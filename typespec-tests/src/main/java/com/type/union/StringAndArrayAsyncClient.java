@@ -79,7 +79,7 @@ public final class StringAndArrayAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest2 The sendRequest2 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -89,8 +89,8 @@ public final class StringAndArrayAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData sendRequest2, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(sendRequest2, requestOptions);
     }
 
     /**
@@ -129,8 +129,8 @@ public final class StringAndArrayAsyncClient {
     public Mono<Void> send(StringAndArrayCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest7 requestObj = new SendRequest7(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SendRequest7 sendRequest2Obj = new SendRequest7(prop);
+        BinaryData sendRequest2 = BinaryData.fromObject(sendRequest2Obj);
+        return sendWithResponse(sendRequest2, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

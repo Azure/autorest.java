@@ -250,12 +250,21 @@ public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClie
      */
     @Generated
     private LroEndpointClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         LroEndpointServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : LroEndpointServiceVersion.getLatest();
         LroEndpointClientImpl client = new LroEndpointClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.projectName, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+        Objects.requireNonNull(projectName, "'projectName' cannot be null.");
     }
 
     @Generated

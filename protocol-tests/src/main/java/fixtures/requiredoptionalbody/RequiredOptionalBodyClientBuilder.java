@@ -234,6 +234,7 @@ public final class RequiredOptionalBodyClientBuilder
      */
     @Generated
     private RequiredOptionalBodyClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         RequiredOptionalBodyServiceVersion localServiceVersion
@@ -241,6 +242,12 @@ public final class RequiredOptionalBodyClientBuilder
         RequiredOptionalBodyClientImpl client = new RequiredOptionalBodyClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated

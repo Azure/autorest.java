@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 public class MadeOptionalClienTests {
     private final MadeOptionalClient madeOptionalClient = new MadeOptionalClientBuilder()
-            .endpoint("http://localhost:3000").buildClient();
+            .endpoint("http://localhost:3000").version("v2").buildClient();
 
     @Test
     public void testMadeOptionalClient() {

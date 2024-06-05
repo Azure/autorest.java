@@ -216,12 +216,19 @@ public final class TraitsClientBuilder
      */
     @Generated
     private TraitsClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         TraitsServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : TraitsServiceVersion.getLatest();
         TraitsClientImpl client
             = new TraitsClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated

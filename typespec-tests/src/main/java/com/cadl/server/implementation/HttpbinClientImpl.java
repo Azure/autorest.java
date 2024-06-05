@@ -69,6 +69,20 @@ public final class HttpbinClientImpl {
     }
 
     /**
+     * relative path segment, can be empty.
+     */
+    private final String relativePath;
+
+    /**
+     * Gets relative path segment, can be empty.
+     * 
+     * @return the relativePath value.
+     */
+    public String getRelativePath() {
+        return this.relativePath;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -101,10 +115,11 @@ public final class HttpbinClientImpl {
      * 
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
+     * @param relativePath relative path segment, can be empty.
      */
-    public HttpbinClientImpl(String domain, String tld) {
+    public HttpbinClientImpl(String domain, String tld, String relativePath) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), domain, tld);
+            JacksonAdapter.createDefaultSerializerAdapter(), domain, tld, relativePath);
     }
 
     /**
@@ -113,9 +128,10 @@ public final class HttpbinClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
+     * @param relativePath relative path segment, can be empty.
      */
-    public HttpbinClientImpl(HttpPipeline httpPipeline, String domain, String tld) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), domain, tld);
+    public HttpbinClientImpl(HttpPipeline httpPipeline, String domain, String tld, String relativePath) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), domain, tld, relativePath);
     }
 
     /**
@@ -125,20 +141,22 @@ public final class HttpbinClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param domain second-level domain, use httpbin.
      * @param tld top-level domain, use org.
+     * @param relativePath relative path segment, can be empty.
      */
-    public HttpbinClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String domain,
-        String tld) {
+    public HttpbinClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String domain, String tld,
+        String relativePath) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.domain = domain;
         this.tld = tld;
+        this.relativePath = relativePath;
         this.service = RestProxy.create(HttpbinClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
      * The interface defining all the services for HttpbinClient to be used by the proxy service to perform REST calls.
      */
-    @Host("https://{domain}.{tld}")
+    @Host("https://{domain}.{tld}{relative-path}")
     @ServiceInterface(name = "HttpbinClient")
     public interface HttpbinClientService {
         @Get("/status/{code}")
@@ -148,8 +166,8 @@ public final class HttpbinClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> status(@HostParam("domain") String domain, @HostParam("tld") String tld,
-            @PathParam("code") int code, @HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+            @HostParam("relative-path") String relativePath, @PathParam("code") int code,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/status/{code}")
         @ExpectedResponses({ 200, 204 })
@@ -158,8 +176,8 @@ public final class HttpbinClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> statusSync(@HostParam("domain") String domain, @HostParam("tld") String tld,
-            @PathParam("code") int code, @HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+            @HostParam("relative-path") String relativePath, @PathParam("code") int code,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -176,8 +194,8 @@ public final class HttpbinClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> statusWithResponseAsync(int code, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.status(this.getDomain(), this.getTld(), code, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.status(this.getDomain(), this.getTld(), this.getRelativePath(),
+            code, accept, requestOptions, context));
     }
 
     /**
@@ -194,6 +212,7 @@ public final class HttpbinClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> statusWithResponse(int code, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.statusSync(this.getDomain(), this.getTld(), code, accept, requestOptions, Context.NONE);
+        return service.statusSync(this.getDomain(), this.getTld(), this.getRelativePath(), code, accept, requestOptions,
+            Context.NONE);
     }
 }

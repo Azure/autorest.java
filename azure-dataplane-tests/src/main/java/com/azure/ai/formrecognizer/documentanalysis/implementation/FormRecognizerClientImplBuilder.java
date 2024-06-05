@@ -267,6 +267,7 @@ public final class FormRecognizerClientImplBuilder
      */
     @Generated
     public FormRecognizerClientImpl buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localApiVersion = (apiVersion != null) ? apiVersion : "2022-08-31";
         SerializerAdapter localSerializerAdapter
@@ -274,6 +275,13 @@ public final class FormRecognizerClientImplBuilder
         FormRecognizerClientImpl client
             = new FormRecognizerClientImpl(localPipeline, localSerializerAdapter, this.endpoint, localApiVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

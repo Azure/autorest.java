@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class RemovedClientTests {
     private final RemovedClient removedClient = new RemovedClientBuilder()
-            .endpoint("http://localhost:3000").buildClient();
+            .endpoint("http://localhost:3000").version("v2").buildClient();
 
     @Test
     public void tesRemovedClient() {

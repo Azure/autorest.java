@@ -87,7 +87,7 @@ public final class MixedTypesClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest The sendRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -97,8 +97,8 @@ public final class MixedTypesClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest, requestOptions);
     }
 
     /**
@@ -135,8 +135,8 @@ public final class MixedTypesClient {
     public void send(MixedTypesCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest9 requestObj = new SendRequest9(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest9 sendRequestObj = new SendRequest9(prop);
+        BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
+        sendWithResponse(sendRequest, requestOptions).getValue();
     }
 }

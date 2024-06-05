@@ -1,10 +1,16 @@
 # Release History
 
+## 0.16.3 (2024-06-03)
+
+Compatible with compiler 0.56.
+
+- Generate customizable `validateClient` method in client builder class.
+
 ## 0.16.2 (2024-05-30)
 
 Compatible with compiler 0.56.
 
-- Generate `OperationLocationPollingStrategy` for long-running operation.
+- Generate `OperationLocationPollingStrategy` class in implementation package for long-running operation.
 The generated lib would no longer need to depend on the `azure-core-experimental` lib.
 
 ## 0.16.1 (2024-05-29)

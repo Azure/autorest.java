@@ -256,6 +256,7 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
      */
     @Generated
     private ResiliencyServiceDrivenClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ServiceDrivenServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ServiceDrivenServiceVersion.getLatest();
@@ -263,6 +264,14 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
             = new ResiliencyServiceDrivenClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
                 this.endpoint, this.serviceDeploymentVersion, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+        Objects.requireNonNull(serviceDeploymentVersion, "'serviceDeploymentVersion' cannot be null.");
     }
 
     @Generated

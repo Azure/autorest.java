@@ -48,7 +48,7 @@ public final class ImplicitBodyAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param simpleRequest The simpleRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,8 +58,8 @@ public final class ImplicitBodyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> simpleWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.simpleWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> simpleWithResponse(BinaryData simpleRequest, RequestOptions requestOptions) {
+        return this.serviceClient.simpleWithResponseAsync(simpleRequest, requestOptions);
     }
 
     /**
@@ -79,8 +79,8 @@ public final class ImplicitBodyAsyncClient {
     public Mono<Void> simple(String name) {
         // Generated convenience method for simpleWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SimpleRequest requestObj = new SimpleRequest(name);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return simpleWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SimpleRequest simpleRequestObj = new SimpleRequest(name);
+        BinaryData simpleRequest = BinaryData.fromObject(simpleRequestObj);
+        return simpleWithResponse(simpleRequest, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

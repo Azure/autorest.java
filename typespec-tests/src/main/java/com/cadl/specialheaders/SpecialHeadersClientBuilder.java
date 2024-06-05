@@ -241,12 +241,20 @@ public final class SpecialHeadersClientBuilder implements HttpTrait<SpecialHeade
      */
     @Generated
     private SpecialHeadersClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SpecialHeadersServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : SpecialHeadersServiceVersion.getLatest();
         SpecialHeadersClientImpl client = new SpecialHeadersClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

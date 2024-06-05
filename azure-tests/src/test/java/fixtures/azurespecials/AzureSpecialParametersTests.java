@@ -7,12 +7,7 @@ package fixtures.azurespecials;
 
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.HttpHeaders;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
-import com.azure.core.http.policy.CookiePolicy;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.Context;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
 import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeadResponse;
@@ -35,20 +30,14 @@ public class AzureSpecialParametersTests {
 
     @BeforeAll
     public static void setup() {
-        HttpPipeline pipeline = new HttpPipelineBuilder().policies(new UserAgentPolicy(),
-                new AddHeadersFromContextPolicy(),
-                new RetryPolicy(),
-                new CookiePolicy()
-                //, new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
-        ).build();
-
         client = new AutoRestAzureSpecialParametersTestClientBuilder()
-                .pipeline(pipeline)
+                .addPolicy(new AddHeadersFromContextPolicy())
                 .subscriptionId("1234-5678-9012-3456")
                 .buildClient();
 
         clientNoSubscription = new AutoRestAzureSpecialParametersTestClientBuilder()
-                .pipeline(pipeline)
+                .addPolicy(new AddHeadersFromContextPolicy())
+                .subscriptionId("")
                 .buildClient();
     }
 
@@ -59,7 +48,7 @@ public class AzureSpecialParametersTests {
 
     @Test
     public void getOverwriteNull() {
-        client.getXMsClientRequestIds().getWithResponse(new Context("azure-http-headers-key", new HttpHeaders(Collections.singletonMap("x-ms-client-request-id", null))));
+        Assertions.assertThrows(HttpResponseException.class, () -> client.getXMsClientRequestIds().getWithResponse(new Context("azure-http-headers-key", new HttpHeaders(Collections.singletonMap("x-ms-client-request-id", null)))));
     }
 
     @Test
@@ -79,7 +68,10 @@ public class AzureSpecialParametersTests {
 
     @Test
     public void postMethodGlobalNull() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> clientNoSubscription.getSubscriptionInCredentials().postMethodGlobalNull());
+        Assertions.assertThrows(RuntimeException.class, () -> new AutoRestAzureSpecialParametersTestClientBuilder()
+                .addPolicy(new AddHeadersFromContextPolicy())
+                .buildClient()
+                .getSubscriptionInCredentials().postMethodGlobalNull());
     }
 
     @Test

@@ -142,9 +142,6 @@ public final class LongRunningClient {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
-     *     result (Optional): {
-     *         data: String (Required)
-     *     }
      * }
      * }</pre>
      * 
