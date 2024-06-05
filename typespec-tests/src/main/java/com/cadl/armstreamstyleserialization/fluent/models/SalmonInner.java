@@ -38,6 +38,16 @@ public final class SalmonInner extends FishInner {
      */
     private FishInner partner;
 
+    /*
+     * The age property.
+     */
+    private int age;
+
+    /*
+     * The dna property.
+     */
+    private String dna;
+
     /**
      * Creates an instance of SalmonInner class.
      */
@@ -79,6 +89,26 @@ public final class SalmonInner extends FishInner {
      */
     public FishInner partner() {
         return this.partner;
+    }
+
+    /**
+     * Get the age property: The age property.
+     * 
+     * @return the age value.
+     */
+    @Override
+    public int age() {
+        return this.age;
+    }
+
+    /**
+     * Get the dna property: The dna property.
+     * 
+     * @return the dna value.
+     */
+    @Override
+    public String dna() {
+        return this.dna;
     }
 
     /**
@@ -136,9 +166,9 @@ public final class SalmonInner extends FishInner {
                 reader.nextToken();
 
                 if ("age".equals(fieldName)) {
-                    deserializedSalmonInner.withAge(reader.getInt());
+                    deserializedSalmonInner.age = reader.getInt();
                 } else if ("dna".equals(fieldName)) {
-                    deserializedSalmonInner.withDna(reader.getString());
+                    deserializedSalmonInner.dna = reader.getString();
                 } else if ("kind".equals(fieldName)) {
                     deserializedSalmonInner.kind = reader.getString();
                 } else if ("friends".equals(fieldName)) {

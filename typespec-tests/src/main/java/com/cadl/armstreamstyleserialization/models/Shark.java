@@ -26,6 +26,16 @@ public class Shark extends FishInner {
      */
     private String sharktype = "shark";
 
+    /*
+     * The age property.
+     */
+    private int age;
+
+    /*
+     * The dna property.
+     */
+    private String dna;
+
     /**
      * Creates an instance of Shark class.
      */
@@ -49,6 +59,26 @@ public class Shark extends FishInner {
      */
     public String sharktype() {
         return this.sharktype;
+    }
+
+    /**
+     * Get the age property: The age property.
+     * 
+     * @return the age value.
+     */
+    @Override
+    public int age() {
+        return this.age;
+    }
+
+    /**
+     * Get the dna property: The dna property.
+     * 
+     * @return the dna value.
+     */
+    @Override
+    public String dna() {
+        return this.dna;
     }
 
     /**
@@ -118,9 +148,9 @@ public class Shark extends FishInner {
                 reader.nextToken();
 
                 if ("age".equals(fieldName)) {
-                    deserializedShark.withAge(reader.getInt());
+                    deserializedShark.age = reader.getInt();
                 } else if ("dna".equals(fieldName)) {
-                    deserializedShark.withDna(reader.getString());
+                    deserializedShark.dna = reader.getString();
                 } else if ("sharktype".equals(fieldName)) {
                     deserializedShark.sharktype = reader.getString();
                 } else {

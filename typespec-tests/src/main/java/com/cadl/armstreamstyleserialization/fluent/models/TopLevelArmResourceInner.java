@@ -44,6 +44,16 @@ public final class TopLevelArmResourceInner extends Resource {
      */
     private String type;
 
+    /*
+     * The geo-location where the resource lives.
+     */
+    private String location;
+
+    /*
+     * Resource tags.
+     */
+    private Map<String, String> tags;
+
     /**
      * Creates an instance of TopLevelArmResourceInner class.
      */
@@ -99,6 +109,26 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
+     * Get the location property: The geo-location where the resource lives.
+     * 
+     * @return the location value.
+     */
+    @Override
+    public String location() {
+        return this.location;
+    }
+
+    /**
+     * Get the tags property: Resource tags.
+     * 
+     * @return the tags value.
+     */
+    @Override
+    public Map<String, String> tags() {
+        return this.tags;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -144,10 +174,10 @@ public final class TopLevelArmResourceInner extends Resource {
                 } else if ("type".equals(fieldName)) {
                     deserializedTopLevelArmResourceInner.type = reader.getString();
                 } else if ("location".equals(fieldName)) {
-                    deserializedTopLevelArmResourceInner.withLocation(reader.getString());
+                    deserializedTopLevelArmResourceInner.location = reader.getString();
                 } else if ("tags".equals(fieldName)) {
                     Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
-                    deserializedTopLevelArmResourceInner.withTags(tags);
+                    deserializedTopLevelArmResourceInner.tags = tags;
                 } else if ("properties".equals(fieldName)) {
                     deserializedTopLevelArmResourceInner.properties = TopLevelArmResourceProperties.fromJson(reader);
                 } else if ("systemData".equals(fieldName)) {

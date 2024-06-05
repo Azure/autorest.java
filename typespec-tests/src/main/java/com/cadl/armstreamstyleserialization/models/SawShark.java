@@ -25,6 +25,16 @@ public final class SawShark extends Shark {
      */
     private String sharktype = "saw";
 
+    /*
+     * The age property.
+     */
+    private int age;
+
+    /*
+     * The dna property.
+     */
+    private String dna;
+
     /**
      * Creates an instance of SawShark class.
      */
@@ -49,6 +59,26 @@ public final class SawShark extends Shark {
     @Override
     public String sharktype() {
         return this.sharktype;
+    }
+
+    /**
+     * Get the age property: The age property.
+     * 
+     * @return the age value.
+     */
+    @Override
+    public int age() {
+        return this.age;
+    }
+
+    /**
+     * Get the dna property: The dna property.
+     * 
+     * @return the dna value.
+     */
+    @Override
+    public String dna() {
+        return this.dna;
     }
 
     /**
@@ -91,9 +121,9 @@ public final class SawShark extends Shark {
                 reader.nextToken();
 
                 if ("age".equals(fieldName)) {
-                    deserializedSawShark.withAge(reader.getInt());
+                    deserializedSawShark.age = reader.getInt();
                 } else if ("dna".equals(fieldName)) {
-                    deserializedSawShark.withDna(reader.getString());
+                    deserializedSawShark.dna = reader.getString();
                 } else if ("sharktype".equals(fieldName)) {
                     deserializedSawShark.sharktype = reader.getString();
                 } else {
