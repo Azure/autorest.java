@@ -242,7 +242,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 super.getFieldProperties(model, settings).stream(),
                 ClientModelUtil.getParentProperties(model)
                         .stream()
-                        .filter(property -> readOnlyNotInCtor(property, settings)
+                        .filter(property -> readOnlyNotInCtor(model, property, settings)
                                 // parent discriminators are already passed to children, see @see in method javadoc
                                 && !property.isPolymorphicDiscriminator())
         ).collect(Collectors.toList());
@@ -257,12 +257,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     @Override
     protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
-        return (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(property, settings)) && !modelDefinesProperty(model, property);
+        return (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings)) && !modelDefinesProperty(model, property);
     }
 
-    private static boolean readOnlyNotInCtor(ClientModelProperty property, JavaSettings settings) {
+    private static boolean readOnlyNotInCtor(ClientModel model, ClientModelProperty property, JavaSettings settings) {
         return  // must be read-only and not appear in constructor
-                property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs()
+                (isImmutableOutputModel(model, settings)
+                                || (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
+                )
                         // not required and in constructor
                         && !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs());
     }
@@ -1478,7 +1480,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // super class.
         if (fromSuper
             // If the property is read-only from parent, it will be shadowed in child class.
-            && !readOnlyNotInCtor(property, JavaSettings.getInstance())) {
+            && !readOnlyNotInCtor(model, property, JavaSettings.getInstance())) {
             if (polymorphicJsonMergePatchScenario) {
                 // Polymorphic JSON merge patch needs special handling as the setter methods are used to track whether
                 // the property is included in patch serialization. To prevent deserialization from requiring parent

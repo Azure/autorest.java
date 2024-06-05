@@ -97,8 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
-        final boolean immutableOutputModel = settings.isOutputModelImmutable()
-            && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
+        final boolean immutableOutputModel = isImmutableOutputModel(model, settings);
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
@@ -325,6 +324,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writeStreamStyleSerialization(classBlock, model, settings);
             }
         });
+    }
+
+    static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
+        return settings.isOutputModelImmutable()
+                && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
     }
 
     /**
