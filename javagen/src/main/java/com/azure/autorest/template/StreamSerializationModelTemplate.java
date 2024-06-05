@@ -242,9 +242,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 super.getFieldProperties(model, settings).stream(),
                 ClientModelUtil.getParentProperties(model)
                         .stream()
-                        .filter(property -> readOnlyNotInCtor(model, property, settings)
+                        .filter(property ->
                                 // parent discriminators are already passed to children, see @see in method javadoc
-                                && !property.isPolymorphicDiscriminator())
+                                !property.isPolymorphicDiscriminator()
+                                        && readOnlyNotInCtor(model, property, settings)
+                        )
         ).collect(Collectors.toList());
     }
 
@@ -257,16 +259,27 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     @Override
     protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
-        return (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings)) && !modelDefinesProperty(model, property);
+        return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings));
     }
 
     private static boolean readOnlyNotInCtor(ClientModel model, ClientModelProperty property, JavaSettings settings) {
-        return  // must be read-only and not appear in constructor
-                (isImmutableOutputModel(model, settings)
-                                || (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
-                )
-                        // not required and in constructor
-                        && !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs());
+        return  // not required and in constructor
+                !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs())
+                        && (
+                        // must be read-only and not appear in constructor
+                        (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
+                                || isImmutableOutputModel(getDefiningModel(model, property), settings));
+    }
+
+    private static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
+        ClientModel current = model;
+        while(current != null) {
+            if (modelDefinesProperty(current, property)) {
+                return current;
+            }
+            current = ClientModelUtil.getClientModel(current.getParentModelName());
+        }
+        throw new IllegalArgumentException("unable to find defining model for property: " + property);
     }
 
     /**
