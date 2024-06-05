@@ -37,6 +37,11 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      */
     private DateTimeRfc1123 rfc1123NonRequiredChild;
 
+    /*
+     * The rfc1123NonRequired property.
+     */
+    private DateTimeRfc1123 rfc1123NonRequired;
+
     /**
      * Creates an instance of TransformationAsParentRequiredFields class.
      * 
@@ -93,6 +98,34 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
             this.rfc1123NonRequiredChild = null;
         } else {
             this.rfc1123NonRequiredChild = new DateTimeRfc1123(rfc1123NonRequiredChild);
+        }
+        return this;
+    }
+
+    /**
+     * Get the rfc1123NonRequired property: The rfc1123NonRequired property.
+     * 
+     * @return the rfc1123NonRequired value.
+     */
+    @Override
+    public OffsetDateTime getRfc1123NonRequired() {
+        if (this.rfc1123NonRequired == null) {
+            return null;
+        }
+        return this.rfc1123NonRequired.getDateTime();
+    }
+
+    /**
+     * Set the rfc1123NonRequired property: The rfc1123NonRequired property.
+     * 
+     * @param rfc1123NonRequired the rfc1123NonRequired value to set.
+     * @return the TransformationAsParentRequiredFields object itself.
+     */
+    public TransformationAsParentRequiredFields setRfc1123NonRequired(OffsetDateTime rfc1123NonRequired) {
+        if (rfc1123NonRequired == null) {
+            this.rfc1123NonRequired = null;
+        } else {
+            this.rfc1123NonRequired = new DateTimeRfc1123(rfc1123NonRequired);
         }
         return this;
     }
@@ -225,7 +258,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
                 TransformationAsParentRequiredFields deserializedTransformationAsParentRequiredFields
                     = new TransformationAsParentRequiredFields(rfc1123Required, nameRequired, urlBase64EncodedRequired,
                         unixTimeLongRequired, unixTimeDateTimeRequired, rfc1123RequiredChild);
-                deserializedTransformationAsParentRequiredFields.setRfc1123NonRequired(rfc1123NonRequired);
+                deserializedTransformationAsParentRequiredFields.rfc1123NonRequired = rfc1123NonRequired;
                 deserializedTransformationAsParentRequiredFields.rfc1123NonRequiredChild = rfc1123NonRequiredChild;
 
                 return deserializedTransformationAsParentRequiredFields;
