@@ -97,8 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
-        final boolean immutableOutputModel = settings.isOutputModelImmutable()
-            && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
+        final boolean immutableOutputModel = isImmutableOutputModel(model, settings);
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
@@ -202,11 +201,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
 
-                // The model is immutable output only if and only if the immutable output model setting is enabled and
-                // the usage of the model include output and does not include input.
-                boolean immutableOutputOnlyModel = immutableOutputModel && ClientModelUtil.isOutputOnly(model);
-
-                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputOnlyModel) {
+                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     addGeneratedAnnotation(classBlock);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
@@ -341,6 +336,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writeStreamStyleSerialization(classBlock, model, settings);
             }
         });
+    }
+
+    /**
+     * The model is immutable output only if and only if the immutable output model setting is enabled and
+     * the usage of the model include output and does not include input.
+     * @param model the model to check
+     * @param settings JavaSettings instance
+     * @return whether the model is output-only immutable model
+     */
+    private static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
+        return settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model);
     }
 
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {
