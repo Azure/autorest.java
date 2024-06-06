@@ -339,17 +339,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * The model is immutable if
-     * 1. The model is output only. Which means if and only if the immutable output model setting is enabled and
-     *    the usage of the model include output and does not include input.
-     * 2. The model has no usage at all.
+     * The model is output only if and only if the immutable output model setting is enabled and
+     * the usage of the model include output and does not include input.
+     *
      * @param model the model to check
      * @param settings JavaSettings instance
      * @return whether the model is output-only immutable model
      */
     private static boolean isImmutableModel(ClientModel model, JavaSettings settings) {
-        return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model))
-                || ClientModelUtil.noUsage(model);
+        return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {
