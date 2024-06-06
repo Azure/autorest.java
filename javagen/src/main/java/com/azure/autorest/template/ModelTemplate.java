@@ -230,9 +230,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
                         classBlock.method(JavaVisibility.PackagePrivate, null,
-                            model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
+                            model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " "
                                 + property.getName() + ")",
-                            methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
+                            methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                                 methodBlock, settings,
                                 ClientModelUtil.isJsonMergePatchModel(model, settings)));
                     }
