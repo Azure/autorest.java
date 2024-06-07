@@ -452,7 +452,7 @@ public class ClientModelUtil {
      * @return whether the type is an output only model.
      */
     public static boolean isOutputOnly(ClientModel model) {
-        if (noUsage(model)) {
+        if (hasNoUsage(model)) {
             return false;
         }
         ImplementationDetails details = model.getImplementationDetails();
@@ -756,7 +756,7 @@ public class ClientModelUtil {
         return model.getSerializationFormats().contains(KnownMediaType.MULTIPART.value());
     }
 
-    public static boolean noUsage(ClientModel model) {
+    private static boolean hasNoUsage(ClientModel model) {
         ImplementationDetails details = model.getImplementationDetails();
         return details == null || CoreUtils.isNullOrEmpty(details.getUsages());
     }
