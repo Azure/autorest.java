@@ -341,7 +341,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings JavaSettings instance
      * @return whether the model is output-only immutable model
      */
-    private static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
+    static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
         return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
