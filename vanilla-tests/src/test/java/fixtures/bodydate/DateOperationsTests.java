@@ -1,17 +1,20 @@
 package fixtures.bodydate;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DateOperationsTests {
     private static AutoRestDateTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestDateTestServiceBuilder().buildClient();
     }
@@ -23,32 +26,20 @@ public class DateOperationsTests {
 
     @Test
     public void getInvalidDate() {
-        try {
-            client.getDateOperations().getInvalidDate();
-            fail();
-        } catch (RuntimeException exception) {
-            assertEquals(InvalidFormatException.class, exception.getCause().getClass());
-        }
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> client.getDateOperations().getInvalidDate());
+        assertInstanceOf(InvalidFormatException.class, exception.getCause());
     }
 
     @Test
     public void getOverflowDate() {
-        try {
-            client.getDateOperations().getOverflowDate();
-            fail();
-        } catch (RuntimeException exception) {
-            assertEquals(InvalidFormatException.class, exception.getCause().getClass());
-        }
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> client.getDateOperations().getOverflowDate());
+        assertInstanceOf(InvalidFormatException.class, exception.getCause());
     }
 
     @Test
     public void getUnderflowDate() {
-        try {
-            client.getDateOperations().getUnderflowDate();
-            fail();
-        } catch (RuntimeException exception) {
-            assertEquals(InvalidFormatException.class, exception.getCause().getClass());
-        }
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> client.getDateOperations().getUnderflowDate());
+        assertInstanceOf(InvalidFormatException.class, exception.getCause());
     }
 
     @Test

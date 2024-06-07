@@ -4,72 +4,55 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.FixedDelay;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.TimeoutPolicy;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class CustomBaseUriTests {
     private static AutoRestParameterizedHostTestClientBuilder clientBuilder;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         clientBuilder = new AutoRestParameterizedHostTestClientBuilder().pipeline(
-                new HttpPipelineBuilder().policies(
-                        new RetryPolicy(new FixedDelay(3, Duration.ZERO) {
-                        }))
-                        .build());
+            new HttpPipelineBuilder().policies(new RetryPolicy(new FixedDelay(3, Duration.ZERO))).build());
     }
 
     // Positive test case
     @Test
-    public void getEmptyWithValidCustomUri() throws Exception {
+    public void getEmptyWithValidCustomUri() {
         clientBuilder.host("host:3000");
         clientBuilder.buildClient().getPaths().getEmpty("local");
     }
 
     @Test
-    public void getEmptyWithInvalidCustomUriAccountName() throws Exception {
-        try {
-            clientBuilder.buildClient().getPaths().getEmpty("bad");
-            Assert.fail();
-        }
-        catch (RuntimeException e) {
-        }
+    public void getEmptyWithInvalidCustomUriAccountName() {
+        assertThrows(RuntimeException.class, () -> clientBuilder.buildClient().getPaths().getEmpty("bad"));
     }
 
     @Test
-    public void getEmptyWithInvalidCustomUriHostName() throws Exception {
+    public void getEmptyWithInvalidCustomUriHostName() {
         try {
             clientBuilder.host("badhost");
-            clientBuilder.buildClient().getPaths().getEmpty("local");
-            Assert.fail();
-        }
-        catch (RuntimeException e) {
-        }
-        finally {
+            assertThrows(RuntimeException.class, () -> clientBuilder.buildClient().getPaths().getEmpty("local"));
+        } finally {
             clientBuilder.host("host:3000");
         }
     }
 
     @Test
-    public void getEmptyWithEmptyCustomUriAccountName() throws Exception {
-        try {
-            clientBuilder.buildClient().getPaths().getEmpty(null);
-            Assert.assertTrue(false);
-        }
-        catch (IllegalArgumentException e) {
-            Assert.assertTrue(true);
-        }
+    public void getEmptyWithEmptyCustomUriAccountName() {
+        assertThrows(IllegalArgumentException.class, () -> clientBuilder.buildClient().getPaths().getEmpty(null));
     }
 
     @Test
-    public void getGoodBadGood() throws Exception {
+    public void getGoodBadGood() {
         // Short repro for a Windows-specific error where failing to open
         // a connection to badhost would cause the connection
         // to localhost:3000 to be closed.
@@ -77,17 +60,17 @@ public class CustomBaseUriTests {
         try {
             clientBuilder.host("host:3000").buildClient().getPaths().getEmpty("local");
         } catch (Exception e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
         try {
             clientBuilder.host("badhost").buildClient().getPaths().getEmpty("local");
-            Assert.fail();
-        } catch (Exception ignored){
+            fail();
+        } catch (Exception ignored) {
         }
         try {
             clientBuilder.host("host:3000").buildClient().getPaths().getEmpty("local");
         } catch (Exception e) {
-            Assert.fail(e.getMessage());
+            fail(e.getMessage());
         }
     }
 
@@ -95,9 +78,7 @@ public class CustomBaseUriTests {
     public void getEmptyMultipleThreads() throws Exception {
         CountDownLatch latch = new CountDownLatch(2);
         AutoRestParameterizedHostTestClientBuilder client1 = new AutoRestParameterizedHostTestClientBuilder().pipeline(
-                new HttpPipelineBuilder().policies(
-                        new TimeoutPolicy(Duration.ofSeconds(1)))
-                        .build());
+            new HttpPipelineBuilder().policies(new TimeoutPolicy(Duration.ofSeconds(1))).build());
         client1.host("host:3000");
         Thread t1 = new Thread(() -> {
             try {
@@ -119,6 +100,6 @@ public class CustomBaseUriTests {
         });
         t1.start();
         t2.start();
-        Assert.assertTrue(latch.await(15, TimeUnit.SECONDS));
+        assertTrue(latch.await(15, TimeUnit.SECONDS));
     }
 }

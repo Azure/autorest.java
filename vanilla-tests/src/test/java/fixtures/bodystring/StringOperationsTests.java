@@ -2,92 +2,85 @@ package fixtures.bodystring;
 
 import com.azure.core.exception.HttpResponseException;
 import fixtures.bodystring.implementation.AutoRestSwaggerBATServiceImplBuilder;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import reactor.test.StepVerifier;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Base64;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StringOperationsTests {
     private static AutoRestSwaggerBATService client;
-    private CountDownLatch lock = new CountDownLatch(1);
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestSwaggerBATServiceImplBuilder().buildClient();
     }
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getStringOperations().getNull());
+        assertNull(client.getStringOperations().getNull());
     }
 
     @Test
-    public void putNull() throws Exception {
-        try {
-            client.getStringOperations().putNullWithResponseAsync(null).block();
-        } catch (Exception ex) {
-            Assert.assertEquals(IllegalArgumentException.class, ex.getClass());
-            assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
-        }
+    public void putNull() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+            () -> client.getStringOperations().putNullWithResponseAsync(null).block());
+        assertTrue(ex.getMessage().contains("Argument for @BodyParam parameter must be non-null"));
     }
 
     @Test
     public void getEmpty() throws Exception {
         String result = client.getStringOperations().getEmpty();
-        Assert.assertEquals("", result);
+        assertEquals("", result);
     }
 
     @Test
     public void putEmpty() throws Exception {
-        client.getStringOperations().putEmptyWithResponseAsync().subscribe(v -> {}, t -> fail(t.getMessage()),
-            () -> lock.countDown());
-        assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
+        StepVerifier.create(client.getStringOperations().putEmptyWithResponseAsync())
+            .expectComplete()
+            .verify(Duration.ofMillis(1000));
     }
 
     @Test
-    public void getMbcs() throws Exception {
+    public void getMbcs() {
         String result = client.getStringOperations().getMbcs();
         String expected = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑ\uE7C7ɡ〇〾⿻⺁\uE843䜣\uE864€";
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
-    public void putMbcs() throws Exception {
+    public void putMbcs() {
         client.getStringOperations().putMbcsWithResponseAsync().block();
     }
 
     @Test
-    public void getWhitespace() throws Exception {
+    public void getWhitespace() {
         String result = client.getStringOperations().getWhitespace();
-        Assert.assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
+        assertEquals("    Now is the time for all good men to come to the aid of their country    ", result);
     }
 
     @Test
-    public void putWhitespace() throws Exception {
+    public void putWhitespace() {
         client.getStringOperations().putWhitespaceWithResponseAsync().block();
     }
 
     @Test
-    public void getNotProvided() throws Exception {
-        try {
-            client.getStringOperations().getNotProvided();
-        } catch (Exception ex) {
-            Assert.assertEquals(HttpResponseException.class, ex.getClass());
-            assertTrue(ex.getMessage().contains("JsonMappingException"));
-        }
+    public void getNotProvided() {
+        HttpResponseException exception = assertThrows(HttpResponseException.class, () -> client.getStringOperations().getNotProvided());
+        assertTrue(exception.getMessage().contains("JsonMappingException"));
     }
 
     @Test
-    public void getBase64Encoded() throws Exception {
+    public void getBase64Encoded() {
         byte[] result = client.getStringOperations().getBase64Encoded();
-        Assert.assertEquals("a string that gets encoded with base64",
+        assertEquals("a string that gets encoded with base64",
             new String(Base64.getDecoder().decode(unquote(new String(result, StandardCharsets.UTF_8))), StandardCharsets.UTF_8));
     }
 
@@ -107,19 +100,19 @@ public class StringOperationsTests {
     }
 
     @Test
-    public void getBase64UrlEncoded() throws Exception {
+    public void getBase64UrlEncoded() {
         byte[] result = client.getStringOperations().getBase64UrlEncoded();
-        Assert.assertEquals("a string that gets encoded with base64url", new String(result));
+        assertEquals("a string that gets encoded with base64url", new String(result));
     }
 
     @Test
-    public void getNullBase64UrlEncoded() throws Exception {
+    public void getNullBase64UrlEncoded() {
         byte[] result = client.getStringOperations().getNullBase64UrlEncoded();
-        Assert.assertTrue(result == null || result.length == 0);
+        assertTrue(result == null || result.length == 0);
     }
 
     @Test
-    public void putBase64UrlEncoded() throws Exception {
+    public void putBase64UrlEncoded() {
         client.getStringOperations().putBase64UrlEncodedWithResponseAsync("a string that gets encoded with base64url".getBytes()).block();
     }
 }
