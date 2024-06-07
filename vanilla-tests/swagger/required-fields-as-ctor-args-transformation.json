@@ -16,6 +16,20 @@
     "application/json"
   ],
   "paths": {
+    "/argstransformation": {
+      "get": {
+        "description": "get methods",
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": "output only model",
+            "schema": {
+              "$ref": "#/definitions/TransformationAsParentRequiredFields"
+            }
+          }
+        }
+      }
+    }
   },
   "definitions": {
     "TransformationAsRequiredFields": {

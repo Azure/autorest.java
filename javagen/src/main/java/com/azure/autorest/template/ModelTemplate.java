@@ -97,8 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
-        final boolean immutableOutputModel = settings.isOutputModelImmutable()
-            && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
+        final boolean immutableModel = isImmutableOutputModel(model, settings);
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
@@ -108,7 +107,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         addClassLevelAnnotations(model, javaFile, settings);
 
         // Add Fluent or Immutable based on whether the model has any setters.
-        addFluentOrImmutableAnnotation(model, immutableOutputModel, propertyReferences, javaFile, settings);
+        addFluentOrImmutableAnnotation(model, immutableModel, propertyReferences, javaFile, settings);
 
         List<JavaModifier> classModifiers = null;
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
@@ -153,7 +152,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             // constructor
-            JavaVisibility modelConstructorVisibility = immutableOutputModel
+            JavaVisibility modelConstructorVisibility = immutableModel
                 ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
                 : JavaVisibility.Public;
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
@@ -173,7 +172,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             for (ClientModelProperty property : model.getProperties()) {
-                final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
+                final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
                 IType propertyClientType = propertyWireType.getClientType();
@@ -202,11 +201,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
 
-                // The model is immutable output only if and only if the immutable output model setting is enabled and
-                // the usage of the model include output and does not include input.
-                boolean immutableOutputOnlyModel = immutableOutputModel && ClientModelUtil.isOutputOnly(model);
-
-                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputOnlyModel) {
+                if (ClientModelUtil.hasSetter(property, settings) && !immutableModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     addGeneratedAnnotation(classBlock);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
@@ -235,9 +230,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
                         classBlock.method(JavaVisibility.PackagePrivate, null,
-                            model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
+                            model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " "
                                 + property.getName() + ")",
-                            methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
+                            methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                                 methodBlock, settings,
                                 ClientModelUtil.isJsonMergePatchModel(model, settings)));
                     }
@@ -264,7 +259,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             // add setters to override parent setters
-            if (!immutableOutputModel) {
+            if (!immutableModel) {
                 List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
                     propertyReferences);
                 for (ClientModelPropertyAccess parentProperty : settersToOverride) {
@@ -296,7 +291,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
 
                     IType propertyClientType = property.getClientType();
-                    final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
+                    final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
 
                     if (propertyClientType instanceof PrimitiveType && !targetProperty.isRequired()) {
                         // since the property to flattened client model is optional, the flattened property should be optional
@@ -341,6 +336,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writeStreamStyleSerialization(classBlock, model, settings);
             }
         });
+    }
+
+    /**
+     * The model is immutable output if and only if the immutable output model setting is enabled and
+     * the usage of the model include output and does not include input.
+     *
+     * @param model the model to check
+     * @param settings JavaSettings instance
+     * @return whether the model is output-only immutable model
+     */
+    private static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
+        return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {
