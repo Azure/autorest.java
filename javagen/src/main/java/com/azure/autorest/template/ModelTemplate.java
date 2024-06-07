@@ -97,7 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
-        final boolean immutableModel = isImmutableModel(model, settings);
+        final boolean immutableModel = isImmutableOutputModel(model, settings);
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
@@ -339,14 +339,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * The model is output only if and only if the immutable output model setting is enabled and
+     * The model is immutable output if and only if the immutable output model setting is enabled and
      * the usage of the model include output and does not include input.
      *
      * @param model the model to check
      * @param settings JavaSettings instance
      * @return whether the model is output-only immutable model
      */
-    private static boolean isImmutableModel(ClientModel model, JavaSettings settings) {
+    private static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
         return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
