@@ -106,7 +106,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * @param rfc1123NonRequired the rfc1123NonRequired value to set.
      * @return the TransformationAsRequiredFields object itself.
      */
-    public TransformationAsRequiredFields setRfc1123NonRequired(OffsetDateTime rfc1123NonRequired) {
+    TransformationAsRequiredFields setRfc1123NonRequired(OffsetDateTime rfc1123NonRequired) {
         if (rfc1123NonRequired == null) {
             this.rfc1123NonRequired = null;
         } else {
