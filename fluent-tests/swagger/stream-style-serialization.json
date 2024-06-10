@@ -48,9 +48,22 @@
             "readOnly": true,
             "type": "string",
             "description": "Resource type"
+          },
+          "identifier": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/CommunityGalleryIdentifier"
           }
         },
         "description": "Base information about the community gallery resource in azure compute gallery."
+      },
+      "CommunityGalleryIdentifier": {
+        "properties": {
+          "uniqueId": {
+            "type": "string",
+            "description": "The unique id of this community gallery."
+          }
+        },
+        "description": "The identifier information of community gallery."
       },
       "CommunityGallery": {
         "properties": {

@@ -36,6 +36,9 @@ model Fish {
 
   @visibility("create", "read")
   dna: string;
+
+  properties: FishProperties;
+  anotherProperties: AnotherFishProperties;
 }
 
 @doc("The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.")
@@ -51,6 +54,26 @@ model Salmon extends Fish {
   friends?: Fish[];
   hate?: Record<Fish>;
   partner?: Fish;
+}
+
+model FishProperties {
+  tailProperties: TailProperties;
+}
+
+model TailProperties {
+  length: float32;
+  @visibility("read")
+  patten: string;
+}
+
+model AnotherFishProperties {
+  eyeProperties: EyeProperties;
+}
+
+model EyeProperties {
+  length: float32;
+  @visibility("read")
+  patten: string;
 }
 
 @doc("The third level model SawShark in polymorphic multiple levels inheritance.")
@@ -79,12 +102,20 @@ model TopLevelArmResourceProperties {
   description?: string;
 }
 
+@route("/model")
 interface Fishes {
-  @route("/model")
   @get
   getModel(): Fish;
+
+  @put
+  putModel(@body fish: Fish): Fish;
 }
 
 interface TopLevelArmResources {
   update is ArmCustomPatchAsync<TopLevelArmResource>;
 }
+
+@@flattenProperty(Fish.properties);
+@@flattenProperty(FishProperties.tailProperties);
+@@flattenProperty(Fish.anotherProperties);
+@@flattenProperty(AnotherFishProperties.eyeProperties);

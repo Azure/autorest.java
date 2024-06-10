@@ -486,14 +486,16 @@ public class RuntimeTests {
     @Test
     public void testStreamStyleSerialization() throws IOException {
         SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
-        String pirCommunityGalleryResourceJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\"}";
+        String pirCommunityGalleryResourceJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\", \"identifier\": {\"uniqueId\": \"abc\"}}";
 
         PirCommunityGalleryResource pirCommunityGalleryResource = serializerAdapter.deserialize(pirCommunityGalleryResourceJson, PirCommunityGalleryResource.class, SerializerEncoding.JSON);
         Assertions.assertEquals("myName", pirCommunityGalleryResource.name());
+        Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
 
-        String galleryJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\",\"disclaimer\":\"myDisclaimer\"}";
+        String galleryJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\",\"disclaimer\":\"myDisclaimer\", \"identifier\": {\"uniqueId\": \"abc\"}}";
         CommunityGalleryInner galleryInner = serializerAdapter.deserialize(galleryJson, CommunityGalleryInner.class, SerializerEncoding.JSON);
         Assertions.assertEquals("myName", galleryInner.name());
         Assertions.assertEquals("myDisclaimer", galleryInner.disclaimer());
+        Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
     }
 }
