@@ -5,180 +5,171 @@ import fixtures.url.models.UriColor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class QueriesTests {
     private static AutoRestUrlTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestUrlTestServiceBuilder().globalStringPath("global").buildClient();
     }
 
     @Test
-    public void getBooleanTrue() throws Exception {
+    public void getBooleanTrue() {
         client.getQueries().getBooleanTrue();
     }
 
     @Test
-    public void getBooleanFalse() throws Exception {
+    public void getBooleanFalse() {
         client.getQueries().getBooleanFalse();
     }
 
     @Test
-    public void getBooleanNull() throws Exception {
+    public void getBooleanNull() {
         client.getQueries().getBooleanNull(null);
     }
 
     @Test
-    public void getIntOneMillion() throws Exception {
+    public void getIntOneMillion() {
         client.getQueries().getIntOneMillion();
     }
 
     @Test
-    public void getIntNegativeOneMillion() throws Exception {
+    public void getIntNegativeOneMillion() {
         client.getQueries().getIntNegativeOneMillion();
     }
 
     @Test
-    public void getIntNull() throws Exception {
+    public void getIntNull() {
         client.getQueries().getIntNull(null);
     }
 
     @Test
-    public void getTenBillion() throws Exception {
+    public void getTenBillion() {
         client.getQueries().getTenBillion();
     }
 
     @Test
-    public void getNegativeTenBillion() throws Exception {
+    public void getNegativeTenBillion() {
         client.getQueries().getNegativeTenBillion();
     }
 
     @Test
-    public void getLongNull() throws Exception {
+    public void getLongNull() {
         client.getQueries().getLongNull(null);
     }
 
     @Test
-    public void floatScientificPositive() throws Exception {
+    public void floatScientificPositive() {
         client.getQueries().floatScientificPositive();
     }
 
     @Test
-    public void floatScientificNegative() throws Exception {
+    public void floatScientificNegative() {
         client.getQueries().floatScientificNegative();
     }
 
     @Test
-    public void floatNull() throws Exception {
+    public void floatNull() {
         client.getQueries().floatNull(null);
     }
 
     @Test
-    public void doubleDecimalPositive() throws Exception {
+    public void doubleDecimalPositive() {
         client.getQueries().doubleDecimalPositive();
     }
 
     @Test
-    public void doubleDecimalNegative() throws Exception {
+    public void doubleDecimalNegative() {
         client.getQueries().doubleDecimalNegative();
     }
 
     @Test
-    public void doubleNull() throws Exception {
+    public void doubleNull() {
         client.getQueries().doubleNull(null);
     }
 
     @Test
-    public void stringUnicode() throws Exception {
+    public void stringUnicode() {
         client.getQueries().stringUnicode();
     }
 
     @Test
-    public void stringUrlEncoded() throws Exception {
+    public void stringUrlEncoded() {
         client.getQueries().stringUrlEncoded();
     }
 
     @Test
-    public void stringEmpty() throws Exception {
+    public void stringEmpty() {
         client.getQueries().stringEmpty();
     }
 
     @Test
-    public void stringNull() throws Exception {
-        try {
-            client.getQueries().stringNull(null);
-        } catch (ErrorException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter stringPath is required"));
-        }
+    public void stringNull() {
+        ErrorException exception = assertThrows(ErrorException.class, () -> client.getQueries().stringNull(null));
+        assertTrue(exception.getMessage().contains("Parameter stringPath is required"));
     }
 
     @Test
-    public void enumValid() throws Exception {
+    public void enumValid() {
         client.getQueries().enumValid(UriColor.GREEN_COLOR);
     }
 
     @Test
-    public void enumNull() throws Exception {
-        try {
-            client.getQueries().enumNull(null);
-        } catch (ErrorException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter enumPath is required"));
-        }
+    public void enumNull() {
+        ErrorException exception = assertThrows(ErrorException.class, () -> client.getQueries().enumNull(null));
+        assertTrue(exception.getMessage().contains("Parameter enumPath is required"));
     }
 
     @Test
-    public void byteMultiByte() throws Exception {
-        client.getQueries().byteMultiByte("啊齄丂狛狜隣郎隣兀﨩".getBytes("UTF-8"));
+    public void byteMultiByte() {
+        client.getQueries().byteMultiByte("啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8));
     }
 
     @Test
-    public void byteEmpty() throws Exception {
+    public void byteEmpty() {
         client.getQueries().byteEmpty();
     }
 
     @Test
-    public void byteNull() throws Exception {
-        try {
-            client.getQueries().byteNull(null);
-        } catch (ErrorException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter bytePath is required"));
-        }
+    public void byteNull() {
+        ErrorException exception = assertThrows(ErrorException.class, () -> client.getQueries().byteNull(null));
+        assertTrue(exception.getMessage().contains("Parameter bytePath is required"));
     }
 
     @Test
-    public void dateValid() throws Exception {
+    public void dateValid() {
         client.getQueries().dateValid();
     }
 
     @Test
-    public void dateNull() throws Exception {
-        try {
-            client.getQueries().dateNull(null);
-        } catch (ErrorException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter datePath is required"));
-        }
+    public void dateNull() {
+        ErrorException exception = assertThrows(ErrorException.class, () -> client.getQueries().dateNull(null));
+        assertTrue(exception.getMessage().contains("Parameter datePath is required"));
     }
 
     @Test
-    public void dateTimeValid() throws Exception {
+    public void dateTimeValid() {
         client.getQueries().dateTimeValid();
     }
 
     @Test
-    public void dateTimeNull() throws Exception {
-        try {
-            client.getQueries().dateTimeNull(null);
-        } catch (ErrorException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
-        }
+    public void dateTimeNull() {
+        ErrorException exception = assertThrows(ErrorException.class, () -> client.getQueries().dateTimeNull(null));
+        assertTrue(exception.getMessage().contains("Parameter dateTimePath is required"));
     }
 
     @Test
-    public void arrayStringCsvValid() throws Exception {
+    public void arrayStringCsvValid() {
         List<String> query = new ArrayList<>();
         query.add("ArrayQuery1");
         query.add("begin!*'();:@ &=+$,/?#[]end");
@@ -188,17 +179,17 @@ public class QueriesTests {
     }
 
     @Test
-    public void arrayStringCsvNull() throws Exception {
+    public void arrayStringCsvNull() {
         client.getQueries().arrayStringCsvNull(null);
     }
 
     @Test
-    public void arrayStringCsvEmpty() throws Exception {
-        client.getQueries().arrayStringCsvEmpty(new ArrayList<String>());
+    public void arrayStringCsvEmpty() {
+        client.getQueries().arrayStringCsvEmpty(new ArrayList<>());
     }
 
     @Test
-    public void arrayStringSsvValid() throws Exception {
+    public void arrayStringSsvValid() {
         List<String> query = new ArrayList<>();
         query.add("ArrayQuery1");
         query.add("begin!*'();:@ &=+$,/?#[]end");
@@ -208,7 +199,7 @@ public class QueriesTests {
     }
 
     @Test
-    public void arrayStringTsvValid() throws Exception {
+    public void arrayStringTsvValid() {
         List<String> query = new ArrayList<>();
         query.add("ArrayQuery1");
         query.add("begin!*'();:@ &=+$,/?#[]end");
@@ -218,7 +209,7 @@ public class QueriesTests {
     }
 
     @Test
-    public void arrayStringPipesValid() throws Exception {
+    public void arrayStringPipesValid() {
         List<String> query = new ArrayList<>();
         query.add("ArrayQuery1");
         query.add("begin!*'();:@ &=+$,/?#[]end");

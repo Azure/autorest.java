@@ -3,16 +3,16 @@ package fixtures.nonstringenum;
 import fixtures.nonstringenum.implementation.NonStringEnumsClientImpl;
 import fixtures.nonstringenum.models.FloatEnum;
 import fixtures.nonstringenum.models.IntEnum;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NonStringEnumTests {
     private static IntClient intClient;
     private static FloatOperationClient floatClient;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         NonStringEnumsClientImpl implClient = new NonStringEnumsClientImpl("http://localhost:3000");
         intClient = new IntClient(implClient.getInts());

@@ -1,61 +1,49 @@
 package fixtures.url;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class PathItemsTests {
     private static AutoRestUrlTestServiceBuilder client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestUrlTestServiceBuilder();
     }
 
     @Test
-    public void getAllWithValues() throws Exception {
+    public void getAllWithValues() {
         client.globalStringPath("globalStringPath");
         client.globalStringQuery("globalStringQuery");
-        client.buildClient().getPathItems().getAllWithValues(
-                "pathItemStringPath",
-                "localStringPath",
-                "pathItemStringQuery",
-                "localStringQuery"
-        );
+        client.buildClient()
+            .getPathItems()
+            .getAllWithValues("pathItemStringPath", "localStringPath", "pathItemStringQuery", "localStringQuery");
     }
 
     @Test
-    public void getGlobalQueryNull() throws Exception {
+    public void getGlobalQueryNull() {
         client.globalStringPath("globalStringPath");
         client.globalStringQuery(null);
-        client.buildClient().getPathItems().getGlobalQueryNull(
-                "pathItemStringPath",
-                "localStringPath",
-                "pathItemStringQuery",
-                "localStringQuery"
-        );
+        client.buildClient()
+            .getPathItems()
+            .getGlobalQueryNull("pathItemStringPath", "localStringPath", "pathItemStringQuery", "localStringQuery");
     }
 
     @Test
-    public void getGlobalAndLocalQueryNull() throws Exception {
+    public void getGlobalAndLocalQueryNull() {
         client.globalStringPath("globalStringPath");
         client.globalStringQuery(null);
-        client.buildClient().getPathItems().getGlobalAndLocalQueryNull(
-                "pathItemStringPath",
-                "localStringPath",
-                "pathItemStringQuery",
-                null
-        );
+        client.buildClient()
+            .getPathItems()
+            .getGlobalAndLocalQueryNull("pathItemStringPath", "localStringPath", "pathItemStringQuery", null);
     }
 
     @Test
-    public void getLocalPathItemQueryNull() throws Exception {
+    public void getLocalPathItemQueryNull() {
         client.globalStringPath("globalStringPath");
         client.globalStringQuery("globalStringQuery");
-        client.buildClient().getPathItems().getLocalPathItemQueryNull(
-                "pathItemStringPath",
-                "localStringPath",
-                null,
-                null
-        );
+        client.buildClient()
+            .getPathItems()
+            .getLocalPathItemQueryNull("pathItemStringPath", "localStringPath", null, null);
     }
 }

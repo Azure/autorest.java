@@ -14,20 +14,20 @@ import fixtures.xmlservice.models.SignedIdentifier;
 import fixtures.xmlservice.models.Slideshow;
 import fixtures.xmlservice.models.StorageServiceProperties;
 import fixtures.xmlservice.models.XmlsGetHeadersHeaders;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class XmlServiceTests {
   private static AutoRestSwaggerBATXMLService client;
 
-  @BeforeClass
+  @BeforeAll
   public static void setup() {
     client = new AutoRestSwaggerBATXMLServiceBuilder().buildClient();
   }

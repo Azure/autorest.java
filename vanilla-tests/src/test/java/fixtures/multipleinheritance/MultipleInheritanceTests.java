@@ -5,87 +5,90 @@ import fixtures.multipleinheritance.models.Feline;
 import fixtures.multipleinheritance.models.Horse;
 import fixtures.multipleinheritance.models.Kitten;
 import fixtures.multipleinheritance.models.Pet;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MultipleInheritanceTests {
-  private static MultipleInheritanceServiceClient client;
+    private static MultipleInheritanceServiceClient client;
 
-  @BeforeClass
-  public static void setup() {
-    client = new MultipleInheritanceServiceClientBuilder().buildClient();
-  }
+    @BeforeAll
+    public static void setup() {
+        client = new MultipleInheritanceServiceClientBuilder().buildClient();
+    }
 
-  @Test
-  public void getHorse() throws Exception {
-    Horse actual = client.getHorse();
-    Assert.assertEquals("Fred", actual.getName());
-    Assert.assertTrue(actual.isAShowHorse());
-  }
+    @Test
+    public void getHorse() {
+        Horse actual = client.getHorse();
+        assertEquals("Fred", actual.getName());
+        assertTrue(actual.isAShowHorse());
+    }
 
-  @Test
-  public void putHorse() throws Exception {
-    Horse horse = new Horse().setIsAShowHorse(false);
-    horse.setName("General");
-    client.putHorse(horse);
-  }
+    @Test
+    public void putHorse() {
+        Horse horse = new Horse().setIsAShowHorse(false);
+        horse.setName("General");
+        client.putHorse(horse);
+    }
 
-  @Test
-  public void getPet() throws Exception {
-    Pet pet = client.getPet();
-    Assert.assertEquals("Peanut", pet.getName());
-  }
+    @Test
+    public void getPet() {
+        Pet pet = client.getPet();
+        assertEquals("Peanut", pet.getName());
+    }
 
-  @Test
-  public void putPet() throws Exception {
-    Pet pet = new Pet().setName("Butter");
-    client.putPet(pet);
-  }
+    @Test
+    public void putPet() {
+        Pet pet = new Pet().setName("Butter");
+        client.putPet(pet);
+    }
 
-  @Test
-  public void getFeline() throws Exception {
-    Feline feline = client.getFeline();
-    Assert.assertTrue(feline.isHisses());
-    Assert.assertTrue(feline.isMeows());
-  }
+    @Test
+    public void getFeline() {
+        Feline feline = client.getFeline();
+        assertTrue(feline.isHisses());
+        assertTrue(feline.isMeows());
+    }
 
-  @Test
-  public void putFeline() throws Exception {
-    Feline feline = new Feline().setMeows(false).setHisses(true);
-    client.putFeline(feline);
-  }
+    @Test
+    public void putFeline() {
+        Feline feline = new Feline().setMeows(false).setHisses(true);
+        client.putFeline(feline);
+    }
 
-  @Test
-  public void getCat() throws Exception {
-    Cat cat = client.getCat();
-    Assert.assertEquals("Whiskers", cat.getName());
-    Assert.assertTrue(cat.isLikesMilk());
-    Assert.assertTrue(cat.isHisses());
-    Assert.assertTrue(cat.isMeows());
-  }
+    @Test
+    public void getCat() {
+        Cat cat = client.getCat();
+        assertEquals("Whiskers", cat.getName());
+        assertTrue(cat.isLikesMilk());
+        assertTrue(cat.isHisses());
+        assertTrue(cat.isMeows());
+    }
 
-  @Test
-  public void putCat() throws Exception {
-    Cat cat = new Cat().setHisses(false).setLikesMilk(false).setMeows(true);
-    cat.setName("Boots");
-    client.putCat(cat);
-  }
+    @Test
+    public void putCat() {
+        Cat cat = new Cat().setHisses(false).setLikesMilk(false).setMeows(true);
+        cat.setName("Boots");
+        client.putCat(cat);
+    }
 
-  @Test
-  public void getKitten() throws Exception {
-    Kitten kitten = client.getKitten();
-    Assert.assertEquals("Gatito", kitten.getName());
-    Assert.assertTrue(kitten.isMeows());
-    Assert.assertTrue(kitten.isLikesMilk());
-    Assert.assertTrue(kitten.isHisses());
-    Assert.assertFalse(kitten.isEatsMiceYet());
-  }
+    @Test
+    public void getKitten() {
+        Kitten kitten = client.getKitten();
+        assertEquals("Gatito", kitten.getName());
+        assertTrue(kitten.isMeows());
+        assertTrue(kitten.isLikesMilk());
+        assertTrue(kitten.isHisses());
+        assertFalse(kitten.isEatsMiceYet());
+    }
 
-  @Test
-  public void putKitten() throws Exception {
-    Kitten kitten = new Kitten().setEatsMiceYet(true);
-    kitten.setHisses(false).setLikesMilk(false).setMeows(true).setName("Kitty");
-    client.putKitten(kitten);
-  }
+    @Test
+    public void putKitten() {
+        Kitten kitten = new Kitten().setEatsMiceYet(true);
+        kitten.setHisses(false).setLikesMilk(false).setMeows(true).setName("Kitty");
+        client.putKitten(kitten);
+    }
 }
