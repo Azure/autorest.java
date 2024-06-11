@@ -40,8 +40,6 @@ public class FilesTests {
         assertArrayEquals(expected, actual);
     }
 
-    @Disabled(
-        "This is causing OOM error with upgraded version of core https://github.com/Azure/autorest.java/issues/980")
     @Test
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;

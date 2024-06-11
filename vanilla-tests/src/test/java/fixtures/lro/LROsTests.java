@@ -33,15 +33,6 @@ public class LROsTests {
         SyncPoller<Product, Product> poller = client.getLROs().beginPut200Succeeded(product);
         assertEquals("Succeeded", poller.getFinalResult().getProvisioningState());
     }
-    //
-    //    @Test
-    //    public void beginPatch200SucceededIgnoreHeaders() throws Exception {
-    //        Product product = new Product();
-    //        product.setLocation("West US");
-    //
-    //        SyncPoller<Product, Product> poller = client.getLROs().beginPatch200SucceededIgnoreHeaders(product);
-    //        assertEquals("Succeeded", poller.getFinalResult().getProvisioningState());
-    //    }
 
     @Test
     public void beginPut201Succeeded() {
@@ -91,17 +82,6 @@ public class LROsTests {
         assertEquals("100", actual.getId());
         assertEquals("foo", actual.getName());
     }
-
-    //    @Test
-    //    public void beginPut202Retry200() throws Exception {
-    //        Product product = new Product();
-    //        product.setLocation("West US");
-    //
-    //        SyncPoller<Product, Product> poller = client.getLROs().beginPut202Retry200(product);
-    //        Product actual = poller.getFinalResult();
-    //        assertEquals("100", actual.getId());
-    //        assertEquals("foo", actual.getName());
-    //    }
 
     @Test
     public void beginPut201CreatingSucceeded200() {
