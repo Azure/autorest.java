@@ -202,6 +202,7 @@ interface ChildResourcesInterface
 @armResourceOperations
 interface TopLevelArmResourceInterface
   extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {
+  @operationId("TopLevelArmResourceInterface_Post")
   action is ArmResourceActionAsync<
     TopLevelArmResource,
     void,
