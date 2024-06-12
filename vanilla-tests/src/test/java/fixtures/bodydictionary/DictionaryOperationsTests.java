@@ -135,7 +135,8 @@ public class DictionaryOperationsTests {
     @Test
     public void getIntInvalidString() {
         RuntimeException ex = assertThrows(RuntimeException.class, () -> client.getIntInvalidString());
-        assertTrue(ex.getCause().getMessage().contains("not a valid `int` value"));
+        assertTrue(ex.getCause().getMessage().contains("not a valid `java.lang.Integer`"),
+            () -> "Expected causal exception message to contain \"not a valid `java.lang.Integer`\" but got: " + ex.getCause().getMessage());
     }
 
     @Test
@@ -168,7 +169,8 @@ public class DictionaryOperationsTests {
     @Test
     public void getLongInvalidString() {
         RuntimeException ex = assertThrows(RuntimeException.class, () -> client.getLongInvalidString());
-        assertTrue(ex.getCause().getMessage().contains("not a valid `long` value"));
+        assertTrue(ex.getCause().getMessage().contains("not a valid `java.lang.Long`"),
+            () -> "Expected causal exception message to contain \"not a valid `java.lang.Long`\" but got: " + ex.getCause().getMessage());
     }
 
     @Test

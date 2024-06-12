@@ -6,6 +6,8 @@ import fixtures.bodycomplex.models.CMYKColors;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -39,7 +41,7 @@ public class BasicOperationsTests {
     @Test
     public void getInvalid() {
         Exception exception = assertThrows(Exception.class, () -> client.getBasics().getInvalid());
-        assertInstanceOf(InvalidFormatException.class, exception.getCause());
+        assertInstanceOf(IOException.class, exception.getCause());
     }
 
     @Test

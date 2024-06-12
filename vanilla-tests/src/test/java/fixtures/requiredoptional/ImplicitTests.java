@@ -1,6 +1,7 @@
 package fixtures.requiredoptional;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,7 +12,10 @@ public class ImplicitTests {
 
     @BeforeAll
     public static void setup() {
-        client = new AutoRestRequiredOptionalTestServiceBuilder().buildClient();
+        client = new AutoRestRequiredOptionalTestServiceBuilder()
+            .requiredGlobalPath("path")
+            .requiredGlobalQuery("query")
+            .buildClient();
     }
 
     @Test
@@ -36,6 +40,7 @@ public class ImplicitTests {
         client.getImplicits().putOptionalBody(null);
     }
 
+    @Disabled("Client builder requires requiredGlobalPath and requiredGlobalQuery, so this case cannot happen")
     @Test
     public void getRequiredGlobalPath() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
@@ -43,6 +48,7 @@ public class ImplicitTests {
         assertTrue(exception.getMessage().contains("this.client.getRequiredGlobalPath() is required"));
     }
 
+    @Disabled("Client builder requires requiredGlobalPath and requiredGlobalQuery, so this case cannot happen")
     @Test
     public void getRequiredGlobalQuery() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,

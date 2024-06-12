@@ -1577,10 +1577,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             methodBlock.line("xmlWriter.writeXml(" + propertyValueGetter + ");");
         } else if (wireType instanceof IterableType) {
             IType elementType = ((IterableType) wireType).getElementType();
-            boolean sameNames = Objects.equals(element.getXmlName(), element.getXmlListElementName());
 
             methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
-                if (!sameNames) {
+                if (element.isXmlWrapper()) {
                     String writeStartElement = element.getXmlNamespace() == null
                         ? "xmlWriter.writeStartElement(\"" + element.getXmlName() + "\");"
                         : "xmlWriter.writeStartElement(" + propertiesManager.getXmlNamespaceConstant(element.getXmlNamespace()) + ", \"" + element.getXmlName() + "\");";
@@ -1594,7 +1593,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 ifAction.indent(() -> ifAction.line(xmlWrite + ";"));
                 ifAction.line("}");
 
-                if (!sameNames) {
+                if (element.isXmlWrapper()) {
                     ifAction.line("xmlWriter.writeEndElement();");
                 }
             });
@@ -1952,7 +1951,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static JavaIfBlock handleXmlPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
         JavaIfBlock ifBlock, String fieldNameVariableName, ClientModelPropertiesManager propertiesManager,
         boolean fromSuper, JavaSettings settings) {
-        String xmlElementName = property.getXmlName();
+        String xmlElementName = (property.getClientType() instanceof IterableType && !property.isXmlWrapper())
+            ? property.getXmlListElementName() : property.getXmlName();
         String xmlNamespace = propertiesManager.getXmlNamespaceConstant(property.getXmlNamespace());
 
         if (CoreUtils.isNullOrEmpty(xmlElementName)) {
@@ -1997,7 +1997,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 fieldAccess = propertiesManager.getDeserializedModelName() + "." + property.getName();
             }
 
-            if (sameNames) {
+            if (!property.isXmlWrapper()) {
                 deserializationBlock.line(fieldAccess + ".add(" + elementDeserialization + ");");
             } else {
                 deserializationBlock.block("while (reader.nextElement() != XmlToken.END_ELEMENT)", whileBlock -> {

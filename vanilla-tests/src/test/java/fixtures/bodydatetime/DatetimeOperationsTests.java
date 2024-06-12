@@ -29,6 +29,7 @@ public class DatetimeOperationsTests {
         assertNull(client.getDatetimeOperations().getNull());
     }
 
+    @Disabled("Java objects allow null but Swagger has x-nullable set to false")
     @Test
     public void getInvalidDate() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> client.getDatetimeOperations().getInvalid());

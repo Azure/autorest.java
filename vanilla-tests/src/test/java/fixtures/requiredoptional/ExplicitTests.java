@@ -18,7 +18,10 @@ public class ExplicitTests {
 
     @BeforeAll
     public static void setup() {
-        client = new AutoRestRequiredOptionalTestServiceBuilder().buildClient();
+        client = new AutoRestRequiredOptionalTestServiceBuilder()
+            .requiredGlobalPath("path")
+            .requiredGlobalQuery("query")
+            .buildClient();
     }
 
     @Test

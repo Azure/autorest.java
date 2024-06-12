@@ -40,6 +40,7 @@ public class FilesTests {
         assertArrayEquals(expected, actual);
     }
 
+    @Disabled("Attempts to create a single byte[] of 3000MB, which is greater than what Java allows")
     @Test
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;

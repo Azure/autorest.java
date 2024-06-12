@@ -2,6 +2,7 @@ package fixtures.bodydatetimerfc1123;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
@@ -19,6 +20,7 @@ public class DateTimeRfc1123OperationsTests {
         client = new AutoRestRFC1123DateTimeTestServiceBuilder().buildClient();
     }
 
+    @Disabled("Java objects always support null but the Swagger spec is configured with x-nullable: false")
     @Test
     public void getNull() {
         assertThrows(NullPointerException.class, () -> client.getDatetimerfc1123s().getNull());

@@ -8,7 +8,9 @@ public class ValidationTests {
 
     @BeforeAll
     public static void setup() {
-        client = new AutoRestValidationTestBuilder().buildClient();
+        client = new AutoRestValidationTestBuilder()
+            .subscriptionId("id")
+            .buildClient();
     }
 
     @Test
