@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import fixtures.annotatedgettersandsetters.models.Sku;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -15,10 +15,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests that when {@code --annotate-getters-and-setters-for-serialization=true} is passed as a configuration to the
@@ -63,8 +63,8 @@ public class GettersAndSettersTests {
 
             String expectedFieldName = getExpectedFieldName(declaredMethod);
             JsonProperty correspondingJsonProperty = jsonPropertyFieldMap.get(expectedFieldName);
-            assertNotNull("'JsonProperty' annotated Field wasn't found for Method '" + declaredMethod.getName() + "'.",
-                correspondingJsonProperty);
+            assertNotNull(correspondingJsonProperty,
+                "'JsonProperty' annotated Field wasn't found for Method '" + declaredMethod.getName() + "'.");
 
             if (jsonGetter != null) {
                 if (correspondingJsonProperty.access() == JsonProperty.Access.WRITE_ONLY) {

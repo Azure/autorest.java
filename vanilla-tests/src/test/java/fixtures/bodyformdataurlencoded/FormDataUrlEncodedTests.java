@@ -3,9 +3,9 @@ package fixtures.bodyformdataurlencoded;
 import com.azure.core.http.rest.Response;
 import fixtures.bodyformdataurlencoded.models.PetFood;
 import fixtures.bodyformdataurlencoded.models.PetType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit tests for {@link BodyFormsDataURLEncoded} client.

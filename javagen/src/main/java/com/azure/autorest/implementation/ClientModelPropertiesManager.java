@@ -25,7 +25,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.regex.Pattern;
 
 import static com.azure.autorest.util.ClientModelUtil.getClientModel;
 
@@ -39,8 +38,6 @@ import static com.azure.autorest.util.ClientModelUtil.getClientModel;
  * This will also handle getting the discriminator property and the expected value for the field.
  */
 public final class ClientModelPropertiesManager {
-    private static final Pattern SPLIT_KEY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
-
     private final ClientModel model;
     private final String deserializedModelName;
     private final boolean hasRequiredProperties;
@@ -660,10 +657,9 @@ public final class ClientModelPropertiesManager {
         JsonFlattenedPropertiesTree structure = JsonFlattenedPropertiesTree.createBaseNode();
 
         if (!CoreUtils.isNullOrEmpty(discriminatorProperty)) {
-            String[] propertyHierarchy = SPLIT_KEY_PATTERN.split(discriminatorProperty);
-            if (propertyHierarchy.length > 1) {
+            List<String> propertyHierarchy = ClientModelUtil.splitFlattenedSerializedName(discriminatorProperty);
+            if (!propertyHierarchy.isEmpty()) {
                 structure = JsonFlattenedPropertiesTree.createBaseNode();
-
             }
         }
 
@@ -675,9 +671,9 @@ public final class ClientModelPropertiesManager {
 
             // Splits the flattened property into the individual properties in the JSON path.
             // For example "im.deeper.flattened" becomes ["im", "deeper", "flattened"].
-            String[] propertyHierarchy = SPLIT_KEY_PATTERN.split(property.getProperty().getSerializedName());
+            List<String> propertyHierarchy = ClientModelUtil.splitFlattenedSerializedName(property.getProperty().getSerializedName());
 
-            if (propertyHierarchy.length == 1) {
+            if (propertyHierarchy.size() == 1) {
                 // Property is marked for flattening but points directly to its JSON path, ignore it.
                 continue;
             }
@@ -685,14 +681,14 @@ public final class ClientModelPropertiesManager {
             // Loop over all the property names in the JSON path, either getting or creating that node in the
             // flattened JSON properties structure.
             JsonFlattenedPropertiesTree pointer = structure;
-            for (int i = 0; i < propertyHierarchy.length; i++) {
-                String nodeName = propertyHierarchy[i];
+            for (int i = 0; i < propertyHierarchy.size(); i++) {
+                String nodeName = propertyHierarchy.get(i);
 
                 // Structure doesn't contain the flattened property.
                 if (!pointer.hasChildNode(nodeName)) {
                     // Depending on whether this is the last property in the flattened property either a terminal
                     // or intermediate node will be inserted.
-                    JsonFlattenedPropertiesTree newPointer = (i == propertyHierarchy.length - 1)
+                    JsonFlattenedPropertiesTree newPointer = (i == propertyHierarchy.size() - 1)
                         ? JsonFlattenedPropertiesTree.createTerminalNode(nodeName, property)
                         : JsonFlattenedPropertiesTree.createIntermediateNode(nodeName);
 

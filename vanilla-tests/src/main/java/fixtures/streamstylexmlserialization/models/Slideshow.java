@@ -150,11 +150,9 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
         xmlWriter.writeStringAttribute("date", this.date);
         xmlWriter.writeStringAttribute("author", this.author);
         if (this.slides != null) {
-            xmlWriter.writeStartElement("slides");
             for (Slide element : this.slides) {
                 xmlWriter.writeXml(element, "slide");
             }
-            xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();
     }
@@ -191,18 +189,8 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
             while (reader.nextElement() != XmlToken.END_ELEMENT) {
                 QName elementName = reader.getElementName();
 
-                if ("slides".equals(elementName.getLocalPart())) {
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        elementName = reader.getElementName();
-                        if ("slide".equals(elementName.getLocalPart())) {
-                            if (deserializedSlideshow.slides == null) {
-                                deserializedSlideshow.slides = new ArrayList<>();
-                            }
-                            deserializedSlideshow.slides.add(Slide.fromXml(reader, "slide"));
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                if ("slide".equals(elementName.getLocalPart())) {
+                    deserializedSlideshow.slides.add(Slide.fromXml(reader, "slide"));
                 } else {
                     reader.skipElement();
                 }

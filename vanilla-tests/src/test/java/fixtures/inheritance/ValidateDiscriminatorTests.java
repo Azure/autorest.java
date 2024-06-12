@@ -9,11 +9,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fixtures.discriminatorflattening.models.MetricAlertCriteria;
 import fixtures.discriminatorflattening.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import fixtures.discriminatorflattening.models.Odatatype;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ValidateDiscriminatorTests {
 
@@ -31,7 +31,8 @@ public class ValidateDiscriminatorTests {
         String subclassJson = BinaryData.fromObject(subclass).toString();
         jsonNode = OBJECT_MAPPER.readTree(subclassJson);
         assertEquals(1, jsonNode.size());
-        assertEquals(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString(), jsonNode.get("odata.type").asText());
+        assertEquals(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString(),
+            jsonNode.get("odata.type").asText());
 
         // de-serialization of unknown type
         String unknownJson = "{\"odata.type\": \"invalid\"}";
