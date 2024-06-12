@@ -10,6 +10,7 @@ import com.azure.autorest.template.PomTemplate;
 import com.azure.autorest.template.ProxyTemplate;
 import com.azure.autorest.template.ServiceClientBuilderTemplate;
 import com.azure.autorest.template.ServiceClientTemplate;
+import com.azure.autorest.template.StreamSerializationModelTemplate;
 
 public class FluentTemplateFactory extends DefaultTemplateFactory {
 
@@ -31,6 +32,11 @@ public class FluentTemplateFactory extends DefaultTemplateFactory {
     @Override
     public ModelTemplate getModelTemplate() {
         return FluentModelTemplate.getInstance();
+    }
+
+    @Override
+    public StreamSerializationModelTemplate getStreamStyleModelTemplate() {
+        return FluentStreamStyleSerializationModelTemplate.getInstance();
     }
 
     @Override
