@@ -10,6 +10,7 @@ import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Objects;
 import javax.xml.namespace.QName;
@@ -103,7 +104,13 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
                 QName elementName = reader.getElementName();
 
                 if ("Url".equals(elementName.getLocalPart())) {
-                    deserializedModelWithUrlProperty.url = reader.getNullableElement(URL::new);
+                    deserializedModelWithUrlProperty.url = reader.getNullableElement(urlString -> {
+                        try {
+                            return new URL(urlString);
+                        } catch (MalformedURLException e) {
+                            throw new XMLStreamException(e);
+                        }
+                    });
                 } else {
                     reader.skipElement();
                 }
