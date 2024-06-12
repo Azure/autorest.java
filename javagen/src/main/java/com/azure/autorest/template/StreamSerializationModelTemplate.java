@@ -42,6 +42,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.azure.autorest.util.ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME;
 import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstructor;
@@ -226,6 +227,59 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writeFromJson(classBlock, model, propertiesManager, settings,
                 Templates.getModelTemplate()::addGeneratedAnnotation);
         }
+    }
+
+    /**
+     * For stream-style-serialization, we generate shadow properties for read-only properties that's not in constructor.
+     * @param model the model to generate class of
+     * @param settings JavaSettings
+     * @return properties to generate as fields of the class
+     * @see com.azure.autorest.mapper.ModelMapper#passPolymorphicDiscriminatorToChildren
+     */
+    @Override
+    protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
+        return Stream.concat(
+                super.getFieldProperties(model, settings).stream(),
+                ClientModelUtil.getParentProperties(model)
+                        .stream()
+                        .filter(property ->
+                                // parent discriminators are already passed to children, see @see in method javadoc
+                                !property.isPolymorphicDiscriminator()
+                                        && readOnlyNotInCtor(model, property, settings)
+                        )
+        ).collect(Collectors.toList());
+    }
+
+    /**
+     * In stream-style-serialization, parent's read-only properties are shadowed in child classes.
+     * @param model the client model
+     * @param property the property to generate getter
+     * @param settings {@link JavaSettings} instance
+     * @return whether the property's getter overrides parent getter
+     */
+    @Override
+    protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+        return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings));
+    }
+
+    private static boolean readOnlyNotInCtor(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+        return  // not required and in constructor
+                !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs())
+                        && (
+                        // must be read-only and not appear in constructor
+                        (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
+                                || isImmutableOutputModel(getDefiningModel(model, property), settings));
+    }
+
+    private static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
+        ClientModel current = model;
+        while(current != null) {
+            if (modelDefinesProperty(current, property)) {
+                return current;
+            }
+            current = ClientModelUtil.getClientModel(current.getParentModelName());
+        }
+        throw new IllegalArgumentException("unable to find defining model for property: " + property);
     }
 
     /**
@@ -922,8 +976,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     }
                     initializeLocalVariable(methodBlock, property, true, settings);
                 });
-                propertiesManager.forEachSuperSetterProperty(property -> initializeLocalVariable(methodBlock, property,
-                    true, settings));
+                propertiesManager.forEachSuperSetterProperty(property -> {
+                    if (readOnlyNotInCtor(propertiesManager.getModel(), property, settings)) {
+                        initializeShadowPropertyLocalVariable(methodBlock, property, settings);
+                    } else {
+                        initializeLocalVariable(methodBlock, property, true, settings);
+                    }
+                });
                 propertiesManager.forEachRequiredProperty(property -> {
                     if (property.isConstant()) {
                         // Constants are never deserialized.
@@ -944,6 +1003,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (additionalProperty != null) {
             initializeLocalVariable(methodBlock, additionalProperty, false, settings);
         }
+    }
+
+    /*
+     * Shadow properties from parent should be initialized as wired type.
+     */
+    private static void initializeShadowPropertyLocalVariable(JavaBlock methodBlock, ClientModelProperty property, JavaSettings settings) {
+        IType type = property.getWireType();
+        String defaultValue = property.isPolymorphicDiscriminator()
+                ? property.getDefaultValue() : type.defaultValueExpression();
+        methodBlock.line(type + " " + property.getName() + " = " + defaultValue + ";");
     }
 
     private static void initializeLocalVariable(JavaBlock methodBlock, ClientModelProperty property, boolean fromSuper,
@@ -1085,7 +1154,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // Need to convert the wire type to the client type for constructors.
             // Need to convert the wire type to the client type for public setters.
             boolean convertToClientType = (clientType != wireType)
-                && (includePropertyInConstructor(property, settings) || (fromSuper && !property.isReadOnly()));
+                && (includePropertyInConstructor(property, settings) || (fromSuper && !readOnlyNotInCtor(model, property, settings)));
             BiConsumer<String, JavaBlock> simpleDeserializationConsumer = (logic, block) -> {
                 if (!hasConstructorArguments) {
                     handleSettingDeserializedValue(block, modelVariableName, model, property, logic, fromSuper,
@@ -1437,7 +1506,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         boolean polymorphicJsonMergePatchScenario) {
         // If the property is defined in a super class use the setter as this will be able to set the value in the
         // super class.
-        if (fromSuper) {
+        if (fromSuper
+            // If the property is read-only from parent, it will be shadowed in child class.
+            && !readOnlyNotInCtor(model, property, JavaSettings.getInstance())) {
             if (polymorphicJsonMergePatchScenario) {
                 // Polymorphic JSON merge patch needs special handling as the setter methods are used to track whether
                 // the property is included in patch serialization. To prevent deserialization from requiring parent

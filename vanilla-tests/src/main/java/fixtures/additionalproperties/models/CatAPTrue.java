@@ -22,6 +22,11 @@ public final class CatAPTrue extends PetAPTrue {
      */
     private Boolean friendly;
 
+    /*
+     * The status property.
+     */
+    private Boolean status;
+
     /**
      * Creates an instance of CatAPTrue class.
      */
@@ -46,6 +51,16 @@ public final class CatAPTrue extends PetAPTrue {
     public CatAPTrue setFriendly(Boolean friendly) {
         this.friendly = friendly;
         return this;
+    }
+
+    /**
+     * Get the status property: The status property.
+     * 
+     * @return the status value.
+     */
+    @Override
+    public Boolean isStatus() {
+        return this.status;
     }
 
     /**
@@ -115,7 +130,7 @@ public final class CatAPTrue extends PetAPTrue {
                 } else if ("name".equals(fieldName)) {
                     deserializedCatAPTrue.setName(reader.getString());
                 } else if ("status".equals(fieldName)) {
-                    deserializedCatAPTrue.setStatus(reader.getNullable(JsonReader::getBoolean));
+                    deserializedCatAPTrue.status = reader.getNullable(JsonReader::getBoolean);
                 } else if ("friendly".equals(fieldName)) {
                     deserializedCatAPTrue.friendly = reader.getNullable(JsonReader::getBoolean);
                 } else {

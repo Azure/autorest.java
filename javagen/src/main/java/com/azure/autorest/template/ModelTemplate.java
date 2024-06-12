@@ -157,21 +157,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 : JavaVisibility.Public;
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
-            // Getters for parent discriminator properties
-            for (ClientModelProperty property : model.getParentPolymorphicDiscriminators()) {
-                IType propertyWireType = property.getWireType();
-                IType propertyClientType = propertyWireType.getClientType();
-
-                generateGetterJavadoc(classBlock, property);
-                addGeneratedAnnotation(classBlock);
-                classBlock.annotation("Override");
-                classBlock.method(JavaVisibility.Public, null,
-                    propertyClientType + " " + getGetterName(model, property) + "()",
-                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                        methodBlock, settings));
-            }
-
-            for (ClientModelProperty property : model.getProperties()) {
+            for (ClientModelProperty property : getFieldProperties(model, settings)) {
                 final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
@@ -190,10 +176,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
-                // getter method of discriminator property in subclass is handled differently
-                boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator()
-                    && !modelDefinesProperty(model, property);
-                if (polymorphicDiscriminatorInSubclass) {
+                boolean overridesParentGetter = isOverrideParentGetter(model, property, settings);
+                if (overridesParentGetter) {
                     classBlock.annotation("Override");
                 }
                 classBlock.method(methodVisibility, null,
@@ -339,6 +323,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
+     * Whether the property's getter overrides parent getter.
+     * @param model the client model
+     * @param property the property to generate getter method
+     * @param settings {@link JavaSettings} instance
+     * @return whether the property's getter overrides parent getter
+     */
+    protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+        // getter method of discriminator property in subclass is handled differently
+        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
+    }
+    /**
      * The model is immutable output if and only if the immutable output model setting is enabled and
      * the usage of the model include output and does not include input.
      *
@@ -346,7 +341,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings JavaSettings instance
      * @return whether the model is output-only immutable model
      */
-    private static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
+    static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
         return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
@@ -560,11 +555,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings AutoRest configuration settings.
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
-        for (ClientModelProperty parentDiscriminator : model.getParentPolymorphicDiscriminators()) {
-            addProperty(parentDiscriminator, model, classBlock, settings);
-        }
-
-        for (ClientModelProperty property : model.getProperties()) {
+        for (ClientModelProperty property : getFieldProperties(model, settings)) {
             addProperty(property, model, classBlock, settings);
         }
     }
@@ -637,6 +628,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else {
             classBlock.privateMemberVariable(fieldSignature);
         }
+    }
+
+    /**
+     * Get properties to generate as fields of the class.
+     * @param model the model to generate class of
+     * @param settings JavaSettings
+     * @return properties to generate as fields of the class
+     */
+    protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
+        return Stream.concat(
+            model.getParentPolymorphicDiscriminators().stream(),
+            model.getProperties().stream()
+        ).collect(Collectors.toList());
     }
 
     protected void addXmlWrapperClass(JavaClass classBlock, ClientModelProperty property, String wrapperClassName,
@@ -1354,7 +1358,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         });
     }
 
-    private static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
+    static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
         return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
             Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
     }
