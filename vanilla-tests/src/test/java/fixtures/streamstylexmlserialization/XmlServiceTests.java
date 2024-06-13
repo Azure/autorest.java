@@ -17,20 +17,21 @@ import fixtures.streamstylexmlserialization.models.SignedIdentifier;
 import fixtures.streamstylexmlserialization.models.Slideshow;
 import fixtures.streamstylexmlserialization.models.StorageServiceProperties;
 import fixtures.streamstylexmlserialization.models.XmlsGetHeadersHeaders;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class XmlServiceTests {
     private static AutoRestSwaggerBATXMLService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestSwaggerBATXMLServiceBuilder().buildClient();
     }
@@ -89,13 +90,14 @@ public class XmlServiceTests {
         assertEquals("Overview", slideshow.getSlides().get(1).getTitle());
         assertEquals(3, slideshow.getSlides().get(1).getItems().size());
         assertEquals("Why WonderWidgets are great", slideshow.getSlides().get(1).getItems().get(0));
-        assertEquals("", slideshow.getSlides().get(1).getItems().get(1));
+        assertNull(slideshow.getSlides().get(1).getItems().get(1));
         assertEquals("Who buys WonderWidgets", slideshow.getSlides().get(1).getItems().get(2));
     }
 
     @Test
     public void putSimple() {
         Slideshow slideshow = client.getXmls().getSimpleAsync().block();
+        slideshow.getSlides().get(1).getItems().set(1, "");
         client.getXmls().putSimpleAsync(slideshow).block();
     }
 
@@ -127,7 +129,12 @@ public class XmlServiceTests {
     @Test
     public void getEmptyList() {
         Slideshow slideshow = client.getXmls().getEmptyListAsync().block();
-        assertNull(slideshow);
+        assertNotNull(slideshow);
+        assertNull(slideshow.getTitle());
+        assertNull(slideshow.getAuthor());
+        assertNull(slideshow.getDate());
+        assertNotNull(slideshow.getSlides());
+        assertTrue(slideshow.getSlides().isEmpty());
     }
 
     @Test
@@ -212,13 +219,15 @@ public class XmlServiceTests {
         assertNotNull(banana);
 
         assertEquals("Unknown Banana", banana.getName());
-        assertEquals("", banana.getFlavor());
+        assertNull(banana.getFlavor());
         assertEquals("2012-02-24T00:53:52.789Z", banana.getExpiration().toString());
     }
 
     @Test
     public void putEmptyChildElement() {
         Banana banana = client.getXmls().getEmptyChildElementAsync().block();
+        // azure-xml treats empty elements as null, so we need to set them to empty strings
+        banana.setFlavor("");
         client.getXmls().putEmptyChildElementAsync(banana).block();
     }
 

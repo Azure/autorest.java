@@ -1,8 +1,8 @@
 package fixtures.bodyfile;
 
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -10,13 +10,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FilesTests {
     private static AutoRestSwaggerBATFileService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestSwaggerBATFileServiceBuilder().buildClient();
     }
@@ -40,7 +40,7 @@ public class FilesTests {
         assertArrayEquals(expected, actual);
     }
 
-    @Ignore("This is causing OOM error with upgraded version of core https://github.com/Azure/autorest.java/issues/980")
+    @Disabled("Attempts to create a single byte[] of 3000MB, which is greater than what Java allows")
     @Test
     public void getLargeFile() throws Exception {
         final long streamSize = 3000L * 1024L * 1024L;

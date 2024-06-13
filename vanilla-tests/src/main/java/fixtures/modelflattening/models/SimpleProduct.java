@@ -165,7 +165,7 @@ public class SimpleProduct extends BaseProduct {
             if (genericValue != null || odataValue != null) {
                 jsonWriter.writeStartObject("max_product_image");
                 jsonWriter.writeStringField("generic_value", this.genericValue);
-                jsonWriter.writeStringField("@odata\\.value", this.odataValue);
+                jsonWriter.writeStringField("@odata.value", this.odataValue);
                 jsonWriter.writeEndObject();
             }
             jsonWriter.writeEndObject();
@@ -211,7 +211,7 @@ public class SimpleProduct extends BaseProduct {
 
                                 if ("generic_value".equals(fieldName)) {
                                     deserializedSimpleProduct.genericValue = reader.getString();
-                                } else if ("@odata\\.value".equals(fieldName)) {
+                                } else if ("@odata.value".equals(fieldName)) {
                                     deserializedSimpleProduct.odataValue = reader.getString();
                                 } else {
                                     reader.skipChildren();

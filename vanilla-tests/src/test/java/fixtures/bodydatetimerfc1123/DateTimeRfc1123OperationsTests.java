@@ -1,60 +1,48 @@
 package fixtures.bodydatetimerfc1123;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
-import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DateTimeRfc1123OperationsTests {
     private static AutoRestRFC1123DateTimeTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestRFC1123DateTimeTestServiceBuilder().buildClient();
     }
 
+    @Disabled("Java objects always support null but the Swagger spec is configured with x-nullable: false")
     @Test
     public void getNull() {
-        try {
-            client.getDatetimerfc1123s().getNull();
-            Assert.fail();
-        } catch (Exception exception) {
-            Assert.assertEquals(NullPointerException.class, exception.getClass());
-        }
+        assertThrows(NullPointerException.class, () -> client.getDatetimerfc1123s().getNull());
     }
 
     @Test
     public void getInvalidDate() {
-        try {
-            client.getDatetimerfc1123s().getInvalid();
-            fail();
-        } catch (RuntimeException e) {
-            assertThat(e.getCause(), instanceOf(JsonMappingException.class));
-        }
+        RuntimeException e = assertThrows(RuntimeException.class, () -> client.getDatetimerfc1123s().getInvalid());
+        assertInstanceOf(JsonMappingException.class, e.getCause());
     }
 
     @Test
     public void getOverflowDate() {
         OffsetDateTime result = client.getDatetimerfc1123s().getOverflow();
         OffsetDateTime expected = OffsetDateTime.of(10000, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
     public void getUnderflowDate() {
-        try {
-            client.getDatetimerfc1123s().getUnderflow();
-            fail();
-        } catch (RuntimeException e) {
-            assertThat(e.getCause(), instanceOf(JsonMappingException.class));
-        }
+        RuntimeException e = assertThrows(RuntimeException.class, () -> client.getDatetimerfc1123s().getUnderflow());
+        assertInstanceOf(JsonMappingException.class, e.getCause());
     }
 
     @Test
@@ -67,14 +55,14 @@ public class DateTimeRfc1123OperationsTests {
     public void getUtcLowercaseMaxDateTime() {
         OffsetDateTime result = client.getDatetimerfc1123s().getUtcLowercaseMaxDateTime();
         OffsetDateTime expected = OffsetDateTime.of(9999, 12, 31, 23, 59, 59, 0, ZoneOffset.UTC);
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
     public void getUtcUppercaseMaxDateTime() {
         OffsetDateTime result = client.getDatetimerfc1123s().getUtcUppercaseMaxDateTime();
         OffsetDateTime expected = OffsetDateTime.of(9999, 12, 31, 23, 59, 59, 0, ZoneOffset.UTC);
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
@@ -87,6 +75,6 @@ public class DateTimeRfc1123OperationsTests {
     public void getUtcMinDateTime() {
         OffsetDateTime result = client.getDatetimerfc1123s().getUtcMinDateTime();
         OffsetDateTime expected = OffsetDateTime.of(1, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
-        Assert.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 }

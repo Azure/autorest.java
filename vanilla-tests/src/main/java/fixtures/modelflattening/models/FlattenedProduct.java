@@ -197,7 +197,7 @@ public class FlattenedProduct extends Resource {
             || provisioningStateValues != null
             || provisioningState != null) {
             jsonWriter.writeStartObject("properties");
-            jsonWriter.writeStringField("p\\.name", this.pName);
+            jsonWriter.writeStringField("p.name", this.pName);
             jsonWriter.writeStringField("type", this.typePropertiesType);
             jsonWriter.writeStringField("provisioningState", this.provisioningState);
             jsonWriter.writeEndObject();
@@ -236,7 +236,7 @@ public class FlattenedProduct extends Resource {
                         fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("p\\.name".equals(fieldName)) {
+                        if ("p.name".equals(fieldName)) {
                             deserializedFlattenedProduct.pName = reader.getString();
                         } else if ("type".equals(fieldName)) {
                             deserializedFlattenedProduct.typePropertiesType = reader.getString();

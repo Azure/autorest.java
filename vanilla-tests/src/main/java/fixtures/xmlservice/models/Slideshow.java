@@ -5,39 +5,40 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
-import com.azure.xml.XmlWriter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
 
 /**
  * Data about a slideshow.
  */
+@JacksonXmlRootElement(localName = "slideshow")
 @Fluent
-public final class Slideshow implements XmlSerializable<Slideshow> {
+public final class Slideshow {
     /*
      * The title property.
      */
+    @JacksonXmlProperty(localName = "title", isAttribute = true)
     private String title;
 
     /*
      * The date property.
      */
+    @JacksonXmlProperty(localName = "date", isAttribute = true)
     private String date;
 
     /*
      * The author property.
      */
+    @JacksonXmlProperty(localName = "author", isAttribute = true)
     private String author;
 
     /*
      * The slides property.
      */
+    @JsonProperty("slide")
     private List<Slide> slides = new ArrayList<>();
 
     /**
@@ -135,80 +136,5 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
         if (getSlides() != null) {
             getSlides().forEach(e -> e.validate());
         }
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        return toXml(xmlWriter, null);
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slideshow" : rootElementName;
-        xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeStringAttribute("title", this.title);
-        xmlWriter.writeStringAttribute("date", this.date);
-        xmlWriter.writeStringAttribute("author", this.author);
-        if (this.slides != null) {
-            xmlWriter.writeStartElement("slides");
-            for (Slide element : this.slides) {
-                xmlWriter.writeXml(element, "slide");
-            }
-            xmlWriter.writeEndElement();
-        }
-        return xmlWriter.writeEndElement();
-    }
-
-    /**
-     * Reads an instance of Slideshow from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @return An instance of Slideshow if the XmlReader was pointing to an instance of it, or null if it was pointing
-     * to XML null.
-     * @throws XMLStreamException If an error occurs while reading the Slideshow.
-     */
-    public static Slideshow fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return fromXml(xmlReader, null);
-    }
-
-    /**
-     * Reads an instance of Slideshow from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     * cases where the model can deserialize from different root element names.
-     * @return An instance of Slideshow if the XmlReader was pointing to an instance of it, or null if it was pointing
-     * to XML null.
-     * @throws XMLStreamException If an error occurs while reading the Slideshow.
-     */
-    public static Slideshow fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slideshow" : rootElementName;
-        return xmlReader.readObject(finalRootElementName, reader -> {
-            Slideshow deserializedSlideshow = new Slideshow();
-            deserializedSlideshow.title = reader.getStringAttribute(null, "title");
-            deserializedSlideshow.date = reader.getStringAttribute(null, "date");
-            deserializedSlideshow.author = reader.getStringAttribute(null, "author");
-            while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                QName elementName = reader.getElementName();
-
-                if ("slides".equals(elementName.getLocalPart())) {
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        elementName = reader.getElementName();
-                        if ("slide".equals(elementName.getLocalPart())) {
-                            if (deserializedSlideshow.slides == null) {
-                                deserializedSlideshow.slides = new ArrayList<>();
-                            }
-                            deserializedSlideshow.slides.add(Slide.fromXml(reader, "slide"));
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
-                } else {
-                    reader.skipElement();
-                }
-            }
-
-            return deserializedSlideshow;
-        });
     }
 }

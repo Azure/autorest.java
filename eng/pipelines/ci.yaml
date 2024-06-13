@@ -94,6 +94,7 @@ jobs:
           mergeTestResults: true
           testRunTitle: 'vanilla-tests'
           searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
+        condition: always()
 
       - task: Maven@3
         displayName: 'Run Azure Tests'
@@ -112,6 +113,7 @@ jobs:
           mergeTestResults: true
           testRunTitle: 'azure-tests'
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
+        condition: always()
 
       - task: Maven@3
         displayName: 'Run Protocol Tests'
@@ -130,6 +132,7 @@ jobs:
           mergeTestResults: true
           testRunTitle: 'protocol-tests'
           searchFolder: '$(System.DefaultWorkingDirectory)/protocol-tests/'
+        condition: always()
 
       - script: |
           npm run testserver-stop

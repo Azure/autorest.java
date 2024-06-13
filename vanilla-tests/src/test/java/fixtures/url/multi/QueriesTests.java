@@ -1,9 +1,7 @@
 package fixtures.url.multi;
 
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 public class QueriesTests {
     private static AutoRestUrlMutliCollectionFormatTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestUrlMutliCollectionFormatTestServiceBuilder().buildClient();
     }

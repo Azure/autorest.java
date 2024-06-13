@@ -1,16 +1,18 @@
 package fixtures.bodybyte;
 
 import fixtures.httpinfrastructure.models.ErrorException;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ByteOperationsTests {
     private static AutoRestSwaggerBATByteService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestSwaggerBATByteServiceBuilder().buildClient();
     }
@@ -18,13 +20,13 @@ public class ByteOperationsTests {
     @Test
     public void getNull() {
         byte[] result = client.getByteOperations().getNull();
-        Assert.assertTrue(result == null || result.length == 0);
+        assertTrue(result == null || result.length == 0);
     }
 
     @Test
     public void getEmpty() {
         byte[] result = client.getByteOperations().getEmpty();
-        Assert.assertArrayEquals("\"\"".getBytes(StandardCharsets.UTF_8), result);
+        assertArrayEquals("\"\"".getBytes(StandardCharsets.UTF_8), result);
     }
 
     @Test
@@ -34,7 +36,7 @@ public class ByteOperationsTests {
         // This conflicts with the octet-stream  (e.g. file/media download) use case,
         // so we're now passing the byte[] through as-is.
         byte[] expected = new byte[] { 34, 47, 47, 55, 57, 47, 80, 118, 54, 43, 102, 106, 51, 57, 103, 61, 61, 34 };
-        Assert.assertArrayEquals(expected, result);
+        assertArrayEquals(expected, result);
     }
 
     @Test
@@ -51,7 +53,7 @@ public class ByteOperationsTests {
     public void getInvalid() {
         try {
             byte[] result = client.getByteOperations().getInvalid();
-            Assert.assertArrayEquals("\"::::SWAGGER::::\"".getBytes(StandardCharsets.UTF_8), result);
+            assertArrayEquals("\"::::SWAGGER::::\"".getBytes(StandardCharsets.UTF_8), result);
         } catch (ErrorException e) {
             e.printStackTrace();
         }
