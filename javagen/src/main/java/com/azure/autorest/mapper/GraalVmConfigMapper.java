@@ -48,18 +48,21 @@ public class GraalVmConfigMapper implements IMapper<GraalVmConfigMapper.ServiceA
         List<String> proxies;
         List<String> reflects;
 
+        final boolean streamStyle = JavaSettings.getInstance().isStreamStyleSerialization();
+
         // Reflect
+        // Exception and error model is still created by reflection in azure-core
         reflects = data.exceptions.stream()
                 .map(e -> e.getPackage() + "." + e.getName())
                 .collect(Collectors.toList());
-        if (!JavaSettings.getInstance().isStreamStyleSerialization()) {
-            reflects.addAll(data.models.stream()
-                    .map(e -> e.getPackage() + "." + e.getName())
-                    .collect(Collectors.toList()));
-            reflects.addAll(data.enums.stream()
-                    .map(m -> m.getPackage() + "." + m.getName())
-                    .collect(Collectors.toList()));
-        }
+        reflects.addAll(data.models.stream()
+                .filter(m -> !streamStyle || (m.getImplementationDetails() != null && m.getImplementationDetails().isException()))
+                .map(m -> m.getPackage() + "." + m.getName())
+                .collect(Collectors.toList()));
+        reflects.addAll(data.enums.stream()
+                .filter(m -> !streamStyle || (m.getImplementationDetails() != null && m.getImplementationDetails().isException()))
+                .map(m -> m.getPackage() + "." + m.getName())
+                .collect(Collectors.toList()));
 
         // Proxy
         proxies = data.serviceClients.stream()
