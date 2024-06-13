@@ -51,6 +51,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
         }
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
         SETTINGS_MAP.put("output-model-immutable", true);
+        SETTINGS_MAP.put("uuid-as-string", true);
         SETTINGS_MAP.put("stream-style-serialization", emitterOptions.getStreamStyleSerialization());
 
         JavaSettingsAccessor.setHost(this);
