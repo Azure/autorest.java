@@ -1,14 +1,16 @@
 package fixtures.validation;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class ValidationTests {
     private static AutoRestValidationTest client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
-        client = new AutoRestValidationTestBuilder().buildClient();
+        client = new AutoRestValidationTestBuilder()
+            .subscriptionId("id")
+            .buildClient();
     }
 
     @Test

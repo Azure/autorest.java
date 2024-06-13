@@ -1,62 +1,53 @@
 package fixtures.bodyboolean;
 
 import com.azure.core.exception.HttpResponseException;
-import com.azure.core.implementation.serializer.MalformedValueException;
 import com.fasterxml.jackson.core.JsonParseException;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BoolTests {
     private static AutoRestBoolTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestBoolTestServiceBuilder().buildClient();
     }
 
     @Test
-    public void getNull() throws Exception {
-        try {
-            boolean b = client.getBools().getNull();
-            fail();
-        } catch (NullPointerException e) {
-            // expected
-        }
+    public void getNull() {
+        assertThrows(NullPointerException.class, () -> client.getBools().getNull());
     }
 
     @Test
-    public void getInvalid() throws Exception {
-        try {
-            client.getBools().getInvalid();
-            Assert.assertTrue(false);
-        } catch (HttpResponseException exception) {
-            // expected
-            Assert.assertTrue(exception.getCause() instanceof JsonParseException);
-        }
+    public void getInvalid() {
+        HttpResponseException ex = assertThrows(HttpResponseException.class, () -> client.getBools().getInvalid());
+        assertInstanceOf(JsonParseException.class, ex.getCause());
     }
 
     @Test
-    public void getTrue() throws Exception {
+    public void getTrue() {
         boolean result = client.getBools().getTrue();
-        Assert.assertTrue(result);
+        assertTrue(result);
     }
 
     @Test
-    public void getFalse() throws Exception {
+    public void getFalse() {
         boolean result = client.getBools().getFalse();
-        Assert.assertFalse(result);
+        assertFalse(result);
     }
 
     @Test
-    public void putTrue() throws Exception {
+    public void putTrue() {
         client.getBools().putTrueWithResponseAsync().block();
     }
 
     @Test
-    public void putFalse() throws Exception {
+    public void putFalse() {
         client.getBools().putFalseWithResponseAsync().block();
     }
 }

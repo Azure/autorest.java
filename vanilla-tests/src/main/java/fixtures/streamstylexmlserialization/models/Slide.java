@@ -121,11 +121,9 @@ public final class Slide implements XmlSerializable<Slide> {
         xmlWriter.writeStringAttribute("type", this.type);
         xmlWriter.writeStringElement("title", this.title);
         if (this.items != null) {
-            xmlWriter.writeStartElement("items");
             for (String element : this.items) {
                 xmlWriter.writeStringElement("item", element);
             }
-            xmlWriter.writeEndElement();
         }
         return xmlWriter.writeEndElement();
     }
@@ -162,18 +160,8 @@ public final class Slide implements XmlSerializable<Slide> {
 
                 if ("title".equals(elementName.getLocalPart())) {
                     deserializedSlide.title = reader.getStringElement();
-                } else if ("items".equals(elementName.getLocalPart())) {
-                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                        elementName = reader.getElementName();
-                        if ("item".equals(elementName.getLocalPart())) {
-                            if (deserializedSlide.items == null) {
-                                deserializedSlide.items = new ArrayList<>();
-                            }
-                            deserializedSlide.items.add(reader.getStringElement());
-                        } else {
-                            reader.skipElement();
-                        }
-                    }
+                } else if ("item".equals(elementName.getLocalPart())) {
+                    deserializedSlide.items.add(reader.getStringElement());
                 } else {
                     reader.skipElement();
                 }

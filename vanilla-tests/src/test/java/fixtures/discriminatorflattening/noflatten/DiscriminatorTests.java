@@ -20,12 +20,16 @@ import fixtures.discriminatorflattening.noflatten.models.VirtualMachineScaleSetN
 import fixtures.discriminatorflattening.noflatten.models.VirtualMachineScaleSetNetworkProfile;
 import fixtures.discriminatorflattening.noflatten.models.VirtualMachineScaleSetProperties;
 import fixtures.discriminatorflattening.noflatten.models.VirtualMachineScaleSetVMProfile;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DiscriminatorTests {
 
@@ -35,58 +39,73 @@ public class DiscriminatorTests {
 
         MetricAlertResource metricAlert = new MetricAlertResource();
         metricAlert.setProperties(new MetricAlertProperties());
-        metricAlert.getProperties().setCriteria(new MetricAlertSingleResourceMultipleMetricCriteria().setAdditionalProperties(Collections.singletonMap("key.1", "value.1")));
+        metricAlert.getProperties()
+            .setCriteria(new MetricAlertSingleResourceMultipleMetricCriteria().setAdditionalProperties(
+                Collections.singletonMap("key.1", "value.1")));
         String metricAlertJson = adapter.serialize(metricAlert, SerializerEncoding.JSON);
         verifyODataTypeInJson(metricAlertJson);
 
-        MetricAlertResource metricAlert2 = adapter.deserialize(metricAlertJson, MetricAlertResource.class, SerializerEncoding.JSON);
-        Assert.assertTrue(metricAlert2.getProperties().getCriteria() instanceof MetricAlertSingleResourceMultipleMetricCriteria);
-        Assert.assertTrue(metricAlert2.getProperties().getCriteria().getAdditionalProperties().containsKey("key.1"));
+        MetricAlertResource metricAlert2 = adapter.deserialize(metricAlertJson, MetricAlertResource.class,
+            SerializerEncoding.JSON);
+        assertInstanceOf(MetricAlertSingleResourceMultipleMetricCriteria.class,
+            metricAlert2.getProperties().getCriteria());
+        assertTrue(metricAlert2.getProperties().getCriteria().getAdditionalProperties().containsKey("key.1"));
     }
 
     @Test
     public void serializationOnNestedFlatten() throws IOException {
         SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
 
-        VirtualMachineScaleSet vmss = new VirtualMachineScaleSet()
-                .setProperties(new VirtualMachineScaleSetProperties()
-                        .setVirtualMachineProfile(new VirtualMachineScaleSetVMProfile()
-                                .setNetworkProfile(new VirtualMachineScaleSetNetworkProfile()
-                                        .setNetworkInterfaceConfigurations(Collections.singletonList(new VirtualMachineScaleSetNetworkConfiguration()
-                                                .setName("name")
-                                                .setProperties(new VirtualMachineScaleSetNetworkConfigurationProperties()
-                                                        .setPrimary(true)))))));
+        VirtualMachineScaleSet vmss = new VirtualMachineScaleSet().setProperties(
+            new VirtualMachineScaleSetProperties().setVirtualMachineProfile(
+                new VirtualMachineScaleSetVMProfile().setNetworkProfile(
+                    new VirtualMachineScaleSetNetworkProfile().setNetworkInterfaceConfigurations(
+                        Collections.singletonList(new VirtualMachineScaleSetNetworkConfiguration().setName("name")
+                            .setProperties(
+                                new VirtualMachineScaleSetNetworkConfigurationProperties().setPrimary(true)))))));
 
         String json = adapter.serialize(vmss, SerializerEncoding.JSON);
-        Assert.assertFalse(json.contains("\"properties.primary\""));
+        assertFalse(json.contains("\"properties.primary\""));
 
         VirtualMachineScaleSet vmss2 = adapter.deserialize(json, VirtualMachineScaleSet.class, SerializerEncoding.JSON);
-        Assert.assertEquals("name", vmss2.getProperties().getVirtualMachineProfile().getNetworkProfile().getNetworkInterfaceConfigurations().iterator().next().getName());
-        Assert.assertTrue(vmss2.getProperties().getVirtualMachineProfile().getNetworkProfile().getNetworkInterfaceConfigurations().iterator().next().getProperties().isPrimary());
+        assertEquals("name", vmss2.getProperties()
+            .getVirtualMachineProfile()
+            .getNetworkProfile()
+            .getNetworkInterfaceConfigurations()
+            .iterator()
+            .next()
+            .getName());
+        assertTrue(vmss2.getProperties()
+            .getVirtualMachineProfile()
+            .getNetworkProfile()
+            .getNetworkInterfaceConfigurations()
+            .iterator()
+            .next()
+            .getProperties()
+            .isPrimary());
     }
 
     @Test
     public void serializationOnNestedArrayFlatten() throws IOException {
         SerializerAdapter adapter = JacksonAdapter.createDefaultSerializerAdapter();
 
-        LoadBalancer lb = new LoadBalancer()
-                .setProperties(new LoadBalancerPropertiesFormat()
-                        .setBackendAddressPools(Arrays.asList(new BackendAddressPool())));
+        LoadBalancer lb = new LoadBalancer().setProperties(
+            new LoadBalancerPropertiesFormat().setBackendAddressPools(Arrays.asList(new BackendAddressPool())));
 
         String json = adapter.serialize(lb, SerializerEncoding.JSON);
-        Assert.assertFalse(json.contains("\"properties.backendAddressPools\""));
-        Assert.assertFalse(json.contains("\"properties.location\""));
+        assertFalse(json.contains("\"properties.backendAddressPools\""));
+        assertFalse(json.contains("\"properties.location\""));
         // verify that null value is ignored
-        Assert.assertFalse(json.contains("\"location\":null"));
+        assertFalse(json.contains("\"location\":null"));
     }
 
     private void verifyODataTypeInJson(String json) {
         final String odataTypeDiscriminatorSignature = "\"odata.type\":";
         final String incorrectOdataTypeDiscriminatorSignature = "\"odata\":";
-        Assert.assertTrue(json.contains(odataTypeDiscriminatorSignature));
-        Assert.assertFalse(json.contains(incorrectOdataTypeDiscriminatorSignature));
+        assertTrue(json.contains(odataTypeDiscriminatorSignature));
+        assertFalse(json.contains(incorrectOdataTypeDiscriminatorSignature));
 
-        Assert.assertTrue(json.contains("\"key.1\""));
-        Assert.assertTrue(json.contains("\"value.1\""));
+        assertTrue(json.contains("\"key.1\""));
+        assertTrue(json.contains("\"value.1\""));
     }
 }

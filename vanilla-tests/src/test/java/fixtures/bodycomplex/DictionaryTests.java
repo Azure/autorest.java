@@ -1,34 +1,37 @@
 package fixtures.bodycomplex;
 
 import fixtures.bodycomplex.models.DictionaryWrapper;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 public class DictionaryTests {
     private static AutoRestComplexTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestComplexTestServiceBuilder().buildClient();
     }
 
     @Test
-    public void getValid() throws Exception {
+    public void getValid() {
         DictionaryWrapper result = client.getDictionaries().getValid();
-        Assert.assertEquals(5, result.getDefaultProgram().size());
-        Assert.assertEquals("", result.getDefaultProgram().get("exe"));
-        Assert.assertNull(result.getDefaultProgram().get(""));
+        assertEquals(5, result.getDefaultProgram().size());
+        assertEquals("", result.getDefaultProgram().get("exe"));
+        assertNull(result.getDefaultProgram().get(""));
     }
 
-    @Ignore("Jackson doesn't serialize null valued map entries")
-    public void putValid() throws Exception {
+    @Disabled("Jackson doesn't serialize null valued map entries")
+    @Test
+    public void putValid() {
         DictionaryWrapper body = new DictionaryWrapper();
-        Map<String, String> programs = new HashMap<String, String>();
+        Map<String, String> programs = new HashMap<>();
         programs.put("txt", "notepad");
         programs.put("bmp", "mspaint");
         programs.put("xls", "excel");
@@ -41,25 +44,25 @@ public class DictionaryTests {
     @Test
     public void getEmpty() throws Exception {
         DictionaryWrapper result = client.getDictionaries().getEmpty();
-        Assert.assertEquals(0, result.getDefaultProgram().size());
+        assertEquals(0, result.getDefaultProgram().size());
     }
 
     @Test
-    public void putEmpty() throws Exception {
+    public void putEmpty() {
         DictionaryWrapper body = new DictionaryWrapper();
-        body.setDefaultProgram(new HashMap<String, String>());
+        body.setDefaultProgram(new HashMap<>());
         client.getDictionaries().putEmptyWithResponseAsync(body).block();
     }
 
     @Test
     public void getNull() throws Exception {
         DictionaryWrapper result = client.getDictionaries().getNull();
-        Assert.assertNull(result.getDefaultProgram());
+        assertNull(result.getDefaultProgram());
     }
 
     @Test
-    public void getNotProvided() throws Exception {
+    public void getNotProvided() {
         DictionaryWrapper result = client.getDictionaries().getNotProvided();
-        Assert.assertNull(result.getDefaultProgram());
+        assertNull(result.getDefaultProgram());
     }
 }

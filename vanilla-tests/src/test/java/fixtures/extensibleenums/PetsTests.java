@@ -3,48 +3,50 @@ package fixtures.extensibleenums;
 import fixtures.extensibleenums.models.DaysOfWeekExtensibleEnum;
 import fixtures.extensibleenums.models.IntEnum;
 import fixtures.extensibleenums.models.Pet;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class PetsTests {
     private static PetStoreInc client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new PetStoreIncBuilder().buildClient();
     }
 
     @Test
-    public void getByPetId() throws Exception {
+    public void getByPetId() {
         Pet tommy = client.getPets().getByPetId("tommy");
-        Assert.assertNotNull(tommy);
-        Assert.assertEquals(DaysOfWeekExtensibleEnum.MONDAY, tommy.getDaysOfWeek());
-        Assert.assertEquals(IntEnum.ONE, tommy.getIntEnum());
-        Assert.assertEquals("Tommy Tomson", tommy.getName());
+        assertNotNull(tommy);
+        assertEquals(DaysOfWeekExtensibleEnum.MONDAY, tommy.getDaysOfWeek());
+        assertEquals(IntEnum.ONE, tommy.getIntEnum());
+        assertEquals("Tommy Tomson", tommy.getName());
 
         Pet casper = client.getPets().getByPetId("casper");
-        Assert.assertNotNull(casper);
-        Assert.assertEquals(DaysOfWeekExtensibleEnum.fromString("Weekend"), casper.getDaysOfWeek());
-        Assert.assertEquals(IntEnum.TWO, casper.getIntEnum());
-        Assert.assertEquals("Casper Ghosty", casper.getName());
+        assertNotNull(casper);
+        assertEquals(DaysOfWeekExtensibleEnum.fromString("Weekend"), casper.getDaysOfWeek());
+        assertEquals(IntEnum.TWO, casper.getIntEnum());
+        assertEquals("Casper Ghosty", casper.getName());
 
         Pet scooby = client.getPets().getByPetId("scooby");
-        Assert.assertNotNull(scooby);
-        Assert.assertEquals(DaysOfWeekExtensibleEnum.THURSDAY, scooby.getDaysOfWeek());
-        Assert.assertEquals(IntEnum.fromString("2.1"), scooby.getIntEnum());
-        Assert.assertEquals("Scooby Scarface", scooby.getName());
+        assertNotNull(scooby);
+        assertEquals(DaysOfWeekExtensibleEnum.THURSDAY, scooby.getDaysOfWeek());
+        assertEquals(IntEnum.fromString("2.1"), scooby.getIntEnum());
+        assertEquals("Scooby Scarface", scooby.getName());
     }
 
     @Test
-    public void addPet() throws Exception {
+    public void addPet() {
         Pet pet = new Pet()
                 .setName("Retriever")
                 .setIntEnum(IntEnum.ONE)
                 .setDaysOfWeek(DaysOfWeekExtensibleEnum.MONDAY);
         Pet res = client.getPets().addPet(pet);
-        Assert.assertEquals(pet.getName(), res.getName());
-        Assert.assertEquals(DaysOfWeekExtensibleEnum.MONDAY, res.getDaysOfWeek());
-        Assert.assertEquals(IntEnum.ONE, res.getIntEnum());
+        assertEquals(pet.getName(), res.getName());
+        assertEquals(DaysOfWeekExtensibleEnum.MONDAY, res.getDaysOfWeek());
+        assertEquals(IntEnum.ONE, res.getIntEnum());
     }
 }

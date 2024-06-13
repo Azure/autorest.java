@@ -5,17 +5,17 @@ package fixtures.complexstreamstylexmlserialization;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 import fixtures.complexstreamstylexmlserialization.models.BlobName;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ComplexXmlTagTests {
     @Test
     public void xmlPropertyIsProperlyAnnotated() throws NoSuchFieldException {
         Field field = BlobName.class.getDeclaredField("content");
-        assertFalse("Expected 'content' field to not be annotated with 'JacksonXmlText' but it was.",
-            field.isAnnotationPresent(JacksonXmlText.class));
+        assertFalse(field.isAnnotationPresent(JacksonXmlText.class),
+            "Expected 'content' field to not be annotated with 'JacksonXmlText' but it was.");
     }
 }

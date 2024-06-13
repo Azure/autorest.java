@@ -13,16 +13,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertCriteria;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import fixtures.inheritance.passdiscriminator.models.Odatatype;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
-import static junit.framework.TestCase.fail;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ValidateDiscriminatorIsPassedTests {
     @Test
@@ -35,18 +35,16 @@ public class ValidateDiscriminatorIsPassedTests {
 
     @Test
     public void subClassAcceptsDiscriminator() {
-        JsonTypeInfo jsonTypeInfo = MetricAlertSingleResourceMultipleMetricCriteria.class
-            .getAnnotation(JsonTypeInfo.class);
+        JsonTypeInfo jsonTypeInfo = MetricAlertSingleResourceMultipleMetricCriteria.class.getAnnotation(
+            JsonTypeInfo.class);
         assertNotNull(jsonTypeInfo);
         assertTrue(jsonTypeInfo.visible());
         assertEquals(JsonTypeInfo.As.PROPERTY, jsonTypeInfo.include());
 
-        String discriminatorValue = MetricAlertSingleResourceMultipleMetricCriteria.class
-            .getAnnotation(JsonTypeName.class)
-            .value();
+        String discriminatorValue = MetricAlertSingleResourceMultipleMetricCriteria.class.getAnnotation(
+            JsonTypeName.class).value();
 
-        String propertyDefaultDiscriminatorValue = new MetricAlertSingleResourceMultipleMetricCriteria()
-            .getOdataType()
+        String propertyDefaultDiscriminatorValue = new MetricAlertSingleResourceMultipleMetricCriteria().getOdataType()
             .toString();
 
         for (Field declaredField : MetricAlertSingleResourceMultipleMetricCriteria.class.getDeclaredFields()) {
@@ -55,9 +53,8 @@ public class ValidateDiscriminatorIsPassedTests {
                 continue;
             }
 
-            if (Objects.equals(jsonTypeInfo.property(), jsonProperty.value())
-                && declaredField.isAnnotationPresent(JsonTypeId.class)
-                && Objects.equals(discriminatorValue, propertyDefaultDiscriminatorValue)) {
+            if (Objects.equals(jsonTypeInfo.property(), jsonProperty.value()) && declaredField.isAnnotationPresent(
+                JsonTypeId.class) && Objects.equals(discriminatorValue, propertyDefaultDiscriminatorValue)) {
                 return;
             }
         }
@@ -79,7 +76,8 @@ public class ValidateDiscriminatorIsPassedTests {
         String subclassJson = BinaryData.fromObject(subclass).toString();
         jsonNode = OBJECT_MAPPER.readTree(subclassJson);
         assertEquals(1, jsonNode.size());
-        assertEquals(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString(), jsonNode.get("odata.type").asText());
+        assertEquals(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString(),
+            jsonNode.get("odata.type").asText());
 
         // de-serialization of unknown type
         String unknownJson = "{\"odata.type\": \"invalid\"}";

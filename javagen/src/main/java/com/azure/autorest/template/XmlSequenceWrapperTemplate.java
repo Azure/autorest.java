@@ -10,7 +10,6 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.xml.XmlProviders;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -47,16 +46,16 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
 
         if (settings.isStreamStyleSerialization()) {
             javaFile.declareImport(ArrayList.class.getName(), ClassType.CORE_UTILS.getFullName(), QName.class.getName(),
-                XmlProviders.class.getName(), XmlReader.class.getName(), XmlSerializable.class.getName(),
-                XMLStreamException.class.getName(), XmlToken.class.getName(), XmlWriter.class.getName());
+                XmlReader.class.getName(), XmlSerializable.class.getName(), XMLStreamException.class.getName(),
+                XmlToken.class.getName(), XmlWriter.class.getName());
         }
 
         javaFile.javadocComment(comment -> comment.description(
-            String.format("A wrapper around %1$s which provides top-level metadata for serialization.", sequenceType)));
+            "A wrapper around " + sequenceType + " which provides top-level metadata for serialization."));
 
         String className = xmlSequenceWrapper.getWrapperClassName();
         if (!settings.isStreamStyleSerialization()) {
-            javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", xmlRootElementName));
+            javaFile.annotation("JacksonXmlRootElement(localName = \"" + xmlRootElementName + "\")");
         } else {
             className = className + " implements XmlSerializable<" + className + ">";
         }
@@ -73,7 +72,7 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
 
     private static void writeJacksonXmlWrapper(JavaClass classBlock, XmlSequenceWrapper xmlSequenceWrapper,
         String xmlListElementName, String xmlElementNameCamelCase, IType sequenceType) {
-        classBlock.annotation(String.format("JacksonXmlProperty(localName = \"%1$s\")", xmlListElementName));
+        classBlock.annotation("JacksonXmlProperty(localName = \"" + xmlListElementName + "\")");
         classBlock.privateFinalMemberVariable(sequenceType.toString(), xmlElementNameCamelCase);
 
         classBlock.javadocComment(comment -> {

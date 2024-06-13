@@ -4,60 +4,59 @@ import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
 import fixtures.bodycomplex.models.Sawshark;
 import fixtures.bodycomplex.models.Shark;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class PolymorphismrecursiveTests {
     private static AutoRestComplexTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestComplexTestServiceBuilder().buildClient();
     }
 
     @Test
-    public void getValid() throws Exception {
+    public void getValid() {
         Fish result = client.getPolymorphicrecursives().getValid();
         Salmon salmon = (Salmon) result;
         Shark sib1 = (Shark) (salmon.getSiblings().get(0));
         Salmon sib2 = (Salmon) (sib1.getSiblings().get(0));
         Shark sib3 = (Shark) (sib2.getSiblings().get(0));
-        Assert.assertEquals(
-                OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC),
-                sib3.getBirthday());
+        assertEquals(OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC), sib3.getBirthday());
     }
 
     @Test
-    public void putValid() throws Exception {
+    public void putValid() {
         Salmon body = new Salmon(1.0f);
         body.setLocation("alaska");
         body.setIswild(true);
         body.setSpecies("king");
-        body.setSiblings(new ArrayList<Fish>());
+        body.setSiblings(new ArrayList<>());
 
         Shark sib1 = new Shark(20.0f, OffsetDateTime.of(2012, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib1.setAge(6);
         sib1.setSpecies("predator");
-        sib1.setSiblings(new ArrayList<Fish>());
+        sib1.setSiblings(new ArrayList<>());
         body.getSiblings().add(sib1);
 
         Sawshark sib2 = new Sawshark(10.0f, OffsetDateTime.of(1900, 1, 5, 1, 0, 0, 0, ZoneOffset.UTC));
         sib2.setAge(105);
         sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib2.setSpecies("dangerous");
-        sib2.setSiblings(new ArrayList<Fish>());
+        sib2.setSiblings(new ArrayList<>());
         body.getSiblings().add(sib2);
 
         Salmon sib11 = new Salmon(2);
         sib11.setIswild(true);
         sib11.setLocation("atlantic");
         sib11.setSpecies("coho");
-        sib11.setSiblings(new ArrayList<Fish>());
+        sib11.setSiblings(new ArrayList<>());
         sib1.getSiblings().add(sib11);
         sib1.getSiblings().add(sib2);
 
