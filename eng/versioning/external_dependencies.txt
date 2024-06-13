@@ -5,6 +5,7 @@ com.azure:azure-core-management
 com.azure:azure-core-test
 com.azure:azure-identity
 com.azure:azure-json
+com.azure:azure-xml
 
 com.fasterxml.jackson.core:jackson-core
 com.fasterxml.jackson.core:jackson-databind

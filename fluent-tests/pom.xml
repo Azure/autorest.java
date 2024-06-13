@@ -91,19 +91,19 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
-      <version>1.14.0</version>
+      <version>1.15.0</version>
     </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-test</artifactId>
-      <version>1.25.0</version>
+      <version>1.26.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.15.0</version>
+      <version>1.15.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
