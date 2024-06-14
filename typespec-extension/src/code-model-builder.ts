@@ -1535,7 +1535,12 @@ export class CodeModelBuilder {
     let responseBody: HttpOperationBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
     let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
-    if (resp.responses && resp.responses.length > 0 && resp.responses[0].body && resp.responses[0].body.bodyKind === "single") {
+    if (
+      resp.responses &&
+      resp.responses.length > 0 &&
+      resp.responses[0].body &&
+      resp.responses[0].body.bodyKind === "single"
+    ) {
       responseBody = resp.responses[0].body;
     }
     if (responseBody) {
@@ -1820,10 +1825,16 @@ export class CodeModelBuilder {
       this.schemaCache.set(type, dictSchema);
     }
 
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
+    let nullableValues = false;
+    let elementType = type.valueType;
+    if (elementType.kind === "nullable") {
+      nullableValues = true;
+      elementType = elementType.type;
+    }
+    const elementSchema = this.processSchemaFromSdkType(elementType, name);
     dictSchema.elementType = elementSchema;
 
-    dictSchema.nullableItems = type.nullableValues;
+    dictSchema.nullableItems = nullableValues;
 
     return this.codeModel.schemas.add(dictSchema);
   }
@@ -2041,8 +2052,13 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
-    let schema = this.processSchemaFromSdkType(prop.type, "");
-    let nullable = prop.nullable;
+    let nullable = false;
+    let type = prop.type;
+    if (type.kind === "nullable") {
+      nullable = true;
+      type = prop.type;
+    }
+    let schema = this.processSchemaFromSdkType(type, "");
 
     let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
