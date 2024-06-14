@@ -220,9 +220,9 @@ export function operationRefersUnion(
     }
   }
   // request body
-  if (op.parameters.body && op.parameters.body.bodyKind === "single") {
-    if (op.parameters.body.parameter) {
-      const ret = unionReferredByType(program, op.parameters.body.parameter.type, cache);
+  if (op.parameters.body) {
+    if (op.parameters.body.property) {
+      const ret = unionReferredByType(program, op.parameters.body.property.type, cache);
       if (ret) {
         return ret;
       }

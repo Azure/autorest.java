@@ -788,10 +788,10 @@ export class CodeModelBuilder {
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
-    if (op.parameters.body && op.parameters.body.bodyKind === "single") {
-      if (op.parameters.body.parameter) {
-        if (!isVoidType(op.parameters.body.parameter.type)) {
-          this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+    if (op.parameters.body) {
+      if (op.parameters.body.property) {
+        if (!isVoidType(op.parameters.body.property.type)) {
+          this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
         }
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
@@ -1535,12 +1535,7 @@ export class CodeModelBuilder {
     let responseBody: HttpOperationBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
     let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
-    if (
-      resp.responses &&
-      resp.responses.length > 0 &&
-      resp.responses[0].body &&
-      resp.responses[0].body.bodyKind === "single"
-    ) {
+    if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       responseBody = resp.responses[0].body;
     }
     if (responseBody) {
