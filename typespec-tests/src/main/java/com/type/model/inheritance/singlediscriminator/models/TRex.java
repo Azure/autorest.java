@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class TRex extends Dinosaur {
     /*
-     * The kind property.
+     * Discriminator property for Dinosaur.
      */
     @Generated
     private String kind = "t-rex";
@@ -33,7 +33,7 @@ public final class TRex extends Dinosaur {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for Dinosaur.
      * 
      * @return the kind value.
      */

@@ -49,7 +49,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.implementation.models.PagedOperation",
+  "name" : "com.cadl.armresourceprovider.implementation.models.OperationListResult",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true

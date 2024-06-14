@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class RealModel extends AbstractModel {
     /*
-     * The kind property.
+     * Discriminator property for AbstractModel.
      */
     @Generated
     private String kind = "real";
@@ -33,7 +33,7 @@ public final class RealModel extends AbstractModel {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for AbstractModel.
      * 
      * @return the kind value.
      */

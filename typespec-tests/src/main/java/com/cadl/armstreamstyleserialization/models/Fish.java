@@ -11,7 +11,7 @@ import com.cadl.armstreamstyleserialization.fluent.models.FishInner;
  */
 public interface Fish {
     /**
-     * Gets the kind property: The kind property.
+     * Gets the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

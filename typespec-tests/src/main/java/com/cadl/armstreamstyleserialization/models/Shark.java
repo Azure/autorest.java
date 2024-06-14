@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public class Shark extends FishInner {
     /*
-     * The kind property.
+     * Discriminator property for Fish.
      */
     private String kind = "shark";
 
@@ -43,7 +43,7 @@ public class Shark extends FishInner {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

@@ -21,7 +21,7 @@ public final class GetResponse9 implements JsonSerializable<GetResponse9> {
      * The prop property.
      */
     @Generated
-    private final GetResponseProp5 prop;
+    private final GetResponseProp4 prop;
 
     /**
      * Creates an instance of GetResponse9 class.
@@ -29,7 +29,7 @@ public final class GetResponse9 implements JsonSerializable<GetResponse9> {
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse9(GetResponseProp5 prop) {
+    private GetResponse9(GetResponseProp4 prop) {
         this.prop = prop;
     }
 
@@ -39,7 +39,7 @@ public final class GetResponse9 implements JsonSerializable<GetResponse9> {
      * @return the prop value.
      */
     @Generated
-    public GetResponseProp5 getProp() {
+    public GetResponseProp4 getProp() {
         return this.prop;
     }
 
@@ -66,13 +66,13 @@ public final class GetResponse9 implements JsonSerializable<GetResponse9> {
     @Generated
     public static GetResponse9 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            GetResponseProp5 prop = null;
+            GetResponseProp4 prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = GetResponseProp5.fromString(reader.getString());
+                    prop = GetResponseProp4.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

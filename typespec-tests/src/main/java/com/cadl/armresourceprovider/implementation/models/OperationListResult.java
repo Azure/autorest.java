@@ -15,7 +15,7 @@ import java.util.List;
  * results.
  */
 @Immutable
-public final class PagedOperation {
+public final class OperationListResult {
     /*
      * The Operation items on this page
      */
@@ -29,9 +29,9 @@ public final class PagedOperation {
     private String nextLink;
 
     /**
-     * Creates an instance of PagedOperation class.
+     * Creates an instance of OperationListResult class.
      */
-    private PagedOperation() {
+    private OperationListResult() {
     }
 
     /**
@@ -60,11 +60,11 @@ public final class PagedOperation {
     public void validate() {
         if (value() == null) {
             throw LOGGER.atError()
-                .log(new IllegalArgumentException("Missing required property value in model PagedOperation"));
+                .log(new IllegalArgumentException("Missing required property value in model OperationListResult"));
         } else {
             value().forEach(e -> e.validate());
         }
     }
 
-    private static final ClientLogger LOGGER = new ClientLogger(PagedOperation.class);
+    private static final ClientLogger LOGGER = new ClientLogger(OperationListResult.class);
 }

@@ -27,7 +27,7 @@ public final class Model implements JsonSerializable<Model> {
      * The optionalLiteral property.
      */
     @Generated
-    private ModelOptionalLiteralOptionalLiteral optionalLiteral;
+    private ModelOptionalLiteral optionalLiteral;
 
     /**
      * Creates an instance of Model class.
@@ -52,7 +52,7 @@ public final class Model implements JsonSerializable<Model> {
      * @return the optionalLiteral value.
      */
     @Generated
-    public ModelOptionalLiteralOptionalLiteral getOptionalLiteral() {
+    public ModelOptionalLiteral getOptionalLiteral() {
         return this.optionalLiteral;
     }
 
@@ -63,7 +63,7 @@ public final class Model implements JsonSerializable<Model> {
      * @return the Model object itself.
      */
     @Generated
-    public Model setOptionalLiteral(ModelOptionalLiteralOptionalLiteral optionalLiteral) {
+    public Model setOptionalLiteral(ModelOptionalLiteral optionalLiteral) {
         this.optionalLiteral = optionalLiteral;
         return this;
     }
@@ -99,8 +99,7 @@ public final class Model implements JsonSerializable<Model> {
                 reader.nextToken();
 
                 if ("optionalLiteral".equals(fieldName)) {
-                    deserializedModel.optionalLiteral
-                        = ModelOptionalLiteralOptionalLiteral.fromString(reader.getString());
+                    deserializedModel.optionalLiteral = ModelOptionalLiteral.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

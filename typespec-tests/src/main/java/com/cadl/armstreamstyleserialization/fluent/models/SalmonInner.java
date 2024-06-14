@@ -19,7 +19,7 @@ import java.util.Map;
 @Immutable
 public final class SalmonInner extends FishInner {
     /*
-     * The kind property.
+     * Discriminator property for Fish.
      */
     private String kind = "salmon";
 
@@ -55,7 +55,7 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

@@ -4,68 +4,72 @@
 
 package com.cadl.longrunning.models;
 
+import com.azure.core.annotation.Generated;
+import com.azure.core.util.ExpandableStringEnum;
+import java.util.Collection;
+
 /**
  * Enum describing allowed operation states.
  */
-public enum OperationState {
+public final class OperationState extends ExpandableStringEnum<OperationState> {
     /**
      * The operation has not started.
      */
-    NOT_STARTED("NotStarted"),
+    @Generated
+    public static final OperationState NOT_STARTED = fromString("NotStarted");
 
     /**
      * The operation is in progress.
      */
-    RUNNING("Running"),
+    @Generated
+    public static final OperationState RUNNING = fromString("Running");
 
     /**
      * The operation has completed successfully.
      */
-    SUCCEEDED("Succeeded"),
+    @Generated
+    public static final OperationState SUCCEEDED = fromString("Succeeded");
 
     /**
      * The operation has failed.
      */
-    FAILED("Failed"),
+    @Generated
+    public static final OperationState FAILED = fromString("Failed");
 
     /**
      * The operation has been canceled by the user.
      */
-    CANCELED("Canceled");
+    @Generated
+    public static final OperationState CANCELED = fromString("Canceled");
 
     /**
-     * The actual serialized value for a OperationState instance.
-     */
-    private final String value;
-
-    OperationState(String value) {
-        this.value = value;
-    }
-
-    /**
-     * Parses a serialized value to a OperationState instance.
+     * Creates a new instance of OperationState value.
      * 
-     * @param value the serialized value to parse.
-     * @return the parsed OperationState object, or null if unable to parse.
+     * @deprecated Use the {@link #fromString(String)} factory method.
      */
-    public static OperationState fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        OperationState[] items = OperationState.values();
-        for (OperationState item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
+    @Generated
+    @Deprecated
+    public OperationState() {
     }
 
     /**
-     * {@inheritDoc}
+     * Creates or finds a OperationState from its string representation.
+     * 
+     * @param name a name to look for.
+     * @return the corresponding OperationState.
      */
-    @Override
-    public String toString() {
-        return this.value;
+    @Generated
+    public static OperationState fromString(String name) {
+        return fromString(name, OperationState.class);
+    }
+
+    /**
+     * Gets known OperationState values.
+     * 
+     * @return known OperationState values.
+     */
+    @Generated
+    public static Collection<OperationState> values() {
+        return values(OperationState.class);
     }
 }

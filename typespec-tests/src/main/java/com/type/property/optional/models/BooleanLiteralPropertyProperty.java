@@ -5,32 +5,32 @@
 package com.type.property.optional.models;
 
 /**
- * Defines values for BooleanLiteralPropertyPropertyTrue.
+ * Defines values for BooleanLiteralPropertyProperty.
  */
-public enum BooleanLiteralPropertyPropertyTrue {
+public enum BooleanLiteralPropertyProperty {
     /**
      * Enum value true.
      */
     TRUE(true);
 
     /**
-     * The actual serialized value for a BooleanLiteralPropertyPropertyTrue instance.
+     * The actual serialized value for a BooleanLiteralPropertyProperty instance.
      */
     private final boolean value;
 
-    BooleanLiteralPropertyPropertyTrue(boolean value) {
+    BooleanLiteralPropertyProperty(boolean value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a BooleanLiteralPropertyPropertyTrue instance.
+     * Parses a serialized value to a BooleanLiteralPropertyProperty instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed BooleanLiteralPropertyPropertyTrue object, or null if unable to parse.
+     * @return the parsed BooleanLiteralPropertyProperty object, or null if unable to parse.
      */
-    public static BooleanLiteralPropertyPropertyTrue fromBoolean(boolean value) {
-        BooleanLiteralPropertyPropertyTrue[] items = BooleanLiteralPropertyPropertyTrue.values();
-        for (BooleanLiteralPropertyPropertyTrue item : items) {
+    public static BooleanLiteralPropertyProperty fromBoolean(boolean value) {
+        BooleanLiteralPropertyProperty[] items = BooleanLiteralPropertyProperty.values();
+        for (BooleanLiteralPropertyProperty item : items) {
             if (item.toBoolean() == value) {
                 return item;
             }
