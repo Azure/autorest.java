@@ -62,6 +62,7 @@ model FishProperties {
 
 model TailProperties {
   length: float32;
+
   @visibility("read")
   patten: string;
 }
@@ -72,6 +73,7 @@ model AnotherFishProperties {
 
 model EyeProperties {
   length: float32;
+
   @visibility("read")
   patten: string;
 }
