@@ -4,16 +4,18 @@
 
 package com.cadl.armstreamstyleserialization.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.cadl.armstreamstyleserialization.fluent.models.AnotherFishProperties;
+import com.cadl.armstreamstyleserialization.fluent.models.FishProperties;
 import java.io.IOException;
 
 /**
  * The third level model SawShark in polymorphic multiple levels inheritance.
  */
-@Immutable
+@Fluent
 public final class SawShark extends Shark {
     /*
      * Discriminator property for Fish.
@@ -26,19 +28,19 @@ public final class SawShark extends Shark {
     private String sharktype = "saw";
 
     /*
-     * The age property.
+     * The properties property.
      */
-    private int age;
+    private FishProperties innerProperties = new FishProperties();
 
     /*
-     * The dna property.
+     * The anotherProperties property.
      */
-    private String dna;
+    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
 
     /**
      * Creates an instance of SawShark class.
      */
-    private SawShark() {
+    public SawShark() {
     }
 
     /**
@@ -62,23 +64,103 @@ public final class SawShark extends Shark {
     }
 
     /**
-     * Get the age property: The age property.
+     * Get the innerProperties property: The properties property.
      * 
-     * @return the age value.
+     * @return the innerProperties value.
      */
-    @Override
-    public int age() {
-        return this.age;
+    private FishProperties innerProperties() {
+        return this.innerProperties;
     }
 
     /**
-     * Get the dna property: The dna property.
+     * Get the innerAnotherProperties property: The anotherProperties property.
      * 
-     * @return the dna value.
+     * @return the innerAnotherProperties value.
+     */
+    private AnotherFishProperties innerAnotherProperties() {
+        return this.innerAnotherProperties;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
-    public String dna() {
-        return this.dna;
+    public SawShark withAge(int age) {
+        super.withAge(age);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SawShark withDna(String dna) {
+        super.withDna(dna);
+        return this;
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double length() {
+        return this.innerProperties() == null ? 0.0 : this.innerProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the SawShark object itself.
+     */
+    public SawShark withLength(double length) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new FishProperties();
+        }
+        this.innerProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String patten() {
+        return this.innerProperties() == null ? null : this.innerProperties().patten();
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double lengthAnotherPropertiesLength() {
+        return this.innerAnotherProperties() == null ? 0.0 : this.innerAnotherProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the SawShark object itself.
+     */
+    public SawShark withLengthAnotherPropertiesLength(double length) {
+        if (this.innerAnotherProperties() == null) {
+            this.innerAnotherProperties = new AnotherFishProperties();
+        }
+        this.innerAnotherProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String pattenAnotherPropertiesPatten() {
+        return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().patten();
     }
 
     /**
@@ -100,6 +182,8 @@ public final class SawShark extends Shark {
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("age", age());
         jsonWriter.writeStringField("dna", dna());
+        jsonWriter.writeJsonField("properties", innerProperties());
+        jsonWriter.writeJsonField("anotherProperties", innerAnotherProperties());
         jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }
@@ -121,9 +205,13 @@ public final class SawShark extends Shark {
                 reader.nextToken();
 
                 if ("age".equals(fieldName)) {
-                    deserializedSawShark.age = reader.getInt();
+                    deserializedSawShark.withAge(reader.getInt());
                 } else if ("dna".equals(fieldName)) {
-                    deserializedSawShark.dna = reader.getString();
+                    deserializedSawShark.withDna(reader.getString());
+                } else if ("properties".equals(fieldName)) {
+                    deserializedSawShark.innerProperties = FishProperties.fromJson(reader);
+                } else if ("anotherProperties".equals(fieldName)) {
+                    deserializedSawShark.innerAnotherProperties = AnotherFishProperties.fromJson(reader);
                 } else if ("sharktype".equals(fieldName)) {
                     deserializedSawShark.sharktype = reader.getString();
                 } else {

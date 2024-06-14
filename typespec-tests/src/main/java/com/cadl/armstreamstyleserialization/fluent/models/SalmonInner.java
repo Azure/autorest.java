@@ -4,7 +4,7 @@
 
 package com.cadl.armstreamstyleserialization.fluent.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -16,7 +16,7 @@ import java.util.Map;
  * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic
  * instances.
  */
-@Immutable
+@Fluent
 public final class SalmonInner extends FishInner {
     /*
      * Discriminator property for Fish.
@@ -39,19 +39,19 @@ public final class SalmonInner extends FishInner {
     private FishInner partner;
 
     /*
-     * The age property.
+     * The properties property.
      */
-    private int age;
+    private FishProperties innerProperties = new FishProperties();
 
     /*
-     * The dna property.
+     * The anotherProperties property.
      */
-    private String dna;
+    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
 
     /**
      * Creates an instance of SalmonInner class.
      */
-    private SalmonInner() {
+    public SalmonInner() {
     }
 
     /**
@@ -74,12 +74,34 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
+     * Set the friends property: The friends property.
+     * 
+     * @param friends the friends value to set.
+     * @return the SalmonInner object itself.
+     */
+    public SalmonInner withFriends(List<FishInner> friends) {
+        this.friends = friends;
+        return this;
+    }
+
+    /**
      * Get the hate property: The hate property.
      * 
      * @return the hate value.
      */
     public Map<String, FishInner> hate() {
         return this.hate;
+    }
+
+    /**
+     * Set the hate property: The hate property.
+     * 
+     * @param hate the hate value to set.
+     * @return the SalmonInner object itself.
+     */
+    public SalmonInner withHate(Map<String, FishInner> hate) {
+        this.hate = hate;
+        return this;
     }
 
     /**
@@ -92,23 +114,114 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
-     * Get the age property: The age property.
+     * Set the partner property: The partner property.
      * 
-     * @return the age value.
+     * @param partner the partner value to set.
+     * @return the SalmonInner object itself.
      */
-    @Override
-    public int age() {
-        return this.age;
+    public SalmonInner withPartner(FishInner partner) {
+        this.partner = partner;
+        return this;
     }
 
     /**
-     * Get the dna property: The dna property.
+     * Get the innerProperties property: The properties property.
      * 
-     * @return the dna value.
+     * @return the innerProperties value.
+     */
+    private FishProperties innerProperties() {
+        return this.innerProperties;
+    }
+
+    /**
+     * Get the innerAnotherProperties property: The anotherProperties property.
+     * 
+     * @return the innerAnotherProperties value.
+     */
+    private AnotherFishProperties innerAnotherProperties() {
+        return this.innerAnotherProperties;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
-    public String dna() {
-        return this.dna;
+    public SalmonInner withAge(int age) {
+        super.withAge(age);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SalmonInner withDna(String dna) {
+        super.withDna(dna);
+        return this;
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double length() {
+        return this.innerProperties() == null ? 0.0 : this.innerProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the SalmonInner object itself.
+     */
+    public SalmonInner withLength(double length) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new FishProperties();
+        }
+        this.innerProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String patten() {
+        return this.innerProperties() == null ? null : this.innerProperties().patten();
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double lengthAnotherPropertiesLength() {
+        return this.innerAnotherProperties() == null ? 0.0 : this.innerAnotherProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the SalmonInner object itself.
+     */
+    public SalmonInner withLengthAnotherPropertiesLength(double length) {
+        if (this.innerAnotherProperties() == null) {
+            this.innerAnotherProperties = new AnotherFishProperties();
+        }
+        this.innerAnotherProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String pattenAnotherPropertiesPatten() {
+        return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().patten();
     }
 
     /**
@@ -142,6 +255,8 @@ public final class SalmonInner extends FishInner {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", age());
         jsonWriter.writeStringField("dna", dna());
+        jsonWriter.writeJsonField("properties", innerProperties());
+        jsonWriter.writeJsonField("anotherProperties", innerAnotherProperties());
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
@@ -166,9 +281,13 @@ public final class SalmonInner extends FishInner {
                 reader.nextToken();
 
                 if ("age".equals(fieldName)) {
-                    deserializedSalmonInner.age = reader.getInt();
+                    deserializedSalmonInner.withAge(reader.getInt());
                 } else if ("dna".equals(fieldName)) {
-                    deserializedSalmonInner.dna = reader.getString();
+                    deserializedSalmonInner.withDna(reader.getString());
+                } else if ("properties".equals(fieldName)) {
+                    deserializedSalmonInner.innerProperties = FishProperties.fromJson(reader);
+                } else if ("anotherProperties".equals(fieldName)) {
+                    deserializedSalmonInner.innerAnotherProperties = AnotherFishProperties.fromJson(reader);
                 } else if ("kind".equals(fieldName)) {
                     deserializedSalmonInner.kind = reader.getString();
                 } else if ("friends".equals(fieldName)) {
