@@ -104,6 +104,7 @@ import {
   Authentication,
   HttpOperation,
   HttpOperationBody,
+  HttpOperationMultipartBody,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -1532,7 +1533,7 @@ export class CodeModelBuilder {
       }
     }
 
-    let responseBody: HttpOperationBody | undefined = undefined;
+    let responseBody: HttpOperationBody | HttpOperationMultipartBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
     let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
@@ -2048,12 +2049,12 @@ export class CodeModelBuilder {
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
     let nullable = false;
-    let type = prop.type;
-    if (type.kind === "nullable") {
+    let nonNullType = prop.type;
+    if (nonNullType.kind === "nullable") {
       nullable = true;
-      type = prop.type;
+      nonNullType = nonNullType.type;
     }
-    let schema = this.processSchemaFromSdkType(type, "");
+    let schema = this.processSchemaFromSdkType(nonNullType, "");
 
     let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
