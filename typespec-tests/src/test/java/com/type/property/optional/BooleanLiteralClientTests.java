@@ -4,7 +4,7 @@
 package com.type.property.optional;
 
 import com.type.property.optional.models.BooleanLiteralProperty;
-import com.type.property.optional.models.BooleanLiteralPropertyPropertyTrue;
+import com.type.property.optional.models.BooleanLiteralPropertyProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class BooleanLiteralClientTests {
     @Test
     public void getAll() {
         BooleanLiteralProperty booleanLiteralProperty = client.getAll();
-        Assertions.assertEquals(BooleanLiteralPropertyPropertyTrue.TRUE, booleanLiteralProperty.getProperty());
+        Assertions.assertEquals(BooleanLiteralPropertyProperty.TRUE, booleanLiteralProperty.getProperty());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class BooleanLiteralClientTests {
     @Test
     public void putAll() {
         BooleanLiteralProperty booleanLiteralProperty = new BooleanLiteralProperty();
-        booleanLiteralProperty.setProperty(BooleanLiteralPropertyPropertyTrue.TRUE);
+        booleanLiteralProperty.setProperty(BooleanLiteralPropertyProperty.TRUE);
         client.putAll(booleanLiteralProperty);
     }
 
