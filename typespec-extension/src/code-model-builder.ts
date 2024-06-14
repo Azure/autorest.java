@@ -719,7 +719,7 @@ export class CodeModelBuilder {
       },
     });
 
-    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(operation);
+    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(this.sdkContext, operation);
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
@@ -2001,11 +2001,8 @@ export class CodeModelBuilder {
         keyType: {
           kind: "string",
           encode: "string",
-          nullable: false,
         },
         description: type.description,
-        nullableValues: false,
-        nullable: false,
         valueType: type.additionalProperties,
       };
       const parentSchema = this.processSchemaFromSdkType(sdkDictType, "Record");
