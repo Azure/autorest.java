@@ -133,7 +133,7 @@ public final class MultipartClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> upload(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("multipart/form-data") BinaryData data, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
@@ -144,7 +144,7 @@ public final class MultipartClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadSync(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("multipart/form-data") BinaryData data, RequestOptions requestOptions, Context context);
     }
 

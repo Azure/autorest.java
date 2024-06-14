@@ -20,7 +20,7 @@ import java.util.Set;
 @Fluent
 public class Shark extends Fish {
     /*
-     * The kind property.
+     * Discriminator property for Fish.
      */
     @Generated
     private String kind = "shark";
@@ -60,7 +60,7 @@ public class Shark extends Fish {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

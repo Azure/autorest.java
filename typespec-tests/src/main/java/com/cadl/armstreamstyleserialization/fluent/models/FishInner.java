@@ -19,7 +19,7 @@ import java.io.IOException;
 @Immutable
 public class FishInner implements JsonSerializable<FishInner> {
     /*
-     * The kind property.
+     * Discriminator property for Fish.
      */
     private String kind = "Fish";
 
@@ -40,7 +40,7 @@ public class FishInner implements JsonSerializable<FishInner> {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

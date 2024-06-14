@@ -163,7 +163,7 @@ public final class MultiContentTypesClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadWithOverload(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/upload/overload/multi-body-types")
@@ -173,7 +173,7 @@ public final class MultiContentTypesClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadWithOverloadSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
     }
 

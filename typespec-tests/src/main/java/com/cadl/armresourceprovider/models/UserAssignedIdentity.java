@@ -4,25 +4,25 @@
 
 package com.cadl.armresourceprovider.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * A managed identity assigned by the user.
+ * User assigned identity properties.
  */
-@Fluent
+@Immutable
 public final class UserAssignedIdentity {
     /*
-     * The active directory client identifier for this principal.
+     * The principal ID of the assigned identity.
      */
-    @JsonProperty(value = "clientId")
-    private String clientId;
+    @JsonProperty(value = "principalId", access = JsonProperty.Access.WRITE_ONLY)
+    private String principalId;
 
     /*
-     * The active directory identifier for this principal.
+     * The client ID of the assigned identity.
      */
-    @JsonProperty(value = "principalId")
-    private String principalId;
+    @JsonProperty(value = "clientId", access = JsonProperty.Access.WRITE_ONLY)
+    private String clientId;
 
     /**
      * Creates an instance of UserAssignedIdentity class.
@@ -31,27 +31,7 @@ public final class UserAssignedIdentity {
     }
 
     /**
-     * Get the clientId property: The active directory client identifier for this principal.
-     * 
-     * @return the clientId value.
-     */
-    public String clientId() {
-        return this.clientId;
-    }
-
-    /**
-     * Set the clientId property: The active directory client identifier for this principal.
-     * 
-     * @param clientId the clientId value to set.
-     * @return the UserAssignedIdentity object itself.
-     */
-    public UserAssignedIdentity withClientId(String clientId) {
-        this.clientId = clientId;
-        return this;
-    }
-
-    /**
-     * Get the principalId property: The active directory identifier for this principal.
+     * Get the principalId property: The principal ID of the assigned identity.
      * 
      * @return the principalId value.
      */
@@ -60,14 +40,12 @@ public final class UserAssignedIdentity {
     }
 
     /**
-     * Set the principalId property: The active directory identifier for this principal.
+     * Get the clientId property: The client ID of the assigned identity.
      * 
-     * @param principalId the principalId value to set.
-     * @return the UserAssignedIdentity object itself.
+     * @return the clientId value.
      */
-    public UserAssignedIdentity withPrincipalId(String principalId) {
-        this.principalId = principalId;
-        return this;
+    public String clientId() {
+        return this.clientId;
     }
 
     /**

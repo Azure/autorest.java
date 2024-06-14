@@ -11,21 +11,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * The properties of the managed service identities assigned to this resource.
+ * Managed service identity (system assigned and/or user assigned identities).
  */
 @Fluent
 public final class ManagedServiceIdentity {
     /*
-     * The Active Directory tenant id of the principal.
-     */
-    @JsonProperty(value = "tenantId", access = JsonProperty.Access.WRITE_ONLY)
-    private String tenantId;
-
-    /*
-     * The active directory identifier of this principal.
+     * The service principal ID of the system assigned identity. This property will only be provided for a system
+     * assigned identity.
      */
     @JsonProperty(value = "principalId", access = JsonProperty.Access.WRITE_ONLY)
     private String principalId;
+
+    /*
+     * The tenant ID of the system assigned identity. This property will only be provided for a system assigned
+     * identity.
+     */
+    @JsonProperty(value = "tenantId", access = JsonProperty.Access.WRITE_ONLY)
+    private String tenantId;
 
     /*
      * The type of managed identity assigned to this resource.
@@ -47,21 +49,23 @@ public final class ManagedServiceIdentity {
     }
 
     /**
-     * Get the tenantId property: The Active Directory tenant id of the principal.
-     * 
-     * @return the tenantId value.
-     */
-    public String tenantId() {
-        return this.tenantId;
-    }
-
-    /**
-     * Get the principalId property: The active directory identifier of this principal.
+     * Get the principalId property: The service principal ID of the system assigned identity. This property will only
+     * be provided for a system assigned identity.
      * 
      * @return the principalId value.
      */
     public String principalId() {
         return this.principalId;
+    }
+
+    /**
+     * Get the tenantId property: The tenant ID of the system assigned identity. This property will only be provided for
+     * a system assigned identity.
+     * 
+     * @return the tenantId value.
+     */
+    public String tenantId() {
+        return this.tenantId;
     }
 
     /**

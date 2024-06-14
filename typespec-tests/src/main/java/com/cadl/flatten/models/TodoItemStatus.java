@@ -5,9 +5,9 @@
 package com.cadl.flatten.models;
 
 /**
- * Defines values for SendLongRequestStatus.
+ * Defines values for TodoItemStatus.
  */
-public enum SendLongRequestStatus {
+public enum TodoItemStatus {
     /**
      * Enum value NotStarted.
      */
@@ -24,26 +24,26 @@ public enum SendLongRequestStatus {
     COMPLETED("Completed");
 
     /**
-     * The actual serialized value for a SendLongRequestStatus instance.
+     * The actual serialized value for a TodoItemStatus instance.
      */
     private final String value;
 
-    SendLongRequestStatus(String value) {
+    TodoItemStatus(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a SendLongRequestStatus instance.
+     * Parses a serialized value to a TodoItemStatus instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed SendLongRequestStatus object, or null if unable to parse.
+     * @return the parsed TodoItemStatus object, or null if unable to parse.
      */
-    public static SendLongRequestStatus fromString(String value) {
+    public static TodoItemStatus fromString(String value) {
         if (value == null) {
             return null;
         }
-        SendLongRequestStatus[] items = SendLongRequestStatus.values();
-        for (SendLongRequestStatus item : items) {
+        TodoItemStatus[] items = TodoItemStatus.values();
+        for (TodoItemStatus item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

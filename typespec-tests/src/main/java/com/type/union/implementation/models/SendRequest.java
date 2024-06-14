@@ -10,7 +10,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.type.union.models.GetResponseProp5;
+import com.type.union.models.GetResponseProp4;
 import java.io.IOException;
 
 /**
@@ -22,7 +22,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
      * The prop property.
      */
     @Generated
-    private final GetResponseProp5 prop;
+    private final GetResponseProp4 prop;
 
     /**
      * Creates an instance of SendRequest class.
@@ -30,7 +30,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
      * @param prop the prop value to set.
      */
     @Generated
-    public SendRequest(GetResponseProp5 prop) {
+    public SendRequest(GetResponseProp4 prop) {
         this.prop = prop;
     }
 
@@ -40,7 +40,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
      * @return the prop value.
      */
     @Generated
-    public GetResponseProp5 getProp() {
+    public GetResponseProp4 getProp() {
         return this.prop;
     }
 
@@ -67,13 +67,13 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     @Generated
     public static SendRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            GetResponseProp5 prop = null;
+            GetResponseProp4 prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = GetResponseProp5.fromString(reader.getString());
+                    prop = GetResponseProp4.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

@@ -131,7 +131,7 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> updateResource(@HeaderParam("content-type") String contentType,
+        Mono<Response<BinaryData>> updateResource(@HeaderParam("Content-Type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -141,7 +141,7 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> updateResourceSync(@HeaderParam("content-type") String contentType,
+        Response<BinaryData> updateResourceSync(@HeaderParam("Content-Type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -151,7 +151,7 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> updateOptionalResource(@HeaderParam("content-type") String contentType,
+        Mono<Response<BinaryData>> updateOptionalResource(@HeaderParam("Content-Type") String contentType,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Patch("/json-merge-patch/update/resource/optional")
@@ -160,7 +160,7 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> updateOptionalResourceSync(@HeaderParam("content-type") String contentType,
+        Response<BinaryData> updateOptionalResourceSync(@HeaderParam("Content-Type") String contentType,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 

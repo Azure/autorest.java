@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringsOnliesImpl;
 import com.type.union.implementation.models.SendRequest;
 import com.type.union.models.GetResponse9;
-import com.type.union.models.GetResponseProp5;
+import com.type.union.models.GetResponseProp4;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -116,7 +116,7 @@ public final class StringsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(GetResponseProp5 prop) {
+    public void send(GetResponseProp4 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SendRequest sendRequest9Obj = new SendRequest(prop);

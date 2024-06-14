@@ -27,7 +27,7 @@ public interface Salmon {
     String dna();
 
     /**
-     * Gets the kind property: The kind property.
+     * Gets the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

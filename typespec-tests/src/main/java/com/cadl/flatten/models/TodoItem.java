@@ -41,7 +41,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
      * The status of the todo item
      */
     @Generated
-    private final SendLongRequestStatus status;
+    private final TodoItemStatus status;
 
     /*
      * When the todo item was created.
@@ -74,7 +74,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
      * @param status the status value to set.
      */
     @Generated
-    private TodoItem(String title, SendLongRequestStatus status) {
+    private TodoItem(String title, TodoItemStatus status) {
         this.title = title;
         this.status = status;
     }
@@ -115,7 +115,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
      * @return the status value.
      */
     @Generated
-    public SendLongRequestStatus getStatus() {
+    public TodoItemStatus getStatus() {
         return this.status;
     }
 
@@ -187,7 +187,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
         return jsonReader.readObject(reader -> {
             long id = 0L;
             String title = null;
-            SendLongRequestStatus status = null;
+            TodoItemStatus status = null;
             OffsetDateTime createdAt = null;
             OffsetDateTime updatedAt = null;
             String description = null;
@@ -202,7 +202,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
                 } else if ("title".equals(fieldName)) {
                     title = reader.getString();
                 } else if ("status".equals(fieldName)) {
-                    status = SendLongRequestStatus.fromString(reader.getString());
+                    status = TodoItemStatus.fromString(reader.getString());
                 } else if ("createdAt".equals(fieldName)) {
                     createdAt = reader
                         .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));

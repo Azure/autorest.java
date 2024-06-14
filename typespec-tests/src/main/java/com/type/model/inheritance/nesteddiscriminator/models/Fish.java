@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public class Fish implements JsonSerializable<Fish> {
     /*
-     * The kind property.
+     * Discriminator property for Fish.
      */
     @Generated
     private String kind = "Fish";
@@ -40,7 +40,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

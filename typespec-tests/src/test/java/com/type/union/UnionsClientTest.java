@@ -9,7 +9,7 @@ import com.type.union.models.Cat;
 import com.type.union.models.EnumsOnlyCases;
 import com.type.union.models.EnumsOnlyCasesLr;
 import com.type.union.models.EnumsOnlyCasesUd;
-import com.type.union.models.GetResponseProp5;
+import com.type.union.models.GetResponseProp2;
 import com.type.union.models.MixedLiteralsCases;
 import com.type.union.models.MixedTypesCases;
 import com.type.union.models.GetResponseProp1;
@@ -38,14 +38,14 @@ public class UnionsClientTest {
 
     @Test
     public void testStringsOnlyClient() {
-        GetResponseProp5 prop = client1.get().getProp();
-        Assertions.assertEquals(GetResponseProp5.B, prop);
+        GetResponseProp4 prop = client1.get().getProp();
+        Assertions.assertEquals(GetResponseProp4.B, prop);
         client1.send(prop);
     }
 
     @Test
     public void testStringExtensibleClient() {
-        GetResponseProp4 prop = client2.get().getProp();
+        GetResponseProp3 prop = client2.get().getProp();
         Assertions.assertEquals("custom", prop.toString());
         client2.send(prop);
     }
@@ -59,7 +59,7 @@ public class UnionsClientTest {
 
     @Test
     public void testIntsOnlyClient() {
-        GetResponseProp3 prop = client4.get().getProp();
+        GetResponseProp2 prop = client4.get().getProp();
         Assertions.assertEquals(2L, prop.toInt());
         client4.send(prop);
     }

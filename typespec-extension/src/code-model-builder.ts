@@ -104,6 +104,7 @@ import {
   Authentication,
   HttpOperation,
   HttpOperationBody,
+  HttpOperationMultipartBody,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -152,6 +153,7 @@ import {
   ProcessingCache,
   getAccess,
   getDurationFormatFromSdkType,
+  getNonNullSdkType,
   getUnionDescription,
   getUsage,
   hasScalarAsBase,
@@ -719,7 +721,7 @@ export class CodeModelBuilder {
       },
     });
 
-    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(operation);
+    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(this.sdkContext, operation);
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
@@ -789,9 +791,9 @@ export class CodeModelBuilder {
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
     if (op.parameters.body) {
-      if (op.parameters.body.parameter) {
-        if (!isVoidType(op.parameters.body.parameter.type)) {
-          this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+      if (op.parameters.body.property) {
+        if (!isVoidType(op.parameters.body.property.type)) {
+          this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
         }
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
@@ -1018,7 +1020,7 @@ export class CodeModelBuilder {
     } else {
       // schema
       let schema;
-      const sdkType = getClientType(this.sdkContext, param.param);
+      const sdkType = getNonNullSdkType(getClientType(this.sdkContext, param.param));
       if (
         param.type === "header" &&
         param.param.type.kind === "Scalar" &&
@@ -1532,7 +1534,7 @@ export class CodeModelBuilder {
       }
     }
 
-    let responseBody: HttpOperationBody | undefined = undefined;
+    let responseBody: HttpOperationBody | HttpOperationMultipartBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
     let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
@@ -1802,10 +1804,18 @@ export class CodeModelBuilder {
   }
 
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
+    let nullableItems = false;
+    let elementType = type.valueType;
+    if (elementType.kind === "nullable") {
+      nullableItems = true;
+      elementType = elementType.type;
+    }
+
+    const elementSchema = this.processSchemaFromSdkType(elementType, name);
     return this.codeModel.schemas.add(
       new ArraySchema(name, type.details ?? "", elementSchema, {
         summary: type.description,
+        nullableItems: nullableItems,
       }),
     );
   }
@@ -1820,10 +1830,16 @@ export class CodeModelBuilder {
       this.schemaCache.set(type, dictSchema);
     }
 
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
+    let nullableItems = false;
+    let elementType = type.valueType;
+    if (elementType.kind === "nullable") {
+      nullableItems = true;
+      elementType = elementType.type;
+    }
+    const elementSchema = this.processSchemaFromSdkType(elementType, name);
     dictSchema.elementType = elementSchema;
 
-    dictSchema.nullableItems = type.nullableValues;
+    dictSchema.nullableItems = nullableItems;
 
     return this.codeModel.schemas.add(dictSchema);
   }
@@ -2001,11 +2017,8 @@ export class CodeModelBuilder {
         keyType: {
           kind: "string",
           encode: "string",
-          nullable: false,
         },
         description: type.description,
-        nullableValues: false,
-        nullable: false,
         valueType: type.additionalProperties,
       };
       const parentSchema = this.processSchemaFromSdkType(sdkDictType, "Record");
@@ -2044,8 +2057,13 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
-    let schema = this.processSchemaFromSdkType(prop.type, "");
-    let nullable = prop.nullable;
+    let nullable = false;
+    let nonNullType = prop.type;
+    if (nonNullType.kind === "nullable") {
+      nullable = true;
+      nonNullType = nonNullType.type;
+    }
+    let schema = this.processSchemaFromSdkType(nonNullType, "");
 
     let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
