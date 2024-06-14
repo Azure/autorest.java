@@ -1,5 +1,12 @@
 # Release History
 
+## 0.17.1 (Unreleased)
+
+Compatible with compiler 0.57.
+
+- Bug fix for stream-style-serialization for ARM.
+- Enabled stream-style-serialization by default for ARM.
+
 ## 0.17.0 (2024-06-14)
 
 Compatible with compiler 0.57.
