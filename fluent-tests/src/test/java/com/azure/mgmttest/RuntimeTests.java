@@ -492,7 +492,7 @@ public class RuntimeTests {
         Assertions.assertEquals("myName", pirCommunityGalleryResource.name());
         Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
 
-        String galleryJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\",\"disclaimer\":\"myDisclaimer\", \"identifier\": {\"uniqueId\": \"abc\"}}";
+        String galleryJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\", \"properties\": {\"disclaimer\":\"myDisclaimer\"}, \"identifier\": {\"uniqueId\": \"abc\"}}";
         CommunityGalleryInner galleryInner = serializerAdapter.deserialize(galleryJson, CommunityGalleryInner.class, SerializerEncoding.JSON);
         Assertions.assertEquals("myName", galleryInner.name());
         Assertions.assertEquals("myDisclaimer", galleryInner.disclaimer());

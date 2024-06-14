@@ -44,7 +44,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.azure.autorest.util.ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME;
 import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstructor;
@@ -240,17 +239,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     @Override
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
-        return Stream.concat(
-                super.getFieldProperties(model, settings).stream(),
-                ClientModelUtil.getParentProperties(model)
-                        .stream()
-                        .filter(property ->
-                                // parent discriminators are already passed to children, see @see in method javadoc
-                                !property.isPolymorphicDiscriminator()
-                                        && readOnlyNotInCtor(model, property, settings)
-                                        || property.getClientFlatten()
-                        )
-        ).collect(Collectors.toList());
+        List<ClientModelProperty> fieldProperties = super.getFieldProperties(model, settings);
+        Set<String> propertySerializedNames = fieldProperties.stream().map(ClientModelProperty::getSerializedName).collect(Collectors.toSet());
+        for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(model)) {
+            if (propertySerializedNames.contains(parentProperty.getSerializedName())) {
+                continue;
+            }
+            propertySerializedNames.add(parentProperty.getSerializedName());
+            if (!parentProperty.isPolymorphicDiscriminator() // parent discriminators are already passed to children, see @see in method javadoc
+                    && readOnlyNotInCtor(model, parentProperty, settings) // we shadow parent read-only properties in child class
+                    || parentProperty.getClientFlatten()) { // we shadow parent flattened property in child class
+                fieldProperties.add(parentProperty);
+            }
+        }
+        return fieldProperties;
     }
 
     /**

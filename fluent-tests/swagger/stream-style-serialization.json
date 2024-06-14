@@ -67,10 +67,14 @@
       },
       "CommunityGallery": {
         "properties": {
-          "disclaimer": {
+          "name": {
             "readOnly": true,
             "type": "string",
-            "description": "Community gallery disclaimer"
+            "description": "Resource name in Child"
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/CommunityGalleryProperties"
           }
         },
         "allOf": [
@@ -79,6 +83,16 @@
           }
         ],
         "description": "Specifies information about the Community Gallery that you want to create or update."
+      },
+      "CommunityGalleryProperties": {
+        "type": "object",
+        "properties": {
+          "disclaimer": {
+            "type": "string",
+            "description": "Resource name"
+          }
+        },
+        "description": "Describes the properties of a community gallery."
       }
     },
   "parameters": {
