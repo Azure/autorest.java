@@ -1804,11 +1804,18 @@ export class CodeModelBuilder {
   }
 
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
-    const elementType = getNonNullSdkType(type.valueType);
+    let nullableItems = false;
+    let elementType = type.valueType;
+    if (elementType.kind === "nullable") {
+      nullableItems = true;
+      elementType = elementType.type;
+    }
+
     const elementSchema = this.processSchemaFromSdkType(elementType, name);
     return this.codeModel.schemas.add(
       new ArraySchema(name, type.details ?? "", elementSchema, {
         summary: type.description,
+        nullableItems: nullableItems,
       }),
     );
   }
@@ -1823,16 +1830,16 @@ export class CodeModelBuilder {
       this.schemaCache.set(type, dictSchema);
     }
 
-    let nullableValues = false;
+    let nullableItems = false;
     let elementType = type.valueType;
     if (elementType.kind === "nullable") {
-      nullableValues = true;
+      nullableItems = true;
       elementType = elementType.type;
     }
     const elementSchema = this.processSchemaFromSdkType(elementType, name);
     dictSchema.elementType = elementSchema;
 
-    dictSchema.nullableItems = nullableValues;
+    dictSchema.nullableItems = nullableItems;
 
     return this.codeModel.schemas.add(dictSchema);
   }
