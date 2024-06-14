@@ -153,6 +153,7 @@ import {
   ProcessingCache,
   getAccess,
   getDurationFormatFromSdkType,
+  getNonNullSdkType,
   getUnionDescription,
   getUsage,
   hasScalarAsBase,
@@ -1019,7 +1020,7 @@ export class CodeModelBuilder {
     } else {
       // schema
       let schema;
-      const sdkType = getClientType(this.sdkContext, param.param);
+      const sdkType = getNonNullSdkType(getClientType(this.sdkContext, param.param));
       if (
         param.type === "header" &&
         param.param.type.kind === "Scalar" &&
@@ -1803,10 +1804,7 @@ export class CodeModelBuilder {
   }
 
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
-    let elementType = type.valueType;
-    if (elementType.kind === "nullable") {
-      elementType = elementType.type;
-    }
+    const elementType = getNonNullSdkType(type.valueType);
     const elementSchema = this.processSchemaFromSdkType(elementType, name);
     return this.codeModel.schemas.add(
       new ArraySchema(name, type.details ?? "", elementSchema, {
