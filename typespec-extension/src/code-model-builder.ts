@@ -1803,7 +1803,11 @@ export class CodeModelBuilder {
   }
 
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
+    let elementType = type.valueType;
+    if (elementType.kind === "nullable") {
+      elementType = elementType.type;
+    }
+    const elementSchema = this.processSchemaFromSdkType(elementType, name);
     return this.codeModel.schemas.add(
       new ArraySchema(name, type.details ?? "", elementSchema, {
         summary: type.description,
