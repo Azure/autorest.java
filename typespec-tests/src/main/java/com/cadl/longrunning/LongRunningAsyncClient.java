@@ -18,10 +18,11 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
-import com.cadl.longrunning.models.JobData;
+import com.cadl.longrunning.implementation.models.CreateJobRequest;
 import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
 import com.cadl.longrunning.models.PollResponse;
+import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -203,7 +204,8 @@ public final class LongRunningAsyncClient {
     /**
      * A remote procedure call (RPC) operation.
      * 
-     * @param jobData The jobData parameter.
+     * @param nullableFloatDict The nullableFloatDict parameter.
+     * @param configuration The configuration parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -214,9 +216,34 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<JobResult, JobResultResult> beginCreateJob(JobData jobData) {
+    public PollerFlux<JobResult, JobResultResult> beginCreateJob(Map<String, Double> nullableFloatDict,
+        String configuration) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateJobWithModelAsync(BinaryData.fromObject(jobData), requestOptions);
+        CreateJobRequest jobDataObj = new CreateJobRequest(nullableFloatDict).setConfiguration(configuration);
+        BinaryData jobData = BinaryData.fromObject(jobDataObj);
+        return serviceClient.beginCreateJobWithModelAsync(jobData, requestOptions);
+    }
+
+    /**
+     * A remote procedure call (RPC) operation.
+     * 
+     * @param nullableFloatDict The nullableFloatDict parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<JobResult, JobResultResult> beginCreateJob(Map<String, Double> nullableFloatDict) {
+        // Generated convenience method for beginCreateJobWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        CreateJobRequest jobDataObj = new CreateJobRequest(nullableFloatDict);
+        BinaryData jobData = BinaryData.fromObject(jobDataObj);
+        return serviceClient.beginCreateJobWithModelAsync(jobData, requestOptions);
     }
 }

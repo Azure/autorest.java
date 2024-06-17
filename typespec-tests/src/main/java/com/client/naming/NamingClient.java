@@ -16,9 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.client.naming.implementation.NamingClientImpl;
-import com.client.naming.models.ClientNameAndJsonEncodedNameModel;
-import com.client.naming.models.ClientNameModel;
-import com.client.naming.models.LanguageClientNameModel;
+import com.client.naming.implementation.models.ClientRequest;
+import com.client.naming.implementation.models.CompatibleWithEncodedNameRequest;
+import com.client.naming.implementation.models.LanguageRequest;
 
 /**
  * Initializes a new instance of the synchronous NamingClient type.
@@ -217,7 +217,7 @@ public final class NamingClient {
     /**
      * The client operation.
      * 
-     * @param clientNameModel The clientNameModel parameter.
+     * @param clientName Pass in true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -227,16 +227,18 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void client(ClientNameModel clientNameModel) {
+    public void client(boolean clientName) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        clientWithResponse(BinaryData.fromObject(clientNameModel), requestOptions).getValue();
+        ClientRequest clientNameModelObj = new ClientRequest(clientName);
+        BinaryData clientNameModel = BinaryData.fromObject(clientNameModelObj);
+        clientWithResponse(clientNameModel, requestOptions).getValue();
     }
 
     /**
      * The language operation.
      * 
-     * @param languageClientNameModel The languageClientNameModel parameter.
+     * @param javaName Pass in true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -246,16 +248,18 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void language(LanguageClientNameModel languageClientNameModel) {
+    public void language(boolean javaName) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        languageWithResponse(BinaryData.fromObject(languageClientNameModel), requestOptions).getValue();
+        LanguageRequest languageClientNameModelObj = new LanguageRequest(javaName);
+        BinaryData languageClientNameModel = BinaryData.fromObject(languageClientNameModelObj);
+        languageWithResponse(languageClientNameModel, requestOptions).getValue();
     }
 
     /**
      * The compatibleWithEncodedName operation.
      * 
-     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
+     * @param clientName Pass in true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -265,11 +269,13 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void compatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel) {
+    public void compatibleWithEncodedName(boolean clientName) {
         // Generated convenience method for compatibleWithEncodedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        compatibleWithEncodedNameWithResponse(BinaryData.fromObject(clientNameAndJsonEncodedNameModel), requestOptions)
-            .getValue();
+        CompatibleWithEncodedNameRequest clientNameAndJsonEncodedNameModelObj
+            = new CompatibleWithEncodedNameRequest(clientName);
+        BinaryData clientNameAndJsonEncodedNameModel = BinaryData.fromObject(clientNameAndJsonEncodedNameModelObj);
+        compatibleWithEncodedNameWithResponse(clientNameAndJsonEncodedNameModel, requestOptions).getValue();
     }
 
     /**

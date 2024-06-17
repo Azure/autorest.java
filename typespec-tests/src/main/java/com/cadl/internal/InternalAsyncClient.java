@@ -17,9 +17,10 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.internal.implementation.InternalOpsImpl;
+import com.cadl.internal.implementation.models.PostInternalRequest;
 import com.cadl.internal.implementation.models.ResponseInternal;
-import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
+import com.cadl.internal.models.RequestInner;
 import reactor.core.publisher.Mono;
 
 /**
@@ -126,7 +127,7 @@ public final class InternalAsyncClient {
     /**
      * The postInternal operation.
      * 
-     * @param apiRequest The apiRequest parameter.
+     * @param property The property parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -137,10 +138,12 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<ResponseInternal> postInternal(ApiRequest apiRequest) {
+    Mono<ResponseInternal> postInternal(RequestInner property) {
         // Generated convenience method for postInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postInternalWithResponse(BinaryData.fromObject(apiRequest), requestOptions).flatMap(FluxUtil::toMono)
+        PostInternalRequest apiRequestObj = new PostInternalRequest(property);
+        BinaryData apiRequest = BinaryData.fromObject(apiRequestObj);
+        return postInternalWithResponse(apiRequest, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(ResponseInternal.class));
     }
 

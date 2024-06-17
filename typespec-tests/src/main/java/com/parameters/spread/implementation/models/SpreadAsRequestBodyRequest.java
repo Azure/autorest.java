@@ -13,7 +13,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The SpreadAsRequestBodyRequest model.
+ * This is a simple model.
  */
 @Immutable
 public final class SpreadAsRequestBodyRequest implements JsonSerializable<SpreadAsRequestBodyRequest> {

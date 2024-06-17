@@ -5,7 +5,7 @@
 package com._specs_.azure.core.lro.rpc;
 
 import com._specs_.azure.core.lro.rpc.implementation.RpcClientImpl;
-import com._specs_.azure.core.lro.rpc.models.GenerationOptions;
+import com._specs_.azure.core.lro.rpc.implementation.models.LongRunningRpcRequest;
 import com._specs_.azure.core.lro.rpc.models.GenerationResult;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -86,7 +86,7 @@ public final class RpcClient {
     /**
      * Generate data.
      * 
-     * @param generationOptions Options for the generation.
+     * @param prompt Prompt.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -97,9 +97,11 @@ public final class RpcClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
+    public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpc(String prompt) {
         // Generated convenience method for beginLongRunningRpcWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLongRunningRpcWithModel(BinaryData.fromObject(generationOptions), requestOptions);
+        LongRunningRpcRequest generationOptionsObj = new LongRunningRpcRequest(prompt);
+        BinaryData generationOptions = BinaryData.fromObject(generationOptionsObj);
+        return serviceClient.beginLongRunningRpcWithModel(generationOptions, requestOptions);
     }
 }

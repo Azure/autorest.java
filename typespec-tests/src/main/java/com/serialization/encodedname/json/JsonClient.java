@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.serialization.encodedname.json.implementation.PropertiesImpl;
-import com.serialization.encodedname.json.models.JsonEncodedNameModel;
+import com.serialization.encodedname.json.implementation.models.SendRequest;
 
 /**
  * Initializes a new instance of the synchronous JsonClient type.
@@ -86,7 +86,7 @@ public final class JsonClient {
     /**
      * The send operation.
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param defaultName Pass in true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -96,10 +96,12 @@ public final class JsonClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(JsonEncodedNameModel jsonEncodedNameModel) {
+    public void send(boolean defaultName) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        sendWithResponse(BinaryData.fromObject(jsonEncodedNameModel), requestOptions).getValue();
+        SendRequest jsonEncodedNameModelObj = new SendRequest(defaultName);
+        BinaryData jsonEncodedNameModel = BinaryData.fromObject(jsonEncodedNameModelObj);
+        sendWithResponse(jsonEncodedNameModel, requestOptions).getValue();
     }
 
     /**
@@ -114,9 +116,9 @@ public final class JsonClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public JsonEncodedNameModel get() {
+    public SendRequest get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(JsonEncodedNameModel.class);
+        return getWithResponse(requestOptions).getValue().toObject(SendRequest.class);
     }
 }

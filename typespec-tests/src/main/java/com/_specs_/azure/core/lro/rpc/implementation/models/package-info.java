@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the data models for BodyOptionality.
- * Test describing optionality of the request body.
+ * Package containing the data models for Rpc.
+ * Illustrates bodies templated with Azure Core with long-running RPC operation.
  * <!-- end generated doc -->
  */
-package com.parameters.bodyoptionality.models;
+package com._specs_.azure.core.lro.rpc.implementation.models;

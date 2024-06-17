@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.parameters.spread.implementation.ModelsImpl;
-import com.parameters.spread.models.BodyParameter;
-import com.parameters.spread.models.CompositeRequestMix;
+import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
+import com.parameters.spread.implementation.models.SpreadCompositeRequestMixRequest;
 import reactor.core.publisher.Mono;
 
 /**
@@ -166,7 +166,7 @@ public final class ModelAsyncClient {
     /**
      * The spreadAsRequestBody operation.
      * 
-     * @param bodyParameter This is a simple model.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -177,11 +177,12 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadAsRequestBody(BodyParameter bodyParameter) {
+    public Mono<Void> spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions)
-            .flatMap(FluxUtil::toMono);
+        SpreadAsRequestBodyRequest bodyParameterObj = new SpreadAsRequestBodyRequest(name);
+        BinaryData bodyParameter = BinaryData.fromObject(bodyParameterObj);
+        return spreadAsRequestBodyWithResponse(bodyParameter, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -198,7 +199,7 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadCompositeRequestOnlyWithBody(BodyParameter body) {
+    public Mono<Void> spreadCompositeRequestOnlyWithBody(SpreadAsRequestBodyRequest body) {
         // Generated convenience method for spreadCompositeRequestOnlyWithBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData.fromObject(body), requestOptions)
@@ -243,7 +244,7 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadCompositeRequest(String name, String testHeader, BodyParameter body) {
+    public Mono<Void> spreadCompositeRequest(String name, String testHeader, SpreadAsRequestBodyRequest body) {
         // Generated convenience method for spreadCompositeRequestWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return spreadCompositeRequestWithResponse(name, testHeader, BinaryData.fromObject(body), requestOptions)
@@ -254,8 +255,7 @@ public final class ModelAsyncClient {
      * The spreadCompositeRequestMix operation.
      * 
      * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
-     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @param prop The prop parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -266,11 +266,12 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadCompositeRequestMix(String name, String testHeader,
-        CompositeRequestMix compositeRequestMix) {
+    public Mono<Void> spreadCompositeRequestMix(String name, String prop) {
         // Generated convenience method for spreadCompositeRequestMixWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return spreadCompositeRequestMixWithResponse(name, testHeader, BinaryData.fromObject(compositeRequestMix),
-            requestOptions).flatMap(FluxUtil::toMono);
+        SpreadCompositeRequestMixRequest compositeRequestMixObj = new SpreadCompositeRequestMixRequest(prop);
+        BinaryData compositeRequestMix = BinaryData.fromObject(compositeRequestMixObj);
+        return spreadCompositeRequestMixWithResponse(name, testHeader, compositeRequestMix, requestOptions)
+            .flatMap(FluxUtil::toMono);
     }
 }

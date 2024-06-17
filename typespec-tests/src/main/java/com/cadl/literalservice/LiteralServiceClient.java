@@ -16,8 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.literalservice.implementation.LiteralOpsImpl;
-import com.cadl.literalservice.models.Model;
-import com.cadl.literalservice.models.PutRequestOptionalLiteralParam;
+import com.cadl.literalservice.implementation.models.PutRequest;
 
 /**
  * Initializes a new instance of the synchronous LiteralServiceClient type.
@@ -82,7 +81,7 @@ public final class LiteralServiceClient {
     /**
      * The put operation.
      * 
-     * @param model The model parameter.
+     * @param literalParam The literalParam parameter.
      * @param optionalLiteralParam The optionalLiteralParam parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -94,32 +93,9 @@ public final class LiteralServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Model put(Model model, PutRequestOptionalLiteralParam optionalLiteralParam) {
+    public PutRequest put(String literalParam, String optionalLiteralParam) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        if (optionalLiteralParam != null) {
-            requestOptions.addQueryParam("optionalLiteralParam", optionalLiteralParam.toString(), false);
-        }
-        return putWithResponse(BinaryData.fromObject(model), requestOptions).getValue().toObject(Model.class);
-    }
-
-    /**
-     * The put operation.
-     * 
-     * @param model The model parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Model put(Model model) {
-        // Generated convenience method for putWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(model), requestOptions).getValue().toObject(Model.class);
+        return putWithResponse(model, requestOptions).getValue().toObject(PutRequest.class);
     }
 }

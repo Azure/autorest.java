@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.serialization.encodedname.json.implementation.PropertiesImpl;
-import com.serialization.encodedname.json.models.JsonEncodedNameModel;
+import com.serialization.encodedname.json.implementation.models.SendRequest;
 import reactor.core.publisher.Mono;
 
 /**
@@ -88,7 +88,7 @@ public final class JsonAsyncClient {
     /**
      * The send operation.
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param defaultName Pass in true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,10 +99,12 @@ public final class JsonAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(JsonEncodedNameModel jsonEncodedNameModel) {
+    public Mono<Void> send(boolean defaultName) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return sendWithResponse(BinaryData.fromObject(jsonEncodedNameModel), requestOptions).flatMap(FluxUtil::toMono);
+        SendRequest jsonEncodedNameModelObj = new SendRequest(defaultName);
+        BinaryData jsonEncodedNameModel = BinaryData.fromObject(jsonEncodedNameModelObj);
+        return sendWithResponse(jsonEncodedNameModel, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -117,10 +119,10 @@ public final class JsonAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<JsonEncodedNameModel> get() {
+    public Mono<SendRequest> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(JsonEncodedNameModel.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(SendRequest.class));
     }
 }

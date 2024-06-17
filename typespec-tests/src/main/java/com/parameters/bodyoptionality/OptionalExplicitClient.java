@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.bodyoptionality.implementation.OptionalExplicitsImpl;
-import com.parameters.bodyoptionality.models.BodyModel;
+import com.parameters.bodyoptionality.implementation.models.RequiredImplicitRequest;
 
 /**
  * Initializes a new instance of the synchronous BodyOptionalityClient type.
@@ -95,7 +95,7 @@ public final class OptionalExplicitClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void set(BodyModel body) {
+    public void set(RequiredImplicitRequest body) {
         // Generated convenience method for setWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (body != null) {
@@ -134,7 +134,7 @@ public final class OptionalExplicitClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void omit(BodyModel body) {
+    public void omit(RequiredImplicitRequest body) {
         // Generated convenience method for omitWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (body != null) {

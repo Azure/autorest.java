@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the data models for Json.
- * Projection.
+ * Package containing the data models for WireType.
+ * Test for mismatch of wire type and client type on class constructors.
  * <!-- end generated doc -->
  */
-package com.serialization.encodedname.json.models;
+package com.cadl.wiretype.implementation.models;

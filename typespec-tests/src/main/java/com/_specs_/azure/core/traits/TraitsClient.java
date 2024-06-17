@@ -5,8 +5,8 @@
 package com._specs_.azure.core.traits;
 
 import com._specs_.azure.core.traits.implementation.TraitsClientImpl;
+import com._specs_.azure.core.traits.implementation.models.RepeatableActionRequest;
 import com._specs_.azure.core.traits.models.User;
-import com._specs_.azure.core.traits.models.UserActionParam;
 import com._specs_.azure.core.traits.models.UserActionResponse;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -190,7 +190,7 @@ public final class TraitsClient {
      * Test for repeatable requests.
      * 
      * @param id The user's id.
-     * @param userActionParam User action param.
+     * @param userActionValue User action value.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -201,10 +201,12 @@ public final class TraitsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public UserActionResponse repeatableAction(int id, UserActionParam userActionParam) {
+    public UserActionResponse repeatableAction(int id, String userActionValue) {
         // Generated convenience method for repeatableActionWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return repeatableActionWithResponse(id, BinaryData.fromObject(userActionParam), requestOptions).getValue()
+        RepeatableActionRequest userActionParamObj = new RepeatableActionRequest(userActionValue);
+        BinaryData userActionParam = BinaryData.fromObject(userActionParamObj);
+        return repeatableActionWithResponse(id, userActionParam, requestOptions).getValue()
             .toObject(UserActionResponse.class);
     }
 }

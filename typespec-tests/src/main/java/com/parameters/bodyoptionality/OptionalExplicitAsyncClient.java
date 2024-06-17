@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.parameters.bodyoptionality.implementation.OptionalExplicitsImpl;
-import com.parameters.bodyoptionality.models.BodyModel;
+import com.parameters.bodyoptionality.implementation.models.RequiredImplicitRequest;
 import reactor.core.publisher.Mono;
 
 /**
@@ -98,7 +98,7 @@ public final class OptionalExplicitAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> set(BodyModel body) {
+    public Mono<Void> set(RequiredImplicitRequest body) {
         // Generated convenience method for setWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (body != null) {
@@ -139,7 +139,7 @@ public final class OptionalExplicitAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> omit(BodyModel body) {
+    public Mono<Void> omit(RequiredImplicitRequest body) {
         // Generated convenience method for omitWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (body != null) {

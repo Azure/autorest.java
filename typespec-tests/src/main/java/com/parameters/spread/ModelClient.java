@@ -16,8 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.spread.implementation.ModelsImpl;
-import com.parameters.spread.models.BodyParameter;
-import com.parameters.spread.models.CompositeRequestMix;
+import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
+import com.parameters.spread.implementation.models.SpreadCompositeRequestMixRequest;
 
 /**
  * Initializes a new instance of the synchronous SpreadClient type.
@@ -163,7 +163,7 @@ public final class ModelClient {
     /**
      * The spreadAsRequestBody operation.
      * 
-     * @param bodyParameter This is a simple model.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -173,10 +173,12 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadAsRequestBody(BodyParameter bodyParameter) {
+    public void spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions).getValue();
+        SpreadAsRequestBodyRequest bodyParameterObj = new SpreadAsRequestBodyRequest(name);
+        BinaryData bodyParameter = BinaryData.fromObject(bodyParameterObj);
+        spreadAsRequestBodyWithResponse(bodyParameter, requestOptions).getValue();
     }
 
     /**
@@ -192,7 +194,7 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadCompositeRequestOnlyWithBody(BodyParameter body) {
+    public void spreadCompositeRequestOnlyWithBody(SpreadAsRequestBodyRequest body) {
         // Generated convenience method for spreadCompositeRequestOnlyWithBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
@@ -233,7 +235,7 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadCompositeRequest(String name, String testHeader, BodyParameter body) {
+    public void spreadCompositeRequest(String name, String testHeader, SpreadAsRequestBodyRequest body) {
         // Generated convenience method for spreadCompositeRequestWithResponse
         RequestOptions requestOptions = new RequestOptions();
         spreadCompositeRequestWithResponse(name, testHeader, BinaryData.fromObject(body), requestOptions).getValue();
@@ -243,8 +245,7 @@ public final class ModelClient {
      * The spreadCompositeRequestMix operation.
      * 
      * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
-     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @param prop The prop parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -254,10 +255,11 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadCompositeRequestMix(String name, String testHeader, CompositeRequestMix compositeRequestMix) {
+    public void spreadCompositeRequestMix(String name, String prop) {
         // Generated convenience method for spreadCompositeRequestMixWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        spreadCompositeRequestMixWithResponse(name, testHeader, BinaryData.fromObject(compositeRequestMix),
-            requestOptions).getValue();
+        SpreadCompositeRequestMixRequest compositeRequestMixObj = new SpreadCompositeRequestMixRequest(prop);
+        BinaryData compositeRequestMix = BinaryData.fromObject(compositeRequestMixObj);
+        spreadCompositeRequestMixWithResponse(name, testHeader, compositeRequestMix, requestOptions).getValue();
     }
 }

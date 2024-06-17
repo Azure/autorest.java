@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.client.naming.implementation.ModelsImpl;
-import com.client.naming.models.ClientModel;
-import com.client.naming.models.JavaModel;
+import com.client.naming.implementation.models.ClientRequest1;
+import com.client.naming.implementation.models.LanguageRequest1;
 import reactor.core.publisher.Mono;
 
 /**
@@ -90,7 +90,7 @@ public final class ModelAsyncClient {
     /**
      * The client operation.
      * 
-     * @param clientModel The clientModel parameter.
+     * @param defaultName Pass in true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -101,16 +101,18 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> client(ClientModel clientModel) {
+    public Mono<Void> client(boolean defaultName) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return clientWithResponse(BinaryData.fromObject(clientModel), requestOptions).flatMap(FluxUtil::toMono);
+        ClientRequest1 clientModelObj = new ClientRequest1(defaultName);
+        BinaryData clientModel = BinaryData.fromObject(clientModelObj);
+        return clientWithResponse(clientModel, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * The language operation.
      * 
-     * @param javaModel The javaModel parameter.
+     * @param defaultName Pass in true.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -121,9 +123,11 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> language(JavaModel javaModel) {
+    public Mono<Void> language(boolean defaultName) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return languageWithResponse(BinaryData.fromObject(javaModel), requestOptions).flatMap(FluxUtil::toMono);
+        LanguageRequest1 javaModelObj = new LanguageRequest1(defaultName);
+        BinaryData javaModel = BinaryData.fromObject(javaModelObj);
+        return languageWithResponse(javaModel, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

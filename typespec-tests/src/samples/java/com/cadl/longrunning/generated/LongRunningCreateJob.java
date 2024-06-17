@@ -8,7 +8,6 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.longrunning.LongRunningClient;
 import com.cadl.longrunning.LongRunningClientBuilder;
-import com.cadl.longrunning.models.JobData;
 import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
 import java.util.HashMap;
@@ -20,8 +19,7 @@ public class LongRunningCreateJob {
             = new LongRunningClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
                 .buildClient();
         // BEGIN:com.cadl.longrunning.generated.createjob.longrunningcreatejob
-        SyncPoller<JobResult, JobResultResult> response = longRunningClient
-            .beginCreateJob(new JobData(mapOf("max", 15.0D, "min", 14.0D, "average", 14.3D)).setConfiguration("{}"));
+        SyncPoller<JobResult, JobResultResult> response = longRunningClient.beginCreateJob(mapOf(), null);
         // END:com.cadl.longrunning.generated.createjob.longrunningcreatejob
     }
 
