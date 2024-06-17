@@ -28,6 +28,11 @@ public final class GoblinShark extends Shark {
     private String sharktype = "goblin";
 
     /*
+     * The dna property.
+     */
+    private String dna;
+
+    /*
      * The properties property.
      */
     private FishProperties innerProperties = new FishProperties();
@@ -64,6 +69,16 @@ public final class GoblinShark extends Shark {
     }
 
     /**
+     * Get the dna property: The dna property.
+     * 
+     * @return the dna value.
+     */
+    @Override
+    public String dna() {
+        return this.dna;
+    }
+
+    /**
      * Get the innerProperties property: The properties property.
      * 
      * @return the innerProperties value.
@@ -87,15 +102,6 @@ public final class GoblinShark extends Shark {
     @Override
     public GoblinShark withAge(int age) {
         super.withAge(age);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GoblinShark withDna(String dna) {
-        super.withDna(dna);
         return this;
     }
 
@@ -181,7 +187,6 @@ public final class GoblinShark extends Shark {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("age", age());
-        jsonWriter.writeStringField("dna", dna());
         jsonWriter.writeJsonField("properties", innerProperties());
         jsonWriter.writeJsonField("anotherProperties", innerAnotherProperties());
         jsonWriter.writeStringField("sharktype", this.sharktype);
@@ -207,7 +212,7 @@ public final class GoblinShark extends Shark {
                 if ("age".equals(fieldName)) {
                     deserializedGoblinShark.withAge(reader.getInt());
                 } else if ("dna".equals(fieldName)) {
-                    deserializedGoblinShark.withDna(reader.getString());
+                    deserializedGoblinShark.dna = reader.getString();
                 } else if ("properties".equals(fieldName)) {
                     deserializedGoblinShark.innerProperties = FishProperties.fromJson(reader);
                 } else if ("anotherProperties".equals(fieldName)) {

@@ -29,6 +29,11 @@ public class Shark extends FishInner {
     private String sharktype = "shark";
 
     /*
+     * The dna property.
+     */
+    private String dna;
+
+    /*
      * The properties property.
      */
     private FishProperties innerProperties = new FishProperties();
@@ -64,6 +69,16 @@ public class Shark extends FishInner {
     }
 
     /**
+     * Get the dna property: The dna property.
+     * 
+     * @return the dna value.
+     */
+    @Override
+    public String dna() {
+        return this.dna;
+    }
+
+    /**
      * Get the innerProperties property: The properties property.
      * 
      * @return the innerProperties value.
@@ -87,15 +102,6 @@ public class Shark extends FishInner {
     @Override
     public Shark withAge(int age) {
         super.withAge(age);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Shark withDna(String dna) {
-        super.withDna(dna);
         return this;
     }
 
@@ -181,7 +187,6 @@ public class Shark extends FishInner {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("age", age());
-        jsonWriter.writeStringField("dna", dna());
         jsonWriter.writeJsonField("properties", innerProperties());
         jsonWriter.writeJsonField("anotherProperties", innerAnotherProperties());
         jsonWriter.writeStringField("sharktype", this.sharktype);
@@ -234,7 +239,7 @@ public class Shark extends FishInner {
                 if ("age".equals(fieldName)) {
                     deserializedShark.withAge(reader.getInt());
                 } else if ("dna".equals(fieldName)) {
-                    deserializedShark.withDna(reader.getString());
+                    deserializedShark.dna = reader.getString();
                 } else if ("properties".equals(fieldName)) {
                     deserializedShark.innerProperties = FishProperties.fromJson(reader);
                 } else if ("anotherProperties".equals(fieldName)) {

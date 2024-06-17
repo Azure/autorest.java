@@ -39,6 +39,11 @@ public final class SalmonInner extends FishInner {
     private FishInner partner;
 
     /*
+     * The dna property.
+     */
+    private String dna;
+
+    /*
      * The properties property.
      */
     private FishProperties innerProperties = new FishProperties();
@@ -125,6 +130,16 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
+     * Get the dna property: The dna property.
+     * 
+     * @return the dna value.
+     */
+    @Override
+    public String dna() {
+        return this.dna;
+    }
+
+    /**
      * Get the innerProperties property: The properties property.
      * 
      * @return the innerProperties value.
@@ -148,15 +163,6 @@ public final class SalmonInner extends FishInner {
     @Override
     public SalmonInner withAge(int age) {
         super.withAge(age);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SalmonInner withDna(String dna) {
-        super.withDna(dna);
         return this;
     }
 
@@ -254,7 +260,6 @@ public final class SalmonInner extends FishInner {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", age());
-        jsonWriter.writeStringField("dna", dna());
         jsonWriter.writeJsonField("properties", innerProperties());
         jsonWriter.writeJsonField("anotherProperties", innerAnotherProperties());
         jsonWriter.writeStringField("kind", this.kind);
@@ -283,7 +288,7 @@ public final class SalmonInner extends FishInner {
                 if ("age".equals(fieldName)) {
                     deserializedSalmonInner.withAge(reader.getInt());
                 } else if ("dna".equals(fieldName)) {
-                    deserializedSalmonInner.withDna(reader.getString());
+                    deserializedSalmonInner.dna = reader.getString();
                 } else if ("properties".equals(fieldName)) {
                     deserializedSalmonInner.innerProperties = FishProperties.fromJson(reader);
                 } else if ("anotherProperties".equals(fieldName)) {

@@ -93,7 +93,7 @@ public class FishInner implements JsonSerializable<FishInner> {
      * @param dna the dna value to set.
      * @return the FishInner object itself.
      */
-    public FishInner withDna(String dna) {
+    FishInner withDna(String dna) {
         this.dna = dna;
         return this;
     }
@@ -208,10 +208,6 @@ public class FishInner implements JsonSerializable<FishInner> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (dna() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Missing required property dna in model FishInner"));
-        }
         if (innerProperties() == null) {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Missing required property innerProperties in model FishInner"));
@@ -236,7 +232,6 @@ public class FishInner implements JsonSerializable<FishInner> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", this.age);
-        jsonWriter.writeStringField("dna", this.dna);
         jsonWriter.writeJsonField("properties", this.innerProperties);
         jsonWriter.writeJsonField("anotherProperties", this.innerAnotherProperties);
         jsonWriter.writeStringField("kind", this.kind);
