@@ -254,7 +254,8 @@ interface CustomTemplateResourceInterface
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface ChildExtensionResourceInterface extends ExtensionResourceOperations<ChildExtensionResource, ChildExtensionResourceProperties> {}
+interface ChildExtensionResourceInterface
+  extends ExtensionResourceOperations<ChildExtensionResource, ChildExtensionResourceProperties> {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
 @autoRoute
