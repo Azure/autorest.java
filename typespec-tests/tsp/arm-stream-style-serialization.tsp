@@ -34,7 +34,7 @@ enum Versions {
 model Fish {
   age: int32;
 
-  @visibility("create", "read")
+  @visibility("read")
   dna: string;
 
   properties: FishProperties;

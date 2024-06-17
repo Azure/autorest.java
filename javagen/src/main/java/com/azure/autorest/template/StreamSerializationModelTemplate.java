@@ -263,7 +263,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @return whether the property's getter overrides parent getter
      */
     @Override
-    protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
         return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings));
     }
 
@@ -311,14 +311,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     @Override
-    protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
-        return super.getParentSettersToOverride(model, settings, propertyReferences)
+    protected List<ClientModelPropertyAccess> getSuperSetters(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
+        return super.getSuperSetters(model, settings, propertyReferences)
                 .stream()
-                // If the propertyReference is flattening property, and we generate local getter/setter
-                // for it, then we don't need to override its parent setter.
+                // If the propertyReference is flattening property, then in Stream-Style we generate local getter/setter
+                // for it, thus we don't need to generate super setter.
                 .filter(propertyReference ->
-                        !(propertyReference instanceof ClientModelPropertyReference)
-                                || getLocalFlattenedModelPropertyReference((ClientModelPropertyReference) propertyReference) == null)
+                        !((propertyReference instanceof ClientModelPropertyReference)
+                                && ((ClientModelPropertyReference) propertyReference).isFromFlattenedProperty()))
                 .collect(Collectors.toList());
     }
 
