@@ -1347,7 +1347,7 @@ export class CodeModelBuilder {
       schema = this.processSchemaFromSdkType(sdkType, body.name);
     }
 
-    const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
+    const isAnonymousModel = sdkType.kind === "model" && body.kind === "Model" && !this.isArm();
     const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
     const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
       summary: this.getSummary(body),
