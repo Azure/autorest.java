@@ -73,4 +73,11 @@ public interface ArmResourceProviderClient {
      * @return the OperationsClient object.
      */
     OperationsClient getOperations();
+
+    /**
+     * Gets the ChildExtensionResourceInterfacesClient object to access its operations.
+     * 
+     * @return the ChildExtensionResourceInterfacesClient object.
+     */
+    ChildExtensionResourceInterfacesClient getChildExtensionResourceInterfaces();
 }

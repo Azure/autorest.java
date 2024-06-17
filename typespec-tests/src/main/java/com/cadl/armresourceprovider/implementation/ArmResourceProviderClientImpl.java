@@ -24,6 +24,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.cadl.armresourceprovider.fluent.ArmResourceProviderClient;
+import com.cadl.armresourceprovider.fluent.ChildExtensionResourceInterfacesClient;
 import com.cadl.armresourceprovider.fluent.ChildResourcesInterfacesClient;
 import com.cadl.armresourceprovider.fluent.CustomTemplateResourceInterfacesClient;
 import com.cadl.armresourceprovider.fluent.OperationsClient;
@@ -183,6 +184,20 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
     }
 
     /**
+     * The ChildExtensionResourceInterfacesClient object to access its operations.
+     */
+    private final ChildExtensionResourceInterfacesClient childExtensionResourceInterfaces;
+
+    /**
+     * Gets the ChildExtensionResourceInterfacesClient object to access its operations.
+     * 
+     * @return the ChildExtensionResourceInterfacesClient object.
+     */
+    public ChildExtensionResourceInterfacesClient getChildExtensionResourceInterfaces() {
+        return this.childExtensionResourceInterfaces;
+    }
+
+    /**
      * Initializes an instance of ArmResourceProviderClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
@@ -204,6 +219,7 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
         this.topLevelArmResourceInterfaces = new TopLevelArmResourceInterfacesClientImpl(this);
         this.customTemplateResourceInterfaces = new CustomTemplateResourceInterfacesClientImpl(this);
         this.operations = new OperationsClientImpl(this);
+        this.childExtensionResourceInterfaces = new ChildExtensionResourceInterfacesClientImpl(this);
     }
 
     /**
