@@ -253,10 +253,8 @@ public final class HttpbinClientBuilder
     private HttpbinClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String localDomain = (domain != null) ? domain : "httpbin";
-        String localTld = (tld != null) ? tld : "org";
         HttpbinClientImpl client = new HttpbinClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
-            localDomain, localTld, this.relativePath);
+            this.domain, this.tld, this.relativePath);
         return client;
     }
 
@@ -264,6 +262,8 @@ public final class HttpbinClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(domain, "'domain' cannot be null.");
+        Objects.requireNonNull(tld, "'tld' cannot be null.");
     }
 
     @Generated
