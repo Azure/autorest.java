@@ -10,6 +10,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.Post;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -93,6 +94,24 @@ public final class ModelInOperationsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> outputToInputOutputSync(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
+
+        @Put("/azure/client-generator-core/usage/modelInReadOnlyProperty")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> modelInReadOnlyProperty(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+
+        @Put("/azure/client-generator-core/usage/modelInReadOnlyProperty")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> modelInReadOnlyPropertySync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -207,5 +226,104 @@ public final class ModelInOperationsImpl {
     public Response<BinaryData> outputToInputOutputWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.outputToInputOutputSync(accept, requestOptions, Context.NONE);
+    }
+
+    /**
+     * "ResultModel" should be usage=output, as it is read-only and does not exist in request body.
+     * 
+     * Expected body parameter:
+     * ```json
+     * {
+     * }
+     * ```
+     * 
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     result (Required): {
+     *         name: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     result (Required): {
+     *         name: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> modelInReadOnlyPropertyWithResponseAsync(BinaryData body,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.modelInReadOnlyProperty(accept, body, requestOptions, context));
+    }
+
+    /**
+     * "ResultModel" should be usage=output, as it is read-only and does not exist in request body.
+     * 
+     * Expected body parameter:
+     * ```json
+     * {
+     * }
+     * ```
+     * 
+     * Expected response body:
+     * ```json
+     * {
+     * "name": &lt;any string&gt;
+     * }
+     * ```.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     result (Required): {
+     *         name: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     result (Required): {
+     *         name: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> modelInReadOnlyPropertyWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.modelInReadOnlyPropertySync(accept, body, requestOptions, Context.NONE);
     }
 }

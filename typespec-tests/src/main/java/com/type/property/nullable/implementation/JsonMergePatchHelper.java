@@ -7,6 +7,7 @@ package com.type.property.nullable.implementation;
 import com.type.property.nullable.models.BytesProperty;
 import com.type.property.nullable.models.CollectionsByteProperty;
 import com.type.property.nullable.models.CollectionsModelProperty;
+import com.type.property.nullable.models.CollectionsStringProperty;
 import com.type.property.nullable.models.DatetimeProperty;
 import com.type.property.nullable.models.DurationProperty;
 import com.type.property.nullable.models.InnerModel;
@@ -130,5 +131,22 @@ public class JsonMergePatchHelper {
 
     public static InnerModelAccessor getInnerModelAccessor() {
         return innerModelAccessor;
+    }
+
+    private static CollectionsStringPropertyAccessor collectionsStringPropertyAccessor;
+
+    public interface CollectionsStringPropertyAccessor {
+        CollectionsStringProperty prepareModelForJsonMergePatch(CollectionsStringProperty collectionsStringProperty,
+            boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(CollectionsStringProperty collectionsStringProperty);
+    }
+
+    public static void setCollectionsStringPropertyAccessor(CollectionsStringPropertyAccessor accessor) {
+        collectionsStringPropertyAccessor = accessor;
+    }
+
+    public static CollectionsStringPropertyAccessor getCollectionsStringPropertyAccessor() {
+        return collectionsStringPropertyAccessor;
     }
 }

@@ -12,6 +12,7 @@ import {
   Type,
   TypeNameOptions,
   Union,
+  Value,
   getTypeName,
   isNullType,
   isTemplateDeclaration,
@@ -93,6 +94,20 @@ export function isNullableType(type: Type): boolean {
 
 export function getNonNullSdkType(type: SdkType): SdkType {
   return type.kind === "nullable" ? type.type : type;
+}
+
+export function getDefaultValue(value: Value | undefined): any {
+  if (value) {
+    switch (value.valueKind) {
+      case "StringValue":
+        return value.value;
+      case "NumericValue":
+        return value.value;
+      case "BooleanValue":
+        return value.value;
+    }
+  }
+  return undefined;
 }
 
 export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {

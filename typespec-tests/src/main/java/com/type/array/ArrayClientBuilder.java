@@ -51,6 +51,10 @@ import java.util.Objects;
         UnknownValueClient.class,
         ModelValueClient.class,
         NullableFloatValueClient.class,
+        NullableInt32ValueClient.class,
+        NullableBooleanValueClient.class,
+        NullableStringValueClient.class,
+        NullableModelValueClient.class,
         Int32ValueAsyncClient.class,
         Int64ValueAsyncClient.class,
         BooleanValueAsyncClient.class,
@@ -60,7 +64,11 @@ import java.util.Objects;
         DurationValueAsyncClient.class,
         UnknownValueAsyncClient.class,
         ModelValueAsyncClient.class,
-        NullableFloatValueAsyncClient.class })
+        NullableFloatValueAsyncClient.class,
+        NullableInt32ValueAsyncClient.class,
+        NullableBooleanValueAsyncClient.class,
+        NullableStringValueAsyncClient.class,
+        NullableModelValueAsyncClient.class })
 public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, ConfigurationTrait<ArrayClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
@@ -365,6 +373,46 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     }
 
     /**
+     * Builds an instance of NullableInt32ValueAsyncClient class.
+     * 
+     * @return an instance of NullableInt32ValueAsyncClient.
+     */
+    @Generated
+    public NullableInt32ValueAsyncClient buildNullableInt32ValueAsyncClient() {
+        return new NullableInt32ValueAsyncClient(buildInnerClient().getNullableInt32Values());
+    }
+
+    /**
+     * Builds an instance of NullableBooleanValueAsyncClient class.
+     * 
+     * @return an instance of NullableBooleanValueAsyncClient.
+     */
+    @Generated
+    public NullableBooleanValueAsyncClient buildNullableBooleanValueAsyncClient() {
+        return new NullableBooleanValueAsyncClient(buildInnerClient().getNullableBooleanValues());
+    }
+
+    /**
+     * Builds an instance of NullableStringValueAsyncClient class.
+     * 
+     * @return an instance of NullableStringValueAsyncClient.
+     */
+    @Generated
+    public NullableStringValueAsyncClient buildNullableStringValueAsyncClient() {
+        return new NullableStringValueAsyncClient(buildInnerClient().getNullableStringValues());
+    }
+
+    /**
+     * Builds an instance of NullableModelValueAsyncClient class.
+     * 
+     * @return an instance of NullableModelValueAsyncClient.
+     */
+    @Generated
+    public NullableModelValueAsyncClient buildNullableModelValueAsyncClient() {
+        return new NullableModelValueAsyncClient(buildInnerClient().getNullableModelValues());
+    }
+
+    /**
      * Builds an instance of Int32ValueClient class.
      * 
      * @return an instance of Int32ValueClient.
@@ -462,6 +510,46 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     @Generated
     public NullableFloatValueClient buildNullableFloatValueClient() {
         return new NullableFloatValueClient(buildInnerClient().getNullableFloatValues());
+    }
+
+    /**
+     * Builds an instance of NullableInt32ValueClient class.
+     * 
+     * @return an instance of NullableInt32ValueClient.
+     */
+    @Generated
+    public NullableInt32ValueClient buildNullableInt32ValueClient() {
+        return new NullableInt32ValueClient(buildInnerClient().getNullableInt32Values());
+    }
+
+    /**
+     * Builds an instance of NullableBooleanValueClient class.
+     * 
+     * @return an instance of NullableBooleanValueClient.
+     */
+    @Generated
+    public NullableBooleanValueClient buildNullableBooleanValueClient() {
+        return new NullableBooleanValueClient(buildInnerClient().getNullableBooleanValues());
+    }
+
+    /**
+     * Builds an instance of NullableStringValueClient class.
+     * 
+     * @return an instance of NullableStringValueClient.
+     */
+    @Generated
+    public NullableStringValueClient buildNullableStringValueClient() {
+        return new NullableStringValueClient(buildInnerClient().getNullableStringValues());
+    }
+
+    /**
+     * Builds an instance of NullableModelValueClient class.
+     * 
+     * @return an instance of NullableModelValueClient.
+     */
+    @Generated
+    public NullableModelValueClient buildNullableModelValueClient() {
+        return new NullableModelValueClient(buildInnerClient().getNullableModelValues());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ArrayClientBuilder.class);
