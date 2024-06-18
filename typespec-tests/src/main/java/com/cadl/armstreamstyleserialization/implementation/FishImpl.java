@@ -30,6 +30,22 @@ public final class FishImpl implements Fish {
         return this.innerModel().dna();
     }
 
+    public double length() {
+        return this.innerModel().length();
+    }
+
+    public String patten() {
+        return this.innerModel().patten();
+    }
+
+    public double lengthAnotherPropertiesLength() {
+        return this.innerModel().lengthAnotherPropertiesLength();
+    }
+
+    public String pattenAnotherPropertiesPatten() {
+        return this.innerModel().pattenAnotherPropertiesPatten();
+    }
+
     public FishInner innerModel() {
         return this.innerObject;
     }

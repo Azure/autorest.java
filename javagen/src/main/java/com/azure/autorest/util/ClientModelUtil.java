@@ -550,31 +550,22 @@ public class ClientModelUtil {
     }
 
     /**
-     * Indicates whether the property will have a setter method generated for it.
+     * Whether the property needs public setter.
      *
      * @param property The client model property, or a reference.
      * @param settings Autorest generation settings.
-     * @return Whether the property will have a setter method.
+     * @return whether the property will have a setter method.
      */
-    public static boolean hasSetter(ClientModelPropertyAccess property, JavaSettings settings) {
-        // If the property isn't read-only or required and part of the constructor, and it isn't private,
-        // add a setter.
-        return !isReadOnlyOrInConstructor(property, settings) && !isPrivateAccess(property);
-    }
-
-    // A property has private access when it is to be flattened.
-    // Only applies to mgmt, no effect on vanilla or DPG.
-    private static boolean isPrivateAccess(ClientModelPropertyAccess property) {
-        boolean privateAccess = false;
-        // ClientModelPropertyReference never refers to a private access property, so only check ClientModelProperty here.
-        if (property instanceof ClientModelProperty) {
-            privateAccess = ((ClientModelProperty) property).getClientFlatten();
-        }
-        return privateAccess;
+    public static boolean needsPublicSetter(ClientModelPropertyAccess property, JavaSettings settings) {
+        return !isReadOnlyOrInConstructor(property, settings) && !isFlattenedProperty(property);
     }
 
     private static boolean isReadOnlyOrInConstructor(ClientModelPropertyAccess property, JavaSettings settings) {
         return property.isReadOnly() || (settings.isRequiredFieldsAsConstructorArgs() && property.isRequired());
+    }
+
+    private static boolean isFlattenedProperty(ClientModelPropertyAccess property) {
+        return (property instanceof ClientModelProperty) && ((ClientModelProperty) property).getClientFlatten();
     }
 
     /**

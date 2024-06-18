@@ -45,6 +45,25 @@ public final class FishesImpl implements Fishes {
         }
     }
 
+    public Response<Fish> putModelWithResponse(FishInner fish, Context context) {
+        Response<FishInner> inner = this.serviceClient().putModelWithResponse(fish, context);
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new FishImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public Fish putModel(FishInner fish) {
+        FishInner inner = this.serviceClient().putModel(fish);
+        if (inner != null) {
+            return new FishImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
     private FishesClient serviceClient() {
         return this.innerClient;
     }

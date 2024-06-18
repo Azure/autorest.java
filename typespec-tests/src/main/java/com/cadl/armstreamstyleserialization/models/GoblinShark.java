@@ -4,16 +4,18 @@
 
 package com.cadl.armstreamstyleserialization.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.cadl.armstreamstyleserialization.fluent.models.AnotherFishProperties;
+import com.cadl.armstreamstyleserialization.fluent.models.FishProperties;
 import java.io.IOException;
 
 /**
  * The third level model GoblinShark in polymorphic multiple levels inheritance.
  */
-@Immutable
+@Fluent
 public final class GoblinShark extends Shark {
     /*
      * Discriminator property for Fish.
@@ -26,19 +28,24 @@ public final class GoblinShark extends Shark {
     private String sharktype = "goblin";
 
     /*
-     * The age property.
-     */
-    private int age;
-
-    /*
      * The dna property.
      */
     private String dna;
 
+    /*
+     * The properties property.
+     */
+    private FishProperties innerProperties = new FishProperties();
+
+    /*
+     * The anotherProperties property.
+     */
+    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
+
     /**
      * Creates an instance of GoblinShark class.
      */
-    private GoblinShark() {
+    public GoblinShark() {
     }
 
     /**
@@ -62,16 +69,6 @@ public final class GoblinShark extends Shark {
     }
 
     /**
-     * Get the age property: The age property.
-     * 
-     * @return the age value.
-     */
-    @Override
-    public int age() {
-        return this.age;
-    }
-
-    /**
      * Get the dna property: The dna property.
      * 
      * @return the dna value.
@@ -79,6 +76,97 @@ public final class GoblinShark extends Shark {
     @Override
     public String dna() {
         return this.dna;
+    }
+
+    /**
+     * Get the innerProperties property: The properties property.
+     * 
+     * @return the innerProperties value.
+     */
+    private FishProperties innerProperties() {
+        return this.innerProperties;
+    }
+
+    /**
+     * Get the innerAnotherProperties property: The anotherProperties property.
+     * 
+     * @return the innerAnotherProperties value.
+     */
+    private AnotherFishProperties innerAnotherProperties() {
+        return this.innerAnotherProperties;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GoblinShark withAge(int age) {
+        super.withAge(age);
+        return this;
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double length() {
+        return this.innerProperties() == null ? 0.0 : this.innerProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the GoblinShark object itself.
+     */
+    public GoblinShark withLength(double length) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new FishProperties();
+        }
+        this.innerProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String patten() {
+        return this.innerProperties() == null ? null : this.innerProperties().patten();
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double lengthAnotherPropertiesLength() {
+        return this.innerAnotherProperties() == null ? 0.0 : this.innerAnotherProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the GoblinShark object itself.
+     */
+    public GoblinShark withLengthAnotherPropertiesLength(double length) {
+        if (this.innerAnotherProperties() == null) {
+            this.innerAnotherProperties = new AnotherFishProperties();
+        }
+        this.innerAnotherProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String pattenAnotherPropertiesPatten() {
+        return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().patten();
     }
 
     /**
@@ -99,7 +187,8 @@ public final class GoblinShark extends Shark {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("age", age());
-        jsonWriter.writeStringField("dna", dna());
+        jsonWriter.writeJsonField("properties", innerProperties());
+        jsonWriter.writeJsonField("anotherProperties", innerAnotherProperties());
         jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }
@@ -121,9 +210,13 @@ public final class GoblinShark extends Shark {
                 reader.nextToken();
 
                 if ("age".equals(fieldName)) {
-                    deserializedGoblinShark.age = reader.getInt();
+                    deserializedGoblinShark.withAge(reader.getInt());
                 } else if ("dna".equals(fieldName)) {
                     deserializedGoblinShark.dna = reader.getString();
+                } else if ("properties".equals(fieldName)) {
+                    deserializedGoblinShark.innerProperties = FishProperties.fromJson(reader);
+                } else if ("anotherProperties".equals(fieldName)) {
+                    deserializedGoblinShark.innerAnotherProperties = AnotherFishProperties.fromJson(reader);
                 } else if ("sharktype".equals(fieldName)) {
                     deserializedGoblinShark.sharktype = reader.getString();
                 } else {

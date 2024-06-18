@@ -48,16 +48,33 @@
             "readOnly": true,
             "type": "string",
             "description": "Resource type"
+          },
+          "identifier": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/CommunityGalleryIdentifier"
           }
         },
         "description": "Base information about the community gallery resource in azure compute gallery."
       },
+      "CommunityGalleryIdentifier": {
+        "properties": {
+          "uniqueId": {
+            "type": "string",
+            "description": "The unique id of this community gallery."
+          }
+        },
+        "description": "The identifier information of community gallery."
+      },
       "CommunityGallery": {
         "properties": {
-          "disclaimer": {
+          "name": {
             "readOnly": true,
             "type": "string",
-            "description": "Community gallery disclaimer"
+            "description": "Resource name in Child"
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/CommunityGalleryProperties"
           }
         },
         "allOf": [
@@ -66,6 +83,16 @@
           }
         ],
         "description": "Specifies information about the Community Gallery that you want to create or update."
+      },
+      "CommunityGalleryProperties": {
+        "type": "object",
+        "properties": {
+          "disclaimer": {
+            "type": "string",
+            "description": "Resource name"
+          }
+        },
+        "description": "Describes the properties of a community gallery."
       }
     },
   "parameters": {

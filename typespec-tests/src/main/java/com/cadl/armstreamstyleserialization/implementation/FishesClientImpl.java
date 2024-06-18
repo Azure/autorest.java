@@ -4,12 +4,14 @@
 
 package com.cadl.armstreamstyleserialization.implementation;
 
+import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -60,6 +62,13 @@ public final class FishesClientImpl implements FishesClient {
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<FishInner>> getModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             Context context);
+
+        @Headers({ "Content-Type: application/json" })
+        @Put("/model")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<FishInner>> putModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") FishInner fish, Context context);
     }
 
     /**
@@ -140,5 +149,103 @@ public final class FishesClientImpl implements FishesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FishInner getModel() {
         return getModelWithResponse(Context.NONE).getValue();
+    }
+
+    /**
+     * The putModel operation.
+     * 
+     * @param fish The fish parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<FishInner>> putModelWithResponseAsync(FishInner fish) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (fish == null) {
+            return Mono.error(new IllegalArgumentException("Parameter fish is required and cannot be null."));
+        } else {
+            fish.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putModel(this.client.getEndpoint(), accept, fish, context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * The putModel operation.
+     * 
+     * @param fish The fish parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<FishInner>> putModelWithResponseAsync(FishInner fish, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (fish == null) {
+            return Mono.error(new IllegalArgumentException("Parameter fish is required and cannot be null."));
+        } else {
+            fish.validate();
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service.putModel(this.client.getEndpoint(), accept, fish, context);
+    }
+
+    /**
+     * The putModel operation.
+     * 
+     * @param fish The fish parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
+     * completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<FishInner> putModelAsync(FishInner fish) {
+        return putModelWithResponseAsync(fish).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * The putModel operation.
+     * 
+     * @param fish The fish parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<FishInner> putModelWithResponse(FishInner fish, Context context) {
+        return putModelWithResponseAsync(fish, context).block();
+    }
+
+    /**
+     * The putModel operation.
+     * 
+     * @param fish The fish parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public FishInner putModel(FishInner fish) {
+        return putModelWithResponse(fish, Context.NONE).getValue();
     }
 }

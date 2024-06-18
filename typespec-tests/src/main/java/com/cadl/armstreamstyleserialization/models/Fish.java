@@ -32,6 +32,34 @@ public interface Fish {
     String dna();
 
     /**
+     * Gets the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    double length();
+
+    /**
+     * Gets the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    String patten();
+
+    /**
+     * Gets the lengthAnotherPropertiesLength property: The length property.
+     * 
+     * @return the lengthAnotherPropertiesLength value.
+     */
+    double lengthAnotherPropertiesLength();
+
+    /**
+     * Gets the pattenAnotherPropertiesPatten property: The patten property.
+     * 
+     * @return the pattenAnotherPropertiesPatten value.
+     */
+    String pattenAnotherPropertiesPatten();
+
+    /**
      * Gets the inner com.cadl.armstreamstyleserialization.fluent.models.FishInner object.
      * 
      * @return the inner object.
