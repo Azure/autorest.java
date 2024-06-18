@@ -21,7 +21,11 @@ import com.type.array.Float32ValueClient;
 import com.type.array.Int32ValueClient;
 import com.type.array.Int64ValueClient;
 import com.type.array.ModelValueClient;
+import com.type.array.NullableBooleanValueClient;
 import com.type.array.NullableFloatValueClient;
+import com.type.array.NullableInt32ValueClient;
+import com.type.array.NullableModelValueClient;
+import com.type.array.NullableStringValueClient;
 import com.type.array.StringValueClient;
 import com.type.array.UnknownValueClient;
 
@@ -45,6 +49,14 @@ class ArrayClientTestBase extends TestProxyTestBase {
     protected ModelValueClient modelValueClient;
 
     protected NullableFloatValueClient nullableFloatValueClient;
+
+    protected NullableInt32ValueClient nullableInt32ValueClient;
+
+    protected NullableBooleanValueClient nullableBooleanValueClient;
+
+    protected NullableStringValueClient nullableStringValueClient;
+
+    protected NullableModelValueClient nullableModelValueClient;
 
     @Override
     protected void beforeTest() {
@@ -138,6 +150,46 @@ class ArrayClientTestBase extends TestProxyTestBase {
             nullableFloatValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         nullableFloatValueClient = nullableFloatValueClientbuilder.buildNullableFloatValueClient();
+
+        ArrayClientBuilder nullableInt32ValueClientbuilder
+            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            nullableInt32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            nullableInt32ValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        nullableInt32ValueClient = nullableInt32ValueClientbuilder.buildNullableInt32ValueClient();
+
+        ArrayClientBuilder nullableBooleanValueClientbuilder
+            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            nullableBooleanValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            nullableBooleanValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        nullableBooleanValueClient = nullableBooleanValueClientbuilder.buildNullableBooleanValueClient();
+
+        ArrayClientBuilder nullableStringValueClientbuilder
+            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            nullableStringValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            nullableStringValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        nullableStringValueClient = nullableStringValueClientbuilder.buildNullableStringValueClient();
+
+        ArrayClientBuilder nullableModelValueClientbuilder
+            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            nullableModelValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            nullableModelValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        nullableModelValueClient = nullableModelValueClientbuilder.buildNullableModelValueClient();
 
     }
 }

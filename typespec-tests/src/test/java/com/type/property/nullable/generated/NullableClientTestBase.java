@@ -16,6 +16,7 @@ import com.azure.core.test.TestProxyTestBase;
 import com.type.property.nullable.BytesClient;
 import com.type.property.nullable.CollectionsByteClient;
 import com.type.property.nullable.CollectionsModelClient;
+import com.type.property.nullable.CollectionsStringClient;
 import com.type.property.nullable.DatetimeOperationClient;
 import com.type.property.nullable.DurationOperationClient;
 import com.type.property.nullable.NullableClientBuilder;
@@ -33,6 +34,8 @@ class NullableClientTestBase extends TestProxyTestBase {
     protected CollectionsByteClient collectionsByteClient;
 
     protected CollectionsModelClient collectionsModelClient;
+
+    protected CollectionsStringClient collectionsStringClient;
 
     @Override
     protected void beforeTest() {
@@ -94,6 +97,16 @@ class NullableClientTestBase extends TestProxyTestBase {
             collectionsModelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         collectionsModelClient = collectionsModelClientbuilder.buildCollectionsModelClient();
+
+        NullableClientBuilder collectionsStringClientbuilder
+            = new NullableClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            collectionsStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            collectionsStringClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        collectionsStringClient = collectionsStringClientbuilder.buildCollectionsStringClient();
 
     }
 }
