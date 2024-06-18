@@ -152,6 +152,7 @@ import { PreNamer } from "./prenamer/prenamer.js";
 import {
   ProcessingCache,
   getAccess,
+  getDefaultValue,
   getDurationFormatFromSdkType,
   getNonNullSdkType,
   getUnionDescription,
@@ -305,6 +306,8 @@ export class CodeModelBuilder {
             extensions: {
               "x-ms-skip-url-encoding": schema instanceof UriSchema,
             },
+            // make the logic same as TCGC, which takes the service default of host as client default
+            clientDefaultValue: getDefaultValue(it.defaultValue),
           });
         }
 
