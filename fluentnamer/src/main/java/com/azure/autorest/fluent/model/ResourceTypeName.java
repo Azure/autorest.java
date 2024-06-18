@@ -20,7 +20,6 @@ public class ResourceTypeName {
     public static final String SUB_RESOURCE_AUTO_GENERATED = SUB_RESOURCE + AUTO_GENERATED;
     public static final String PROXY_RESOURCE_AUTO_GENERATED = PROXY_RESOURCE + AUTO_GENERATED;
     public static final String TRACKED_RESOURCE_AUTO_GENERATED = TRACKED_RESOURCE + AUTO_GENERATED;
-    public static final String EXTENSION_RESOURCE_AUTO_GENERATED = EXTENSION_RESOURCE + AUTO_GENERATED;
 
     public static final String FIELD_ID = "id";
     public static final String FIELD_NAME = "name";

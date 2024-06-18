@@ -232,7 +232,6 @@ class ResourceTypeNormalization {
             javaName.equals(ResourceTypeName.PROXY_RESOURCE)
                 || javaName.startsWith(ResourceTypeName.PROXY_RESOURCE_AUTO_GENERATED)
                 || javaName.equals(ResourceTypeName.EXTENSION_RESOURCE)
-                || javaName.startsWith(ResourceTypeName.EXTENSION_RESOURCE_AUTO_GENERATED)
         ) {
             type = ResourceType.PROXY_RESOURCE;
         } else if (javaName.equals(ResourceTypeName.TRACKED_RESOURCE) || javaName.startsWith(ResourceTypeName.TRACKED_RESOURCE_AUTO_GENERATED)) {
