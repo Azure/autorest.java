@@ -25,10 +25,12 @@ import com.azure.core.util.Configuration;
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.ArmResourceProviderClient;
 import com.cadl.armresourceprovider.implementation.ArmResourceProviderClientBuilder;
+import com.cadl.armresourceprovider.implementation.ChildExtensionResourceInterfacesImpl;
 import com.cadl.armresourceprovider.implementation.ChildResourcesInterfacesImpl;
 import com.cadl.armresourceprovider.implementation.CustomTemplateResourceInterfacesImpl;
 import com.cadl.armresourceprovider.implementation.OperationsImpl;
 import com.cadl.armresourceprovider.implementation.TopLevelArmResourceInterfacesImpl;
+import com.cadl.armresourceprovider.models.ChildExtensionResourceInterfaces;
 import com.cadl.armresourceprovider.models.ChildResourcesInterfaces;
 import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfaces;
 import com.cadl.armresourceprovider.models.Operations;
@@ -52,6 +54,8 @@ public final class ArmResourceProviderManager {
     private CustomTemplateResourceInterfaces customTemplateResourceInterfaces;
 
     private Operations operations;
+
+    private ChildExtensionResourceInterfaces childExtensionResourceInterfaces;
 
     private final ArmResourceProviderClient clientObject;
 
@@ -312,6 +316,19 @@ public final class ArmResourceProviderManager {
             this.operations = new OperationsImpl(clientObject.getOperations(), this);
         }
         return operations;
+    }
+
+    /**
+     * Gets the resource collection API of ChildExtensionResourceInterfaces. It manages ChildExtensionResource.
+     * 
+     * @return Resource collection API of ChildExtensionResourceInterfaces.
+     */
+    public ChildExtensionResourceInterfaces childExtensionResourceInterfaces() {
+        if (this.childExtensionResourceInterfaces == null) {
+            this.childExtensionResourceInterfaces
+                = new ChildExtensionResourceInterfacesImpl(clientObject.getChildExtensionResourceInterfaces(), this);
+        }
+        return childExtensionResourceInterfaces;
     }
 
     /**
