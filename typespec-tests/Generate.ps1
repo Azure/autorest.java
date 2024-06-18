@@ -35,16 +35,21 @@ $generateScript = {
   } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]") {
     # override namespace for reserved keyword "enum"
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.type.enums.fixed"""
-  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old.tsp") {
+  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old\.tsp") {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"""
-  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]main.tsp") {
+  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]main\.tsp") {
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"""
+  } elseif ($tspFile -match "azure[\\/]arm[\\/].*[\\/]main\.tsp") {
+    # for mgmt, do not generate tests due to random mock values
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+    # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
+    $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
     # test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""
@@ -59,11 +64,6 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
-    # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
-    $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
-  } elseif ($tspFile -match "azure[\\/]arm[\\/]") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
