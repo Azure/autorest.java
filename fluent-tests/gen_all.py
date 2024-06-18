@@ -68,6 +68,7 @@ def codegen(autorest_java: str, specs_dir: str, sdk: str, output_sdk_dir: str) -
         '--java.license-header=MICROSOFT_MIT_SMALL',
         '--java.output-folder=' + output_sdk_dir,
         '--java.namespace=' + namespace,
+        '--stream-style-serialization=true',
         readme_dir]
 
     logging.info(' '.join(command))
