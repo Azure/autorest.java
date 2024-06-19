@@ -24,8 +24,9 @@ public class ArmResourceTest {
     private static final String TOP_LEVEL_TRACKED_RESOURCE_NAME = "top";
     private static final String TOP_LEVEL_TRACKED_RESOURCE_TYPE = "topLevel";
     private static final String NESTED_PROXY_RESOURCE_ID = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.Arm.Models.Resources/topLevelTrackedResources/top/nestedProxyResources/nested";
-    private static final String NESTED_PROXY_RESOURCE_NAME_TYPE = "nested";
-    private static final String TOP_LEVEL_TRACKED_RESOURCE_LOCATION = Region.US_EAST.name();
+    private static final String NESTED_PROXY_RESOURCE_NAME = "nested";
+    private static final String NESTED_PROXY_RESOURCE_TYPE = "nested";
+    private static final Region TOP_LEVEL_TRACKED_RESOURCE_REGION = Region.US_EAST;
     private static final String RESOURCE_DESCRIPTION_VALID = "valid";
     private static final String RESOURCE_DESCRIPTION_VALID2 = "valid2";
     private static final ProvisioningState RESOURCE_PROVISIONING_STATE = ProvisioningState.SUCCEEDED;
@@ -34,9 +35,10 @@ public class ArmResourceTest {
             ArmUtils.createTestHttpPipeline(),
             ArmUtils.getAzureProfile());
 
-    @Test public void testTopLevelTrackedResource() {
+    @Test
+    public void testTopLevelTrackedResource() {
         // TopLevelTrackedResources.createOrReplace
-        TopLevelTrackedResource  topLevelTrackedResource = manager.topLevelTrackedResources()
+        TopLevelTrackedResource topLevelTrackedResource = manager.topLevelTrackedResources()
                 .define(TOP_LEVEL_TRACKED_RESOURCE_NAME)
                 .withRegion(Region.US_EAST)
                 .withExistingResourceGroup(RESOURCE_GROUP_NAME)
@@ -45,7 +47,7 @@ public class ArmResourceTest {
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, topLevelTrackedResource.id());
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, topLevelTrackedResource.name());
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, topLevelTrackedResource.type());
-        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_LOCATION, topLevelTrackedResource.location());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_REGION, topLevelTrackedResource.region());
         Assertions.assertNotNull(topLevelTrackedResource.properties());
         Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, topLevelTrackedResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
@@ -54,15 +56,14 @@ public class ArmResourceTest {
         List<TopLevelTrackedResource> topLevelTrackedResourceList = manager.topLevelTrackedResources()
                 .listByResourceGroup(RESOURCE_GROUP_NAME).stream().collect(Collectors.toList());
         Assertions.assertEquals(1, topLevelTrackedResourceList.size());
-        topLevelTrackedResourceList.forEach(resource -> {
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, resource.id());
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, resource.name());
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, resource.type());
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_LOCATION, resource.location());
-            Assertions.assertNotNull(resource.properties());
-            Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, resource.properties().description());
-            Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, resource.properties().provisioningState());
-        });
+        topLevelTrackedResource = topLevelTrackedResourceList.get(0);
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, topLevelTrackedResource.id());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, topLevelTrackedResource.name());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, topLevelTrackedResource.type());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_REGION, topLevelTrackedResource.region());
+        Assertions.assertNotNull(topLevelTrackedResource.properties());
+        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, topLevelTrackedResource.properties().description());
+        Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
 
         // TopLevelTrackedResources.listBySubscription
         topLevelTrackedResourceList = manager.topLevelTrackedResources()
@@ -71,15 +72,14 @@ public class ArmResourceTest {
                 .filter(resource -> TOP_LEVEL_TRACKED_RESOURCE_ID.equals(resource.id()))
                 .collect(Collectors.toList());
         Assertions.assertEquals(1, topLevelTrackedResourceList.size());
-        topLevelTrackedResourceList.forEach(resource -> {
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, resource.id());
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, resource.name());
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, resource.type());
-            Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_LOCATION, resource.location());
-            Assertions.assertNotNull(resource.properties());
-            Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, resource.properties().description());
-            Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, resource.properties().provisioningState());
-        });
+        topLevelTrackedResource = topLevelTrackedResourceList.get(0);
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, topLevelTrackedResource.id());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, topLevelTrackedResource.name());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, topLevelTrackedResource.type());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_REGION, topLevelTrackedResource.region());
+        Assertions.assertNotNull(topLevelTrackedResource.properties());
+        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, topLevelTrackedResource.properties().description());
+        Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
 
         // TopLevelTrackedResources.get
         topLevelTrackedResource = manager.topLevelTrackedResources()
@@ -87,7 +87,7 @@ public class ArmResourceTest {
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, topLevelTrackedResource.id());
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, topLevelTrackedResource.name());
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, topLevelTrackedResource.type());
-        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_LOCATION, topLevelTrackedResource.location());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_REGION, topLevelTrackedResource.region());
         Assertions.assertNotNull(topLevelTrackedResource.properties());
         Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, topLevelTrackedResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
@@ -100,7 +100,7 @@ public class ArmResourceTest {
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, topLevelTrackedResource.id());
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, topLevelTrackedResource.name());
         Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, topLevelTrackedResource.type());
-        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_LOCATION, topLevelTrackedResource.location());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_REGION, topLevelTrackedResource.region());
         Assertions.assertNotNull(topLevelTrackedResource.properties());
         Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID2, topLevelTrackedResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
@@ -113,13 +113,13 @@ public class ArmResourceTest {
     public void testNestedProxyResource() {
         // NestedProxyResources.createOrReplace
         NestedProxyResource nestedProxyResource = manager.nestedProxyResources()
-                .define(NESTED_PROXY_RESOURCE_NAME_TYPE)
+                .define(NESTED_PROXY_RESOURCE_NAME)
                 .withExistingTopLevelTrackedResource(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME)
                 .withProperties(new NestedProxyResourceProperties().withDescription(RESOURCE_DESCRIPTION_VALID))
                 .create();
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_ID, nestedProxyResource.id());
-        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, nestedProxyResource.name());
-        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, nestedProxyResource.type());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME, nestedProxyResource.name());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_TYPE, nestedProxyResource.type());
         Assertions.assertNotNull(nestedProxyResource.properties());
         Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, nestedProxyResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, nestedProxyResource.properties().provisioningState());
@@ -129,21 +129,20 @@ public class ArmResourceTest {
                 .listByTopLevelTrackedResource(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME)
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(1, nestedProxyResourceList.size());
-        nestedProxyResourceList.forEach(resource -> {
-            Assertions.assertEquals(NESTED_PROXY_RESOURCE_ID, resource.id());
-            Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, resource.name());
-            Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, resource.type());
-            Assertions.assertNotNull(resource.properties());
-            Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, resource.properties().description());
-            Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, resource.properties().provisioningState());
-        });
+        nestedProxyResource = nestedProxyResourceList.get(0);
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_ID, nestedProxyResource.id());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME, nestedProxyResource.name());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_TYPE, nestedProxyResource.type());
+        Assertions.assertNotNull(nestedProxyResource.properties());
+        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, nestedProxyResource.properties().description());
+        Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, nestedProxyResource.properties().provisioningState());
 
         // NestedProxyResources.get
-        nestedProxyResource= manager.nestedProxyResources()
-                .get(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME, NESTED_PROXY_RESOURCE_NAME_TYPE);
+        nestedProxyResource = manager.nestedProxyResources()
+                .get(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME, NESTED_PROXY_RESOURCE_NAME);
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_ID, nestedProxyResource.id());
-        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, nestedProxyResource.name());
-        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, nestedProxyResource.type());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME, nestedProxyResource.name());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_TYPE, nestedProxyResource.type());
         Assertions.assertNotNull(nestedProxyResource.properties());
         Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, nestedProxyResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, nestedProxyResource.properties().provisioningState());
@@ -154,13 +153,13 @@ public class ArmResourceTest {
                         new NestedProxyResourceUpdateProperties().withDescription(RESOURCE_DESCRIPTION_VALID2))
                 .apply();
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_ID, nestedProxyResource.id());
-        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, nestedProxyResource.name());
-        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME_TYPE, nestedProxyResource.type());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME, nestedProxyResource.name());
+        Assertions.assertEquals(NESTED_PROXY_RESOURCE_TYPE, nestedProxyResource.type());
         Assertions.assertNotNull(nestedProxyResource.properties());
         Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID2, nestedProxyResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, nestedProxyResource.properties().provisioningState());
 
         // NestedProxyResources.delete
-        manager.nestedProxyResources().delete(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME, NESTED_PROXY_RESOURCE_NAME_TYPE);
+        manager.nestedProxyResources().delete(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME, NESTED_PROXY_RESOURCE_NAME);
     }
 }
