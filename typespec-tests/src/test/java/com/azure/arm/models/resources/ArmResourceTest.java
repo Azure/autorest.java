@@ -4,7 +4,7 @@
 package com.azure.arm.models.resources;
 
 import com.azure.arm.models.resources.models.TopLevelTrackedResource;
-import com.utils.ArmUtils;
+import org.utils.ArmUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
