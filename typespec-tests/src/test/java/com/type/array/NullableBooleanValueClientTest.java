@@ -8,20 +8,20 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
-class NullableBooleanValueClientTest {
+public class NullableBooleanValueClientTest {
 
-    NullableBooleanValueClient client = new ArrayClientBuilder().buildNullableBooleanValueClient();
+    private final NullableBooleanValueClient client = new ArrayClientBuilder().buildNullableBooleanValueClient();
 
     @Test
-    void get() {
+    public void get() {
         List<Boolean> response = client.get();
-        assertEquals(Arrays.asList(true, null, false), response);
+        assertIterableEquals(Arrays.asList(true, null, false), response);
     }
 
     @Test
-    void put() {
+    public void put() {
         List<Boolean> body = Arrays.asList(true, null, false);
         client.put(body);
     }

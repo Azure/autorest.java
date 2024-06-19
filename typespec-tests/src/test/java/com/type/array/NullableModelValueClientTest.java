@@ -12,12 +12,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class NullableModelValueClientTest {
+public class NullableModelValueClientTest {
 
-    NullableModelValueClient client = new ArrayClientBuilder().buildNullableModelValueClient();
+    private final NullableModelValueClient client = new ArrayClientBuilder().buildNullableModelValueClient();
 
     @Test
-    void get() {
+    public void get() {
         List<InnerModel> response = client.get();
         assertEquals(3, response.size());
         assertEquals("hello", response.get(0).getProperty());
@@ -26,7 +26,7 @@ class NullableModelValueClientTest {
     }
 
     @Test
-    void put() {
+    public void put() {
         List<InnerModel> body = Arrays.asList(
                 new InnerModel("hello"), null, new InnerModel("world"));
         client.put(body);
