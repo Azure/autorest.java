@@ -18,13 +18,13 @@ public class CollectionsStringClientTest {
     private final CollectionsStringClient client = new NullableClientBuilder().buildCollectionsStringClient();
 
     @Test
-    public void patchNonNullWithResponse() {
+    public void patchNonNull() {
         CollectionsStringProperty property = new CollectionsStringProperty().setRequiredProperty("foo").setNullableProperty(Arrays.asList("hello","world"));
         client.patchNonNull(property);
     }
 
     @Test
-    public void patchNullWithResponse() {
+    public void patchNull() {
         client.patchNull(new CollectionsStringProperty().setRequiredProperty("foo").setNullableProperty(null));
     }
 
