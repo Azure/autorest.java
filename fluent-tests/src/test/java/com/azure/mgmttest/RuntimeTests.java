@@ -126,6 +126,7 @@ public class RuntimeTests {
         Assertions.assertNotNull(webError.getDetails());
         Assertions.assertEquals(1, webError.getDetails().size());
         Assertions.assertEquals("InnerError", webError.getDetails().get(0).getCode());
+        Assertions.assertEquals("Deployment error.", webError.getInnererror());
 
         GraphErrorException graphException = new GraphErrorException("mock graph error", null);
         Assertions.assertFalse((Object) graphException instanceof ManagementException);
