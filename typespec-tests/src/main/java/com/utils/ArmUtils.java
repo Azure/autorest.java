@@ -40,7 +40,7 @@ public final class ArmUtils {
         policies.add(new RetryPolicy("Retry-After", ChronoUnit.SECONDS));
         policies.add(new AddDatePolicy());
         // no ArmChallengeAuthenticationPolicy
-        policies.add(new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)));
+        policies.add(new HttpLoggingPolicy(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.NONE)));
         return new HttpPipelineBuilder()
                 .policies(policies.toArray(new HttpPipelinePolicy[0]))
                 .build();
