@@ -74,7 +74,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.network.md --namespace=com.azure.mgmttest.network",
 
     # error response that is subclass of ManagementException
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.appservice.md --namespace=com.azure.mgmttest.appservice",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.appservice.md --namespace=com.azure.mgmttest.appservice --stream-style-serialization=false",
 
     # multiple inheritance
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json --namespace=com.azure.mgmttest.cosmos",

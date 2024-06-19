@@ -117,7 +117,6 @@ public class RuntimeTests {
     }
 
     @Test
-    @Disabled("Enable when deserialization for error subclasses are fixed.")
     public void testWebException() throws IOException {
         final String errorBody = "{\"error\":{\"code\":\"WepAppError\",\"message\":\"Web app error.\",\"innererror\":\"Deployment error.\",\"details\":[{\"code\":\"InnerError\"}]}}";
 
