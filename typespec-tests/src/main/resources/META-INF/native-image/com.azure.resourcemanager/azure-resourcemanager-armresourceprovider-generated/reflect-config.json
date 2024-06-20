@@ -1,4 +1,9 @@
 [ {
+  "name" : "com.cadl.armresourceprovider.fluent.models.ChildExtensionResourceInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.fluent.models.ChildResourceInner",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
@@ -24,6 +29,11 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.fluent.models.ResultInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
@@ -39,12 +49,17 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.implementation.models.ChildExtensionResourceListResult",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.implementation.models.ChildResourceListResult",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.implementation.models.PagedOperation",
+  "name" : "com.cadl.armresourceprovider.implementation.models.OperationListResult",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
@@ -55,6 +70,11 @@
   "allDeclaredMethods" : true
 }, {
   "name" : "com.cadl.armresourceprovider.models.ActionType",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.ChildExtensionResourceProperties",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true

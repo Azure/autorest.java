@@ -144,9 +144,6 @@ public final class LongRunningAsyncClient {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
-     *     result (Optional): {
-     *         data: String (Required)
-     *     }
      * }
      * }</pre>
      * 

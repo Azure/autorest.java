@@ -366,4 +366,24 @@ public interface TopLevelArmResource {
      * @return the refreshed resource.
      */
     TopLevelArmResource refresh(Context context);
+
+    /**
+     * A long-running resource action.
+     * 
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    Result action();
+
+    /**
+     * A long-running resource action.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    Result action(Context context);
 }

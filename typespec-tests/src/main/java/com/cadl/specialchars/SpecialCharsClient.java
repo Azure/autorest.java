@@ -59,7 +59,7 @@ public final class SpecialCharsClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param readRequest The readRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -69,8 +69,8 @@ public final class SpecialCharsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.readWithResponse(request, requestOptions);
+    public Response<BinaryData> readWithResponse(BinaryData readRequest, RequestOptions requestOptions) {
+        return this.serviceClient.readWithResponse(readRequest, requestOptions);
     }
 
     /**
@@ -90,8 +90,8 @@ public final class SpecialCharsClient {
     public Resource read(String id) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        ReadRequest requestObj = new ReadRequest(id);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return readWithResponse(request, requestOptions).getValue().toObject(Resource.class);
+        ReadRequest readRequestObj = new ReadRequest(id);
+        BinaryData readRequest = BinaryData.fromObject(readRequestObj);
+        return readWithResponse(readRequest, requestOptions).getValue().toObject(Resource.class);
     }
 }

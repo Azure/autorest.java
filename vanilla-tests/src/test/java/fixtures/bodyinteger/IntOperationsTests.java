@@ -1,146 +1,119 @@
 package fixtures.bodyinteger;
 
 import com.azure.core.exception.HttpResponseException;
-import com.azure.core.implementation.serializer.MalformedValueException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.exc.InputCoercionException;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import reactor.test.StepVerifier;
 
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class IntOperationsTests {
-  private static AutoRestIntegerTestService client;
-  private CountDownLatch lock = new CountDownLatch(1);
+    private static AutoRestIntegerTestService client;
 
-  @BeforeClass
-  public static void setup() {
-    client = new AutoRestIntegerTestServiceBuilder().buildClient();
-  }
-
-  @Test
-  public void getNull() {
-    try {
-      client.getInts().getNull();
-      Assert.fail();
-    } catch (NullPointerException e) {
-      // expected
+    @BeforeAll
+    public static void setup() {
+        client = new AutoRestIntegerTestServiceBuilder().buildClient();
     }
-  }
 
-  @Test
-  public void getNullAsync() {
-    Integer i = client.getInts().getNullAsync().block();
-    Assert.assertNull(i);
-  }
-
-  @Test
-  public void getInvalid() {
-    try {
-      client.getInts().getInvalid();
-      Assert.fail();
-    } catch (HttpResponseException exception) {
-      // expected
-      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
+    @Test
+    public void getNull() {
+        assertThrows(NullPointerException.class, () -> client.getInts().getNull());
     }
-  }
 
-  @Test
-  public void getOverflowInt32() {
-    try {
-      client.getInts().getOverflowInt32();
-      Assert.fail();
-    } catch (Exception exception) {
-      Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
+    @Test
+    public void getNullAsync() {
+        Integer i = client.getInts().getNullAsync().block();
+        assertNull(i);
     }
-  }
 
-  @Test
-  public void getUnderflowInt32() {
-    try {
-      client.getInts().getUnderflowInt32();
-      Assert.fail();
-    } catch (Exception exception) {
-      Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
+    @Test
+    public void getInvalid() {
+        HttpResponseException exception = assertThrows(HttpResponseException.class, () -> client.getInts().getInvalid());
+        assertInstanceOf(JsonParseException.class, exception.getCause());
     }
-  }
 
-  @Test
-  public void getOverflowInt64() {
-    try {
-      long value = client.getInts().getOverflowInt64();
-      Assert.assertEquals(Long.MAX_VALUE, value);
-    } catch (Exception exception) {
-      Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
+    @Test
+    public void getOverflowInt32() {
+        Exception exception = assertThrows(Exception.class, () -> client.getInts().getOverflowInt32());
+        assertInstanceOf(InputCoercionException.class, exception.getCause());
     }
-  }
 
-  @Test
-  public void getUnderflowInt64() {
-    try {
-      long value = client.getInts().getUnderflowInt64();
-      Assert.assertEquals(Long.MIN_VALUE, value);
-    } catch (Exception exception) {
-      Assert.assertEquals(InputCoercionException.class, exception.getCause().getClass());
+    @Test
+    public void getUnderflowInt32() {
+        Exception exception = assertThrows(Exception.class, () -> client.getInts().getUnderflowInt32());
+        assertInstanceOf(InputCoercionException.class, exception.getCause());
     }
-  }
 
-  @Test
-  public void putMax32() throws Exception {
-    client.getInts().putMax32Async(Integer.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
-    Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
-  }
-
-  @Test
-  public void putMax64() throws Exception {
-    client.getInts().putMax64Async(Long.MAX_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
-    Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
-  }
-
-  @Test
-  public void putMin32() throws Exception {
-    client.getInts().putMin32Async(Integer.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
-    Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
-  }
-
-  @Test
-  public void putMin64() throws Exception {
-    client.getInts().putMin64Async(Long.MIN_VALUE).subscribe(v -> {}, t -> fail(t.getMessage()), () -> lock.countDown());
-    Assert.assertTrue(lock.await(1000, TimeUnit.MILLISECONDS));
-  }
-
-  @Ignore
-  @Test
-  public void getUnixTime() {
-    OffsetDateTime result = client.getInts().getUnixTime();
-    Assert.assertEquals(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC), result);
-  }
-
-  @Test
-  public void putUnixTimeDate() {
-    client.getInts().putUnixTimeDate(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC));
-  }
-
-  @Test
-  public void getInvalidUnixTime() {
-    try {
-      client.getInts().getInvalidUnixTime();
-      Assert.fail();
-    } catch (HttpResponseException exception) {
-      // expected
-      Assert.assertTrue(exception.getCause() instanceof JsonParseException);
+    @Test
+    public void getOverflowInt64() {
+        Exception exception = assertThrows(Exception.class, () -> client.getInts().getOverflowInt64());
+        assertInstanceOf(InputCoercionException.class, exception.getCause());
     }
-  }
 
-  @Test
-  public void getNullUnixTime() {
-    Assert.assertNull(client.getInts().getNullUnixTime());
-  }
+    @Test
+    public void getUnderflowInt64() {
+        Exception exception = assertThrows(Exception.class, () -> client.getInts().getUnderflowInt64());
+        assertInstanceOf(InputCoercionException.class, exception.getCause());
+    }
+
+    @Test
+    public void putMax32() {
+        StepVerifier.create(client.getInts().putMax32Async(Integer.MAX_VALUE))
+            .expectComplete()
+            .verify(Duration.ofMillis(1000));
+    }
+
+    @Test
+    public void putMax64() {
+        StepVerifier.create(client.getInts().putMax64Async(Long.MAX_VALUE))
+            .expectComplete()
+            .verify(Duration.ofMillis(1000));
+    }
+
+    @Test
+    public void putMin32() {
+        StepVerifier.create(client.getInts().putMin32Async(Integer.MIN_VALUE))
+            .expectComplete()
+            .verify(Duration.ofMillis(1000));
+    }
+
+    @Test
+    public void putMin64() {
+        StepVerifier.create(client.getInts().putMin64Async(Long.MIN_VALUE))
+            .expectComplete()
+            .verify(Duration.ofMillis(1000));
+    }
+
+    @Disabled
+    @Test
+    public void getUnixTime() {
+        OffsetDateTime result = client.getInts().getUnixTime();
+        assertEquals(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC), result);
+    }
+
+    @Test
+    public void putUnixTimeDate() {
+        client.getInts().putUnixTimeDate(OffsetDateTime.of(2016, 4, 13, 0, 0, 0, 0, ZoneOffset.UTC));
+    }
+
+    @Test
+    public void getInvalidUnixTime() {
+        HttpResponseException exception = assertThrows(HttpResponseException.class, () -> client.getInts().getInvalidUnixTime());
+        assertInstanceOf(JsonParseException.class, exception.getCause());
+    }
+
+    @Test
+    public void getNullUnixTime() {
+        assertNull(client.getInts().getNullUnixTime());
+    }
 }

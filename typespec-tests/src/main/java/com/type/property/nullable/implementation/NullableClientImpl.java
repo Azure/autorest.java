@@ -128,6 +128,20 @@ public final class NullableClientImpl {
     }
 
     /**
+     * The CollectionsStringsImpl object to access its operations.
+     */
+    private final CollectionsStringsImpl collectionsStrings;
+
+    /**
+     * Gets the CollectionsStringsImpl object to access its operations.
+     * 
+     * @return the CollectionsStringsImpl object.
+     */
+    public CollectionsStringsImpl getCollectionsStrings() {
+        return this.collectionsStrings;
+    }
+
+    /**
      * Initializes an instance of NullableClient client.
      */
     public NullableClientImpl() {
@@ -159,5 +173,6 @@ public final class NullableClientImpl {
         this.durationOperations = new DurationOperationsImpl(this);
         this.collectionsBytes = new CollectionsBytesImpl(this);
         this.collectionsModels = new CollectionsModelsImpl(this);
+        this.collectionsStrings = new CollectionsStringsImpl(this);
     }
 }

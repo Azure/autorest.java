@@ -5,6 +5,8 @@ package com._specs_.azure.clientgenerator.core.usage;
 
 import com._specs_.azure.clientgenerator.core.usage.models.InputModel;
 import com._specs_.azure.clientgenerator.core.usage.models.OutputModel;
+import com._specs_.azure.clientgenerator.core.usage.models.ResultModel;
+import com._specs_.azure.clientgenerator.core.usage.models.RoundTripModel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,8 +23,13 @@ public class UsageTests {
 
         client.outputToInputOutput();
 
-        // verify OutputModel has private constructor
-        Constructor<OutputModel> ctor = OutputModel.class.getDeclaredConstructor(String.class);
-        Assertions.assertEquals("public", Modifier.toString(ctor.getModifiers()));
+        // verify "OutputModel" class has public constructor
+        Constructor<OutputModel> ctorOutputModel = OutputModel.class.getDeclaredConstructor(String.class);
+        Assertions.assertEquals("public", Modifier.toString(ctorOutputModel.getModifiers()));
+
+        client.modelInReadOnlyProperty(new RoundTripModel());
+        // verify "ResultModel" class has private constructor and no setter
+        Constructor<ResultModel> ctorResultModel = ResultModel.class.getDeclaredConstructor(String.class);
+        Assertions.assertEquals("private", Modifier.toString(ctorResultModel.getModifiers()));
     }
 }

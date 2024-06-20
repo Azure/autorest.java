@@ -30,6 +30,11 @@ public final class DotSalmon extends DotFish {
      */
     private Boolean iswild;
 
+    /*
+     * The species property.
+     */
+    private String species;
+
     /**
      * Creates an instance of DotSalmon class.
      */
@@ -62,6 +67,16 @@ public final class DotSalmon extends DotFish {
      */
     public Boolean iswild() {
         return this.iswild;
+    }
+
+    /**
+     * Get the species property: The species property.
+     * 
+     * @return the species value.
+     */
+    @Override
+    public String getSpecies() {
+        return this.species;
     }
 
     /**
@@ -103,7 +118,7 @@ public final class DotSalmon extends DotFish {
                 reader.nextToken();
 
                 if ("species".equals(fieldName)) {
-                    deserializedDotSalmon.setSpecies(reader.getString());
+                    deserializedDotSalmon.species = reader.getString();
                 } else if ("fish.type".equals(fieldName)) {
                     deserializedDotSalmon.fishType = reader.getString();
                 } else if ("location".equals(fieldName)) {

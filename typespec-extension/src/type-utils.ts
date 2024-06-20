@@ -5,7 +5,6 @@ import {
   EnumMember,
   IntrinsicScalarName,
   Model,
-  ModelProperty,
   Program,
   Scalar,
   StringLiteral,
@@ -13,6 +12,7 @@ import {
   Type,
   TypeNameOptions,
   Union,
+  Value,
   getTypeName,
   isNullType,
   isTemplateDeclaration,
@@ -21,9 +21,9 @@ import {
 } from "@typespec/compiler";
 import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
-import { getNamespace, pascalCase } from "./utils.js";
+import { getNamespace } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
-import { SdkDurationType, isSdkFloatKind, isSdkIntKind } from "@azure-tools/typespec-client-generator-core";
+import { SdkDurationType, SdkType, isSdkFloatKind, isSdkIntKind } from "@azure-tools/typespec-client-generator-core";
 import { Version } from "@typespec/versioning";
 
 /** Acts as a cache for processing inputs.
@@ -83,24 +83,6 @@ export function isModelReferredInTemplate(template: TemplatedTypeBase, target: M
   );
 }
 
-export function getNameForTemplate(target: Type): string {
-  switch (target.kind) {
-    case "Model": {
-      let name = target.name;
-      if (target.templateMapper && target.templateMapper.args) {
-        name = name + target.templateMapper.args.map((it) => ("kind" in it ? getNameForTemplate(it) : "")).join("");
-      }
-      return name;
-    }
-
-    case "String":
-      return target.value;
-
-    default:
-      return "";
-  }
-}
-
 export function isNullableType(type: Type): boolean {
   if (type.kind === "Union") {
     const nullVariants = Array.from(type.variants.values()).filter((it) => isNullType(it.type));
@@ -108,6 +90,24 @@ export function isNullableType(type: Type): boolean {
   } else {
     return false;
   }
+}
+
+export function getNonNullSdkType(type: SdkType): SdkType {
+  return type.kind === "nullable" ? type.type : type;
+}
+
+export function getDefaultValue(value: Value | undefined): any {
+  if (value) {
+    switch (value.valueKind) {
+      case "StringValue":
+        return value.value;
+      case "NumericValue":
+        return value.value;
+      case "BooleanValue":
+        return value.value;
+    }
+  }
+  return undefined;
 }
 
 export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {
@@ -220,33 +220,6 @@ export function getUnionDescription(union: Union, typeNameOptions: TypeNameOptio
     name = names.join(" | ");
   }
   return name;
-}
-
-export function getNamePrefixForProperty(property: ModelProperty | undefined): string {
-  if (property && property.model) {
-    if (property.model.name) {
-      return property.model.name;
-    } else if (property.model.namespace) {
-      for (const model of property.model.namespace.models.values()) {
-        for (const prop of model.properties.values()) {
-          const candidateModel = prop.type;
-          // find the property that refers to the unnamed property.model
-          if (
-            candidateModel.kind === "Model" &&
-            (candidateModel === property.model || candidateModel.indexer?.value === property.model)
-          ) {
-            return getNamePrefixForProperty(prop) + pascalCase(prop.name);
-          } else if (
-            candidateModel.kind === "Union" &&
-            Array.from(candidateModel.variants.values()).find((it) => it.type === property.model)
-          ) {
-            return getNamePrefixForProperty(prop) + pascalCase(prop.name);
-          }
-        }
-      }
-    }
-  }
-  return "";
 }
 
 export function modelIs(model: Model, name: string, namespace: string): boolean {

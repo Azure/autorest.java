@@ -83,7 +83,7 @@ public final class StringExtensiblesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> send(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData sendRequest8, RequestOptions requestOptions, Context context);
 
         @Post("/type/union/string-extensible")
         @ExpectedResponses({ 204 })
@@ -91,8 +91,8 @@ public final class StringExtensiblesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData request,
-            RequestOptions requestOptions, Context context);
+        Response<Void> sendSync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData sendRequest8, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -151,7 +151,7 @@ public final class StringExtensiblesImpl {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest8 The sendRequest8 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -160,9 +160,9 @@ public final class StringExtensiblesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponseAsync(BinaryData request, RequestOptions requestOptions) {
+    public Mono<Response<Void>> sendWithResponseAsync(BinaryData sendRequest8, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.send(accept, request, requestOptions, context));
+        return FluxUtil.withContext(context -> service.send(accept, sendRequest8, requestOptions, context));
     }
 
     /**
@@ -175,7 +175,7 @@ public final class StringExtensiblesImpl {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest8 The sendRequest8 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -184,8 +184,8 @@ public final class StringExtensiblesImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> sendWithResponse(BinaryData sendRequest8, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.sendSync(accept, request, requestOptions, Context.NONE);
+        return service.sendSync(accept, sendRequest8, requestOptions, Context.NONE);
     }
 }

@@ -20,7 +20,7 @@ import java.util.Map;
 @Fluent
 public final class Salmon extends Fish {
     /*
-     * The kind property.
+     * Discriminator property for Fish.
      */
     @Generated
     private String kind = "salmon";
@@ -54,7 +54,7 @@ public final class Salmon extends Fish {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
      */

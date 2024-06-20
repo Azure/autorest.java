@@ -5,27 +5,43 @@
 package fixtures.discriminatorflattening.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeId;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * The rule criteria that defines the conditions of the alert rule.
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    property = "odata.type",
+    defaultImpl = MetricAlertCriteria.class,
+    visible = true)
+@JsonTypeName("MetricAlertCriteria")
+@JsonSubTypes({
+    @JsonSubTypes.Type(
+        name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
+        value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
 @Fluent
-public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria> {
+public class MetricAlertCriteria {
     /*
      * specifies the type of the alert criteria.
      */
+    @JsonTypeId
+    @JsonProperty(value = "odata.type", required = true)
     private Odatatype odataType = Odatatype.fromString("MetricAlertCriteria");
 
     /*
      * The rule criteria that defines the conditions of the alert rule.
      */
+    @JsonIgnore
     private Map<String, Object> additionalProperties;
 
     /**
@@ -48,6 +64,7 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
      * 
      * @return the additionalProperties value.
      */
+    @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -63,83 +80,19 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
         return this;
     }
 
+    @JsonAnySetter
+    void setAdditionalProperties(String key, Object value) {
+        if (additionalProperties == null) {
+            additionalProperties = new LinkedHashMap<>();
+        }
+        additionalProperties.put(key, value);
+    }
+
     /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("odata.type", this.odataType == null ? null : this.odataType.toString());
-        if (additionalProperties != null) {
-            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of MetricAlertCriteria from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of MetricAlertCriteria if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IOException If an error occurs while reading the MetricAlertCriteria.
-     */
-    public static MetricAlertCriteria fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String discriminatorValue = null;
-            try (JsonReader readerToUse = reader.bufferObject()) {
-                readerToUse.nextToken(); // Prepare for reading
-                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                    String fieldName = readerToUse.getFieldName();
-                    readerToUse.nextToken();
-                    if ("odata.type".equals(fieldName)) {
-                        discriminatorValue = readerToUse.getString();
-                        break;
-                    } else {
-                        readerToUse.skipChildren();
-                    }
-                }
-                // Use the discriminator value to determine which subtype should be deserialized.
-                if ("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria".equals(discriminatorValue)) {
-                    return MetricAlertSingleResourceMultipleMetricCriteria.fromJson(readerToUse.reset());
-                } else {
-                    return fromJsonKnownDiscriminator(readerToUse.reset());
-                }
-            }
-        });
-    }
-
-    static MetricAlertCriteria fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            MetricAlertCriteria deserializedMetricAlertCriteria = new MetricAlertCriteria();
-            Map<String, Object> additionalProperties = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("odata.type".equals(fieldName)) {
-                    deserializedMetricAlertCriteria.odataType = Odatatype.fromString(reader.getString());
-                } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.readUntyped());
-                }
-            }
-            deserializedMetricAlertCriteria.additionalProperties = additionalProperties;
-
-            return deserializedMetricAlertCriteria;
-        });
     }
 }

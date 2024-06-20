@@ -81,7 +81,7 @@ public final class MixedLiteralsClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest1 The sendRequest1 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -91,8 +91,8 @@ public final class MixedLiteralsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest1, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest1, requestOptions);
     }
 
     /**
@@ -129,8 +129,8 @@ public final class MixedLiteralsClient {
     public void send(MixedLiteralsCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest8 requestObj = new SendRequest8(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest8 sendRequest1Obj = new SendRequest8(prop);
+        BinaryData sendRequest1 = BinaryData.fromObject(sendRequest1Obj);
+        sendWithResponse(sendRequest1, requestOptions).getValue();
     }
 }

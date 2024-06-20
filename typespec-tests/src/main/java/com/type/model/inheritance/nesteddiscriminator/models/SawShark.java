@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class SawShark extends Shark {
     /*
-     * The kind property.
+     * Discriminator property for Fish.
      */
     @Generated
     private String kind = "shark";
@@ -36,6 +36,17 @@ public final class SawShark extends Shark {
     @Generated
     public SawShark(int age) {
         super(age);
+    }
+
+    /**
+     * Get the kind property: Discriminator property for Fish.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**

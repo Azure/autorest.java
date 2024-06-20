@@ -5,25 +5,26 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlWriter;
-import javax.xml.stream.XMLStreamException;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 /**
  * Contans property.
  */
+@JacksonXmlRootElement(localName = "Data")
 @Fluent
-public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWithXMsTextProperty> {
+public final class ObjectWithXMsTextProperty {
     /*
      * Returned value should be 'english'
      */
+    @JacksonXmlProperty(localName = "language", isAttribute = true)
     private String language;
 
     /*
      * Returned value should be 'I am text'
      */
+    @JacksonXmlText
     private String content;
 
     /**
@@ -78,53 +79,5 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        return toXml(xmlWriter, null);
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Data" : rootElementName;
-        xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeStringAttribute("language", this.language);
-        xmlWriter.writeString(this.content);
-        return xmlWriter.writeEndElement();
-    }
-
-    /**
-     * Reads an instance of ObjectWithXMsTextProperty from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
-     * it was pointing to XML null.
-     * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
-     */
-    public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return fromXml(xmlReader, null);
-    }
-
-    /**
-     * Reads an instance of ObjectWithXMsTextProperty from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     * cases where the model can deserialize from different root element names.
-     * @return An instance of ObjectWithXMsTextProperty if the XmlReader was pointing to an instance of it, or null if
-     * it was pointing to XML null.
-     * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
-     */
-    public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader, String rootElementName)
-        throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Data" : rootElementName;
-        return xmlReader.readObject(finalRootElementName, reader -> {
-            ObjectWithXMsTextProperty deserializedObjectWithXMsTextProperty = new ObjectWithXMsTextProperty();
-            deserializedObjectWithXMsTextProperty.language = reader.getStringAttribute(null, "language");
-            deserializedObjectWithXMsTextProperty.content = reader.getStringElement();
-
-            return deserializedObjectWithXMsTextProperty;
-        });
     }
 }

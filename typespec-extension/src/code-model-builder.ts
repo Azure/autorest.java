@@ -92,8 +92,6 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
-  Enum,
-  EnumMember,
   Model,
   ModelProperty,
   Operation,
@@ -102,7 +100,6 @@ import {
   Type,
   TypeNameOptions,
   Union,
-  UnionVariant,
   getDoc,
   getEffectiveModelType,
   getEncode,
@@ -111,7 +108,6 @@ import {
   getOverloadedOperation,
   getProjectedName,
   getSummary,
-  getTypeName,
   getVisibility,
   ignoreDiagnostics,
   isArrayModelType,
@@ -124,6 +120,7 @@ import {
   Authentication,
   HttpOperation,
   HttpOperationBody,
+  HttpOperationMultipartBody,
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
@@ -173,8 +170,7 @@ import {
   ProcessingCache,
   getAccess,
   getDurationFormatFromSdkType,
-  getNameForTemplate,
-  getNamePrefixForProperty,
+  getNonNullSdkType,
   getUnionDescription,
   getUsage,
   hasScalarAsBase,
@@ -314,10 +310,10 @@ export class CodeModelBuilder {
           this.trackSchemaUsage(schema, {
             usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
           });
-          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+          parameter = new Parameter(this.getName(it), this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
             origin: "modelerfour:synthesized/host",
-            required: true,
+            required: !it.optional,
             protocol: {
               http: new HttpParameter(ParameterLocation.Uri),
             },
@@ -329,6 +325,8 @@ export class CodeModelBuilder {
             extensions: {
               "x-ms-skip-url-encoding": schema instanceof UriSchema,
             },
+            // // make the logic same as TCGC, which takes the server-side default of host as client-side default
+            // clientDefaultValue: getDefaultValue(it.defaultValue),
           });
         }
 
@@ -336,6 +334,7 @@ export class CodeModelBuilder {
       });
       return hostParameters;
     } else {
+      // use "endpoint"
       hostParameters.push(
         this.codeModel.addGlobalParameter(
           new Parameter("endpoint", "Server parameter", this.stringSchema, {
@@ -888,7 +887,7 @@ export class CodeModelBuilder {
   /**
    * `@armProviderNamespace` currently will add a default server if not defined globally:
    * https://github.com/Azure/typespec-azure/blob/8b8d7c05f168d9305a09691c4fedcb88f4a57652/packages/typespec-azure-resource-manager/src/namespace.ts#L121-L128
-   * TODO: if the synthesized server has the right hostParameter, we can use that insteadß
+   * TODO: if the synthesized server has the right hostParameter, we can use that instead
    *
    * @param server returned by getServers
    * @returns whether it's synthesized by `@armProviderNamespace`
@@ -1037,8 +1036,26 @@ export class CodeModelBuilder {
           // }
           this.processParameterBody(codeModelOperation, httpOperation.__raw, bodyType.__raw as Model | ModelProperty);
         }
-      
     }
+
+    // group ETag header parameters, if exists
+    if (this.options["group-etag-headers"]) {
+      this.processEtagHeaderParameters(codeModelOperation, sdkMethod.operation.__raw);
+    }
+
+    // lro metadata
+    const lroMetadata = this.processLroMetadata(codeModelOperation, sdkMethod.operation.__raw);
+
+    // responses
+    sdkMethod.operation.__raw.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
+
+    // check for paged
+    this.processRouteForPaged(codeModelOperation, sdkMethod.operation.__raw.responses);
+    // check for long-running operation
+    if (sdkMethod.__raw) {
+      this.processRouteForLongRunning(codeModelOperation, sdkMethod.__raw, sdkMethod.operation.__raw.responses, lroMetadata);
+    }
+
     return codeModelOperation;
   }
 
@@ -1061,7 +1078,7 @@ export class CodeModelBuilder {
       },
     });
 
-    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(operation);
+    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(this.sdkContext, operation);
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
@@ -1134,9 +1151,9 @@ export class CodeModelBuilder {
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
     if (op.parameters.body) {
-      if (op.parameters.body.parameter) {
-        if (!isVoidType(op.parameters.body.parameter.type)) {
-          this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+      if (op.parameters.body.property) {
+        if (!isVoidType(op.parameters.body.property.type)) {
+          this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
         }
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
@@ -1170,8 +1187,7 @@ export class CodeModelBuilder {
     const lroMetadata = this.processLroMetadata(codeModelOperation, op);
 
     // responses
-    const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
-    op.responses.map((it) => this.processResponse(codeModelOperation, it, candidateResponseSchema));
+    op.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
 
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
@@ -1212,6 +1228,8 @@ export class CodeModelBuilder {
 
   private processLroMetadata(op: CodeModelOperation, httpOperation: HttpOperation): LongRunningMetadata {
     const operation = httpOperation.operation;
+
+    const trackConvenienceApi: boolean = Boolean(op.convenienceApi);
 
     const lroMetadata = getLroMetadata(this.program, operation);
     // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
@@ -1272,7 +1290,7 @@ export class CodeModelBuilder {
       // track usage
       if (pollingSchema) {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
+        if (trackConvenienceApi) {
           this.trackSchemaUsage(pollingSchema, {
             usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
           });
@@ -1280,7 +1298,7 @@ export class CodeModelBuilder {
       }
       if (finalSchema) {
         this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
+        if (trackConvenienceApi) {
           this.trackSchemaUsage(finalSchema, {
             usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
           });
@@ -1436,7 +1454,7 @@ export class CodeModelBuilder {
         }
       }
 
-      const nullable = param.nullable;
+      const nullable = param.type.kind === "nullable";
       const parameter = new Parameter(param.name, param.details ?? "", schema, {
         summary: param.description,
         implementation: ImplementationLocation.Method,
@@ -1900,7 +1918,8 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
+    const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
+    const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
@@ -2057,11 +2076,7 @@ export class CodeModelBuilder {
     return this.getEffectiveSchemaType(bodyType);
   }
 
-  private processResponse(
-    op: CodeModelOperation,
-    resp: HttpOperationResponse,
-    candidateResponseSchema: Schema | undefined = undefined,
-  ) {
+  private processResponse(op: CodeModelOperation, resp: HttpOperationResponse, longRunning: boolean) {
     // TODO: what to do if more than 1 response?
     // It happens when the response type is Union, on one status code.
     let response: Response;
@@ -2089,9 +2104,9 @@ export class CodeModelBuilder {
       }
     }
 
-    let responseBody: HttpOperationBody | undefined = undefined;
+    let responseBody: HttpOperationBody | HttpOperationMultipartBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
-    let trackConvenienceApi = op.convenienceApi ?? false;
+    let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       responseBody = resp.responses[0].body;
     }
@@ -2121,53 +2136,13 @@ export class CodeModelBuilder {
       } else {
         // schema (usually JSON)
         let schema: Schema | undefined = undefined;
-        const verb = op.requests?.[0].protocol?.http?.method;
-        if (
-          // LRO, candidateResponseSchema is Model/ObjectSchema
-          candidateResponseSchema &&
-          candidateResponseSchema instanceof ObjectSchema &&
-          // bodyType is templated Model
-          bodyType.kind === "Model" &&
-          bodyType.templateMapper &&
-          bodyType.templateMapper.args &&
-          bodyType.templateMapper.args.length > 0
-        ) {
-          if (verb === "post") {
-            // for LRO ResourceAction, the standard does not require a final type, hence it can be the same as intermediate type
-            // https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#long-running-action-operations
-
-            // check if we can use candidateResponseSchema as response schema (instead of the templated Model), for LRO ResourceAction
-            if (candidateResponseSchema.properties?.length === bodyType.properties.size) {
-              let match = true;
-              for (const prop of Array.from(bodyType.properties.values())) {
-                const name = this.getName(prop);
-                if (!candidateResponseSchema.properties?.find((it) => it.language.default.name === name)) {
-                  match = false;
-                  break;
-                }
-              }
-              if (match) {
-                schema = candidateResponseSchema;
-                this.trace(
-                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
-                    candidateResponseSchema.language.default.name
-                  }'`,
-                );
-              }
-            }
-          } else if (verb === "delete") {
-            // for LRO ResourceDelete, final type will be replaced to "Void" in convenience API, hence do not generate the class
-            trackConvenienceApi = false;
-          }
+        if (longRunning) {
+          // LRO uses the LroMetadata for poll/final result, not the response of activation request
+          trackConvenienceApi = false;
         }
         if (!schema) {
-          if (verb === "post" && op.lroMetadata && op.lroMetadata.pollResultType) {
-            // for standard LRO action, return type is the pollResultType
-            schema = op.lroMetadata.pollResultType;
-          } else {
-            const sdkType = getClientType(this.sdkContext, bodyType);
-            schema = this.processSchemaFromSdkType(sdkType, op.language.default.name + "Response");
-          }
+          const sdkType = getClientType(this.sdkContext, bodyType);
+          schema = this.processSchemaFromSdkType(sdkType, op.language.default.name + "Response");
         }
         response = new SchemaResponse(schema, {
           protocol: {
@@ -2399,10 +2374,18 @@ export class CodeModelBuilder {
   }
 
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
+    let nullableItems = false;
+    let elementType = type.valueType;
+    if (elementType.kind === "nullable") {
+      nullableItems = true;
+      elementType = elementType.type;
+    }
+
+    const elementSchema = this.processSchemaFromSdkType(elementType, name);
     return this.codeModel.schemas.add(
       new ArraySchema(name, type.details ?? "", elementSchema, {
         summary: type.description,
+        nullableItems: nullableItems,
       }),
     );
   }
@@ -2417,10 +2400,16 @@ export class CodeModelBuilder {
       this.schemaCache.set(type, dictSchema);
     }
 
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
+    let nullableItems = false;
+    let elementType = type.valueType;
+    if (elementType.kind === "nullable") {
+      nullableItems = true;
+      elementType = elementType.type;
+    }
+    const elementSchema = this.processSchemaFromSdkType(elementType, name);
     dictSchema.elementType = elementSchema;
 
-    dictSchema.nullableItems = type.nullableValues;
+    dictSchema.nullableItems = nullableItems;
 
     return this.codeModel.schemas.add(dictSchema);
   }
@@ -2440,7 +2429,7 @@ export class CodeModelBuilder {
 
     const schemaType = type.isFixed ? SealedChoiceSchema : ChoiceSchema;
 
-    const schema = new schemaType(type.name ? type.name : name, type.details ?? "", {
+    const schema = new schemaType(type.name ?? name, type.details ?? "", {
       summary: type.description,
       choiceType: valueType as any,
       choices: choices,
@@ -2461,7 +2450,7 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, type.details ?? "", {
+      new ConstantSchema(type.name ?? name, type.details ?? "", {
         summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value),
@@ -2473,7 +2462,7 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.enumType, type.enumType.name);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, type.details ?? "", {
+      new ConstantSchema(type.name ?? name, type.details ?? "", {
         summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value ?? type.name),
@@ -2598,11 +2587,8 @@ export class CodeModelBuilder {
         keyType: {
           kind: "string",
           encode: "string",
-          nullable: false,
         },
         description: type.description,
-        nullableValues: false,
-        nullable: false,
         valueType: type.additionalProperties,
       };
       const parentSchema = this.processSchemaFromSdkType(sdkDictType, "Record");
@@ -2641,11 +2627,13 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
-    const rawModelPropertyType = prop.__raw as ModelProperty | undefined;
-    // TODO: This case is related with literal.tsp, once TCGC supports giving a name, we can use TCGC generatedName
-    const schemaNameHint = pascalCase(getNamePrefixForProperty(rawModelPropertyType)) + pascalCase(prop.name);
-    let schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
-    let nullable = prop.nullable;
+    let nullable = false;
+    let nonNullType = prop.type;
+    if (nonNullType.kind === "nullable") {
+      nullable = true;
+      nonNullType = nonNullType.type;
+    }
+    let schema = this.processSchemaFromSdkType(nonNullType, "");
 
     let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
@@ -2683,7 +2671,6 @@ export class CodeModelBuilder {
       throw new Error(`Invalid type for union: '${type.kind}'.`);
     }
     const rawUnionType: Union = type.__raw as Union;
-    // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(rawUnionType);
     const baseName = type.name ?? pascalCase(name) + "Model";
     this.logWarning(
@@ -2814,14 +2801,7 @@ export class CodeModelBuilder {
     return target ? getSummary(this.program, target) : undefined;
   }
 
-  private getName(
-    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation | undefined,
-    nameHint: string | undefined = undefined,
-  ): string {
-    if (!target) {
-      return nameHint || "";
-    }
-
+  private getName(target: ModelProperty | Operation, nameHint: string | undefined = undefined): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
     if (emitterClientName && typeof emitterClientName === "string") {
@@ -2843,24 +2823,6 @@ export class CodeModelBuilder {
       return friendlyName;
     }
 
-    // if no projectedName and friendlyName found, return the name of the target (including special handling for template)
-    if (
-      target.kind === "Model" &&
-      target.templateMapper &&
-      target.templateMapper.args &&
-      target.templateMapper.args.length > 0
-    ) {
-      const tspName = getTypeName(target, this.typeNameOptions);
-      const newName = getNameForTemplate(target);
-      this.logWarning(`Rename TypeSpec Model '${tspName}' to '${newName}'`);
-      return newName;
-    }
-
-    if (!target.name && nameHint) {
-      const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
-      return newName;
-    }
     if (typeof target.name === "symbol") {
       return "";
     }

@@ -206,10 +206,17 @@ public final class SpecialWordsClientBuilder
      */
     @Generated
     private SpecialWordsClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SpecialWordsClientImpl client
             = new SpecialWordsClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated

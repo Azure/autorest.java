@@ -36,6 +36,21 @@ public class FlattenedProduct extends Resource {
      */
     private String provisioningState;
 
+    /*
+     * Resource Id
+     */
+    private String id;
+
+    /*
+     * Resource Type
+     */
+    private String type;
+
+    /*
+     * Resource Name
+     */
+    private String name;
+
     /**
      * Creates an instance of FlattenedProduct class.
      */
@@ -112,6 +127,36 @@ public class FlattenedProduct extends Resource {
     }
 
     /**
+     * Get the id property: Resource Id.
+     * 
+     * @return the id value.
+     */
+    @Override
+    public String getId() {
+        return this.id;
+    }
+
+    /**
+     * Get the type property: Resource Type.
+     * 
+     * @return the type value.
+     */
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    /**
+     * Get the name property: Resource Name.
+     * 
+     * @return the name value.
+     */
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -152,7 +197,7 @@ public class FlattenedProduct extends Resource {
             || provisioningStateValues != null
             || provisioningState != null) {
             jsonWriter.writeStartObject("properties");
-            jsonWriter.writeStringField("p\\.name", this.pName);
+            jsonWriter.writeStringField("p.name", this.pName);
             jsonWriter.writeStringField("type", this.typePropertiesType);
             jsonWriter.writeStringField("provisioningState", this.provisioningState);
             jsonWriter.writeEndObject();
@@ -176,22 +221,22 @@ public class FlattenedProduct extends Resource {
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    deserializedFlattenedProduct.setId(reader.getString());
+                    deserializedFlattenedProduct.id = reader.getString();
                 } else if ("type".equals(fieldName)) {
-                    deserializedFlattenedProduct.setType(reader.getString());
+                    deserializedFlattenedProduct.type = reader.getString();
                 } else if ("tags".equals(fieldName)) {
                     Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
                     deserializedFlattenedProduct.setTags(tags);
                 } else if ("location".equals(fieldName)) {
                     deserializedFlattenedProduct.setLocation(reader.getString());
                 } else if ("name".equals(fieldName)) {
-                    deserializedFlattenedProduct.setName(reader.getString());
+                    deserializedFlattenedProduct.name = reader.getString();
                 } else if ("properties".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                     while (reader.nextToken() != JsonToken.END_OBJECT) {
                         fieldName = reader.getFieldName();
                         reader.nextToken();
 
-                        if ("p\\.name".equals(fieldName)) {
+                        if ("p.name".equals(fieldName)) {
                             deserializedFlattenedProduct.pName = reader.getString();
                         } else if ("type".equals(fieldName)) {
                             deserializedFlattenedProduct.typePropertiesType = reader.getString();

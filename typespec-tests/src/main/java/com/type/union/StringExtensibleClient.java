@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringExtensiblesImpl;
 import com.type.union.implementation.models.SendRequest1;
 import com.type.union.models.GetResponse8;
-import com.type.union.models.GetResponseProp4;
+import com.type.union.models.GetResponseProp3;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -71,7 +71,7 @@ public final class StringExtensibleClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest8 The sendRequest8 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,8 +81,8 @@ public final class StringExtensibleClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest8, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest8, requestOptions);
     }
 
     /**
@@ -116,11 +116,11 @@ public final class StringExtensibleClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(GetResponseProp4 prop) {
+    public void send(GetResponseProp3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest1 requestObj = new SendRequest1(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest1 sendRequest8Obj = new SendRequest1(prop);
+        BinaryData sendRequest8 = BinaryData.fromObject(sendRequest8Obj);
+        sendWithResponse(sendRequest8, requestOptions).getValue();
     }
 }

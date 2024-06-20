@@ -19,7 +19,7 @@ import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringsOnliesImpl;
 import com.type.union.implementation.models.SendRequest;
 import com.type.union.models.GetResponse9;
-import com.type.union.models.GetResponseProp5;
+import com.type.union.models.GetResponseProp4;
 import reactor.core.publisher.Mono;
 
 /**
@@ -73,7 +73,7 @@ public final class StringsOnlyAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest9 The sendRequest9 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,8 +83,8 @@ public final class StringsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData sendRequest9, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(sendRequest9, requestOptions);
     }
 
     /**
@@ -120,11 +120,11 @@ public final class StringsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(GetResponseProp5 prop) {
+    public Mono<Void> send(GetResponseProp4 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest requestObj = new SendRequest(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SendRequest sendRequest9Obj = new SendRequest(prop);
+        BinaryData sendRequest9 = BinaryData.fromObject(sendRequest9Obj);
+        return sendWithResponse(sendRequest9, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

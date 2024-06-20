@@ -97,8 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
-        final boolean immutableOutputModel = settings.isOutputModelImmutable()
-            && model.getImplementationDetails() != null && !model.getImplementationDetails().isInput();
+        final boolean immutableModel = isImmutableOutputModel(model, settings);
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
@@ -108,7 +107,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         addClassLevelAnnotations(model, javaFile, settings);
 
         // Add Fluent or Immutable based on whether the model has any setters.
-        addFluentOrImmutableAnnotation(model, immutableOutputModel, propertyReferences, javaFile, settings);
+        addFluentOrImmutableAnnotation(model, immutableModel, propertyReferences, javaFile, settings);
 
         List<JavaModifier> classModifiers = null;
         if (!hasDerivedModels && !model.getNeedsFlatten()) {
@@ -153,13 +152,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             // constructor
-            JavaVisibility modelConstructorVisibility = immutableOutputModel
+            JavaVisibility modelConstructorVisibility = immutableModel
                 ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
                 : JavaVisibility.Public;
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
-            for (ClientModelProperty property : model.getProperties()) {
-                final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
+            for (ClientModelProperty property : getFieldProperties(model, settings)) {
+                final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
                 IType propertyClientType = propertyWireType.getClientType();
@@ -177,10 +176,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
-                // getter method of discriminator property in subclass is handled differently
-                boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator()
-                    && !modelDefinesProperty(model, property);
-                if (polymorphicDiscriminatorInSubclass) {
+                boolean overridesParentGetter = overridesParentGetter(model, property, settings);
+                if (overridesParentGetter) {
                     classBlock.annotation("Override");
                 }
                 classBlock.method(methodVisibility, null,
@@ -188,11 +185,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
 
-                // The model is immutable output only if and only if the immutable output model setting is enabled and
-                // the usage of the model include output and does not include input.
-                boolean immutableOutputOnlyModel = immutableOutputModel && ClientModelUtil.isOutputOnly(model);
-
-                if (ClientModelUtil.hasSetter(property, settings) && !immutableOutputOnlyModel) {
+                if (ClientModelUtil.needsPublicSetter(property, settings) && !immutableModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     addGeneratedAnnotation(classBlock);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
@@ -221,9 +214,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
                         classBlock.method(JavaVisibility.PackagePrivate, null,
-                            model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
+                            model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " "
                                 + property.getName() + ")",
-                            methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
+                            methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                                 methodBlock, settings,
                                 ClientModelUtil.isJsonMergePatchModel(model, settings)));
                     }
@@ -250,8 +243,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             // add setters to override parent setters
-            if (!immutableOutputModel) {
-                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
+            if (!immutableModel) {
+                List<ClientModelPropertyAccess> settersToOverride = getSuperSetters(model, settings,
                     propertyReferences);
                 for (ClientModelPropertyAccess parentProperty : settersToOverride) {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
@@ -274,7 +267,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 // reference to properties from flattened client model
                 for (ClientModelPropertyReference propertyReference : propertyReferences) {
-                    if (!propertyReference.isFromFlattenedProperty()) {
+                    propertyReference = getLocalFlattenedModelPropertyReference(propertyReference);
+                    if (propertyReference == null) {
                         continue;
                     }
 
@@ -282,7 +276,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
 
                     IType propertyClientType = property.getClientType();
-                    final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
+                    final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
 
                     if (propertyClientType instanceof PrimitiveType && !targetProperty.isRequired()) {
                         // since the property to flattened client model is optional, the flattened property should be optional
@@ -306,9 +300,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     if (!propertyIsReadOnly) {
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
+                        ClientModelPropertyReference propertyReferenceFinal = propertyReference;
                         classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%s() == null", targetProperty.getGetterName()), ifBlock ->
-                                methodBlock.line(String.format("this.%s = new %s();", targetProperty.getName(), propertyReference.getTargetModelType())));
+                                methodBlock.line(String.format("this.%s = new %s();", targetProperty.getName(), propertyReferenceFinal.getTargetModelType())));
 
                             methodBlock.line(String.format("this.%s().%s(%s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");
@@ -327,6 +322,43 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writeStreamStyleSerialization(classBlock, model, settings);
             }
         });
+    }
+
+    /**
+     * Get the property reference referring to the local(field) flattened property.
+     *
+     * @param propertyReference propertyReference to check
+     * @return the property reference referring to the local(field) flattened property, null if it's not
+     */
+    protected ClientModelPropertyReference getLocalFlattenedModelPropertyReference(ClientModelPropertyReference propertyReference) {
+        if (propertyReference.isFromFlattenedProperty()) {
+            return propertyReference;
+        }
+        // Not a flattening property, return null.
+        return null;
+    }
+
+    /**
+     * Whether the property's getter overrides parent getter.
+     * @param model the client model
+     * @param property the property to generate getter method
+     * @param settings {@link JavaSettings} instance
+     * @return whether the property's getter overrides parent getter
+     */
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+        // getter method of discriminator property in subclass is handled differently
+        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
+    }
+    /**
+     * The model is immutable output if and only if the immutable output model setting is enabled and
+     * the usage of the model include output and does not include input.
+     *
+     * @param model the model to check
+     * @param settings JavaSettings instance
+     * @return whether the model is output-only immutable model
+     */
+    static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
+        return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {
@@ -396,21 +428,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Override parent setters if: 1. parent property has setter 2. child does not contain property that shadow this
-     * parent property, otherwise overridden parent setter methods will collide with child setter methods
+     * We generate super setters in child class if all of below conditions are met:
+     * 1. parent property has setter
+     * 2. child does not contain property that shadow this parent property, otherwise super setters
+     * will collide with child setters
      *
      * @see <a href="https://github.com/Azure/autorest.java/issues/1320">Issue 1320</a>
      */
-    protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings,
-        List<ClientModelPropertyReference> propertyReferences) {
-        Set<String> modelPropertyNames = model.getProperties().stream().map(ClientModelProperty::getName)
+    protected List<ClientModelPropertyAccess> getSuperSetters(ClientModel model, JavaSettings settings,
+                                                              List<ClientModelPropertyReference> propertyReferences) {
+        Set<String> modelPropertyNames = getFieldProperties(model, settings).stream().map(ClientModelProperty::getName)
             .collect(Collectors.toSet());
         return propertyReferences.stream()
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
             .filter(parentProperty -> {
                     // parent property doesn't have setter
-                    if (!ClientModelUtil.hasSetter(parentProperty, settings)) {
+                    if (!ClientModelUtil.needsPublicSetter(parentProperty, settings)) {
                         return false;
                     }
                     // child does not contain property that shadow this parent property
@@ -497,7 +531,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         List<ClientModelPropertyReference> propertyReferences, JavaFile javaFile, JavaSettings settings) {
         boolean fluent = !immutableOutputModel && Stream
             .concat(model.getProperties().stream(), propertyReferences.stream())
-            .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
+            .anyMatch(p -> ClientModelUtil.needsPublicSetter(p, settings));
 
         if (JavaSettings.getInstance().isBranded()) {
             if (fluent) {
@@ -539,11 +573,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings AutoRest configuration settings.
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
-        for (ClientModelProperty parentDiscriminator : model.getParentPolymorphicDiscriminators()) {
-            addProperty(parentDiscriminator, model, classBlock, settings);
-        }
-
-        for (ClientModelProperty property : model.getProperties()) {
+        for (ClientModelProperty property : getFieldProperties(model, settings)) {
             addProperty(property, model, classBlock, settings);
         }
     }
@@ -616,6 +646,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else {
             classBlock.privateMemberVariable(fieldSignature);
         }
+    }
+
+    /**
+     * Get properties to generate as fields of the class.
+     * @param model the model to generate class of
+     * @param settings JavaSettings
+     * @return properties to generate as fields of the class
+     */
+    protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
+        return Stream.concat(
+            model.getParentPolymorphicDiscriminators().stream(),
+            model.getProperties().stream()
+        ).collect(Collectors.toList());
     }
 
     protected void addXmlWrapperClass(JavaClass classBlock, ClientModelProperty property, String wrapperClassName,
@@ -1333,7 +1376,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         });
     }
 
-    private static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
+    static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
         return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
             Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
     }

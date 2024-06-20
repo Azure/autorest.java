@@ -1,12 +1,12 @@
 package fixtures.custombaseuri.moreoptions;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class CustomBaseUriMoreOptionsTests {
     private static AutoRestParameterizedCustomHostTestClientBuilder client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
         client = new AutoRestParameterizedCustomHostTestClientBuilder();
         client.subscriptionId("test12");

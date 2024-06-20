@@ -1,170 +1,164 @@
 package fixtures.url;
 
 import fixtures.url.models.UriColor;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class PathsTests {
     private static AutoRestUrlTestService client;
 
-    @BeforeClass
+    @BeforeAll
     public static void setup() {
-        client = new AutoRestUrlTestServiceBuilder().buildClient();
+        client = new AutoRestUrlTestServiceBuilder().globalStringPath("global").buildClient();
     }
 
     @Test
-    public void getBooleanTrue() throws Exception {
+    public void getBooleanTrue() {
         client.getPaths().getBooleanTrue();
     }
 
     @Test
-    public void getBooleanFalse() throws Exception {
+    public void getBooleanFalse() {
         client.getPaths().getBooleanFalse();
     }
 
     @Test
-    public void getIntOneMillion() throws Exception {
+    public void getIntOneMillion() {
         client.getPaths().getIntOneMillion();
     }
 
     @Test
-    public void getIntNegativeOneMillion() throws Exception {
+    public void getIntNegativeOneMillion() {
         client.getPaths().getIntNegativeOneMillion();
     }
 
     @Test
-    public void getTenBillion() throws Exception {
+    public void getTenBillion() {
         client.getPaths().getTenBillion();
     }
 
     @Test
-    public void getNegativeTenBillion() throws Exception {
+    public void getNegativeTenBillion() {
         client.getPaths().getNegativeTenBillion();
     }
 
     @Test
-    public void floatScientificPositive() throws Exception {
+    public void floatScientificPositive() {
         client.getPaths().floatScientificPositive();
     }
 
     @Test
-    public void floatScientificNegative() throws Exception {
+    public void floatScientificNegative() {
         client.getPaths().floatScientificNegative();
     }
 
     @Test
-    public void doubleDecimalPositive() throws Exception {
+    public void doubleDecimalPositive() {
         client.getPaths().doubleDecimalPositive();
     }
 
     @Test
-    public void doubleDecimalNegative() throws Exception {
+    public void doubleDecimalNegative() {
         client.getPaths().doubleDecimalNegative();
     }
 
     @Test
-    public void stringUnicode() throws Exception {
+    public void stringUnicode() {
         client.getPaths().stringUnicode();
     }
 
     @Test
-    public void stringUrlEncoded() throws Exception {
+    public void stringUrlEncoded() {
         client.getPaths().stringUrlEncoded();
     }
 
     @Test
-    public void stringUrlNonEncoded() throws Exception {
+    public void stringUrlNonEncoded() {
         client.getPaths().stringUrlNonEncoded();
     }
 
     @Test
-    public void stringEmpty() throws Exception {
+    public void stringEmpty() {
         client.getPaths().stringEmpty();
     }
 
-    @Ignore("Client side validation")
-    public void stringNull() throws Exception {
-        try {
-            client.getPaths().stringNull(null);
-        } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter stringPath is required"));
-        }
+    @Disabled("Client side validation")
+    @Test
+    public void stringNull() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+            () -> client.getPaths().stringNull(null));
+        assertTrue(ex.getMessage().contains("Parameter stringPath is required"));
     }
 
     @Test
-    public void enumValid() throws Exception {
+    public void enumValid() {
         client.getPaths().enumValid(UriColor.GREEN_COLOR);
     }
 
     @Test
-    public void enumNull() throws Exception {
-        try {
-            client.getPaths().enumNull(null);
-        } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter enumPath is required"));
-        }
+    public void enumNull() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+            () -> client.getPaths().enumNull(null));
+        assertTrue(ex.getMessage().contains("Parameter enumPath is required"));
     }
 
     @Test
-    public void byteMultiByte() throws Exception {
-        client.getPaths().byteMultiByte("啊齄丂狛狜隣郎隣兀﨩".getBytes("UTF-8"));
+    public void byteMultiByte() {
+        client.getPaths().byteMultiByte("啊齄丂狛狜隣郎隣兀﨩".getBytes(StandardCharsets.UTF_8));
     }
 
     @Test
-    public void byteEmpty() throws Exception {
+    public void byteEmpty() {
         client.getPaths().byteEmpty();
     }
 
     @Test
-    public void byteNull() throws Exception {
-        try {
-            client.getPaths().byteNull(null);
-        } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter bytePath is required"));
-        }
+    public void byteNull() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+            () -> client.getPaths().byteNull(null));
+        assertTrue(ex.getMessage().contains("Parameter bytePath is required"));
     }
 
     @Test
-    public void dateValid() throws Exception {
+    public void dateValid() {
         client.getPaths().dateValid();
     }
 
     @Test
-    public void dateNull() throws Exception {
-        try {
-            client.getPaths().dateNull(null);
-        } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter datePath is required"));
-        }
+    public void dateNull() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+            () -> client.getPaths().dateNull(null));
+        assertTrue(ex.getMessage().contains("Parameter datePath is required"));
     }
 
     @Test
-    public void dateTimeValid() throws Exception {
+    public void dateTimeValid() {
         client.getPaths().dateTimeValid();
     }
 
     @Test
-    public void dateTimeNull() throws Exception {
-        try {
-            client.getPaths().dateTimeNull(null);
-        } catch (IllegalArgumentException ex) {
-            Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
-        }
+    public void dateTimeNull() {
+        IllegalArgumentException ex = assertThrows(IllegalArgumentException.class,
+            () -> client.getPaths().dateTimeNull(null));
+        assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
     }
 
     @Test
-    public void base64Url() throws Exception {
+    public void base64Url() {
         client.getPaths().base64Url("lorem".getBytes());
     }
 
     @Test
-    public void arrayCsvInPath() throws Exception {
+    public void arrayCsvInPath() {
         List<String> arrayPath = new ArrayList<>();
         arrayPath.add("ArrayPath1");
         arrayPath.add("begin!*'();:@ &=+$,/?#[]end");
@@ -174,7 +168,7 @@ public class PathsTests {
     }
 
     @Test
-    public void unixTimeUrl() throws Exception {
+    public void unixTimeUrl() {
         client.getPaths().unixTimeUrl(OffsetDateTime.parse("2016-04-13T00:00:00Z"));
     }
 }

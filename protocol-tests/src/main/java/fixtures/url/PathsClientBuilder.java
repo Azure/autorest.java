@@ -268,6 +268,7 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
      */
     @Generated
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestUrlTestServiceVersion localServiceVersion
@@ -276,6 +277,13 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
             = new AutoRestUrlTestServiceClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
                 this.globalStringPath, this.globalStringQuery, localHost, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(globalStringPath, "'globalStringPath' cannot be null.");
     }
 
     @Generated

@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringsOnliesImpl;
 import com.type.union.implementation.models.SendRequest;
 import com.type.union.models.GetResponse9;
-import com.type.union.models.GetResponseProp5;
+import com.type.union.models.GetResponseProp4;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -71,7 +71,7 @@ public final class StringsOnlyClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest9 The sendRequest9 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,8 +81,8 @@ public final class StringsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest9, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest9, requestOptions);
     }
 
     /**
@@ -116,11 +116,11 @@ public final class StringsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(GetResponseProp5 prop) {
+    public void send(GetResponseProp4 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest requestObj = new SendRequest(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest sendRequest9Obj = new SendRequest(prop);
+        BinaryData sendRequest9 = BinaryData.fromObject(sendRequest9Obj);
+        sendWithResponse(sendRequest9, requestOptions).getValue();
     }
 }

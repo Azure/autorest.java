@@ -209,6 +209,24 @@ public final class HttpbinClientBuilder
     }
 
     /*
+     * relative path segment, can be empty
+     */
+    @Generated
+    private String relativePath;
+
+    /**
+     * Sets relative path segment, can be empty.
+     * 
+     * @param relativePath the relativePath value.
+     * @return the HttpbinClientBuilder.
+     */
+    @Generated
+    public HttpbinClientBuilder relativePath(String relativePath) {
+        this.relativePath = relativePath;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -233,10 +251,19 @@ public final class HttpbinClientBuilder
      */
     @Generated
     private HttpbinClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         HttpbinClientImpl client = new HttpbinClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
-            this.domain, this.tld);
+            this.domain, this.tld, this.relativePath);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(domain, "'domain' cannot be null.");
+        Objects.requireNonNull(tld, "'tld' cannot be null.");
     }
 
     @Generated

@@ -168,7 +168,7 @@ public final class RpcClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -176,6 +176,9 @@ public final class RpcClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
+     *     result (Optional): {
+     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -186,8 +189,8 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return provides status details for long running operations along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData generationOptions,
@@ -212,7 +215,7 @@ public final class RpcClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -220,6 +223,9 @@ public final class RpcClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
+     *     result (Optional): {
+     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -230,7 +236,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response}.
+     * @return provides status details for long running operations along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> longRunningRpcWithResponse(BinaryData generationOptions,
@@ -255,7 +261,7 @@ public final class RpcClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -263,6 +269,9 @@ public final class RpcClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
+     *     result (Optional): {
+     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -273,7 +282,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginLongRunningRpcAsync(BinaryData generationOptions,
@@ -306,7 +315,7 @@ public final class RpcClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -314,6 +323,9 @@ public final class RpcClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
+     *     result (Optional): {
+     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -324,7 +336,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(BinaryData generationOptions,
@@ -357,7 +369,7 @@ public final class RpcClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -365,6 +377,9 @@ public final class RpcClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
+     *     result (Optional): {
+     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -375,7 +390,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<PollOperationDetails, GenerationResult>
@@ -409,7 +424,7 @@ public final class RpcClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -417,6 +432,9 @@ public final class RpcClientImpl {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
+     *     result (Optional): {
+     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -427,7 +445,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpcWithModel(BinaryData generationOptions,

@@ -48,14 +48,16 @@ import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
+import com.azure.mgmtlitetest.streamstyleserialization.fluent.models.CommunityGalleryInner;
+import com.azure.mgmtlitetest.streamstyleserialization.models.PirCommunityGalleryResource;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.networkwatcher.models.PacketCapture;
 import com.azure.mgmttest.networkwatcher.models.PacketCaptureStorageLocation;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
+import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import com.azure.mgmttest.storage.implementation.StorageAccountsClientImpl;
 import com.azure.mgmttest.storage.implementation.StorageManagementClientBuilder;
-import com.azure.mgmttest.storage.fluent.StorageManagementClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -124,6 +126,7 @@ public class RuntimeTests {
         Assertions.assertNotNull(webError.getDetails());
         Assertions.assertEquals(1, webError.getDetails().size());
         Assertions.assertEquals("InnerError", webError.getDetails().get(0).getCode());
+        Assertions.assertEquals("Deployment error.", webError.getInnererror());
 
         GraphErrorException graphException = new GraphErrorException("mock graph error", null);
         Assertions.assertFalse((Object) graphException instanceof ManagementException);
@@ -479,5 +482,21 @@ public class RuntimeTests {
         if (!found) {
             Assertions.fail("Method should exist: " + clazz.getName() + " " + methodName + "(" + parametersSignature + ")");
         }
+    }
+
+    @Test
+    public void testStreamStyleSerialization() throws IOException {
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
+        String pirCommunityGalleryResourceJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\", \"identifier\": {\"uniqueId\": \"abc\"}}";
+
+        PirCommunityGalleryResource pirCommunityGalleryResource = serializerAdapter.deserialize(pirCommunityGalleryResourceJson, PirCommunityGalleryResource.class, SerializerEncoding.JSON);
+        Assertions.assertEquals("myName", pirCommunityGalleryResource.name());
+        Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
+
+        String galleryJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\", \"properties\": {\"disclaimer\":\"myDisclaimer\"}, \"identifier\": {\"uniqueId\": \"abc\"}}";
+        CommunityGalleryInner galleryInner = serializerAdapter.deserialize(galleryJson, CommunityGalleryInner.class, SerializerEncoding.JSON);
+        Assertions.assertEquals("myName", galleryInner.name());
+        Assertions.assertEquals("myDisclaimer", galleryInner.disclaimer());
+        Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
     }
 }

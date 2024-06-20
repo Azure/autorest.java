@@ -392,7 +392,7 @@ public class ClassType implements IType {
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
         .jsonDeserializationMethod("getNullable(nonNullReader -> new URL(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
-        .xmlElementDeserializationMethod("getNullableElement(URL::new)")
+        .xmlElementDeserializationMethod("getNullableElement(urlString -> { try { return new URL(urlString); } catch (MalformedURLException e) { throw new XMLStreamException(e); } })")
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, URL::new)")
         .build();
 
@@ -615,6 +615,11 @@ public class ClassType implements IType {
 
         if (this == ClassType.DATE_TIME) {
             imports.add(DateTimeFormatter.class.getName());
+        }
+
+        if (this == ClassType.URL) {
+            imports.add(java.net.URL.class.getName());
+            imports.add(java.net.MalformedURLException.class.getName());
         }
 
         if (includeImplementationImports && getImplementationImports() != null) {

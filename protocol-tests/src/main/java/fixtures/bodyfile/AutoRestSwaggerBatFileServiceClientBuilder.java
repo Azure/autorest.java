@@ -236,6 +236,7 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
      */
     @Generated
     private AutoRestSwaggerBatFileServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerBatFileServiceVersion localServiceVersion
@@ -243,6 +244,12 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
         AutoRestSwaggerBatFileServiceClientImpl client = new AutoRestSwaggerBatFileServiceClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated

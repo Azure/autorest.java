@@ -468,9 +468,6 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
-     *     result (Optional): {
-     *         data: String (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -546,9 +543,6 @@ public final class LongRunningClientImpl {
      *             code: String (Optional)
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
-     *     }
-     *     result (Optional): {
-     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -626,9 +620,6 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
-     *     result (Optional): {
-     *         data: String (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -696,9 +687,6 @@ public final class LongRunningClientImpl {
      *             code: String (Optional)
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
-     *     }
-     *     result (Optional): {
-     *         data: String (Required)
      *     }
      * }
      * }</pre>
@@ -768,9 +756,6 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
-     *     result (Optional): {
-     *         data: String (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -839,9 +824,6 @@ public final class LongRunningClientImpl {
      *             code: String (Optional)
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
-     *     }
-     *     result (Optional): {
-     *         data: String (Required)
      *     }
      * }
      * }</pre>

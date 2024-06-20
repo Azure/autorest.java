@@ -9,6 +9,7 @@ import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import com.cadl.armresourceprovider.models.ProvisioningState;
+import com.cadl.armresourceprovider.models.Result;
 import com.cadl.armresourceprovider.models.TopLevelArmResource;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate;
 import java.time.OffsetDateTime;
@@ -175,6 +176,15 @@ public final class TopLevelArmResourceImpl
             .getByResourceGroupWithResponse(resourceGroupName, topLevelArmResourceName, context)
             .getValue();
         return this;
+    }
+
+    public Result action() {
+        return serviceManager.topLevelArmResourceInterfaces().action(resourceGroupName, topLevelArmResourceName);
+    }
+
+    public Result action(Context context) {
+        return serviceManager.topLevelArmResourceInterfaces()
+            .action(resourceGroupName, topLevelArmResourceName, context);
     }
 
     public TopLevelArmResourceImpl withRegion(Region location) {

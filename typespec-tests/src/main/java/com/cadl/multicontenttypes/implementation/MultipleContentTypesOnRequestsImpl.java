@@ -65,7 +65,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadBytesWithSingleBodyTypeForMultiContentTypes(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/single-body-type")
@@ -75,7 +75,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
@@ -85,7 +85,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadBytesWithMultiBodyTypesForMultiContentTypes(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
@@ -95,7 +95,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
@@ -105,7 +105,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadJsonWithMultiBodyTypesForMultiContentTypes(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
@@ -115,7 +115,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadJsonWithMultiBodyTypesForMultiContentTypesSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/multiple/sharedroute/request/upload/multi-body-types")
@@ -125,7 +125,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes(
-            @HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType,
+            @HostParam("endpoint") String endpoint, @HeaderParam("Content-Type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data,
             RequestOptions requestOptions, Context context);
 
@@ -136,7 +136,7 @@ public final class MultipleContentTypesOnRequestsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesSync(
-            @HostParam("endpoint") String endpoint, @HeaderParam("content-type") String contentType,
+            @HostParam("endpoint") String endpoint, @HeaderParam("Content-Type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData data,
             RequestOptions requestOptions, Context context);
     }

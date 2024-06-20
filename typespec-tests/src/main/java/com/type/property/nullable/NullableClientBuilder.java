@@ -47,12 +47,14 @@ import java.util.Objects;
         DurationOperationClient.class,
         CollectionsByteClient.class,
         CollectionsModelClient.class,
+        CollectionsStringClient.class,
         StringOperationAsyncClient.class,
         BytesAsyncClient.class,
         DatetimeOperationAsyncClient.class,
         DurationOperationAsyncClient.class,
         CollectionsByteAsyncClient.class,
-        CollectionsModelAsyncClient.class })
+        CollectionsModelAsyncClient.class,
+        CollectionsStringAsyncClient.class })
 public final class NullableClientBuilder
     implements HttpTrait<NullableClientBuilder>, ConfigurationTrait<NullableClientBuilder> {
     @Generated
@@ -210,10 +212,17 @@ public final class NullableClientBuilder
      */
     @Generated
     private NullableClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NullableClientImpl client
             = new NullableClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated
@@ -312,6 +321,16 @@ public final class NullableClientBuilder
     }
 
     /**
+     * Builds an instance of CollectionsStringAsyncClient class.
+     * 
+     * @return an instance of CollectionsStringAsyncClient.
+     */
+    @Generated
+    public CollectionsStringAsyncClient buildCollectionsStringAsyncClient() {
+        return new CollectionsStringAsyncClient(buildInnerClient().getCollectionsStrings());
+    }
+
+    /**
      * Builds an instance of StringOperationClient class.
      * 
      * @return an instance of StringOperationClient.
@@ -369,6 +388,16 @@ public final class NullableClientBuilder
     @Generated
     public CollectionsModelClient buildCollectionsModelClient() {
         return new CollectionsModelClient(buildInnerClient().getCollectionsModels());
+    }
+
+    /**
+     * Builds an instance of CollectionsStringClient class.
+     * 
+     * @return an instance of CollectionsStringClient.
+     */
+    @Generated
+    public CollectionsStringClient buildCollectionsStringClient() {
+        return new CollectionsStringClient(buildInnerClient().getCollectionsStrings());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(NullableClientBuilder.class);

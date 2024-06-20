@@ -4,54 +4,58 @@
 
 package com.type.union.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import java.util.Collection;
-
 /**
  * Defines values for GetResponseProp4.
  */
-public final class GetResponseProp4 extends ExpandableStringEnum<GetResponseProp4> {
+public enum GetResponseProp4 {
     /**
-     * Static value b for GetResponseProp4.
+     * Enum value a.
      */
-    @Generated
-    public static final GetResponseProp4 B = fromString("b");
+    A("a"),
 
     /**
-     * Static value c for GetResponseProp4.
+     * Enum value b.
      */
-    @Generated
-    public static final GetResponseProp4 C = fromString("c");
+    B("b"),
 
     /**
-     * Creates a new instance of GetResponseProp4 value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * Enum value c.
      */
-    @Generated
-    @Deprecated
-    public GetResponseProp4() {
+    C("c");
+
+    /**
+     * The actual serialized value for a GetResponseProp4 instance.
+     */
+    private final String value;
+
+    GetResponseProp4(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a GetResponseProp4 from its string representation.
+     * Parses a serialized value to a GetResponseProp4 instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding GetResponseProp4.
+     * @param value the serialized value to parse.
+     * @return the parsed GetResponseProp4 object, or null if unable to parse.
      */
-    @Generated
-    public static GetResponseProp4 fromString(String name) {
-        return fromString(name, GetResponseProp4.class);
+    public static GetResponseProp4 fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        GetResponseProp4[] items = GetResponseProp4.values();
+        for (GetResponseProp4 item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known GetResponseProp4 values.
-     * 
-     * @return known GetResponseProp4 values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<GetResponseProp4> values() {
-        return values(GetResponseProp4.class);
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

@@ -174,6 +174,10 @@ model ResponseWithHeader<T> {
   ...Body<T>;
 }
 
+model Result {
+  reason?: string;
+}
+
 // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "built-in conditional request includes time based conditional headers"
 alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   @header("If-Match")
@@ -187,6 +191,26 @@ alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.Resource
   ifNoneMatch?: string;
 };
 
+//----------------------- Extension Resource -----------------------
+/** ExtensionResource of Top Level Arm Resource. */
+@parentResource(TopLevelArmResource)
+model ChildExtensionResource is ExtensionResource<ChildExtensionResourceProperties> {
+  @key("childExtensionResourceName")
+  @doc("ChildExtensionResources")
+  @visibility("read")
+  @path
+  @segment("childExtensionResources")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+/** Child ExtensionResource properties. */
+model ChildExtensionResourceProperties {
+  @visibility("read")
+  @doc("Provisioning State of the Resource")
+  provisioningState?: ProvisioningState;
+}
+
 //----------------------- Paths -----------------------
 @armResourceOperations
 interface ChildResourcesInterface
@@ -197,7 +221,15 @@ interface ChildResourcesInterface
 
 @armResourceOperations
 interface TopLevelArmResourceInterface
-  extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {}
+  extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {
+  @operationId("TopLevelArmResourceInterface_Post")
+  action is ArmResourceActionAsync<
+    TopLevelArmResource,
+    void,
+    Result,
+    Azure.ResourceManager.Foundations.BaseParameters<TopLevelArmResource>
+  >;
+}
 
 @armResourceOperations
 interface CustomTemplateResourceInterface
@@ -220,6 +252,10 @@ interface CustomTemplateResourceInterface
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@armResourceOperations
+interface ChildExtensionResourceInterface
+  extends ExtensionResourceOperations<ChildExtensionResource, ChildExtensionResourceProperties> {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
 @autoRoute

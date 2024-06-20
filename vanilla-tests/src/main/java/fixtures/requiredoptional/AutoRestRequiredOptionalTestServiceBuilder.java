@@ -285,6 +285,7 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
      */
     @Generated
     public AutoRestRequiredOptionalTestService buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter
@@ -293,6 +294,14 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
             = new AutoRestRequiredOptionalTestService(localPipeline, localSerializerAdapter, this.requiredGlobalPath,
                 this.requiredGlobalQuery, this.optionalGlobalQuery, localHost);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(requiredGlobalPath, "'requiredGlobalPath' cannot be null.");
+        Objects.requireNonNull(requiredGlobalQuery, "'requiredGlobalQuery' cannot be null.");
     }
 
     @Generated
