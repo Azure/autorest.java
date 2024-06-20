@@ -44,18 +44,31 @@ import { KnownMediaType } from "@azure-tools/codegen";
 import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
+  SdkBodyParameter,
   SdkBuiltInType,
   SdkClient,
+  SdkClientType,
   SdkConstantType,
   SdkContext,
   SdkDatetimeType,
   SdkDictionaryType,
   SdkDurationType,
+  SdkEndpointParameter,
   SdkEnumType,
   SdkEnumValueType,
+  SdkHeaderParameter,
+  SdkHttpOperation,
+  SdkHttpResponse,
+  SdkInitializationType,
+  SdkMethod,
   SdkModelPropertyType,
   SdkModelType,
   SdkPackage,
+  SdkParameter,
+  SdkPathParameter,
+  SdkQueryParameter,
+  SdkServiceMethod,
+  SdkServiceOperation,
   SdkType,
   SdkUnionType,
   createSdkContext,
@@ -114,6 +127,7 @@ import {
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
+  HttpStatusCodeRange,
   HttpStatusCodesEntry,
   Visibility,
   getAuthentication,
@@ -198,6 +212,7 @@ export class CodeModelBuilder {
   private operationExamples: Map<Operation, any> = new Map<Operation, any>();
   // current apiVersion name to generate code
   private apiVersion: Version | undefined;
+  private apiVersionString: string | undefined;
 
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
@@ -270,7 +285,9 @@ export class CodeModelBuilder {
 
     const clients = this.processClients();
 
-    this.processModels(clients);
+    this.processClientsFromSdkType();
+
+    this.processModels();
 
     this.processSchemaUsage();
 
@@ -343,6 +360,36 @@ export class CodeModelBuilder {
     }
   }
 
+  private processHostParametersFromSdkType(sdkPathParameters: SdkPathParameter[]): Parameter[] {
+    const hostParameters: Parameter[] = [];
+      let parameter;
+      sdkPathParameters.forEach((arg) => {
+        const schema = this.processSchemaFromSdkType(arg.type, arg.name);
+        this.trackSchemaUsage(schema, {
+          usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
+        });
+        parameter = new Parameter(arg.name, arg.description ?? "", schema, { // TODO: descroption or details?
+          implementation: ImplementationLocation.Client,
+          origin: "modelerfour:synthesized/host",
+          required: true,
+          protocol: {
+            http: new HttpParameter(ParameterLocation.Uri),
+          },
+          language: {
+            default: {
+              serializedName: arg.name,
+            },
+          },
+          extensions: {
+            "x-ms-skip-url-encoding": schema instanceof UriSchema,
+          },
+        });
+        hostParameters.push(this.codeModel.addGlobalParameter(parameter));
+      });
+        
+    return hostParameters;
+  }
+
   private processAuth(auth: Authentication) {
     const securitySchemes: SecurityScheme[] = [];
     for (const option of auth.options) {
@@ -413,7 +460,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processModels(clients: SdkClient[]) {
+  private processModels() {
     const processedSdkModels: Set<SdkModelType | SdkEnumType> = new Set();
 
     // lambda to mark model as public
@@ -519,95 +566,160 @@ export class CodeModelBuilder {
     }
   }
 
-  // private processClientsFromSdkType() {
-  //     // preprocess group-etag-headers
-  //     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
+  private processClientsFromSdkType() {
+    // preprocess group-etag-headers
+    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
-  //     const sdkPackage = this.sdkContext.experimental_sdkPackage;
-  //     for (const client of sdkPackage.clients) {
-  //       const codeModelClient = new CodeModelClient(client.name, client.details ?? "", {
-  //         summary: client.description,
-  
-  //         // at present, use global security definition
-  //         security: this.codeModel.security,
-  //       });
-  //       // codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
-  //     }
+    const sdkPackage = this.sdkContext.experimental_sdkPackage;
+    for (const client of sdkPackage.clients) {
+      if (client.initialization.access !== "public") { // do not generate client for internal client which is operation group
+        continue;
+      }
+      const codeModelClient = new CodeModelClient(client.name, client.details ?? "", {
+        summary: client.description,
+
+        // at present, use global security definition
+        security: this.codeModel.security,
+      });
+      // codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
 
       // versioning
-      // const versioning = getVersion(this.program, client.service);
-      // if (versioning && versioning.getVersions()) {
-      //   // @versioned in versioning
-      //   if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
-      //     this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
-      //   } else {
-      //     this.apiVersion = versioning.getVersions().find((it: Version) => it.value === this.sdkContext.apiVersion);
-      //     if (!this.apiVersion) {
-      //       throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
-      //     }
-      //   }
+      const versions = client.apiVersions;
+      if (versions && versions.length > 0) {
+        if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
+          this.apiVersionString = versions[versions.length - 1];
+        } else {
+          this.apiVersionString = versions.find((it: string) => it === this.sdkContext.apiVersion);
+          if (!this.apiVersionString) {
+            throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
+          }
+        }
 
-      //   codeModelClient.apiVersions = [];
-      //   for (const version of this.getFilteredApiVersions(this.apiVersion, versioning.getVersions())) {
-      //     const apiVersion = new ApiVersion();
-      //     apiVersion.version = version.value;
-      //     codeModelClient.apiVersions.push(apiVersion);
-      //   }
-      // }
+        codeModelClient.apiVersions = [];
+        for (const version of this.getFilteredApiVersionsFromString(this.apiVersionString, versions)) {
+          const apiVersion = new ApiVersion();
+          apiVersion.version = version;
+          codeModelClient.apiVersions.push(apiVersion);
+        }
+      }
 
-      // server
-  //     let baseUri = "{endpoint}";
-  //     const servers = getServers(this.program, client.service);
-  //     if (servers && servers.length === 1 && !this.isArmSynthesizedServer(servers[0])) {
-  //       baseUri = servers[0].url;
-  //     }
-  //     const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
-  //     codeModelClient.addGlobalParameters(hostParameters);
-  //     const clientContext = new ClientContext(
-  //       baseUri,
-  //       hostParameters,
-  //       codeModelClient.globalParameters!,
-  //       codeModelClient.apiVersions,
-  //     );
-  //     clientContext.preProcessOperations(this.sdkContext, client);
+      // client initialization
+      let baseUri = "{endpoint}";
+      let hostParameters: Parameter[] = [];
+      client.initialization.properties.forEach((initializationProperty) => {
+        if (initializationProperty.kind === "endpoint") {
+          baseUri = initializationProperty.type.serverUrl;
+          hostParameters = this.processHostParametersFromSdkType(initializationProperty.type.templateArguments);
+          codeModelClient.addGlobalParameters(hostParameters);
+        }
+      });
 
-  //     const operationGroups = listOperationGroups(this.sdkContext, client, true);
+      const clientContext = new ClientContext(
+        baseUri,
+        hostParameters,
+        codeModelClient.globalParameters!,
+        codeModelClient.apiVersions,
+      );
 
-  //     const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
-  //     let codeModelGroup = new OperationGroup("");
-  //     for (const operation of operationWithoutGroup) {
-  //       if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-  //         codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
-  //       }
-  //     }
-  //     if (codeModelGroup.operations?.length > 0) {
-  //       codeModelClient.operationGroups.push(codeModelGroup);
-  //     }
+      // preprocess operation groups and operations
+      const serviceMethodsWithoutSubClient = this.listServiceMethodsUnderClient(client, false);
+      let codeModelGroup = new OperationGroup("");
+      for (const serviceMethod of serviceMethodsWithoutSubClient) {
+        if (!this.needToSkipProcessingOperation(serviceMethod.__raw, clientContext)) {
+          codeModelGroup.addOperation(this.processOperationFromSdkType(serviceMethod, clientContext, ""));
+        }
+      }
+      if (codeModelGroup.operations?.length > 0) {
+        codeModelClient.operationGroups.push(codeModelGroup);
+      }
 
-  //     for (const operationGroup of operationGroups) {
-  //       const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
-  //       // operation group with no operation is skipped
-  //       if (operations.length > 0) {
-  //         const groupPath = operationGroup.groupPath.split(".");
-  //         let operationGroupName: string;
-  //         if (groupPath.length > 1) {
-  //           // groupPath should be in format of "OpenAIClient.Chat.Completions"
-  //           operationGroupName = groupPath.slice(1).join("");
-  //         } else {
-  //           // protection
-  //           operationGroupName = operationGroup.type.name;
-  //         }
-  //         codeModelGroup = new OperationGroup(operationGroupName);
-  //         for (const operation of operations) {
-  //           if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-  //             codeModelGroup.addOperation(this.processOperation(operationGroupName, operation, clientContext));
-  //           }
-  //         }
-  //         codeModelClient.operationGroups.push(codeModelGroup);
-  //       }
-  //     }
-      
-  // }
+      const subClients = this.listSubClientsUnderClient(client, true);
+      for (const subClient of subClients) {
+        const serviceMethods = this.listServiceMethodsUnderClient(subClient, true);
+        // operation group with no operation is skipped
+        if (serviceMethods.length > 0) {
+          codeModelGroup = new OperationGroup(subClient.name);
+          for (const serviceMethod of serviceMethods) {
+            if (!this.needToSkipProcessingOperation(serviceMethod.__raw, clientContext)) {
+              codeModelGroup.addOperation(this.processOperationFromSdkType(serviceMethod, clientContext, subClient.name));
+            }
+          }
+          codeModelClient.operationGroups.push(codeModelGroup);
+        }
+      }
+      this.codeModel.clients.push(codeModelClient);
+
+      // postprocess for ServiceVersion
+      let apiVersionSameForAllClients = true;
+      let sharedApiVersions = undefined;
+      for (const client of this.codeModel.clients) {
+        const apiVersions = client.apiVersions;
+        if (!apiVersions) {
+          // client does not have apiVersions
+          apiVersionSameForAllClients = false;
+        } else if (!sharedApiVersions) {
+          // first client, set it to sharedApiVersions
+          sharedApiVersions = apiVersions;
+        } else {
+          apiVersionSameForAllClients = isEqual(sharedApiVersions, apiVersions);
+        }
+        if (!apiVersionSameForAllClients) {
+          break;
+        }
+      }
+      if (apiVersionSameForAllClients) {
+        const serviceVersion = getServiceVersion(this.codeModel);
+        for (const client of this.codeModel.clients) {
+          client.serviceVersion = serviceVersion;
+        }
+      } else {
+        for (const client of this.codeModel.clients) {
+          const apiVersions = client.apiVersions;
+          if (apiVersions) {
+            client.serviceVersion = getServiceVersion(client);
+          }
+        }
+      }
+    } 
+  }
+
+  private processOperationGroupsUnderClient(codeModelClient: CodeModelClient, sdkOperationGroup: SdkClientType<SdkHttpOperation>, clientContext: ClientContext) {
+
+  }
+
+  private listSubClientsUnderClient(client: SdkClientType<SdkHttpOperation>, includeNestedOperationGroups: boolean): SdkClientType<SdkHttpOperation>[] {
+    const operationGroups: SdkClientType<SdkHttpOperation>[] = [];
+    for (const method of client.methods) {
+      if (method.kind === "clientaccessor") {
+        const client = method.response;
+        operationGroups.push(client);
+        if (includeNestedOperationGroups) {
+          for (const operationGroup of this.listSubClientsUnderClient(client, includeNestedOperationGroups)) {
+            operationGroups.push(operationGroup);
+          }
+        }
+      }
+    }
+    return operationGroups;
+  }
+
+  private listServiceMethodsUnderClient(client: SdkClientType<SdkHttpOperation>, includeNestedServiceMethods: boolean): SdkServiceMethod<SdkHttpOperation>[] {
+    const methods: SdkServiceMethod<SdkHttpOperation>[] = [];
+    for (const method of client.methods) {
+      if (includeNestedServiceMethods) {
+        if (method.kind === "clientaccessor") {
+          const client = method.response;
+          for (const method of this.listServiceMethodsUnderClient(client, includeNestedServiceMethods)) {
+            methods.push(method);
+          }
+        }
+      } 
+      if (method.kind !== "clientaccessor") {
+        methods.push(method);
+      }
+    }
+    return methods;
+  }
 
   private processClients(): SdkClient[] {
     const sdkPackage = this.sdkContext.experimental_sdkPackage;
@@ -743,13 +855,34 @@ export class CodeModelBuilder {
    * @param versions api-versions to filter
    * @returns filtered api-versions
    */
-  private getFilteredApiVersions(pinnedApiVersion: Version | undefined, versions: Version[]): Version[] {
+  private getFilteredApiVersionsFromString(pinnedApiVersion: string | undefined, versions: string[]): string[] {
     if (!pinnedApiVersion) {
       return versions;
     }
     return versions
       .slice(0, versions.indexOf(pinnedApiVersion) + 1)
-      .filter((version) => !isStable(pinnedApiVersion) || isStable(version));
+      .filter((version) => !this.isStableApiVersion(pinnedApiVersion) || this.isStableApiVersion(version));
+  }
+
+    /**
+   * Filter api-versions for "ServiceVersion".
+   * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/746
+   *
+   * @param pinnedApiVersion the api-version to use as filter base
+   * @param versions api-versions to filter
+   * @returns filtered api-versions
+   */
+    private getFilteredApiVersions(pinnedApiVersion: Version | undefined, versions: Version[]): Version[] {
+      if (!pinnedApiVersion) {
+        return versions;
+      }
+      return versions
+        .slice(0, versions.indexOf(pinnedApiVersion) + 1)
+        .filter((version) => !isStable(pinnedApiVersion) || isStable(version));
+    }
+
+  private isStableApiVersion(version: string): boolean {
+    return !version.includes("preview");
   }
 
   /**
@@ -764,10 +897,10 @@ export class CodeModelBuilder {
     return this.isArm() && (!server.parameters || server.parameters.size == 0);
   }
 
-  private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
+  private needToSkipProcessingOperation(operation: Operation | undefined, clientContext: ClientContext): boolean {
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
-    if (getOverloadedOperation(this.program, operation)) {
+    if (operation && getOverloadedOperation(this.program, operation)) {
       this.trace(`Operation '${operation.name}' is temporary skipped, as it is an overloaded operation`);
       return true;
     }
@@ -797,6 +930,116 @@ export class CodeModelBuilder {
       operationExample = this.operationExamples.get(operation);
     }
     return operationExample;
+  }
+
+  private processOperationFromSdkType(sdkMethod: SdkServiceMethod<SdkHttpOperation>, clientContext: ClientContext, groupName?: string): CodeModelOperation {
+    // TODO: get operation example
+    const operationName = sdkMethod.name;
+    const httpOperation = sdkMethod.operation;
+    const operationId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
+
+    const codeModelOperation = new CodeModelOperation(operationName, sdkMethod.details ?? "", {
+      operationId: operationId,
+      summary: sdkMethod.description,
+      // extensions: {
+      //   "x-ms-examples": operationExample
+      //     ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
+      //     : undefined,
+      // },
+    });
+
+    codeModelOperation.crossLanguageDefinitionId = sdkMethod.crossLanguageDefintionId;
+    codeModelOperation.internalApi = sdkMethod.access === "internal";
+
+    const convenienceApiName = this.getConvenienceApiNameFromServiceMethod(sdkMethod);
+    let generateConvenienceApi: boolean = Boolean(convenienceApiName);
+    let generateProtocolApi: boolean = sdkMethod.__raw ? shouldGenerateProtocol(this.sdkContext, sdkMethod.__raw) : true;
+
+    let apiComment: string | undefined = undefined;
+    if (generateConvenienceApi) {
+      // check if the convenience API need to be disabled for some special cases
+      if (operationIsMultipart(httpOperation.__raw)) {
+        // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
+        generateProtocolApi = false;
+        apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${operationName}' is 'multipart/form-data'`;
+        this.logWarning(apiComment);
+      } else if (operationIsMultipleContentTypes(httpOperation.__raw)) {
+        // and multiple content types
+        // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
+        generateConvenienceApi = false;
+        apiComment = `Convenience API is not generated, as operation '${operationName}' is multiple content-type`;
+        this.logWarning(apiComment);
+      } else if (operationIsJsonMergePatch(httpOperation.__raw) && this.options["stream-style-serialization"] === false) {
+        // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
+        generateConvenienceApi = false;
+        apiComment = `Convenience API is not generated, as operation '${operationName}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;
+        this.logWarning(apiComment);
+      }
+      // else {
+      //   const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
+      //   if (union) {
+      //     // and Union
+      //     generateConvenienceApi = false;
+      //     apiComment = `Convenience API is not generated, as operation '${
+      //       op.operation.name
+      //     }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+      //     this.logWarning(apiComment);
+      //   }
+      // }
+    }
+    if (generateConvenienceApi && convenienceApiName) {
+      codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+    }
+    if (apiComment) {
+      codeModelOperation.language.java = new Language();
+      codeModelOperation.language.java.comment = apiComment;
+    }
+
+     // check for generating protocol api or not
+     codeModelOperation.generateProtocolApi = generateProtocolApi && !codeModelOperation.internalApi;
+
+     codeModelOperation.addRequest(
+       new Request({
+         protocol: {
+           http: {
+             path: httpOperation.path,
+             method: httpOperation.verb,
+             uri: clientContext.baseUri,
+           },
+         },
+       }),
+     );
+
+     // host
+    clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
+    // path/query/header parameters
+    httpOperation.parameters.map((it) => {
+      this.processParameterFromSdkType(codeModelOperation, it, clientContext);
+    });
+    // "accept" header
+    this.addAcceptHeaderParameterFromSdkType(codeModelOperation, httpOperation.responses);
+    // // body
+    if (httpOperation.bodyParam && httpOperation.__raw && sdkMethod.__raw && httpOperation.bodyParam.type.__raw) {
+        let bodyType = httpOperation.bodyParam.type;
+        if (bodyType.kind === "model" && bodyType.__raw) {
+          // // try use resource type as round-trip model
+          // const resourceType = getResourceOperation(this.program, rawOperation)?.resourceType;
+          // if (resourceType && rawHttpOperation.responses && rawHttpOperation.responses.length > 0) {
+          //   const resp = rawHttpOperation.responses[0];
+          //   if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+          //     const responseBody = resp.responses[0].body;
+          //     const bodyTypeInResponse = this.findResponseBody(responseBody.type);
+          //     // response body type is resource type, and request body type (if templated) contains resource type
+          //     if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
+          //       bodyType = resourceType;
+          //     }
+          //   }
+          // }
+          this.processParameterBody(codeModelOperation, httpOperation.__raw, bodyType.__raw as Model | ModelProperty);
+        }
+      
+    }
+    return codeModelOperation;
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
@@ -884,9 +1127,9 @@ export class CodeModelBuilder {
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
     op.parameters.parameters.map((it) => {
-      const sdkParamType: SdkModelPropertyType = ignoreDiagnostics(getSdkModelPropertyType(this.sdkContext, it.param, operation));
-      this.processParameterFromSdkType(codeModelOperation, sdkParamType, it, clientContext);
-  });
+      const sdkParamType = ignoreDiagnostics(getSdkModelPropertyType(this.sdkContext, it.param, operation)) as SdkHeaderParameter | SdkQueryParameter | SdkPathParameter;
+      this.processParameterFromSdkType(codeModelOperation, sdkParamType, clientContext);
+    });
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
@@ -1085,7 +1328,7 @@ export class CodeModelBuilder {
 
   private _armApiVersionParameter?: Parameter;
 
-  private processParameterFromSdkType(op: CodeModelOperation, param: SdkModelPropertyType, raw: HttpOperationParameter, clientContext: ClientContext) {
+  private processParameterFromSdkType(op: CodeModelOperation, param: SdkQueryParameter | SdkPathParameter | SdkHeaderParameter, clientContext: ClientContext) {
     if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
       // pre-condition for "isApiVersion": the client supports ApiVersions
       if (this.isArm()) {
@@ -1107,11 +1350,11 @@ export class CodeModelBuilder {
         clientContext.addGlobalParameter(parameter);
       }
     } 
-    else if (this.isSubscriptionId(raw)) { // TODO: remove this
-      const parameter = this.subscriptionIdParameter(raw);
-      op.addParameter(parameter);
-      clientContext.addGlobalParameter(parameter);
-    } 
+    // else if (this.isSubscriptionId(raw)) { // TODO: remove this
+    //   const parameter = this.subscriptionIdParameter(raw);
+    //   op.addParameter(parameter);
+    //   clientContext.addGlobalParameter(parameter);
+    // } 
     else if (param.kind === "header" && SPECIAL_HEADER_NAMES.has(param.serializedName.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
@@ -1134,9 +1377,9 @@ export class CodeModelBuilder {
         extensions = { "x-ms-skip-url-encoding": true };
       }
 
-      if (this.supportsAdvancedVersioning()) {
+      if (this.supportsAdvancedVersioning() && param.__raw) {
         // versioning
-        const addedOn = getAddedOnVersions(this.program, raw.param);
+        const addedOn = getAddedOnVersions(this.program, param.__raw);
         if (addedOn) {
           extensions = extensions ?? {};
           extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
@@ -1146,7 +1389,7 @@ export class CodeModelBuilder {
       // format if array
       let style = undefined;
       let explode = undefined;
-      if (sdkType.kind === "array" && sdkType.valueType.kind === "model") {
+      if (sdkType.kind === "array") {
         if (param.kind === "query") {
           const format = param.collectionFormat;
           switch (format) {
@@ -1200,14 +1443,14 @@ export class CodeModelBuilder {
         required: !param.optional,
         nullable: nullable,
         protocol: {
-          http: new HttpParameter(raw.type, {
+          http: new HttpParameter(param.kind, {
             style: style,
             explode: explode,
           }),
         },
         language: {
           default: {
-            serializedName: (param.kind === "header" || param.kind === "query" || param.kind === "path" || param.kind === "property") ? param.serializedName : param.name,
+            serializedName: param.serializedName,
           },
         },
         extensions: extensions,
@@ -1233,161 +1476,210 @@ export class CodeModelBuilder {
 
   }
 
-  private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
-    if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
-      // pre-condition for "isApiVersion": the client supports ApiVersions
-      if (this.isArm()) {
-        // Currently we assume ARM tsp only have one client and one api-version.
-        // TODO: How will service define mixed api-versions(like those in Compute RP)?
-        const apiVersion = this.apiVersion?.value;
-        if (!this._armApiVersionParameter) {
-          this._armApiVersionParameter = this.createApiVersionParameter(
-            "api-version",
-            param.type === "query" ? ParameterLocation.Query : ParameterLocation.Path,
-            apiVersion,
-          );
-          clientContext.addGlobalParameter(this._armApiVersionParameter);
+  // private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
+  //   if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
+  //     // pre-condition for "isApiVersion": the client supports ApiVersions
+  //     if (this.isArm()) {
+  //       // Currently we assume ARM tsp only have one client and one api-version.
+  //       // TODO: How will service define mixed api-versions(like those in Compute RP)?
+  //       const apiVersion = this.apiVersion?.value;
+  //       if (!this._armApiVersionParameter) {
+  //         this._armApiVersionParameter = this.createApiVersionParameter(
+  //           "api-version",
+  //           param.type === "query" ? ParameterLocation.Query : ParameterLocation.Path,
+  //           apiVersion,
+  //         );
+  //         clientContext.addGlobalParameter(this._armApiVersionParameter);
+  //       }
+  //       op.addParameter(this._armApiVersionParameter);
+  //     } else {
+  //       const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
+  //       op.addParameter(parameter);
+  //       clientContext.addGlobalParameter(parameter);
+  //     }
+  //   } else if (this.isSubscriptionId(param)) {
+  //     const parameter = this.subscriptionIdParameter(param);
+  //     op.addParameter(parameter);
+  //     clientContext.addGlobalParameter(parameter);
+  //   } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
+  //     // special headers
+  //     op.specialHeaders = op.specialHeaders ?? [];
+  //     if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.name)) {
+  //       op.specialHeaders.push(param.name);
+  //     }
+  //   } else {
+  //     // schema
+  //     let schema;
+  //     const sdkType = getClientType(this.sdkContext, param.param);
+  //     if (
+  //       param.type === "header" &&
+  //       param.param.type.kind === "Scalar" &&
+  //       getEncode(this.program, param.param) === undefined &&
+  //       getEncode(this.program, param.param.type) === undefined &&
+  //       (hasScalarAsBase(param.param.type, "utcDateTime") || hasScalarAsBase(param.param.type, "offsetDateTime")) &&
+  //       (sdkType.kind === "utcDateTime" || sdkType.kind === "offsetDateTime")
+  //     ) {
+  //       // utcDateTime in header maps to rfc7231
+  //       schema = this.processDateTimeSchemaFromSdkType(sdkType, param.param.name, true);
+  //     } else {
+  //       schema = this.processSchemaFromSdkType(sdkType, param.param.name);
+  //     }
+
+  //     // skip-url-encoding
+  //     let extensions: { [id: string]: any } | undefined = undefined;
+  //     if (
+  //       (param.type === "query" || param.type === "path") &&
+  //       param.param.type.kind === "Scalar" &&
+  //       schema instanceof UriSchema
+  //     ) {
+  //       extensions = { "x-ms-skip-url-encoding": true };
+  //     }
+
+  //     if (this.supportsAdvancedVersioning()) {
+  //       // versioning
+  //       const addedOn = getAddedOnVersions(this.program, param.param);
+  //       if (addedOn) {
+  //         extensions = extensions ?? {};
+  //         extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
+  //       }
+  //     }
+
+  //     // format if array
+  //     let style = undefined;
+  //     let explode = undefined;
+  //     if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
+  //       if (param.type === "query") {
+  //         const queryParamOptions = getQueryParamOptions(this.program, param.param);
+  //         switch (queryParamOptions?.format) {
+  //           case "csv":
+  //             style = SerializationStyle.Simple;
+  //             break;
+
+  //           case "ssv":
+  //             style = SerializationStyle.SpaceDelimited;
+  //             break;
+
+  //           case "tsv":
+  //             style = SerializationStyle.TabDelimited;
+  //             break;
+
+  //           case "pipes":
+  //             style = SerializationStyle.PipeDelimited;
+  //             break;
+
+  //           case "multi":
+  //             style = SerializationStyle.Form;
+  //             explode = true;
+  //             break;
+
+  //           default:
+  //             if (queryParamOptions?.format) {
+  //               this.logWarning(`Unrecognized query parameter format: '${queryParamOptions?.format}'.`);
+  //             }
+  //             break;
+  //         }
+  //       } else if (param.type === "header") {
+  //         const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
+  //         switch (headerFieldOptions?.format) {
+  //           case "csv":
+  //             style = SerializationStyle.Simple;
+  //             break;
+
+  //           default:
+  //             if (headerFieldOptions?.format) {
+  //               this.logWarning(`Unrecognized header parameter format: '${headerFieldOptions?.format}'.`);
+  //             }
+  //             break;
+  //         }
+  //       }
+  //     }
+
+  //     const nullable = isNullableType(param.param.type);
+  //     const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
+  //       summary: this.getSummary(param.param),
+  //       implementation: ImplementationLocation.Method,
+  //       required: !param.param.optional,
+  //       nullable: nullable,
+  //       protocol: {
+  //         http: new HttpParameter(param.type, {
+  //           style: style,
+  //           explode: explode,
+  //         }),
+  //       },
+  //       language: {
+  //         default: {
+  //           serializedName: param.name,
+  //         },
+  //       },
+  //       extensions: extensions,
+  //     });
+  //     op.addParameter(parameter);
+
+  //     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
+
+  //     if (op.convenienceApi) {
+  //       this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
+  //     }
+
+  //     if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
+  //       let mediaTypes = ["application/json"];
+  //       if (schema instanceof ConstantSchema) {
+  //         mediaTypes = [schema.value.value.toString()];
+  //       } else if (schema instanceof SealedChoiceSchema) {
+  //         mediaTypes = schema.choices.map((it) => it.value.toString());
+  //       }
+  //       op.requests![0].protocol.http!.mediaTypes = mediaTypes;
+  //     }
+  //   }
+  // }
+
+  private addAcceptHeaderParameterFromSdkType(op: CodeModelOperation, responses: Map<number | HttpStatusCodeRange, SdkHttpResponse>) {
+    if (op.parameters?.some((it) => it.language.default.serializedName?.toLowerCase() === "accept")) {
+      // parameters already include "accept" header
+      return;
+    }``
+
+    const produces = new Set<string>();
+    for (const code of responses.keys()) {
+      const response = responses.get(code);
+      if (response) {
+        if (response.contentTypes && response.contentTypes.length > 0) {
+          response.contentTypes.forEach((it) => produces.add(it));
+        } else if (response.defaultContentType) {
+          produces.add(response.defaultContentType);
         }
-        op.addParameter(this._armApiVersionParameter);
-      } else {
-        const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
-        op.addParameter(parameter);
-        clientContext.addGlobalParameter(parameter);
       }
-    } else if (this.isSubscriptionId(param)) {
-      const parameter = this.subscriptionIdParameter(param);
-      op.addParameter(parameter);
-      clientContext.addGlobalParameter(parameter);
-    } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
-      // special headers
-      op.specialHeaders = op.specialHeaders ?? [];
-      if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.name)) {
-        op.specialHeaders.push(param.name);
-      }
-    } else {
-      // schema
-      let schema;
-      const sdkType = getClientType(this.sdkContext, param.param);
-      if (
-        param.type === "header" &&
-        param.param.type.kind === "Scalar" &&
-        getEncode(this.program, param.param) === undefined &&
-        getEncode(this.program, param.param.type) === undefined &&
-        (hasScalarAsBase(param.param.type, "utcDateTime") || hasScalarAsBase(param.param.type, "offsetDateTime")) &&
-        (sdkType.kind === "utcDateTime" || sdkType.kind === "offsetDateTime")
-      ) {
-        // utcDateTime in header maps to rfc7231
-        schema = this.processDateTimeSchemaFromSdkType(sdkType, param.param.name, true);
-      } else {
-        schema = this.processSchemaFromSdkType(sdkType, param.param.name);
-      }
+    }
+    if (produces.size === 0) {
+      produces.add("application/json");
+    }
+    const acceptTypes = Array.from(produces.values()).join(", ");
 
-      // skip-url-encoding
-      let extensions: { [id: string]: any } | undefined = undefined;
-      if (
-        (param.type === "query" || param.type === "path") &&
-        param.param.type.kind === "Scalar" &&
-        schema instanceof UriSchema
-      ) {
-        extensions = { "x-ms-skip-url-encoding": true };
-      }
-
-      if (this.supportsAdvancedVersioning()) {
-        // versioning
-        const addedOn = getAddedOnVersions(this.program, param.param);
-        if (addedOn) {
-          extensions = extensions ?? {};
-          extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
-        }
-      }
-
-      // format if array
-      let style = undefined;
-      let explode = undefined;
-      if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
-        if (param.type === "query") {
-          const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          switch (queryParamOptions?.format) {
-            case "csv":
-              style = SerializationStyle.Simple;
-              break;
-
-            case "ssv":
-              style = SerializationStyle.SpaceDelimited;
-              break;
-
-            case "tsv":
-              style = SerializationStyle.TabDelimited;
-              break;
-
-            case "pipes":
-              style = SerializationStyle.PipeDelimited;
-              break;
-
-            case "multi":
-              style = SerializationStyle.Form;
-              explode = true;
-              break;
-
-            default:
-              if (queryParamOptions?.format) {
-                this.logWarning(`Unrecognized query parameter format: '${queryParamOptions?.format}'.`);
-              }
-              break;
-          }
-        } else if (param.type === "header") {
-          const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
-          switch (headerFieldOptions?.format) {
-            case "csv":
-              style = SerializationStyle.Simple;
-              break;
-
-            default:
-              if (headerFieldOptions?.format) {
-                this.logWarning(`Unrecognized header parameter format: '${headerFieldOptions?.format}'.`);
-              }
-              break;
-          }
-        }
-      }
-
-      const nullable = isNullableType(param.param.type);
-      const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
-        summary: this.getSummary(param.param),
+    const acceptSchema =
+      this.codeModel.schemas.constants?.find(
+        (it) => it.language.default.name === "accept" && it.value.value === acceptTypes,
+      ) ||
+      this.codeModel.schemas.add(
+        new ConstantSchema("accept", `Accept: ${acceptTypes}`, {
+          valueType: this.stringSchema,
+          value: new ConstantValue(acceptTypes),
+        }),
+      );
+    op.addParameter(
+      new Parameter("accept", "Accept header", acceptSchema, {
         implementation: ImplementationLocation.Method,
-        required: !param.param.optional,
-        nullable: nullable,
+        origin: "modelerfour:synthesized/accept",
+        required: true,
         protocol: {
-          http: new HttpParameter(param.type, {
-            style: style,
-            explode: explode,
-          }),
+          http: new HttpParameter(ParameterLocation.Header),
         },
         language: {
           default: {
-            serializedName: param.name,
+            serializedName: "accept",
           },
         },
-        extensions: extensions,
-      });
-      op.addParameter(parameter);
-
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
-
-      if (op.convenienceApi) {
-        this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
-      }
-
-      if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
-        let mediaTypes = ["application/json"];
-        if (schema instanceof ConstantSchema) {
-          mediaTypes = [schema.value.value.toString()];
-        } else if (schema instanceof SealedChoiceSchema) {
-          mediaTypes = schema.choices.map((it) => it.value.toString());
-        }
-        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
-      }
-    }
+      }),
+    );
   }
 
   private addAcceptHeaderParameter(op: CodeModelOperation, responses: HttpOperationResponse[]) {
@@ -1569,6 +1861,19 @@ export class CodeModelBuilder {
         request.signatureParameters.push(requestConditionsParameter);
       }
     }
+  }
+
+  private processParameterBodyFromSdkType(op: CodeModelOperation, httpOperation: HttpOperation, body: SdkModelPropertyType) {
+    const parameters = httpOperation.operation.parameters;
+
+    const unknownRequestBody =
+      op.requests![0].protocol.http!.mediaTypes &&
+      op.requests![0].protocol.http!.mediaTypes.length > 0 &&
+      !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
+
+    // const sdkType: SdkType = getClientType(this.sdkContext, body, httpOperation.operation);
+
+
   }
 
   private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
@@ -2622,6 +2927,15 @@ export class CodeModelBuilder {
     // check @convenienceMethod
     if (shouldGenerateConvenient(this.sdkContext, op)) {
       return this.getName(op);
+    } else {
+      return undefined;
+    }
+  }
+
+  private getConvenienceApiNameFromServiceMethod(sdkMethod: SdkServiceMethod<SdkHttpOperation>): string | undefined {
+    // check @convenienceMethod
+    if (sdkMethod.__raw && shouldGenerateConvenient(this.sdkContext, sdkMethod.__raw)) {
+      return sdkMethod.name;
     } else {
       return undefined;
     }
