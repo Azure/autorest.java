@@ -87,9 +87,7 @@ public final class NamingAsyncClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param dataRequest summary of Request
-     * 
-     * description of Request.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,9 +97,8 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponse(String name, BinaryData dataRequest,
-        RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponseAsync(name, dataRequest, requestOptions);
+    public Mono<Response<BinaryData>> postWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponseAsync(name, body, requestOptions);
     }
 
     /**
@@ -135,9 +132,7 @@ public final class NamingAsyncClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param dataRequest summary of Request
-     * 
-     * description of Request.
+     * @param body The body parameter.
      * @param etag summary of etag header parameter
      * 
      * description of etag header parameter.
@@ -151,13 +146,13 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DataResponse> post(String name, DataRequest dataRequest, String etag) {
+    public Mono<DataResponse> post(String name, DataRequest body, String etag) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader(HttpHeaderName.ETAG, etag);
         }
-        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).flatMap(FluxUtil::toMono)
+        return postWithResponse(name, BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 
@@ -169,9 +164,7 @@ public final class NamingAsyncClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param dataRequest summary of Request
-     * 
-     * description of Request.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -182,10 +175,10 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<DataResponse> post(String name, DataRequest dataRequest) {
+    public Mono<DataResponse> post(String name, DataRequest body) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).flatMap(FluxUtil::toMono)
+        return postWithResponse(name, BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(DataResponse.class));
     }
 

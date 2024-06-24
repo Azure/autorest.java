@@ -62,7 +62,7 @@ public final class InternalAsyncClient {
      * }
      * }</pre>
      * 
-     * @param apiRequest The apiRequest parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -72,8 +72,8 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData apiRequest, RequestOptions requestOptions) {
-        return this.serviceClient.postInternalWithResponseAsync(apiRequest, requestOptions);
+    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.postInternalWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -126,7 +126,7 @@ public final class InternalAsyncClient {
     /**
      * The postInternal operation.
      * 
-     * @param apiRequest The apiRequest parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -137,10 +137,10 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<ResponseInternal> postInternal(ApiRequest apiRequest) {
+    Mono<ResponseInternal> postInternal(ApiRequest body) {
         // Generated convenience method for postInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postInternalWithResponse(BinaryData.fromObject(apiRequest), requestOptions).flatMap(FluxUtil::toMono)
+        return postInternalWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(ResponseInternal.class));
     }
 
