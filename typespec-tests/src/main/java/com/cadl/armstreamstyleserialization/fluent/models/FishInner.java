@@ -4,7 +4,7 @@
 
 package com.cadl.armstreamstyleserialization.fluent.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -16,7 +16,7 @@ import java.io.IOException;
 /**
  * This is base model for polymorphic multiple levels inheritance with a discriminator.
  */
-@Immutable
+@Fluent
 public class FishInner implements JsonSerializable<FishInner> {
     /*
      * Discriminator property for Fish.
@@ -33,10 +33,20 @@ public class FishInner implements JsonSerializable<FishInner> {
      */
     private String dna;
 
+    /*
+     * The properties property.
+     */
+    private FishProperties innerProperties = new FishProperties();
+
+    /*
+     * The anotherProperties property.
+     */
+    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
+
     /**
      * Creates an instance of FishInner class.
      */
-    protected FishInner() {
+    public FishInner() {
     }
 
     /**
@@ -63,7 +73,7 @@ public class FishInner implements JsonSerializable<FishInner> {
      * @param age the age value to set.
      * @return the FishInner object itself.
      */
-    FishInner withAge(int age) {
+    public FishInner withAge(int age) {
         this.age = age;
         return this;
     }
@@ -89,14 +99,127 @@ public class FishInner implements JsonSerializable<FishInner> {
     }
 
     /**
+     * Get the innerProperties property: The properties property.
+     * 
+     * @return the innerProperties value.
+     */
+    private FishProperties innerProperties() {
+        return this.innerProperties;
+    }
+
+    /**
+     * Set the innerProperties property: The properties property.
+     * 
+     * @param innerProperties the innerProperties value to set.
+     * @return the FishInner object itself.
+     */
+    FishInner withInnerProperties(FishProperties innerProperties) {
+        this.innerProperties = innerProperties;
+        return this;
+    }
+
+    /**
+     * Get the innerAnotherProperties property: The anotherProperties property.
+     * 
+     * @return the innerAnotherProperties value.
+     */
+    private AnotherFishProperties innerAnotherProperties() {
+        return this.innerAnotherProperties;
+    }
+
+    /**
+     * Set the innerAnotherProperties property: The anotherProperties property.
+     * 
+     * @param innerAnotherProperties the innerAnotherProperties value to set.
+     * @return the FishInner object itself.
+     */
+    FishInner withInnerAnotherProperties(AnotherFishProperties innerAnotherProperties) {
+        this.innerAnotherProperties = innerAnotherProperties;
+        return this;
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double length() {
+        return this.innerProperties() == null ? 0.0 : this.innerProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the FishInner object itself.
+     */
+    public FishInner withLength(double length) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new FishProperties();
+        }
+        this.innerProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String patten() {
+        return this.innerProperties() == null ? null : this.innerProperties().patten();
+    }
+
+    /**
+     * Get the length property: The length property.
+     * 
+     * @return the length value.
+     */
+    public double lengthAnotherPropertiesLength() {
+        return this.innerAnotherProperties() == null ? 0.0 : this.innerAnotherProperties().length();
+    }
+
+    /**
+     * Set the length property: The length property.
+     * 
+     * @param length the length value to set.
+     * @return the FishInner object itself.
+     */
+    public FishInner withLengthAnotherPropertiesLength(double length) {
+        if (this.innerAnotherProperties() == null) {
+            this.innerAnotherProperties = new AnotherFishProperties();
+        }
+        this.innerAnotherProperties().withLength(length);
+        return this;
+    }
+
+    /**
+     * Get the patten property: The patten property.
+     * 
+     * @return the patten value.
+     */
+    public String pattenAnotherPropertiesPatten() {
+        return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().patten();
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (dna() == null) {
+        if (innerProperties() == null) {
             throw LOGGER.atError()
-                .log(new IllegalArgumentException("Missing required property dna in model FishInner"));
+                .log(new IllegalArgumentException("Missing required property innerProperties in model FishInner"));
+        } else {
+            innerProperties().validate();
+        }
+        if (innerAnotherProperties() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property innerAnotherProperties in model FishInner"));
+        } else {
+            innerAnotherProperties().validate();
         }
     }
 
@@ -109,7 +232,8 @@ public class FishInner implements JsonSerializable<FishInner> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", this.age);
-        jsonWriter.writeStringField("dna", this.dna);
+        jsonWriter.writeJsonField("properties", this.innerProperties);
+        jsonWriter.writeJsonField("anotherProperties", this.innerAnotherProperties);
         jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
@@ -161,6 +285,10 @@ public class FishInner implements JsonSerializable<FishInner> {
                     deserializedFishInner.age = reader.getInt();
                 } else if ("dna".equals(fieldName)) {
                     deserializedFishInner.dna = reader.getString();
+                } else if ("properties".equals(fieldName)) {
+                    deserializedFishInner.innerProperties = FishProperties.fromJson(reader);
+                } else if ("anotherProperties".equals(fieldName)) {
+                    deserializedFishInner.innerAnotherProperties = AnotherFishProperties.fromJson(reader);
                 } else if ("kind".equals(fieldName)) {
                     deserializedFishInner.kind = reader.getString();
                 } else {

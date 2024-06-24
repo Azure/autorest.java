@@ -36,4 +36,30 @@ public interface FishesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     FishInner getModel();
+
+    /**
+     * The putModel operation.
+     * 
+     * @param fish The fish parameter.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<FishInner> putModelWithResponse(FishInner fish, Context context);
+
+    /**
+     * The putModel operation.
+     * 
+     * @param fish The fish parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    FishInner putModel(FishInner fish);
 }

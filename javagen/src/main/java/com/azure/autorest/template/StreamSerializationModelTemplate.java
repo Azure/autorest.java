@@ -10,6 +10,8 @@ import com.azure.autorest.implementation.JsonFlattenedPropertiesTree;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -42,7 +44,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.azure.autorest.util.ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME;
 import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstructor;
@@ -238,16 +239,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     @Override
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
-        return Stream.concat(
-                super.getFieldProperties(model, settings).stream(),
-                ClientModelUtil.getParentProperties(model)
-                        .stream()
-                        .filter(property ->
-                                // parent discriminators are already passed to children, see @see in method javadoc
-                                !property.isPolymorphicDiscriminator()
-                                        && readOnlyNotInCtor(model, property, settings)
-                        )
-        ).collect(Collectors.toList());
+        List<ClientModelProperty> fieldProperties = super.getFieldProperties(model, settings);
+        Set<String> propertySerializedNames = fieldProperties.stream().map(ClientModelProperty::getSerializedName).collect(Collectors.toSet());
+        for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(model)) {
+            if (propertySerializedNames.contains(parentProperty.getSerializedName())) {
+                continue;
+            }
+            propertySerializedNames.add(parentProperty.getSerializedName());
+            if (!parentProperty.isPolymorphicDiscriminator() // parent discriminators are already passed to children, see @see in method javadoc
+                    && readOnlyNotInCtor(model, parentProperty, settings) // we shadow parent read-only properties in child class
+                    || parentProperty.getClientFlatten()) { // we shadow parent flattened property in child class
+                fieldProperties.add(parentProperty);
+            }
+        }
+        return fieldProperties;
     }
 
     /**
@@ -258,8 +263,63 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @return whether the property's getter overrides parent getter
      */
     @Override
-    protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
         return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings));
+    }
+
+    /**
+     * Get the property reference referring to the local(field) flattened property.
+     * Additionally, in Stream-Style, parent property reference count as well. Since in Stream-Style, the flattened model property
+     * will be shadowed in child class.
+     * For example, for the property1FromParent collected by {@link #getClientModelPropertyReferences(ClientModel)} on model2,
+     * it looks like:
+     * <pre>{@code
+     *         FlattenedProperties
+     *          - property1                    <--------------
+     *                                                       |
+     *         Model1                                        |
+     *          - innerProperties: FlattenProperties         |
+     *          - property1FromFlatten    ^    <--           |
+     *              - referenceProperty   |      |       ----|
+     *              - targetProperty    ---      |
+     *                                           |
+     *         Model2 extends Model1             |
+     *          (- property1FromParent)          |
+     *              - referenceProperty      ----|
+     *              - targetProperty -> null
+     * }
+     * </pre>
+     * If called on property1FromParent collected from Model2, property1FromFlatten will be returned.
+     * If this method is called on property1FromFlatten collected from Model1, itself will be returned.
+     *
+     * @param propertyReference propertyReference collected by {@link #getClientModelPropertyReferences(ClientModel)}
+     * @return the property reference referring to the local(field) flattened property, or parent flattening property reference,
+     *         null if neither
+     */
+    @Override
+    protected ClientModelPropertyReference getLocalFlattenedModelPropertyReference(ClientModelPropertyReference propertyReference) {
+        if (propertyReference.isFromFlattenedProperty()) {
+            return propertyReference;
+        } else if (propertyReference.isFromParentModel()) {
+            ClientModelPropertyAccess parentProperty = propertyReference.getReferenceProperty(); // parent property
+            if (parentProperty instanceof ClientModelPropertyReference && ((ClientModelPropertyReference) parentProperty).isFromFlattenedProperty()) {
+                return (ClientModelPropertyReference) parentProperty;
+            }
+        }
+        // Not a flattening property, return null.
+        return null;
+    }
+
+    @Override
+    protected List<ClientModelPropertyAccess> getSuperSetters(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
+        return super.getSuperSetters(model, settings, propertyReferences)
+                .stream()
+                // If the propertyReference is flattening property, then in Stream-Style we generate local getter/setter
+                // for it, thus we don't need to generate super setter.
+                .filter(propertyReference ->
+                        !((propertyReference instanceof ClientModelPropertyReference)
+                                && ((ClientModelPropertyReference) propertyReference).isFromFlattenedProperty()))
+                .collect(Collectors.toList());
     }
 
     private static boolean readOnlyNotInCtor(ClientModel model, ClientModelProperty property, JavaSettings settings) {
@@ -1507,8 +1567,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // If the property is defined in a super class use the setter as this will be able to set the value in the
         // super class.
         if (fromSuper
-            // If the property is read-only from parent, it will be shadowed in child class.
-            && !readOnlyNotInCtor(model, property, JavaSettings.getInstance())) {
+            // If the property is flattened or read-only from parent, it will be shadowed in child class.
+            && (!readOnlyNotInCtor(model, property, JavaSettings.getInstance()) && !property.getClientFlatten())) {
             if (polymorphicJsonMergePatchScenario) {
                 // Polymorphic JSON merge patch needs special handling as the setter methods are used to track whether
                 // the property is included in patch serialization. To prevent deserialization from requiring parent

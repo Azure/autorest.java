@@ -126,6 +126,7 @@ public class RuntimeTests {
         Assertions.assertNotNull(webError.getDetails());
         Assertions.assertEquals(1, webError.getDetails().size());
         Assertions.assertEquals("InnerError", webError.getDetails().get(0).getCode());
+        Assertions.assertEquals("Deployment error.", webError.getInnererror());
 
         GraphErrorException graphException = new GraphErrorException("mock graph error", null);
         Assertions.assertFalse((Object) graphException instanceof ManagementException);
@@ -486,14 +487,16 @@ public class RuntimeTests {
     @Test
     public void testStreamStyleSerialization() throws IOException {
         SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
-        String pirCommunityGalleryResourceJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\"}";
+        String pirCommunityGalleryResourceJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\", \"identifier\": {\"uniqueId\": \"abc\"}}";
 
         PirCommunityGalleryResource pirCommunityGalleryResource = serializerAdapter.deserialize(pirCommunityGalleryResourceJson, PirCommunityGalleryResource.class, SerializerEncoding.JSON);
         Assertions.assertEquals("myName", pirCommunityGalleryResource.name());
+        Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
 
-        String galleryJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\",\"disclaimer\":\"myDisclaimer\"}";
+        String galleryJson = "{\"name\":\"myName\",\"location\":\"myLocation\",\"type\":\"myType\", \"properties\": {\"disclaimer\":\"myDisclaimer\"}, \"identifier\": {\"uniqueId\": \"abc\"}}";
         CommunityGalleryInner galleryInner = serializerAdapter.deserialize(galleryJson, CommunityGalleryInner.class, SerializerEncoding.JSON);
         Assertions.assertEquals("myName", galleryInner.name());
         Assertions.assertEquals("myDisclaimer", galleryInner.disclaimer());
+        Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
     }
 }

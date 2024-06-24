@@ -184,6 +184,62 @@ public final class ArrayClientImpl {
     }
 
     /**
+     * The NullableInt32ValuesImpl object to access its operations.
+     */
+    private final NullableInt32ValuesImpl nullableInt32Values;
+
+    /**
+     * Gets the NullableInt32ValuesImpl object to access its operations.
+     * 
+     * @return the NullableInt32ValuesImpl object.
+     */
+    public NullableInt32ValuesImpl getNullableInt32Values() {
+        return this.nullableInt32Values;
+    }
+
+    /**
+     * The NullableBooleanValuesImpl object to access its operations.
+     */
+    private final NullableBooleanValuesImpl nullableBooleanValues;
+
+    /**
+     * Gets the NullableBooleanValuesImpl object to access its operations.
+     * 
+     * @return the NullableBooleanValuesImpl object.
+     */
+    public NullableBooleanValuesImpl getNullableBooleanValues() {
+        return this.nullableBooleanValues;
+    }
+
+    /**
+     * The NullableStringValuesImpl object to access its operations.
+     */
+    private final NullableStringValuesImpl nullableStringValues;
+
+    /**
+     * Gets the NullableStringValuesImpl object to access its operations.
+     * 
+     * @return the NullableStringValuesImpl object.
+     */
+    public NullableStringValuesImpl getNullableStringValues() {
+        return this.nullableStringValues;
+    }
+
+    /**
+     * The NullableModelValuesImpl object to access its operations.
+     */
+    private final NullableModelValuesImpl nullableModelValues;
+
+    /**
+     * Gets the NullableModelValuesImpl object to access its operations.
+     * 
+     * @return the NullableModelValuesImpl object.
+     */
+    public NullableModelValuesImpl getNullableModelValues() {
+        return this.nullableModelValues;
+    }
+
+    /**
      * Initializes an instance of ArrayClient client.
      */
     public ArrayClientImpl() {
@@ -219,5 +275,9 @@ public final class ArrayClientImpl {
         this.unknownValues = new UnknownValuesImpl(this);
         this.modelValues = new ModelValuesImpl(this);
         this.nullableFloatValues = new NullableFloatValuesImpl(this);
+        this.nullableInt32Values = new NullableInt32ValuesImpl(this);
+        this.nullableBooleanValues = new NullableBooleanValuesImpl(this);
+        this.nullableStringValues = new NullableStringValuesImpl(this);
+        this.nullableModelValues = new NullableModelValuesImpl(this);
     }
 }

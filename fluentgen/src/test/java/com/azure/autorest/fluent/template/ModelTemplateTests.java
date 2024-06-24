@@ -34,7 +34,7 @@ public class ModelTemplateTests {
     /**
      * Issue: https://github.com/Azure/autorest.java/issues/1320
      * Remove duplicate setter methods from child schema when parent schema contains same property
-     * mainly to test {@link com.azure.autorest.template.ModelTemplate#getParentSettersToOverride(ClientModel, JavaSettings, List)}
+     * mainly to test {@link com.azure.autorest.template.ModelTemplate#getSuperSetters(ClientModel, JavaSettings, List)}
      */
     @Test
     public void deduplicateTest(){
@@ -47,7 +47,7 @@ public class ModelTemplateTests {
             propertyReferences.addAll(model.getPropertyReferences());
         }
         // real test here
-        List<ClientModelPropertyAccess> toOverride = templateAccessor.getParentSettersToOverride(model, settings, propertyReferences);
+        List<ClientModelPropertyAccess> toOverride = templateAccessor.getSuperSetters(model, settings, propertyReferences);
         Assertions.assertEquals(toOverride.size(), 1);
     }
 
@@ -57,8 +57,8 @@ public class ModelTemplateTests {
             return super.getClientModelPropertyReferences(model);
         }
 
-        public List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
-            return super.getParentSettersToOverride(model, settings, propertyReferences);
+        public List<ClientModelPropertyAccess> getSuperSetters(ClientModel model, JavaSettings settings, List<ClientModelPropertyReference> propertyReferences) {
+            return super.getSuperSetters(model, settings, propertyReferences);
         }
 
     }

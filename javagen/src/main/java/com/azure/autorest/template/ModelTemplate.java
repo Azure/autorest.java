@@ -176,7 +176,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
-                boolean overridesParentGetter = isOverrideParentGetter(model, property, settings);
+                boolean overridesParentGetter = overridesParentGetter(model, property, settings);
                 if (overridesParentGetter) {
                     classBlock.annotation("Override");
                 }
@@ -185,7 +185,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
 
-                if (ClientModelUtil.hasSetter(property, settings) && !immutableModel) {
+                if (ClientModelUtil.needsPublicSetter(property, settings) && !immutableModel) {
                     generateSetterJavadoc(classBlock, model, property);
                     addGeneratedAnnotation(classBlock);
                     TemplateUtil.addJsonSetter(classBlock, settings, property.getSerializedName());
@@ -244,7 +244,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             // add setters to override parent setters
             if (!immutableModel) {
-                List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
+                List<ClientModelPropertyAccess> settersToOverride = getSuperSetters(model, settings,
                     propertyReferences);
                 for (ClientModelPropertyAccess parentProperty : settersToOverride) {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
@@ -267,7 +267,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 // reference to properties from flattened client model
                 for (ClientModelPropertyReference propertyReference : propertyReferences) {
-                    if (!propertyReference.isFromFlattenedProperty()) {
+                    propertyReference = getLocalFlattenedModelPropertyReference(propertyReference);
+                    if (propertyReference == null) {
                         continue;
                     }
 
@@ -299,9 +300,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     if (!propertyIsReadOnly) {
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
+                        ClientModelPropertyReference propertyReferenceFinal = propertyReference;
                         classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
                             methodBlock.ifBlock(String.format("this.%s() == null", targetProperty.getGetterName()), ifBlock ->
-                                methodBlock.line(String.format("this.%s = new %s();", targetProperty.getName(), propertyReference.getTargetModelType())));
+                                methodBlock.line(String.format("this.%s = new %s();", targetProperty.getName(), propertyReferenceFinal.getTargetModelType())));
 
                             methodBlock.line(String.format("this.%s().%s(%s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");
@@ -323,13 +325,27 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
+     * Get the property reference referring to the local(field) flattened property.
+     *
+     * @param propertyReference propertyReference to check
+     * @return the property reference referring to the local(field) flattened property, null if it's not
+     */
+    protected ClientModelPropertyReference getLocalFlattenedModelPropertyReference(ClientModelPropertyReference propertyReference) {
+        if (propertyReference.isFromFlattenedProperty()) {
+            return propertyReference;
+        }
+        // Not a flattening property, return null.
+        return null;
+    }
+
+    /**
      * Whether the property's getter overrides parent getter.
      * @param model the client model
      * @param property the property to generate getter method
      * @param settings {@link JavaSettings} instance
      * @return whether the property's getter overrides parent getter
      */
-    protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
         // getter method of discriminator property in subclass is handled differently
         return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
     }
@@ -412,21 +428,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Override parent setters if: 1. parent property has setter 2. child does not contain property that shadow this
-     * parent property, otherwise overridden parent setter methods will collide with child setter methods
+     * We generate super setters in child class if all of below conditions are met:
+     * 1. parent property has setter
+     * 2. child does not contain property that shadow this parent property, otherwise super setters
+     * will collide with child setters
      *
      * @see <a href="https://github.com/Azure/autorest.java/issues/1320">Issue 1320</a>
      */
-    protected List<ClientModelPropertyAccess> getParentSettersToOverride(ClientModel model, JavaSettings settings,
-        List<ClientModelPropertyReference> propertyReferences) {
-        Set<String> modelPropertyNames = model.getProperties().stream().map(ClientModelProperty::getName)
+    protected List<ClientModelPropertyAccess> getSuperSetters(ClientModel model, JavaSettings settings,
+                                                              List<ClientModelPropertyReference> propertyReferences) {
+        Set<String> modelPropertyNames = getFieldProperties(model, settings).stream().map(ClientModelProperty::getName)
             .collect(Collectors.toSet());
         return propertyReferences.stream()
             .filter(ClientModelPropertyReference::isFromParentModel)
             .map(ClientModelPropertyReference::getReferenceProperty)
             .filter(parentProperty -> {
                     // parent property doesn't have setter
-                    if (!ClientModelUtil.hasSetter(parentProperty, settings)) {
+                    if (!ClientModelUtil.needsPublicSetter(parentProperty, settings)) {
                         return false;
                     }
                     // child does not contain property that shadow this parent property
@@ -513,7 +531,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         List<ClientModelPropertyReference> propertyReferences, JavaFile javaFile, JavaSettings settings) {
         boolean fluent = !immutableOutputModel && Stream
             .concat(model.getProperties().stream(), propertyReferences.stream())
-            .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
+            .anyMatch(p -> ClientModelUtil.needsPublicSetter(p, settings));
 
         if (JavaSettings.getInstance().isBranded()) {
             if (fluent) {

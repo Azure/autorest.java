@@ -32,6 +32,22 @@ public final class SalmonImpl implements Salmon {
         return this.innerModel().dna();
     }
 
+    public double length() {
+        return this.innerModel().length();
+    }
+
+    public String patten() {
+        return this.innerModel().patten();
+    }
+
+    public double lengthAnotherPropertiesLength() {
+        return this.innerModel().lengthAnotherPropertiesLength();
+    }
+
+    public String pattenAnotherPropertiesPatten() {
+        return this.innerModel().pattenAnotherPropertiesPatten();
+    }
+
     public String kind() {
         return this.innerModel().kind();
     }
