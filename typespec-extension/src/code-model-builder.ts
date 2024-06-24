@@ -798,7 +798,7 @@ export class CodeModelBuilder {
           this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
         }
       } else if (op.parameters.body.type) {
-        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
+        let bodyType = op.parameters.body.type;
 
         if (bodyType.kind === "Model") {
           // try use resource type as round-trip model
