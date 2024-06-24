@@ -37,13 +37,13 @@ model SubClassBothMismatch extends SuperClassMismatch {
 interface WireTypeOp {
   @route("/superClassMismatch")
   @put
-  superClassMismatch(...SubClass): SubClass;
+  superClassMismatch(@body body: SubClass): SubClass;
 
   @route("/subClassMismatch")
   @put
-  subClassMismatch(...SubClassMismatch): SubClassMismatch;
+  subClassMismatch(@body body: SubClassMismatch): SubClassMismatch;
 
   @route("/bothClassMismatch")
   @put
-  bothClassMismatch(...SubClassBothMismatch): SubClassBothMismatch;
+  bothClassMismatch(@body body: SubClassBothMismatch): SubClassBothMismatch;
 }

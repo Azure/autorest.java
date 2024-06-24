@@ -96,7 +96,7 @@ interface InternalOp {
   @access(Access.public, "python")
   @access(Access.internal, "client")
   @post
-  postInternal(...ApiRequest): ResponseInternal;
+  postInternal(@body body: ApiRequest): ResponseInternal;
 
   // test ApiResponse with Access.public
   @get
