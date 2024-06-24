@@ -123,7 +123,7 @@ interface NamingOp {
   @summary("summary of POST op")
   @doc("description of POST op")
   @post
-  post(@body body: Request): Response | ErrorResponse;
+  post(@bodyRoot body: Request): Response | ErrorResponse;
 
   getAnonymous(): {
     name: string;
