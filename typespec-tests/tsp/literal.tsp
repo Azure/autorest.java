@@ -26,5 +26,5 @@ alias Request = {
 interface LiteralOp {
   @put
   @route("/put")
-  put(...Request, ...Model): Model;
+  put(...Request, @body body: Model): Model;
 }
