@@ -17,7 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.literalservice.implementation.LiteralOpsImpl;
-import com.cadl.literalservice.implementation.models.PutRequest;
+import com.cadl.literalservice.models.Model;
+import com.cadl.literalservice.models.PutRequestOptionalLiteralParam;
 import reactor.core.publisher.Mono;
 
 /**
@@ -66,7 +67,7 @@ public final class LiteralServiceAsyncClient {
      * }
      * }</pre>
      * 
-     * @param model The model parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -76,14 +77,14 @@ public final class LiteralServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithResponse(BinaryData model, RequestOptions requestOptions) {
-        return this.serviceClient.putWithResponseAsync(model, requestOptions);
+    public Mono<Response<BinaryData>> putWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.putWithResponseAsync(body, requestOptions);
     }
 
     /**
      * The put operation.
      * 
-     * @param literalParam The literalParam parameter.
+     * @param body The body parameter.
      * @param optionalLiteralParam The optionalLiteralParam parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -95,10 +96,34 @@ public final class LiteralServiceAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PutRequest> put(String literalParam, String optionalLiteralParam) {
+    public Mono<Model> put(Model body, PutRequestOptionalLiteralParam optionalLiteralParam) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(model, requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(PutRequest.class));
+        if (optionalLiteralParam != null) {
+            requestOptions.addQueryParam("optionalLiteralParam", optionalLiteralParam.toString(), false);
+        }
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Model.class));
+    }
+
+    /**
+     * The put operation.
+     * 
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Model> put(Model body) {
+        // Generated convenience method for putWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Model.class));
     }
 }

@@ -6,6 +6,7 @@ package com.cadl.longrunning.generated;
 
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.longrunning.models.JobData;
 import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
 import java.util.HashMap;
@@ -20,8 +21,8 @@ public final class LongRunningCreateJobTests extends LongRunningClientTestBase {
     @Disabled
     public void testLongRunningCreateJobTests() {
         // method invocation
-        SyncPoller<JobResult, JobResultResult> response
-            = setPlaybackSyncPollerPollInterval(longRunningClient.beginCreateJob(mapOf(), null));
+        SyncPoller<JobResult, JobResultResult> response = setPlaybackSyncPollerPollInterval(longRunningClient
+            .beginCreateJob(new JobData(mapOf("max", 15.0D, "min", 14.0D, "average", 14.3D)).setConfiguration("{}")));
 
         // response assertion
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED,

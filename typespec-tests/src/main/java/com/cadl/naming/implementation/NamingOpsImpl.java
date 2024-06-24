@@ -11,7 +11,6 @@ import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
-import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -66,9 +65,8 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> post(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData dataRequest,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> post(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/naming")
         @ExpectedResponses({ 200 })
@@ -76,9 +74,8 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> postSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData dataRequest,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> postSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Get("/naming")
         @ExpectedResponses({ 200 })
@@ -103,15 +100,6 @@ public final class NamingOpsImpl {
      * summary of POST op
      * 
      * description of POST op.
-     * <p><strong>Header Parameters</strong></p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
-     * 
-     * description of etag header parameter</td></tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -142,12 +130,7 @@ public final class NamingOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name summary of name query parameter
-     * 
-     * description of name query parameter.
-     * @param dataRequest summary of Request
-     * 
-     * description of Request.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -156,26 +139,16 @@ public final class NamingOpsImpl {
      * @return summary of Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postWithResponseAsync(String name, BinaryData dataRequest,
-        RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> postWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.post(this.client.getEndpoint(), name, accept, dataRequest, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.post(this.client.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
      * summary of POST op
      * 
      * description of POST op.
-     * <p><strong>Header Parameters</strong></p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
-     * 
-     * description of etag header parameter</td></tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -206,12 +179,7 @@ public final class NamingOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name summary of name query parameter
-     * 
-     * description of name query parameter.
-     * @param dataRequest summary of Request
-     * 
-     * description of Request.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -220,9 +188,9 @@ public final class NamingOpsImpl {
      * @return summary of Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, BinaryData dataRequest, RequestOptions requestOptions) {
+    public Response<BinaryData> postWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postSync(this.client.getEndpoint(), name, accept, dataRequest, requestOptions, Context.NONE);
+        return service.postSync(this.client.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 
     /**

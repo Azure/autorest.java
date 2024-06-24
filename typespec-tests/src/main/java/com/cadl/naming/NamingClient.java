@@ -12,15 +12,13 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.naming.implementation.NamingOpsImpl;
-import com.cadl.naming.implementation.models.PostRequest;
+import com.cadl.naming.models.DataRequest;
 import com.cadl.naming.models.DataResponse;
 import com.cadl.naming.models.GetAnonymousResponse;
-import com.cadl.naming.models.RequestParameters;
 
 /**
  * Initializes a new instance of the synchronous NamingClient type.
@@ -44,8 +42,7 @@ public final class NamingClient {
      * Protocol method for POST operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param dataRequest summary of Request
-     * @param name summary of name query parameter
+     * @param body The body parameter.
      * @return summary of Response along with {@link Response}.
      * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status
      * code 409.
@@ -57,8 +54,8 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, BinaryData dataRequest, RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponse(name, dataRequest, requestOptions);
+    public Response<BinaryData> postWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponse(body, requestOptions);
     }
 
     /**
@@ -89,13 +86,7 @@ public final class NamingClient {
      * 
      * description of POST op.
      * 
-     * @param name summary of name query parameter
-     * 
-     * description of name query parameter.
-     * @param etag summary of etag header parameter
-     * 
-     * description of etag header parameter.
-     * @param parameters The parameters parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -106,41 +97,10 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DataResponse post(String name, String etag, RequestParameters parameters) {
+    public DataResponse post(DataRequest body) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        PostRequest dataRequestObj = new PostRequest().setParameters(parameters);
-        BinaryData dataRequest = BinaryData.fromObject(dataRequestObj);
-        if (etag != null) {
-            requestOptions.setHeader(HttpHeaderName.ETAG, etag);
-        }
-        return postWithResponse(name, dataRequest, requestOptions).getValue().toObject(DataResponse.class);
-    }
-
-    /**
-     * summary of POST op
-     * 
-     * description of POST op.
-     * 
-     * @param name summary of name query parameter
-     * 
-     * description of name query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summary of Response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public DataResponse post(String name) {
-        // Generated convenience method for postWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        PostRequest dataRequestObj = new PostRequest();
-        BinaryData dataRequest = BinaryData.fromObject(dataRequestObj);
-        return postWithResponse(name, dataRequest, requestOptions).getValue().toObject(DataResponse.class);
+        return postWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(DataResponse.class);
     }
 
     /**

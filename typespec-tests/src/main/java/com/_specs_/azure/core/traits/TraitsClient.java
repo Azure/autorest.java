@@ -110,7 +110,7 @@ public final class TraitsClient {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam User action param.
+     * @param userActionParam The userActionParam parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

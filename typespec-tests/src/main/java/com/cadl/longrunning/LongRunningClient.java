@@ -17,11 +17,10 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
-import com.cadl.longrunning.implementation.models.CreateJobRequest;
+import com.cadl.longrunning.models.JobData;
 import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
 import com.cadl.longrunning.models.PollResponse;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous LongRunningClient type.
@@ -146,7 +145,7 @@ public final class LongRunningClient {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -156,8 +155,8 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateJob(jobData, requestOptions);
+    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.beginCreateJob(body, requestOptions);
     }
 
     /**
@@ -201,8 +200,7 @@ public final class LongRunningClient {
     /**
      * A remote procedure call (RPC) operation.
      * 
-     * @param nullableFloatDict The nullableFloatDict parameter.
-     * @param configuration The configuration parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -213,34 +211,9 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobResult, JobResultResult> beginCreateJob(Map<String, Double> nullableFloatDict,
-        String configuration) {
+    public SyncPoller<JobResult, JobResultResult> beginCreateJob(JobData body) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
-        CreateJobRequest jobDataObj = new CreateJobRequest(nullableFloatDict).setConfiguration(configuration);
-        BinaryData jobData = BinaryData.fromObject(jobDataObj);
-        return serviceClient.beginCreateJobWithModel(jobData, requestOptions);
-    }
-
-    /**
-     * A remote procedure call (RPC) operation.
-     * 
-     * @param nullableFloatDict The nullableFloatDict parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobResult, JobResultResult> beginCreateJob(Map<String, Double> nullableFloatDict) {
-        // Generated convenience method for beginCreateJobWithModel
-        RequestOptions requestOptions = new RequestOptions();
-        CreateJobRequest jobDataObj = new CreateJobRequest(nullableFloatDict);
-        BinaryData jobData = BinaryData.fromObject(jobDataObj);
-        return serviceClient.beginCreateJobWithModel(jobData, requestOptions);
+        return serviceClient.beginCreateJobWithModel(BinaryData.fromObject(body), requestOptions);
     }
 }

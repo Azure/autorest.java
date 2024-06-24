@@ -16,10 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.internal.implementation.InternalOpsImpl;
-import com.cadl.internal.implementation.models.PostInternalRequest;
 import com.cadl.internal.implementation.models.ResponseInternal;
+import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
-import com.cadl.internal.models.RequestInner;
 
 /**
  * Initializes a new instance of the synchronous InternalClient type.
@@ -61,7 +60,7 @@ public final class InternalClient {
      * }
      * }</pre>
      * 
-     * @param apiRequest The apiRequest parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -71,8 +70,8 @@ public final class InternalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<BinaryData> postInternalWithResponse(BinaryData apiRequest, RequestOptions requestOptions) {
-        return this.serviceClient.postInternalWithResponse(apiRequest, requestOptions);
+    Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.postInternalWithResponse(body, requestOptions);
     }
 
     /**
@@ -125,7 +124,7 @@ public final class InternalClient {
     /**
      * The postInternal operation.
      * 
-     * @param property The property parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -136,12 +135,11 @@ public final class InternalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    ResponseInternal postInternal(RequestInner property) {
+    ResponseInternal postInternal(ApiRequest body) {
         // Generated convenience method for postInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        PostInternalRequest apiRequestObj = new PostInternalRequest(property);
-        BinaryData apiRequest = BinaryData.fromObject(apiRequestObj);
-        return postInternalWithResponse(apiRequest, requestOptions).getValue().toObject(ResponseInternal.class);
+        return postInternalWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
+            .toObject(ResponseInternal.class);
     }
 
     /**
