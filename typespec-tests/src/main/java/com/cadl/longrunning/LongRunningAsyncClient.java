@@ -147,7 +147,7 @@ public final class LongRunningAsyncClient {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -157,8 +157,8 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateJobAsync(jobData, requestOptions);
+    public PollerFlux<BinaryData, BinaryData> beginCreateJob(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.beginCreateJobAsync(body, requestOptions);
     }
 
     /**
@@ -203,7 +203,7 @@ public final class LongRunningAsyncClient {
     /**
      * A remote procedure call (RPC) operation.
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -214,9 +214,9 @@ public final class LongRunningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<JobResult, JobResultResult> beginCreateJob(JobData jobData) {
+    public PollerFlux<JobResult, JobResultResult> beginCreateJob(JobData body) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateJobWithModelAsync(BinaryData.fromObject(jobData), requestOptions);
+        return serviceClient.beginCreateJobWithModelAsync(BinaryData.fromObject(body), requestOptions);
     }
 }

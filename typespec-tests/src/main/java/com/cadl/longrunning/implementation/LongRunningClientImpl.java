@@ -207,7 +207,7 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createJob(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData jobData, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/long-running/jobs")
         @ExpectedResponses({ 202 })
@@ -217,7 +217,7 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createJobSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData jobData, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -471,7 +471,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -480,7 +480,7 @@ public final class LongRunningClientImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -498,7 +498,7 @@ public final class LongRunningClientImpl {
             }
         });
         return FluxUtil.withContext(context -> service.createJob(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, jobData, requestOptionsLocal, context));
+            this.getServiceVersion().getVersion(), accept, body, requestOptionsLocal, context));
     }
 
     /**
@@ -547,7 +547,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -556,7 +556,7 @@ public final class LongRunningClientImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<BinaryData> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
+    private Response<BinaryData> createJobWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -573,7 +573,7 @@ public final class LongRunningClientImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, jobData,
+        return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, body,
             requestOptionsLocal, Context.NONE);
     }
 
@@ -623,7 +623,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -632,8 +632,8 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(BinaryData jobData, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
+    public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(BinaryData body, RequestOptions requestOptions) {
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(body, requestOptions),
             new com.cadl.longrunning.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
@@ -691,7 +691,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -700,8 +700,8 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
+    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData body, RequestOptions requestOptions) {
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(body, requestOptions),
             new com.cadl.longrunning.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
@@ -759,7 +759,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -768,9 +768,9 @@ public final class LongRunningClientImpl {
      * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<JobResult, JobResultResult> beginCreateJobWithModelAsync(BinaryData jobData,
+    public PollerFlux<JobResult, JobResultResult> beginCreateJobWithModelAsync(BinaryData body,
         RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(body, requestOptions),
             new com.cadl.longrunning.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
@@ -828,7 +828,7 @@ public final class LongRunningClientImpl {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -837,9 +837,9 @@ public final class LongRunningClientImpl {
      * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobResult, JobResultResult> beginCreateJobWithModel(BinaryData jobData,
+    public SyncPoller<JobResult, JobResultResult> beginCreateJobWithModel(BinaryData body,
         RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(body, requestOptions),
             new com.cadl.longrunning.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
