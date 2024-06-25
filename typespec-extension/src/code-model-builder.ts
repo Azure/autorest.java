@@ -135,7 +135,6 @@ import { EmitterOptions } from "./emitter.js";
 import { createPollOperationDetailsSchema, getFileDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
-  CONTENT_TYPE_KEY,
   ORIGIN_API_VERSION,
   SPECIAL_HEADER_NAMES,
   cloneOperationParameter,
