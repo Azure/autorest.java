@@ -135,7 +135,6 @@ import { EmitterOptions } from "./emitter.js";
 import { createPollOperationDetailsSchema, getFileDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
-  CONTENT_TYPE_KEY,
   ORIGIN_API_VERSION,
   SPECIAL_HEADER_NAMES,
   cloneOperationParameter,
@@ -1132,16 +1131,6 @@ export class CodeModelBuilder {
       if (op.convenienceApi) {
         this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
       }
-
-      if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
-        let mediaTypes = ["application/json"];
-        if (schema instanceof ConstantSchema) {
-          mediaTypes = [schema.value.value.toString()];
-        } else if (schema instanceof SealedChoiceSchema) {
-          mediaTypes = schema.choices.map((it) => it.value.toString());
-        }
-        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
-      }
     }
   }
 
@@ -1327,6 +1316,9 @@ export class CodeModelBuilder {
   }
 
   private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
+    // set contentTypes to mediaTypes
+    op.requests![0].protocol.http!.mediaTypes = httpOperation.parameters.body!.contentTypes;
+
     const parameters = httpOperation.operation.parameters;
 
     const unknownRequestBody =
