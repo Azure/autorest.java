@@ -23,12 +23,12 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import fixtures.specialheader.models.ErrorException;
 import fixtures.specialheader.models.ProductResultValue;
 import java.time.OffsetDateTime;
-import java.util.UUID;
 import reactor.core.publisher.Mono;
 
 /**
@@ -122,7 +122,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil.withContext(context -> service.paramRepeatabilityRequest(this.client.getHost(), accept,
             repeatabilityRequestId, repeatabilityFirstSent, context));
@@ -144,7 +144,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return service.paramRepeatabilityRequest(this.client.getHost(), accept, repeatabilityRequestId,
             repeatabilityFirstSent, context);
@@ -216,7 +216,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil.withContext(context -> service.paramRepeatabilityRequestPut(this.client.getHost(), accept,
             repeatabilityRequestId, repeatabilityFirstSent, context));
@@ -238,7 +238,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return service.paramRepeatabilityRequestPut(this.client.getHost(), accept, repeatabilityRequestId,
             repeatabilityFirstSent, context);
@@ -399,7 +399,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil.withContext(context -> service.paramRepeatabilityRequestLRO(this.client.getHost(), accept,
             repeatabilityRequestId, repeatabilityFirstSent, context));
@@ -421,7 +421,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return service.paramRepeatabilityRequestLRO(this.client.getHost(), accept, repeatabilityRequestId,
             repeatabilityFirstSent, context);
@@ -493,7 +493,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return FluxUtil
             .withContext(context -> service.paramRepeatabilityRequestPageable(this.client.getHost(), accept,
@@ -518,7 +518,7 @@ public final class Headers {
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
-        String repeatabilityRequestId = UUID.randomUUID().toString();
+        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         return service
             .paramRepeatabilityRequestPageable(this.client.getHost(), accept, repeatabilityRequestId,
