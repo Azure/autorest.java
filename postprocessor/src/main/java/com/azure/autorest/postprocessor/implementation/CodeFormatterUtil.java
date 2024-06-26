@@ -4,6 +4,7 @@
 package com.azure.autorest.postprocessor.implementation;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
@@ -18,6 +19,7 @@ import org.eclipse.jdt.internal.compiler.env.IModule;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
+import org.slf4j.Logger;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -30,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 /**
@@ -44,6 +47,7 @@ public final class CodeFormatterUtil {
      * @throws Exception If code formatting fails.
      */
     public static void formatCode(Map<String, String> files, NewPlugin plugin) throws Exception {
+        AtomicReference<Logger> loggerReference = new AtomicReference<>();
         Map<String, String> eclipseSettings = loadEclipseSettings();
         files.entrySet().parallelStream().forEach(fileEntry -> {
             try {
@@ -52,8 +56,13 @@ public final class CodeFormatterUtil {
 
                 plugin.writeFile(fileEntry.getKey(), file, null);
             } catch (Exception e) {
-                throw new RuntimeException("Failed to format: " + fileEntry.getKey() + "\n"
-                    + fileEntry.getValue(), e);
+                // print file content
+                Logger logger = loggerReference.updateAndGet(logger1 ->
+                    logger1 == null ? new PluginLogger(plugin, CodeFormatterUtil.class) : logger1);
+                String errorMessage = "Failed to format file: " + fileEntry.getKey() + ". File content: \n" + fileEntry.getValue();
+                logger.error(errorMessage);
+
+                throw new RuntimeException("Failed to format: " + fileEntry.getKey(), e);
             }
         });
     }
