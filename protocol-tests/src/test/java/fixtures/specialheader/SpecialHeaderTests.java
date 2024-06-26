@@ -6,6 +6,7 @@ package fixtures.specialheader;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeader;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipelineCallContext;
 import com.azure.core.http.HttpPipelineNextPolicy;
@@ -15,6 +16,8 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.rest.RequestOptions;
+import com.azure.core.http.rest.Response;
+import com.azure.core.util.BinaryData;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import fixtures.MockHttpResponse;
@@ -23,16 +26,21 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Locale;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public class SpecialHeaderTests {
 
     private static SpecialHeaderClient client;
+
+    private static SpecialHeaderAsyncClient asyncClient;
 
     private static class ValidationPolicy implements HttpPipelinePolicy {
         private String repeatabilityRequestId;
@@ -97,25 +105,33 @@ public class SpecialHeaderTests {
     public static void setup() {
         HttpClient mockHttpClient = request -> Mono.just(new MockHttpResponse(request, 500));
 
+        HttpLogOptions httpLogOptions = new HttpLogOptions()
+                .setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)
+                .setRequestLogger((logger, loggingOptions) -> {
+                    final HttpRequest request = loggingOptions.getHttpRequest();
+                    StringBuilder sb = new StringBuilder();
+                    for (HttpHeader header : request.getHeaders()) {
+                        String headerName = header.getName();
+                        sb.append(headerName).append(":");
+                        sb.append(header.getValue());
+                        sb.append("; ");
+                    }
+                    logger.info(sb.toString());
+                    return Mono.empty();
+                });
+
         client = new SpecialHeaderClientBuilder()
 //                .host("https://httpbin.org/")
                 .httpClient(mockHttpClient)
                 .addPolicy(VALIDATION_POLICY)
-                .httpLogOptions(new HttpLogOptions()
-                        .setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)
-                        .setRequestLogger((logger, loggingOptions) -> {
-                            final HttpRequest request = loggingOptions.getHttpRequest();
-                            StringBuilder sb = new StringBuilder();
-                            for (HttpHeader header : request.getHeaders()) {
-                                String headerName = header.getName();
-                                sb.append(headerName).append(":");
-                                sb.append(header.getValue());
-                                sb.append("; ");
-                            }
-                            logger.info(sb.toString());
-                            return Mono.empty();
-                        }))
+                .httpLogOptions(httpLogOptions)
                 .buildClient();
+
+        asyncClient = new SpecialHeaderClientBuilder()
+                .httpClient(mockHttpClient)
+                .addPolicy(VALIDATION_POLICY)
+                .httpLogOptions(httpLogOptions)
+                .buildAsyncClient();
     }
 
     @Test
@@ -142,17 +158,39 @@ public class SpecialHeaderTests {
     public void testRepeatabilityRequestUserProvidedHeader() {
         VALIDATION_POLICY.clear();
 
-        final String id = UUID.randomUUID().toString();
+        final String id = CoreUtils.randomUuid().toString();
         final String date = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now().minusMinutes(1));
 
         Assertions.assertThrows(HttpResponseException.class,
                 () -> client.paramRepeatabilityRequestWithResponse(new RequestOptions()
-                        .setHeader("Repeatability-Request-ID", id)
-                        .setHeader("Repeatability-First-Sent", date)));
+                        .setHeader(HttpHeaderName.fromString("Repeatability-Request-ID"), id)
+                        .setHeader(HttpHeaderName.fromString("Repeatability-First-Sent"), date)));
 
         Assertions.assertTrue(VALIDATION_POLICY.isValidationPass());
 
         Assertions.assertEquals(id, VALIDATION_POLICY.repeatabilityRequestId);
         Assertions.assertEquals(date, VALIDATION_POLICY.repeatabilityFirstSent);
+    }
+
+    @Test
+    public void testRepeatabilityRequestAsyncDate() throws InterruptedException {
+        // make the Mono but do not subscribe
+        Instant instantAtMono = OffsetDateTime.now().toInstant();
+        Mono<Response<BinaryData>> responseMono = asyncClient.paramRepeatabilityRequestWithResponse(null);
+
+        // wait for 3 sec
+        TimeUnit.SECONDS.sleep(3);
+
+        // subscribe - send request
+        Instant instantAtRequest = OffsetDateTime.now().toInstant();
+        Assertions.assertThrows(HttpResponseException.class, responseMono::block);
+
+        Assertions.assertTrue(VALIDATION_POLICY.isValidationPass());
+        Instant instantOfRepeatabilityFirstSent = new DateTimeRfc1123(VALIDATION_POLICY.repeatabilityFirstSent).getDateTime().toInstant();
+
+        // instantOfRepeatabilityFirstSent should be near instantAtRequest, not instantAtMono
+        Duration duration = Duration.between(instantAtMono, instantOfRepeatabilityFirstSent);
+        // check for 2 sec, as the precision of "repeatability-first-sent" is 1 sec
+        Assertions.assertTrue(duration.compareTo(Duration.ofSeconds(2)) > 0);
     }
 }

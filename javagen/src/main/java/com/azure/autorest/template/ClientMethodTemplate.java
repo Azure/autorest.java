@@ -503,9 +503,8 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
         // repeatability headers
         if (repeatabilityRequestHeaders) {
-            addSpecialHeadersToLocalVariables(function, clientMethod);
-            requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME, MethodUtil.REPEATABILITY_REQUEST_ID_HEADER);
-            requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME, MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
+            requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_REQUEST_ID_EXPRESSION, MethodUtil.REPEATABILITY_REQUEST_ID_HEADER);
+            requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_FIRST_SENT_EXPRESSION, MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
         }
 
         // content-type headers for optional body parameter
@@ -523,21 +522,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         return requestOptionsLocal;
     }
 
-    private static void requestOptionsSetHeaderIfAbsent(JavaBlock function, String variableName, String headerName) {
+    private static void requestOptionsSetHeaderIfAbsent(JavaBlock function, String expression, String headerName) {
         function.line("requestOptionsLocal.addRequestCallback(requestLocal -> {");
         function.indent(() -> {
             function.ifBlock(String.format("requestLocal.getHeaders().get(HttpHeaderName.fromString(\"%1$s\")) == null", headerName), ifBlock -> {
-                function.line(String.format("requestLocal.getHeaders().set(HttpHeaderName.fromString(\"%1$s\"), %2$s);", headerName, variableName));
+                function.line(String.format("requestLocal.getHeaders().set(HttpHeaderName.fromString(\"%1$s\"), %2$s);", headerName, expression));
             });
         });
         function.line("});");
-    }
-
-    protected static void addSpecialHeadersToLocalVariables(JavaBlock function, ClientMethod clientMethod) {
-        if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(clientMethod.getProxyMethod())) {
-            function.line(String.format("String %1$s = CoreUtils.randomUuid().toString();", MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME));
-            function.line(String.format("String %1$s = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());", MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME));
-        }
     }
 
     protected static void writeMethod(JavaType typeBlock, JavaVisibility visibility, String methodSignature, Consumer<JavaBlock> method) {
@@ -742,8 +734,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             boolean requestOptionsLocal = false;
             if (settings.isDataPlaneClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
-            } else {
-                addSpecialHeadersToLocalVariables(function, clientMethod);
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
@@ -1063,8 +1053,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             boolean requestOptionsLocal = false;
             if (settings.isDataPlaneClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
-            } else {
-                addSpecialHeadersToLocalVariables(function, clientMethod);
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod.toSync(), requestOptionsLocal,
@@ -1163,8 +1151,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             boolean requestOptionsLocal = false;
             if (settings.isDataPlaneClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
-            } else {
-                addSpecialHeadersToLocalVariables(function, clientMethod);
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
@@ -1300,8 +1286,6 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             boolean requestOptionsLocal = false;
             if (settings.isDataPlaneClient()) {
                 requestOptionsLocal = addSpecialHeadersToRequestOptions(function, clientMethod);
-            } else {
-                addSpecialHeadersToLocalVariables(function, clientMethod);
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
