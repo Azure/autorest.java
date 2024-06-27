@@ -2011,9 +2011,11 @@ export class CodeModelBuilder {
         keyType: {
           kind: "string",
           encode: "string",
+          decorators: [],
         },
         description: type.description,
         valueType: type.additionalProperties,
+        decorators: [],
       };
       const parentSchema = this.processSchemaFromSdkType(sdkDictType, "Record");
       objectSchema.parents = objectSchema.parents ?? new Relations();
