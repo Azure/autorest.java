@@ -281,7 +281,7 @@ export class CodeModelBuilder {
       this.options["group-etag-headers"] = false;
     }
 
-    const clients = this.processClients();
+    // const clients = this.processClients();
 
     this.processClientsFromSdkType();
 
@@ -1053,11 +1053,13 @@ export class CodeModelBuilder {
     // this.processResponseFromSdkType(codeModelOperation, sdkMethod.operation.responses, lroMetadata.longRunning);
 
     for (const [code, response] of sdkMethod.operation.responses) {
-      this.processResponseFromSdkType(codeModelOperation, code, response, lroMetadata.longRunning);
+      this.processResponseFromSdkType(codeModelOperation, code, response, lroMetadata.longRunning, false);
     }
 
-
-    // sdkMethod.operation.__raw.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
+    // exception
+    for (const [code, response] of sdkMethod.operation.exceptions) {
+      this.processResponseFromSdkType(codeModelOperation, code, response, lroMetadata.longRunning, true);
+    }
 
 
     // check for paged
@@ -2596,7 +2598,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processResponseFromSdkType(op: CodeModelOperation, statusCode: number | HttpStatusCodeRange, sdkResponse: SdkHttpResponse, longRunning: boolean) {
+  private processResponseFromSdkType(op: CodeModelOperation, statusCode: number | HttpStatusCodeRange | "*", sdkResponse: SdkHttpResponse, longRunning: boolean, isErrorResponse: boolean) {
     // TODO: what to do if more than 1 response?
     // It happens when the response type is Union, on one status code.
     // let response: Response;
@@ -2633,7 +2635,7 @@ export class CodeModelBuilder {
       response = new BinaryResponse({
         protocol: {
           http: {
-            statusCodes: statusCode,
+            statusCodes: this.getStatusCodes(statusCode),
             headers: headers,
             mediaTypes: sdkResponse.contentTypes,
             knownMediaType: KnownMediaType.Binary,
@@ -2642,7 +2644,7 @@ export class CodeModelBuilder {
         language: {
           default: {
             name: op.language.default.name + "Response",
-            description: sdkResponse.description ?? bodyType.details,
+            description: this.getResponseDescription(sdkResponse.__raw),
           },
         },
       });
@@ -2659,7 +2661,7 @@ export class CodeModelBuilder {
       response = new SchemaResponse(schema, {
         protocol: {
           http: {
-            statusCodes: statusCode,
+            statusCodes: this.getStatusCodes(statusCode),
             headers: headers,
             mediaTypes: sdkResponse.contentTypes,
           },
@@ -2667,7 +2669,7 @@ export class CodeModelBuilder {
         language: {
           default: {
             name: op.language.default.name + "Response",
-            description: bodyType.description ?? bodyType.details,
+            description: this.getResponseDescription(sdkResponse.__raw),
           },
         },
       });
@@ -2676,19 +2678,38 @@ export class CodeModelBuilder {
       response = new Response({
         protocol: {
           http: {
-            statusCodes: statusCode,
+            statusCodes: this.getStatusCodes(statusCode),
             headers: headers,
           },
         },
         language: {
           default: {
             name: op.language.default.name + "Response",
-            description: this.getResponseDescription(resp),
+            description: this.getResponseDescription(sdkResponse.__raw),
           },
         },
       });
     }
-    
+
+    if (isErrorResponse) {
+      op.addException(response);
+
+      if (response instanceof SchemaResponse) {
+        this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Exception] });
+      }
+    } else {
+      op.addResponse(response);
+
+      if (response instanceof SchemaResponse) {
+        this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
+
+        if (trackConvenienceApi) {
+          this.trackSchemaUsage(response.schema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
+        }
+      }
+    }
   }
 
   private getStatusCodes(statusCodes: HttpStatusCodesEntry): string[] {
@@ -3079,9 +3100,11 @@ export class CodeModelBuilder {
         keyType: {
           kind: "string",
           encode: "string",
+          decorators: [],
         },
         description: type.description,
         valueType: type.additionalProperties,
+        decorators: [],
       };
       const parentSchema = this.processSchemaFromSdkType(sdkDictType, "Record");
       objectSchema.parents = objectSchema.parents ?? new Relations();
