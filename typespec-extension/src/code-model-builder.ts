@@ -60,6 +60,8 @@ import {
   SdkHttpOperation,
   SdkHttpResponse,
   SdkInitializationType,
+  SdkLroPagingServiceMethod,
+  SdkLroServiceMethod,
   SdkMethod,
   SdkModelPropertyType,
   SdkModelType,
@@ -682,10 +684,6 @@ export class CodeModelBuilder {
     } 
   }
 
-  private processOperationGroupsUnderClient(codeModelClient: CodeModelClient, sdkOperationGroup: SdkClientType<SdkHttpOperation>, clientContext: ClientContext) {
-
-  }
-
   private listSubClientsUnderClient(client: SdkClientType<SdkHttpOperation>, includeNestedOperationGroups: boolean): SdkClientType<SdkHttpOperation>[] {
     const operationGroups: SdkClientType<SdkHttpOperation>[] = [];
     for (const method of client.methods) {
@@ -931,11 +929,12 @@ export class CodeModelBuilder {
     return operationExample;
   }
 
-  private processOperationFromSdkType(sdkMethod: SdkServiceMethod<SdkHttpOperation>, clientContext: ClientContext, groupName?: string): CodeModelOperation {
-    // TODO: get operation example
+  private processOperationFromSdkType(sdkMethod: SdkServiceMethod<SdkHttpOperation>, clientContext: ClientContext, groupName: string): CodeModelOperation {
+    // TODO: haoling get operation example
     const operationName = sdkMethod.name;
     const httpOperation = sdkMethod.operation;
     const operationId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
+    const operationGroup = this.codeModel.getOperationGroup(groupName);
 
     const codeModelOperation = new CodeModelOperation(operationName, sdkMethod.details ?? "", {
       operationId: operationId,
@@ -1016,11 +1015,11 @@ export class CodeModelBuilder {
       this.processParameterFromSdkType(codeModelOperation, it, clientContext);
     });
     // "accept" header
-    this.addAcceptHeaderParameterFromSdkType(codeModelOperation, httpOperation.responses);
+    // this.addAcceptHeaderParameterFromSdkType(codeModelOperation, httpOperation.responses);
     // // body
     if (httpOperation.bodyParam && httpOperation.__raw && sdkMethod.__raw && httpOperation.bodyParam.type.__raw) {
-        let bodyType = httpOperation.bodyParam.type;
-        if (bodyType.kind === "model" && bodyType.__raw) {
+        // let bodyType = httpOperation.bodyParam.type;
+        // if (bodyType.kind === "model" && bodyType.__raw) {
           // // try use resource type as round-trip model
           // const resourceType = getResourceOperation(this.program, rawOperation)?.resourceType;
           // if (resourceType && rawHttpOperation.responses && rawHttpOperation.responses.length > 0) {
@@ -1034,20 +1033,32 @@ export class CodeModelBuilder {
           //     }
           //   }
           // }
-          this.processParameterBody(codeModelOperation, httpOperation.__raw, bodyType.__raw as Model | ModelProperty);
-        }
+          // this.processParameterBody(codeModelOperation, httpOperation.__raw, bodyType.__raw as Model | ModelProperty);
+        this.processParameterBodyFromSdkType(codeModelOperation, httpOperation.__raw, httpOperation.bodyParam);
+        // }
     }
 
     // group ETag header parameters, if exists
     if (this.options["group-etag-headers"]) {
-      this.processEtagHeaderParameters(codeModelOperation, sdkMethod.operation.__raw);
+      this.processEtagHeaderParametersFromSdkType(codeModelOperation, sdkMethod.operation);
     }
 
     // lro metadata
-    const lroMetadata = this.processLroMetadata(codeModelOperation, sdkMethod.operation.__raw);
+    let lroMetadata = new LongRunningMetadata(false);
+    if (sdkMethod.kind === "lro" || sdkMethod.kind === "lropaging") {
+      this.processLroMetadataFromSdkType(codeModelOperation, sdkMethod);
+    }
 
     // responses
-    sdkMethod.operation.__raw.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
+    // this.processResponseFromSdkType(codeModelOperation, sdkMethod.operation.responses, lroMetadata.longRunning);
+
+    for (const [code, response] of sdkMethod.operation.responses) {
+      this.processResponseFromSdkType(codeModelOperation, code, response, lroMetadata.longRunning);
+    }
+
+
+    // sdkMethod.operation.__raw.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
+
 
     // check for paged
     this.processRouteForPaged(codeModelOperation, sdkMethod.operation.__raw.responses);
@@ -1055,6 +1066,8 @@ export class CodeModelBuilder {
     if (sdkMethod.__raw) {
       this.processRouteForLongRunning(codeModelOperation, sdkMethod.__raw, sdkMethod.operation.__raw.responses, lroMetadata);
     }
+
+    operationGroup.addOperation(codeModelOperation);
 
     return codeModelOperation;
   }
@@ -1318,6 +1331,96 @@ export class CodeModelBuilder {
     return new LongRunningMetadata(false);
   }
 
+  private processLroMetadataFromSdkType(op: CodeModelOperation, sdkMethod: SdkLroServiceMethod<SdkHttpOperation> | SdkLroPagingServiceMethod<SdkHttpOperation>): LongRunningMetadata {
+    const trackConvenienceApi: boolean = Boolean(op.convenienceApi);
+    
+    const lroMetadata = sdkMethod.__raw_lro_metadata;
+    // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
+    if (lroMetadata && lroMetadata.pollingInfo && lroMetadata.statusMonitorStep) {
+      let pollingSchema = undefined;
+      let finalSchema = undefined;
+
+      let pollingStrategy: Metadata | undefined = undefined;
+      let finalResultPropertySerializedName: string | undefined = undefined;
+
+      const verb = sdkMethod.operation.verb;
+      const useNewPollStrategy = isLroNewPollingStrategy(sdkMethod.operation.__raw, lroMetadata);
+      if (useNewPollStrategy) {
+        // use OperationLocationPollingStrategy
+        pollingStrategy = new Metadata({
+          language: {
+            java: {
+              name: "OperationLocationPollingStrategy",
+              namespace: getJavaNamespace(this.namespace) + ".implementation",
+            },
+          },
+        });
+      }
+
+      // pollingSchema
+      if (modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")) {
+        pollingSchema = this.pollResultSchema;
+      } else {
+        const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
+        const sdkType = getClientType(this.sdkContext, pollType);
+        pollingSchema = this.processSchemaFromSdkType(sdkType, "pollResult");
+      }
+
+      // finalSchema
+      if (
+        verb !== "delete" &&
+        lroMetadata.finalResult &&
+        lroMetadata.finalEnvelopeResult &&
+        lroMetadata.finalResult !== "void" &&
+        lroMetadata.finalEnvelopeResult !== "void"
+      ) {
+        const finalResult = useNewPollStrategy ? lroMetadata.finalResult : lroMetadata.finalEnvelopeResult;
+        const finalType = this.findResponseBody(finalResult);
+        const sdkType = getClientType(this.sdkContext, finalType);
+        finalSchema = this.processSchemaFromSdkType(sdkType, "finalResult");
+
+        if (
+          useNewPollStrategy &&
+          lroMetadata.finalStep &&
+          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+          lroMetadata.finalStep.target
+        ) {
+          // final result is the value in lroMetadata.finalStep.target
+          finalResultPropertySerializedName = this.getSerializedName(lroMetadata.finalStep.target);
+        }
+      }
+
+      // track usage
+      if (pollingSchema) {
+        this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
+        if (trackConvenienceApi) {
+          this.trackSchemaUsage(pollingSchema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
+        }
+      }
+      if (finalSchema) {
+        this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
+        if (trackConvenienceApi) {
+          this.trackSchemaUsage(finalSchema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
+        }
+      }
+
+      op.lroMetadata = new LongRunningMetadata(
+        true,
+        pollingSchema,
+        finalSchema,
+        pollingStrategy,
+        finalResultPropertySerializedName,
+      );
+      return op.lroMetadata;
+    }
+
+    return new LongRunningMetadata(false);
+  }
+
   private processRouteForLongRunning(
     op: CodeModelOperation,
     operation: Operation,
@@ -1352,7 +1455,7 @@ export class CodeModelBuilder {
       if (this.isArm()) {
         // Currently we assume ARM tsp only have one client and one api-version.
         // TODO: How will service define mixed api-versions(like those in Compute RP)?
-        const apiVersion = this.apiVersion?.value;
+        const apiVersion = this.apiVersionString;
         if (!this._armApiVersionParameter) {
           this._armApiVersionParameter = this.createApiVersionParameter(
             "api-version",
@@ -1368,11 +1471,11 @@ export class CodeModelBuilder {
         clientContext.addGlobalParameter(parameter);
       }
     } 
-    // else if (this.isSubscriptionId(raw)) { // TODO: remove this
-    //   const parameter = this.subscriptionIdParameter(raw);
-    //   op.addParameter(parameter);
-    //   clientContext.addGlobalParameter(parameter);
-    // } 
+    else if (param.kind === "path" && param.onClient && this.isSubscriptionId(param)) {
+      const parameter = this.subscriptionIdParameter(param);
+      op.addParameter(parameter);
+      clientContext.addGlobalParameter(parameter);
+    } 
     else if (param.kind === "header" && SPECIAL_HEADER_NAMES.has(param.serializedName.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
@@ -1381,9 +1484,8 @@ export class CodeModelBuilder {
       }
     } else {
       // schema
-      let schema;
       const sdkType = param.type;
-      schema = this.processSchemaFromSdkType(sdkType, param.name);
+      const schema = this.processSchemaFromSdkType(sdkType, param.name);
 
       // skip-url-encoding
       let extensions: { [id: string]: any } | undefined = undefined;
@@ -1468,7 +1570,7 @@ export class CodeModelBuilder {
         },
         language: {
           default: {
-            serializedName: param.serializedName,
+            serializedName: param.serializedName, // it uses param.name previously, but better to use param.serializedName directly
           },
         },
         extensions: extensions,
@@ -1655,7 +1757,7 @@ export class CodeModelBuilder {
     if (op.parameters?.some((it) => it.language.default.serializedName?.toLowerCase() === "accept")) {
       // parameters already include "accept" header
       return;
-    }``
+    }
 
     const produces = new Set<string>();
     for (const code of responses.keys()) {
@@ -1881,7 +1983,142 @@ export class CodeModelBuilder {
     }
   }
 
-  private processParameterBodyFromSdkType(op: CodeModelOperation, httpOperation: HttpOperation, body: SdkModelPropertyType) {
+  private processEtagHeaderParametersFromSdkType(op: CodeModelOperation, httpOperation: SdkHttpOperation) {
+    if (op.convenienceApi && op.parameters && op.signatureParameters) {
+      const etagHeadersNames = new Set<string>([
+        "if-match",
+        "if-none-match",
+        "if-unmodified-since",
+        "if-modified-since",
+      ]);
+
+      // collect etag headers in parameters
+      const etagHeaders: string[] = [];
+      if (op.parameters) {
+        for (const parameter of op.parameters) {
+          if (
+            parameter.language.default.serializedName &&
+            etagHeadersNames.has(parameter.language.default.serializedName.toLowerCase())
+          ) {
+            etagHeaders.push(parameter.language.default.serializedName);
+          }
+        }
+      }
+
+      let groupToRequestConditions = false;
+      let groupToMatchConditions = false;
+
+      if (etagHeaders.length === 4) {
+        // all 4 headers available, use RequestConditions
+        groupToRequestConditions = true;
+      } else if (etagHeaders.length === 2) {
+        const etagHeadersLowerCase = etagHeaders.map((it) => it.toLowerCase());
+        if (etagHeadersLowerCase.includes("if-match") && etagHeadersLowerCase.includes("if-none-match")) {
+          // only 2 headers available, use MatchConditions
+          groupToMatchConditions = true;
+        }
+      }
+
+      if (groupToRequestConditions || groupToMatchConditions) {
+        op.convenienceApi.requests = [];
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
+        request.parameters = [];
+        request.signatureParameters = [];
+        op.convenienceApi.requests.push(request);
+
+        for (const parameter of op.parameters) {
+          // copy all parameters to request
+          const clonedParameter = cloneOperationParameter(parameter);
+          request.parameters.push(clonedParameter);
+
+          // copy signatureParameters, but exclude etag headers (as they won't be in method signature)
+          if (
+            op.signatureParameters.includes(parameter) &&
+            !(
+              parameter.language.default.serializedName &&
+              etagHeaders.includes(parameter.language.default.serializedName)
+            )
+          ) {
+            request.signatureParameters.push(clonedParameter);
+          }
+        }
+
+        const namespace = getNamespace(httpOperation.__raw.operation); // TODO: SdkHttpOperation does not have namespace
+        const schemaName = groupToRequestConditions ? "RequestConditions" : "MatchConditions";
+        const schemaDescription = groupToRequestConditions
+          ? "Specifies HTTP options for conditional requests based on modification time."
+          : "Specifies HTTP options for conditional requests.";
+
+        // group schema
+        const requestConditionsSchema = this.codeModel.schemas.add(
+          new GroupSchema(schemaName, schemaDescription, {
+            language: {
+              default: {
+                namespace: namespace,
+              },
+              java: {
+                namespace: "com.azure.core.http",
+              },
+            },
+          }),
+        );
+
+        // parameter (optional) of the group schema
+        const requestConditionsParameter = new Parameter(
+          schemaName,
+          requestConditionsSchema.language.default.description,
+          requestConditionsSchema,
+          {
+            implementation: ImplementationLocation.Method,
+            required: false,
+            nullable: true,
+          },
+        );
+
+        this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(requestConditionsSchema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
+        }
+
+        // update group schema for properties
+        for (const parameter of request.parameters) {
+          if (
+            parameter.language.default.serializedName &&
+            etagHeaders.includes(parameter.language.default.serializedName)
+          ) {
+            parameter.groupedBy = requestConditionsParameter;
+
+            requestConditionsSchema.add(
+              // name is serializedName, as it must be same as that in RequestConditions class
+              new GroupProperty(
+                parameter.language.default.serializedName,
+                parameter.language.default.description,
+                parameter.schema,
+                {
+                  originalParameter: [parameter],
+                  summary: parameter.summary,
+                  required: false,
+                  nullable: true,
+                  readOnly: false,
+                  serializedName: parameter.language.default.serializedName,
+                },
+              ),
+            );
+          }
+        }
+
+        // put RequestConditions/MatchConditions as last parameter/signatureParameters
+        request.parameters.push(requestConditionsParameter);
+        request.signatureParameters.push(requestConditionsParameter);
+      }
+    }
+  }
+
+  private processParameterBodyFromSdkType(op: CodeModelOperation, httpOperation: HttpOperation, sdkBody: SdkModelPropertyType) {
     const parameters = httpOperation.operation.parameters;
 
     const unknownRequestBody =
@@ -1889,8 +2126,168 @@ export class CodeModelBuilder {
       op.requests![0].protocol.http!.mediaTypes.length > 0 &&
       !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
 
-    // const sdkType: SdkType = getClientType(this.sdkContext, body, httpOperation.operation);
+    const sdkType: SdkType = sdkBody.type;
 
+    let schema: Schema;
+    if (unknownRequestBody && sdkType.kind === "bytes") {
+      // if it's unknown request body, handle binary request body
+      schema = this.processBinarySchemaFromSdkType(sdkType);
+    } else {
+      schema = this.processSchemaFromSdkType(getNonNullSdkType(sdkType), sdkBody.name);
+    }
+
+    const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
+    const parameterName = sdkBody.name;
+    const parameter = new Parameter(parameterName, sdkBody.description ?? "", schema, {
+      summary: sdkBody.details,
+      implementation: ImplementationLocation.Method,
+      required: !sdkBody.optional,
+      protocol: {
+        http: new HttpParameter(ParameterLocation.Body),
+      },
+    });
+    op.addParameter(parameter);
+
+    this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
+
+    if (op.convenienceApi) {
+      // model/schema does not need to be Public or Internal, if it is not to be used in convenience API
+      this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
+    }
+
+    if (operationIsJsonMergePatch(httpOperation)) {
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
+    }
+    if (op.convenienceApi && operationIsMultipart(httpOperation)) {
+      this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
+    }
+
+    if (schema instanceof ObjectSchema && isAnonymousModel) {
+      // anonymous model
+
+      // name the schema for documentation
+      schema.language.default.name = pascalCase(op.language.default.name) + "Request";
+
+      if (!parameter.language.default.name) {
+        // name the parameter for documentation
+        parameter.language.default.name = "request";
+      }
+
+      if (operationIsJsonMergePatch(httpOperation)) {
+        // skip model flatten, if "application/merge-patch+json"
+        schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
+        return;
+      }
+
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
+
+      if (op.convenienceApi && op.parameters) {
+        op.convenienceApi.requests = [];
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
+        request.parameters = [];
+        op.convenienceApi.requests.push(request);
+
+        for (const [_, opParameter] of parameters.properties) {
+          const serializedName = this.getSerializedName(opParameter);
+          const existParameter = op.parameters.find((it) => it.language.default.serializedName === serializedName);
+          if (existParameter) {
+            // parameter
+            if (
+              existParameter.implementation === ImplementationLocation.Method &&
+              (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
+            ) {
+              request.parameters.push(cloneOperationParameter(existParameter));
+            }
+          } else {
+            // property from anonymous model
+            const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
+            if (
+              existBodyProperty &&
+              !existBodyProperty.readOnly &&
+              !(existBodyProperty.schema instanceof ConstantSchema)
+            ) {
+              request.parameters.push(
+                new VirtualParameter(
+                  existBodyProperty.language.default.name,
+                  existBodyProperty.language.default.description,
+                  existBodyProperty.schema,
+                  {
+                    originalParameter: parameter,
+                    targetProperty: existBodyProperty,
+                    language: {
+                      default: {
+                        serializedName: existBodyProperty.serializedName,
+                      },
+                    },
+                    summary: existBodyProperty.summary,
+                    implementation: ImplementationLocation.Method,
+                    required: existBodyProperty.required,
+                    nullable: existBodyProperty.nullable,
+                  },
+                ),
+              );
+            }
+          }
+        }
+        request.signatureParameters = request.parameters;
+
+        if (request.signatureParameters.length > 6) {
+          // create an option bag
+          const name = op.language.default.name + "Options";
+          const namespace = getNamespace(httpOperation.operation);
+          // option bag schema
+          const optionBagSchema = this.codeModel.schemas.add(
+            new GroupSchema(name, `Options for ${op.language.default.name} API`, {
+              language: {
+                default: {
+                  namespace: namespace,
+                },
+                java: {
+                  namespace: getJavaNamespace(namespace),
+                },
+              },
+            }),
+          );
+          request.parameters.forEach((it) => {
+            optionBagSchema.add(
+              new GroupProperty(it.language.default.name, it.language.default.description, it.schema, {
+                originalParameter: [it],
+                summary: it.summary,
+                required: it.required,
+                nullable: it.nullable,
+                readOnly: false,
+                serializedName: it.language.default.serializedName,
+              }),
+            );
+          });
+
+          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input] });
+          if (op.convenienceApi) {
+            this.trackSchemaUsage(optionBagSchema, {
+              usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+            });
+          }
+
+          // option bag parameter
+          const optionBagParameter = new Parameter(
+            "options",
+            optionBagSchema.language.default.description,
+            optionBagSchema,
+            {
+              implementation: ImplementationLocation.Method,
+              required: true,
+              nullable: false,
+            },
+          );
+
+          request.signatureParameters = [optionBagParameter];
+          request.parameters.forEach((it) => (it.groupedBy = optionBagParameter));
+          request.parameters.push(optionBagParameter);
+        }
+      }
+    }
 
   }
 
@@ -2197,6 +2594,101 @@ export class CodeModelBuilder {
         }
       }
     }
+  }
+
+  private processResponseFromSdkType(op: CodeModelOperation, statusCode: number | HttpStatusCodeRange, sdkResponse: SdkHttpResponse, longRunning: boolean) {
+    // TODO: what to do if more than 1 response?
+    // It happens when the response type is Union, on one status code.
+    // let response: Response;
+    let headers: Array<HttpHeader> | undefined = undefined;
+
+    // headers
+    headers = [];
+    if (sdkResponse.headers) {
+      for (const header of sdkResponse.headers) {
+        const schema = this.processSchemaFromSdkType(header.type, header.serializedName);
+        headers.push(
+          new HttpHeader(header.serializedName, schema, {
+            language: {
+              default: {
+                name: header.serializedName,
+                description: header.description ?? header.details,
+              },
+            }
+          }),
+        );
+      }
+    }
+
+    // let responseBody: SdkHttpResponse | undefined = undefined;
+    let bodyType: SdkType | undefined = sdkResponse.type;
+    let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
+
+    const unknownResponseBody =
+    sdkResponse.contentTypes && sdkResponse.contentTypes.length > 0 && !isKnownContentType(sdkResponse.contentTypes);
+
+    let response: Response;
+    if (unknownResponseBody && bodyType && bodyType.kind === "bytes") {
+      // binary
+      response = new BinaryResponse({
+        protocol: {
+          http: {
+            statusCodes: statusCode,
+            headers: headers,
+            mediaTypes: sdkResponse.contentTypes,
+            knownMediaType: KnownMediaType.Binary,
+          },
+        },
+        language: {
+          default: {
+            name: op.language.default.name + "Response",
+            description: sdkResponse.description ?? bodyType.details,
+          },
+        },
+      });
+    } else if (bodyType) {
+      // schema (usually JSON)
+      let schema: Schema | undefined = undefined;
+      if (longRunning) {
+        // LRO uses the LroMetadata for poll/final result, not the response of activation request
+        trackConvenienceApi = false;
+      }
+      if (!schema) {
+        schema = this.processSchemaFromSdkType(bodyType, op.language.default.name + "Response");
+      }
+      response = new SchemaResponse(schema, {
+        protocol: {
+          http: {
+            statusCodes: statusCode,
+            headers: headers,
+            mediaTypes: sdkResponse.contentTypes,
+          },
+        },
+        language: {
+          default: {
+            name: op.language.default.name + "Response",
+            description: bodyType.description ?? bodyType.details,
+          },
+        },
+      });
+    } else {
+      // not binary nor schema, usually NoContent
+      response = new Response({
+        protocol: {
+          http: {
+            statusCodes: statusCode,
+            headers: headers,
+          },
+        },
+        language: {
+          default: {
+            name: op.language.default.name + "Response",
+            description: this.getResponseDescription(resp),
+          },
+        },
+      });
+    }
+    
   }
 
   private getStatusCodes(statusCodes: HttpStatusCodesEntry): string[] {
@@ -2719,6 +3211,14 @@ export class CodeModelBuilder {
     );
   }
 
+  private processBinarySchemaFromSdkType(type: SdkBuiltInType): BinarySchema {
+    return this.codeModel.schemas.add(
+      new BinarySchema(type.description ?? "", {
+        summary: type.details,
+      }),
+    );
+  }
+
   private getUnionVariantName(type: Type | undefined, option: any): string {
     if (type === undefined) {
       throw new Error("type is undefined.");
@@ -3014,19 +3514,15 @@ export class CodeModelBuilder {
     );
   }
 
-  private isSubscriptionId(param: HttpOperationParameter): boolean {
+  private isSubscriptionId(param: SdkPathParameter): boolean {
     return (
-      "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() &&
-      param.param &&
-      isArmCommonType(param.param) &&
-      isPathParam(this.program, param.param)
+      "subscriptionId".toLocaleLowerCase() === param.name.toLocaleLowerCase()
     );
   }
 
-  private subscriptionIdParameter(parameter: HttpOperationParameter): Parameter {
+  private subscriptionIdParameter(parameter: SdkPathParameter): Parameter {
     if (!this._subscriptionParameter) {
-      const param = parameter.param;
-      const description = getDoc(this.program, param);
+      const description = parameter.description;
       this._subscriptionParameter = new Parameter(
         "subscriptionId",
         description ? description : "The ID of the target subscription.",
