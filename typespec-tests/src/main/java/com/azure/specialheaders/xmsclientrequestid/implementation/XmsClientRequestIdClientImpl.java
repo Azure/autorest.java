@@ -6,7 +6,6 @@ package com.azure.specialheaders.xmsclientrequestid.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -109,7 +108,7 @@ public final class XmsClientRequestIdClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get(RequestOptions requestOptions, Context context);
 
         @Get("/azure/special-headers/x-ms-client-request-id")
         @ExpectedResponses({ 204 })
@@ -117,7 +116,7 @@ public final class XmsClientRequestIdClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> getSync(RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -128,13 +127,11 @@ public final class XmsClientRequestIdClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return operation with azure `x-ms-client-request-id` header along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(requestOptions, context));
     }
 
     /**
@@ -145,11 +142,10 @@ public final class XmsClientRequestIdClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return operation with azure `x-ms-client-request-id` header along with {@link Response}.
+     * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.getSync(accept, requestOptions, Context.NONE);
+        return service.getSync(requestOptions, Context.NONE);
     }
 }

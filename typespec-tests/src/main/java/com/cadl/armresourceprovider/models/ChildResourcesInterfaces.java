@@ -22,7 +22,7 @@ public interface ChildResourcesInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a ChildResource along with {@link Response}.
+     * @return subresource of Top Level Arm Resource along with {@link Response}.
      */
     Response<ChildResource> getWithResponse(String resourceGroupName, String topLevelArmResourceName,
         String childResourceName, Context context);
@@ -36,7 +36,7 @@ public interface ChildResourcesInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a ChildResource.
+     * @return subresource of Top Level Arm Resource.
      */
     ChildResource get(String resourceGroupName, String topLevelArmResourceName, String childResourceName);
 
@@ -124,7 +124,7 @@ public interface ChildResourcesInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a ChildResource along with {@link Response}.
+     * @return subresource of Top Level Arm Resource along with {@link Response}.
      */
     ChildResource getById(String id);
 
@@ -136,7 +136,7 @@ public interface ChildResourcesInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a ChildResource along with {@link Response}.
+     * @return subresource of Top Level Arm Resource along with {@link Response}.
      */
     Response<ChildResource> getByIdWithResponse(String id, Context context);
 

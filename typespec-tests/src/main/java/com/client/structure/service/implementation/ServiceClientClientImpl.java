@@ -5,7 +5,6 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -96,45 +95,17 @@ public final class ServiceClientClientImpl {
     }
 
     /**
-     * The BazFoosImpl object to access its operations.
+     * The BazesImpl object to access its operations.
      */
-    private final BazFoosImpl bazFoos;
+    private final BazesImpl bazes;
 
     /**
-     * Gets the BazFoosImpl object to access its operations.
+     * Gets the BazesImpl object to access its operations.
      * 
-     * @return the BazFoosImpl object.
+     * @return the BazesImpl object.
      */
-    public BazFoosImpl getBazFoos() {
-        return this.bazFoos;
-    }
-
-    /**
-     * The QuxesImpl object to access its operations.
-     */
-    private final QuxesImpl quxes;
-
-    /**
-     * Gets the QuxesImpl object to access its operations.
-     * 
-     * @return the QuxesImpl object.
-     */
-    public QuxesImpl getQuxes() {
-        return this.quxes;
-    }
-
-    /**
-     * The QuxBarsImpl object to access its operations.
-     */
-    private final QuxBarsImpl quxBars;
-
-    /**
-     * Gets the QuxBarsImpl object to access its operations.
-     * 
-     * @return the QuxBarsImpl object.
-     */
-    public QuxBarsImpl getQuxBars() {
-        return this.quxBars;
+    public BazesImpl getBazes() {
+        return this.bazes;
     }
 
     /**
@@ -152,6 +123,20 @@ public final class ServiceClientClientImpl {
     }
 
     /**
+     * The QuxesImpl object to access its operations.
+     */
+    private final QuxesImpl quxes;
+
+    /**
+     * Gets the QuxesImpl object to access its operations.
+     * 
+     * @return the QuxesImpl object.
+     */
+    public QuxesImpl getQuxes() {
+        return this.quxes;
+    }
+
+    /**
      * The BarsImpl object to access its operations.
      */
     private final BarsImpl bars;
@@ -163,6 +148,34 @@ public final class ServiceClientClientImpl {
      */
     public BarsImpl getBars() {
         return this.bars;
+    }
+
+    /**
+     * The FoosOperationsImpl object to access its operations.
+     */
+    private final FoosOperationsImpl foosOperations;
+
+    /**
+     * Gets the FoosOperationsImpl object to access its operations.
+     * 
+     * @return the FoosOperationsImpl object.
+     */
+    public FoosOperationsImpl getFoosOperations() {
+        return this.foosOperations;
+    }
+
+    /**
+     * The BarsOperationsImpl object to access its operations.
+     */
+    private final BarsOperationsImpl barsOperations;
+
+    /**
+     * Gets the BarsOperationsImpl object to access its operations.
+     * 
+     * @return the BarsOperationsImpl object.
+     */
+    public BarsOperationsImpl getBarsOperations() {
+        return this.barsOperations;
     }
 
     /**
@@ -201,11 +214,12 @@ public final class ServiceClientClientImpl {
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.client = client;
-        this.bazFoos = new BazFoosImpl(this);
-        this.quxes = new QuxesImpl(this);
-        this.quxBars = new QuxBarsImpl(this);
+        this.bazes = new BazesImpl(this);
         this.foos = new FoosImpl(this);
+        this.quxes = new QuxesImpl(this);
         this.bars = new BarsImpl(this);
+        this.foosOperations = new FoosOperationsImpl(this);
+        this.barsOperations = new BarsOperationsImpl(this);
         this.service
             = RestProxy.create(ServiceClientClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -224,7 +238,7 @@ public final class ServiceClientClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> one(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/one")
         @ExpectedResponses({ 204 })
@@ -233,7 +247,7 @@ public final class ServiceClientClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> oneSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/two")
         @ExpectedResponses({ 204 })
@@ -242,7 +256,7 @@ public final class ServiceClientClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> two(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/two")
         @ExpectedResponses({ 204 })
@@ -251,7 +265,7 @@ public final class ServiceClientClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> twoSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -266,9 +280,8 @@ public final class ServiceClientClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> oneWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.one(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
+            .withContext(context -> service.one(this.getEndpoint(), this.getClient(), requestOptions, context));
     }
 
     /**
@@ -283,8 +296,7 @@ public final class ServiceClientClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> oneWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.oneSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
+        return service.oneSync(this.getEndpoint(), this.getClient(), requestOptions, Context.NONE);
     }
 
     /**
@@ -299,9 +311,8 @@ public final class ServiceClientClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> twoWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.two(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
+            .withContext(context -> service.two(this.getEndpoint(), this.getClient(), requestOptions, context));
     }
 
     /**
@@ -316,7 +327,6 @@ public final class ServiceClientClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> twoWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.twoSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
+        return service.twoSync(this.getEndpoint(), this.getClient(), requestOptions, Context.NONE);
     }
 }

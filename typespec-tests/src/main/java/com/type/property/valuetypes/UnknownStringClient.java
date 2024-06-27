@@ -51,7 +51,7 @@ public final class UnknownStringClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return call along with {@link Response}.
+     * @return model with a property unknown, and the data is a string along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -91,7 +91,7 @@ public final class UnknownStringClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return call.
+     * @return model with a property unknown, and the data is a string.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

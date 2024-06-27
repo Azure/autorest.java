@@ -64,7 +64,7 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> noDecoratorInInternal(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/noDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -73,7 +73,7 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> noDecoratorInInternalSync(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -82,7 +82,7 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> internalDecoratorInInternal(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -91,7 +91,7 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> internalDecoratorInInternalSync(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -100,7 +100,7 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> publicDecoratorInInternal(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -109,7 +109,7 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> publicDecoratorInInternalSync(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**

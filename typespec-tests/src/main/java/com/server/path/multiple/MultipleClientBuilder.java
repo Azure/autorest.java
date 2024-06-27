@@ -190,6 +190,24 @@ public final class MultipleClientBuilder implements HttpTrait<MultipleClientBuil
     }
 
     /*
+     * Pass in v1.0 for API version.
+     */
+    @Generated
+    private String apiVersion;
+
+    /**
+     * Sets Pass in v1.0 for API version.
+     * 
+     * @param apiVersion the apiVersion value.
+     * @return the MultipleClientBuilder.
+     */
+    @Generated
+    public MultipleClientBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -237,7 +255,7 @@ public final class MultipleClientBuilder implements HttpTrait<MultipleClientBuil
         MultipleServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : MultipleServiceVersion.getLatest();
         MultipleClientImpl client = new MultipleClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.apiVersion, localServiceVersion);
         return client;
     }
 
@@ -246,6 +264,7 @@ public final class MultipleClientBuilder implements HttpTrait<MultipleClientBuil
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+        Objects.requireNonNull(apiVersion, "'apiVersion' cannot be null.");
     }
 
     @Generated

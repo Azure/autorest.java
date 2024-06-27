@@ -64,7 +64,7 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> send(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> send(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData jsonEncodedNameModel, RequestOptions requestOptions,
             Context context);
 
@@ -74,7 +74,7 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("accept") String accept,
+        Response<Void> sendSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData jsonEncodedNameModel, RequestOptions requestOptions,
             Context context);
 
@@ -84,7 +84,7 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> get(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/serialization/encoded-name/json/property")
@@ -93,7 +93,7 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
@@ -117,8 +117,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.send(accept, jsonEncodedNameModel, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil
+            .withContext(context -> service.send(contentType, jsonEncodedNameModel, requestOptions, context));
     }
 
     /**
@@ -141,8 +142,8 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sendSync(accept, jsonEncodedNameModel, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.sendSync(contentType, jsonEncodedNameModel, requestOptions, Context.NONE);
     }
 
     /**

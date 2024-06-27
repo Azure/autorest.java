@@ -16,12 +16,12 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class BuiltinClientImpl {
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -74,7 +74,7 @@ public final class BuiltinClientImpl {
     /**
      * Initializes an instance of BuiltinClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public BuiltinClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -85,7 +85,7 @@ public final class BuiltinClientImpl {
      * Initializes an instance of BuiltinClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public BuiltinClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -96,7 +96,7 @@ public final class BuiltinClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public BuiltinClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;

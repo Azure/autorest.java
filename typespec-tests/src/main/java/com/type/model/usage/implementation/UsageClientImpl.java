@@ -110,7 +110,7 @@ public final class UsageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> input(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> input(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Post("/type/model/usage/input")
@@ -119,44 +119,46 @@ public final class UsageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> inputSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData input,
+        Response<Void> inputSync(@HeaderParam("Content-Type") String contentType,
+            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+
+        @Get("/type/model/usage/output")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> output(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
+
+        @Get("/type/model/usage/output")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> outputSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
+
+        @Post("/type/model/usage/input-output")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> inputAndOutput(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
-        @Get("/type/model/usage/output")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> output(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
-
-        @Get("/type/model/usage/output")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> outputSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
-
         @Post("/type/model/usage/input-output")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> inputAndOutput(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
-
-        @Post("/type/model/usage/input-output")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> inputAndOutputSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> inputAndOutputSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -179,8 +181,8 @@ public final class UsageClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> inputWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.input(accept, input, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.input(contentType, input, requestOptions, context));
     }
 
     /**
@@ -203,8 +205,8 @@ public final class UsageClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> inputWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.inputSync(accept, input, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.inputSync(contentType, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -283,8 +285,10 @@ public final class UsageClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> inputAndOutputWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.inputAndOutput(accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.inputAndOutput(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -315,7 +319,8 @@ public final class UsageClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> inputAndOutputWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.inputAndOutputSync(accept, body, requestOptions, Context.NONE);
+        return service.inputAndOutputSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 }

@@ -8,7 +8,6 @@ import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
@@ -76,6 +75,20 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
+     * Pass in either 'v1' or 'v2'. This represents the API version of a service.
+     */
+    private final String apiVersion;
+
+    /**
+     * Gets Pass in either 'v1' or 'v2'. This represents the API version of a service.
+     * 
+     * @return the apiVersion value.
+     */
+    public String getApiVersion() {
+        return this.apiVersion;
+    }
+
+    /**
      * Service version.
      */
     private final ServiceDrivenServiceVersion serviceVersion;
@@ -124,12 +137,14 @@ public final class ResiliencyServiceDrivenClientImpl {
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
      * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
      * the service had api-versions 'v1' and 'v2'.
+     * @param apiVersion Pass in either 'v1' or 'v2'. This represents the API version of a service.
      * @param serviceVersion Service version.
      */
-    public ResiliencyServiceDrivenClientImpl(String endpoint, String serviceDeploymentVersion,
+    public ResiliencyServiceDrivenClientImpl(String endpoint, String serviceDeploymentVersion, String apiVersion,
         ServiceDrivenServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceDeploymentVersion, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceDeploymentVersion, apiVersion,
+            serviceVersion);
     }
 
     /**
@@ -140,12 +155,13 @@ public final class ResiliencyServiceDrivenClientImpl {
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
      * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
      * the service had api-versions 'v1' and 'v2'.
+     * @param apiVersion Pass in either 'v1' or 'v2'. This represents the API version of a service.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, String endpoint,
-        String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
+        String serviceDeploymentVersion, String apiVersion, ServiceDrivenServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceDeploymentVersion,
-            serviceVersion);
+            apiVersion, serviceVersion);
     }
 
     /**
@@ -157,14 +173,17 @@ public final class ResiliencyServiceDrivenClientImpl {
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
      * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
      * the service had api-versions 'v1' and 'v2'.
+     * @param apiVersion Pass in either 'v1' or 'v2'. This represents the API version of a service.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        String endpoint, String serviceDeploymentVersion, ServiceDrivenServiceVersion serviceVersion) {
+        String endpoint, String serviceDeploymentVersion, String apiVersion,
+        ServiceDrivenServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.serviceDeploymentVersion = serviceDeploymentVersion;
+        this.apiVersion = apiVersion;
         this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(ResiliencyServiceDrivenClientService.class, this.httpPipeline,
             this.getSerializerAdapter());
@@ -185,8 +204,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> addOperation(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Delete("/add-operation")
         @ExpectedResponses({ 204 })
@@ -196,8 +214,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> addOperationSync(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Head("/add-optional-param/from-none")
         @ExpectedResponses({ 204 })
@@ -207,8 +224,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> fromNone(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Head("/add-optional-param/from-none")
         @ExpectedResponses({ 204 })
@@ -218,8 +234,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fromNoneSync(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-required")
         @ExpectedResponses({ 204 })
@@ -230,7 +245,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         Mono<Response<Void>> fromOneRequired(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
             @HostParam("apiVersion") String apiVersion, @QueryParam("parameter") String parameter,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-required")
         @ExpectedResponses({ 204 })
@@ -241,7 +256,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         Response<Void> fromOneRequiredSync(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
             @HostParam("apiVersion") String apiVersion, @QueryParam("parameter") String parameter,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-optional")
         @ExpectedResponses({ 204 })
@@ -251,8 +266,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> fromOneOptional(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Get("/add-optional-param/from-one-optional")
         @ExpectedResponses({ 204 })
@@ -262,8 +276,7 @@ public final class ResiliencyServiceDrivenClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fromOneOptionalSync(@HostParam("endpoint") String endpoint,
             @HostParam("serviceDeploymentVersion") String serviceDeploymentVersion,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -278,10 +291,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> addOperationWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.addOperation(this.getEndpoint(), this.getServiceDeploymentVersion(),
-                this.getServiceVersion().getVersion(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.addOperation(this.getEndpoint(),
+            this.getServiceDeploymentVersion(), this.getApiVersion(), requestOptions, context));
     }
 
     /**
@@ -296,9 +307,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> addOperationWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.addOperationSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return service.addOperationSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getApiVersion(),
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -320,9 +330,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fromNoneWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.fromNone(this.getEndpoint(), this.getServiceDeploymentVersion(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, context));
+            this.getApiVersion(), requestOptions, context));
     }
 
     /**
@@ -344,9 +353,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fromNoneWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.fromNoneSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return service.fromNoneSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getApiVersion(),
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -370,10 +378,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fromOneRequiredWithResponseAsync(String parameter, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.fromOneRequired(this.getEndpoint(), this.getServiceDeploymentVersion(),
-                this.getServiceVersion().getVersion(), parameter, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.fromOneRequired(this.getEndpoint(),
+            this.getServiceDeploymentVersion(), this.getApiVersion(), parameter, requestOptions, context));
     }
 
     /**
@@ -397,9 +403,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fromOneRequiredWithResponse(String parameter, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.fromOneRequiredSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
-            this.getServiceVersion().getVersion(), parameter, accept, requestOptions, Context.NONE);
+        return service.fromOneRequiredSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getApiVersion(),
+            parameter, requestOptions, Context.NONE);
     }
 
     /**
@@ -423,10 +428,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fromOneOptionalWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.fromOneOptional(this.getEndpoint(), this.getServiceDeploymentVersion(),
-                this.getServiceVersion().getVersion(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.fromOneOptional(this.getEndpoint(),
+            this.getServiceDeploymentVersion(), this.getApiVersion(), requestOptions, context));
     }
 
     /**
@@ -450,8 +453,7 @@ public final class ResiliencyServiceDrivenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fromOneOptionalWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.fromOneOptionalSync(this.getEndpoint(), this.getServiceDeploymentVersion(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        return service.fromOneOptionalSync(this.getEndpoint(), this.getServiceDeploymentVersion(), this.getApiVersion(),
+            requestOptions, Context.NONE);
     }
 }

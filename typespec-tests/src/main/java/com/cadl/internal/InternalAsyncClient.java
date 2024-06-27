@@ -17,9 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.internal.implementation.InternalOpsImpl;
-import com.cadl.internal.implementation.models.ResponseInternal;
 import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
+import com.cadl.internal.models.ResponseInternal;
 import reactor.core.publisher.Mono;
 
 /**
@@ -72,7 +72,7 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<BinaryData>> postInternalWithResponse(BinaryData apiRequest, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> postInternalWithResponse(BinaryData apiRequest, RequestOptions requestOptions) {
         return this.serviceClient.postInternalWithResponseAsync(apiRequest, requestOptions);
     }
 
@@ -137,7 +137,7 @@ public final class InternalAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<ResponseInternal> postInternal(ApiRequest apiRequest) {
+    public Mono<ResponseInternal> postInternal(ApiRequest apiRequest) {
         // Generated convenience method for postInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postInternalWithResponse(BinaryData.fromObject(apiRequest), requestOptions).flatMap(FluxUtil::toMono)

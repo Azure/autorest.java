@@ -15,29 +15,29 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.FluxUtil;
-import com.client.structure.service.implementation.QuxBarsImpl;
+import com.client.structure.service.implementation.BazesImpl;
 import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the asynchronous ServiceClientClient type.
  */
 @ServiceClient(builder = ServiceClientClientBuilder.class, isAsync = true)
-public final class QuxBarAsyncClient {
+public final class BazAsyncClient {
     @Generated
-    private final QuxBarsImpl serviceClient;
+    private final BazesImpl serviceClient;
 
     /**
-     * Initializes an instance of QuxBarAsyncClient class.
+     * Initializes an instance of BazAsyncClient class.
      * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    QuxBarAsyncClient(QuxBarsImpl serviceClient) {
+    BazAsyncClient(BazesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
-     * The nine operation.
+     * The seven operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -48,12 +48,12 @@ public final class QuxBarAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> nineWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.nineWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> sevenWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.sevenWithResponseAsync(requestOptions);
     }
 
     /**
-     * The nine operation.
+     * The seven operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -64,9 +64,9 @@ public final class QuxBarAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> nine() {
-        // Generated convenience method for nineWithResponse
+    public Mono<Void> seven() {
+        // Generated convenience method for sevenWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return nineWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        return sevenWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

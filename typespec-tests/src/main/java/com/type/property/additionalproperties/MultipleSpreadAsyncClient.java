@@ -56,7 +56,8 @@ public final class MultipleSpreadAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return call along with {@link Response} on successful completion of {@link Mono}.
+     * @return the model spread Record&lt;string&gt; and Record&lt;float32&gt; along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -99,7 +100,7 @@ public final class MultipleSpreadAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return call on successful completion of {@link Mono}.
+     * @return the model spread Record&lt;string&gt; and Record&lt;float32&gt; on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

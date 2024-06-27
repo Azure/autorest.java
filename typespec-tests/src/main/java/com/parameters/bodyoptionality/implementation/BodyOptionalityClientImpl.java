@@ -126,7 +126,7 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requiredExplicit(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> requiredExplicit(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/required-explicit")
@@ -135,7 +135,7 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requiredExplicitSync(@HeaderParam("accept") String accept,
+        Response<Void> requiredExplicitSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/required-implicit")
@@ -144,7 +144,7 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requiredImplicit(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> requiredImplicit(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData bodyModel, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/required-implicit")
@@ -153,7 +153,7 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requiredImplicitSync(@HeaderParam("accept") String accept,
+        Response<Void> requiredImplicitSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData bodyModel, RequestOptions requestOptions, Context context);
     }
 
@@ -177,8 +177,8 @@ public final class BodyOptionalityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requiredExplicitWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.requiredExplicit(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.requiredExplicit(contentType, body, requestOptions, context));
     }
 
     /**
@@ -201,8 +201,8 @@ public final class BodyOptionalityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requiredExplicitWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.requiredExplicitSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.requiredExplicitSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -225,8 +225,9 @@ public final class BodyOptionalityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requiredImplicitWithResponseAsync(BinaryData bodyModel, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.requiredImplicit(accept, bodyModel, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil
+            .withContext(context -> service.requiredImplicit(contentType, bodyModel, requestOptions, context));
     }
 
     /**
@@ -249,7 +250,7 @@ public final class BodyOptionalityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requiredImplicitWithResponse(BinaryData bodyModel, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.requiredImplicitSync(accept, bodyModel, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.requiredImplicitSync(contentType, bodyModel, requestOptions, Context.NONE);
     }
 }

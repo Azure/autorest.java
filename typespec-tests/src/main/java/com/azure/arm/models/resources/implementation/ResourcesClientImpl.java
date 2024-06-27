@@ -41,20 +41,6 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = ResourcesClientBuilder.class)
 public final class ResourcesClientImpl implements ResourcesClient {
     /**
-     * Server parameter.
-     */
-    private final String endpoint;
-
-    /**
-     * Gets Server parameter.
-     * 
-     * @return the endpoint value.
-     */
-    public String getEndpoint() {
-        return this.endpoint;
-    }
-
-    /**
      * Version parameter.
      */
     private final String apiVersion;
@@ -159,15 +145,13 @@ public final class ResourcesClientImpl implements ResourcesClient {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param defaultPollInterval The default poll interval for long-running operation.
      * @param environment The Azure environment.
-     * @param endpoint Server parameter.
      * @param subscriptionId The ID of the target subscription. The value must be an UUID.
      */
     ResourcesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, Duration defaultPollInterval,
-        AzureEnvironment environment, String endpoint, String subscriptionId) {
+        AzureEnvironment environment, String subscriptionId) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.defaultPollInterval = defaultPollInterval;
-        this.endpoint = endpoint;
         this.subscriptionId = subscriptionId;
         this.apiVersion = "2023-12-01-preview";
         this.topLevelTrackedResources = new TopLevelTrackedResourcesClientImpl(this);

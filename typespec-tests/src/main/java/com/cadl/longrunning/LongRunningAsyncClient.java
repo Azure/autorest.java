@@ -21,7 +21,6 @@ import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.JobData;
 import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
-import com.cadl.longrunning.models.PollResponse;
 import reactor.core.publisher.Mono;
 
 /**
@@ -50,12 +49,12 @@ public final class LongRunningAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLongRunning(RequestOptions requestOptions) {
-        return this.serviceClient.beginLongRunningAsync(requestOptions);
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> longRunningWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.longRunningWithResponseAsync(requestOptions);
     }
 
     /**
@@ -169,14 +168,14 @@ public final class LongRunningAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResponse, Void> beginLongRunning() {
-        // Generated convenience method for beginLongRunningWithModel
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> longRunning() {
+        // Generated convenience method for longRunningWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLongRunningWithModelAsync(requestOptions);
+        return longRunningWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

@@ -6,7 +6,6 @@ package com.encode.datetime.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -61,8 +60,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> defaultMethod(RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/responseheader/default")
         @ExpectedResponses({ 204 })
@@ -70,8 +68,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> defaultMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/responseheader/rfc3339")
         @ExpectedResponses({ 204 })
@@ -79,8 +76,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc3339(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> rfc3339(RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/responseheader/rfc3339")
         @ExpectedResponses({ 204 })
@@ -88,8 +84,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc3339Sync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> rfc3339Sync(RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/responseheader/rfc7231")
         @ExpectedResponses({ 204 })
@@ -97,8 +92,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc7231(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> rfc7231(RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/responseheader/rfc7231")
         @ExpectedResponses({ 204 })
@@ -106,8 +100,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc7231Sync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> rfc7231Sync(RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/responseheader/unix-timestamp")
         @ExpectedResponses({ 204 })
@@ -115,8 +108,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimestamp(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> unixTimestamp(RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/responseheader/unix-timestamp")
         @ExpectedResponses({ 204 })
@@ -124,8 +116,7 @@ public final class ResponseHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimestampSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> unixTimestampSync(RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -140,8 +131,7 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> defaultMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.defaultMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.defaultMethod(requestOptions, context));
     }
 
     /**
@@ -156,8 +146,7 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> defaultMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.defaultMethodSync(accept, requestOptions, Context.NONE);
+        return service.defaultMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -172,8 +161,7 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> rfc3339WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.rfc3339(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.rfc3339(requestOptions, context));
     }
 
     /**
@@ -188,8 +176,7 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> rfc3339WithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.rfc3339Sync(accept, requestOptions, Context.NONE);
+        return service.rfc3339Sync(requestOptions, Context.NONE);
     }
 
     /**
@@ -204,8 +191,7 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> rfc7231WithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.rfc7231(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.rfc7231(requestOptions, context));
     }
 
     /**
@@ -220,8 +206,7 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> rfc7231WithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.rfc7231Sync(accept, requestOptions, Context.NONE);
+        return service.rfc7231Sync(requestOptions, Context.NONE);
     }
 
     /**
@@ -236,8 +221,7 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimestampWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.unixTimestamp(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.unixTimestamp(requestOptions, context));
     }
 
     /**
@@ -252,7 +236,6 @@ public final class ResponseHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimestampWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.unixTimestampSync(accept, requestOptions, Context.NONE);
+        return service.unixTimestampSync(requestOptions, Context.NONE);
     }
 }

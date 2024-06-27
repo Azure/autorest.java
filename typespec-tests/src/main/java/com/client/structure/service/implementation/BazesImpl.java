@@ -5,7 +5,6 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -25,13 +24,13 @@ import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
- * An instance of this class provides access to all the operations defined in QuxBars.
+ * An instance of this class provides access to all the operations defined in Bazes.
  */
-public final class QuxBarsImpl {
+public final class BazesImpl {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final QuxBarsService service;
+    private final BazesService service;
 
     /**
      * The service client containing this operation class.
@@ -39,43 +38,43 @@ public final class QuxBarsImpl {
     private final ServiceClientClientImpl client;
 
     /**
-     * Initializes an instance of QuxBarsImpl.
+     * Initializes an instance of BazesImpl.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    QuxBarsImpl(ServiceClientClientImpl client) {
-        this.service = RestProxy.create(QuxBarsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    BazesImpl(ServiceClientClientImpl client) {
+        this.service = RestProxy.create(BazesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for ServiceClientClientQuxBars to be used by the proxy service to perform
+     * The interface defining all the services for ServiceClientClientBazes to be used by the proxy service to perform
      * REST calls.
      */
     @Host("{endpoint}/client/structure/{client}")
-    @ServiceInterface(name = "ServiceClientClientQ")
-    public interface QuxBarsService {
-        @Post("/nine")
+    @ServiceInterface(name = "ServiceClientClientB")
+    public interface BazesService {
+        @Post("/seven")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> nine(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> seven(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            RequestOptions requestOptions, Context context);
 
-        @Post("/nine")
+        @Post("/seven")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> nineSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> sevenSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
-     * The nine operation.
+     * The seven operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -85,14 +84,13 @@ public final class QuxBarsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> nineWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.nine(this.client.getEndpoint(), this.client.getClient(), accept,
-            requestOptions, context));
+    public Mono<Response<Void>> sevenWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+            context -> service.seven(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
     }
 
     /**
-     * The nine operation.
+     * The seven operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -102,9 +100,7 @@ public final class QuxBarsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> nineWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.nineSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
-            Context.NONE);
+    public Response<Void> sevenWithResponse(RequestOptions requestOptions) {
+        return service.sevenSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
     }
 }

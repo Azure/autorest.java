@@ -5,7 +5,6 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -55,45 +54,27 @@ public final class BarsImpl {
     @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "ServiceClientClientB")
     public interface BarsService {
-        @Post("/five")
+        @Post("/nine")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> five(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> nine(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            RequestOptions requestOptions, Context context);
 
-        @Post("/five")
+        @Post("/nine")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> fiveSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Post("/six")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> six(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Post("/six")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sixSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> nineSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
-     * The five operation.
+     * The nine operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -103,14 +84,13 @@ public final class BarsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> fiveWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.five(this.client.getEndpoint(), this.client.getClient(), accept,
-            requestOptions, context));
+    public Mono<Response<Void>> nineWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(
+            context -> service.nine(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
     }
 
     /**
-     * The five operation.
+     * The nine operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -120,43 +100,7 @@ public final class BarsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.fiveSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
-            Context.NONE);
-    }
-
-    /**
-     * The six operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sixWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.six(this.client.getEndpoint(), this.client.getClient(), accept,
-            requestOptions, context));
-    }
-
-    /**
-     * The six operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sixWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sixSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
-            Context.NONE);
+    public Response<Void> nineWithResponse(RequestOptions requestOptions) {
+        return service.nineSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
     }
 }

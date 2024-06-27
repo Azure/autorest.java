@@ -6,7 +6,6 @@ package com.specialwords.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -61,7 +60,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> and(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> and(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/and")
         @ExpectedResponses({ 204 })
@@ -69,7 +68,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> andSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> andSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/as")
         @ExpectedResponses({ 204 })
@@ -77,7 +76,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> as(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> as(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/as")
         @ExpectedResponses({ 204 })
@@ -85,7 +84,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> asSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> asSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/assert")
         @ExpectedResponses({ 204 })
@@ -93,8 +92,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> assertMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> assertMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/assert")
         @ExpectedResponses({ 204 })
@@ -102,8 +100,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> assertMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> assertMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/async")
         @ExpectedResponses({ 204 })
@@ -111,8 +108,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> async(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> async(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/async")
         @ExpectedResponses({ 204 })
@@ -120,7 +116,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> asyncSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> asyncSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/await")
         @ExpectedResponses({ 204 })
@@ -128,8 +124,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> await(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> await(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/await")
         @ExpectedResponses({ 204 })
@@ -137,7 +132,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> awaitSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> awaitSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/break")
         @ExpectedResponses({ 204 })
@@ -145,8 +140,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> breakMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> breakMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/break")
         @ExpectedResponses({ 204 })
@@ -154,8 +148,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> breakMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> breakMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/class")
         @ExpectedResponses({ 204 })
@@ -163,8 +156,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> classMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> classMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/class")
         @ExpectedResponses({ 204 })
@@ -172,8 +164,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> classMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> classMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/constructor")
         @ExpectedResponses({ 204 })
@@ -181,8 +172,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> constructor(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> constructor(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/constructor")
         @ExpectedResponses({ 204 })
@@ -190,8 +180,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> constructorSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> constructorSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/continue")
         @ExpectedResponses({ 204 })
@@ -199,8 +188,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> continueMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> continueMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/continue")
         @ExpectedResponses({ 204 })
@@ -208,8 +196,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> continueMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> continueMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/def")
         @ExpectedResponses({ 204 })
@@ -217,7 +204,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> def(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> def(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/def")
         @ExpectedResponses({ 204 })
@@ -225,7 +212,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> defSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/del")
         @ExpectedResponses({ 204 })
@@ -233,7 +220,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> del(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> del(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/del")
         @ExpectedResponses({ 204 })
@@ -241,7 +228,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> delSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> delSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/elif")
         @ExpectedResponses({ 204 })
@@ -249,7 +236,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> elif(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> elif(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/elif")
         @ExpectedResponses({ 204 })
@@ -257,7 +244,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> elifSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> elifSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/else")
         @ExpectedResponses({ 204 })
@@ -265,8 +252,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> elseMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> elseMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/else")
         @ExpectedResponses({ 204 })
@@ -274,8 +260,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> elseMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> elseMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/except")
         @ExpectedResponses({ 204 })
@@ -283,8 +268,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> except(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> except(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/except")
         @ExpectedResponses({ 204 })
@@ -292,7 +276,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> exceptSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> exceptSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/exec")
         @ExpectedResponses({ 204 })
@@ -300,7 +284,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> exec(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> exec(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/exec")
         @ExpectedResponses({ 204 })
@@ -308,7 +292,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> execSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> execSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/finally")
         @ExpectedResponses({ 204 })
@@ -316,8 +300,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> finallyMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> finallyMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/finally")
         @ExpectedResponses({ 204 })
@@ -325,8 +308,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> finallyMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> finallyMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/for")
         @ExpectedResponses({ 204 })
@@ -334,8 +316,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> forMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> forMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/for")
         @ExpectedResponses({ 204 })
@@ -343,8 +324,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> forMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> forMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/from")
         @ExpectedResponses({ 204 })
@@ -352,7 +332,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> from(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> from(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/from")
         @ExpectedResponses({ 204 })
@@ -360,7 +340,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> fromSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> fromSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/global")
         @ExpectedResponses({ 204 })
@@ -368,8 +348,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> global(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> global(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/global")
         @ExpectedResponses({ 204 })
@@ -377,7 +356,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> globalSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> globalSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/if")
         @ExpectedResponses({ 204 })
@@ -385,8 +364,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> ifMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> ifMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/if")
         @ExpectedResponses({ 204 })
@@ -394,8 +372,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> ifMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> ifMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/import")
         @ExpectedResponses({ 204 })
@@ -403,8 +380,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> importMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> importMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/import")
         @ExpectedResponses({ 204 })
@@ -412,8 +388,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> importMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> importMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/in")
         @ExpectedResponses({ 204 })
@@ -421,7 +396,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> in(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> in(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/in")
         @ExpectedResponses({ 204 })
@@ -429,7 +404,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> inSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> inSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/is")
         @ExpectedResponses({ 204 })
@@ -437,7 +412,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> is(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> is(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/is")
         @ExpectedResponses({ 204 })
@@ -445,7 +420,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> isSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> isSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/lambda")
         @ExpectedResponses({ 204 })
@@ -453,8 +428,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> lambda(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> lambda(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/lambda")
         @ExpectedResponses({ 204 })
@@ -462,7 +436,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> lambdaSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> lambdaSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/not")
         @ExpectedResponses({ 204 })
@@ -470,7 +444,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> not(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> not(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/not")
         @ExpectedResponses({ 204 })
@@ -478,7 +452,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> notSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> notSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/or")
         @ExpectedResponses({ 204 })
@@ -486,7 +460,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> or(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> or(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/or")
         @ExpectedResponses({ 204 })
@@ -494,7 +468,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> orSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> orSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/pass")
         @ExpectedResponses({ 204 })
@@ -502,7 +476,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> pass(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> pass(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/pass")
         @ExpectedResponses({ 204 })
@@ -510,7 +484,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> passSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> passSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/raise")
         @ExpectedResponses({ 204 })
@@ -518,8 +492,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> raise(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> raise(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/raise")
         @ExpectedResponses({ 204 })
@@ -527,7 +500,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> raiseSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> raiseSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/return")
         @ExpectedResponses({ 204 })
@@ -535,8 +508,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> returnMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> returnMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/return")
         @ExpectedResponses({ 204 })
@@ -544,8 +516,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> returnMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> returnMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/try")
         @ExpectedResponses({ 204 })
@@ -553,8 +524,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> tryMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> tryMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/try")
         @ExpectedResponses({ 204 })
@@ -562,8 +532,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> tryMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> tryMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/while")
         @ExpectedResponses({ 204 })
@@ -571,8 +540,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> whileMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> whileMethod(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/while")
         @ExpectedResponses({ 204 })
@@ -580,8 +548,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> whileMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> whileMethodSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/with")
         @ExpectedResponses({ 204 })
@@ -589,7 +556,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> with(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> with(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/with")
         @ExpectedResponses({ 204 })
@@ -597,7 +564,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> withSync(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/yield")
         @ExpectedResponses({ 204 })
@@ -605,8 +572,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> yield(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> yield(RequestOptions requestOptions, Context context);
 
         @Get("/special-words/operations/yield")
         @ExpectedResponses({ 204 })
@@ -614,7 +580,7 @@ public final class OperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> yieldSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> yieldSync(RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -629,8 +595,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> andWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.and(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.and(requestOptions, context));
     }
 
     /**
@@ -645,8 +610,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> andWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.andSync(accept, requestOptions, Context.NONE);
+        return service.andSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -661,8 +625,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> asWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.as(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.as(requestOptions, context));
     }
 
     /**
@@ -677,8 +640,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> asWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.asSync(accept, requestOptions, Context.NONE);
+        return service.asSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -693,8 +655,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> assertMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.assertMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.assertMethod(requestOptions, context));
     }
 
     /**
@@ -709,8 +670,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> assertMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.assertMethodSync(accept, requestOptions, Context.NONE);
+        return service.assertMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -725,8 +685,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> asyncWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.async(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.async(requestOptions, context));
     }
 
     /**
@@ -741,8 +700,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> asyncWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.asyncSync(accept, requestOptions, Context.NONE);
+        return service.asyncSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -757,8 +715,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> awaitWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.await(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.await(requestOptions, context));
     }
 
     /**
@@ -773,8 +730,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> awaitWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.awaitSync(accept, requestOptions, Context.NONE);
+        return service.awaitSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -789,8 +745,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> breakMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.breakMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.breakMethod(requestOptions, context));
     }
 
     /**
@@ -805,8 +760,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> breakMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.breakMethodSync(accept, requestOptions, Context.NONE);
+        return service.breakMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -821,8 +775,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> classMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.classMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.classMethod(requestOptions, context));
     }
 
     /**
@@ -837,8 +790,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> classMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.classMethodSync(accept, requestOptions, Context.NONE);
+        return service.classMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -853,8 +805,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> constructorWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.constructor(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.constructor(requestOptions, context));
     }
 
     /**
@@ -869,8 +820,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> constructorWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.constructorSync(accept, requestOptions, Context.NONE);
+        return service.constructorSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -885,8 +835,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> continueMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.continueMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.continueMethod(requestOptions, context));
     }
 
     /**
@@ -901,8 +850,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> continueMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.continueMethodSync(accept, requestOptions, Context.NONE);
+        return service.continueMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -917,8 +865,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> defWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.def(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.def(requestOptions, context));
     }
 
     /**
@@ -933,8 +880,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> defWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.defSync(accept, requestOptions, Context.NONE);
+        return service.defSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -949,8 +895,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.del(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.del(requestOptions, context));
     }
 
     /**
@@ -965,8 +910,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.delSync(accept, requestOptions, Context.NONE);
+        return service.delSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -981,8 +925,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> elifWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.elif(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.elif(requestOptions, context));
     }
 
     /**
@@ -997,8 +940,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> elifWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.elifSync(accept, requestOptions, Context.NONE);
+        return service.elifSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1013,8 +955,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> elseMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.elseMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.elseMethod(requestOptions, context));
     }
 
     /**
@@ -1029,8 +970,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> elseMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.elseMethodSync(accept, requestOptions, Context.NONE);
+        return service.elseMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1045,8 +985,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> exceptWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.except(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.except(requestOptions, context));
     }
 
     /**
@@ -1061,8 +1000,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> exceptWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.exceptSync(accept, requestOptions, Context.NONE);
+        return service.exceptSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1077,8 +1015,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> execWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.exec(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.exec(requestOptions, context));
     }
 
     /**
@@ -1093,8 +1030,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> execWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.execSync(accept, requestOptions, Context.NONE);
+        return service.execSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1109,8 +1045,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> finallyMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.finallyMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.finallyMethod(requestOptions, context));
     }
 
     /**
@@ -1125,8 +1060,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> finallyMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.finallyMethodSync(accept, requestOptions, Context.NONE);
+        return service.finallyMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1141,8 +1075,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> forMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.forMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.forMethod(requestOptions, context));
     }
 
     /**
@@ -1157,8 +1090,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> forMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.forMethodSync(accept, requestOptions, Context.NONE);
+        return service.forMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1173,8 +1105,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fromWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.from(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.from(requestOptions, context));
     }
 
     /**
@@ -1189,8 +1120,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fromWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.fromSync(accept, requestOptions, Context.NONE);
+        return service.fromSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1205,8 +1135,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> globalWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.global(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.global(requestOptions, context));
     }
 
     /**
@@ -1221,8 +1150,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> globalWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.globalSync(accept, requestOptions, Context.NONE);
+        return service.globalSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1237,8 +1165,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> ifMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.ifMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.ifMethod(requestOptions, context));
     }
 
     /**
@@ -1253,8 +1180,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> ifMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.ifMethodSync(accept, requestOptions, Context.NONE);
+        return service.ifMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1269,8 +1195,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> importMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.importMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.importMethod(requestOptions, context));
     }
 
     /**
@@ -1285,8 +1210,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> importMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.importMethodSync(accept, requestOptions, Context.NONE);
+        return service.importMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1301,8 +1225,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> inWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.in(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.in(requestOptions, context));
     }
 
     /**
@@ -1317,8 +1240,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> inWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.inSync(accept, requestOptions, Context.NONE);
+        return service.inSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1333,8 +1255,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> isWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.is(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.is(requestOptions, context));
     }
 
     /**
@@ -1349,8 +1270,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> isWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.isSync(accept, requestOptions, Context.NONE);
+        return service.isSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1365,8 +1285,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> lambdaWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.lambda(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.lambda(requestOptions, context));
     }
 
     /**
@@ -1381,8 +1300,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> lambdaWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.lambdaSync(accept, requestOptions, Context.NONE);
+        return service.lambdaSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1397,8 +1315,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> notWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.not(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.not(requestOptions, context));
     }
 
     /**
@@ -1413,8 +1330,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> notWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.notSync(accept, requestOptions, Context.NONE);
+        return service.notSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1429,8 +1345,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> orWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.or(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.or(requestOptions, context));
     }
 
     /**
@@ -1445,8 +1360,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> orWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.orSync(accept, requestOptions, Context.NONE);
+        return service.orSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1461,8 +1375,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> passWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.pass(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.pass(requestOptions, context));
     }
 
     /**
@@ -1477,8 +1390,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> passWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.passSync(accept, requestOptions, Context.NONE);
+        return service.passSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1493,8 +1405,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> raiseWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.raise(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.raise(requestOptions, context));
     }
 
     /**
@@ -1509,8 +1420,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> raiseWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.raiseSync(accept, requestOptions, Context.NONE);
+        return service.raiseSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1525,8 +1435,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> returnMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.returnMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.returnMethod(requestOptions, context));
     }
 
     /**
@@ -1541,8 +1450,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> returnMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.returnMethodSync(accept, requestOptions, Context.NONE);
+        return service.returnMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1557,8 +1465,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> tryMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.tryMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.tryMethod(requestOptions, context));
     }
 
     /**
@@ -1573,8 +1480,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> tryMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.tryMethodSync(accept, requestOptions, Context.NONE);
+        return service.tryMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1589,8 +1495,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> whileMethodWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.whileMethod(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.whileMethod(requestOptions, context));
     }
 
     /**
@@ -1605,8 +1510,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> whileMethodWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.whileMethodSync(accept, requestOptions, Context.NONE);
+        return service.whileMethodSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1621,8 +1525,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.with(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.with(requestOptions, context));
     }
 
     /**
@@ -1637,8 +1540,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withSync(accept, requestOptions, Context.NONE);
+        return service.withSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -1653,8 +1555,7 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> yieldWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.yield(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.yield(requestOptions, context));
     }
 
     /**
@@ -1669,7 +1570,6 @@ public final class OperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> yieldWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.yieldSync(accept, requestOptions, Context.NONE);
+        return service.yieldSync(requestOptions, Context.NONE);
     }
 }

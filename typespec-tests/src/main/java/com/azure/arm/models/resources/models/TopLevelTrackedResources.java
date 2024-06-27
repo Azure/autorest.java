@@ -21,7 +21,8 @@ public interface TopLevelTrackedResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelTrackedResource along with {@link Response}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
+     * with {@link Response}.
      */
     Response<TopLevelTrackedResource> getByResourceGroupWithResponse(String resourceGroupName,
         String topLevelTrackedResourceName, Context context);
@@ -34,7 +35,7 @@ public interface TopLevelTrackedResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelTrackedResource.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
      */
     TopLevelTrackedResource getByResourceGroup(String resourceGroupName, String topLevelTrackedResourceName);
 
@@ -115,7 +116,8 @@ public interface TopLevelTrackedResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelTrackedResource along with {@link Response}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
+     * with {@link Response}.
      */
     TopLevelTrackedResource getById(String id);
 
@@ -127,7 +129,8 @@ public interface TopLevelTrackedResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelTrackedResource along with {@link Response}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
+     * with {@link Response}.
      */
     Response<TopLevelTrackedResource> getByIdWithResponse(String id, Context context);
 

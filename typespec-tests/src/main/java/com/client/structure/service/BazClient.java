@@ -14,25 +14,23 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-import com.azure.core.util.FluxUtil;
-import com.client.structure.service.implementation.BazFoosImpl;
-import reactor.core.publisher.Mono;
+import com.client.structure.service.implementation.BazesImpl;
 
 /**
- * Initializes a new instance of the asynchronous ServiceClientClient type.
+ * Initializes a new instance of the synchronous ServiceClientClient type.
  */
-@ServiceClient(builder = ServiceClientClientBuilder.class, isAsync = true)
-public final class BazFooAsyncClient {
+@ServiceClient(builder = ServiceClientClientBuilder.class)
+public final class BazClient {
     @Generated
-    private final BazFoosImpl serviceClient;
+    private final BazesImpl serviceClient;
 
     /**
-     * Initializes an instance of BazFooAsyncClient class.
+     * Initializes an instance of BazClient class.
      * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    BazFooAsyncClient(BazFoosImpl serviceClient) {
+    BazClient(BazesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -44,12 +42,12 @@ public final class BazFooAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sevenWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.sevenWithResponseAsync(requestOptions);
+    public Response<Void> sevenWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.sevenWithResponse(requestOptions);
     }
 
     /**
@@ -60,13 +58,12 @@ public final class BazFooAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> seven() {
+    public void seven() {
         // Generated convenience method for sevenWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return sevenWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        sevenWithResponse(requestOptions).getValue();
     }
 }

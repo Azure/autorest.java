@@ -62,7 +62,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/default")
@@ -71,7 +71,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> defaultMethodSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> defaultMethodSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/octet-stream")
@@ -80,7 +80,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> octetStream(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> octetStream(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/octet-stream")
@@ -89,7 +89,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> octetStreamSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> octetStreamSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/custom-content-type")
@@ -98,7 +98,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> customContentType(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> customContentType(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/body/response/custom-content-type")
@@ -107,7 +107,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> customContentTypeSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> customContentTypeSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/base64")
@@ -116,7 +116,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> base64(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/base64")
@@ -125,7 +125,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64Sync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> base64Sync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/base64url")
@@ -134,7 +134,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64url(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> base64url(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/base64url")
@@ -143,7 +143,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64urlSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> base64urlSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 

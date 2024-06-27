@@ -139,8 +139,9 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> longRunningRpc(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData generationOptions,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData generationOptions, RequestOptions requestOptions,
+            Context context);
 
         @Post("/azure/core/lro/rpc/generations:submit")
         @ExpectedResponses({ 202 })
@@ -149,8 +150,9 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> longRunningRpcSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData generationOptions,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData generationOptions, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -183,7 +185,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions Options for the generation.
+     * @param generationOptions The generationOptions parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -195,9 +197,10 @@ public final class RpcClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData generationOptions,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.longRunningRpc(this.getServiceVersion().getVersion(), accept,
-            generationOptions, requestOptions, context));
+        return FluxUtil.withContext(context -> service.longRunningRpc(this.getServiceVersion().getVersion(),
+            contentType, accept, generationOptions, requestOptions, context));
     }
 
     /**
@@ -230,7 +233,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions Options for the generation.
+     * @param generationOptions The generationOptions parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -241,8 +244,9 @@ public final class RpcClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> longRunningRpcWithResponse(BinaryData generationOptions,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.longRunningRpcSync(this.getServiceVersion().getVersion(), accept, generationOptions,
+        return service.longRunningRpcSync(this.getServiceVersion().getVersion(), contentType, accept, generationOptions,
             requestOptions, Context.NONE);
     }
 
@@ -276,7 +280,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions Options for the generation.
+     * @param generationOptions The generationOptions parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -330,7 +334,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions Options for the generation.
+     * @param generationOptions The generationOptions parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -384,7 +388,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions Options for the generation.
+     * @param generationOptions The generationOptions parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -439,7 +443,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions Options for the generation.
+     * @param generationOptions The generationOptions parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

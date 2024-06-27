@@ -7,9 +7,7 @@ package com.cadl.armresourceprovider.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
-import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Put;
@@ -62,31 +60,29 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * The interface defining all the services for ArmResourceProviderClientCustomTemplateResourceInterfaces to be used
      * by the proxy service to perform REST calls.
      */
-    @Host("{endpoint}")
+    @Host("https://management.azure.com")
     @ServiceInterface(name = "ArmResourceProviderC")
     public interface CustomTemplateResourceInterfacesService {
-        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/customTemplateResources/{customTemplateResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> createOrUpdate(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
+        Mono<Response<Flux<ByteBuffer>>> createOrUpdate(@QueryParam("api-version") String apiVersion,
+            @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("If-Match") String ifMatch,
             @HeaderParam("If-None-Match") String ifNoneMatch,
             @PathParam("customTemplateResourceName") String customTemplateResourceName,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") CustomTemplateResourceInner resource,
-            Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") CustomTemplateResourceInner resource, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/customTemplateResources/{customTemplateResourceName}")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> updateLongRunning(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
+        Mono<Response<Flux<ByteBuffer>>> updateLongRunning(@QueryParam("api-version") String apiVersion,
+            @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("customTemplateResourceName") String customTemplateResourceName,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") CustomTemplateResourcePatch properties,
-            Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") CustomTemplateResourcePatch properties, Context context);
     }
 
     /**
@@ -106,10 +102,6 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
         String customTemplateResourceName, CustomTemplateResourceInner resource, String ifMatch, String ifNoneMatch) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -127,11 +119,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, ifMatch, ifNoneMatch, customTemplateResourceName,
-                accept, resource, context))
+            .withContext(context -> service.createOrUpdate(this.client.getApiVersion(), this.client.getSubscriptionId(),
+                resourceGroupName, ifMatch, ifNoneMatch, customTemplateResourceName, contentType, accept, resource,
+                context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -154,10 +147,6 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
         String customTemplateResourceName, CustomTemplateResourceInner resource, String ifMatch, String ifNoneMatch,
         Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -175,11 +164,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, ifMatch, ifNoneMatch, customTemplateResourceName,
-            accept, resource, context);
+        return service.createOrUpdate(this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
+            ifMatch, ifNoneMatch, customTemplateResourceName, contentType, accept, resource, context);
     }
 
     /**
@@ -428,10 +417,6 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateLongRunningWithResponseAsync(String resourceGroupName,
         String customTemplateResourceName, CustomTemplateResourcePatch properties) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -449,11 +434,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.updateLongRunning(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, accept, properties,
-                context))
+            .withContext(
+                context -> service.updateLongRunning(this.client.getApiVersion(), this.client.getSubscriptionId(),
+                    resourceGroupName, customTemplateResourceName, contentType, accept, properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -473,10 +459,6 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateLongRunningWithResponseAsync(String resourceGroupName,
         String customTemplateResourceName, CustomTemplateResourcePatch properties, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -494,11 +476,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.updateLongRunning(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, accept, properties,
-            context);
+        return service.updateLongRunning(this.client.getApiVersion(), this.client.getSubscriptionId(),
+            resourceGroupName, customTemplateResourceName, contentType, accept, properties, context);
     }
 
     /**

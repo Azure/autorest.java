@@ -33,10 +33,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
-import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -44,7 +42,6 @@ import com.azure.core.util.serializer.TypeReference;
 import com.cadl.longrunning.LongRunningServiceVersion;
 import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
-import com.cadl.longrunning.models.PollResponse;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -60,12 +57,12 @@ public final class LongRunningClientImpl {
     private final LongRunningClientService service;
 
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -118,7 +115,7 @@ public final class LongRunningClientImpl {
     /**
      * Initializes an instance of LongRunningClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public LongRunningClientImpl(String endpoint, LongRunningServiceVersion serviceVersion) {
@@ -130,7 +127,7 @@ public final class LongRunningClientImpl {
      * Initializes an instance of LongRunningClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public LongRunningClientImpl(HttpPipeline httpPipeline, String endpoint, LongRunningServiceVersion serviceVersion) {
@@ -142,7 +139,7 @@ public final class LongRunningClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public LongRunningClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -167,8 +164,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> longRunning(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> longRunning(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Post("/long-running/post")
         @ExpectedResponses({ 202 })
@@ -176,8 +173,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> longRunningSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> longRunningSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/long-running/jobs/{id}")
         @ExpectedResponses({ 200 })
@@ -187,7 +184,7 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getJob(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("id") String id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/long-running/jobs/{id}")
         @ExpectedResponses({ 200 })
@@ -197,7 +194,7 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getJobSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("id") String id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/long-running/jobs")
         @ExpectedResponses({ 202 })
@@ -206,8 +203,9 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createJob(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData jobData, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData jobData,
+            RequestOptions requestOptions, Context context);
 
         @Post("/long-running/jobs")
         @ExpectedResponses({ 202 })
@@ -216,8 +214,9 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createJobSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData jobData, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData jobData,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -231,10 +230,8 @@ public final class LongRunningClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Void>> longRunningWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.longRunning(this.getEndpoint(), accept, requestOptions, context));
+    public Mono<Response<Void>> longRunningWithResponseAsync(RequestOptions requestOptions) {
+        return FluxUtil.withContext(context -> service.longRunning(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -248,93 +245,8 @@ public final class LongRunningClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<Void> longRunningWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.longRunningSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
-    }
-
-    /**
-     * The longRunning operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLongRunningAsync(RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.longRunningWithResponseAsync(requestOptions),
-            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null
-                    ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
-    }
-
-    /**
-     * The longRunning operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLongRunning(RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.longRunningWithResponse(requestOptions),
-            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null
-                    ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
-    }
-
-    /**
-     * The longRunning operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollResponse, Void> beginLongRunningWithModelAsync(RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.longRunningWithResponseAsync(requestOptions),
-            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null
-                    ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(Void.class));
-    }
-
-    /**
-     * The longRunning operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollResponse, Void> beginLongRunningWithModel(RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.longRunningWithResponse(requestOptions),
-            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-                .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null
-                    ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(Void.class));
+    public Response<Void> longRunningWithResponse(RequestOptions requestOptions) {
+        return service.longRunningSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 
     /**
@@ -481,6 +393,7 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -498,7 +411,7 @@ public final class LongRunningClientImpl {
             }
         });
         return FluxUtil.withContext(context -> service.createJob(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, jobData, requestOptionsLocal, context));
+            this.getServiceVersion().getVersion(), contentType, accept, jobData, requestOptionsLocal, context));
     }
 
     /**
@@ -557,6 +470,7 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
@@ -573,8 +487,8 @@ public final class LongRunningClientImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, jobData,
-            requestOptionsLocal, Context.NONE);
+        return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), contentType, accept,
+            jobData, requestOptionsLocal, Context.NONE);
     }
 
     /**

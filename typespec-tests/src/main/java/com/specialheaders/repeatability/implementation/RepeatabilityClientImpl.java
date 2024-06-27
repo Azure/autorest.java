@@ -5,7 +5,6 @@
 package com.specialheaders.repeatability.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
@@ -113,8 +112,7 @@ public final class RepeatabilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> immediateSuccess(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> immediateSuccess(RequestOptions requestOptions, Context context);
 
         @Post("/special-headers/repeatability/immediateSuccess")
         @ExpectedResponses({ 204 })
@@ -122,8 +120,7 @@ public final class RepeatabilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> immediateSuccessSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> immediateSuccessSync(RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -147,7 +144,6 @@ public final class RepeatabilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> immediateSuccessWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
@@ -163,7 +159,7 @@ public final class RepeatabilityClientImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return FluxUtil.withContext(context -> service.immediateSuccess(accept, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.immediateSuccess(requestOptionsLocal, context));
     }
 
     /**
@@ -187,7 +183,6 @@ public final class RepeatabilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> immediateSuccessWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = UUID.randomUUID().toString();
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
@@ -203,6 +198,6 @@ public final class RepeatabilityClientImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return service.immediateSuccessSync(accept, requestOptionsLocal, Context.NONE);
+        return service.immediateSuccessSync(requestOptionsLocal, Context.NONE);
     }
 }

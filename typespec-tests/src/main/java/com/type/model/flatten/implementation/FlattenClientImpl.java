@@ -109,8 +109,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putFlattenModel(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> putFlattenModel(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/flatten/flattenModel")
         @ExpectedResponses({ 200 })
@@ -118,8 +119,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putFlattenModelSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Response<BinaryData> putFlattenModelSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/flatten/nestedFlattenModel")
         @ExpectedResponses({ 200 })
@@ -127,8 +129,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putNestedFlattenModel(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> putNestedFlattenModel(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/flatten/nestedFlattenModel")
         @ExpectedResponses({ 200 })
@@ -136,8 +139,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putNestedFlattenModelSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Response<BinaryData> putNestedFlattenModelSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -178,8 +182,10 @@ public final class FlattenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putFlattenModelWithResponseAsync(BinaryData input,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putFlattenModel(accept, input, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.putFlattenModel(contentType, accept, input, requestOptions, context));
     }
 
     /**
@@ -218,8 +224,9 @@ public final class FlattenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putFlattenModelWithResponse(BinaryData input, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putFlattenModelSync(accept, input, requestOptions, Context.NONE);
+        return service.putFlattenModelSync(contentType, accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -266,8 +273,10 @@ public final class FlattenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNestedFlattenModelWithResponseAsync(BinaryData input,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putNestedFlattenModel(accept, input, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.putNestedFlattenModel(contentType, accept, input, requestOptions, context));
     }
 
     /**
@@ -312,7 +321,8 @@ public final class FlattenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putNestedFlattenModelWithResponse(BinaryData input, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putNestedFlattenModelSync(accept, input, requestOptions, Context.NONE);
+        return service.putNestedFlattenModelSync(contentType, accept, input, requestOptions, Context.NONE);
     }
 }
