@@ -688,10 +688,10 @@ export class CodeModelBuilder {
     const operationGroups: SdkClientType<SdkHttpOperation>[] = [];
     for (const method of client.methods) {
       if (method.kind === "clientaccessor") {
-        const client = method.response;
-        operationGroups.push(client);
+        const subClient = method.response;
+        operationGroups.push(subClient);
         if (includeNestedOperationGroups) {
-          for (const operationGroup of this.listSubClientsUnderClient(client, includeNestedOperationGroups)) {
+          for (const operationGroup of this.listSubClientsUnderClient(subClient, includeNestedOperationGroups)) {
             operationGroups.push(operationGroup);
           }
         }
