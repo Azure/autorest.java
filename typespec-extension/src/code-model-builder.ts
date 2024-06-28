@@ -623,6 +623,7 @@ export class CodeModelBuilder {
       );
 
       // preprocess operation groups and operations
+      // operations without operation group
       const serviceMethodsWithoutSubClient = this.listServiceMethodsUnderClient(client, false);
       let codeModelGroup = new OperationGroup("");
       for (const serviceMethod of serviceMethodsWithoutSubClient) {
@@ -634,11 +635,21 @@ export class CodeModelBuilder {
         codeModelClient.operationGroups.push(codeModelGroup);
       }
 
+      // operations under operation groups 
       const subClients = this.listSubClientsUnderClient(client, true);
       for (const subClient of subClients) {
         const serviceMethods = this.listServiceMethodsUnderClient(subClient, true);
         // operation group with no operation is skipped
         if (serviceMethods.length > 0) {
+          // const groupPath = subClient..groupPath.split(".");
+          // let operationGroupName: string;
+          // if (groupPath.length > 1) {
+          //   // groupPath should be in format of "OpenAIClient.Chat.Completions"
+          //   operationGroupName = groupPath.slice(1).join("");
+          // } else {
+          //   // protection
+          //   operationGroupName = operationGroup.type.name;
+          // }
           codeModelGroup = new OperationGroup(subClient.name);
           for (const serviceMethod of serviceMethods) {
             if (!this.needToSkipProcessingOperation(serviceMethod.__raw, clientContext)) {
@@ -936,14 +947,19 @@ export class CodeModelBuilder {
     const operationId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
     const operationGroup = this.codeModel.getOperationGroup(groupName);
 
+    let operationExample = undefined;
+    if (sdkMethod.__raw) {
+      operationExample = this.getOperationExample(sdkMethod.__raw);
+    }
+
     const codeModelOperation = new CodeModelOperation(operationName, sdkMethod.details ?? "", {
       operationId: operationId,
       summary: sdkMethod.description,
-      // extensions: {
-      //   "x-ms-examples": operationExample
-      //     ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
-      //     : undefined,
-      // },
+      extensions: {
+        "x-ms-examples": operationExample
+          ? { [operationExample.title ?? operationExample.operationId ?? sdkMethod.name]: operationExample }
+          : undefined,
+      },
     });
 
     codeModelOperation.crossLanguageDefinitionId = sdkMethod.crossLanguageDefintionId;
