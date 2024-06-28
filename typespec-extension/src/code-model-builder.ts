@@ -48,7 +48,7 @@ import {
   SdkClient,
   SdkConstantType,
   SdkContext,
-  SdkDatetimeType,
+  SdkDateTimeType,
   SdkDictionaryType,
   SdkDurationType,
   SdkEnumType,
@@ -1894,7 +1894,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processUnixTimeSchemaFromSdkType(type: SdkDatetimeType, name: string): UnixTimeSchema {
+  private processUnixTimeSchemaFromSdkType(type: SdkDateTimeType, name: string): UnixTimeSchema {
     return this.codeModel.schemas.add(
       new UnixTimeSchema(name, type.details ?? "", {
         summary: type.description,
@@ -1902,7 +1902,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDateTimeSchemaFromSdkType(type: SdkDatetimeType, name: string, rfc1123: boolean): DateTimeSchema {
+  private processDateTimeSchemaFromSdkType(type: SdkDateTimeType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
       new DateTimeSchema(name, type.details ?? "", {
         summary: type.description,
@@ -2011,9 +2011,11 @@ export class CodeModelBuilder {
         keyType: {
           kind: "string",
           encode: "string",
+          decorators: [],
         },
         description: type.description,
         valueType: type.additionalProperties,
+        decorators: [],
       };
       const parentSchema = this.processSchemaFromSdkType(sdkDictType, "Record");
       objectSchema.parents = objectSchema.parents ?? new Relations();
