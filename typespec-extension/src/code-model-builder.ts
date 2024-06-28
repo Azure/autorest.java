@@ -50,7 +50,7 @@ import {
   SdkClientType,
   SdkConstantType,
   SdkContext,
-  SdkDatetimeType,
+  SdkDateTimeType,
   SdkDictionaryType,
   SdkDurationType,
   SdkEndpointParameter,
@@ -154,7 +154,6 @@ import { EmitterOptions } from "./emitter.js";
 import { createPollOperationDetailsSchema, getFileDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
-  CONTENT_TYPE_KEY,
   ORIGIN_API_VERSION,
   SPECIAL_HEADER_NAMES,
   cloneOperationParameter,
@@ -1600,18 +1599,7 @@ export class CodeModelBuilder {
       if (op.convenienceApi) {
         this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
       }
-
-      if (param.kind === "header" && param.serializedName.toLowerCase() === CONTENT_TYPE_KEY) {
-        let mediaTypes = ["application/json"];
-        if (schema instanceof ConstantSchema) {
-          mediaTypes = [schema.value.value.toString()];
-        } else if (schema instanceof SealedChoiceSchema) {
-          mediaTypes = schema.choices.map((it) => it.value.toString());
-        }
-        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
-      }
     }
-
   }
 
   // private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
@@ -2310,6 +2298,9 @@ export class CodeModelBuilder {
   }
 
   private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
+    // set contentTypes to mediaTypes
+    op.requests![0].protocol.http!.mediaTypes = httpOperation.parameters.body!.contentTypes;
+
     const parameters = httpOperation.operation.parameters;
 
     const unknownRequestBody =
@@ -2999,7 +2990,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processUnixTimeSchemaFromSdkType(type: SdkDatetimeType, name: string): UnixTimeSchema {
+  private processUnixTimeSchemaFromSdkType(type: SdkDateTimeType, name: string): UnixTimeSchema {
     return this.codeModel.schemas.add(
       new UnixTimeSchema(name, type.details ?? "", {
         summary: type.description,
@@ -3007,7 +2998,7 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDateTimeSchemaFromSdkType(type: SdkDatetimeType, name: string, rfc1123: boolean): DateTimeSchema {
+  private processDateTimeSchemaFromSdkType(type: SdkDateTimeType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
       new DateTimeSchema(name, type.details ?? "", {
         summary: type.description,

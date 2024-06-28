@@ -43,7 +43,7 @@ public final class NamingClient {
      * Protocol method for POST operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @param dataRequest The dataRequest parameter.
+     * @param body The body parameter.
      * @param name summary of name query parameter
      * @return summary of Response along with {@link Response}.
      * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status
@@ -56,8 +56,8 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postWithResponse(String name, BinaryData dataRequest, RequestOptions requestOptions) {
-        return this.serviceClient.postWithResponse(name, dataRequest, requestOptions);
+    public Response<BinaryData> postWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.postWithResponse(name, body, requestOptions);
     }
 
     /**
@@ -91,7 +91,7 @@ public final class NamingClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param dataRequest The dataRequest parameter.
+     * @param body The body parameter.
      * @param etag summary of etag header parameter
      * 
      * description of etag header parameter.
@@ -105,13 +105,13 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DataResponse post(String name, DataRequest dataRequest, String etag) {
+    public DataResponse post(String name, DataRequest body, String etag) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (etag != null) {
             requestOptions.setHeader(HttpHeaderName.ETAG, etag);
         }
-        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).getValue()
+        return postWithResponse(name, BinaryData.fromObject(body), requestOptions).getValue()
             .toObject(DataResponse.class);
     }
 
@@ -123,7 +123,7 @@ public final class NamingClient {
      * @param name summary of name query parameter
      * 
      * description of name query parameter.
-     * @param dataRequest The dataRequest parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -134,10 +134,10 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public DataResponse post(String name, DataRequest dataRequest) {
+    public DataResponse post(String name, DataRequest body) {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return postWithResponse(name, BinaryData.fromObject(dataRequest), requestOptions).getValue()
+        return postWithResponse(name, BinaryData.fromObject(body), requestOptions).getValue()
             .toObject(DataResponse.class);
     }
 

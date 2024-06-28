@@ -449,7 +449,7 @@ public class ClientMethod {
 
             if (MethodUtil.isMethodIncludeRepeatableRequestHeaders(this.proxyMethod)) {
                 // Repeatable Requests
-                ClassType.UUID.addImportsTo(imports, false);
+                ClassType.CORE_UTILS.addImportsTo(imports, false);
                 ClassType.DATE_TIME.addImportsTo(imports, false);
                 ClassType.DATE_TIME_RFC_1123.addImportsTo(imports, false);
             }

@@ -65,7 +65,7 @@ public final class LiteralServiceClient {
      * }
      * }</pre>
      * 
-     * @param model The model parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -75,14 +75,14 @@ public final class LiteralServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putWithResponse(BinaryData model, RequestOptions requestOptions) {
-        return this.serviceClient.putWithResponse(model, requestOptions);
+    public Response<BinaryData> putWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.putWithResponse(body, requestOptions);
     }
 
     /**
      * The put operation.
      * 
-     * @param model The model parameter.
+     * @param body The body parameter.
      * @param optionalLiteralParam The optionalLiteralParam parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -94,19 +94,19 @@ public final class LiteralServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Model put(Model model, PutRequestOptionalLiteralParam optionalLiteralParam) {
+    public Model put(Model body, PutRequestOptionalLiteralParam optionalLiteralParam) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalLiteralParam != null) {
             requestOptions.addQueryParam("optionalLiteralParam", optionalLiteralParam.toString(), false);
         }
-        return putWithResponse(BinaryData.fromObject(model), requestOptions).getValue().toObject(Model.class);
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Model.class);
     }
 
     /**
      * The put operation.
      * 
-     * @param model The model parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -117,9 +117,9 @@ public final class LiteralServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Model put(Model model) {
+    public Model put(Model body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return putWithResponse(BinaryData.fromObject(model), requestOptions).getValue().toObject(Model.class);
+        return putWithResponse(BinaryData.fromObject(body), requestOptions).getValue().toObject(Model.class);
     }
 }

@@ -66,8 +66,8 @@ public final class InternalOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> postInternal(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData apiRequest, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/internal")
         @ExpectedResponses({ 200 })
@@ -76,8 +76,8 @@ public final class InternalOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> postInternalSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData apiRequest, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Get("/internal")
         @ExpectedResponses({ 200 })
@@ -86,7 +86,7 @@ public final class InternalOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getInternal(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/internal")
         @ExpectedResponses({ 200 })
@@ -95,7 +95,7 @@ public final class InternalOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getInternalSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/internal/protocal-internal")
         @ExpectedResponses({ 204 })
@@ -104,7 +104,7 @@ public final class InternalOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> postProtocalInternal(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/internal/protocal-internal")
@@ -114,7 +114,7 @@ public final class InternalOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> postProtocalInternalSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -140,7 +140,7 @@ public final class InternalOpsImpl {
      * }
      * }</pre>
      * 
-     * @param apiRequest The apiRequest parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -149,12 +149,10 @@ public final class InternalOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> postInternalWithResponseAsync(BinaryData apiRequest,
-        RequestOptions requestOptions) {
-        final String contentType = "application/json";
+    public Mono<Response<BinaryData>> postInternalWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.postInternal(this.client.getEndpoint(), contentType, accept,
-            apiRequest, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.postInternal(this.client.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
@@ -179,7 +177,7 @@ public final class InternalOpsImpl {
      * }
      * }</pre>
      * 
-     * @param apiRequest The apiRequest parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -188,11 +186,9 @@ public final class InternalOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> postInternalWithResponse(BinaryData apiRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
+    public Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.postInternalSync(this.client.getEndpoint(), contentType, accept, apiRequest, requestOptions,
-            Context.NONE);
+        return service.postInternalSync(this.client.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -262,9 +258,9 @@ public final class InternalOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postProtocalInternalWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.postProtocalInternal(this.client.getEndpoint(), contentType,
-            body, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.postProtocalInternal(this.client.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
@@ -287,8 +283,7 @@ public final class InternalOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postProtocalInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.postProtocalInternalSync(this.client.getEndpoint(), contentType, body, requestOptions,
-            Context.NONE);
+        final String accept = "application/json";
+        return service.postProtocalInternalSync(this.client.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 }

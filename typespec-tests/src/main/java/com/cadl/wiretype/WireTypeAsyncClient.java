@@ -60,7 +60,7 @@ public final class WireTypeAsyncClient {
      * }
      * }</pre>
      * 
-     * @param subClass The subClass parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -70,9 +70,8 @@ public final class WireTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> superClassMismatchWithResponse(BinaryData subClass,
-        RequestOptions requestOptions) {
-        return this.serviceClient.superClassMismatchWithResponseAsync(subClass, requestOptions);
+    public Mono<Response<BinaryData>> superClassMismatchWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.superClassMismatchWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -95,7 +94,7 @@ public final class WireTypeAsyncClient {
      * }
      * }</pre>
      * 
-     * @param subClassMismatch The subClassMismatch parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -105,9 +104,8 @@ public final class WireTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> subClassMismatchWithResponse(BinaryData subClassMismatch,
-        RequestOptions requestOptions) {
-        return this.serviceClient.subClassMismatchWithResponseAsync(subClassMismatch, requestOptions);
+    public Mono<Response<BinaryData>> subClassMismatchWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.subClassMismatchWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -130,7 +128,7 @@ public final class WireTypeAsyncClient {
      * }
      * }</pre>
      * 
-     * @param subClassBothMismatch The subClassBothMismatch parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -140,15 +138,14 @@ public final class WireTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> bothClassMismatchWithResponse(BinaryData subClassBothMismatch,
-        RequestOptions requestOptions) {
-        return this.serviceClient.bothClassMismatchWithResponseAsync(subClassBothMismatch, requestOptions);
+    public Mono<Response<BinaryData>> bothClassMismatchWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.bothClassMismatchWithResponseAsync(body, requestOptions);
     }
 
     /**
      * The superClassMismatch operation.
      * 
-     * @param subClass The subClass parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -159,17 +156,17 @@ public final class WireTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SubClass> superClassMismatch(SubClass subClass) {
+    public Mono<SubClass> superClassMismatch(SubClass body) {
         // Generated convenience method for superClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return superClassMismatchWithResponse(BinaryData.fromObject(subClass), requestOptions).flatMap(FluxUtil::toMono)
+        return superClassMismatchWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(SubClass.class));
     }
 
     /**
      * The subClassMismatch operation.
      * 
-     * @param subClassMismatch The subClassMismatch parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -180,18 +177,17 @@ public final class WireTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SubClassMismatch> subClassMismatch(SubClassMismatch subClassMismatch) {
+    public Mono<SubClassMismatch> subClassMismatch(SubClassMismatch body) {
         // Generated convenience method for subClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return subClassMismatchWithResponse(BinaryData.fromObject(subClassMismatch), requestOptions)
-            .flatMap(FluxUtil::toMono)
+        return subClassMismatchWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(SubClassMismatch.class));
     }
 
     /**
      * The bothClassMismatch operation.
      * 
-     * @param subClassBothMismatch The subClassBothMismatch parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -202,11 +198,10 @@ public final class WireTypeAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SubClassBothMismatch> bothClassMismatch(SubClassBothMismatch subClassBothMismatch) {
+    public Mono<SubClassBothMismatch> bothClassMismatch(SubClassBothMismatch body) {
         // Generated convenience method for bothClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return bothClassMismatchWithResponse(BinaryData.fromObject(subClassBothMismatch), requestOptions)
-            .flatMap(FluxUtil::toMono)
+        return bothClassMismatchWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(SubClassBothMismatch.class));
     }
 }

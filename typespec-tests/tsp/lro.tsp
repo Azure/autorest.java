@@ -34,7 +34,12 @@ namespace Cadl.LongRunning {
 
   @pollingOperation(LongRunning.getJob)
   @route("/jobs")
-  op createJob is LroLongRunningRpcOperation<JobData, JobResult>;
+  op createJob is LroLongRunningRpcOperation<
+    {
+      @body body: JobData;
+    },
+    JobResult
+  >;
 
   model JobData {
     configuration?: string;

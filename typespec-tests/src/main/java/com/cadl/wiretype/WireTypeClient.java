@@ -58,7 +58,7 @@ public final class WireTypeClient {
      * }
      * }</pre>
      * 
-     * @param subClass The subClass parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -68,8 +68,8 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> superClassMismatchWithResponse(BinaryData subClass, RequestOptions requestOptions) {
-        return this.serviceClient.superClassMismatchWithResponse(subClass, requestOptions);
+    public Response<BinaryData> superClassMismatchWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.superClassMismatchWithResponse(body, requestOptions);
     }
 
     /**
@@ -92,7 +92,7 @@ public final class WireTypeClient {
      * }
      * }</pre>
      * 
-     * @param subClassMismatch The subClassMismatch parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -102,9 +102,8 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> subClassMismatchWithResponse(BinaryData subClassMismatch,
-        RequestOptions requestOptions) {
-        return this.serviceClient.subClassMismatchWithResponse(subClassMismatch, requestOptions);
+    public Response<BinaryData> subClassMismatchWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.subClassMismatchWithResponse(body, requestOptions);
     }
 
     /**
@@ -127,7 +126,7 @@ public final class WireTypeClient {
      * }
      * }</pre>
      * 
-     * @param subClassBothMismatch The subClassBothMismatch parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -137,15 +136,14 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> bothClassMismatchWithResponse(BinaryData subClassBothMismatch,
-        RequestOptions requestOptions) {
-        return this.serviceClient.bothClassMismatchWithResponse(subClassBothMismatch, requestOptions);
+    public Response<BinaryData> bothClassMismatchWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.bothClassMismatchWithResponse(body, requestOptions);
     }
 
     /**
      * The superClassMismatch operation.
      * 
-     * @param subClass The subClass parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -156,17 +154,17 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SubClass superClassMismatch(SubClass subClass) {
+    public SubClass superClassMismatch(SubClass body) {
         // Generated convenience method for superClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return superClassMismatchWithResponse(BinaryData.fromObject(subClass), requestOptions).getValue()
+        return superClassMismatchWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
             .toObject(SubClass.class);
     }
 
     /**
      * The subClassMismatch operation.
      * 
-     * @param subClassMismatch The subClassMismatch parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -177,17 +175,17 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SubClassMismatch subClassMismatch(SubClassMismatch subClassMismatch) {
+    public SubClassMismatch subClassMismatch(SubClassMismatch body) {
         // Generated convenience method for subClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return subClassMismatchWithResponse(BinaryData.fromObject(subClassMismatch), requestOptions).getValue()
+        return subClassMismatchWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
             .toObject(SubClassMismatch.class);
     }
 
     /**
      * The bothClassMismatch operation.
      * 
-     * @param subClassBothMismatch The subClassBothMismatch parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -198,10 +196,10 @@ public final class WireTypeClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SubClassBothMismatch bothClassMismatch(SubClassBothMismatch subClassBothMismatch) {
+    public SubClassBothMismatch bothClassMismatch(SubClassBothMismatch body) {
         // Generated convenience method for bothClassMismatchWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return bothClassMismatchWithResponse(BinaryData.fromObject(subClassBothMismatch), requestOptions).getValue()
+        return bothClassMismatchWithResponse(BinaryData.fromObject(body), requestOptions).getValue()
             .toObject(SubClassBothMismatch.class);
     }
 }

@@ -103,6 +103,8 @@ public final class EtagHeadersOptionalBodiesImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
      * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
@@ -172,6 +174,8 @@ public final class EtagHeadersOptionalBodiesImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
      * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this

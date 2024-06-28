@@ -144,7 +144,7 @@ public final class LongRunningClient {
      * }
      * }</pre>
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -154,8 +154,8 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return this.serviceClient.beginCreateJob(jobData, requestOptions);
+    public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.beginCreateJob(body, requestOptions);
     }
 
     /**
@@ -198,7 +198,7 @@ public final class LongRunningClient {
     /**
      * A remote procedure call (RPC) operation.
      * 
-     * @param jobData The jobData parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -209,9 +209,9 @@ public final class LongRunningClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<JobResult, JobResultResult> beginCreateJob(JobData jobData) {
+    public SyncPoller<JobResult, JobResultResult> beginCreateJob(JobData body) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginCreateJobWithModel(BinaryData.fromObject(jobData), requestOptions);
+        return serviceClient.beginCreateJobWithModel(BinaryData.fromObject(body), requestOptions);
     }
 }
