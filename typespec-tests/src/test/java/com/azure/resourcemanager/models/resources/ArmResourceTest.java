@@ -20,12 +20,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ArmResourceTest {
-    private static final String TOP_LEVEL_TRACKED_RESOURCE_ID = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.Arm.Models.Resources/topLevelTrackedResources/top";
+    private static final String TOP_LEVEL_TRACKED_RESOURCE_ID = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top";
     private static final String TOP_LEVEL_TRACKED_RESOURCE_NAME = "top";
-    private static final String TOP_LEVEL_TRACKED_RESOURCE_TYPE = "topLevel";
-    private static final String NESTED_PROXY_RESOURCE_ID = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.Arm.Models.Resources/topLevelTrackedResources/top/nestedProxyResources/nested";
+    private static final String TOP_LEVEL_TRACKED_RESOURCE_TYPE = "Azure.ResourceManager.Models.Resources/topLevelTrackedResources";
+    private static final String NESTED_PROXY_RESOURCE_ID = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources/nested";
     private static final String NESTED_PROXY_RESOURCE_NAME = "nested";
-    private static final String NESTED_PROXY_RESOURCE_TYPE = "nested";
+    private static final String NESTED_PROXY_RESOURCE_TYPE = "Azure.ResourceManager.Models.Resources/topLevelTrackedResources/top/nestedProxyResources";
     private static final Region TOP_LEVEL_TRACKED_RESOURCE_REGION = Region.US_EAST;
     private static final String RESOURCE_DESCRIPTION_VALID = "valid";
     private static final String RESOURCE_DESCRIPTION_VALID2 = "valid2";
