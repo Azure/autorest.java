@@ -159,7 +159,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> repeatableAction(@QueryParam("api-version") String apiVersion,
             @PathParam("id") int id, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData userActionParam, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
         @ExpectedResponses({ 200 })
@@ -168,7 +168,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> repeatableActionSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData userActionParam,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -283,7 +283,7 @@ public final class TraitsClientImpl {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam User action param.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -292,7 +292,7 @@ public final class TraitsClientImpl {
      * @return user action response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData userActionParam,
+    public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData body,
         RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
@@ -311,7 +311,7 @@ public final class TraitsClientImpl {
             }
         });
         return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id,
-            accept, userActionParam, requestOptionsLocal, context));
+            accept, body, requestOptionsLocal, context));
     }
 
     /**
@@ -342,7 +342,7 @@ public final class TraitsClientImpl {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam User action param.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -351,8 +351,7 @@ public final class TraitsClientImpl {
      * @return user action response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData userActionParam,
-        RequestOptions requestOptions) {
+    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = CoreUtils.randomUuid().toString();
@@ -369,7 +368,7 @@ public final class TraitsClientImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, userActionParam,
+        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, body,
             requestOptionsLocal, Context.NONE);
     }
 }

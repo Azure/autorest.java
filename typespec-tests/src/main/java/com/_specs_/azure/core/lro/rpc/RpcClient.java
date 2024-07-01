@@ -68,7 +68,7 @@ public final class RpcClient {
      * }
      * }</pre>
      * 
-     * @param generationOptions Options for the generation.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -78,15 +78,14 @@ public final class RpcClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(BinaryData generationOptions,
-        RequestOptions requestOptions) {
-        return this.serviceClient.beginLongRunningRpc(generationOptions, requestOptions);
+    public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.beginLongRunningRpc(body, requestOptions);
     }
 
     /**
      * Generate data.
      * 
-     * @param generationOptions Options for the generation.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -97,9 +96,9 @@ public final class RpcClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpc(GenerationOptions generationOptions) {
+    public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpc(GenerationOptions body) {
         // Generated convenience method for beginLongRunningRpcWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLongRunningRpcWithModel(BinaryData.fromObject(generationOptions), requestOptions);
+        return serviceClient.beginLongRunningRpcWithModel(BinaryData.fromObject(body), requestOptions);
     }
 }
