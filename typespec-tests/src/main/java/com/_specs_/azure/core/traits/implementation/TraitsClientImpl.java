@@ -296,18 +296,17 @@ public final class TraitsClientImpl {
         RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
-        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
+                    .set(HttpHeaderName.fromString("repeatability-request-id"), CoreUtils.randomUuid().toString());
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
+                    .set(HttpHeaderName.fromString("repeatability-first-sent"),
+                        DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
         return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id,
@@ -354,18 +353,17 @@ public final class TraitsClientImpl {
     public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        String repeatabilityRequestId = CoreUtils.randomUuid().toString();
-        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
+                    .set(HttpHeaderName.fromString("repeatability-request-id"), CoreUtils.randomUuid().toString());
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
+                    .set(HttpHeaderName.fromString("repeatability-first-sent"),
+                        DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
         return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, body,

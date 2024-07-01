@@ -4,10 +4,12 @@
 package fixtures.specialheader;
 
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
+import com.azure.core.test.http.MockHttpResponse;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
@@ -20,7 +22,11 @@ public class SpecialHeaderTests {
 
     @BeforeAll
     public static void setup() {
-        client = new SpecialHeaderBuilder().host("https://httpbin.org/")
+        HttpClient mockHttpClient = request -> Mono.just(new MockHttpResponse(request, 500));
+
+        client = new SpecialHeaderBuilder()
+//            .host("https://httpbin.org/")
+            .httpClient(mockHttpClient)
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)
                 .setRequestLogger((logger, loggingOptions) -> {
                     final HttpRequest request = loggingOptions.getHttpRequest();

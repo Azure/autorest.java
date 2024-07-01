@@ -39,7 +39,6 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 applyParameterTransformations(function, clientMethod, settings);
                 convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-                addSpecialHeadersToLocalVariables(function, clientMethod);
                 if (mergeContextParameter) {
                     function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
                 }
@@ -206,7 +205,6 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             applyParameterTransformations(function, clientMethod, settings);
             convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
-            addSpecialHeadersToLocalVariables(function, clientMethod);
 
             String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
             String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);
