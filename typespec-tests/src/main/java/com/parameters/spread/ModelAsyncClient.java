@@ -49,7 +49,7 @@ public final class ModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param bodyParameter The bodyParameter parameter.
+     * @param bodyParameter This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -147,7 +147,7 @@ public final class ModelAsyncClient {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param compositeRequestMix The compositeRequestMix parameter.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -166,7 +166,7 @@ public final class ModelAsyncClient {
     /**
      * The spreadAsRequestBody operation.
      * 
-     * @param bodyParameter The bodyParameter parameter.
+     * @param bodyParameter This is a simple model.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -255,7 +255,7 @@ public final class ModelAsyncClient {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param compositeRequestMix The compositeRequestMix parameter.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

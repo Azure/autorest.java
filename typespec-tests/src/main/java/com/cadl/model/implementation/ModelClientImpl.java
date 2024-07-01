@@ -16,12 +16,12 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class ModelClientImpl {
     /**
-     * Service host.
+     * Server parameter.
      */
     private final String endpoint;
 
     /**
-     * Gets Service host.
+     * Gets Server parameter.
      * 
      * @return the endpoint value.
      */
@@ -74,7 +74,7 @@ public final class ModelClientImpl {
     /**
      * Initializes an instance of ModelClient client.
      * 
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public ModelClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -85,7 +85,7 @@ public final class ModelClientImpl {
      * Initializes an instance of ModelClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public ModelClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -96,7 +96,7 @@ public final class ModelClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public ModelClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;

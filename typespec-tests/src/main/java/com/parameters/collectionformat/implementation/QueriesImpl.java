@@ -6,6 +6,7 @@ package com.parameters.collectionformat.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -64,7 +65,7 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> multi(@QueryParam(value = "colors", multipleQueryParams = true) List<String> colors,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/multi")
         @ExpectedResponses({ 204 })
@@ -73,6 +74,15 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> multiSync(@QueryParam(value = "colors", multipleQueryParams = true) List<String> colors,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/parameters/collection-format/query/ssv")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> ssv(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/ssv")
@@ -81,15 +91,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> ssv(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
-
-        @Get("/parameters/collection-format/query/ssv")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> ssvSync(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Response<Void> ssvSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/tsv")
         @ExpectedResponses({ 204 })
@@ -97,7 +100,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> tsv(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> tsv(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/tsv")
         @ExpectedResponses({ 204 })
@@ -105,7 +109,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> tsvSync(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Response<Void> tsvSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/pipes")
         @ExpectedResponses({ 204 })
@@ -113,7 +118,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> pipes(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> pipes(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/pipes")
         @ExpectedResponses({ 204 })
@@ -121,7 +127,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> pipesSync(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Response<Void> pipesSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/csv")
         @ExpectedResponses({ 204 })
@@ -129,7 +136,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> csv(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> csv(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/query/csv")
         @ExpectedResponses({ 204 })
@@ -137,7 +145,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> csvSync(@QueryParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Response<Void> csvSync(@QueryParam("colors") String colors, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -153,9 +162,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> multiWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         List<String> colorsConverted
             = colors.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(context -> service.multi(colorsConverted, requestOptions, context));
+        return FluxUtil.withContext(context -> service.multi(colorsConverted, accept, requestOptions, context));
     }
 
     /**
@@ -171,9 +181,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> multiWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         List<String> colorsConverted
             = colors.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return service.multiSync(colorsConverted, requestOptions, Context.NONE);
+        return service.multiSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -189,10 +200,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> ssvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(" "));
-        return FluxUtil.withContext(context -> service.ssv(colorsConverted, requestOptions, context));
+        return FluxUtil.withContext(context -> service.ssv(colorsConverted, accept, requestOptions, context));
     }
 
     /**
@@ -208,10 +220,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> ssvWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(" "));
-        return service.ssvSync(colorsConverted, requestOptions, Context.NONE);
+        return service.ssvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -227,10 +240,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> tsvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("\t"));
-        return FluxUtil.withContext(context -> service.tsv(colorsConverted, requestOptions, context));
+        return FluxUtil.withContext(context -> service.tsv(colorsConverted, accept, requestOptions, context));
     }
 
     /**
@@ -246,10 +260,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> tsvWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("\t"));
-        return service.tsvSync(colorsConverted, requestOptions, Context.NONE);
+        return service.tsvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -265,10 +280,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> pipesWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("|"));
-        return FluxUtil.withContext(context -> service.pipes(colorsConverted, requestOptions, context));
+        return FluxUtil.withContext(context -> service.pipes(colorsConverted, accept, requestOptions, context));
     }
 
     /**
@@ -284,10 +300,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> pipesWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("|"));
-        return service.pipesSync(colorsConverted, requestOptions, Context.NONE);
+        return service.pipesSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -303,10 +320,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> csvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
-        return FluxUtil.withContext(context -> service.csv(colorsConverted, requestOptions, context));
+        return FluxUtil.withContext(context -> service.csv(colorsConverted, accept, requestOptions, context));
     }
 
     /**
@@ -322,9 +340,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> csvWithResponse(List<String> colors, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
-        return service.csvSync(colorsConverted, requestOptions, Context.NONE);
+        return service.csvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 }

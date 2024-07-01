@@ -64,8 +64,7 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> put1(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> put1(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/model/resource1")
@@ -74,8 +73,7 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> put1Sync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+        Response<BinaryData> put1Sync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/model/resource2")
@@ -84,8 +82,7 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> put2(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> put2(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/model/resource2")
@@ -94,8 +91,7 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> put2Sync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+        Response<BinaryData> put2Sync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Get("/model/resource3")
@@ -104,7 +100,7 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get3(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> get3(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/model/resource3")
@@ -113,7 +109,7 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> get3Sync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+        Response<BinaryData> get3Sync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/model/nested")
@@ -123,8 +119,8 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putNested(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Get("/model/nested")
         @ExpectedResponses({ 200 })
@@ -132,8 +128,7 @@ public final class ModelOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putNestedSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+        Response<BinaryData> putNestedSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
@@ -177,10 +172,9 @@ public final class ModelOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> put1WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.put1(this.client.getEndpoint(), contentType, accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.put1(this.client.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
@@ -223,9 +217,8 @@ public final class ModelOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> put1WithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.put1Sync(this.client.getEndpoint(), contentType, accept, body, requestOptions, Context.NONE);
+        return service.put1Sync(this.client.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -262,10 +255,9 @@ public final class ModelOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> put2WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.put2(this.client.getEndpoint(), contentType, accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.put2(this.client.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
@@ -302,9 +294,8 @@ public final class ModelOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> put2WithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.put2Sync(this.client.getEndpoint(), contentType, accept, body, requestOptions, Context.NONE);
+        return service.put2Sync(this.client.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -396,10 +387,9 @@ public final class ModelOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putNestedWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putNested(this.client.getEndpoint(), contentType, accept, body,
-            requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.putNested(this.client.getEndpoint(), accept, body, requestOptions, context));
     }
 
     /**
@@ -438,9 +428,7 @@ public final class ModelOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putNestedWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putNestedSync(this.client.getEndpoint(), contentType, accept, body, requestOptions,
-            Context.NONE);
+        return service.putNestedSync(this.client.getEndpoint(), accept, body, requestOptions, Context.NONE);
     }
 }

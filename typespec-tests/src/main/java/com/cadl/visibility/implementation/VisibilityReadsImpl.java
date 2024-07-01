@@ -63,7 +63,7 @@ public final class VisibilityReadsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/read")
@@ -72,7 +72,7 @@ public final class VisibilityReadsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 

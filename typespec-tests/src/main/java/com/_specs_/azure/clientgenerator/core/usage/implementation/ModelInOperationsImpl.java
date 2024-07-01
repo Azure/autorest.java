@@ -65,7 +65,7 @@ public final class ModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> inputToInputOutput(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> inputToInputOutput(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/client-generator-core/usage/inputToInputOutput")
@@ -74,7 +74,7 @@ public final class ModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> inputToInputOutputSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> inputToInputOutputSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/usage/outputToInputOutput")
@@ -83,7 +83,7 @@ public final class ModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> outputToInputOutput(@HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> outputToInputOutput(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/usage/outputToInputOutput")
@@ -92,7 +92,7 @@ public final class ModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> outputToInputOutputSync(@HeaderParam("Accept") String accept,
+        Response<BinaryData> outputToInputOutputSync(@HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Put("/azure/client-generator-core/usage/modelInReadOnlyProperty")
@@ -101,9 +101,8 @@ public final class ModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> modelInReadOnlyProperty(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> modelInReadOnlyProperty(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/azure/client-generator-core/usage/modelInReadOnlyProperty")
         @ExpectedResponses({ 200 })
@@ -111,9 +110,8 @@ public final class ModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> modelInReadOnlyPropertySync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> modelInReadOnlyPropertySync(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -141,8 +139,8 @@ public final class ModelInOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> inputToInputOutputWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.inputToInputOutput(contentType, body, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.inputToInputOutput(accept, body, requestOptions, context));
     }
 
     /**
@@ -170,8 +168,8 @@ public final class ModelInOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> inputToInputOutputWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.inputToInputOutputSync(contentType, body, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.inputToInputOutputSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -276,10 +274,8 @@ public final class ModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> modelInReadOnlyPropertyWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.modelInReadOnlyProperty(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.modelInReadOnlyProperty(accept, body, requestOptions, context));
     }
 
     /**
@@ -327,8 +323,7 @@ public final class ModelInOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> modelInReadOnlyPropertyWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.modelInReadOnlyPropertySync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.modelInReadOnlyPropertySync(accept, body, requestOptions, Context.NONE);
     }
 }

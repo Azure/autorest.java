@@ -143,9 +143,8 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion,
-            @PathParam("name") String name, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+            @PathParam("name") String name, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/lro/standard/users/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -154,9 +153,8 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion,
-            @PathParam("name") String name, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+            @PathParam("name") String name, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/lro/standard/users/{name}")
         @ExpectedResponses({ 202 })
@@ -165,7 +163,7 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> delete(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/lro/standard/users/{name}")
         @ExpectedResponses({ 202 })
@@ -174,7 +172,7 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/standard/users/{name}:export")
         @ExpectedResponses({ 202 })
@@ -183,7 +181,7 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/azure/core/lro/standard/users/{name}:export")
@@ -193,7 +191,7 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
@@ -231,10 +229,9 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), name,
-            contentType, accept, resource, requestOptions, context));
+            accept, resource, requestOptions, context));
     }
 
     /**
@@ -271,9 +268,8 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createOrReplaceWithResponse(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), name, contentType, accept, resource,
+        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), name, accept, resource,
             requestOptions, Context.NONE);
     }
 

@@ -64,7 +64,7 @@ public final class ModelsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/union/models-only")
@@ -73,7 +73,7 @@ public final class ModelsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/type/union/models-only")
@@ -82,7 +82,7 @@ public final class ModelsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> send(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> send(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData sendRequest4, RequestOptions requestOptions, Context context);
 
         @Post("/type/union/models-only")
@@ -91,7 +91,7 @@ public final class ModelsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> sendSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData sendRequest4, RequestOptions requestOptions, Context context);
     }
 
@@ -161,8 +161,8 @@ public final class ModelsOnliesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(BinaryData sendRequest4, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.send(contentType, sendRequest4, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.send(accept, sendRequest4, requestOptions, context));
     }
 
     /**
@@ -185,7 +185,7 @@ public final class ModelsOnliesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(BinaryData sendRequest4, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.sendSync(contentType, sendRequest4, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.sendSync(accept, sendRequest4, requestOptions, Context.NONE);
     }
 }

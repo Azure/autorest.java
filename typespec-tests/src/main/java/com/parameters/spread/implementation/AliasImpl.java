@@ -63,7 +63,7 @@ public final class AliasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData spreadAsRequestBodyRequest, RequestOptions requestOptions,
             Context context);
 
@@ -73,7 +73,7 @@ public final class AliasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> spreadAsRequestBodySync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> spreadAsRequestBodySync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData spreadAsRequestBodyRequest, RequestOptions requestOptions,
             Context context);
 
@@ -84,9 +84,8 @@ public final class AliasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> spreadAsRequestParameter(@PathParam("id") String id,
-            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData spreadAsRequestParameterRequest, RequestOptions requestOptions,
-            Context context);
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/alias/request-parameter/{id}")
         @ExpectedResponses({ 204 })
@@ -95,9 +94,8 @@ public final class AliasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> spreadAsRequestParameterSync(@PathParam("id") String id,
-            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData spreadAsRequestParameterRequest, RequestOptions requestOptions,
-            Context context);
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/alias/multiple-parameters/{id}")
         @ExpectedResponses({ 204 })
@@ -106,9 +104,8 @@ public final class AliasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> spreadWithMultipleParameters(@PathParam("id") String id,
-            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData spreadWithMultipleParametersRequest,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/alias/multiple-parameters/{id}")
         @ExpectedResponses({ 204 })
@@ -117,9 +114,8 @@ public final class AliasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> spreadWithMultipleParametersSync(@PathParam("id") String id,
-            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData spreadWithMultipleParametersRequest,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -143,9 +139,9 @@ public final class AliasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadAsRequestBodyWithResponseAsync(BinaryData spreadAsRequestBodyRequest,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
+        final String accept = "application/json";
         return FluxUtil.withContext(
-            context -> service.spreadAsRequestBody(contentType, spreadAsRequestBodyRequest, requestOptions, context));
+            context -> service.spreadAsRequestBody(accept, spreadAsRequestBodyRequest, requestOptions, context));
     }
 
     /**
@@ -169,8 +165,8 @@ public final class AliasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> spreadAsRequestBodyWithResponse(BinaryData spreadAsRequestBodyRequest,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.spreadAsRequestBodySync(contentType, spreadAsRequestBodyRequest, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.spreadAsRequestBodySync(accept, spreadAsRequestBodyRequest, requestOptions, Context.NONE);
     }
 
     /**
@@ -185,7 +181,7 @@ public final class AliasImpl {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param spreadAsRequestParameterRequest The spreadAsRequestParameterRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -195,10 +191,10 @@ public final class AliasImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadAsRequestParameterWithResponseAsync(String id, String xMsTestHeader,
-        BinaryData spreadAsRequestParameterRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.spreadAsRequestParameter(id, xMsTestHeader, contentType,
-            spreadAsRequestParameterRequest, requestOptions, context));
+        BinaryData request, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.spreadAsRequestParameter(id, xMsTestHeader, accept, request, requestOptions, context));
     }
 
     /**
@@ -213,7 +209,7 @@ public final class AliasImpl {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param spreadAsRequestParameterRequest The spreadAsRequestParameterRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -222,11 +218,10 @@ public final class AliasImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadAsRequestParameterWithResponse(String id, String xMsTestHeader,
-        BinaryData spreadAsRequestParameterRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.spreadAsRequestParameterSync(id, xMsTestHeader, contentType, spreadAsRequestParameterRequest,
-            requestOptions, Context.NONE);
+    public Response<Void> spreadAsRequestParameterWithResponse(String id, String xMsTestHeader, BinaryData request,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.spreadAsRequestParameterSync(id, xMsTestHeader, accept, request, requestOptions, Context.NONE);
     }
 
     /**
@@ -246,7 +241,7 @@ public final class AliasImpl {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param spreadWithMultipleParametersRequest The spreadWithMultipleParametersRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -256,10 +251,10 @@ public final class AliasImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadWithMultipleParametersWithResponseAsync(String id, String xMsTestHeader,
-        BinaryData spreadWithMultipleParametersRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.spreadWithMultipleParameters(id, xMsTestHeader, contentType,
-            spreadWithMultipleParametersRequest, requestOptions, context));
+        BinaryData request, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.spreadWithMultipleParameters(id, xMsTestHeader, accept, request,
+            requestOptions, context));
     }
 
     /**
@@ -279,7 +274,7 @@ public final class AliasImpl {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param spreadWithMultipleParametersRequest The spreadWithMultipleParametersRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -288,10 +283,10 @@ public final class AliasImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadWithMultipleParametersWithResponse(String id, String xMsTestHeader,
-        BinaryData spreadWithMultipleParametersRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.spreadWithMultipleParametersSync(id, xMsTestHeader, contentType,
-            spreadWithMultipleParametersRequest, requestOptions, Context.NONE);
+    public Response<Void> spreadWithMultipleParametersWithResponse(String id, String xMsTestHeader, BinaryData request,
+        RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.spreadWithMultipleParametersSync(id, xMsTestHeader, accept, request, requestOptions,
+            Context.NONE);
     }
 }

@@ -76,7 +76,7 @@ public final class AliasClient {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param spreadAsRequestParameterRequest The spreadAsRequestParameterRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -86,10 +86,9 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadAsRequestParameterWithResponse(String id, String xMsTestHeader,
-        BinaryData spreadAsRequestParameterRequest, RequestOptions requestOptions) {
-        return this.serviceClient.spreadAsRequestParameterWithResponse(id, xMsTestHeader,
-            spreadAsRequestParameterRequest, requestOptions);
+    public Response<Void> spreadAsRequestParameterWithResponse(String id, String xMsTestHeader, BinaryData request,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadAsRequestParameterWithResponse(id, xMsTestHeader, request, requestOptions);
     }
 
     /**
@@ -109,7 +108,7 @@ public final class AliasClient {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param spreadWithMultipleParametersRequest The spreadWithMultipleParametersRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -119,10 +118,9 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadWithMultipleParametersWithResponse(String id, String xMsTestHeader,
-        BinaryData spreadWithMultipleParametersRequest, RequestOptions requestOptions) {
-        return this.serviceClient.spreadWithMultipleParametersWithResponse(id, xMsTestHeader,
-            spreadWithMultipleParametersRequest, requestOptions);
+    public Response<Void> spreadWithMultipleParametersWithResponse(String id, String xMsTestHeader, BinaryData request,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadWithMultipleParametersWithResponse(id, xMsTestHeader, request, requestOptions);
     }
 
     /**
@@ -164,10 +162,9 @@ public final class AliasClient {
     public void spreadAsRequestParameter(String id, String xMsTestHeader, String name) {
         // Generated convenience method for spreadAsRequestParameterWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadAsRequestParameterRequest spreadAsRequestParameterRequestObj = new SpreadAsRequestParameterRequest(name);
-        BinaryData spreadAsRequestParameterRequest = BinaryData.fromObject(spreadAsRequestParameterRequestObj);
-        spreadAsRequestParameterWithResponse(id, xMsTestHeader, spreadAsRequestParameterRequest, requestOptions)
-            .getValue();
+        SpreadAsRequestParameterRequest requestObj = new SpreadAsRequestParameterRequest(name);
+        BinaryData request = BinaryData.fromObject(requestObj);
+        spreadAsRequestParameterWithResponse(id, xMsTestHeader, request, requestOptions).getValue();
     }
 
     /**
@@ -188,11 +185,9 @@ public final class AliasClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String xMsTestHeader = options.getXMsTestHeader();
-        SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequestObj
-            = new SpreadWithMultipleParametersRequest(options.getProp1(), options.getProp2(), options.getProp3(),
-                options.getProp4(), options.getProp5(), options.getProp6());
-        BinaryData spreadWithMultipleParametersRequest = BinaryData.fromObject(spreadWithMultipleParametersRequestObj);
-        spreadWithMultipleParametersWithResponse(id, xMsTestHeader, spreadWithMultipleParametersRequest, requestOptions)
-            .getValue();
+        SpreadWithMultipleParametersRequest requestObj = new SpreadWithMultipleParametersRequest(options.getProp1(),
+            options.getProp2(), options.getProp3(), options.getProp4(), options.getProp5(), options.getProp6());
+        BinaryData request = BinaryData.fromObject(requestObj);
+        spreadWithMultipleParametersWithResponse(id, xMsTestHeader, request, requestOptions).getValue();
     }
 }

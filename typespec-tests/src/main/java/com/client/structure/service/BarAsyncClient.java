@@ -37,7 +37,7 @@ public final class BarAsyncClient {
     }
 
     /**
-     * The nine operation.
+     * The five operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -48,12 +48,28 @@ public final class BarAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> nineWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.nineWithResponseAsync(requestOptions);
+    public Mono<Response<Void>> fiveWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.fiveWithResponseAsync(requestOptions);
     }
 
     /**
-     * The nine operation.
+     * The six operation.
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> sixWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.sixWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * The five operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -64,9 +80,27 @@ public final class BarAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> nine() {
-        // Generated convenience method for nineWithResponse
+    public Mono<Void> five() {
+        // Generated convenience method for fiveWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return nineWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        return fiveWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The six operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> six() {
+        // Generated convenience method for sixWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return sixWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

@@ -76,7 +76,8 @@ public final class TraitsAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return sample Model along with {@link Response} on successful completion of {@link Mono}.
+     * @return a resource, sending and receiving headers along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -112,7 +113,7 @@ public final class TraitsAsyncClient {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam The userActionParam parameter.
+     * @param userActionParam User action param.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -139,7 +140,7 @@ public final class TraitsAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sample Model on successful completion of {@link Mono}.
+     * @return a resource, sending and receiving headers on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -179,7 +180,7 @@ public final class TraitsAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sample Model on successful completion of {@link Mono}.
+     * @return a resource, sending and receiving headers on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -194,7 +195,7 @@ public final class TraitsAsyncClient {
      * Test for repeatable requests.
      * 
      * @param id The user's id.
-     * @param userActionParam The userActionParam parameter.
+     * @param userActionParam User action param.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

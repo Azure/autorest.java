@@ -16,12 +16,12 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class ErrorModelClientImpl {
     /**
-     * Service host.
+     * Server parameter.
      */
     private final String endpoint;
 
     /**
-     * Gets Service host.
+     * Gets Server parameter.
      * 
      * @return the endpoint value.
      */
@@ -74,7 +74,7 @@ public final class ErrorModelClientImpl {
     /**
      * Initializes an instance of ErrorModelClient client.
      * 
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public ErrorModelClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -85,7 +85,7 @@ public final class ErrorModelClientImpl {
      * Initializes an instance of ErrorModelClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public ErrorModelClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -96,7 +96,7 @@ public final class ErrorModelClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public ErrorModelClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;

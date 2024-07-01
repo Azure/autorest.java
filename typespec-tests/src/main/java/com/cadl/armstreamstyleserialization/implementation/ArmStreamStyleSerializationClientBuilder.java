@@ -20,6 +20,22 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ArmStreamStyleSerializationClientImpl.class })
 public final class ArmStreamStyleSerializationClientBuilder {
     /*
+     * Server parameter
+     */
+    private String endpoint;
+
+    /**
+     * Sets Server parameter.
+     * 
+     * @param endpoint the endpoint value.
+     * @return the ArmStreamStyleSerializationClientBuilder.
+     */
+    public ArmStreamStyleSerializationClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The ID of the target subscription. The value must be an UUID.
      */
     private String subscriptionId;
@@ -115,7 +131,7 @@ public final class ArmStreamStyleSerializationClientBuilder {
             ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ArmStreamStyleSerializationClientImpl client = new ArmStreamStyleSerializationClientImpl(localPipeline,
-            localSerializerAdapter, localDefaultPollInterval, localEnvironment, this.subscriptionId);
+            localSerializerAdapter, localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
         return client;
     }
 }

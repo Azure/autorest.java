@@ -184,9 +184,8 @@ public final class AddedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> v1(@HostParam("endpoint") String endpoint, @HostParam("version") String version,
-            @HeaderParam("header-v2") String headerV2, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("header-v2") String headerV2, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/v1")
         @ExpectedResponses({ 200 })
@@ -195,9 +194,8 @@ public final class AddedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> v1Sync(@HostParam("endpoint") String endpoint, @HostParam("version") String version,
-            @HeaderParam("header-v2") String headerV2, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("header-v2") String headerV2, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/v2")
         @ExpectedResponses({ 200 })
@@ -206,8 +204,8 @@ public final class AddedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> v2(@HostParam("endpoint") String endpoint, @HostParam("version") String version,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/v2")
         @ExpectedResponses({ 200 })
@@ -216,8 +214,8 @@ public final class AddedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> v2Sync(@HostParam("endpoint") String endpoint, @HostParam("version") String version,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -254,10 +252,9 @@ public final class AddedClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> v1WithResponseAsync(String headerV2, BinaryData body,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.v1(this.getEndpoint(), this.getVersion(), headerV2, contentType,
-            accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.v1(this.getEndpoint(), this.getVersion(), headerV2, accept, body,
+            requestOptions, context));
     }
 
     /**
@@ -293,10 +290,9 @@ public final class AddedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> v1WithResponse(String headerV2, BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.v1Sync(this.getEndpoint(), this.getVersion(), headerV2, contentType, accept, body,
-            requestOptions, Context.NONE);
+        return service.v1Sync(this.getEndpoint(), this.getVersion(), headerV2, accept, body, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -331,10 +327,9 @@ public final class AddedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> v2WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.v2(this.getEndpoint(), this.getVersion(), contentType, accept,
-            body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.v2(this.getEndpoint(), this.getVersion(), accept, body, requestOptions, context));
     }
 
     /**
@@ -369,9 +364,7 @@ public final class AddedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> v2WithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.v2Sync(this.getEndpoint(), this.getVersion(), contentType, accept, body, requestOptions,
-            Context.NONE);
+        return service.v2Sync(this.getEndpoint(), this.getVersion(), accept, body, requestOptions, Context.NONE);
     }
 }

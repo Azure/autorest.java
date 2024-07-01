@@ -5,6 +5,7 @@
 package com.specialheaders.conditionalrequest.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
@@ -108,7 +109,8 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> postIfMatch(RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> postIfMatch(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/special-headers/conditional-request/if-match")
         @ExpectedResponses({ 204 })
@@ -116,7 +118,8 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> postIfMatchSync(RequestOptions requestOptions, Context context);
+        Response<Void> postIfMatchSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/special-headers/conditional-request/if-none-match")
         @ExpectedResponses({ 204 })
@@ -124,7 +127,8 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> postIfNoneMatch(RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> postIfNoneMatch(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Post("/special-headers/conditional-request/if-none-match")
         @ExpectedResponses({ 204 })
@@ -132,7 +136,8 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> postIfNoneMatchSync(RequestOptions requestOptions, Context context);
+        Response<Void> postIfNoneMatchSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -155,7 +160,8 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postIfMatchWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.postIfMatch(requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.postIfMatch(accept, requestOptions, context));
     }
 
     /**
@@ -178,7 +184,8 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postIfMatchWithResponse(RequestOptions requestOptions) {
-        return service.postIfMatchSync(requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.postIfMatchSync(accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -201,7 +208,8 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postIfNoneMatchWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.postIfNoneMatch(requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.postIfNoneMatch(accept, requestOptions, context));
     }
 
     /**
@@ -224,6 +232,7 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postIfNoneMatchWithResponse(RequestOptions requestOptions) {
-        return service.postIfNoneMatchSync(requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.postIfNoneMatchSync(accept, requestOptions, Context.NONE);
     }
 }

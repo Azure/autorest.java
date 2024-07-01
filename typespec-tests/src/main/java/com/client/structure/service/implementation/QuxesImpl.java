@@ -5,6 +5,7 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -61,7 +62,7 @@ public final class QuxesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> eight(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/eight")
         @ExpectedResponses({ 204 })
@@ -70,25 +71,7 @@ public final class QuxesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> eightSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
-
-        @Post("/nine")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> nine(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
-
-        @Post("/nine")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> nineSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -103,8 +86,9 @@ public final class QuxesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> eightWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.eight(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.eight(this.client.getEndpoint(), this.client.getClient(), accept,
+            requestOptions, context));
     }
 
     /**
@@ -119,37 +103,8 @@ public final class QuxesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> eightWithResponse(RequestOptions requestOptions) {
-        return service.eightSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
-    }
-
-    /**
-     * The nine operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> nineWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.nine(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
-    }
-
-    /**
-     * The nine operation.
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> nineWithResponse(RequestOptions requestOptions) {
-        return service.nineSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.eightSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
+            Context.NONE);
     }
 }

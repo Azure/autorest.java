@@ -53,7 +53,7 @@ public final class DatetimeOperationClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return model with a datetime property along with {@link Response}.
+     * @return models that will return all properties in the model along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -77,7 +77,7 @@ public final class DatetimeOperationClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return model with a datetime property along with {@link Response}.
+     * @return models that will return the default object along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -143,7 +143,7 @@ public final class DatetimeOperationClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return model with a datetime property.
+     * @return models that will return all properties in the model.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -161,7 +161,7 @@ public final class DatetimeOperationClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return model with a datetime property.
+     * @return models that will return the default object.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -5,6 +5,7 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -61,7 +62,7 @@ public final class Group2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> two(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/two")
         @ExpectedResponses({ 204 })
@@ -70,7 +71,7 @@ public final class Group2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> twoSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/five")
         @ExpectedResponses({ 204 })
@@ -79,7 +80,7 @@ public final class Group2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> five(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/five")
         @ExpectedResponses({ 204 })
@@ -88,7 +89,7 @@ public final class Group2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fiveSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/six")
         @ExpectedResponses({ 204 })
@@ -97,7 +98,7 @@ public final class Group2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> six(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/six")
         @ExpectedResponses({ 204 })
@@ -106,7 +107,7 @@ public final class Group2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sixSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -121,8 +122,9 @@ public final class Group2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> twoWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.two(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.two(this.client.getEndpoint(), this.client.getClient(), accept,
+            requestOptions, context));
     }
 
     /**
@@ -137,7 +139,9 @@ public final class Group2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> twoWithResponse(RequestOptions requestOptions) {
-        return service.twoSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.twoSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -152,8 +156,9 @@ public final class Group2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fiveWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.five(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.five(this.client.getEndpoint(), this.client.getClient(), accept,
+            requestOptions, context));
     }
 
     /**
@@ -168,7 +173,9 @@ public final class Group2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
-        return service.fiveSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.fiveSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -183,8 +190,9 @@ public final class Group2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sixWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.six(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.six(this.client.getEndpoint(), this.client.getClient(), accept,
+            requestOptions, context));
     }
 
     /**
@@ -199,6 +207,8 @@ public final class Group2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sixWithResponse(RequestOptions requestOptions) {
-        return service.sixSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.sixSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
+            Context.NONE);
     }
 }

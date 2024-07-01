@@ -64,8 +64,7 @@ public final class VisibilityWritesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> create(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> create(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData dog, RequestOptions requestOptions, Context context);
 
         @Put("/write")
@@ -74,8 +73,7 @@ public final class VisibilityWritesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+        Response<BinaryData> createSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData dog, RequestOptions requestOptions, Context context);
     }
 
@@ -109,10 +107,9 @@ public final class VisibilityWritesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createWithResponseAsync(BinaryData dog, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.create(this.client.getEndpoint(), contentType, accept, dog, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.create(this.client.getEndpoint(), accept, dog, requestOptions, context));
     }
 
     /**
@@ -145,8 +142,7 @@ public final class VisibilityWritesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createWithResponse(BinaryData dog, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.createSync(this.client.getEndpoint(), contentType, accept, dog, requestOptions, Context.NONE);
+        return service.createSync(this.client.getEndpoint(), accept, dog, requestOptions, Context.NONE);
     }
 }

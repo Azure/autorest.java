@@ -42,12 +42,12 @@ public final class MultiContentTypesClientImpl {
     private final MultiContentTypesClientService service;
 
     /**
-     * Service host.
+     * Server parameter.
      */
     private final String endpoint;
 
     /**
-     * Gets Service host.
+     * Gets Server parameter.
      * 
      * @return the endpoint value.
      */
@@ -114,7 +114,7 @@ public final class MultiContentTypesClientImpl {
     /**
      * Initializes an instance of MultiContentTypesClient client.
      * 
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public MultiContentTypesClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -125,7 +125,7 @@ public final class MultiContentTypesClientImpl {
      * Initializes an instance of MultiContentTypesClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public MultiContentTypesClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -136,7 +136,7 @@ public final class MultiContentTypesClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      */
     public MultiContentTypesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
         String endpoint) {
@@ -163,8 +163,8 @@ public final class MultiContentTypesClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadWithOverload(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @BodyParam("application/json") BinaryData data,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/upload/overload/multi-body-types")
         @ExpectedResponses({ 204 })
@@ -173,8 +173,8 @@ public final class MultiContentTypesClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadWithOverloadSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @BodyParam("application/json") BinaryData data,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData data, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -198,8 +198,9 @@ public final class MultiContentTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> uploadWithOverloadWithResponseAsync(String contentType, BinaryData data,
         RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.uploadWithOverload(this.getEndpoint(), contentType, data, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.uploadWithOverload(this.getEndpoint(), contentType, accept, data,
+            requestOptions, context));
     }
 
     /**
@@ -223,6 +224,8 @@ public final class MultiContentTypesClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadWithOverloadWithResponse(String contentType, BinaryData data,
         RequestOptions requestOptions) {
-        return service.uploadWithOverloadSync(this.getEndpoint(), contentType, data, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.uploadWithOverloadSync(this.getEndpoint(), contentType, accept, data, requestOptions,
+            Context.NONE);
     }
 }

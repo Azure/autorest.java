@@ -66,7 +66,7 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> responseBody(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> responseBody(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/scalar/decimal/response_body")
@@ -75,7 +75,7 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> responseBodySync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> responseBodySync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/scalar/decimal/resquest_body")
@@ -84,7 +84,7 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requestBody(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> requestBody(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/type/scalar/decimal/resquest_body")
@@ -93,7 +93,7 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requestBodySync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> requestBodySync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Get("/type/scalar/decimal/request_parameter")
@@ -102,8 +102,8 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requestParameter(@QueryParam("value") BigDecimal value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> requestParameter(@QueryParam("value") BigDecimal value,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/scalar/decimal/request_parameter")
         @ExpectedResponses({ 204 })
@@ -111,8 +111,8 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requestParameterSync(@QueryParam("value") BigDecimal value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> requestParameterSync(@QueryParam("value") BigDecimal value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -176,8 +176,8 @@ public final class DecimalTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requestBodyWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.requestBody(contentType, body, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.requestBody(accept, body, requestOptions, context));
     }
 
     /**
@@ -198,8 +198,8 @@ public final class DecimalTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requestBodyWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.requestBodySync(contentType, body, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.requestBodySync(accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -215,7 +215,8 @@ public final class DecimalTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requestParameterWithResponseAsync(BigDecimal value, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.requestParameter(value, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.requestParameter(value, accept, requestOptions, context));
     }
 
     /**
@@ -231,6 +232,7 @@ public final class DecimalTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requestParameterWithResponse(BigDecimal value, RequestOptions requestOptions) {
-        return service.requestParameterSync(value, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.requestParameterSync(value, accept, requestOptions, Context.NONE);
     }
 }

@@ -6,6 +6,7 @@ package com.server.path.single.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Head;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -126,8 +127,8 @@ public final class SingleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> myOp(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> myOp(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Head("/server/path/single/myOp")
         @ExpectedResponses({ 200 })
@@ -135,7 +136,8 @@ public final class SingleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> myOpSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions, Context context);
+        Response<Void> myOpSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -150,7 +152,8 @@ public final class SingleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> myOpWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.myOp(this.getEndpoint(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.myOp(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -165,6 +168,7 @@ public final class SingleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> myOpWithResponse(RequestOptions requestOptions) {
-        return service.myOpSync(this.getEndpoint(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.myOpSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

@@ -62,8 +62,7 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> set(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> set(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/set")
         @ExpectedResponses({ 204 })
@@ -71,8 +70,7 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> setSync(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
-            Context context);
+        Response<Void> setSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
         @ExpectedResponses({ 204 })
@@ -80,8 +78,7 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> omit(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> omit(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
         @ExpectedResponses({ 204 })
@@ -89,8 +86,7 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> omitSync(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
-            Context context);
+        Response<Void> omitSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -120,14 +116,14 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> setWithResponseAsync(RequestOptions requestOptions) {
-        final String contentType = "application/json";
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return FluxUtil.withContext(context -> service.set(contentType, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.set(accept, requestOptionsLocal, context));
     }
 
     /**
@@ -157,14 +153,14 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> setWithResponse(RequestOptions requestOptions) {
-        final String contentType = "application/json";
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return service.setSync(contentType, requestOptionsLocal, Context.NONE);
+        return service.setSync(accept, requestOptionsLocal, Context.NONE);
     }
 
     /**
@@ -194,14 +190,14 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> omitWithResponseAsync(RequestOptions requestOptions) {
-        final String contentType = "application/json";
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return FluxUtil.withContext(context -> service.omit(contentType, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.omit(accept, requestOptionsLocal, context));
     }
 
     /**
@@ -231,13 +227,13 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> omitWithResponse(RequestOptions requestOptions) {
-        final String contentType = "application/json";
+        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return service.omitSync(contentType, requestOptionsLocal, Context.NONE);
+        return service.omitSync(accept, requestOptionsLocal, Context.NONE);
     }
 }

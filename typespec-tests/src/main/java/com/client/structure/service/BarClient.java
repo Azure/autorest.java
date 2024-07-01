@@ -35,7 +35,7 @@ public final class BarClient {
     }
 
     /**
-     * The nine operation.
+     * The five operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -46,12 +46,28 @@ public final class BarClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> nineWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.nineWithResponse(requestOptions);
+    public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.fiveWithResponse(requestOptions);
     }
 
     /**
-     * The nine operation.
+     * The six operation.
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> sixWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.sixWithResponse(requestOptions);
+    }
+
+    /**
+     * The five operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,9 +77,26 @@ public final class BarClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void nine() {
-        // Generated convenience method for nineWithResponse
+    public void five() {
+        // Generated convenience method for fiveWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        nineWithResponse(requestOptions).getValue();
+        fiveWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * The six operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void six() {
+        // Generated convenience method for sixWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        sixWithResponse(requestOptions).getValue();
     }
 }

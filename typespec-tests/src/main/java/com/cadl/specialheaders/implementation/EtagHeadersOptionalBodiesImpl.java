@@ -76,8 +76,8 @@ public final class EtagHeadersOptionalBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putWithOptionalBody(@HostParam("endpoint") String endpoint,
-            @QueryParam("format") String format, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Put("/etag-headers-optional-body")
         @ExpectedResponses({ 200 })
@@ -86,8 +86,8 @@ public final class EtagHeadersOptionalBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> putWithOptionalBodySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("format") String format, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -149,7 +149,6 @@ public final class EtagHeadersOptionalBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putWithOptionalBodyWithResponseAsync(String format,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -157,8 +156,8 @@ public final class EtagHeadersOptionalBodiesImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return FluxUtil.withContext(context -> service.putWithOptionalBody(this.client.getEndpoint(), format,
-            contentType, accept, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.putWithOptionalBody(this.client.getEndpoint(), format, accept,
+            requestOptionsLocal, context));
     }
 
     /**
@@ -219,7 +218,6 @@ public final class EtagHeadersOptionalBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithOptionalBodyWithResponse(String format, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -227,7 +225,7 @@ public final class EtagHeadersOptionalBodiesImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return service.putWithOptionalBodySync(this.client.getEndpoint(), format, contentType, accept,
-            requestOptionsLocal, Context.NONE);
+        return service.putWithOptionalBodySync(this.client.getEndpoint(), format, accept, requestOptionsLocal,
+            Context.NONE);
     }
 }

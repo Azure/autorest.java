@@ -44,12 +44,12 @@ public final class FirstClientImpl {
     private final FirstClientService service;
 
     /**
-     * Service host.
+     * Server parameter.
      */
     private final String endpoint;
 
     /**
-     * Gets Service host.
+     * Gets Server parameter.
      * 
      * @return the endpoint value.
      */
@@ -102,7 +102,7 @@ public final class FirstClientImpl {
     /**
      * Initializes an instance of FirstClient client.
      * 
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public FirstClientImpl(String endpoint, FirstServiceVersion serviceVersion) {
@@ -114,7 +114,7 @@ public final class FirstClientImpl {
      * Initializes an instance of FirstClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public FirstClientImpl(HttpPipeline httpPipeline, String endpoint, FirstServiceVersion serviceVersion) {
@@ -126,7 +126,7 @@ public final class FirstClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public FirstClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -152,7 +152,7 @@ public final class FirstClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/client1/resources/{name}")
         @ExpectedResponses({ 200 })
@@ -162,7 +162,7 @@ public final class FirstClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**

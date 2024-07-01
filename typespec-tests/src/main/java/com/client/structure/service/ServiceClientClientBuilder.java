@@ -43,17 +43,15 @@ import java.util.Objects;
 @ServiceClientBuilder(
     serviceClients = {
         ServiceClientClient.class,
-        BazClient.class,
-        FooClient.class,
+        BazFooClient.class,
         QuxClient.class,
-        BarClient.class,
+        QuxBarClient.class,
         FooClient.class,
         BarClient.class,
         ServiceClientAsyncClient.class,
-        BazAsyncClient.class,
-        FooAsyncClient.class,
+        BazFooAsyncClient.class,
         QuxAsyncClient.class,
-        BarAsyncClient.class,
+        QuxBarAsyncClient.class,
         FooAsyncClient.class,
         BarAsyncClient.class })
 public final class ServiceClientClientBuilder implements HttpTrait<ServiceClientClientBuilder>,
@@ -309,23 +307,13 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     /**
-     * Builds an instance of BazAsyncClient class.
+     * Builds an instance of BazFooAsyncClient class.
      * 
-     * @return an instance of BazAsyncClient.
+     * @return an instance of BazFooAsyncClient.
      */
     @Generated
-    public BazAsyncClient buildBazAsyncClient() {
-        return new BazAsyncClient(buildInnerClient().getBazes());
-    }
-
-    /**
-     * Builds an instance of FooAsyncClient class.
-     * 
-     * @return an instance of FooAsyncClient.
-     */
-    @Generated
-    public FooAsyncClient buildFooAsyncClient() {
-        return new FooAsyncClient(buildInnerClient().getFoos());
+    public BazFooAsyncClient buildBazFooAsyncClient() {
+        return new BazFooAsyncClient(buildInnerClient().getBazFoos());
     }
 
     /**
@@ -339,13 +327,13 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     /**
-     * Builds an instance of BarAsyncClient class.
+     * Builds an instance of QuxBarAsyncClient class.
      * 
-     * @return an instance of BarAsyncClient.
+     * @return an instance of QuxBarAsyncClient.
      */
     @Generated
-    public BarAsyncClient buildBarAsyncClient() {
-        return new BarAsyncClient(buildInnerClient().getBars());
+    public QuxBarAsyncClient buildQuxBarAsyncClient() {
+        return new QuxBarAsyncClient(buildInnerClient().getQuxBars());
     }
 
     /**
@@ -355,7 +343,7 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
      */
     @Generated
     public FooAsyncClient buildFooAsyncClient() {
-        return new FooAsyncClient(buildInnerClient().getFoosOperations());
+        return new FooAsyncClient(buildInnerClient().getFoos());
     }
 
     /**
@@ -365,7 +353,7 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
      */
     @Generated
     public BarAsyncClient buildBarAsyncClient() {
-        return new BarAsyncClient(buildInnerClient().getBarsOperations());
+        return new BarAsyncClient(buildInnerClient().getBars());
     }
 
     /**
@@ -379,23 +367,13 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     /**
-     * Builds an instance of BazClient class.
+     * Builds an instance of BazFooClient class.
      * 
-     * @return an instance of BazClient.
+     * @return an instance of BazFooClient.
      */
     @Generated
-    public BazClient buildBazClient() {
-        return new BazClient(buildInnerClient().getBazes());
-    }
-
-    /**
-     * Builds an instance of FooClient class.
-     * 
-     * @return an instance of FooClient.
-     */
-    @Generated
-    public FooClient buildFooClient() {
-        return new FooClient(buildInnerClient().getFoos());
+    public BazFooClient buildBazFooClient() {
+        return new BazFooClient(buildInnerClient().getBazFoos());
     }
 
     /**
@@ -409,13 +387,13 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     /**
-     * Builds an instance of BarClient class.
+     * Builds an instance of QuxBarClient class.
      * 
-     * @return an instance of BarClient.
+     * @return an instance of QuxBarClient.
      */
     @Generated
-    public BarClient buildBarClient() {
-        return new BarClient(buildInnerClient().getBars());
+    public QuxBarClient buildQuxBarClient() {
+        return new QuxBarClient(buildInnerClient().getQuxBars());
     }
 
     /**
@@ -425,7 +403,7 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
      */
     @Generated
     public FooClient buildFooClient() {
-        return new FooClient(buildInnerClient().getFoosOperations());
+        return new FooClient(buildInnerClient().getFoos());
     }
 
     /**
@@ -435,7 +413,7 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
      */
     @Generated
     public BarClient buildBarClient() {
-        return new BarClient(buildInnerClient().getBarsOperations());
+        return new BarClient(buildInnerClient().getBars());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ServiceClientClientBuilder.class);

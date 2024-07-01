@@ -20,6 +20,7 @@ import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.JobData;
 import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
+import com.cadl.longrunning.models.PollResponse;
 
 /**
  * Initializes a new instance of the synchronous LongRunningClient type.
@@ -47,12 +48,12 @@ public final class LongRunningClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> longRunningWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.longRunningWithResponse(requestOptions);
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginLongRunning(RequestOptions requestOptions) {
+        return this.serviceClient.beginLongRunning(requestOptions);
     }
 
     /**
@@ -166,13 +167,14 @@ public final class LongRunningClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void longRunning() {
-        // Generated convenience method for longRunningWithResponse
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<PollResponse, Void> beginLongRunning() {
+        // Generated convenience method for beginLongRunningWithModel
         RequestOptions requestOptions = new RequestOptions();
-        longRunningWithResponse(requestOptions).getValue();
+        return serviceClient.beginLongRunningWithModel(requestOptions);
     }
 
     /**

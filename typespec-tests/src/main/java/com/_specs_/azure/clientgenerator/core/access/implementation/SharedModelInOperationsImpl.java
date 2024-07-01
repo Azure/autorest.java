@@ -63,7 +63,7 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> publicMethod(@QueryParam("name") String name, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> publicMethod(@QueryParam("name") String name, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/sharedModelInOperation/public")
@@ -72,7 +72,7 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> publicMethodSync(@QueryParam("name") String name, @HeaderParam("Accept") String accept,
+        Response<BinaryData> publicMethodSync(@QueryParam("name") String name, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/sharedModelInOperation/internal")
@@ -81,7 +81,7 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> internal(@QueryParam("name") String name, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> internal(@QueryParam("name") String name, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/sharedModelInOperation/internal")
@@ -90,7 +90,7 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> internalSync(@QueryParam("name") String name, @HeaderParam("Accept") String accept,
+        Response<BinaryData> internalSync(@QueryParam("name") String name, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 

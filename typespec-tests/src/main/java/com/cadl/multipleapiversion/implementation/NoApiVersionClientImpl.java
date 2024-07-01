@@ -5,6 +5,7 @@
 package com.cadl.multipleapiversion.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -40,12 +41,12 @@ public final class NoApiVersionClientImpl {
     private final NoApiVersionClientService service;
 
     /**
-     * Service host.
+     * Server parameter.
      */
     private final String endpoint;
 
     /**
-     * Gets Service host.
+     * Gets Server parameter.
      * 
      * @return the endpoint value.
      */
@@ -98,7 +99,7 @@ public final class NoApiVersionClientImpl {
     /**
      * Initializes an instance of NoApiVersionClient client.
      * 
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public NoApiVersionClientImpl(String endpoint, NoApiVersionServiceVersion serviceVersion) {
@@ -110,7 +111,7 @@ public final class NoApiVersionClientImpl {
      * Initializes an instance of NoApiVersionClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public NoApiVersionClientImpl(HttpPipeline httpPipeline, String endpoint,
@@ -123,7 +124,7 @@ public final class NoApiVersionClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public NoApiVersionClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -149,8 +150,8 @@ public final class NoApiVersionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> action(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> action(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/client3")
         @ExpectedResponses({ 200 })
@@ -158,8 +159,8 @@ public final class NoApiVersionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> actionSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
-            Context context);
+        Response<Void> actionSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -181,7 +182,8 @@ public final class NoApiVersionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> actionWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.action(this.getEndpoint(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.action(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -203,6 +205,7 @@ public final class NoApiVersionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> actionWithResponse(RequestOptions requestOptions) {
-        return service.actionSync(this.getEndpoint(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.actionSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

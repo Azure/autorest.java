@@ -111,8 +111,8 @@ public final class RecursiveClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/recursive")
         @ExpectedResponses({ 204 })
@@ -120,8 +120,8 @@ public final class RecursiveClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putSync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Response<Void> putSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/recursive")
         @ExpectedResponses({ 200 })
@@ -129,7 +129,7 @@ public final class RecursiveClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/model/inheritance/recursive")
@@ -138,7 +138,7 @@ public final class RecursiveClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
@@ -165,8 +165,8 @@ public final class RecursiveClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.put(contentType, input, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put(accept, input, requestOptions, context));
     }
 
     /**
@@ -192,8 +192,8 @@ public final class RecursiveClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.putSync(contentType, input, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.putSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**

@@ -5,6 +5,7 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -146,7 +147,7 @@ public final class ClientAClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> renamedOne(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/one")
         @ExpectedResponses({ 204 })
@@ -155,7 +156,7 @@ public final class ClientAClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> renamedOneSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/three")
         @ExpectedResponses({ 204 })
@@ -164,7 +165,7 @@ public final class ClientAClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> renamedThree(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/three")
         @ExpectedResponses({ 204 })
@@ -173,7 +174,7 @@ public final class ClientAClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> renamedThreeSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/five")
         @ExpectedResponses({ 204 })
@@ -182,7 +183,7 @@ public final class ClientAClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> renamedFive(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/five")
         @ExpectedResponses({ 204 })
@@ -191,7 +192,7 @@ public final class ClientAClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> renamedFiveSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -206,8 +207,9 @@ public final class ClientAClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedOneWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil
-            .withContext(context -> service.renamedOne(this.getEndpoint(), this.getClient(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.renamedOne(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -222,7 +224,8 @@ public final class ClientAClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> renamedOneWithResponse(RequestOptions requestOptions) {
-        return service.renamedOneSync(this.getEndpoint(), this.getClient(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.renamedOneSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -237,8 +240,9 @@ public final class ClientAClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedThreeWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(
-            context -> service.renamedThree(this.getEndpoint(), this.getClient(), requestOptions, context));
+            context -> service.renamedThree(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -253,7 +257,8 @@ public final class ClientAClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> renamedThreeWithResponse(RequestOptions requestOptions) {
-        return service.renamedThreeSync(this.getEndpoint(), this.getClient(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.renamedThreeSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -268,8 +273,9 @@ public final class ClientAClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> renamedFiveWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil
-            .withContext(context -> service.renamedFive(this.getEndpoint(), this.getClient(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.renamedFive(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
     }
 
     /**
@@ -284,6 +290,7 @@ public final class ClientAClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> renamedFiveWithResponse(RequestOptions requestOptions) {
-        return service.renamedFiveSync(this.getEndpoint(), this.getClient(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.renamedFiveSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
     }
 }

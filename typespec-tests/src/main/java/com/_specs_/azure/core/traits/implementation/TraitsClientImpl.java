@@ -138,7 +138,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> smokeTest(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/azure/core/traits/user/{id}")
@@ -148,7 +148,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> smokeTestSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
@@ -158,9 +158,8 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> repeatableAction(@QueryParam("api-version") String apiVersion,
-            @PathParam("id") int id, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData userActionParam,
-            RequestOptions requestOptions, Context context);
+            @PathParam("id") int id, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData userActionParam, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
         @ExpectedResponses({ 200 })
@@ -169,8 +168,8 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> repeatableActionSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData userActionParam, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData userActionParam,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -205,7 +204,8 @@ public final class TraitsClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return sample Model along with {@link Response} on successful completion of {@link Mono}.
+     * @return a resource, sending and receiving headers along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> smokeTestWithResponseAsync(int id, String foo, RequestOptions requestOptions) {
@@ -246,7 +246,7 @@ public final class TraitsClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return sample Model along with {@link Response}.
+     * @return a resource, sending and receiving headers along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> smokeTestWithResponse(int id, String foo, RequestOptions requestOptions) {
@@ -283,7 +283,7 @@ public final class TraitsClientImpl {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam The userActionParam parameter.
+     * @param userActionParam User action param.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -294,7 +294,6 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData userActionParam,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = CoreUtils.randomUuid().toString();
@@ -312,7 +311,7 @@ public final class TraitsClientImpl {
             }
         });
         return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id,
-            contentType, accept, userActionParam, requestOptionsLocal, context));
+            accept, userActionParam, requestOptionsLocal, context));
     }
 
     /**
@@ -343,7 +342,7 @@ public final class TraitsClientImpl {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam The userActionParam parameter.
+     * @param userActionParam User action param.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -354,7 +353,6 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData userActionParam,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = CoreUtils.randomUuid().toString();
@@ -371,7 +369,7 @@ public final class TraitsClientImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, contentType, accept,
-            userActionParam, requestOptionsLocal, Context.NONE);
+        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, userActionParam,
+            requestOptionsLocal, Context.NONE);
     }
 }

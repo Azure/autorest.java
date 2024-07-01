@@ -64,7 +64,7 @@ public final class StringOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getKnownValue(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> getKnownValue(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/enum/fixed/string/known-value")
@@ -73,7 +73,7 @@ public final class StringOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getKnownValueSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getKnownValueSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/enum/fixed/string/known-value")
@@ -82,7 +82,7 @@ public final class StringOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putKnownValue(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> putKnownValue(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/type/enum/fixed/string/known-value")
@@ -91,7 +91,7 @@ public final class StringOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putKnownValueSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> putKnownValueSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/type/enum/fixed/string/unknown-value")
@@ -100,7 +100,7 @@ public final class StringOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putUnknownValue(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> putUnknownValue(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/type/enum/fixed/string/unknown-value")
@@ -109,7 +109,7 @@ public final class StringOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putUnknownValueSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> putUnknownValueSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
@@ -173,8 +173,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putKnownValueWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.putKnownValue(contentType, body, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putKnownValue(accept, body, requestOptions, context));
     }
 
     /**
@@ -195,8 +195,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putKnownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.putKnownValueSync(contentType, body, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.putKnownValueSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -217,8 +217,8 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putUnknownValueWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.putUnknownValue(contentType, body, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putUnknownValue(accept, body, requestOptions, context));
     }
 
     /**
@@ -239,7 +239,7 @@ public final class StringOperationsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putUnknownValueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.putUnknownValueSync(contentType, body, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.putUnknownValueSync(accept, body, requestOptions, Context.NONE);
     }
 }

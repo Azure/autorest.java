@@ -160,7 +160,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrUpdate(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -171,7 +171,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrUpdateSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -182,9 +182,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion,
-            @PathParam("id") int id, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+            @PathParam("id") int id, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 200, 201 })
@@ -193,8 +192,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 200 })
@@ -203,7 +202,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 200 })
@@ -212,7 +211,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
         @ExpectedResponses({ 200 })
@@ -221,7 +220,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> list(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
         @ExpectedResponses({ 200 })
@@ -230,7 +229,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/page")
         @ExpectedResponses({ 200 })
@@ -239,7 +238,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithPage(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/page")
         @ExpectedResponses({ 200 })
@@ -248,7 +247,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithPageSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/parameters")
         @ExpectedResponses({ 200 })
@@ -257,8 +256,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithParameters(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData bodyInput, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/parameters")
         @ExpectedResponses({ 200 })
@@ -267,8 +266,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithParametersSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData bodyInput, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/custom-page")
         @ExpectedResponses({ 200 })
@@ -277,7 +276,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithCustomPageModel(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/custom-page")
         @ExpectedResponses({ 200 })
@@ -286,7 +285,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithCustomPageModelSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 204 })
@@ -295,7 +294,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 204 })
@@ -304,7 +303,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/basic/users/{id}:export")
         @ExpectedResponses({ 200 })
@@ -313,7 +312,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/azure/core/basic/users/{id}:export")
@@ -323,7 +322,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("{nextLink}")
@@ -333,7 +332,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -342,7 +341,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -351,7 +350,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithPageNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -360,7 +359,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithPageNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -369,8 +368,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithParametersNext(
-            @PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
@@ -380,8 +378,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithParametersNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -390,7 +387,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithCustomPageModelNext(
-            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("Accept") String accept,
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
@@ -400,7 +397,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithCustomPageModelNextSync(
-            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("Accept") String accept,
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 
@@ -565,10 +562,9 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(int id, BinaryData resource,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), id,
-            contentType, accept, resource, requestOptions, context));
+            accept, resource, requestOptions, context));
     }
 
     /**
@@ -621,10 +617,9 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrReplaceWithResponse(int id, BinaryData resource,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), id, contentType, accept, resource,
-            requestOptions, Context.NONE);
+        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), id, accept, resource, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -1138,11 +1133,10 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithParametersSinglePageAsync(BinaryData bodyInput,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.listWithParameters(this.getServiceVersion().getVersion(), contentType,
-                accept, bodyInput, requestOptions, context))
+            .withContext(context -> service.listWithParameters(this.getServiceVersion().getVersion(), accept, bodyInput,
+                requestOptions, context))
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
@@ -1245,10 +1239,9 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listWithParametersSinglePage(BinaryData bodyInput,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        Response<BinaryData> res = service.listWithParametersSync(this.getServiceVersion().getVersion(), contentType,
-            accept, bodyInput, requestOptions, Context.NONE);
+        Response<BinaryData> res = service.listWithParametersSync(this.getServiceVersion().getVersion(), accept,
+            bodyInput, requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
@@ -1634,8 +1627,6 @@ public final class BasicClientImpl {
     }
 
     /**
-     * List with Azure.Core.Page&lt;&gt;.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -1672,8 +1663,6 @@ public final class BasicClientImpl {
     }
 
     /**
-     * List with Azure.Core.Page&lt;&gt;.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -1709,8 +1698,6 @@ public final class BasicClientImpl {
     }
 
     /**
-     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -1740,18 +1727,14 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithParametersNextSinglePageAsync(String nextLink,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(
-                context -> service.listWithParametersNext(nextLink, contentType, accept, requestOptions, context))
+            .withContext(context -> service.listWithParametersNext(nextLink, accept, requestOptions, context))
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
 
     /**
-     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -1780,17 +1763,13 @@ public final class BasicClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listWithParametersNextSinglePage(String nextLink, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        Response<BinaryData> res
-            = service.listWithParametersNextSync(nextLink, contentType, accept, requestOptions, Context.NONE);
+        Response<BinaryData> res = service.listWithParametersNextSync(nextLink, accept, requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
 
     /**
-     * List with custom page model.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -1828,8 +1807,6 @@ public final class BasicClientImpl {
     }
 
     /**
-     * List with custom page model.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 

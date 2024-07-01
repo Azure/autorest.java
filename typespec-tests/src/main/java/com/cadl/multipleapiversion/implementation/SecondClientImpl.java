@@ -44,12 +44,12 @@ public final class SecondClientImpl {
     private final SecondClientService service;
 
     /**
-     * Service host.
+     * Server parameter.
      */
     private final String endpoint;
 
     /**
-     * Gets Service host.
+     * Gets Server parameter.
      * 
      * @return the endpoint value.
      */
@@ -102,7 +102,7 @@ public final class SecondClientImpl {
     /**
      * Initializes an instance of SecondClient client.
      * 
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public SecondClientImpl(String endpoint, SecondServiceVersion serviceVersion) {
@@ -114,7 +114,7 @@ public final class SecondClientImpl {
      * Initializes an instance of SecondClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public SecondClientImpl(HttpPipeline httpPipeline, String endpoint, SecondServiceVersion serviceVersion) {
@@ -126,7 +126,7 @@ public final class SecondClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Service host.
+     * @param endpoint Server parameter.
      * @param serviceVersion Service version.
      */
     public SecondClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -152,7 +152,7 @@ public final class SecondClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/client2/resources/{name}")
         @ExpectedResponses({ 200 })
@@ -162,7 +162,7 @@ public final class SecondClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**

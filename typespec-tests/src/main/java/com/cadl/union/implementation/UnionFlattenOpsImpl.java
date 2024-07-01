@@ -84,8 +84,8 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> send(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData sendRequest, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
         @Post("/union/send")
         @ExpectedResponses({ 200 })
@@ -94,8 +94,8 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sendSync(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData sendRequest, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
         @Post("/union/send-long")
         @ExpectedResponses({ 200 })
@@ -104,8 +104,8 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> sendLong(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData sendLongRequest, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
         @Post("/union/send-long")
         @ExpectedResponses({ 200 })
@@ -114,8 +114,8 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sendLongSync(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData sendLongRequest, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
         @Get("/union/param")
         @ExpectedResponses({ 200 })
@@ -123,8 +123,8 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> get(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/union/param")
         @ExpectedResponses({ 200 })
@@ -132,7 +132,8 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions, Context context);
+        Response<Void> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/union/generate")
         @ExpectedResponses({ 202 })
@@ -141,7 +142,7 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> generate(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/union/generate")
@@ -151,7 +152,7 @@ public final class UnionFlattenOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> generateSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 
@@ -169,7 +170,7 @@ public final class UnionFlattenOpsImpl {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param sendRequest The sendRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -178,11 +179,10 @@ public final class UnionFlattenOpsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponseAsync(String id, BinaryData sendRequest,
-        RequestOptions requestOptions) {
-        final String contentType = "application/json";
+    public Mono<Response<Void>> sendWithResponseAsync(String id, BinaryData request, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.send(this.client.getEndpoint(), id,
-            this.client.getServiceVersion().getVersion(), contentType, sendRequest, requestOptions, context));
+            this.client.getServiceVersion().getVersion(), accept, request, requestOptions, context));
     }
 
     /**
@@ -199,7 +199,7 @@ public final class UnionFlattenOpsImpl {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param sendRequest The sendRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -208,10 +208,10 @@ public final class UnionFlattenOpsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(String id, BinaryData sendRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.sendSync(this.client.getEndpoint(), id, this.client.getServiceVersion().getVersion(),
-            contentType, sendRequest, requestOptions, Context.NONE);
+    public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.sendSync(this.client.getEndpoint(), id, this.client.getServiceVersion().getVersion(), accept,
+            request, requestOptions, Context.NONE);
     }
 
     /**
@@ -239,7 +239,7 @@ public final class UnionFlattenOpsImpl {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param sendLongRequest The sendLongRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -248,11 +248,11 @@ public final class UnionFlattenOpsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendLongWithResponseAsync(String id, BinaryData sendLongRequest,
+    public Mono<Response<Void>> sendLongWithResponseAsync(String id, BinaryData request,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
+        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.sendLong(this.client.getEndpoint(), id,
-            this.client.getServiceVersion().getVersion(), contentType, sendLongRequest, requestOptions, context));
+            this.client.getServiceVersion().getVersion(), accept, request, requestOptions, context));
     }
 
     /**
@@ -280,7 +280,7 @@ public final class UnionFlattenOpsImpl {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param sendLongRequest The sendLongRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -289,10 +289,10 @@ public final class UnionFlattenOpsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendLongWithResponse(String id, BinaryData sendLongRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.sendLongSync(this.client.getEndpoint(), id, this.client.getServiceVersion().getVersion(),
-            contentType, sendLongRequest, requestOptions, Context.NONE);
+    public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.sendLongSync(this.client.getEndpoint(), id, this.client.getServiceVersion().getVersion(), accept,
+            request, requestOptions, Context.NONE);
     }
 
     /**
@@ -314,7 +314,8 @@ public final class UnionFlattenOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.get(this.client.getEndpoint(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -336,7 +337,8 @@ public final class UnionFlattenOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
-        return service.getSync(this.client.getEndpoint(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.getSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**

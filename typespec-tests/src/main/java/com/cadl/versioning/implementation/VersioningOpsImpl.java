@@ -95,7 +95,7 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> export(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/versioning/resources/{name}:export")
         @ExpectedResponses({ 202 })
@@ -105,7 +105,7 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> exportSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/versioning/resources")
         @ExpectedResponses({ 200 })
@@ -114,7 +114,7 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> list(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/versioning/resources")
@@ -124,7 +124,7 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Put("/versioning/resources/{name}")
@@ -135,8 +135,8 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createLongRunning(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Put("/versioning/resources/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -146,8 +146,8 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createLongRunningSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -156,7 +156,7 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("{nextLink}")
@@ -166,7 +166,7 @@ public final class VersioningOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
@@ -657,11 +657,9 @@ public final class VersioningOpsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createLongRunningWithResponseAsync(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.createLongRunning(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions,
-            context));
+            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, context));
     }
 
     /**
@@ -698,10 +696,9 @@ public final class VersioningOpsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createLongRunningWithResponse(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         return service.createLongRunningSync(this.client.getEndpoint(), this.client.getServiceVersion().getVersion(),
-            name, contentType, accept, resource, requestOptions, Context.NONE);
+            name, accept, resource, requestOptions, Context.NONE);
     }
 
     /**
@@ -889,8 +886,6 @@ public final class VersioningOpsImpl {
     }
 
     /**
-     * Resource list operation template.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -922,8 +917,6 @@ public final class VersioningOpsImpl {
     }
 
     /**
-     * Resource list operation template.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 

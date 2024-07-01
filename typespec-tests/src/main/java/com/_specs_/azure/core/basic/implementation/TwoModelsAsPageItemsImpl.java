@@ -82,7 +82,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listFirstItem(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/first-item")
         @ExpectedResponses({ 200 })
@@ -91,7 +91,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listFirstItemSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/second-item")
         @ExpectedResponses({ 200 })
@@ -100,7 +100,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listSecondItem(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/second-item")
         @ExpectedResponses({ 200 })
@@ -109,7 +109,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listSecondItemSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -118,7 +118,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listFirstItemNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -127,7 +127,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listFirstItemNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -136,7 +136,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listSecondItemNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -145,7 +145,7 @@ public final class TwoModelsAsPageItemsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listSecondItemNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -369,9 +369,6 @@ public final class TwoModelsAsPageItemsImpl {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for
-     * FirstItem.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -400,9 +397,6 @@ public final class TwoModelsAsPageItemsImpl {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for
-     * FirstItem.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -429,9 +423,6 @@ public final class TwoModelsAsPageItemsImpl {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for
-     * SecondItem.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -460,9 +451,6 @@ public final class TwoModelsAsPageItemsImpl {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for
-     * SecondItem.
-     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 

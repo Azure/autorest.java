@@ -6,6 +6,7 @@ package com.encode.datetime.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -66,8 +67,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(@QueryParam("value") OffsetDateTime value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> defaultMethod(@QueryParam("value") OffsetDateTime value,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/default")
         @ExpectedResponses({ 204 })
@@ -75,8 +76,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(@QueryParam("value") OffsetDateTime value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> defaultMethodSync(@QueryParam("value") OffsetDateTime value,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/rfc3339")
         @ExpectedResponses({ 204 })
@@ -84,8 +85,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc3339(@QueryParam("value") OffsetDateTime value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> rfc3339(@QueryParam("value") OffsetDateTime value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/rfc3339")
         @ExpectedResponses({ 204 })
@@ -93,8 +94,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc3339Sync(@QueryParam("value") OffsetDateTime value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> rfc3339Sync(@QueryParam("value") OffsetDateTime value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/rfc7231")
         @ExpectedResponses({ 204 })
@@ -102,8 +103,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc7231(@QueryParam("value") DateTimeRfc1123 value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> rfc7231(@QueryParam("value") DateTimeRfc1123 value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/rfc7231")
         @ExpectedResponses({ 204 })
@@ -111,8 +112,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc7231Sync(@QueryParam("value") DateTimeRfc1123 value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> rfc7231Sync(@QueryParam("value") DateTimeRfc1123 value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/unix-timestamp")
         @ExpectedResponses({ 204 })
@@ -120,8 +121,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimestamp(@QueryParam("value") long value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> unixTimestamp(@QueryParam("value") long value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/unix-timestamp")
         @ExpectedResponses({ 204 })
@@ -129,8 +130,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimestampSync(@QueryParam("value") long value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> unixTimestampSync(@QueryParam("value") long value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/unix-timestamp-array")
         @ExpectedResponses({ 204 })
@@ -138,8 +139,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimestampArray(@QueryParam("value") String value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> unixTimestampArray(@QueryParam("value") String value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/query/unix-timestamp-array")
         @ExpectedResponses({ 204 })
@@ -147,8 +148,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimestampArraySync(@QueryParam("value") String value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> unixTimestampArraySync(@QueryParam("value") String value, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -164,7 +165,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> defaultMethodWithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.defaultMethod(value, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.defaultMethod(value, accept, requestOptions, context));
     }
 
     /**
@@ -180,7 +182,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> defaultMethodWithResponse(OffsetDateTime value, RequestOptions requestOptions) {
-        return service.defaultMethodSync(value, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.defaultMethodSync(value, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -196,7 +199,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> rfc3339WithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.rfc3339(value, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.rfc3339(value, accept, requestOptions, context));
     }
 
     /**
@@ -212,7 +216,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> rfc3339WithResponse(OffsetDateTime value, RequestOptions requestOptions) {
-        return service.rfc3339Sync(value, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.rfc3339Sync(value, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -228,8 +233,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> rfc7231WithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
+        final String accept = "application/json";
         DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
-        return FluxUtil.withContext(context -> service.rfc7231(valueConverted, requestOptions, context));
+        return FluxUtil.withContext(context -> service.rfc7231(valueConverted, accept, requestOptions, context));
     }
 
     /**
@@ -245,8 +251,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> rfc7231WithResponse(OffsetDateTime value, RequestOptions requestOptions) {
+        final String accept = "application/json";
         DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
-        return service.rfc7231Sync(valueConverted, requestOptions, Context.NONE);
+        return service.rfc7231Sync(valueConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -262,8 +269,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimestampWithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
+        final String accept = "application/json";
         long valueConverted = value.toEpochSecond();
-        return FluxUtil.withContext(context -> service.unixTimestamp(valueConverted, requestOptions, context));
+        return FluxUtil.withContext(context -> service.unixTimestamp(valueConverted, accept, requestOptions, context));
     }
 
     /**
@@ -279,8 +287,9 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimestampWithResponse(OffsetDateTime value, RequestOptions requestOptions) {
+        final String accept = "application/json";
         long valueConverted = value.toEpochSecond();
-        return service.unixTimestampSync(valueConverted, requestOptions, Context.NONE);
+        return service.unixTimestampSync(valueConverted, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -297,11 +306,13 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimestampArrayWithResponseAsync(List<OffsetDateTime> value,
         RequestOptions requestOptions) {
+        final String accept = "application/json";
         String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
             .serializeIterable(
                 value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return FluxUtil.withContext(context -> service.unixTimestampArray(valueConverted, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.unixTimestampArray(valueConverted, accept, requestOptions, context));
     }
 
     /**
@@ -317,10 +328,11 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimestampArrayWithResponse(List<OffsetDateTime> value, RequestOptions requestOptions) {
+        final String accept = "application/json";
         String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
             .serializeIterable(
                 value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return service.unixTimestampArraySync(valueConverted, requestOptions, Context.NONE);
+        return service.unixTimestampArraySync(valueConverted, accept, requestOptions, Context.NONE);
     }
 }

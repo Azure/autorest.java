@@ -92,7 +92,7 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/repeatability-headers/resources/{name}")
         @ExpectedResponses({ 200 })
@@ -102,7 +102,7 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/repeatability-headers/resources/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -112,8 +112,8 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Put("/repeatability-headers/resources/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -123,8 +123,8 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> putSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Post("/repeatability-headers/resources/{name}:post")
         @ExpectedResponses({ 200 })
@@ -134,7 +134,7 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> post(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/repeatability-headers/resources/{name}:post")
         @ExpectedResponses({ 200 })
@@ -144,7 +144,7 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> postSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Patch("/repeatability-headers/resources/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -154,7 +154,7 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createLro(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -166,7 +166,7 @@ public final class RepeatabilityHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createLroSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
     }
@@ -272,7 +272,6 @@ public final class RepeatabilityHeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putWithResponseAsync(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = CoreUtils.randomUuid().toString();
@@ -289,9 +288,8 @@ public final class RepeatabilityHeadersImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return FluxUtil
-            .withContext(context -> service.put(this.client.getEndpoint(), this.client.getServiceVersion().getVersion(),
-                name, contentType, accept, resource, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.put(this.client.getEndpoint(),
+            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptionsLocal, context));
     }
 
     /**
@@ -338,7 +336,6 @@ public final class RepeatabilityHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithResponse(String name, BinaryData resource, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         String repeatabilityRequestId = CoreUtils.randomUuid().toString();
@@ -355,8 +352,8 @@ public final class RepeatabilityHeadersImpl {
                     .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
-        return service.putSync(this.client.getEndpoint(), this.client.getServiceVersion().getVersion(), name,
-            contentType, accept, resource, requestOptionsLocal, Context.NONE);
+        return service.putSync(this.client.getEndpoint(), this.client.getServiceVersion().getVersion(), name, accept,
+            resource, requestOptionsLocal, Context.NONE);
     }
 
     /**

@@ -63,7 +63,7 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> operation(@QueryParam("name") String name, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> operation(@QueryParam("name") String name, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/operation")
@@ -72,7 +72,7 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> operationSync(@QueryParam("name") String name, @HeaderParam("Accept") String accept,
+        Response<BinaryData> operationSync(@QueryParam("name") String name, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/discriminator")
@@ -81,7 +81,7 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> discriminator(@QueryParam("kind") String kind, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> discriminator(@QueryParam("kind") String kind, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/discriminator")
@@ -90,7 +90,7 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> discriminatorSync(@QueryParam("kind") String kind, @HeaderParam("Accept") String accept,
+        Response<BinaryData> discriminatorSync(@QueryParam("kind") String kind, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 

@@ -66,7 +66,7 @@ public final class SingleContentTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> downloadImageForSingleContentType(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/single/request/download/image")
         @ExpectedResponses({ 200 })
@@ -75,7 +75,7 @@ public final class SingleContentTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> downloadImageForSingleContentTypeSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/single/request/upload/image")
         @ExpectedResponses({ 204 })
@@ -84,8 +84,8 @@ public final class SingleContentTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadImageForSingleContentType(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @BodyParam("image/png") BinaryData data,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("image/png") BinaryData data, RequestOptions requestOptions, Context context);
 
         @Post("/single/request/upload/image")
         @ExpectedResponses({ 204 })
@@ -94,8 +94,8 @@ public final class SingleContentTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadImageForSingleContentTypeSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @BodyParam("image/png") BinaryData data,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @BodyParam("image/png") BinaryData data, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -163,8 +163,9 @@ public final class SingleContentTypesImpl {
     public Mono<Response<Void>> uploadImageForSingleContentTypeWithResponseAsync(BinaryData data,
         RequestOptions requestOptions) {
         final String contentType = "image/png";
+        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.uploadImageForSingleContentType(this.client.getEndpoint(),
-            contentType, data, requestOptions, context));
+            contentType, accept, data, requestOptions, context));
     }
 
     /**
@@ -186,7 +187,8 @@ public final class SingleContentTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadImageForSingleContentTypeWithResponse(BinaryData data, RequestOptions requestOptions) {
         final String contentType = "image/png";
-        return service.uploadImageForSingleContentTypeSync(this.client.getEndpoint(), contentType, data, requestOptions,
-            Context.NONE);
+        final String accept = "application/json";
+        return service.uploadImageForSingleContentTypeSync(this.client.getEndpoint(), contentType, accept, data,
+            requestOptions, Context.NONE);
     }
 }

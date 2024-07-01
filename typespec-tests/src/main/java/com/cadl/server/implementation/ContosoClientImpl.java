@@ -6,6 +6,7 @@ package com.cadl.server.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -55,20 +56,6 @@ public final class ContosoClientImpl {
     }
 
     /**
-     * Api Version.
-     */
-    private final String apiVersion;
-
-    /**
-     * Gets Api Version.
-     * 
-     * @return the apiVersion value.
-     */
-    public String getApiVersion() {
-        return this.apiVersion;
-    }
-
-    /**
      * Service version.
      */
     private final ContosoServiceVersion serviceVersion;
@@ -114,12 +101,11 @@ public final class ContosoClientImpl {
      * Initializes an instance of ContosoClient client.
      * 
      * @param endpoint Service endpoint.
-     * @param apiVersion Api Version.
      * @param serviceVersion Service version.
      */
-    public ContosoClientImpl(String endpoint, String apiVersion, ContosoServiceVersion serviceVersion) {
+    public ContosoClientImpl(String endpoint, ContosoServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -127,12 +113,10 @@ public final class ContosoClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Service endpoint.
-     * @param apiVersion Api Version.
      * @param serviceVersion Service version.
      */
-    public ContosoClientImpl(HttpPipeline httpPipeline, String endpoint, String apiVersion,
-        ContosoServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion, serviceVersion);
+    public ContosoClientImpl(HttpPipeline httpPipeline, String endpoint, ContosoServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -141,15 +125,13 @@ public final class ContosoClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Service endpoint.
-     * @param apiVersion Api Version.
      * @param serviceVersion Service version.
      */
     public ContosoClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String apiVersion, ContosoServiceVersion serviceVersion) {
+        ContosoServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.apiVersion = apiVersion;
         this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(ContosoClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -167,7 +149,8 @@ public final class ContosoClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
-            @PathParam(value = "group", encoded = true) String group, RequestOptions requestOptions, Context context);
+            @PathParam(value = "group", encoded = true) String group, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/contoso/{group}")
         @ExpectedResponses({ 200, 204 })
@@ -176,7 +159,8 @@ public final class ContosoClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> getSync(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
-            @PathParam(value = "group", encoded = true) String group, RequestOptions requestOptions, Context context);
+            @PathParam(value = "group", encoded = true) String group, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -192,8 +176,9 @@ public final class ContosoClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponseAsync(String group, RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.get(this.getEndpoint(), this.getApiVersion(), group, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.get(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            group, accept, requestOptions, context));
     }
 
     /**
@@ -209,6 +194,8 @@ public final class ContosoClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(String group, RequestOptions requestOptions) {
-        return service.getSync(this.getEndpoint(), this.getApiVersion(), group, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.getSync(this.getEndpoint(), this.getServiceVersion().getVersion(), group, accept, requestOptions,
+            Context.NONE);
     }
 }

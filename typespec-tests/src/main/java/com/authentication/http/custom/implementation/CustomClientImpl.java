@@ -107,7 +107,8 @@ public final class CustomClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> valid(RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> valid(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/authentication/http/custom/valid")
         @ExpectedResponses({ 204 })
@@ -115,7 +116,7 @@ public final class CustomClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validSync(RequestOptions requestOptions, Context context);
+        Response<Void> validSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/authentication/http/custom/invalid")
         @ExpectedResponses({ 204 })
@@ -123,7 +124,7 @@ public final class CustomClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> invalid(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Mono<Response<Void>> invalid(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/authentication/http/custom/invalid")
@@ -132,7 +133,7 @@ public final class CustomClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> invalidSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Response<Void> invalidSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
@@ -148,7 +149,8 @@ public final class CustomClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.valid(requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.valid(accept, requestOptions, context));
     }
 
     /**
@@ -163,7 +165,8 @@ public final class CustomClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validWithResponse(RequestOptions requestOptions) {
-        return service.validSync(requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.validSync(accept, requestOptions, Context.NONE);
     }
 
     /**

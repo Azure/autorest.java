@@ -56,7 +56,7 @@ public final class UnionClient {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param sendRequest The sendRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -66,8 +66,8 @@ public final class UnionClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(String id, BinaryData sendRequest, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(id, sendRequest, requestOptions);
+    public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(id, request, requestOptions);
     }
 
     /**
@@ -95,7 +95,7 @@ public final class UnionClient {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param sendLongRequest The sendLongRequest parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -105,8 +105,8 @@ public final class UnionClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendLongWithResponse(String id, BinaryData sendLongRequest, RequestOptions requestOptions) {
-        return this.serviceClient.sendLongWithResponse(id, sendLongRequest, requestOptions);
+    public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.sendLongWithResponse(id, request, requestOptions);
     }
 
     /**
@@ -187,9 +187,9 @@ public final class UnionClient {
     public void send(String id, BinaryData input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest sendRequestObj = new SendRequest(input).setUser(user);
-        BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
-        sendWithResponse(id, sendRequest, requestOptions).getValue();
+        SendRequest requestObj = new SendRequest(input).setUser(user);
+        BinaryData request = BinaryData.fromObject(requestObj);
+        sendWithResponse(id, request, requestOptions).getValue();
     }
 
     /**
@@ -209,9 +209,9 @@ public final class UnionClient {
     public void send(String id, BinaryData input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest sendRequestObj = new SendRequest(input);
-        BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
-        sendWithResponse(id, sendRequest, requestOptions).getValue();
+        SendRequest requestObj = new SendRequest(input);
+        BinaryData request = BinaryData.fromObject(requestObj);
+        sendWithResponse(id, request, requestOptions).getValue();
     }
 
     /**
@@ -232,16 +232,16 @@ public final class UnionClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String filter = options.getFilter();
-        SendLongRequest sendLongRequestObj
+        SendLongRequest requestObj
             = new SendLongRequest(options.getInput(), options.getDataInt()).setUser(options.getUser())
                 .setDataUnion(options.getDataUnion())
                 .setDataLong(options.getDataLong())
                 .setDataFloat(options.getDataFloat());
-        BinaryData sendLongRequest = BinaryData.fromObject(sendLongRequestObj);
+        BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
         }
-        sendLongWithResponse(id, sendLongRequest, requestOptions).getValue();
+        sendLongWithResponse(id, request, requestOptions).getValue();
     }
 
     /**

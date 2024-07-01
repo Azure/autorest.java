@@ -115,9 +115,8 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getModel(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getModel(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/visibility")
         @ExpectedResponses({ 200 })
@@ -125,17 +124,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getModelSync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
-            RequestOptions requestOptions, Context context);
-
-        @Head("/type/model/visibility")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> headModel(@HeaderParam("Content-Type") String contentType,
+        Response<BinaryData> getModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Head("/type/model/visibility")
@@ -144,7 +133,16 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> headModelSync(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> headModel(@HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+
+        @Head("/type/model/visibility")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> headModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/visibility")
@@ -153,7 +151,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModel(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> putModel(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/visibility")
@@ -162,7 +160,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> putModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Patch("/type/model/visibility")
@@ -171,7 +169,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patchModel(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> patchModel(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Patch("/type/model/visibility")
@@ -180,7 +178,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> patchModelSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> patchModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Post("/type/model/visibility")
@@ -189,7 +187,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> postModel(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> postModel(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Post("/type/model/visibility")
@@ -198,7 +196,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> postModelSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> postModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Delete("/type/model/visibility")
@@ -207,7 +205,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> deleteModel(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> deleteModel(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Delete("/type/model/visibility")
@@ -216,7 +214,7 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> deleteModelSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> deleteModelSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
     }
 
@@ -265,9 +263,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getModel(contentType, accept, input, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getModel(accept, input, requestOptions, context));
     }
 
     /**
@@ -314,9 +311,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.getModelSync(contentType, accept, input, requestOptions, Context.NONE);
+        return service.getModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -347,8 +343,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> headModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.headModel(contentType, input, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.headModel(accept, input, requestOptions, context));
     }
 
     /**
@@ -379,8 +375,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.headModelSync(contentType, input, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.headModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -411,8 +407,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.putModel(contentType, input, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putModel(accept, input, requestOptions, context));
     }
 
     /**
@@ -443,8 +439,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.putModelSync(contentType, input, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.putModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -475,8 +471,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patchModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.patchModel(contentType, input, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.patchModel(accept, input, requestOptions, context));
     }
 
     /**
@@ -507,8 +503,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.patchModelSync(contentType, input, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.patchModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -539,8 +535,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.postModel(contentType, input, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.postModel(accept, input, requestOptions, context));
     }
 
     /**
@@ -571,8 +567,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.postModelSync(contentType, input, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.postModelSync(accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -603,8 +599,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.deleteModel(contentType, input, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.deleteModel(accept, input, requestOptions, context));
     }
 
     /**
@@ -635,7 +631,7 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.deleteModelSync(contentType, input, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.deleteModelSync(accept, input, requestOptions, Context.NONE);
     }
 }

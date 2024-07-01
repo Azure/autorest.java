@@ -6,6 +6,7 @@ package com.server.path.multiple.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
+import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -55,20 +56,6 @@ public final class MultipleClientImpl {
     }
 
     /**
-     * Pass in v1.0 for API version.
-     */
-    private final String apiVersion;
-
-    /**
-     * Gets Pass in v1.0 for API version.
-     * 
-     * @return the apiVersion value.
-     */
-    public String getApiVersion() {
-        return this.apiVersion;
-    }
-
-    /**
      * Service version.
      */
     private final MultipleServiceVersion serviceVersion;
@@ -114,12 +101,11 @@ public final class MultipleClientImpl {
      * Initializes an instance of MultipleClient client.
      * 
      * @param endpoint Pass in http://localhost:3000 for endpoint.
-     * @param apiVersion Pass in v1.0 for API version.
      * @param serviceVersion Service version.
      */
-    public MultipleClientImpl(String endpoint, String apiVersion, MultipleServiceVersion serviceVersion) {
+    public MultipleClientImpl(String endpoint, MultipleServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -127,12 +113,10 @@ public final class MultipleClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Pass in http://localhost:3000 for endpoint.
-     * @param apiVersion Pass in v1.0 for API version.
      * @param serviceVersion Service version.
      */
-    public MultipleClientImpl(HttpPipeline httpPipeline, String endpoint, String apiVersion,
-        MultipleServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion, serviceVersion);
+    public MultipleClientImpl(HttpPipeline httpPipeline, String endpoint, MultipleServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -141,15 +125,13 @@ public final class MultipleClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Pass in http://localhost:3000 for endpoint.
-     * @param apiVersion Pass in v1.0 for API version.
      * @param serviceVersion Service version.
      */
     public MultipleClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String apiVersion, MultipleServiceVersion serviceVersion) {
+        MultipleServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.apiVersion = apiVersion;
         this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(MultipleClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -167,7 +149,8 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> noOperationParams(@HostParam("endpoint") String endpoint,
-            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/")
         @ExpectedResponses({ 204 })
@@ -176,7 +159,8 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> noOperationParamsSync(@HostParam("endpoint") String endpoint,
-            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/{keyword}")
         @ExpectedResponses({ 204 })
@@ -186,7 +170,7 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withOperationPathParam(@HostParam("endpoint") String endpoint,
             @HostParam("apiVersion") String apiVersion, @PathParam("keyword") String keyword,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/{keyword}")
         @ExpectedResponses({ 204 })
@@ -196,7 +180,7 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withOperationPathParamSync(@HostParam("endpoint") String endpoint,
             @HostParam("apiVersion") String apiVersion, @PathParam("keyword") String keyword,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -211,8 +195,9 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> noOperationParamsWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(
-            context -> service.noOperationParams(this.getEndpoint(), this.getApiVersion(), requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.noOperationParams(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), accept, requestOptions, context));
     }
 
     /**
@@ -227,7 +212,9 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> noOperationParamsWithResponse(RequestOptions requestOptions) {
-        return service.noOperationParamsSync(this.getEndpoint(), this.getApiVersion(), requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.noOperationParamsSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -243,8 +230,9 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withOperationPathParamWithResponseAsync(String keyword, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.withOperationPathParam(this.getEndpoint(), this.getApiVersion(),
-            keyword, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.withOperationPathParam(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), keyword, accept, requestOptions, context));
     }
 
     /**
@@ -260,7 +248,8 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withOperationPathParamWithResponse(String keyword, RequestOptions requestOptions) {
-        return service.withOperationPathParamSync(this.getEndpoint(), this.getApiVersion(), keyword, requestOptions,
-            Context.NONE);
+        final String accept = "application/json";
+        return service.withOperationPathParamSync(this.getEndpoint(), this.getServiceVersion().getVersion(), keyword,
+            accept, requestOptions, Context.NONE);
     }
 }

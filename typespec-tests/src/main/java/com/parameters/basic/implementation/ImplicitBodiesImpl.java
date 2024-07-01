@@ -63,7 +63,7 @@ public final class ImplicitBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> simple(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> simple(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData simpleRequest, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/basic/implicit-body/simple")
@@ -72,7 +72,7 @@ public final class ImplicitBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> simpleSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> simpleSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData simpleRequest, RequestOptions requestOptions, Context context);
     }
 
@@ -96,8 +96,8 @@ public final class ImplicitBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> simpleWithResponseAsync(BinaryData simpleRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.simple(contentType, simpleRequest, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.simple(accept, simpleRequest, requestOptions, context));
     }
 
     /**
@@ -120,7 +120,7 @@ public final class ImplicitBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> simpleWithResponse(BinaryData simpleRequest, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.simpleSync(contentType, simpleRequest, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.simpleSync(accept, simpleRequest, requestOptions, Context.NONE);
     }
 }

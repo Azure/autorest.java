@@ -62,7 +62,7 @@ public final class ErrorOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+        Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/error")
@@ -71,7 +71,7 @@ public final class ErrorOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> readSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+        Response<BinaryData> readSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 

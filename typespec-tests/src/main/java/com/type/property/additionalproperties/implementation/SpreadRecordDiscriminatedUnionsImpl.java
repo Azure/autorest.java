@@ -64,7 +64,7 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/property/additionalProperties/spreadRecordDiscriminatedUnion")
@@ -73,7 +73,7 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/property/additionalProperties/spreadRecordDiscriminatedUnion")
@@ -82,8 +82,8 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/additionalProperties/spreadRecordDiscriminatedUnion")
         @ExpectedResponses({ 204 })
@@ -91,8 +91,8 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putSync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> putSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -113,8 +113,7 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the model spread Record&lt;WidgetData&gt; along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return call along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
@@ -140,7 +139,7 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the model spread Record&lt;WidgetData&gt; along with {@link Response}.
+     * @return call along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
@@ -171,8 +170,8 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.put(contentType, body, requestOptions, context));
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.put(accept, body, requestOptions, context));
     }
 
     /**
@@ -198,7 +197,7 @@ public final class SpreadRecordDiscriminatedUnionsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        return service.putSync(contentType, body, requestOptions, Context.NONE);
+        final String accept = "application/json";
+        return service.putSync(accept, body, requestOptions, Context.NONE);
     }
 }

@@ -35,7 +35,7 @@ public final class FooClient {
     }
 
     /**
-     * The seven operation.
+     * The three operation.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -46,12 +46,28 @@ public final class FooClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sevenWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.sevenWithResponse(requestOptions);
+    public Response<Void> threeWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.threeWithResponse(requestOptions);
     }
 
     /**
-     * The seven operation.
+     * The four operation.
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> fourWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.fourWithResponse(requestOptions);
+    }
+
+    /**
+     * The three operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,9 +77,26 @@ public final class FooClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void seven() {
-        // Generated convenience method for sevenWithResponse
+    public void three() {
+        // Generated convenience method for threeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        sevenWithResponse(requestOptions).getValue();
+        threeWithResponse(requestOptions).getValue();
+    }
+
+    /**
+     * The four operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void four() {
+        // Generated convenience method for fourWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        fourWithResponse(requestOptions).getValue();
     }
 }
