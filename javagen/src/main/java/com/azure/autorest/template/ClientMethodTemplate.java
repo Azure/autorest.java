@@ -504,7 +504,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         // repeatability headers
         if (repeatabilityRequestHeaders) {
             requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_REQUEST_ID_EXPRESSION, MethodUtil.REPEATABILITY_REQUEST_ID_HEADER);
-            if (!CoreUtils.isNullOrEmpty(clientMethod.getProxyMethod().getSpecialHeaders()) && clientMethod.getProxyMethod().getSpecialHeaders().contains(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER)) {
+            if (clientMethod.getProxyMethod().getSpecialHeaders().contains(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER)) {
                 requestOptionsSetHeaderIfAbsent(function, MethodUtil.REPEATABILITY_FIRST_SENT_EXPRESSION, MethodUtil.REPEATABILITY_FIRST_SENT_HEADER);
             }
         }

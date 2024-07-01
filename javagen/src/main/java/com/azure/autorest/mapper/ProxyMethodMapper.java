@@ -84,7 +84,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         ProxyMethod.Builder builder = createProxyMethodBuilder()
                 .description(operation.getDescription())
                 .name(operationName)
-                .specialHeaders(operation.getSpecialHeaders())
                 .isResumable(false);
 
         String operationId = operation.getOperationId();
@@ -199,6 +198,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 }
             }
             List<ProxyMethodParameter> specialParameters = getSpecialParameters(operation);
+            if (!CoreUtils.isNullOrEmpty(specialParameters)) {
+                builder.specialHeaders(specialParameters.stream()
+                    .map(ProxyMethodParameter::getRequestParameterName)
+                    .collect(Collectors.toList()));
+            }
             if (!settings.isDataPlaneClient()) {
                 parameters.addAll(specialParameters);
             }
