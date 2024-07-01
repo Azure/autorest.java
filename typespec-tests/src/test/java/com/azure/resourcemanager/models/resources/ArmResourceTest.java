@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.arm.models.resources;
+package com.azure.resourcemanager.models.resources;
 
-import com.azure.arm.models.resources.models.NestedProxyResource;
-import com.azure.arm.models.resources.models.NestedProxyResourceProperties;
-import com.azure.arm.models.resources.models.NestedProxyResourceUpdateProperties;
-import com.azure.arm.models.resources.models.ProvisioningState;
-import com.azure.arm.models.resources.models.TopLevelTrackedResource;
-import com.azure.arm.models.resources.models.TopLevelTrackedResourceProperties;
-import com.azure.arm.models.resources.models.TopLevelTrackedResourceUpdateProperties;
+import com.azure.resourcemanager.models.resources.models.NestedProxyResource;
+import com.azure.resourcemanager.models.resources.models.NestedProxyResourceProperties;
+import com.azure.resourcemanager.models.resources.models.NestedProxyResourceUpdateProperties;
+import com.azure.resourcemanager.models.resources.models.ProvisioningState;
+import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResource;
+import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceProperties;
+import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceUpdateProperties;
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import org.utils.ArmUtils;
