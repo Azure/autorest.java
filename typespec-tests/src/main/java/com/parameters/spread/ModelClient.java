@@ -16,8 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.spread.implementation.ModelsImpl;
+import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
+import com.parameters.spread.implementation.models.SpreadCompositeRequestMixRequest;
 import com.parameters.spread.models.BodyParameter;
-import com.parameters.spread.models.CompositeRequestMix;
 
 /**
  * Initializes a new instance of the synchronous SpreadClient type.
@@ -47,7 +48,7 @@ public final class ModelClient {
      * }
      * }</pre>
      * 
-     * @param bodyParameter This is a simple model.
+     * @param spreadAsRequestBodyRequest1 The spreadAsRequestBodyRequest1 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,8 +58,9 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadAsRequestBodyWithResponse(BinaryData bodyParameter, RequestOptions requestOptions) {
-        return this.serviceClient.spreadAsRequestBodyWithResponse(bodyParameter, requestOptions);
+    public Response<Void> spreadAsRequestBodyWithResponse(BinaryData spreadAsRequestBodyRequest1,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadAsRequestBodyWithResponse(spreadAsRequestBodyRequest1, requestOptions);
     }
 
     /**
@@ -144,7 +146,7 @@ public final class ModelClient {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -154,16 +156,15 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadCompositeRequestMixWithResponse(String name, String testHeader,
-        BinaryData compositeRequestMix, RequestOptions requestOptions) {
-        return this.serviceClient.spreadCompositeRequestMixWithResponse(name, testHeader, compositeRequestMix,
-            requestOptions);
+    public Response<Void> spreadCompositeRequestMixWithResponse(String name, String testHeader, BinaryData request,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestMixWithResponse(name, testHeader, request, requestOptions);
     }
 
     /**
      * The spreadAsRequestBody operation.
      * 
-     * @param bodyParameter This is a simple model.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -173,10 +174,12 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadAsRequestBody(BodyParameter bodyParameter) {
+    public void spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions).getValue();
+        SpreadAsRequestBodyRequest spreadAsRequestBodyRequest1Obj = new SpreadAsRequestBodyRequest(name);
+        BinaryData spreadAsRequestBodyRequest1 = BinaryData.fromObject(spreadAsRequestBodyRequest1Obj);
+        spreadAsRequestBodyWithResponse(spreadAsRequestBodyRequest1, requestOptions).getValue();
     }
 
     /**
@@ -244,7 +247,7 @@ public final class ModelClient {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @param prop The prop parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -254,10 +257,11 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadCompositeRequestMix(String name, String testHeader, CompositeRequestMix compositeRequestMix) {
+    public void spreadCompositeRequestMix(String name, String testHeader, String prop) {
         // Generated convenience method for spreadCompositeRequestMixWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        spreadCompositeRequestMixWithResponse(name, testHeader, BinaryData.fromObject(compositeRequestMix),
-            requestOptions).getValue();
+        SpreadCompositeRequestMixRequest requestObj = new SpreadCompositeRequestMixRequest(prop);
+        BinaryData request = BinaryData.fromObject(requestObj);
+        spreadCompositeRequestMixWithResponse(name, testHeader, request, requestOptions).getValue();
     }
 }

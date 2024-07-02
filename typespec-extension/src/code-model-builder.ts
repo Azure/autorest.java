@@ -111,12 +111,17 @@ import {
   HttpStatusCodesEntry,
   Visibility,
   getAuthentication,
+  getHeaderFieldName,
   getHeaderFieldOptions,
   getHttpOperation,
+  getPathParamName,
+  getQueryParamName,
   getQueryParamOptions,
   getServers,
   getStatusCodeDescription,
+  isHeader,
   isPathParam,
+  isQueryParam,
 } from "@typespec/http";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
@@ -797,7 +802,7 @@ export class CodeModelBuilder {
           this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
         }
       } else if (op.parameters.body.type) {
-        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
+        let bodyType = op.parameters.body.type;
 
         if (bodyType.kind === "Model") {
           // try use resource type as round-trip model
@@ -1341,7 +1346,7 @@ export class CodeModelBuilder {
       schema = this.processSchemaFromSdkType(sdkType, body.name);
     }
 
-    const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
+    const isAnonymousModel = sdkType.kind === "model" && body.kind === "Model" && !this.isArm();
     const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
     const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
       summary: this.getSummary(body),
@@ -2256,8 +2261,16 @@ export class CodeModelBuilder {
   }
 
   private getSerializedName(target: ModelProperty): string {
-    // TODO: currently this is only for JSON
-    return getWireName(this.sdkContext, target);
+    if (isHeader(this.program, target)) {
+      return getHeaderFieldName(this.program, target);
+    } else if (isQueryParam(this.program, target)) {
+      return getQueryParamName(this.program, target);
+    } else if (isPathParam(this.program, target)) {
+      return getPathParamName(this.program, target);
+    } else {
+      // TODO: currently this is only for JSON
+      return getWireName(this.sdkContext, target);
+    }
   }
 
   private isReadOnly(target: SdkModelPropertyType): boolean {
