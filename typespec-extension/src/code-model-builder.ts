@@ -2118,7 +2118,7 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameterName = sdkBody.name;
+    const parameterName = isAnonymousModel ? "" : sdkBody.name; // not use TCGC's anonymous model's name, as we want to overwrite the name in below logics
     const parameter = new Parameter(parameterName, sdkBody.description ?? "", schema, {
       summary: sdkBody.details,
       implementation: ImplementationLocation.Method,
