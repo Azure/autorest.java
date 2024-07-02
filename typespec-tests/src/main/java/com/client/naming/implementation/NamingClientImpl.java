@@ -178,7 +178,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> client(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData clientNameModel, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData clientRequest, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/client")
         @ExpectedResponses({ 204 })
@@ -187,7 +187,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> clientSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData clientNameModel, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData clientRequest, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/language")
         @ExpectedResponses({ 204 })
@@ -196,8 +196,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> language(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData languageClientNameModel, RequestOptions requestOptions,
-            Context context);
+            @BodyParam("application/json") BinaryData languageRequest, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/language")
         @ExpectedResponses({ 204 })
@@ -206,8 +205,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> languageSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData languageClientNameModel, RequestOptions requestOptions,
-            Context context);
+            @BodyParam("application/json") BinaryData languageRequest, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/compatible-with-encoded-name")
         @ExpectedResponses({ 204 })
@@ -216,7 +214,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> compatibleWithEncodedName(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData clientNameAndJsonEncodedNameModel, RequestOptions requestOptions,
+            @BodyParam("application/json") BinaryData compatibleWithEncodedNameRequest, RequestOptions requestOptions,
             Context context);
 
         @Post("/client/naming/property/compatible-with-encoded-name")
@@ -226,7 +224,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> compatibleWithEncodedNameSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData clientNameAndJsonEncodedNameModel, RequestOptions requestOptions,
+            @BodyParam("application/json") BinaryData compatibleWithEncodedNameRequest, RequestOptions requestOptions,
             Context context);
 
         @Post("/client/naming/header")
@@ -342,7 +340,7 @@ public final class NamingClientImpl {
      * }
      * }</pre>
      * 
-     * @param clientNameModel The clientNameModel parameter.
+     * @param clientRequest The clientRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -351,9 +349,9 @@ public final class NamingClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> clientWithResponseAsync(BinaryData clientNameModel, RequestOptions requestOptions) {
+    public Mono<Response<Void>> clientWithResponseAsync(BinaryData clientRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.client(accept, clientNameModel, requestOptions, context));
+        return FluxUtil.withContext(context -> service.client(accept, clientRequest, requestOptions, context));
     }
 
     /**
@@ -366,7 +364,7 @@ public final class NamingClientImpl {
      * }
      * }</pre>
      * 
-     * @param clientNameModel The clientNameModel parameter.
+     * @param clientRequest The clientRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -375,9 +373,9 @@ public final class NamingClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> clientWithResponse(BinaryData clientNameModel, RequestOptions requestOptions) {
+    public Response<Void> clientWithResponse(BinaryData clientRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.clientSync(accept, clientNameModel, requestOptions, Context.NONE);
+        return service.clientSync(accept, clientRequest, requestOptions, Context.NONE);
     }
 
     /**
@@ -390,7 +388,7 @@ public final class NamingClientImpl {
      * }
      * }</pre>
      * 
-     * @param languageClientNameModel The languageClientNameModel parameter.
+     * @param languageRequest The languageRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -399,11 +397,9 @@ public final class NamingClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> languageWithResponseAsync(BinaryData languageClientNameModel,
-        RequestOptions requestOptions) {
+    public Mono<Response<Void>> languageWithResponseAsync(BinaryData languageRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.language(accept, languageClientNameModel, requestOptions, context));
+        return FluxUtil.withContext(context -> service.language(accept, languageRequest, requestOptions, context));
     }
 
     /**
@@ -416,7 +412,7 @@ public final class NamingClientImpl {
      * }
      * }</pre>
      * 
-     * @param languageClientNameModel The languageClientNameModel parameter.
+     * @param languageRequest The languageRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -425,9 +421,9 @@ public final class NamingClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> languageWithResponse(BinaryData languageClientNameModel, RequestOptions requestOptions) {
+    public Response<Void> languageWithResponse(BinaryData languageRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.languageSync(accept, languageClientNameModel, requestOptions, Context.NONE);
+        return service.languageSync(accept, languageRequest, requestOptions, Context.NONE);
     }
 
     /**
@@ -440,7 +436,7 @@ public final class NamingClientImpl {
      * }
      * }</pre>
      * 
-     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
+     * @param compatibleWithEncodedNameRequest The compatibleWithEncodedNameRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -449,11 +445,11 @@ public final class NamingClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> compatibleWithEncodedNameWithResponseAsync(BinaryData clientNameAndJsonEncodedNameModel,
+    public Mono<Response<Void>> compatibleWithEncodedNameWithResponseAsync(BinaryData compatibleWithEncodedNameRequest,
         RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.compatibleWithEncodedName(accept,
-            clientNameAndJsonEncodedNameModel, requestOptions, context));
+            compatibleWithEncodedNameRequest, requestOptions, context));
     }
 
     /**
@@ -466,7 +462,7 @@ public final class NamingClientImpl {
      * }
      * }</pre>
      * 
-     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
+     * @param compatibleWithEncodedNameRequest The compatibleWithEncodedNameRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -475,10 +471,10 @@ public final class NamingClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> compatibleWithEncodedNameWithResponse(BinaryData clientNameAndJsonEncodedNameModel,
+    public Response<Void> compatibleWithEncodedNameWithResponse(BinaryData compatibleWithEncodedNameRequest,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.compatibleWithEncodedNameSync(accept, clientNameAndJsonEncodedNameModel, requestOptions,
+        return service.compatibleWithEncodedNameSync(accept, compatibleWithEncodedNameRequest, requestOptions,
             Context.NONE);
     }
 
