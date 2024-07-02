@@ -41,6 +41,12 @@
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
+      <artifactId>azure-core-test</artifactId>
+      <version>1.26.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
       <version>1.15.1</version>
       <scope>test</scope>

@@ -13,7 +13,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * This is a model with non-body http request decorator.
+ * The SpreadCompositeRequestMixRequest model.
  */
 @Immutable
 public final class SpreadCompositeRequestMixRequest implements JsonSerializable<SpreadCompositeRequestMixRequest> {

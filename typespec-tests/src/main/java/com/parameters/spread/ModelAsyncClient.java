@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.parameters.spread.implementation.ModelsImpl;
-import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
-import com.parameters.spread.implementation.models.SpreadCompositeRequestMixRequest;
+import com.parameters.spread.models.BodyParameter;
+import com.parameters.spread.models.CompositeRequestMix;
 import reactor.core.publisher.Mono;
 
 /**
@@ -49,7 +49,7 @@ public final class ModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param bodyParameter The bodyParameter parameter.
+     * @param bodyParameter This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -147,7 +147,7 @@ public final class ModelAsyncClient {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param compositeRequestMix The compositeRequestMix parameter.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -166,7 +166,7 @@ public final class ModelAsyncClient {
     /**
      * The spreadAsRequestBody operation.
      * 
-     * @param name The name parameter.
+     * @param bodyParameter This is a simple model.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -177,12 +177,11 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadAsRequestBody(String name) {
+    public Mono<Void> spreadAsRequestBody(BodyParameter bodyParameter) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadAsRequestBodyRequest bodyParameterObj = new SpreadAsRequestBodyRequest(name);
-        BinaryData bodyParameter = BinaryData.fromObject(bodyParameterObj);
-        return spreadAsRequestBodyWithResponse(bodyParameter, requestOptions).flatMap(FluxUtil::toMono);
+        return spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions)
+            .flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -199,7 +198,7 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadCompositeRequestOnlyWithBody(SpreadAsRequestBodyRequest body) {
+    public Mono<Void> spreadCompositeRequestOnlyWithBody(BodyParameter body) {
         // Generated convenience method for spreadCompositeRequestOnlyWithBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData.fromObject(body), requestOptions)
@@ -244,7 +243,7 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadCompositeRequest(String name, String testHeader, SpreadAsRequestBodyRequest body) {
+    public Mono<Void> spreadCompositeRequest(String name, String testHeader, BodyParameter body) {
         // Generated convenience method for spreadCompositeRequestWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return spreadCompositeRequestWithResponse(name, testHeader, BinaryData.fromObject(body), requestOptions)
@@ -255,7 +254,8 @@ public final class ModelAsyncClient {
      * The spreadCompositeRequestMix operation.
      * 
      * @param name The name parameter.
-     * @param prop The prop parameter.
+     * @param testHeader The testHeader parameter.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -266,12 +266,11 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadCompositeRequestMix(String name, String prop) {
+    public Mono<Void> spreadCompositeRequestMix(String name, String testHeader,
+        CompositeRequestMix compositeRequestMix) {
         // Generated convenience method for spreadCompositeRequestMixWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadCompositeRequestMixRequest compositeRequestMixObj = new SpreadCompositeRequestMixRequest(prop);
-        BinaryData compositeRequestMix = BinaryData.fromObject(compositeRequestMixObj);
-        return spreadCompositeRequestMixWithResponse(name, testHeader, compositeRequestMix, requestOptions)
-            .flatMap(FluxUtil::toMono);
+        return spreadCompositeRequestMixWithResponse(name, testHeader, BinaryData.fromObject(compositeRequestMix),
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 }

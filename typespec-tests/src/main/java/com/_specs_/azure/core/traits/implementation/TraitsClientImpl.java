@@ -31,12 +31,12 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import java.time.OffsetDateTime;
-import java.util.UUID;
 import reactor.core.publisher.Mono;
 
 /**
@@ -159,7 +159,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> repeatableAction(@QueryParam("api-version") String apiVersion,
             @PathParam("id") int id, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData userActionParam, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
         @ExpectedResponses({ 200 })
@@ -168,7 +168,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> repeatableActionSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData userActionParam,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -283,7 +283,7 @@ public final class TraitsClientImpl {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam The userActionParam parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -292,26 +292,25 @@ public final class TraitsClientImpl {
      * @return user action response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData userActionParam,
+    public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData body,
         RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
+                    .set(HttpHeaderName.fromString("repeatability-request-id"), CoreUtils.randomUuid().toString());
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
+                    .set(HttpHeaderName.fromString("repeatability-first-sent"),
+                        DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
         return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id,
-            accept, userActionParam, requestOptionsLocal, context));
+            accept, body, requestOptionsLocal, context));
     }
 
     /**
@@ -342,7 +341,7 @@ public final class TraitsClientImpl {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam The userActionParam parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -351,25 +350,23 @@ public final class TraitsClientImpl {
      * @return user action response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData userActionParam,
-        RequestOptions requestOptions) {
+    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
-        String repeatabilityRequestId = UUID.randomUUID().toString();
-        String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
+                    .set(HttpHeaderName.fromString("repeatability-request-id"), CoreUtils.randomUuid().toString());
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
                 requestLocal.getHeaders()
-                    .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
+                    .set(HttpHeaderName.fromString("repeatability-first-sent"),
+                        DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
-        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, userActionParam,
+        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, body,
             requestOptionsLocal, Context.NONE);
     }
 }

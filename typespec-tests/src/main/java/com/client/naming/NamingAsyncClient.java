@@ -17,9 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.client.naming.implementation.NamingClientImpl;
-import com.client.naming.implementation.models.ClientRequest;
-import com.client.naming.implementation.models.CompatibleWithEncodedNameRequest;
-import com.client.naming.implementation.models.LanguageRequest;
+import com.client.naming.models.ClientNameAndJsonEncodedNameModel;
+import com.client.naming.models.ClientNameModel;
+import com.client.naming.models.LanguageClientNameModel;
 import reactor.core.publisher.Mono;
 
 /**
@@ -222,7 +222,7 @@ public final class NamingAsyncClient {
     /**
      * The client operation.
      * 
-     * @param clientName Pass in true.
+     * @param clientNameModel The clientNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -233,18 +233,16 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> client(boolean clientName) {
+    public Mono<Void> client(ClientNameModel clientNameModel) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        ClientRequest clientNameModelObj = new ClientRequest(clientName);
-        BinaryData clientNameModel = BinaryData.fromObject(clientNameModelObj);
-        return clientWithResponse(clientNameModel, requestOptions).flatMap(FluxUtil::toMono);
+        return clientWithResponse(BinaryData.fromObject(clientNameModel), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * The language operation.
      * 
-     * @param javaName Pass in true.
+     * @param languageClientNameModel The languageClientNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -255,18 +253,17 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> language(boolean javaName) {
+    public Mono<Void> language(LanguageClientNameModel languageClientNameModel) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        LanguageRequest languageClientNameModelObj = new LanguageRequest(javaName);
-        BinaryData languageClientNameModel = BinaryData.fromObject(languageClientNameModelObj);
-        return languageWithResponse(languageClientNameModel, requestOptions).flatMap(FluxUtil::toMono);
+        return languageWithResponse(BinaryData.fromObject(languageClientNameModel), requestOptions)
+            .flatMap(FluxUtil::toMono);
     }
 
     /**
      * The compatibleWithEncodedName operation.
      * 
-     * @param clientName Pass in true.
+     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -277,14 +274,11 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> compatibleWithEncodedName(boolean clientName) {
+    public Mono<Void> compatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel) {
         // Generated convenience method for compatibleWithEncodedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        CompatibleWithEncodedNameRequest clientNameAndJsonEncodedNameModelObj
-            = new CompatibleWithEncodedNameRequest(clientName);
-        BinaryData clientNameAndJsonEncodedNameModel = BinaryData.fromObject(clientNameAndJsonEncodedNameModelObj);
-        return compatibleWithEncodedNameWithResponse(clientNameAndJsonEncodedNameModel, requestOptions)
-            .flatMap(FluxUtil::toMono);
+        return compatibleWithEncodedNameWithResponse(BinaryData.fromObject(clientNameAndJsonEncodedNameModel),
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

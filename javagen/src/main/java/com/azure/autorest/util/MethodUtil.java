@@ -47,6 +47,8 @@ public class MethodUtil {
     public static final String REPEATABILITY_FIRST_SENT_HEADER = "repeatability-first-sent";
     public static final String REPEATABILITY_REQUEST_ID_VARIABLE_NAME = CodeNamer.toCamelCase(REPEATABILITY_REQUEST_ID_HEADER);
     public static final String REPEATABILITY_FIRST_SENT_VARIABLE_NAME = CodeNamer.toCamelCase(REPEATABILITY_FIRST_SENT_HEADER);
+    public static final String REPEATABILITY_REQUEST_ID_EXPRESSION = "CoreUtils.randomUuid().toString()";
+    public static final String REPEATABILITY_FIRST_SENT_EXPRESSION = "DateTimeRfc1123.toRfc1123String(OffsetDateTime.now())";
 
     private static final Set<HttpMethod> REPEATABILITY_REQUEST_HTTP_METHODS
         = EnumSet.of(HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.POST);

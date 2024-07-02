@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.serialization.encodedname.json.implementation.PropertiesImpl;
-import com.serialization.encodedname.json.implementation.models.SendRequest;
+import com.serialization.encodedname.json.models.JsonEncodedNameModel;
 import reactor.core.publisher.Mono;
 
 /**
@@ -48,7 +48,7 @@ public final class JsonAsyncClient {
      * }
      * }</pre>
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,8 +58,8 @@ public final class JsonAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(jsonEncodedNameModel, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -88,7 +88,7 @@ public final class JsonAsyncClient {
     /**
      * The send operation.
      * 
-     * @param defaultName Pass in true.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,12 +99,10 @@ public final class JsonAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(boolean defaultName) {
+    public Mono<Void> send(JsonEncodedNameModel body) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest jsonEncodedNameModelObj = new SendRequest(defaultName);
-        BinaryData jsonEncodedNameModel = BinaryData.fromObject(jsonEncodedNameModelObj);
-        return sendWithResponse(jsonEncodedNameModel, requestOptions).flatMap(FluxUtil::toMono);
+        return sendWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -119,10 +117,10 @@ public final class JsonAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<SendRequest> get() {
+    public Mono<JsonEncodedNameModel> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(SendRequest.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(JsonEncodedNameModel.class));
     }
 }

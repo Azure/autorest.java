@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.parameters.bodyoptionality.implementation.OptionalExplicitsImpl;
-import com.parameters.bodyoptionality.implementation.models.RequiredImplicitRequest;
+import com.parameters.bodyoptionality.models.BodyModel;
 import reactor.core.publisher.Mono;
 
 /**
@@ -40,6 +40,14 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The set operation.
+     * <p><strong>Header Parameters</strong></p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -63,6 +71,14 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The omit operation.
+     * <p><strong>Header Parameters</strong></p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -98,7 +114,7 @@ public final class OptionalExplicitAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> set(RequiredImplicitRequest body) {
+    public Mono<Void> set(BodyModel body) {
         // Generated convenience method for setWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (body != null) {
@@ -139,7 +155,7 @@ public final class OptionalExplicitAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> omit(RequiredImplicitRequest body) {
+    public Mono<Void> omit(BodyModel body) {
         // Generated convenience method for omitWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (body != null) {

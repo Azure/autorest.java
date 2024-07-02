@@ -9,7 +9,7 @@
     "testserver-run": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http --coverageFile ./cadl-ranch-coverage-java.json"
   },
   "dependencies": {
-    "@azure-tools/cadl-ranch-specs": "0.34.0",
+    "@azure-tools/cadl-ranch-specs": "0.34.1",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.17.0.tgz"
   },
   "devDependencies": {
@@ -23,6 +23,7 @@
     "@typespec/rest": ">=0.57.0 <1.0.0",
     "@typespec/versioning": ">=0.57.0 <1.0.0",
     "@typespec/openapi": ">=0.57.0 <1.0.0",
+    "@typespec/xml": ">=0.57.0 <1.0.0",
     "@azure-tools/typespec-azure-core": ">=0.43.0 <1.0.0",
     "@azure-tools/typespec-client-generator-core": "./azure-tools-typespec-client-generator-core-0.44.0-pr-886.20240701.33.tgz",
     "@azure-tools/typespec-azure-resource-manager": ">=0.43.0 <1.0.0",

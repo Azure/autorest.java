@@ -23,7 +23,7 @@ public class EncodeDurationTests {
     private final PropertyClient propertyClient = new DurationClientBuilder().buildPropertyClient();
 
     private static final Duration DAY40 = Duration.ofDays(40);
-    private static final Duration SECOND35 = Duration.ofSeconds(35, 621_000_000);
+    private static final Duration SECOND35 = Duration.ofSeconds(35, 625_000_000);
     private static final Duration SECOND36 = Duration.ofSeconds(36);
 
     @Test
@@ -72,7 +72,7 @@ public class EncodeDurationTests {
 
         propertyClient.iso8601(new ISO8601DurationProperty(DAY40));
 
-        List<Duration> array = Arrays.asList(SECOND35, Duration.ofSeconds(46, 781_000_000));
+        List<Duration> array = Arrays.asList(SECOND35, Duration.ofSeconds(46, 750_000_000));
         FloatSecondsDurationArrayProperty ret = propertyClient.floatSecondsArray(new FloatSecondsDurationArrayProperty(array));
         Assertions.assertEquals(array, ret.getValue());
     }

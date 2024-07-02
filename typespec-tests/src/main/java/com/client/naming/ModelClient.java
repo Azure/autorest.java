@@ -16,8 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.client.naming.implementation.ModelsImpl;
-import com.client.naming.implementation.models.ClientRequest1;
-import com.client.naming.implementation.models.LanguageRequest1;
+import com.client.naming.models.ClientModel;
+import com.client.naming.models.JavaModel;
 
 /**
  * Initializes a new instance of the synchronous NamingClient type.
@@ -47,7 +47,7 @@ public final class ModelClient {
      * }
      * }</pre>
      * 
-     * @param clientModel The clientModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,8 +57,8 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> clientWithResponse(BinaryData clientModel, RequestOptions requestOptions) {
-        return this.serviceClient.clientWithResponse(clientModel, requestOptions);
+    public Response<Void> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.clientWithResponse(body, requestOptions);
     }
 
     /**
@@ -71,7 +71,7 @@ public final class ModelClient {
      * }
      * }</pre>
      * 
-     * @param javaModel The javaModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,14 +81,14 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> languageWithResponse(BinaryData javaModel, RequestOptions requestOptions) {
-        return this.serviceClient.languageWithResponse(javaModel, requestOptions);
+    public Response<Void> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.languageWithResponse(body, requestOptions);
     }
 
     /**
      * The client operation.
      * 
-     * @param defaultName Pass in true.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -98,18 +98,16 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void client(boolean defaultName) {
+    public void client(ClientModel body) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        ClientRequest1 clientModelObj = new ClientRequest1(defaultName);
-        BinaryData clientModel = BinaryData.fromObject(clientModelObj);
-        clientWithResponse(clientModel, requestOptions).getValue();
+        clientWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**
      * The language operation.
      * 
-     * @param defaultName Pass in true.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -119,11 +117,9 @@ public final class ModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void language(boolean defaultName) {
+    public void language(JavaModel body) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        LanguageRequest1 javaModelObj = new LanguageRequest1(defaultName);
-        BinaryData javaModel = BinaryData.fromObject(javaModelObj);
-        languageWithResponse(javaModel, requestOptions).getValue();
+        languageWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }

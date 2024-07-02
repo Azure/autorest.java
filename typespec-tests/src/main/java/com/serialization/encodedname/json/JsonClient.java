@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.serialization.encodedname.json.implementation.PropertiesImpl;
-import com.serialization.encodedname.json.implementation.models.SendRequest;
+import com.serialization.encodedname.json.models.JsonEncodedNameModel;
 
 /**
  * Initializes a new instance of the synchronous JsonClient type.
@@ -46,7 +46,7 @@ public final class JsonClient {
      * }
      * }</pre>
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,8 +56,8 @@ public final class JsonClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(jsonEncodedNameModel, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(body, requestOptions);
     }
 
     /**
@@ -86,7 +86,7 @@ public final class JsonClient {
     /**
      * The send operation.
      * 
-     * @param defaultName Pass in true.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -96,12 +96,10 @@ public final class JsonClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(boolean defaultName) {
+    public void send(JsonEncodedNameModel body) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest jsonEncodedNameModelObj = new SendRequest(defaultName);
-        BinaryData jsonEncodedNameModel = BinaryData.fromObject(jsonEncodedNameModelObj);
-        sendWithResponse(jsonEncodedNameModel, requestOptions).getValue();
+        sendWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**
@@ -116,9 +114,9 @@ public final class JsonClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public SendRequest get() {
+    public JsonEncodedNameModel get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(SendRequest.class);
+        return getWithResponse(requestOptions).getValue().toObject(JsonEncodedNameModel.class);
     }
 }

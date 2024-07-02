@@ -63,7 +63,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> client(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData clientModel, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/model/client")
         @ExpectedResponses({ 204 })
@@ -71,8 +71,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> clientSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData clientModel, RequestOptions requestOptions, Context context);
+        Response<Void> clientSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/model/language")
         @ExpectedResponses({ 204 })
@@ -81,7 +81,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> language(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData javaModel, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/model/language")
         @ExpectedResponses({ 204 })
@@ -90,7 +90,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> languageSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData javaModel, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -103,7 +103,7 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param clientModel The clientModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -112,9 +112,9 @@ public final class ModelsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> clientWithResponseAsync(BinaryData clientModel, RequestOptions requestOptions) {
+    public Mono<Response<Void>> clientWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.client(accept, clientModel, requestOptions, context));
+        return FluxUtil.withContext(context -> service.client(accept, body, requestOptions, context));
     }
 
     /**
@@ -127,7 +127,7 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param clientModel The clientModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -136,9 +136,9 @@ public final class ModelsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> clientWithResponse(BinaryData clientModel, RequestOptions requestOptions) {
+    public Response<Void> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.clientSync(accept, clientModel, requestOptions, Context.NONE);
+        return service.clientSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -151,7 +151,7 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param javaModel The javaModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -160,9 +160,9 @@ public final class ModelsImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> languageWithResponseAsync(BinaryData javaModel, RequestOptions requestOptions) {
+    public Mono<Response<Void>> languageWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.language(accept, javaModel, requestOptions, context));
+        return FluxUtil.withContext(context -> service.language(accept, body, requestOptions, context));
     }
 
     /**
@@ -175,7 +175,7 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param javaModel The javaModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -184,8 +184,8 @@ public final class ModelsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> languageWithResponse(BinaryData javaModel, RequestOptions requestOptions) {
+    public Response<Void> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.languageSync(accept, javaModel, requestOptions, Context.NONE);
+        return service.languageSync(accept, body, requestOptions, Context.NONE);
     }
 }

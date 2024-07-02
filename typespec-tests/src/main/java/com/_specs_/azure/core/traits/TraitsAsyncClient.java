@@ -5,8 +5,8 @@
 package com._specs_.azure.core.traits;
 
 import com._specs_.azure.core.traits.implementation.TraitsClientImpl;
-import com._specs_.azure.core.traits.implementation.models.RepeatableActionRequest;
 import com._specs_.azure.core.traits.models.User;
+import com._specs_.azure.core.traits.models.UserActionParam;
 import com._specs_.azure.core.traits.models.UserActionResponse;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
@@ -113,7 +113,7 @@ public final class TraitsAsyncClient {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam The userActionParam parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -123,9 +123,9 @@ public final class TraitsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> repeatableActionWithResponse(int id, BinaryData userActionParam,
+    public Mono<Response<BinaryData>> repeatableActionWithResponse(int id, BinaryData body,
         RequestOptions requestOptions) {
-        return this.serviceClient.repeatableActionWithResponseAsync(id, userActionParam, requestOptions);
+        return this.serviceClient.repeatableActionWithResponseAsync(id, body, requestOptions);
     }
 
     /**
@@ -195,7 +195,7 @@ public final class TraitsAsyncClient {
      * Test for repeatable requests.
      * 
      * @param id The user's id.
-     * @param userActionValue User action value.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -206,12 +206,10 @@ public final class TraitsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<UserActionResponse> repeatableAction(int id, String userActionValue) {
+    public Mono<UserActionResponse> repeatableAction(int id, UserActionParam body) {
         // Generated convenience method for repeatableActionWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        RepeatableActionRequest userActionParamObj = new RepeatableActionRequest(userActionValue);
-        BinaryData userActionParam = BinaryData.fromObject(userActionParamObj);
-        return repeatableActionWithResponse(id, userActionParam, requestOptions).flatMap(FluxUtil::toMono)
+        return repeatableActionWithResponse(id, BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(UserActionResponse.class));
     }
 }

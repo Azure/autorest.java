@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.bodyoptionality.implementation.BodyOptionalityClientImpl;
-import com.parameters.bodyoptionality.implementation.models.RequiredImplicitRequest;
+import com.parameters.bodyoptionality.models.BodyModel;
 
 /**
  * Initializes a new instance of the synchronous BodyOptionalityClient type.
@@ -97,7 +97,7 @@ public final class BodyOptionalityClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void requiredExplicit(RequiredImplicitRequest body) {
+    public void requiredExplicit(BodyModel body) {
         // Generated convenience method for requiredExplicitWithResponse
         RequestOptions requestOptions = new RequestOptions();
         requiredExplicitWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
@@ -106,7 +106,7 @@ public final class BodyOptionalityClient {
     /**
      * The requiredImplicit operation.
      * 
-     * @param name The name parameter.
+     * @param bodyModel The bodyModel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -116,11 +116,9 @@ public final class BodyOptionalityClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void requiredImplicit(String name) {
+    public void requiredImplicit(BodyModel bodyModel) {
         // Generated convenience method for requiredImplicitWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        RequiredImplicitRequest bodyModelObj = new RequiredImplicitRequest(name);
-        BinaryData bodyModel = BinaryData.fromObject(bodyModelObj);
-        requiredImplicitWithResponse(bodyModel, requestOptions).getValue();
+        requiredImplicitWithResponse(BinaryData.fromObject(bodyModel), requestOptions).getValue();
     }
 }

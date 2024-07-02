@@ -139,7 +139,7 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> longRunningRpc(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData generationOptions,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/rpc/generations:submit")
@@ -149,7 +149,7 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> longRunningRpcSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData generationOptions,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -183,7 +183,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions The generationOptions parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -193,11 +193,10 @@ public final class RpcClientImpl {
      * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData generationOptions,
-        RequestOptions requestOptions) {
+    private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.longRunningRpc(this.getServiceVersion().getVersion(), accept,
-            generationOptions, requestOptions, context));
+            body, requestOptions, context));
     }
 
     /**
@@ -230,7 +229,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions The generationOptions parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -239,11 +238,10 @@ public final class RpcClientImpl {
      * @return provides status details for long running operations along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Response<BinaryData> longRunningRpcWithResponse(BinaryData generationOptions,
-        RequestOptions requestOptions) {
+    private Response<BinaryData> longRunningRpcWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.longRunningRpcSync(this.getServiceVersion().getVersion(), accept, generationOptions,
-            requestOptions, Context.NONE);
+        return service.longRunningRpcSync(this.getServiceVersion().getVersion(), accept, body, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -276,7 +274,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions The generationOptions parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -285,10 +283,9 @@ public final class RpcClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLongRunningRpcAsync(BinaryData generationOptions,
-        RequestOptions requestOptions) {
+    public PollerFlux<BinaryData, BinaryData> beginLongRunningRpcAsync(BinaryData body, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.longRunningRpcWithResponseAsync(generationOptions, requestOptions),
+            () -> this.longRunningRpcWithResponseAsync(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
@@ -330,7 +327,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions The generationOptions parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -339,10 +336,9 @@ public final class RpcClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(BinaryData generationOptions,
-        RequestOptions requestOptions) {
+    public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(BinaryData body, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.longRunningRpcWithResponse(generationOptions, requestOptions),
+            () -> this.longRunningRpcWithResponse(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
@@ -384,7 +380,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions The generationOptions parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -393,10 +389,10 @@ public final class RpcClientImpl {
      * @return the {@link PollerFlux} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, GenerationResult>
-        beginLongRunningRpcWithModelAsync(BinaryData generationOptions, RequestOptions requestOptions) {
+    public PollerFlux<PollOperationDetails, GenerationResult> beginLongRunningRpcWithModelAsync(BinaryData body,
+        RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
-            () -> this.longRunningRpcWithResponseAsync(generationOptions, requestOptions),
+            () -> this.longRunningRpcWithResponseAsync(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
@@ -439,7 +435,7 @@ public final class RpcClientImpl {
      * }
      * }</pre>
      * 
-     * @param generationOptions The generationOptions parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -448,10 +444,10 @@ public final class RpcClientImpl {
      * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpcWithModel(BinaryData generationOptions,
+    public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpcWithModel(BinaryData body,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
-            () -> this.longRunningRpcWithResponse(generationOptions, requestOptions),
+            () -> this.longRunningRpcWithResponse(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
