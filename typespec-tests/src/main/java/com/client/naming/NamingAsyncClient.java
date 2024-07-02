@@ -83,7 +83,7 @@ public final class NamingAsyncClient {
      * }
      * }</pre>
      * 
-     * @param clientNameModel The clientNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -93,8 +93,8 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> clientWithResponse(BinaryData clientNameModel, RequestOptions requestOptions) {
-        return this.serviceClient.clientWithResponseAsync(clientNameModel, requestOptions);
+    public Mono<Response<Void>> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.clientWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -107,7 +107,7 @@ public final class NamingAsyncClient {
      * }
      * }</pre>
      * 
-     * @param languageClientNameModel The languageClientNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -117,9 +117,8 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> languageWithResponse(BinaryData languageClientNameModel,
-        RequestOptions requestOptions) {
-        return this.serviceClient.languageWithResponseAsync(languageClientNameModel, requestOptions);
+    public Mono<Response<Void>> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.languageWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -132,7 +131,7 @@ public final class NamingAsyncClient {
      * }
      * }</pre>
      * 
-     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -142,10 +141,8 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> compatibleWithEncodedNameWithResponse(BinaryData clientNameAndJsonEncodedNameModel,
-        RequestOptions requestOptions) {
-        return this.serviceClient.compatibleWithEncodedNameWithResponseAsync(clientNameAndJsonEncodedNameModel,
-            requestOptions);
+    public Mono<Response<Void>> compatibleWithEncodedNameWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.compatibleWithEncodedNameWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -222,7 +219,7 @@ public final class NamingAsyncClient {
     /**
      * The client operation.
      * 
-     * @param clientNameModel The clientNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -233,16 +230,16 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> client(ClientNameModel clientNameModel) {
+    public Mono<Void> client(ClientNameModel body) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return clientWithResponse(BinaryData.fromObject(clientNameModel), requestOptions).flatMap(FluxUtil::toMono);
+        return clientWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * The language operation.
      * 
-     * @param languageClientNameModel The languageClientNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -253,17 +250,16 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> language(LanguageClientNameModel languageClientNameModel) {
+    public Mono<Void> language(LanguageClientNameModel body) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return languageWithResponse(BinaryData.fromObject(languageClientNameModel), requestOptions)
-            .flatMap(FluxUtil::toMono);
+        return languageWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * The compatibleWithEncodedName operation.
      * 
-     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -274,11 +270,11 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> compatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel) {
+    public Mono<Void> compatibleWithEncodedName(ClientNameAndJsonEncodedNameModel body) {
         // Generated convenience method for compatibleWithEncodedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return compatibleWithEncodedNameWithResponse(BinaryData.fromObject(clientNameAndJsonEncodedNameModel),
-            requestOptions).flatMap(FluxUtil::toMono);
+        return compatibleWithEncodedNameWithResponse(BinaryData.fromObject(body), requestOptions)
+            .flatMap(FluxUtil::toMono);
     }
 
     /**

@@ -81,7 +81,7 @@ public final class NamingClient {
      * }
      * }</pre>
      * 
-     * @param clientNameModel The clientNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -91,8 +91,8 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> clientWithResponse(BinaryData clientNameModel, RequestOptions requestOptions) {
-        return this.serviceClient.clientWithResponse(clientNameModel, requestOptions);
+    public Response<Void> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.clientWithResponse(body, requestOptions);
     }
 
     /**
@@ -105,7 +105,7 @@ public final class NamingClient {
      * }
      * }</pre>
      * 
-     * @param languageClientNameModel The languageClientNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -115,8 +115,8 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> languageWithResponse(BinaryData languageClientNameModel, RequestOptions requestOptions) {
-        return this.serviceClient.languageWithResponse(languageClientNameModel, requestOptions);
+    public Response<Void> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.languageWithResponse(body, requestOptions);
     }
 
     /**
@@ -129,7 +129,7 @@ public final class NamingClient {
      * }
      * }</pre>
      * 
-     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -139,10 +139,8 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> compatibleWithEncodedNameWithResponse(BinaryData clientNameAndJsonEncodedNameModel,
-        RequestOptions requestOptions) {
-        return this.serviceClient.compatibleWithEncodedNameWithResponse(clientNameAndJsonEncodedNameModel,
-            requestOptions);
+    public Response<Void> compatibleWithEncodedNameWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.compatibleWithEncodedNameWithResponse(body, requestOptions);
     }
 
     /**
@@ -217,7 +215,7 @@ public final class NamingClient {
     /**
      * The client operation.
      * 
-     * @param clientNameModel The clientNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -227,16 +225,16 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void client(ClientNameModel clientNameModel) {
+    public void client(ClientNameModel body) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        clientWithResponse(BinaryData.fromObject(clientNameModel), requestOptions).getValue();
+        clientWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**
      * The language operation.
      * 
-     * @param languageClientNameModel The languageClientNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -246,16 +244,16 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void language(LanguageClientNameModel languageClientNameModel) {
+    public void language(LanguageClientNameModel body) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        languageWithResponse(BinaryData.fromObject(languageClientNameModel), requestOptions).getValue();
+        languageWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**
      * The compatibleWithEncodedName operation.
      * 
-     * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -265,11 +263,10 @@ public final class NamingClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void compatibleWithEncodedName(ClientNameAndJsonEncodedNameModel clientNameAndJsonEncodedNameModel) {
+    public void compatibleWithEncodedName(ClientNameAndJsonEncodedNameModel body) {
         // Generated convenience method for compatibleWithEncodedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        compatibleWithEncodedNameWithResponse(BinaryData.fromObject(clientNameAndJsonEncodedNameModel), requestOptions)
-            .getValue();
+        compatibleWithEncodedNameWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**
