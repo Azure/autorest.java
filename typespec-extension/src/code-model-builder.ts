@@ -111,12 +111,17 @@ import {
   HttpStatusCodesEntry,
   Visibility,
   getAuthentication,
+  getHeaderFieldName,
   getHeaderFieldOptions,
   getHttpOperation,
+  getPathParamName,
+  getQueryParamName,
   getQueryParamOptions,
   getServers,
   getStatusCodeDescription,
+  isHeader,
   isPathParam,
+  isQueryParam,
 } from "@typespec/http";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
@@ -2256,8 +2261,16 @@ export class CodeModelBuilder {
   }
 
   private getSerializedName(target: ModelProperty): string {
-    // TODO: currently this is only for JSON
-    return getWireName(this.sdkContext, target);
+    if (isHeader(this.program, target)) {
+      return getHeaderFieldName(this.program, target);
+    } else if (isQueryParam(this.program, target)) {
+      return getQueryParamName(this.program, target);
+    } else if (isPathParam(this.program, target)) {
+      return getPathParamName(this.program, target);
+    } else {
+      // TODO: currently this is only for JSON
+      return getWireName(this.sdkContext, target);
+    }
   }
 
   private isReadOnly(target: SdkModelPropertyType): boolean {
