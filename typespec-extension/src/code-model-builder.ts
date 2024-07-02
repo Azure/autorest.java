@@ -44,53 +44,38 @@ import { KnownMediaType } from "@azure-tools/codegen";
 import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
-  SdkBodyParameter,
   SdkBuiltInType,
-  SdkClient,
   SdkClientType,
   SdkConstantType,
   SdkContext,
   SdkDateTimeType,
   SdkDictionaryType,
   SdkDurationType,
-  SdkEndpointParameter,
   SdkEnumType,
   SdkEnumValueType,
   SdkHeaderParameter,
   SdkHttpOperation,
   SdkHttpResponse,
-  SdkInitializationType,
   SdkLroPagingServiceMethod,
   SdkLroServiceMethod,
-  SdkMethod,
   SdkModelPropertyType,
   SdkModelType,
-  SdkPackage,
-  SdkParameter,
   SdkPathParameter,
   SdkQueryParameter,
   SdkServiceMethod,
-  SdkServiceOperation,
   SdkType,
   SdkUnionType,
   createSdkContext,
   getAllModels,
   getClientNameOverride,
   getClientType,
-  getCrossLanguageDefinitionId,
-  getDefaultApiVersion,
-  getSdkModelPropertyType,
-  getSdkModelPropertyTypeBase,
   getWireName,
   isApiVersion,
   isInternal,
   isSdkBuiltInKind,
   isSdkIntKind,
-  listClients,
-  listOperationGroups,
-  listOperationsInOperationGroup,
   shouldGenerateConvenient,
-  shouldGenerateProtocol,
+  shouldGenerateProtocol
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
@@ -104,41 +89,32 @@ import {
   Union,
   getDoc,
   getEffectiveModelType,
-  getEncode,
   getFriendlyName,
   getNamespaceFullName,
   getOverloadedOperation,
   getProjectedName,
   getSummary,
   getVisibility,
-  ignoreDiagnostics,
   isArrayModelType,
   isErrorModel,
   isRecordModelType,
-  isVoidType,
-  listServices,
+  listServices
 } from "@typespec/compiler";
 import {
   Authentication,
   HttpOperation,
   HttpOperationBody,
   HttpOperationMultipartBody,
-  HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
   HttpStatusCodeRange,
   HttpStatusCodesEntry,
   Visibility,
   getAuthentication,
-  getHeaderFieldOptions,
-  getHttpOperation,
-  getQueryParamOptions,
-  getServers,
-  getStatusCodeDescription,
-  isPathParam,
+  getStatusCodeDescription
 } from "@typespec/http";
-import { getResourceOperation, getSegment } from "@typespec/rest";
-import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
+import { getSegment } from "@typespec/rest";
+import { Version, getAddedOnVersions } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
 import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
@@ -162,9 +138,9 @@ import {
   isLroNewPollingStrategy,
   isPayloadProperty,
   loadExamples,
-  operationIsJsonMergePatch,
-  operationIsMultipart,
-  operationIsMultipleContentTypes,
+  sdkHttpOperationIsJsonMergePatch,
+  sdkHttpOperationIsMultipart,
+  sdkHttpOperationIsMultipleContentTypes,
 } from "./operation-utils.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import {
@@ -174,13 +150,9 @@ import {
   getNonNullSdkType,
   getUnionDescription,
   getUsage,
-  hasScalarAsBase,
-  isArmCommonType,
-  isModelReferredInTemplate,
-  isNullableType,
   isStable,
   modelIs,
-  pushDistinct,
+  pushDistinct
 } from "./type-utils.js";
 import {
   getJavaNamespace,
@@ -297,68 +269,68 @@ export class CodeModelBuilder {
     return this.codeModel;
   }
 
-  private processHost(server: HttpServer | undefined): Parameter[] {
-    const hostParameters: Parameter[] = [];
-    if (server && !this.isArmSynthesizedServer(server)) {
-      server.parameters.forEach((it) => {
-        let parameter;
+  // private processHost(server: HttpServer | undefined): Parameter[] {
+  //   const hostParameters: Parameter[] = [];
+  //   if (server && !this.isArmSynthesizedServer(server)) {
+  //     server.parameters.forEach((it) => {
+  //       let parameter;
 
-        if (isApiVersion(this.sdkContext, it)) {
-          parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
-        } else {
-          const sdkType = getClientType(this.sdkContext, it.type);
-          const schema = this.processSchemaFromSdkType(sdkType, it.name);
-          this.trackSchemaUsage(schema, {
-            usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
-          });
-          parameter = new Parameter(this.getName(it), this.getDoc(it), schema, {
-            implementation: ImplementationLocation.Client,
-            origin: "modelerfour:synthesized/host",
-            required: !it.optional,
-            protocol: {
-              http: new HttpParameter(ParameterLocation.Uri),
-            },
-            language: {
-              default: {
-                serializedName: it.name,
-              },
-            },
-            extensions: {
-              "x-ms-skip-url-encoding": schema instanceof UriSchema,
-            },
-            // // make the logic same as TCGC, which takes the server-side default of host as client-side default
-            // clientDefaultValue: getDefaultValue(it.defaultValue),
-          });
-        }
+  //       if (isApiVersion(this.sdkContext, it)) {
+  //         parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
+  //       } else {
+  //         const sdkType = getClientType(this.sdkContext, it.type);
+  //         const schema = this.processSchemaFromSdkType(sdkType, it.name);
+  //         this.trackSchemaUsage(schema, {
+  //           usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
+  //         });
+  //         parameter = new Parameter(this.getName(it), this.getDoc(it), schema, {
+  //           implementation: ImplementationLocation.Client,
+  //           origin: "modelerfour:synthesized/host",
+  //           required: !it.optional,
+  //           protocol: {
+  //             http: new HttpParameter(ParameterLocation.Uri),
+  //           },
+  //           language: {
+  //             default: {
+  //               serializedName: it.name,
+  //             },
+  //           },
+  //           extensions: {
+  //             "x-ms-skip-url-encoding": schema instanceof UriSchema,
+  //           },
+  //           // // make the logic same as TCGC, which takes the server-side default of host as client-side default
+  //           // clientDefaultValue: getDefaultValue(it.defaultValue),
+  //         });
+  //       }
 
-        hostParameters.push(this.codeModel.addGlobalParameter(parameter));
-      });
-      return hostParameters;
-    } else {
-      // use "endpoint"
-      hostParameters.push(
-        this.codeModel.addGlobalParameter(
-          new Parameter("endpoint", "Server parameter", this.stringSchema, {
-            implementation: ImplementationLocation.Client,
-            origin: "modelerfour:synthesized/host",
-            required: true,
-            protocol: {
-              http: new HttpParameter(ParameterLocation.Uri),
-            },
-            language: {
-              default: {
-                serializedName: "endpoint",
-              },
-            },
-            extensions: {
-              "x-ms-skip-url-encoding": true,
-            },
-          }),
-        ),
-      );
-      return hostParameters;
-    }
-  }
+  //       hostParameters.push(this.codeModel.addGlobalParameter(parameter));
+  //     });
+  //     return hostParameters;
+  //   } else {
+  //     // use "endpoint"
+  //     hostParameters.push(
+  //       this.codeModel.addGlobalParameter(
+  //         new Parameter("endpoint", "Server parameter", this.stringSchema, {
+  //           implementation: ImplementationLocation.Client,
+  //           origin: "modelerfour:synthesized/host",
+  //           required: true,
+  //           protocol: {
+  //             http: new HttpParameter(ParameterLocation.Uri),
+  //           },
+  //           language: {
+  //             default: {
+  //               serializedName: "endpoint",
+  //             },
+  //           },
+  //           extensions: {
+  //             "x-ms-skip-url-encoding": true,
+  //           },
+  //         }),
+  //       ),
+  //     );
+  //     return hostParameters;
+  //   }
+  // }
 
   private processHostParametersFromSdkType(sdkPathParameters: SdkPathParameter[]): Parameter[] {
     const hostParameters: Parameter[] = [];
@@ -640,6 +612,7 @@ export class CodeModelBuilder {
         const serviceMethods = this.listServiceMethodsUnderClient(subClient, true);
         // operation group with no operation is skipped
         if (serviceMethods.length > 0) {
+          // TODO: haoling get name from group path
           // const groupPath = subClient..groupPath.split(".");
           // let operationGroupName: string;
           // if (groupPath.length > 1) {
@@ -728,131 +701,131 @@ export class CodeModelBuilder {
     return methods;
   }
 
-  private processClients(): SdkClient[] {
-    const sdkPackage = this.sdkContext.experimental_sdkPackage;
-    const clients = listClients(this.sdkContext);
-    // preprocess group-etag-headers
-    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
+  // private processClients(): SdkClient[] {
+  //   const sdkPackage = this.sdkContext.experimental_sdkPackage;
+  //   const clients = listClients(this.sdkContext);
+  //   // preprocess group-etag-headers
+  //   this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
-    for (const client of clients) {
-      const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
-        summary: this.getSummary(client.type),
+  //   for (const client of clients) {
+  //     const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
+  //       summary: this.getSummary(client.type),
 
-        // at present, use global security definition
-        security: this.codeModel.security,
-      });
-      codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
+  //       // at present, use global security definition
+  //       security: this.codeModel.security,
+  //     });
+  //     codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
 
-      // versioning
-      const versioning = getVersion(this.program, client.service);
-      if (versioning && versioning.getVersions()) {
-        // @versioned in versioning
-        if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
-          this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
-        } else {
-          this.apiVersion = versioning.getVersions().find((it: Version) => it.value === this.sdkContext.apiVersion);
-          if (!this.apiVersion) {
-            throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
-          }
-        }
+  //     // versioning
+  //     const versioning = getVersion(this.program, client.service);
+  //     if (versioning && versioning.getVersions()) {
+  //       // @versioned in versioning
+  //       if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
+  //         this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
+  //       } else {
+  //         this.apiVersion = versioning.getVersions().find((it: Version) => it.value === this.sdkContext.apiVersion);
+  //         if (!this.apiVersion) {
+  //           throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
+  //         }
+  //       }
 
-        codeModelClient.apiVersions = [];
-        for (const version of this.getFilteredApiVersions(this.apiVersion, versioning.getVersions())) {
-          const apiVersion = new ApiVersion();
-          apiVersion.version = version.value;
-          codeModelClient.apiVersions.push(apiVersion);
-        }
-      }
+  //       codeModelClient.apiVersions = [];
+  //       for (const version of this.getFilteredApiVersions(this.apiVersion, versioning.getVersions())) {
+  //         const apiVersion = new ApiVersion();
+  //         apiVersion.version = version.value;
+  //         codeModelClient.apiVersions.push(apiVersion);
+  //       }
+  //     }
 
-      // server
-      let baseUri = "{endpoint}";
-      const servers = getServers(this.program, client.service);
-      if (servers && servers.length === 1 && !this.isArmSynthesizedServer(servers[0])) {
-        baseUri = servers[0].url;
-      }
-      const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
-      codeModelClient.addGlobalParameters(hostParameters);
-      const clientContext = new ClientContext(
-        baseUri,
-        hostParameters,
-        codeModelClient.globalParameters!,
-        codeModelClient.apiVersions,
-      );
-      clientContext.preProcessOperations(this.sdkContext, client);
+  //     // server
+  //     let baseUri = "{endpoint}";
+  //     const servers = getServers(this.program, client.service);
+  //     if (servers && servers.length === 1 && !this.isArmSynthesizedServer(servers[0])) {
+  //       baseUri = servers[0].url;
+  //     }
+  //     const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
+  //     codeModelClient.addGlobalParameters(hostParameters);
+  //     const clientContext = new ClientContext(
+  //       baseUri,
+  //       hostParameters,
+  //       codeModelClient.globalParameters!,
+  //       codeModelClient.apiVersions,
+  //     );
+  //     clientContext.preProcessOperations(this.sdkContext, client);
 
-      const operationGroups = listOperationGroups(this.sdkContext, client, true);
+  //     const operationGroups = listOperationGroups(this.sdkContext, client, true);
 
-      const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
-      let codeModelGroup = new OperationGroup("");
-      for (const operation of operationWithoutGroup) {
-        if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-          codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
-        }
-      }
-      if (codeModelGroup.operations?.length > 0) {
-        codeModelClient.operationGroups.push(codeModelGroup);
-      }
+  //     const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
+  //     let codeModelGroup = new OperationGroup("");
+  //     for (const operation of operationWithoutGroup) {
+  //       if (!this.needToSkipProcessingOperation(operation, clientContext)) {
+  //         codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+  //       }
+  //     }
+  //     if (codeModelGroup.operations?.length > 0) {
+  //       codeModelClient.operationGroups.push(codeModelGroup);
+  //     }
 
-      for (const operationGroup of operationGroups) {
-        const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
-        // operation group with no operation is skipped
-        if (operations.length > 0) {
-          const groupPath = operationGroup.groupPath.split(".");
-          let operationGroupName: string;
-          if (groupPath.length > 1) {
-            // groupPath should be in format of "OpenAIClient.Chat.Completions"
-            operationGroupName = groupPath.slice(1).join("");
-          } else {
-            // protection
-            operationGroupName = operationGroup.type.name;
-          }
-          codeModelGroup = new OperationGroup(operationGroupName);
-          for (const operation of operations) {
-            if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-              codeModelGroup.addOperation(this.processOperation(operationGroupName, operation, clientContext));
-            }
-          }
-          codeModelClient.operationGroups.push(codeModelGroup);
-        }
-      }
+  //     for (const operationGroup of operationGroups) {
+  //       const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
+  //       // operation group with no operation is skipped
+  //       if (operations.length > 0) {
+  //         const groupPath = operationGroup.groupPath.split(".");
+  //         let operationGroupName: string;
+  //         if (groupPath.length > 1) {
+  //           // groupPath should be in format of "OpenAIClient.Chat.Completions"
+  //           operationGroupName = groupPath.slice(1).join("");
+  //         } else {
+  //           // protection
+  //           operationGroupName = operationGroup.type.name;
+  //         }
+  //         codeModelGroup = new OperationGroup(operationGroupName);
+  //         for (const operation of operations) {
+  //           if (!this.needToSkipProcessingOperation(operation, clientContext)) {
+  //             codeModelGroup.addOperation(this.processOperation(operationGroupName, operation, clientContext));
+  //           }
+  //         }
+  //         codeModelClient.operationGroups.push(codeModelGroup);
+  //       }
+  //     }
 
-      this.codeModel.clients.push(codeModelClient);
-    }
+  //     this.codeModel.clients.push(codeModelClient);
+  //   }
 
-    // postprocess for ServiceVersion
-    let apiVersionSameForAllClients = true;
-    let sharedApiVersions = undefined;
-    for (const client of this.codeModel.clients) {
-      const apiVersions = client.apiVersions;
-      if (!apiVersions) {
-        // client does not have apiVersions
-        apiVersionSameForAllClients = false;
-      } else if (!sharedApiVersions) {
-        // first client, set it to sharedApiVersions
-        sharedApiVersions = apiVersions;
-      } else {
-        apiVersionSameForAllClients = isEqual(sharedApiVersions, apiVersions);
-      }
-      if (!apiVersionSameForAllClients) {
-        break;
-      }
-    }
-    if (apiVersionSameForAllClients) {
-      const serviceVersion = getServiceVersion(this.codeModel);
-      for (const client of this.codeModel.clients) {
-        client.serviceVersion = serviceVersion;
-      }
-    } else {
-      for (const client of this.codeModel.clients) {
-        const apiVersions = client.apiVersions;
-        if (apiVersions) {
-          client.serviceVersion = getServiceVersion(client);
-        }
-      }
-    }
+  //   // postprocess for ServiceVersion
+  //   let apiVersionSameForAllClients = true;
+  //   let sharedApiVersions = undefined;
+  //   for (const client of this.codeModel.clients) {
+  //     const apiVersions = client.apiVersions;
+  //     if (!apiVersions) {
+  //       // client does not have apiVersions
+  //       apiVersionSameForAllClients = false;
+  //     } else if (!sharedApiVersions) {
+  //       // first client, set it to sharedApiVersions
+  //       sharedApiVersions = apiVersions;
+  //     } else {
+  //       apiVersionSameForAllClients = isEqual(sharedApiVersions, apiVersions);
+  //     }
+  //     if (!apiVersionSameForAllClients) {
+  //       break;
+  //     }
+  //   }
+  //   if (apiVersionSameForAllClients) {
+  //     const serviceVersion = getServiceVersion(this.codeModel);
+  //     for (const client of this.codeModel.clients) {
+  //       client.serviceVersion = serviceVersion;
+  //     }
+  //   } else {
+  //     for (const client of this.codeModel.clients) {
+  //       const apiVersions = client.apiVersions;
+  //       if (apiVersions) {
+  //         client.serviceVersion = getServiceVersion(client);
+  //       }
+  //     }
+  //   }
 
-    return clients;
-  }
+  //   return clients;
+  // }
 
   /**
    * Filter api-versions for "ServiceVersion".
@@ -971,18 +944,18 @@ export class CodeModelBuilder {
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
       // check if the convenience API need to be disabled for some special cases
-      if (operationIsMultipart(httpOperation.__raw)) {
+      if (sdkHttpOperationIsMultipart(httpOperation)) {
         // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
         generateProtocolApi = false;
         apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${operationName}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
-      } else if (operationIsMultipleContentTypes(httpOperation.__raw)) {
+      } else if (sdkHttpOperationIsMultipleContentTypes(httpOperation)) {
         // and multiple content types
         // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${operationName}' is multiple content-type`;
         this.logWarning(apiComment);
-      } else if (operationIsJsonMergePatch(httpOperation.__raw) && this.options["stream-style-serialization"] === false) {
+      } else if (sdkHttpOperationIsJsonMergePatch(httpOperation) && this.options["stream-style-serialization"] === false) {
         // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${operationName}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;
@@ -1049,7 +1022,7 @@ export class CodeModelBuilder {
           //   }
           // }
           // this.processParameterBody(codeModelOperation, httpOperation.__raw, bodyType.__raw as Model | ModelProperty);
-        this.processParameterBodyFromSdkType(codeModelOperation, httpOperation.__raw, httpOperation.bodyParam);
+        this.processParameterBodyFromSdkType(codeModelOperation, httpOperation.__raw, httpOperation, httpOperation.bodyParam);
         // }
     }
 
@@ -1061,12 +1034,10 @@ export class CodeModelBuilder {
     // lro metadata
     let lroMetadata = new LongRunningMetadata(false);
     if (sdkMethod.kind === "lro" || sdkMethod.kind === "lropaging") {
-      this.processLroMetadataFromSdkType(codeModelOperation, sdkMethod);
+      lroMetadata = this.processLroMetadataFromSdkType(codeModelOperation, sdkMethod);
     }
 
     // responses
-    // this.processResponseFromSdkType(codeModelOperation, sdkMethod.operation.responses, lroMetadata.longRunning);
-
     for (const [code, response] of sdkMethod.operation.responses) {
       this.processResponseFromSdkType(codeModelOperation, code, response, lroMetadata.longRunning, false);
     }
@@ -1079,6 +1050,7 @@ export class CodeModelBuilder {
 
     // check for paged
     this.processRouteForPaged(codeModelOperation, sdkMethod.operation.__raw.responses);
+    
     // check for long-running operation
     if (sdkMethod.__raw) {
       this.processRouteForLongRunning(codeModelOperation, sdkMethod.__raw, sdkMethod.operation.__raw.responses, lroMetadata);
@@ -1089,145 +1061,145 @@ export class CodeModelBuilder {
     return codeModelOperation;
   }
 
-  private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
-    const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
+  // private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
+  //   const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
-    const operationGroup = this.codeModel.getOperationGroup(groupName);
-    const operationName = this.getName(operation);
-    const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
+  //   const operationGroup = this.codeModel.getOperationGroup(groupName);
+  //   const operationName = this.getName(operation);
+  //   const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
-    const operationExample = this.getOperationExample(operation);
+  //   const operationExample = this.getOperationExample(operation);
 
-    const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
-      operationId: opId,
-      summary: this.getSummary(operation),
-      extensions: {
-        "x-ms-examples": operationExample
-          ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
-          : undefined,
-      },
-    });
+  //   const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
+  //     operationId: opId,
+  //     summary: this.getSummary(operation),
+  //     extensions: {
+  //       "x-ms-examples": operationExample
+  //         ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
+  //         : undefined,
+  //     },
+  //   });
 
-    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(this.sdkContext, operation);
-    codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
+  //   codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(this.sdkContext, operation);
+  //   codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
-    const convenienceApiName = this.getConvenienceApiName(operation);
-    let generateConvenienceApi: boolean = Boolean(convenienceApiName);
-    let generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
+  //   const convenienceApiName = this.getConvenienceApiName(operation);
+  //   let generateConvenienceApi: boolean = Boolean(convenienceApiName);
+  //   let generateProtocolApi: boolean = shouldGenerateProtocol(this.sdkContext, operation);
 
-    let apiComment: string | undefined = undefined;
-    if (generateConvenienceApi) {
-      // check if the convenience API need to be disabled for some special cases
-      if (operationIsMultipart(op)) {
-        // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
-        generateProtocolApi = false;
-        apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
-        this.logWarning(apiComment);
-      } else if (operationIsMultipleContentTypes(op)) {
-        // and multiple content types
-        // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
-        generateConvenienceApi = false;
-        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
-        this.logWarning(apiComment);
-      } else if (operationIsJsonMergePatch(op) && this.options["stream-style-serialization"] === false) {
-        // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
-        generateConvenienceApi = false;
-        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;
-        this.logWarning(apiComment);
-      }
-      // else {
-      //   const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
-      //   if (union) {
-      //     // and Union
-      //     generateConvenienceApi = false;
-      //     apiComment = `Convenience API is not generated, as operation '${
-      //       op.operation.name
-      //     }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
-      //     this.logWarning(apiComment);
-      //   }
-      // }
-    }
-    if (generateConvenienceApi && convenienceApiName) {
-      codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
-    }
-    if (apiComment) {
-      codeModelOperation.language.java = new Language();
-      codeModelOperation.language.java.comment = apiComment;
-    }
+  //   let apiComment: string | undefined = undefined;
+  //   if (generateConvenienceApi) {
+  //     // check if the convenience API need to be disabled for some special cases
+  //     if (operationIsMultipart(op)) {
+  //       // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
+  //       generateProtocolApi = false;
+  //       apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${op.operation.name}' is 'multipart/form-data'`;
+  //       this.logWarning(apiComment);
+  //     } else if (operationIsMultipleContentTypes(op)) {
+  //       // and multiple content types
+  //       // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
+  //       generateConvenienceApi = false;
+  //       apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
+  //       this.logWarning(apiComment);
+  //     } else if (operationIsJsonMergePatch(op) && this.options["stream-style-serialization"] === false) {
+  //       // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
+  //       generateConvenienceApi = false;
+  //       apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;
+  //       this.logWarning(apiComment);
+  //     }
+  //     // else {
+  //     //   const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
+  //     //   if (union) {
+  //     //     // and Union
+  //     //     generateConvenienceApi = false;
+  //     //     apiComment = `Convenience API is not generated, as operation '${
+  //     //       op.operation.name
+  //     //     }' refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
+  //     //     this.logWarning(apiComment);
+  //     //   }
+  //     // }
+  //   }
+  //   if (generateConvenienceApi && convenienceApiName) {
+  //     codeModelOperation.convenienceApi = new ConvenienceApi(convenienceApiName);
+  //   }
+  //   if (apiComment) {
+  //     codeModelOperation.language.java = new Language();
+  //     codeModelOperation.language.java.comment = apiComment;
+  //   }
 
-    // check for generating protocol api or not
-    codeModelOperation.generateProtocolApi = generateProtocolApi && !codeModelOperation.internalApi;
+  //   // check for generating protocol api or not
+  //   codeModelOperation.generateProtocolApi = generateProtocolApi && !codeModelOperation.internalApi;
 
-    codeModelOperation.addRequest(
-      new Request({
-        protocol: {
-          http: {
-            path: op.path,
-            method: op.verb,
-            uri: clientContext.baseUri,
-          },
-        },
-      }),
-    );
+  //   codeModelOperation.addRequest(
+  //     new Request({
+  //       protocol: {
+  //         http: {
+  //           path: op.path,
+  //           method: op.verb,
+  //           uri: clientContext.baseUri,
+  //         },
+  //       },
+  //     }),
+  //   );
 
-    // host
-    clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
-    // parameters
-    op.parameters.parameters.map((it) => {
-      const sdkParamType = ignoreDiagnostics(getSdkModelPropertyType(this.sdkContext, it.param, operation)) as SdkHeaderParameter | SdkQueryParameter | SdkPathParameter;
-      this.processParameterFromSdkType(codeModelOperation, sdkParamType, clientContext);
-    });
-    // "accept" header
-    this.addAcceptHeaderParameter(codeModelOperation, op.responses);
-    // body
-    if (op.parameters.body) {
-      if (op.parameters.body.property) {
-        if (!isVoidType(op.parameters.body.property.type)) {
-          this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
-        }
-      } else if (op.parameters.body.type) {
-        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
+  //   // host
+  //   clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
+  //   // parameters
+  //   op.parameters.parameters.map((it) => {
+  //     const sdkParamType = ignoreDiagnostics(getSdkModelPropertyType(this.sdkContext, it.param, operation)) as SdkHeaderParameter | SdkQueryParameter | SdkPathParameter;
+  //     this.processParameterFromSdkType(codeModelOperation, sdkParamType, clientContext);
+  //   });
+  //   // "accept" header
+  //   this.addAcceptHeaderParameter(codeModelOperation, op.responses);
+  //   // body
+  //   if (op.parameters.body) {
+  //     if (op.parameters.body.property) {
+  //       if (!isVoidType(op.parameters.body.property.type)) {
+  //         this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
+  //       }
+  //     } else if (op.parameters.body.type) {
+  //       let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
-        if (bodyType.kind === "Model") {
-          // try use resource type as round-trip model
-          const resourceType = getResourceOperation(this.program, operation)?.resourceType;
-          if (resourceType && op.responses && op.responses.length > 0) {
-            const resp = op.responses[0];
-            if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
-              const responseBody = resp.responses[0].body;
-              const bodyTypeInResponse = this.findResponseBody(responseBody.type);
-              // response body type is resource type, and request body type (if templated) contains resource type
-              if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
-                bodyType = resourceType;
-              }
-            }
-          }
+  //       if (bodyType.kind === "Model") {
+  //         // try use resource type as round-trip model
+  //         const resourceType = getResourceOperation(this.program, operation)?.resourceType;
+  //         if (resourceType && op.responses && op.responses.length > 0) {
+  //           const resp = op.responses[0];
+  //           if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
+  //             const responseBody = resp.responses[0].body;
+  //             const bodyTypeInResponse = this.findResponseBody(responseBody.type);
+  //             // response body type is resource type, and request body type (if templated) contains resource type
+  //             if (bodyTypeInResponse === resourceType && isModelReferredInTemplate(bodyType, resourceType)) {
+  //               bodyType = resourceType;
+  //             }
+  //           }
+  //         }
 
-          this.processParameterBody(codeModelOperation, op, bodyType);
-        }
-      }
-    }
+  //         this.processParameterBody(codeModelOperation, op, bodyType);
+  //       }
+  //     }
+  //   }
 
-    // group ETag header parameters, if exists
-    if (this.options["group-etag-headers"]) {
-      this.processEtagHeaderParameters(codeModelOperation, op);
-    }
+  //   // group ETag header parameters, if exists
+  //   if (this.options["group-etag-headers"]) {
+  //     this.processEtagHeaderParameters(codeModelOperation, op);
+  //   }
 
-    // lro metadata
-    const lroMetadata = this.processLroMetadata(codeModelOperation, op);
+  //   // lro metadata
+  //   const lroMetadata = this.processLroMetadata(codeModelOperation, op);
 
-    // responses
-    op.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
+  //   // responses
+  //   op.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
 
-    // check for paged
-    this.processRouteForPaged(codeModelOperation, op.responses);
-    // check for long-running operation
-    this.processRouteForLongRunning(codeModelOperation, operation, op.responses, lroMetadata);
+  //   // check for paged
+  //   this.processRouteForPaged(codeModelOperation, op.responses);
+  //   // check for long-running operation
+  //   this.processRouteForLongRunning(codeModelOperation, operation, op.responses, lroMetadata);
 
-    operationGroup.addOperation(codeModelOperation);
+  //   operationGroup.addOperation(codeModelOperation);
 
-    return codeModelOperation;
-  }
+  //   return codeModelOperation;
+  // }
 
   private processRouteForPaged(op: CodeModelOperation, responses: HttpOperationResponse[]) {
     for (const response of responses) {
@@ -1501,7 +1473,7 @@ export class CodeModelBuilder {
       }
     } else {
       // schema
-      const sdkType = param.type;
+      const sdkType = getNonNullSdkType(param.type);
       const schema = this.processSchemaFromSdkType(sdkType, param.name);
 
       // skip-url-encoding
@@ -2124,8 +2096,11 @@ export class CodeModelBuilder {
     }
   }
 
-  private processParameterBodyFromSdkType(op: CodeModelOperation, httpOperation: HttpOperation, sdkBody: SdkModelPropertyType) {
-    const parameters = httpOperation.operation.parameters;
+  private processParameterBodyFromSdkType(op: CodeModelOperation, rawHttpOperation: HttpOperation, sdkHttpOperation: SdkHttpOperation, sdkBody: SdkModelPropertyType) {
+    // set contentTypes to mediaTypes
+    op.requests![0].protocol.http!.mediaTypes = rawHttpOperation.parameters.body!.contentTypes;
+
+    const parameters = rawHttpOperation.operation.parameters;
 
     const unknownRequestBody =
       op.requests![0].protocol.http!.mediaTypes &&
@@ -2161,10 +2136,10 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
     }
 
-    if (operationIsJsonMergePatch(httpOperation)) {
+    if (sdkHttpOperationIsJsonMergePatch(sdkHttpOperation)) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
-    if (op.convenienceApi && operationIsMultipart(httpOperation)) {
+    if (op.convenienceApi && sdkHttpOperationIsMultipart(sdkHttpOperation)){
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
@@ -2179,12 +2154,12 @@ export class CodeModelBuilder {
         parameter.language.default.name = "request";
       }
 
-      if (operationIsJsonMergePatch(httpOperation)) {
+      if (sdkHttpOperationIsJsonMergePatch(sdkHttpOperation)) {
         // skip model flatten, if "application/merge-patch+json"
         schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
         return;
       }
-
+    
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {
@@ -2242,7 +2217,7 @@ export class CodeModelBuilder {
         if (request.signatureParameters.length > 6) {
           // create an option bag
           const name = op.language.default.name + "Options";
-          const namespace = getNamespace(httpOperation.operation);
+          const namespace = getNamespace(rawHttpOperation.operation);
           // option bag schema
           const optionBagSchema = this.codeModel.schemas.add(
             new GroupSchema(name, `Options for ${op.language.default.name} API`, {
@@ -2297,185 +2272,185 @@ export class CodeModelBuilder {
 
   }
 
-  private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
-    // set contentTypes to mediaTypes
-    op.requests![0].protocol.http!.mediaTypes = httpOperation.parameters.body!.contentTypes;
+  // private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
+  //   // set contentTypes to mediaTypes
+  //   op.requests![0].protocol.http!.mediaTypes = httpOperation.parameters.body!.contentTypes;
 
-    const parameters = httpOperation.operation.parameters;
+  //   const parameters = httpOperation.operation.parameters;
 
-    const unknownRequestBody =
-      op.requests![0].protocol.http!.mediaTypes &&
-      op.requests![0].protocol.http!.mediaTypes.length > 0 &&
-      !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
+  //   const unknownRequestBody =
+  //     op.requests![0].protocol.http!.mediaTypes &&
+  //     op.requests![0].protocol.http!.mediaTypes.length > 0 &&
+  //     !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
 
-    const sdkType: SdkType = getClientType(this.sdkContext, body, httpOperation.operation);
+  //   const sdkType: SdkType = getClientType(this.sdkContext, body, httpOperation.operation);
 
-    let schema: Schema;
-    if (
-      unknownRequestBody &&
-      body.kind === "ModelProperty" &&
-      body.type.kind === "Scalar" &&
-      body.type.name === "bytes"
-    ) {
-      // handle binary request body
-      schema = this.processBinarySchema(body.type);
-    } else {
-      schema = this.processSchemaFromSdkType(sdkType, body.name);
-    }
+  //   let schema: Schema;
+  //   if (
+  //     unknownRequestBody &&
+  //     body.kind === "ModelProperty" &&
+  //     body.type.kind === "Scalar" &&
+  //     body.type.name === "bytes"
+  //   ) {
+  //     // handle binary request body
+  //     schema = this.processBinarySchema(body.type);
+  //   } else {
+  //     schema = this.processSchemaFromSdkType(sdkType, body.name);
+  //   }
 
-    const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
-    const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
-      summary: this.getSummary(body),
-      implementation: ImplementationLocation.Method,
-      required: body.kind === "Model" || !body.optional,
-      protocol: {
-        http: new HttpParameter(ParameterLocation.Body),
-      },
-    });
-    op.addParameter(parameter);
+  //   const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
+  //   const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
+  //   const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
+  //     summary: this.getSummary(body),
+  //     implementation: ImplementationLocation.Method,
+  //     required: body.kind === "Model" || !body.optional,
+  //     protocol: {
+  //       http: new HttpParameter(ParameterLocation.Body),
+  //     },
+  //   });
+  //   op.addParameter(parameter);
 
-    this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
+  //   this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-    if (op.convenienceApi) {
-      // model/schema does not need to be Public or Internal, if it is not to be used in convenience API
-      this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
-    }
+  //   if (op.convenienceApi) {
+  //     // model/schema does not need to be Public or Internal, if it is not to be used in convenience API
+  //     this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
+  //   }
 
-    if (operationIsJsonMergePatch(httpOperation)) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
-    }
-    if (op.convenienceApi && operationIsMultipart(httpOperation)) {
-      this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
-    }
+  //   if (operationIsJsonMergePatch(httpOperation)) {
+  //     this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
+  //   }
+  //   if (op.convenienceApi && operationIsMultipart(httpOperation)) {
+  //     this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
+  //   }
 
-    if (schema instanceof ObjectSchema && isAnonymousModel) {
-      // anonymous model
+  //   if (schema instanceof ObjectSchema && isAnonymousModel) {
+  //     // anonymous model
 
-      // name the schema for documentation
-      schema.language.default.name = pascalCase(op.language.default.name) + "Request";
+  //     // name the schema for documentation
+  //     schema.language.default.name = pascalCase(op.language.default.name) + "Request";
 
-      if (!parameter.language.default.name) {
-        // name the parameter for documentation
-        parameter.language.default.name = "request";
-      }
+  //     if (!parameter.language.default.name) {
+  //       // name the parameter for documentation
+  //       parameter.language.default.name = "request";
+  //     }
 
-      if (operationIsJsonMergePatch(httpOperation)) {
-        // skip model flatten, if "application/merge-patch+json"
-        schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
-        return;
-      }
+  //     if (operationIsJsonMergePatch(httpOperation)) {
+  //       // skip model flatten, if "application/merge-patch+json"
+  //       schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
+  //       return;
+  //     }
 
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
+  //     this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
-      if (op.convenienceApi && op.parameters) {
-        op.convenienceApi.requests = [];
-        const request = new Request({
-          protocol: op.requests![0].protocol,
-        });
-        request.parameters = [];
-        op.convenienceApi.requests.push(request);
+  //     if (op.convenienceApi && op.parameters) {
+  //       op.convenienceApi.requests = [];
+  //       const request = new Request({
+  //         protocol: op.requests![0].protocol,
+  //       });
+  //       request.parameters = [];
+  //       op.convenienceApi.requests.push(request);
 
-        for (const [_, opParameter] of parameters.properties) {
-          const serializedName = this.getSerializedName(opParameter);
-          const existParameter = op.parameters.find((it) => it.language.default.serializedName === serializedName);
-          if (existParameter) {
-            // parameter
-            if (
-              existParameter.implementation === ImplementationLocation.Method &&
-              (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
-            ) {
-              request.parameters.push(cloneOperationParameter(existParameter));
-            }
-          } else {
-            // property from anonymous model
-            const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
-            if (
-              existBodyProperty &&
-              !existBodyProperty.readOnly &&
-              !(existBodyProperty.schema instanceof ConstantSchema)
-            ) {
-              request.parameters.push(
-                new VirtualParameter(
-                  existBodyProperty.language.default.name,
-                  existBodyProperty.language.default.description,
-                  existBodyProperty.schema,
-                  {
-                    originalParameter: parameter,
-                    targetProperty: existBodyProperty,
-                    language: {
-                      default: {
-                        serializedName: existBodyProperty.serializedName,
-                      },
-                    },
-                    summary: existBodyProperty.summary,
-                    implementation: ImplementationLocation.Method,
-                    required: existBodyProperty.required,
-                    nullable: existBodyProperty.nullable,
-                  },
-                ),
-              );
-            }
-          }
-        }
-        request.signatureParameters = request.parameters;
+  //       for (const [_, opParameter] of parameters.properties) {
+  //         const serializedName = this.getSerializedName(opParameter);
+  //         const existParameter = op.parameters.find((it) => it.language.default.serializedName === serializedName);
+  //         if (existParameter) {
+  //           // parameter
+  //           if (
+  //             existParameter.implementation === ImplementationLocation.Method &&
+  //             (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
+  //           ) {
+  //             request.parameters.push(cloneOperationParameter(existParameter));
+  //           }
+  //         } else {
+  //           // property from anonymous model
+  //           const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
+  //           if (
+  //             existBodyProperty &&
+  //             !existBodyProperty.readOnly &&
+  //             !(existBodyProperty.schema instanceof ConstantSchema)
+  //           ) {
+  //             request.parameters.push(
+  //               new VirtualParameter(
+  //                 existBodyProperty.language.default.name,
+  //                 existBodyProperty.language.default.description,
+  //                 existBodyProperty.schema,
+  //                 {
+  //                   originalParameter: parameter,
+  //                   targetProperty: existBodyProperty,
+  //                   language: {
+  //                     default: {
+  //                       serializedName: existBodyProperty.serializedName,
+  //                     },
+  //                   },
+  //                   summary: existBodyProperty.summary,
+  //                   implementation: ImplementationLocation.Method,
+  //                   required: existBodyProperty.required,
+  //                   nullable: existBodyProperty.nullable,
+  //                 },
+  //               ),
+  //             );
+  //           }
+  //         }
+  //       }
+  //       request.signatureParameters = request.parameters;
 
-        if (request.signatureParameters.length > 6) {
-          // create an option bag
-          const name = op.language.default.name + "Options";
-          const namespace = getNamespace(httpOperation.operation);
-          // option bag schema
-          const optionBagSchema = this.codeModel.schemas.add(
-            new GroupSchema(name, `Options for ${op.language.default.name} API`, {
-              language: {
-                default: {
-                  namespace: namespace,
-                },
-                java: {
-                  namespace: getJavaNamespace(namespace),
-                },
-              },
-            }),
-          );
-          request.parameters.forEach((it) => {
-            optionBagSchema.add(
-              new GroupProperty(it.language.default.name, it.language.default.description, it.schema, {
-                originalParameter: [it],
-                summary: it.summary,
-                required: it.required,
-                nullable: it.nullable,
-                readOnly: false,
-                serializedName: it.language.default.serializedName,
-              }),
-            );
-          });
+  //       if (request.signatureParameters.length > 6) {
+  //         // create an option bag
+  //         const name = op.language.default.name + "Options";
+  //         const namespace = getNamespace(httpOperation.operation);
+  //         // option bag schema
+  //         const optionBagSchema = this.codeModel.schemas.add(
+  //           new GroupSchema(name, `Options for ${op.language.default.name} API`, {
+  //             language: {
+  //               default: {
+  //                 namespace: namespace,
+  //               },
+  //               java: {
+  //                 namespace: getJavaNamespace(namespace),
+  //               },
+  //             },
+  //           }),
+  //         );
+  //         request.parameters.forEach((it) => {
+  //           optionBagSchema.add(
+  //             new GroupProperty(it.language.default.name, it.language.default.description, it.schema, {
+  //               originalParameter: [it],
+  //               summary: it.summary,
+  //               required: it.required,
+  //               nullable: it.nullable,
+  //               readOnly: false,
+  //               serializedName: it.language.default.serializedName,
+  //             }),
+  //           );
+  //         });
 
-          this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input] });
-          if (op.convenienceApi) {
-            this.trackSchemaUsage(optionBagSchema, {
-              usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
-            });
-          }
+  //         this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input] });
+  //         if (op.convenienceApi) {
+  //           this.trackSchemaUsage(optionBagSchema, {
+  //             usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+  //           });
+  //         }
 
-          // option bag parameter
-          const optionBagParameter = new Parameter(
-            "options",
-            optionBagSchema.language.default.description,
-            optionBagSchema,
-            {
-              implementation: ImplementationLocation.Method,
-              required: true,
-              nullable: false,
-            },
-          );
+  //         // option bag parameter
+  //         const optionBagParameter = new Parameter(
+  //           "options",
+  //           optionBagSchema.language.default.description,
+  //           optionBagSchema,
+  //           {
+  //             implementation: ImplementationLocation.Method,
+  //             required: true,
+  //             nullable: false,
+  //           },
+  //         );
 
-          request.signatureParameters = [optionBagParameter];
-          request.parameters.forEach((it) => (it.groupedBy = optionBagParameter));
-          request.parameters.push(optionBagParameter);
-        }
-      }
-    }
-  }
+  //         request.signatureParameters = [optionBagParameter];
+  //         request.parameters.forEach((it) => (it.groupedBy = optionBagParameter));
+  //         request.parameters.push(optionBagParameter);
+  //       }
+  //     }
+  //   }
+  // }
 
   private findResponseBody(bodyType: Type): Type {
     // find a type that possibly without http metadata like @statusCode
