@@ -11,6 +11,7 @@ import subprocess
 import glob
 import shutil
 import json
+import yaml
 from typing import List
 
 sdk_root: str
@@ -107,6 +108,16 @@ def update_sdks():
         generated_samples_exists = os.path.isdir(generated_samples_path)
         generated_test_exists = os.path.isdir(generated_test_path)
 
+        if not arm_module:
+            # update commit id
+            with open(tsp_location_file, "r", encoding="utf-8") as fin:
+                tsp_location_yml = yaml.safe_load(fin)
+            tsp_location_yml['commit'] = '3cb1b51638616435470fc10ea00de92512186ece'
+
+            updated_yaml_str = yaml.dump(tsp_location_yml, width=sys.maxsize, sort_keys=False, Dumper=ListIndentDumper)
+            with open(tsp_location_file, "w", encoding="utf-8") as fout:
+                fout.write(updated_yaml_str)
+
         if arm_module:
             logging.info('Delete source code of resourcemanager module %s', artifact)
             shutil.rmtree(os.path.join(module_path, 'src', 'main'))
@@ -138,6 +149,13 @@ def update_sdks():
 
     cmd = ['git', 'add', '.']
     subprocess.check_call(cmd, cwd=sdk_root)
+
+
+# Add two more indent for list in yaml dump
+class ListIndentDumper(yaml.SafeDumper):
+
+    def increase_indent(self, flow=False, indentless=False):
+        return super(ListIndentDumper, self).increase_indent(flow, False)
 
 
 def main():
