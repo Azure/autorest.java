@@ -44,14 +44,14 @@ public class IsUnknownClientTest {
         additionalProperty.put("prop3", "abc") ;
 
         IsUnknownAdditionalPropertiesDerived body = new IsUnknownAdditionalPropertiesDerived("IsUnknownAdditionalProperties", 314)
-                .setAge(2.71828);
+                .setAge(2.71875);
         body.setAdditionalProperties(additionalProperty);
         isUnknownDerivedClient.put(body);
 
         IsUnknownAdditionalPropertiesDerived properties = isUnknownDerivedClient.get();
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
-        Assertions.assertEquals(2.71828, properties.getAge());
+        Assertions.assertEquals(2.71875, properties.getAge());
         Assertions.assertEquals(314, properties.getIndex());
         Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
@@ -64,7 +64,7 @@ public class IsUnknownClientTest {
         additionalProperty.put("prop3", "abc") ;
 
         IsUnknownAdditionalPropertiesDiscriminatedDerived body = new IsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
-                .setAge(2.71828);
+                .setAge(2.71875);
         body.setAdditionalProperties(additionalProperty);
         isUnknownDiscriminatedClient.put(body);
 
