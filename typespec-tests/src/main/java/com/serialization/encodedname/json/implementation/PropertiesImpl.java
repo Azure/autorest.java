@@ -64,9 +64,8 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> send(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData jsonEncodedNameModel, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> send(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/serialization/encoded-name/json/property")
         @ExpectedResponses({ 204 })
@@ -74,9 +73,8 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData jsonEncodedNameModel, RequestOptions requestOptions,
-            Context context);
+        Response<Void> sendSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Get("/serialization/encoded-name/json/property")
         @ExpectedResponses({ 200 })
@@ -107,7 +105,7 @@ public final class PropertiesImpl {
      * }
      * }</pre>
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -116,9 +114,9 @@ public final class PropertiesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponseAsync(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
+    public Mono<Response<Void>> sendWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.send(accept, jsonEncodedNameModel, requestOptions, context));
+        return FluxUtil.withContext(context -> service.send(accept, body, requestOptions, context));
     }
 
     /**
@@ -131,7 +129,7 @@ public final class PropertiesImpl {
      * }
      * }</pre>
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -140,9 +138,9 @@ public final class PropertiesImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
+    public Response<Void> sendWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.sendSync(accept, jsonEncodedNameModel, requestOptions, Context.NONE);
+        return service.sendSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**

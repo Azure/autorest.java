@@ -739,13 +739,13 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
 
                     specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
                                     .name(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
-                                    .parameterReference(MethodUtil.REPEATABILITY_REQUEST_ID_VARIABLE_NAME)
+                                    .parameterReference(MethodUtil.REPEATABILITY_REQUEST_ID_EXPRESSION)
                                     .requestParameterName(MethodUtil.REPEATABILITY_REQUEST_ID_HEADER)
                                     .description("Repeatability request ID header"))
                             .build());
                     specialParameters.add(commonBuilderSetting.apply(new ProxyMethodParameter.Builder()
                                     .name(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
-                                    .parameterReference(MethodUtil.REPEATABILITY_FIRST_SENT_VARIABLE_NAME)
+                                    .parameterReference(MethodUtil.REPEATABILITY_FIRST_SENT_EXPRESSION)
                                     .requestParameterName(MethodUtil.REPEATABILITY_FIRST_SENT_HEADER)
                                     .description("Repeatability first sent header as HTTP-date"))
                             .build());

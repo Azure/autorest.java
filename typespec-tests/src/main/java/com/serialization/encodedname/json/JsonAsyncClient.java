@@ -48,7 +48,7 @@ public final class JsonAsyncClient {
      * }
      * }</pre>
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -58,8 +58,8 @@ public final class JsonAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(jsonEncodedNameModel, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -88,7 +88,7 @@ public final class JsonAsyncClient {
     /**
      * The send operation.
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,10 +99,10 @@ public final class JsonAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(JsonEncodedNameModel jsonEncodedNameModel) {
+    public Mono<Void> send(JsonEncodedNameModel body) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return sendWithResponse(BinaryData.fromObject(jsonEncodedNameModel), requestOptions).flatMap(FluxUtil::toMono);
+        return sendWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

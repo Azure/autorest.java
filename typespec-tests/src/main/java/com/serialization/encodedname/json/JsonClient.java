@@ -46,7 +46,7 @@ public final class JsonClient {
      * }
      * }</pre>
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,8 +56,8 @@ public final class JsonClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData jsonEncodedNameModel, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(jsonEncodedNameModel, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(body, requestOptions);
     }
 
     /**
@@ -86,7 +86,7 @@ public final class JsonClient {
     /**
      * The send operation.
      * 
-     * @param jsonEncodedNameModel The jsonEncodedNameModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -96,10 +96,10 @@ public final class JsonClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(JsonEncodedNameModel jsonEncodedNameModel) {
+    public void send(JsonEncodedNameModel body) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        sendWithResponse(BinaryData.fromObject(jsonEncodedNameModel), requestOptions).getValue();
+        sendWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 
     /**

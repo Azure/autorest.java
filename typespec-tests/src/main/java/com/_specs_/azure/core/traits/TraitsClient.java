@@ -110,7 +110,7 @@ public final class TraitsClient {
      * }</pre>
      * 
      * @param id The user's id.
-     * @param userActionParam User action param.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -120,9 +120,8 @@ public final class TraitsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData userActionParam,
-        RequestOptions requestOptions) {
-        return this.serviceClient.repeatableActionWithResponse(id, userActionParam, requestOptions);
+    public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.repeatableActionWithResponse(id, body, requestOptions);
     }
 
     /**
@@ -190,7 +189,7 @@ public final class TraitsClient {
      * Test for repeatable requests.
      * 
      * @param id The user's id.
-     * @param userActionParam User action param.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -201,10 +200,10 @@ public final class TraitsClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public UserActionResponse repeatableAction(int id, UserActionParam userActionParam) {
+    public UserActionResponse repeatableAction(int id, UserActionParam body) {
         // Generated convenience method for repeatableActionWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return repeatableActionWithResponse(id, BinaryData.fromObject(userActionParam), requestOptions).getValue()
+        return repeatableActionWithResponse(id, BinaryData.fromObject(body), requestOptions).getValue()
             .toObject(UserActionResponse.class);
     }
 }

@@ -45,7 +45,7 @@ $generateScript = {
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"""
-  } elseif ($tspFile -match "azure[\\/]arm[\\/].*[\\/]main\.tsp") {
+  } elseif ($tspFile -match "azure[\\/]resource-manager[\\/].*[\\/]main\.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet

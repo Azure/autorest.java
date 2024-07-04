@@ -49,7 +49,7 @@ public final class ModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param clientModel The clientModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,8 +59,8 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> clientWithResponse(BinaryData clientModel, RequestOptions requestOptions) {
-        return this.serviceClient.clientWithResponseAsync(clientModel, requestOptions);
+    public Mono<Response<Void>> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.clientWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -73,7 +73,7 @@ public final class ModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param javaModel The javaModel parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,14 +83,14 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> languageWithResponse(BinaryData javaModel, RequestOptions requestOptions) {
-        return this.serviceClient.languageWithResponseAsync(javaModel, requestOptions);
+    public Mono<Response<Void>> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.languageWithResponseAsync(body, requestOptions);
     }
 
     /**
      * The client operation.
      * 
-     * @param clientModel The clientModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -101,16 +101,16 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> client(ClientModel clientModel) {
+    public Mono<Void> client(ClientModel body) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return clientWithResponse(BinaryData.fromObject(clientModel), requestOptions).flatMap(FluxUtil::toMono);
+        return clientWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * The language operation.
      * 
-     * @param javaModel The javaModel parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -121,9 +121,9 @@ public final class ModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> language(JavaModel javaModel) {
+    public Mono<Void> language(JavaModel body) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return languageWithResponse(BinaryData.fromObject(javaModel), requestOptions).flatMap(FluxUtil::toMono);
+        return languageWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }
