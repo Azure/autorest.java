@@ -63,6 +63,7 @@ import {
   getClientType,
   getCrossLanguageDefinitionId,
   getDefaultApiVersion,
+  getHttpOperationWithCache,
   getWireName,
   isApiVersion,
   isInternal,
@@ -93,7 +94,6 @@ import {
   getProjectedName,
   getSummary,
   getVisibility,
-  ignoreDiagnostics,
   isArrayModelType,
   isErrorModel,
   isRecordModelType,
@@ -113,7 +113,6 @@ import {
   getAuthentication,
   getHeaderFieldName,
   getHeaderFieldOptions,
-  getHttpOperation,
   getPathParamName,
   getQueryParamName,
   getQueryParamOptions,
@@ -709,7 +708,7 @@ export class CodeModelBuilder {
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
-    const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
+    const op = getHttpOperationWithCache(this.sdkContext, operation);
 
     const operationGroup = this.codeModel.getOperationGroup(groupName);
     const operationName = this.getName(operation);
