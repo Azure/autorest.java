@@ -218,7 +218,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> anonymousModel(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData request,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData anonymousModelRequest,
             RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
@@ -229,7 +229,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> anonymousModelSync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData request,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData anonymousModelRequest,
             RequestOptions requestOptions, Context context);
     }
 
@@ -493,7 +493,7 @@ public final class FormDatasImpl {
     /**
      * Test content-type: multipart/form-data.
      * 
-     * @param request The request parameter.
+     * @param anonymousModelRequest The anonymousModelRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -502,17 +502,18 @@ public final class FormDatasImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> anonymousModelWithResponseAsync(BinaryData request, RequestOptions requestOptions) {
+    public Mono<Response<Void>> anonymousModelWithResponseAsync(BinaryData anonymousModelRequest,
+        RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.anonymousModel(contentType, accept, request, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.anonymousModel(contentType, accept, anonymousModelRequest, requestOptions, context));
     }
 
     /**
      * Test content-type: multipart/form-data.
      * 
-     * @param request The request parameter.
+     * @param anonymousModelRequest The anonymousModelRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -521,9 +522,9 @@ public final class FormDatasImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> anonymousModelWithResponse(BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> anonymousModelWithResponse(BinaryData anonymousModelRequest, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
         final String accept = "application/json";
-        return service.anonymousModelSync(contentType, accept, request, requestOptions, Context.NONE);
+        return service.anonymousModelSync(contentType, accept, anonymousModelRequest, requestOptions, Context.NONE);
     }
 }
