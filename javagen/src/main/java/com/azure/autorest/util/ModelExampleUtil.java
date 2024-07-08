@@ -307,7 +307,7 @@ public class ModelExampleUtil {
             }
 
             // fallback, "body" is commonly used in example JSON for request body
-            if (parameterValue == null) {
+            if (parameterValue == null && !"body".equalsIgnoreCase(serializedName)) {
                 serializedName = "body";
                 parameterValue = findParameter(example, serializedName);
             }
