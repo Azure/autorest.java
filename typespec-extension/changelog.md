@@ -1,5 +1,13 @@
 # Release History
 
+## 0.18.0 (2024-07-10)
+
+Compatible with compiler 0.57.
+
+### Breaking Changes
+
+- Request body without `@body` or `@bodyRoot`: the properties of the request body is flattened into method signature.
+
 ## 0.17.1 (2024-07-03)
 
 Compatible with compiler 0.57.
