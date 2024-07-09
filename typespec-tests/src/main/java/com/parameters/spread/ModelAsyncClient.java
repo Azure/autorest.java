@@ -148,7 +148,7 @@ public final class ModelAsyncClient {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param request The request parameter.
+     * @param spreadCompositeRequestMixRequest The spreadCompositeRequestMixRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -159,8 +159,9 @@ public final class ModelAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadCompositeRequestMixWithResponse(String name, String testHeader,
-        BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.spreadCompositeRequestMixWithResponseAsync(name, testHeader, request, requestOptions);
+        BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestMixWithResponseAsync(name, testHeader,
+            spreadCompositeRequestMixRequest, requestOptions);
     }
 
     /**
@@ -270,9 +271,10 @@ public final class ModelAsyncClient {
     public Mono<Void> spreadCompositeRequestMix(String name, String testHeader, String prop) {
         // Generated convenience method for spreadCompositeRequestMixWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadCompositeRequestMixRequest requestObj = new SpreadCompositeRequestMixRequest(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return spreadCompositeRequestMixWithResponse(name, testHeader, request, requestOptions)
+        SpreadCompositeRequestMixRequest spreadCompositeRequestMixRequestObj
+            = new SpreadCompositeRequestMixRequest(prop);
+        BinaryData spreadCompositeRequestMixRequest = BinaryData.fromObject(spreadCompositeRequestMixRequestObj);
+        return spreadCompositeRequestMixWithResponse(name, testHeader, spreadCompositeRequestMixRequest, requestOptions)
             .flatMap(FluxUtil::toMono);
     }
 }
