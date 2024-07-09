@@ -78,7 +78,7 @@ public final class AliasAsyncClient {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param request The request parameter.
+     * @param spreadAsRequestParameterRequest The spreadAsRequestParameterRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -89,8 +89,9 @@ public final class AliasAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadAsRequestParameterWithResponse(String id, String xMsTestHeader,
-        BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.spreadAsRequestParameterWithResponseAsync(id, xMsTestHeader, request, requestOptions);
+        BinaryData spreadAsRequestParameterRequest, RequestOptions requestOptions) {
+        return this.serviceClient.spreadAsRequestParameterWithResponseAsync(id, xMsTestHeader,
+            spreadAsRequestParameterRequest, requestOptions);
     }
 
     /**
@@ -110,7 +111,7 @@ public final class AliasAsyncClient {
      * 
      * @param id The id parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
-     * @param request The request parameter.
+     * @param spreadWithMultipleParametersRequest The spreadWithMultipleParametersRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -121,9 +122,9 @@ public final class AliasAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadWithMultipleParametersWithResponse(String id, String xMsTestHeader,
-        BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.spreadWithMultipleParametersWithResponseAsync(id, xMsTestHeader, request,
-            requestOptions);
+        BinaryData spreadWithMultipleParametersRequest, RequestOptions requestOptions) {
+        return this.serviceClient.spreadWithMultipleParametersWithResponseAsync(id, xMsTestHeader,
+            spreadWithMultipleParametersRequest, requestOptions);
     }
 
     /**
@@ -167,9 +168,9 @@ public final class AliasAsyncClient {
     public Mono<Void> spreadAsRequestParameter(String id, String xMsTestHeader, String name) {
         // Generated convenience method for spreadAsRequestParameterWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadAsRequestParameterRequest requestObj = new SpreadAsRequestParameterRequest(name);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return spreadAsRequestParameterWithResponse(id, xMsTestHeader, request, requestOptions)
+        SpreadAsRequestParameterRequest spreadAsRequestParameterRequestObj = new SpreadAsRequestParameterRequest(name);
+        BinaryData spreadAsRequestParameterRequest = BinaryData.fromObject(spreadAsRequestParameterRequestObj);
+        return spreadAsRequestParameterWithResponse(id, xMsTestHeader, spreadAsRequestParameterRequest, requestOptions)
             .flatMap(FluxUtil::toMono);
     }
 
@@ -192,10 +193,11 @@ public final class AliasAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String xMsTestHeader = options.getXMsTestHeader();
-        SpreadWithMultipleParametersRequest requestObj = new SpreadWithMultipleParametersRequest(options.getProp1(),
-            options.getProp2(), options.getProp3(), options.getProp4(), options.getProp5(), options.getProp6());
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return spreadWithMultipleParametersWithResponse(id, xMsTestHeader, request, requestOptions)
-            .flatMap(FluxUtil::toMono);
+        SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequestObj
+            = new SpreadWithMultipleParametersRequest(options.getProp1(), options.getProp2(), options.getProp3(),
+                options.getProp4(), options.getProp5(), options.getProp6());
+        BinaryData spreadWithMultipleParametersRequest = BinaryData.fromObject(spreadWithMultipleParametersRequestObj);
+        return spreadWithMultipleParametersWithResponse(id, xMsTestHeader, spreadWithMultipleParametersRequest,
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 }

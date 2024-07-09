@@ -4,7 +4,7 @@
   "parameters": {
     "name":  "myRequiredId",
     "filter": "name=myName",
-    "request": {
+    "body": {
       "user": {
         "user": "myOptionalUser"
       },
