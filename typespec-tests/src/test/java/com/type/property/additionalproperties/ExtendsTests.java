@@ -131,7 +131,7 @@ public class ExtendsTests {
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
         ExtendsUnknownAdditionalPropertiesDerived body = new ExtendsUnknownAdditionalPropertiesDerived("ExtendsUnknownAdditionalProperties", 314)
-                .setAge(2.71828);
+                .setAge(2.71875);
         body.setAdditionalProperties(additionalProperty);
         extendsUnknownDerivedClient.put(body);
 
@@ -149,7 +149,7 @@ public class ExtendsTests {
         additionalProperty.put("prop2", true) ;
         additionalProperty.put("prop3", "abc") ;
         ExtendsUnknownAdditionalPropertiesDiscriminatedDerived body = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
-                .setAge(2.71828);
+                .setAge(2.71875);
         body.setAdditionalProperties(additionalProperty);
         extendsUnknownDiscriminatedClient.put(body);
 

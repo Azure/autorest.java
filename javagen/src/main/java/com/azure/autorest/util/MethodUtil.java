@@ -54,7 +54,7 @@ public class MethodUtil {
         = EnumSet.of(HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.POST);
 
     /**
-     * Checks that method include special headers for Repeatable Requests Version 1.0
+     * Checks that method include special headers for Repeatable Requests Version 1.0 ("repeatability-request-id")
      * @param proxyMethod the proxy method
      * @return whether method include special headers for Repeatable Requests Version 1.0
      */
@@ -70,15 +70,8 @@ public class MethodUtil {
             return false;
         }
 
-        // check 2 headers exists
-        for (String specialHeader : proxyMethod.getSpecialHeaders()) {
-            if (REPEATABILITY_REQUEST_ID_HEADER.equalsIgnoreCase(specialHeader)
-                || REPEATABILITY_FIRST_SENT_HEADER.equalsIgnoreCase(specialHeader)) {
-                return true;
-            }
-        }
-
-        return false;
+        // check "repeatability-request-id" exists
+        return proxyMethod.getSpecialHeaders().contains(REPEATABILITY_REQUEST_ID_HEADER);
     }
 
     public static boolean isHttpMethodSupportRepeatableRequestHeaders(HttpMethod httpMethod) {

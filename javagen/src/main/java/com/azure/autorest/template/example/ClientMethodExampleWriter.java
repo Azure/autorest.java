@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template.example;
 
+import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -42,6 +43,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ClientMethodExampleWriter {
@@ -284,7 +286,7 @@ public class ClientMethodExampleWriter {
                         // output parameter's name is the "escaped reserved client method parameter name" of the real parameter's serialized name
                         // since flattened parameter is always in body, we can deal with that explicitly
                         ClientMethodParameter outputParameter = detail.getOutParameter();
-                        Map<String, Object> flattenedParameterValue = getFlattenedBodyParameterExampleValue(proxyMethodExample, outputParameter.getName());
+                        Map<String, Object> flattenedParameterValue = getFlattenedBodyParameterExampleValue(proxyMethodExample, outputParameter);
                         if (flattenedParameterValue != null) {
                             exampleValue.putAll(flattenedParameterValue);
                         }
@@ -307,8 +309,8 @@ public class ClientMethodExampleWriter {
             return ModelExampleUtil.parseNode(type, wireType, exampleValue);
         } else if (isFlattenParameter(convenienceMethod, methodParameter)) {
             // flatten, no grouping
-            String outputParameterName = convenienceMethod.getMethodTransformationDetails().iterator().next().getOutParameter().getName();
-            Map<String, Object> realParameterValue = getFlattenedBodyParameterExampleValue(proxyMethodExample, outputParameterName);
+            ClientMethodParameter outputParameter = convenienceMethod.getMethodTransformationDetails().iterator().next().getOutParameter();
+            Map<String, Object> realParameterValue = getFlattenedBodyParameterExampleValue(proxyMethodExample, outputParameter);
 
             IType type = methodParameter.getClientMethodParameter().getClientType();
             IType wireType = methodParameter.getClientMethodParameter().getWireType();
@@ -329,18 +331,25 @@ public class ClientMethodExampleWriter {
         }
     }
 
-    private Map<String, Object> getFlattenedBodyParameterExampleValue(ProxyMethodExample example, String clientMethodParameterName) {
-        ProxyMethodExample.ParameterValue parameterValue = example.getParameters().entrySet()
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> getFlattenedBodyParameterExampleValue(ProxyMethodExample example, ClientMethodParameter clientMethodParameter) {
+        String clientMethodParameterName = clientMethodParameter.getName();
+        Function<String, ProxyMethodExample.ParameterValue> getParameterValue = (parameterSerializedName) -> example.getParameters().entrySet()
                 .stream().filter(
                         p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getKey())
-                                .equalsIgnoreCase(clientMethodParameterName))
+                                .equalsIgnoreCase(parameterSerializedName))
                 .map(Map.Entry::getValue)
                 .findFirst()
                 .orElse(null);
-        if (parameterValue == null) {
-            return null;
+        ProxyMethodExample.ParameterValue parameterValue = getParameterValue.apply(clientMethodParameterName);
+
+        if (parameterValue == null && clientMethodParameter.getRequestParameterLocation() == RequestParameterLocation.BODY && !"body".equalsIgnoreCase(clientMethodParameterName)) {
+            // fallback, "body" is commonly used in example JSON for request body
+            clientMethodParameterName = "body";
+            parameterValue = getParameterValue.apply(clientMethodParameterName);
         }
-        return (Map<String, Object>) parameterValue.getObjectValue();
+
+        return parameterValue == null ? null : (Map<String, Object>) parameterValue.getObjectValue();
     }
 
     private boolean isGroupingParameter(ClientMethod convenienceMethod, MethodParameter methodParameter) {
