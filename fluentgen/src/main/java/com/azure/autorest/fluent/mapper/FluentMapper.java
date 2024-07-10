@@ -30,7 +30,7 @@ import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import org.slf4j.Logger;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -170,7 +170,11 @@ public class FluentMapper {
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getFluentModelsSubpackage())));
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage(settings.getModelsSubpackage())));
 
-        List<String> openToModules = Arrays.asList("com.azure.core", "com.fasterxml.jackson.databind");
+        List<String> openToModules = new ArrayList<>();
+        openToModules.add("com.azure.core");
+        if (!settings.isStreamStyleSerialization()) {
+            openToModules.add("com.fasterxml.jackson.databind");
+        }
         List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
         openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getFluentModelsSubpackage()), openToModules));
         openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));

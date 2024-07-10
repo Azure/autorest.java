@@ -64,7 +64,7 @@ public final class FlattenClient {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param request The request parameter.
+     * @param sendRequest The sendRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -74,8 +74,8 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(id, request, requestOptions);
+    public Response<Void> sendWithResponse(String id, BinaryData sendRequest, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(id, sendRequest, requestOptions);
     }
 
     /**
@@ -89,7 +89,7 @@ public final class FlattenClient {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param request The request parameter.
+     * @param sendProjectedNameRequest The sendProjectedNameRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,8 +99,9 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendProjectedNameWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendProjectedNameWithResponse(id, request, requestOptions);
+    public Response<Void> sendProjectedNameWithResponse(String id, BinaryData sendProjectedNameRequest,
+        RequestOptions requestOptions) {
+        return this.serviceClient.sendProjectedNameWithResponse(id, sendProjectedNameRequest, requestOptions);
     }
 
     /**
@@ -133,7 +134,7 @@ public final class FlattenClient {
      * }</pre>
      * 
      * @param name The name parameter.
-     * @param request The request parameter.
+     * @param sendLongRequest The sendLongRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -143,8 +144,8 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendLongWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendLongWithResponse(name, request, requestOptions);
+    public Response<Void> sendLongWithResponse(String name, BinaryData sendLongRequest, RequestOptions requestOptions) {
+        return this.serviceClient.sendLongWithResponse(name, sendLongRequest, requestOptions);
     }
 
     /**
@@ -177,7 +178,7 @@ public final class FlattenClient {
      * }</pre>
      * 
      * @param id The id parameter.
-     * @param request The request parameter.
+     * @param updateRequest The updateRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -187,15 +188,15 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> updateWithResponse(long id, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.updateWithResponse(id, request, requestOptions);
+    public Response<BinaryData> updateWithResponse(long id, BinaryData updateRequest, RequestOptions requestOptions) {
+        return this.serviceClient.updateWithResponse(id, updateRequest, requestOptions);
     }
 
     /**
      * The uploadFile operation.
      * 
      * @param name The name parameter.
-     * @param request The request parameter.
+     * @param uploadFileRequest The uploadFileRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -205,16 +206,16 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<Void> uploadFileWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+    Response<Void> uploadFileWithResponse(String name, BinaryData uploadFileRequest, RequestOptions requestOptions) {
         // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is
         // 'multipart/form-data'
-        return this.serviceClient.uploadFileWithResponse(name, request, requestOptions);
+        return this.serviceClient.uploadFileWithResponse(name, uploadFileRequest, requestOptions);
     }
 
     /**
      * The uploadTodo operation.
      * 
-     * @param request The request parameter.
+     * @param uploadTodoRequest The uploadTodoRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -224,10 +225,10 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<Void> uploadTodoWithResponse(BinaryData request, RequestOptions requestOptions) {
+    Response<Void> uploadTodoWithResponse(BinaryData uploadTodoRequest, RequestOptions requestOptions) {
         // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadTodo' is
         // 'multipart/form-data'
-        return this.serviceClient.uploadTodoWithResponse(request, requestOptions);
+        return this.serviceClient.uploadTodoWithResponse(uploadTodoRequest, requestOptions);
     }
 
     /**
@@ -248,9 +249,9 @@ public final class FlattenClient {
     public void send(String id, String input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest requestObj = new SendRequest(input).setUser(user);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(id, request, requestOptions).getValue();
+        SendRequest sendRequestObj = new SendRequest(input).setUser(user);
+        BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
+        sendWithResponse(id, sendRequest, requestOptions).getValue();
     }
 
     /**
@@ -270,9 +271,9 @@ public final class FlattenClient {
     public void send(String id, String input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest requestObj = new SendRequest(input);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(id, request, requestOptions).getValue();
+        SendRequest sendRequestObj = new SendRequest(input);
+        BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
+        sendWithResponse(id, sendRequest, requestOptions).getValue();
     }
 
     /**
@@ -292,9 +293,9 @@ public final class FlattenClient {
     public void sendProjectedName(String id, String fileIdentifier) {
         // Generated convenience method for sendProjectedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendProjectedNameRequest requestObj = new SendProjectedNameRequest(fileIdentifier);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendProjectedNameWithResponse(id, request, requestOptions).getValue();
+        SendProjectedNameRequest sendProjectedNameRequestObj = new SendProjectedNameRequest(fileIdentifier);
+        BinaryData sendProjectedNameRequest = BinaryData.fromObject(sendProjectedNameRequestObj);
+        sendProjectedNameWithResponse(id, sendProjectedNameRequest, requestOptions).getValue();
     }
 
     /**
@@ -315,7 +316,7 @@ public final class FlattenClient {
         RequestOptions requestOptions = new RequestOptions();
         String name = options.getName();
         String filter = options.getFilter();
-        SendLongRequest requestObj
+        SendLongRequest sendLongRequestObj
             = new SendLongRequest(options.getInput(), options.getDataInt(), options.getTitle(), options.getStatus())
                 .setUser(options.getUser())
                 .setDataIntOptional(options.getDataIntOptional())
@@ -323,18 +324,18 @@ public final class FlattenClient {
                 .setDataFloat(options.getDataFloat())
                 .setDescription(options.getDescription())
                 .setDummy(options.getDummy());
-        BinaryData request = BinaryData.fromObject(requestObj);
+        BinaryData sendLongRequest = BinaryData.fromObject(sendLongRequestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
         }
-        sendLongWithResponse(name, request, requestOptions).getValue();
+        sendLongWithResponse(name, sendLongRequest, requestOptions).getValue();
     }
 
     /**
      * The update operation.
      * 
      * @param id The id parameter.
-     * @param request The request parameter.
+     * @param updateRequest The updateRequest parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -345,15 +346,15 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public TodoItem update(long id, UpdatePatchRequest request) {
+    public TodoItem update(long id, UpdatePatchRequest updateRequest) {
         // Generated convenience method for updateWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, true);
-        BinaryData requestInBinaryData = BinaryData.fromObject(request);
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(updateRequest, true);
+        BinaryData updateRequestInBinaryData = BinaryData.fromObject(updateRequest);
         // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
-        requestInBinaryData.getLength();
-        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, false);
-        return updateWithResponse(id, requestInBinaryData, requestOptions).getValue().toObject(TodoItem.class);
+        updateRequestInBinaryData.getLength();
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(updateRequest, false);
+        return updateWithResponse(id, updateRequestInBinaryData, requestOptions).getValue().toObject(TodoItem.class);
     }
 
     /**
@@ -373,14 +374,14 @@ public final class FlattenClient {
     public void uploadFile(String name, FileDataFileDetails fileData) {
         // Generated convenience method for uploadFileWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        UploadFileRequest requestObj = new UploadFileRequest(fileData);
-        BinaryData request = new MultipartFormDataHelper(requestOptions)
-            .serializeFileField("file_data", requestObj.getFileData().getContent(),
-                requestObj.getFileData().getContentType(), requestObj.getFileData().getFilename())
-            .serializeTextField("constant", requestObj.getConstant())
+        UploadFileRequest uploadFileRequestObj = new UploadFileRequest(fileData);
+        BinaryData uploadFileRequest = new MultipartFormDataHelper(requestOptions)
+            .serializeFileField("file_data", uploadFileRequestObj.getFileData().getContent(),
+                uploadFileRequestObj.getFileData().getContentType(), uploadFileRequestObj.getFileData().getFilename())
+            .serializeTextField("constant", uploadFileRequestObj.getConstant())
             .end()
             .getRequestBody();
-        uploadFileWithResponse(name, request, requestOptions).getValue();
+        uploadFileWithResponse(name, uploadFileRequest, requestOptions).getValue();
     }
 
     /**
@@ -399,22 +400,22 @@ public final class FlattenClient {
     public void uploadTodo(UploadTodoOptions options) {
         // Generated convenience method for uploadTodoWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        UploadTodoRequest requestObj
+        UploadTodoRequest uploadTodoRequestObj
             = new UploadTodoRequest(options.getTitle(), options.getStatus()).setDescription(options.getDescription())
                 .setDummy(options.getDummy())
                 .setProp1(options.getProp1())
                 .setProp2(options.getProp2())
                 .setProp3(options.getProp3());
-        BinaryData request
-            = new MultipartFormDataHelper(requestOptions).serializeTextField("title", requestObj.getTitle())
-                .serializeTextField("description", requestObj.getDescription())
-                .serializeTextField("status", Objects.toString(requestObj.getStatus()))
-                .serializeTextField("_dummy", requestObj.getDummy())
-                .serializeTextField("prop1", requestObj.getProp1())
-                .serializeTextField("prop2", requestObj.getProp2())
-                .serializeTextField("prop3", requestObj.getProp3())
+        BinaryData uploadTodoRequest
+            = new MultipartFormDataHelper(requestOptions).serializeTextField("title", uploadTodoRequestObj.getTitle())
+                .serializeTextField("description", uploadTodoRequestObj.getDescription())
+                .serializeTextField("status", Objects.toString(uploadTodoRequestObj.getStatus()))
+                .serializeTextField("_dummy", uploadTodoRequestObj.getDummy())
+                .serializeTextField("prop1", uploadTodoRequestObj.getProp1())
+                .serializeTextField("prop2", uploadTodoRequestObj.getProp2())
+                .serializeTextField("prop3", uploadTodoRequestObj.getProp3())
                 .end()
                 .getRequestBody();
-        uploadTodoWithResponse(request, requestOptions).getValue();
+        uploadTodoWithResponse(uploadTodoRequest, requestOptions).getValue();
     }
 }

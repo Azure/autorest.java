@@ -184,7 +184,7 @@ public final class MultiPartAsyncClient {
     /**
      * Test content-type: multipart/form-data.
      * 
-     * @param request The request parameter.
+     * @param anonymousModelRequest The anonymousModelRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -194,10 +194,10 @@ public final class MultiPartAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Mono<Response<Void>> anonymousModelWithResponse(BinaryData request, RequestOptions requestOptions) {
+    Mono<Response<Void>> anonymousModelWithResponse(BinaryData anonymousModelRequest, RequestOptions requestOptions) {
         // Protocol API requires serialization of parts with content-disposition and data, as operation 'anonymousModel'
         // is 'multipart/form-data'
-        return this.serviceClient.anonymousModelWithResponseAsync(request, requestOptions);
+        return this.serviceClient.anonymousModelWithResponseAsync(anonymousModelRequest, requestOptions);
     }
 
     /**
@@ -403,12 +403,14 @@ public final class MultiPartAsyncClient {
     public Mono<Void> anonymousModel(ProfileImageFileDetails profileImage) {
         // Generated convenience method for anonymousModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        AnonymousModelRequest requestObj = new AnonymousModelRequest(profileImage);
-        BinaryData request = new MultipartFormDataHelper(requestOptions)
-            .serializeFileField("profileImage", requestObj.getProfileImage().getContent(),
-                requestObj.getProfileImage().getContentType(), requestObj.getProfileImage().getFilename())
-            .end()
-            .getRequestBody();
-        return anonymousModelWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        AnonymousModelRequest anonymousModelRequestObj = new AnonymousModelRequest(profileImage);
+        BinaryData anonymousModelRequest
+            = new MultipartFormDataHelper(requestOptions)
+                .serializeFileField("profileImage", anonymousModelRequestObj.getProfileImage().getContent(),
+                    anonymousModelRequestObj.getProfileImage().getContentType(),
+                    anonymousModelRequestObj.getProfileImage().getFilename())
+                .end()
+                .getRequestBody();
+        return anonymousModelWithResponse(anonymousModelRequest, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

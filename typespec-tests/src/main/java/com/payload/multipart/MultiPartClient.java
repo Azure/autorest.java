@@ -182,7 +182,7 @@ public final class MultiPartClient {
     /**
      * Test content-type: multipart/form-data.
      * 
-     * @param request The request parameter.
+     * @param anonymousModelRequest The anonymousModelRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -192,10 +192,10 @@ public final class MultiPartClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<Void> anonymousModelWithResponse(BinaryData request, RequestOptions requestOptions) {
+    Response<Void> anonymousModelWithResponse(BinaryData anonymousModelRequest, RequestOptions requestOptions) {
         // Protocol API requires serialization of parts with content-disposition and data, as operation 'anonymousModel'
         // is 'multipart/form-data'
-        return this.serviceClient.anonymousModelWithResponse(request, requestOptions);
+        return this.serviceClient.anonymousModelWithResponse(anonymousModelRequest, requestOptions);
     }
 
     /**
@@ -391,12 +391,14 @@ public final class MultiPartClient {
     public void anonymousModel(ProfileImageFileDetails profileImage) {
         // Generated convenience method for anonymousModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        AnonymousModelRequest requestObj = new AnonymousModelRequest(profileImage);
-        BinaryData request = new MultipartFormDataHelper(requestOptions)
-            .serializeFileField("profileImage", requestObj.getProfileImage().getContent(),
-                requestObj.getProfileImage().getContentType(), requestObj.getProfileImage().getFilename())
-            .end()
-            .getRequestBody();
-        anonymousModelWithResponse(request, requestOptions).getValue();
+        AnonymousModelRequest anonymousModelRequestObj = new AnonymousModelRequest(profileImage);
+        BinaryData anonymousModelRequest
+            = new MultipartFormDataHelper(requestOptions)
+                .serializeFileField("profileImage", anonymousModelRequestObj.getProfileImage().getContent(),
+                    anonymousModelRequestObj.getProfileImage().getContentType(),
+                    anonymousModelRequestObj.getProfileImage().getFilename())
+                .end()
+                .getRequestBody();
+        anonymousModelWithResponse(anonymousModelRequest, requestOptions).getValue();
     }
 }
