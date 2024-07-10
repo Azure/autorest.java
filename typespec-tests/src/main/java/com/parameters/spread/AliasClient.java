@@ -16,7 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.spread.implementation.AliasImpl;
-import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
+import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest1;
 import com.parameters.spread.implementation.models.SpreadAsRequestParameterRequest;
 import com.parameters.spread.implementation.models.SpreadWithMultipleParametersRequest;
 import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
@@ -141,7 +141,7 @@ public final class AliasClient {
     public void spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadAsRequestBodyRequest spreadAsRequestBodyRequestObj = new SpreadAsRequestBodyRequest(name);
+        SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequestObj = new SpreadAsRequestBodyRequest1(name);
         BinaryData spreadAsRequestBodyRequest = BinaryData.fromObject(spreadAsRequestBodyRequestObj);
         spreadAsRequestBodyWithResponse(spreadAsRequestBodyRequest, requestOptions).getValue();
     }

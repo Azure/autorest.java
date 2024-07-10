@@ -48,7 +48,7 @@ public class BodyTests {
     public void testBodyOptionality() {
         client.requiredExplicit(new BodyModel("foo"));
 
-        client.requiredImplicit(new BodyModel("foo"));
+        client.requiredImplicit("foo");
 
         optionalClient.set(new BodyModel("foo"));
         validationPolicy.validateContentTypeHeader(true);

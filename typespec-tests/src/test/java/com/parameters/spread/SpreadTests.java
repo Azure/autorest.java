@@ -4,7 +4,6 @@
 package com.parameters.spread;
 
 import com.parameters.spread.models.BodyParameter;
-import com.parameters.spread.models.CompositeRequestMix;
 import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
 import org.junit.jupiter.api.Test;
 
@@ -28,10 +27,10 @@ public class SpreadTests {
     @Test
     public void testModel() {
 
-        modelClient.spreadAsRequestBody(new BodyParameter("foo"));
+        modelClient.spreadAsRequestBody("foo");
         modelClient.spreadCompositeRequestOnlyWithBody(new BodyParameter("foo"));
         modelClient.spreadCompositeRequestWithoutBody("foo", "bar");
         modelClient.spreadCompositeRequest("foo", "bar", new BodyParameter("foo"));
-        modelClient.spreadCompositeRequestMix("foo", "bar", new CompositeRequestMix("foo"));
+        modelClient.spreadCompositeRequestMix("foo", "bar", "foo");
     }
 }
