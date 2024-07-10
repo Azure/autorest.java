@@ -801,7 +801,7 @@ export class CodeModelBuilder {
           this.processParameterBody(codeModelOperation, op, op.parameters.body.property);
         }
       } else if (op.parameters.body.type) {
-        let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
+        let bodyType = op.parameters.body.type;
 
         if (bodyType.kind === "Model") {
           // try use resource type as round-trip model
@@ -1345,7 +1345,11 @@ export class CodeModelBuilder {
       schema = this.processSchemaFromSdkType(sdkType, body.name);
     }
 
-    const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
+    // Explicit body parameter @body or @bodyRoot would result to body.kind === "ModelProperty"
+    // Implicit body parameter would result to body.kind === "Model"
+    // see https://typespec.io/docs/libraries/http/cheat-sheet#data-types
+    const bodyParameterFlatten = sdkType.kind === "model" && body.kind === "Model" && !this.isArm();
+
     const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
     const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
       summary: this.getSummary(body),
@@ -1371,8 +1375,8 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    if (schema instanceof ObjectSchema && isAnonymousModel) {
-      // anonymous model
+    if (schema instanceof ObjectSchema && bodyParameterFlatten) {
+      // flatten body parameter
 
       // name the schema for documentation
       schema.language.default.name = pascalCase(op.language.default.name) + "Request";
