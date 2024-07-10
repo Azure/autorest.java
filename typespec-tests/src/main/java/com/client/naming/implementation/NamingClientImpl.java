@@ -71,17 +71,17 @@ public final class NamingClientImpl {
     }
 
     /**
-     * The ModelsImpl object to access its operations.
+     * The ClientModelsImpl object to access its operations.
      */
-    private final ModelsImpl models;
+    private final ClientModelsImpl clientModels;
 
     /**
-     * Gets the ModelsImpl object to access its operations.
+     * Gets the ClientModelsImpl object to access its operations.
      * 
-     * @return the ModelsImpl object.
+     * @return the ClientModelsImpl object.
      */
-    public ModelsImpl getModels() {
-        return this.models;
+    public ClientModelsImpl getClientModels() {
+        return this.clientModels;
     }
 
     /**
@@ -124,7 +124,7 @@ public final class NamingClientImpl {
     public NamingClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
-        this.models = new ModelsImpl(this);
+        this.clientModels = new ClientModelsImpl(this);
         this.unionEnums = new UnionEnumsImpl(this);
         this.service = RestProxy.create(NamingClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }

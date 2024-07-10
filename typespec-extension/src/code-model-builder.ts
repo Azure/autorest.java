@@ -1345,7 +1345,11 @@ export class CodeModelBuilder {
       schema = this.processSchemaFromSdkType(sdkType, body.name);
     }
 
-    const isAnonymousModel = sdkType.kind === "model" && body.kind === "Model" && !this.isArm();
+    // Explicit body parameter @body or @bodyRoot would result to body.kind === "ModelProperty"
+    // Implicit body parameter would result to body.kind === "Model"
+    // see https://typespec.io/docs/libraries/http/cheat-sheet#data-types
+    const bodyParameterFlatten = sdkType.kind === "model" && body.kind === "Model" && !this.isArm();
+
     const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
     const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
       summary: this.getSummary(body),
@@ -1371,7 +1375,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    if (schema instanceof ObjectSchema && isAnonymousModel) {
+    if (schema instanceof ObjectSchema && bodyParameterFlatten) {
       // anonymous model
 
       // name the schema for documentation

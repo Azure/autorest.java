@@ -143,7 +143,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> spreadCompositeRequestMix(@PathParam("name") String name,
             @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions,
+            Context context);
 
         @Put("/parameters/spread/model/composite-request-mix/{name}")
         @ExpectedResponses({ 204 })
@@ -153,7 +154,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> spreadCompositeRequestMixSync(@PathParam("name") String name,
             @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -364,7 +366,7 @@ public final class ModelsImpl {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param request The request parameter.
+     * @param spreadCompositeRequestMixRequest The spreadCompositeRequestMixRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -374,10 +376,10 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadCompositeRequestMixWithResponseAsync(String name, String testHeader,
-        BinaryData request, RequestOptions requestOptions) {
+        BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.spreadCompositeRequestMix(name, testHeader, accept, request, requestOptions, context));
+        return FluxUtil.withContext(context -> service.spreadCompositeRequestMix(name, testHeader, accept,
+            spreadCompositeRequestMixRequest, requestOptions, context));
     }
 
     /**
@@ -392,7 +394,7 @@ public final class ModelsImpl {
      * 
      * @param name The name parameter.
      * @param testHeader The testHeader parameter.
-     * @param request The request parameter.
+     * @param spreadCompositeRequestMixRequest The spreadCompositeRequestMixRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -401,9 +403,10 @@ public final class ModelsImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadCompositeRequestMixWithResponse(String name, String testHeader, BinaryData request,
-        RequestOptions requestOptions) {
+    public Response<Void> spreadCompositeRequestMixWithResponse(String name, String testHeader,
+        BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.spreadCompositeRequestMixSync(name, testHeader, accept, request, requestOptions, Context.NONE);
+        return service.spreadCompositeRequestMixSync(name, testHeader, accept, spreadCompositeRequestMixRequest,
+            requestOptions, Context.NONE);
     }
 }
