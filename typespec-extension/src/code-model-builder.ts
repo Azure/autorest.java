@@ -66,6 +66,7 @@ import {
   SdkServiceMethod,
   SdkType,
   SdkUnionType,
+  UsageFlags,
   createSdkContext,
   getAllModels,
   getClientNameOverride,
@@ -2088,10 +2089,8 @@ export class CodeModelBuilder {
     }
 
 
-    // Explicit body parameter @body or @bodyRoot would result to body.kind === "ModelProperty"
-    // Implicit body parameter would result to body.kind === "Model"
-    // see https://typespec.io/docs/libraries/http/cheat-sheet#data-types
-    const bodyParameterFlatten = sdkType.kind === "model" && !this.isArm();
+    // Implicit body parameter would have usage flag: UsageFlags.Spread, for this case we need to do body parameter flatten
+    const bodyParameterFlatten = sdkType.kind === "model" && (sdkType.usage & UsageFlags.Spread) && !this.isArm();
 
     const parameterName = sdkBody.name;
     const parameter = new Parameter(parameterName, sdkBody.description ?? "", schema, {
