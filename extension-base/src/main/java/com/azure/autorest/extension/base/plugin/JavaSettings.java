@@ -108,13 +108,15 @@ public class JavaSettings {
                 logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
+            String fluent = getStringValue(host, "fluent");
+
             setHeader(getStringValue(host, "license-header"));
             instance = new JavaSettings(
                 autorestSettings,
                 host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, Object.class), "modelerfour"),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
-                getStringValue(host, "fluent"),
+                fluent,
                 getBooleanValue(host, "regenerate-pom", false),
                 header,
                 getStringValue(host, "service-name"),
@@ -157,7 +159,9 @@ public class JavaSettings {
                 host.getValue(TYPE_FACTORY.constructMapType(Map.class, Integer.class, String.class),
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
-                getBooleanValue(host, "generic-response-type", true),
+                // If fluent default to false, this is because the automated test generation ends up with invalid code.
+                // Once that is fixed, this can be switched over to true.
+                getBooleanValue(host, "generic-response-type", fluent == null),
                 getBooleanValue(host, "stream-style-serialization", true),
                 getBooleanValue(host, "enable-sync-stack", false),
                 getBooleanValue(host, "output-model-immutable", false),
