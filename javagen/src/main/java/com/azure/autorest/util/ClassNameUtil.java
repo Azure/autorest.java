@@ -3,8 +3,19 @@
 
 package com.azure.autorest.util;
 
-public class ClassNameUtil {
+public final class ClassNameUtil {
 
+    /**
+     * Truncate class name to avoid path too long.
+     *
+     * It contains some heuristic logic, and the result may not be exactly correct.
+     *
+     * @param namespace the namespace of the package, used to deduce the artifact id and group id
+     * @param directory the part of directory from maven project
+     * @param packageName the namespace/package of the class
+     * @param className the name of the class
+     * @return the truncated class name
+     */
     public static String truncateClassName(
             String namespace, String directory,
             String packageName, String className) {
