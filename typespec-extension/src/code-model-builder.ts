@@ -58,6 +58,7 @@ import {
   SdkHttpResponse,
   SdkLroPagingServiceMethod,
   SdkLroServiceMethod,
+  SdkMethod,
   SdkModelPropertyType,
   SdkModelType,
   SdkPathParameter,
@@ -1005,12 +1006,18 @@ export class CodeModelBuilder {
      // host
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // path/query/header parameters
-    httpOperation.parameters.map((it) => {
-      this.processParameterFromSdkType(codeModelOperation, it, clientContext);
-    });
+    for (let param of httpOperation.parameters) {
+      // if it's paged operation with request body, remove content-type header added by TCGC, as next link call should not have content type header
+      if ((sdkMethod.kind === "paging" || sdkMethod.kind === "lropaging") && httpOperation.bodyParam) {
+        if (param.serializedName.toLocaleLowerCase() === "content-type") {
+          continue;
+        }
+      }
+      this.processParameterFromSdkType(codeModelOperation, param, clientContext);
+    }
     // "accept" header
     // this.addAcceptHeaderParameterFromSdkType(codeModelOperation, httpOperation.responses);
-    // // body
+    // body
     if (httpOperation.bodyParam && httpOperation.__raw && sdkMethod.__raw && httpOperation.bodyParam.type.__raw) {
         // let bodyType = httpOperation.bodyParam.type;
         // if (bodyType.kind === "model" && bodyType.__raw) {
@@ -1055,13 +1062,12 @@ export class CodeModelBuilder {
 
 
     // check for paged
-    this.processRouteForPaged(codeModelOperation, sdkMethod.operation.__raw.responses);
-    
+    // this.processRouteForPaged(codeModelOperation, sdkMethod.operation.__raw.responses);
+    this.processRouteForPagedFromSdkType(codeModelOperation, sdkMethod.operation.responses, sdkMethod);
+  
     // check for long-running operation
-    if (sdkMethod.__raw) {
-      this.processRouteForLongRunning(codeModelOperation, sdkMethod.__raw, sdkMethod.operation.__raw.responses, lroMetadata);
-    }
-
+    this.processRouteForLongRunningFromSdkType(codeModelOperation, sdkMethod.operation.responses, lroMetadata);
+    
     operationGroup.addOperation(codeModelOperation);
 
     return codeModelOperation;
@@ -1234,96 +1240,29 @@ export class CodeModelBuilder {
     }
   }
 
-  private processLroMetadata(op: CodeModelOperation, httpOperation: HttpOperation): LongRunningMetadata {
-    const operation = httpOperation.operation;
+  private processRouteForPagedFromSdkType(op: CodeModelOperation, responses: Map<number | HttpStatusCodeRange, SdkHttpResponse>, sdkMethod: SdkMethod<SdkHttpOperation>) {
+    if (sdkMethod.kind === "paging" || sdkMethod.kind === "lropaging") {
+      for (const [code, response] of responses) {
+        let bodyType = response.type;
+        if (bodyType && bodyType.kind === "model") {
+          const pagedResult = sdkMethod.__raw_paged_metadata;
+          if (pagedResult) {
+            op.extensions = op.extensions ?? {};
+            op.extensions["x-ms-pageable"] = {
+              itemName: pagedResult.itemsProperty?.name,
+              nextLinkName: pagedResult.nextLinkProperty?.name,
+            };
 
-    const trackConvenienceApi: boolean = Boolean(op.convenienceApi);
-
-    const lroMetadata = getLroMetadata(this.program, operation);
-    // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
-    if (lroMetadata && lroMetadata.pollingInfo && lroMetadata.statusMonitorStep) {
-      let pollingSchema = undefined;
-      let finalSchema = undefined;
-
-      let pollingStrategy: Metadata | undefined = undefined;
-      let finalResultPropertySerializedName: string | undefined = undefined;
-
-      const verb = httpOperation.verb;
-      const useNewPollStrategy = isLroNewPollingStrategy(httpOperation, lroMetadata);
-      if (useNewPollStrategy) {
-        // use OperationLocationPollingStrategy
-        pollingStrategy = new Metadata({
-          language: {
-            java: {
-              name: "OperationLocationPollingStrategy",
-              namespace: getJavaNamespace(this.namespace) + ".implementation",
-            },
-          },
-        });
-      }
-
-      // pollingSchema
-      if (modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")) {
-        pollingSchema = this.pollResultSchema;
-      } else {
-        const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
-        const sdkType = getClientType(this.sdkContext, pollType);
-        pollingSchema = this.processSchemaFromSdkType(sdkType, "pollResult");
-      }
-
-      // finalSchema
-      if (
-        verb !== "delete" &&
-        lroMetadata.finalResult &&
-        lroMetadata.finalEnvelopeResult &&
-        lroMetadata.finalResult !== "void" &&
-        lroMetadata.finalEnvelopeResult !== "void"
-      ) {
-        const finalResult = useNewPollStrategy ? lroMetadata.finalResult : lroMetadata.finalEnvelopeResult;
-        const finalType = this.findResponseBody(finalResult);
-        const sdkType = getClientType(this.sdkContext, finalType);
-        finalSchema = this.processSchemaFromSdkType(sdkType, "finalResult");
-
-        if (
-          useNewPollStrategy &&
-          lroMetadata.finalStep &&
-          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
-          lroMetadata.finalStep.target
-        ) {
-          // final result is the value in lroMetadata.finalStep.target
-          finalResultPropertySerializedName = this.getSerializedName(lroMetadata.finalStep.target);
+            op.responses?.forEach((r) => {
+              if (r instanceof SchemaResponse) {
+                this.trackSchemaUsage(r.schema, { usage: [SchemaContext.Paged] });
+              }
+            });
+            break;
+          }
         }
       }
-
-      // track usage
-      if (pollingSchema) {
-        this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
-        if (trackConvenienceApi) {
-          this.trackSchemaUsage(pollingSchema, {
-            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
-          });
-        }
-      }
-      if (finalSchema) {
-        this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
-        if (trackConvenienceApi) {
-          this.trackSchemaUsage(finalSchema, {
-            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
-          });
-        }
-      }
-
-      op.lroMetadata = new LongRunningMetadata(
-        true,
-        pollingSchema,
-        finalSchema,
-        pollingStrategy,
-        finalResultPropertySerializedName,
-      );
-      return op.lroMetadata;
     }
-
-    return new LongRunningMetadata(false);
   }
 
   private processLroMetadataFromSdkType(op: CodeModelOperation, sdkMethod: SdkLroServiceMethod<SdkHttpOperation> | SdkLroPagingServiceMethod<SdkHttpOperation>): LongRunningMetadata {
@@ -1432,6 +1371,31 @@ export class CodeModelBuilder {
       if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
         for (const [_, header] of Object.entries(resp.responses[0].headers)) {
           if (isPollingLocation(this.program, header)) {
+            op.extensions = op.extensions ?? {};
+            op.extensions["x-ms-long-running-operation"] = true;
+
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  private processRouteForLongRunningFromSdkType(
+    op: CodeModelOperation,
+    responses: Map<number | HttpStatusCodeRange, SdkHttpResponse>,
+    lroMetadata: LongRunningMetadata,
+  ) {
+    if (lroMetadata.longRunning) {
+      op.extensions = op.extensions ?? {};
+      op.extensions["x-ms-long-running-operation"] = true;
+      return;
+    }
+
+    for (const [code, response] of responses) {
+      if (response.headers) {
+        for (const header of response.headers) {
+          if (isPollingLocation(this.program, header.__raw)) {
             op.extensions = op.extensions ?? {};
             op.extensions["x-ms-long-running-operation"] = true;
 
@@ -2124,7 +2088,8 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameterName = isAnonymousModel ? "" : sdkBody.name; // not use TCGC's anonymous model's name, as we want to overwrite the name in below logics
+    const parameterName = sdkBody.name;
+
     const parameter = new Parameter(parameterName, sdkBody.description ?? "", schema, {
       summary: sdkBody.details,
       implementation: ImplementationLocation.Method,
