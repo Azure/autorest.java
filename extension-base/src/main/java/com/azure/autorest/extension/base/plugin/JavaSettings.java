@@ -33,6 +33,7 @@ public class JavaSettings {
     private final boolean useKeyCredential;
     private final String flavor;
     private final boolean noCustomHeaders;
+    private final boolean disableTypedHeadersMethods;
 
     static void setHeader(String value) {
         if ("MICROSOFT_MIT".equals(value)) {
@@ -156,12 +157,12 @@ public class JavaSettings {
                 host.getValue(TYPE_FACTORY.constructMapType(Map.class, Integer.class, String.class),
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
-                getBooleanValue(host, "generic-response-type", false),
+                getBooleanValue(host, "generic-response-type", true),
                 getBooleanValue(host, "stream-style-serialization", true),
                 getBooleanValue(host, "enable-sync-stack", false),
                 getBooleanValue(host, "output-model-immutable", false),
                 getBooleanValue(host, "use-input-stream-for-binary", false),
-                getBooleanValue(host, "no-custom-headers", false),
+                getBooleanValue(host, "no-custom-headers", true),
                 getBooleanValue(host, "include-read-only-in-constructor-args", false),
                 // setting the default as true as the Java design guideline recommends using String for URLs.
                 getBooleanValue(host, "url-as-string", true),
@@ -174,7 +175,8 @@ public class JavaSettings {
                 getBooleanValue(host, "use-key-credential", false),
                 getBooleanValue(host, "null-byte-array-maps-to-empty-array", false),
                 getBooleanValue(host, "graal-vm-config", false),
-                getStringValue(host, "flavor", "Azure")
+                getStringValue(host, "flavor", "Azure"),
+                getBooleanValue(host, "disable-typed-headers-methods", false)
             );
         }
         return instance;
@@ -262,7 +264,9 @@ public class JavaSettings {
      * @param nullByteArrayMapsToEmptyArray If set to true, {@code ArrayType.BYTE_ARRAY} will return an empty array
      * instead of null when the default value expression is null.
      * @param generateGraalVmConfig If set to true, the generated client will have support for GraalVM.
-     * @param flavor The brand name we use to geneate SDK.
+     * @param flavor The brand name we use to generate SDK.
+     * @param disableTypedHeadersMethods Prevents generating REST API methods that include typed headers. If set to
+     * true, {@code noCustomHeaders} will be ignored as no REST APIs with typed headers will be generated.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -324,7 +328,8 @@ public class JavaSettings {
         boolean useKeyCredential,
         boolean nullByteArrayMapsToEmptyArray,
         boolean generateGraalVmConfig,
-        String flavor) {
+        String flavor,
+        boolean disableTypedHeadersMethods) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -422,6 +427,7 @@ public class JavaSettings {
         this.nullByteArrayMapsToEmptyArray = nullByteArrayMapsToEmptyArray;
         this.generateGraalVmConfig = generateGraalVmConfig;
         this.flavor = flavor;
+        this.disableTypedHeadersMethods = disableTypedHeadersMethods;
     }
 
     /**
@@ -1538,6 +1544,24 @@ public class JavaSettings {
      */
     public boolean isNullByteArrayMapsToEmptyArray() {
         return nullByteArrayMapsToEmptyArray;
+    }
+
+    /**
+     * Determines whether REST API methods returning typed headers will be generated.
+     * <p>
+     * If set to true, {@link #isNoCustomHeaders()} and {@link #isGenericResponseTypes()} will be ignored as no REST
+     * APIs returning typed headers will be generated. Meaning overloads without typed headers won't be generated and
+     * since no methods with typed headers will exist there won't be usage of {@code ResponseBase}, or named subtypes of
+     * it.
+     * <p>
+     * No matter the value, typed header classes will be generated. This can be useful if a majority of API calls don't
+     * returned the typed headers at all but there are still cases where it would be useful to have them. Typed header
+     * classes are simply created with {@code HttpHeaders} from {@code azure-core}.
+     *
+     * @return Whether REST APIs including typed headers should be generated.
+     */
+    public boolean isDisableTypedHeadersMethods() {
+        return disableTypedHeadersMethods;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\n",
