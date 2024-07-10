@@ -15,25 +15,27 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.client.naming.implementation.ModelsImpl;
+import com.azure.core.util.FluxUtil;
+import com.client.naming.implementation.ClientModelsImpl;
 import com.client.naming.models.ClientModel;
 import com.client.naming.models.JavaModel;
+import reactor.core.publisher.Mono;
 
 /**
- * Initializes a new instance of the synchronous NamingClient type.
+ * Initializes a new instance of the asynchronous NamingClient type.
  */
-@ServiceClient(builder = NamingClientBuilder.class)
-public final class ModelClient {
+@ServiceClient(builder = NamingClientBuilder.class, isAsync = true)
+public final class ClientModelAsyncClient {
     @Generated
-    private final ModelsImpl serviceClient;
+    private final ClientModelsImpl serviceClient;
 
     /**
-     * Initializes an instance of ModelClient class.
+     * Initializes an instance of ClientModelAsyncClient class.
      * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    ModelClient(ModelsImpl serviceClient) {
+    ClientModelAsyncClient(ClientModelsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -53,12 +55,12 @@ public final class ModelClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.clientWithResponse(body, requestOptions);
+    public Mono<Response<Void>> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.clientWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -77,12 +79,12 @@ public final class ModelClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.languageWithResponse(body, requestOptions);
+    public Mono<Response<Void>> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.languageWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -95,13 +97,14 @@ public final class ModelClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void client(ClientModel body) {
+    public Mono<Void> client(ClientModel body) {
         // Generated convenience method for clientWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        clientWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        return clientWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -114,12 +117,13 @@ public final class ModelClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void language(JavaModel body) {
+    public Mono<Void> language(JavaModel body) {
         // Generated convenience method for languageWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        languageWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+        return languageWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 }

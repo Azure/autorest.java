@@ -29,6 +29,7 @@ import com.azure.autorest.fluent.template.SampleTemplate;
 import com.azure.autorest.fluent.template.ResourceManagerUtilsTemplate;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
+import com.azure.autorest.util.ClassNameUtil;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.List;
@@ -111,11 +112,22 @@ public class FluentJavaPackage extends JavaPackage {
     }
 
     public void addOperationUnitTest(FluentMethodMockUnitTest unitTest) {
-
+        final String packageName = JavaSettings.getInstance().getPackage("generated");
         String className = unitTest.getResourceCollection().getInterfaceType().getName()
-                + CodeNamer.toPascalCase(unitTest.getCollectionMethod().getMethodName())
-                + "MockTests";
-        JavaFile javaFile = getJavaFileFactory().createTestFile(JavaSettings.getInstance().getPackage("generated"), className);
+                + CodeNamer.toPascalCase(unitTest.getCollectionMethod().getMethodName());
+
+        final String classNameSuffix = "MockTests";
+
+        className = ClassNameUtil.truncateClassName(
+                JavaSettings.getInstance().getPackage(),
+                "src/tests/java"
+                        // a hack to count "MockTests" suffix into the length of the full path
+                        + classNameSuffix,
+                packageName, className);
+
+        className += classNameSuffix;
+
+        JavaFile javaFile = getJavaFileFactory().createTestFile(packageName, className);
         FluentMethodMockTestTemplate.ClientMethodInfo info = new FluentMethodMockTestTemplate.ClientMethodInfo(
                 className, unitTest);
         FluentMethodMockTestTemplate.getInstance().write(info, javaFile);

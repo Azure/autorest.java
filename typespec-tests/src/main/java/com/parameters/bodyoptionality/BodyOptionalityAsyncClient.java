@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.parameters.bodyoptionality.implementation.BodyOptionalityClientImpl;
+import com.parameters.bodyoptionality.implementation.models.RequiredImplicitRequest;
 import com.parameters.bodyoptionality.models.BodyModel;
 import reactor.core.publisher.Mono;
 
@@ -72,7 +73,7 @@ public final class BodyOptionalityAsyncClient {
      * }
      * }</pre>
      * 
-     * @param bodyModel The bodyModel parameter.
+     * @param requiredImplicitRequest The requiredImplicitRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -82,8 +83,9 @@ public final class BodyOptionalityAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> requiredImplicitWithResponse(BinaryData bodyModel, RequestOptions requestOptions) {
-        return this.serviceClient.requiredImplicitWithResponseAsync(bodyModel, requestOptions);
+    public Mono<Response<Void>> requiredImplicitWithResponse(BinaryData requiredImplicitRequest,
+        RequestOptions requestOptions) {
+        return this.serviceClient.requiredImplicitWithResponseAsync(requiredImplicitRequest, requestOptions);
     }
 
     /**
@@ -109,7 +111,7 @@ public final class BodyOptionalityAsyncClient {
     /**
      * The requiredImplicit operation.
      * 
-     * @param bodyModel The bodyModel parameter.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -120,9 +122,11 @@ public final class BodyOptionalityAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> requiredImplicit(BodyModel bodyModel) {
+    public Mono<Void> requiredImplicit(String name) {
         // Generated convenience method for requiredImplicitWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return requiredImplicitWithResponse(BinaryData.fromObject(bodyModel), requestOptions).flatMap(FluxUtil::toMono);
+        RequiredImplicitRequest requiredImplicitRequestObj = new RequiredImplicitRequest(name);
+        BinaryData requiredImplicitRequest = BinaryData.fromObject(requiredImplicitRequestObj);
+        return requiredImplicitWithResponse(requiredImplicitRequest, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
