@@ -112,7 +112,7 @@ def update_sdks():
             # update commit id
             with open(tsp_location_file, "r", encoding="utf-8") as fin:
                 tsp_location_yml = yaml.safe_load(fin)
-            tsp_location_yml['commit'] = '3cb1b51638616435470fc10ea00de92512186ece'
+            tsp_location_yml['commit'] = '72de08114673a547de8a017c85ed89a2017a86f7'
 
             updated_yaml_str = yaml.dump(tsp_location_yml, width=sys.maxsize, sort_keys=False, Dumper=ListIndentDumper)
             with open(tsp_location_file, "w", encoding="utf-8") as fout:
