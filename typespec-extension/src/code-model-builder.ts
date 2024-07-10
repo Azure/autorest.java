@@ -1376,7 +1376,7 @@ export class CodeModelBuilder {
     }
 
     if (schema instanceof ObjectSchema && bodyParameterFlatten) {
-      // anonymous model
+      // flatten body parameter
 
       // name the schema for documentation
       schema.language.default.name = pascalCase(op.language.default.name) + "Request";
