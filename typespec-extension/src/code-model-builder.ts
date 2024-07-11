@@ -1123,7 +1123,7 @@ export class CodeModelBuilder {
         },
         language: {
           default: {
-            serializedName: param.name,
+            serializedName: this.getSerializedName(param.param),
           },
         },
         extensions: extensions,
@@ -1409,7 +1409,8 @@ export class CodeModelBuilder {
             // parameter
             if (
               existParameter.implementation === ImplementationLocation.Method &&
-              (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true)
+              (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true) &&
+              !(existParameter.schema instanceof ConstantSchema)
             ) {
               request.parameters.push(cloneOperationParameter(existParameter));
             }

@@ -101,7 +101,12 @@ model TodoItemPatch {
 interface FlattenOp {
   @route("send")
   @post
-  send(@query id: string, ...Request, ...ApiVersionParameter): OkResponse;
+  send(
+    @query id: string,
+    @query constantQueryParam: "constant",
+    ...Request,
+    ...ApiVersionParameter,
+  ): OkResponse;
 
   @route("send-projected-name")
   @post
