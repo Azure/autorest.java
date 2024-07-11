@@ -64,7 +64,7 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sendAsText(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> sendAsText(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("text/plain") BinaryData text,
             RequestOptions requestOptions, Context context);
 
@@ -74,7 +74,7 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendAsTextSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> sendAsTextSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("text/plain") BinaryData text,
             RequestOptions requestOptions, Context context);
 
@@ -102,7 +102,7 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sendAsJson(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> sendAsJson(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData text,
             RequestOptions requestOptions, Context context);
 
@@ -112,7 +112,7 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendAsJsonSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> sendAsJsonSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData text,
             RequestOptions requestOptions, Context context);
 
