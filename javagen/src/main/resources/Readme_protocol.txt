@@ -41,6 +41,21 @@ Various documentation is available to help you get started
 ```java {{package-name}}.readme
 ```
 
+### Service API versions
+
+The client library targets the latest service API version by default.
+The service client builder accepts an optional service API version parameter to specify which API version to communicate.
+
+#### Select a service version
+
+You have the flexibility to explicitly select a supported service API version when initializing a service client via the service client builder.
+This ensures that the client can communicate with services using the specified API version.
+
+When selecting an API version, it is important to verify that there are no breaking changes compared to the latest API version.
+If there are significant differences, API calls may fail due to incompatibility.
+
+Always ensure that the chosen API version is fully supported and operational for your specific use case and that it aligns with the service's versioning policy.
+
 ## Troubleshooting
 
 ## Next steps
