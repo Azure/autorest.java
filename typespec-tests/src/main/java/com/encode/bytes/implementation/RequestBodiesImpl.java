@@ -81,7 +81,7 @@ public final class RequestBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> octetStream(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> octetStream(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/octet-stream") BinaryData value,
             RequestOptions requestOptions, Context context);
 
@@ -91,7 +91,7 @@ public final class RequestBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> octetStreamSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> octetStreamSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("application/octet-stream") BinaryData value,
             RequestOptions requestOptions, Context context);
 
@@ -101,7 +101,7 @@ public final class RequestBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> customContentType(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> customContentType(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("image/png") BinaryData value,
             RequestOptions requestOptions, Context context);
 
@@ -111,7 +111,7 @@ public final class RequestBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> customContentTypeSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> customContentTypeSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("image/png") BinaryData value,
             RequestOptions requestOptions, Context context);
 
