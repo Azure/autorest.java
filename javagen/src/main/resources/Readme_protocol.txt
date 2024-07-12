@@ -46,7 +46,7 @@ Various documentation is available to help you get started
 The client library targets the latest service API version by default.
 The service client builder accepts an optional service API version parameter to specify which API version to communicate.
 
-#### Select a service version
+#### Select a service API version
 
 You have the flexibility to explicitly select a supported service API version when initializing a service client via the service client builder.
 This ensures that the client can communicate with services using the specified API version.
