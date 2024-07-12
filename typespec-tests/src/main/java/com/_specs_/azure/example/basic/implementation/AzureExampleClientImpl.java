@@ -127,7 +127,7 @@ public final class AzureExampleClientImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AzureExampleClient")
     public interface AzureExampleClientService {
-        @Post("/basic")
+        @Post("/azure/example/basic/basic")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -138,7 +138,7 @@ public final class AzureExampleClientImpl {
             @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
-        @Post("/basic")
+        @Post("/azure/example/basic/basic")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
