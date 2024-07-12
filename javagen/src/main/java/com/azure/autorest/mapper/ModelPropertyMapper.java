@@ -90,7 +90,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
         if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
                 // avoid non-object schema or a plain object schema without any properties
-                && property.getSchema() instanceof ObjectSchema && !ObjectMapper.isPlainObject((ObjectSchema) property.getSchema())
+                && property.getSchema() instanceof ObjectSchema && !SchemaUtil.isPlainObject((ObjectSchema) property.getSchema())
                 && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
             // avoid naming conflict
             builder.name("inner" + CodeNamer.toPascalCase(property.getLanguage().getJava().getName()));
