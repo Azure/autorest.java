@@ -130,7 +130,7 @@ public interface ChildExtensionResource {
     /**
      * The template for ChildExtensionResource update.
      */
-    interface Update extends UpdateStages.WithProperties {
+    interface Update {
         /**
          * Executes the update request.
          * 
@@ -151,18 +151,6 @@ public interface ChildExtensionResource {
      * The ChildExtensionResource update stages.
      */
     interface UpdateStages {
-        /**
-         * The stage of the ChildExtensionResource update allowing to specify properties.
-         */
-        interface WithProperties {
-            /**
-             * Specifies the properties property: The resource-specific properties for this resource..
-             * 
-             * @param properties The resource-specific properties for this resource.
-             * @return the next definition stage.
-             */
-            Update withProperties(ChildExtensionResourceProperties properties);
-        }
     }
 
     /**
