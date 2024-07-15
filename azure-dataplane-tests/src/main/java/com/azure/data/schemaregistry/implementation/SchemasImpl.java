@@ -198,10 +198,7 @@ public final class SchemasImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasGetByIdHeaders, Flux<ByteBuffer>>> getByIdWithResponseAsync(String id) {
-        final String accept
-            = "application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8, text/vnd.ms.protobuf";
-        return FluxUtil.withContext(
-            context -> service.getById(this.client.getEndpoint(), id, this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getByIdWithResponseAsync(id, context));
     }
 
     /**
@@ -488,10 +485,8 @@ public final class SchemasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>>>
         getSchemaVersionWithResponseAsync(String groupName, String schemaName, int schemaVersion) {
-        final String accept
-            = "application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8, text/vnd.ms.protobuf";
-        return FluxUtil.withContext(context -> service.getSchemaVersion(this.client.getEndpoint(), groupName,
-            schemaName, schemaVersion, this.client.getApiVersion(), accept, context));
+        return FluxUtil
+            .withContext(context -> getSchemaVersionWithResponseAsync(groupName, schemaName, schemaVersion, context));
     }
 
     /**
@@ -625,9 +620,8 @@ public final class SchemasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
         String schemaName, SchemaFormat contentType, Flux<ByteBuffer> schemaContent, long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.queryIdByContent(this.client.getEndpoint(), groupName,
-            schemaName, this.client.getApiVersion(), contentType, schemaContent, contentLength, accept, context));
+        return FluxUtil.withContext(context -> queryIdByContentWithResponseAsync(groupName, schemaName, contentType,
+            schemaContent, contentLength, context));
     }
 
     /**
@@ -730,9 +724,8 @@ public final class SchemasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
         String schemaName, SchemaFormat contentType, BinaryData schemaContent, long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.queryIdByContent(this.client.getEndpoint(), groupName,
-            schemaName, this.client.getApiVersion(), contentType, schemaContent, contentLength, accept, context));
+        return FluxUtil.withContext(context -> queryIdByContentWithResponseAsync(groupName, schemaName, contentType,
+            schemaContent, contentLength, context));
     }
 
     /**
@@ -882,9 +875,8 @@ public final class SchemasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
         String schemaName, String contentType, Flux<ByteBuffer> schemaContent, long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.register(this.client.getEndpoint(), groupName, schemaName,
-            this.client.getApiVersion(), contentType, schemaContent, contentLength, accept, context));
+        return FluxUtil.withContext(context -> registerWithResponseAsync(groupName, schemaName, contentType,
+            schemaContent, contentLength, context));
     }
 
     /**
@@ -982,9 +974,8 @@ public final class SchemasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
         String schemaName, String contentType, BinaryData schemaContent, long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.register(this.client.getEndpoint(), groupName, schemaName,
-            this.client.getApiVersion(), contentType, schemaContent, contentLength, accept, context));
+        return FluxUtil.withContext(context -> registerWithResponseAsync(groupName, schemaName, contentType,
+            schemaContent, contentLength, context));
     }
 
     /**

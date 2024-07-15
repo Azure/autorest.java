@@ -79,15 +79,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> getByPetIdWithResponseAsync(String petId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (petId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter petId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getByPetId(this.client.getHost(), petId, accept, context));
+        return FluxUtil.withContext(context -> getByPetIdWithResponseAsync(petId, context));
     }
 
     /**
@@ -182,15 +174,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> addPetWithResponseAsync(Pet petParam) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (petParam != null) {
-            petParam.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.addPet(this.client.getHost(), petParam, accept, context));
+        return FluxUtil.withContext(context -> addPetWithResponseAsync(petParam, context));
     }
 
     /**

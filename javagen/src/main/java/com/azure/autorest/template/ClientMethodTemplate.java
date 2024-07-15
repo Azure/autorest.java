@@ -1277,9 +1277,23 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         return builder.append(')').toString();
     }
 
-    protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
+    protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock,
+        ProxyMethod restAPIMethod, JavaSettings settings) {
         addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
+            boolean contextInParameters = contextInParameters(clientMethod);
+            if (!contextInParameters && !requestOptionsInParameters(clientMethod)) {
+                String arguments = clientMethod.getArgumentList();
+                arguments = CoreUtils.isNullOrEmpty(arguments) ? "context" : arguments + ", context";
+
+                // If this RestResponse method doesn't have a Context parameter, call into the overload that does.
+                // Doing this prevents duplicating validation and setup logic, which in some cases can reduce out
+                // hundreds of lines of code.
+                String methodCall = clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName() + "(" + arguments + ")";
+                function.methodReturn("FluxUtil.withContext(context -> " + methodCall +")");
+                return;
+            }
+
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             applyParameterTransformations(function, clientMethod, settings);
@@ -1291,16 +1305,21 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             }
 
             String serviceMethodCall = checkAndReplaceParamNameCollision(clientMethod, restAPIMethod, requestOptionsLocal, settings);
-            if (contextInParameters(clientMethod)) {
+            if (contextInParameters) {
                 function.methodReturn(serviceMethodCall);
             } else {
-                function.methodReturn(String.format("FluxUtil.withContext(context -> %s)", serviceMethodCall));
+                function.methodReturn("FluxUtil.withContext(context -> " + serviceMethodCall + ")");
             }
         });
     }
 
     protected boolean contextInParameters(ClientMethod clientMethod) {
         return clientMethod.getParameters().stream().anyMatch(param -> getContextType().equals(param.getClientType()));
+    }
+
+    protected boolean requestOptionsInParameters(ClientMethod clientMethod) {
+        return clientMethod.getParameters().stream()
+            .anyMatch(param -> ClassType.REQUEST_OPTIONS.equals(param.getClientType()));
     }
 
     protected IType getContextType() {

@@ -120,26 +120,8 @@ public final class PathItems {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getAllWithValuesWithResponseAsync(String pathItemStringPath, String localStringPath,
         String pathItemStringQuery, String localStringQuery) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (pathItemStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
-        }
-        if (this.client.getGlobalStringPath() == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
-        }
-        if (localStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getAllWithValues(this.client.getHost(), pathItemStringPath,
-            pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath,
-            localStringQuery, accept, context));
+        return FluxUtil.withContext(context -> getAllWithValuesWithResponseAsync(pathItemStringPath, localStringPath,
+            pathItemStringQuery, localStringQuery, context));
     }
 
     /**
@@ -323,26 +305,8 @@ public final class PathItems {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalQueryNullWithResponseAsync(String pathItemStringPath, String localStringPath,
         String pathItemStringQuery, String localStringQuery) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (pathItemStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
-        }
-        if (this.client.getGlobalStringPath() == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
-        }
-        if (localStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getGlobalQueryNull(this.client.getHost(), pathItemStringPath,
-            pathItemStringQuery, this.client.getGlobalStringPath(), this.client.getGlobalStringQuery(), localStringPath,
-            localStringQuery, accept, context));
+        return FluxUtil.withContext(context -> getGlobalQueryNullWithResponseAsync(pathItemStringPath, localStringPath,
+            pathItemStringQuery, localStringQuery, context));
     }
 
     /**
@@ -526,26 +490,8 @@ public final class PathItems {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getGlobalAndLocalQueryNullWithResponseAsync(String pathItemStringPath,
         String localStringPath, String pathItemStringQuery, String localStringQuery) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (pathItemStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
-        }
-        if (this.client.getGlobalStringPath() == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
-        }
-        if (localStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getGlobalAndLocalQueryNull(this.client.getHost(),
-            pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(),
-            this.client.getGlobalStringQuery(), localStringPath, localStringQuery, accept, context));
+        return FluxUtil.withContext(context -> getGlobalAndLocalQueryNullWithResponseAsync(pathItemStringPath,
+            localStringPath, pathItemStringQuery, localStringQuery, context));
     }
 
     /**
@@ -729,26 +675,8 @@ public final class PathItems {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLocalPathItemQueryNullWithResponseAsync(String pathItemStringPath,
         String localStringPath, String pathItemStringQuery, String localStringQuery) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (pathItemStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter pathItemStringPath is required and cannot be null."));
-        }
-        if (this.client.getGlobalStringPath() == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter this.client.getGlobalStringPath() is required and cannot be null."));
-        }
-        if (localStringPath == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter localStringPath is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getLocalPathItemQueryNull(this.client.getHost(),
-            pathItemStringPath, pathItemStringQuery, this.client.getGlobalStringPath(),
-            this.client.getGlobalStringQuery(), localStringPath, localStringQuery, accept, context));
+        return FluxUtil.withContext(context -> getLocalPathItemQueryNullWithResponseAsync(pathItemStringPath,
+            localStringPath, pathItemStringQuery, localStringQuery, context));
     }
 
     /**

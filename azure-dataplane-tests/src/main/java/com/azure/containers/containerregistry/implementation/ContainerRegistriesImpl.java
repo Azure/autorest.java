@@ -366,8 +366,7 @@ public final class ContainerRegistriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkDockerV2SupportWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.checkDockerV2Support(this.client.getUrl(), accept, context));
+        return FluxUtil.withContext(context -> checkDockerV2SupportWithResponseAsync(context));
     }
 
     /**
@@ -452,8 +451,7 @@ public final class ContainerRegistriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getManifestWithResponseAsync(String name, String reference, String accept) {
-        return FluxUtil
-            .withContext(context -> service.getManifest(this.client.getUrl(), name, reference, accept, context));
+        return FluxUtil.withContext(context -> getManifestWithResponseAsync(name, reference, accept, context));
     }
 
     /**
@@ -566,9 +564,8 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
         String name, String reference, Flux<ByteBuffer> payload, long contentLength, String contentType) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createManifest(this.client.getUrl(), name, reference,
-            contentType, payload, contentLength, accept, context));
+        return FluxUtil.withContext(
+            context -> createManifestWithResponseAsync(name, reference, payload, contentLength, contentType, context));
     }
 
     /**
@@ -651,9 +648,8 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
         String name, String reference, BinaryData payload, long contentLength, String contentType) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createManifest(this.client.getUrl(), name, reference,
-            contentType, payload, contentLength, accept, context));
+        return FluxUtil.withContext(
+            context -> createManifestWithResponseAsync(name, reference, payload, contentLength, contentType, context));
     }
 
     /**
@@ -771,9 +767,7 @@ public final class ContainerRegistriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteManifestWithResponseAsync(String name, String reference) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.deleteManifest(this.client.getUrl(), name, reference, accept, context));
+        return FluxUtil.withContext(context -> deleteManifestWithResponseAsync(name, reference, context));
     }
 
     /**
@@ -943,9 +937,7 @@ public final class ContainerRegistriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ContainerRepositoryProperties>> getPropertiesWithResponseAsync(String name) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.getProperties(this.client.getUrl(), name, this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getPropertiesWithResponseAsync(name, context));
     }
 
     /**
@@ -1034,9 +1026,7 @@ public final class ContainerRegistriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DeleteRepositoryResult>> deleteRepositoryWithResponseAsync(String name) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.deleteRepository(this.client.getUrl(), name,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> deleteRepositoryWithResponseAsync(name, context));
     }
 
     /**
@@ -1127,9 +1117,7 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ContainerRepositoryProperties>> updatePropertiesWithResponseAsync(String name,
         RepositoryWriteableProperties value) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.updateProperties(this.client.getUrl(), name,
-            this.client.getApiVersion(), value, accept, context));
+        return FluxUtil.withContext(context -> updatePropertiesWithResponseAsync(name, value, context));
     }
 
     /**
@@ -1324,9 +1312,7 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactTagPropertiesInternal>> getTagPropertiesWithResponseAsync(String name,
         String reference) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getTagProperties(this.client.getUrl(), name, reference,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getTagPropertiesWithResponseAsync(name, reference, context));
     }
 
     /**
@@ -1428,9 +1414,7 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactTagPropertiesInternal>> updateTagAttributesWithResponseAsync(String name,
         String reference, TagWriteableProperties value) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.updateTagAttributes(this.client.getUrl(), name, reference,
-            this.client.getApiVersion(), value, accept, context));
+        return FluxUtil.withContext(context -> updateTagAttributesWithResponseAsync(name, reference, value, context));
     }
 
     /**
@@ -1539,9 +1523,7 @@ public final class ContainerRegistriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteTagWithResponseAsync(String name, String reference) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.deleteTag(this.client.getUrl(), name, reference,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> deleteTagWithResponseAsync(name, reference, context));
     }
 
     /**
@@ -1727,9 +1709,7 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactManifestPropertiesInternal>> getManifestPropertiesWithResponseAsync(String name,
         String digest) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getManifestProperties(this.client.getUrl(), name, digest,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getManifestPropertiesWithResponseAsync(name, digest, context));
     }
 
     /**
@@ -1832,9 +1812,7 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactManifestPropertiesInternal>> updateManifestPropertiesWithResponseAsync(String name,
         String digest, ManifestWriteableProperties value) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.updateManifestProperties(this.client.getUrl(), name, digest,
-            this.client.getApiVersion(), value, accept, context));
+        return FluxUtil.withContext(context -> updateManifestPropertiesWithResponseAsync(name, digest, value, context));
     }
 
     /**

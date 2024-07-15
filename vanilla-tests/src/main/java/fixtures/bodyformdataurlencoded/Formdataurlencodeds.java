@@ -90,18 +90,8 @@ public final class Formdataurlencodeds {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> updatePetWithFormWithResponseAsync(int petId, PetType petType, PetFood petFood,
         int petAge, String name, String status) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (petType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter petType is required and cannot be null."));
-        }
-        if (petFood == null) {
-            return Mono.error(new IllegalArgumentException("Parameter petFood is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.updatePetWithForm(this.client.getHost(), petId, petType, petFood,
-            petAge, name, status, context));
+        return FluxUtil.withContext(
+            context -> updatePetWithFormWithResponseAsync(petId, petType, petFood, petAge, name, status, context));
     }
 
     /**
@@ -268,19 +258,8 @@ public final class Formdataurlencodeds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> partialConstantBodyWithResponseAsync(String serviceParam, String accessToken) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (serviceParam == null) {
-            return Mono.error(new IllegalArgumentException("Parameter serviceParam is required and cannot be null."));
-        }
-        if (accessToken == null) {
-            return Mono.error(new IllegalArgumentException("Parameter accessToken is required and cannot be null."));
-        }
-        final String grantType = "access_token";
-        return FluxUtil.withContext(context -> service.partialConstantBody(this.client.getHost(), grantType,
-            serviceParam, accessToken, context));
+        return FluxUtil
+            .withContext(context -> partialConstantBodyWithResponseAsync(serviceParam, accessToken, context));
     }
 
     /**

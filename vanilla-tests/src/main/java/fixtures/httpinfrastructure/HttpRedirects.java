@@ -181,12 +181,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead300Response> head300WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head300(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> head300WithResponseAsync(context));
     }
 
     /**
@@ -268,12 +263,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet300Response> get300WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get300(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> get300WithResponseAsync(context));
     }
 
     /**
@@ -356,12 +346,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead301Response> head301WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head301(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> head301WithResponseAsync(context));
     }
 
     /**
@@ -443,12 +428,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet301Response> get301WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get301(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> get301WithResponseAsync(context));
     }
 
     /**
@@ -531,13 +511,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut301Response> put301WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.put301(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> put301WithResponseAsync(context));
     }
 
     /**
@@ -625,12 +599,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead302Response> head302WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head302(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> head302WithResponseAsync(context));
     }
 
     /**
@@ -712,12 +681,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet302Response> get302WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get302(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> get302WithResponseAsync(context));
     }
 
     /**
@@ -800,13 +764,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch302Response> patch302WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.patch302(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> patch302WithResponseAsync(context));
     }
 
     /**
@@ -895,13 +853,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost303Response> post303WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post303(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> post303WithResponseAsync(context));
     }
 
     /**
@@ -989,12 +941,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsHead307Response> head307WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head307(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> head307WithResponseAsync(context));
     }
 
     /**
@@ -1076,12 +1023,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsGet307Response> get307WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get307(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> get307WithResponseAsync(context));
     }
 
     /**
@@ -1163,12 +1105,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsOptions307Response> options307WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.options307(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> options307WithResponseAsync(context));
     }
 
     /**
@@ -1250,13 +1187,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPut307Response> put307WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.put307(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> put307WithResponseAsync(context));
     }
 
     /**
@@ -1339,13 +1270,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPatch307Response> patch307WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.patch307(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> patch307WithResponseAsync(context));
     }
 
     /**
@@ -1428,13 +1353,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsPost307Response> post307WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post307(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> post307WithResponseAsync(context));
     }
 
     /**
@@ -1517,13 +1436,7 @@ public final class HttpRedirects {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HttpRedirectsDelete307Response> delete307WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.delete307(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> delete307WithResponseAsync(context));
     }
 
     /**

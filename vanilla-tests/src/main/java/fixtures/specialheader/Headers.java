@@ -117,13 +117,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.paramRepeatabilityRequest(this.client.getHost(), accept,
-            CoreUtils.randomUuid().toString(), DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()), context));
+        return FluxUtil.withContext(context -> paramRepeatabilityRequestWithResponseAsync(context));
     }
 
     /**
@@ -207,13 +201,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestPutWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.paramRepeatabilityRequestPut(this.client.getHost(), accept,
-            CoreUtils.randomUuid().toString(), DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()), context));
+        return FluxUtil.withContext(context -> paramRepeatabilityRequestPutWithResponseAsync(context));
     }
 
     /**
@@ -297,13 +285,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestGetWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.paramRepeatabilityRequestGet(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> paramRepeatabilityRequestGetWithResponseAsync(context));
     }
 
     /**
@@ -386,13 +368,7 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestLROWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.paramRepeatabilityRequestLRO(this.client.getHost(), accept,
-            CoreUtils.randomUuid().toString(), DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()), context));
+        return FluxUtil.withContext(context -> paramRepeatabilityRequestLROWithResponseAsync(context));
     }
 
     /**

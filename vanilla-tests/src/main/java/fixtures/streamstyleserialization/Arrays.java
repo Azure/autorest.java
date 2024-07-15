@@ -129,12 +129,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getValidWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getValidWithResponseAsync(context));
     }
 
     /**
@@ -225,18 +220,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putValidWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -348,12 +332,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getEmptyWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getEmptyWithResponseAsync(context));
     }
 
     /**
@@ -444,18 +423,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putEmptyWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -562,12 +530,7 @@ public final class Arrays {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getNotProvidedWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNotProvidedWithResponseAsync(context));
     }
 
     /**

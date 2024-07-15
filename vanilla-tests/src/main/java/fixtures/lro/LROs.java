@@ -375,16 +375,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put200SucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.put200Succeeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put200SucceededWithResponseAsync(product, context));
     }
 
     /**
@@ -532,16 +523,7 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPatch200SucceededIgnoreHeadersResponse>
         patch200SucceededIgnoreHeadersWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.patch200SucceededIgnoreHeaders(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> patch200SucceededIgnoreHeadersWithResponseAsync(product, context));
     }
 
     /**
@@ -686,16 +668,7 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPatch201RetryWithAsyncHeaderResponse>
         patch201RetryWithAsyncHeaderWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.patch201RetryWithAsyncHeader(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> patch201RetryWithAsyncHeaderWithResponseAsync(product, context));
     }
 
     /**
@@ -833,16 +806,8 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse>
         patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.patch202RetryWithAsyncAndLocationHeader(this.client.getHost(),
-            product, accept, context));
+        return FluxUtil
+            .withContext(context -> patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(product, context));
     }
 
     /**
@@ -981,16 +946,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put201SucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.put201Succeeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put201SucceededWithResponseAsync(product, context));
     }
 
     /**
@@ -1129,12 +1085,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPost202ListResponse> post202ListWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post202List(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> post202ListWithResponseAsync(context));
     }
 
     /**
@@ -1233,16 +1184,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put200SucceededNoStateWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.put200SucceededNoState(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put200SucceededNoStateWithResponseAsync(product, context));
     }
 
     /**
@@ -1384,15 +1326,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put202Retry200WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.put202Retry200(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put202Retry200WithResponseAsync(product, context));
     }
 
     /**
@@ -1534,16 +1468,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.put201CreatingSucceeded200(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put201CreatingSucceeded200WithResponseAsync(product, context));
     }
 
     /**
@@ -1693,16 +1618,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put200UpdatingSucceeded204WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.put200UpdatingSucceeded204(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put200UpdatingSucceeded204WithResponseAsync(product, context));
     }
 
     /**
@@ -1852,16 +1768,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put201CreatingFailed200WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.put201CreatingFailed200(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put201CreatingFailed200WithResponseAsync(product, context));
     }
 
     /**
@@ -2011,16 +1918,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put200Acceptedcanceled200WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.put200Acceptedcanceled200(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put200Acceptedcanceled200WithResponseAsync(product, context));
     }
 
     /**
@@ -2169,16 +2067,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putNoHeaderInRetry(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putNoHeaderInRetryWithResponseAsync(product, context));
     }
 
     /**
@@ -2321,16 +2210,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putAsyncRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putAsyncRetrySucceededWithResponseAsync(product, context));
     }
 
     /**
@@ -2481,16 +2361,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putAsyncNoRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putAsyncNoRetrySucceededWithResponseAsync(product, context));
     }
 
     /**
@@ -2641,16 +2512,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putAsyncRetryFailed(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putAsyncRetryFailedWithResponseAsync(product, context));
     }
 
     /**
@@ -2801,16 +2663,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putAsyncNoRetrycanceled(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putAsyncNoRetrycanceledWithResponseAsync(product, context));
     }
 
     /**
@@ -2960,16 +2813,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putAsyncNoHeaderInRetry(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putAsyncNoHeaderInRetryWithResponseAsync(product, context));
     }
 
     /**
@@ -3111,15 +2955,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Sku>> putNonResourceWithResponseAsync(Sku sku) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (sku != null) {
-            sku.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putNonResource(this.client.getHost(), sku, accept, context));
+        return FluxUtil.withContext(context -> putNonResourceWithResponseAsync(sku, context));
     }
 
     /**
@@ -3252,16 +3088,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Sku>> putAsyncNonResourceWithResponseAsync(Sku sku) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (sku != null) {
-            sku.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putAsyncNonResource(this.client.getHost(), sku, accept, context));
+        return FluxUtil.withContext(context -> putAsyncNonResourceWithResponseAsync(sku, context));
     }
 
     /**
@@ -3394,15 +3221,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<SubProduct>> putSubResourceWithResponseAsync(SubProduct product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putSubResource(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putSubResourceWithResponseAsync(product, context));
     }
 
     /**
@@ -3535,16 +3354,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<SubProduct>> putAsyncSubResourceWithResponseAsync(SubProduct product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putAsyncSubResource(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putAsyncSubResourceWithResponseAsync(product, context));
     }
 
     /**
@@ -3679,13 +3489,7 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteProvisioning202Accepted200SucceededResponse>
         deleteProvisioning202Accepted200SucceededWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.deleteProvisioning202Accepted200Succeeded(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteProvisioning202Accepted200SucceededWithResponseAsync(context));
     }
 
     /**
@@ -3792,13 +3596,7 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteProvisioning202DeletingFailed200Response>
         deleteProvisioning202DeletingFailed200WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.deleteProvisioning202DeletingFailed200(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteProvisioning202DeletingFailed200WithResponseAsync(context));
     }
 
     /**
@@ -3905,13 +3703,7 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteProvisioning202Deletingcanceled200Response>
         deleteProvisioning202Deletingcanceled200WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.deleteProvisioning202Deletingcanceled200(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteProvisioning202Deletingcanceled200WithResponseAsync(context));
     }
 
     /**
@@ -4015,12 +3807,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204SucceededWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.delete204Succeeded(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> delete204SucceededWithResponseAsync(context));
     }
 
     /**
@@ -4112,12 +3899,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDelete202Retry200Response> delete202Retry200WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.delete202Retry200(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> delete202Retry200WithResponseAsync(context));
     }
 
     /**
@@ -4214,12 +3996,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDelete202NoRetry204Response> delete202NoRetry204WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.delete202NoRetry204(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> delete202NoRetry204WithResponseAsync(context));
     }
 
     /**
@@ -4316,12 +4093,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.deleteNoHeaderInRetry(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteNoHeaderInRetryWithResponseAsync(context));
     }
 
     /**
@@ -4418,13 +4190,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.deleteAsyncNoHeaderInRetry(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteAsyncNoHeaderInRetryWithResponseAsync(context));
     }
 
     /**
@@ -4521,13 +4287,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.deleteAsyncRetrySucceeded(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteAsyncRetrySucceededWithResponseAsync(context));
     }
 
     /**
@@ -4624,13 +4384,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.deleteAsyncNoRetrySucceeded(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteAsyncNoRetrySucceededWithResponseAsync(context));
     }
 
     /**
@@ -4728,12 +4482,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.deleteAsyncRetryFailed(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteAsyncRetryFailedWithResponseAsync(context));
     }
 
     /**
@@ -4830,13 +4579,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.deleteAsyncRetrycanceled(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteAsyncRetrycanceledWithResponseAsync(context));
     }
 
     /**
@@ -4933,12 +4676,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Sku>> post200WithPayloadWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post200WithPayload(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> post200WithPayloadWithResponseAsync(context));
     }
 
     /**
@@ -5037,16 +4775,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPost202Retry200Response> post202Retry200WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.post202Retry200(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> post202Retry200WithResponseAsync(product, context));
     }
 
     /**
@@ -5187,16 +4916,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPost202NoRetry204Response> post202NoRetry204WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.post202NoRetry204(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> post202NoRetry204WithResponseAsync(product, context));
     }
 
     /**
@@ -5335,13 +5055,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> postDoubleHeadersFinalLocationGetWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.postDoubleHeadersFinalLocationGet(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> postDoubleHeadersFinalLocationGetWithResponseAsync(context));
     }
 
     /**
@@ -5439,13 +5153,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.postDoubleHeadersFinalAzureHeaderGet(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> postDoubleHeadersFinalAzureHeaderGetWithResponseAsync(context));
     }
 
     /**
@@ -5545,13 +5253,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.postDoubleHeadersFinalAzureHeaderGetDefault(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> postDoubleHeadersFinalAzureHeaderGetDefaultWithResponseAsync(context));
     }
 
     /**
@@ -5658,16 +5360,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.postAsyncRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> postAsyncRetrySucceededWithResponseAsync(product, context));
     }
 
     /**
@@ -5818,16 +5511,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.postAsyncNoRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> postAsyncNoRetrySucceededWithResponseAsync(product, context));
     }
 
     /**
@@ -5978,16 +5662,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.postAsyncRetryFailed(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> postAsyncRetryFailedWithResponseAsync(product, context));
     }
 
     /**
@@ -6138,16 +5813,7 @@ public final class LROs {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.postAsyncRetrycanceled(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> postAsyncRetrycanceledWithResponseAsync(product, context));
     }
 
     /**

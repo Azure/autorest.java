@@ -291,9 +291,8 @@ public final class DocumentModelsImpl {
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
         String modelId, String pages, String locale, StringIndexType stringIndexType,
         AnalyzeDocumentRequest analyzeRequest) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.analyzeDocument(this.client.getEndpoint(), modelId, pages,
-            locale, stringIndexType, this.client.getApiVersion(), analyzeRequest, accept, context));
+        return FluxUtil.withContext(context -> analyzeDocumentWithResponseAsync(modelId, pages, locale, stringIndexType,
+            analyzeRequest, context));
     }
 
     /**
@@ -468,10 +467,8 @@ public final class DocumentModelsImpl {
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
         String modelId, ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
         Flux<ByteBuffer> analyzeRequest, Long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.analyzeDocument(this.client.getEndpoint(), modelId, pages, locale, stringIndexType,
-                this.client.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context));
+        return FluxUtil.withContext(context -> analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale,
+            stringIndexType, analyzeRequest, contentLength, context));
     }
 
     /**
@@ -579,10 +576,8 @@ public final class DocumentModelsImpl {
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
         String modelId, ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
         BinaryData analyzeRequest, Long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.analyzeDocument(this.client.getEndpoint(), modelId, pages, locale, stringIndexType,
-                this.client.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context));
+        return FluxUtil.withContext(context -> analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale,
+            stringIndexType, analyzeRequest, contentLength, context));
     }
 
     /**
@@ -765,9 +760,7 @@ public final class DocumentModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<AnalyzeResultOperation>> getAnalyzeResultWithResponseAsync(String modelId, String resultId) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getAnalyzeResult(this.client.getEndpoint(), modelId, resultId,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getAnalyzeResultWithResponseAsync(modelId, resultId, context));
     }
 
     /**
@@ -867,9 +860,7 @@ public final class DocumentModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsBuildModelHeaders, Void>>
         buildModelWithResponseAsync(BuildDocumentModelRequest buildRequest) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.buildModel(this.client.getEndpoint(),
-            this.client.getApiVersion(), buildRequest, accept, context));
+        return FluxUtil.withContext(context -> buildModelWithResponseAsync(buildRequest, context));
     }
 
     /**
@@ -996,9 +987,7 @@ public final class DocumentModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsComposeModelHeaders, Void>>
         composeModelWithResponseAsync(ComposeDocumentModelRequest composeRequest) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.composeModel(this.client.getEndpoint(),
-            this.client.getApiVersion(), composeRequest, accept, context));
+        return FluxUtil.withContext(context -> composeModelWithResponseAsync(composeRequest, context));
     }
 
     /**
@@ -1130,9 +1119,7 @@ public final class DocumentModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CopyAuthorization>>
         authorizeModelCopyWithResponseAsync(AuthorizeCopyRequest authorizeCopyRequest) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.authorizeModelCopy(this.client.getEndpoint(),
-            this.client.getApiVersion(), authorizeCopyRequest, accept, context));
+        return FluxUtil.withContext(context -> authorizeModelCopyWithResponseAsync(authorizeCopyRequest, context));
     }
 
     /**
@@ -1238,9 +1225,7 @@ public final class DocumentModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsCopyModelToHeaders, Void>> copyModelToWithResponseAsync(String modelId,
         CopyAuthorization copyToRequest) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.copyModelTo(this.client.getEndpoint(), modelId,
-            this.client.getApiVersion(), copyToRequest, accept, context));
+        return FluxUtil.withContext(context -> copyModelToWithResponseAsync(modelId, copyToRequest, context));
     }
 
     /**
@@ -1500,9 +1485,7 @@ public final class DocumentModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DocumentModelDetails>> getModelWithResponseAsync(String modelId) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getModel(this.client.getEndpoint(), modelId,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getModelWithResponseAsync(modelId, context));
     }
 
     /**
@@ -1591,9 +1574,7 @@ public final class DocumentModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteModelWithResponseAsync(String modelId) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.deleteModel(this.client.getEndpoint(), modelId,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> deleteModelWithResponseAsync(modelId, context));
     }
 
     /**

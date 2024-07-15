@@ -44,23 +44,23 @@ public class ClientMethod {
     /**
      * The description of this ClientMethod.
      */
-    private String description;
+    private final String description;
     /**
      * The return value of this ClientMethod.
      */
-    private ReturnValue returnValue;
+    private final ReturnValue returnValue;
     /**
      * The name of this ClientMethod.
      */
-    private String name;
+    private final String name;
     /**
      * The parameters of this ClientMethod.
      */
-    private List<ClientMethodParameter> parameters;
+    private final List<ClientMethodParameter> parameters;
     /**
      * Whether or not this ClientMethod has omitted optional parameters.
      */
-    private boolean onlyRequiredParameters;
+    private final boolean onlyRequiredParameters;
     /**
      * The type of this ClientMethod.
      */
@@ -68,45 +68,45 @@ public class ClientMethod {
     /**
      * The RestAPIMethod that this ClientMethod eventually calls.
      */
-    private ProxyMethod proxyMethod;
+    private final ProxyMethod proxyMethod;
     /**
      * The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
      */
-    private Map<String, String> validateExpressions;
+    private final Map<String, String> validateExpressions;
     /**
      * The reference to the service client.
      */
-    private String clientReference;
+    private final String clientReference;
     /**
      * The parameter expressions which are required.
      */
-    private List<String> requiredNullableParameterExpressions;
+    private final List<String> requiredNullableParameterExpressions;
     /**
      * The parameter that needs to transformed before pagination.
      */
-    private boolean isGroupedParameterRequired;
+    private final boolean isGroupedParameterRequired;
     /**
      * The type name of groupedParameter.
      */
-    private String groupedParameterTypeName;
+    private final String groupedParameterTypeName;
     /**
      * The pagination information if this is a paged method.
      */
-    private MethodPageDetails methodPageDetails;
+    private final MethodPageDetails methodPageDetails;
     /**
      * The parameter transformations before calling ProxyMethod.
      */
-    private List<MethodTransformationDetail> methodTransformationDetails;
+    private final List<MethodTransformationDetail> methodTransformationDetails;
 
-    private JavaVisibility methodVisibility;
+    private final JavaVisibility methodVisibility;
 
-    private JavaVisibility methodVisibilityInWrapperClient;
+    private final JavaVisibility methodVisibilityInWrapperClient;
 
     private final ImplementationDetails implementationDetails;
 
-    private MethodPollingDetails methodPollingDetails;
+    private final MethodPollingDetails methodPollingDetails;
 
-    private ExternalDocumentation externalDocumentation;
+    private final ExternalDocumentation externalDocumentation;
 
     /**
      * Create a new ClientMethod with the provided properties.

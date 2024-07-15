@@ -261,8 +261,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetBlobHeaders, BinaryData>> getBlobWithResponseAsync(String name,
         String digest) {
-        final String accept = "application/octet-stream";
-        return FluxUtil.withContext(context -> service.getBlob(this.client.getUrl(), name, digest, accept, context));
+        return FluxUtil.withContext(context -> getBlobWithResponseAsync(name, digest, context));
     }
 
     /**
@@ -360,9 +359,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCheckBlobExistsHeaders, Void>>
         checkBlobExistsWithResponseAsync(String name, String digest) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.checkBlobExists(this.client.getUrl(), name, digest, accept, context));
+        return FluxUtil.withContext(context -> checkBlobExistsWithResponseAsync(name, digest, context));
     }
 
     /**
@@ -459,7 +456,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsDeleteBlobHeaders, Void>> deleteBlobWithResponseAsync(String name,
         String digest) {
-        return FluxUtil.withContext(context -> service.deleteBlob(this.client.getUrl(), name, digest, context));
+        return FluxUtil.withContext(context -> deleteBlobWithResponseAsync(name, digest, context));
     }
 
     /**
@@ -555,9 +552,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsMountBlobHeaders, Void>> mountBlobWithResponseAsync(String name,
         String from, String mount) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.mountBlob(this.client.getUrl(), name, from, mount, accept, context));
+        return FluxUtil.withContext(context -> mountBlobWithResponseAsync(name, from, mount, context));
     }
 
     /**
@@ -660,9 +655,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetUploadStatusHeaders, Void>>
         getUploadStatusWithResponseAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getUploadStatus(this.client.getUrl(), nextLink, accept, context));
+        return FluxUtil.withContext(context -> getUploadStatusWithResponseAsync(nextLink, context));
     }
 
     /**
@@ -766,9 +759,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>>
         uploadChunkWithResponseAsync(String nextLink, Flux<ByteBuffer> value, long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.uploadChunk(this.client.getUrl(), nextLink, value, contentLength, accept, context));
+        return FluxUtil.withContext(context -> uploadChunkWithResponseAsync(nextLink, value, contentLength, context));
     }
 
     /**
@@ -841,9 +832,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>>
         uploadChunkWithResponseAsync(String nextLink, BinaryData value, long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.uploadChunk(this.client.getUrl(), nextLink, value, contentLength, accept, context));
+        return FluxUtil.withContext(context -> uploadChunkWithResponseAsync(nextLink, value, contentLength, context));
     }
 
     /**
@@ -954,9 +943,8 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>>
         completeUploadWithResponseAsync(String digest, String nextLink, Flux<ByteBuffer> value, Long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.completeUpload(this.client.getUrl(), digest, nextLink, value,
-            contentLength, accept, context));
+        return FluxUtil
+            .withContext(context -> completeUploadWithResponseAsync(digest, nextLink, value, contentLength, context));
     }
 
     /**
@@ -1039,9 +1027,8 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>>
         completeUploadWithResponseAsync(String digest, String nextLink, BinaryData value, Long contentLength) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.completeUpload(this.client.getUrl(), digest, nextLink, value,
-            contentLength, accept, context));
+        return FluxUtil
+            .withContext(context -> completeUploadWithResponseAsync(digest, nextLink, value, contentLength, context));
     }
 
     /**
@@ -1161,8 +1148,7 @@ public final class ContainerRegistryBlobsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> cancelUploadWithResponseAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.cancelUpload(this.client.getUrl(), nextLink, accept, context));
+        return FluxUtil.withContext(context -> cancelUploadWithResponseAsync(nextLink, context));
     }
 
     /**
@@ -1261,8 +1247,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsStartUploadHeaders, Void>>
         startUploadWithResponseAsync(String name) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.startUpload(this.client.getUrl(), name, accept, context));
+        return FluxUtil.withContext(context -> startUploadWithResponseAsync(name, context));
     }
 
     /**
@@ -1357,9 +1342,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetChunkHeaders, BinaryData>> getChunkWithResponseAsync(String name,
         String digest, String range) {
-        final String accept = "application/octet-stream";
-        return FluxUtil
-            .withContext(context -> service.getChunk(this.client.getUrl(), name, digest, range, accept, context));
+        return FluxUtil.withContext(context -> getChunkWithResponseAsync(name, digest, range, context));
     }
 
     /**
@@ -1473,9 +1456,7 @@ public final class ContainerRegistryBlobsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCheckChunkExistsHeaders, Void>>
         checkChunkExistsWithResponseAsync(String name, String digest, String range) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.checkChunkExists(this.client.getUrl(), name, digest, range, accept, context));
+        return FluxUtil.withContext(context -> checkChunkExistsWithResponseAsync(name, digest, range, context));
     }
 
     /**

@@ -127,16 +127,7 @@ public final class LRORetrys {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put201CreatingSucceeded200WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.put201CreatingSucceeded200(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> put201CreatingSucceeded200WithResponseAsync(product, context));
     }
 
     /**
@@ -287,16 +278,7 @@ public final class LRORetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LRORetrysPutAsyncRelativeRetrySucceededResponse>
         putAsyncRelativeRetrySucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putAsyncRelativeRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> putAsyncRelativeRetrySucceededWithResponseAsync(product, context));
     }
 
     /**
@@ -448,13 +430,7 @@ public final class LRORetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LRORetrysDeleteProvisioning202Accepted200SucceededResponse>
         deleteProvisioning202Accepted200SucceededWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.deleteProvisioning202Accepted200Succeeded(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteProvisioning202Accepted200SucceededWithResponseAsync(context));
     }
 
     /**
@@ -559,12 +535,7 @@ public final class LRORetrys {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LRORetrysDelete202Retry200Response> delete202Retry200WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.delete202Retry200(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> delete202Retry200WithResponseAsync(context));
     }
 
     /**
@@ -662,13 +633,7 @@ public final class LRORetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LRORetrysDeleteAsyncRelativeRetrySucceededResponse>
         deleteAsyncRelativeRetrySucceededWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.deleteAsyncRelativeRetrySucceeded(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> deleteAsyncRelativeRetrySucceededWithResponseAsync(context));
     }
 
     /**
@@ -769,16 +734,7 @@ public final class LRORetrys {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LRORetrysPost202Retry200Response> post202Retry200WithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.post202Retry200(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> post202Retry200WithResponseAsync(product, context));
     }
 
     /**
@@ -921,16 +877,7 @@ public final class LRORetrys {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<LRORetrysPostAsyncRelativeRetrySucceededResponse>
         postAsyncRelativeRetrySucceededWithResponseAsync(Product product) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (product != null) {
-            product.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.postAsyncRelativeRetrySucceeded(this.client.getHost(), product, accept, context));
+        return FluxUtil.withContext(context -> postAsyncRelativeRetrySucceededWithResponseAsync(product, context));
     }
 
     /**

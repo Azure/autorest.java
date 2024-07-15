@@ -197,7 +197,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean addContextParameter = !contextInParameters(clientMethod);
-        boolean mergeContextParameter = contextInParameters(clientMethod);
+        boolean mergeContextParameter = !addContextParameter;
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {

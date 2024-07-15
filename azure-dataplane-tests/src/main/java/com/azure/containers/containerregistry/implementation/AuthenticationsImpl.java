@@ -114,9 +114,8 @@ public final class AuthenticationsImpl {
     public Mono<Response<AcrRefreshToken>> exchangeAadAccessTokenForAcrRefreshTokenWithResponseAsync(
         PostContentSchemaGrantType grantType, String serviceParam, String tenant, String refreshToken,
         String accessToken) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.exchangeAadAccessTokenForAcrRefreshToken(this.client.getUrl(),
-            this.client.getApiVersion(), grantType, serviceParam, tenant, refreshToken, accessToken, accept, context));
+        return FluxUtil.withContext(context -> exchangeAadAccessTokenForAcrRefreshTokenWithResponseAsync(grantType,
+            serviceParam, tenant, refreshToken, accessToken, context));
     }
 
     /**
@@ -242,9 +241,8 @@ public final class AuthenticationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<AcrAccessToken>> exchangeAcrRefreshTokenForAcrAccessTokenWithResponseAsync(String serviceParam,
         String scope, String refreshToken, TokenGrantType grantType) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.exchangeAcrRefreshTokenForAcrAccessToken(this.client.getUrl(),
-            this.client.getApiVersion(), serviceParam, scope, refreshToken, grantType, accept, context));
+        return FluxUtil.withContext(context -> exchangeAcrRefreshTokenForAcrAccessTokenWithResponseAsync(serviceParam,
+            scope, refreshToken, grantType, context));
     }
 
     /**

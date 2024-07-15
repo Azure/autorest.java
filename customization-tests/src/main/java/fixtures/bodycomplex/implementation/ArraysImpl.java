@@ -96,8 +96,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getValidWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getValidWithResponseAsync(context));
     }
 
     /**
@@ -179,8 +178,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(ArrayWrapper complexBody) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putValidWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -271,8 +269,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getEmptyWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getEmptyWithResponseAsync(context));
     }
 
     /**
@@ -354,8 +351,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(ArrayWrapper complexBody) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putEmpty(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putEmptyWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -441,8 +437,7 @@ public final class ArraysImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getNotProvidedWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNotProvidedWithResponseAsync(context));
     }
 
     /**
