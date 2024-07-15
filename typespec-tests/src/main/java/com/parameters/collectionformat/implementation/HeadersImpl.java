@@ -63,8 +63,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> csv(@HeaderParam("colors") String colors, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> csv(@HeaderParam("colors") String colors, RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/header/csv")
         @ExpectedResponses({ 204 })
@@ -72,8 +71,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> csvSync(@HeaderParam("colors") String colors, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> csvSync(@HeaderParam("colors") String colors, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -89,11 +87,10 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> csvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
-        return FluxUtil.withContext(context -> service.csv(colorsConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.csv(colorsConverted, requestOptions, context));
     }
 
     /**
@@ -109,10 +106,9 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> csvWithResponse(List<String> colors, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
-        return service.csvSync(colorsConverted, accept, requestOptions, Context.NONE);
+        return service.csvSync(colorsConverted, requestOptions, Context.NONE);
     }
 }

@@ -6,7 +6,6 @@ package com.server.endpoint.notdefined.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Head;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
@@ -40,12 +39,12 @@ public final class NotDefinedClientImpl {
     private final NotDefinedClientService service;
 
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -84,7 +83,7 @@ public final class NotDefinedClientImpl {
     /**
      * Initializes an instance of NotDefinedClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public NotDefinedClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -95,7 +94,7 @@ public final class NotDefinedClientImpl {
      * Initializes an instance of NotDefinedClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public NotDefinedClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -106,7 +105,7 @@ public final class NotDefinedClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public NotDefinedClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
@@ -128,8 +127,8 @@ public final class NotDefinedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> valid(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> valid(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Head("/server/endpoint/not-defined/valid")
         @ExpectedResponses({ 200 })
@@ -137,8 +136,8 @@ public final class NotDefinedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> validSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -153,8 +152,7 @@ public final class NotDefinedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.valid(this.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.valid(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -169,7 +167,6 @@ public final class NotDefinedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.validSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
+        return service.validSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 }

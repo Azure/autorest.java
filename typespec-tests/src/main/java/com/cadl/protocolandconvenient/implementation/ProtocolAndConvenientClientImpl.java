@@ -17,12 +17,12 @@ import com.cadl.protocolandconvenient.ProtocolAndConvenientServiceVersion;
  */
 public final class ProtocolAndConvenientClientImpl {
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -89,7 +89,7 @@ public final class ProtocolAndConvenientClientImpl {
     /**
      * Initializes an instance of ProtocolAndConvenientClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public ProtocolAndConvenientClientImpl(String endpoint, ProtocolAndConvenientServiceVersion serviceVersion) {
@@ -101,7 +101,7 @@ public final class ProtocolAndConvenientClientImpl {
      * Initializes an instance of ProtocolAndConvenientClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public ProtocolAndConvenientClientImpl(HttpPipeline httpPipeline, String endpoint,
@@ -114,7 +114,7 @@ public final class ProtocolAndConvenientClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public ProtocolAndConvenientClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,

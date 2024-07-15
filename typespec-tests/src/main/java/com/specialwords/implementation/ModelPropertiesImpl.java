@@ -63,7 +63,7 @@ public final class ModelPropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sameAsModel(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> sameAsModel(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/special-words/model-properties/same-as-model")
@@ -72,7 +72,7 @@ public final class ModelPropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sameAsModelSync(@HeaderParam("accept") String accept,
+        Response<Void> sameAsModelSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
@@ -96,8 +96,8 @@ public final class ModelPropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sameAsModelWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.sameAsModel(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.sameAsModel(contentType, body, requestOptions, context));
     }
 
     /**
@@ -120,7 +120,7 @@ public final class ModelPropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sameAsModelWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sameAsModelSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.sameAsModelSync(contentType, body, requestOptions, Context.NONE);
     }
 }

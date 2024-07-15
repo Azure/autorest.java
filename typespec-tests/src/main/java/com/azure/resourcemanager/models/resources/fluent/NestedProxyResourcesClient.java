@@ -28,7 +28,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a NestedProxyResource along with {@link Response}.
+     * @return nested child of Top Level Tracked Resource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<NestedProxyResourceInner> getWithResponse(String resourceGroupName, String topLevelTrackedResourceName,
@@ -43,7 +43,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a NestedProxyResource.
+     * @return nested child of Top Level Tracked Resource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     NestedProxyResourceInner get(String resourceGroupName, String topLevelTrackedResourceName,

@@ -64,7 +64,7 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> get(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/union/mixed-literals")
@@ -73,7 +73,7 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/type/union/mixed-literals")
@@ -82,7 +82,7 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> send(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> send(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData sendRequest1, RequestOptions requestOptions, Context context);
 
         @Post("/type/union/mixed-literals")
@@ -91,7 +91,7 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("accept") String accept,
+        Response<Void> sendSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData sendRequest1, RequestOptions requestOptions, Context context);
     }
 
@@ -176,8 +176,8 @@ public final class MixedLiteralsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(BinaryData sendRequest1, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.send(accept, sendRequest1, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.send(contentType, sendRequest1, requestOptions, context));
     }
 
     /**
@@ -205,7 +205,7 @@ public final class MixedLiteralsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(BinaryData sendRequest1, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sendSync(accept, sendRequest1, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.sendSync(contentType, sendRequest1, requestOptions, Context.NONE);
     }
 }

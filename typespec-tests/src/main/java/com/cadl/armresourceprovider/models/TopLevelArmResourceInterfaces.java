@@ -21,7 +21,8 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelArmResource along with {@link Response}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
+     * with {@link Response}.
      */
     Response<TopLevelArmResource> getByResourceGroupWithResponse(String resourceGroupName,
         String topLevelArmResourceName, Context context);
@@ -34,7 +35,7 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelArmResource.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
      */
     TopLevelArmResource getByResourceGroup(String resourceGroupName, String topLevelArmResourceName);
 
@@ -136,7 +137,8 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelArmResource along with {@link Response}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
+     * with {@link Response}.
      */
     TopLevelArmResource getById(String id);
 
@@ -148,7 +150,8 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a TopLevelArmResource along with {@link Response}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
+     * with {@link Response}.
      */
     Response<TopLevelArmResource> getByIdWithResponse(String id, Context context);
 

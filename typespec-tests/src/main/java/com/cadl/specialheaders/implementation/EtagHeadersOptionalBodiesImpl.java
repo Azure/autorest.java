@@ -76,8 +76,8 @@ public final class EtagHeadersOptionalBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putWithOptionalBody(@HostParam("endpoint") String endpoint,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+            @QueryParam("format") String format, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/etag-headers-optional-body")
         @ExpectedResponses({ 200 })
@@ -86,8 +86,8 @@ public final class EtagHeadersOptionalBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> putWithOptionalBodySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+            @QueryParam("format") String format, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -103,8 +103,6 @@ public final class EtagHeadersOptionalBodiesImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
-     * "application/json".</td></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
      * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
@@ -149,6 +147,7 @@ public final class EtagHeadersOptionalBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putWithOptionalBodyWithResponseAsync(String format,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -156,8 +155,8 @@ public final class EtagHeadersOptionalBodiesImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return FluxUtil.withContext(context -> service.putWithOptionalBody(this.client.getEndpoint(), format, accept,
-            requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.putWithOptionalBody(this.client.getEndpoint(), format,
+            contentType, accept, requestOptionsLocal, context));
     }
 
     /**
@@ -173,8 +172,6 @@ public final class EtagHeadersOptionalBodiesImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
-     * "application/json".</td></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
      * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
@@ -218,6 +215,7 @@ public final class EtagHeadersOptionalBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithOptionalBodyWithResponse(String format, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -225,7 +223,7 @@ public final class EtagHeadersOptionalBodiesImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return service.putWithOptionalBodySync(this.client.getEndpoint(), format, accept, requestOptionsLocal,
-            Context.NONE);
+        return service.putWithOptionalBodySync(this.client.getEndpoint(), format, contentType, accept,
+            requestOptionsLocal, Context.NONE);
     }
 }

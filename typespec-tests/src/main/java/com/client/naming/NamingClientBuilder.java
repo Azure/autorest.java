@@ -42,10 +42,10 @@ import java.util.Objects;
 @ServiceClientBuilder(
     serviceClients = {
         NamingClient.class,
-        ClientModelClient.class,
+        ModelClient.class,
         UnionEnumClient.class,
         NamingAsyncClient.class,
-        ClientModelAsyncClient.class,
+        ModelAsyncClient.class,
         UnionEnumAsyncClient.class })
 public final class NamingClientBuilder
     implements HttpTrait<NamingClientBuilder>, ConfigurationTrait<NamingClientBuilder> {
@@ -262,13 +262,13 @@ public final class NamingClientBuilder
     }
 
     /**
-     * Builds an instance of ClientModelAsyncClient class.
+     * Builds an instance of ModelAsyncClient class.
      * 
-     * @return an instance of ClientModelAsyncClient.
+     * @return an instance of ModelAsyncClient.
      */
     @Generated
-    public ClientModelAsyncClient buildClientModelAsyncClient() {
-        return new ClientModelAsyncClient(buildInnerClient().getClientModels());
+    public ModelAsyncClient buildModelAsyncClient() {
+        return new ModelAsyncClient(buildInnerClient().getModels());
     }
 
     /**
@@ -292,13 +292,13 @@ public final class NamingClientBuilder
     }
 
     /**
-     * Builds an instance of ClientModelClient class.
+     * Builds an instance of ModelClient class.
      * 
-     * @return an instance of ClientModelClient.
+     * @return an instance of ModelClient.
      */
     @Generated
-    public ClientModelClient buildClientModelClient() {
-        return new ClientModelClient(buildInnerClient().getClientModels());
+    public ModelClient buildModelClient() {
+        return new ModelClient(buildInnerClient().getModels());
     }
 
     /**

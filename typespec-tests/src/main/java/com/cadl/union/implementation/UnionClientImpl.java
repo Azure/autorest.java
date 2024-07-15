@@ -17,11 +17,12 @@ import com.cadl.union.UnionServiceVersion;
  */
 public final class UnionClientImpl {
     /**
+     * Union.
      */
     private final String endpoint;
 
     /**
-     * Gets.
+     * Gets Union.
      * 
      * @return the endpoint value.
      */
@@ -88,7 +89,7 @@ public final class UnionClientImpl {
     /**
      * Initializes an instance of UnionClient client.
      * 
-     * @param endpoint
+     * @param endpoint Union.
      * @param serviceVersion Service version.
      */
     public UnionClientImpl(String endpoint, UnionServiceVersion serviceVersion) {
@@ -100,7 +101,7 @@ public final class UnionClientImpl {
      * Initializes an instance of UnionClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint
+     * @param endpoint Union.
      * @param serviceVersion Service version.
      */
     public UnionClientImpl(HttpPipeline httpPipeline, String endpoint, UnionServiceVersion serviceVersion) {
@@ -112,7 +113,7 @@ public final class UnionClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint
+     * @param endpoint Union.
      * @param serviceVersion Service version.
      */
     public UnionClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,

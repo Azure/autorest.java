@@ -63,7 +63,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> spreadAsRequestBody(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData spreadAsRequestBodyRequest1, RequestOptions requestOptions,
             Context context);
 
@@ -73,7 +73,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> spreadAsRequestBodySync(@HeaderParam("accept") String accept,
+        Response<Void> spreadAsRequestBodySync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData spreadAsRequestBodyRequest1, RequestOptions requestOptions,
             Context context);
 
@@ -83,7 +83,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> spreadCompositeRequestOnlyWithBody(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> spreadCompositeRequestOnlyWithBody(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/composite-request-only-with-body")
@@ -92,7 +92,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> spreadCompositeRequestOnlyWithBodySync(@HeaderParam("accept") String accept,
+        Response<Void> spreadCompositeRequestOnlyWithBodySync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/composite-request-without-body/{name}")
@@ -102,8 +102,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> spreadCompositeRequestWithoutBody(@PathParam("name") String name,
-            @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("test-header") String testHeader, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/composite-request-without-body/{name}")
         @ExpectedResponses({ 204 })
@@ -112,8 +111,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> spreadCompositeRequestWithoutBodySync(@PathParam("name") String name,
-            @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("test-header") String testHeader, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/composite-request/{name}")
         @ExpectedResponses({ 204 })
@@ -122,7 +120,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> spreadCompositeRequest(@PathParam("name") String name,
-            @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
+            @HeaderParam("test-header") String testHeader, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/composite-request/{name}")
@@ -132,7 +130,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> spreadCompositeRequestSync(@PathParam("name") String name,
-            @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
+            @HeaderParam("test-header") String testHeader, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/spread/model/composite-request-mix/{name}")
@@ -142,7 +140,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> spreadCompositeRequestMix(@PathParam("name") String name,
-            @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
+            @HeaderParam("test-header") String testHeader, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions,
             Context context);
 
@@ -153,7 +151,7 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> spreadCompositeRequestMixSync(@PathParam("name") String name,
-            @HeaderParam("test-header") String testHeader, @HeaderParam("accept") String accept,
+            @HeaderParam("test-header") String testHeader, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions,
             Context context);
     }
@@ -179,9 +177,9 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadAsRequestBodyWithResponseAsync(BinaryData spreadAsRequestBodyRequest1,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
+        final String contentType = "application/json";
         return FluxUtil.withContext(
-            context -> service.spreadAsRequestBody(accept, spreadAsRequestBodyRequest1, requestOptions, context));
+            context -> service.spreadAsRequestBody(contentType, spreadAsRequestBodyRequest1, requestOptions, context));
     }
 
     /**
@@ -205,8 +203,8 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> spreadAsRequestBodyWithResponse(BinaryData spreadAsRequestBodyRequest1,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.spreadAsRequestBodySync(accept, spreadAsRequestBodyRequest1, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.spreadAsRequestBodySync(contentType, spreadAsRequestBodyRequest1, requestOptions, Context.NONE);
     }
 
     /**
@@ -230,9 +228,9 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadCompositeRequestOnlyWithBodyWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.spreadCompositeRequestOnlyWithBody(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.spreadCompositeRequestOnlyWithBody(contentType, body, requestOptions, context));
     }
 
     /**
@@ -256,8 +254,8 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData body,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.spreadCompositeRequestOnlyWithBodySync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.spreadCompositeRequestOnlyWithBodySync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -275,9 +273,8 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadCompositeRequestWithoutBodyWithResponseAsync(String name, String testHeader,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(
-            context -> service.spreadCompositeRequestWithoutBody(name, testHeader, accept, requestOptions, context));
+            context -> service.spreadCompositeRequestWithoutBody(name, testHeader, requestOptions, context));
     }
 
     /**
@@ -295,8 +292,7 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> spreadCompositeRequestWithoutBodyWithResponse(String name, String testHeader,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.spreadCompositeRequestWithoutBodySync(name, testHeader, accept, requestOptions, Context.NONE);
+        return service.spreadCompositeRequestWithoutBodySync(name, testHeader, requestOptions, Context.NONE);
     }
 
     /**
@@ -322,9 +318,9 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadCompositeRequestWithResponseAsync(String name, String testHeader, BinaryData body,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
+        final String contentType = "application/json";
         return FluxUtil.withContext(
-            context -> service.spreadCompositeRequest(name, testHeader, accept, body, requestOptions, context));
+            context -> service.spreadCompositeRequest(name, testHeader, contentType, body, requestOptions, context));
     }
 
     /**
@@ -350,8 +346,8 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> spreadCompositeRequestWithResponse(String name, String testHeader, BinaryData body,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.spreadCompositeRequestSync(name, testHeader, accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.spreadCompositeRequestSync(name, testHeader, contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -377,8 +373,8 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> spreadCompositeRequestMixWithResponseAsync(String name, String testHeader,
         BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.spreadCompositeRequestMix(name, testHeader, accept,
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.spreadCompositeRequestMix(name, testHeader, contentType,
             spreadCompositeRequestMixRequest, requestOptions, context));
     }
 
@@ -405,8 +401,8 @@ public final class ModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> spreadCompositeRequestMixWithResponse(String name, String testHeader,
         BinaryData spreadCompositeRequestMixRequest, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.spreadCompositeRequestMixSync(name, testHeader, accept, spreadCompositeRequestMixRequest,
+        final String contentType = "application/json";
+        return service.spreadCompositeRequestMixSync(name, testHeader, contentType, spreadCompositeRequestMixRequest,
             requestOptions, Context.NONE);
     }
 }

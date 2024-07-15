@@ -112,7 +112,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getExtensibleModel(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> getExtensibleModel(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum")
@@ -121,7 +121,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getExtensibleModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getExtensibleModelSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/extensible-enum")
@@ -130,7 +130,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putExtensibleModel(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> putExtensibleModel(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/extensible-enum")
@@ -139,7 +139,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putExtensibleModelSync(@HeaderParam("accept") String accept,
+        Response<Void> putExtensibleModelSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/missingdiscriminator")
@@ -148,7 +148,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getExtensibleModelMissingDiscriminator(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> getExtensibleModelMissingDiscriminator(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/missingdiscriminator")
@@ -157,7 +157,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getExtensibleModelMissingDiscriminatorSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> getExtensibleModelMissingDiscriminatorSync(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/wrongdiscriminator")
@@ -166,7 +166,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getExtensibleModelWrongDiscriminator(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> getExtensibleModelWrongDiscriminator(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/extensible-enum/wrongdiscriminator")
@@ -175,7 +175,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getExtensibleModelWrongDiscriminatorSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> getExtensibleModelWrongDiscriminatorSync(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum")
@@ -184,7 +184,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getFixedModel(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> getFixedModel(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum")
@@ -193,7 +193,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getFixedModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getFixedModelSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/fixed-enum")
@@ -202,7 +202,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putFixedModel(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> putFixedModel(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/enum-discriminator/fixed-enum")
@@ -211,7 +211,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putFixedModelSync(@HeaderParam("accept") String accept,
+        Response<Void> putFixedModelSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/missingdiscriminator")
@@ -220,7 +220,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getFixedModelMissingDiscriminator(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> getFixedModelMissingDiscriminator(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/missingdiscriminator")
@@ -229,7 +229,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getFixedModelMissingDiscriminatorSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> getFixedModelMissingDiscriminatorSync(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/wrongdiscriminator")
@@ -238,7 +238,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getFixedModelWrongDiscriminator(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> getFixedModelWrongDiscriminator(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/enum-discriminator/fixed-enum/wrongdiscriminator")
@@ -247,7 +247,7 @@ public final class EnumDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getFixedModelWrongDiscriminatorSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> getFixedModelWrongDiscriminatorSync(@HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 
@@ -321,8 +321,8 @@ public final class EnumDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putExtensibleModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putExtensibleModel(accept, input, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.putExtensibleModel(contentType, input, requestOptions, context));
     }
 
     /**
@@ -346,8 +346,8 @@ public final class EnumDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putExtensibleModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putExtensibleModelSync(accept, input, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putExtensibleModelSync(contentType, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -366,7 +366,8 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model omitting the discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>>
@@ -392,7 +393,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model omitting the discriminator along with {@link Response}.
+     * @return test extensible enum type for discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getExtensibleModelMissingDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -416,8 +417,8 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>>
@@ -443,7 +444,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response}.
+     * @return test extensible enum type for discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getExtensibleModelWrongDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -521,8 +522,8 @@ public final class EnumDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFixedModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putFixedModel(accept, input, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.putFixedModel(contentType, input, requestOptions, context));
     }
 
     /**
@@ -546,8 +547,8 @@ public final class EnumDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFixedModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putFixedModelSync(accept, input, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putFixedModelSync(contentType, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -566,7 +567,8 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model omitting the discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>>
@@ -592,7 +594,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model omitting the discriminator along with {@link Response}.
+     * @return test fixed enum type for discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFixedModelMissingDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -616,8 +618,8 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFixedModelWrongDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -642,7 +644,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response}.
+     * @return test fixed enum type for discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFixedModelWrongDiscriminatorWithResponse(RequestOptions requestOptions) {

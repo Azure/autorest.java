@@ -62,7 +62,8 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> set(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> set(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
+            Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/set")
         @ExpectedResponses({ 204 })
@@ -70,7 +71,8 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> setSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> setSync(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
+            Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
         @ExpectedResponses({ 204 })
@@ -78,7 +80,8 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> omit(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> omit(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
+            Context context);
 
         @Post("/parameters/body-optionality/optional-explicit/omit")
         @ExpectedResponses({ 204 })
@@ -86,19 +89,12 @@ public final class OptionalExplicitsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> omitSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> omitSync(@HeaderParam("Content-Type") String contentType, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
      * The set operation.
-     * <p><strong>Header Parameters</strong></p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
-     * "application/json".</td></tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -116,26 +112,18 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> setWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
+        final String contentType = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return FluxUtil.withContext(context -> service.set(accept, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.set(contentType, requestOptionsLocal, context));
     }
 
     /**
      * The set operation.
-     * <p><strong>Header Parameters</strong></p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
-     * "application/json".</td></tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -153,26 +141,18 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> setWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
+        final String contentType = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return service.setSync(accept, requestOptionsLocal, Context.NONE);
+        return service.setSync(contentType, requestOptionsLocal, Context.NONE);
     }
 
     /**
      * The omit operation.
-     * <p><strong>Header Parameters</strong></p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
-     * "application/json".</td></tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -190,26 +170,18 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> omitWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
+        final String contentType = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return FluxUtil.withContext(context -> service.omit(accept, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.omit(contentType, requestOptionsLocal, context));
     }
 
     /**
      * The omit operation.
-     * <p><strong>Header Parameters</strong></p>
-     * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
-     * "application/json".</td></tr>
-     * </table>
-     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -227,13 +199,13 @@ public final class OptionalExplicitsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> omitWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
+        final String contentType = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getBody() != null && requestLocal.getHeaders().get(HttpHeaderName.CONTENT_TYPE) == null) {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return service.omitSync(accept, requestOptionsLocal, Context.NONE);
+        return service.omitSync(contentType, requestOptionsLocal, Context.NONE);
     }
 }

@@ -71,17 +71,17 @@ public final class NamingClientImpl {
     }
 
     /**
-     * The ClientModelsImpl object to access its operations.
+     * The ModelsImpl object to access its operations.
      */
-    private final ClientModelsImpl clientModels;
+    private final ModelsImpl models;
 
     /**
-     * Gets the ClientModelsImpl object to access its operations.
+     * Gets the ModelsImpl object to access its operations.
      * 
-     * @return the ClientModelsImpl object.
+     * @return the ModelsImpl object.
      */
-    public ClientModelsImpl getClientModels() {
-        return this.clientModels;
+    public ModelsImpl getModels() {
+        return this.models;
     }
 
     /**
@@ -124,7 +124,7 @@ public final class NamingClientImpl {
     public NamingClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
-        this.clientModels = new ClientModelsImpl(this);
+        this.models = new ModelsImpl(this);
         this.unionEnums = new UnionEnumsImpl(this);
         this.service = RestProxy.create(NamingClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -141,8 +141,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> clientName(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> clientName(RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/operation")
         @ExpectedResponses({ 204 })
@@ -150,7 +149,15 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> clientNameSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<Void> clientNameSync(RequestOptions requestOptions, Context context);
+
+        @Post("/client/naming/parameter")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> parameter(@QueryParam("defaultName") String clientName, RequestOptions requestOptions,
             Context context);
 
         @Post("/client/naming/parameter")
@@ -159,17 +166,8 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> parameter(@QueryParam("defaultName") String clientName,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Post("/client/naming/parameter")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> parameterSync(@QueryParam("defaultName") String clientName, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> parameterSync(@QueryParam("defaultName") String clientName, RequestOptions requestOptions,
+            Context context);
 
         @Post("/client/naming/property/client")
         @ExpectedResponses({ 204 })
@@ -177,7 +175,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> client(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> client(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/client")
@@ -186,16 +184,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> clientSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
-
-        @Post("/client/naming/property/language")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> language(@HeaderParam("accept") String accept,
+        Response<Void> clientSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/language")
@@ -204,7 +193,16 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> languageSync(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> language(@HeaderParam("Content-Type") String contentType,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+
+        @Post("/client/naming/property/language")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> languageSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/compatible-with-encoded-name")
@@ -213,7 +211,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> compatibleWithEncodedName(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> compatibleWithEncodedName(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/property/compatible-with-encoded-name")
@@ -222,7 +220,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> compatibleWithEncodedNameSync(@HeaderParam("accept") String accept,
+        Response<Void> compatibleWithEncodedNameSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/header")
@@ -231,8 +229,8 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> request(@HeaderParam("default-name") String clientName,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> request(@HeaderParam("default-name") String clientName, RequestOptions requestOptions,
+            Context context);
 
         @Post("/client/naming/header")
         @ExpectedResponses({ 204 })
@@ -240,16 +238,7 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requestSync(@HeaderParam("default-name") String clientName, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
-
-        @Get("/client/naming/header")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> response(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<Void> requestSync(@HeaderParam("default-name") String clientName, RequestOptions requestOptions,
             Context context);
 
         @Get("/client/naming/header")
@@ -258,8 +247,15 @@ public final class NamingClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> responseSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> response(RequestOptions requestOptions, Context context);
+
+        @Get("/client/naming/header")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> responseSync(RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -274,8 +270,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> clientNameWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.clientName(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.clientName(requestOptions, context));
     }
 
     /**
@@ -290,8 +285,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> clientNameWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.clientNameSync(accept, requestOptions, Context.NONE);
+        return service.clientNameSync(requestOptions, Context.NONE);
     }
 
     /**
@@ -307,8 +301,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> parameterWithResponseAsync(String clientName, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.parameter(clientName, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.parameter(clientName, requestOptions, context));
     }
 
     /**
@@ -324,8 +317,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> parameterWithResponse(String clientName, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.parameterSync(clientName, accept, requestOptions, Context.NONE);
+        return service.parameterSync(clientName, requestOptions, Context.NONE);
     }
 
     /**
@@ -348,8 +340,8 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> clientWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.client(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.client(contentType, body, requestOptions, context));
     }
 
     /**
@@ -372,8 +364,8 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.clientSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.clientSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -396,8 +388,8 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> languageWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.language(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.language(contentType, body, requestOptions, context));
     }
 
     /**
@@ -420,8 +412,8 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.languageSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.languageSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -445,9 +437,9 @@ public final class NamingClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> compatibleWithEncodedNameWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
+        final String contentType = "application/json";
         return FluxUtil
-            .withContext(context -> service.compatibleWithEncodedName(accept, body, requestOptions, context));
+            .withContext(context -> service.compatibleWithEncodedName(contentType, body, requestOptions, context));
     }
 
     /**
@@ -470,8 +462,8 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> compatibleWithEncodedNameWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.compatibleWithEncodedNameSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.compatibleWithEncodedNameSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -487,8 +479,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requestWithResponseAsync(String clientName, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.request(clientName, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.request(clientName, requestOptions, context));
     }
 
     /**
@@ -504,8 +495,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requestWithResponse(String clientName, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.requestSync(clientName, accept, requestOptions, Context.NONE);
+        return service.requestSync(clientName, requestOptions, Context.NONE);
     }
 
     /**
@@ -520,8 +510,7 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> responseWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.response(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.response(requestOptions, context));
     }
 
     /**
@@ -536,7 +525,6 @@ public final class NamingClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> responseWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.responseSync(accept, requestOptions, Context.NONE);
+        return service.responseSync(requestOptions, Context.NONE);
     }
 }

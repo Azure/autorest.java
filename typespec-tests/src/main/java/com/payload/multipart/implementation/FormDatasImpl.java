@@ -65,8 +65,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> basic(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/mixed-parts")
@@ -75,7 +74,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> basicSync(@HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
+        Response<Void> basicSync(@HeaderParam("content-type") String contentType,
             @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
@@ -86,8 +85,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> complex(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/complex-parts")
@@ -97,8 +95,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> complexSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/json-part")
@@ -108,8 +105,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> jsonPart(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/json-part")
@@ -119,8 +115,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> jsonPartSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/binary-array-parts")
@@ -130,8 +125,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> binaryArrayParts(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/binary-array-parts")
@@ -141,8 +135,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> binaryArrayPartsSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/json-array-parts")
@@ -152,8 +145,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> jsonArrayParts(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/json-array-parts")
@@ -163,8 +155,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> jsonArrayPartsSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/multi-binary-parts")
@@ -174,8 +165,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> multiBinaryParts(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/multi-binary-parts")
@@ -185,8 +175,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> multiBinaryPartsSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/check-filename-and-content-type")
@@ -196,8 +185,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> checkFileNameAndContentType(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/check-filename-and-content-type")
@@ -207,8 +195,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> checkFileNameAndContentTypeSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/anonymous-model")
@@ -218,8 +205,8 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> anonymousModel(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData anonymousModelRequest,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData anonymousModelRequest, RequestOptions requestOptions,
+            Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/anonymous-model")
@@ -229,8 +216,8 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> anonymousModelSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData anonymousModelRequest,
-            RequestOptions requestOptions, Context context);
+            @BodyParam("multipart/form-data") BinaryData anonymousModelRequest, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -247,8 +234,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> basicWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.basic(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.basic(contentType, body, requestOptions, context));
     }
 
     /**
@@ -265,8 +251,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> basicWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.basicSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.basicSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -283,8 +268,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> complexWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.complex(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.complex(contentType, body, requestOptions, context));
     }
 
     /**
@@ -301,8 +285,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> complexWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.complexSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.complexSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -319,8 +302,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> jsonPartWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.jsonPart(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonPart(contentType, body, requestOptions, context));
     }
 
     /**
@@ -337,8 +319,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> jsonPartWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.jsonPartSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.jsonPartSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -355,9 +336,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> binaryArrayPartsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.binaryArrayParts(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.binaryArrayParts(contentType, body, requestOptions, context));
     }
 
     /**
@@ -374,8 +353,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> binaryArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.binaryArrayPartsSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.binaryArrayPartsSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -392,9 +370,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> jsonArrayPartsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.jsonArrayParts(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.jsonArrayParts(contentType, body, requestOptions, context));
     }
 
     /**
@@ -411,8 +387,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> jsonArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.jsonArrayPartsSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.jsonArrayPartsSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -429,9 +404,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> multiBinaryPartsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.multiBinaryParts(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.multiBinaryParts(contentType, body, requestOptions, context));
     }
 
     /**
@@ -448,8 +421,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> multiBinaryPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.multiBinaryPartsSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.multiBinaryPartsSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -467,9 +439,8 @@ public final class FormDatasImpl {
     public Mono<Response<Void>> checkFileNameAndContentTypeWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.checkFileNameAndContentType(contentType, accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.checkFileNameAndContentType(contentType, body, requestOptions, context));
     }
 
     /**
@@ -486,8 +457,7 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> checkFileNameAndContentTypeWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.checkFileNameAndContentTypeSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.checkFileNameAndContentTypeSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -505,9 +475,8 @@ public final class FormDatasImpl {
     public Mono<Response<Void>> anonymousModelWithResponseAsync(BinaryData anonymousModelRequest,
         RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
         return FluxUtil.withContext(
-            context -> service.anonymousModel(contentType, accept, anonymousModelRequest, requestOptions, context));
+            context -> service.anonymousModel(contentType, anonymousModelRequest, requestOptions, context));
     }
 
     /**
@@ -524,7 +493,6 @@ public final class FormDatasImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> anonymousModelWithResponse(BinaryData anonymousModelRequest, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.anonymousModelSync(contentType, accept, anonymousModelRequest, requestOptions, Context.NONE);
+        return service.anonymousModelSync(contentType, anonymousModelRequest, requestOptions, Context.NONE);
     }
 }

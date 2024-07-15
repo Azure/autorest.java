@@ -139,8 +139,8 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> longRunningRpc(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/rpc/generations:submit")
         @ExpectedResponses({ 202 })
@@ -149,8 +149,8 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> longRunningRpcSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -194,9 +194,10 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.longRunningRpc(this.getServiceVersion().getVersion(), accept,
-            body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.longRunningRpc(this.getServiceVersion().getVersion(),
+            contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -239,9 +240,10 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> longRunningRpcWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.longRunningRpcSync(this.getServiceVersion().getVersion(), accept, body, requestOptions,
-            Context.NONE);
+        return service.longRunningRpcSync(this.getServiceVersion().getVersion(), contentType, accept, body,
+            requestOptions, Context.NONE);
     }
 
     /**

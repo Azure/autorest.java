@@ -214,6 +214,24 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
     }
 
     /*
+     * Pass in either 'v1' or 'v2'. This represents the API version of a service.
+     */
+    @Generated
+    private String apiVersion;
+
+    /**
+     * Sets Pass in either 'v1' or 'v2'. This represents the API version of a service.
+     * 
+     * @param apiVersion the apiVersion value.
+     * @return the ResiliencyServiceDrivenClientBuilder.
+     */
+    @Generated
+    public ResiliencyServiceDrivenClientBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -262,7 +280,7 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
             = (serviceVersion != null) ? serviceVersion : ServiceDrivenServiceVersion.getLatest();
         ResiliencyServiceDrivenClientImpl client
             = new ResiliencyServiceDrivenClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
-                this.endpoint, this.serviceDeploymentVersion, localServiceVersion);
+                this.endpoint, this.serviceDeploymentVersion, this.apiVersion, localServiceVersion);
         return client;
     }
 
@@ -272,6 +290,7 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
         Objects.requireNonNull(serviceDeploymentVersion, "'serviceDeploymentVersion' cannot be null.");
+        Objects.requireNonNull(apiVersion, "'apiVersion' cannot be null.");
     }
 
     @Generated

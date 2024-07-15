@@ -190,6 +190,24 @@ public final class ContosoClientBuilder implements HttpTrait<ContosoClientBuilde
     }
 
     /*
+     * Api Version
+     */
+    @Generated
+    private String apiVersion;
+
+    /**
+     * Sets Api Version.
+     * 
+     * @param apiVersion the apiVersion value.
+     * @return the ContosoClientBuilder.
+     */
+    @Generated
+    public ContosoClientBuilder apiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -237,7 +255,7 @@ public final class ContosoClientBuilder implements HttpTrait<ContosoClientBuilde
         ContosoServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ContosoServiceVersion.getLatest();
         ContosoClientImpl client = new ContosoClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
-            this.endpoint, localServiceVersion);
+            this.endpoint, this.apiVersion, localServiceVersion);
         return client;
     }
 
@@ -246,6 +264,7 @@ public final class ContosoClientBuilder implements HttpTrait<ContosoClientBuilde
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+        Objects.requireNonNull(apiVersion, "'apiVersion' cannot be null.");
     }
 
     @Generated

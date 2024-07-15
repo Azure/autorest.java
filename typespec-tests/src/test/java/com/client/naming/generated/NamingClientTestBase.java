@@ -13,7 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.client.naming.ClientModelClient;
+import com.client.naming.ModelClient;
 import com.client.naming.NamingClient;
 import com.client.naming.NamingClientBuilder;
 import com.client.naming.UnionEnumClient;
@@ -21,7 +21,7 @@ import com.client.naming.UnionEnumClient;
 class NamingClientTestBase extends TestProxyTestBase {
     protected NamingClient namingClient;
 
-    protected ClientModelClient clientModelClient;
+    protected ModelClient modelClient;
 
     protected UnionEnumClient unionEnumClient;
 
@@ -36,14 +36,14 @@ class NamingClientTestBase extends TestProxyTestBase {
         }
         namingClient = namingClientbuilder.buildClient();
 
-        NamingClientBuilder clientModelClientbuilder = new NamingClientBuilder().httpClient(HttpClient.createDefault())
+        NamingClientBuilder modelClientbuilder = new NamingClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            clientModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            clientModelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            modelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        clientModelClient = clientModelClientbuilder.buildClientModelClient();
+        modelClient = modelClientbuilder.buildModelClient();
 
         NamingClientBuilder unionEnumClientbuilder = new NamingClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));

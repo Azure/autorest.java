@@ -20,22 +20,6 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ResourcesClientImpl.class })
 public final class ResourcesClientBuilder {
     /*
-     * Server parameter
-     */
-    private String endpoint;
-
-    /**
-     * Sets Server parameter.
-     * 
-     * @param endpoint the endpoint value.
-     * @return the ResourcesClientBuilder.
-     */
-    public ResourcesClientBuilder endpoint(String endpoint) {
-        this.endpoint = endpoint;
-        return this;
-    }
-
-    /*
      * The ID of the target subscription. The value must be an UUID.
      */
     private String subscriptionId;
@@ -131,7 +115,7 @@ public final class ResourcesClientBuilder {
             ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ResourcesClientImpl client = new ResourcesClientImpl(localPipeline, localSerializerAdapter,
-            localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
+            localDefaultPollInterval, localEnvironment, this.subscriptionId);
         return client;
     }
 }

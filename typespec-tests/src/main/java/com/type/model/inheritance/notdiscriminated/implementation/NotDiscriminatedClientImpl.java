@@ -113,7 +113,7 @@ public final class NotDiscriminatedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> postValid(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> postValid(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Post("/type/model/inheritance/not-discriminated/valid")
@@ -122,7 +122,7 @@ public final class NotDiscriminatedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> postValidSync(@HeaderParam("accept") String accept,
+        Response<Void> postValidSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/not-discriminated/valid")
@@ -131,7 +131,7 @@ public final class NotDiscriminatedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getValid(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> getValid(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/model/inheritance/not-discriminated/valid")
@@ -140,7 +140,7 @@ public final class NotDiscriminatedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getValidSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getValidSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/type/model/inheritance/not-discriminated/valid")
@@ -149,8 +149,9 @@ public final class NotDiscriminatedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putValid(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> putValid(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/not-discriminated/valid")
         @ExpectedResponses({ 200 })
@@ -158,8 +159,9 @@ public final class NotDiscriminatedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putValidSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Response<BinaryData> putValidSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -184,8 +186,8 @@ public final class NotDiscriminatedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postValidWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.postValid(accept, input, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.postValid(contentType, input, requestOptions, context));
     }
 
     /**
@@ -210,8 +212,8 @@ public final class NotDiscriminatedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postValidWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.postValidSync(accept, input, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.postValidSync(contentType, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -298,8 +300,9 @@ public final class NotDiscriminatedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putValidWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putValid(accept, input, requestOptions, context));
+        return FluxUtil.withContext(context -> service.putValid(contentType, accept, input, requestOptions, context));
     }
 
     /**
@@ -334,7 +337,8 @@ public final class NotDiscriminatedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putValidWithResponse(BinaryData input, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putValidSync(accept, input, requestOptions, Context.NONE);
+        return service.putValidSync(contentType, accept, input, requestOptions, Context.NONE);
     }
 }
