@@ -44,6 +44,8 @@ import { KnownMediaType } from "@azure-tools/codegen";
 import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
+  SdkBodyModelPropertyType,
+  SdkBodyParameter,
   SdkBuiltInType,
   SdkClientType,
   SdkConstantType,
@@ -2071,8 +2073,6 @@ export class CodeModelBuilder {
     // set contentTypes to mediaTypes
     op.requests![0].protocol.http!.mediaTypes = rawHttpOperation.parameters.body!.contentTypes;
 
-    const parameters = rawHttpOperation.operation.parameters;
-
     const unknownRequestBody =
       op.requests![0].protocol.http!.mediaTypes &&
       op.requests![0].protocol.http!.mediaTypes.length > 0 &&
@@ -2087,10 +2087,6 @@ export class CodeModelBuilder {
     } else {
       schema = this.processSchemaFromSdkType(getNonNullSdkType(sdkType), sdkBody.name);
     }
-
-
-    // Implicit body parameter would have usage flag: UsageFlags.Spread, for this case we need to do body parameter flatten
-    const bodyParameterFlatten = sdkType.kind === "model" && (sdkType.usage & UsageFlags.Spread) && !this.isArm();
 
     const parameterName = sdkBody.name;
     const parameter = new Parameter(parameterName, sdkBody.description ?? "", schema, {
@@ -2117,9 +2113,13 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
+    // Implicit body parameter would have usage flag: UsageFlags.Spread, for this case we need to do body parameter flatten
+    const bodyParameterFlatten = sdkType.kind === "model" && (sdkType.usage & UsageFlags.Spread) && !this.isArm();
+
     if (schema instanceof ObjectSchema && bodyParameterFlatten) {
       // flatten body parameter
-
+      const parameters = sdkHttpOperation.parameters;
+      const bodyParameter = sdkHttpOperation.bodyParam;
       // name the schema for documentation
       schema.language.default.name = pascalCase(op.language.default.name) + "Request";
 
@@ -2144,46 +2144,17 @@ export class CodeModelBuilder {
         request.parameters = [];
         op.convenienceApi.requests.push(request);
 
-        for (const [_, opParameter] of parameters.properties) {
-          const serializedName = this.getSerializedName(opParameter);
-          const existParameter = op.parameters.find((it) => it.language.default.serializedName === serializedName);
-          if (existParameter) {
-            // parameter
-            if (
-              existParameter.implementation === ImplementationLocation.Method &&
-              (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true) &&
-              !(existParameter.schema instanceof ConstantSchema)
-            ) {
-              request.parameters.push(cloneOperationParameter(existParameter));
-            }
-          } else {
-            // property from anonymous model
-            const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
-            if (
-              existBodyProperty &&
-              !existBodyProperty.readOnly &&
-              !(existBodyProperty.schema instanceof ConstantSchema)
-            ) {
-              request.parameters.push(
-                new VirtualParameter(
-                  existBodyProperty.language.default.name,
-                  existBodyProperty.language.default.description,
-                  existBodyProperty.schema,
-                  {
-                    originalParameter: parameter,
-                    targetProperty: existBodyProperty,
-                    language: {
-                      default: {
-                        serializedName: existBodyProperty.serializedName,
-                      },
-                    },
-                    summary: existBodyProperty.summary,
-                    implementation: ImplementationLocation.Method,
-                    required: existBodyProperty.required,
-                    nullable: existBodyProperty.nullable,
-                  },
-                ),
-              );
+        // header/query/path params
+        for (const opParameter of parameters) {
+          this.addParameterOrBodyToCodeModelRequest(opParameter, op, request, schema, parameter);
+        }
+        // body param
+        if (bodyParameter) {
+          if (bodyParameter.type.kind === "model") {
+            for (const bodyParam of bodyParameter.type.properties) {
+              if (bodyParam.kind === "property") {
+                this.addParameterOrBodyToCodeModelRequest(bodyParam, op, request, schema, parameter)
+              }
             }
           }
         }
@@ -2244,7 +2215,51 @@ export class CodeModelBuilder {
         }
       }
     }
+  }
 
+  private addParameterOrBodyToCodeModelRequest(opParameter: SdkPathParameter | SdkHeaderParameter | SdkQueryParameter | SdkBodyModelPropertyType, op: CodeModelOperation, request: Request, schema: ObjectSchema, originalParameter: Parameter) {
+    const serializedName = opParameter.serializedName;
+    const existParameter = op.parameters?.find((it) => it.language.default.serializedName === serializedName);
+    request.parameters = request.parameters ?? [];
+    if (existParameter) {
+      // parameter
+      if (
+        existParameter.implementation === ImplementationLocation.Method &&
+        (existParameter.origin?.startsWith("modelerfour:synthesized/") ?? true) &&
+        !(existParameter.schema instanceof ConstantSchema)
+      ) {
+        request.parameters.push(cloneOperationParameter(existParameter));
+      }
+    } else {
+      // property from anonymous model
+      const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
+      if (
+        existBodyProperty &&
+        !existBodyProperty.readOnly &&
+        !(existBodyProperty.schema instanceof ConstantSchema)
+      ) {
+        request.parameters.push(
+          new VirtualParameter(
+            existBodyProperty.language.default.name,
+            existBodyProperty.language.default.description,
+            existBodyProperty.schema,
+            {
+              originalParameter: originalParameter,
+              targetProperty: existBodyProperty,
+              language: {
+                default: {
+                  serializedName: existBodyProperty.serializedName,
+                },
+              },
+              summary: existBodyProperty.summary,
+              implementation: ImplementationLocation.Method,
+              required: existBodyProperty.required,
+              nullable: existBodyProperty.nullable,
+            },
+          ),
+        );
+      }
+    }
   }
 
   // private processParameterBody(op: CodeModelOperation, httpOperation: HttpOperation, body: ModelProperty | Model) {
