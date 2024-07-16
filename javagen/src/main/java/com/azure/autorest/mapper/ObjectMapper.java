@@ -13,7 +13,7 @@ import com.azure.autorest.util.SchemaUtil;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ObjectMapper implements IMapper<ObjectSchema, IType> {
+public class ObjectMapper implements IMapper<ObjectSchema, IType>, NeedsPlainObjectCheck {
     private static final ObjectMapper INSTANCE = new ObjectMapper();
     Map<ObjectSchema, ClassType> parsed = new ConcurrentHashMap<>();
 
@@ -41,7 +41,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             return result;
         }
 
-        if (SchemaUtil.isPlainObject(compositeType)) {
+        if (isPlainObject(compositeType)) {
             return ClassType.OBJECT;
         }
 

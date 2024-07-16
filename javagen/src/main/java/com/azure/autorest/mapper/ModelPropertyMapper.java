@@ -24,11 +24,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-public class ModelPropertyMapper implements IMapper<Property, ClientModelProperty> {
+public class ModelPropertyMapper implements IMapper<Property, ClientModelProperty>, NeedsPlainObjectCheck {
     private static final ModelPropertyMapper INSTANCE = new ModelPropertyMapper();
-
-    private ModelPropertyMapper() {
-    }
 
     public static ModelPropertyMapper getInstance() {
         return INSTANCE;
@@ -90,7 +87,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
         if (property.getExtensions() != null && property.getExtensions().isXmsClientFlatten()
                 // avoid non-object schema or a plain object schema without any properties
-                && property.getSchema() instanceof ObjectSchema && !SchemaUtil.isPlainObject((ObjectSchema) property.getSchema())
+                && property.getSchema() instanceof ObjectSchema && !isPlainObject((ObjectSchema) property.getSchema())
                 && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
             // avoid naming conflict
             builder.name("inner" + CodeNamer.toPascalCase(property.getLanguage().getJava().getName()));

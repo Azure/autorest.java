@@ -10,13 +10,12 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.autorest.util.SchemaUtilAdapter;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
@@ -217,7 +216,6 @@ public class TypeSpecPlugin extends Javagen {
     public TypeSpecPlugin(EmitterOptions options, boolean sdkIntegration) {
         super(new MockConnection(), "dummy", "dummy");
         this.emitterOptions = options;
-        SchemaUtilAdapter.adaptForTypeSpec();
         SETTINGS_MAP.put("namespace", options.getNamespace());
         if (!CoreUtils.isNullOrEmpty(options.getOutputDir())) {
             SETTINGS_MAP.put("output-folder", options.getOutputDir());

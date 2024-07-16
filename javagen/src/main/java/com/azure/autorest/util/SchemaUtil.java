@@ -33,16 +33,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.Stack;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class SchemaUtil {
-
-    private static Predicate<ObjectSchema> plainObject = compositeType -> !JavaSettings.getInstance().isDataPlaneClient()
-            && compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
-            && compositeType.getParents() == null && compositeType.getChildren() == null
-            && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
-
 
     private SchemaUtil() {
     }
@@ -344,18 +337,5 @@ public class SchemaUtil {
     public static boolean treatAsXml(Schema schema) {
         return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains(KnownMediaType.XML.value()))
             || (schema.getSerialization() != null && schema.getSerialization().getXml() != null);
-    }
-
-    /**
-     * Check that the type can be regarded as a plain java.lang.Object.
-     *
-     * @param compositeType The type to check.
-     */
-    public static boolean isPlainObject(ObjectSchema compositeType) {
-        return plainObject.test(compositeType);
-    }
-
-    static void setPlainObjectPredicate(Predicate<ObjectSchema> plainObjectPredicate) {
-        plainObject = plainObjectPredicate;
     }
 }

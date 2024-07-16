@@ -13,7 +13,6 @@ import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.util.SchemaUtilAdapter;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.model.EmitterOptions;
 import com.azure.typespec.util.FileUtil;
@@ -32,7 +31,6 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
     public TypeSpecFluentPlugin(EmitterOptions emitterOptions, boolean sdkIntegration) {
         super(new TypeSpecPlugin.MockConnection(), "dummy", "dummy");
-        SchemaUtilAdapter.adaptForTypeSpec();
         this.emitterOptions = emitterOptions;
         SETTINGS_MAP.put("namespace", emitterOptions.getNamespace());
         if (!CoreUtils.isNullOrEmpty(emitterOptions.getOutputDir())) {

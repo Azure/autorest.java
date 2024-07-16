@@ -38,7 +38,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
+public class ModelMapper implements IMapper<ObjectSchema, ClientModel>, NeedsPlainObjectCheck {
     private static final ModelMapper INSTANCE = new ModelMapper();
     private final ClientModels serviceModels = ClientModels.getInstance();
 
@@ -59,7 +59,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !SchemaUtil.isPlainObject(compositeType)) {
+        if (result == null && !isPlainObject(compositeType)) {
             Set<ImplementationDetails.Usage> usages = SchemaUtil.mapSchemaContext(compositeType.getUsage());
             if (isPredefinedModel(modelType)) {
                 // TODO (weidxu): a more consistent handling of external model for all data-plane
@@ -603,7 +603,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                                     }
                                 } else {
                                     // nested flattened model
-                                    if (property1.getSchema() instanceof ObjectSchema && !SchemaUtil.isPlainObject((ObjectSchema) property.getSchema())) {
+                                    if (property1.getSchema() instanceof ObjectSchema && !isPlainObject((ObjectSchema) property.getSchema())) {
                                         ClientModelProperty modelProperty1 = Mappers.getModelPropertyMapper().map(property1);
                                         List<ClientModelPropertyReference> nestedReferences = collectPropertiesFromFlattenedModel(
                                             objectSchema1, property1, modelProperty1, existingPropertyReferences);
