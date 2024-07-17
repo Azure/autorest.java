@@ -131,10 +131,10 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         @Get("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childResources")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ChildResourceListResult>> listByTopLevelArmResource(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
+        Mono<Response<ChildResourceListResult>> listByTopLevelArmResource(@QueryParam("api-version") String apiVersion,
+            @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -1134,10 +1134,6 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceSinglePageAsync(String resourceGroupName,
         String topLevelArmResourceName) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -1152,9 +1148,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         }
         final String accept = "application/json";
         return FluxUtil
-            .withContext(
-                context -> service.listByTopLevelArmResource(this.client.getEndpoint(), this.client.getApiVersion(),
-                    this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, context))
+            .withContext(context -> service.listByTopLevelArmResource(this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, context))
             .<PagedResponse<ChildResourceInner>>map(res -> new PagedResponseBase<>(res.getRequest(),
                 res.getStatusCode(), res.getHeaders(), res.getValue().value(), res.getValue().nextLink(), null))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -1175,10 +1170,6 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceSinglePageAsync(String resourceGroupName,
         String topLevelArmResourceName, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -1194,8 +1185,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByTopLevelArmResource(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, context)
+            .listByTopLevelArmResource(this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
+                topLevelArmResourceName, accept, context)
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 res.getValue().value(), res.getValue().nextLink(), null));
     }
@@ -1271,6 +1262,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     }
 
     /**
+     * List ChildResource resources by TopLevelArmResource
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
