@@ -45,6 +45,8 @@ import java.util.Objects;
         BytesClient.class,
         DatetimeOperationClient.class,
         DurationOperationClient.class,
+        PlaindateClient.class,
+        PlaintimeClient.class,
         CollectionsByteClient.class,
         CollectionsModelClient.class,
         StringLiteralClient.class,
@@ -59,6 +61,8 @@ import java.util.Objects;
         BytesAsyncClient.class,
         DatetimeOperationAsyncClient.class,
         DurationOperationAsyncClient.class,
+        PlaindateAsyncClient.class,
+        PlaintimeAsyncClient.class,
         CollectionsByteAsyncClient.class,
         CollectionsModelAsyncClient.class,
         StringLiteralAsyncClient.class,
@@ -315,6 +319,26 @@ public final class OptionalClientBuilder
     }
 
     /**
+     * Builds an instance of PlaindateAsyncClient class.
+     * 
+     * @return an instance of PlaindateAsyncClient.
+     */
+    @Generated
+    public PlaindateAsyncClient buildPlaindateAsyncClient() {
+        return new PlaindateAsyncClient(buildInnerClient().getPlaindates());
+    }
+
+    /**
+     * Builds an instance of PlaintimeAsyncClient class.
+     * 
+     * @return an instance of PlaintimeAsyncClient.
+     */
+    @Generated
+    public PlaintimeAsyncClient buildPlaintimeAsyncClient() {
+        return new PlaintimeAsyncClient(buildInnerClient().getPlaintimes());
+    }
+
+    /**
      * Builds an instance of CollectionsByteAsyncClient class.
      * 
      * @return an instance of CollectionsByteAsyncClient.
@@ -452,6 +476,26 @@ public final class OptionalClientBuilder
     @Generated
     public DurationOperationClient buildDurationOperationClient() {
         return new DurationOperationClient(buildInnerClient().getDurationOperations());
+    }
+
+    /**
+     * Builds an instance of PlaindateClient class.
+     * 
+     * @return an instance of PlaindateClient.
+     */
+    @Generated
+    public PlaindateClient buildPlaindateClient() {
+        return new PlaindateClient(buildInnerClient().getPlaindates());
+    }
+
+    /**
+     * Builds an instance of PlaintimeClient class.
+     * 
+     * @return an instance of PlaintimeClient.
+     */
+    @Generated
+    public PlaintimeClient buildPlaintimeClient() {
+        return new PlaintimeClient(buildInnerClient().getPlaintimes());
     }
 
     /**

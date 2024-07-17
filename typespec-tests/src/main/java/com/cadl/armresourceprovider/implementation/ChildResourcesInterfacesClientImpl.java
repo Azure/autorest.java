@@ -132,7 +132,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         @Get("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childResources")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ChildResourceListResult>> listByTopLevelArmResource(@HostParam("endpoint") String endpoint,
+        Mono<Response<ChildResourceListResult>> listByTopLevelTrackedResource(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
@@ -142,7 +142,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ChildResourceListResult>> listByTopLevelArmResourceNext(
+        Mono<Response<ChildResourceListResult>> listByTopLevelTrackedResourceNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
             @HeaderParam("accept") String accept, Context context);
     }
@@ -1172,8 +1172,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceSinglePageAsync(String resourceGroupName,
-        String topLevelArmResourceName) {
+    private Mono<PagedResponse<ChildResourceInner>>
+        listByTopLevelTrackedResourceSinglePageAsync(String resourceGroupName, String topLevelArmResourceName) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -1193,7 +1193,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         final String accept = "application/json";
         return FluxUtil
             .withContext(
-                context -> service.listByTopLevelArmResource(this.client.getEndpoint(), this.client.getApiVersion(),
+                context -> service.listByTopLevelTrackedResource(this.client.getEndpoint(), this.client.getApiVersion(),
                     this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, context))
             .<PagedResponse<ChildResourceInner>>map(res -> new PagedResponseBase<>(res.getRequest(),
                 res.getStatusCode(), res.getHeaders(), res.getValue().value(), res.getValue().nextLink(), null))
@@ -1213,8 +1213,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceSinglePageAsync(String resourceGroupName,
-        String topLevelArmResourceName, Context context) {
+    private Mono<PagedResponse<ChildResourceInner>> listByTopLevelTrackedResourceSinglePageAsync(
+        String resourceGroupName, String topLevelArmResourceName, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -1234,7 +1234,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByTopLevelArmResource(this.client.getEndpoint(), this.client.getApiVersion(),
+            .listByTopLevelTrackedResource(this.client.getEndpoint(), this.client.getApiVersion(),
                 this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, context)
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 res.getValue().value(), res.getValue().nextLink(), null));
@@ -1251,11 +1251,11 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @return the response of a ChildResource list operation as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<ChildResourceInner> listByTopLevelArmResourceAsync(String resourceGroupName,
+    private PagedFlux<ChildResourceInner> listByTopLevelTrackedResourceAsync(String resourceGroupName,
         String topLevelArmResourceName) {
         return new PagedFlux<>(
-            () -> listByTopLevelArmResourceSinglePageAsync(resourceGroupName, topLevelArmResourceName),
-            nextLink -> listByTopLevelArmResourceNextSinglePageAsync(nextLink));
+            () -> listByTopLevelTrackedResourceSinglePageAsync(resourceGroupName, topLevelArmResourceName),
+            nextLink -> listByTopLevelTrackedResourceNextSinglePageAsync(nextLink));
     }
 
     /**
@@ -1270,11 +1270,11 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @return the response of a ChildResource list operation as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    private PagedFlux<ChildResourceInner> listByTopLevelArmResourceAsync(String resourceGroupName,
+    private PagedFlux<ChildResourceInner> listByTopLevelTrackedResourceAsync(String resourceGroupName,
         String topLevelArmResourceName, Context context) {
         return new PagedFlux<>(
-            () -> listByTopLevelArmResourceSinglePageAsync(resourceGroupName, topLevelArmResourceName, context),
-            nextLink -> listByTopLevelArmResourceNextSinglePageAsync(nextLink, context));
+            () -> listByTopLevelTrackedResourceSinglePageAsync(resourceGroupName, topLevelArmResourceName, context),
+            nextLink -> listByTopLevelTrackedResourceNextSinglePageAsync(nextLink, context));
     }
 
     /**
@@ -1288,9 +1288,9 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
+    public PagedIterable<ChildResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
         String topLevelArmResourceName) {
-        return new PagedIterable<>(listByTopLevelArmResourceAsync(resourceGroupName, topLevelArmResourceName));
+        return new PagedIterable<>(listByTopLevelTrackedResourceAsync(resourceGroupName, topLevelArmResourceName));
     }
 
     /**
@@ -1305,9 +1305,10 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
+    public PagedIterable<ChildResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
         String topLevelArmResourceName, Context context) {
-        return new PagedIterable<>(listByTopLevelArmResourceAsync(resourceGroupName, topLevelArmResourceName, context));
+        return new PagedIterable<>(
+            listByTopLevelTrackedResourceAsync(resourceGroupName, topLevelArmResourceName, context));
     }
 
     /**
@@ -1321,7 +1322,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceNextSinglePageAsync(String nextLink) {
+    private Mono<PagedResponse<ChildResourceInner>> listByTopLevelTrackedResourceNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -1330,9 +1331,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
         }
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context -> service.listByTopLevelArmResourceNext(nextLink, this.client.getEndpoint(), accept, context))
+        return FluxUtil.withContext(
+            context -> service.listByTopLevelTrackedResourceNext(nextLink, this.client.getEndpoint(), accept, context))
             .<PagedResponse<ChildResourceInner>>map(res -> new PagedResponseBase<>(res.getRequest(),
                 res.getStatusCode(), res.getHeaders(), res.getValue().value(), res.getValue().nextLink(), null))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -1350,7 +1350,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceNextSinglePageAsync(String nextLink,
+    private Mono<PagedResponse<ChildResourceInner>> listByTopLevelTrackedResourceNextSinglePageAsync(String nextLink,
         Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
@@ -1361,7 +1361,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.listByTopLevelArmResourceNext(nextLink, this.client.getEndpoint(), accept, context)
+        return service.listByTopLevelTrackedResourceNext(nextLink, this.client.getEndpoint(), accept, context)
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 res.getValue().value(), res.getValue().nextLink(), null));
     }
