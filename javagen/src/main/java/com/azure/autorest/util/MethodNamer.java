@@ -26,17 +26,27 @@ public class MethodNamer {
     }
 
     public static String getLroBeginAsyncMethodName(String baseName) {
-        return "begin" + CodeNamer.toPascalCase(baseName) + "Async";
+        return getLroBeginAsyncMethodNameInternal(CodeNamer.toPascalCase(baseName));
+    }
+
+    private static String getLroBeginAsyncMethodNameInternal(String formattedName) {
+        return "begin" + formattedName + "Async";
     }
 
     public static String getLroBeginMethodName(String baseName) {
-        return "begin" + CodeNamer.toPascalCase(baseName);
+        return getLroBeginMethodNameInternal(CodeNamer.toPascalCase(baseName));
+    }
+
+    private static String getLroBeginMethodNameInternal(String formattedName) {
+        return "begin" + formattedName;
     }
 
     private final String baseName;
+    private final String pascalName;
 
     public MethodNamer(String baseName) {
         this.baseName = baseName;
+        this.pascalName = CodeNamer.toPascalCase(baseName);
     }
 
     public String getMethodName() {
@@ -64,18 +74,18 @@ public class MethodNamer {
     }
 
     public String getLroBeginAsyncMethodName() {
-        return getLroBeginAsyncMethodName(this.getMethodName());
+        return getLroBeginAsyncMethodNameInternal(pascalName);
     }
 
     public String getLroBeginMethodName() {
-        return getLroBeginMethodName(this.getMethodName());
+        return getLroBeginMethodNameInternal(pascalName);
     }
 
     public String getLroModelBeginMethodName() {
-        return "begin" + CodeNamer.toPascalCase(this.getMethodName()) + "WithModel";
+        return "begin" + pascalName + "WithModel";
     }
 
     public String getLroModelBeginAsyncMethodName() {
-        return "begin" + CodeNamer.toPascalCase(this.getMethodName()) + "WithModel" + "Async";
+        return "begin" + pascalName + "WithModelAsync";
     }
 }

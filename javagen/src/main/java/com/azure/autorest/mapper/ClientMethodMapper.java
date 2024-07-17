@@ -372,6 +372,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .type(ClientMethodType.SimpleAsyncRestResponse)
                         .groupedParameterRequired(false)
                         .methodVisibility(simpleAsyncMethodVisibility)
+                        .hasWithContextOverload(simpleAsyncMethodVisibilityWithContext != NOT_GENERATE)
                         .build());
 
                     builder.methodVisibility(simpleAsyncMethodVisibilityWithContext);
@@ -834,18 +835,20 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String methodName = isSync ? methodNamer.getSimpleRestResponseMethodName() : methodNamer.getSimpleAsyncRestResponseMethodName();
         ClientMethodType methodType = isSync ? ClientMethodType.SimpleSyncRestResponse : ClientMethodType.SimpleAsyncRestResponse;
 
+        JavaVisibility withContextVisibility = visibilityFunction.methodVisibility(true, defaultOverloadType, true);
         builder.parameters(parameters)
             .returnValue(responseReturnValue)
             .onlyRequiredParameters(false)
             .name(methodName)
             .type(methodType)
             .groupedParameterRequired(false)
+            .hasWithContextOverload(withContextVisibility != NOT_GENERATE)
             .methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, false));
         // Always generate an overload of WithResponse with non-required parameters without Context.
         // It is only for sync proxy method, and is usually filtered out in methodVisibility function.
         methods.add(builder.build());
 
-        builder.methodVisibility(visibilityFunction.methodVisibility(true, defaultOverloadType, true));
+        builder.methodVisibility(withContextVisibility);
         addClientMethodWithContext(methods, builder, parameters, contextParameter);
 
         // Repeat the same but for simple returns.
@@ -1508,9 +1511,10 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
 
         methods.add(builder
-                .parameters(updatedParams) // update builder parameters to include context
-                .onlyRequiredParameters(false)
-                .build());
+            .parameters(updatedParams) // update builder parameters to include context
+            .onlyRequiredParameters(false)
+            .hasWithContextOverload(false) // WithContext overload doesn't have a withContext overload
+            .build());
         // reset the parameters to original params
         builder.parameters(parameters);
     }

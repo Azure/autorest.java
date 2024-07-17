@@ -18,7 +18,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -29,17 +28,11 @@ import java.util.stream.Collectors;
  * A ClientMethod that exists on a ServiceClient or MethodGroupClient that eventually will call a ProxyMethod.
  */
 public class ClientMethod {
-    private static final List<String> KNOWN_POLLING_STRATEGIES = Arrays.asList(
-            "DefaultPollingStrategy",
-            "ChainedPollingStrategy",
-            "OperationResourcePollingStrategy",
-            "LocationPollingStrategy",
-            "StatusCheckPollingStrategy",
-            "SyncDefaultPollingStrategy",
-            "SyncChainedPollingStrategy",
-            "SyncOperationResourcePollingStrategy",
-            "SyncLocationPollingStrategy",
-            "SyncStatusCheckPollingStrategy");
+    private static final List<String> KNOWN_POLLING_STRATEGIES = Arrays.asList("DefaultPollingStrategy",
+        "ChainedPollingStrategy", "OperationResourcePollingStrategy", "LocationPollingStrategy",
+        "StatusCheckPollingStrategy", "SyncDefaultPollingStrategy", "SyncChainedPollingStrategy",
+        "SyncOperationResourcePollingStrategy", "SyncLocationPollingStrategy", "SyncStatusCheckPollingStrategy");
+
     private final String crossLanguageDefinitionId;
     /**
      * The description of this ClientMethod.
@@ -57,8 +50,11 @@ public class ClientMethod {
      * The parameters of this ClientMethod.
      */
     private final List<ClientMethodParameter> parameters;
+    private final List<ClientMethodParameter> methodParameters;
+    private final List<ClientMethodParameter> methodRequiredParameters;
+
     /**
-     * Whether or not this ClientMethod has omitted optional parameters.
+     * Whether this ClientMethod has omitted optional parameters.
      */
     private final boolean onlyRequiredParameters;
     /**
@@ -108,16 +104,22 @@ public class ClientMethod {
 
     private final ExternalDocumentation externalDocumentation;
 
+    private final boolean hasWithContextOverload;
+    private final String parametersDeclaration;
+    private final String argumentList;
+
     /**
      * Create a new ClientMethod with the provided properties.
+     *
      * @param description The description of this ClientMethod.
      * @param returnValue The return value of this ClientMethod.
      * @param name The name of this ClientMethod.
      * @param parameters The parameters of this ClientMethod.
-     * @param onlyRequiredParameters Whether or not this ClientMethod has omitted optional parameters.
+     * @param onlyRequiredParameters Whether this ClientMethod has omitted optional parameters.
      * @param type The type of this ClientMethod.
      * @param proxyMethod The ProxyMethod that this ClientMethod eventually calls.
-     * @param validateExpressions The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
+     * @param validateExpressions The expressions (parameters and service client properties) that need to be validated
+     * in this ClientMethod.
      * @param clientReference The reference to the service client.
      * @param requiredNullableParameterExpressions The parameter expressions which are required.
      * @param isGroupedParameterRequired The parameter that needs to transformed before pagination.
@@ -125,20 +127,28 @@ public class ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      * @param externalDocumentation The external documentation.
+     * @param hasWithContextOverload Whether this method has a corresponding {@code Context}-based overload.
      */
     protected ClientMethod(String description, ReturnValue returnValue, String name,
-                           List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
-                           ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions,
-                           String clientReference, List<String> requiredNullableParameterExpressions,
-                           boolean isGroupedParameterRequired, String groupedParameterTypeName,
-                           MethodPageDetails methodPageDetails,
-                           List<MethodTransformationDetail> methodTransformationDetails,
-                           JavaVisibility methodVisibility, JavaVisibility methodVisibilityInWrapperClient, ImplementationDetails implementationDetails,
-                           MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation, String crossLanguageDefinitionId) {
+        List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type,
+        ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference,
+        List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired,
+        String groupedParameterTypeName, MethodPageDetails methodPageDetails,
+        List<MethodTransformationDetail> methodTransformationDetails, JavaVisibility methodVisibility,
+        JavaVisibility methodVisibilityInWrapperClient, ImplementationDetails implementationDetails,
+        MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation,
+        String crossLanguageDefinitionId, boolean hasWithContextOverload) {
         this.description = description;
         this.returnValue = returnValue;
         this.name = name;
-        this.parameters = parameters;
+        this.parameters = List.copyOf(parameters);
+        this.methodParameters = parameters.stream()
+            .filter(parameter -> !parameter.isFromClient() && parameter.getName() != null && !parameter.getName().trim().isEmpty())
+            .sorted((p1, p2) -> Boolean.compare(!p1.isRequired(), !p2.isRequired()))
+            .collect(Collectors.toUnmodifiableList());
+        this.methodRequiredParameters = methodParameters.stream()
+            .filter(param -> !param.isConstant() && param.isRequired())
+            .collect(Collectors.toUnmodifiableList());
         this.onlyRequiredParameters = onlyRequiredParameters;
         this.type = type;
         this.proxyMethod = proxyMethod;
@@ -155,30 +165,34 @@ public class ClientMethod {
         this.externalDocumentation = externalDocumentation;
         this.methodVisibilityInWrapperClient = methodVisibilityInWrapperClient;
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+        this.hasWithContextOverload = hasWithContextOverload;
+        this.parametersDeclaration = getMethodInputParameters().stream().map(ClientMethodParameter::getDeclaration)
+            .collect(Collectors.joining(", "));
+        this.argumentList = getMethodParameters().stream().map(ClientMethodParameter::getName)
+            .collect(Collectors.joining(", "));
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         ClientMethod that = (ClientMethod) o;
         return onlyRequiredParameters == that.onlyRequiredParameters
-                && isGroupedParameterRequired == that.isGroupedParameterRequired
-                && Objects.equals(returnValue.getType(), that.returnValue.getType())
-                && Objects.equals(name, that.name)
-                && Objects.equals(getParametersDeclaration(), that.getParametersDeclaration())
-                && type == that.type
-                && Objects.equals(requiredNullableParameterExpressions, that.requiredNullableParameterExpressions)
-                && Objects.equals(groupedParameterTypeName, that.groupedParameterTypeName)
-                && Objects.equals(methodTransformationDetails, that.methodTransformationDetails)
-                && methodVisibility == that.methodVisibility;
+            && isGroupedParameterRequired == that.isGroupedParameterRequired && Objects.equals(returnValue.getType(),
+            that.returnValue.getType()) && Objects.equals(name, that.name) && Objects.equals(getParametersDeclaration(),
+            that.getParametersDeclaration()) && type == that.type && Objects.equals(
+            requiredNullableParameterExpressions, that.requiredNullableParameterExpressions) && Objects.equals(
+            groupedParameterTypeName, that.groupedParameterTypeName) && Objects.equals(methodTransformationDetails,
+            that.methodTransformationDetails) && methodVisibility == that.methodVisibility;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(returnValue.getType(), name, getParametersDeclaration(), onlyRequiredParameters, type,
-                requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
-                methodTransformationDetails, methodVisibility);
+            requiredNullableParameterExpressions, isGroupedParameterRequired, groupedParameterTypeName,
+            methodTransformationDetails, methodVisibility);
     }
 
     public String getCrossLanguageDefinitionId() {
@@ -225,51 +239,43 @@ public class ClientMethod {
      * Get the comma-separated list of parameter declarations for this ClientMethod.
      */
     public final String getParametersDeclaration() {
-        List<ClientMethodParameter> methodParameters = onlyRequiredParameters ? getMethodRequiredParameters() : getMethodParameters();
-        return methodParameters.stream().map(ClientMethodParameter::getDeclaration).collect(Collectors.joining(", "));
+        return parametersDeclaration;
     }
 
     /**
      * Get the comma-separated list of parameter names for this ClientMethod.
      */
     public final String getArgumentList() {
-        return getMethodParameters().stream().map(ClientMethodParameter::getName).collect(Collectors.joining(", "));
+        return argumentList;
     }
 
     public final String getArgumentListWithoutRequestOptions() {
-        return getMethodParameters().stream().map(ClientMethodParameter::getName)
-                .map(name -> name.equals("requestOptions") ? "null" : name).collect(Collectors.joining(", "));
+        return getMethodParameters().stream()
+            .map(ClientMethodParameter::getName)
+            .map(name -> name.equals("requestOptions") ? "null" : name)
+            .collect(Collectors.joining(", "));
     }
 
     /**
      * The full declaration of this ClientMethod.
      */
     public final String getDeclaration() {
-        return String.format("%1$s %2$s(%3$s)", getReturnValue().getType(), getName(), getParametersDeclaration());
+        return getReturnValue().getType() + " " + getName() + "(" + getParametersDeclaration() + ")";
     }
 
     /**
      * Get the input parameters of the client method, taking configure of onlyRequiredParameters.
      */
     public final List<ClientMethodParameter> getMethodInputParameters() {
-        return getOnlyRequiredParameters() ? getMethodRequiredParameters() : getMethodParameters();
+        return onlyRequiredParameters ? getMethodRequiredParameters() : getMethodParameters();
     }
 
     public final List<ClientMethodParameter> getMethodParameters() {
-        return getParameters().stream().filter(parameter -> parameter != null && !parameter.isFromClient() &&
-                parameter.getName() != null && !parameter.getName().trim().isEmpty())
-                .sorted((p1, p2) -> Boolean.compare(!p1.isRequired(), !p2.isRequired()))
-                .collect(Collectors.toList());
-    }
-
-    private final List<ClientMethodParameter> getMethodNonConstantParameters() {
-        return getMethodParameters().stream().filter(parameter -> !parameter.isConstant())
-                .sorted((p1, p2) -> Boolean.compare(!p1.isRequired(), !p2.isRequired()))
-                .collect(Collectors.toList());
+        return methodParameters;
     }
 
     public final List<ClientMethodParameter> getMethodRequiredParameters() {
-        return getMethodNonConstantParameters().stream().filter(ClientMethodParameter::isRequired).collect(Collectors.toList());
+        return methodRequiredParameters;
     }
 
     public final List<String> getRequiredNullableParameterExpressions() {
@@ -305,16 +311,25 @@ public class ClientMethod {
             }
             IType parameterClientType = parameter.getClientType();
 
-            if (parameterClientType != ClassType.BASE_64_URL && parameter.getRequestParameterLocation() != RequestParameterLocation.BODY /*&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData*/ && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
+            if (parameterClientType != ClassType.BASE_64_URL && parameter.getRequestParameterLocation()
+                != RequestParameterLocation.BODY /*&& parameter.getRequestParameterLocation() != RequestParameterLocation.FormData*/
+                && (parameterClientType instanceof ArrayType || parameterClientType instanceof ListType)) {
                 parameterWireType = ClassType.STRING;
             }
 
-            String parameterWireName = parameterClientType != parameterWireType ? String.format("%1$sConverted", CodeNamer
-                .toCamelCase(CodeNamer.removeInvalidCharacters(parameterName))) : parameterName;
+            String parameterWireName = (parameterClientType != parameterWireType)
+                ? CodeNamer.toCamelCase(CodeNamer.removeInvalidCharacters(parameterName)) + "Converted"
+                : parameterName;
 
             String result;
-            if (getMethodTransformationDetails().stream().anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1"))) {
-                result = getMethodTransformationDetails().stream().filter(d -> d.getOutParameter().getName().equals(parameterName + "1")).findFirst().get().getOutParameter().getName();
+            if (getMethodTransformationDetails().stream()
+                .anyMatch(d -> d.getOutParameter().getName().equals(parameterName + "1"))) {
+                result = getMethodTransformationDetails().stream()
+                    .filter(d -> d.getOutParameter().getName().equals(parameterName + "1"))
+                    .findFirst()
+                    .get()
+                    .getOutParameter()
+                    .getName();
             } else {
                 result = parameterWireName;
             }
@@ -344,9 +359,21 @@ public class ClientMethod {
     }
 
     /**
+     * Whether this {@link ClientMethod} has a corresponding {@link ClientMethod} that has an equivalent overload that
+     * contains an additional {@code Context} parameter.
+     *
+     * @return whether this method has a corresponding {@code Context}-based overload
+     */
+    public boolean hasWithContextOverload() {
+        return hasWithContextOverload;
+    }
+
+    /**
      * Add this ClientMethod's imports to the provided set of imports.
+     *
      * @param imports The set of imports to add to.
-     * @param includeImplementationImports Whether to include imports that are only necessary for method implementations.
+     * @param includeImplementationImports Whether to include imports that are only necessary for method
+     * implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
 
@@ -398,9 +425,8 @@ public class ClientMethod {
 
             // Add FluxUtil as an import if this is an asynchronous method and the last parameter isn't the Context
             // parameter.
-            if (proxyMethod != null && !proxyMethod.isSync()
-                && (CoreUtils.isNullOrEmpty(parameters)
-                    || parameters.get(parameters.size() - 1) != ClientMethodParameter.CONTEXT_PARAMETER)) {
+            if (proxyMethod != null && !proxyMethod.isSync() && (CoreUtils.isNullOrEmpty(parameters)
+                || parameters.get(parameters.size() - 1) != ClientMethodParameter.CONTEXT_PARAMETER)) {
                 imports.add("com.azure.core.util.FluxUtil");
             }
 
@@ -416,7 +442,9 @@ public class ClientMethod {
 
             if (type == ClientMethodType.LongRunningBeginAsync || type == ClientMethodType.LongRunningBeginSync) {
                 if (settings.isFluent()) {
-                    if (((GenericType) this.getReturnValue().getType().getClientType()).getTypeArguments()[0] instanceof GenericType) {
+                    if (((GenericType) this.getReturnValue()
+                        .getType()
+                        .getClientType()).getTypeArguments()[0] instanceof GenericType) {
                         imports.add("com.fasterxml.jackson.core.type.TypeReference");
                     }
                 } else {
@@ -432,7 +460,7 @@ public class ClientMethod {
                     if (getMethodPollingDetails() != null) {
                         for (String pollingStrategy : KNOWN_POLLING_STRATEGIES) {
                             if (getMethodPollingDetails().getPollingStrategy().contains(pollingStrategy)
-                                    || getMethodPollingDetails().getSyncPollingStrategy().contains(pollingStrategy)) {
+                                || getMethodPollingDetails().getSyncPollingStrategy().contains(pollingStrategy)) {
                                 imports.add("com.azure.core.util.polling." + pollingStrategy);
                             }
                         }
@@ -440,10 +468,14 @@ public class ClientMethod {
                 }
             }
 
-            if (type == ClientMethodType.PagingAsyncSinglePage || type == ClientMethodType.PagingSyncSinglePage && this.getMethodPageDetails() != null) {
-                if (this.getMethodPageDetails() != null && this.getMethodPageDetails().getLroIntermediateType() != null) {
+            if (type == ClientMethodType.PagingAsyncSinglePage
+                || type == ClientMethodType.PagingSyncSinglePage && this.getMethodPageDetails() != null) {
+                if (this.getMethodPageDetails() != null
+                    && this.getMethodPageDetails().getLroIntermediateType() != null) {
                     // pageable + LRO
-                    this.getMethodPageDetails().getLroIntermediateType().addImportsTo(imports, includeImplementationImports);
+                    this.getMethodPageDetails()
+                        .getLroIntermediateType()
+                        .addImportsTo(imports, includeImplementationImports);
                 }
             }
 
@@ -463,31 +495,29 @@ public class ClientMethod {
     }
 
     public static ClientMethod getAsyncSendRequestClientMethod(boolean isInMethodGroup) {
-        return new Builder()
-                .name("sendRequestAsync")
-                .description("Sends the {@code httpRequest}.")
-                .clientReference(isInMethodGroup ? "this.client" : "this")
-                .methodVisibility(JavaVisibility.Public)
-                .onlyRequiredParameters(false)
-                .type(ClientMethodType.SendRequestAsync)
-                .parameters(Collections.singletonList(ClientMethodParameter.HTTP_REQUEST_PARAMETER))
-                .returnValue(new ReturnValue("the response body on successful completion of {@link Mono}",
-                        GenericType.Mono(GenericType.Response(ClassType.BINARY_DATA))))
-                .build();
+        return new Builder().name("sendRequestAsync")
+            .description("Sends the {@code httpRequest}.")
+            .clientReference(isInMethodGroup ? "this.client" : "this")
+            .methodVisibility(JavaVisibility.Public)
+            .onlyRequiredParameters(false)
+            .type(ClientMethodType.SendRequestAsync)
+            .parameters(ClientMethodParameter.HTTP_REQUEST_PARAMETER)
+            .returnValue(new ReturnValue("the response body on successful completion of {@link Mono}",
+                GenericType.Mono(GenericType.Response(ClassType.BINARY_DATA))))
+            .build();
     }
 
     public static ClientMethod getSyncSendRequestClientMethod(boolean isInMethodGroup) {
-        return new Builder()
-                .name("sendRequest")
-                .description("Sends the {@code httpRequest}.")
-                .clientReference(isInMethodGroup ? "this.client" : "this")
-                .methodVisibility(JavaVisibility.Public)
-                .onlyRequiredParameters(false)
-                .type(ClientMethodType.SendRequestSync)
-                .parameters(Arrays.asList(ClientMethodParameter.HTTP_REQUEST_PARAMETER, ClientMethodParameter.CONTEXT_PARAMETER))
-                .returnValue(new ReturnValue("the response body along with {@link Response}",
-                        GenericType.Response(ClassType.BINARY_DATA)))
-                .build();
+        return new Builder().name("sendRequest")
+            .description("Sends the {@code httpRequest}.")
+            .clientReference(isInMethodGroup ? "this.client" : "this")
+            .methodVisibility(JavaVisibility.Public)
+            .onlyRequiredParameters(false)
+            .type(ClientMethodType.SendRequestSync)
+            .parameters(ClientMethodParameter.HTTP_REQUEST_PARAMETER, ClientMethodParameter.CONTEXT_PARAMETER)
+            .returnValue(new ReturnValue("the response body along with {@link Response}",
+                GenericType.Response(ClassType.BINARY_DATA)))
+            .build();
     }
 
     public static class Builder {
@@ -511,6 +541,7 @@ public class ClientMethod {
         protected MethodPollingDetails methodPollingDetails;
         protected ExternalDocumentation externalDocumentation;
         protected String crossLanguageDefinitionId;
+        protected boolean hasWithContextOverload;
 
         public Builder setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
             this.crossLanguageDefinitionId = crossLanguageDefinitionId;
@@ -519,6 +550,7 @@ public class ClientMethod {
 
         /**
          * Sets the description of this ClientMethod.
+         *
          * @param description the description of this ClientMethod
          * @return the Builder itself
          */
@@ -529,6 +561,7 @@ public class ClientMethod {
 
         /**
          * Sets the return value of this ClientMethod.
+         *
          * @param returnValue the return value of this ClientMethod
          * @return the Builder itself
          */
@@ -539,6 +572,7 @@ public class ClientMethod {
 
         /**
          * Sets the name of this ClientMethod.
+         *
          * @param name the name of this ClientMethod
          * @return the Builder itself
          */
@@ -549,6 +583,7 @@ public class ClientMethod {
 
         /**
          * Sets the parameters of this ClientMethod.
+         *
          * @param parameters the parameters of this ClientMethod
          * @return the Builder itself
          */
@@ -557,9 +592,15 @@ public class ClientMethod {
             return this;
         }
 
+        private Builder parameters(ClientMethodParameter... parameters) {
+            this.parameters = CoreUtils.isNullOrEmpty(parameters) ? null : Arrays.asList(parameters);
+            return this;
+        }
+
         /**
-         * Sets whether or not this ClientMethod has omitted optional parameters.
-         * @param onlyRequiredParameters whether or not this ClientMethod has omitted optional parameters
+         * Sets whether this ClientMethod has omitted optional parameters.
+         *
+         * @param onlyRequiredParameters whether this ClientMethod has omitted optional parameters
          * @return the Builder itself
          */
         public Builder onlyRequiredParameters(boolean onlyRequiredParameters) {
@@ -569,6 +610,7 @@ public class ClientMethod {
 
         /**
          * Sets the type of this ClientMethod.
+         *
          * @param type the type of this ClientMethod
          * @return the Builder itself
          */
@@ -579,6 +621,7 @@ public class ClientMethod {
 
         /**
          * Sets the RestAPIMethod that this ClientMethod eventually calls.
+         *
          * @param proxyMethod the RestAPIMethod that this ClientMethod eventually calls
          * @return the Builder itself
          */
@@ -588,8 +631,11 @@ public class ClientMethod {
         }
 
         /**
-         * Sets the expressions ( (parameters and service client properties) that need to be validated in this ClientMethod.
-         * @param validateExpressions the expressions (parameters and service client properties) that need to be validated in this ClientMethod
+         * Sets the expressions ( (parameters and service client properties) that need to be validated in this
+         * ClientMethod.
+         *
+         * @param validateExpressions the expressions (parameters and service client properties) that need to be
+         * validated in this ClientMethod
          * @return the Builder itself
          */
         public Builder validateExpressions(Map<String, String> validateExpressions) {
@@ -599,6 +645,7 @@ public class ClientMethod {
 
         /**
          * Sets the reference to the service client.
+         *
          * @param clientReference the reference to the service client
          * @return the Builder itself
          */
@@ -609,6 +656,7 @@ public class ClientMethod {
 
         /**
          * Sets the parameter expressions which are required.
+         *
          * @param requiredNullableParameterExpressions the parameter expressions which are required
          * @return the Builder itself
          */
@@ -619,6 +667,7 @@ public class ClientMethod {
 
         /**
          * Sets the parameter that needs to transformed before pagination.
+         *
          * @param isGroupedParameterRequired the parameter that needs to transformed before pagination
          * @return the Builder itself
          */
@@ -629,6 +678,7 @@ public class ClientMethod {
 
         /**
          * Sets the type name of groupedParameter.
+         *
          * @param groupedParameterTypeName the type name of groupedParameter
          * @return the Builder itself
          */
@@ -639,6 +689,7 @@ public class ClientMethod {
 
         /**
          * Sets the pagination information if this is a paged method.
+         *
          * @param methodPageDetails the pagination information if this is a paged method
          * @return the Builder itself
          */
@@ -649,6 +700,7 @@ public class ClientMethod {
 
         /**
          * Sets the parameter transformations before calling ProxyMethod.
+         *
          * @param methodTransformationDetails the parameter transformations before calling ProxyMethod
          * @return the Builder itself
          */
@@ -659,6 +711,7 @@ public class ClientMethod {
 
         /**
          * Sets the parameter method visibility.
+         *
          * @param methodVisibility the method visibility, default is Public.
          * @return the Builder itself
          */
@@ -669,6 +722,7 @@ public class ClientMethod {
 
         /**
          * Sets the parameter method visibility in wrapper client.
+         *
          * @param methodVisibilityInWrapperClient the method visibility in wrapper client, default is Public.
          * @return the Builder itself
          */
@@ -679,6 +733,7 @@ public class ClientMethod {
 
         /**
          * Sets the polling information if this is a long running method.
+         *
          * @param methodPollingDetails the polling information
          * @return the Builder itself
          */
@@ -689,6 +744,7 @@ public class ClientMethod {
 
         /**
          * Sets the implementation details for the method.
+         *
          * @param implementationDetails the implementation details.
          * @return the Builder itself
          */
@@ -699,6 +755,7 @@ public class ClientMethod {
 
         /**
          * Sets method documentation
+         *
          * @param externalDocumentation method level documentation
          * @return the Builder itself
          */
@@ -708,30 +765,30 @@ public class ClientMethod {
         }
 
         /**
+         * Whether this {@link ClientMethod} has a corresponding {@link ClientMethod} that has an additional
+         * {@code Context} parameter.
+         * <p>
+         * When this is true, when this method generates its client method it will call into the {@code Context}-based
+         * overload instead of generating a method body. This helps to avoid generating duplicate method bodies that
+         * only differ by the presence of a {@code Context} parameter.
+         *
+         * @param hasWithContextOverload whether this method has a corresponding {@code Context}-based overload
+         * @return the Builder itself
+         */
+        public Builder hasWithContextOverload(boolean hasWithContextOverload) {
+            this.hasWithContextOverload = hasWithContextOverload;
+            return this;
+        }
+
+        /**
          * @return an immutable ClientMethod instance with the configurations on this builder.
          */
         public ClientMethod build() {
-            return new ClientMethod(
-                    description,
-                    returnValue,
-                    name,
-                    parameters,
-                    onlyRequiredParameters,
-                    type,
-                    proxyMethod,
-                    validateExpressions,
-                    clientReference,
-                    requiredNullableParameterExpressions,
-                    isGroupedParameterRequired,
-                    groupedParameterTypeName,
-                    methodPageDetails,
-                    methodTransformationDetails,
-                    methodVisibility,
-                    methodVisibilityInWrapperClient,
-                    implementationDetails,
-                    methodPollingDetails,
-                    externalDocumentation,
-                    crossLanguageDefinitionId);
+            return new ClientMethod(description, returnValue, name, parameters, onlyRequiredParameters, type,
+                proxyMethod, validateExpressions, clientReference, requiredNullableParameterExpressions,
+                isGroupedParameterRequired, groupedParameterTypeName, methodPageDetails, methodTransformationDetails,
+                methodVisibility, methodVisibilityInWrapperClient, implementationDetails, methodPollingDetails,
+                externalDocumentation, crossLanguageDefinitionId, hasWithContextOverload);
         }
     }
 }
