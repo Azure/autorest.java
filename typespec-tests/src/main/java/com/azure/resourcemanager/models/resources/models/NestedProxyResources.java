@@ -77,8 +77,7 @@ public interface NestedProxyResources {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<NestedProxyResource> listByTopLevelTrackedResource(String resourceGroupName,
-        String topLevelTrackedResourceName);
+    PagedIterable<NestedProxyResource> listByParent(String resourceGroupName, String topLevelTrackedResourceName);
 
     /**
      * List NestedProxyResource resources by TopLevelTrackedResource.
@@ -91,8 +90,8 @@ public interface NestedProxyResources {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<NestedProxyResource> listByTopLevelTrackedResource(String resourceGroupName,
-        String topLevelTrackedResourceName, Context context);
+    PagedIterable<NestedProxyResource> listByParent(String resourceGroupName, String topLevelTrackedResourceName,
+        Context context);
 
     /**
      * Get a NestedProxyResource.

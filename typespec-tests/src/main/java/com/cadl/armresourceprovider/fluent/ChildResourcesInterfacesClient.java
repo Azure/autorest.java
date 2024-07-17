@@ -206,6 +206,35 @@ public interface ChildResourcesInterfacesClient {
     void delete(String resourceGroupName, String topLevelArmResourceName, String childResourceName, Context context);
 
     /**
+     * List ChildResource resources by TopLevelArmResource.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelArmResourceName arm resource name for path.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
+        String topLevelArmResourceName);
+
+    /**
+     * List ChildResource resources by TopLevelArmResource.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelArmResourceName arm resource name for path.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
+     */
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
+        String topLevelArmResourceName, Context context);
+
+    /**
      * A long-running resource action.
      * 
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
@@ -263,33 +292,4 @@ public interface ChildResourcesInterfacesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     void actionWithoutBody(String resourceGroupName, String topLevelArmResourceName, String childResourceName,
         Context context);
-
-    /**
-     * List ChildResource resources by TopLevelArmResource.
-     * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
-        String topLevelArmResourceName);
-
-    /**
-     * List ChildResource resources by TopLevelArmResource.
-     * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
-        String topLevelArmResourceName, Context context);
 }

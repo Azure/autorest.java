@@ -12,7 +12,6 @@ import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.models.resources.fluent.models.NestedProxyResourceInner;
-import com.azure.resourcemanager.models.resources.models.NestedProxyResourceUpdate;
 
 /**
  * An instance of this class provides access to all the operations defined in NestedProxyResourcesClient.
@@ -131,7 +130,7 @@ public interface NestedProxyResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(String resourceGroupName,
-        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceUpdate properties);
+        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner properties);
 
     /**
      * Update a NestedProxyResource.
@@ -148,7 +147,7 @@ public interface NestedProxyResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(String resourceGroupName,
-        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceUpdate properties,
+        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner properties,
         Context context);
 
     /**
@@ -165,7 +164,7 @@ public interface NestedProxyResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties);
+        String nextedProxyResourceName, NestedProxyResourceInner properties);
 
     /**
      * Update a NestedProxyResource.
@@ -182,7 +181,7 @@ public interface NestedProxyResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties, Context context);
+        String nextedProxyResourceName, NestedProxyResourceInner properties, Context context);
 
     /**
      * Delete a NestedProxyResource.
@@ -254,8 +253,7 @@ public interface NestedProxyResourcesClient {
      * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<NestedProxyResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
-        String topLevelTrackedResourceName);
+    PagedIterable<NestedProxyResourceInner> listByParent(String resourceGroupName, String topLevelTrackedResourceName);
 
     /**
      * List NestedProxyResource resources by TopLevelTrackedResource.
@@ -269,6 +267,6 @@ public interface NestedProxyResourcesClient {
      * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<NestedProxyResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
-        String topLevelTrackedResourceName, Context context);
+    PagedIterable<NestedProxyResourceInner> listByParent(String resourceGroupName, String topLevelTrackedResourceName,
+        Context context);
 }
