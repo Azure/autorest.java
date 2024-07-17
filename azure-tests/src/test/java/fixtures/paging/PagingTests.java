@@ -33,27 +33,27 @@ public class PagingTests {
     }
 
     @Test
-    public void getSinglePages() throws Exception {
+    public void getSinglePages() {
         PagedIterable<Product> response = client.getSinglePages();
         Assertions.assertEquals(1, response.stream().count());
     }
 
     @Test
-    public void getMultiplePages() throws Exception {
+    public void getMultiplePages() {
         List<Product> response = client.getMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
 
     @Test
-    public void getOdataMultiplePages() throws Exception {
+    public void getOdataMultiplePages() {
         List<Product> response = client.getOdataMultiplePages(null, null)
                 .stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
 
     @Test
-    public void getMultiplePagesWithOffset() throws Exception {
+    public void getMultiplePagesWithOffset() {
         PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
         options.setOffset(100);
         List<Product> response = client.getMultiplePagesWithOffset(options, "client-id")
@@ -74,32 +74,25 @@ public class PagingTests {
     }
 
     @Test
-    public void getMultiplePagesRetryFirst() throws Exception {
-        List<Product> response = client.getMultiplePagesRetryFirst()
-                .stream().collect(Collectors.toList());
+    public void getMultiplePagesRetryFirst() {
+        List<Product> response = client.getMultiplePagesRetryFirst().stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
 
     @Test
-    public void getMultiplePagesRetrySecond() throws Exception {
-        List<Product> response = client.getMultiplePagesRetrySecond()
-                .stream().collect(Collectors.toList());
+    public void getMultiplePagesRetrySecond() {
+        List<Product> response = client.getMultiplePagesRetrySecond().stream().collect(Collectors.toList());
         Assertions.assertEquals(10, response.size());
     }
 
     @Test
-    public void getSinglePagesFailure() throws Exception {
-        try {
-            List<Product> response = client.getSinglePagesFailure()
-                    .stream().collect(Collectors.toList());
-            Assertions.fail();
-        } catch (HttpResponseException ex) {
-            Assertions.assertNotNull(ex.getResponse());
-        }
+    public void getSinglePagesFailure() {
+        Assertions.assertThrows(HttpResponseException.class,
+            () -> client.getSinglePagesFailure().stream().collect(Collectors.toList()));
     }
 
     @Test
-    public void getMultiplePagesFailure() throws Exception {
+    public void getMultiplePagesFailure() {
         try {
             List<Product> response = client.getMultiplePagesFailure()
                     .stream().collect(Collectors.toList());
@@ -116,20 +109,20 @@ public class PagingTests {
             client.getMultiplePagesFailureUri().stream().collect(Collectors.toList());
             Assertions.fail();
         } catch (Exception e) {
-            Assertions.assertTrue(e instanceof HttpResponseException);
+            Assertions.assertInstanceOf(HttpResponseException.class, e);
             HttpResponseException httpResponseException = (HttpResponseException) e;
             Assertions.assertEquals(404, httpResponseException.getResponse().getStatusCode());
         }
     }
 
     @Test
-    public void getMultiplePagesFragmentNextLink() throws Exception {
+    public void getMultiplePagesFragmentNextLink() {
         PagedIterable<Product> response = client.getMultiplePagesFragmentNextLink("1.6", "test_user");
         Assertions.assertEquals(10, response.stream().count());
     }
 
     @Test
-    public void getMultiplePagesFragmentWithGroupingNextLink() throws Exception {
+    public void getMultiplePagesFragmentWithGroupingNextLink() {
         PagedIterable<Product> response = client.getMultiplePagesFragmentWithGroupingNextLink(
                 new CustomParameterGroup().setApiVersion("1.6").setTenant("test_user"));
         Assertions.assertEquals(10, response.stream().count());
