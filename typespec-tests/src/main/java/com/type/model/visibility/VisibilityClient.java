@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.model.visibility.implementation.VisibilityClientImpl;
+import com.type.model.visibility.models.ReadOnlyModel;
 import com.type.model.visibility.models.VisibilityModel;
 
 /**
@@ -245,6 +246,48 @@ public final class VisibilityClient {
     }
 
     /**
+     * The putReadOnlyModel operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     optionalNullableIntList (Optional): [
+     *         int (Optional)
+     *     ]
+     *     optionalStringRecord (Optional): {
+     *         String: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     optionalNullableIntList (Optional): [
+     *         int (Optional)
+     *     ]
+     *     optionalStringRecord (Optional): {
+     *         String: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param input The input parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return roundTrip model with readonly optional properties along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putReadOnlyModelWithResponse(BinaryData input, RequestOptions requestOptions) {
+        return this.serviceClient.putReadOnlyModelWithResponse(input, requestOptions);
+    }
+
+    /**
      * The getModel operation.
      * 
      * @param input The input parameter.
@@ -358,5 +401,26 @@ public final class VisibilityClient {
         // Generated convenience method for deleteModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         deleteModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue();
+    }
+
+    /**
+     * The putReadOnlyModel operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return roundTrip model with readonly optional properties.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ReadOnlyModel putReadOnlyModel(ReadOnlyModel input) {
+        // Generated convenience method for putReadOnlyModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putReadOnlyModelWithResponse(BinaryData.fromObject(input), requestOptions).getValue()
+            .toObject(ReadOnlyModel.class);
     }
 }

@@ -75,7 +75,8 @@ public interface ChildResourcesInterfaces {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<ChildResource> listByTopLevelArmResource(String resourceGroupName, String topLevelArmResourceName);
+    PagedIterable<ChildResource> listByTopLevelTrackedResource(String resourceGroupName,
+        String topLevelArmResourceName);
 
     /**
      * List ChildResource resources by TopLevelArmResource.
@@ -88,7 +89,7 @@ public interface ChildResourcesInterfaces {
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
      */
-    PagedIterable<ChildResource> listByTopLevelArmResource(String resourceGroupName, String topLevelArmResourceName,
+    PagedIterable<ChildResource> listByTopLevelTrackedResource(String resourceGroupName, String topLevelArmResourceName,
         Context context);
 
     /**
