@@ -84,10 +84,10 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
                 methodBlock.line("PagedFlux<BinaryData> pagedFluxResponse = %1$s(%2$s);", getMethodName(protocolMethod), invocationExpression);
 
                 methodBlock.methodReturn(String.format(
-                        "PagedFlux.create(() -> (continuationToken, pageSize) -> {\n" +
-                                "    Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)\n" +
+                        "PagedFlux.create(() -> (continuationTokenParam, pageSizeParam) -> {\n" +
+                                "    Flux<PagedResponse<BinaryData>> flux = (continuationTokenParam == null)\n" +
                                 "        ? pagedFluxResponse.byPage().take(1)\n" +
-                                "        : pagedFluxResponse.byPage(continuationToken).take(1);\n" +
+                                "        : pagedFluxResponse.byPage(continuationTokenParam).take(1);\n" +
                                 "    return flux.map(pagedResponse -> new PagedResponseBase<Void, %1$s>(pagedResponse.getRequest(),\n" +
                                 "        pagedResponse.getStatusCode(),\n" +
                                 "        pagedResponse.getHeaders(),\n" +
@@ -120,7 +120,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
     @Override
     protected void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock) {
         if (methodType == ClientMethodType.PagingAsync) {
-            methodBlock.methodReturn(String.format("PagedFlux.create(() -> (continuationToken, pageSize) -> Flux.error(%s))", exceptionExpression));
+            methodBlock.methodReturn(String.format("PagedFlux.create(() -> (ignoredContinuationToken, ignoredPageSize) -> Flux.error(%s))", exceptionExpression));
         } else if (methodType == ClientMethodType.LongRunningBeginAsync) {
             methodBlock.methodReturn(String.format("PollerFlux.error(%s)", exceptionExpression));
         } else {

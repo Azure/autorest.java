@@ -35,7 +35,6 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.models.resources.fluent.NestedProxyResourcesClient;
 import com.azure.resourcemanager.models.resources.fluent.models.NestedProxyResourceInner;
 import com.azure.resourcemanager.models.resources.implementation.models.NestedProxyResourceListResult;
-import com.azure.resourcemanager.models.resources.models.NestedProxyResourceUpdate;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -103,7 +102,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
             @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") NestedProxyResourceUpdate properties, Context context);
+            @BodyParam("application/json") NestedProxyResourceInner properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Delete("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}")
@@ -559,7 +558,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
-        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceUpdate properties) {
+        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner properties) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -609,7 +608,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
-        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceUpdate properties,
+        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner properties,
         Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
@@ -657,7 +656,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdateAsync(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties) {
+        NestedProxyResourceInner properties) {
         Mono<Response<Flux<ByteBuffer>>> mono = updateWithResponseAsync(resourceGroupName, topLevelTrackedResourceName,
             nextedProxyResourceName, properties);
         return this.client.<NestedProxyResourceInner, NestedProxyResourceInner>getLroResult(mono,
@@ -681,7 +680,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdateAsync(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties, Context context) {
+        NestedProxyResourceInner properties, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = updateWithResponseAsync(resourceGroupName, topLevelTrackedResourceName,
             nextedProxyResourceName, properties, context);
@@ -704,7 +703,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties) {
+        NestedProxyResourceInner properties) {
         return this
             .beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties)
             .getSyncPoller();
@@ -726,7 +725,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties, Context context) {
+        NestedProxyResourceInner properties, Context context) {
         return this
             .beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties,
                 context)
@@ -747,7 +746,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<NestedProxyResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties) {
         return beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -768,7 +767,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<NestedProxyResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties, Context context) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties, Context context) {
         return beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties,
             context).last().flatMap(this.client::getLroFinalResultOrError);
     }
@@ -787,7 +786,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties) {
         return updateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties).block();
     }
 
@@ -806,7 +805,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties, Context context) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties, Context context) {
         return updateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties, context)
             .block();
     }

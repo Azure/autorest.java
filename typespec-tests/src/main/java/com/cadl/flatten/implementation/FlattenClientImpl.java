@@ -152,8 +152,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> send(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData sendRequest, RequestOptions requestOptions, Context context);
+            @QueryParam("constantQueryParam") String constantQueryParam, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData sendRequest,
+            RequestOptions requestOptions, Context context);
 
         @Post("/flatten/send")
         @ExpectedResponses({ 200 })
@@ -162,8 +163,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sendSync(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData sendRequest, RequestOptions requestOptions, Context context);
+            @QueryParam("constantQueryParam") String constantQueryParam, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData sendRequest,
+            RequestOptions requestOptions, Context context);
 
         @Post("/flatten/send-projected-name")
         @ExpectedResponses({ 200 })
@@ -212,7 +214,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> update(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @PathParam("id") long id,
+            @HeaderParam("content-type") String contentType, @PathParam("id") long id,
             @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData updateRequest,
             RequestOptions requestOptions, Context context);
 
@@ -223,7 +225,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> updateSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @PathParam("id") long id,
+            @HeaderParam("content-type") String contentType, @PathParam("id") long id,
             @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData updateRequest,
             RequestOptions requestOptions, Context context);
 
@@ -235,7 +237,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadFile(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("multipart/form-data") BinaryData uploadFileRequest, RequestOptions requestOptions,
             Context context);
 
@@ -247,7 +249,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadFileSync(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("multipart/form-data") BinaryData uploadFileRequest, RequestOptions requestOptions,
             Context context);
 
@@ -259,7 +261,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadTodo(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("multipart/form-data") BinaryData uploadTodoRequest, RequestOptions requestOptions,
             Context context);
 
@@ -271,7 +273,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadTodoSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("multipart/form-data") BinaryData uploadTodoRequest, RequestOptions requestOptions,
             Context context);
     }
@@ -302,8 +304,9 @@ public final class FlattenClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(String id, BinaryData sendRequest,
         RequestOptions requestOptions) {
+        final String constantQueryParam = "constant";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.send(this.getEndpoint(), id,
+        return FluxUtil.withContext(context -> service.send(this.getEndpoint(), id, constantQueryParam,
             this.getServiceVersion().getVersion(), accept, sendRequest, requestOptions, context));
     }
 
@@ -332,9 +335,10 @@ public final class FlattenClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData sendRequest, RequestOptions requestOptions) {
+        final String constantQueryParam = "constant";
         final String accept = "application/json";
-        return service.sendSync(this.getEndpoint(), id, this.getServiceVersion().getVersion(), accept, sendRequest,
-            requestOptions, Context.NONE);
+        return service.sendSync(this.getEndpoint(), id, constantQueryParam, this.getServiceVersion().getVersion(),
+            accept, sendRequest, requestOptions, Context.NONE);
     }
 
     /**

@@ -23,7 +23,7 @@ public final class TopLevelArmResourceUpdate {
     private Map<String, String> tags;
 
     /*
-     * The properties property.
+     * The resource-specific properties for this resource.
      */
     @JsonProperty(value = "properties")
     private TopLevelArmResourceUpdateProperties innerProperties;
@@ -55,7 +55,7 @@ public final class TopLevelArmResourceUpdate {
     }
 
     /**
-     * Get the innerProperties property: The properties property.
+     * Get the innerProperties property: The resource-specific properties for this resource.
      * 
      * @return the innerProperties value.
      */

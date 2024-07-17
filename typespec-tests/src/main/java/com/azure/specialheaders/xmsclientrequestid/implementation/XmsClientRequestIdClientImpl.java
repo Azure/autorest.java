@@ -103,7 +103,7 @@ public final class XmsClientRequestIdClientImpl {
     @Host("http://localhost:3000")
     @ServiceInterface(name = "XmsClientRequestIdCl")
     public interface XmsClientRequestIdClientService {
-        @Get("/azure/special-headers/x-ms-client-request-id")
+        @Get("/azure/special-headers/x-ms-client-request-id/")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -111,7 +111,7 @@ public final class XmsClientRequestIdClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Get("/azure/special-headers/x-ms-client-request-id")
+        @Get("/azure/special-headers/x-ms-client-request-id/")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })

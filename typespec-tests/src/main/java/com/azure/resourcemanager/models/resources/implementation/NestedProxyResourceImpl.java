@@ -9,8 +9,6 @@ import com.azure.core.util.Context;
 import com.azure.resourcemanager.models.resources.fluent.models.NestedProxyResourceInner;
 import com.azure.resourcemanager.models.resources.models.NestedProxyResource;
 import com.azure.resourcemanager.models.resources.models.NestedProxyResourceProperties;
-import com.azure.resourcemanager.models.resources.models.NestedProxyResourceUpdate;
-import com.azure.resourcemanager.models.resources.models.NestedProxyResourceUpdateProperties;
 
 public final class NestedProxyResourceImpl
     implements NestedProxyResource, NestedProxyResource.Definition, NestedProxyResource.Update {
@@ -56,8 +54,6 @@ public final class NestedProxyResourceImpl
 
     private String nextedProxyResourceName;
 
-    private NestedProxyResourceUpdate updateProperties;
-
     public NestedProxyResourceImpl withExistingTopLevelTrackedResource(String resourceGroupName,
         String topLevelTrackedResourceName) {
         this.resourceGroupName = resourceGroupName;
@@ -88,14 +84,13 @@ public final class NestedProxyResourceImpl
     }
 
     public NestedProxyResourceImpl update() {
-        this.updateProperties = new NestedProxyResourceUpdate();
         return this;
     }
 
     public NestedProxyResource apply() {
         this.innerObject = serviceManager.serviceClient()
             .getNestedProxyResources()
-            .update(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, updateProperties,
+            .update(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, this.innerModel(),
                 Context.NONE);
         return this;
     }
@@ -103,7 +98,8 @@ public final class NestedProxyResourceImpl
     public NestedProxyResource apply(Context context) {
         this.innerObject = serviceManager.serviceClient()
             .getNestedProxyResources()
-            .update(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, updateProperties, context);
+            .update(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, this.innerModel(),
+                context);
         return this;
     }
 
@@ -136,11 +132,6 @@ public final class NestedProxyResourceImpl
 
     public NestedProxyResourceImpl withProperties(NestedProxyResourceProperties properties) {
         this.innerModel().withProperties(properties);
-        return this;
-    }
-
-    public NestedProxyResourceImpl withProperties(NestedProxyResourceUpdateProperties properties) {
-        this.updateProperties.withProperties(properties);
         return this;
     }
 }

@@ -18,6 +18,7 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
@@ -32,33 +33,33 @@ import com.azure.core.util.polling.StatusCheckPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
 import fixtures.lro.models.CloudErrorException;
-import fixtures.lro.models.LROsDelete202NoRetry204Response;
-import fixtures.lro.models.LROsDelete202Retry200Response;
-import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryResponse;
-import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededResponse;
-import fixtures.lro.models.LROsDeleteAsyncRetrycanceledResponse;
-import fixtures.lro.models.LROsDeleteAsyncRetryFailedResponse;
-import fixtures.lro.models.LROsDeleteAsyncRetrySucceededResponse;
-import fixtures.lro.models.LROsDeleteNoHeaderInRetryResponse;
-import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededResponse;
-import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Response;
-import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Response;
-import fixtures.lro.models.LROsPatch200SucceededIgnoreHeadersResponse;
-import fixtures.lro.models.LROsPatch201RetryWithAsyncHeaderResponse;
-import fixtures.lro.models.LROsPatch202RetryWithAsyncAndLocationHeaderResponse;
-import fixtures.lro.models.LROsPost202ListResponse;
-import fixtures.lro.models.LROsPost202NoRetry204Response;
-import fixtures.lro.models.LROsPost202Retry200Response;
-import fixtures.lro.models.LROsPostAsyncNoRetrySucceededResponse;
-import fixtures.lro.models.LROsPostAsyncRetrycanceledResponse;
-import fixtures.lro.models.LROsPostAsyncRetryFailedResponse;
-import fixtures.lro.models.LROsPostAsyncRetrySucceededResponse;
-import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryResponse;
-import fixtures.lro.models.LROsPutAsyncNoRetrycanceledResponse;
-import fixtures.lro.models.LROsPutAsyncNoRetrySucceededResponse;
-import fixtures.lro.models.LROsPutAsyncRetryFailedResponse;
-import fixtures.lro.models.LROsPutAsyncRetrySucceededResponse;
-import fixtures.lro.models.LROsPutNoHeaderInRetryResponse;
+import fixtures.lro.models.LROsDelete202NoRetry204Headers;
+import fixtures.lro.models.LROsDelete202Retry200Headers;
+import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetrycanceledHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsDeleteNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededHeaders;
+import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Headers;
+import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Headers;
+import fixtures.lro.models.LROsPatch200SucceededIgnoreHeadersHeaders;
+import fixtures.lro.models.LROsPatch201RetryWithAsyncHeaderHeaders;
+import fixtures.lro.models.LROsPatch202RetryWithAsyncAndLocationHeaderHeaders;
+import fixtures.lro.models.LROsPost202ListHeaders;
+import fixtures.lro.models.LROsPost202NoRetry204Headers;
+import fixtures.lro.models.LROsPost202Retry200Headers;
+import fixtures.lro.models.LROsPostAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsPostAsyncRetrycanceledHeaders;
+import fixtures.lro.models.LROsPostAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsPostAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsPutAsyncNoRetrycanceledHeaders;
+import fixtures.lro.models.LROsPutAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsPutAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutNoHeaderInRetryHeaders;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
@@ -106,21 +107,41 @@ public final class LROs {
         @Patch("/lro/patch/200/succeeded/ignoreheaders")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPatch200SucceededIgnoreHeadersResponse> patch200SucceededIgnoreHeaders(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPatch200SucceededIgnoreHeadersHeaders, Product>> patch200SucceededIgnoreHeaders(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Patch("/lro/patch/200/succeeded/ignoreheaders")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> patch200SucceededIgnoreHeadersNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/lro/patch/201/retry/onlyAsyncHeader")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPatch201RetryWithAsyncHeaderResponse> patch201RetryWithAsyncHeader(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPatch201RetryWithAsyncHeaderHeaders, Product>> patch201RetryWithAsyncHeader(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Patch("/lro/patch/201/retry/onlyAsyncHeader")
+        @ExpectedResponses({ 200, 201 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> patch201RetryWithAsyncHeaderNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Patch("/lro/patch/202/retry/asyncAndLocationHeader")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse> patch202RetryWithAsyncAndLocationHeader(
-            @HostParam("$host") String host, @BodyParam("application/json") Product product,
-            @HeaderParam("Accept") String accept, Context context);
+        Mono<ResponseBase<LROsPatch202RetryWithAsyncAndLocationHeaderHeaders, Product>>
+            patch202RetryWithAsyncAndLocationHeader(@HostParam("$host") String host,
+                @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
+
+        @Patch("/lro/patch/202/retry/asyncAndLocationHeader")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> patch202RetryWithAsyncAndLocationHeaderNoCustomHeaders(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/put/201/succeeded")
         @ExpectedResponses({ 201 })
@@ -131,8 +152,14 @@ public final class LROs {
         @Post("/lro/list")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPost202ListResponse> post202List(@HostParam("$host") String host, @HeaderParam("Accept") String accept,
-            Context context);
+        Mono<ResponseBase<LROsPost202ListHeaders, List<Product>>> post202List(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/lro/list")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<List<Product>>> post202ListNoCustomHeaders(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/put/200/succeeded/nostate")
         @ExpectedResponses({ 200 })
@@ -173,37 +200,77 @@ public final class LROs {
         @Put("/lro/put/noheader/202/200")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetry(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPutNoHeaderInRetryHeaders, Product>> putNoHeaderInRetry(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/lro/put/noheader/202/200")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> putNoHeaderInRetryNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/putasync/retry/succeeded")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceeded(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPutAsyncRetrySucceededHeaders, Product>> putAsyncRetrySucceeded(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/lro/putasync/retry/succeeded")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> putAsyncRetrySucceededNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/putasync/noretry/succeeded")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceeded(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPutAsyncNoRetrySucceededHeaders, Product>> putAsyncNoRetrySucceeded(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/lro/putasync/noretry/succeeded")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> putAsyncNoRetrySucceededNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/putasync/retry/failed")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailed(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPutAsyncRetryFailedHeaders, Product>> putAsyncRetryFailed(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/lro/putasync/retry/failed")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> putAsyncRetryFailedNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/putasync/noretry/canceled")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceled(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, Product>> putAsyncNoRetrycanceled(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/lro/putasync/noretry/canceled")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> putAsyncNoRetrycanceledNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/putasync/noheader/201/200")
         @ExpectedResponses({ 201 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetry(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPutAsyncNoHeaderInRetryHeaders, Product>> putAsyncNoHeaderInRetry(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/lro/putasync/noheader/201/200")
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> putAsyncNoHeaderInRetryNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/lro/putnonresource/202/200")
@@ -233,20 +300,41 @@ public final class LROs {
         @Delete("/lro/delete/provisioning/202/accepted/200/succeeded")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteProvisioning202Accepted200SucceededResponse> deleteProvisioning202Accepted200Succeeded(
+        Mono<ResponseBase<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>>
+            deleteProvisioning202Accepted200Succeeded(@HostParam("$host") String host,
+                @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/delete/provisioning/202/accepted/200/succeeded")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> deleteProvisioning202Accepted200SucceededNoCustomHeaders(
             @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/provisioning/202/deleting/200/failed")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteProvisioning202DeletingFailed200Response> deleteProvisioning202DeletingFailed200(
-            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<ResponseBase<LROsDeleteProvisioning202DeletingFailed200Headers, Product>>
+            deleteProvisioning202DeletingFailed200(@HostParam("$host") String host,
+                @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/delete/provisioning/202/deleting/200/failed")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> deleteProvisioning202DeletingFailed200NoCustomHeaders(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/provisioning/202/deleting/200/canceled")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteProvisioning202Deletingcanceled200Response> deleteProvisioning202Deletingcanceled200(
-            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+        Mono<ResponseBase<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>>
+            deleteProvisioning202Deletingcanceled200(@HostParam("$host") String host,
+                @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/delete/provisioning/202/deleting/200/canceled")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> deleteProvisioning202Deletingcanceled200NoCustomHeaders(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/204/succeeded")
         @ExpectedResponses({ 204 })
@@ -257,49 +345,97 @@ public final class LROs {
         @Delete("/lro/delete/202/retry/200")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDelete202Retry200Response> delete202Retry200(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDelete202Retry200Headers, Product>> delete202Retry200(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/delete/202/retry/200")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> delete202Retry200NoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/202/noretry/204")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDelete202NoRetry204Response> delete202NoRetry204(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204(@HostParam("$host") String host,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/delete/202/noretry/204")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> delete202NoRetry204NoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/delete/noheader")
         @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetry(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetry(
+            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/delete/noheader")
+        @ExpectedResponses({ 202, 204 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> deleteNoHeaderInRetryNoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/noheader/202/204")
         @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetry(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>> deleteAsyncNoHeaderInRetry(
+            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/deleteasync/noheader/202/204")
+        @ExpectedResponses({ 202, 204 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> deleteAsyncNoHeaderInRetryNoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/retry/succeeded")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceeded(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceeded(
+            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/deleteasync/retry/succeeded")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> deleteAsyncRetrySucceededNoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/noretry/succeeded")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceeded(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDeleteAsyncNoRetrySucceededHeaders, Void>> deleteAsyncNoRetrySucceeded(
+            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/deleteasync/noretry/succeeded")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> deleteAsyncNoRetrySucceededNoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/retry/failed")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailed(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailed(
+            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/deleteasync/retry/failed")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> deleteAsyncRetryFailedNoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Delete("/lro/deleteasync/retry/canceled")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceled(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceled(
+            @HostParam("$host") String host, @HeaderParam("Accept") String accept, Context context);
+
+        @Delete("/lro/deleteasync/retry/canceled")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> deleteAsyncRetrycanceledNoCustomHeaders(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/post/payload/200")
@@ -311,13 +447,25 @@ public final class LROs {
         @Post("/lro/post/202/retry/200")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPost202Retry200Response> post202Retry200(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPost202Retry200Headers, Void>> post202Retry200(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/lro/post/202/retry/200")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> post202Retry200NoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/post/202/noretry/204")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPost202NoRetry204Response> post202NoRetry204(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPost202NoRetry204Headers, Product>> post202NoRetry204(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/lro/post/202/noretry/204")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> post202NoRetry204NoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/LROPostDoubleHeadersFinalLocationGet")
@@ -341,25 +489,52 @@ public final class LROs {
         @Post("/lro/postasync/retry/succeeded")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceeded(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPostAsyncRetrySucceededHeaders, Product>> postAsyncRetrySucceeded(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/lro/postasync/retry/succeeded")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> postAsyncRetrySucceededNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/postasync/noretry/succeeded")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceeded(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPostAsyncNoRetrySucceededHeaders, Product>> postAsyncNoRetrySucceeded(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/lro/postasync/noretry/succeeded")
+        @ExpectedResponses({ 200, 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Product>> postAsyncNoRetrySucceededNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/postasync/retry/failed")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailed(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPostAsyncRetryFailedHeaders, Void>> postAsyncRetryFailed(@HostParam("$host") String host,
+            @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/lro/postasync/retry/failed")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> postAsyncRetryFailedNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/lro/postasync/retry/canceled")
         @ExpectedResponses({ 202 })
         @UnexpectedResponseExceptionType(CloudErrorException.class)
-        Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceled(@HostParam("$host") String host,
+        Mono<ResponseBase<LROsPostAsyncRetrycanceledHeaders, Void>> postAsyncRetrycanceled(
+            @HostParam("$host") String host, @BodyParam("application/json") Product product,
+            @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/lro/postasync/retry/canceled")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(CloudErrorException.class)
+        Mono<Response<Void>> postAsyncRetrycanceledNoCustomHeaders(@HostParam("$host") String host,
             @BodyParam("application/json") Product product, @HeaderParam("Accept") String accept, Context context);
     }
 
@@ -527,10 +702,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch200SucceededIgnoreHeadersResponse>
+    public Mono<ResponseBase<LROsPatch200SucceededIgnoreHeadersHeaders, Product>>
         patch200SucceededIgnoreHeadersWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
@@ -553,10 +728,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch200SucceededIgnoreHeadersResponse>
+    public Mono<ResponseBase<LROsPatch200SucceededIgnoreHeadersHeaders, Product>>
         patch200SucceededIgnoreHeadersWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
@@ -675,16 +850,172 @@ public final class LROs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> patch200SucceededIgnoreHeadersNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service
+            .patch200SucceededIgnoreHeadersNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> patch200SucceededIgnoreHeadersNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.patch200SucceededIgnoreHeadersNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch200SucceededIgnoreHeadersNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch200SucceededIgnoreHeadersNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch200SucceededIgnoreHeadersNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch200SucceededIgnoreHeadersNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch200SucceededIgnoreHeadersNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch200SucceededIgnoreHeadersNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch200SucceededIgnoreHeadersNoCustomHeaders(Product product) {
+        return this.beginPatch200SucceededIgnoreHeadersNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch200SucceededIgnoreHeadersNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPatch200SucceededIgnoreHeadersNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have
+     * any subsequent calls after receiving this first response.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch200SucceededIgnoreHeadersNoCustomHeaders(Product product,
+        Context context) {
+        return this.beginPatch200SucceededIgnoreHeadersNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
      * Long running patch request, service returns a 201 to the initial request with async header.
      * 
      * @param product Product to patch.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch201RetryWithAsyncHeaderResponse>
+    public Mono<ResponseBase<LROsPatch201RetryWithAsyncHeaderHeaders, Product>>
         patch201RetryWithAsyncHeaderWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
@@ -706,11 +1037,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch201RetryWithAsyncHeaderResponse> patch201RetryWithAsyncHeaderWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPatch201RetryWithAsyncHeaderHeaders, Product>>
+        patch201RetryWithAsyncHeaderWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -822,16 +1153,164 @@ public final class LROs {
     }
 
     /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> patch201RetryWithAsyncHeaderNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service
+            .patch201RetryWithAsyncHeaderNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> patch201RetryWithAsyncHeaderNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.patch201RetryWithAsyncHeaderNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch201RetryWithAsyncHeaderNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch201RetryWithAsyncHeaderNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch201RetryWithAsyncHeaderNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch201RetryWithAsyncHeaderNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch201RetryWithAsyncHeaderNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch201RetryWithAsyncHeaderNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch201RetryWithAsyncHeaderNoCustomHeaders(Product product) {
+        return this.beginPatch201RetryWithAsyncHeaderNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch201RetryWithAsyncHeaderNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPatch201RetryWithAsyncHeaderNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running patch request, service returns a 201 to the initial request with async header.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch201RetryWithAsyncHeaderNoCustomHeaders(Product product,
+        Context context) {
+        return this.beginPatch201RetryWithAsyncHeaderNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
      * Long running patch request, service returns a 202 to the initial request with async and location header.
      * 
      * @param product Product to patch.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse>
+    public Mono<ResponseBase<LROsPatch202RetryWithAsyncAndLocationHeaderHeaders, Product>>
         patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
@@ -853,10 +1332,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPatch202RetryWithAsyncAndLocationHeaderResponse>
+    public Mono<ResponseBase<LROsPatch202RetryWithAsyncAndLocationHeaderHeaders, Product>>
         patch202RetryWithAsyncAndLocationHeaderWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
@@ -967,6 +1446,157 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPatch202RetryWithAsyncAndLocationHeader(Product product, Context context) {
         return this.beginPatch202RetryWithAsyncAndLocationHeaderAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>>
+        patch202RetryWithAsyncAndLocationHeaderNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service
+            .patch202RetryWithAsyncAndLocationHeaderNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>>
+        patch202RetryWithAsyncAndLocationHeaderNoCustomHeadersWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.patch202RetryWithAsyncAndLocationHeaderNoCustomHeaders(this.client.getHost(), product, accept,
+            context);
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product>
+        beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch202RetryWithAsyncAndLocationHeaderNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch202RetryWithAsyncAndLocationHeaderNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product>
+        beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeadersAsync(Product product, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.patch202RetryWithAsyncAndLocationHeaderNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @param product Product to patch.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeaders(Product product) {
+        return this.beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running patch request, service returns a 202 to the initial request with async and location header.
+     * 
+     * @param product Product to patch.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeaders(Product product,
+        Context context) {
+        return this.beginPatch202RetryWithAsyncAndLocationHeaderNoCustomHeadersAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -1125,10 +1755,10 @@ public final class LROs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return array of Product on successful completion of {@link Mono}.
+     * @return array of Product along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202ListResponse> post202ListWithResponseAsync() {
+    public Mono<ResponseBase<LROsPost202ListHeaders, List<Product>>> post202ListWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1145,10 +1775,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return array of Product on successful completion of {@link Mono}.
+     * @return array of Product along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202ListResponse> post202ListWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsPost202ListHeaders, List<Product>>> post202ListWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1219,6 +1849,109 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<List<Product>, List<Product>> beginPost202List(Context context) {
         return this.beginPost202ListAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
+     * 'id': '100', 'name': 'foo' }].
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of Product along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Product>>> post202ListNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.post202ListNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
+     * 'id': '100', 'name': 'foo' }].
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return array of Product along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<List<Product>>> post202ListNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.post202ListNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
+     * 'id': '100', 'name': 'foo' }].
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of array of Product.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<List<Product>, List<Product>> beginPost202ListNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.post202ListNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TYPE_REFERENCE_LIST_PRODUCT, TYPE_REFERENCE_LIST_PRODUCT);
+    }
+
+    /**
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
+     * 'id': '100', 'name': 'foo' }].
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of array of Product.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<List<Product>, List<Product>> beginPost202ListNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.post202ListNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TYPE_REFERENCE_LIST_PRODUCT, TYPE_REFERENCE_LIST_PRODUCT);
+    }
+
+    /**
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
+     * 'id': '100', 'name': 'foo' }].
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of array of Product.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<List<Product>, List<Product>> beginPost202ListNoCustomHeaders() {
+        return this.beginPost202ListNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
+     * 'id': '100', 'name': 'foo' }].
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of array of Product.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<List<Product>, List<Product>> beginPost202ListNoCustomHeaders(Context context) {
+        return this.beginPost202ListNoCustomHeadersAsync(context).getSyncPoller();
     }
 
     /**
@@ -2165,10 +2898,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutNoHeaderInRetryHeaders, Product>>
+        putNoHeaderInRetryWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2190,10 +2924,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutNoHeaderInRetryResponse> putNoHeaderInRetryWithResponseAsync(Product product, Context context) {
+    public Mono<ResponseBase<LROsPutNoHeaderInRetryHeaders, Product>>
+        putNoHeaderInRetryWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2309,6 +3044,160 @@ public final class LROs {
     }
 
     /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putNoHeaderInRetryNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putNoHeaderInRetryNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putNoHeaderInRetryNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putNoHeaderInRetryNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutNoHeaderInRetryNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putNoHeaderInRetryNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutNoHeaderInRetryNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putNoHeaderInRetryNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutNoHeaderInRetryNoCustomHeadersAsync(Product product, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putNoHeaderInRetryNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutNoHeaderInRetryNoCustomHeaders(Product product) {
+        return this.beginPutNoHeaderInRetryNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutNoHeaderInRetryNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPutNoHeaderInRetryNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutNoHeaderInRetryNoCustomHeaders(Product product, Context context) {
+        return this.beginPutNoHeaderInRetryNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
      * status.
@@ -2317,10 +3206,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutAsyncRetrySucceededHeaders, Product>>
+        putAsyncRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2343,11 +3233,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetrySucceededResponse> putAsyncRetrySucceededWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPutAsyncRetrySucceededHeaders, Product>>
+        putAsyncRetrySucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2477,10 +3367,174 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithResponseAsync(Product product) {
+    public Mono<Response<Product>> putAsyncRetrySucceededNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putAsyncRetrySucceededNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putAsyncRetrySucceededNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncRetrySucceededNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRetrySucceededNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRetrySucceededNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRetrySucceededNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncRetrySucceededNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRetrySucceededNoCustomHeaders(Product product) {
+        return this.beginPutAsyncRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRetrySucceededNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPutAsyncRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRetrySucceededNoCustomHeaders(Product product, Context context) {
+        return this.beginPutAsyncRetrySucceededNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsPutAsyncNoRetrySucceededHeaders, Product>>
+        putAsyncNoRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2503,11 +3557,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrySucceededResponse> putAsyncNoRetrySucceededWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPutAsyncNoRetrySucceededHeaders, Product>>
+        putAsyncNoRetrySucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2637,10 +3691,174 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithResponseAsync(Product product) {
+    public Mono<Response<Product>> putAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.putAsyncNoRetrySucceededNoCustomHeaders(this.client.getHost(),
+            product, accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncNoRetrySucceededNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoRetrySucceededNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoRetrySucceededNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoRetrySucceededNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoRetrySucceededNoCustomHeaders(Product product) {
+        return this.beginPutAsyncNoRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoRetrySucceededNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPutAsyncNoRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoRetrySucceededNoCustomHeaders(Product product, Context context) {
+        return this.beginPutAsyncNoRetrySucceededNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsPutAsyncRetryFailedHeaders, Product>>
+        putAsyncRetryFailedWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2663,11 +3881,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncRetryFailedResponse> putAsyncRetryFailedWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPutAsyncRetryFailedHeaders, Product>>
+        putAsyncRetryFailedWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2797,10 +4015,173 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithResponseAsync(Product product) {
+    public Mono<Response<Product>> putAsyncRetryFailedNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putAsyncRetryFailedNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putAsyncRetryFailedNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncRetryFailedNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRetryFailedNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncRetryFailedNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRetryFailedNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncRetryFailedNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncRetryFailedNoCustomHeadersAsync(Product product, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncRetryFailedNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRetryFailedNoCustomHeaders(Product product) {
+        return this.beginPutAsyncRetryFailedNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRetryFailedNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPutAsyncRetryFailedNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncRetryFailedNoCustomHeaders(Product product, Context context) {
+        return this.beginPutAsyncRetryFailedNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, Product>>
+        putAsyncNoRetrycanceledWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2823,11 +4204,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoRetrycanceledResponse> putAsyncNoRetrycanceledWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPutAsyncNoRetrycanceledHeaders, Product>>
+        putAsyncNoRetrycanceledWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2949,6 +4330,169 @@ public final class LROs {
     }
 
     /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putAsyncNoRetrycanceledNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putAsyncNoRetrycanceledNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putAsyncNoRetrycanceledNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncNoRetrycanceledNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoRetrycanceledNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoRetrycanceledNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoRetrycanceledNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoRetrycanceledNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoRetrycanceledNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoRetrycanceledNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoRetrycanceledNoCustomHeaders(Product product) {
+        return this.beginPutAsyncNoRetrycanceledNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoRetrycanceledNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPutAsyncNoRetrycanceledNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoRetrycanceledNoCustomHeaders(Product product, Context context) {
+        return this.beginPutAsyncNoRetrycanceledNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
      * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
      * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
@@ -2956,10 +4500,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPutAsyncNoHeaderInRetryHeaders, Product>>
+        putAsyncNoHeaderInRetryWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -2981,11 +4526,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPutAsyncNoHeaderInRetryResponse> putAsyncNoHeaderInRetryWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPutAsyncNoHeaderInRetryHeaders, Product>>
+        putAsyncNoHeaderInRetryWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -3098,6 +4643,161 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncNoHeaderInRetry(Product product, Context context) {
         return this.beginPutAsyncNoHeaderInRetryAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putAsyncNoHeaderInRetryNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> putAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.putAsyncNoHeaderInRetryNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoHeaderInRetryNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoHeaderInRetryNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPutAsyncNoHeaderInRetryNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.putAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoHeaderInRetryNoCustomHeaders(Product product) {
+        return this.beginPutAsyncNoHeaderInRetryNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoHeaderInRetryNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPutAsyncNoHeaderInRetryNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
+     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPutAsyncNoHeaderInRetryNoCustomHeaders(Product product, Context context) {
+        return this.beginPutAsyncNoHeaderInRetryNoCustomHeadersAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -3674,10 +5374,10 @@ public final class LROs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Accepted200SucceededResponse>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>>
         deleteProvisioning202Accepted200SucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
@@ -3697,10 +5397,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Accepted200SucceededResponse>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Accepted200SucceededHeaders, Product>>
         deleteProvisioning202Accepted200SucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
@@ -3782,15 +5482,128 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> deleteProvisioning202Accepted200SucceededNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service
+            .deleteProvisioning202Accepted200SucceededNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>>
+        deleteProvisioning202Accepted200SucceededNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteProvisioning202Accepted200SucceededNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDeleteProvisioning202Accepted200SucceededNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteProvisioning202Accepted200SucceededNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void>
+        beginDeleteProvisioning202Accepted200SucceededNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteProvisioning202Accepted200SucceededNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDeleteProvisioning202Accepted200SucceededNoCustomHeaders() {
+        return this.beginDeleteProvisioning202Accepted200SucceededNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDeleteProvisioning202Accepted200SucceededNoCustomHeaders(Context context) {
+        return this.beginDeleteProvisioning202Accepted200SucceededNoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202DeletingFailed200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202DeletingFailed200Headers, Product>>
         deleteProvisioning202DeletingFailed200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
@@ -3810,10 +5623,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202DeletingFailed200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202DeletingFailed200Headers, Product>>
         deleteProvisioning202DeletingFailed200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
@@ -3896,14 +5709,126 @@ public final class LROs {
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
      * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> deleteProvisioning202DeletingFailed200NoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service
+            .deleteProvisioning202DeletingFailed200NoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>>
+        deleteProvisioning202DeletingFailed200NoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteProvisioning202DeletingFailed200NoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDeleteProvisioning202DeletingFailed200NoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteProvisioning202DeletingFailed200NoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDeleteProvisioning202DeletingFailed200NoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteProvisioning202DeletingFailed200NoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDeleteProvisioning202DeletingFailed200NoCustomHeaders() {
+        return this.beginDeleteProvisioning202DeletingFailed200NoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Failed’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDeleteProvisioning202DeletingFailed200NoCustomHeaders(Context context) {
+        return this.beginDeleteProvisioning202DeletingFailed200NoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Deletingcanceled200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>>
         deleteProvisioning202Deletingcanceled200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
@@ -3923,10 +5848,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteProvisioning202Deletingcanceled200Response>
+    public Mono<ResponseBase<LROsDeleteProvisioning202Deletingcanceled200Headers, Product>>
         deleteProvisioning202Deletingcanceled200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
@@ -4004,6 +5929,119 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Void> beginDeleteProvisioning202Deletingcanceled200(Context context) {
         return this.beginDeleteProvisioning202Deletingcanceled200Async(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> deleteProvisioning202Deletingcanceled200NoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service
+            .deleteProvisioning202Deletingcanceled200NoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>>
+        deleteProvisioning202Deletingcanceled200NoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteProvisioning202Deletingcanceled200NoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDeleteProvisioning202Deletingcanceled200NoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteProvisioning202Deletingcanceled200NoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void>
+        beginDeleteProvisioning202Deletingcanceled200NoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteProvisioning202Deletingcanceled200NoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDeleteProvisioning202Deletingcanceled200NoCustomHeaders() {
+        return this.beginDeleteProvisioning202Deletingcanceled200NoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Canceled’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDeleteProvisioning202Deletingcanceled200NoCustomHeaders(Context context) {
+        return this.beginDeleteProvisioning202Deletingcanceled200NoCustomHeadersAsync(context).getSyncPoller();
     }
 
     /**
@@ -4108,10 +6146,10 @@ public final class LROs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202Retry200Response> delete202Retry200WithResponseAsync() {
+    public Mono<ResponseBase<LROsDelete202Retry200Headers, Product>> delete202Retry200WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4128,10 +6166,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202Retry200Response> delete202Retry200WithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDelete202Retry200Headers, Product>>
+        delete202Retry200WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4210,10 +6249,114 @@ public final class LROs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202NoRetry204Response> delete202NoRetry204WithResponseAsync() {
+    public Mono<Response<Product>> delete202Retry200NoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.delete202Retry200NoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> delete202Retry200NoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.delete202Retry200NoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDelete202Retry200NoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.delete202Retry200NoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDelete202Retry200NoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.delete202Retry200NoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDelete202Retry200NoCustomHeaders() {
+        return this.beginDelete202Retry200NoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDelete202Retry200NoCustomHeaders(Context context) {
+        return this.beginDelete202Retry200NoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsDelete202NoRetry204Headers, Product>> delete202NoRetry204WithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4230,10 +6373,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDelete202NoRetry204Response> delete202NoRetry204WithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDelete202NoRetry204Headers, Product>>
+        delete202NoRetry204WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4307,15 +6451,120 @@ public final class LROs {
     }
 
     /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> delete202NoRetry204NoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.delete202NoRetry204NoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> delete202NoRetry204NoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.delete202NoRetry204NoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDelete202NoRetry204NoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.delete202NoRetry204NoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Void> beginDelete202NoRetry204NoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.delete202NoRetry204NoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDelete202NoRetry204NoCustomHeaders() {
+        return this.beginDelete202NoRetry204NoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Void> beginDelete202NoRetry204NoCustomHeaders(Context context) {
+        return this.beginDelete202NoRetry204NoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
      * Long running delete request, service returns a location header in the initial request. Subsequent calls to
      * operation status do not contain location header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteNoHeaderInRetryHeaders, Void>> deleteNoHeaderInRetryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4332,10 +6581,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteNoHeaderInRetryResponse> deleteNoHeaderInRetryWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteNoHeaderInRetryHeaders, Void>>
+        deleteNoHeaderInRetryWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4409,15 +6659,121 @@ public final class LROs {
     }
 
     /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteNoHeaderInRetryNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.deleteNoHeaderInRetryNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteNoHeaderInRetryNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteNoHeaderInRetryNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteNoHeaderInRetryNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteNoHeaderInRetryNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteNoHeaderInRetryNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteNoHeaderInRetryNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteNoHeaderInRetryNoCustomHeaders() {
+        return this.beginDeleteNoHeaderInRetryNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
+     * operation status do not contain location header.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteNoHeaderInRetryNoCustomHeaders(Context context) {
+        return this.beginDeleteNoHeaderInRetryNoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
      * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
      * calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>>
+        deleteAsyncNoHeaderInRetryWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4435,10 +6791,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoHeaderInRetryResponse> deleteAsyncNoHeaderInRetryWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncNoHeaderInRetryHeaders, Void>>
+        deleteAsyncNoHeaderInRetryWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4512,15 +6869,120 @@ public final class LROs {
     }
 
     /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
+     * calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.deleteAsyncNoHeaderInRetryNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
+     * calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncNoHeaderInRetryNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
+     * calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncNoHeaderInRetryNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
+     * calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncNoHeaderInRetryNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncNoHeaderInRetryNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
+     * calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoHeaderInRetryNoCustomHeaders() {
+        return this.beginDeleteAsyncNoHeaderInRetryNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
+     * calls to operation status do not contain Azure-AsyncOperation header.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoHeaderInRetryNoCustomHeaders(Context context) {
+        return this.beginDeleteAsyncNoHeaderInRetryNoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
      * Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithResponseAsync() {
+    public Mono<ResponseBase<LROsDeleteAsyncRetrySucceededHeaders, Void>> deleteAsyncRetrySucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4538,10 +7000,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrySucceededResponse> deleteAsyncRetrySucceededWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncRetrySucceededHeaders, Void>>
+        deleteAsyncRetrySucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4620,10 +7083,116 @@ public final class LROs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithResponseAsync() {
+    public Mono<Response<Void>> deleteAsyncRetrySucceededNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.deleteAsyncRetrySucceededNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteAsyncRetrySucceededNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncRetrySucceededNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetrySucceededNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncRetrySucceededNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetrySucceededNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncRetrySucceededNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrySucceededNoCustomHeaders() {
+        return this.beginDeleteAsyncRetrySucceededNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrySucceededNoCustomHeaders(Context context) {
+        return this.beginDeleteAsyncRetrySucceededNoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsDeleteAsyncNoRetrySucceededHeaders, Void>>
+        deleteAsyncNoRetrySucceededWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4641,10 +7210,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncNoRetrySucceededResponse> deleteAsyncNoRetrySucceededWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncNoRetrySucceededHeaders, Void>>
+        deleteAsyncNoRetrySucceededWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4724,10 +7294,115 @@ public final class LROs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithResponseAsync() {
+    public Mono<Response<Void>> deleteAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.deleteAsyncNoRetrySucceededNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncNoRetrySucceededNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncNoRetrySucceededNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncNoRetrySucceededNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoRetrySucceededNoCustomHeaders() {
+        return this.beginDeleteAsyncNoRetrySucceededNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncNoRetrySucceededNoCustomHeaders(Context context) {
+        return this.beginDeleteAsyncNoRetrySucceededNoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsDeleteAsyncRetryFailedHeaders, Void>> deleteAsyncRetryFailedWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4744,10 +7419,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetryFailedResponse> deleteAsyncRetryFailedWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncRetryFailedHeaders, Void>>
+        deleteAsyncRetryFailedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4826,10 +7502,115 @@ public final class LROs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithResponseAsync() {
+    public Mono<Response<Void>> deleteAsyncRetryFailedNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.deleteAsyncRetryFailedNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteAsyncRetryFailedNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncRetryFailedNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetryFailedNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncRetryFailedNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetryFailedNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncRetryFailedNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetryFailedNoCustomHeaders() {
+        return this.beginDeleteAsyncRetryFailedNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetryFailedNoCustomHeaders(Context context) {
+        return this.beginDeleteAsyncRetryFailedNoCustomHeadersAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsDeleteAsyncRetrycanceledHeaders, Void>> deleteAsyncRetrycanceledWithResponseAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4847,10 +7628,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsDeleteAsyncRetrycanceledResponse> deleteAsyncRetrycanceledWithResponseAsync(Context context) {
+    public Mono<ResponseBase<LROsDeleteAsyncRetrycanceledHeaders, Void>>
+        deleteAsyncRetrycanceledWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -4921,6 +7703,111 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrycanceled(Context context) {
         return this.beginDeleteAsyncRetrycanceledAsync(context).getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteAsyncRetrycanceledNoCustomHeadersWithResponseAsync() {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.deleteAsyncRetrycanceledNoCustomHeaders(this.client.getHost(), accept, context));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> deleteAsyncRetrycanceledNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return service.deleteAsyncRetrycanceledNoCustomHeaders(this.client.getHost(), accept, context);
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetrycanceledNoCustomHeadersAsync() {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncRetrycanceledNoCustomHeadersWithResponseAsync(),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, Void> beginDeleteAsyncRetrycanceledNoCustomHeadersAsync(Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.deleteAsyncRetrycanceledNoCustomHeadersWithResponseAsync(context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrycanceledNoCustomHeaders() {
+        return this.beginDeleteAsyncRetrycanceledNoCustomHeadersAsync().getSyncPoller();
+    }
+
+    /**
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
+     * Azure-AsyncOperation header for operation status.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, Void> beginDeleteAsyncRetrycanceledNoCustomHeaders(Context context) {
+        return this.beginDeleteAsyncRetrycanceledNoCustomHeadersAsync(context).getSyncPoller();
     }
 
     /**
@@ -5033,10 +7920,10 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202Retry200Response> post202Retry200WithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPost202Retry200Headers, Void>> post202Retry200WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5058,10 +7945,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202Retry200Response> post202Retry200WithResponseAsync(Product product, Context context) {
+    public Mono<ResponseBase<LROsPost202Retry200Headers, Void>> post202Retry200WithResponseAsync(Product product,
+        Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5176,6 +8064,160 @@ public final class LROs {
     }
 
     /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> post202Retry200NoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.post202Retry200NoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> post202Retry200NoCustomHeadersWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.post202Retry200NoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPost202Retry200NoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.post202Retry200NoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPost202Retry200NoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.post202Retry200NoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPost202Retry200NoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.post202Retry200NoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200NoCustomHeaders(Product product) {
+        return this.beginPost202Retry200NoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200NoCustomHeaders() {
+        final Product product = null;
+        return this.beginPost202Retry200NoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
+     * headers, Polls return a 200 with a response body after success.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPost202Retry200NoCustomHeaders(Product product, Context context) {
+        return this.beginPost202Retry200NoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
      * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
      * noresponse body after success.
      * 
@@ -5183,10 +8225,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202NoRetry204Response> post202NoRetry204WithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPost202NoRetry204Headers, Product>>
+        post202NoRetry204WithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5208,10 +8251,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPost202NoRetry204Response> post202NoRetry204WithResponseAsync(Product product, Context context) {
+    public Mono<ResponseBase<LROsPost202NoRetry204Headers, Product>> post202NoRetry204WithResponseAsync(Product product,
+        Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5323,6 +8367,159 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPost202NoRetry204(Product product, Context context) {
         return this.beginPost202NoRetry204Async(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> post202NoRetry204NoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.post202NoRetry204NoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> post202NoRetry204NoCustomHeadersWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.post202NoRetry204NoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPost202NoRetry204NoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.post202NoRetry204NoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPost202NoRetry204NoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.post202NoRetry204NoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPost202NoRetry204NoCustomHeadersAsync(Product product, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.post202NoRetry204NoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPost202NoRetry204NoCustomHeaders(Product product) {
+        return this.beginPost202NoRetry204NoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPost202NoRetry204NoCustomHeaders() {
+        final Product product = null;
+        return this.beginPost202NoRetry204NoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
+     * noresponse body after success.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPost202NoRetry204NoCustomHeaders(Product product, Context context) {
+        return this.beginPost202NoRetry204NoCustomHeadersAsync(product, context).getSyncPoller();
     }
 
     /**
@@ -5654,10 +8851,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(Product product) {
+    public Mono<ResponseBase<LROsPostAsyncRetrySucceededHeaders, Product>>
+        postAsyncRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5680,11 +8878,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrySucceededResponse> postAsyncRetrySucceededWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPostAsyncRetrySucceededHeaders, Product>>
+        postAsyncRetrySucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5814,10 +9012,174 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithResponseAsync(Product product) {
+    public Mono<Response<Product>> postAsyncRetrySucceededNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.postAsyncRetrySucceededNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> postAsyncRetrySucceededNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncRetrySucceededNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPostAsyncRetrySucceededNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPostAsyncRetrySucceededNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPostAsyncRetrySucceededNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetrySucceededNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPostAsyncRetrySucceededNoCustomHeaders(Product product) {
+        return this.beginPostAsyncRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPostAsyncRetrySucceededNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPostAsyncRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPostAsyncRetrySucceededNoCustomHeaders(Product product, Context context) {
+        return this.beginPostAsyncRetrySucceededNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsPostAsyncNoRetrySucceededHeaders, Product>>
+        postAsyncNoRetrySucceededWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5840,11 +9202,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncNoRetrySucceededResponse> postAsyncNoRetrySucceededWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPostAsyncNoRetrySucceededHeaders, Product>>
+        postAsyncNoRetrySucceededWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -5974,10 +9336,175 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithResponseAsync(Product product) {
+    public Mono<Response<Product>> postAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.postAsyncNoRetrySucceededNoCustomHeaders(this.client.getHost(),
+            product, accept, context));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Product>> postAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncNoRetrySucceededNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPostAsyncNoRetrySucceededNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPostAsyncNoRetrySucceededNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<Product, Product> beginPostAsyncNoRetrySucceededNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncNoRetrySucceededNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(Product.class), TypeReference.createInstance(Product.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPostAsyncNoRetrySucceededNoCustomHeaders(Product product) {
+        return this.beginPostAsyncNoRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPostAsyncNoRetrySucceededNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPostAsyncNoRetrySucceededNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<Product, Product> beginPostAsyncNoRetrySucceededNoCustomHeaders(Product product,
+        Context context) {
+        return this.beginPostAsyncNoRetrySucceededNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsPostAsyncRetryFailedHeaders, Void>>
+        postAsyncRetryFailedWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -6000,11 +9527,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetryFailedResponse> postAsyncRetryFailedWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPostAsyncRetryFailedHeaders, Void>>
+        postAsyncRetryFailedWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -6134,10 +9661,174 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithResponseAsync(Product product) {
+    public Mono<Response<Void>> postAsyncRetryFailedNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.postAsyncRetryFailedNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postAsyncRetryFailedNoCustomHeadersWithResponseAsync(Product product, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncRetryFailedNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetryFailedNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetryFailedNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetryFailedNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetryFailedNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetryFailedNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetryFailedNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetryFailedNoCustomHeaders(Product product) {
+        return this.beginPostAsyncRetryFailedNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetryFailedNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPostAsyncRetryFailedNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetryFailedNoCustomHeaders(Product product,
+        Context context) {
+        return this.beginPostAsyncRetryFailedNoCustomHeadersAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<LROsPostAsyncRetrycanceledHeaders, Void>>
+        postAsyncRetrycanceledWithResponseAsync(Product product) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -6160,11 +9851,11 @@ public final class LROs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<LROsPostAsyncRetrycanceledResponse> postAsyncRetrycanceledWithResponseAsync(Product product,
-        Context context) {
+    public Mono<ResponseBase<LROsPostAsyncRetrycanceledHeaders, Void>>
+        postAsyncRetrycanceledWithResponseAsync(Product product, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -6283,6 +9974,170 @@ public final class LROs {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrycanceled(Product product, Context context) {
         return this.beginPostAsyncRetrycanceledAsync(product, context).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postAsyncRetrycanceledNoCustomHeadersWithResponseAsync(Product product) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.postAsyncRetrycanceledNoCustomHeaders(this.client.getHost(), product, accept, context));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> postAsyncRetrycanceledNoCustomHeadersWithResponseAsync(Product product,
+        Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (product != null) {
+            product.validate();
+        }
+        final String accept = "application/json";
+        return service.postAsyncRetrycanceledNoCustomHeaders(this.client.getHost(), product, accept, context);
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrycanceledNoCustomHeadersAsync(Product product) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetrycanceledNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrycanceledNoCustomHeadersAsync() {
+        final Product product = null;
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetrycanceledNoCustomHeadersWithResponseAsync(product),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginPostAsyncRetrycanceledNoCustomHeadersAsync(Product product,
+        Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.postAsyncRetrycanceledNoCustomHeadersWithResponseAsync(product, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrycanceledNoCustomHeaders(Product product) {
+        return this.beginPostAsyncRetrycanceledNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrycanceledNoCustomHeaders() {
+        final Product product = null;
+        return this.beginPostAsyncRetrycanceledNoCustomHeadersAsync(product).getSyncPoller();
+    }
+
+    /**
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
+     * 
+     * @param product Product to put.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws CloudErrorException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<BinaryData, BinaryData> beginPostAsyncRetrycanceledNoCustomHeaders(Product product,
+        Context context) {
+        return this.beginPostAsyncRetrycanceledNoCustomHeadersAsync(product, context).getSyncPoller();
     }
 
     private static final TypeReference<List<Product>> TYPE_REFERENCE_LIST_PRODUCT = new TypeReference<List<Product>>() {

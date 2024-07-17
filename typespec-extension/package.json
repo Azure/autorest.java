@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -45,17 +45,17 @@
     "target/emitter.jar"
   ],
   "peerDependencies": {
-    "@azure-tools/typespec-azure-core": ">=0.43.0 <1.0.0",
-    "@azure-tools/typespec-azure-resource-manager": ">=0.43.0 <1.0.0",
-    "@azure-tools/typespec-autorest": ">=0.43.0 <1.0.0",
-    "@azure-tools/typespec-azure-rulesets": ">=0.43.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.43.2 <1.0.0",
-    "@typespec/compiler": ">=0.57.0 <1.0.0",
-    "@typespec/http": ">=0.57.0 <1.0.0",
-    "@typespec/openapi": ">=0.57.0 <1.0.0",
-    "@typespec/rest": ">=0.57.0 <1.0.0",
-    "@typespec/versioning": ">=0.57.0 <1.0.0",
-    "@typespec/xml": ">=0.57.0 <1.0.0"
+    "@azure-tools/typespec-azure-core": ">=0.44.0 <1.0.0",
+    "@azure-tools/typespec-azure-resource-manager": ">=0.44.0 <1.0.0",
+    "@azure-tools/typespec-autorest": ">=0.44.0 <1.0.0",
+    "@azure-tools/typespec-azure-rulesets": ">=0.44.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.44.0 <1.0.0",
+    "@typespec/compiler": ">=0.58.0 <1.0.0",
+    "@typespec/http": ">=0.58.0 <1.0.0",
+    "@typespec/openapi": ">=0.58.0 <1.0.0",
+    "@typespec/rest": ">=0.58.0 <1.0.0",
+    "@typespec/versioning": ">=0.58.0 <1.0.0",
+    "@typespec/xml": ">=0.58.0 <1.0.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.20.0",
@@ -63,29 +63,29 @@
     "lodash": "~4.17.21"
   },
   "devDependencies": {
-    "@azure-tools/typespec-azure-core": "0.43.0",
-    "@azure-tools/typespec-azure-resource-manager": "0.43.0",
-    "@azure-tools/typespec-autorest": "0.43.0",
-    "@azure-tools/typespec-azure-rulesets": "0.43.0",
-    "@azure-tools/typespec-client-generator-core": "0.43.2",
+    "@azure-tools/typespec-azure-core": "0.44.0",
+    "@azure-tools/typespec-azure-resource-manager": "0.44.0",
+    "@azure-tools/typespec-autorest": "0.44.0",
+    "@azure-tools/typespec-azure-rulesets": "0.44.0",
+    "@azure-tools/typespec-client-generator-core": "0.44.0",
     "@types/js-yaml": "~4.0.9",
-    "@types/lodash": "~4.17.6",
+    "@types/lodash": "~4.17.7",
     "@types/mocha": "~10.0.7",
-    "@types/node": "~20.14.10",
-    "@typescript-eslint/eslint-plugin": "~7.16.0",
-    "@typescript-eslint/parser": "~7.16.0",
-    "@typespec/compiler": "0.57.0",
-    "@typespec/http": "0.57.0",
-    "@typespec/openapi": "0.57.0",
-    "@typespec/rest": "0.57.0",
-    "@typespec/versioning": "0.57.0",
-    "@typespec/xml": "0.57.0",
+    "@types/node": "~20.14.11",
+    "@typescript-eslint/eslint-plugin": "~7.16.1",
+    "@typescript-eslint/parser": "~7.16.1",
+    "@typespec/compiler": "0.58.0",
+    "@typespec/http": "0.58.0",
+    "@typespec/openapi": "0.58.0",
+    "@typespec/rest": "0.58.0",
+    "@typespec/versioning": "0.58.0",
+    "@typespec/xml": "0.58.0",
     "c8": "~10.1.2",
     "eslint": "~8.57.0",
     "eslint-plugin-deprecation": "~3.0.0",
     "mocha": "~10.6.0",
-    "prettier": "~3.3.2",
-    "rimraf": "~6.0.0",
+    "prettier": "~3.3.3",
+    "rimraf": "~6.0.1",
     "typescript": "~5.5.3"
   }
 }

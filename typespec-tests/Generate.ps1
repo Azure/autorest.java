@@ -35,6 +35,9 @@ $generateScript = {
   } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]") {
     # override namespace for reserved keyword "enum"
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.type.enums.fixed"""
+  } elseif ($tspFile -match "azure[\\/]example[\\/]basic[\\/]") {
+    # override examples-directory
+    $tspOptions += " --option ""@azure-tools/typespec-java.examples-directory={project-root}/http/azure/example/basic/examples"""
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old\.tsp") {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""

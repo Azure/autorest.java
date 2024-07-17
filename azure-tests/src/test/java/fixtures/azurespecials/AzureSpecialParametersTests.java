@@ -6,13 +6,15 @@
 package fixtures.azurespecials;
 
 import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.util.Context;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
-import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeadResponse;
-import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingResponse;
-import fixtures.azurespecials.models.HeadersCustomNamedRequestIdResponse;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeadHeaders;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeaders;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingHeaders;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,8 @@ public class AzureSpecialParametersTests {
 
     private static AutoRestAzureSpecialParametersTestClient clientNoSubscription;
 
-    private static final Context CONTEXT = new Context("azure-http-headers-key", new HttpHeaders(Collections.singletonMap("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")));
+    private static final Context CONTEXT = new Context("azure-http-headers-key", new HttpHeaders()
+        .add(HttpHeaderName.X_MS_CLIENT_REQUEST_ID, "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"));
 
     @BeforeAll
     public static void setup() {
@@ -191,20 +194,23 @@ public class AzureSpecialParametersTests {
 
     @Test
     public void customNamedRequestId() {
-        HeadersCustomNamedRequestIdResponse response = client.getHeaders().customNamedRequestIdWithResponse("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", Context.NONE);
+        ResponseBase<HeadersCustomNamedRequestIdHeaders, Void> response = client.getHeaders()
+            .customNamedRequestIdWithResponse("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", Context.NONE);
         Assertions.assertEquals("123", response.getDeserializedHeaders().getFooRequestId());
     }
 
     @Test
     public void customNamedRequestIdHead() {
-        HeadersCustomNamedRequestIdHeadResponse response = client.getHeaders().customNamedRequestIdHeadWithResponse("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", Context.NONE);
+        ResponseBase<HeadersCustomNamedRequestIdHeadHeaders, Boolean> response = client.getHeaders()
+            .customNamedRequestIdHeadWithResponse("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", Context.NONE);
         Assertions.assertEquals("123", response.getDeserializedHeaders().getFooRequestId());
     }
 
     @Test
     public void customNamedRequestIdParamGrouping() {
-        HeadersCustomNamedRequestIdParamGroupingResponse response = client.getHeaders().customNamedRequestIdParamGroupingWithResponse(
-                new HeaderCustomNamedRequestIdParamGroupingParameters().setFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"), Context.NONE);
+        ResponseBase<HeadersCustomNamedRequestIdParamGroupingHeaders, Void> response = client.getHeaders()
+            .customNamedRequestIdParamGroupingWithResponse(new HeaderCustomNamedRequestIdParamGroupingParameters()
+                .setFooClientRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0"), Context.NONE);
         Assertions.assertEquals("123", response.getDeserializedHeaders().getFooRequestId());
     }
 }

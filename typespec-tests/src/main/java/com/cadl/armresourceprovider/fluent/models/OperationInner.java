@@ -32,7 +32,7 @@ public final class OperationInner {
     /*
      * Localized display information for this particular operation.
      */
-    @JsonProperty(value = "display")
+    @JsonProperty(value = "display", access = JsonProperty.Access.WRITE_ONLY)
     private OperationDisplay display;
 
     /*

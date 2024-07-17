@@ -51,6 +51,7 @@ To debug, add `--java.debugger` to the argument list. The JVM will suspend at th
 
 - `use-default-http-status-code-to-exception-type-mapping: true`, use subclass of `HttpResponseException` defined in azure-core, when service returns unexpected status code.
 - `generic-response-type: true`, use `ResponseBase<>`, instead a subclass of `ResponseBase<>`, for response with HTTP headers. Performance and reflective access improvement.
+- `no-custom-headers: true`, generates overloads of interface methods that exclude typed headers. Performance improvement by removing the need to convert header strings to Java types.
 - `required-fields-as-ctor-args`, create a constructor taking required properties, for model classes. The correctness of this constructor highly depends on the correctness of Swagger.
 - `output-model-immutable: true`, make model classes immutable, if model is used only in response.
 - `enable-sync-stack: true`, let sync method invoke sync RestProxy method.
@@ -88,6 +89,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
 |`--http-status-code-to-exception-type-mapping`|The HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
 |`--generic-response-type`|Indicates that generic response types are used instead of named response types that extend the generic type.|
+|`--no-custom-headers`|Indicates that overloads of interface methods that exclude typed headers are generated.|
 |`--enable-sync-stack`|Indicates that sync method invokes sync RestProxy method. By default, sync method invokes async RestProxy method.|
 |`--required-fields-as-ctor-args`|Indicates that class models have constructor taking required properties.|
 |`--output-model-immutable`|Indicates that output-only models be generated as immutable, and without public constructor.|

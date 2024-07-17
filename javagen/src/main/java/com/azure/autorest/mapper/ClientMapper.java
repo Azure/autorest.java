@@ -591,7 +591,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     private ClientResponse parseResponse(Operation method, List<ClientModel> models, JavaSettings settings) {
         ClientResponse.Builder builder = new ClientResponse.Builder();
         ObjectSchema headerSchema = parseHeader(method, settings);
-        if (headerSchema == null || settings.isGenericResponseTypes()) {
+        if (headerSchema == null || settings.isGenericResponseTypes() || settings.isDisableTypedHeadersMethods()) {
             return null;
         }
 

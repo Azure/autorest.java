@@ -10,8 +10,6 @@ import com.azure.core.util.Context;
 import com.azure.resourcemanager.models.resources.fluent.models.TopLevelTrackedResourceInner;
 import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResource;
 import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceProperties;
-import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceUpdate;
-import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceUpdateProperties;
 import java.util.Collections;
 import java.util.Map;
 
@@ -78,8 +76,6 @@ public final class TopLevelTrackedResourceImpl
 
     private String topLevelTrackedResourceName;
 
-    private TopLevelTrackedResourceUpdate updateProperties;
-
     public TopLevelTrackedResourceImpl withExistingResourceGroup(String resourceGroupName) {
         this.resourceGroupName = resourceGroupName;
         return this;
@@ -107,21 +103,20 @@ public final class TopLevelTrackedResourceImpl
     }
 
     public TopLevelTrackedResourceImpl update() {
-        this.updateProperties = new TopLevelTrackedResourceUpdate();
         return this;
     }
 
     public TopLevelTrackedResource apply() {
         this.innerObject = serviceManager.serviceClient()
             .getTopLevelTrackedResources()
-            .update(resourceGroupName, topLevelTrackedResourceName, updateProperties, Context.NONE);
+            .update(resourceGroupName, topLevelTrackedResourceName, this.innerModel(), Context.NONE);
         return this;
     }
 
     public TopLevelTrackedResource apply(Context context) {
         this.innerObject = serviceManager.serviceClient()
             .getTopLevelTrackedResources()
-            .update(resourceGroupName, topLevelTrackedResourceName, updateProperties, context);
+            .update(resourceGroupName, topLevelTrackedResourceName, this.innerModel(), context);
         return this;
     }
 
@@ -161,26 +156,12 @@ public final class TopLevelTrackedResourceImpl
     }
 
     public TopLevelTrackedResourceImpl withTags(Map<String, String> tags) {
-        if (isInCreateMode()) {
-            this.innerModel().withTags(tags);
-            return this;
-        } else {
-            this.updateProperties.withTags(tags);
-            return this;
-        }
+        this.innerModel().withTags(tags);
+        return this;
     }
 
     public TopLevelTrackedResourceImpl withProperties(TopLevelTrackedResourceProperties properties) {
         this.innerModel().withProperties(properties);
         return this;
-    }
-
-    public TopLevelTrackedResourceImpl withProperties(TopLevelTrackedResourceUpdateProperties properties) {
-        this.updateProperties.withProperties(properties);
-        return this;
-    }
-
-    private boolean isInCreateMode() {
-        return this.innerModel().id() == null;
     }
 }
