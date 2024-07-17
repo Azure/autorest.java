@@ -275,7 +275,7 @@ public interface ChildResourcesInterfacesClient {
      * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
+    PagedIterable<ChildResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
         String topLevelArmResourceName);
 
     /**
@@ -290,6 +290,6 @@ public interface ChildResourcesInterfacesClient {
      * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
+    PagedIterable<ChildResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
         String topLevelArmResourceName, Context context);
 }
