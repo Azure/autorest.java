@@ -119,7 +119,7 @@ public class ArmResourceTest {
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME, nestedProxyResource.name());
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_TYPE, nestedProxyResource.type());
         Assertions.assertNotNull(nestedProxyResource.properties());
-        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, nestedProxyResource.properties().description());
+        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID2, nestedProxyResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, nestedProxyResource.properties().provisioningState());
 
         // NestedProxyResources.listByTopLevelTrackedResource
@@ -132,7 +132,7 @@ public class ArmResourceTest {
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME, nestedProxyResource.name());
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_TYPE, nestedProxyResource.type());
         Assertions.assertNotNull(nestedProxyResource.properties());
-        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, nestedProxyResource.properties().description());
+        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID2, nestedProxyResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, nestedProxyResource.properties().provisioningState());
 
         // NestedProxyResources.get
@@ -142,7 +142,7 @@ public class ArmResourceTest {
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_NAME, nestedProxyResource.name());
         Assertions.assertEquals(NESTED_PROXY_RESOURCE_TYPE, nestedProxyResource.type());
         Assertions.assertNotNull(nestedProxyResource.properties());
-        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, nestedProxyResource.properties().description());
+        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID2, nestedProxyResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, nestedProxyResource.properties().provisioningState());
 
         // NestedProxyResources.update
