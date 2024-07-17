@@ -3,7 +3,9 @@
 
 package com.type.model.visibility;
 
+import com.type.model.visibility.models.ReadOnlyModel;
 import com.type.model.visibility.models.VisibilityModel;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -47,5 +49,13 @@ class AutomaticClientTest {
     void deleteModel() {
         // client.deleteModelWithResponse(BinaryData.fromString("{\"deleteProp\": true}"), null);
         client.deleteModel(new VisibilityModel(null, null, null, true));
+    }
+
+    @Test
+    void putReadOnlyModel() {
+        ReadOnlyModel readOnlyModel = client.putReadOnlyModel(new ReadOnlyModel());
+        Assertions.assertIterableEquals(Arrays.asList(1, 2, 3), readOnlyModel.getOptionalNullableIntList());
+        Assertions.assertEquals("value1", readOnlyModel.getOptionalStringRecord().get("k1"));
+        Assertions.assertEquals("value2", readOnlyModel.getOptionalStringRecord().get("k2"));
     }
 }
