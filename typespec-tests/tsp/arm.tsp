@@ -145,9 +145,7 @@ model CustomTemplateResourceProperties {
   propertyRemovedInStable: string;
 
   dog: Dog;
-
   namedEmptyModel: EmptyModel;
-
   anonymousEmptyModel: {};
 }
 
