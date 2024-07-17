@@ -58,26 +58,17 @@ public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfa
         this.serviceClient().delete(resourceGroupName, topLevelArmResourceName, childResourceName, context);
     }
 
-    public void actionWithoutBody(String resourceGroupName, String topLevelArmResourceName, String childResourceName) {
-        this.serviceClient().actionWithoutBody(resourceGroupName, topLevelArmResourceName, childResourceName);
-    }
-
-    public void actionWithoutBody(String resourceGroupName, String topLevelArmResourceName, String childResourceName,
-        Context context) {
-        this.serviceClient().actionWithoutBody(resourceGroupName, topLevelArmResourceName, childResourceName, context);
-    }
-
-    public PagedIterable<ChildResource> listByTopLevelTrackedResource(String resourceGroupName,
+    public PagedIterable<ChildResource> listByTopLevelArmResource(String resourceGroupName,
         String topLevelArmResourceName) {
         PagedIterable<ChildResourceInner> inner
-            = this.serviceClient().listByTopLevelTrackedResource(resourceGroupName, topLevelArmResourceName);
+            = this.serviceClient().listByTopLevelArmResource(resourceGroupName, topLevelArmResourceName);
         return ResourceManagerUtils.mapPage(inner, inner1 -> new ChildResourceImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<ChildResource> listByTopLevelTrackedResource(String resourceGroupName,
+    public PagedIterable<ChildResource> listByTopLevelArmResource(String resourceGroupName,
         String topLevelArmResourceName, Context context) {
         PagedIterable<ChildResourceInner> inner
-            = this.serviceClient().listByTopLevelTrackedResource(resourceGroupName, topLevelArmResourceName, context);
+            = this.serviceClient().listByTopLevelArmResource(resourceGroupName, topLevelArmResourceName, context);
         return ResourceManagerUtils.mapPage(inner, inner1 -> new ChildResourceImpl(inner1, this.manager()));
     }
 

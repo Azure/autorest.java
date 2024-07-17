@@ -59,17 +59,17 @@ public final class NestedProxyResourcesImpl implements NestedProxyResources {
         this.serviceClient().delete(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, context);
     }
 
-    public PagedIterable<NestedProxyResource> listByParent(String resourceGroupName,
+    public PagedIterable<NestedProxyResource> listByTopLevelTrackedResource(String resourceGroupName,
         String topLevelTrackedResourceName) {
         PagedIterable<NestedProxyResourceInner> inner
-            = this.serviceClient().listByParent(resourceGroupName, topLevelTrackedResourceName);
+            = this.serviceClient().listByTopLevelTrackedResource(resourceGroupName, topLevelTrackedResourceName);
         return ResourceManagerUtils.mapPage(inner, inner1 -> new NestedProxyResourceImpl(inner1, this.manager()));
     }
 
-    public PagedIterable<NestedProxyResource> listByParent(String resourceGroupName, String topLevelTrackedResourceName,
-        Context context) {
-        PagedIterable<NestedProxyResourceInner> inner
-            = this.serviceClient().listByParent(resourceGroupName, topLevelTrackedResourceName, context);
+    public PagedIterable<NestedProxyResource> listByTopLevelTrackedResource(String resourceGroupName,
+        String topLevelTrackedResourceName, Context context) {
+        PagedIterable<NestedProxyResourceInner> inner = this.serviceClient()
+            .listByTopLevelTrackedResource(resourceGroupName, topLevelTrackedResourceName, context);
         return ResourceManagerUtils.mapPage(inner, inner1 -> new NestedProxyResourceImpl(inner1, this.manager()));
     }
 

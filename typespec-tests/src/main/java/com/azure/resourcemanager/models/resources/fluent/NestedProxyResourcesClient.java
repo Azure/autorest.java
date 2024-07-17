@@ -253,7 +253,8 @@ public interface NestedProxyResourcesClient {
      * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<NestedProxyResourceInner> listByParent(String resourceGroupName, String topLevelTrackedResourceName);
+    PagedIterable<NestedProxyResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
+        String topLevelTrackedResourceName);
 
     /**
      * List NestedProxyResource resources by TopLevelTrackedResource.
@@ -267,6 +268,6 @@ public interface NestedProxyResourcesClient {
      * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    PagedIterable<NestedProxyResourceInner> listByParent(String resourceGroupName, String topLevelTrackedResourceName,
-        Context context);
+    PagedIterable<NestedProxyResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
+        String topLevelTrackedResourceName, Context context);
 }
