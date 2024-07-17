@@ -7,6 +7,7 @@ import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionK
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.eclipse.lsp4j.ClientCapabilities;
@@ -204,6 +205,7 @@ public class EclipseLanguageClient implements AutoCloseable {
 
     public void close() {
         try {
+            connection.request(TypeFactory.defaultInstance().constructType(void.class), "shutdown");
             connection.notifyWithObject("exit", null);
             connection.stop();
             server.shutdown();

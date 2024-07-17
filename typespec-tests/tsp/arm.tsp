@@ -221,9 +221,9 @@ model ChildExtensionResourceProperties {
 //----------------------- Paths -----------------------
 @armResourceOperations
 interface ChildResourcesInterface
-  extends ResourceInstanceOperations<ChildResource, ChildResourceProperties>,
-    ResourceListByParent<ChildResource> {
+  extends ResourceInstanceOperations<ChildResource, ChildResourceProperties> {
   actionWithoutBody is ArmResourceActionAsync<ChildResource, void, void>;
+  listByTopLevelTrackedResource is ArmResourceListByParent<ChildResource>;
 }
 
 @armResourceOperations
