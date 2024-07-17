@@ -31,6 +31,6 @@ public class PlaindateClientTests {
 
     @Test
     public void putDefault() {
-        client.putAll(new PlaindateProperty().setProperty(LocalDate.parse("2022-12-12")));
+        client.putDefault(new PlaindateProperty());
     }
 }
