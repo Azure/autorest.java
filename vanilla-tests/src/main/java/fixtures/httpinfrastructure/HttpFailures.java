@@ -81,12 +81,7 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getEmptyErrorWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getEmptyError(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getEmptyErrorWithResponseAsync(context));
     }
 
     /**
@@ -169,12 +164,7 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelErrorWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNoModelError(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNoModelErrorWithResponseAsync(context));
     }
 
     /**
@@ -257,12 +247,7 @@ public final class HttpFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> getNoModelEmptyWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNoModelEmpty(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNoModelEmptyWithResponseAsync(context));
     }
 
     /**

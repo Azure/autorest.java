@@ -38,7 +38,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 applyParameterTransformations(function, clientMethod, settings);
-                convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters());
                 if (mergeContextParameter) {
                     function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
                 }
@@ -117,7 +117,7 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
                 addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
                 addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
                 applyParameterTransformations(function, clientMethod, settings);
-                convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+                convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters());
                 if (mergeContextParameter) {
                     function.line(String.format("context = %s.mergeContext(context);", clientMethod.getClientReference()));
                 }
@@ -134,7 +134,8 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
                             IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
                             function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError));",
-                                    clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
+                                    clientMethod.getClientReference(), classType.toString(), classType, clientMethod.getClientReference(),
+                                classType, classType, contextParam, clientMethod.getClientReference()));
                         });
                         function.line("})");
                     }
@@ -149,7 +150,9 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
 
                         IType classType = clientMethod.getMethodPageDetails().getLroIntermediateType();
                         function.line(String.format("return Mono.zip(mono, %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s).last().flatMap(%s::getLroFinalResultOrError))",
-                                clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam, clientMethod.getClientReference()));
+                                clientMethod.getClientReference(), classType.toString(), classType, clientMethod.getClientReference(),
+                            classType,
+                            classType, contextParam, clientMethod.getClientReference()));
                     }
                 }
                 function.indent(() -> {
@@ -197,14 +200,14 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
     @Override
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
         boolean addContextParameter = !contextInParameters(clientMethod);
-        boolean mergeContextParameter = contextInParameters(clientMethod);
+        boolean mergeContextParameter = !addContextParameter;
 
         typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
             applyParameterTransformations(function, clientMethod, settings);
-            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters(), clientMethod.getClientReference(), settings);
+            convertClientTypesToWireTypes(function, clientMethod, restAPIMethod.getParameters());
 
             String restAPIMethodArgumentList = String.join(", ", clientMethod.getProxyMethodArguments(settings));
             String serviceMethodCall = String.format("service.%s(%s)", restAPIMethod.getName(), restAPIMethodArgumentList);

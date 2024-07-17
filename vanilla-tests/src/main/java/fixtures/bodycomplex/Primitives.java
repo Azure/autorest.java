@@ -219,12 +219,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getInt(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getIntWithResponseAsync(context));
     }
 
     /**
@@ -310,17 +305,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putInt(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putIntWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -414,12 +399,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<LongWrapper>> getLongWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getLong(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getLongWithResponseAsync(context));
     }
 
     /**
@@ -504,17 +484,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putLong(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putLongWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -608,12 +578,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<FloatWrapper>> getFloatWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getFloat(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getFloatWithResponseAsync(context));
     }
 
     /**
@@ -698,17 +663,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putFloat(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putFloatWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -803,12 +758,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDouble(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getDoubleWithResponseAsync(context));
     }
 
     /**
@@ -894,17 +844,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putDouble(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putDoubleWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -998,12 +938,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BooleanWrapper>> getBoolWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getBool(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBoolWithResponseAsync(context));
     }
 
     /**
@@ -1088,17 +1023,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putBool(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putBoolWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -1193,12 +1118,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getString(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getStringWithResponseAsync(context));
     }
 
     /**
@@ -1284,17 +1204,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putString(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putStringWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -1388,12 +1298,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DateWrapper>> getDateWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDate(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getDateWithResponseAsync(context));
     }
 
     /**
@@ -1478,17 +1383,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putDate(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putDateWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -1583,12 +1478,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDateTime(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getDateTimeWithResponseAsync(context));
     }
 
     /**
@@ -1674,18 +1564,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putDateTime(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putDateTimeWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -1780,12 +1659,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDateTimeRfc1123(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getDateTimeRfc1123WithResponseAsync(context));
     }
 
     /**
@@ -1871,18 +1745,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putDateTimeRfc1123(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putDateTimeRfc1123WithResponseAsync(complexBody, context));
     }
 
     /**
@@ -1978,12 +1841,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDuration(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getDurationWithResponseAsync(context));
     }
 
     /**
@@ -2069,18 +1927,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putDuration(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putDurationWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -2174,12 +2021,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ByteWrapper>> getByteWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getByte(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getByteWithResponseAsync(context));
     }
 
     /**
@@ -2264,17 +2106,7 @@ public final class Primitives {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper complexBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (complexBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
-        } else {
-            complexBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putByte(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putByteWithResponseAsync(complexBody, context));
     }
 
     /**

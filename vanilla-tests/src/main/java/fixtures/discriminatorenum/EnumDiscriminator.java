@@ -136,11 +136,7 @@ public final class EnumDiscriminator {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Dog>> getExtensibleModelWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getExtensibleModel(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getExtensibleModelWithResponseAsync(context));
     }
 
     /**

@@ -206,20 +206,8 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> validationOfMethodParametersWithResponseAsync(String resourceGroupName, int id) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (this.getSubscriptionId() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.validationOfMethodParameters(this.getHost(),
-            this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion(), accept, context));
+        return FluxUtil
+            .withContext(context -> validationOfMethodParametersWithResponseAsync(resourceGroupName, id, context));
     }
 
     /**
@@ -330,23 +318,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> validationOfBodyWithResponseAsync(String resourceGroupName, int id, Product body) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (this.getSubscriptionId() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (body != null) {
-            body.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.validationOfBody(this.getHost(), this.getSubscriptionId(),
-            resourceGroupName, id, this.getApiVersion(), body, accept, context));
+        return FluxUtil.withContext(context -> validationOfBodyWithResponseAsync(resourceGroupName, id, body, context));
     }
 
     /**
@@ -494,11 +466,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithConstantInPathWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String constantParam = "constant";
-        return FluxUtil.withContext(context -> service.getWithConstantInPath(this.getHost(), constantParam, context));
+        return FluxUtil.withContext(context -> getWithConstantInPathWithResponseAsync(context));
     }
 
     /**
@@ -581,16 +549,7 @@ public final class AutoRestValidationTest {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> postWithConstantInBodyWithResponseAsync(Product body) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (body != null) {
-            body.validate();
-        }
-        final String constantParam = "constant";
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.postWithConstantInBody(this.getHost(), constantParam, body, accept, context));
+        return FluxUtil.withContext(context -> postWithConstantInBodyWithResponseAsync(body, context));
     }
 
     /**

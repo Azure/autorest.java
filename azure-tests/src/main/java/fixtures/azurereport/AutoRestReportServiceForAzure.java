@@ -140,11 +140,7 @@ public final class AutoRestReportServiceForAzure {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, Integer>>> getReportWithResponseAsync(String qualifier) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getReport(this.getHost(), qualifier, accept, context));
+        return FluxUtil.withContext(context -> getReportWithResponseAsync(qualifier, context));
     }
 
     /**

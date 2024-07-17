@@ -251,9 +251,7 @@ public final class MiscellaneousImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OperationDetails>> getOperationWithResponseAsync(String operationId) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getOperation(this.client.getEndpoint(), operationId,
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getOperationWithResponseAsync(operationId, context));
     }
 
     /**
@@ -343,9 +341,7 @@ public final class MiscellaneousImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceDetails>> getResourceInfoWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getResourceInfo(this.client.getEndpoint(),
-            this.client.getApiVersion(), accept, context));
+        return FluxUtil.withContext(context -> getResourceInfoWithResponseAsync(context));
     }
 
     /**

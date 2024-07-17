@@ -212,12 +212,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Float>> getNullWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNullWithResponseAsync(context));
     }
 
     /**
@@ -300,12 +295,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Float>> getInvalidFloatWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getInvalidFloat(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getInvalidFloatWithResponseAsync(context));
     }
 
     /**
@@ -388,12 +378,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Double>> getInvalidDoubleWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getInvalidDouble(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getInvalidDoubleWithResponseAsync(context));
     }
 
     /**
@@ -476,12 +461,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BigDecimal>> getInvalidDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getInvalidDecimal(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getInvalidDecimalWithResponseAsync(context));
     }
 
     /**
@@ -566,12 +546,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigFloatWithResponseAsync(float numberBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putBigFloat(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putBigFloatWithResponseAsync(numberBody, context));
     }
 
     /**
@@ -660,12 +635,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Float>> getBigFloatWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getBigFloat(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBigFloatWithResponseAsync(context));
     }
 
     /**
@@ -750,13 +720,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoubleWithResponseAsync(double numberBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putBigDouble(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putBigDoubleWithResponseAsync(numberBody, context));
     }
 
     /**
@@ -845,12 +809,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Double>> getBigDoubleWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getBigDouble(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBigDoubleWithResponseAsync(context));
     }
 
     /**
@@ -933,14 +892,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoublePositiveDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final double numberBody = 9.999999999E7;
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putBigDoublePositiveDecimal(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putBigDoublePositiveDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1023,13 +975,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Double>> getBigDoublePositiveDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getBigDoublePositiveDecimal(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBigDoublePositiveDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1112,14 +1058,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDoubleNegativeDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final double numberBody = -9.999999999E7;
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putBigDoubleNegativeDecimal(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putBigDoubleNegativeDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1202,13 +1141,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Double>> getBigDoubleNegativeDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getBigDoubleNegativeDecimal(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBigDoubleNegativeDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1293,16 +1226,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalWithResponseAsync(BigDecimal numberBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (numberBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putBigDecimal(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putBigDecimalWithResponseAsync(numberBody, context));
     }
 
     /**
@@ -1394,12 +1318,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BigDecimal>> getBigDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getBigDecimal(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBigDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1482,14 +1401,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalPositiveDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final BigDecimal numberBody = new BigDecimal("9.999999999E7");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putBigDecimalPositiveDecimal(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putBigDecimalPositiveDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1572,13 +1484,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BigDecimal>> getBigDecimalPositiveDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getBigDecimalPositiveDecimal(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBigDecimalPositiveDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1661,14 +1567,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBigDecimalNegativeDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final BigDecimal numberBody = new BigDecimal("-9.999999999E7");
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putBigDecimalNegativeDecimal(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putBigDecimalNegativeDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1751,13 +1650,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BigDecimal>> getBigDecimalNegativeDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getBigDecimalNegativeDecimal(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getBigDecimalNegativeDecimalWithResponseAsync(context));
     }
 
     /**
@@ -1842,13 +1735,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallFloatWithResponseAsync(float numberBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putSmallFloat(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putSmallFloatWithResponseAsync(numberBody, context));
     }
 
     /**
@@ -1937,12 +1824,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Double>> getSmallFloatWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getSmallFloat(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getSmallFloatWithResponseAsync(context));
     }
 
     /**
@@ -2027,13 +1909,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallDoubleWithResponseAsync(double numberBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putSmallDouble(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putSmallDoubleWithResponseAsync(numberBody, context));
     }
 
     /**
@@ -2122,12 +1998,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Double>> getSmallDoubleWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getSmallDouble(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getSmallDoubleWithResponseAsync(context));
     }
 
     /**
@@ -2212,16 +2083,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putSmallDecimalWithResponseAsync(BigDecimal numberBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (numberBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putSmallDecimal(this.client.getHost(), numberBody, accept, context));
+        return FluxUtil.withContext(context -> putSmallDecimalWithResponseAsync(numberBody, context));
     }
 
     /**
@@ -2313,12 +2175,7 @@ public final class Numbers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BigDecimal>> getSmallDecimalWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getSmallDecimal(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getSmallDecimalWithResponseAsync(context));
     }
 
     /**

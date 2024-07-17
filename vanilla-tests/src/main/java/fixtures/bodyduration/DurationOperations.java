@@ -90,12 +90,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getNullWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNullWithResponseAsync(context));
     }
 
     /**
@@ -180,16 +175,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putPositiveDurationWithResponseAsync(Duration durationBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (durationBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putPositiveDuration(this.client.getHost(), durationBody, accept, context));
+        return FluxUtil.withContext(context -> putPositiveDurationWithResponseAsync(durationBody, context));
     }
 
     /**
@@ -281,12 +267,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getPositiveDurationWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getPositiveDuration(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getPositiveDurationWithResponseAsync(context));
     }
 
     /**
@@ -369,12 +350,7 @@ public final class DurationOperations {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Duration>> getInvalidWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getInvalidWithResponseAsync(context));
     }
 
     /**
