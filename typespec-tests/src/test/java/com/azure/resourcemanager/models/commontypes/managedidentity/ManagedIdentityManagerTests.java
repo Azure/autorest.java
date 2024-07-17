@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ManagedIdentityManagerTests {
+    private static final String USER_ASSIGNED_IDENTITIES_KEY = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1";
     private final ManagedIdentityManager manager = ManagedIdentityManager.authenticate(
             ArmUtils.createTestHttpPipeline(),
             ArmUtils.getAzureProfile());
@@ -43,9 +44,7 @@ public class ManagedIdentityManagerTests {
         Assertions.assertNotNull(resource.identity().tenantId());
 
         Map<String, UserAssignedIdentity> userAssignedIdentityMap = new HashMap<>();
-        userAssignedIdentityMap.put(
-                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1",
-                new UserAssignedIdentity());
+        userAssignedIdentityMap.put(USER_ASSIGNED_IDENTITIES_KEY, new UserAssignedIdentity());
         resource.update().withIdentity(new ManagedServiceIdentity()
                         .withType(ManagedServiceIdentityType.SYSTEM_ASSIGNED_USER_ASSIGNED)
                         .withUserAssignedIdentities(userAssignedIdentityMap))
@@ -55,10 +54,10 @@ public class ManagedIdentityManagerTests {
         Assertions.assertNotNull(resource.identity().tenantId());
         Assertions.assertNotNull(resource.identity().userAssignedIdentities());
         Assertions.assertEquals(1, resource.identity().userAssignedIdentities().size());
-        resource.identity().userAssignedIdentities()
-                .values().forEach(item -> {
-                    Assertions.assertNotNull(item.principalId());
-                    Assertions.assertNotNull(item.clientId());
-                });
+        UserAssignedIdentity userAssignedIdentity = resource.identity()
+                .userAssignedIdentities().get(USER_ASSIGNED_IDENTITIES_KEY);
+        Assertions.assertNotNull(userAssignedIdentity.principalId());
+        Assertions.assertNotNull(userAssignedIdentity.clientId());
+
     }
 }
