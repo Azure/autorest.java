@@ -3,10 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
+
+import static com.azure.autorest.extension.base.util.JsonUtils.readObject;
+
 /**
  * Represents the per-language metadata.
  */
-public class Language {
+public class Language implements JsonSerializable<Language> {
     private String name;
     private String serializedName;
     private String description;
@@ -130,6 +138,38 @@ public class Language {
 
     @Override
     public String toString() {
-        return "Language{" + "name='" + name + "', serializedName='" + serializedName + "'}";
+        return "Language{name='" + name + "', serializedName='" + serializedName + "'}";
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("name", name)
+            .writeStringField("serializedName", serializedName)
+            .writeStringField("description", description)
+            .writeStringField("summary", summary)
+            .writeStringField("namespace", namespace)
+            .writeStringField("comment", comment)
+            .writeEndObject();
+    }
+
+    public static Language fromJson(JsonReader jsonReader) throws IOException {
+        return readObject(jsonReader, Language::new, (language, fieldName, reader) -> {
+            if ("name".equals(fieldName)) {
+                language.name = reader.getString();
+            } else if ("serializedName".equals(fieldName)) {
+                language.serializedName = reader.getString();
+            } else if ("description".equals(fieldName)) {
+                language.description = reader.getString();
+            } else if ("summary".equals(fieldName)) {
+                language.summary = reader.getString();
+            } else if ("namespace".equals(fieldName)) {
+                language.namespace = reader.getString();
+            } else if ("comment".equals(fieldName)) {
+                language.comment = reader.getString();
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

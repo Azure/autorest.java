@@ -4,11 +4,12 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.json.JsonSerializable;
 
 /**
  * Represents metadata.
  */
-public class Metadata {
+public class Metadata implements JsonSerializable<Metadata> {
     private Languages language;
     private Protocols protocol;
     private XmsExtensions extensions;

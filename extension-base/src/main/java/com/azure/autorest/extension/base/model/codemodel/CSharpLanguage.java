@@ -3,10 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
+
+import static com.azure.autorest.extension.base.util.JsonUtils.readObject;
+
 /**
  * Represents the C# language.
  */
-public class CSharpLanguage {
+public class CSharpLanguage implements JsonSerializable<CSharpLanguage> {
 
     /**
      * Creates a new instance of the CSharpLanguage class.
@@ -33,4 +41,12 @@ public class CSharpLanguage {
         return other instanceof CSharpLanguage;
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject().writeEndObject();
+    }
+
+    public static CSharpLanguage fromJson(JsonReader jsonReader) throws IOException {
+        return readObject(jsonReader, CSharpLanguage::new, (cSharp, fieldName, reader) -> reader.skipChildren());
+    }
 }

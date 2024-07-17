@@ -3,10 +3,14 @@
 
 package com.azure.autorest.extension.base.plugin;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.slf4j.Logger;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +27,6 @@ import java.util.stream.Collectors;
  * Settings that are used by the Java AutoRest Generator.
  */
 public class JavaSettings {
-    private static final TypeFactory TYPE_FACTORY = TypeFactory.defaultInstance();
     private static final String VERSION = "4.0.0";
     private static JavaSettings instance;
     private static NewPlugin host;
@@ -1293,16 +1296,11 @@ public class JavaSettings {
     /**
      * Represents the details of polling for a long-running operation.
      */
-    public static class PollingDetails {
-        @JsonProperty("strategy")
+    public static class PollingDetails implements JsonSerializable<PollingDetails> {
         private String strategy;
-        @JsonProperty("sync-strategy")
         private String syncStrategy;
-        @JsonProperty("intermediate-type")
         private String intermediateType;
-        @JsonProperty("final-type")
         private String finalType;
-        @JsonProperty("poll-interval")
         private String pollInterval;
 
         /**
@@ -1377,6 +1375,44 @@ public class JavaSettings {
          */
         public int getPollIntervalInSeconds() {
             return pollInterval != null ? Integer.parseInt(pollInterval) : 1;
+        }
+
+        @Override
+        public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+            return jsonWriter.writeStartObject()
+                .writeStringField("strategy", strategy)
+                .writeStringField("sync-strategy", syncStrategy)
+                .writeStringField("intermediate-type", intermediateType)
+                .writeStringField("final-type", finalType)
+                .writeStringField("poll-interval", pollInterval)
+                .writeEndObject();
+        }
+
+        public static PollingDetails fromJson(JsonReader jsonReader) throws IOException {
+            return jsonReader.readObject(reader -> {
+                PollingDetails pollingDetails = new PollingDetails();
+
+                while (reader.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = reader.getFieldName();
+                    reader.nextToken();
+
+                    if ("strategy".equals(fieldName)) {
+                        pollingDetails.strategy = reader.getString();
+                    } else if ("sync-strategy".equals(fieldName)) {
+                        pollingDetails.syncStrategy = reader.getString();
+                    } else if ("intermediate-type".equals(fieldName)) {
+                        pollingDetails.intermediateType = reader.getString();
+                    } else if ("final-type".equals(fieldName)) {
+                        pollingDetails.finalType = reader.getString();
+                    } else if ("poll-interval".equals(fieldName)) {
+                        pollingDetails.pollInterval = reader.getString();
+                    } else {
+                        reader.skipChildren();
+                    }
+                }
+
+                return pollingDetails;
+            });
         }
     }
 

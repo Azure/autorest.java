@@ -3,12 +3,19 @@
 
 package com.azure.autorest.extension.base.model.extensionmodel;
 
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.List;
+
+import static com.azure.autorest.extension.base.util.JsonUtils.readObject;
 
 /**
  * Represents an enum.
  */
-public class XmsEnum {
+public class XmsEnum implements JsonSerializable<XmsEnum> {
     private String name;
     private boolean modelAsString = false;
     private List<Value> values;
@@ -73,10 +80,33 @@ public class XmsEnum {
         this.values = values;
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("name", name)
+            .writeBooleanField("modelAsString", modelAsString)
+            .writeArrayField("values", values, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    public static XmsEnum fromJson(JsonReader jsonReader) throws IOException {
+        return readObject(jsonReader, XmsEnum::new, (xmsEnum, fieldName, reader) -> {
+            if ("name".equals(fieldName)) {
+                xmsEnum.name = reader.getString();
+            } else if ("modelAsString".equals(fieldName)) {
+                xmsEnum.modelAsString = reader.getBoolean();
+            } else if ("values".equals(fieldName)) {
+                xmsEnum.values = reader.readArray(Value::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
+
     /**
      * Represents a value of the enum.
      */
-    public static class Value {
+    public static class Value implements JsonSerializable<Value> {
         private String value;
         private String description;
         private String name;
@@ -139,6 +169,29 @@ public class XmsEnum {
          */
         public void setName(String name) {
             this.name = name;
+        }
+
+        @Override
+        public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+            return jsonWriter.writeStartObject()
+                .writeStringField("value", value)
+                .writeStringField("description", description)
+                .writeStringField("name", name)
+                .writeEndObject();
+        }
+
+        public static Value fromJson(JsonReader jsonReader) throws IOException {
+            return readObject(jsonReader, Value::new, (value, fieldName, reader) -> {
+                if ("value".equals(fieldName)) {
+                    value.value = reader.getString();
+                } else if ("description".equals(fieldName)) {
+                    value.description = reader.getString();
+                } else if ("name".equals(fieldName)) {
+                    value.name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            });
         }
     }
 }

@@ -8,12 +8,9 @@ import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.MessageChannel;
 import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -21,9 +18,10 @@ import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.inspector.TrustedTagInspector;
 import org.yaml.snakeyaml.representer.Representer;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.lang.reflect.Type;
+import java.io.UncheckedIOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -33,19 +31,8 @@ import java.util.Objects;
 
 /**
  * Represents a plugin that can be run by AutoRest.
-
  */
 public abstract class NewPlugin {
-    private static final Type MAP_STRING_STRING_TYPE = TypeFactory.defaultInstance()
-        .constructMapType(Map.class, String.class, String.class);
-    private static final JavaType LIST_STRING = TypeFactory.defaultInstance()
-        .constructCollectionLikeType(List.class, String.class);
-
-    /**
-     * The ObjectMapper used to serialize and deserialize JSON.
-     */
-    protected final ObjectMapper jsonMapper;
-
     /**
      * The Yaml used to serialize and deserialize YAML.
      */
@@ -73,46 +60,50 @@ public abstract class NewPlugin {
      * @return The content of the file.
      */
     public String readFile(String fileName) {
-        return connection.request(jsonMapper.constructType(String.class), "ReadFile", sessionId, fileName);
+        return connection.request("ReadFile", sessionId, fileName);
     }
 
     /**
      * Gets the value of a key.
      *
      * @param <T> The type of the value.
-     * @param type The type of the value.
      * @param key The key.
+     * @param converter The converter to convert the value to the desired type.
      * @return The value of the key.
      */
-    public <T> T getValue(Type type, String key) {
-        return connection.request(jsonMapper.constructType(type), "GetValue", sessionId, key);
+    public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        try {
+            return converter.read(connection.request("GetValue", sessionId, key));
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
     }
 
-//    /**
-//     * Gets the Map value of a key.
-//     *
-//     * @param <K> The type of the key.
-//     * @param <V> The type of the value.
-//     * @param keyType The type of the key.
-//     * @param valueType The type of the value.
-//     * @param key The key.
-//     * @return The value of the key.
-//     */
-//    public <K, V> Map<K, V> getMapValue(Class<K> keyType, Class<V> valueType, String key) {
-//        return getValue(jsonMapper.getTypeFactory().constructMapType(Map.class, keyType, valueType), key);
-//    }
-//
-//    /**
-//     * Gets the List value of a key.
-//     *
-//     * @param <T> The type of the value.
-//     * @param valueType The type of the value.
-//     * @param key The key.
-//     * @return The value of the key.
-//     */
-//    public <T> List<T> getListValue(Class<T> valueType, String key) {
-//        return getValue(jsonMapper.getTypeFactory().constructCollectionType(List.class, valueType), key);
-//    }
+    //    /**
+    //     * Gets the Map value of a key.
+    //     *
+    //     * @param <K> The type of the key.
+    //     * @param <V> The type of the value.
+    //     * @param keyType The type of the key.
+    //     * @param valueType The type of the value.
+    //     * @param key The key.
+    //     * @return The value of the key.
+    //     */
+    //    public <K, V> Map<K, V> getMapValue(Class<K> keyType, Class<V> valueType, String key) {
+    //        return getValue(jsonMapper.getTypeFactory().constructMapType(Map.class, keyType, valueType), key);
+    //    }
+    //
+    //    /**
+    //     * Gets the List value of a key.
+    //     *
+    //     * @param <T> The type of the value.
+    //     * @param valueType The type of the value.
+    //     * @param key The key.
+    //     * @return The value of the key.
+    //     */
+    //    public <T> List<T> getListValue(Class<T> valueType, String key) {
+    //        return getValue(jsonMapper.getTypeFactory().constructCollectionType(List.class, valueType), key);
+    //    }
 
     /**
      * Gets the value of a key.
@@ -121,7 +112,7 @@ public abstract class NewPlugin {
      * @return The value of the key.
      */
     public String getStringValue(String key) {
-        return getValue(String.class, key);
+        return getValue(key, json -> json);
     }
 
     /**
@@ -133,7 +124,7 @@ public abstract class NewPlugin {
      */
     public String getStringValue(String key, String defaultValue) {
         String ret = getStringValue(key);
-        return  (ret == null) ? defaultValue : ret;
+        return (ret == null) ? defaultValue : ret;
     }
 
     /**
@@ -143,7 +134,8 @@ public abstract class NewPlugin {
      * @return The value of the key.
      */
     public Boolean getBooleanValue(String key) {
-        return getValue(Boolean.class, key);
+        return getValue(key,
+            json -> json == null ? null : (!json.equals("0") && !json.equals("false") && !json.isEmpty()));
     }
 
     /**
@@ -174,7 +166,12 @@ public abstract class NewPlugin {
      * @return The input files of the specific type.
      */
     public List<String> listInputs(String artifactType) {
-        return connection.request(LIST_STRING, "ListInputs", sessionId, artifactType);
+        String jsonResponse = connection.request("ListInputs", sessionId, artifactType);
+        try (JsonReader jsonReader = JsonProviders.createReader(jsonResponse)) {
+            return jsonReader.readArray(JsonReader::getString);
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
     }
 
     /**
@@ -263,7 +260,12 @@ public abstract class NewPlugin {
      * @return The content of the configuration file.
      */
     public String getConfigurationFile(String fileName) {
-        Map<String, String> configurations = getValue(MAP_STRING_STRING_TYPE, "configurationFiles");
+        Map<String, String> configurations = getValue("configurationFiles", json -> {
+            try (JsonReader jsonReader = JsonProviders.createReader(json)) {
+                return jsonReader.readMap(JsonReader::getString);
+            }
+        });
+
         if (configurations != null) {
             Iterator<String> it = configurations.keySet().iterator();
             if (it.hasNext()) {
@@ -304,17 +306,6 @@ public abstract class NewPlugin {
         this.connection = connection;
         this.pluginName = pluginName;
         this.sessionId = sessionId;
-        this.jsonMapper = new ObjectMapper()
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-            .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-            .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
-        this.jsonMapper.setVisibility(jsonMapper.getSerializationConfig().getDefaultVisibilityChecker()
-            .withFieldVisibility(JsonAutoDetect.Visibility.ANY)
-            .withSetterVisibility(JsonAutoDetect.Visibility.NONE)
-            .withGetterVisibility(JsonAutoDetect.Visibility.NONE)
-            .withIsGetterVisibility(JsonAutoDetect.Visibility.NONE));
         Representer representer = new Representer(new DumperOptions());
         representer.setPropertyUtils(new AnnotatedPropertyUtils());
         representer.getPropertyUtils().setSkipMissingProperties(true);

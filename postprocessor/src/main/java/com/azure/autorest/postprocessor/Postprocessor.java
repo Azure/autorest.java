@@ -11,7 +11,8 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.extension.base.util.FileUtils;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.postprocessor.implementation.CodeFormatterUtil;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -126,8 +127,12 @@ public class Postprocessor {
     }
 
     private static String getReadme(NewPlugin plugin) {
-        List<String> configurationFiles = plugin.getValue(
-            TypeFactory.defaultInstance().constructCollectionLikeType(List.class, String.class), "configurationFiles");
+        List<String> configurationFiles = plugin.getValue("configurationFiles", json -> {
+            try (JsonReader jsonReader = JsonProviders.createReader(json)) {
+                return jsonReader.readArray(JsonReader::getString);
+            }
+        });
+
         return configurationFiles == null || configurationFiles.isEmpty()
             ? JavaSettings.getInstance().getAutorestSettings().getOutputFolder()
             : configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);

@@ -5,9 +5,7 @@ package com.azure.autorest.customization.implementation.ls;
 
 import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.eclipse.lsp4j.ClientCapabilities;
@@ -45,8 +43,6 @@ import org.eclipse.lsp4j.jsonrpc.json.MessageJsonHandler;
 import org.slf4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -122,7 +118,7 @@ public class EclipseLanguageClient implements AutoCloseable {
         initializeParams.getCapabilities().setTextDocument(textDocumentClientCapabilities);
 
         sendRequest(connection, "initialize", initializeParams, InitializeResult.class);
-        connection.notifyWithObject("initialized", null);
+        connection.notifyWithSerializedObject("initialized", "null");
         try {
             Thread.sleep(2500);
         } catch (InterruptedException e) {
@@ -205,8 +201,8 @@ public class EclipseLanguageClient implements AutoCloseable {
 
     public void close() {
         try {
-            connection.request(TypeFactory.defaultInstance().constructType(void.class), "shutdown");
-            connection.notifyWithObject("exit", null);
+            connection.request(void.class, "shutdown");
+            connection.notifyWithSerializedObject("exit", "null");
             connection.stop();
             server.shutdown();
         } catch (Exception e) {
@@ -215,14 +211,7 @@ public class EclipseLanguageClient implements AutoCloseable {
     }
 
     private static <T> T sendRequest(Connection connection, String method, Object param, Type responseType) {
-        try {
-            String response = OBJECT_MAPPER.writeValueAsString(connection.requestWithSerializedObject(
-                OBJECT_MAPPER.constructType(JsonNode.class), method, GSON.toJson(param)));
-
-            return GSON.fromJson(response, responseType);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        return GSON.fromJson(connection.requestWithSerializedObject(method, GSON.toJson(param)), responseType);
     }
 
     private static Type createParameterizedType(Type rawType, Type... typeArguments) {
