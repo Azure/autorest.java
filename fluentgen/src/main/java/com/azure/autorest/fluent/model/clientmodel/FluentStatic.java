@@ -6,6 +6,9 @@ package com.azure.autorest.fluent.model.clientmodel;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.model.clientmodel.Client;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Convenient class for global variables.
  *
@@ -38,6 +41,13 @@ public class FluentStatic {
      */
     public static FluentManager getFluentManager() {
         return fluentClient.getManager();
+    }
+
+    /**
+     * @return the client on resource collections.
+     */
+    public static List<FluentResourceCollection> getResourceCollections() {
+        return Collections.unmodifiableList(fluentClient.getResourceCollections());
     }
 
     public static void setFluentClient(FluentClient fluentClient) {
