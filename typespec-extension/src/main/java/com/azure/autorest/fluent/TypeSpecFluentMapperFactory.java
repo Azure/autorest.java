@@ -10,7 +10,6 @@ import com.azure.autorest.mapper.ModelPropertyMapper;
 import com.azure.autorest.mapper.ObjectMapper;
 import com.azure.autorest.mapper.PrimitiveMapper;
 import com.azure.typespec.mapper.TypeSpecClientMapper;
-import com.azure.typespec.mapper.TypeSpecModelPropertyMapper;
 import com.azure.typespec.mapper.TypeSpecPrimitiveMapper;
 
 public class TypeSpecFluentMapperFactory extends FluentMapperFactory {
@@ -36,6 +35,6 @@ public class TypeSpecFluentMapperFactory extends FluentMapperFactory {
 
     @Override
     public ModelPropertyMapper getModelPropertyMapper() {
-        return TypeSpecModelPropertyMapper.getInstance();
+        return TypeSpecFluentModelPropertyMapper.getInstance();
     }
 }
