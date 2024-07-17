@@ -64,7 +64,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> basic(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> basic(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -75,7 +75,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> basicSync(@HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+        Response<Void> basicSync(@HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
             @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
@@ -85,7 +85,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> complex(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> complex(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -96,7 +96,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> complexSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> complexSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -107,7 +107,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> jsonPart(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> jsonPart(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -118,7 +118,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> jsonPartSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> jsonPartSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -129,7 +129,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> binaryArrayParts(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> binaryArrayParts(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -140,7 +140,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> binaryArrayPartsSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> binaryArrayPartsSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -151,7 +151,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> jsonArrayParts(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> jsonArrayParts(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -162,7 +162,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> jsonArrayPartsSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> jsonArrayPartsSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -173,7 +173,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> multiBinaryParts(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> multiBinaryParts(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -184,7 +184,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> multiBinaryPartsSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> multiBinaryPartsSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -195,7 +195,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> checkFileNameAndContentType(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> checkFileNameAndContentType(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -206,7 +206,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> checkFileNameAndContentTypeSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> checkFileNameAndContentTypeSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
 
@@ -217,7 +217,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> anonymousModel(@HeaderParam("Content-Type") String contentType,
+        Mono<Response<Void>> anonymousModel(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData anonymousModelRequest,
             RequestOptions requestOptions, Context context);
 
@@ -228,7 +228,7 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> anonymousModelSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> anonymousModelSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData anonymousModelRequest,
             RequestOptions requestOptions, Context context);
     }

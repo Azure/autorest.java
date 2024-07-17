@@ -348,7 +348,7 @@ public class FluentUtils {
                     .findFirst();
             if (clientResponse.isPresent()) {
                 bodyType = clientResponse.get().getBodyType();
-            };
+            }
         }
         return bodyType;
     }

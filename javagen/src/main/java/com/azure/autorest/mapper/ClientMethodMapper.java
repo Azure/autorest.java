@@ -1073,7 +1073,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (isProtocolMethod || !responseContainsHeaders) {
             return GenericType.Response(syncReturnType);
         } else if (settings.isGenericResponseTypes()) {
-            if (ignoreCustomHeaders) {
+            if (ignoreCustomHeaders || settings.isDisableTypedHeadersMethods()) {
                 return GenericType.Response(syncReturnType);
             }
             return GenericType.RestResponse(Mappers.getSchemaMapper().map(ClientMapper.parseHeader(operation, settings)),

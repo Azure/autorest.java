@@ -35,7 +35,6 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.models.resources.fluent.TopLevelTrackedResourcesClient;
 import com.azure.resourcemanager.models.resources.fluent.models.TopLevelTrackedResourceInner;
 import com.azure.resourcemanager.models.resources.implementation.models.TopLevelTrackedResourceListResult;
-import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceUpdate;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -102,7 +101,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
             @HeaderParam("accept") String accept,
-            @BodyParam("application/json") TopLevelTrackedResourceUpdate properties, Context context);
+            @BodyParam("application/json") TopLevelTrackedResourceInner properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Delete("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}")
@@ -532,7 +531,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
-        String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties) {
+        String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -577,7 +576,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
-        String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties, Context context) {
+        String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -619,7 +618,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdateAsync(
-        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties) {
+        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties) {
         Mono<Response<Flux<ByteBuffer>>> mono
             = updateWithResponseAsync(resourceGroupName, topLevelTrackedResourceName, properties);
         return this.client.<TopLevelTrackedResourceInner, TopLevelTrackedResourceInner>getLroResult(mono,
@@ -642,7 +641,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdateAsync(
-        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties,
+        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties,
         Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono
@@ -666,7 +665,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdate(
-        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties) {
+        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties) {
         return this.beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, properties).getSyncPoller();
     }
 
@@ -685,7 +684,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdate(
-        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties,
+        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties,
         Context context) {
         return this.beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, properties, context)
             .getSyncPoller();
@@ -705,7 +704,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelTrackedResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
-        TopLevelTrackedResourceUpdate properties) {
+        TopLevelTrackedResourceInner properties) {
         return beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, properties).last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
@@ -725,7 +724,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelTrackedResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
-        TopLevelTrackedResourceUpdate properties, Context context) {
+        TopLevelTrackedResourceInner properties, Context context) {
         return beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, properties, context).last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
@@ -743,7 +742,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelTrackedResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        TopLevelTrackedResourceUpdate properties) {
+        TopLevelTrackedResourceInner properties) {
         return updateAsync(resourceGroupName, topLevelTrackedResourceName, properties).block();
     }
 
@@ -761,7 +760,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelTrackedResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        TopLevelTrackedResourceUpdate properties, Context context) {
+        TopLevelTrackedResourceInner properties, Context context) {
         return updateAsync(resourceGroupName, topLevelTrackedResourceName, properties, context).block();
     }
 

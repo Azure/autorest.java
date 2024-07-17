@@ -18,6 +18,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -38,7 +39,7 @@ import fixtures.xmlservice.models.RootWithRefAndNoMeta;
 import fixtures.xmlservice.models.SignedIdentifier;
 import fixtures.xmlservice.models.Slideshow;
 import fixtures.xmlservice.models.StorageServiceProperties;
-import fixtures.xmlservice.models.XmlsGetHeadersResponse;
+import fixtures.xmlservice.models.XmlsGetHeadersHeaders;
 import java.util.List;
 import reactor.core.publisher.Mono;
 
@@ -125,7 +126,12 @@ public final class Xmls {
         @Get("/xml/headers")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<XmlsGetHeadersResponse> getHeaders(@HostParam("$host") String host, Context context);
+        Mono<ResponseBase<XmlsGetHeadersHeaders, Void>> getHeaders(@HostParam("$host") String host, Context context);
+
+        @Get("/xml/headers")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> getHeadersNoCustomHeaders(@HostParam("$host") String host, Context context);
 
         @Get("/xml/empty-list")
         @ExpectedResponses({ 200 })
@@ -1011,10 +1017,10 @@ public final class Xmls {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return strongly-typed response headers on successful completion of {@link Mono}.
+     * @return strongly-typed response headers along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<XmlsGetHeadersResponse> getHeadersWithResponseAsync() {
+    public Mono<ResponseBase<XmlsGetHeadersHeaders, Void>> getHeadersWithResponseAsync() {
         return FluxUtil.withContext(context -> getHeadersWithResponseAsync(context));
     }
 
@@ -1025,10 +1031,10 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return strongly-typed response headers on successful completion of {@link Mono}.
+     * @return strongly-typed response headers along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<XmlsGetHeadersResponse> getHeadersWithResponseAsync(Context context) {
+    public Mono<ResponseBase<XmlsGetHeadersHeaders, Void>> getHeadersWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1069,10 +1075,10 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return strongly-typed response headers.
+     * @return strongly-typed response headers along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public XmlsGetHeadersResponse getHeadersWithResponse(Context context) {
+    public ResponseBase<XmlsGetHeadersHeaders, Void> getHeadersWithResponse(Context context) {
         return getHeadersWithResponseAsync(context).block();
     }
 
@@ -1085,6 +1091,50 @@ public final class Xmls {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void getHeaders() {
         getHeadersWithResponse(Context.NONE);
+    }
+
+    /**
+     * Get strongly-typed response headers.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return strongly-typed response headers along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getHeadersNoCustomHeadersWithResponseAsync() {
+        return FluxUtil.withContext(context -> getHeadersNoCustomHeadersWithResponseAsync(context));
+    }
+
+    /**
+     * Get strongly-typed response headers.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return strongly-typed response headers along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> getHeadersNoCustomHeadersWithResponseAsync(Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        return service.getHeadersNoCustomHeaders(this.client.getHost(), context);
+    }
+
+    /**
+     * Get strongly-typed response headers.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return strongly-typed response headers along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> getHeadersNoCustomHeadersWithResponse(Context context) {
+        return getHeadersNoCustomHeadersWithResponseAsync(context).block();
     }
 
     /**
