@@ -17,7 +17,7 @@ public class PlaintimeClientTests {
 
     @Test
     public void getDefault() {
-        Assertions.assertNotNull(client.getDefault());
+        Assertions.assertNull(client.getDefault().getProperty());
     }
 
     @Test
