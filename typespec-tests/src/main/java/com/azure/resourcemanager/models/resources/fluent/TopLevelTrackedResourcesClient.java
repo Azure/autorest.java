@@ -12,7 +12,6 @@ import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.models.resources.fluent.models.TopLevelTrackedResourceInner;
-import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceUpdate;
 
 /**
  * An instance of this class provides access to all the operations defined in TopLevelTrackedResourcesClient.
@@ -126,7 +125,7 @@ public interface TopLevelTrackedResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdate(
-        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties);
+        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties);
 
     /**
      * Update a TopLevelTrackedResource.
@@ -143,7 +142,7 @@ public interface TopLevelTrackedResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdate(
-        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceUpdate properties,
+        String resourceGroupName, String topLevelTrackedResourceName, TopLevelTrackedResourceInner properties,
         Context context);
 
     /**
@@ -159,7 +158,7 @@ public interface TopLevelTrackedResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     TopLevelTrackedResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        TopLevelTrackedResourceUpdate properties);
+        TopLevelTrackedResourceInner properties);
 
     /**
      * Update a TopLevelTrackedResource.
@@ -175,7 +174,7 @@ public interface TopLevelTrackedResourcesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     TopLevelTrackedResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        TopLevelTrackedResourceUpdate properties, Context context);
+        TopLevelTrackedResourceInner properties, Context context);
 
     /**
      * Delete a TopLevelTrackedResource.

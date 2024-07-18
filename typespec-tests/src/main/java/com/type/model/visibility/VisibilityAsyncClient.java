@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.model.visibility.implementation.VisibilityClientImpl;
+import com.type.model.visibility.models.ReadOnlyModel;
 import com.type.model.visibility.models.VisibilityModel;
 import reactor.core.publisher.Mono;
 
@@ -248,6 +249,49 @@ public final class VisibilityAsyncClient {
     }
 
     /**
+     * The putReadOnlyModel operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     optionalNullableIntList (Optional): [
+     *         int (Optional)
+     *     ]
+     *     optionalStringRecord (Optional): {
+     *         String: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     optionalNullableIntList (Optional): [
+     *         int (Optional)
+     *     ]
+     *     optionalStringRecord (Optional): {
+     *         String: String (Required)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param input The input parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return roundTrip model with readonly optional properties along with {@link Response} on successful completion of
+     * {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putReadOnlyModelWithResponse(BinaryData input, RequestOptions requestOptions) {
+        return this.serviceClient.putReadOnlyModelWithResponseAsync(input, requestOptions);
+    }
+
+    /**
      * The getModel operation.
      * 
      * @param input The input parameter.
@@ -366,5 +410,26 @@ public final class VisibilityAsyncClient {
         // Generated convenience method for deleteModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return deleteModelWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The putReadOnlyModel operation.
+     * 
+     * @param input The input parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return roundTrip model with readonly optional properties on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ReadOnlyModel> putReadOnlyModel(ReadOnlyModel input) {
+        // Generated convenience method for putReadOnlyModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return putReadOnlyModelWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ReadOnlyModel.class));
     }
 }

@@ -119,23 +119,8 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         postRequiredWithResponseAsync(ParameterGroupingPostRequiredParameters parameterGroupingPostRequiredParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (parameterGroupingPostRequiredParameters == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter parameterGroupingPostRequiredParameters is required and cannot be null."));
-        } else {
-            parameterGroupingPostRequiredParameters.validate();
-        }
-        final String accept = "application/json";
-        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        Integer query = parameterGroupingPostRequiredParameters.getQuery();
-        String path = parameterGroupingPostRequiredParameters.getPath();
-        int body = parameterGroupingPostRequiredParameters.getBody();
-        return FluxUtil.withContext(
-            context -> service.postRequired(this.client.getHost(), customHeader, query, path, body, accept, context));
+        return FluxUtil
+            .withContext(context -> postRequiredWithResponseAsync(parameterGroupingPostRequiredParameters, context));
     }
 
     /**
@@ -242,26 +227,8 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         postOptionalWithResponseAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (parameterGroupingPostOptionalParameters != null) {
-            parameterGroupingPostOptionalParameters.validate();
-        }
-        final String accept = "application/json";
-        String customHeaderInternal = null;
-        if (parameterGroupingPostOptionalParameters != null) {
-            customHeaderInternal = parameterGroupingPostOptionalParameters.getCustomHeader();
-        }
-        String customHeader = customHeaderInternal;
-        Integer queryInternal = null;
-        if (parameterGroupingPostOptionalParameters != null) {
-            queryInternal = parameterGroupingPostOptionalParameters.getQuery();
-        }
-        Integer query = queryInternal;
         return FluxUtil
-            .withContext(context -> service.postOptional(this.client.getHost(), customHeader, query, accept, context));
+            .withContext(context -> postOptionalWithResponseAsync(parameterGroupingPostOptionalParameters, context));
     }
 
     /**
@@ -396,26 +363,8 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postReservedWordsWithResponseAsync(
         ParameterGroupingPostReservedWordsParameters parameterGroupingPostReservedWordsParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (parameterGroupingPostReservedWordsParameters != null) {
-            parameterGroupingPostReservedWordsParameters.validate();
-        }
-        final String acceptParam = "application/json";
-        String fromInternal = null;
-        if (parameterGroupingPostReservedWordsParameters != null) {
-            fromInternal = parameterGroupingPostReservedWordsParameters.getFrom();
-        }
-        String from = fromInternal;
-        String acceptInternal = null;
-        if (parameterGroupingPostReservedWordsParameters != null) {
-            acceptInternal = parameterGroupingPostReservedWordsParameters.getAccept();
-        }
-        String accept = acceptInternal;
         return FluxUtil.withContext(
-            context -> service.postReservedWords(this.client.getHost(), from, accept, acceptParam, context));
+            context -> postReservedWordsWithResponseAsync(parameterGroupingPostReservedWordsParameters, context));
     }
 
     /**
@@ -554,39 +503,8 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postMultiParamGroupsWithResponseAsync(FirstParameterGroup firstParameterGroup,
         ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (firstParameterGroup != null) {
-            firstParameterGroup.validate();
-        }
-        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            parameterGroupingPostMultiParamGroupsSecondParamGroup.validate();
-        }
-        final String accept = "application/json";
-        String headerOneInternal = null;
-        if (firstParameterGroup != null) {
-            headerOneInternal = firstParameterGroup.getHeaderOne();
-        }
-        String headerOne = headerOneInternal;
-        Integer queryOneInternal = null;
-        if (firstParameterGroup != null) {
-            queryOneInternal = firstParameterGroup.getQueryOne();
-        }
-        Integer queryOne = queryOneInternal;
-        String headerTwoInternal = null;
-        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            headerTwoInternal = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
-        }
-        String headerTwo = headerTwoInternal;
-        Integer queryTwoInternal = null;
-        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            queryTwoInternal = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
-        }
-        Integer queryTwo = queryTwoInternal;
-        return FluxUtil.withContext(context -> service.postMultiParamGroups(this.client.getHost(), headerOne, queryOne,
-            headerTwo, queryTwo, accept, context));
+        return FluxUtil.withContext(context -> postMultiParamGroupsWithResponseAsync(firstParameterGroup,
+            parameterGroupingPostMultiParamGroupsSecondParamGroup, context));
     }
 
     /**
@@ -753,26 +671,8 @@ public final class ParameterGroupings {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         postSharedParameterGroupObjectWithResponseAsync(FirstParameterGroup firstParameterGroup) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (firstParameterGroup != null) {
-            firstParameterGroup.validate();
-        }
-        final String accept = "application/json";
-        String headerOneInternal = null;
-        if (firstParameterGroup != null) {
-            headerOneInternal = firstParameterGroup.getHeaderOne();
-        }
-        String headerOne = headerOneInternal;
-        Integer queryOneInternal = null;
-        if (firstParameterGroup != null) {
-            queryOneInternal = firstParameterGroup.getQueryOne();
-        }
-        Integer queryOne = queryOneInternal;
-        return FluxUtil.withContext(context -> service.postSharedParameterGroupObject(this.client.getHost(), headerOne,
-            queryOne, accept, context));
+        return FluxUtil
+            .withContext(context -> postSharedParameterGroupObjectWithResponseAsync(firstParameterGroup, context));
     }
 
     /**
@@ -904,22 +804,7 @@ public final class ParameterGroupings {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> groupWithConstantWithResponseAsync(Grouper grouper) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (grouper != null) {
-            grouper.validate();
-        }
-        final String groupedConstant = "foo";
-        final String accept = "application/json";
-        String groupedParameterInternal = null;
-        if (grouper != null) {
-            groupedParameterInternal = grouper.getGroupedParameter();
-        }
-        String groupedParameter = groupedParameterInternal;
-        return FluxUtil.withContext(context -> service.groupWithConstant(this.client.getHost(), groupedConstant,
-            groupedParameter, accept, context));
+        return FluxUtil.withContext(context -> groupWithConstantWithResponseAsync(grouper, context));
     }
 
     /**

@@ -78,6 +78,20 @@ public interface CustomTemplateResource {
     Dog dog();
 
     /**
+     * Gets the namedEmptyModel property: The namedEmptyModel property.
+     * 
+     * @return the namedEmptyModel value.
+     */
+    EmptyModel namedEmptyModel();
+
+    /**
+     * Gets the anonymousEmptyModel property: The anonymousEmptyModel property.
+     * 
+     * @return the anonymousEmptyModel value.
+     */
+    CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel();
+
+    /**
      * Gets the region of the resource.
      * 
      * @return the region of the resource.
@@ -161,6 +175,7 @@ public interface CustomTemplateResource {
          * resource to be created, but also allows for any other optional properties to be specified.
          */
         interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithIdentity, DefinitionStages.WithDog,
+            DefinitionStages.WithNamedEmptyModel, DefinitionStages.WithAnonymousEmptyModel,
             DefinitionStages.WithIfMatch, DefinitionStages.WithIfNoneMatch {
             /**
              * Executes the create request.
@@ -215,6 +230,32 @@ public interface CustomTemplateResource {
              * @return the next definition stage.
              */
             WithCreate withDog(Dog dog);
+        }
+
+        /**
+         * The stage of the CustomTemplateResource definition allowing to specify namedEmptyModel.
+         */
+        interface WithNamedEmptyModel {
+            /**
+             * Specifies the namedEmptyModel property: The namedEmptyModel property..
+             * 
+             * @param namedEmptyModel The namedEmptyModel property.
+             * @return the next definition stage.
+             */
+            WithCreate withNamedEmptyModel(EmptyModel namedEmptyModel);
+        }
+
+        /**
+         * The stage of the CustomTemplateResource definition allowing to specify anonymousEmptyModel.
+         */
+        interface WithAnonymousEmptyModel {
+            /**
+             * Specifies the anonymousEmptyModel property: The anonymousEmptyModel property..
+             * 
+             * @param anonymousEmptyModel The anonymousEmptyModel property.
+             * @return the next definition stage.
+             */
+            WithCreate withAnonymousEmptyModel(CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel);
         }
 
         /**

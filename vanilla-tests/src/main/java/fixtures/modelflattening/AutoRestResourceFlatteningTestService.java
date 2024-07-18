@@ -218,14 +218,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putArrayWithResponseAsync(List<Resource> resourceArray) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (resourceArray != null) {
-            resourceArray.forEach(e -> e.validate());
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putArray(this.getHost(), resourceArray, accept, context));
+        return FluxUtil.withContext(context -> putArrayWithResponseAsync(resourceArray, context));
     }
 
     /**
@@ -341,11 +334,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<FlattenedProduct>>> getArrayWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getArray(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getArrayWithResponseAsync(context));
     }
 
     /**
@@ -430,14 +419,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWrappedArrayWithResponseAsync(List<WrappedProduct> resourceArray) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (resourceArray != null) {
-            resourceArray.forEach(e -> e.validate());
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putWrappedArray(this.getHost(), resourceArray, accept, context));
+        return FluxUtil.withContext(context -> putWrappedArrayWithResponseAsync(resourceArray, context));
     }
 
     /**
@@ -561,11 +543,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<ProductWrapper>>> getWrappedArrayWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getWrappedArray(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getWrappedArrayWithResponseAsync(context));
     }
 
     /**
@@ -654,19 +632,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDictionaryWithResponseAsync(Map<String, FlattenedProduct> resourceDictionary) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (resourceDictionary != null) {
-            resourceDictionary.values().forEach(e -> {
-                if (e != null) {
-                    e.validate();
-                }
-            });
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putDictionary(this.getHost(), resourceDictionary, accept, context));
+        return FluxUtil.withContext(context -> putDictionaryWithResponseAsync(resourceDictionary, context));
     }
 
     /**
@@ -787,11 +753,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Map<String, FlattenedProduct>>> getDictionaryWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDictionary(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getDictionaryWithResponseAsync(context));
     }
 
     /**
@@ -875,15 +837,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putResourceCollectionWithResponseAsync(ResourceCollection resourceComplexObject) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (resourceComplexObject != null) {
-            resourceComplexObject.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putResourceCollection(this.getHost(), resourceComplexObject, accept, context));
+        return FluxUtil.withContext(context -> putResourceCollectionWithResponseAsync(resourceComplexObject, context));
     }
 
     /**
@@ -1001,11 +955,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceCollection>> getResourceCollectionWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getResourceCollection(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getResourceCollectionWithResponseAsync(context));
     }
 
     /**
@@ -1090,15 +1040,7 @@ public final class AutoRestResourceFlatteningTestService {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<SimpleProduct>> putSimpleProductWithResponseAsync(SimpleProduct simpleBodyProduct) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (simpleBodyProduct != null) {
-            simpleBodyProduct.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putSimpleProduct(this.getHost(), simpleBodyProduct, accept, context));
+        return FluxUtil.withContext(context -> putSimpleProductWithResponseAsync(simpleBodyProduct, context));
     }
 
     /**
@@ -1228,30 +1170,8 @@ public final class AutoRestResourceFlatteningTestService {
     public Mono<Response<SimpleProduct>> postFlattenedSimpleProductWithResponseAsync(String productId,
         String description, String maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity capacity,
         String genericValue, String odataValue) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (productId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter productId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        SimpleProduct simpleBodyProductInternal = null;
-        if (description != null
-            || maxProductDisplayName != null
-            || capacity != null
-            || genericValue != null
-            || odataValue != null) {
-            simpleBodyProductInternal = new SimpleProduct();
-            simpleBodyProductInternal.setProductId(productId);
-            simpleBodyProductInternal.setDescription(description);
-            simpleBodyProductInternal.setMaxProductDisplayName(maxProductDisplayName);
-            simpleBodyProductInternal.setCapacity(capacity);
-            simpleBodyProductInternal.setGenericValue(genericValue);
-            simpleBodyProductInternal.setOdataValue(odataValue);
-        }
-        SimpleProduct simpleBodyProduct = simpleBodyProductInternal;
-        return FluxUtil.withContext(
-            context -> service.postFlattenedSimpleProduct(this.getHost(), simpleBodyProduct, accept, context));
+        return FluxUtil.withContext(context -> postFlattenedSimpleProductWithResponseAsync(productId, description,
+            maxProductDisplayName, capacity, genericValue, odataValue, context));
     }
 
     /**
@@ -1446,26 +1366,8 @@ public final class AutoRestResourceFlatteningTestService {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<SimpleProduct>>
         putSimpleProductWithGroupingWithResponseAsync(FlattenParameterGroup flattenParameterGroup) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (flattenParameterGroup == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
-        } else {
-            flattenParameterGroup.validate();
-        }
-        final String accept = "application/json";
-        String name = flattenParameterGroup.getName();
-        SimpleProduct simpleBodyProduct = new SimpleProduct();
-        simpleBodyProduct.setProductId(flattenParameterGroup.getProductId());
-        simpleBodyProduct.setDescription(flattenParameterGroup.getDescription());
-        simpleBodyProduct.setMaxProductDisplayName(flattenParameterGroup.getMaxProductDisplayName());
-        simpleBodyProduct.setCapacity(flattenParameterGroup.getCapacity());
-        simpleBodyProduct.setGenericValue(flattenParameterGroup.getGenericValue());
-        simpleBodyProduct.setOdataValue(flattenParameterGroup.getOdataValue());
-        return FluxUtil.withContext(
-            context -> service.putSimpleProductWithGrouping(this.getHost(), name, simpleBodyProduct, accept, context));
+        return FluxUtil
+            .withContext(context -> putSimpleProductWithGroupingWithResponseAsync(flattenParameterGroup, context));
     }
 
     /**

@@ -41,37 +41,6 @@ public interface ChildExtensionResourceInterfaces {
     ChildExtensionResource get(String resourceUri, String topLevelArmResourceName, String childExtensionResourceName);
 
     /**
-     * Update a ChildExtensionResource.
-     * 
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childExtensionResourceName ChildExtensionResources.
-     * @param properties The resource properties to be updated.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response}.
-     */
-    Response<ChildExtensionResource> updateWithResponse(String resourceUri, String topLevelArmResourceName,
-        String childExtensionResourceName, Object properties, Context context);
-
-    /**
-     * Update a ChildExtensionResource.
-     * 
-     * @param resourceUri The fully qualified Azure Resource manager identifier of the resource.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childExtensionResourceName ChildExtensionResources.
-     * @param properties The resource properties to be updated.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
-     */
-    ChildExtensionResource update(String resourceUri, String topLevelArmResourceName, String childExtensionResourceName,
-        Object properties);
-
-    /**
      * Delete a ChildExtensionResource.
      * 
      * @param resourceUri The fully qualified Azure Resource manager identifier of the resource.

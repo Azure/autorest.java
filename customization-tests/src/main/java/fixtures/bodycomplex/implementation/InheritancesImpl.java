@@ -77,8 +77,7 @@ public final class InheritancesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Siamese>> getValidWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getValidWithResponseAsync(context));
     }
 
     /**
@@ -161,8 +160,7 @@ public final class InheritancesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), complexBody, accept, context));
+        return FluxUtil.withContext(context -> putValidWithResponseAsync(complexBody, context));
     }
 
     /**

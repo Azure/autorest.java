@@ -11,6 +11,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Put;
@@ -34,7 +35,6 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.models.resources.fluent.NestedProxyResourcesClient;
 import com.azure.resourcemanager.models.resources.fluent.models.NestedProxyResourceInner;
 import com.azure.resourcemanager.models.resources.implementation.models.NestedProxyResourceListResult;
-import com.azure.resourcemanager.models.resources.models.NestedProxyResourceUpdate;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -68,51 +68,51 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * The interface defining all the services for ResourcesClientNestedProxyResources to be used by the proxy service
      * to perform REST calls.
      */
-    @Host("https://management.azure.com")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ResourcesClientNeste")
     public interface NestedProxyResourcesService {
         @Headers({ "Content-Type: application/json" })
         @Get("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<NestedProxyResourceInner>> get(@QueryParam("api-version") String apiVersion,
-            @PathParam("subscriptionId") String subscriptionId,
+        Mono<Response<NestedProxyResourceInner>> get(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("Accept") String accept,
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
             Context context);
 
+        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> createOrReplace(@QueryParam("api-version") String apiVersion,
-            @PathParam("subscriptionId") String subscriptionId,
+        Mono<Response<Flux<ByteBuffer>>> createOrReplace(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
             @BodyParam("application/json") NestedProxyResourceInner resource, Context context);
 
+        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> update(@QueryParam("api-version") String apiVersion,
-            @PathParam("subscriptionId") String subscriptionId,
+        Mono<Response<Flux<ByteBuffer>>> update(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") NestedProxyResourceUpdate properties, Context context);
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") NestedProxyResourceInner properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Delete("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}")
         @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<Flux<ByteBuffer>>> delete(@QueryParam("api-version") String apiVersion,
-            @PathParam("subscriptionId") String subscriptionId,
+        Mono<Response<Flux<ByteBuffer>>> delete(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("Accept") String accept,
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -120,18 +120,19 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<NestedProxyResourceListResult>> listByTopLevelTrackedResource(
-            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
+            @HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
+            @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("Accept") String accept, Context context);
+            @HeaderParam("accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<NestedProxyResourceListResult>> listByTopLevelTrackedResourceNext(
-            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("Accept") String accept,
-            Context context);
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, Context context);
     }
 
     /**
@@ -143,12 +144,15 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return a NestedProxyResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<NestedProxyResourceInner>> getWithResponseAsync(String resourceGroupName,
         String topLevelTrackedResourceName, String nextedProxyResourceName) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -167,8 +171,9 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         }
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.get(this.client.getApiVersion(), this.client.getSubscriptionId(),
-                resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, accept, context))
+            .withContext(context -> service.get(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName,
+                nextedProxyResourceName, accept, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -182,12 +187,15 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return a NestedProxyResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<NestedProxyResourceInner>> getWithResponseAsync(String resourceGroupName,
         String topLevelTrackedResourceName, String nextedProxyResourceName, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -206,8 +214,8 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.get(this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
-            topLevelTrackedResourceName, nextedProxyResourceName, accept, context);
+        return service.get(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
+            resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, accept, context);
     }
 
     /**
@@ -219,7 +227,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource on successful completion of {@link Mono}.
+     * @return a NestedProxyResource on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<NestedProxyResourceInner> getAsync(String resourceGroupName, String topLevelTrackedResourceName,
@@ -238,7 +246,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response}.
+     * @return a NestedProxyResource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<NestedProxyResourceInner> getWithResponse(String resourceGroupName,
@@ -256,7 +264,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource.
+     * @return a NestedProxyResource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public NestedProxyResourceInner get(String resourceGroupName, String topLevelTrackedResourceName,
@@ -281,6 +289,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrReplaceWithResponseAsync(String resourceGroupName,
         String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner resource) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -302,12 +314,11 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             resource.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.createOrReplace(this.client.getApiVersion(),
+            .withContext(context -> service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
                 this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName,
-                nextedProxyResourceName, contentType, accept, resource, context))
+                nextedProxyResourceName, accept, resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -329,6 +340,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     private Mono<Response<Flux<ByteBuffer>>> createOrReplaceWithResponseAsync(String resourceGroupName,
         String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner resource,
         Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -350,11 +365,11 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             resource.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.createOrReplace(this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
-            topLevelTrackedResourceName, nextedProxyResourceName, contentType, accept, resource, context);
+        return service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
+            this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName,
+            accept, resource, context);
     }
 
     /**
@@ -543,7 +558,11 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
-        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceUpdate properties) {
+        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner properties) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -565,12 +584,11 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             properties.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.update(this.client.getApiVersion(), this.client.getSubscriptionId(),
-                resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, contentType, accept,
-                properties, context))
+            .withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName,
+                nextedProxyResourceName, accept, properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -590,8 +608,12 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
-        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceUpdate properties,
+        String topLevelTrackedResourceName, String nextedProxyResourceName, NestedProxyResourceInner properties,
         Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -613,11 +635,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             properties.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.update(this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
-            topLevelTrackedResourceName, nextedProxyResourceName, contentType, accept, properties, context);
+        return service.update(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
+            resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, accept, properties, context);
     }
 
     /**
@@ -635,7 +656,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdateAsync(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties) {
+        NestedProxyResourceInner properties) {
         Mono<Response<Flux<ByteBuffer>>> mono = updateWithResponseAsync(resourceGroupName, topLevelTrackedResourceName,
             nextedProxyResourceName, properties);
         return this.client.<NestedProxyResourceInner, NestedProxyResourceInner>getLroResult(mono,
@@ -659,7 +680,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdateAsync(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties, Context context) {
+        NestedProxyResourceInner properties, Context context) {
         context = this.client.mergeContext(context);
         Mono<Response<Flux<ByteBuffer>>> mono = updateWithResponseAsync(resourceGroupName, topLevelTrackedResourceName,
             nextedProxyResourceName, properties, context);
@@ -682,7 +703,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties) {
+        NestedProxyResourceInner properties) {
         return this
             .beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties)
             .getSyncPoller();
@@ -704,7 +725,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(
         String resourceGroupName, String topLevelTrackedResourceName, String nextedProxyResourceName,
-        NestedProxyResourceUpdate properties, Context context) {
+        NestedProxyResourceInner properties, Context context) {
         return this
             .beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties,
                 context)
@@ -725,7 +746,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<NestedProxyResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties) {
         return beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties)
             .last()
             .flatMap(this.client::getLroFinalResultOrError);
@@ -746,7 +767,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<NestedProxyResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties, Context context) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties, Context context) {
         return beginUpdateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties,
             context).last().flatMap(this.client::getLroFinalResultOrError);
     }
@@ -765,7 +786,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties) {
         return updateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties).block();
     }
 
@@ -784,7 +805,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
-        String nextedProxyResourceName, NestedProxyResourceUpdate properties, Context context) {
+        String nextedProxyResourceName, NestedProxyResourceInner properties, Context context) {
         return updateAsync(resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, properties, context)
             .block();
     }
@@ -803,6 +824,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceGroupName,
         String topLevelTrackedResourceName, String nextedProxyResourceName) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -821,8 +846,9 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         }
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.delete(this.client.getApiVersion(), this.client.getSubscriptionId(),
-                resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, accept, context))
+            .withContext(context -> service.delete(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName,
+                nextedProxyResourceName, accept, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -841,6 +867,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceGroupName,
         String topLevelTrackedResourceName, String nextedProxyResourceName, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -859,8 +889,8 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.delete(this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
-            topLevelTrackedResourceName, nextedProxyResourceName, accept, context);
+        return service.delete(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
+            resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, accept, context);
     }
 
     /**
@@ -1025,6 +1055,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<NestedProxyResourceInner>>
         listByTopLevelTrackedResourceSinglePageAsync(String resourceGroupName, String topLevelTrackedResourceName) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -1039,8 +1073,9 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         }
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.listByTopLevelTrackedResource(this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, context))
+            .withContext(
+                context -> service.listByTopLevelTrackedResource(this.client.getEndpoint(), this.client.getApiVersion(),
+                    this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, context))
             .<PagedResponse<NestedProxyResourceInner>>map(res -> new PagedResponseBase<>(res.getRequest(),
                 res.getStatusCode(), res.getHeaders(), res.getValue().value(), res.getValue().nextLink(), null))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
@@ -1061,6 +1096,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<NestedProxyResourceInner>> listByTopLevelTrackedResourceSinglePageAsync(
         String resourceGroupName, String topLevelTrackedResourceName, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -1076,8 +1115,8 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service
-            .listByTopLevelTrackedResource(this.client.getApiVersion(), this.client.getSubscriptionId(),
-                resourceGroupName, topLevelTrackedResourceName, accept, context)
+            .listByTopLevelTrackedResource(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, context)
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 res.getValue().value(), res.getValue().nextLink(), null));
     }
@@ -1154,8 +1193,6 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     }
 
     /**
-     * List NestedProxyResource resources by TopLevelTrackedResource
-     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1171,16 +1208,19 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.listByTopLevelTrackedResourceNext(nextLink, accept, context))
+        return FluxUtil.withContext(
+            context -> service.listByTopLevelTrackedResourceNext(nextLink, this.client.getEndpoint(), accept, context))
             .<PagedResponse<NestedProxyResourceInner>>map(res -> new PagedResponseBase<>(res.getRequest(),
                 res.getStatusCode(), res.getHeaders(), res.getValue().value(), res.getValue().nextLink(), null))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
     /**
-     * List NestedProxyResource resources by TopLevelTrackedResource
-     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1197,9 +1237,13 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.listByTopLevelTrackedResourceNext(nextLink, accept, context)
+        return service.listByTopLevelTrackedResourceNext(nextLink, this.client.getEndpoint(), accept, context)
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 res.getValue().value(), res.getValue().nextLink(), null));
     }

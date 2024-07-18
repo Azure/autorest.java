@@ -198,11 +198,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Horse>> getHorseWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getHorse(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getHorseWithResponseAsync(context));
     }
 
     /**
@@ -287,16 +283,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putHorseWithResponseAsync(Horse horse) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (horse == null) {
-            return Mono.error(new IllegalArgumentException("Parameter horse is required and cannot be null."));
-        } else {
-            horse.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putHorse(this.getHost(), horse, accept, context));
+        return FluxUtil.withContext(context -> putHorseWithResponseAsync(horse, context));
     }
 
     /**
@@ -390,11 +377,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Pet>> getPetWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getPet(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getPetWithResponseAsync(context));
     }
 
     /**
@@ -478,16 +461,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putPetWithResponseAsync(Pet pet) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (pet == null) {
-            return Mono.error(new IllegalArgumentException("Parameter pet is required and cannot be null."));
-        } else {
-            pet.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putPet(this.getHost(), pet, accept, context));
+        return FluxUtil.withContext(context -> putPetWithResponseAsync(pet, context));
     }
 
     /**
@@ -582,11 +556,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Feline>> getFelineWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getFeline(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getFelineWithResponseAsync(context));
     }
 
     /**
@@ -671,16 +641,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putFelineWithResponseAsync(Feline feline) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (feline == null) {
-            return Mono.error(new IllegalArgumentException("Parameter feline is required and cannot be null."));
-        } else {
-            feline.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putFeline(this.getHost(), feline, accept, context));
+        return FluxUtil.withContext(context -> putFelineWithResponseAsync(feline, context));
     }
 
     /**
@@ -775,11 +736,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Cat>> getCatWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getCat(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getCatWithResponseAsync(context));
     }
 
     /**
@@ -866,16 +823,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putCatWithResponseAsync(Cat cat) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (cat == null) {
-            return Mono.error(new IllegalArgumentException("Parameter cat is required and cannot be null."));
-        } else {
-            cat.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putCat(this.getHost(), cat, accept, context));
+        return FluxUtil.withContext(context -> putCatWithResponseAsync(cat, context));
     }
 
     /**
@@ -970,11 +918,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Kitten>> getKittenWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getKitten(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getKittenWithResponseAsync(context));
     }
 
     /**
@@ -1062,16 +1006,7 @@ public final class MultipleInheritanceServiceClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putKittenWithResponseAsync(Kitten kitten) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (kitten == null) {
-            return Mono.error(new IllegalArgumentException("Parameter kitten is required and cannot be null."));
-        } else {
-            kitten.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putKitten(this.getHost(), kitten, accept, context));
+        return FluxUtil.withContext(context -> putKittenWithResponseAsync(kitten, context));
     }
 
     /**

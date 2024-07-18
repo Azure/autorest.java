@@ -102,8 +102,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getValidWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getValidWithResponseAsync(context));
     }
 
     /**
@@ -185,9 +184,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putValid(this.client.getHost(), this.client.getApiVersion(),
-            complexBody, accept, context));
+        return FluxUtil.withContext(context -> putValidWithResponseAsync(complexBody, context));
     }
 
     /**
@@ -273,8 +270,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getInvalidWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getInvalidWithResponseAsync(context));
     }
 
     /**
@@ -354,8 +350,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getEmptyWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getEmptyWithResponseAsync(context));
     }
 
     /**
@@ -435,8 +430,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNullWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNullWithResponseAsync(context));
     }
 
     /**
@@ -517,8 +511,7 @@ public final class BasicsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNotProvidedWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNotProvidedWithResponseAsync(context));
     }
 
     /**

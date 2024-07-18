@@ -37,7 +37,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
 
     public final void write(MethodGroupClient methodGroupClient, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
-        Set<String> imports = new HashSet<String>();
+        Set<String> imports = new HashSet<>();
         if (settings.isUseClientLogger()) {
             ClassType.CLIENT_LOGGER.addImportsTo(imports, false);
         }
@@ -67,7 +67,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
             final boolean hasProxy = methodGroupClient.getProxy() != null;
 
             if (hasProxy) {
-                classBlock.javadocComment(String.format("The proxy service used to perform REST calls."));
+                classBlock.javadocComment("The proxy service used to perform REST calls.");
                 classBlock.privateFinalMemberVariable(methodGroupClient.getProxy().getName(), "service");
             }
 

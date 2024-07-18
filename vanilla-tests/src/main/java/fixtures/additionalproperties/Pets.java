@@ -112,19 +112,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (createParameters == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
-        } else {
-            createParameters.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.createAPTrue(this.client.getHost(), createParameters, accept, context));
+        return FluxUtil.withContext(context -> createAPTrueWithResponseAsync(createParameters, context));
     }
 
     /**
@@ -223,19 +211,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (createParameters == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
-        } else {
-            createParameters.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.createCatAPTrue(this.client.getHost(), createParameters, accept, context));
+        return FluxUtil.withContext(context -> createCatAPTrueWithResponseAsync(createParameters, context));
     }
 
     /**
@@ -334,19 +310,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (createParameters == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
-        } else {
-            createParameters.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.createAPObject(this.client.getHost(), createParameters, accept, context));
+        return FluxUtil.withContext(context -> createAPObjectWithResponseAsync(createParameters, context));
     }
 
     /**
@@ -445,19 +409,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (createParameters == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
-        } else {
-            createParameters.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.createAPString(this.client.getHost(), createParameters, accept, context));
+        return FluxUtil.withContext(context -> createAPStringWithResponseAsync(createParameters, context));
     }
 
     /**
@@ -556,19 +508,7 @@ public final class Pets {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPInProperties>> createAPInPropertiesWithResponseAsync(PetAPInProperties createParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (createParameters == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
-        } else {
-            createParameters.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.createAPInProperties(this.client.getHost(), createParameters, accept, context));
+        return FluxUtil.withContext(context -> createAPInPropertiesWithResponseAsync(createParameters, context));
     }
 
     /**
@@ -670,19 +610,8 @@ public final class Pets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPInPropertiesWithAPString>>
         createAPInPropertiesWithAPStringWithResponseAsync(PetAPInPropertiesWithAPString createParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (createParameters == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter createParameters is required and cannot be null."));
-        } else {
-            createParameters.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createAPInPropertiesWithAPString(this.client.getHost(),
-            createParameters, accept, context));
+        return FluxUtil
+            .withContext(context -> createAPInPropertiesWithAPStringWithResponseAsync(createParameters, context));
     }
 
     /**

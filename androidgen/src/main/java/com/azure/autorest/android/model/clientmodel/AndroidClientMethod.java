@@ -24,14 +24,16 @@ public class AndroidClientMethod extends ClientMethod {
 
     /**
      * Create a new ClientMethod with the provided properties.
+     *
      * @param description The description of this ClientMethod.
      * @param returnValue The return value of this ClientMethod.
      * @param name The name of this ClientMethod.
      * @param parameters The parameters of this ClientMethod.
-     * @param onlyRequiredParameters Whether or not this ClientMethod has omitted optional parameters.
+     * @param onlyRequiredParameters Whether this ClientMethod has omitted optional parameters.
      * @param type The type of this ClientMethod.
      * @param proxyMethod The ProxyMethod that this ClientMethod eventually calls.
-     * @param validateExpressions The expressions (parameters and service client properties) that need to be validated in this ClientMethod.
+     * @param validateExpressions The expressions (parameters and service client properties) that need to be validated
+     * in this ClientMethod.
      * @param clientReference The reference to the service client.
      * @param requiredNullableParameterExpressions The parameter expressions which are required.
      * @param isGroupedParameterRequired The parameter that needs to transformed before pagination.
@@ -39,34 +41,21 @@ public class AndroidClientMethod extends ClientMethod {
      * @param methodPageDetails The pagination information if this is a paged method.
      * @param methodTransformationDetails The parameter transformations before calling ProxyMethod.
      * @param externalDocumentation The external documentation.
+     * @param hasWithContextOverload Whether this ClientMethod has a withContext overload.
      */
     protected AndroidClientMethod(String description, ReturnValue returnValue, String name,
-                                  List<ClientMethodParameter> parameters, boolean onlyRequiredParameters,
-                                  ClientMethodType type, ProxyMethod proxyMethod, Map<String, String> validateExpressions,
-                                  String clientReference, List<String> requiredNullableParameterExpressions,
-                                  boolean isGroupedParameterRequired, String groupedParameterTypeName,
-                                  MethodPageDetails methodPageDetails, List<MethodTransformationDetail> methodTransformationDetails,
-                                  JavaVisibility methodVisibility, JavaVisibility methodVisibilityInWrapperClient, MethodPollingDetails methodPollingDetails, ExternalDocumentation externalDocumentation) {
-        super(description,
-                returnValue,
-                name,
-                parameters,
-                onlyRequiredParameters,
-                type,
-                proxyMethod,
-                validateExpressions,
-                clientReference,
-                requiredNullableParameterExpressions,
-                isGroupedParameterRequired,
-                groupedParameterTypeName,
-                methodPageDetails,
-                methodTransformationDetails,
-                methodVisibility,
-                methodVisibilityInWrapperClient,
-                null,
-                methodPollingDetails,
-                externalDocumentation,
-                null);
+        List<ClientMethodParameter> parameters, boolean onlyRequiredParameters, ClientMethodType type,
+        ProxyMethod proxyMethod, Map<String, String> validateExpressions, String clientReference,
+        List<String> requiredNullableParameterExpressions, boolean isGroupedParameterRequired,
+        String groupedParameterTypeName, MethodPageDetails methodPageDetails,
+        List<MethodTransformationDetail> methodTransformationDetails, JavaVisibility methodVisibility,
+        JavaVisibility methodVisibilityInWrapperClient, MethodPollingDetails methodPollingDetails,
+        ExternalDocumentation externalDocumentation, boolean hasWithContextOverload) {
+        super(description, returnValue, name, parameters, onlyRequiredParameters, type, proxyMethod,
+            validateExpressions, clientReference, requiredNullableParameterExpressions, isGroupedParameterRequired,
+            groupedParameterTypeName, methodPageDetails, methodTransformationDetails, methodVisibility,
+            methodVisibilityInWrapperClient, null, methodPollingDetails, externalDocumentation, null,
+            hasWithContextOverload);
     }
 
     @Override
@@ -101,29 +90,12 @@ public class AndroidClientMethod extends ClientMethod {
 
     public static class Builder extends ClientMethod.Builder {
         @Override
-        /**
-         * @return an immutable ClientMethod instance with the configurations on this builder.
-         */
         public ClientMethod build() {
-            return new AndroidClientMethod(
-                    description,
-                    returnValue,
-                    name,
-                    parameters,
-                    onlyRequiredParameters,
-                    type,
-                    proxyMethod,
-                    validateExpressions,
-                    clientReference,
-                    requiredNullableParameterExpressions,
-                    isGroupedParameterRequired,
-                    groupedParameterTypeName,
-                    methodPageDetails,
-                    methodTransformationDetails,
-                    methodVisibility,
-                    methodVisibilityInWrapperClient,
-                    methodPollingDetails,
-                    externalDocumentation);
+            return new AndroidClientMethod(description, returnValue, name, parameters, onlyRequiredParameters, type,
+                proxyMethod, validateExpressions, clientReference, requiredNullableParameterExpressions,
+                isGroupedParameterRequired, groupedParameterTypeName, methodPageDetails, methodTransformationDetails,
+                methodVisibility, methodVisibilityInWrapperClient, methodPollingDetails, externalDocumentation,
+                hasWithContextOverload);
         }
     }
 }

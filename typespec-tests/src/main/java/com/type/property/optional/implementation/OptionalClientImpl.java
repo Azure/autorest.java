@@ -100,6 +100,34 @@ public final class OptionalClientImpl {
     }
 
     /**
+     * The PlaindatesImpl object to access its operations.
+     */
+    private final PlaindatesImpl plaindates;
+
+    /**
+     * Gets the PlaindatesImpl object to access its operations.
+     * 
+     * @return the PlaindatesImpl object.
+     */
+    public PlaindatesImpl getPlaindates() {
+        return this.plaindates;
+    }
+
+    /**
+     * The PlaintimesImpl object to access its operations.
+     */
+    private final PlaintimesImpl plaintimes;
+
+    /**
+     * Gets the PlaintimesImpl object to access its operations.
+     * 
+     * @return the PlaintimesImpl object.
+     */
+    public PlaintimesImpl getPlaintimes() {
+        return this.plaintimes;
+    }
+
+    /**
      * The CollectionsBytesImpl object to access its operations.
      */
     private final CollectionsBytesImpl collectionsBytes;
@@ -269,6 +297,8 @@ public final class OptionalClientImpl {
         this.bytes = new BytesImpl(this);
         this.datetimeOperations = new DatetimeOperationsImpl(this);
         this.durationOperations = new DurationOperationsImpl(this);
+        this.plaindates = new PlaindatesImpl(this);
+        this.plaintimes = new PlaintimesImpl(this);
         this.collectionsBytes = new CollectionsBytesImpl(this);
         this.collectionsModels = new CollectionsModelsImpl(this);
         this.stringLiterals = new StringLiteralsImpl(this);

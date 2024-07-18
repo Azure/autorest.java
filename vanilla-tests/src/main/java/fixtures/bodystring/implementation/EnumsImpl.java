@@ -105,12 +105,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Colors>> getNotExpandableWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNotExpandable(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getNotExpandableWithResponseAsync(context));
     }
 
     /**
@@ -199,16 +194,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (stringBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putNotExpandable(this.client.getHost(), stringBody, accept, context));
+        return FluxUtil.withContext(context -> putNotExpandableWithResponseAsync(stringBody, context));
     }
 
     /**
@@ -301,12 +287,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Colors>> getReferencedWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getReferenced(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getReferencedWithResponseAsync(context));
     }
 
     /**
@@ -395,16 +376,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (enumStringBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter enumStringBody is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putReferenced(this.client.getHost(), enumStringBody, accept, context));
+        return FluxUtil.withContext(context -> putReferencedWithResponseAsync(enumStringBody, context));
     }
 
     /**
@@ -497,12 +469,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<RefColorConstant>> getReferencedConstantWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getReferencedConstant(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getReferencedConstantWithResponseAsync(context));
     }
 
     /**
@@ -588,18 +555,7 @@ public final class EnumsImpl implements Enums {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant enumStringBody) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (enumStringBody == null) {
-            return Mono.error(new IllegalArgumentException("Parameter enumStringBody is required and cannot be null."));
-        } else {
-            enumStringBody.validate();
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putReferencedConstant(this.client.getHost(), enumStringBody, accept, context));
+        return FluxUtil.withContext(context -> putReferencedConstantWithResponseAsync(enumStringBody, context));
     }
 
     /**

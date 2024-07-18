@@ -112,17 +112,7 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HeadersCustomNamedRequestIdHeaders, Void>>
         customNamedRequestIdWithResponseAsync(String fooClientRequestId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (fooClientRequestId == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.customNamedRequestId(this.client.getHost(), fooClientRequestId, accept, context));
+        return FluxUtil.withContext(context -> customNamedRequestIdWithResponseAsync(fooClientRequestId, context));
     }
 
     /**
@@ -219,17 +209,8 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customNamedRequestIdNoCustomHeadersWithResponseAsync(String fooClientRequestId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (fooClientRequestId == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.customNamedRequestIdNoCustomHeaders(this.client.getHost(),
-            fooClientRequestId, accept, context));
+        return FluxUtil
+            .withContext(context -> customNamedRequestIdNoCustomHeadersWithResponseAsync(fooClientRequestId, context));
     }
 
     /**
@@ -286,20 +267,8 @@ public final class Headers {
     public Mono<ResponseBase<HeadersCustomNamedRequestIdParamGroupingHeaders, Void>>
         customNamedRequestIdParamGroupingWithResponseAsync(
             HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (headerCustomNamedRequestIdParamGroupingParameters == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null."));
-        } else {
-            headerCustomNamedRequestIdParamGroupingParameters.validate();
-        }
-        final String accept = "application/json";
-        String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.getFooClientRequestId();
-        return FluxUtil.withContext(context -> service.customNamedRequestIdParamGrouping(this.client.getHost(),
-            fooClientRequestId, accept, context));
+        return FluxUtil.withContext(context -> customNamedRequestIdParamGroupingWithResponseAsync(
+            headerCustomNamedRequestIdParamGroupingParameters, context));
     }
 
     /**
@@ -417,21 +386,8 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> customNamedRequestIdParamGroupingNoCustomHeadersWithResponseAsync(
         HeaderCustomNamedRequestIdParamGroupingParameters headerCustomNamedRequestIdParamGroupingParameters) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (headerCustomNamedRequestIdParamGroupingParameters == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter headerCustomNamedRequestIdParamGroupingParameters is required and cannot be null."));
-        } else {
-            headerCustomNamedRequestIdParamGroupingParameters.validate();
-        }
-        final String accept = "application/json";
-        String fooClientRequestId = headerCustomNamedRequestIdParamGroupingParameters.getFooClientRequestId();
-        return FluxUtil
-            .withContext(context -> service.customNamedRequestIdParamGroupingNoCustomHeaders(this.client.getHost(),
-                fooClientRequestId, accept, context));
+        return FluxUtil.withContext(context -> customNamedRequestIdParamGroupingNoCustomHeadersWithResponseAsync(
+            headerCustomNamedRequestIdParamGroupingParameters, context));
     }
 
     /**
@@ -496,17 +452,7 @@ public final class Headers {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HeadersCustomNamedRequestIdHeadHeaders, Boolean>>
         customNamedRequestIdHeadWithResponseAsync(String fooClientRequestId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (fooClientRequestId == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.customNamedRequestIdHead(this.client.getHost(), fooClientRequestId, accept, context));
+        return FluxUtil.withContext(context -> customNamedRequestIdHeadWithResponseAsync(fooClientRequestId, context));
     }
 
     /**
@@ -606,17 +552,8 @@ public final class Headers {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> customNamedRequestIdHeadNoCustomHeadersWithResponseAsync(String fooClientRequestId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (fooClientRequestId == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.customNamedRequestIdHeadNoCustomHeaders(this.client.getHost(),
-            fooClientRequestId, accept, context));
+        return FluxUtil.withContext(
+            context -> customNamedRequestIdHeadNoCustomHeadersWithResponseAsync(fooClientRequestId, context));
     }
 
     /**

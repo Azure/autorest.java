@@ -78,12 +78,7 @@ public final class IntsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putWithResponseAsync(IntEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.put(this.client.getHost(), input, accept, context));
+        return FluxUtil.withContext(context -> putWithResponseAsync(input, context));
     }
 
     /**
@@ -199,12 +194,7 @@ public final class IntsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntEnum>> getWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getWithResponseAsync(context));
     }
 
     /**
