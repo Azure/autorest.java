@@ -58,7 +58,7 @@ public final class OperationsClientImpl implements OperationsClient {
      * The interface defining all the services for ArmResourceProviderClientOperations to be used by the proxy service
      * to perform REST calls.
      */
-    @Host("https://management.azure.com")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ArmResourceProviderC")
     public interface OperationsService {
         @Headers({ "Content-Type: application/json" })

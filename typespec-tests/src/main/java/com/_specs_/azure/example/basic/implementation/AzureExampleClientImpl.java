@@ -135,8 +135,8 @@ public final class AzureExampleClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> basicAction(@QueryParam("api-version") String apiVersion,
             @QueryParam("query-param") String queryParam, @HeaderParam("header-param") String headerParam,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/example/basic/basic")
         @ExpectedResponses({ 200 })
@@ -146,8 +146,8 @@ public final class AzureExampleClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> basicActionSync(@QueryParam("api-version") String apiVersion,
             @QueryParam("query-param") String queryParam, @HeaderParam("header-param") String headerParam,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -203,9 +203,10 @@ public final class AzureExampleClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> basicActionWithResponseAsync(String queryParam, String headerParam,
         BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.basicAction(this.getServiceVersion().getVersion(), queryParam,
-            headerParam, accept, body, requestOptions, context));
+            headerParam, contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -261,8 +262,9 @@ public final class AzureExampleClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> basicActionWithResponse(String queryParam, String headerParam, BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.basicActionSync(this.getServiceVersion().getVersion(), queryParam, headerParam, accept, body,
-            requestOptions, Context.NONE);
+        return service.basicActionSync(this.getServiceVersion().getVersion(), queryParam, headerParam, contentType,
+            accept, body, requestOptions, Context.NONE);
     }
 }

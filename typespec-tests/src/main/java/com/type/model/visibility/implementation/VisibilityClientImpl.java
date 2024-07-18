@@ -225,8 +225,9 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putReadOnlyModel(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> putReadOnlyModel(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/visibility/readonlyroundtrip")
         @ExpectedResponses({ 200 })
@@ -234,8 +235,9 @@ public final class VisibilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putReadOnlyModelSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Response<BinaryData> putReadOnlyModelSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -697,8 +699,10 @@ public final class VisibilityClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putReadOnlyModelWithResponseAsync(BinaryData input,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putReadOnlyModel(accept, input, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.putReadOnlyModel(contentType, accept, input, requestOptions, context));
     }
 
     /**
@@ -739,7 +743,8 @@ public final class VisibilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putReadOnlyModelWithResponse(BinaryData input, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putReadOnlyModelSync(accept, input, requestOptions, Context.NONE);
+        return service.putReadOnlyModelSync(contentType, accept, input, requestOptions, Context.NONE);
     }
 }

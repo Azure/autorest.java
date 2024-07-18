@@ -60,7 +60,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * The interface defining all the services for ArmResourceProviderClientCustomTemplateResourceInterfaces to be used
      * by the proxy service to perform REST calls.
      */
-    @Host("https://management.azure.com")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ArmResourceProviderC")
     public interface CustomTemplateResourceInterfacesService {
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/customTemplateResources/{customTemplateResourceName}")

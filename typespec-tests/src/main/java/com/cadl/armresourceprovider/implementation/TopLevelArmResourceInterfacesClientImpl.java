@@ -70,7 +70,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * The interface defining all the services for ArmResourceProviderClientTopLevelArmResourceInterfaces to be used by
      * the proxy service to perform REST calls.
      */
-    @Host("https://management.azure.com")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ArmResourceProviderC")
     public interface TopLevelArmResourceInterfacesService {
         @Headers({ "Content-Type: application/json" })

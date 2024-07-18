@@ -59,7 +59,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * The interface defining all the services for ArmStreamStyleSerializationClientTopLevelArmResources to be used by
      * the proxy service to perform REST calls.
      */
-    @Host("https://management.azure.com")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ArmStreamStyleSerial")
     public interface TopLevelArmResourcesService {
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmStreamStyleSerialization/topLevelArmResources/{topLevelArmResourceName}")
