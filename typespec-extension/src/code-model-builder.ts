@@ -552,7 +552,7 @@ export class CodeModelBuilder {
     // preprocess group-etag-headers
     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
-    const sdkPackage = this.sdkContext.experimental_sdkPackage;
+    const sdkPackage = this.sdkContext.sdkPackage;
     for (const client of sdkPackage.clients) {
       if (client.initialization.access !== "public") { // do not generate client for internal client which is operation group
         continue;
@@ -590,7 +590,9 @@ export class CodeModelBuilder {
       let hostParameters: Parameter[] = [];
       client.initialization.properties.forEach((initializationProperty) => {
         if (initializationProperty.kind === "endpoint") {
-          baseUri = initializationProperty.type.serverUrl;
+          if (!this.isArm()) {
+            baseUri = initializationProperty.type.serverUrl;
+          }
           hostParameters = this.processHostParametersFromSdkType(initializationProperty.type.templateArguments);
           codeModelClient.addGlobalParameters(hostParameters);
         }
@@ -2616,7 +2618,7 @@ export class CodeModelBuilder {
         language: {
           default: {
             name: op.language.default.name + "Response",
-            description: this.getResponseDescription(sdkResponse.__raw),
+            description: sdkResponse.description,
           },
         },
       });
@@ -2641,7 +2643,7 @@ export class CodeModelBuilder {
         language: {
           default: {
             name: op.language.default.name + "Response",
-            description: this.getResponseDescription(sdkResponse.__raw),
+            description: sdkResponse.description,
           },
         },
       });
@@ -2657,7 +2659,7 @@ export class CodeModelBuilder {
         language: {
           default: {
             name: op.language.default.name + "Response",
-            description: this.getResponseDescription(sdkResponse.__raw),
+            description: sdkResponse.description,
           },
         },
       });
