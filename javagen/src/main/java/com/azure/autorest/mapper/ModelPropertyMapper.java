@@ -31,6 +31,9 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         return INSTANCE;
     }
 
+    protected ModelPropertyMapper() {
+    }
+
     @Override
     public ClientModelProperty map(Property property) {
         return map(property, false);
