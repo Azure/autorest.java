@@ -27,13 +27,13 @@ import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
- * An instance of this class provides access to all the operations defined in Plaindates.
+ * An instance of this class provides access to all the operations defined in PlainDates.
  */
-public final class PlaindatesImpl {
+public final class PlainDatesImpl {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final PlaindatesService service;
+    private final PlainDatesService service;
 
     /**
      * The service client containing this operation class.
@@ -41,24 +41,24 @@ public final class PlaindatesImpl {
     private final OptionalClientImpl client;
 
     /**
-     * Initializes an instance of PlaindatesImpl.
+     * Initializes an instance of PlainDatesImpl.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    PlaindatesImpl(OptionalClientImpl client) {
+    PlainDatesImpl(OptionalClientImpl client) {
         this.service
-            = RestProxy.create(PlaindatesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+            = RestProxy.create(PlainDatesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for OptionalClientPlaindates to be used by the proxy service to perform
+     * The interface defining all the services for OptionalClientPlainDates to be used by the proxy service to perform
      * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "OptionalClientPlaind")
-    public interface PlaindatesService {
-        @Get("/type/property/optional/plaindate/all")
+    @ServiceInterface(name = "OptionalClientPlainD")
+    public interface PlainDatesService {
+        @Get("/type/property/optional/plainDate/all")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -67,7 +67,7 @@ public final class PlaindatesImpl {
         Mono<Response<BinaryData>> getAll(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Get("/type/property/optional/plaindate/all")
+        @Get("/type/property/optional/plainDate/all")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -76,7 +76,7 @@ public final class PlaindatesImpl {
         Response<BinaryData> getAllSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Get("/type/property/optional/plaindate/default")
+        @Get("/type/property/optional/plainDate/default")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -85,7 +85,7 @@ public final class PlaindatesImpl {
         Mono<Response<BinaryData>> getDefault(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Get("/type/property/optional/plaindate/default")
+        @Get("/type/property/optional/plainDate/default")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -94,7 +94,7 @@ public final class PlaindatesImpl {
         Response<BinaryData> getDefaultSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Put("/type/property/optional/plaindate/all")
+        @Put("/type/property/optional/plainDate/all")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -103,7 +103,7 @@ public final class PlaindatesImpl {
         Mono<Response<Void>> putAll(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
-        @Put("/type/property/optional/plaindate/all")
+        @Put("/type/property/optional/plainDate/all")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -112,7 +112,7 @@ public final class PlaindatesImpl {
         Response<Void> putAllSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
-        @Put("/type/property/optional/plaindate/default")
+        @Put("/type/property/optional/plainDate/default")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -121,7 +121,7 @@ public final class PlaindatesImpl {
         Mono<Response<Void>> putDefault(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
-        @Put("/type/property/optional/plaindate/default")
+        @Put("/type/property/optional/plainDate/default")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
