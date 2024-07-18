@@ -7,8 +7,8 @@ import com.type.property.optional.models.PlainTimeProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class PlaintimeClientTests {
-    private final PlaintimeClient client = new OptionalClientBuilder().buildPlaintimeClient();
+public class PlainTimeClientTests {
+    private final PlainTimeClient client = new OptionalClientBuilder().buildPlainTimeClient();
 
     @Test
     public void getAll() {
