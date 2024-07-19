@@ -10,7 +10,6 @@ import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 
 import java.net.MalformedURLException;
@@ -23,8 +22,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,12 +29,11 @@ public class ProxyMethodExample {
 
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
 
-    private static final ObjectMapper PRETTY_PRINTER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
     private static final String SLASH = "/";
-    private static final String QUOTED_SLASH = Pattern.quote(SLASH);
 
     private static String tspDirectory = null;
+
     public static void setTspDirectory(String tspDirectory) {
         ProxyMethodExample.tspDirectory = tspDirectory;
     }
@@ -61,7 +57,7 @@ public class ProxyMethodExample {
 
         /**
          * Gets the un-escaped query value.
-         *
+         * <p>
          * This is done by heuristic, and not guaranteed to be correct.
          *
          * @return the un-escaped query value
@@ -77,13 +73,9 @@ public class ProxyMethodExample {
         @Override
         public String toString() {
             try {
-                return "ParameterValue{" +
-                        "objectValue=" + PRETTY_PRINTER.writeValueAsString(objectValue) +
-                        '}';
+                return "ParameterValue{" + "objectValue=" + NORMAL_PRINTER.writeValueAsString(objectValue) + '}';
             } catch (JsonProcessingException e) {
-                return "ParameterValue{" +
-                        "objectValue=" + objectValue +
-                        '}';
+                return "ParameterValue{" + "objectValue=" + objectValue + '}';
             }
         }
 
@@ -110,9 +102,8 @@ public class ProxyMethodExample {
                 Map<String, Object> responseMap = (Map<String, Object>) response;
                 if (responseMap.containsKey("headers") && responseMap.get("headers") instanceof Map) {
                     Map<String, Object> headersMap = (Map<String, Object>) responseMap.get("headers");
-                    headersMap.forEach((header, value) -> {
-                        httpHeaders.add(HttpHeaderName.fromString(header), value.toString());
-                    });
+                    headersMap.forEach(
+                        (header, value) -> httpHeaders.add(HttpHeaderName.fromString(header), String.valueOf(value)));
                 }
                 this.body = responseMap.getOrDefault("body", null);
             } else {
@@ -167,17 +158,11 @@ public class ProxyMethodExample {
         @Override
         public String toString() {
             try {
-                return "Response{" +
-                        "statusCode=" + statusCode +
-                        ", httpHeaders=" + httpHeaders +
-                        ", body=" + PRETTY_PRINTER.writeValueAsString(body) +
-                        '}';
+                return "Response{" + "statusCode=" + statusCode + ", httpHeaders=" + httpHeaders + ", body="
+                    + NORMAL_PRINTER.writeValueAsString(body) + '}';
             } catch (JsonProcessingException e) {
-                return "Response{" +
-                        "statusCode=" + statusCode +
-                        ", httpHeaders=" + httpHeaders +
-                        ", body=" + body +
-                        '}';
+                return "Response{" + "statusCode=" + statusCode + ", httpHeaders=" + httpHeaders + ", body=" + body
+                    + '}';
             }
         }
     }
@@ -206,18 +191,23 @@ public class ProxyMethodExample {
     /**
      * @return the primary response
      */
-    public Optional<Response> getPrimaryResponse() {
+    public Response getPrimaryResponse() {
         if (responses.isEmpty()) {
-            return Optional.empty();
+            return null;
         }
 
-        Optional<Response> response = responses.values().stream()
-                .filter(r -> r.statusCode / 100 == 2)
-                .findFirst();
-        if (!response.isPresent()) {
-            response = responses.values().stream().findFirst();
+        Response firstResponse = null;
+        for (Response response : responses.values()) {
+            if (firstResponse == null) {
+                firstResponse = response;
+            }
+
+            if (response.statusCode / 100 == 2) {
+                return response;
+            }
         }
-        return response;
+
+        return firstResponse;
     }
 
     /**
@@ -229,8 +219,9 @@ public class ProxyMethodExample {
 
     /**
      * Heuristically find relative path of the original file to the repository.
-     *
-     * For instance, "specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/examples/getDataPolicyManifest.json"
+     * <p>
+     * For instance,
+     * "specification/resources/resource-manager/Microsoft.Authorization/stable/2020-09-01/examples/getDataPolicyManifest.json"
      *
      * @return the relative path of the original file
      */
@@ -241,32 +232,29 @@ public class ProxyMethodExample {
                 URL url = new URI(originalFileName).toURL();
                 switch (url.getProtocol()) {
                     case "http":
-                    case "https":
-                    {
-                        String[] segments = url.getPath().split(QUOTED_SLASH);
+                    case "https": {
+                        String[] segments = url.getPath().split(SLASH);
                         if (segments.length > 3) {
                             // first 3 should be owner, name, branch
                             originalFileName = Arrays.stream(segments)
-                                    .filter(s -> !s.isEmpty())
-                                    .skip(3)
-                                    .collect(Collectors.joining(SLASH));
+                                .filter(s -> !s.isEmpty())
+                                .skip(3)
+                                .collect(Collectors.joining(SLASH));
                         }
                         break;
                     }
 
-                    case "file":
-                    {
+                    case "file": {
                         String relativeFileName = tspDirectory != null
-                                ? getRelativeOriginalFileNameForTsp(url)
-                                : getRelativeOriginalFileNameForSwagger(url);
+                            ? getRelativeOriginalFileNameForTsp(url)
+                            : getRelativeOriginalFileNameForSwagger(url);
                         if (relativeFileName != null) {
                             originalFileName = relativeFileName;
                         }
                         break;
                     }
 
-                    default:
-                    {
+                    default: {
                         logger.error("Unknown protocol in x-ms-original-file: '{}'", originalFileName);
                         break;
                     }
@@ -281,8 +269,10 @@ public class ProxyMethodExample {
 
     /**
      * identifier of the codesnippet label from codesnippet-maven-plugin
-     * @see <a href="https://github.com/Azure/azure-sdk-tools/blob/main/packages/java-packages/codesnippet-maven-plugin/README.md">codesnippet-maven-plugin</a>
+     *
      * @return the identifier of the codesnippet label that wraps around the example code
+     * @see <a
+     * href="https://github.com/Azure/azure-sdk-tools/blob/main/packages/java-packages/codesnippet-maven-plugin/README.md">codesnippet-maven-plugin</a>
      */
     public String getCodeSnippetIdentifier() {
         return codeSnippetIdentifier;
@@ -308,10 +298,10 @@ public class ProxyMethodExample {
          * "specification/standbypool/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
          */
         String originalFileName = null;
-        String[] directorySegments = tspDirectory.split(QUOTED_SLASH);
+        String[] directorySegments = tspDirectory.split(SLASH);
         String directoryLastSegment = directorySegments[directorySegments.length - 1];
         int sharedDirectorySegment = -1;
-        String[] segments = url.getPath().split(QUOTED_SLASH);
+        String[] segments = url.getPath().split(SLASH);
         for (int i = segments.length - 1; i >= 0; --i) {
             if (Objects.equals(directoryLastSegment, segments[i])) {
                 sharedDirectorySegment = i;
@@ -319,10 +309,8 @@ public class ProxyMethodExample {
             }
         }
         if (sharedDirectorySegment >= 0) {
-            originalFileName = Stream.concat(
-                    Arrays.stream(directorySegments),
-                    Arrays.stream(segments).skip(sharedDirectorySegment + 1)
-            ).collect(Collectors.joining(SLASH));
+            originalFileName = Stream.concat(Arrays.stream(directorySegments),
+                Arrays.stream(segments).skip(sharedDirectorySegment + 1)).collect(Collectors.joining(SLASH));
         }
         return originalFileName;
     }
@@ -334,7 +322,7 @@ public class ProxyMethodExample {
          * or "specification/<service>/data-plane"
          */
         String originalFileName = null;
-        String[] segments = url.getPath().split(QUOTED_SLASH);
+        String[] segments = url.getPath().split(SLASH);
         int resourceManagerOrDataPlaneSegmentIndex = -1;
         for (int i = 0; i < segments.length; ++i) {
             if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
@@ -344,18 +332,15 @@ public class ProxyMethodExample {
         }
         if (resourceManagerOrDataPlaneSegmentIndex > 2) {
             originalFileName = Arrays.stream(segments)
-                    .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
-                    .collect(Collectors.joining(SLASH));
+                .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
+                .collect(Collectors.joining(SLASH));
         }
         return originalFileName;
     }
 
     @Override
     public String toString() {
-        return "ProxyMethodExample{" +
-                "parameters=" + parameters +
-                ", responses=" + responses +
-                '}';
+        return "ProxyMethodExample{" + "parameters=" + parameters + ", responses=" + responses + '}';
     }
 
     public static final class Builder {
