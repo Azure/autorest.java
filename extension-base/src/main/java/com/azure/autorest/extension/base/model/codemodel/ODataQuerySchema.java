@@ -3,6 +3,12 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
+
 /**
  * Represents an ODataQuery value.
  */
@@ -31,5 +37,18 @@ public class ODataQuerySchema extends Schema {
         }
 
         return other instanceof ODataQuerySchema;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.toJson(jsonWriter);
+    }
+
+    public static ODataQuerySchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ODataQuerySchema::new, (schema, fieldName, reader) -> {
+            if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {
+                reader.skipChildren();
+            }
+        });
     }
 }

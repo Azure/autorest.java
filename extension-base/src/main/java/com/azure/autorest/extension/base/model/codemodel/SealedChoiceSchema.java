@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 
 /**
  * Represents a choice of several values (ie, an 'enum').
@@ -38,4 +43,16 @@ public class SealedChoiceSchema extends ChoiceSchema {
         return sharedEquals(this, (SealedChoiceSchema) other);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.toJson(jsonWriter);
+    }
+
+    public static SealedChoiceSchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, SealedChoiceSchema::new, (schema, fieldName, reader) -> {
+            if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {
+                reader.skipChildren();
+            }
+        });
+    }
 }

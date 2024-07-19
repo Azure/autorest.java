@@ -3,12 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
  * Represents individual serialization formats.
  */
-public class SerializationFormats {
+public class SerializationFormats implements JsonSerializable<SerializationFormats> {
     private SerializationFormat json;
     private XmlSerializationFormat xml;
     private SerializationFormat protobuf;
@@ -99,4 +105,26 @@ public class SerializationFormats {
         return Objects.equals(json, rhs.json) && Objects.equals(protobuf, rhs.protobuf) && Objects.equals(xml, rhs.xml);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeJsonField("json", json)
+            .writeJsonField("xml", xml)
+            .writeJsonField("protobuf", protobuf)
+            .writeEndObject();
+    }
+
+    public static SerializationFormats fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, SerializationFormats::new, (formats, fieldName, reader) -> {
+            if ("json".equals(fieldName)) {
+                formats.json = SerializationFormat.fromJson(reader);
+            } else if ("xml".equals(fieldName)) {
+                formats.xml = XmlSerializationFormat.fromJson(reader);
+            } else if ("protobuf".equals(fieldName)) {
+                formats.protobuf = SerializationFormat.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

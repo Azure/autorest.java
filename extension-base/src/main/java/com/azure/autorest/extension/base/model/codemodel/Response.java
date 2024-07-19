@@ -3,6 +3,12 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
+
 /**
  * Represents a response from a service.
  */
@@ -50,5 +56,38 @@ public class Response extends Metadata {
      */
     public void setBinary(Boolean binary) {
         this.binary = binary;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return writeParentProperties(jsonWriter.writeStartObject()).writeEndObject();
+    }
+
+    JsonWriter writeParentProperties(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter)
+            .writeJsonField("schema", schema)
+            .writeBooleanField("binary", binary);
+    }
+
+    public static Response fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Response::new, (response, fieldName, reader) -> {
+            if (!response.tryConsumeParentProperties(response, fieldName, reader)) {
+                reader.skipChildren();
+            }
+        });
+    }
+
+    boolean tryConsumeParentProperties(Response response, String fieldName, JsonReader reader) throws IOException {
+        if (super.tryConsumeParentProperties(response, fieldName, reader)) {
+            return true;
+        } else if ("schema".equals(fieldName)) {
+            response.schema = Schema.fromJson(reader);
+            return true;
+        } else if ("binary".equals(fieldName)) {
+            response.binary = reader.getNullable(JsonReader::getBoolean);
+            return true;
+        }
+
+        return false;
     }
 }

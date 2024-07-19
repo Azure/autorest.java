@@ -3,13 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * Represents a reference to external documentation.
  */
-public class ExternalDocumentation {
+public class ExternalDocumentation implements JsonSerializable<ExternalDocumentation> {
     private String description;
     private String url;
     private DictionaryAny extensions;
@@ -101,4 +106,26 @@ public class ExternalDocumentation {
             && Objects.equals(extensions, rhs.extensions);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("description", description)
+            .writeStringField("url", url)
+            .writeJsonField("extensions", extensions)
+            .writeEndObject();
+    }
+
+    public static ExternalDocumentation fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ExternalDocumentation::new, (documentation, fieldName, reader) -> {
+            if ("description".equals(fieldName)) {
+                documentation.description = reader.getString();
+            } else if ("url".equals(fieldName)) {
+                documentation.url = reader.getString();
+            } else if ("extensions".equals(fieldName)) {
+                documentation.extensions = DictionaryAny.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

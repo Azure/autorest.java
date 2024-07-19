@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,5 +77,32 @@ public class OperationGroup extends Metadata {
      */
     public void setCodeModel(Client codeModel) {
         this.codeModel = codeModel;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeStringField("$key", $key)
+            .writeArrayField("operations", operations, JsonWriter::writeJson)
+            .writeJsonField("codeModel", codeModel)
+            .writeEndObject();
+    }
+
+    public static OperationGroup fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, OperationGroup::new, (group, fieldName, reader) -> {
+            if (group.tryConsumeParentProperties(group, fieldName, reader)) {
+                return;
+            }
+
+            if ("$key".equals(fieldName)) {
+                group.$key = reader.getString();
+            } else if ("operations".equals(fieldName)) {
+                group.operations = reader.readArray(Operation::fromJson);
+            } else if ("codeModel".equals(fieldName)) {
+                group.codeModel = CodeModel.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

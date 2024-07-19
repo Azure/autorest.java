@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,5 +58,29 @@ public class Request extends Metadata {
      */
     public void setSignatureParameters(List<Parameter> signatureParameters) {
         this.signatureParameters = signatureParameters;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeArrayField("parameters", parameters, JsonWriter::writeJson)
+            .writeArrayField("signatureParameters", signatureParameters, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    public static Request fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Request::new, (request, fieldName, reader) -> {
+            if (request.tryConsumeParentProperties(request, fieldName, reader)) {
+                return;
+            }
+
+            if ("parameters".equals(fieldName)) {
+                request.parameters = reader.readArray(Parameter::fromJson);
+            } else if ("signatureParameters".equals(fieldName)) {
+                request.signatureParameters = reader.readArray(Parameter::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

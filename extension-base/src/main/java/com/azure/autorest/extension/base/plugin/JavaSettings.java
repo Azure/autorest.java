@@ -7,11 +7,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.slf4j.Logger;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -96,18 +94,17 @@ public class JavaSettings {
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
             // input-file
-            Type listObjectType = TYPE_FACTORY.constructCollectionType(List.class, Object.class);
-            List<Object> inputFiles = host.getValue(listObjectType, "input-file");
+            List<String> inputFiles = host.getValueWithJsonReader("input-file",
+                jsonReader -> jsonReader.readArray(JsonReader::getString));
             if (inputFiles != null) {
-                autorestSettings.getInputFiles().addAll(
-                    inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
+                autorestSettings.getInputFiles().addAll(inputFiles);
                 logger.debug("List of input files : {}", autorestSettings.getInputFiles());
             }
             // require (readme.md etc.)
-            List<Object> require = host.getValue(listObjectType, "require");
+            List<String> require = host.getValueWithJsonReader("require",
+                jsonReader -> jsonReader.readArray(JsonReader::getString));
             if (require != null) {
-                autorestSettings.getRequire().addAll(
-                    require.stream().map(Object::toString).collect(Collectors.toList()));
+                autorestSettings.getRequire().addAll(require);
                 logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
@@ -116,7 +113,7 @@ public class JavaSettings {
             setHeader(getStringValue(host, "license-header"));
             instance = new JavaSettings(
                 autorestSettings,
-                host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, Object.class), "modelerfour"),
+                host.getValueWithJsonReader("modelerfour", jsonReader -> jsonReader.readMap(JsonReader::readUntyped)),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 fluent,
@@ -148,19 +145,18 @@ public class JavaSettings {
                 getBooleanValue(host, "optional-constant-as-enum", false),
                 getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
-                host.getValue(TYPE_FACTORY.constructCollectionLikeType(List.class, String.class), "service-versions"),
+                host.getValueWithJsonReader("service-versions", jsonReader -> jsonReader.readArray(JsonReader::getString)),
                 getStringValue(host, "client-flattened-annotation-target", ""),
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
-                host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, PollingDetails.class), "polling"),
+                host.getValueWithJsonReader("polling", jsonReader -> jsonReader.readMap(PollingDetails::fromJson)),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 false, //getBooleanValue(host, "generate-send-request-method", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
-                host.getValue(TYPE_FACTORY.constructMapType(Map.class, Integer.class, String.class),
-                    "http-status-code-to-exception-type-mapping"),
+                host.getValueWithJsonReader("http-status-code-to-exception-type-mapping", JavaSettings::parseStatusCodeMapping),
                 getBooleanValue(host, "partial-update", false),
                 // If fluent default to false, this is because the automated test generation ends up with invalid code.
                 // Once that is fixed, this can be switched over to true.
@@ -187,6 +183,19 @@ public class JavaSettings {
             );
         }
         return instance;
+    }
+
+    private static Map<Integer, String> parseStatusCodeMapping(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Map<Integer, String> mapping = new HashMap<>();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                int key = Integer.parseInt(reader.getFieldName());
+                reader.nextToken();
+                mapping.put(key, reader.getString());
+            }
+
+            return mapping;
+        });
     }
 
     /**
@@ -1644,12 +1653,7 @@ public class JavaSettings {
     }
 
     private static String getStringValue(NewPlugin host, String settingName) {
-        String value = host.getStringValue(settingName);
-        if (value != null) {
-            logger.debug("Option, string, {} : {}", settingName, value);
-            SIMPLE_JAVA_SETTINGS.put(settingName, value);
-        }
-        return value;
+        return getStringValue(host, settingName, null);
     }
 
     private static String getStringValue(NewPlugin host, String settingName, String defaultValue) {
@@ -1674,20 +1678,24 @@ public class JavaSettings {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private static void loadStringOrArraySettingAsArray(String settingName, Consumer<List<String>> action) {
-        List<String> settingValues = new ArrayList<>();
-        Object settingValue = host.getValue(Object.class, settingName);
-        if (settingValue instanceof String) {
-            logger.debug("Option, string, {} : {}", settingName, settingValue);
-            settingValues.add(settingValue.toString());
-        } else if (settingValue instanceof List) {
-            List<String> settingValueList = (List<String>) settingValue;
-            logger.debug("Option, array, {} : {}", settingName, settingValueList);
-            settingValues.addAll(settingValueList);
-        }
-        if (!settingValues.isEmpty()) {
-            action.accept(settingValues);
-        }
+        host.getValueWithJsonReader(settingName, jsonReader -> {
+            JsonToken token = jsonReader.currentToken();
+            if (token == null) {
+                token = jsonReader.nextToken();
+            }
+
+            if (token == JsonToken.START_ARRAY) {
+                List<String> settingValueList = jsonReader.readArray(JsonReader::getString);
+                logger.debug("Option, array, {} : {}", settingName, settingValueList);
+                action.accept(settingValueList);
+            } else if (token == JsonToken.STRING) {
+                String settingValue = jsonReader.getString();
+                logger.debug("Option, string, {} : {}", settingName, settingValue);
+                action.accept(Collections.singletonList(settingValue));
+            }
+
+            return null;
+        });
     }
 }

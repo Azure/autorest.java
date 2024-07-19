@@ -3,13 +3,19 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents security information.
  */
-public class Security {
+public class Security implements JsonSerializable<Security> {
     private boolean authenticationRequired;
     private List<Scheme> schemes = new ArrayList<>();
 
@@ -53,5 +59,25 @@ public class Security {
      */
     public void setSchemes(List<Scheme> schemes) {
         this.schemes = schemes;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeBooleanField("authenticationRequired", authenticationRequired)
+            .writeArrayField("schemes", schemes, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    public static Security fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Security::new, (security, fieldName, reader) -> {
+            if ("authenticationRequired".equals(fieldName)) {
+                security.authenticationRequired = reader.getBoolean();
+            } else if ("schemes".equals(fieldName)) {
+                security.schemes = reader.readArray(Scheme::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

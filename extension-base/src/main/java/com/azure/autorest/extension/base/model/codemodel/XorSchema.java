@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,5 +66,26 @@ public class XorSchema extends ComplexSchema {
 
         XorSchema rhs = ((XorSchema) other);
         return Objects.equals(oneOf, rhs.oneOf);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeArrayField("oneOf", oneOf, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    public static XorSchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, XorSchema::new, (schema, fieldName, reader) -> {
+            if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {
+                return;
+            }
+
+            if ("oneOf".equals(fieldName)) {
+                schema.oneOf = reader.readArray(Schema::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

@@ -22,6 +22,14 @@ public final class JsonUtils {
         });
     }
 
+    public static <T> T readEmptyObject(JsonReader jsonReader, Supplier<T> objectCreator) throws IOException {
+        return jsonReader.readObject(reader -> {
+            T object = objectCreator.get();
+            fieldReaderLoop(reader, (fieldName, r) -> r.skipChildren());
+            return object;
+        });
+    }
+
     public interface ReadObjectCallback<T> {
         void read(T object, String fieldName, JsonReader jsonReader) throws IOException;
     }

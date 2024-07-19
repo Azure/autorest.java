@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -62,4 +67,20 @@ public class OrSchema extends ComplexSchema {
         return Objects.equals(anyOf, rhs.anyOf);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeArrayField("anyOf", anyOf, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    public static OrSchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, OrSchema::new, (schema, fieldName, reader) -> {
+            if ("anyOf".equals(fieldName)) {
+                schema.anyOf = reader.readArray(ObjectSchema::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

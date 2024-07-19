@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -99,4 +104,29 @@ public class StringSchema extends PrimitiveSchema {
         return maxLength == rhs.maxLength && minLength == rhs.minLength && Objects.equals(pattern, rhs.pattern);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeDoubleField("maxLength", maxLength)
+            .writeDoubleField("minLength", minLength)
+            .writeStringField("pattern", pattern)
+            .writeEndObject();
+    }
+
+    public static StringSchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, StringSchema::new, (schema, fieldName, reader) -> {
+            if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {
+                return;
+            }
+            if ("maxLength".equals(fieldName)) {
+                schema.maxLength = reader.getDouble();
+            } else if ("minLength".equals(fieldName)) {
+                schema.minLength = reader.getDouble();
+            } else if ("pattern".equals(fieldName)) {
+                schema.pattern = reader.getString();
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

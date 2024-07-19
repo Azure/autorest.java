@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -34,5 +39,26 @@ public class ConvenienceApi extends Metadata {
      */
     public void setRequests(List<Request> requests) {
         this.requests = requests;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeArrayField("requests", requests, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    public static ConvenienceApi fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ConvenienceApi::new, (convenienceApi, fieldName, reader) -> {
+            if (convenienceApi.tryConsumeParentProperties(convenienceApi, fieldName, reader)) {
+                return;
+            }
+
+            if ("requests".equals(fieldName)) {
+                convenienceApi.requests = reader.readArray(Request::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

@@ -3,12 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
  * Represents a flag value.
  */
-public class FlagValue {
+public class FlagValue implements JsonSerializable<FlagValue> {
     private Languages language;
     private double value;
     private DictionaryAny extensions;
@@ -100,4 +106,26 @@ public class FlagValue {
             && Objects.equals(extensions, rhs.extensions);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeJsonField("language", language)
+            .writeDoubleField("value", value)
+            .writeJsonField("extensions", extensions)
+            .writeEndObject();
+    }
+
+    public static FlagValue fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, FlagValue::new, (value, fieldName, reader) -> {
+            if ("language".equals(fieldName)) {
+                value.language = Languages.fromJson(reader);
+            } else if ("value".equals(fieldName)) {
+                value.value = reader.getDouble();
+            } else if ("extensions".equals(fieldName)) {
+                value.extensions = DictionaryAny.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

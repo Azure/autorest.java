@@ -4,13 +4,12 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsEnum;
+import com.azure.autorest.extension.base.util.JsonUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonWriter;
 
 import java.io.IOException;
-
-import static com.azure.autorest.extension.base.util.JsonUtils.readObject;
 
 /**
  * Represents the version of the dictionary API.
@@ -47,7 +46,7 @@ public class DictionaryApiVersion implements JsonSerializable<DictionaryApiVersi
         return jsonWriter.writeStartObject().writeEndObject();
     }
 
-    public static XmsEnum fromJson(JsonReader jsonReader) throws IOException {
-        return readObject(jsonReader, XmsEnum::new, (xmsEnum, fieldName, reader) -> reader.skipChildren());
+    public static DictionaryApiVersion fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readEmptyObject(jsonReader, DictionaryApiVersion::new);
     }
 }

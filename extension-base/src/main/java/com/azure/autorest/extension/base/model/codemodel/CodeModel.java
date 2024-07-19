@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,5 +99,35 @@ public class CodeModel extends Client {
      */
     public void setTestModel(TestModel testModel) {
         this.testModel = testModel;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeJsonField("info", info)
+            .writeJsonField("schemas", schemas)
+            .writeArrayField("clients", clients, JsonWriter::writeJson)
+            .writeJsonField("testModel", testModel)
+            .writeEndObject();
+    }
+
+    public static CodeModel fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, CodeModel::new, (codeModel, fieldName, reader) -> {
+            if (codeModel.tryConsumeParentProperties(codeModel, fieldName, reader)) {
+                return;
+            }
+
+            if ("info".equals(fieldName)) {
+                codeModel.info = Info.fromJson(reader);
+            } else if ("schemas".equals(fieldName)) {
+                codeModel.schemas = Schemas.fromJson(reader);
+            } else if ("clients".equals(fieldName)) {
+                codeModel.clients = reader.readArray(Client::fromJson);
+            } else if ("testModel".equals(fieldName)) {
+                codeModel.testModel = TestModel.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

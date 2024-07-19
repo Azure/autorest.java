@@ -5,7 +5,6 @@ package com.azure.autorest.customization.implementation.ls;
 
 import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.eclipse.lsp4j.ClientCapabilities;
@@ -52,7 +51,6 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class EclipseLanguageClient implements AutoCloseable {
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final Gson GSON = new MessageJsonHandler(null).getDefaultGsonBuilder().create();
 
     private static final Type LIST_SYMBOL_INFORMATION = createParameterizedType(List.class, SymbolInformation.class);
@@ -201,7 +199,7 @@ public class EclipseLanguageClient implements AutoCloseable {
 
     public void close() {
         try {
-            connection.request(void.class, "shutdown");
+            connection.request("shutdown");
             connection.notifyWithSerializedObject("exit", "null");
             connection.stop();
             server.shutdown();

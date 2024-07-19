@@ -3,6 +3,12 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -18,7 +24,7 @@ import java.util.Objects;
  * <p>
  * - semver-range style (ie, '^1.0.0' or '~1.0.0' )
  */
-public class ApiVersion {
+public class ApiVersion implements JsonSerializable<ApiVersion> {
     private String version;
     private ApiVersion.Range range;
 
@@ -87,6 +93,26 @@ public class ApiVersion {
 
         ApiVersion rhs = ((ApiVersion) other);
         return Objects.equals(version, rhs.version) && Objects.equals(range, rhs.range);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("version", version)
+            .writeStringField("range", range == null ? null : range.toString())
+            .writeEndObject();
+    }
+
+    public static ApiVersion fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ApiVersion::new, (version, fieldName, reader) -> {
+            if ("version".equals(fieldName)) {
+                version.version = reader.getString();
+            } else if ("range".equals(fieldName)) {
+                version.range = ApiVersion.Range.fromValue(reader.getString());
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 
     /**

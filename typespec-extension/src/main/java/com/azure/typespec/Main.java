@@ -18,11 +18,10 @@ import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
 import com.azure.typespec.model.EmitterOptions;
 import com.azure.typespec.util.TspLocationUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
@@ -46,15 +45,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    static {
-        OBJECT_MAPPER
-                .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
-                .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-    }
 
     private static final String TSP_LOCATION_FILENAME = "tsp-location.yaml";
 
@@ -84,10 +75,9 @@ public class Main {
                 sdkIntegration = Files.exists(Paths.get(outputDir, "../../parents/azure-client-sdk-parent"));
             } else {
                 try (Stream<Path> filestream = Files.list(outputDirPath)) {
-                    Set<String> filenames = filestream
-                            .map(p -> p.getFileName().toString())
-                            .map(name -> name.toLowerCase(Locale.ROOT))
-                            .collect(Collectors.toSet());
+                    Set<String> filenames = filestream.map(p -> p.getFileName().toString())
+                        .map(name -> name.toLowerCase(Locale.ROOT))
+                        .collect(Collectors.toSet());
 
                     // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
                     sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
@@ -96,13 +86,12 @@ public class Main {
 
             // load tsp-location.yaml
             try (Stream<Path> filestream = Files.list(outputDirPath)) {
-                Set<String> filenames = filestream
-                        .map(p -> p.getFileName().toString())
-                        .map(name -> name.toLowerCase(Locale.ROOT))
-                        .collect(Collectors.toSet());
+                Set<String> filenames = filestream.map(p -> p.getFileName().toString())
+                    .map(name -> name.toLowerCase(Locale.ROOT))
+                    .collect(Collectors.toSet());
                 if (filenames.contains(TSP_LOCATION_FILENAME)) {
                     String directory = TspLocationUtil.getDirectory(getYaml(),
-                            outputDirPath.resolve(TSP_LOCATION_FILENAME));
+                        outputDirPath.resolve(TSP_LOCATION_FILENAME));
                     if (!CoreUtils.isNullOrEmpty(directory)) {
                         ProxyMethodExample.setTspDirectory(directory);
                     }
@@ -132,17 +121,21 @@ public class Main {
         // write
 
         // java files
-        Postprocessor.writeToFiles(javaPackage.getJavaFiles().stream()
-            .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())), fluentPlugin,
+        Postprocessor.writeToFiles(javaPackage.getJavaFiles()
+                .stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())), fluentPlugin,
             fluentPlugin.getLogger());
 
         // XML include POM
-        javaPackage.getXmlFiles().forEach(xmlFile -> fluentPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
+        javaPackage.getXmlFiles()
+            .forEach(xmlFile -> fluentPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
         // Others
-        javaPackage.getTextFiles().forEach(textFile -> fluentPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
+        javaPackage.getTextFiles()
+            .forEach(textFile -> fluentPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
     }
 
-    private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
+    private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration,
+        String outputDir) {
         // initialize plugin
         TypeSpecPlugin typeSpecPlugin = new TypeSpecPlugin(emitterOptions, sdkIntegration);
 
@@ -159,9 +152,9 @@ public class Main {
         // handle partial update
         Map<String, String> javaFiles = new ConcurrentHashMap<>();
         JavaSettings settings = JavaSettings.getInstance();
-        javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-            javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
-        });
+        javaPackage.getJavaFiles()
+            .parallelStream()
+            .forEach(javaFile -> javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString()));
 
         // handle customization
         // write output
@@ -169,25 +162,30 @@ public class Main {
         new Postprocessor(typeSpecPlugin).postProcess(javaFiles);
 
         // XML include POM
-        javaPackage.getXmlFiles().forEach(xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
+        javaPackage.getXmlFiles()
+            .forEach(
+                xmlFile -> typeSpecPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
         // Others
-        javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
+        javaPackage.getTextFiles()
+            .forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
         String artifactId = ClientModelUtil.getArtifactId();
         if (settings.isBranded()) {
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
-                        "name=${project.artifactId}\nversion=${project.version}\n", null);
+                    "name=${project.artifactId}\nversion=${project.version}\n", null);
             }
         }
 
-        boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null && emitterOptions.includeApiViewProperties();
+        boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null
+            && emitterOptions.includeApiViewProperties();
         if (includeApiViewProperties && !CoreUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
             String flavor = emitterOptions.getFlavor() == null ? "azure" : emitterOptions.getFlavor();
-            StringBuilder sb = new StringBuilder("{\n  \"flavor\": \"" + flavor + "\", \n  \"CrossLanguageDefinitionId\": {\n");
+            StringBuilder sb = new StringBuilder(
+                "{\n  \"flavor\": \"" + flavor + "\", \n  \"CrossLanguageDefinitionId\": {\n");
             AtomicBoolean first = new AtomicBoolean(true);
             typeSpecPlugin.getCrossLanguageDefinitionMap().forEach((key, value) -> {
-                if(first.get()) {
+                if (first.get()) {
                     first.set(false);
                 } else {
                     sb.append(",\n");
@@ -196,7 +194,8 @@ public class Main {
             });
             sb.append("\n  }\n}\n");
 
-            typeSpecPlugin.writeFile("src/main/resources/META-INF/" + artifactId + "_apiview_properties.json", sb.toString(), null);
+            typeSpecPlugin.writeFile("src/main/resources/META-INF/" + artifactId + "_apiview_properties.json",
+                sb.toString(), null);
         }
         System.exit(0);
     }
@@ -207,11 +206,12 @@ public class Main {
         String emitterOptionsJson = Configuration.getGlobalConfiguration().get("emitterOptions");
 
         if (emitterOptionsJson != null) {
-            try {
-                options = OBJECT_MAPPER.readValue(emitterOptionsJson, EmitterOptions.class);
+            try (JsonReader jsonReader = JsonProviders.createReader(emitterOptionsJson)) {
+                options = EmitterOptions.fromJson(jsonReader);
                 // namespace
                 if (CoreUtils.isNullOrEmpty(options.getNamespace())) {
-                    if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+                    if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(
+                        codeModel.getLanguage().getJava().getNamespace())) {
                         options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
                     }
                 }
@@ -222,7 +222,7 @@ public class Main {
                 } else if (!options.getOutputDir().endsWith("/")) {
                     options.setOutputDir(options.getOutputDir() + "/");
                 }
-            } catch (JsonProcessingException e) {
+            } catch (IOException e) {
                 LOGGER.info("Read emitter options failed, emitter options json: {}", emitterOptionsJson);
             }
         }
@@ -231,7 +231,8 @@ public class Main {
             // default if emitterOptions fails
             options = new EmitterOptions();
             options.setOutputDir("typespec-tests/tsp-output/");
-            if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+            if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(
+                codeModel.getLanguage().getJava().getNamespace())) {
                 options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
             }
         }

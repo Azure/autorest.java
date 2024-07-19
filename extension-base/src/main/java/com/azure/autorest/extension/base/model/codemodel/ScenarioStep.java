@@ -3,12 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Map;
 
 /**
  * Represents a step in a scenario.
  */
-public class ScenarioStep {
+public class ScenarioStep implements JsonSerializable<ScenarioStep> {
     private TestScenarioStepType type;
     private String operationId;
     private String exampleFile;
@@ -128,5 +134,37 @@ public class ScenarioStep {
      */
     public void setRequestParameters(Map<String, Object> requestParameters) {
         this.requestParameters = requestParameters;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("type", type == null ? null : type.toString())
+            .writeStringField("operationId", operationId)
+            .writeStringField("exampleFile", exampleFile)
+            .writeStringField("exampleName", exampleName)
+            .writeMapField("requestParameters", requestParameters, JsonWriter::writeUntyped)
+            .writeStringField("description", description)
+            .writeEndObject();
+    }
+
+    public static ScenarioStep fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ScenarioStep::new, (step, fieldName, reader) -> {
+            if ("type".equals(fieldName)) {
+                step.type = TestScenarioStepType.fromValue(reader.getString());
+            } else if ("operationId".equals(fieldName)) {
+                step.operationId = reader.getString();
+            } else if ("exampleFile".equals(fieldName)) {
+                step.exampleFile = reader.getString();
+            } else if ("exampleName".equals(fieldName)) {
+                step.exampleName = reader.getString();
+            } else if ("requestParameters".equals(fieldName)) {
+                step.requestParameters = reader.readMap(JsonReader::readUntyped);
+            } else if ("description".equals(fieldName)) {
+                step.description = reader.getString();
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

@@ -73,10 +73,22 @@ public abstract class NewPlugin {
      */
     public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
         try {
-            return converter.read(connection.request("GetValue", sessionId, key));
+            return converter.read(getValueString(key));
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
+    }
+
+    public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
+        try (JsonReader jsonReader = JsonProviders.createReader(getValueString(key))) {
+            return converter.read(jsonReader);
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
+    }
+
+    private String getValueString(String key) {
+        return connection.request("GetValue", sessionId, key);
     }
 
     //    /**
@@ -260,11 +272,8 @@ public abstract class NewPlugin {
      * @return The content of the configuration file.
      */
     public String getConfigurationFile(String fileName) {
-        Map<String, String> configurations = getValue("configurationFiles", json -> {
-            try (JsonReader jsonReader = JsonProviders.createReader(json)) {
-                return jsonReader.readMap(JsonReader::getString);
-            }
-        });
+        Map<String, String> configurations = getValueWithJsonReader("configurationFiles",
+            jsonReader -> jsonReader.readMap(JsonReader::getString));
 
         if (configurations != null) {
             Iterator<String> it = configurations.keySet().iterator();

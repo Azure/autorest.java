@@ -3,6 +3,12 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +19,7 @@ import java.util.Map;
  * Api Scenario Definition Reference
  * </a>
  */
-public class ScenarioTest {
+public class ScenarioTest implements JsonSerializable<ScenarioTest> {
     private String filePath;
     private List<String> requiredVariables;
     private Map<String, String> requiredVariablesDefault;
@@ -134,5 +140,37 @@ public class ScenarioTest {
      */
     public void setUseArmTemplate(Boolean useArmTemplate) {
         this.useArmTemplate = useArmTemplate;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("_filePath", filePath)
+            .writeArrayField("requiredVariables", requiredVariables, JsonWriter::writeString)
+            .writeMapField("requiredVariablesDefault", requiredVariablesDefault, JsonWriter::writeString)
+            .writeArrayField("scenarios", scenarios, JsonWriter::writeJson)
+            .writeStringField("scope", scope == null ? null : scope.toString())
+            .writeBooleanField("useArmTemplate", useArmTemplate)
+            .writeEndObject();
+    }
+
+    public static ScenarioTest fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ScenarioTest::new, (test, fieldName, reader) -> {
+            if ("_filePath".equals(fieldName)) {
+                test.filePath = reader.getString();
+            } else if ("requiredVariables".equals(fieldName)) {
+                test.requiredVariables = reader.readArray(JsonReader::getString);
+            } else if ("requiredVariablesDefault".equals(fieldName)) {
+                test.requiredVariablesDefault = reader.readMap(JsonReader::getString);
+            } else if ("scenarios".equals(fieldName)) {
+                test.scenarios = reader.readArray(TestScenario::fromJson);
+            } else if ("scope".equals(fieldName)) {
+                test.scope = ScenarioTestScope.fromValue(reader.getString());
+            } else if ("useArmTemplate".equals(fieldName)) {
+                test.useArmTemplate = reader.getNullable(JsonReader::getBoolean);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

@@ -3,12 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
  * Represents a contact.
  */
-public class Contact {
+public class Contact implements JsonSerializable<Contact> {
     private String name;
     private String url;
     private String email;
@@ -118,4 +124,29 @@ public class Contact {
             && Objects.equals(url, rhs.url) && Objects.equals(email, rhs.email);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("name", name)
+            .writeStringField("url", url)
+            .writeStringField("email", email)
+            .writeJsonField("extensions", extensions)
+            .writeEndObject();
+    }
+
+    public static Contact fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Contact::new, (contact, fieldName, reader) -> {
+            if ("name".equals(fieldName)) {
+                contact.name = reader.getString();
+            } else if ("url".equals(fieldName)) {
+                contact.url = reader.getString();
+            } else if ("email".equals(fieldName)) {
+                contact.email = reader.getString();
+            } else if ("extensions".equals(fieldName)) {
+                contact.extensions = DictionaryAny.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }
