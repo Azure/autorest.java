@@ -7,7 +7,9 @@ package com.cadl.armresourceprovider.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
+import com.cadl.armresourceprovider.models.CustomTemplateResourcePropertiesAnonymousEmptyModel;
 import com.cadl.armresourceprovider.models.Dog;
+import com.cadl.armresourceprovider.models.EmptyModel;
 import com.cadl.armresourceprovider.models.ManagedServiceIdentity;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -127,6 +129,53 @@ public final class CustomTemplateResourceInner extends Resource {
             this.innerProperties = new CustomTemplateResourceProperties();
         }
         this.innerProperties().withDog(dog);
+        return this;
+    }
+
+    /**
+     * Get the namedEmptyModel property: The namedEmptyModel property.
+     * 
+     * @return the namedEmptyModel value.
+     */
+    public EmptyModel namedEmptyModel() {
+        return this.innerProperties() == null ? null : this.innerProperties().namedEmptyModel();
+    }
+
+    /**
+     * Set the namedEmptyModel property: The namedEmptyModel property.
+     * 
+     * @param namedEmptyModel the namedEmptyModel value to set.
+     * @return the CustomTemplateResourceInner object itself.
+     */
+    public CustomTemplateResourceInner withNamedEmptyModel(EmptyModel namedEmptyModel) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CustomTemplateResourceProperties();
+        }
+        this.innerProperties().withNamedEmptyModel(namedEmptyModel);
+        return this;
+    }
+
+    /**
+     * Get the anonymousEmptyModel property: The anonymousEmptyModel property.
+     * 
+     * @return the anonymousEmptyModel value.
+     */
+    public CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel() {
+        return this.innerProperties() == null ? null : this.innerProperties().anonymousEmptyModel();
+    }
+
+    /**
+     * Set the anonymousEmptyModel property: The anonymousEmptyModel property.
+     * 
+     * @param anonymousEmptyModel the anonymousEmptyModel value to set.
+     * @return the CustomTemplateResourceInner object itself.
+     */
+    public CustomTemplateResourceInner
+        withAnonymousEmptyModel(CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CustomTemplateResourceProperties();
+        }
+        this.innerProperties().withAnonymousEmptyModel(anonymousEmptyModel);
         return this;
     }
 

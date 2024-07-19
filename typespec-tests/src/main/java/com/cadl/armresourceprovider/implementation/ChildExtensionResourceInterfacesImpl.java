@@ -50,29 +50,6 @@ public final class ChildExtensionResourceInterfacesImpl implements ChildExtensio
         }
     }
 
-    public Response<ChildExtensionResource> updateWithResponse(String resourceUri, String topLevelArmResourceName,
-        String childExtensionResourceName, Object properties, Context context) {
-        Response<ChildExtensionResourceInner> inner = this.serviceClient()
-            .updateWithResponse(resourceUri, topLevelArmResourceName, childExtensionResourceName, properties, context);
-        if (inner != null) {
-            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-                new ChildExtensionResourceImpl(inner.getValue(), this.manager()));
-        } else {
-            return null;
-        }
-    }
-
-    public ChildExtensionResource update(String resourceUri, String topLevelArmResourceName,
-        String childExtensionResourceName, Object properties) {
-        ChildExtensionResourceInner inner
-            = this.serviceClient().update(resourceUri, topLevelArmResourceName, childExtensionResourceName, properties);
-        if (inner != null) {
-            return new ChildExtensionResourceImpl(inner, this.manager());
-        } else {
-            return null;
-        }
-    }
-
     public void delete(String resourceUri, String topLevelArmResourceName, String childExtensionResourceName) {
         this.serviceClient().delete(resourceUri, topLevelArmResourceName, childExtensionResourceName);
     }

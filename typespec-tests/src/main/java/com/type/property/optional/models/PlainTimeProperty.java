@@ -13,7 +13,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * Model with a plaintime property.
+ * Model with a plainTime property.
  */
 @Fluent
 public final class PlainTimeProperty implements JsonSerializable<PlainTimeProperty> {

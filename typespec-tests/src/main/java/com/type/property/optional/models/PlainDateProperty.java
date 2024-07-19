@@ -15,10 +15,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Model with a plaindate property.
+ * Model with a plainDate property.
  */
 @Fluent
-public final class PlaindateProperty implements JsonSerializable<PlaindateProperty> {
+public final class PlainDateProperty implements JsonSerializable<PlainDateProperty> {
     /*
      * Property
      */
@@ -26,10 +26,10 @@ public final class PlaindateProperty implements JsonSerializable<PlaindateProper
     private LocalDate property;
 
     /**
-     * Creates an instance of PlaindateProperty class.
+     * Creates an instance of PlainDateProperty class.
      */
     @Generated
-    public PlaindateProperty() {
+    public PlainDateProperty() {
     }
 
     /**
@@ -46,10 +46,10 @@ public final class PlaindateProperty implements JsonSerializable<PlaindateProper
      * Set the property property: Property.
      * 
      * @param property the property value to set.
-     * @return the PlaindateProperty object itself.
+     * @return the PlainDateProperty object itself.
      */
     @Generated
-    public PlaindateProperty setProperty(LocalDate property) {
+    public PlainDateProperty setProperty(LocalDate property) {
         this.property = property;
         return this;
     }
@@ -66,30 +66,30 @@ public final class PlaindateProperty implements JsonSerializable<PlaindateProper
     }
 
     /**
-     * Reads an instance of PlaindateProperty from the JsonReader.
+     * Reads an instance of PlainDateProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of PlaindateProperty if the JsonReader was pointing to an instance of it, or null if it was
+     * @return An instance of PlainDateProperty if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IOException If an error occurs while reading the PlaindateProperty.
+     * @throws IOException If an error occurs while reading the PlainDateProperty.
      */
     @Generated
-    public static PlaindateProperty fromJson(JsonReader jsonReader) throws IOException {
+    public static PlainDateProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            PlaindateProperty deserializedPlaindateProperty = new PlaindateProperty();
+            PlainDateProperty deserializedPlainDateProperty = new PlainDateProperty();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedPlaindateProperty.property
+                    deserializedPlainDateProperty.property
                         = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }
             }
 
-            return deserializedPlaindateProperty;
+            return deserializedPlainDateProperty;
         });
     }
 }

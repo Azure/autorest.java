@@ -6,7 +6,9 @@ package com.cadl.armresourceprovider.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.cadl.armresourceprovider.models.CustomTemplateResourcePropertiesAnonymousEmptyModel;
 import com.cadl.armresourceprovider.models.Dog;
+import com.cadl.armresourceprovider.models.EmptyModel;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -26,6 +28,18 @@ public final class CustomTemplateResourceProperties {
      */
     @JsonProperty(value = "dog", required = true)
     private Dog dog;
+
+    /*
+     * The namedEmptyModel property.
+     */
+    @JsonProperty(value = "namedEmptyModel", required = true)
+    private EmptyModel namedEmptyModel;
+
+    /*
+     * The anonymousEmptyModel property.
+     */
+    @JsonProperty(value = "anonymousEmptyModel", required = true)
+    private CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel;
 
     /**
      * Creates an instance of CustomTemplateResourceProperties class.
@@ -63,6 +77,47 @@ public final class CustomTemplateResourceProperties {
     }
 
     /**
+     * Get the namedEmptyModel property: The namedEmptyModel property.
+     * 
+     * @return the namedEmptyModel value.
+     */
+    public EmptyModel namedEmptyModel() {
+        return this.namedEmptyModel;
+    }
+
+    /**
+     * Set the namedEmptyModel property: The namedEmptyModel property.
+     * 
+     * @param namedEmptyModel the namedEmptyModel value to set.
+     * @return the CustomTemplateResourceProperties object itself.
+     */
+    public CustomTemplateResourceProperties withNamedEmptyModel(EmptyModel namedEmptyModel) {
+        this.namedEmptyModel = namedEmptyModel;
+        return this;
+    }
+
+    /**
+     * Get the anonymousEmptyModel property: The anonymousEmptyModel property.
+     * 
+     * @return the anonymousEmptyModel value.
+     */
+    public CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel() {
+        return this.anonymousEmptyModel;
+    }
+
+    /**
+     * Set the anonymousEmptyModel property: The anonymousEmptyModel property.
+     * 
+     * @param anonymousEmptyModel the anonymousEmptyModel value to set.
+     * @return the CustomTemplateResourceProperties object itself.
+     */
+    public CustomTemplateResourceProperties
+        withAnonymousEmptyModel(CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel) {
+        this.anonymousEmptyModel = anonymousEmptyModel;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -74,6 +129,20 @@ public final class CustomTemplateResourceProperties {
                     "Missing required property dog in model CustomTemplateResourceProperties"));
         } else {
             dog().validate();
+        }
+        if (namedEmptyModel() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property namedEmptyModel in model CustomTemplateResourceProperties"));
+        } else {
+            namedEmptyModel().validate();
+        }
+        if (anonymousEmptyModel() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property anonymousEmptyModel in model CustomTemplateResourceProperties"));
+        } else {
+            anonymousEmptyModel().validate();
         }
     }
 

@@ -12,6 +12,7 @@ import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.armresourceprovider.fluent.models.ChildExtensionResourceInner;
+import com.cadl.armresourceprovider.models.ChildExtensionResourceUpdate;
 
 /**
  * An instance of this class provides access to all the operations defined in ChildExtensionResourceInterfacesClient.
@@ -131,7 +132,7 @@ public interface ChildExtensionResourceInterfacesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<ChildExtensionResourceInner> updateWithResponse(String resourceUri, String topLevelArmResourceName,
-        String childExtensionResourceName, Object properties, Context context);
+        String childExtensionResourceName, ChildExtensionResourceUpdate properties, Context context);
 
     /**
      * Update a ChildExtensionResource.
@@ -147,7 +148,7 @@ public interface ChildExtensionResourceInterfacesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     ChildExtensionResourceInner update(String resourceUri, String topLevelArmResourceName,
-        String childExtensionResourceName, Object properties);
+        String childExtensionResourceName, ChildExtensionResourceUpdate properties);
 
     /**
      * Delete a ChildExtensionResource.

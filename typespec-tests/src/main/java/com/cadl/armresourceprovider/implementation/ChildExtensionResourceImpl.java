@@ -9,6 +9,7 @@ import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.ChildExtensionResourceInner;
 import com.cadl.armresourceprovider.models.ChildExtensionResource;
 import com.cadl.armresourceprovider.models.ChildExtensionResourceProperties;
+import com.cadl.armresourceprovider.models.ChildExtensionResourceUpdate;
 
 public final class ChildExtensionResourceImpl
     implements ChildExtensionResource, ChildExtensionResource.Definition, ChildExtensionResource.Update {
@@ -50,6 +51,8 @@ public final class ChildExtensionResourceImpl
 
     private String childExtensionResourceName;
 
+    private ChildExtensionResourceUpdate updateProperties;
+
     public ChildExtensionResourceImpl withExistingTopLevelArmResource(String resourceUri,
         String topLevelArmResourceName) {
         this.resourceUri = resourceUri;
@@ -80,22 +83,25 @@ public final class ChildExtensionResourceImpl
     }
 
     public ChildExtensionResourceImpl update() {
+        this.updateProperties = new ChildExtensionResourceUpdate();
         return this;
     }
 
     public ChildExtensionResource apply() {
         this.innerObject = serviceManager.serviceClient()
             .getChildExtensionResourceInterfaces()
-            .createOrUpdate(resourceUri, topLevelArmResourceName, childExtensionResourceName, this.innerModel(),
-                Context.NONE);
+            .updateWithResponse(resourceUri, topLevelArmResourceName, childExtensionResourceName, updateProperties,
+                Context.NONE)
+            .getValue();
         return this;
     }
 
     public ChildExtensionResource apply(Context context) {
         this.innerObject = serviceManager.serviceClient()
             .getChildExtensionResourceInterfaces()
-            .createOrUpdate(resourceUri, topLevelArmResourceName, childExtensionResourceName, this.innerModel(),
-                context);
+            .updateWithResponse(resourceUri, topLevelArmResourceName, childExtensionResourceName, updateProperties,
+                context)
+            .getValue();
         return this;
     }
 
