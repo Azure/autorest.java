@@ -27,13 +27,13 @@ import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
- * An instance of this class provides access to all the operations defined in Plaintimes.
+ * An instance of this class provides access to all the operations defined in PlainTimes.
  */
-public final class PlaintimesImpl {
+public final class PlainTimesImpl {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final PlaintimesService service;
+    private final PlainTimesService service;
 
     /**
      * The service client containing this operation class.
@@ -41,24 +41,24 @@ public final class PlaintimesImpl {
     private final OptionalClientImpl client;
 
     /**
-     * Initializes an instance of PlaintimesImpl.
+     * Initializes an instance of PlainTimesImpl.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    PlaintimesImpl(OptionalClientImpl client) {
+    PlainTimesImpl(OptionalClientImpl client) {
         this.service
-            = RestProxy.create(PlaintimesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+            = RestProxy.create(PlainTimesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for OptionalClientPlaintimes to be used by the proxy service to perform
+     * The interface defining all the services for OptionalClientPlainTimes to be used by the proxy service to perform
      * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "OptionalClientPlaint")
-    public interface PlaintimesService {
-        @Get("/type/property/optional/plaintime/all")
+    @ServiceInterface(name = "OptionalClientPlainT")
+    public interface PlainTimesService {
+        @Get("/type/property/optional/plainTime/all")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -67,7 +67,7 @@ public final class PlaintimesImpl {
         Mono<Response<BinaryData>> getAll(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Get("/type/property/optional/plaintime/all")
+        @Get("/type/property/optional/plainTime/all")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -76,7 +76,7 @@ public final class PlaintimesImpl {
         Response<BinaryData> getAllSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Get("/type/property/optional/plaintime/default")
+        @Get("/type/property/optional/plainTime/default")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -85,7 +85,7 @@ public final class PlaintimesImpl {
         Mono<Response<BinaryData>> getDefault(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Get("/type/property/optional/plaintime/default")
+        @Get("/type/property/optional/plainTime/default")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -94,7 +94,7 @@ public final class PlaintimesImpl {
         Response<BinaryData> getDefaultSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
-        @Put("/type/property/optional/plaintime/all")
+        @Put("/type/property/optional/plainTime/all")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -103,7 +103,7 @@ public final class PlaintimesImpl {
         Mono<Response<Void>> putAll(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
-        @Put("/type/property/optional/plaintime/all")
+        @Put("/type/property/optional/plainTime/all")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -112,7 +112,7 @@ public final class PlaintimesImpl {
         Response<Void> putAllSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
-        @Put("/type/property/optional/plaintime/default")
+        @Put("/type/property/optional/plainTime/default")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
@@ -121,7 +121,7 @@ public final class PlaintimesImpl {
         Mono<Response<Void>> putDefault(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
-        @Put("/type/property/optional/plaintime/default")
+        @Put("/type/property/optional/plainTime/default")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
