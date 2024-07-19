@@ -108,6 +108,13 @@ public class XmsPageable implements JsonSerializable<XmsPageable> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an XmsPageable instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An XmsPageable instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmsPageable fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, XmsPageable::new, (pageable, fieldName, reader) -> {
             if ("itemName".equals(fieldName)) {

@@ -7,8 +7,9 @@ import com.azure.autorest.TypeSpecPlugin;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.fluentnamer.FluentNamer;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 
-import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -26,8 +27,19 @@ public class TypeSpecFluentNamer extends FluentNamer {
         return this.codeModel;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <T> T getValue(Type type, String key) {
+    public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        // in case parent class constructor calls this method, e.g. new PluginLogger()
+        if (settingsMap == null) {
+            return null;
+        }
+        return (T) settingsMap.get(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
         // in case parent class constructor calls this method, e.g. new PluginLogger()
         if (settingsMap == null) {
             return null;

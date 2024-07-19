@@ -69,6 +69,13 @@ public class Response extends Metadata {
             .writeBooleanField("binary", binary);
     }
 
+    /**
+     * Deserializes a Response instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Response instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Response fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Response::new, (response, fieldName, reader) -> {
             if (!response.tryConsumeParentProperties(response, fieldName, reader)) {

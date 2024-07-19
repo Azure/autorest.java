@@ -114,6 +114,13 @@ public class ChoiceValue implements JsonSerializable<ChoiceValue> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a ChoiceValue instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ChoiceValue instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ChoiceValue fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ChoiceValue::new, (value, fieldName, reader) -> {
             if ("language".equals(fieldName)) {

@@ -148,6 +148,13 @@ public class Message implements JsonSerializable<Message> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Message instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Message instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Message fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Message message = new Message();

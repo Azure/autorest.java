@@ -115,6 +115,13 @@ public class FlagValue implements JsonSerializable<FlagValue> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a FlagValue instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A FlagValue instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static FlagValue fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, FlagValue::new, (value, fieldName, reader) -> {
             if ("language".equals(fieldName)) {

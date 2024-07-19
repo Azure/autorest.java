@@ -88,6 +88,13 @@ public class Discriminator implements JsonSerializable<Discriminator> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Discriminator instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Discriminator instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Discriminator fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Discriminator::new, (discriminator, fieldName, reader) -> {
             if ("property".equals(fieldName)) {

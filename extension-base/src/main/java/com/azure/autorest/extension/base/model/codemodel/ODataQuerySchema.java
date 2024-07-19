@@ -44,6 +44,13 @@ public class ODataQuerySchema extends Schema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes an ODataQuerySchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An ODataQuerySchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ODataQuerySchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ODataQuerySchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

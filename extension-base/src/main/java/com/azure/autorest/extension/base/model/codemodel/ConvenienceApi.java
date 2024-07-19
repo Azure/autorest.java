@@ -48,6 +48,13 @@ public class ConvenienceApi extends Metadata {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a ConvenienceApi instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ConvenienceApi instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ConvenienceApi fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ConvenienceApi::new, (convenienceApi, fieldName, reader) -> {
             if (convenienceApi.tryConsumeParentProperties(convenienceApi, fieldName, reader)) {

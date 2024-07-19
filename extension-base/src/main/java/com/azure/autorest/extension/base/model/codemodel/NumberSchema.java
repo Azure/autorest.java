@@ -146,6 +146,13 @@ public class NumberSchema extends PrimitiveSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a NumberSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A NumberSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static NumberSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, NumberSchema::new, (schema, fieldName, reader) -> {
             if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {

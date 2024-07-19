@@ -73,6 +73,13 @@ public class DurationSchema extends PrimitiveSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a DurationSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A DurationSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static DurationSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, DurationSchema::new, (schema, fieldName, reader) -> {
             if ("format".equals(fieldName)) {

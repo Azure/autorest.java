@@ -132,6 +132,13 @@ public class Scheme implements JsonSerializable<Scheme> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Scheme instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Scheme instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Scheme fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Scheme::new, (scheme, fieldName, reader) -> {
             if ("type".equals(fieldName)) {

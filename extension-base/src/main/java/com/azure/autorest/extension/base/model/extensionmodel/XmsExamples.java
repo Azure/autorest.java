@@ -49,6 +49,13 @@ public class XmsExamples implements JsonSerializable<XmsExamples> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an XmsExamples instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An XmsExamples instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmsExamples fromJson(JsonReader jsonReader) throws IOException {
         return readObject(jsonReader, XmsExamples::new, (xmsExamples, fieldName, reader) -> {
             if ("examples".equals(fieldName)) {

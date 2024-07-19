@@ -113,6 +113,13 @@ public class StringSchema extends PrimitiveSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a StringSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A StringSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static StringSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, StringSchema::new, (schema, fieldName, reader) -> {
             if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {

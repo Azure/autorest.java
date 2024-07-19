@@ -319,6 +319,13 @@ public class Languages implements JsonSerializable<Languages> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Languages instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Languages instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Languages fromJson(JsonReader jsonReader) throws IOException {
         return readObject(jsonReader, Languages::new, (languages, fieldName, reader) -> {
             if ("_default".equals(fieldName)) {

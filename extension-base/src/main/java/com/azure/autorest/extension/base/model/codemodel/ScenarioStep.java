@@ -148,6 +148,13 @@ public class ScenarioStep implements JsonSerializable<ScenarioStep> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a ScenarioStep instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ScenarioStep instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ScenarioStep fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ScenarioStep::new, (step, fieldName, reader) -> {
             if ("type".equals(fieldName)) {

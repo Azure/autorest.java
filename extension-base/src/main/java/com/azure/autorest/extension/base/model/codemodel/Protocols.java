@@ -135,6 +135,13 @@ public class Protocols implements JsonSerializable<Protocols> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Protocols instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Protocols instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Protocols fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Protocols::new, (protocols, fieldName, reader) -> {
             if ("http".equals(fieldName)) {

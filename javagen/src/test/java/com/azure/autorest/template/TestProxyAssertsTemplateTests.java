@@ -5,11 +5,13 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.MockUnitJavagen;
 import com.azure.autorest.model.projectmodel.Project;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+import java.util.Map;
 
 public class TestProxyAssertsTemplateTests {
 
@@ -24,17 +26,20 @@ public class TestProxyAssertsTemplateTests {
     }
 
     @Test
-    public void testAssertsTemplateWrite() throws JsonProcessingException {
+    public void testAssertsTemplateWrite() throws IOException {
         MockUnitJavagen javagen = new MockUnitJavagen();
 
         Project project = new MockProject();
 
         String output = new TestProxyAssetsTemplate().write(project);
 
-        JsonNode jsonNode = new ObjectMapper().readTree(output);
-        Assertions.assertEquals("Azure/azure-sdk-assets", jsonNode.get("AssetsRepo").asText());
-        Assertions.assertEquals("java", jsonNode.get("AssetsRepoPrefixPath").asText());
-        Assertions.assertEquals("java/openai/azure-ai-openai", jsonNode.get("TagPrefix").asText());
-        Assertions.assertNotNull(jsonNode.get("Tag").asText());
+        try (JsonReader jsonReader = JsonProviders.createReader(output)) {
+            Map<String, Object> jsonMap = jsonReader.readMap(JsonReader::readUntyped);
+
+            Assertions.assertEquals("Azure/azure-sdk-assets", jsonMap.get("AssetsRepo").toString());
+            Assertions.assertEquals("java", jsonMap.get("AssetsRepoPrefixPath").toString());
+            Assertions.assertEquals("java/openai/azure-ai-openai", jsonMap.get("TagPrefix").toString());
+            Assertions.assertNotNull(jsonMap.get("Tag").toString());
+        }
     }
 }

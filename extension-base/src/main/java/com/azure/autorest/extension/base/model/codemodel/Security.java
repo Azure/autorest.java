@@ -69,6 +69,13 @@ public class Security implements JsonSerializable<Security> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Security instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Security instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Security fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Security::new, (security, fieldName, reader) -> {
             if ("authenticationRequired".equals(fieldName)) {

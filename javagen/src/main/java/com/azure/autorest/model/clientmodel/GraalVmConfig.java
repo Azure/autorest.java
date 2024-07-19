@@ -4,8 +4,10 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.util.TemplateUtil;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,48 +27,70 @@ public class GraalVmConfig {
         Collections.sort(this.reflects);
     }
 
-    private static class ReflectConfig {
-        @JsonProperty("name")
+    private static class ReflectConfig implements JsonSerializable<ReflectConfig> {
         private final String name;
-        @JsonProperty("allDeclaredConstructors")
-        private final boolean allDeclaredConstructors = true;
-        @JsonProperty("allDeclaredFields")
-        private final boolean allDeclaredFields = true;
-        @JsonProperty("allDeclaredMethods")
-        private final boolean allDeclaredMethods = true;
 
         private ReflectConfig(String name) {
             this.name = name;
         }
+
+        @Override
+        public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+            return jsonWriter.writeStartObject()
+                .writeStringField("name", name)
+                .writeBooleanField("allDeclaredConstructors", true)
+                .writeBooleanField("allDeclaredFields", true)
+                .writeBooleanField("allDeclaredMethods", true)
+                .writeEndObject();
+        }
     }
 
-    private static class ResourceConfig {
+    private static class ResourceConfig implements JsonSerializable<ResourceConfig> {
 
-        private static class Pattern {
-            @JsonProperty("pattern")
+        private static class Pattern implements JsonSerializable<Pattern> {
             private final String pattern;
 
             private Pattern(String pattern) {
                 this.pattern = pattern;
             }
+
+            @Override
+            public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+                return jsonWriter.writeStartObject()
+                    .writeStringField("pattern", pattern)
+                    .writeEndObject();
+            }
         }
 
-        private static class Resource {
-            @JsonProperty("includes")
+        private static class Resource implements JsonSerializable<Resource>{
             private final List<Pattern> includes;
 
             public Resource(List<Pattern> includes) {
                 this.includes = includes;
             }
+
+            @Override
+            public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+                return jsonWriter.writeStartObject()
+                    .writeArrayField("includes", includes, JsonWriter::writeJson)
+                    .writeEndObject();
+            }
         }
 
-        @JsonProperty("resources")
         private final Resource resources;
         private final List<Object> bundles = Collections.emptyList();
 
         private ResourceConfig(String artifactId) {
             this.resources = new Resource(Collections.singletonList(
                     new Pattern("\\Q" + artifactId + ".properties" + "\\E")));
+        }
+
+        @Override
+        public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+            return jsonWriter.writeStartObject()
+                .writeJsonField("resources", resources)
+                .writeArrayField("bundles", bundles, JsonWriter::writeUntyped)
+                .writeEndObject();
         }
     }
 

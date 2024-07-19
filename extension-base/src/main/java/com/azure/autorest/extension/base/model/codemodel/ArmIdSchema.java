@@ -25,6 +25,13 @@ public class ArmIdSchema extends PrimitiveSchema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes an ArmIdSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An ArmIdSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ArmIdSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ArmIdSchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

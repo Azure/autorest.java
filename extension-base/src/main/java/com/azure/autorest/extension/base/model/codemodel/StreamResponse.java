@@ -34,6 +34,13 @@ public class StreamResponse extends Response {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes a StreamResponse instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A StreamResponse instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static StreamResponse fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, StreamResponse::new, (response, fieldName, reader) -> {
             if (!response.tryConsumeParentProperties(response, fieldName, reader)) {

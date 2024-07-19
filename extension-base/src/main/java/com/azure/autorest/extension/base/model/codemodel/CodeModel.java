@@ -111,6 +111,13 @@ public class CodeModel extends Client {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a CodeModel instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A CodeModel instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static CodeModel fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, CodeModel::new, (codeModel, fieldName, reader) -> {
             if (codeModel.tryConsumeParentProperties(codeModel, fieldName, reader)) {

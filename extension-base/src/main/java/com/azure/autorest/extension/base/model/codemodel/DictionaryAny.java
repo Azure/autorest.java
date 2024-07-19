@@ -45,6 +45,13 @@ public class DictionaryAny implements JsonSerializable<DictionaryAny> {
         return jsonWriter.writeStartObject().writeEndObject();
     }
 
+    /**
+     * Deserializes a DictionaryAny instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A DictionaryAny instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static DictionaryAny fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readEmptyObject(jsonReader, DictionaryAny::new);
     }

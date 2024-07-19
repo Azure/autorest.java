@@ -113,6 +113,13 @@ public class UriSchema extends PrimitiveSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a UriSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A UriSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static UriSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, UriSchema::new, (schema, fieldName, reader) -> {
             if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {

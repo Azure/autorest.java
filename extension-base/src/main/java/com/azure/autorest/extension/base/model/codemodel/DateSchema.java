@@ -45,6 +45,13 @@ public class DateSchema extends PrimitiveSchema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes a DateSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A DateSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static DateSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, DateSchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

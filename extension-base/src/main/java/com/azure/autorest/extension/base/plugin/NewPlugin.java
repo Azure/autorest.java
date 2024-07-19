@@ -79,6 +79,14 @@ public abstract class NewPlugin {
         }
     }
 
+    /**
+     * Gets the value of a key as a JSON object.
+     *
+     * @param key The key.
+     * @param converter The converter to convert the value to the desired type.
+     * @return The value of the key.
+     * @param <T> The type of the value.
+     */
     public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
         try (JsonReader jsonReader = JsonProviders.createReader(getValueString(key))) {
             return converter.read(jsonReader);

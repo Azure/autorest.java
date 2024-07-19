@@ -73,6 +73,13 @@ public class DateTimeSchema extends PrimitiveSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a DateTimeSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A DateTimeSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static DateTimeSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, DateTimeSchema::new, (schema, fieldName, reader) -> {
             if ("format".equals(fieldName)) {

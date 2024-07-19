@@ -25,6 +25,13 @@ public class ComplexSchema extends Schema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes a ComplexSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ComplexSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ComplexSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ComplexSchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

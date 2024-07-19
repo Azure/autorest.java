@@ -94,6 +94,13 @@ public class DictionarySchema extends ComplexSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a DictionarySchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A DictionarySchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static DictionarySchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, DictionarySchema::new, (schema, fieldName, reader) -> {
             if ("elementType".equals(fieldName)) {

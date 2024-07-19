@@ -1397,6 +1397,13 @@ public class JavaSettings {
                 .writeEndObject();
         }
 
+        /**
+         * Deserializes a PollingDetails instance from the JSON data.
+         *
+         * @param jsonReader The JSON reader to deserialize from.
+         * @return A PollingDetails instance deserialized from the JSON data.
+         * @throws IOException If an error occurs during deserialization.
+         */
         public static PollingDetails fromJson(JsonReader jsonReader) throws IOException {
             return jsonReader.readObject(reader -> {
                 PollingDetails pollingDetails = new PollingDetails();

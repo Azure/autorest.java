@@ -48,6 +48,13 @@ public class SmartLocation implements JsonSerializable<SourceLocation> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a SmartLocation instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A SmartLocation instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static SmartLocation fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             SmartLocation smartLocation = new SmartLocation();

@@ -25,6 +25,13 @@ public class TimeSchema extends PrimitiveSchema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes a TimeSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A TimeSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static TimeSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, TimeSchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

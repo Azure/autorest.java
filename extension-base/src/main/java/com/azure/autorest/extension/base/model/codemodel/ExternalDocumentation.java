@@ -115,6 +115,13 @@ public class ExternalDocumentation implements JsonSerializable<ExternalDocumenta
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an ExternalDocumentation instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An ExternalDocumentation instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ExternalDocumentation fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ExternalDocumentation::new, (documentation, fieldName, reader) -> {
             if ("description".equals(fieldName)) {

@@ -74,6 +74,13 @@ public class ParameterGroupSchema extends ComplexSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a ParameterGroupSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ParameterGroupSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ParameterGroupSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ParameterGroupSchema::new, (relations, fieldName, reader) -> {
             if ("parameters".equals(fieldName)) {

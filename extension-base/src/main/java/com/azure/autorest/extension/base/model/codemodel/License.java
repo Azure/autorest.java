@@ -115,6 +115,13 @@ public class License implements JsonSerializable<License> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a License instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A License instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static License fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, License::new, (license, fieldName, reader) -> {
             if ("name".equals(fieldName)) {

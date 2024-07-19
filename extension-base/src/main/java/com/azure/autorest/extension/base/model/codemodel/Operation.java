@@ -449,6 +449,13 @@ public class Operation extends Metadata {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an Operation instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An Operation instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Operation fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Operation::new, (operation, fieldName, reader) -> {
             if (operation.tryConsumeParentProperties(operation, fieldName, reader)) {

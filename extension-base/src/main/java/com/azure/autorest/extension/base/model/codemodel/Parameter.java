@@ -200,6 +200,13 @@ public class Parameter extends Value {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Parameter instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Parameter instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Parameter fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Parameter::new, (parameter, fieldName, reader) -> {
             if (parameter.tryConsumeParentProperties(parameter, fieldName, reader)) {

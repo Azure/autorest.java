@@ -51,6 +51,13 @@ public class XmsLongRunningOperationOptions implements JsonSerializable<XmsLongR
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an XmsLongRunningOperationOptions instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An XmsLongRunningOperationOptions instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmsLongRunningOperationOptions fromJson(JsonReader jsonReader) throws IOException {
         return readObject(jsonReader, XmsLongRunningOperationOptions::new, (lroOptions, fieldName, reader) -> {
             if ("finalStateVia".equals(fieldName)) {

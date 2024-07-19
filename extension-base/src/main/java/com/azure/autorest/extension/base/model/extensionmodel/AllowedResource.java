@@ -69,6 +69,13 @@ public class AllowedResource implements JsonSerializable<AllowedResource> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an AllowedResource instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An AllowedResource instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static AllowedResource fromJson(JsonReader jsonReader) throws IOException {
         return readObject(jsonReader, AllowedResource::new, (allowedResource, fieldName, reader) -> {
             if ("scopes".equals(fieldName)) {

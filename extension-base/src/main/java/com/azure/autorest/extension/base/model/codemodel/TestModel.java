@@ -48,6 +48,13 @@ public class TestModel implements JsonSerializable<TestModel> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a TestModel instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A TestModel instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static TestModel fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, TestModel::new, (model, fieldName, reader) -> {
             if ("scenarioTests".equals(fieldName)) {

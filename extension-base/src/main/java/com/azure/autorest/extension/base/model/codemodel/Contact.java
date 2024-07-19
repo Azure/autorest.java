@@ -134,6 +134,13 @@ public class Contact implements JsonSerializable<Contact> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Constant instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Constant instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Contact fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Contact::new, (contact, fieldName, reader) -> {
             if ("name".equals(fieldName)) {

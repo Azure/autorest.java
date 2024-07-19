@@ -248,6 +248,13 @@ public class Protocol implements JsonSerializable<Protocol> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Protocol instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Protocol instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Protocol fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Protocol::new, (protocol, fieldName, reader) -> {
             if ("in".equals(fieldName)) {

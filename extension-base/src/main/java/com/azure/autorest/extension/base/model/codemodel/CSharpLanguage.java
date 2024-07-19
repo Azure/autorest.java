@@ -45,6 +45,13 @@ public class CSharpLanguage implements JsonSerializable<CSharpLanguage> {
         return jsonWriter.writeStartObject().writeEndObject();
     }
 
+    /**
+     * Deserializes a CSharpLanguage instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A CSharpLanguage instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static CSharpLanguage fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readEmptyObject(jsonReader, CSharpLanguage::new);
     }

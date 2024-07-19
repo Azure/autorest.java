@@ -75,6 +75,13 @@ public class FlagSchema extends ValueSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a FlagSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A FlagSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static FlagSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, FlagSchema::new, (schema, fieldName, reader) -> {
             if ("choices".equals(fieldName)) {

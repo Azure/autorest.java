@@ -114,6 +114,13 @@ public class SerializationFormats implements JsonSerializable<SerializationForma
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a SerializationFormats instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A SerializationFormats instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static SerializationFormats fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, SerializationFormats::new, (formats, fieldName, reader) -> {
             if ("json".equals(fieldName)) {

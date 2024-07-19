@@ -67,6 +67,13 @@ public class SourceLocation implements JsonSerializable<SourceLocation> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a SourceLocation instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A SourceLocation instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static SourceLocation fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             SourceLocation sourceLocation = new SourceLocation();

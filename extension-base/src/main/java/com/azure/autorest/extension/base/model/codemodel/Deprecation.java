@@ -95,6 +95,13 @@ public class Deprecation implements JsonSerializable<Deprecation> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Deprecation instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Deprecation instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Deprecation fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Deprecation::new, (deprecation, fieldName, reader) -> {
             if ("message".equals(fieldName)) {

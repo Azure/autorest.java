@@ -74,7 +74,13 @@ public class XorSchema extends ComplexSchema {
             .writeArrayField("oneOf", oneOf, JsonWriter::writeJson)
             .writeEndObject();
     }
-
+    /**
+     * Deserializes a XorSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A XorSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XorSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, XorSchema::new, (schema, fieldName, reader) -> {
             if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {

@@ -48,6 +48,13 @@ public class SealedChoiceSchema extends ChoiceSchema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes a SealedChoiceSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A SealedChoiceSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static SealedChoiceSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, SealedChoiceSchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

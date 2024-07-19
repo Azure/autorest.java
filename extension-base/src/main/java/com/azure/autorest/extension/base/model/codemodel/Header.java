@@ -88,6 +88,13 @@ public class Header implements JsonSerializable<Header> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Header instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Header instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Header fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Header::new, (header, fieldName, reader) -> {
             if ("header".equals(fieldName)) {

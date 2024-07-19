@@ -13,6 +13,18 @@ import java.util.function.Supplier;
  * Utility classes that help simplify repetitive code with {@code azure-json}.
  */
 public final class JsonUtils {
+    /**
+     * Reads a JSON object from the passed {@code jsonReader} and creates an object of type {@code T} using the passed
+     * {@code objectCreator}. The {@code callback} is then called for each field in the JSON object to read the field
+     * value and set it on the object.
+     *
+     * @param jsonReader The JSON reader to read the object from.
+     * @param objectCreator The supplier that creates a new instance of the object.
+     * @param callback The callback that reads the field value and sets it on the object.
+     * @return The object created from the JSON object.
+     * @param <T> The type of object to create.
+     * @throws IOException If an error occurs while reading the JSON object.
+     */
     public static <T> T readObject(JsonReader jsonReader, Supplier<T> objectCreator, ReadObjectCallback<T> callback)
         throws IOException {
         return jsonReader.readObject(reader -> {
@@ -22,6 +34,16 @@ public final class JsonUtils {
         });
     }
 
+    /**
+     * Reads a JSON object from the passed {@code jsonReader} and creates an object of type {@code T} using the passed
+     * {@code objectCreator}. This method will skip the children of each field in the JSON object.
+     *
+     * @param jsonReader The JSON reader to read the object from.
+     * @param objectCreator The supplier that creates a new instance of the object.
+     * @return The object created from the JSON object.
+     * @param <T> The type of object to create.
+     * @throws IOException If an error occurs while reading the JSON object.
+     */
     public static <T> T readEmptyObject(JsonReader jsonReader, Supplier<T> objectCreator) throws IOException {
         return jsonReader.readObject(reader -> {
             T object = objectCreator.get();
@@ -30,7 +52,20 @@ public final class JsonUtils {
         });
     }
 
+    /**
+     * Callback for reading a JSON object.
+     *
+     * @param <T> The type of the object being read.
+     */
     public interface ReadObjectCallback<T> {
+        /**
+         * Reads a field from the JSON object and sets it on the object.
+         *
+         * @param object The object to set the field on.
+         * @param fieldName The name of the field being read.
+         * @param jsonReader The JSON reader to read the field value from.
+         * @throws IOException If an error occurs while reading the field value.
+         */
         void read(T object, String fieldName, JsonReader jsonReader) throws IOException;
     }
 

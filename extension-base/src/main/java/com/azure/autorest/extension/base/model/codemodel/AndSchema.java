@@ -97,6 +97,13 @@ public class AndSchema extends ComplexSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an AndSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An AndSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static AndSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, AndSchema::new, (schema, fieldName, reader) -> {
             if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {

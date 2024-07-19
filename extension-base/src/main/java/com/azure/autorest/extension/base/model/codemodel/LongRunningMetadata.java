@@ -107,6 +107,13 @@ public class LongRunningMetadata implements JsonSerializable<LongRunningMetadata
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a LongRunningMetadata instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A LongRunningMetadata instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static LongRunningMetadata fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, LongRunningMetadata::new, (lroMetadata, fieldName, reader) -> {
             if ("pollResultType".equals(fieldName)) {

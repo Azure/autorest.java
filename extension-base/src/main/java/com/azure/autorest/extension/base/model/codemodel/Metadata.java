@@ -90,6 +90,13 @@ public class Metadata implements JsonSerializable<Metadata> {
             .writeJsonField("extensions", extensions);
     }
 
+    /**
+     * Deserializes a Metadata instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Metadata instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Metadata fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Metadata::new, (metadata, fieldName, reader) -> {
             if (!metadata.tryConsumeParentProperties(metadata, fieldName, reader)) {

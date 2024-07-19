@@ -135,6 +135,13 @@ public class ArraySchema extends ValueSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an ArraySchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An ArraySchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ArraySchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ArraySchema::new, (schema, fieldName, reader) -> {
             if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {

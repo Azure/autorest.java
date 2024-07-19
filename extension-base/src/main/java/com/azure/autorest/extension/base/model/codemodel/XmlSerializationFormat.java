@@ -175,6 +175,13 @@ public class XmlSerializationFormat extends SerializationFormat {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a XmlSerializationFormat instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A XmlSerializationFormat instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmlSerializationFormat fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, XmlSerializationFormat::new, (format, fieldName, reader) -> {
             if ("extensions".equals(fieldName)) {

@@ -88,6 +88,13 @@ public class Server implements JsonSerializable<Server> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Server instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Server instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Server fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Server::new, (server, fieldName, reader) -> {
             if ("url".equals(fieldName)) {

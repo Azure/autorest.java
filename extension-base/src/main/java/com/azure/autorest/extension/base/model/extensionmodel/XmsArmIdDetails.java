@@ -49,6 +49,13 @@ public class XmsArmIdDetails implements JsonSerializable<XmsArmIdDetails> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an XmsArmIdDetails instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An XmsArmIdDetails instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmsArmIdDetails fromJson(JsonReader jsonReader) throws IOException {
         return readObject(jsonReader, XmsArmIdDetails::new, (xmsArmIdDetails, fieldName, reader) -> {
             if ("allowedResources".equals(fieldName)) {

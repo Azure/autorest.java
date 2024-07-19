@@ -89,6 +89,13 @@ public class XmsEnum implements JsonSerializable<XmsEnum> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an XmsEnum instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An XmsEnum instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmsEnum fromJson(JsonReader jsonReader) throws IOException {
         return readObject(jsonReader, XmsEnum::new, (xmsEnum, fieldName, reader) -> {
             if ("name".equals(fieldName)) {
@@ -180,6 +187,13 @@ public class XmsEnum implements JsonSerializable<XmsEnum> {
                 .writeEndObject();
         }
 
+        /**
+         * Deserializes a Value instance from the JSON data.
+         *
+         * @param jsonReader The JSON reader to deserialize from.
+         * @return A Value instance deserialized from the JSON data.
+         * @throws IOException If an error occurs during deserialization.
+         */
         public static Value fromJson(JsonReader jsonReader) throws IOException {
             return readObject(jsonReader, Value::new, (value, fieldName, reader) -> {
                 if ("value".equals(fieldName)) {

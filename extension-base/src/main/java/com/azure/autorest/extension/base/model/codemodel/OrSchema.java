@@ -74,6 +74,13 @@ public class OrSchema extends ComplexSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an OrSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An OrSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static OrSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, OrSchema::new, (schema, fieldName, reader) -> {
             if ("anyOf".equals(fieldName)) {

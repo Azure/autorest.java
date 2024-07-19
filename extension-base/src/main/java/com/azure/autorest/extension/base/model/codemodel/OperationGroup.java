@@ -88,6 +88,13 @@ public class OperationGroup extends Metadata {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an OperationGroup instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An OperationGroup instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static OperationGroup fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, OperationGroup::new, (group, fieldName, reader) -> {
             if (group.tryConsumeParentProperties(group, fieldName, reader)) {

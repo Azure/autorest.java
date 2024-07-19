@@ -46,6 +46,13 @@ public class SchemaResponse extends Response {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a SchemaResponse instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A SchemaResponse instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static SchemaResponse fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, SchemaResponse::new, (response, fieldName, reader) -> {
             if (response.tryConsumeParentProperties(response, fieldName, reader)) {

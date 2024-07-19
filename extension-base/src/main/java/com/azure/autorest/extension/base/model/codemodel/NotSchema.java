@@ -46,6 +46,13 @@ public class NotSchema extends Schema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a NotSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A NotSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static NotSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, NotSchema::new, (schema, fieldName, reader) -> {
             if ("not".equals(fieldName)) {

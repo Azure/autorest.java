@@ -115,6 +115,13 @@ public class CredentialSchema extends PrimitiveSchema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a CredentialSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A CredentialSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static CredentialSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, CredentialSchema::new, (schema, fieldName, reader) -> {
             if ("maxLength".equals(fieldName)) {

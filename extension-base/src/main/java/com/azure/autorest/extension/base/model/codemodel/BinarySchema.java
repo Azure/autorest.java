@@ -25,6 +25,13 @@ public class BinarySchema extends Schema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes a BinarySchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A BinarySchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static BinarySchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, BinarySchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

@@ -589,6 +589,13 @@ public class Schemas implements JsonSerializable<Schemas> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Schemas instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Schemas instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Schemas fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Schemas::new, (schemas, fieldName, reader) -> {
             if ("arrays".equals(fieldName)) {

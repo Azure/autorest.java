@@ -348,6 +348,13 @@ public class XmsExtensions implements JsonSerializable<XmsExtensions> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an XmsExtensions instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An XmsExtensions instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmsExtensions fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, XmsExtensions::new, (extensions, fieldName, reader) -> {
             if ("xmsEnum".equals(fieldName)) {

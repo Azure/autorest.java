@@ -150,6 +150,13 @@ public class TestScenario implements JsonSerializable<TestScenario> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a TestScenario instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A TestScenario instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static TestScenario fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, TestScenario::new, (scenario, fieldName, reader) -> {
             if ("description".equals(fieldName)) {

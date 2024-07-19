@@ -199,6 +199,13 @@ public class Info implements JsonSerializable<Info> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an Info instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An Info instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Info fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Info::new, (info, fieldName, reader) -> {
             if ("title".equals(fieldName)) {

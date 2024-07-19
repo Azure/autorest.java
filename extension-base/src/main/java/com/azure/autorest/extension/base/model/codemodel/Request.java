@@ -68,6 +68,13 @@ public class Request extends Metadata {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Request instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Request instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Request fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Request::new, (request, fieldName, reader) -> {
             if (request.tryConsumeParentProperties(request, fieldName, reader)) {

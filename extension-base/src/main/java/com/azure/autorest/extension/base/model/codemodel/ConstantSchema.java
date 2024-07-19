@@ -67,6 +67,13 @@ public class ConstantSchema extends Schema {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a ConstantSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ConstantSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ConstantSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ConstantSchema::new, (schema, fieldName, reader) -> {
             if ("valueType".equals(fieldName)) {

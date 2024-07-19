@@ -68,6 +68,13 @@ public class Relations implements JsonSerializable<Relations> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Relations instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Relations instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Relations fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Relations::new, (relations, fieldName, reader) -> {
             if ("all".equals(fieldName)) {

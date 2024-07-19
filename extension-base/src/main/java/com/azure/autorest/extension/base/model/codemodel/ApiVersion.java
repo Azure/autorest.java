@@ -103,6 +103,13 @@ public class ApiVersion implements JsonSerializable<ApiVersion> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an ApiVersion instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An ApiVersion instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ApiVersion fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ApiVersion::new, (version, fieldName, reader) -> {
             if ("version".equals(fieldName)) {

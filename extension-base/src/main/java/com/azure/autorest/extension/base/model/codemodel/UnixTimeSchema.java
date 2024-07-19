@@ -45,6 +45,13 @@ public class UnixTimeSchema extends PrimitiveSchema {
         return super.toJson(jsonWriter);
     }
 
+    /**
+     * Deserializes a UnixTimeSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A UnixTimeSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static UnixTimeSchema fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, UnixTimeSchema::new, (schema, fieldName, reader) -> {
             if (!schema.tryConsumeParentProperties(schema, fieldName, reader)) {

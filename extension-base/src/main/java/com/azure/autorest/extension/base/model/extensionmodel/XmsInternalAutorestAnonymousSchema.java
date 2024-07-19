@@ -48,6 +48,13 @@ public class XmsInternalAutorestAnonymousSchema implements JsonSerializable<XmsI
             .writeEndObject();
     }
 
+    /**
+     * Deserializes an XmsInternalAutorestAnonymousSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An XmsInternalAutorestAnonymousSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static XmsInternalAutorestAnonymousSchema fromJson(JsonReader jsonReader) throws IOException {
         return readObject(jsonReader, XmsInternalAutorestAnonymousSchema::new, (anonymousSchema, fieldName, reader) -> {
             if ("anonymous".equals(fieldName)) {

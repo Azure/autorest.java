@@ -114,6 +114,13 @@ public class ConstantValue implements JsonSerializable<ConstantValue> {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a ConstantValue instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ConstantValue instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static ConstantValue fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, ConstantValue::new, (value, fieldName, reader) -> {
             if ("language".equals(fieldName)) {

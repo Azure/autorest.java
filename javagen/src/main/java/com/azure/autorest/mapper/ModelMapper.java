@@ -23,9 +23,6 @@ import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -185,7 +182,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel>, NeedsPla
                             .getSerialization()
                             .getXml()
                             .isAttribute())) {
-                        modelImports.add(JsonProperty.class.getName());
+                        modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
                     }
 
                     if (compositeTypeProperties.stream()
@@ -194,11 +191,11 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel>, NeedsPla
                             .getSerialization()
                             .getXml()
                             .isWrapped())) {
-                        modelImports.add(JsonCreator.class.getName());
+                        modelImports.add("com.fasterxml.jackson.annotation.JsonCreator");
                     }
 
                 } else {
-                    modelImports.add(JsonProperty.class.getName());
+                    modelImports.add("com.fasterxml.jackson.annotation.JsonProperty");
                 }
             }
             if (hasAdditionalProperties) {
@@ -282,7 +279,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel>, NeedsPla
                     properties.add(discriminatorProperty);
 
                     if (!settings.isStreamStyleSerialization()) {
-                        modelImports.add(JsonTypeId.class.getName());
+                        modelImports.add("com.fasterxml.jackson.annotation.JsonTypeId");
                     }
                 }
 
@@ -492,7 +489,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel>, NeedsPla
      * @param hasChildren Flag indicating whether the Swagger model has children models.
      * @param compositeType The Swagger schema of the model.
      * @param annotationArgumentsMapper Function that maps the {@link ClientModelProperty#getAnnotationArguments()} of
-     * the {@code compositeType} into the attributes of {@link JsonProperty} for the discriminator property.
+     * the {@code compositeType} into the attributes of {@code JsonProperty} for the discriminator property.
      * @param serializedName The serialized name of the discriminator property.
      * @return A {@link ClientModelProperty} that is the discriminator field property, or null if either the
      * discriminator shouldn't be made into a property or if the model isn't a terminal, or leaf, type.

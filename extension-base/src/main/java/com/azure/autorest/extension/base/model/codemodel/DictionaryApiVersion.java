@@ -46,6 +46,13 @@ public class DictionaryApiVersion implements JsonSerializable<DictionaryApiVersi
         return jsonWriter.writeStartObject().writeEndObject();
     }
 
+    /**
+     * Deserializes a DictionaryApiVersion instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A DictionaryApiVersion instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static DictionaryApiVersion fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readEmptyObject(jsonReader, DictionaryApiVersion::new);
     }

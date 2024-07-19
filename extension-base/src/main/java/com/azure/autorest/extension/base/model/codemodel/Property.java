@@ -179,6 +179,13 @@ public class Property extends Value {
             .writeEndObject();
     }
 
+    /**
+     * Deserializes a Property instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Property instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
     public static Property fromJson(JsonReader jsonReader) throws IOException {
         return JsonUtils.readObject(jsonReader, Property::new, (property, fieldName, reader) -> {
             if (property.tryConsumeParentProperties(property, fieldName, reader)) {
