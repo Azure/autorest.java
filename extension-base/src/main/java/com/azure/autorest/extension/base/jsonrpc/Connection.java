@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,7 @@ public class Connection {
     private final Map<Integer, CompletableFuture<String>> tasks = new ConcurrentHashMap<>();
     private final ExecutorService executorService = Executors.newCachedThreadPool();
     private final CompletableFuture<Void> loop;
-    private final Map<String, Function<Object, String>> dispatch = new ConcurrentHashMap<>();
+    private final Map<String, Function<String, String>> dispatch = new ConcurrentHashMap<>();
 
     /**
      * Create a new Connection.
@@ -106,22 +105,18 @@ public class Connection {
         });
     }
 
-    private static List<Object> readArguments(Object input) {
-        List<Object> ret = new ArrayList<>();
-        if (input instanceof Iterable<?>) {
-            for (Object obj : (Iterable<?>) input) {
-                ret.add(obj);
+    private static List<String> readArguments(String input) {
+        try (JsonReader jsonReader = JsonProviders.createReader(input)) {
+            List<String> ret = jsonReader.readArray(JsonReader::getString);
+            if (ret.size() == 2) {
+                // Return passed array if size is larger than 0, otherwise return a new ArrayList
+                return ret;
             }
-        } else if (input != null) {
-            ret.add(input);
-        }
 
-        if (ret.size() == 2) {
-            // Return passed array if size is larger than 0, otherwise return a new ArrayList
-            return ret;
+            throw new RuntimeException("Invalid number of arguments");
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
         }
-
-        throw new RuntimeException("Invalid number of arguments");
     }
 
     /**
@@ -145,8 +140,8 @@ public class Connection {
      */
     public void dispatch(String path, BiFunction<String, String, Boolean> method) {
         dispatch.put(path, input -> {
-            List<Object> args = readArguments(input);
-            return String.valueOf(method.apply(String.valueOf(args.get(0)), String.valueOf(args.get(1))));
+            List<String> args = readArguments(input);
+            return String.valueOf(method.apply(args.get(0), args.get(1)));
         });
     }
 
@@ -235,7 +230,7 @@ public class Connection {
                     if (reader.isStartArrayOrObject()) {
                         return reader.readChildren();
                     } else {
-                        return reader.getRawText();
+                        return reader.getString();
                     }
                 });
 
@@ -246,8 +241,8 @@ public class Connection {
                     // this is a method call.
                     // pass it to the service that is listening...
                     if (dispatch.containsKey(method)) {
-                        Function<Object, String> fn = dispatch.get(method);
-                        Object parameters = jobject.get("params");
+                        Function<String, String> fn = dispatch.get(method);
+                        String parameters = jobject.get("params");
                         String result = fn.apply(parameters);
                         if (id != -1) {
                             // if this is a request, send the response.
@@ -257,8 +252,8 @@ public class Connection {
                     return;
                 }
 
-                String result = jobject.get("result");
-                if (result != null) {
+                if (jobject.containsKey("result")) {
+                    String result = jobject.get("result");
                     int id = processIdField(jobject.get("id"));
                     if (id != -1) {
                         CompletableFuture<String> f = tasks.remove(id);

@@ -573,7 +573,29 @@ public class JavaSettings {
         /**
          * Fluent Premium generation.
          */
-        PREMIUM
+        PREMIUM;
+
+        /**
+         * Gets a {@link Fluent} value for the give {@code value} string.
+         *
+         * @param value The value to parse.
+         * @return The {@link Fluent} value.
+         */
+        public static Fluent fromString(String value) {
+            if (value == null || value.isEmpty()) {
+                return null;
+            }
+
+            if ("none".equalsIgnoreCase(value)) {
+                return NONE;
+            } else if ("lite".equalsIgnoreCase(value)) {
+                return LITE;
+            } else if ("premium".equalsIgnoreCase(value)) {
+                return PREMIUM;
+            } else {
+                return null;
+            }
+        }
     }
 
     private final Fluent fluent;

@@ -38,8 +38,6 @@ public class Postprocessor {
 
     @SuppressWarnings("unchecked")
     public void postProcess(Map<String, String> fileContents) {
-        this.clear();
-
         String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
         String className = JavaSettings.getInstance().getCustomizationClass();
 
@@ -157,7 +155,8 @@ public class Postprocessor {
             String code = Files.readString(customizationFile);
             return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), code);
         } catch (IOException e) {
-            logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
+            logger.error("Cannot read customization from base directory {} and file {}", baseDirectory,
+                customizationFile);
             return null;
         }
     }
@@ -247,9 +246,5 @@ public class Postprocessor {
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException("Failed to run compile on generated code.", ex);
         }
-    }
-
-    private void clear() {
-        JavaSettings.clear();
     }
 }

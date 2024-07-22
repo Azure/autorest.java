@@ -88,7 +88,12 @@ public abstract class NewPlugin {
      * @param <T> The type of the value.
      */
     public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
-        try (JsonReader jsonReader = JsonProviders.createReader(getValueString(key))) {
+        String valueString = getValueString(key);
+        if (valueString == null) {
+            return null;
+        }
+
+        try (JsonReader jsonReader = JsonProviders.createReader(valueString)) {
             return converter.read(jsonReader);
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
@@ -98,32 +103,6 @@ public abstract class NewPlugin {
     private String getValueString(String key) {
         return connection.request("GetValue", sessionId, key);
     }
-
-    //    /**
-    //     * Gets the Map value of a key.
-    //     *
-    //     * @param <K> The type of the key.
-    //     * @param <V> The type of the value.
-    //     * @param keyType The type of the key.
-    //     * @param valueType The type of the value.
-    //     * @param key The key.
-    //     * @return The value of the key.
-    //     */
-    //    public <K, V> Map<K, V> getMapValue(Class<K> keyType, Class<V> valueType, String key) {
-    //        return getValue(jsonMapper.getTypeFactory().constructMapType(Map.class, keyType, valueType), key);
-    //    }
-    //
-    //    /**
-    //     * Gets the List value of a key.
-    //     *
-    //     * @param <T> The type of the value.
-    //     * @param valueType The type of the value.
-    //     * @param key The key.
-    //     * @return The value of the key.
-    //     */
-    //    public <T> List<T> getListValue(Class<T> valueType, String key) {
-    //        return getValue(jsonMapper.getTypeFactory().constructCollectionType(List.class, valueType), key);
-    //    }
 
     /**
      * Gets the value of a key.
