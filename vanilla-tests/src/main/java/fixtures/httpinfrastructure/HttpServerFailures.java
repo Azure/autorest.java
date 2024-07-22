@@ -85,12 +85,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head501WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.head501(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> head501WithResponseAsync(context));
     }
 
     /**
@@ -172,12 +167,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get501WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get501(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> get501WithResponseAsync(context));
     }
 
     /**
@@ -259,13 +249,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post505WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post505(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> post505WithResponseAsync(context));
     }
 
     /**
@@ -348,13 +332,7 @@ public final class HttpServerFailures {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete505WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final Boolean booleanValue = true;
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.delete505(this.client.getHost(), booleanValue, accept, context));
+        return FluxUtil.withContext(context -> delete505WithResponseAsync(context));
     }
 
     /**

@@ -51,7 +51,6 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
                 : parameter.getLanguage().getJava().getName();
         name = CodeNamer.getEscapedReservedClientMethodParameterName(name);
 
-        JavaSettings settings = JavaSettings.getInstance();
         ClientMethodParameter.Builder builder = new ClientMethodParameter.Builder()
                 .name(name)
                 .required(parameter.isRequired())

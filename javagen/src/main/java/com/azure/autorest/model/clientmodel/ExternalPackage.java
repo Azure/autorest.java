@@ -7,24 +7,21 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 public class ExternalPackage {
 
-    public static final String GENERIC_CORE_PACKAGE_NAME = "io.clientcore.core";
-    public static final String GENERIC_JSON_PACKAGE_NAME = "io.clientcore.core.json";
+    public static final String CLIENTCORE_PACKAGE_NAME = "io.clientcore.core";
+    public static final String CLIENTCORE_JSON_PACKAGE_NAME = "io.clientcore.core.json";
 
     public static final String AZURE_CORE_PACKAGE_NAME = "com.azure.core";
     public static final String AZURE_JSON_PACKAGE_NAME = "com.azure.json";
 
+    public static final ExternalPackage CORE = new Builder().packageName(CLIENTCORE_PACKAGE_NAME)
+        .groupId("io.clientcore")
+        .artifactId("core")
+        .build();
 
-    public static final ExternalPackage CORE = new Builder()
-            .packageName(GENERIC_CORE_PACKAGE_NAME)
-            .groupId("io.clientcore")
-            .artifactId("core")
-            .build();
-
-    public static final ExternalPackage JSON = new Builder()
-            .packageName(GENERIC_JSON_PACKAGE_NAME)
-            .groupId("io.clientcore")
-            .artifactId("core-json")
-            .build();
+    public static final ExternalPackage JSON = new Builder().packageName(CLIENTCORE_JSON_PACKAGE_NAME)
+        .groupId("io.clientcore")
+        .artifactId("core-json")
+        .build();
 
     private final String packageName;
     private final String groupId;
@@ -74,13 +71,13 @@ public class ExternalPackage {
         public ExternalPackage build() {
             if (JavaSettings.getInstance().isBranded()) {
                 switch (packageName) {
-                    case GENERIC_CORE_PACKAGE_NAME:
+                    case CLIENTCORE_PACKAGE_NAME:
                         packageName = AZURE_CORE_PACKAGE_NAME;
                         groupId = "com.azure";
                         artifactId = "azure-core";
                         break;
 
-                    case GENERIC_JSON_PACKAGE_NAME:
+                    case CLIENTCORE_JSON_PACKAGE_NAME:
                         packageName = AZURE_JSON_PACKAGE_NAME;
                         groupId = "com.azure";
                         artifactId = "azure-json";

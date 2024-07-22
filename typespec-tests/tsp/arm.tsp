@@ -145,7 +145,12 @@ model CustomTemplateResourceProperties {
   propertyRemovedInStable: string;
 
   dog: Dog;
+  namedEmptyModel: EmptyModel;
+  anonymousEmptyModel: {};
 }
+
+@doc("Empty model.")
+model EmptyModel {}
 
 model CustomTemplateResourcePatch {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
@@ -215,8 +220,8 @@ model ChildExtensionResourceProperties {
 @armResourceOperations
 interface ChildResourcesInterface
   extends ResourceInstanceOperations<ChildResource, ChildResourceProperties> {
+  listByTopLevelArmResource is ArmResourceListByParent<ChildResource>;
   actionWithoutBody is ArmResourceActionAsync<ChildResource, void, void>;
-  listByTopLevelTrackedResource is ArmResourceListByParent<ChildResource>;
 }
 
 @armResourceOperations

@@ -31,7 +31,6 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
     public TypeSpecFluentPlugin(EmitterOptions emitterOptions, boolean sdkIntegration) {
         super(new TypeSpecPlugin.MockConnection(), "dummy", "dummy");
-
         this.emitterOptions = emitterOptions;
         SETTINGS_MAP.put("namespace", emitterOptions.getNamespace());
         if (!CoreUtils.isNullOrEmpty(emitterOptions.getOutputDir())) {

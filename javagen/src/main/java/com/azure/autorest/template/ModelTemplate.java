@@ -1248,8 +1248,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            Annotation.GENERATED.addImportsTo(imports);
-            Annotation.METADATA.addImportsTo(imports);
+            if (JavaSettings.getInstance().isBranded()) {
+                Annotation.GENERATED.addImportsTo(imports);
+            } else {
+                Annotation.METADATA.addImportsTo(imports);
+            }
         }
     }
 

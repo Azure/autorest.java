@@ -90,16 +90,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiNullWithResponseAsync(List<String> arrayQuery) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        List<String> arrayQueryConverted = (arrayQuery == null)
-            ? new ArrayList<>()
-            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(
-            context -> service.arrayStringMultiNull(this.client.getHost(), arrayQueryConverted, accept, context));
+        return FluxUtil.withContext(context -> arrayStringMultiNullWithResponseAsync(arrayQuery, context));
     }
 
     /**
@@ -220,16 +211,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiEmptyWithResponseAsync(List<String> arrayQuery) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        List<String> arrayQueryConverted = (arrayQuery == null)
-            ? new ArrayList<>()
-            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(
-            context -> service.arrayStringMultiEmpty(this.client.getHost(), arrayQueryConverted, accept, context));
+        return FluxUtil.withContext(context -> arrayStringMultiEmptyWithResponseAsync(arrayQuery, context));
     }
 
     /**
@@ -352,16 +334,7 @@ public final class Queries {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringMultiValidWithResponseAsync(List<String> arrayQuery) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        List<String> arrayQueryConverted = (arrayQuery == null)
-            ? new ArrayList<>()
-            : arrayQuery.stream().map(item -> Objects.toString(item, "")).collect(Collectors.toList());
-        return FluxUtil.withContext(
-            context -> service.arrayStringMultiValid(this.client.getHost(), arrayQueryConverted, accept, context));
+        return FluxUtil.withContext(context -> arrayStringMultiValidWithResponseAsync(arrayQuery, context));
     }
 
     /**

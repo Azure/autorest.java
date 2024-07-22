@@ -62,6 +62,7 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FluentGen extends Javagen {
@@ -321,6 +322,9 @@ public class FluentGen extends Javagen {
             // module-info
             javaPackage.addModuleInfo(fluentClient.getModuleInfo());
 
+            // package-info
+            ensureModelsPackageInfos(javaPackage, fluentClient);
+
             // POM
             if (javaSettings.isRegeneratePom()) {
                 Pom pom = new FluentPomMapper().map(project);
@@ -357,6 +361,29 @@ public class FluentGen extends Javagen {
         }
 
         return fluentClient;
+    }
+
+    // Fix the case where there are no models but only resource collections.
+    private void ensureModelsPackageInfos(FluentJavaPackage javaPackage, FluentClient fluentClient) {
+        Set<String> packageInfos = fluentClient
+            .getInnerClient().getPackageInfos()
+            .stream()
+            .map(PackageInfo::getPackage)
+            .collect(Collectors.toSet());
+
+        for (FluentResourceCollection resourceCollection : fluentClient.getResourceCollections()) {
+            String packageName = resourceCollection.getInterfaceType().getPackage();
+            if (!packageInfos.contains(packageName)) {
+                javaPackage.addPackageInfo(
+                    packageName,
+                    "package-info",
+                    new PackageInfo(
+                        packageName,
+                        String.format("Package containing the data models for %s.\n%s", fluentClient.getInnerClient().getClientName(),
+                            fluentClient.getInnerClient().getClientDescription())));
+                packageInfos.add(packageName);
+            }
+        }
     }
 
     void clear() {

@@ -298,14 +298,16 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            Annotation.GENERATED.addImportsTo(imports);
-            Annotation.METADATA.addImportsTo(imports);
+            if (JavaSettings.getInstance().isBranded()) {
+                Annotation.GENERATED.addImportsTo(imports);
+            } else {
+                Annotation.METADATA.addImportsTo(imports);
+            }
         }
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-
             if (JavaSettings.getInstance().isBranded()) {
                 classBlock.annotation(Annotation.GENERATED.getName());
             } else {

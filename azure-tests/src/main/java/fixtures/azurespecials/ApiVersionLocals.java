@@ -88,14 +88,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalValidWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String apiVersion = "2.0";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getMethodLocalValid(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil.withContext(context -> getMethodLocalValidWithResponseAsync(context));
     }
 
     /**
@@ -183,13 +176,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getMethodLocalNull(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil.withContext(context -> getMethodLocalNullWithResponseAsync(apiVersion, context));
     }
 
     /**
@@ -310,14 +297,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getPathLocalValidWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String apiVersion = "2.0";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getPathLocalValid(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil.withContext(context -> getPathLocalValidWithResponseAsync(context));
     }
 
     /**
@@ -402,14 +382,7 @@ public final class ApiVersionLocals {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String apiVersion = "2.0";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getSwaggerLocalValid(this.client.getHost(), apiVersion, accept, context));
+        return FluxUtil.withContext(context -> getSwaggerLocalValidWithResponseAsync(context));
     }
 
     /**

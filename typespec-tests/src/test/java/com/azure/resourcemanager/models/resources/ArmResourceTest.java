@@ -91,17 +91,17 @@ public class ArmResourceTest {
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
 
         // TopLevelTrackedResources.update
-//        topLevelTrackedResource.update()
-//                .withProperties(
-//                        new TopLevelTrackedResourceProperties().withDescription(RESOURCE_DESCRIPTION_VALID2))
-//                .apply();
-//        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, topLevelTrackedResource.id());
-//        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, topLevelTrackedResource.name());
-//        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, topLevelTrackedResource.type());
-//        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_REGION, topLevelTrackedResource.region());
-//        Assertions.assertNotNull(topLevelTrackedResource.properties());
-//        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID2, topLevelTrackedResource.properties().description());
-//        Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
+        topLevelTrackedResource.update()
+                .withProperties(
+                        new TopLevelTrackedResourceProperties().withDescription(RESOURCE_DESCRIPTION_VALID2))
+                .apply();
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_ID, topLevelTrackedResource.id());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_NAME, topLevelTrackedResource.name());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_TYPE, topLevelTrackedResource.type());
+        Assertions.assertEquals(TOP_LEVEL_TRACKED_RESOURCE_REGION, topLevelTrackedResource.region());
+        Assertions.assertNotNull(topLevelTrackedResource.properties());
+        Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID2, topLevelTrackedResource.properties().description());
+        Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
 
         // TopLevelTrackedResources.delete
         manager.topLevelTrackedResources().delete(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME, Context.NONE);

@@ -22,8 +22,8 @@ import com.type.property.optional.DurationOperationClient;
 import com.type.property.optional.FloatLiteralClient;
 import com.type.property.optional.IntLiteralClient;
 import com.type.property.optional.OptionalClientBuilder;
-import com.type.property.optional.PlaindateClient;
-import com.type.property.optional.PlaintimeClient;
+import com.type.property.optional.PlainDateClient;
+import com.type.property.optional.PlainTimeClient;
 import com.type.property.optional.RequiredAndOptionalClient;
 import com.type.property.optional.StringLiteralClient;
 import com.type.property.optional.StringOperationClient;
@@ -40,9 +40,9 @@ class OptionalClientTestBase extends TestProxyTestBase {
 
     protected DurationOperationClient durationOperationClient;
 
-    protected PlaindateClient plaindateClient;
+    protected PlainDateClient plainDateClient;
 
-    protected PlaintimeClient plaintimeClient;
+    protected PlainTimeClient plainTimeClient;
 
     protected CollectionsByteClient collectionsByteClient;
 
@@ -105,25 +105,25 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         durationOperationClient = durationOperationClientbuilder.buildDurationOperationClient();
 
-        OptionalClientBuilder plaindateClientbuilder
+        OptionalClientBuilder plainDateClientbuilder
             = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            plaindateClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            plainDateClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            plaindateClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            plainDateClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        plaindateClient = plaindateClientbuilder.buildPlaindateClient();
+        plainDateClient = plainDateClientbuilder.buildPlainDateClient();
 
-        OptionalClientBuilder plaintimeClientbuilder
+        OptionalClientBuilder plainTimeClientbuilder
             = new OptionalClientBuilder().httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            plaintimeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+            plainTimeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
-            plaintimeClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+            plainTimeClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
-        plaintimeClient = plaintimeClientbuilder.buildPlaintimeClient();
+        plainTimeClient = plainTimeClientbuilder.buildPlainTimeClient();
 
         OptionalClientBuilder collectionsByteClientbuilder
             = new OptionalClientBuilder().httpClient(HttpClient.createDefault())

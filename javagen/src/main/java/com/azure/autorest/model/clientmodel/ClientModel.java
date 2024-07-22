@@ -152,7 +152,6 @@ public class ClientModel {
      * @param implementationDetails The implementation details for the model.
      * @param usedInXml Whether the model is used in XML serialization.
      * @param crossLanguageDefinitionId The cross language definition id for the model.
-     *
      */
     protected ClientModel(String packageKeyword, String name, List<String> imports, String description,
         boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String polymorphicDiscriminatorName,
@@ -476,8 +475,8 @@ public class ClientModel {
      */
     protected void addImmutableAnnotationImport(Set<String> imports) {
         Annotation.IMMUTABLE.addImportsTo(imports);
-        Annotation.TYPE_CONDITIONS.addImportsTo(imports);
         if (!JavaSettings.getInstance().isBranded()) {
+            Annotation.TYPE_CONDITIONS.addImportsTo(imports);
             Annotation.METADATA.addImportsTo(imports);
         }
     }
@@ -489,7 +488,7 @@ public class ClientModel {
      */
     protected void addFluentAnnotationImport(Set<String> imports) {
         Annotation.FLUENT.addImportsTo(imports);
-        if(!JavaSettings.getInstance().isBranded()) {
+        if (!JavaSettings.getInstance().isBranded()) {
             Annotation.METADATA.addImportsTo(imports);
         }
     }

@@ -13,7 +13,7 @@ import com.azure.autorest.util.SchemaUtil;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ObjectMapper implements IMapper<ObjectSchema, IType> {
+public class ObjectMapper implements IMapper<ObjectSchema, IType>, NeedsPlainObjectCheck {
     private static final ObjectMapper INSTANCE = new ObjectMapper();
     Map<ObjectSchema, ClassType> parsed = new ConcurrentHashMap<>();
 
@@ -75,18 +75,6 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             .extensions(compositeType.getExtensions())
             .usedInXml(SchemaUtil.treatAsXml(compositeType))
             .build();
-    }
-
-    /**
-     * Check that the type can be regarded as a plain java.lang.Object.
-     *
-     * @param compositeType The type to check.
-     */
-    public static boolean isPlainObject(ObjectSchema compositeType) {
-        return !JavaSettings.getInstance().isDataPlaneClient()
-            && compositeType.getProperties().isEmpty() && compositeType.getDiscriminator() == null
-            && compositeType.getParents() == null && compositeType.getChildren() == null
-            && (compositeType.getExtensions() == null || compositeType.getExtensions().getXmsEnum() == null);
     }
 
     /**

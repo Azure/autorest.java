@@ -137,11 +137,7 @@ public final class RequiredFieldsAsCtorArgsTransformation {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<TransformationAsParentRequiredFields>> getWithResponseAsync() {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(this.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getWithResponseAsync(context));
     }
 
     /**

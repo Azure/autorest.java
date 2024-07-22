@@ -45,6 +45,7 @@ export interface EmitterOptions {
 
   "advanced-versioning"?: boolean;
   "api-version"?: string;
+  "service-version-exclude-preview"?: boolean;
 
   "dev-options"?: DevOptions;
 }
@@ -93,8 +94,10 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "polling": { type: "object", additionalProperties: true, nullable: true },
 
     "group-etag-headers": { type: "boolean", nullable: true },
+
     "advanced-versioning": { type: "boolean", nullable: true, default: false },
     "api-version": { type: "string", nullable: true },
+    "service-version-exclude-preview": { type: "boolean", nullable: true, default: false },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },

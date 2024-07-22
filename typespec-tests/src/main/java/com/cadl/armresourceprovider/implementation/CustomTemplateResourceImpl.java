@@ -10,7 +10,9 @@ import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResource;
 import com.cadl.armresourceprovider.models.CustomTemplateResourcePatch;
+import com.cadl.armresourceprovider.models.CustomTemplateResourcePropertiesAnonymousEmptyModel;
 import com.cadl.armresourceprovider.models.Dog;
+import com.cadl.armresourceprovider.models.EmptyModel;
 import com.cadl.armresourceprovider.models.ManagedServiceIdentity;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import java.util.Collections;
@@ -61,6 +63,14 @@ public final class CustomTemplateResourceImpl
 
     public Dog dog() {
         return this.innerModel().dog();
+    }
+
+    public EmptyModel namedEmptyModel() {
+        return this.innerModel().namedEmptyModel();
+    }
+
+    public CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel() {
+        return this.innerModel().anonymousEmptyModel();
     }
 
     public Region region() {
@@ -177,6 +187,17 @@ public final class CustomTemplateResourceImpl
 
     public CustomTemplateResourceImpl withDog(Dog dog) {
         this.innerModel().withDog(dog);
+        return this;
+    }
+
+    public CustomTemplateResourceImpl withNamedEmptyModel(EmptyModel namedEmptyModel) {
+        this.innerModel().withNamedEmptyModel(namedEmptyModel);
+        return this;
+    }
+
+    public CustomTemplateResourceImpl
+        withAnonymousEmptyModel(CustomTemplateResourcePropertiesAnonymousEmptyModel anonymousEmptyModel) {
+        this.innerModel().withAnonymousEmptyModel(anonymousEmptyModel);
         return this;
     }
 

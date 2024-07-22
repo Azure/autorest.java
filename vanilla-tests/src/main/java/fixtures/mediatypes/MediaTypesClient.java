@@ -258,15 +258,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input,
         Long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context));
+        return FluxUtil
+            .withContext(context -> analyzeBodyWithResponseAsync(contentType, input, contentLength, context));
     }
 
     /**
@@ -411,15 +404,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, BinaryData input,
         Long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context));
+        return FluxUtil
+            .withContext(context -> analyzeBodyWithResponseAsync(contentType, input, contentLength, context));
     }
 
     /**
@@ -528,17 +514,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(String source) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        SourcePath inputInternal = null;
-        if (source != null) {
-            inputInternal = new SourcePath();
-            inputInternal.setSource(source);
-        }
-        SourcePath input = inputInternal;
-        return FluxUtil.withContext(context -> service.analyzeBody(this.getHost(), input, accept, context));
+        return FluxUtil.withContext(context -> analyzeBodyWithResponseAsync(source, context));
     }
 
     /**
@@ -664,14 +640,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType,
         Flux<ByteBuffer> input, Long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
         return FluxUtil.withContext(
-            context -> service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context));
+            context -> analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context));
     }
 
     /**
@@ -814,14 +784,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType, BinaryData input,
         Long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
         return FluxUtil.withContext(
-            context -> service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context));
+            context -> analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context));
     }
 
     /**
@@ -928,16 +892,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(String source) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        SourcePath inputInternal = null;
-        if (source != null) {
-            inputInternal = new SourcePath();
-            inputInternal.setSource(source);
-        }
-        SourcePath input = inputInternal;
-        return FluxUtil.withContext(context -> service.analyzeBodyNoAcceptHeader(this.getHost(), input, context));
+        return FluxUtil.withContext(context -> analyzeBodyNoAcceptHeaderWithResponseAsync(source, context));
     }
 
     /**
@@ -1057,11 +1012,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> contentTypeWithEncodingWithResponseAsync(String input) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.contentTypeWithEncoding(this.getHost(), input, accept, context));
+        return FluxUtil.withContext(context -> contentTypeWithEncodingWithResponseAsync(input, context));
     }
 
     /**
@@ -1183,18 +1134,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
         Flux<ByteBuffer> message, long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.binaryBodyWithTwoContentTypes(this.getHost(), contentType,
-            message, contentLength, accept, context));
+        return FluxUtil.withContext(
+            context -> binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context));
     }
 
     /**
@@ -1318,18 +1259,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
         BinaryData message, long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.binaryBodyWithTwoContentTypes(this.getHost(), contentType,
-            message, contentLength, accept, context));
+        return FluxUtil.withContext(
+            context -> binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context));
     }
 
     /**
@@ -1452,18 +1383,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
         Flux<ByteBuffer> message, long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.binaryBodyWithThreeContentTypes(this.getHost(), contentType,
-            message, contentLength, accept, context));
+        return FluxUtil.withContext(
+            context -> binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context));
     }
 
     /**
@@ -1588,18 +1509,8 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
         BinaryData message, long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.binaryBodyWithThreeContentTypes(this.getHost(), contentType,
-            message, contentLength, accept, context));
+        return FluxUtil.withContext(
+            context -> binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context));
     }
 
     /**
@@ -1722,15 +1633,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Flux<ByteBuffer> message, long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil
-            .withContext(context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
+        return FluxUtil.withContext(context -> bodyThreeTypesWithResponseAsync(message, contentLength, context));
     }
 
     /**
@@ -1844,15 +1747,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(BinaryData message, long contentLength) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil
-            .withContext(context -> service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context));
+        return FluxUtil.withContext(context -> bodyThreeTypesWithResponseAsync(message, contentLength, context));
     }
 
     /**
@@ -1965,14 +1860,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(String message) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.bodyThreeTypes(this.getHost(), message, accept, context));
+        return FluxUtil.withContext(context -> bodyThreeTypesWithResponseAsync(message, context));
     }
 
     /**
@@ -2078,14 +1966,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Object message) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.bodyThreeTypes(this.getHost(), message, accept, context));
+        return FluxUtil.withContext(context -> bodyThreeTypesWithResponseAsync(message, context));
     }
 
     /**
@@ -2190,18 +2071,7 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putTextAndJsonBodyWithResponseAsync(ContentType3 contentType, String message) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return FluxUtil
-            .withContext(context -> service.putTextAndJsonBody(this.getHost(), contentType, message, accept, context));
+        return FluxUtil.withContext(context -> putTextAndJsonBodyWithResponseAsync(contentType, message, context));
     }
 
     /**

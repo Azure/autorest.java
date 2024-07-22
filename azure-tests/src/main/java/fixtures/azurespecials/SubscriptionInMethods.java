@@ -90,16 +90,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postMethodLocalValidWithResponseAsync(String subscriptionId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.postMethodLocalValid(this.client.getHost(), subscriptionId, accept, context));
+        return FluxUtil.withContext(context -> postMethodLocalValidWithResponseAsync(subscriptionId, context));
     }
 
     /**
@@ -200,16 +191,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postMethodLocalNullWithResponseAsync(String subscriptionId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.postMethodLocalNull(this.client.getHost(), subscriptionId, accept, context));
+        return FluxUtil.withContext(context -> postMethodLocalNullWithResponseAsync(subscriptionId, context));
     }
 
     /**
@@ -314,16 +296,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postPathLocalValidWithResponseAsync(String subscriptionId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.postPathLocalValid(this.client.getHost(), subscriptionId, accept, context));
+        return FluxUtil.withContext(context -> postPathLocalValidWithResponseAsync(subscriptionId, context));
     }
 
     /**
@@ -423,16 +396,7 @@ public final class SubscriptionInMethods {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postSwaggerLocalValidWithResponseAsync(String subscriptionId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (subscriptionId == null) {
-            return Mono.error(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.postSwaggerLocalValid(this.client.getHost(), subscriptionId, accept, context));
+        return FluxUtil.withContext(context -> postSwaggerLocalValidWithResponseAsync(subscriptionId, context));
     }
 
     /**

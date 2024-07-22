@@ -76,11 +76,7 @@ public final class XMsClientRequestIds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.get(this.client.getHost(), context));
+        return FluxUtil.withContext(context -> getWithResponseAsync(context));
     }
 
     /**
@@ -169,17 +165,7 @@ public final class XMsClientRequestIds {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> paramGetWithResponseAsync(String xMsClientRequestId) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (xMsClientRequestId == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.paramGet(this.client.getHost(), xMsClientRequestId, accept, context));
+        return FluxUtil.withContext(context -> paramGetWithResponseAsync(xMsClientRequestId, context));
     }
 
     /**

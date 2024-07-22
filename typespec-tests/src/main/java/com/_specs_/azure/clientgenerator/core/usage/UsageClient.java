@@ -107,7 +107,9 @@ public final class UsageClient {
      * Expected response body:
      * ```json
      * {
+     * "result": {
      * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
      * <p><strong>Request Body Schema</strong></p>
@@ -203,7 +205,9 @@ public final class UsageClient {
      * Expected response body:
      * ```json
      * {
+     * "result": {
      * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
      * 

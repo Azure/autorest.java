@@ -181,12 +181,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(
         NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringNoRequiredTwoValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putNoModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -307,12 +303,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(
         NoModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringNoRequiredTwoValueDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putNoModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -430,13 +422,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String input = "value1";
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil.withContext(context -> putNoModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(context));
     }
 
     /**
@@ -518,13 +504,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String input = "value1";
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringNoRequiredOneValueDefault(this.client.getHost(), input, context));
+        return FluxUtil.withContext(context -> putNoModelAsStringNoRequiredOneValueDefaultWithResponseAsync(context));
     }
 
     /**
@@ -609,15 +589,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(
         NoModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringRequiredTwoValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putNoModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -716,15 +689,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(NoModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringRequiredTwoValueDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putNoModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -820,13 +786,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String input = "value1";
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringRequiredOneValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil.withContext(context -> putNoModelAsStringRequiredOneValueNoDefaultWithResponseAsync(context));
     }
 
     /**
@@ -908,13 +868,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putNoModelAsStringRequiredOneValueDefaultWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String input = "value1";
-        return FluxUtil.withContext(
-            context -> service.putNoModelAsStringRequiredOneValueDefault(this.client.getHost(), input, context));
+        return FluxUtil.withContext(context -> putNoModelAsStringRequiredOneValueDefaultWithResponseAsync(context));
     }
 
     /**
@@ -999,12 +953,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(
         ModelAsStringNoRequiredTwoValueNoDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringNoRequiredTwoValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringNoRequiredTwoValueNoDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1125,12 +1075,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(ModelAsStringNoRequiredTwoValueDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringNoRequiredTwoValueDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringNoRequiredTwoValueDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1251,12 +1197,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(
         ModelAsStringNoRequiredOneValueNoDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringNoRequiredOneValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringNoRequiredOneValueNoDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1377,12 +1319,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(ModelAsStringNoRequiredOneValueDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringNoRequiredOneValueDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringNoRequiredOneValueDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1503,15 +1441,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(ModelAsStringRequiredTwoValueNoDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringRequiredTwoValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringRequiredTwoValueNoDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1610,15 +1541,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         putModelAsStringRequiredTwoValueDefaultWithResponseAsync(ModelAsStringRequiredTwoValueDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringRequiredTwoValueDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringRequiredTwoValueDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1716,15 +1640,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(ModelAsStringRequiredOneValueNoDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringRequiredOneValueNoDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringRequiredOneValueNoDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1823,15 +1740,8 @@ public final class Contants {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
         putModelAsStringRequiredOneValueDefaultWithResponseAsync(ModelAsStringRequiredOneValueDefaultOpEnum input) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (input == null) {
-            return Mono.error(new IllegalArgumentException("Parameter input is required and cannot be null."));
-        }
-        return FluxUtil.withContext(
-            context -> service.putModelAsStringRequiredOneValueDefault(this.client.getHost(), input, context));
+        return FluxUtil
+            .withContext(context -> putModelAsStringRequiredOneValueDefaultWithResponseAsync(input, context));
     }
 
     /**
@@ -1926,12 +1836,7 @@ public final class Contants {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putClientConstantsWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.putClientConstants(this.client.getHost(),
-            this.client.isHeaderConstant(), this.client.getQueryConstant(), this.client.getPathConstant(), context));
+        return FluxUtil.withContext(context -> putClientConstantsWithResponseAsync(context));
     }
 
     /**

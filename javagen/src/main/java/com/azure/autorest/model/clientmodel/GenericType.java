@@ -45,7 +45,7 @@ public class GenericType implements IType {
                 packageKeyword = "io.clientcore.core.http";
             } else {
                 packageKeyword = packageKeyword
-                        .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME);
+                        .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.CLIENTCORE_PACKAGE_NAME);
             }
         }
 

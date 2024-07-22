@@ -77,25 +77,8 @@ public final class AvailabilitySets {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> updateWithResponseAsync(String resourceGroupName, String avset,
         Map<String, String> availabilitySetUpdateParametersTags) {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        if (resourceGroupName == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
-        }
-        if (avset == null) {
-            return Mono.error(new IllegalArgumentException("Parameter avset is required and cannot be null."));
-        }
-        if (availabilitySetUpdateParametersTags == null) {
-            return Mono.error(new IllegalArgumentException(
-                "Parameter availabilitySetUpdateParametersTags is required and cannot be null."));
-        }
-        AvailabilitySetUpdateParameters tags = new AvailabilitySetUpdateParameters();
-        tags.setTags(availabilitySetUpdateParametersTags);
-        return FluxUtil
-            .withContext(context -> service.update(this.client.getHost(), resourceGroupName, avset, tags, context));
+        return FluxUtil.withContext(
+            context -> updateWithResponseAsync(resourceGroupName, avset, availabilitySetUpdateParametersTags, context));
     }
 
     /**

@@ -8,7 +8,7 @@ import com.azure.core.util.Configuration;
 import com.cadl.flatten.FlattenClient;
 import com.cadl.flatten.FlattenClientBuilder;
 import com.cadl.flatten.models.SendLongOptions;
-import com.cadl.flatten.models.TodoItemStatus;
+import com.cadl.flatten.models.SendLongRequestStatus;
 import com.cadl.flatten.models.User;
 
 public class FlattenOpSendLong {
@@ -16,8 +16,8 @@ public class FlattenOpSendLong {
         FlattenClient flattenClient
             = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.flatten.generated.sendlong.flattenopsendlong
-        flattenClient
-            .sendLong(new SendLongOptions("myRequiredId", "myRequiredInput", 11, "title", TodoItemStatus.NOT_STARTED)
+        flattenClient.sendLong(
+            new SendLongOptions("myRequiredId", "myRequiredInput", 11, "title", SendLongRequestStatus.NOT_STARTED)
                 .setFilter("name=myName")
                 .setUser(new User("myOptionalUser"))
                 .setDataIntOptional(12)

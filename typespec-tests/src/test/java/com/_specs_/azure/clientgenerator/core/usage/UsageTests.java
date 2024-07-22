@@ -27,7 +27,8 @@ public class UsageTests {
         Constructor<OutputModel> ctorOutputModel = OutputModel.class.getDeclaredConstructor(String.class);
         Assertions.assertEquals("public", Modifier.toString(ctorOutputModel.getModifiers()));
 
-        client.modelInReadOnlyProperty(new RoundTripModel());
+        RoundTripModel roundTripModel = client.modelInReadOnlyProperty(new RoundTripModel());
+        Assertions.assertEquals("Madge", roundTripModel.getResult().getName());
         // verify "ResultModel" class has private constructor and no setter
         Constructor<ResultModel> ctorResultModel = ResultModel.class.getDeclaredConstructor(String.class);
         Assertions.assertEquals("private", Modifier.toString(ctorResultModel.getModifiers()));

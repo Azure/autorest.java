@@ -69,8 +69,7 @@ public final class FlattencomplexesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getValidWithResponseAsync(context));
     }
 
     /**

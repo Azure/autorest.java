@@ -28,7 +28,7 @@ public final class UploadTodoOptions {
      * The status of the todo item
      */
     @Generated
-    private final TodoItemStatus status;
+    private final SendLongRequestStatus status;
 
     /*
      * The _dummy property.
@@ -61,7 +61,7 @@ public final class UploadTodoOptions {
      * @param status the status value to set.
      */
     @Generated
-    public UploadTodoOptions(String title, TodoItemStatus status) {
+    public UploadTodoOptions(String title, SendLongRequestStatus status) {
         this.title = title;
         this.status = status;
     }
@@ -104,7 +104,7 @@ public final class UploadTodoOptions {
      * @return the status value.
      */
     @Generated
-    public TodoItemStatus getStatus() {
+    public SendLongRequestStatus getStatus() {
         return this.status;
     }
 

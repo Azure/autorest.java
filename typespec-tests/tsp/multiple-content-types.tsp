@@ -42,7 +42,11 @@ interface MultipleContentTypesOnRequest {
   @post
   uploadBytesWithSingleBodyTypeForMultiContentTypes(
     @body data: bytes,
-    @header contentType: "application/octet-stream" | "image/jpeg" | "image/png",
+    @header contentType:
+      | "application/octet-stream"
+      | "image/jpeg"
+      | "image/png"
+      | "application/json-patch+json",
   ): void;
 
   @doc("multiple data types map to multiple content types using shared route")

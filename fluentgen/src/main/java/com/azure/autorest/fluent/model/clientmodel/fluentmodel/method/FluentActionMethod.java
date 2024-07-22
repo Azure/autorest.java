@@ -21,6 +21,7 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.template.ClientMethodTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class FluentActionMethod extends FluentMethod {
 
         // remove path parameters from input parameter, as they are provided by the variables of resource model
         ClientMethod method = collectionMethod.getInnerClientMethod();
-        List<ClientMethodParameter> parameters = method.getMethodInputParameters();
+        List<ClientMethodParameter> parameters = new ArrayList<>(method.getMethodInputParameters());
         ResourceLocalVariables resourceLocalVariables = new ResourceLocalVariables(collectionMethod.getInnerClientMethod());
         parameters.removeAll(resourceLocalVariables.getLocalVariablesMap().entrySet().stream()
                 .filter(e -> e.getValue().getParameterLocation() == RequestParameterLocation.PATH)

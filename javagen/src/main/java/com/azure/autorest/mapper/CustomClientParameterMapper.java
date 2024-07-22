@@ -7,11 +7,12 @@ import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
+import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
 
@@ -28,11 +29,14 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
 
     @Override
     public ClientMethodParameter map(Parameter parameter) {
+        return map(parameter, false);
+    }
+
+    public ClientMethodParameter map(Parameter parameter, boolean isProtocolMethod) {
         String name = parameter.getOriginalParameter() != null && parameter.getLanguage().getJava().getName().equals(parameter.getOriginalParameter().getLanguage().getJava().getName())
                 ? CodeNamer.toCamelCase(parameter.getOriginalParameter().getSchema().getLanguage().getJava().getName()) + CodeNamer.toPascalCase(parameter.getLanguage().getJava().getName())
                 : parameter.getLanguage().getJava().getName();
 
-        JavaSettings settings = JavaSettings.getInstance();
         ClientMethodParameter.Builder builder = new ClientMethodParameter.Builder()
                 .name(name)
                 .required(parameter.isRequired())
@@ -44,6 +48,10 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
             if (arraySchema.getElementType() instanceof AnySchema) {
                 wireType = ClassType.JSON_PATCH_DOCUMENT;
             }
+        }
+
+        if (isProtocolMethod) {
+            wireType = SchemaUtil.removeModelFromParameter(parameter.getProtocol().getHttp().getIn(), wireType);
         }
 
         if (parameter.isNullable() || !parameter.isRequired()) {
@@ -62,15 +70,8 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
         }
         builder.constant(isConstant).defaultValue(defaultValue);
 
-        if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-            String description = parameter.getSchema().getLanguage().getDefault().getDescription();
-            if (description == null || description.isEmpty()) {
-                if (parameter.getLanguage() != null) {
-                    description = parameter.getLanguage().getDefault().getDescription();
-                }
-            }
-            builder.description(description);
-        }
+        builder.description(MethodUtil.getMethodParameterDescription(parameter, name, isProtocolMethod));
+
         return builder.build();
     }
 }

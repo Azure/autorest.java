@@ -546,7 +546,11 @@ export class CodeModelBuilder {
         }
 
         codeModelClient.apiVersions = [];
-        for (const version of this.getFilteredApiVersions(this.apiVersion, versioning.getVersions())) {
+        for (const version of this.getFilteredApiVersions(
+          this.apiVersion,
+          versioning.getVersions(),
+          this.options["service-version-exclude-preview"],
+        )) {
           const apiVersion = new ApiVersion();
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
@@ -645,19 +649,23 @@ export class CodeModelBuilder {
 
   /**
    * Filter api-versions for "ServiceVersion".
-   * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/746
+   * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/965
    *
    * @param pinnedApiVersion the api-version to use as filter base
    * @param versions api-versions to filter
    * @returns filtered api-versions
    */
-  private getFilteredApiVersions(pinnedApiVersion: Version | undefined, versions: Version[]): Version[] {
+  private getFilteredApiVersions(
+    pinnedApiVersion: Version | undefined,
+    versions: Version[],
+    excludePreview: boolean = false,
+  ): Version[] {
     if (!pinnedApiVersion) {
       return versions;
     }
     return versions
       .slice(0, versions.indexOf(pinnedApiVersion) + 1)
-      .filter((version) => !isStable(pinnedApiVersion) || isStable(version));
+      .filter((version) => !excludePreview || !isStable(pinnedApiVersion) || isStable(version));
   }
 
   /**

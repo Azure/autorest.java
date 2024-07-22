@@ -37,7 +37,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -239,9 +238,8 @@ public class ProtocolExampleWriter {
         };
 
         this.assertionWriter = methodBlock -> {
-            Optional<ProxyMethodExample.Response> responseOpt = proxyMethodExample.getPrimaryResponse();
-            if (responseOpt.isPresent()) {
-                ProxyMethodExample.Response response = responseOpt.get();
+            ProxyMethodExample.Response response = proxyMethodExample.getPrimaryResponse();
+            if (response != null) {
                 IType returnType = method.getReturnValue().getType();
                 if (returnType instanceof GenericType) {
                     GenericType responseType = (GenericType) returnType;

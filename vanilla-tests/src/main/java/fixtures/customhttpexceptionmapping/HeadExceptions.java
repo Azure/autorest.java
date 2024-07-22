@@ -81,11 +81,7 @@ public final class HeadExceptions {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head200WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.head200(this.client.getHost(), context));
+        return FluxUtil.withContext(context -> head200WithResponseAsync(context));
     }
 
     /**
@@ -172,11 +168,7 @@ public final class HeadExceptions {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head204WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.head204(this.client.getHost(), context));
+        return FluxUtil.withContext(context -> head204WithResponseAsync(context));
     }
 
     /**
@@ -263,11 +255,7 @@ public final class HeadExceptions {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head404WithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        return FluxUtil.withContext(context -> service.head404(this.client.getHost(), context));
+        return FluxUtil.withContext(context -> head404WithResponseAsync(context));
     }
 
     /**

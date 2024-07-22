@@ -69,12 +69,7 @@ public final class MetricAlerts {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MetricAlertResource>> getWithResponseAsync() {
-        if (this.client.getHost() == null) {
-            return Mono
-                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(this.client.getHost(), accept, context));
+        return FluxUtil.withContext(context -> getWithResponseAsync(context));
     }
 
     /**

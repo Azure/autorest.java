@@ -100,31 +100,31 @@ public final class OptionalClientImpl {
     }
 
     /**
-     * The PlaindatesImpl object to access its operations.
+     * The PlainDatesImpl object to access its operations.
      */
-    private final PlaindatesImpl plaindates;
+    private final PlainDatesImpl plainDates;
 
     /**
-     * Gets the PlaindatesImpl object to access its operations.
+     * Gets the PlainDatesImpl object to access its operations.
      * 
-     * @return the PlaindatesImpl object.
+     * @return the PlainDatesImpl object.
      */
-    public PlaindatesImpl getPlaindates() {
-        return this.plaindates;
+    public PlainDatesImpl getPlainDates() {
+        return this.plainDates;
     }
 
     /**
-     * The PlaintimesImpl object to access its operations.
+     * The PlainTimesImpl object to access its operations.
      */
-    private final PlaintimesImpl plaintimes;
+    private final PlainTimesImpl plainTimes;
 
     /**
-     * Gets the PlaintimesImpl object to access its operations.
+     * Gets the PlainTimesImpl object to access its operations.
      * 
-     * @return the PlaintimesImpl object.
+     * @return the PlainTimesImpl object.
      */
-    public PlaintimesImpl getPlaintimes() {
-        return this.plaintimes;
+    public PlainTimesImpl getPlainTimes() {
+        return this.plainTimes;
     }
 
     /**
@@ -297,8 +297,8 @@ public final class OptionalClientImpl {
         this.bytes = new BytesImpl(this);
         this.datetimeOperations = new DatetimeOperationsImpl(this);
         this.durationOperations = new DurationOperationsImpl(this);
-        this.plaindates = new PlaindatesImpl(this);
-        this.plaintimes = new PlaintimesImpl(this);
+        this.plainDates = new PlainDatesImpl(this);
+        this.plainTimes = new PlainTimesImpl(this);
         this.collectionsBytes = new CollectionsBytesImpl(this);
         this.collectionsModels = new CollectionsModelsImpl(this);
         this.stringLiterals = new StringLiteralsImpl(this);

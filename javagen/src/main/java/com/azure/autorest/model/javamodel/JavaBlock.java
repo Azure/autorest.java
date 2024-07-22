@@ -28,6 +28,10 @@ public class JavaBlock implements JavaContext {
         contents.text(text);
     }
 
+    public final void line(String text) {
+        contents.line(text);
+    }
+
     public final void line(String text, Object... formattedArguments) {
         contents.line(text, formattedArguments);
     }

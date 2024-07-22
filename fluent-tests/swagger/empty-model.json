@@ -1,0 +1,61 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2020-12-01",
+    "title": "EmptyModel"
+  },
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/emptymodels": {
+      "get": {
+        "summary": "List emptymodels",
+        "operationId": "emptymodels_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Retrieved empty models",
+            "schema": {
+              "$ref": "#/definitions/EmptyModel"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Create emptymodel",
+        "operationId": "emptymodels_Create",
+        "parameters": [{
+          "name": "emptymodel",
+          "in": "body",
+          "schema": {
+            "$ref": "#/definitions/EmptyModel"
+          },
+          "required": true,
+          "description": "The empty model."
+        }],
+        "responses": {
+          "200": {
+            "description": "Create empty models response",
+            "schema": {
+              "$ref": "#/definitions/EmptyModelResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EmptyModel": {
+      "description": "Empty model.",
+      "type": "object"
+    },
+    "EmptyModelResponse": {
+      "properties": {
+        "emptyModel": {
+          "$ref": "#/definitions/EmptyModel"
+        }
+      }
+    }
+  }
+}
