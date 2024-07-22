@@ -108,18 +108,18 @@ def update_sdks():
         generated_samples_exists = os.path.isdir(generated_samples_path)
         generated_test_exists = os.path.isdir(generated_test_path)
 
-        if arm_module:
-            # update commit id
-            with open(tsp_location_file, "r", encoding="utf-8") as fin:
-                tsp_location_yml = yaml.safe_load(fin)
-            tsp_location_yml['commit'] = 'b574e2a41acda14a90ef237006e8bbdda2b63c63'
+        # if arm_module:
+        #     # update commit id
+        #     with open(tsp_location_file, "r", encoding="utf-8") as fin:
+        #         tsp_location_yml = yaml.safe_load(fin)
+        #     tsp_location_yml['commit'] = 'b574e2a41acda14a90ef237006e8bbdda2b63c63'
 
-            if not tsp_location_yml['directory'].endswith('.Management'):
-                tsp_location_yml['directory'] = tsp_location_yml['directory'] + '.Management'
+        #     if not tsp_location_yml['directory'].endswith('.Management'):
+        #         tsp_location_yml['directory'] = tsp_location_yml['directory'] + '.Management'
 
-            updated_yaml_str = yaml.dump(tsp_location_yml, width=sys.maxsize, sort_keys=False, Dumper=ListIndentDumper)
-            with open(tsp_location_file, "w", encoding="utf-8") as fout:
-                fout.write(updated_yaml_str)
+        #     updated_yaml_str = yaml.dump(tsp_location_yml, width=sys.maxsize, sort_keys=False, Dumper=ListIndentDumper)
+        #     with open(tsp_location_file, "w", encoding="utf-8") as fout:
+        #         fout.write(updated_yaml_str)
 
         if arm_module:
             logging.info('Delete source code of resourcemanager module %s', artifact)
