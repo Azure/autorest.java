@@ -3,6 +3,7 @@
 
 package com.azure.autorest.extension.base.plugin;
 
+import com.azure.json.JsonProviders;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -1708,20 +1709,20 @@ public class JavaSettings {
     }
 
     private static void loadStringOrArraySettingAsArray(String settingName, Consumer<List<String>> action) {
-        host.getValueWithJsonReader(settingName, jsonReader -> {
-            JsonToken token = jsonReader.currentToken();
-            if (token == null) {
-                token = jsonReader.nextToken();
-            }
-
-            if (token == JsonToken.START_ARRAY) {
-                List<String> settingValueList = jsonReader.readArray(JsonReader::getString);
-                logger.debug("Option, array, {} : {}", settingName, settingValueList);
-                action.accept(settingValueList);
-            } else if (token == JsonToken.STRING) {
-                String settingValue = jsonReader.getString();
-                logger.debug("Option, string, {} : {}", settingName, settingValue);
-                action.accept(Collections.singletonList(settingValue));
+        host.getValue(settingName, jsonString -> {
+            if (jsonString == null) {
+                return null;
+            } else if (jsonString.startsWith("[")) {
+                // Array values will need to be parsed.
+                try (JsonReader jsonReader = JsonProviders.createReader(jsonString)) {
+                    List<String> settingValueList = jsonReader.readArray(JsonReader::getString);
+                    logger.debug("Option, array, {} : {}", settingName, settingValueList);
+                    action.accept(settingValueList);
+                }
+            } else {
+                // Single values will be returned as the string representation.
+                logger.debug("Option, string, {} : {}", settingName, jsonString);
+                action.accept(Collections.singletonList(jsonString));
             }
 
             return null;
