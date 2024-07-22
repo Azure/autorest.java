@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
@@ -69,15 +70,8 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
         }
         builder.constant(isConstant).defaultValue(defaultValue);
 
-        if (parameter.getSchema() != null && parameter.getSchema().getLanguage() != null) {
-            String description = parameter.getSchema().getLanguage().getDefault().getDescription();
-            if (description == null || description.isEmpty()) {
-                if (parameter.getLanguage() != null) {
-                    description = parameter.getLanguage().getDefault().getDescription();
-                }
-            }
-            builder.description(description);
-        }
+        builder.description(MethodUtil.getMethodParameterDescription(parameter, name, isProtocolMethod));
+
         return builder.build();
     }
 }
