@@ -619,9 +619,9 @@ export class CodeModelBuilder {
       }
 
       // operations under operation groups 
-      const subClients = this.listSubClientsUnderClient(client, true);
+      const subClients = this.listSubClientsUnderClient(client, true, true);
       for (const subClient of subClients) {
-        const serviceMethods = this.listServiceMethodsUnderClient(subClient, true);
+        const serviceMethods = this.listServiceMethodsUnderClient(subClient, false);
         // operation group with no operation is skipped
         if (serviceMethods.length > 0) {
           // TODO: haoling get name from group path
@@ -679,14 +679,17 @@ export class CodeModelBuilder {
     } 
   }
 
-  private listSubClientsUnderClient(client: SdkClientType<SdkHttpOperation>, includeNestedOperationGroups: boolean): SdkClientType<SdkHttpOperation>[] {
+  private listSubClientsUnderClient(client: SdkClientType<SdkHttpOperation>, includeNestedOperationGroups: boolean, isRootClient: boolean): SdkClientType<SdkHttpOperation>[] {
     const operationGroups: SdkClientType<SdkHttpOperation>[] = [];
     for (const method of client.methods) {
       if (method.kind === "clientaccessor") {
         const subClient = method.response;
+        if (!isRootClient) { // if it is not root client, append the parent client's name
+          subClient.name = this.removeClientSuffix(client.name) + this.removeClientSuffix(pascalCase(subClient.name));
+        }
         operationGroups.push(subClient);
         if (includeNestedOperationGroups) {
-          for (const operationGroup of this.listSubClientsUnderClient(subClient, includeNestedOperationGroups)) {
+          for (const operationGroup of this.listSubClientsUnderClient(subClient, includeNestedOperationGroups, false)) {
             operationGroups.push(operationGroup);
           }
         }
@@ -711,6 +714,10 @@ export class CodeModelBuilder {
       }
     }
     return methods;
+  }
+
+  private removeClientSuffix(clientName: string): string {
+    return clientName.endsWith("Client") ? clientName.slice(0, -6) : clientName;
   }
 
   // private processClients(): SdkClient[] {
