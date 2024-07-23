@@ -5,7 +5,6 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -62,7 +61,7 @@ public final class BazFoosImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> seven(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/seven")
         @ExpectedResponses({ 204 })
@@ -71,7 +70,7 @@ public final class BazFoosImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sevenSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -86,9 +85,8 @@ public final class BazFoosImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sevenWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.seven(this.client.getEndpoint(), this.client.getClient(), accept,
-            requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.seven(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
     }
 
     /**
@@ -103,8 +101,6 @@ public final class BazFoosImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sevenWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sevenSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
-            Context.NONE);
+        return service.sevenSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
     }
 }
