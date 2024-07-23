@@ -104,13 +104,43 @@ model TopLevelArmResourceProperties {
   description?: string;
 }
 
+@error
+model ErrorResponse {
+  error: Error;
+}
+
+@error
+model ErrorResponseMin {
+  error: ErrorMin;
+}
+
+model Error {
+  code: string;
+  message: string;
+  target: string;
+  details?: Error[];
+  additionalInfo?: AdditionalInfo[];
+  additionalProperty: string;
+}
+
+model AdditionalInfo {
+  type: string;
+  info: {};
+}
+
+model ErrorMin {
+  code: string;
+  message: string;
+  additionalProperty: string;
+}
+
 @route("/model")
 interface Fishes {
   @get
-  getModel(): Fish;
+  getModel(): Fish | ErrorResponse;
 
   @put
-  putModel(@body fish: Fish): Fish;
+  putModel(@body fish: Fish): Fish | ErrorResponseMin;
 }
 
 interface TopLevelArmResources {

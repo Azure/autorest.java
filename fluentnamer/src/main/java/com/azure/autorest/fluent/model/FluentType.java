@@ -13,6 +13,7 @@ import com.azure.core.management.Region;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SubResource;
 import com.azure.core.management.SystemData;
+import com.azure.core.management.exception.AdditionalInfo;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.profile.AzureProfile;
@@ -35,6 +36,8 @@ public class FluentType {
 
     public static final ClassType AZURE_RESOURCE_MANAGER = new ClassType.Builder()
         .packageName("com.azure.resourcemanager").name("AzureResourceManager").build();
+
+    public static final ClassType ADDITIONAL_INFO = new ClassType.Builder().knownClass(AdditionalInfo.class).build();
 
     private FluentType() {
     }

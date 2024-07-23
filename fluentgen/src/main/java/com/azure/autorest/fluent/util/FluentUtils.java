@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.ResourceTypeName;
+import com.azure.autorest.fluent.model.arm.ErrorClientModel;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
@@ -229,6 +230,11 @@ public class FluentUtils {
             Optional<ClientModel> modelOpt = ResourceClientModel.getResourceClientModel(name);
             if (modelOpt.isPresent()) {
                 clientModel = modelOpt.get();
+            } else {
+                modelOpt = ErrorClientModel.getErrorClientModel(name);
+                if (modelOpt.isPresent()) {
+                    clientModel = modelOpt.get();
+                }
             }
         }
         return clientModel;
