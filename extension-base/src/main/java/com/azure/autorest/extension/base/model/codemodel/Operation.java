@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -416,5 +421,90 @@ public class Operation extends Metadata {
      */
     public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeStringField("operationId", operationId)
+            .writeArrayField("parameters", parameters, JsonWriter::writeJson)
+            .writeArrayField("signatureParameters", signatureParameters, JsonWriter::writeJson)
+            .writeArrayField("requests", requests, JsonWriter::writeJson)
+            .writeArrayField("responses", responses, JsonWriter::writeJson)
+            .writeArrayField("exceptions", exceptions, JsonWriter::writeJson)
+            .writeJsonField("profile", profile)
+            .writeStringField("$key", $key)
+            .writeStringField("description", description)
+            .writeStringField("uid", uid)
+            .writeStringField("summary", summary)
+            .writeArrayField("apiVersions", apiVersions, JsonWriter::writeJson)
+            .writeJsonField("deprecated", deprecated)
+            .writeJsonField("externalDocs", externalDocs)
+            .writeArrayField("specialHeaders", specialHeaders, JsonWriter::writeString)
+            .writeJsonField("lroMetadata", lroMetadata)
+            .writeJsonField("convenienceApi", convenienceApi)
+            .writeBooleanField("generateProtocolApi", generateProtocolApi)
+            .writeBooleanField("internalApi", internalApi)
+            .writeStringField("crossLanguageDefinitionId", crossLanguageDefinitionId)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes an Operation instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An Operation instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static Operation fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Operation::new, (operation, fieldName, reader) -> {
+            if (operation.tryConsumeParentProperties(operation, fieldName, reader)) {
+                return;
+            }
+
+            if ("operationId".equals(fieldName)) {
+                operation.operationId = reader.getString();
+            } else if ("parameters".equals(fieldName)) {
+                operation.parameters = reader.readArray(Parameter::fromJson);
+            } else if ("signatureParameters".equals(fieldName)) {
+                operation.signatureParameters = reader.readArray(Parameter::fromJson);
+            } else if ("requests".equals(fieldName)) {
+                operation.requests = reader.readArray(Request::fromJson);
+            } else if ("responses".equals(fieldName)) {
+                operation.responses = reader.readArray(Response::fromJson);
+            } else if ("exceptions".equals(fieldName)) {
+                operation.exceptions = reader.readArray(Response::fromJson);
+            } else if ("profile".equals(fieldName)) {
+                operation.profile = DictionaryApiVersion.fromJson(reader);
+            } else if ("$key".equals(fieldName)) {
+                operation.$key = reader.getString();
+            } else if ("description".equals(fieldName)) {
+                operation.description = reader.getString();
+            } else if ("uid".equals(fieldName)) {
+                operation.uid = reader.getString();
+            } else if ("summary".equals(fieldName)) {
+                operation.summary = reader.getString();
+            } else if ("apiVersions".equals(fieldName)) {
+                operation.apiVersions = reader.readArray(ApiVersion::fromJson);
+            } else if ("deprecated".equals(fieldName)) {
+                operation.deprecated = Deprecation.fromJson(reader);
+            } else if ("externalDocs".equals(fieldName)) {
+                operation.externalDocs = ExternalDocumentation.fromJson(reader);
+            } else if ("specialHeaders".equals(fieldName)) {
+                operation.specialHeaders = reader.readArray(JsonReader::getString);
+            } else if ("lroMetadata".equals(fieldName)) {
+                operation.lroMetadata = LongRunningMetadata.fromJson(reader);
+            } else if ("convenienceApi".equals(fieldName)) {
+                operation.convenienceApi = ConvenienceApi.fromJson(reader);
+            } else if ("generateProtocolApi".equals(fieldName)) {
+                operation.generateProtocolApi = reader.getBoolean();
+            } else if ("internalApi".equals(fieldName)) {
+                operation.internalApi = reader.getBoolean();
+            } else if ("crossLanguageDefinitionId".equals(fieldName)) {
+                operation.crossLanguageDefinitionId = reader.getString();
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

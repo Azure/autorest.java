@@ -5,6 +5,8 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -19,8 +21,15 @@ public class MockJavagen extends Javagen {
         instance = this;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <T> T getValue(Type type, String key) {
+    public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        return (T) DEFAULT_SETTINGS.get(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
         return (T) DEFAULT_SETTINGS.get(key);
     }
 

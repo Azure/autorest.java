@@ -14,13 +14,14 @@ import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.core.util.CoreUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 import com.azure.typespec.model.EmitterOptions;
 import com.azure.typespec.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,7 +135,13 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getValue(Type type, String key) {
+    public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        return (T) SETTINGS_MAP.get(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
         return (T) SETTINGS_MAP.get(key);
     }
 

@@ -15,6 +15,8 @@ import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -90,18 +92,17 @@ public class FluentNamer extends Preprocessor {
         // Write the input code model file to a local code model file to help debugging
         Files.writeString(codeModelFolder.resolve("code-model.yaml"), file);
         // Deserialize the input code model string to CodeModel object
-        CodeModel codeModel = loadCodeModel(file);
-        return codeModel;
+        return loadCodeModel(file);
     }
 
-    private CodeModel loadCodeModel(String file) throws com.fasterxml.jackson.core.JsonProcessingException {
-        CodeModel codeModel;
+    private CodeModel loadCodeModel(String file) throws IOException {
         if (!file.startsWith("{")) {
-            codeModel = yamlMapper.loadAs(file, CodeModel.class);
+            return yamlMapper.loadAs(file, CodeModel.class);
         } else {
-            codeModel = jsonMapper.readValue(file, CodeModel.class);
+            try (JsonReader jsonReader = JsonProviders.createReader(file)) {
+                return CodeModel.fromJson(jsonReader);
+            }
         }
-        return codeModel;
     }
 
     private Yaml createYaml() {

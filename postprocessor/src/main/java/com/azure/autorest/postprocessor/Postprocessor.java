@@ -11,7 +11,7 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.extension.base.util.FileUtils;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.postprocessor.implementation.CodeFormatterUtil;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.azure.json.JsonReader;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -38,8 +38,6 @@ public class Postprocessor {
 
     @SuppressWarnings("unchecked")
     public void postProcess(Map<String, String> fileContents) {
-        this.clear();
-
         String jarPath = JavaSettings.getInstance().getCustomizationJarPath();
         String className = JavaSettings.getInstance().getCustomizationClass();
 
@@ -126,8 +124,9 @@ public class Postprocessor {
     }
 
     private static String getReadme(NewPlugin plugin) {
-        List<String> configurationFiles = plugin.getValue(
-            TypeFactory.defaultInstance().constructCollectionLikeType(List.class, String.class), "configurationFiles");
+        List<String> configurationFiles = plugin.getValueWithJsonReader("configurationFiles",
+            jsonReader -> jsonReader.readArray(JsonReader::getString));
+
         return configurationFiles == null || configurationFiles.isEmpty()
             ? JavaSettings.getInstance().getAutorestSettings().getOutputFolder()
             : configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);
@@ -156,7 +155,8 @@ public class Postprocessor {
             String code = Files.readString(customizationFile);
             return loadCustomizationClass(customizationFile.getFileName().toString().replace(".java", ""), code);
         } catch (IOException e) {
-            logger.error("Cannot read customization from base directory " + baseDirectory + " and file " + customizationFile);
+            logger.error("Cannot read customization from base directory {} and file {}", baseDirectory,
+                customizationFile);
             return null;
         }
     }
@@ -246,9 +246,5 @@ public class Postprocessor {
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException("Failed to run compile on generated code.", ex);
         }
-    }
-
-    private void clear() {
-        JavaSettings.clear();
     }
 }

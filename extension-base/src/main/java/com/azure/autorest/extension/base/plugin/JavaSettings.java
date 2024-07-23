@@ -3,11 +3,14 @@
 
 package com.azure.autorest.extension.base.plugin;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
 import org.slf4j.Logger;
 
-import java.lang.reflect.Type;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,7 +26,6 @@ import java.util.stream.Collectors;
  * Settings that are used by the Java AutoRest Generator.
  */
 public class JavaSettings {
-    private static final TypeFactory TYPE_FACTORY = TypeFactory.defaultInstance();
     private static final String VERSION = "4.0.0";
     private static JavaSettings instance;
     private static NewPlugin host;
@@ -93,18 +95,17 @@ public class JavaSettings {
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
             // input-file
-            Type listObjectType = TYPE_FACTORY.constructCollectionType(List.class, Object.class);
-            List<Object> inputFiles = host.getValue(listObjectType, "input-file");
+            List<String> inputFiles = host.getValueWithJsonReader("input-file",
+                jsonReader -> jsonReader.readArray(JsonReader::getString));
             if (inputFiles != null) {
-                autorestSettings.getInputFiles().addAll(
-                    inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
+                autorestSettings.getInputFiles().addAll(inputFiles);
                 logger.debug("List of input files : {}", autorestSettings.getInputFiles());
             }
             // require (readme.md etc.)
-            List<Object> require = host.getValue(listObjectType, "require");
+            List<String> require = host.getValueWithJsonReader("require",
+                jsonReader -> jsonReader.readArray(JsonReader::getString));
             if (require != null) {
-                autorestSettings.getRequire().addAll(
-                    require.stream().map(Object::toString).collect(Collectors.toList()));
+                autorestSettings.getRequire().addAll(require);
                 logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
@@ -113,7 +114,7 @@ public class JavaSettings {
             setHeader(getStringValue(host, "license-header"));
             instance = new JavaSettings(
                 autorestSettings,
-                host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, Object.class), "modelerfour"),
+                host.getValueWithJsonReader("modelerfour", jsonReader -> jsonReader.readMap(JsonReader::readUntyped)),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 fluent,
@@ -145,19 +146,18 @@ public class JavaSettings {
                 getBooleanValue(host, "optional-constant-as-enum", false),
                 getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
-                host.getValue(TYPE_FACTORY.constructCollectionLikeType(List.class, String.class), "service-versions"),
+                host.getValueWithJsonReader("service-versions", jsonReader -> jsonReader.readArray(JsonReader::getString)),
                 getStringValue(host, "client-flattened-annotation-target", ""),
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
-                host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, PollingDetails.class), "polling"),
+                host.getValueWithJsonReader("polling", jsonReader -> jsonReader.readMap(PollingDetails::fromJson)),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 false, //getBooleanValue(host, "generate-send-request-method", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
-                host.getValue(TYPE_FACTORY.constructMapType(Map.class, Integer.class, String.class),
-                    "http-status-code-to-exception-type-mapping"),
+                host.getValueWithJsonReader("http-status-code-to-exception-type-mapping", JavaSettings::parseStatusCodeMapping),
                 getBooleanValue(host, "partial-update", false),
                 // If fluent default to false, this is because the automated test generation ends up with invalid code.
                 // Once that is fixed, this can be switched over to true.
@@ -184,6 +184,19 @@ public class JavaSettings {
             );
         }
         return instance;
+    }
+
+    private static Map<Integer, String> parseStatusCodeMapping(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Map<Integer, String> mapping = new HashMap<>();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                int key = Integer.parseInt(reader.getFieldName());
+                reader.nextToken();
+                mapping.put(key, reader.getString());
+            }
+
+            return mapping;
+        });
     }
 
     /**
@@ -561,7 +574,29 @@ public class JavaSettings {
         /**
          * Fluent Premium generation.
          */
-        PREMIUM
+        PREMIUM;
+
+        /**
+         * Gets a {@link Fluent} value for the give {@code value} string.
+         *
+         * @param value The value to parse.
+         * @return The {@link Fluent} value.
+         */
+        public static Fluent fromString(String value) {
+            if (value == null || value.isEmpty()) {
+                return null;
+            }
+
+            if ("none".equalsIgnoreCase(value)) {
+                return NONE;
+            } else if ("lite".equalsIgnoreCase(value)) {
+                return LITE;
+            } else if ("premium".equalsIgnoreCase(value)) {
+                return PREMIUM;
+            } else {
+                return null;
+            }
+        }
     }
 
     private final Fluent fluent;
@@ -1293,16 +1328,11 @@ public class JavaSettings {
     /**
      * Represents the details of polling for a long-running operation.
      */
-    public static class PollingDetails {
-        @JsonProperty("strategy")
+    public static class PollingDetails implements JsonSerializable<PollingDetails> {
         private String strategy;
-        @JsonProperty("sync-strategy")
         private String syncStrategy;
-        @JsonProperty("intermediate-type")
         private String intermediateType;
-        @JsonProperty("final-type")
         private String finalType;
-        @JsonProperty("poll-interval")
         private String pollInterval;
 
         /**
@@ -1377,6 +1407,51 @@ public class JavaSettings {
          */
         public int getPollIntervalInSeconds() {
             return pollInterval != null ? Integer.parseInt(pollInterval) : 1;
+        }
+
+        @Override
+        public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+            return jsonWriter.writeStartObject()
+                .writeStringField("strategy", strategy)
+                .writeStringField("sync-strategy", syncStrategy)
+                .writeStringField("intermediate-type", intermediateType)
+                .writeStringField("final-type", finalType)
+                .writeStringField("poll-interval", pollInterval)
+                .writeEndObject();
+        }
+
+        /**
+         * Deserializes a PollingDetails instance from the JSON data.
+         *
+         * @param jsonReader The JSON reader to deserialize from.
+         * @return A PollingDetails instance deserialized from the JSON data.
+         * @throws IOException If an error occurs during deserialization.
+         */
+        public static PollingDetails fromJson(JsonReader jsonReader) throws IOException {
+            return jsonReader.readObject(reader -> {
+                PollingDetails pollingDetails = new PollingDetails();
+
+                while (reader.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = reader.getFieldName();
+                    reader.nextToken();
+
+                    if ("strategy".equals(fieldName)) {
+                        pollingDetails.strategy = reader.getString();
+                    } else if ("sync-strategy".equals(fieldName)) {
+                        pollingDetails.syncStrategy = reader.getString();
+                    } else if ("intermediate-type".equals(fieldName)) {
+                        pollingDetails.intermediateType = reader.getString();
+                    } else if ("final-type".equals(fieldName)) {
+                        pollingDetails.finalType = reader.getString();
+                    } else if ("poll-interval".equals(fieldName)) {
+                        pollingDetails.pollInterval = reader.getString();
+                    } else {
+                        reader.skipChildren();
+                    }
+                }
+
+                return pollingDetails;
+            });
         }
     }
 
@@ -1608,12 +1683,7 @@ public class JavaSettings {
     }
 
     private static String getStringValue(NewPlugin host, String settingName) {
-        String value = host.getStringValue(settingName);
-        if (value != null) {
-            logger.debug("Option, string, {} : {}", settingName, value);
-            SIMPLE_JAVA_SETTINGS.put(settingName, value);
-        }
-        return value;
+        return getStringValue(host, settingName, null);
     }
 
     private static String getStringValue(NewPlugin host, String settingName, String defaultValue) {
@@ -1638,20 +1708,24 @@ public class JavaSettings {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private static void loadStringOrArraySettingAsArray(String settingName, Consumer<List<String>> action) {
-        List<String> settingValues = new ArrayList<>();
-        Object settingValue = host.getValue(Object.class, settingName);
-        if (settingValue instanceof String) {
-            logger.debug("Option, string, {} : {}", settingName, settingValue);
-            settingValues.add(settingValue.toString());
-        } else if (settingValue instanceof List) {
-            List<String> settingValueList = (List<String>) settingValue;
-            logger.debug("Option, array, {} : {}", settingName, settingValueList);
-            settingValues.addAll(settingValueList);
-        }
-        if (!settingValues.isEmpty()) {
-            action.accept(settingValues);
-        }
+        host.getValue(settingName, jsonString -> {
+            if (jsonString == null) {
+                return null;
+            } else if (jsonString.startsWith("[")) {
+                // Array values will need to be parsed.
+                try (JsonReader jsonReader = JsonProviders.createReader(jsonString)) {
+                    List<String> settingValueList = jsonReader.readArray(JsonReader::getString);
+                    logger.debug("Option, array, {} : {}", settingName, settingValueList);
+                    action.accept(settingValueList);
+                }
+            } else {
+                // Single values will be returned as the string representation.
+                logger.debug("Option, string, {} : {}", settingName, jsonString);
+                action.accept(Collections.singletonList(jsonString));
+            }
+
+            return null;
+        });
     }
 }

@@ -8,10 +8,12 @@ import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonWriter;
 import org.slf4j.Logger;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -28,8 +30,6 @@ import java.util.stream.Stream;
 public class ProxyMethodExample {
 
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
-
-    private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
     private static final String SLASH = "/";
 
     private static String tspDirectory = null;
@@ -72,17 +72,15 @@ public class ProxyMethodExample {
 
         @Override
         public String toString() {
-            try {
-                return "ParameterValue{" + "objectValue=" + NORMAL_PRINTER.writeValueAsString(objectValue) + '}';
-            } catch (JsonProcessingException e) {
-                return "ParameterValue{" + "objectValue=" + objectValue + '}';
-            }
+            return "ParameterValue{objectValue=" + getJsonString() + '}';
         }
 
         public String getJsonString() {
-            try {
-                return NORMAL_PRINTER.writeValueAsString(objectValue);
-            } catch (JsonProcessingException e) {
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+                jsonWriter.writeUntyped(objectValue).flush();
+                return outputStream.toString(StandardCharsets.UTF_8);
+            } catch (IOException e) {
                 return objectValue.toString();
             }
         }
@@ -128,15 +126,7 @@ public class ProxyMethodExample {
 
         /** @return the response body as JSON string */
         public String getJsonBody() {
-            if (body != null) {
-                try {
-                    return NORMAL_PRINTER.writeValueAsString(body);
-                } catch (JsonProcessingException e) {
-                    return body.toString();
-                }
-            } else {
-                return "";
-            }
+            return getJson(body);
         }
 
         /**
@@ -145,9 +135,11 @@ public class ProxyMethodExample {
          */
         public String getJson(Object obj) {
             if (obj != null) {
-                try {
-                    return NORMAL_PRINTER.writeValueAsString(obj);
-                } catch (JsonProcessingException e) {
+                try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+                    jsonWriter.writeUntyped(obj).flush();
+                    return outputStream.toString(StandardCharsets.UTF_8);
+                } catch (IOException e) {
                     return obj.toString();
                 }
             } else {
@@ -157,13 +149,8 @@ public class ProxyMethodExample {
 
         @Override
         public String toString() {
-            try {
-                return "Response{" + "statusCode=" + statusCode + ", httpHeaders=" + httpHeaders + ", body="
-                    + NORMAL_PRINTER.writeValueAsString(body) + '}';
-            } catch (JsonProcessingException e) {
-                return "Response{" + "statusCode=" + statusCode + ", httpHeaders=" + httpHeaders + ", body=" + body
-                    + '}';
-            }
+            return "Response{statusCode=" + statusCode + ", httpHeaders=" + httpHeaders + ", body=" + getJsonBody()
+                + '}';
         }
     }
 

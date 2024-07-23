@@ -5,11 +5,6 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.util.CodeNamer;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -298,9 +293,9 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
             Annotation.HEADER_COLLECTION.addImportsTo(imports);
         }
         if (isAdditionalProperties) {
-            imports.add(JsonIgnore.class.getName());
-            imports.add(JsonAnySetter.class.getName());
-            imports.add(JsonAnyGetter.class.getName());
+            imports.add("com.fasterxml.jackson.annotation.JsonIgnore");
+            imports.add("com.fasterxml.jackson.annotation.JsonAnySetter");
+            imports.add("com.fasterxml.jackson.annotation.JsonAnyGetter");
             imports.add(LinkedHashMap.class.getName());
         }
 
@@ -310,7 +305,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
 
         if (!isAdditionalProperties && getClientType() instanceof MapType) {
             // required for "@JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)"
-            imports.add(JsonInclude.class.getName());
+            imports.add("com.fasterxml.jackson.annotation.JsonInclude");
         }
 
         if (getWireType() != null) {
@@ -331,7 +326,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
                 imports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText");
             }
         } else {
-            imports.add(JsonProperty.class.getName());
+            imports.add("com.fasterxml.jackson.annotation.JsonProperty");
         }
     }
 

@@ -16,7 +16,6 @@ import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class FluentModelTemplate extends ModelTemplate {
     protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
         super.addSerializationImports(imports, model, settings);
 
-        imports.add(JsonInclude.class.getName());
+        imports.add("com.fasterxml.jackson.annotation.JsonInclude");
     }
 
     @Override

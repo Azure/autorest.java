@@ -12,11 +12,12 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.autorest.util.ModelTestCaseUtil;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.SerializerEncoding;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -24,8 +25,6 @@ import java.util.Set;
 public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private static final ModelTestTemplate INSTANCE = new ModelTestTemplate();
-
-    private static final SerializerAdapter SERIALIZER = JacksonAdapter.createDefaultSerializerAdapter();
 
     private ModelTestTemplate() {
     }
@@ -46,9 +45,11 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         String jsonStr;
         ExampleNode exampleNode;
-        try {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
             Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(model);
-            jsonStr = SERIALIZER.serialize(jsonObject, SerializerEncoding.JSON);
+            jsonWriter.writeMap(jsonObject, JsonWriter::writeUntyped).flush();
+            jsonStr = outputStream.toString(StandardCharsets.UTF_8);
 
             exampleNode = ModelExampleUtil.parseNode(model.getType(), jsonObject);
         } catch (IOException e) {

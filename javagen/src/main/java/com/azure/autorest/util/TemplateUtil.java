@@ -20,12 +20,12 @@ import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.Templates;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonWriter;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -40,8 +40,6 @@ import java.util.stream.Collectors;
 public class TemplateUtil {
 
     private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), TemplateUtil.class);
-
-    private static final ObjectMapper PRETTY_PRINT_MAPPER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 
     // begin of constant for template replacement, used in ResourceUtil.loadTextFromResource
     public static final String SERVICE_NAME = "service-name";
@@ -81,9 +79,12 @@ public class TemplateUtil {
      * @return the JSON string
      */
     public static String prettyPrintToJson(Object jsonObject) {
-        try {
-            return PRETTY_PRINT_MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
-        } catch (JsonProcessingException e) {
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+            jsonWriter.writeUntyped(jsonObject).flush();
+
+            return outputStream.toString(StandardCharsets.UTF_8);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
