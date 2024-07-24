@@ -19,7 +19,7 @@ public class ErrorClientModel {
 
     }
 
-    private static final ClientModel MANAGEMENT_ERROR = new ClientModel.Builder()
+    public static final ClientModel MANAGEMENT_ERROR = new ClientModel.Builder()
         .name(FluentType.MANAGEMENT_ERROR.getName())
         .packageName("com.azure.core.management.exception")
         .properties(Arrays.asList(

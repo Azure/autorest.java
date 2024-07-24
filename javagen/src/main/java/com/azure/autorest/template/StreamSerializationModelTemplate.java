@@ -53,6 +53,7 @@ import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstruct
  */
 public class StreamSerializationModelTemplate extends ModelTemplate {
     private static final StreamSerializationModelTemplate INSTANCE = new StreamSerializationModelTemplate();
+    private static final String READ_MANAGEMENT_ERROR_METHOD_NAME = "fromJson0";
 
     // TODO (alzimmer): Future enhancements:
     //  - Create a utility class in the implementation package containing base serialization for polymorphic types.
@@ -227,6 +228,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
             writeFromJson(classBlock, model, propertiesManager, settings,
                 Templates.getModelTemplate()::addGeneratedAnnotation);
+            if (isManagementErrorSubclass(model, settings)) {
+                writeManagementErrorDeserializationMethod(classBlock, propertiesManager, settings);
+            }
         }
     }
 
@@ -728,7 +732,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     /*
      * Writes the fromJson(JsonReader) implementation.
      */
-    private static void writeFromJson(JavaClass classBlock, ClientModel model,
+    private void writeFromJson(JavaClass classBlock, ClientModel model,
         ClientModelPropertiesManager propertiesManager, JavaSettings settings,
         Consumer<JavaClass> addGeneratedAnnotation) {
         // All classes will create a public fromJson(JsonReader) method that initiates reading.
@@ -760,6 +764,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
     }
 
+    /*
+     * Writes the readManagementError(JsonReader) implementation for ManagementError subclass.
+     */
+    private void writeManagementErrorDeserializationMethod(JavaClass classBlock, ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        classBlock.staticMethod(
+            JavaVisibility.Private,
+            propertiesManager.getModel().getName() + " " + READ_MANAGEMENT_ERROR_METHOD_NAME + "(JsonReader reader) throws IOException",
+            methodBlock -> writeFromJsonDeserialization0(methodBlock, propertiesManager, settings));
+    }
+
     /**
      * Writes a super type's {@code fromJson(JsonReader)} method.
      *
@@ -769,7 +783,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param settings The Autorest generation settings.
      * @param addGeneratedAnnotation Callback that adds {@code @Generated} annotation to a code block.
      */
-    private static void writeSuperTypeFromJson(JavaClass classBlock, ClientModel model,
+    private void writeSuperTypeFromJson(JavaClass classBlock, ClientModel model,
         ClientModelPropertiesManager propertiesManager, JavaSettings settings,
         Consumer<JavaClass> addGeneratedAnnotation) {
         // Handling polymorphic fields while determining which subclass, or the class itself, to deserialize handles the
@@ -888,68 +902,107 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param settings The Autorest generation settings.
      * @param addGeneratedAnnotation Callback that adds {@code @Generated} annotation to a code block.
      */
-    private static void writeTerminalTypeFromJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
+    private void writeTerminalTypeFromJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         JavaSettings settings, Consumer<JavaClass> addGeneratedAnnotation) {
         readJsonObject(classBlock, propertiesManager, false,
             methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings),
             addGeneratedAnnotation);
     }
 
-    private static void writeFromJsonDeserialization(JavaBlock methodBlock,
+    private void writeFromJsonDeserialization(JavaBlock methodBlock,
         ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
-        boolean polymorphicJsonMergePatchScenario = propertiesManager.getModel().isPolymorphic()
-            && ClientModelUtil.isJsonMergePatchModel(propertiesManager.getModel(), settings);
         // Add the deserialization logic.
         methodBlock.indent(() -> {
-            // Initialize local variables to track what has been deserialized.
-            initializeLocalVariables(methodBlock, propertiesManager, false, settings);
+            if (isManagementErrorSubclass(propertiesManager.getModel(), settings)) {
+                writeManagementErrorAdaption(methodBlock, propertiesManager);
+            } else {
+                writeFromJsonDeserialization0(methodBlock, propertiesManager, settings);
+            }
+        });
+    }
 
-            // Add the outermost while loop to read the JSON object.
-            String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
-            addReaderWhileLoop(methodBlock, true, fieldNameVariableName, false, whileBlock -> {
-                // Loop over all properties and generate their deserialization handling.
-                AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(null);
+    private static void writeManagementErrorAdaption(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager) {
+        methodBlock.line("JsonReader bufferedReader = reader.bufferObject();");
+        methodBlock.line("bufferedReader.nextToken();");
 
-                BiConsumer<ClientModelProperty, Boolean> consumer = (property, fromSuper) ->
-                    handleJsonPropertyDeserialization(propertiesManager.getModel(), property,
-                        propertiesManager.getDeserializedModelName(), whileBlock, ifBlockReference,
-                        fieldNameVariableName, fromSuper, propertiesManager.hasConstructorArguments(), settings,
-                        polymorphicJsonMergePatchScenario);
-
-                // Constants are skipped as they aren't deserialized.
-                propertiesManager.forEachSuperRequiredProperty(property -> {
-                    if (property.isConstant()) {
-                        return;
-                    }
-
-                    consumer.accept(property, true);
+        String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
+        addReaderWhileLoop("bufferedReader", methodBlock, true, fieldNameVariableName, false, whileBlock -> {
+            methodBlock
+                .ifBlock("\"error\".equals(" + fieldNameVariableName + ")", ifAction -> {
+                    ifAction.line("return " + READ_MANAGEMENT_ERROR_METHOD_NAME + "(bufferedReader);");
+                }).elseBlock(elseAction -> {
+                    elseAction.line("bufferedReader.skipChildren();");
                 });
-                propertiesManager.forEachSuperSetterProperty(property -> consumer.accept(property, true));
-                propertiesManager.forEachRequiredProperty(property -> {
-                    if (property.isConstant()) {
-                        return;
-                    }
-                    consumer.accept(property, false);
-                });
-                propertiesManager.forEachSetterProperty(property -> consumer.accept(property, false));
+        });
 
-                JavaIfBlock ifBlock = ifBlockReference.get();
+        methodBlock.methodReturn(READ_MANAGEMENT_ERROR_METHOD_NAME + "(bufferedReader.reset())");
+    }
 
-                handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
-                    methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
-                    propertiesManager.getJsonReaderFieldNameVariableName(), propertiesManager.hasConstructorArguments(),
-                    settings, polymorphicJsonMergePatchScenario);
+    private static void writeFromJsonDeserialization0(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        // Initialize local variables to track what has been deserialized.
+        initializeLocalVariables(methodBlock, propertiesManager, false, settings);
 
-                // All properties have been checked for, add an else block that will either ignore unknown properties
-                // or add them into an additional properties bag.
-                ClientModelProperty additionalProperty = getAdditionalPropertiesPropertyInModelOrFromSuper(propertiesManager);
-                handleUnknownJsonFieldDeserialization(whileBlock, ifBlock, additionalProperty,
-                    propertiesManager.getJsonReaderFieldNameVariableName());
+        boolean polymorphicJsonMergePatchScenario = propertiesManager.getModel().isPolymorphic()
+            && ClientModelUtil.isJsonMergePatchModel(propertiesManager.getModel(), settings);
+
+        String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
+
+        // Add the outermost while loop to read the JSON object.
+        addReaderWhileLoop(methodBlock, true, fieldNameVariableName, false, whileBlock -> {
+            // Loop over all properties and generate their deserialization handling.
+            AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(null);
+
+            BiConsumer<ClientModelProperty, Boolean> consumer = (property, fromSuper) ->
+                handleJsonPropertyDeserialization(propertiesManager.getModel(), property,
+                    propertiesManager.getDeserializedModelName(), whileBlock, ifBlockReference,
+                    fieldNameVariableName, fromSuper, propertiesManager.hasConstructorArguments(), settings,
+                    polymorphicJsonMergePatchScenario);
+
+            // Constants are skipped as they aren't deserialized.
+            propertiesManager.forEachSuperRequiredProperty(property -> {
+                if (property.isConstant()) {
+                    return;
+                }
+
+                consumer.accept(property, true);
             });
+            propertiesManager.forEachSuperSetterProperty(property -> {
+                consumer.accept(property, true);
+            });
+            propertiesManager.forEachRequiredProperty(property -> {
+                if (property.isConstant()) {
+                    return;
+                }
+                consumer.accept(property, false);
+            });
+            propertiesManager.forEachSetterProperty(property -> consumer.accept(property, false));
+
+            JavaIfBlock ifBlock = ifBlockReference.get();
+
+            handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
+                methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
+                propertiesManager.getJsonReaderFieldNameVariableName(), propertiesManager.hasConstructorArguments(),
+                settings, polymorphicJsonMergePatchScenario);
+
+            // All properties have been checked for, add an else block that will either ignore unknown properties
+            // or add them into an additional properties bag.
+            ClientModelProperty additionalProperty = getAdditionalPropertiesPropertyInModelOrFromSuper(propertiesManager);
+            handleUnknownJsonFieldDeserialization(whileBlock, ifBlock, additionalProperty,
+                propertiesManager.getJsonReaderFieldNameVariableName());
         });
 
         // Add the validation and return logic.
         handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+    }
+
+    /**
+     * Whether the given model is subclass of ManagementError, which needs special deserialization adaption.
+     * @param model the model to check
+     * @param settings JavaSettings instance
+     * @return whether the given model is subclass of ManagementError
+     */
+    protected boolean isManagementErrorSubclass(ClientModel model, JavaSettings settings) {
+        return false;
     }
 
     /**
@@ -1038,7 +1091,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 });
                 propertiesManager.forEachSuperSetterProperty(property -> {
                     if (readOnlyNotInCtor(propertiesManager.getModel(), property, settings)) {
-                        initializeShadowPropertyLocalVariable(methodBlock, property, settings);
+                        initializeShadowPropertyLocalVariable(methodBlock, property);
                     } else {
                         initializeLocalVariable(methodBlock, property, true, settings);
                     }
@@ -1068,7 +1121,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     /*
      * Shadow properties from parent should be initialized as wired type.
      */
-    private static void initializeShadowPropertyLocalVariable(JavaBlock methodBlock, ClientModelProperty property, JavaSettings settings) {
+    private static void initializeShadowPropertyLocalVariable(JavaBlock methodBlock, ClientModelProperty property) {
         IType type = property.getWireType();
         String defaultValue = property.isPolymorphicDiscriminator()
                 ? property.getDefaultValue() : type.defaultValueExpression();
@@ -1105,9 +1158,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void addReaderWhileLoop(JavaBlock methodBlock, boolean initializeFieldNameVariable,
         String fieldNameVariableName, boolean isXml, Consumer<JavaBlock> whileBlock) {
+        addReaderWhileLoop("reader", methodBlock, initializeFieldNameVariable, fieldNameVariableName,
+                isXml, whileBlock);
+    }
+
+    /**
+     * Adds the while loop that handles reading the JSON object until it is fully consumed.
+     *
+     * @param readerVariableName The name of the local reader variable.
+     * @param methodBlock The method handling deserialization.
+     * @param initializeFieldNameVariable Whether the {@code fieldNameVariableName} variable needs to be initialized. If
+     * this is a nested while loop the variable doesn't need to be initialized.
+     * @param fieldNameVariableName The name for the variable that tracks the JSON field name.
+     * @param isXml Whether the reader while loop is for XML reading.
+     * @param whileBlock The consumer that adds deserialization logic into the while loop.
+     */
+    private static void addReaderWhileLoop(String readerVariableName, JavaBlock methodBlock, boolean initializeFieldNameVariable,
+        String fieldNameVariableName, boolean isXml, Consumer<JavaBlock> whileBlock) {
         String whileCheck = isXml
-            ? "reader.nextElement() != XmlToken.END_ELEMENT"
-            : "reader.nextToken() != JsonToken.END_OBJECT";
+            ? readerVariableName + ".nextElement() != XmlToken.END_ELEMENT"
+            : readerVariableName + ".nextToken() != JsonToken.END_OBJECT";
 
         methodBlock.block("while (" + whileCheck + ")", whileAction -> {
             String fieldNameInitialization = "";
@@ -1115,11 +1185,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 fieldNameInitialization = isXml ? "QName" : "String";
             }
 
-            methodBlock.line("%s %s = reader.get%sName();", fieldNameInitialization, fieldNameVariableName,
-                isXml ? "Element" : "Field");
+            methodBlock.line("%s %s = %s.get%sName();", fieldNameInitialization, fieldNameVariableName,
+                    readerVariableName, isXml ? "Element" : "Field");
 
             if (!isXml) {
-                methodBlock.line("reader" + ".nextToken();");
+                methodBlock.line(readerVariableName + ".nextToken();");
             }
             methodBlock.line("");
 
