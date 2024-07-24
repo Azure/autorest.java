@@ -81,8 +81,10 @@ model EyeProperties {
 @doc("The third level model SawShark in polymorphic multiple levels inheritance.")
 model SawShark extends Shark {
   sharktype: "saw";
+
   // this is a duplicate property from Fish, with different visibility
   dna: string;
+
   // this is a duplicate property from Fish, with same visibility
   age: int32;
 }
