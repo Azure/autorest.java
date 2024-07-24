@@ -77,8 +77,10 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
+  Interface,
   Model,
   ModelProperty,
+  Namespace,
   Operation,
   Program,
   Scalar,
@@ -181,9 +183,12 @@ export class CodeModelBuilder {
   private program: Program;
   private typeNameOptions: TypeNameOptions;
   private namespace: string;
-  private sdkContext: SdkContext;
+  private sdkContext!: SdkContext;
   private options: EmitterOptions;
   private codeModel: CodeModel;
+  private emitterContext: EmitContext<EmitterOptions>;
+  private serviceNamespace: Namespace | Interface | Operation;
+
   private loggingEnabled: boolean = false;
 
   readonly schemaCache = new ProcessingCache((type: SdkType, name: string) =>
@@ -198,6 +203,7 @@ export class CodeModelBuilder {
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
+    this.emitterContext = context;
     if (this.options["dev-options"]?.loglevel) {
       this.loggingEnabled = true;
     }
@@ -206,15 +212,15 @@ export class CodeModelBuilder {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
-    this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
       throw Error("Cannot emit yaml for a namespace that doesn't exist.");
     }
+    this.serviceNamespace = serviceNamespace;
 
-    // java namespace
     this.namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
+    // java namespace
     const javaNamespace = getJavaNamespace(this.namespace);
 
     const namespace1 = this.namespace;
@@ -222,7 +228,7 @@ export class CodeModelBuilder {
       // shorten type names by removing TypeSpec and service namespace
       namespaceFilter(ns) {
         const name = getNamespaceFullName(ns);
-        return name !== "Cadl" && name !== namespace1;
+        return name !== "TypeSpec" && name !== namespace1;
       },
     };
 
@@ -246,16 +252,18 @@ export class CodeModelBuilder {
         },
       },
     });
-
-    // auth
-    // TODO: it is not very likely, but different client could have different auth
-    const auth = getAuthentication(this.program, serviceNamespace);
-    if (auth) {
-      this.processAuth(auth);
-    }
   }
 
   public async build(): Promise<CodeModel> {
+    this.sdkContext = createSdkContext(this.emitterContext, "@azure-tools/typespec-java");
+
+    // auth
+    // TODO: it is not very likely, but different client could have different auth
+    const auth = getAuthentication(this.program, this.serviceNamespace);
+    if (auth) {
+      this.processAuth(auth);
+    }
+
     this.operationExamples = await loadExamples(this.program, this.options, this.sdkContext);
 
     if (this.sdkContext.arm) {
