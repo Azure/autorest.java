@@ -958,15 +958,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     fieldNameVariableName, fromSuper, propertiesManager.hasConstructorArguments(), settings,
                     polymorphicJsonMergePatchScenario);
 
+            Set<String> modelProperties = propertiesManager.getModel().getProperties()
+                    .stream()
+                    .map(ClientModelProperty::getSerializedName)
+                    .collect(Collectors.toSet());
+
             // Constants are skipped as they aren't deserialized.
             propertiesManager.forEachSuperRequiredProperty(property -> {
-                if (property.isConstant()) {
+                if (property.isConstant()
+                        // Shadowed properties in parent classes are skipped as their duplicate variants will be deserialized
+                        || modelProperties.contains(property.getSerializedName())) {
                     return;
                 }
 
                 consumer.accept(property, true);
             });
             propertiesManager.forEachSuperSetterProperty(property -> {
+                // Shadowed properties in parent classes are skipped as their duplicate variants will be deserialized
+                if (modelProperties.contains(property.getSerializedName())) {
+                    return;
+                }
                 consumer.accept(property, true);
             });
             propertiesManager.forEachRequiredProperty(property -> {
