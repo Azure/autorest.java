@@ -53,7 +53,7 @@ import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstruct
  */
 public class StreamSerializationModelTemplate extends ModelTemplate {
     private static final StreamSerializationModelTemplate INSTANCE = new StreamSerializationModelTemplate();
-    private static final String READ_MANAGEMENT_ERROR_METHOD_NAME = "fromJson0";
+    private static final String READ_MANAGEMENT_ERROR_METHOD_NAME = "readManagementError";
 
     // TODO (alzimmer): Future enhancements:
     //  - Create a utility class in the implementation package containing base serialization for polymorphic types.
@@ -229,7 +229,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writeFromJson(classBlock, model, propertiesManager, settings,
                 Templates.getModelTemplate()::addGeneratedAnnotation);
             if (isManagementErrorSubclass(model, settings)) {
-                writeManagementErrorDeserializationMethod(classBlock, propertiesManager, settings);
+                writeManagementErrorDeserializationMethod(classBlock, propertiesManager, settings,
+                    Templates.getModelTemplate()::addGeneratedAnnotation);
             }
         }
     }
@@ -767,11 +768,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     /*
      * Writes the readManagementError(JsonReader) implementation for ManagementError subclass.
      */
-    private void writeManagementErrorDeserializationMethod(JavaClass classBlock, ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+    private void writeManagementErrorDeserializationMethod(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
+       JavaSettings settings, Consumer<JavaClass> addGeneratedAnnotation) {
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.staticMethod(
             JavaVisibility.Private,
-            propertiesManager.getModel().getName() + " " + READ_MANAGEMENT_ERROR_METHOD_NAME + "(JsonReader reader) throws IOException",
-            methodBlock -> writeFromJsonDeserialization0(methodBlock, propertiesManager, settings));
+            propertiesManager.getModel().getName() + " " + READ_MANAGEMENT_ERROR_METHOD_NAME + "(JsonReader jsonReader) throws IOException",
+            methodBlock -> readJsonObjectMethodBody(methodBlock,
+                    deserializationBlock -> writeFromJsonDeserialization0(deserializationBlock, propertiesManager, settings)));
     }
 
     /**
@@ -1064,16 +1068,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         addGeneratedAnnotation.accept(classBlock);
         classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader) throws IOException", methodBlock -> {
-            // For now, use the basic readObject which will return null if the JsonReader is pointing to JsonToken.NULL.
-            //
-            // Support for a default value if null will need to be supported and for objects that get their value
-            // from a JSON value instead of JSON object or are an array type.
-            methodBlock.line("return jsonReader.readObject(reader -> {");
-
-            deserializationBlock.accept(methodBlock);
-
-            methodBlock.line("});");
+            readJsonObjectMethodBody(methodBlock, deserializationBlock);
         });
+    }
+
+    private static void readJsonObjectMethodBody(JavaBlock methodBlock, Consumer<JavaBlock> deserializationBlock) {
+        // For now, use the basic readObject which will return null if the JsonReader is pointing to JsonToken.NULL.
+        //
+        // Support for a default value if null will need to be supported and for objects that get their value
+        // from a JSON value instead of JSON object or are an array type.
+        methodBlock.line("return jsonReader.readObject(reader -> {");
+
+        deserializationBlock.accept(methodBlock);
+
+        methodBlock.line("});");
     }
 
     /**
