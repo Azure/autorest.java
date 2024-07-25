@@ -257,7 +257,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync() {
@@ -271,7 +271,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError200ValidWithResponseAsync(Context context) {
@@ -288,7 +288,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError200ValidAsync() {
@@ -303,7 +303,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError200ValidAsync(Context context) {
@@ -318,7 +318,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model204NoModelDefaultError200ValidWithResponse(Context context) {
@@ -330,7 +330,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError200Valid() {
@@ -342,7 +342,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '204'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync() {
@@ -356,7 +356,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '204'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError204ValidWithResponseAsync(Context context) {
@@ -373,7 +373,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '204'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError204ValidAsync() {
@@ -388,7 +388,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '204'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError204ValidAsync(Context context) {
@@ -403,7 +403,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '204'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model204NoModelDefaultError204ValidWithResponse(Context context) {
@@ -415,7 +415,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '204'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError204Valid() {
@@ -427,7 +427,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync() {
@@ -441,7 +441,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError201InvalidWithResponseAsync(Context context) {
@@ -458,7 +458,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError201InvalidAsync() {
@@ -473,7 +473,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError201InvalidAsync(Context context) {
@@ -488,7 +488,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model204NoModelDefaultError201InvalidWithResponse(Context context) {
@@ -500,7 +500,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError201Invalid() {
@@ -512,7 +512,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync() {
@@ -526,7 +526,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError202NoneWithResponseAsync(Context context) {
@@ -543,7 +543,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError202NoneAsync() {
@@ -558,7 +558,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError202NoneAsync(Context context) {
@@ -573,7 +573,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model204NoModelDefaultError202NoneWithResponse(Context context) {
@@ -585,7 +585,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError202None() {
@@ -597,7 +597,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync() {
@@ -611,7 +611,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model204NoModelDefaultError400ValidWithResponseAsync(Context context) {
@@ -628,7 +628,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError400ValidAsync() {
@@ -643,7 +643,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model204NoModelDefaultError400ValidAsync(Context context) {
@@ -658,7 +658,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model204NoModelDefaultError400ValidWithResponse(Context context) {
@@ -670,7 +670,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model204NoModelDefaultError400Valid() {
@@ -682,7 +682,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync() {
@@ -696,7 +696,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError200ValidWithResponseAsync(Context context) {
@@ -713,7 +713,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError200ValidAsync() {
@@ -728,7 +728,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError200ValidAsync(Context context) {
@@ -743,7 +743,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model201ModelDefaultError200ValidWithResponse(Context context) {
@@ -755,7 +755,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError200Valid() {
@@ -767,7 +767,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync() {
@@ -781,7 +781,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError201ValidWithResponseAsync(Context context) {
@@ -798,7 +798,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError201ValidAsync() {
@@ -813,7 +813,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError201ValidAsync(Context context) {
@@ -828,7 +828,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model201ModelDefaultError201ValidWithResponse(Context context) {
@@ -840,7 +840,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError201Valid() {
@@ -852,7 +852,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync() {
@@ -866,7 +866,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200Model201ModelDefaultError400ValidWithResponseAsync(Context context) {
@@ -883,7 +883,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError400ValidAsync() {
@@ -898,7 +898,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200Model201ModelDefaultError400ValidAsync(Context context) {
@@ -913,7 +913,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200Model201ModelDefaultError400ValidWithResponse(Context context) {
@@ -925,7 +925,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200Model201ModelDefaultError400Valid() {
@@ -937,7 +937,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
@@ -952,7 +952,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(Context context) {
@@ -969,7 +969,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
@@ -984,7 +984,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(Context context) {
@@ -999,7 +999,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(Context context) {
@@ -1011,7 +1011,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
@@ -1023,7 +1023,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
@@ -1038,7 +1038,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(Context context) {
@@ -1055,7 +1055,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
@@ -1070,7 +1070,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(Context context) {
@@ -1085,7 +1085,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(Context context) {
@@ -1097,7 +1097,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
@@ -1109,7 +1109,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
@@ -1124,7 +1124,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(Context context) {
@@ -1141,7 +1141,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
@@ -1156,7 +1156,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(Context context) {
@@ -1171,7 +1171,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(Context context) {
@@ -1183,7 +1183,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
@@ -1195,7 +1195,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
@@ -1210,7 +1210,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(Context context) {
@@ -1227,7 +1227,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
@@ -1242,7 +1242,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Context context) {
@@ -1257,7 +1257,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(Context context) {
@@ -1269,7 +1269,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
@@ -1281,7 +1281,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync() {
@@ -1295,7 +1295,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError202NoneWithResponseAsync(Context context) {
@@ -1312,7 +1312,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError202NoneAsync() {
@@ -1326,7 +1326,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError202NoneAsync(Context context) {
@@ -1340,7 +1340,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no payload for Accepted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError202NoneWithResponse(Context context) {
@@ -1363,7 +1363,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponseAsync() {
@@ -1377,7 +1377,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError204NoneWithResponseAsync(Context context) {
@@ -1394,7 +1394,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError204NoneAsync() {
@@ -1408,7 +1408,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError204NoneAsync(Context context) {
@@ -1422,7 +1422,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no payload for Accepted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError204NoneWithResponse(Context context) {
@@ -1445,7 +1445,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync() {
@@ -1459,7 +1459,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultError400ValidWithResponseAsync(Context context) {
@@ -1476,7 +1476,7 @@ public final class MultipleResponses {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError400ValidAsync() {
@@ -1490,7 +1490,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultError400ValidAsync(Context context) {
@@ -1504,7 +1504,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no payload for Accepted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultError400ValidWithResponse(Context context) {
@@ -1527,7 +1527,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted, but this operation will return {'property': 'value'} along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponseAsync() {
@@ -1541,7 +1542,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted, but this operation will return {'property': 'value'} along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone202InvalidWithResponseAsync(Context context) {
@@ -1557,7 +1559,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted, but this operation will return {'property': 'value'} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone202InvalidAsync() {
@@ -1571,7 +1574,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted, but this operation will return {'property': 'value'} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone202InvalidAsync(Context context) {
@@ -1585,7 +1589,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no payload for Accepted, but this operation will return {'property': 'value'} along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone202InvalidWithResponse(Context context) {
@@ -1608,7 +1613,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync() {
@@ -1622,7 +1627,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone204NoneWithResponseAsync(Context context) {
@@ -1638,7 +1643,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone204NoneAsync() {
@@ -1652,7 +1657,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone204NoneAsync(Context context) {
@@ -1666,7 +1671,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no payload for Accepted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone204NoneWithResponse(Context context) {
@@ -1689,7 +1694,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponseAsync() {
@@ -1703,7 +1708,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400NoneWithResponseAsync(Context context) {
@@ -1719,7 +1724,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400NoneAsync() {
@@ -1733,7 +1738,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400NoneAsync(Context context) {
@@ -1747,7 +1752,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no payload for Accepted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400NoneWithResponse(Context context) {
@@ -1770,7 +1775,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync() {
@@ -1784,7 +1789,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no payload for Accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get202None204NoneDefaultNone400InvalidWithResponseAsync(Context context) {
@@ -1800,7 +1805,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400InvalidAsync() {
@@ -1814,7 +1819,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no payload for Accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get202None204NoneDefaultNone400InvalidAsync(Context context) {
@@ -1828,7 +1833,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no payload for Accepted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get202None204NoneDefaultNone400InvalidWithResponse(Context context) {
@@ -1851,7 +1856,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200ValidWithResponseAsync() {
@@ -1865,7 +1870,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200ValidWithResponseAsync(Context context) {
@@ -1882,7 +1887,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200ValidAsync() {
@@ -1896,7 +1901,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200ValidAsync(Context context) {
@@ -1910,7 +1915,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> getDefaultModelA200ValidWithResponse(Context context) {
@@ -1922,7 +1927,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException getDefaultModelA200Valid() {
@@ -1934,7 +1939,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200NoneWithResponseAsync() {
@@ -1948,7 +1953,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> getDefaultModelA200NoneWithResponseAsync(Context context) {
@@ -1965,7 +1970,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return no payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200NoneAsync() {
@@ -1979,7 +1984,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return no payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> getDefaultModelA200NoneAsync(Context context) {
@@ -1993,7 +1998,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return no payload along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> getDefaultModelA200NoneWithResponse(Context context) {
@@ -2005,7 +2010,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return no payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException getDefaultModelA200None() {
@@ -2017,7 +2022,8 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync() {
@@ -2031,7 +2037,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400ValidWithResponseAsync(Context context) {
@@ -2048,7 +2055,7 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400ValidAsync() {
@@ -2062,7 +2069,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400ValidAsync(Context context) {
@@ -2076,7 +2083,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return will not happen, server will return 400 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400ValidWithResponse(Context context) {
@@ -2099,7 +2106,8 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400NoneWithResponseAsync() {
@@ -2113,7 +2121,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultModelA400NoneWithResponseAsync(Context context) {
@@ -2130,7 +2139,7 @@ public final class MultipleResponses {
      * 
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400NoneAsync() {
@@ -2144,7 +2153,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultModelA400NoneAsync(Context context) {
@@ -2158,7 +2167,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws MyExceptionException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return will not happen, server will return 400 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultModelA400NoneWithResponse(Context context) {
@@ -2181,7 +2190,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return return invalid payload {'statusCode': '200'} along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync() {
@@ -2195,7 +2205,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return return invalid payload {'statusCode': '200'} along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200InvalidWithResponseAsync(Context context) {
@@ -2211,7 +2222,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return return invalid payload {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200InvalidAsync() {
@@ -2225,7 +2236,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return return invalid payload {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200InvalidAsync(Context context) {
@@ -2239,7 +2250,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return return invalid payload {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200InvalidWithResponse(Context context) {
@@ -2262,7 +2273,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync() {
@@ -2276,7 +2287,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone200NoneWithResponseAsync(Context context) {
@@ -2292,7 +2303,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return return no payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200NoneAsync() {
@@ -2306,7 +2317,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return return no payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone200NoneAsync(Context context) {
@@ -2320,7 +2331,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return return no payload along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone200NoneWithResponse(Context context) {
@@ -2343,7 +2354,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400InvalidWithResponseAsync() {
@@ -2357,7 +2369,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400InvalidWithResponseAsync(Context context) {
@@ -2373,7 +2386,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400InvalidAsync() {
@@ -2387,7 +2400,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400InvalidAsync(Context context) {
@@ -2401,7 +2414,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return will not happen, server will return 400 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400InvalidWithResponse(Context context) {
@@ -2424,7 +2437,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync() {
@@ -2438,7 +2452,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return will not happen, server will return 400 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getDefaultNone400NoneWithResponseAsync(Context context) {
@@ -2454,7 +2469,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400NoneAsync() {
@@ -2468,7 +2483,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return will not happen, server will return 400 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getDefaultNone400NoneAsync(Context context) {
@@ -2482,7 +2497,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return will not happen, server will return 400 along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getDefaultNone400NoneWithResponse(Context context) {
@@ -2506,7 +2521,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200NoneWithResponseAsync() {
@@ -2521,7 +2536,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200NoneWithResponseAsync(Context context) {
@@ -2539,7 +2554,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return no payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200NoneAsync() {
@@ -2554,7 +2569,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return no payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200NoneAsync(Context context) {
@@ -2569,7 +2584,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return no payload along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200ModelA200NoneWithResponse(Context context) {
@@ -2582,7 +2597,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return no payload.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200None() {
@@ -2594,7 +2609,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '200'} along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200ValidWithResponseAsync() {
@@ -2608,7 +2624,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '200'} along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200ValidWithResponseAsync(Context context) {
@@ -2625,7 +2642,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200ValidAsync() {
@@ -2639,7 +2656,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '200'} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200ValidAsync(Context context) {
@@ -2653,7 +2670,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return a respose with valid payload {'statusCode': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200ModelA200ValidWithResponse(Context context) {
@@ -2665,7 +2682,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return a respose with valid payload {'statusCode': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200Valid() {
@@ -2677,7 +2694,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '200'} along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200InvalidWithResponseAsync() {
@@ -2691,7 +2709,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '200'} along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA200InvalidWithResponseAsync(Context context) {
@@ -2708,7 +2727,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '200'} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200InvalidAsync() {
@@ -2722,7 +2742,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '200'} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA200InvalidAsync(Context context) {
@@ -2736,7 +2757,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '200'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200ModelA200InvalidWithResponse(Context context) {
@@ -2748,7 +2769,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '200'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA200Invalid() {
@@ -2760,7 +2781,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload, and an unmodeled 400 response along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400NoneWithResponseAsync() {
@@ -2774,7 +2796,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return no payload, and an unmodeled 400 response along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400NoneWithResponseAsync(Context context) {
@@ -2791,7 +2814,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return no payload, and an unmodeled 400 response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400NoneAsync() {
@@ -2805,7 +2828,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return no payload, and an unmodeled 400 response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400NoneAsync(Context context) {
@@ -2819,7 +2842,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return no payload, and an unmodeled 400 response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200ModelA400NoneWithResponse(Context context) {
@@ -2831,7 +2854,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return no payload, and an unmodeled 400 response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400None() {
@@ -2843,7 +2866,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '400'} but error status code 400, which is unmodeled
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400ValidWithResponseAsync() {
@@ -2857,7 +2881,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '400'} but error status code 400, which is unmodeled
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400ValidWithResponseAsync(Context context) {
@@ -2874,7 +2899,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '400'} but error status code 400, which is unmodeled
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400ValidAsync() {
@@ -2888,7 +2914,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '400'} but error status code 400, which is unmodeled
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400ValidAsync(Context context) {
@@ -2902,7 +2929,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return a respose with valid payload {'statusCode': '400'} but error status code 400, which is unmodeled
+     * along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200ModelA400ValidWithResponse(Context context) {
@@ -2914,7 +2942,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return a respose with valid payload {'statusCode': '400'} but error status code 400, which is unmodeled.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400Valid() {
@@ -2926,7 +2954,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '400'} along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400InvalidWithResponseAsync() {
@@ -2940,7 +2969,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '400'} along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA400InvalidWithResponseAsync(Context context) {
@@ -2957,7 +2987,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '400'} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400InvalidAsync() {
@@ -2971,7 +3002,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '400'} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA400InvalidAsync(Context context) {
@@ -2985,7 +3017,7 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '400'} along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200ModelA400InvalidWithResponse(Context context) {
@@ -2997,7 +3029,7 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return a respose with invalid payload {'statusCodeInvalid': '400'}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA400Invalid() {
@@ -3009,7 +3041,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '202'} but unmodeled success status code 202, which is
+     * unmodeled along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA202ValidWithResponseAsync() {
@@ -3023,7 +3056,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '202'} but unmodeled success status code 202, which is
+     * unmodeled along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyException>> get200ModelA202ValidWithResponseAsync(Context context) {
@@ -3040,7 +3074,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '202'} but unmodeled success status code 202, which is
+     * unmodeled on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA202ValidAsync() {
@@ -3054,7 +3089,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return return a respose with valid payload {'statusCode': '202'} but unmodeled success status code 202, which is
+     * unmodeled on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<MyException> get200ModelA202ValidAsync(Context context) {
@@ -3068,7 +3104,8 @@ public final class MultipleResponses {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return return a respose with valid payload {'statusCode': '202'} but unmodeled success status code 202, which is
+     * unmodeled along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyException> get200ModelA202ValidWithResponse(Context context) {
@@ -3080,7 +3117,8 @@ public final class MultipleResponses {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return return a respose with valid payload {'statusCode': '202'} but unmodeled success status code 202, which is
+     * unmodeled.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public MyException get200ModelA202Valid() {

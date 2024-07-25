@@ -269,8 +269,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return resource 'ChildExtensionResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceUri,
@@ -313,8 +313,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return resource 'ChildExtensionResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceUri,
@@ -356,7 +356,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of extensionResource of Top Level Arm Resource.
+     * @return the {@link PollerFlux} for polling of resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ChildExtensionResourceInner>, ChildExtensionResourceInner> beginCreateOrUpdateAsync(
@@ -380,7 +380,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of extensionResource of Top Level Arm Resource.
+     * @return the {@link PollerFlux} for polling of resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ChildExtensionResourceInner>, ChildExtensionResourceInner> beginCreateOrUpdateAsync(
@@ -404,7 +404,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of extensionResource of Top Level Arm Resource.
+     * @return the {@link SyncPoller} for polling of resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ChildExtensionResourceInner>, ChildExtensionResourceInner> beginCreateOrUpdate(
@@ -425,7 +425,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of extensionResource of Top Level Arm Resource.
+     * @return the {@link SyncPoller} for polling of resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ChildExtensionResourceInner>, ChildExtensionResourceInner> beginCreateOrUpdate(
@@ -447,7 +447,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource on successful completion of {@link Mono}.
+     * @return resource 'ChildExtensionResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ChildExtensionResourceInner> createOrUpdateAsync(String resourceUri, String topLevelArmResourceName,
@@ -468,7 +468,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource on successful completion of {@link Mono}.
+     * @return resource 'ChildExtensionResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ChildExtensionResourceInner> createOrUpdateAsync(String resourceUri, String topLevelArmResourceName,
@@ -487,7 +487,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ChildExtensionResourceInner createOrUpdate(String resourceUri, String topLevelArmResourceName,
@@ -506,7 +506,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ChildExtensionResourceInner createOrUpdate(String resourceUri, String topLevelArmResourceName,
@@ -525,7 +525,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response} on successful completion of
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
      * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -569,7 +569,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response} on successful completion of
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
      * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -612,7 +612,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource on successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ChildExtensionResourceInner> updateAsync(String resourceUri, String topLevelArmResourceName,
@@ -632,7 +632,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response}.
+     * @return azure operation completed successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ChildExtensionResourceInner> updateWithResponse(String resourceUri, String topLevelArmResourceName,
@@ -651,7 +651,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ChildExtensionResourceInner update(String resourceUri, String topLevelArmResourceName,
@@ -669,7 +669,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return resource deleted successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceUri, String topLevelArmResourceName,
@@ -706,7 +706,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return resource deleted successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceUri, String topLevelArmResourceName,
@@ -741,7 +741,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceUri, String topLevelArmResourceName,
@@ -762,7 +762,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceUri, String topLevelArmResourceName,
@@ -783,7 +783,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceUri, String topLevelArmResourceName,
@@ -801,7 +801,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceUri, String topLevelArmResourceName,
@@ -819,7 +819,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return resource deleted successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceUri, String topLevelArmResourceName,
@@ -838,7 +838,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return resource deleted successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceUri, String topLevelArmResourceName,
@@ -887,8 +887,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildExtensionResourceInner>>
@@ -922,8 +922,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildExtensionResourceInner>>
@@ -956,7 +956,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<ChildExtensionResourceInner> listByTopLevelArmResourceAsync(String resourceUri,
@@ -974,7 +974,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<ChildExtensionResourceInner> listByTopLevelArmResourceAsync(String resourceUri,
@@ -992,7 +992,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ChildExtensionResourceInner> listByTopLevelArmResource(String resourceUri,
@@ -1009,7 +1009,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ChildExtensionResourceInner> listByTopLevelArmResource(String resourceUri,
@@ -1024,8 +1024,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildExtensionResourceInner>>
@@ -1054,8 +1054,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildExtensionResourceInner>>

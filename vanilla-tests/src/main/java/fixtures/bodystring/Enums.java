@@ -94,7 +94,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody);
@@ -107,7 +107,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> putNotExpandableWithResponseAsync(Colors stringBody, Context context);
@@ -119,7 +119,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putNotExpandableAsync(Colors stringBody);
@@ -132,7 +132,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putNotExpandableAsync(Colors stringBody, Context context);
@@ -145,7 +145,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return empty Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> putNotExpandableWithResponse(Colors stringBody, Context context);
@@ -239,7 +239,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody);
@@ -252,7 +252,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> putReferencedWithResponseAsync(Colors enumStringBody, Context context);
@@ -264,7 +264,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putReferencedAsync(Colors enumStringBody);
@@ -277,7 +277,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putReferencedAsync(Colors enumStringBody, Context context);
@@ -290,7 +290,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return empty Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> putReferencedWithResponse(Colors enumStringBody, Context context);
@@ -381,7 +381,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant enumStringBody);
@@ -394,7 +394,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> putReferencedConstantWithResponseAsync(RefColorConstant enumStringBody, Context context);
@@ -406,7 +406,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putReferencedConstantAsync(RefColorConstant enumStringBody);
@@ -419,7 +419,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Void> putReferencedConstantAsync(RefColorConstant enumStringBody, Context context);
@@ -432,7 +432,7 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return empty Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> putReferencedConstantWithResponse(RefColorConstant enumStringBody, Context context);

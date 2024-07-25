@@ -52,7 +52,7 @@ public final class SharedModelInOperationClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used by both public and internal operation along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -76,7 +76,7 @@ public final class SharedModelInOperationClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used by both public and internal operation along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -94,7 +94,7 @@ public final class SharedModelInOperationClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return used by both public and internal operation.
+     * @return the request has succeeded.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -114,7 +114,7 @@ public final class SharedModelInOperationClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return used by both public and internal operation.
+     * @return the request has succeeded.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

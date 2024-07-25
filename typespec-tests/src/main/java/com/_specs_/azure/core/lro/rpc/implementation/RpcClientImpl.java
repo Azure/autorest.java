@@ -189,8 +189,8 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -235,7 +235,8 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> longRunningRpcWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -280,7 +281,8 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginLongRunningRpcAsync(BinaryData body, RequestOptions requestOptions) {
@@ -333,7 +335,8 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginLongRunningRpc(BinaryData body, RequestOptions requestOptions) {
@@ -386,7 +389,8 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<PollOperationDetails, GenerationResult> beginLongRunningRpcWithModelAsync(BinaryData body,
@@ -441,7 +445,8 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollOperationDetails, GenerationResult> beginLongRunningRpcWithModel(BinaryData body,

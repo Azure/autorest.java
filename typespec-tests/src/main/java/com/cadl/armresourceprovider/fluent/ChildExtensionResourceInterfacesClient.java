@@ -59,7 +59,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of extensionResource of Top Level Arm Resource.
+     * @return the {@link SyncPoller} for polling of resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ChildExtensionResourceInner>, ChildExtensionResourceInner> beginCreateOrUpdate(
@@ -77,7 +77,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of extensionResource of Top Level Arm Resource.
+     * @return the {@link SyncPoller} for polling of resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<ChildExtensionResourceInner>, ChildExtensionResourceInner> beginCreateOrUpdate(
@@ -94,7 +94,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     ChildExtensionResourceInner createOrUpdate(String resourceUri, String topLevelArmResourceName,
@@ -111,7 +111,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return resource 'ChildExtensionResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     ChildExtensionResourceInner createOrUpdate(String resourceUri, String topLevelArmResourceName,
@@ -128,7 +128,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response}.
+     * @return azure operation completed successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<ChildExtensionResourceInner> updateWithResponse(String resourceUri, String topLevelArmResourceName,
@@ -144,7 +144,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     ChildExtensionResourceInner update(String resourceUri, String topLevelArmResourceName,
@@ -159,7 +159,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceUri, String topLevelArmResourceName,
@@ -175,7 +175,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceUri, String topLevelArmResourceName,
@@ -216,7 +216,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<ChildExtensionResourceInner> listByTopLevelArmResource(String resourceUri,
@@ -231,7 +231,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<ChildExtensionResourceInner> listByTopLevelArmResource(String resourceUri,

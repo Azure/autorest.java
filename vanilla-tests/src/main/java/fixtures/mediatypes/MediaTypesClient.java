@@ -253,7 +253,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input,
@@ -272,7 +272,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input,
@@ -296,7 +296,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
@@ -311,7 +311,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType) {
@@ -331,7 +331,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength,
@@ -350,7 +350,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> analyzeBodyWithResponse(ContentType contentType, Flux<ByteBuffer> input, Long contentLength,
@@ -367,7 +367,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
@@ -381,7 +381,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(ContentType contentType) {
@@ -399,7 +399,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, BinaryData input,
@@ -418,7 +418,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, BinaryData input,
@@ -442,7 +442,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, BinaryData input, Long contentLength) {
@@ -460,7 +460,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(ContentType contentType, BinaryData input, Long contentLength,
@@ -479,7 +479,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> analyzeBodyWithResponse(ContentType contentType, BinaryData input, Long contentLength,
@@ -496,7 +496,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(ContentType contentType, BinaryData input, Long contentLength) {
@@ -510,7 +510,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(String source) {
@@ -525,7 +525,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> analyzeBodyWithResponseAsync(String source, Context context) {
@@ -549,7 +549,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(String source) {
@@ -561,7 +561,7 @@ public final class MediaTypesClient {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync() {
@@ -577,7 +577,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> analyzeBodyAsync(String source, Context context) {
@@ -592,7 +592,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> analyzeBodyWithResponse(String source, Context context) {
@@ -606,7 +606,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(String source) {
@@ -618,7 +618,7 @@ public final class MediaTypesClient {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct format.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody() {
@@ -635,7 +635,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType,
@@ -654,7 +654,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType,
@@ -677,7 +677,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, Flux<ByteBuffer> input,
@@ -693,7 +693,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType) {
@@ -713,7 +713,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, Flux<ByteBuffer> input,
@@ -732,7 +732,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(ContentType contentType, Flux<ByteBuffer> input,
@@ -779,7 +779,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType, BinaryData input,
@@ -798,7 +798,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType, BinaryData input,
@@ -821,7 +821,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, BinaryData input, Long contentLength) {
@@ -839,7 +839,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, BinaryData input, Long contentLength,
@@ -858,7 +858,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(ContentType contentType, BinaryData input,
@@ -888,7 +888,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(String source) {
@@ -903,7 +903,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(String source, Context context) {
@@ -926,7 +926,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(String source) {
@@ -938,7 +938,7 @@ public final class MediaTypesClient {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync() {
@@ -954,7 +954,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(String source, Context context) {
@@ -969,7 +969,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(String source, Context context) {
@@ -1008,7 +1008,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received 'text/plain; charset=UTF-8' as contentType along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> contentTypeWithEncodingWithResponseAsync(String input) {
@@ -1023,7 +1024,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received 'text/plain; charset=UTF-8' as contentType along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> contentTypeWithEncodingWithResponseAsync(String input, Context context) {
@@ -1041,7 +1043,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received 'text/plain; charset=UTF-8' as contentType on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> contentTypeWithEncodingAsync(String input) {
@@ -1053,7 +1055,7 @@ public final class MediaTypesClient {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received 'text/plain; charset=UTF-8' as contentType on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> contentTypeWithEncodingAsync() {
@@ -1069,7 +1071,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received 'text/plain; charset=UTF-8' as contentType on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> contentTypeWithEncodingAsync(String input, Context context) {
@@ -1085,7 +1087,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received 'text/plain; charset=UTF-8' as contentType along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> contentTypeWithEncodingWithResponse(String input, Context context) {
@@ -1099,7 +1101,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received 'text/plain; charset=UTF-8' as contentType.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String contentTypeWithEncoding(String input) {
@@ -1111,7 +1113,7 @@ public final class MediaTypesClient {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received 'text/plain; charset=UTF-8' as contentType.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String contentTypeWithEncoding() {
@@ -1129,7 +1131,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
@@ -1149,7 +1152,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
@@ -1178,7 +1182,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Flux<ByteBuffer> message,
@@ -1198,7 +1202,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Flux<ByteBuffer> message,
@@ -1218,7 +1222,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> binaryBodyWithTwoContentTypesWithResponse(ContentType1 contentType,
@@ -1236,7 +1240,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String binaryBodyWithTwoContentTypes(ContentType1 contentType, Flux<ByteBuffer> message,
@@ -1254,7 +1258,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
@@ -1274,7 +1279,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
@@ -1303,7 +1309,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, BinaryData message,
@@ -1323,7 +1329,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, BinaryData message,
@@ -1343,7 +1349,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> binaryBodyWithTwoContentTypesWithResponse(ContentType1 contentType, BinaryData message,
@@ -1361,7 +1367,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String binaryBodyWithTwoContentTypes(ContentType1 contentType, BinaryData message, long contentLength) {
@@ -1378,7 +1384,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
@@ -1398,7 +1405,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
@@ -1427,7 +1435,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Flux<ByteBuffer> message,
@@ -1447,7 +1455,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Flux<ByteBuffer> message,
@@ -1467,7 +1475,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> binaryBodyWithThreeContentTypesWithResponse(ContentType2 contentType,
@@ -1485,7 +1493,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String binaryBodyWithThreeContentTypes(ContentType2 contentType, Flux<ByteBuffer> message,
@@ -1504,7 +1512,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
@@ -1524,7 +1533,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
@@ -1553,7 +1563,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, BinaryData message,
@@ -1573,7 +1583,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, BinaryData message,
@@ -1593,7 +1603,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> binaryBodyWithThreeContentTypesWithResponse(ContentType2 contentType, BinaryData message,
@@ -1611,7 +1621,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String binaryBodyWithThreeContentTypes(ContentType2 contentType, BinaryData message, long contentLength) {
@@ -1629,7 +1639,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Flux<ByteBuffer> message, long contentLength) {
@@ -1647,7 +1658,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Flux<ByteBuffer> message, long contentLength,
@@ -1672,7 +1684,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(Flux<ByteBuffer> message, long contentLength) {
@@ -1690,7 +1702,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(Flux<ByteBuffer> message, long contentLength, Context context) {
@@ -1709,7 +1721,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> bodyThreeTypesWithResponse(Flux<ByteBuffer> message, long contentLength, Context context) {
@@ -1726,7 +1738,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String bodyThreeTypes(Flux<ByteBuffer> message, long contentLength) {
@@ -1743,7 +1755,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(BinaryData message, long contentLength) {
@@ -1761,7 +1774,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(BinaryData message, long contentLength,
@@ -1786,7 +1800,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(BinaryData message, long contentLength) {
@@ -1804,7 +1818,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(BinaryData message, long contentLength, Context context) {
@@ -1823,7 +1837,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> bodyThreeTypesWithResponse(BinaryData message, long contentLength, Context context) {
@@ -1840,7 +1854,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String bodyThreeTypes(BinaryData message, long contentLength) {
@@ -1856,7 +1870,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(String message) {
@@ -1873,7 +1888,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(String message, Context context) {
@@ -1896,7 +1912,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(String message) {
@@ -1913,7 +1929,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(String message, Context context) {
@@ -1930,7 +1946,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> bodyThreeTypesWithResponse(String message, Context context) {
@@ -1946,7 +1962,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String bodyThreeTypes(String message) {
@@ -1962,7 +1978,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Object message) {
@@ -1979,7 +1996,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Object message, Context context) {
@@ -2002,7 +2020,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(Object message) {
@@ -2019,7 +2037,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> bodyThreeTypesAsync(Object message, Context context) {
@@ -2036,7 +2054,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> bodyThreeTypesWithResponse(Object message, Context context) {
@@ -2052,7 +2070,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String bodyThreeTypes(Object message) {
@@ -2067,7 +2085,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putTextAndJsonBodyWithResponseAsync(ContentType3 contentType, String message) {
@@ -2083,7 +2102,8 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return received correct content type and body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> putTextAndJsonBodyWithResponseAsync(ContentType3 contentType, String message,
@@ -2109,7 +2129,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putTextAndJsonBodyAsync(ContentType3 contentType, String message) {
@@ -2126,7 +2146,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return received correct content type and body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<String> putTextAndJsonBodyAsync(ContentType3 contentType, String message, Context context) {
@@ -2143,7 +2163,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct content type and body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<String> putTextAndJsonBodyWithResponse(ContentType3 contentType, String message, Context context) {
@@ -2158,7 +2178,7 @@ public final class MediaTypesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct content type and body.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String putTextAndJsonBody(ContentType3 contentType, String message) {

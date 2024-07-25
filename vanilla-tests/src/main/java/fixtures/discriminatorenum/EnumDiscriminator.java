@@ -131,8 +131,7 @@ public final class EnumDiscriminator {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Dog>> getExtensibleModelWithResponseAsync() {
@@ -146,8 +145,7 @@ public final class EnumDiscriminator {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Dog>> getExtensibleModelWithResponseAsync(Context context) {
@@ -163,7 +161,7 @@ public final class EnumDiscriminator {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator on successful completion of {@link Mono}.
+     * @return the request has succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> getExtensibleModelAsync() {
@@ -177,7 +175,7 @@ public final class EnumDiscriminator {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator on successful completion of {@link Mono}.
+     * @return the request has succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Dog> getExtensibleModelAsync(Context context) {
@@ -191,7 +189,7 @@ public final class EnumDiscriminator {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Dog> getExtensibleModelWithResponse(Context context) {
@@ -203,7 +201,7 @@ public final class EnumDiscriminator {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator.
+     * @return the request has succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Dog getExtensibleModel() {

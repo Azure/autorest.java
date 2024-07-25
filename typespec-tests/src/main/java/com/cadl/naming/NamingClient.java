@@ -45,7 +45,7 @@ public final class NamingClient {
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param body The body parameter.
      * @param name summary of name query parameter
-     * @return summary of Response along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status
      * code 409.
      * @throws ResourceNotFoundException ResourceNotFoundException thrown if the request is rejected by server on status
@@ -75,7 +75,7 @@ public final class NamingClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -101,7 +101,7 @@ public final class NamingClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summary of Response.
+     * @return the request has succeeded.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -130,7 +130,7 @@ public final class NamingClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return summary of Response.
+     * @return the request has succeeded.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -149,7 +149,7 @@ public final class NamingClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the request has succeeded.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
