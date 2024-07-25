@@ -1592,6 +1592,14 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return null;
         }
         String description = null;
+        // use the description on response if it exists
+        if (operation.getResponses() != null && !operation.getResponses().isEmpty()) {
+            Response response = operation.getResponses().get(0);
+            if (response.getLanguage() != null && response.getLanguage().getDefault() != null && !CoreUtils.isNullOrEmpty(response.getLanguage().getDefault().getDescription())) {
+                description = formatReturnTypeDescription(response.getLanguage().getDefault().getDescription());
+            }
+        }
+
         // try the description of the operation
         if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {
             String operationDescription = operation.getLanguage().getDefault().getDescription();

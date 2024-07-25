@@ -136,6 +136,7 @@ interface ResponseOp {
   };
 
   @route("/get-array")
+  @returnsDoc("An array of resources.")
   getArray(): ResourceArray;
 
   @route("/get-another-array")
