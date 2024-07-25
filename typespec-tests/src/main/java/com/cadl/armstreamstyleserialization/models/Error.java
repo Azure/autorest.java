@@ -151,40 +151,42 @@ public final class Error extends ManagementError {
                 bufferedReader.nextToken();
 
                 if ("error".equals(fieldName)) {
-                    return fromJson0(bufferedReader);
+                    return readManagementError(bufferedReader);
                 } else {
                     bufferedReader.skipChildren();
                 }
             }
-            return fromJson0(bufferedReader.reset());
+            return readManagementError(bufferedReader.reset());
         });
     }
 
-    private static Error fromJson0(JsonReader reader) throws IOException {
-        Error deserializedError = new Error();
-        while (reader.nextToken() != JsonToken.END_OBJECT) {
-            String fieldName = reader.getFieldName();
-            reader.nextToken();
+    private static Error readManagementError(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Error deserializedError = new Error();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
 
-            if ("code".equals(fieldName)) {
-                deserializedError.code = reader.getString();
-            } else if ("message".equals(fieldName)) {
-                deserializedError.message = reader.getString();
-            } else if ("target".equals(fieldName)) {
-                deserializedError.target = reader.getString();
-            } else if ("additionalInfo".equals(fieldName)) {
-                List<AdditionalInfo> additionalInfo = reader.readArray(reader1 -> AdditionalInfo.fromJson(reader1));
-                deserializedError.additionalInfo = additionalInfo;
-            } else if ("additionalProperty".equals(fieldName)) {
-                deserializedError.additionalProperty = reader.getString();
-            } else if ("details".equals(fieldName)) {
-                List<Error> details = reader.readArray(reader1 -> Error.fromJson(reader1));
-                deserializedError.details = details;
-            } else {
-                reader.skipChildren();
+                if ("code".equals(fieldName)) {
+                    deserializedError.code = reader.getString();
+                } else if ("message".equals(fieldName)) {
+                    deserializedError.message = reader.getString();
+                } else if ("target".equals(fieldName)) {
+                    deserializedError.target = reader.getString();
+                } else if ("additionalInfo".equals(fieldName)) {
+                    List<AdditionalInfo> additionalInfo = reader.readArray(reader1 -> AdditionalInfo.fromJson(reader1));
+                    deserializedError.additionalInfo = additionalInfo;
+                } else if ("additionalProperty".equals(fieldName)) {
+                    deserializedError.additionalProperty = reader.getString();
+                } else if ("details".equals(fieldName)) {
+                    List<Error> details = reader.readArray(reader1 -> Error.fromJson(reader1));
+                    deserializedError.details = details;
+                } else {
+                    reader.skipChildren();
+                }
             }
-        }
 
-        return deserializedError;
+            return deserializedError;
+        });
     }
 }
