@@ -227,15 +227,9 @@ public class FluentUtils {
             }
         }
         if (clientModel == null) {
-            Optional<ClientModel> modelOpt = ResourceClientModel.getResourceClientModel(name);
-            if (modelOpt.isPresent()) {
-                clientModel = modelOpt.get();
-            } else {
-                modelOpt = ErrorClientModel.getErrorClientModel(name);
-                if (modelOpt.isPresent()) {
-                    clientModel = modelOpt.get();
-                }
-            }
+            clientModel = ResourceClientModel.getResourceClientModel(name)
+                    .or(() -> ErrorClientModel.getErrorClientModel(name))
+                    .orElse(null);
         }
         return clientModel;
     }
