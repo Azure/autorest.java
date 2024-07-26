@@ -27,7 +27,7 @@
     "@azure-tools/typespec-azure-core": ">=0.44.0 <1.0.0",
     "@azure-tools/typespec-client-generator-core": ">=0.44.2 < 1.0.0",
     "@azure-tools/typespec-azure-resource-manager": ">=0.44.0 <1.0.0",
-    "@azure-tools/typespec-autorest": ">=0.44.0 <1.0.0"
+    "@azure-tools/typespec-autorest": ">=0.44.1 <1.0.0"
   },
   "private": true
 }
