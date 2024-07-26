@@ -44,6 +44,7 @@ import { KnownMediaType } from "@azure-tools/codegen";
 import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
+  SdkBodyModelPropertyType,
   SdkBuiltInType,
   SdkClient,
   SdkConstantType,
@@ -255,7 +256,7 @@ export class CodeModelBuilder {
   }
 
   public async build(): Promise<CodeModel> {
-    this.sdkContext = createSdkContext(this.emitterContext, "@azure-tools/typespec-java");
+    this.sdkContext = await createSdkContext(this.emitterContext, "@azure-tools/typespec-java");
 
     // auth
     // TODO: it is not very likely, but different client could have different auth
@@ -1728,16 +1729,7 @@ export class CodeModelBuilder {
           return this.processAnySchemaFromSdkType();
 
         case "string":
-        case "password":
-        case "guid":
-        case "ipAddress":
-        case "uuid":
-        case "ipV4Address":
-        case "ipV6Address":
-        case "eTag":
-        case "armId":
-        case "azureLocation":
-          return this.processStringSchemaFromSdkType(type, type.kind);
+          return this.processStringSchemaFromSdkType(type, nameHint);
 
         case "float":
         case "float32":
@@ -1761,7 +1753,6 @@ export class CodeModelBuilder {
           return this.processDateSchemaFromSdkType(type, nameHint);
 
         case "url":
-        case "uri":
           return this.processUrlSchemaFromSdkType(type, nameHint);
       }
     }
@@ -2037,6 +2028,8 @@ export class CodeModelBuilder {
           kind: "string",
           encode: "string",
           decorators: [],
+          name: "string",
+          crossLanguageDefinitionId: type.crossLanguageDefinitionId,
         },
         description: type.description,
         valueType: type.additionalProperties,
@@ -2103,8 +2096,12 @@ export class CodeModelBuilder {
       extensions["x-ms-mutability"] = mutability;
     }
 
-    if (prop.kind === "property" && prop.isMultipartFileInput) {
-      schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
+    if (prop.kind === "property" && prop.multipartOptions) {
+      if (prop.multipartOptions.isFilePart) {
+        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, prop.multipartOptions.isMulti, this.namespace);
+      } else {
+        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(prop, prop.multipartOptions.isMulti, schema);
+      }
     }
 
     return new Property(prop.name, prop.details ?? "", schema, {
@@ -2223,10 +2220,17 @@ export class CodeModelBuilder {
   }
 
   private processMultipartFormDataFilePropertySchemaFromSdkType(
-    property: SdkModelPropertyType,
+    property: SdkBodyModelPropertyType,
+    isMulti: boolean,
     namespace: string,
   ): Schema {
-    if (property.type.kind === "bytes") {
+    if (isMulti) {
+      return new ArraySchema(
+        property.name,
+        property.description ?? "",
+        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
+      );
+    } else {
       return getFileDetailsSchema(
         property.name,
         namespace,
@@ -2234,14 +2238,22 @@ export class CodeModelBuilder {
         this.binarySchema,
         this.stringSchema,
       );
-    } else if (property.type.kind === "array" && property.type.valueType.kind === "bytes") {
+    }
+  }
+
+  private processMultipartFormDataNonFilePropertySchemaFromSdkType(    
+    property: SdkBodyModelPropertyType,
+    isMulti: boolean,
+    schema: Schema) {
+    if (isMulti) {
       return new ArraySchema(
         property.name,
         property.description ?? "",
-        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
+        schema,
       );
+    } else {
+      return schema;
     }
-    throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
   }
 
   private getDoc(target: Type | undefined): string {
