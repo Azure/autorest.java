@@ -445,7 +445,12 @@ public class ClientMethod {
                     if (((GenericType) this.getReturnValue()
                         .getType()
                         .getClientType()).getTypeArguments()[0] instanceof GenericType) {
-                        imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                        // pageable LRO
+                        if (settings.isStreamStyleSerialization()) {
+                            imports.add(TypeReference.class.getName());
+                        } else {
+                            imports.add("com.fasterxml.jackson.core.type.TypeReference");
+                        }
                     }
                 } else {
                     imports.add(TypeReference.class.getName());

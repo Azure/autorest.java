@@ -5,6 +5,7 @@
 package com.cadl.armstreamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -31,6 +32,11 @@ public final class SawShark extends Shark {
      * The dna property.
      */
     private String dna;
+
+    /*
+     * The age property.
+     */
+    private int age;
 
     /*
      * The properties property.
@@ -73,9 +79,39 @@ public final class SawShark extends Shark {
      * 
      * @return the dna value.
      */
-    @Override
     public String dna() {
         return this.dna;
+    }
+
+    /**
+     * Set the dna property: The dna property.
+     * 
+     * @param dna the dna value to set.
+     * @return the SawShark object itself.
+     */
+    public SawShark withDna(String dna) {
+        this.dna = dna;
+        return this;
+    }
+
+    /**
+     * Get the age property: The age property.
+     * 
+     * @return the age value.
+     */
+    public int age() {
+        return this.age;
+    }
+
+    /**
+     * Set the age property: The age property.
+     * 
+     * @param age the age value to set.
+     * @return the SawShark object itself.
+     */
+    public SawShark withAge(int age) {
+        this.age = age;
+        return this;
     }
 
     /**
@@ -94,15 +130,6 @@ public final class SawShark extends Shark {
      */
     private AnotherFishProperties innerAnotherProperties() {
         return this.innerAnotherProperties;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SawShark withAge(int age) {
-        super.withAge(age);
-        return this;
     }
 
     /**
@@ -177,7 +204,12 @@ public final class SawShark extends Shark {
     @Override
     public void validate() {
         super.validate();
+        if (dna() == null) {
+            throw LOGGER.atError().log(new IllegalArgumentException("Missing required property dna in model SawShark"));
+        }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(SawShark.class);
 
     /**
      * {@inheritDoc}
@@ -189,6 +221,8 @@ public final class SawShark extends Shark {
         jsonWriter.writeIntField("age", age());
         jsonWriter.writeJsonField("properties", innerProperties());
         jsonWriter.writeJsonField("anotherProperties", innerAnotherProperties());
+        jsonWriter.writeStringField("dna", this.dna);
+        jsonWriter.writeIntField("age", this.age);
         jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }
@@ -209,14 +243,14 @@ public final class SawShark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("age".equals(fieldName)) {
-                    deserializedSawShark.withAge(reader.getInt());
-                } else if ("dna".equals(fieldName)) {
-                    deserializedSawShark.dna = reader.getString();
-                } else if ("properties".equals(fieldName)) {
+                if ("properties".equals(fieldName)) {
                     deserializedSawShark.innerProperties = FishProperties.fromJson(reader);
                 } else if ("anotherProperties".equals(fieldName)) {
                     deserializedSawShark.innerAnotherProperties = AnotherFishProperties.fromJson(reader);
+                } else if ("dna".equals(fieldName)) {
+                    deserializedSawShark.dna = reader.getString();
+                } else if ("age".equals(fieldName)) {
+                    deserializedSawShark.age = reader.getInt();
                 } else if ("sharktype".equals(fieldName)) {
                     deserializedSawShark.sharktype = reader.getString();
                 } else {
