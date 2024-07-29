@@ -140,7 +140,16 @@ export function getFileDetailsSchema(
   processSchemaFunc: (type: SdkType) => Schema,
 ): ObjectSchema {
   if (property.type.kind === "model") {
-    // property.type is File
+    // property.type is File, use name and properties from property.type for the File schema
+    /*
+    Current logic:
+    - Class name suffix "FileDetails"
+    - No class hierachy for File
+    - File has 3 properties: "content", "filename", "contentType" (Note that it is "contents" in TypeSpec)
+    - No adjustment on "content" property, it is always BinaryData and required
+    - Allow constant type for "filename" and "contentType" (to be discussed for other types e.g. enum)
+    - Allow required for "filename" and "contentType"
+     */
     const filePropertyName = property.name;
     const fileSchemaName = property.type.name;
     const schemaName = getFileSchemaName(fileSchemaName);
@@ -153,6 +162,7 @@ export function getFileDetailsSchema(
     let contentTypeProperty;
     let filenameProperty;
 
+    // find "filename" and "contentType" property in current model and its base models
     let type: SdkModelType | undefined = property.type;
     while (type !== undefined) {
       for (const property of type.properties) {
