@@ -129,7 +129,7 @@ import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
-import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
+import { Client as CodeModelClient, CrossLanguageDefinition } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { Operation as CodeModelOperation, ConvenienceApi, Request } from "./common/operation.js";
@@ -743,7 +743,10 @@ export class CodeModelBuilder {
       },
     });
 
-    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(this.sdkContext, operation);
+    (codeModelOperation as CrossLanguageDefinition).crossLanguageDefinitionId = getCrossLanguageDefinitionId(
+      this.sdkContext,
+      operation,
+    );
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
@@ -1967,7 +1970,7 @@ export class CodeModelBuilder {
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
     const rawModelType = type.__raw;
     const namespace = getNamespace(rawModelType);
-    const objectSchema = new ObjectScheme(name, type.details ?? "", {
+    const objectSchema = new ObjectSchema(name, type.details ?? "", {
       summary: type.description,
       language: {
         default: {
@@ -1978,7 +1981,7 @@ export class CodeModelBuilder {
         },
       },
     });
-    objectSchema.crossLanguageDefinitionId = type.crossLanguageDefinitionId;
+    (objectSchema as CrossLanguageDefinition).crossLanguageDefinitionId = type.crossLanguageDefinitionId;
     this.codeModel.schemas.add(objectSchema);
 
     // cache this now before we accidentally recurse on this type.
@@ -2223,22 +2226,31 @@ export class CodeModelBuilder {
     property: SdkBodyModelPropertyType,
     namespace: string,
   ): Schema {
+    const processSchemaFunc = (type: SdkType) => this.processSchemaFromSdkType(type, "");
     if (property.multipartOptions?.isMulti) {
       return new ArraySchema(
         property.name,
         property.details ?? "",
-        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
+        getFileDetailsSchema(
+          property,
+          namespace,
+          this.codeModel.schemas,
+          this.binarySchema,
+          this.stringSchema,
+          processSchemaFunc,
+        ),
         {
           summary: property.description,
         },
       );
     } else {
       return getFileDetailsSchema(
-        property.name,
+        property,
         namespace,
         this.codeModel.schemas,
         this.binarySchema,
         this.stringSchema,
+        processSchemaFunc,
       );
     }
   }

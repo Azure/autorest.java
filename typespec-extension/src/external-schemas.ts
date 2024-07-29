@@ -1,6 +1,7 @@
-import { ArraySchema, BinarySchema, ObjectSchema, Property, Schemas, StringSchema } from "@autorest/codemodel";
+import { ArraySchema, BinarySchema, ObjectSchema, Property, Schema, Schemas, StringSchema } from "@autorest/codemodel";
 import { KnownMediaType } from "@azure-tools/codegen";
 import { getJavaNamespace, pascalCase } from "./utils.js";
+import { SdkBodyModelPropertyType, SdkModelType, SdkType } from "@azure-tools/typespec-client-generator-core";
 
 /*
  * These schema need to reflect
@@ -108,30 +109,63 @@ export function createPollOperationDetailsSchema(schemas: Schemas, stringSchema:
 
 const fileDetailsMap: Map<string, ObjectSchema> = new Map();
 
+function getFileSchemaName(baseName: string) {
+  return pascalCase(baseName) + (baseName.toLocaleLowerCase().endsWith("file") ? "Details" : "FileDetails");
+}
+
+function createFileDetailsSchema(schemaName: string, propertyName: string, namespace: string, schemas: Schemas) {
+  const fileDetailsSchema = new ObjectSchema(schemaName, 'The file details for the "' + propertyName + '" field.', {
+    language: {
+      default: {
+        namespace: namespace,
+      },
+      java: {
+        namespace: getJavaNamespace(namespace),
+      },
+    },
+    serializationFormats: [KnownMediaType.Multipart],
+  });
+  fileDetailsSchema.serializationFormats;
+  schemas.add(fileDetailsSchema);
+  fileDetailsMap.set(schemaName, fileDetailsSchema);
+  return fileDetailsSchema;
+}
+
 export function getFileDetailsSchema(
-  filePropertyName: string,
+  property: SdkBodyModelPropertyType,
   namespace: string,
   schemas: Schemas,
   binarySchema: BinarySchema,
   stringSchema: StringSchema,
+  processSchemaFunc: (type: SdkType) => Schema,
 ): ObjectSchema {
-  const schemaName =
-    pascalCase(filePropertyName) + (filePropertyName.toLocaleLowerCase().endsWith("file") ? "Details" : "FileDetails");
-  let fileDetailsSchema = fileDetailsMap.get(schemaName);
-  if (!fileDetailsSchema) {
-    fileDetailsSchema = new ObjectSchema(schemaName, 'The file details for the "' + filePropertyName + '" field.', {
-      language: {
-        default: {
-          namespace: namespace,
-        },
-        java: {
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-      serializationFormats: [KnownMediaType.Multipart],
-    });
-    fileDetailsSchema.serializationFormats;
-    schemas.add(fileDetailsSchema);
+  if (property.type.kind === "model") {
+    // property.type is File
+    const filePropertyName = property.name;
+    const fileSchemaName = property.type.name;
+    const schemaName = getFileSchemaName(fileSchemaName);
+    let fileDetailsSchema = fileDetailsMap.get(schemaName);
+    if (!fileDetailsSchema) {
+      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, namespace, schemas);
+      fileDetailsMap.set(schemaName, fileDetailsSchema);
+    }
+
+    let contentTypeProperty;
+    let filenameProperty;
+
+    let type: SdkModelType | undefined = property.type;
+    while (type !== undefined) {
+      for (const property of type.properties) {
+        if (!contentTypeProperty && property.name === "contentType") {
+          contentTypeProperty = property;
+        }
+        if (!filenameProperty && property.name === "filename") {
+          filenameProperty = property;
+        }
+      }
+      type = type.baseModel;
+    }
+
     fileDetailsSchema.addProperty(
       new Property("content", "The content of the file.", binarySchema, {
         required: true,
@@ -140,21 +174,63 @@ export function getFileDetailsSchema(
       }),
     );
     fileDetailsSchema.addProperty(
-      new Property("filename", "The filename of the file.", stringSchema, {
-        required: false,
-        nullable: false,
-        readOnly: false,
-      }),
+      new Property(
+        "filename",
+        "The filename of the file.",
+        filenameProperty?.type.kind === "constant" ? processSchemaFunc(filenameProperty.type) : stringSchema,
+        {
+          required: filenameProperty ? !filenameProperty.optional : false,
+          nullable: false,
+          readOnly: false,
+        },
+      ),
     );
     fileDetailsSchema.addProperty(
-      new Property("contentType", "The content-type of the file.", stringSchema, {
-        required: false,
-        nullable: false,
-        readOnly: false,
-        clientDefaultValue: "application/octet-stream",
-      }),
+      new Property(
+        "contentType",
+        "The content-type of the file.",
+        contentTypeProperty?.type.kind === "constant" ? processSchemaFunc(contentTypeProperty.type) : stringSchema,
+        {
+          required: contentTypeProperty ? !contentTypeProperty.optional : false,
+          nullable: false,
+          readOnly: false,
+          clientDefaultValue: contentTypeProperty?.type.kind === "constant" ? undefined : "application/octet-stream",
+        },
+      ),
     );
-    fileDetailsMap.set(schemaName, fileDetailsSchema);
+    return fileDetailsSchema;
+  } else {
+    // property.type is bytes, create a File schema
+    const filePropertyName = property.name;
+    const schemaName = getFileSchemaName(filePropertyName);
+    let fileDetailsSchema = fileDetailsMap.get(schemaName);
+    if (!fileDetailsSchema) {
+      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, namespace, schemas);
+      fileDetailsMap.set(schemaName, fileDetailsSchema);
+
+      fileDetailsSchema.addProperty(
+        new Property("content", "The content of the file.", binarySchema, {
+          required: true,
+          nullable: false,
+          readOnly: false,
+        }),
+      );
+      fileDetailsSchema.addProperty(
+        new Property("filename", "The filename of the file.", stringSchema, {
+          required: false,
+          nullable: false,
+          readOnly: false,
+        }),
+      );
+      fileDetailsSchema.addProperty(
+        new Property("contentType", "The content-type of the file.", stringSchema, {
+          required: false,
+          nullable: false,
+          readOnly: false,
+          clientDefaultValue: "application/octet-stream",
+        }),
+      );
+    }
+    return fileDetailsSchema;
   }
-  return fileDetailsSchema;
 }
