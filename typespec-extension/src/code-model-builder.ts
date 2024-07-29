@@ -2098,17 +2098,9 @@ export class CodeModelBuilder {
 
     if (prop.kind === "property" && prop.multipartOptions) {
       if (prop.multipartOptions.isFilePart) {
-        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(
-          prop,
-          prop.multipartOptions.isMulti,
-          this.namespace,
-        );
+        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
       } else {
-        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(
-          prop,
-          prop.multipartOptions.isMulti,
-          schema,
-        );
+        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(prop, schema);
       }
     }
 
@@ -2229,10 +2221,9 @@ export class CodeModelBuilder {
 
   private processMultipartFormDataFilePropertySchemaFromSdkType(
     property: SdkBodyModelPropertyType,
-    isMulti: boolean,
     namespace: string,
   ): Schema {
-    if (isMulti) {
+    if (property.multipartOptions?.isMulti) {
       return new ArraySchema(
         property.name,
         property.details ?? "",
@@ -2252,12 +2243,8 @@ export class CodeModelBuilder {
     }
   }
 
-  private processMultipartFormDataNonFilePropertySchemaFromSdkType(
-    property: SdkBodyModelPropertyType,
-    isMulti: boolean,
-    schema: Schema,
-  ) {
-    if (isMulti) {
+  private processMultipartFormDataNonFilePropertySchemaFromSdkType(property: SdkBodyModelPropertyType, schema: Schema) {
+    if (property.multipartOptions?.isMulti) {
       return new ArraySchema(property.name, property.details ?? "", schema, {
         summary: property.description,
       });
