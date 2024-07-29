@@ -110,7 +110,14 @@ export function createPollOperationDetailsSchema(schemas: Schemas, stringSchema:
 const fileDetailsMap: Map<string, ObjectSchema> = new Map();
 
 function getFileSchemaName(baseName: string) {
-  return pascalCase(baseName) + (baseName.toLocaleLowerCase().endsWith("file") ? "Details" : "FileDetails");
+  // make sure suffix "FileDetails"
+  if (baseName.toLocaleLowerCase().endsWith("filedetails")) {
+    return pascalCase(baseName);
+  } else if (baseName.toLocaleLowerCase().endsWith("file")) {
+    return pascalCase(baseName) + "Details";
+  } else {
+    return pascalCase(baseName) + "FileDetails";
+  }
 }
 
 function createFileDetailsSchema(schemaName: string, propertyName: string, namespace: string, schemas: Schemas) {
