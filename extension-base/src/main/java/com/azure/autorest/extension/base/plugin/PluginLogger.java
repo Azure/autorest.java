@@ -8,10 +8,9 @@ import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MarkerIgnoringBase;
 import org.slf4j.helpers.MessageFormatter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * A logger for AutoRest plugins.
@@ -45,7 +44,18 @@ public final class PluginLogger extends MarkerIgnoringBase {
      * @param labels the labels for logging
      */
     public PluginLogger(NewPlugin plugin, Class<?> clazz, String... labels) {
-        this(plugin, Stream.concat(Stream.of(clazz.getSimpleName()), Stream.of(labels)).toArray(String[]::new));
+        this.plugin = plugin;
+        this.isTracingEnabled = plugin.getBooleanValue("verbose", false);
+        this.isDebugEnabled = plugin.getBooleanValue("debug", false) || plugin.getBooleanValue("debugger", false);
+
+        this.keys = new ArrayList<>();
+        if (clazz != null) {
+            keys.add(clazz.getSimpleName());
+        }
+
+        if (labels != null && labels.length > 0) {
+            this.keys.addAll(Arrays.asList(labels));
+        }
     }
 
     /**
@@ -55,15 +65,7 @@ public final class PluginLogger extends MarkerIgnoringBase {
      * @param labels the labels for logging
      */
     public PluginLogger(NewPlugin plugin, String... labels) {
-        this.plugin = plugin;
-        if (labels == null || labels.length == 0) {
-            keys = Collections.emptyList();
-        } else {
-            keys = Arrays.asList(labels);
-        }
-        this.isTracingEnabled = plugin.getBooleanValue("verbose", false);
-        this.isDebugEnabled = plugin.getBooleanValue("debug", false)
-                || plugin.getBooleanValue("debugger", false);
+        this(plugin, null, labels);
     }
 
     /**

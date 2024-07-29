@@ -3,21 +3,17 @@
 
 package com.azure.autorest.extension.base.jsonrpc;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -34,17 +30,14 @@ import java.util.function.Supplier;
  * Represents a connection.
  */
 public class Connection {
-    private static final ObjectMapper MAPPER = new ObjectMapper()
-        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
     private OutputStream writer;
     private PeekingBinaryReader reader;
     private boolean isDisposed = false;
     private final AtomicInteger requestId;
-    private final Map<Integer, CallerResponse<?>> tasks = new ConcurrentHashMap<>();
+    private final Map<Integer, CompletableFuture<String>> tasks = new ConcurrentHashMap<>();
     private final ExecutorService executorService = Executors.newCachedThreadPool();
     private final CompletableFuture<Void> loop;
-    private final Map<String, Function<JsonNode, String>> dispatch = new ConcurrentHashMap<>();
+    private final Map<String, Function<String, String>> dispatch = new ConcurrentHashMap<>();
 
     /**
      * Create a new Connection.
@@ -69,9 +62,8 @@ public class Connection {
         loop.cancel(true);
     }
 
-    private JsonNode readJson() {
+    private String readJson() {
         String jsonText = "";
-        JsonNode json;
         while (true) {
             try {
                 jsonText += reader.readAsciiLine(); // + "\n";
@@ -79,10 +71,8 @@ public class Connection {
                 throw new RuntimeException("Cannot read JSON input");
             }
             try {
-                json = MAPPER.readTree(jsonText);
-                if (json != null) {
-                    return json;
-                }
+                validateJsonText(jsonText);
+                return jsonText;
             } catch (IOException e) {
                 // not enough text?
             }
@@ -90,42 +80,43 @@ public class Connection {
     }
 
     /**
+     * Tests that the passed {@code jsonText} is valid JSON.
+     *
+     * @param jsonText The JSON text to validate.
+     * @throws IOException If the JSON text is invalid.
+     */
+    private static void validateJsonText(String jsonText) throws IOException {
+        try (JsonReader jsonReader = JsonProviders.createReader(jsonText)) {
+            jsonReader.readUntyped();
+        }
+    }
+
+    /**
      * Dispatches a message.
      *
-     * @param <T> The type of the result.
      * @param path The path.
-     * @param method The method that gets the result.
+     * @param method The method that gets the result as a JSON string.
      */
-    public <T> void dispatch(String path, Supplier<T> method) {
+    public void dispatch(String path, Supplier<String> method) {
         dispatch.put(path, input -> {
-            T result = method.get();
-            if (result == null) {
-                return "null";
-            }
-            try {
-                return MAPPER.writeValueAsString(result);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
+            String result = method.get();
+
+            return (result == null) ? "null" : result;
         });
     }
 
-    private List<JsonNode> readArguments(JsonNode input, int expectedArgs) {
-        List<JsonNode> ret = new ArrayList<>();
-        if (input instanceof ArrayNode) {
-            for (JsonNode jsonNode : input) {
-                ret.add(jsonNode);
+    private static List<String> readArguments(String input) {
+        try (JsonReader jsonReader = JsonProviders.createReader(input)) {
+            List<String> ret = jsonReader.readArray(JsonReader::getString);
+            if (ret.size() == 2) {
+                // Return passed array if size is larger than 0, otherwise return a new ArrayList
+                return ret;
             }
-        } else if (input != null) {
-            ret.add(input);
-        }
 
-        if (ret.size() == expectedArgs) {
-            // Return passed array if size is larger than 0, otherwise return a new ArrayList
-            return (expectedArgs == 0) ? new ArrayList<>() : ret;
+            throw new RuntimeException("Invalid number of arguments");
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
         }
-
-        throw new RuntimeException("Invalid number of arguments");
     }
 
     /**
@@ -144,37 +135,19 @@ public class Connection {
     /**
      * Dispatches a message.
      *
-     * @param <T> The type of the result.
-     * @param <P1> The type of the parameter.
-     * @param <P2> The type of the parameter.
      * @param path The path.
-     * @param method The method that gets the result.
-     * @param p1Class The class of the parameter.
-     * @param p2Class The class of the parameter.
+     * @param method The method that gets the result as a JSON string.
      */
-    public <P1, P2, T> void dispatch(String path, BiFunction<P1, P2, T> method, Class<? extends P1> p1Class,
-        Class<? extends P2> p2Class) {
+    public void dispatch(String path, BiFunction<String, String, Boolean> method) {
         dispatch.put(path, input -> {
-            List<JsonNode> args = readArguments(input, 2);
-            try {
-                P1 a1 = MAPPER.treeToValue(args.get(0), p1Class);
-                P2 a2 = MAPPER.treeToValue(args.get(1), p2Class);
-
-                T result = method.apply(a1, a2);
-                if (result == null) {
-                    return "null";
-                }
-                return MAPPER.writeValueAsString(result);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
+            List<String> args = readArguments(input);
+            return String.valueOf(method.apply(args.get(0), args.get(1)));
         });
     }
 
-    private JsonNode readJson(int contentLength) {
+    private String readJson(int contentLength) {
         try {
-            byte[] bytes = reader.readBytes(contentLength);
-            return MAPPER.readTree(bytes);
+            return new String(reader.readBytes(contentLength), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -192,7 +165,7 @@ public class Connection {
                 if ('{' == ch || '[' == ch) {
                     // looks like a json block or array. let's do this.
                     // don't wait for this to finish!
-                    process(readJson());
+                    process(readJson(), '{' == ch);
 
                     // we're done here, start again.
                     continue;
@@ -210,16 +183,16 @@ public class Connection {
                 ch = reader.peekByte();
                 // the next character had better be a { or [
                 if ('{' == ch || '[' == ch) {
-                    if (headers.containsKey("Content-Length")) {
-                        String value = headers.get("Content-Length");
-                        int contentLength = Integer.parseInt(value);
+                    String contentLengthStr = headers.get("Content-Length");
+                    if (contentLengthStr != null && !contentLengthStr.isEmpty()) {
+                        int contentLength = Integer.parseInt(contentLengthStr);
                         // don't wait for this to finish!
-                        process(readJson(contentLength));
+                        process(readJson(contentLength), '{' == ch);
                         continue;
                     }
                     // looks like a json block or array. let's do this.
                     // don't wait for this to finish!
-                    process(readJson());
+                    process(readJson(), '{' == ch);
                     // we're done here, start again.
                     continue;
                 }
@@ -239,82 +212,89 @@ public class Connection {
      * Processes a message.
      *
      * @param content The content.
+     * @param isObject Whether the JSON {@code content} is a JSON object.
      */
-    public void process(JsonNode content) {
-        if (content instanceof ObjectNode) {
-            executorService.submit(() -> {
-                ObjectNode jobject = (ObjectNode) content;
-                try {
-                    Iterator<Map.Entry<String, JsonNode>> fieldIterator = jobject.fields();
-                    while (fieldIterator.hasNext()) {
-                        Map.Entry<String, JsonNode> field = fieldIterator.next();
-                        if (field.getKey().equals("method")) {
-                            String method = field.getValue().asText();
-                            int id = -1;
-                            if (jobject.has("id")) {
-                                id = jobject.get("id").asInt(-1);
-                            }
-                            // this is a method call.
-                            // pass it to the service that is listening...
-                            if (dispatch.containsKey(method)) {
-                                Function<JsonNode, String> fn = dispatch.get(method);
-                                JsonNode parameters = jobject.get("params");
-                                String result = fn.apply(parameters);
-                                if (id != -1) {
-                                    // if this is a request, send the response.
-                                    respond(id, result);
-                                }
-                            }
-                            return;
-                        }
-                        if (field.getKey().equals("result")) {
-                            int id = jobject.get("id").asInt(-1);
-                            if (id != -1) {
-                                CallerResponse<?> f = tasks.remove(id);
+    public void process(String content, boolean isObject) {
+        // The only times this method is called is when the beginning portion of the JSON text is '{' or '['.
+        // So, instead of the previous design when using Jackson where a fully processed JsonNode was passed, use a
+        // simpler parameter 'isObject' to check if we are in a valid processing state.
+        if (!isObject) {
+            System.err.println("Unhandled: Batch Request");
+            return;
+        }
 
-                                try {
-                                    if (f.getType().getRawClass().equals(Boolean.class)
-                                        && (jobject.get("result") != null)
-                                        && jobject.get("result").toString().equals("{}")) {
-                                        f.complete(Boolean.TRUE);
-                                    } else if (f.getType().getRawClass().equals(String.class)
-                                        && (jobject.get("result") != null)
-                                        && jobject.get("result").toString().equals("{}")) {
-                                        f.complete("");
-                                    } else {
-                                        f.complete(MAPPER.convertValue(jobject.get("result"), f.getType()));
-                                    }
-                                } catch (Exception e) {
-                                    f.completeExceptionally(e);
-                                }
-                            }
-                        }
+        executorService.submit(() -> {
 
-                        if (field.getKey().equals("error")) {
-                            int id = jobject.get("id").asInt(-1);
-                            if (id != -1) {
-                                CallerResponse<?> f = tasks.remove(id);
+            try (JsonReader jsonReader = JsonProviders.createReader(content)) {
+                Map<String, String> jobject = jsonReader.readMap(reader -> {
+                    if (reader.isStartArrayOrObject()) {
+                        return reader.readChildren();
+                    } else {
+                        return reader.getString();
+                    }
+                });
 
-                                try {
-                                    String message = field.getValue().get("message").asText();
-                                    if (field.getValue().has("data")) {
-                                        message += " (" + field.getValue().get("data").asText() + ")";
-                                    }
-                                    f.completeExceptionally(new RuntimeException(message));
-                                } catch (Exception e) {
-                                    f.completeExceptionally(e);
-                                }
-                            }
+                String method = jobject.get("method");
+                if (method != null) {
+                    int id = processIdField(jobject.get("id"));
+
+                    // this is a method call.
+                    // pass it to the service that is listening...
+                    if (dispatch.containsKey(method)) {
+                        Function<String, String> fn = dispatch.get(method);
+                        String parameters = jobject.get("params");
+                        String result = fn.apply(parameters);
+                        if (id != -1) {
+                            // if this is a request, send the response.
+                            respond(id, result);
                         }
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    return;
                 }
-            });
-        }
-        if (content instanceof ArrayNode) {
-            System.err.println("Unhandled: Batch Request");
-        }
+
+                if (jobject.containsKey("result")) {
+                    String result = jobject.get("result");
+                    int id = processIdField(jobject.get("id"));
+                    if (id != -1) {
+                        CompletableFuture<String> f = tasks.remove(id);
+
+                        try {
+                            f.complete(result);
+                        } catch (Exception e) {
+                            f.completeExceptionally(e);
+                        }
+                    }
+                    return;
+                }
+
+                String error = jobject.get("error");
+                if (error != null) {
+                    int id = processIdField(jobject.get("id"));
+                    if (id != -1) {
+                        CompletableFuture<String> f = tasks.remove(id);
+
+                        try (JsonReader errorReader = JsonProviders.createReader(error)) {
+                            Map<String, Object> errorObject = errorReader.readMap(JsonReader::readUntyped);
+
+                            String message = String.valueOf(errorObject.get("message"));
+                            Object dataField = errorObject.get("data");
+                            if (dataField != null) {
+                                message += " (" + dataField + ")";
+                            }
+                            f.completeExceptionally(new RuntimeException(message));
+                        } catch (Exception e) {
+                            f.completeExceptionally(e);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private static int processIdField(String idField) {
+        return (idField == null) ? -1 : Integer.parseInt(idField);
     }
 
     /**
@@ -328,9 +308,7 @@ public class Connection {
         if (!isDisposed) {
             // make sure we can't dispose twice
             isDisposed = true;
-            for (Map.Entry<Integer, CallerResponse<?>> t : tasks.entrySet()) {
-                t.getValue().cancel(true);
-            }
+            tasks.forEach((ignored, future) -> future.cancel(true));
 
             writer.close();
             writer = null;
@@ -361,12 +339,22 @@ public class Connection {
      * @param message The message.
      */
     public void sendError(int id, int code, String message) {
-        JsonNode node = new ObjectNode(MAPPER.getNodeFactory())
-            .put("jsonrpc", "2.0")
-            .put("id", id)
-            .put("message", message)
-            .set("error", new ObjectNode(MAPPER.getNodeFactory()).put("code", code));
-        send(node.toString());
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+            jsonWriter.writeStartObject()
+                .writeStringField("jsonrpc", "2.0")
+                .writeIntField("id", id)
+                .writeStringField("message", message)
+                .writeStartObject("error")
+                .writeIntField("code", code)
+                .writeEndObject()
+                .writeEndObject()
+                .flush();
+
+            send(outputStream.toString(StandardCharsets.UTF_8));
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
+        }
     }
 
     /**
@@ -376,16 +364,19 @@ public class Connection {
      * @param value The value.
      */
     public void respond(int id, String value) {
-        JsonNode node;
-        try {
-            node = new ObjectNode(MAPPER.getNodeFactory())
-                .put("jsonrpc", "2.0")
-                .put("id", id)
-                .set("result", MAPPER.readTree(value));
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+            jsonWriter.writeStartObject()
+                .writeStringField("jsonrpc", "2.0")
+                .writeIntField("id", id)
+                .writeRawField("result", value)
+                .writeEndObject()
+                .flush();
+
+            send(outputStream.toString(StandardCharsets.UTF_8));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        send(node.toString());
     }
 
     /**
@@ -395,33 +386,13 @@ public class Connection {
      * @param values The values.
      */
     public void notify(String methodName, Object... values) {
-        ObjectNode node = new ObjectNode(MAPPER.getNodeFactory())
-            .put("jsonrpc", "2.0")
-            .put("method", methodName);
-        if (values != null && values.length > 0) {
-            ArrayNode params = new ArrayNode(MAPPER.getNodeFactory());
-            for (Object value : values) {
-                params.add(MAPPER.convertValue(value, JsonNode.class));
-            }
-            node.set("params", params);
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+            jsonWriter.writeArray(values, JsonWriter::writeUntyped).flush();
+            notifyWithSerializedObject(methodName, outputStream.toString(StandardCharsets.UTF_8));
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
         }
-        send(node.toString());
-    }
-
-    /**
-     * Sends a notification.
-     *
-     * @param methodName The method name.
-     * @param parameter The parameter.
-     */
-    public void notifyWithObject(String methodName, Object parameter) {
-        ObjectNode node = new ObjectNode(MAPPER.getNodeFactory())
-            .put("jsonrpc", "2.0")
-            .put("method", methodName);
-        if (parameter != null) {
-            node = node.set("params", MAPPER.convertValue(parameter, JsonNode.class));
-        }
-        send(node.toString());
     }
 
     /**
@@ -441,30 +412,30 @@ public class Connection {
     /**
      * Sends a request.
      *
-     * @param <T> The type of the result.
-     * @param type The type.
      * @param methodName The method name.
      * @param values The values.
      * @return The result.
      */
-    public <T> T request(JavaType type, String methodName, Object... values) {
+    public String request(String methodName, Object... values) {
         int id = requestId.getAndIncrement();
-        CallerResponse<T> response = new CallerResponse<T>(id, type);
+        CompletableFuture<String> response = new CompletableFuture<>();
         tasks.put(id, response);
-        ObjectNode node = new ObjectNode(MAPPER.getNodeFactory())
-            .put("jsonrpc", "2.0")
-            .put("method", methodName)
-            .put("id", id);
-        if (values != null && values.length > 0) {
-            ArrayNode params = new ArrayNode(MAPPER.getNodeFactory());
-            for (Object value : values) {
-                params.add(MAPPER.convertValue(value, JsonNode.class));
-            }
-            node.set("params", params);
-        }
-        send(node.toString());
-        try {
+
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+            jsonWriter.writeStartObject()
+                .writeStringField("jsonrpc", "2.0")
+                .writeStringField("method", methodName)
+                .writeIntField("id", id)
+                .writeArrayField("params", values, JsonWriter::writeUntyped)
+                .writeEndObject()
+                .flush();
+
+            send(outputStream.toString(StandardCharsets.UTF_8));
+
             return response.get();
+        } catch (IOException ex) {
+            throw new UncheckedIOException(ex);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
@@ -473,43 +444,13 @@ public class Connection {
     /**
      * Sends a request.
      *
-     * @param <T> The type of the result.
-     * @param type The type.
-     * @param methodName The method name.
-     * @param parameter The parameter.
-     * @return The result.
-     */
-    public <T> T requestWithObject(JavaType type, String methodName, Object parameter) {
-        int id = requestId.getAndIncrement();
-        CallerResponse<T> response = new CallerResponse<T>(id, type);
-        tasks.put(id, response);
-        ObjectNode node = new ObjectNode(MAPPER.getNodeFactory())
-            .put("jsonrpc", "2.0")
-            .put("method", methodName)
-            .put("id", id);
-        if (parameter != null) {
-            node = node.set("params", MAPPER.convertValue(parameter, JsonNode.class));
-        }
-        send(node.toString());
-        try {
-            return response.get();
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Sends a request.
-     *
-     * @param <T> The type of the result.
-     * @param type The type.
      * @param method The method name.
      * @param serializedObject The serialized object.
      * @return The result.
      */
-    public <T> T requestWithSerializedObject(JavaType type, String method, String serializedObject) {
+    public String requestWithSerializedObject(String method, String serializedObject) {
         int id = requestId.getAndIncrement();
-        CallerResponse<T> response = new CallerResponse<>(id, type);
+        CompletableFuture<String> response = new CompletableFuture<>();
         tasks.put(id, response);
 
         String json = (serializedObject == null)

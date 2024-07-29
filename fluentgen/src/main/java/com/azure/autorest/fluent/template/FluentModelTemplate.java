@@ -5,8 +5,8 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.FluentType;
-import com.azure.autorest.fluent.model.arm.ResourceClientModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
+import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
@@ -14,13 +14,10 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.template.ModelTemplate;
-import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,7 +38,7 @@ public class FluentModelTemplate extends ModelTemplate {
     protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
         super.addSerializationImports(imports, model, settings);
 
-        imports.add(JsonInclude.class.getName());
+        imports.add("com.fasterxml.jackson.annotation.JsonInclude");
     }
 
     @Override
@@ -108,10 +105,7 @@ public class FluentModelTemplate extends ModelTemplate {
         String lastParentName = model.getName();
         String parentModelName = model.getParentModelName();
         while (parentModelName != null && !lastParentName.equals(parentModelName)) {
-            ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
-            if (parentModel == null) {
-                parentModel = getPredefinedModel(parentModelName).orElse(null);
-            }
+            ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
             if (parentModel != null) {
                 if (parentModel.getProperties() != null) {
                     propertyReferences.addAll(parentModel.getProperties().stream()
@@ -141,9 +135,5 @@ public class FluentModelTemplate extends ModelTemplate {
 
     @Override
     protected void addGeneratedAnnotation(JavaContext classBlock) {
-    }
-
-    private Optional<ClientModel> getPredefinedModel(String modelName) {
-        return ResourceClientModel.getResourceClientModel(modelName);
     }
 }

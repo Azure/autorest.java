@@ -4,73 +4,35 @@
 package com.azure.typespec.model;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.core.util.CoreUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EmitterOptions {
-    @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
-    @JsonProperty(value="namespace")
+public class EmitterOptions implements JsonSerializable<EmitterOptions> {
     private String namespace;
-
-    @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
-    @JsonProperty(value="output-dir")
     private String outputDir;
-
-    @JsonProperty(value = "flavor")
     private String flavor = "Azure";
-
-    @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
-    @JsonProperty(value="service-name")
     private String serviceName;
-
-    @JsonProperty(value="service-versions")
     private List<String> serviceVersions;
-
-    @JsonProperty(value = "generate-tests")
     private Boolean generateTests = true;
-
-    @JsonProperty(value = "generate-samples")
     private Boolean generateSamples = true;
-
-    @JsonProperty(value = "enable-sync-stack")
     private Boolean enableSyncStack = true;
-
-    @JsonProperty(value = "stream-style-serialization")
     private Boolean streamStyleSerialization = true;
-
-    @JsonProperty(value="partial-update")
     private Boolean partialUpdate;
-
-    @JsonProperty(value="custom-types")
     private String customTypes;
-
-    @JsonProperty(value="custom-types-subpackage")
     private String customTypeSubpackage;
-
-    @JsonProperty(value="customization-class")
     private String customizationClass;
-
-    @JsonProperty(value = "include-api-view-properties")
     private Boolean includeApiViewProperties = true;
-
-    @JsonProperty(value = "polling")
     private Map<String, JavaSettings.PollingDetails> polling = new HashMap<>();
-
-    @JsonProperty(value = "arm")
     private Boolean arm = false;
-
-    @JsonProperty(value="models-subpackage")
     private String modelsSubpackage;
-
-    @JsonProperty(value="dev-options")
     private DevOptions devOptions;
 
     public String getNamespace() {
@@ -159,15 +121,75 @@ public class EmitterOptions {
         return flavor;
     }
 
-    public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("namespace", namespace)
+            .writeStringField("output-dir", outputDir)
+            .writeStringField("flavor", flavor)
+            .writeStringField("service-name", serviceName)
+            .writeArrayField("service-versions", serviceVersions, JsonWriter::writeString)
+            .writeBooleanField("generate-tests", generateTests)
+            .writeBooleanField("generate-samples", generateSamples)
+            .writeBooleanField("enable-sync-stack", enableSyncStack)
+            .writeBooleanField("stream-style-serialization", streamStyleSerialization)
+            .writeBooleanField("partial-update", partialUpdate)
+            .writeStringField("custom-types", customTypes)
+            .writeStringField("custom-types-subpackage", customTypeSubpackage)
+            .writeStringField("customization-class", customizationClass)
+            .writeBooleanField("include-api-view-properties", includeApiViewProperties)
+            .writeMapField("polling", polling, JsonWriter::writeJson)
+            .writeBooleanField("arm", arm)
+            .writeStringField("models-subpackage", modelsSubpackage)
+            .writeJsonField("dev-options", devOptions)
+            .writeEndObject();
+    }
 
-        @Override
-        public String deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-            String value = jsonParser.readValueAs(String.class);
-            if (value != null && value.isEmpty()) {
-                return null;
+    public static EmitterOptions fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, EmitterOptions::new, (options, fieldName, reader) -> {
+            if ("namespace".equals(fieldName)) {
+                options.namespace = emptyToNull(reader.getString());
+            } else if ("output-dir".equals(fieldName)) {
+                options.outputDir = emptyToNull(reader.getString());
+            } else if ("flavor".equals(fieldName)) {
+                options.flavor = emptyToNull(reader.getString());
+            } else if ("service-name".equals(fieldName)) {
+                options.serviceName = emptyToNull(reader.getString());
+            } else if ("service-versions".equals(fieldName)) {
+                options.serviceVersions = reader.readArray(JsonReader::getString);
+            } else if ("generate-tests".equals(fieldName)) {
+                options.generateTests = reader.getNullable(JsonReader::getBoolean);
+            } else if ("generate-samples".equals(fieldName)) {
+                options.generateSamples = reader.getNullable(JsonReader::getBoolean);
+            } else if ("enable-sync-stack".equals(fieldName)) {
+                options.enableSyncStack = reader.getNullable(JsonReader::getBoolean);
+            } else if ("stream-style-serialization".equals(fieldName)) {
+                options.streamStyleSerialization = reader.getNullable(JsonReader::getBoolean);
+            } else if ("partial-update".equals(fieldName)) {
+                options.partialUpdate = reader.getNullable(JsonReader::getBoolean);
+            } else if ("custom-types".equals(fieldName)) {
+                options.customTypes = emptyToNull(reader.getString());
+            } else if ("custom-types-subpackage".equals(fieldName)) {
+                options.customTypeSubpackage = emptyToNull(reader.getString());
+            } else if ("customization-class".equals(fieldName)) {
+                options.customizationClass = emptyToNull(reader.getString());
+            } else if ("include-api-view-properties".equals(fieldName)) {
+                options.includeApiViewProperties = reader.getNullable(JsonReader::getBoolean);
+            } else if ("polling".equals(fieldName)) {
+                options.polling = reader.readMap(JavaSettings.PollingDetails::fromJson);
+            } else if ("arm".equals(fieldName)) {
+                options.arm = reader.getNullable(JsonReader::getBoolean);
+            } else if ("models-subpackage".equals(fieldName)) {
+                options.modelsSubpackage = emptyToNull(reader.getString());
+            } else if ("dev-options".equals(fieldName)) {
+                options.devOptions = DevOptions.fromJson(reader);
+            } else {
+                reader.skipChildren();
             }
-            return value;
-        }
+        });
+    }
+
+    private static String emptyToNull(String str) {
+        return CoreUtils.isNullOrEmpty(str) ? null : str;
     }
 }

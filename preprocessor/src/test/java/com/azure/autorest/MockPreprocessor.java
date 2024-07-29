@@ -10,6 +10,9 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -20,11 +23,9 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +57,9 @@ public class MockPreprocessor extends NewPlugin {
                 // YAML
                 codeModel = yamlMapper.loadAs(file, CodeModel.class);
             } else {
-                codeModel = jsonMapper.readValue(file, CodeModel.class);
+                try (JsonReader jsonReader = JsonProviders.createReader(fileName)) {
+                    codeModel = CodeModel.fromJson(jsonReader);
+                }
             }
         } catch (Exception e) {
             System.err.println("Got an error " + e.getMessage());
@@ -98,7 +101,13 @@ public class MockPreprocessor extends NewPlugin {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getValue(Type type, String key) {
+    public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        return (T) SETTINGS_MAP.get(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
         return (T) SETTINGS_MAP.get(key);
     }
 
@@ -113,22 +122,14 @@ public class MockPreprocessor extends NewPlugin {
 
     @Override
     public String readFile(String filename) {
-        try {
-            InputStream fis = MockPreprocessor.class.getClassLoader().getResourceAsStream(filename);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append("\n");
-            }
-            return sb.toString();
+        try (InputStream fis = MockPreprocessor.class.getClassLoader().getResourceAsStream(filename)) {
+            return new String(fis.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public  CodeModel performPosttransformUpdates(CodeModel codeModel) {
+    public CodeModel performPosttransformUpdates(CodeModel codeModel) {
         if (JavaSettings.getInstance().isOptionalConstantAsEnum()) {
             return Preprocessor.convertOptionalConstantsToEnum(codeModel);
         }

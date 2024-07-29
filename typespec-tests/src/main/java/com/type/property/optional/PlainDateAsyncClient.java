@@ -16,25 +16,25 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.type.property.optional.implementation.PlaindatesImpl;
-import com.type.property.optional.models.PlaindateProperty;
+import com.type.property.optional.implementation.PlainDatesImpl;
+import com.type.property.optional.models.PlainDateProperty;
 import reactor.core.publisher.Mono;
 
 /**
  * Initializes a new instance of the asynchronous OptionalClient type.
  */
 @ServiceClient(builder = OptionalClientBuilder.class, isAsync = true)
-public final class PlaindateAsyncClient {
+public final class PlainDateAsyncClient {
     @Generated
-    private final PlaindatesImpl serviceClient;
+    private final PlainDatesImpl serviceClient;
 
     /**
-     * Initializes an instance of PlaindateAsyncClient class.
+     * Initializes an instance of PlainDateAsyncClient class.
      * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PlaindateAsyncClient(PlaindatesImpl serviceClient) {
+    PlainDateAsyncClient(PlainDatesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -144,11 +144,11 @@ public final class PlaindateAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PlaindateProperty> getAll() {
+    public Mono<PlainDateProperty> getAll() {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getAllWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(PlaindateProperty.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(PlainDateProperty.class));
     }
 
     /**
@@ -163,11 +163,11 @@ public final class PlaindateAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PlaindateProperty> getDefault() {
+    public Mono<PlainDateProperty> getDefault() {
         // Generated convenience method for getDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getDefaultWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(PlaindateProperty.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(PlainDateProperty.class));
     }
 
     /**
@@ -184,7 +184,7 @@ public final class PlaindateAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putAll(PlaindateProperty body) {
+    public Mono<Void> putAll(PlainDateProperty body) {
         // Generated convenience method for putAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putAllWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
@@ -204,7 +204,7 @@ public final class PlaindateAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putDefault(PlaindateProperty body) {
+    public Mono<Void> putDefault(PlainDateProperty body) {
         // Generated convenience method for putDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);

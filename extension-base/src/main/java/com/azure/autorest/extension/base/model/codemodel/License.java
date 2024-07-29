@@ -3,12 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
  * Represents license information.
  */
-public class License {
+public class License implements JsonSerializable<License> {
     private String name;
     private String url;
     private DictionaryAny extensions;
@@ -100,4 +106,33 @@ public class License {
             && Objects.equals(extensions, rhs.extensions);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("name", name)
+            .writeStringField("url", url)
+            .writeJsonField("extensions", extensions)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a License instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A License instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static License fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, License::new, (license, fieldName, reader) -> {
+            if ("name".equals(fieldName)) {
+                license.name = reader.getString();
+            } else if ("url".equals(fieldName)) {
+                license.url = reader.getString();
+            } else if ("extensions".equals(fieldName)) {
+                license.extensions = DictionaryAny.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

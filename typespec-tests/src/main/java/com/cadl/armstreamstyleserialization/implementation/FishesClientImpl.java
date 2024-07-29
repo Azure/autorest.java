@@ -10,6 +10,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -17,11 +18,12 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.cadl.armstreamstyleserialization.fluent.FishesClient;
 import com.cadl.armstreamstyleserialization.fluent.models.FishInner;
+import com.cadl.armstreamstyleserialization.models.ErrorException;
+import com.cadl.armstreamstyleserialization.models.ErrorMinException;
 import reactor.core.publisher.Mono;
 
 /**
@@ -58,28 +60,34 @@ public final class FishesClientImpl implements FishesClient {
         @Headers({ "Content-Type: application/json" })
         @Get("/model")
         @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<FishInner>> getModel(@HeaderParam("Accept") String accept, Context context);
+        @UnexpectedResponseExceptionType(ErrorException.class)
+        Mono<Response<FishInner>> getModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            Context context);
 
+        @Headers({ "Content-Type: application/json" })
         @Put("/model")
         @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<FishInner>> putModel(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") FishInner fish, Context context);
+        @UnexpectedResponseExceptionType(ErrorMinException.class)
+        Mono<Response<FishInner>> putModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") FishInner fish, Context context);
     }
 
     /**
      * The getModel operation.
      * 
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
      * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> getModelWithResponseAsync() {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getModel(accept, context))
+        return FluxUtil.withContext(context -> service.getModel(this.client.getEndpoint(), accept, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -88,22 +96,26 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
      * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> getModelWithResponseAsync(Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.getModel(accept, context);
+        return service.getModel(this.client.getEndpoint(), accept, context);
     }
 
     /**
      * The getModel operation.
      * 
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
      * completion of {@link Mono}.
@@ -118,7 +130,7 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
      * {@link Response}.
@@ -131,7 +143,7 @@ public final class FishesClientImpl implements FishesClient {
     /**
      * The getModel operation.
      * 
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
      */
@@ -145,21 +157,24 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @param fish The fish parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
      * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> putModelWithResponseAsync(FishInner fish) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (fish == null) {
             return Mono.error(new IllegalArgumentException("Parameter fish is required and cannot be null."));
         } else {
             fish.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putModel(contentType, accept, fish, context))
+        return FluxUtil.withContext(context -> service.putModel(this.client.getEndpoint(), accept, fish, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -169,22 +184,25 @@ public final class FishesClientImpl implements FishesClient {
      * @param fish The fish parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
      * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> putModelWithResponseAsync(FishInner fish, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (fish == null) {
             return Mono.error(new IllegalArgumentException("Parameter fish is required and cannot be null."));
         } else {
             fish.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.putModel(contentType, accept, fish, context);
+        return service.putModel(this.client.getEndpoint(), accept, fish, context);
     }
 
     /**
@@ -192,7 +210,7 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @param fish The fish parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
      * completion of {@link Mono}.
@@ -208,7 +226,7 @@ public final class FishesClientImpl implements FishesClient {
      * @param fish The fish parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
      * {@link Response}.
@@ -223,7 +241,7 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @param fish The fish parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
      */

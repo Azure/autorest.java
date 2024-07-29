@@ -26,10 +26,13 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonWriter;
 import org.slf4j.Logger;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -44,7 +47,6 @@ import java.util.stream.Stream;
 public class ModelExampleWriter {
 
     private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), ModelExampleWriter.class);
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private final Set<String> imports = new HashSet<>();
 
@@ -216,11 +218,12 @@ public class ModelExampleWriter {
                 } else {
                     helperFeatures.add(ExampleHelperFeature.ThrowsIOException);
 
-                    try {
-                        String jsonStr = OBJECT_MAPPER.writeValueAsString(node.getObjectValue());
+                    try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                        JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+                        jsonWriter.writeUntyped(node.getObjectValue()).flush();
 
-                        return codeDeserializeJsonString(jsonStr);
-                    } catch (JsonProcessingException e) {
+                        return codeDeserializeJsonString(outputStream.toString(StandardCharsets.UTF_8));
+                    } catch (IOException e) {
                         LOGGER.error("Failed to write JSON {}", node.getObjectValue());
                         throw new IllegalStateException(e);
                     }

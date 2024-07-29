@@ -18,6 +18,9 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.extension.base.util.FileUtils;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -30,7 +33,6 @@ import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
@@ -90,7 +92,9 @@ public class Preprocessor extends NewPlugin {
                 // YAML
                 codeModel = yamlMapper.loadAs(file, CodeModel.class);
             } else {
-                codeModel = jsonMapper.readValue(file, CodeModel.class);
+                try (JsonReader jsonReader = JsonProviders.createReader(file)) {
+                    codeModel = CodeModel.fromJson(jsonReader);
+                }
             }
         } catch (Exception e) {
             System.err.println("Got an error " + e.getMessage());
@@ -238,8 +242,8 @@ public class Preprocessor extends NewPlugin {
     }
 
     @Override
-    public <T> T getValue(Type type, String key) {
-        return wrappedPlugin.getValue(type, key);
+    public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        return wrappedPlugin.getValue(key, converter);
     }
 
 //    @Override

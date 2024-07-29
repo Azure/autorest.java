@@ -233,7 +233,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .map(parameter, isProtocolMethod);
 
                     if (isJsonPatch) {
-                        clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
+                        clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter, isProtocolMethod);
                     }
 
                     // If the codemodel parameter and proxy method parameter types don't match, update the client

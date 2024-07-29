@@ -15,24 +15,24 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.type.property.optional.implementation.PlaindatesImpl;
-import com.type.property.optional.models.PlaindateProperty;
+import com.type.property.optional.implementation.PlainDatesImpl;
+import com.type.property.optional.models.PlainDateProperty;
 
 /**
  * Initializes a new instance of the synchronous OptionalClient type.
  */
 @ServiceClient(builder = OptionalClientBuilder.class)
-public final class PlaindateClient {
+public final class PlainDateClient {
     @Generated
-    private final PlaindatesImpl serviceClient;
+    private final PlainDatesImpl serviceClient;
 
     /**
-     * Initializes an instance of PlaindateClient class.
+     * Initializes an instance of PlainDateClient class.
      * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    PlaindateClient(PlaindatesImpl serviceClient) {
+    PlainDateClient(PlainDatesImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
@@ -142,10 +142,10 @@ public final class PlaindateClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PlaindateProperty getAll() {
+    public PlainDateProperty getAll() {
         // Generated convenience method for getAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAllWithResponse(requestOptions).getValue().toObject(PlaindateProperty.class);
+        return getAllWithResponse(requestOptions).getValue().toObject(PlainDateProperty.class);
     }
 
     /**
@@ -160,10 +160,10 @@ public final class PlaindateClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PlaindateProperty getDefault() {
+    public PlainDateProperty getDefault() {
         // Generated convenience method for getDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getDefaultWithResponse(requestOptions).getValue().toObject(PlaindateProperty.class);
+        return getDefaultWithResponse(requestOptions).getValue().toObject(PlainDateProperty.class);
     }
 
     /**
@@ -179,7 +179,7 @@ public final class PlaindateClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putAll(PlaindateProperty body) {
+    public void putAll(PlainDateProperty body) {
         // Generated convenience method for putAllWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putAllWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
@@ -198,7 +198,7 @@ public final class PlaindateClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putDefault(PlaindateProperty body) {
+    public void putDefault(PlainDateProperty body) {
         // Generated convenience method for putDefaultWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putDefaultWithResponse(BinaryData.fromObject(body), requestOptions).getValue();

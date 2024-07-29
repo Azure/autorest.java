@@ -3,10 +3,17 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
+
 /**
  * Represents the metadata for long-running operations.
  */
-public class LongRunningMetadata {
+public class LongRunningMetadata implements JsonSerializable<LongRunningMetadata> {
     private ObjectSchema pollResultType;
     private ObjectSchema finalResultType;
     private Metadata pollingStrategy;
@@ -88,5 +95,38 @@ public class LongRunningMetadata {
      */
     public void setFinalResultPropertySerializedName(String finalResultPropertySerializedName) {
         this.finalResultPropertySerializedName = finalResultPropertySerializedName;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeJsonField("pollResultType", pollResultType)
+            .writeJsonField("finalResultType", finalResultType)
+            .writeJsonField("pollingStrategy", pollingStrategy)
+            .writeStringField("finalResultPropertySerializedName", finalResultPropertySerializedName)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a LongRunningMetadata instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A LongRunningMetadata instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static LongRunningMetadata fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, LongRunningMetadata::new, (lroMetadata, fieldName, reader) -> {
+            if ("pollResultType".equals(fieldName)) {
+                lroMetadata.pollResultType = ObjectSchema.fromJson(reader);
+            } else if ("finalResultType".equals(fieldName)) {
+                lroMetadata.finalResultType = ObjectSchema.fromJson(reader);
+            } else if ("pollingStrategy".equals(fieldName)) {
+                lroMetadata.pollingStrategy = Metadata.fromJson(reader);
+            } else if ("finalResultPropertySerializedName".equals(fieldName)) {
+                lroMetadata.finalResultPropertySerializedName = reader.getFieldName();
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

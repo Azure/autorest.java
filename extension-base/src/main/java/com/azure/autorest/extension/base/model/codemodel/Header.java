@@ -4,11 +4,17 @@
 package com.azure.autorest.extension.base.model.codemodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 
 /**
  * Represents a header.
  */
-public class Header {
+public class Header implements JsonSerializable<Header> {
     private String header;
     private Schema schema;
     private XmsExtensions extensions;
@@ -71,5 +77,35 @@ public class Header {
      */
     public void setExtensions(XmsExtensions extensions) {
         this.extensions = extensions;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("header", header)
+            .writeJsonField("schema", schema)
+            .writeJsonField("extensions", extensions)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a Header instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Header instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static Header fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Header::new, (header, fieldName, reader) -> {
+            if ("header".equals(fieldName)) {
+                header.header = reader.getString();
+            } else if ("schema".equals(fieldName)) {
+                header.schema = Schema.fromJson(reader);
+            } else if ("extensions".equals(fieldName)) {
+                header.extensions = XmsExtensions.fromJson(reader);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

@@ -20,6 +20,8 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.prototype.MethodTemplate;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
@@ -71,8 +73,15 @@ public class TestUtils {
             javagen = new MockJavagen(this.connection);
         }
 
+        @SuppressWarnings("unchecked")
         @Override
-        public <T> T getValue(Type type, String key) {
+        public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+            return (T) DEFAULT_SETTINGS.get(key);
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
             return (T) DEFAULT_SETTINGS.get(key);
         }
 
@@ -110,7 +119,7 @@ public class TestUtils {
         try {
             Path path = Paths.get(ResourceParserTests.class.getClassLoader().getResource(filename).toURI());
 
-            return new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+            return Files.readString(path);
         } catch (IOException | URISyntaxException e) {
             Assertions.fail(e);
             return null;

@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -62,4 +67,27 @@ public class ParameterGroupSchema extends ComplexSchema {
         return Objects.equals(parameters, rhs.parameters);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeArrayField("parameters", parameters, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a ParameterGroupSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A ParameterGroupSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static ParameterGroupSchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ParameterGroupSchema::new, (relations, fieldName, reader) -> {
+            if ("parameters".equals(fieldName)) {
+                relations.parameters = reader.readArray(Parameter::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

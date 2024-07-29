@@ -83,8 +83,10 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
+  Interface,
   Model,
   ModelProperty,
+  Namespace,
   Operation,
   Program,
   Scalar,
@@ -178,9 +180,12 @@ export class CodeModelBuilder {
   private program: Program;
   private typeNameOptions: TypeNameOptions;
   private namespace: string;
-  private sdkContext: SdkContext;
+  private sdkContext!: SdkContext;
   private options: EmitterOptions;
   private codeModel: CodeModel;
+  private emitterContext: EmitContext<EmitterOptions>;
+  private serviceNamespace: Namespace | Interface | Operation;
+
   private loggingEnabled: boolean = false;
 
   readonly schemaCache = new ProcessingCache((type: SdkType, name: string) =>
@@ -196,6 +201,7 @@ export class CodeModelBuilder {
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
+    this.emitterContext = context;
     if (this.options["dev-options"]?.loglevel) {
       this.loggingEnabled = true;
     }
@@ -204,15 +210,15 @@ export class CodeModelBuilder {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
-    this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
       throw Error("Cannot emit yaml for a namespace that doesn't exist.");
     }
+    this.serviceNamespace = serviceNamespace;
 
-    // java namespace
     this.namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
+    // java namespace
     const javaNamespace = getJavaNamespace(this.namespace);
 
     const namespace1 = this.namespace;
@@ -220,7 +226,7 @@ export class CodeModelBuilder {
       // shorten type names by removing TypeSpec and service namespace
       namespaceFilter(ns) {
         const name = getNamespaceFullName(ns);
-        return name !== "Cadl" && name !== namespace1;
+        return name !== "TypeSpec" && name !== namespace1;
       },
     };
 
@@ -244,16 +250,18 @@ export class CodeModelBuilder {
         },
       },
     });
-
-    // auth
-    // TODO: it is not very likely, but different client could have different auth
-    const auth = getAuthentication(this.program, serviceNamespace);
-    if (auth) {
-      this.processAuth(auth);
-    }
   }
 
   public async build(): Promise<CodeModel> {
+    this.sdkContext = await createSdkContext(this.emitterContext, "@azure-tools/typespec-java", {versioning:  {previewStringRegex: /$/}}); // include all versions and do the filter by ourselves
+
+    // auth
+    // TODO: it is not very likely, but different client could have different auth
+    const auth = getAuthentication(this.program, this.serviceNamespace);
+    if (auth) {
+      this.processAuth(auth);
+    }
+
     this.operationExamples = await loadExamples(this.program, this.options, this.sdkContext);
 
     if (this.sdkContext.arm) {
@@ -578,7 +586,11 @@ export class CodeModelBuilder {
         }
 
         codeModelClient.apiVersions = [];
-        for (const version of this.getFilteredApiVersionsFromString(this.apiVersionString, versions)) {
+        for (const version of this.getFilteredApiVersions(
+          this.apiVersion,
+          versioning.getVersions(),
+          this.options["service-version-exclude-preview"],
+        )) {
           const apiVersion = new ApiVersion();
           apiVersion.version = version;
           codeModelClient.apiVersions.push(apiVersion);
@@ -848,40 +860,23 @@ export class CodeModelBuilder {
 
   /**
    * Filter api-versions for "ServiceVersion".
-   * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/746
+   * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/965
    *
    * @param pinnedApiVersion the api-version to use as filter base
    * @param versions api-versions to filter
    * @returns filtered api-versions
    */
-  private getFilteredApiVersionsFromString(pinnedApiVersion: string | undefined, versions: string[]): string[] {
+  private getFilteredApiVersionsFromString(
+    pinnedApiVersion: string | undefined,
+    versions: string[],
+    excludePreview: boolean = false,
+  ): Version[] {
     if (!pinnedApiVersion) {
       return versions;
     }
     return versions
       .slice(0, versions.indexOf(pinnedApiVersion) + 1)
-      .filter((version) => !this.isStableApiVersion(pinnedApiVersion) || this.isStableApiVersion(version));
-  }
-
-    /**
-   * Filter api-versions for "ServiceVersion".
-   * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/746
-   *
-   * @param pinnedApiVersion the api-version to use as filter base
-   * @param versions api-versions to filter
-   * @returns filtered api-versions
-   */
-    private getFilteredApiVersions(pinnedApiVersion: Version | undefined, versions: Version[]): Version[] {
-      if (!pinnedApiVersion) {
-        return versions;
-      }
-      return versions
-        .slice(0, versions.indexOf(pinnedApiVersion) + 1)
-        .filter((version) => !isStable(pinnedApiVersion) || isStable(version));
-    }
-
-  private isStableApiVersion(version: string): boolean {
-    return !version.includes("preview");
+      .filter((version) => !excludePreview || !isStable(pinnedApiVersion) || isStable(version));
   }
 
   /**
@@ -2773,16 +2768,7 @@ export class CodeModelBuilder {
           return this.processAnySchemaFromSdkType();
 
         case "string":
-        case "password":
-        case "guid":
-        case "ipAddress":
-        case "uuid":
-        case "ipV4Address":
-        case "ipV6Address":
-        case "eTag":
-        case "armId":
-        case "azureLocation":
-          return this.processStringSchemaFromSdkType(type, type.kind);
+          return this.processStringSchemaFromSdkType(type, nameHint);
 
         case "float":
         case "float32":
@@ -2806,7 +2792,6 @@ export class CodeModelBuilder {
           return this.processDateSchemaFromSdkType(type, nameHint);
 
         case "url":
-        case "uri":
           return this.processUrlSchemaFromSdkType(type, nameHint);
       }
     }
@@ -3082,6 +3067,8 @@ export class CodeModelBuilder {
           kind: "string",
           encode: "string",
           decorators: [],
+          name: "string",
+          crossLanguageDefinitionId: type.crossLanguageDefinitionId,
         },
         description: type.description,
         valueType: type.additionalProperties,
@@ -3148,8 +3135,20 @@ export class CodeModelBuilder {
       extensions["x-ms-mutability"] = mutability;
     }
 
-    if (prop.kind === "property" && prop.isMultipartFileInput) {
-      schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
+    if (prop.kind === "property" && prop.multipartOptions) {
+      if (prop.multipartOptions.isFilePart) {
+        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(
+          prop,
+          prop.multipartOptions.isMulti,
+          this.namespace,
+        );
+      } else {
+        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(
+          prop,
+          prop.multipartOptions.isMulti,
+          schema,
+        );
+      }
     }
 
     return new Property(prop.name, prop.details ?? "", schema, {
@@ -3276,10 +3275,17 @@ export class CodeModelBuilder {
   }
 
   private processMultipartFormDataFilePropertySchemaFromSdkType(
-    property: SdkModelPropertyType,
+    property: SdkBodyModelPropertyType,
+    isMulti: boolean,
     namespace: string,
   ): Schema {
-    if (property.type.kind === "bytes") {
+    if (isMulti) {
+      return new ArraySchema(
+        property.name,
+        property.description ?? "",
+        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
+      );
+    } else {
       return getFileDetailsSchema(
         property.name,
         namespace,
@@ -3287,14 +3293,19 @@ export class CodeModelBuilder {
         this.binarySchema,
         this.stringSchema,
       );
-    } else if (property.type.kind === "array" && property.type.valueType.kind === "bytes") {
-      return new ArraySchema(
-        property.name,
-        property.description ?? "",
-        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
-      );
     }
-    throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
+  }
+
+  private processMultipartFormDataNonFilePropertySchemaFromSdkType(
+    property: SdkBodyModelPropertyType,
+    isMulti: boolean,
+    schema: Schema,
+  ) {
+    if (isMulti) {
+      return new ArraySchema(property.name, property.description ?? "", schema);
+    } else {
+      return schema;
+    }
   }
 
   private getDoc(target: Type | undefined): string {
