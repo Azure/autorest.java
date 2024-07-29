@@ -2235,8 +2235,11 @@ export class CodeModelBuilder {
     if (isMulti) {
       return new ArraySchema(
         property.name,
-        property.description ?? "",
+        property.details ?? "",
         getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
+        {
+          summary: property.description,
+        },
       );
     } else {
       return getFileDetailsSchema(
@@ -2255,7 +2258,9 @@ export class CodeModelBuilder {
     schema: Schema,
   ) {
     if (isMulti) {
-      return new ArraySchema(property.name, property.description ?? "", schema);
+      return new ArraySchema(property.name, property.details ?? "", schema, {
+        summary: property.description,
+      });
     } else {
       return schema;
     }
