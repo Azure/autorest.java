@@ -2098,9 +2098,17 @@ export class CodeModelBuilder {
 
     if (prop.kind === "property" && prop.multipartOptions) {
       if (prop.multipartOptions.isFilePart) {
-        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, prop.multipartOptions.isMulti, this.namespace);
+        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(
+          prop,
+          prop.multipartOptions.isMulti,
+          this.namespace,
+        );
       } else {
-        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(prop, prop.multipartOptions.isMulti, schema);
+        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(
+          prop,
+          prop.multipartOptions.isMulti,
+          schema,
+        );
       }
     }
 
@@ -2241,16 +2249,13 @@ export class CodeModelBuilder {
     }
   }
 
-  private processMultipartFormDataNonFilePropertySchemaFromSdkType(    
+  private processMultipartFormDataNonFilePropertySchemaFromSdkType(
     property: SdkBodyModelPropertyType,
     isMulti: boolean,
-    schema: Schema) {
+    schema: Schema,
+  ) {
     if (isMulti) {
-      return new ArraySchema(
-        property.name,
-        property.description ?? "",
-        schema,
-      );
+      return new ArraySchema(property.name, property.description ?? "", schema);
     } else {
       return schema;
     }
