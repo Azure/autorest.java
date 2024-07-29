@@ -151,7 +151,7 @@ export function getFileDetailsSchema(
     /*
     Current logic:
     - Class name suffix "FileDetails"
-    - No class hierachy for File
+    - No class hierarchy for File
     - File has 3 properties: "content", "filename", "contentType" (Note that it is "contents" in TypeSpec)
     - No adjustment on "content" property, it is always BinaryData and required
     - Allow constant type for "filename" and "contentType" (to be discussed for other types e.g. enum)
