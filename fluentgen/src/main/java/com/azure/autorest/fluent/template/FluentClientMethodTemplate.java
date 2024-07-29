@@ -270,7 +270,14 @@ public class FluentClientMethodTemplate extends ClientMethodTemplate {
             }
             function.line("%s mono = %s(%s);", clientMethod.getProxyMethod().getReturnType().toString(), clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
             if (classType instanceof GenericType) {
-                function.line("return %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), new TypeReference<%s>() {}.getType(), new TypeReference<%s>() {}.getType(), %s);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam);
+                // pageable LRO
+                String typeReferenceGetType;
+                if (settings.isStreamStyleSerialization()) {
+                    typeReferenceGetType = "getJavaType";
+                } else {
+                    typeReferenceGetType = "getType";
+                }
+                function.line("return %1$s.<%2$s, %2$s>getLroResult(mono, %1$s.getHttpPipeline(), new TypeReference<%2$s>() {}.%3$s(), new TypeReference<%2$s>() {}.%3$s(), %4$s);", clientMethod.getClientReference(), classType.toString(), typeReferenceGetType, contextParam);
             } else {
                 function.line("return %s.<%s, %s>getLroResult(mono, %s.getHttpPipeline(), %s.class, %s.class, %s);", clientMethod.getClientReference(), classType.toString(), classType.toString(), clientMethod.getClientReference(), classType.toString(), classType.toString(), contextParam);
             }
