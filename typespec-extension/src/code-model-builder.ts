@@ -586,9 +586,9 @@ export class CodeModelBuilder {
         }
 
         codeModelClient.apiVersions = [];
-        for (const version of this.getFilteredApiVersions(
-          this.apiVersion,
-          versioning.getVersions(),
+        for (const version of this.getFilteredApiVersionsFromString(
+          this.apiVersionString,
+          versions,
           this.options["service-version-exclude-preview"],
         )) {
           const apiVersion = new ApiVersion();
@@ -870,13 +870,13 @@ export class CodeModelBuilder {
     pinnedApiVersion: string | undefined,
     versions: string[],
     excludePreview: boolean = false,
-  ): Version[] {
+  ): string[] {
     if (!pinnedApiVersion) {
       return versions;
     }
     return versions
       .slice(0, versions.indexOf(pinnedApiVersion) + 1)
-      .filter((version) => !excludePreview || !isStable(pinnedApiVersion) || isStable(version));
+      .filter((version) => !excludePreview || pinnedApiVersion.includes("preview") || !version.includes("preview"));
   }
 
   /**
