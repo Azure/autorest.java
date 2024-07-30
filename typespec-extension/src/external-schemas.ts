@@ -224,7 +224,6 @@ export function getFileDetailsSchema(
     if (!fileDetailsSchema) {
       const typeNamespace = getNamespace(property.type.__raw) ?? namespace;
       fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, typeNamespace, schemas);
-      fileDetailsMap.set(schemaName, fileDetailsSchema);
 
       // description if available
       if (property.type.description) {
@@ -266,7 +265,6 @@ export function getFileDetailsSchema(
     let fileDetailsSchema = fileDetailsMap.get(schemaName);
     if (!fileDetailsSchema) {
       fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, namespace, schemas);
-      fileDetailsMap.set(schemaName, fileDetailsSchema);
 
       addContentProperty(fileDetailsSchema, binarySchema);
       addFilenameProperty(fileDetailsSchema, stringSchema);
