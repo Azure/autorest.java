@@ -1594,7 +1594,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         String description = null;
         // try the description of the operation
         if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {
-            String operationDescription = operation.getLanguage().getDefault().getDescription();
+            String operationDescription = SchemaUtil.mergeSummaryWithDescription(operation.getSummary(), operation.getLanguage().getDefault().getDescription());
             if (!CoreUtils.isNullOrEmpty(operationDescription)) {
                 if (operationDescription.toLowerCase().startsWith("get ") || operationDescription.toLowerCase().startsWith("gets ")) {
                     int startIndex = operationDescription.indexOf(" ") + 1;
