@@ -3147,12 +3147,6 @@ export class CodeModelBuilder {
           prop.multipartOptions.isMulti,
           this.namespace,
         );
-      } else {
-        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(
-          prop,
-          prop.multipartOptions.isMulti,
-          schema,
-        );
       }
     }
 
