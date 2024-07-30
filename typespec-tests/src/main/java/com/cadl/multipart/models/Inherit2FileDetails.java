@@ -9,6 +9,8 @@ import com.azure.core.annotation.Immutable;
 import com.azure.core.util.BinaryData;
 
 /**
+ * Image file of content-type "image/jpeg"
+ * 
  * The file details for the "fileData1" field.
  */
 @Immutable
