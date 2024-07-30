@@ -4,15 +4,17 @@
 
 package com.cadl.multipart.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.BinaryData;
 
 /**
- * The file details for the "fileData2" field.
+ * Image file of content-type "image/jpeg"
+ * 
+ * The file details for the "fileData1" field.
  */
-@Fluent
-public final class FileDetails {
+@Immutable
+public final class Inherit2FileDetails {
     /*
      * The content of the file.
      */
@@ -23,22 +25,24 @@ public final class FileDetails {
      * The filename of the file.
      */
     @Generated
-    private String filename;
+    private final String filename;
 
     /*
      * The content-type of the file.
      */
     @Generated
-    private String contentType = "application/octet-stream";
+    private final String contentType = "image/jpeg";
 
     /**
-     * Creates an instance of FileDetails class.
+     * Creates an instance of Inherit2FileDetails class.
      * 
      * @param content the content value to set.
+     * @param filename the filename value to set.
      */
     @Generated
-    public FileDetails(BinaryData content) {
+    public Inherit2FileDetails(BinaryData content, String filename) {
         this.content = content;
+        this.filename = filename;
     }
 
     /**
@@ -62,18 +66,6 @@ public final class FileDetails {
     }
 
     /**
-     * Set the filename property: The filename of the file.
-     * 
-     * @param filename the filename value to set.
-     * @return the FileDetails object itself.
-     */
-    @Generated
-    public FileDetails setFilename(String filename) {
-        this.filename = filename;
-        return this;
-    }
-
-    /**
      * Get the contentType property: The content-type of the file.
      * 
      * @return the contentType value.
@@ -81,17 +73,5 @@ public final class FileDetails {
     @Generated
     public String getContentType() {
         return this.contentType;
-    }
-
-    /**
-     * Set the contentType property: The content-type of the file.
-     * 
-     * @param contentType the contentType value to set.
-     * @return the FileDetails object itself.
-     */
-    @Generated
-    public FileDetails setContentType(String contentType) {
-        this.contentType = contentType;
-        return this;
     }
 }
