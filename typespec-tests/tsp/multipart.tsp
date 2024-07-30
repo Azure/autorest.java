@@ -41,6 +41,9 @@ model Inherit1File extends File {
   filename: string;
 }
 
+/**
+ * Image file of content-type "image/jpeg"
+ */
 model Inherit2File extends Inherit1File {
   contentType: "image/jpeg";
 }

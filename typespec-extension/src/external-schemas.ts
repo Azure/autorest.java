@@ -1,7 +1,13 @@
 import { ArraySchema, BinarySchema, ObjectSchema, Property, Schema, Schemas, StringSchema } from "@autorest/codemodel";
 import { KnownMediaType } from "@azure-tools/codegen";
-import { getJavaNamespace, pascalCase } from "./utils.js";
-import { SdkBodyModelPropertyType, SdkModelType, SdkType } from "@azure-tools/typespec-client-generator-core";
+import { getJavaNamespace, getNamespace, pascalCase } from "./utils.js";
+import {
+  SdkBodyModelPropertyType,
+  SdkModelPropertyType,
+  SdkModelType,
+  SdkType,
+} from "@azure-tools/typespec-client-generator-core";
+import { CrossLanguageDefinition } from "./common/client.js";
 
 /*
  * These schema need to reflect
@@ -138,6 +144,61 @@ function createFileDetailsSchema(schemaName: string, propertyName: string, names
   return fileDetailsSchema;
 }
 
+function addContentProperty(fileDetailsSchema: ObjectSchema, binarySchema: BinarySchema) {
+  fileDetailsSchema.addProperty(
+    new Property("content", "The content of the file.", binarySchema, {
+      required: true,
+      nullable: false,
+      readOnly: false,
+    }),
+  );
+}
+
+function addFilenameProperty(
+  fileDetailsSchema: ObjectSchema,
+  stringSchema: StringSchema,
+  filenameProperty?: SdkModelPropertyType,
+  processSchemaFunc?: (type: SdkType) => Schema,
+) {
+  fileDetailsSchema.addProperty(
+    new Property(
+      "filename",
+      "The filename of the file.",
+      filenameProperty?.type.kind === "constant" && processSchemaFunc
+        ? processSchemaFunc(filenameProperty.type)
+        : stringSchema,
+      {
+        required: filenameProperty ? !filenameProperty.optional : false,
+        nullable: false,
+        readOnly: false,
+      },
+    ),
+  );
+}
+
+function addContentTypeProperty(
+  fileDetailsSchema: ObjectSchema,
+  stringSchema: StringSchema,
+  contentTypeProperty?: SdkModelPropertyType,
+  processSchemaFunc?: (type: SdkType) => Schema,
+) {
+  fileDetailsSchema.addProperty(
+    new Property(
+      "contentType",
+      "The content-type of the file.",
+      contentTypeProperty?.type.kind === "constant" && processSchemaFunc
+        ? processSchemaFunc(contentTypeProperty.type)
+        : stringSchema,
+      {
+        required: contentTypeProperty ? !contentTypeProperty.optional : false,
+        nullable: false,
+        readOnly: false,
+        clientDefaultValue: contentTypeProperty?.type.kind === "constant" ? undefined : "application/octet-stream",
+      },
+    ),
+  );
+}
+
 export function getFileDetailsSchema(
   property: SdkBodyModelPropertyType,
   namespace: string,
@@ -162,8 +223,20 @@ export function getFileDetailsSchema(
     const schemaName = getFileSchemaName(fileSchemaName);
     let fileDetailsSchema = fileDetailsMap.get(schemaName);
     if (!fileDetailsSchema) {
-      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, namespace, schemas);
+      const typeNamespace = getNamespace(property.type.__raw) ?? namespace;
+      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, typeNamespace, schemas);
       fileDetailsMap.set(schemaName, fileDetailsSchema);
+
+      // description if available
+      if (property.type.description) {
+        fileDetailsSchema.summary = property.type.description;
+      }
+      if (property.type.details) {
+        fileDetailsSchema.language.default.description = property.type.details;
+      }
+      // crossLanguageDefinitionId
+      (fileDetailsSchema as CrossLanguageDefinition).crossLanguageDefinitionId =
+        property.type.crossLanguageDefinitionId;
     }
 
     let contentTypeProperty;
@@ -173,48 +246,19 @@ export function getFileDetailsSchema(
     let type: SdkModelType | undefined = property.type;
     while (type !== undefined) {
       for (const property of type.properties) {
-        if (!contentTypeProperty && property.name === "contentType") {
-          contentTypeProperty = property;
-        }
         if (!filenameProperty && property.name === "filename") {
           filenameProperty = property;
+        }
+        if (!contentTypeProperty && property.name === "contentType") {
+          contentTypeProperty = property;
         }
       }
       type = type.baseModel;
     }
 
-    fileDetailsSchema.addProperty(
-      new Property("content", "The content of the file.", binarySchema, {
-        required: true,
-        nullable: false,
-        readOnly: false,
-      }),
-    );
-    fileDetailsSchema.addProperty(
-      new Property(
-        "filename",
-        "The filename of the file.",
-        filenameProperty?.type.kind === "constant" ? processSchemaFunc(filenameProperty.type) : stringSchema,
-        {
-          required: filenameProperty ? !filenameProperty.optional : false,
-          nullable: false,
-          readOnly: false,
-        },
-      ),
-    );
-    fileDetailsSchema.addProperty(
-      new Property(
-        "contentType",
-        "The content-type of the file.",
-        contentTypeProperty?.type.kind === "constant" ? processSchemaFunc(contentTypeProperty.type) : stringSchema,
-        {
-          required: contentTypeProperty ? !contentTypeProperty.optional : false,
-          nullable: false,
-          readOnly: false,
-          clientDefaultValue: contentTypeProperty?.type.kind === "constant" ? undefined : "application/octet-stream",
-        },
-      ),
-    );
+    addContentProperty(fileDetailsSchema, binarySchema);
+    addFilenameProperty(fileDetailsSchema, stringSchema, filenameProperty, processSchemaFunc);
+    addContentTypeProperty(fileDetailsSchema, stringSchema, contentTypeProperty, processSchemaFunc);
     return fileDetailsSchema;
   } else {
     // property.type is bytes, create a File schema
@@ -225,28 +269,9 @@ export function getFileDetailsSchema(
       fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, namespace, schemas);
       fileDetailsMap.set(schemaName, fileDetailsSchema);
 
-      fileDetailsSchema.addProperty(
-        new Property("content", "The content of the file.", binarySchema, {
-          required: true,
-          nullable: false,
-          readOnly: false,
-        }),
-      );
-      fileDetailsSchema.addProperty(
-        new Property("filename", "The filename of the file.", stringSchema, {
-          required: false,
-          nullable: false,
-          readOnly: false,
-        }),
-      );
-      fileDetailsSchema.addProperty(
-        new Property("contentType", "The content-type of the file.", stringSchema, {
-          required: false,
-          nullable: false,
-          readOnly: false,
-          clientDefaultValue: "application/octet-stream",
-        }),
-      );
+      addContentProperty(fileDetailsSchema, binarySchema);
+      addFilenameProperty(fileDetailsSchema, stringSchema);
+      addContentTypeProperty(fileDetailsSchema, stringSchema);
     }
     return fileDetailsSchema;
   }

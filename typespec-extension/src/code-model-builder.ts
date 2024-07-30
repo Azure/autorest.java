@@ -2100,10 +2100,9 @@ export class CodeModelBuilder {
     }
 
     if (prop.kind === "property" && prop.multipartOptions) {
+      // TODO: handle MultipartOptions.isMulti
       if (prop.multipartOptions.isFilePart) {
         schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
-      } else {
-        schema = this.processMultipartFormDataNonFilePropertySchemaFromSdkType(prop, schema);
       }
     }
 
@@ -2227,7 +2226,19 @@ export class CodeModelBuilder {
     namespace: string,
   ): Schema {
     const processSchemaFunc = (type: SdkType) => this.processSchemaFromSdkType(type, "");
-    if (property.multipartOptions?.isMulti) {
+    if (property.type.kind === "bytes" || property.type.kind === "model") {
+      return getFileDetailsSchema(
+        property,
+        namespace,
+        this.codeModel.schemas,
+        this.binarySchema,
+        this.stringSchema,
+        processSchemaFunc,
+      );
+    } else if (
+      property.type.kind === "array" &&
+      (property.type.valueType.kind === "bytes" || property.type.valueType.kind === "model")
+    ) {
       return new ArraySchema(
         property.name,
         property.details ?? "",
@@ -2244,24 +2255,7 @@ export class CodeModelBuilder {
         },
       );
     } else {
-      return getFileDetailsSchema(
-        property,
-        namespace,
-        this.codeModel.schemas,
-        this.binarySchema,
-        this.stringSchema,
-        processSchemaFunc,
-      );
-    }
-  }
-
-  private processMultipartFormDataNonFilePropertySchemaFromSdkType(property: SdkBodyModelPropertyType, schema: Schema) {
-    if (property.multipartOptions?.isMulti) {
-      return new ArraySchema(property.name, property.details ?? "", schema, {
-        summary: property.description,
-      });
-    } else {
-      return schema;
+      throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
     }
   }
 
