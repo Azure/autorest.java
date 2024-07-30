@@ -1014,16 +1014,21 @@ export class CodeModelBuilder {
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // path/query/header parameters
     for (let param of httpOperation.parameters) {
-      // if it's paged operation with request body, remove content-type header added by TCGC, as next link call should not have content type header
+      // if it's paged operation with request body, skip content-type header added by TCGC, as next link call should not have content type header
       if ((sdkMethod.kind === "paging" || sdkMethod.kind === "lropaging") && httpOperation.bodyParam) {
+        if (param.serializedName.toLocaleLowerCase() === "content-type") {
+          continue;
+        }
+      }
+      // if the request body is optional, skip content-type header added by TCGC
+      if (httpOperation.bodyParam && httpOperation.bodyParam.optional) {
         if (param.serializedName.toLocaleLowerCase() === "content-type") {
           continue;
         }
       }
       this.processParameterFromSdkType(codeModelOperation, param, clientContext);
     }
-    // "accept" header
-    // this.addAcceptHeaderParameterFromSdkType(codeModelOperation, httpOperation.responses);
+
     // body
     if (httpOperation.bodyParam && httpOperation.__raw && sdkMethod.__raw && httpOperation.bodyParam.type.__raw) {
         // let bodyType = httpOperation.bodyParam.type;
