@@ -138,7 +138,6 @@ function createFileDetailsSchema(schemaName: string, propertyName: string, names
     },
     serializationFormats: [KnownMediaType.Multipart],
   });
-  fileDetailsSchema.serializationFormats;
   schemas.add(fileDetailsSchema);
   fileDetailsMap.set(schemaName, fileDetailsSchema);
   return fileDetailsSchema;
@@ -237,28 +236,28 @@ export function getFileDetailsSchema(
       // crossLanguageDefinitionId
       (fileDetailsSchema as CrossLanguageDefinition).crossLanguageDefinitionId =
         property.type.crossLanguageDefinitionId;
-    }
 
-    let contentTypeProperty;
-    let filenameProperty;
+      let contentTypeProperty;
+      let filenameProperty;
 
-    // find "filename" and "contentType" property in current model and its base models
-    let type: SdkModelType | undefined = property.type;
-    while (type !== undefined) {
-      for (const property of type.properties) {
-        if (!filenameProperty && property.name === "filename") {
-          filenameProperty = property;
+      // find "filename" and "contentType" property in current model and its base models
+      let type: SdkModelType | undefined = property.type;
+      while (type !== undefined) {
+        for (const property of type.properties) {
+          if (!filenameProperty && property.name === "filename") {
+            filenameProperty = property;
+          }
+          if (!contentTypeProperty && property.name === "contentType") {
+            contentTypeProperty = property;
+          }
         }
-        if (!contentTypeProperty && property.name === "contentType") {
-          contentTypeProperty = property;
-        }
+        type = type.baseModel;
       }
-      type = type.baseModel;
-    }
 
-    addContentProperty(fileDetailsSchema, binarySchema);
-    addFilenameProperty(fileDetailsSchema, stringSchema, filenameProperty, processSchemaFunc);
-    addContentTypeProperty(fileDetailsSchema, stringSchema, contentTypeProperty, processSchemaFunc);
+      addContentProperty(fileDetailsSchema, binarySchema);
+      addFilenameProperty(fileDetailsSchema, stringSchema, filenameProperty, processSchemaFunc);
+      addContentTypeProperty(fileDetailsSchema, stringSchema, contentTypeProperty, processSchemaFunc);
+    }
     return fileDetailsSchema;
   } else {
     // property.type is bytes, create a File schema
