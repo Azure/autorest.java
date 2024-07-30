@@ -10,6 +10,7 @@ import com.client.naming.models.ClientNameModel;
 import com.client.naming.models.ExtensibleEnum;
 import com.client.naming.models.JavaModel;
 import com.client.naming.models.LanguageClientNameModel;
+import org.eclipse.jetty.io.ssl.ALPNProcessor;
 import org.junit.jupiter.api.Test;
 
 public class NamingTests {
@@ -17,7 +18,7 @@ public class NamingTests {
     private final NamingClient client = new NamingClientBuilder().buildClient();
 
     // client name should be "ClientModel", currently a bug in TCGC
-    private final ModelClient modelClient = new NamingClientBuilder().buildModelClient();
+    private final ClientModelClient modelClient = new NamingClientBuilder().buildClientModelClient();
 
     private final UnionEnumClient enumClient = new NamingClientBuilder().buildUnionEnumClient();
 

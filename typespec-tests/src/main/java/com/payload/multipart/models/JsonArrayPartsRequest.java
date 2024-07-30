@@ -23,7 +23,7 @@ public final class JsonArrayPartsRequest {
      * The previousAddresses property.
      */
     @Generated
-    private final List<List<Address>> previousAddresses;
+    private final List<Address> previousAddresses;
 
     /**
      * Creates an instance of JsonArrayPartsRequest class.
@@ -32,7 +32,7 @@ public final class JsonArrayPartsRequest {
      * @param previousAddresses the previousAddresses value to set.
      */
     @Generated
-    public JsonArrayPartsRequest(ProfileImageFileDetails profileImage, List<List<Address>> previousAddresses) {
+    public JsonArrayPartsRequest(ProfileImageFileDetails profileImage, List<Address> previousAddresses) {
         this.profileImage = profileImage;
         this.previousAddresses = previousAddresses;
     }
@@ -53,7 +53,7 @@ public final class JsonArrayPartsRequest {
      * @return the previousAddresses value.
      */
     @Generated
-    public List<List<Address>> getPreviousAddresses() {
+    public List<Address> getPreviousAddresses() {
         return this.previousAddresses;
     }
 }
