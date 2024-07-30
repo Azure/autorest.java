@@ -711,7 +711,8 @@ export class CodeModelBuilder {
       for (const example of httpOperationExamples) {
         const operationExample = example.rawExample;
         operationExample["x-ms-original-file"] = pathToFileURL(example.filePath).toString();
-        operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] = operationExample;
+        operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] =
+          operationExample;
       }
       return operationExamples;
     } else {
