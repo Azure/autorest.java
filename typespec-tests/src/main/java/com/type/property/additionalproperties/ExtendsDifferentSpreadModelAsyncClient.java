@@ -59,8 +59,7 @@ public final class ExtendsDifferentSpreadModelAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the model extends from a model that spread Record&lt;ModelForRecord&gt; with the different known property
-     * type along with {@link Response} on successful completion of {@link Mono}.
+     * @return call along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -106,8 +105,7 @@ public final class ExtendsDifferentSpreadModelAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the model extends from a model that spread Record&lt;ModelForRecord&gt; with the different known property
-     * type on successful completion of {@link Mono}.
+     * @return call on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -142,8 +142,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return a NestedProxyResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<NestedProxyResourceInner>> getWithResponseAsync(String resourceGroupName,
@@ -181,8 +180,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return a NestedProxyResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<NestedProxyResourceInner>> getWithResponseAsync(String resourceGroupName,
@@ -218,7 +216,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource on successful completion of {@link Mono}.
+     * @return a NestedProxyResource on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<NestedProxyResourceInner> getAsync(String resourceGroupName, String topLevelTrackedResourceName,
@@ -237,7 +235,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response}.
+     * @return a NestedProxyResource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<NestedProxyResourceInner> getWithResponse(String resourceGroupName,
@@ -255,7 +253,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource.
+     * @return a NestedProxyResource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public NestedProxyResourceInner get(String resourceGroupName, String topLevelTrackedResourceName,

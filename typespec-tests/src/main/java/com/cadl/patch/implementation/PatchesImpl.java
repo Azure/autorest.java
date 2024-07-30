@@ -87,8 +87,7 @@ public final class PatchesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrUpdateOptionalResource(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("Accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Patch("/patch/resource/optional")
         @ExpectedResponses({ 200 })
@@ -97,8 +96,7 @@ public final class PatchesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrUpdateOptionalResourceSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("content-type") String contentType, @HeaderParam("Accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Patch("/patch/fish")
         @ExpectedResponses({ 200 })
@@ -280,6 +278,14 @@ public final class PatchesImpl {
 
     /**
      * The createOrUpdateOptionalResource operation.
+     * <p><strong>Header Parameters</strong></p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/merge-patch+json".</td></tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -349,7 +355,6 @@ public final class PatchesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateOptionalResourceWithResponseAsync(RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -357,12 +362,20 @@ public final class PatchesImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/merge-patch+json");
             }
         });
-        return FluxUtil.withContext(context -> service.createOrUpdateOptionalResource(this.client.getEndpoint(),
-            contentType, accept, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.createOrUpdateOptionalResource(this.client.getEndpoint(), accept,
+            requestOptionsLocal, context));
     }
 
     /**
      * The createOrUpdateOptionalResource operation.
+     * <p><strong>Header Parameters</strong></p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/merge-patch+json".</td></tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -432,7 +445,6 @@ public final class PatchesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateOptionalResourceWithResponse(RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -440,8 +452,8 @@ public final class PatchesImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/merge-patch+json");
             }
         });
-        return service.createOrUpdateOptionalResourceSync(this.client.getEndpoint(), contentType, accept,
-            requestOptionsLocal, Context.NONE);
+        return service.createOrUpdateOptionalResourceSync(this.client.getEndpoint(), accept, requestOptionsLocal,
+            Context.NONE);
     }
 
     /**

@@ -28,7 +28,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response}.
+     * @return a ChildExtensionResource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<ChildExtensionResourceInner> getWithResponse(String resourceUri, String topLevelArmResourceName,
@@ -43,7 +43,7 @@ public interface ChildExtensionResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return a ChildExtensionResource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     ChildExtensionResourceInner get(String resourceUri, String topLevelArmResourceName,

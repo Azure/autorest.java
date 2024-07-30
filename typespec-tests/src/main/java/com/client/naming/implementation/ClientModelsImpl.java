@@ -26,13 +26,13 @@ import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
- * An instance of this class provides access to all the operations defined in Models.
+ * An instance of this class provides access to all the operations defined in ClientModels.
  */
-public final class ModelsImpl {
+public final class ClientModelsImpl {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final ModelsService service;
+    private final ClientModelsService service;
 
     /**
      * The service client containing this operation class.
@@ -40,22 +40,23 @@ public final class ModelsImpl {
     private final NamingClientImpl client;
 
     /**
-     * Initializes an instance of ModelsImpl.
+     * Initializes an instance of ClientModelsImpl.
      * 
      * @param client the instance of the service client containing this operation class.
      */
-    ModelsImpl(NamingClientImpl client) {
-        this.service = RestProxy.create(ModelsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+    ClientModelsImpl(NamingClientImpl client) {
+        this.service
+            = RestProxy.create(ClientModelsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
     }
 
     /**
-     * The interface defining all the services for NamingClientModels to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for NamingClientClientModels to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
-    @ServiceInterface(name = "NamingClientModels")
-    public interface ModelsService {
+    @ServiceInterface(name = "NamingClientClientMo")
+    public interface ClientModelsService {
         @Post("/client/naming/model/client")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })

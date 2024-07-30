@@ -151,8 +151,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return a TopLevelTrackedResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<TopLevelTrackedResourceInner>> getByResourceGroupWithResponseAsync(String resourceGroupName,
@@ -185,8 +184,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return a TopLevelTrackedResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<TopLevelTrackedResourceInner>> getByResourceGroupWithResponseAsync(String resourceGroupName,
@@ -217,8 +215,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return a TopLevelTrackedResource on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelTrackedResourceInner> getByResourceGroupAsync(String resourceGroupName,
@@ -236,8 +233,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response}.
+     * @return a TopLevelTrackedResource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<TopLevelTrackedResourceInner> getByResourceGroupWithResponse(String resourceGroupName,
@@ -253,7 +249,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return a TopLevelTrackedResource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelTrackedResourceInner getByResourceGroup(String resourceGroupName,

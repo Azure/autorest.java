@@ -22,7 +22,7 @@ public interface NestedProxyResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response}.
+     * @return a NestedProxyResource along with {@link Response}.
      */
     Response<NestedProxyResource> getWithResponse(String resourceGroupName, String topLevelTrackedResourceName,
         String nextedProxyResourceName, Context context);
@@ -36,7 +36,7 @@ public interface NestedProxyResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource.
+     * @return a NestedProxyResource.
      */
     NestedProxyResource get(String resourceGroupName, String topLevelTrackedResourceName,
         String nextedProxyResourceName);
@@ -101,7 +101,7 @@ public interface NestedProxyResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response}.
+     * @return a NestedProxyResource along with {@link Response}.
      */
     NestedProxyResource getById(String id);
 
@@ -113,7 +113,7 @@ public interface NestedProxyResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource along with {@link Response}.
+     * @return a NestedProxyResource along with {@link Response}.
      */
     Response<NestedProxyResource> getByIdWithResponse(String id, Context context);
 

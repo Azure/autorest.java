@@ -70,8 +70,7 @@ public final class OptionalOpsImpl {
             @QueryParam("booleanRequired") boolean booleanRequired,
             @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
             @QueryParam("stringRequired") String stringRequired,
-            @QueryParam("stringRequiredNullable") String stringRequiredNullable,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Put("/optional/put")
@@ -85,8 +84,7 @@ public final class OptionalOpsImpl {
             @QueryParam("booleanRequired") boolean booleanRequired,
             @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
             @QueryParam("stringRequired") String stringRequired,
-            @QueryParam("stringRequiredNullable") String stringRequiredNullable,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 
@@ -105,6 +103,8 @@ public final class OptionalOpsImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * <tr><td>request-header-optional</td><td>String</td><td>No</td><td>The requestHeaderOptional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -188,7 +188,6 @@ public final class OptionalOpsImpl {
     public Mono<Response<BinaryData>> putWithResponseAsync(String requestHeaderRequired, boolean booleanRequired,
         Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -196,9 +195,9 @@ public final class OptionalOpsImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/json");
             }
         });
-        return FluxUtil.withContext(context -> service.put(this.client.getEndpoint(), requestHeaderRequired,
-            booleanRequired, booleanRequiredNullable, stringRequired, stringRequiredNullable, contentType, accept,
-            requestOptionsLocal, context));
+        return FluxUtil
+            .withContext(context -> service.put(this.client.getEndpoint(), requestHeaderRequired, booleanRequired,
+                booleanRequiredNullable, stringRequired, stringRequiredNullable, accept, requestOptionsLocal, context));
     }
 
     /**
@@ -216,6 +215,8 @@ public final class OptionalOpsImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * <tr><td>request-header-optional</td><td>String</td><td>No</td><td>The requestHeaderOptional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -299,7 +300,6 @@ public final class OptionalOpsImpl {
     public Response<BinaryData> putWithResponse(String requestHeaderRequired, boolean booleanRequired,
         Boolean booleanRequiredNullable, String stringRequired, String stringRequiredNullable,
         RequestOptions requestOptions) {
-        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -308,7 +308,6 @@ public final class OptionalOpsImpl {
             }
         });
         return service.putSync(this.client.getEndpoint(), requestHeaderRequired, booleanRequired,
-            booleanRequiredNullable, stringRequired, stringRequiredNullable, contentType, accept, requestOptionsLocal,
-            Context.NONE);
+            booleanRequiredNullable, stringRequired, stringRequiredNullable, accept, requestOptionsLocal, Context.NONE);
     }
 }

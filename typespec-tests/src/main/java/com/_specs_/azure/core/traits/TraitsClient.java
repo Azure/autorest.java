@@ -74,7 +74,7 @@ public final class TraitsClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return sample Model along with {@link Response}.
+     * @return a resource, sending and receiving headers along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -136,7 +136,7 @@ public final class TraitsClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sample Model.
+     * @return a resource, sending and receiving headers.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -175,7 +175,7 @@ public final class TraitsClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return sample Model.
+     * @return a resource, sending and receiving headers.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

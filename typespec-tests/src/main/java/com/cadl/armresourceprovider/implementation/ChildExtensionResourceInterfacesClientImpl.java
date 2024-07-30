@@ -138,8 +138,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return a ChildExtensionResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ChildExtensionResourceInner>> getWithResponseAsync(String resourceUri,
@@ -172,8 +171,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return a ChildExtensionResource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ChildExtensionResourceInner>> getWithResponseAsync(String resourceUri,
@@ -204,7 +202,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource on successful completion of {@link Mono}.
+     * @return a ChildExtensionResource on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ChildExtensionResourceInner> getAsync(String resourceUri, String topLevelArmResourceName,
@@ -223,7 +221,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource along with {@link Response}.
+     * @return a ChildExtensionResource along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ChildExtensionResourceInner> getWithResponse(String resourceUri, String topLevelArmResourceName,
@@ -240,7 +238,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return extensionResource of Top Level Arm Resource.
+     * @return a ChildExtensionResource.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ChildExtensionResourceInner get(String resourceUri, String topLevelArmResourceName,

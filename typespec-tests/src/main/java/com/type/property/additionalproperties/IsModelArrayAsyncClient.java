@@ -62,8 +62,7 @@ public final class IsModelArrayAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the model is from Record&lt;ModelForRecord[]&gt; type along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return call along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -112,7 +111,7 @@ public final class IsModelArrayAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the model is from Record&lt;ModelForRecord[]&gt; type on successful completion of {@link Mono}.
+     * @return call on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
