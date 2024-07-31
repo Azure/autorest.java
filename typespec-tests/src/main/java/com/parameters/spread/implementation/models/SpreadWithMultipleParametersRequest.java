@@ -4,135 +4,119 @@
 
 package com.parameters.spread.implementation.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * The SpreadWithMultipleParametersRequest model.
  */
-@Immutable
+@Fluent
 public final class SpreadWithMultipleParametersRequest
     implements JsonSerializable<SpreadWithMultipleParametersRequest> {
     /*
-     * The prop1 property.
+     * required string
      */
     @Generated
-    private final String prop1;
+    private final String requiredString;
 
     /*
-     * The prop2 property.
+     * optional int
      */
     @Generated
-    private final String prop2;
+    private Integer optionalInt;
 
     /*
-     * The prop3 property.
+     * required int
      */
     @Generated
-    private final String prop3;
+    private final List<Integer> requiredIntList;
 
     /*
-     * The prop4 property.
+     * optional string
      */
     @Generated
-    private final String prop4;
-
-    /*
-     * The prop5 property.
-     */
-    @Generated
-    private final String prop5;
-
-    /*
-     * The prop6 property.
-     */
-    @Generated
-    private final String prop6;
+    private List<String> optionalStringList;
 
     /**
      * Creates an instance of SpreadWithMultipleParametersRequest class.
      * 
-     * @param prop1 the prop1 value to set.
-     * @param prop2 the prop2 value to set.
-     * @param prop3 the prop3 value to set.
-     * @param prop4 the prop4 value to set.
-     * @param prop5 the prop5 value to set.
-     * @param prop6 the prop6 value to set.
+     * @param requiredString the requiredString value to set.
+     * @param requiredIntList the requiredIntList value to set.
      */
     @Generated
-    public SpreadWithMultipleParametersRequest(String prop1, String prop2, String prop3, String prop4, String prop5,
-        String prop6) {
-        this.prop1 = prop1;
-        this.prop2 = prop2;
-        this.prop3 = prop3;
-        this.prop4 = prop4;
-        this.prop5 = prop5;
-        this.prop6 = prop6;
+    public SpreadWithMultipleParametersRequest(String requiredString, List<Integer> requiredIntList) {
+        this.requiredString = requiredString;
+        this.requiredIntList = requiredIntList;
     }
 
     /**
-     * Get the prop1 property: The prop1 property.
+     * Get the requiredString property: required string.
      * 
-     * @return the prop1 value.
+     * @return the requiredString value.
      */
     @Generated
-    public String getProp1() {
-        return this.prop1;
+    public String getRequiredString() {
+        return this.requiredString;
     }
 
     /**
-     * Get the prop2 property: The prop2 property.
+     * Get the optionalInt property: optional int.
      * 
-     * @return the prop2 value.
+     * @return the optionalInt value.
      */
     @Generated
-    public String getProp2() {
-        return this.prop2;
+    public Integer getOptionalInt() {
+        return this.optionalInt;
     }
 
     /**
-     * Get the prop3 property: The prop3 property.
+     * Set the optionalInt property: optional int.
      * 
-     * @return the prop3 value.
+     * @param optionalInt the optionalInt value to set.
+     * @return the SpreadWithMultipleParametersRequest object itself.
      */
     @Generated
-    public String getProp3() {
-        return this.prop3;
+    public SpreadWithMultipleParametersRequest setOptionalInt(Integer optionalInt) {
+        this.optionalInt = optionalInt;
+        return this;
     }
 
     /**
-     * Get the prop4 property: The prop4 property.
+     * Get the requiredIntList property: required int.
      * 
-     * @return the prop4 value.
+     * @return the requiredIntList value.
      */
     @Generated
-    public String getProp4() {
-        return this.prop4;
+    public List<Integer> getRequiredIntList() {
+        return this.requiredIntList;
     }
 
     /**
-     * Get the prop5 property: The prop5 property.
+     * Get the optionalStringList property: optional string.
      * 
-     * @return the prop5 value.
+     * @return the optionalStringList value.
      */
     @Generated
-    public String getProp5() {
-        return this.prop5;
+    public List<String> getOptionalStringList() {
+        return this.optionalStringList;
     }
 
     /**
-     * Get the prop6 property: The prop6 property.
+     * Set the optionalStringList property: optional string.
      * 
-     * @return the prop6 value.
+     * @param optionalStringList the optionalStringList value to set.
+     * @return the SpreadWithMultipleParametersRequest object itself.
      */
     @Generated
-    public String getProp6() {
-        return this.prop6;
+    public SpreadWithMultipleParametersRequest setOptionalStringList(List<String> optionalStringList) {
+        this.optionalStringList = optionalStringList;
+        return this;
     }
 
     /**
@@ -142,12 +126,12 @@ public final class SpreadWithMultipleParametersRequest
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("prop1", this.prop1);
-        jsonWriter.writeStringField("prop2", this.prop2);
-        jsonWriter.writeStringField("prop3", this.prop3);
-        jsonWriter.writeStringField("prop4", this.prop4);
-        jsonWriter.writeStringField("prop5", this.prop5);
-        jsonWriter.writeStringField("prop6", this.prop6);
+        jsonWriter.writeStringField("requiredString", this.requiredString);
+        jsonWriter.writeArrayField("requiredIntList", this.requiredIntList,
+            (writer, element) -> writer.writeInt(element));
+        jsonWriter.writeNumberField("optionalInt", this.optionalInt);
+        jsonWriter.writeArrayField("optionalStringList", this.optionalStringList,
+            (writer, element) -> writer.writeString(element));
         return jsonWriter.writeEndObject();
     }
 
@@ -163,33 +147,32 @@ public final class SpreadWithMultipleParametersRequest
     @Generated
     public static SpreadWithMultipleParametersRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String prop1 = null;
-            String prop2 = null;
-            String prop3 = null;
-            String prop4 = null;
-            String prop5 = null;
-            String prop6 = null;
+            String requiredString = null;
+            List<Integer> requiredIntList = null;
+            Integer optionalInt = null;
+            List<String> optionalStringList = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("prop1".equals(fieldName)) {
-                    prop1 = reader.getString();
-                } else if ("prop2".equals(fieldName)) {
-                    prop2 = reader.getString();
-                } else if ("prop3".equals(fieldName)) {
-                    prop3 = reader.getString();
-                } else if ("prop4".equals(fieldName)) {
-                    prop4 = reader.getString();
-                } else if ("prop5".equals(fieldName)) {
-                    prop5 = reader.getString();
-                } else if ("prop6".equals(fieldName)) {
-                    prop6 = reader.getString();
+                if ("requiredString".equals(fieldName)) {
+                    requiredString = reader.getString();
+                } else if ("requiredIntList".equals(fieldName)) {
+                    requiredIntList = reader.readArray(reader1 -> reader1.getInt());
+                } else if ("optionalInt".equals(fieldName)) {
+                    optionalInt = reader.getNullable(JsonReader::getInt);
+                } else if ("optionalStringList".equals(fieldName)) {
+                    optionalStringList = reader.readArray(reader1 -> reader1.getString());
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
+            SpreadWithMultipleParametersRequest deserializedSpreadWithMultipleParametersRequest
+                = new SpreadWithMultipleParametersRequest(requiredString, requiredIntList);
+            deserializedSpreadWithMultipleParametersRequest.optionalInt = optionalInt;
+            deserializedSpreadWithMultipleParametersRequest.optionalStringList = optionalStringList;
+
+            return deserializedSpreadWithMultipleParametersRequest;
         });
     }
 }
