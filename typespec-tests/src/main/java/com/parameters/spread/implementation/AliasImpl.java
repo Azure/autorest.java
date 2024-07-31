@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -77,6 +78,28 @@ public final class AliasImpl {
             @BodyParam("application/json") BinaryData spreadAsRequestBodyRequest, RequestOptions requestOptions,
             Context context);
 
+        @Post("/parameters/spread/alias/inner-model-parameter/{id}")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> spreadParameterWithInnerModel(@PathParam("id") String id,
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData spreadParameterWithInnerModelRequest,
+            RequestOptions requestOptions, Context context);
+
+        @Post("/parameters/spread/alias/inner-model-parameter/{id}")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> spreadParameterWithInnerModelSync(@PathParam("id") String id,
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData spreadParameterWithInnerModelRequest,
+            RequestOptions requestOptions, Context context);
+
         @Put("/parameters/spread/alias/request-parameter/{id}")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -119,6 +142,28 @@ public final class AliasImpl {
         Response<Void> spreadWithMultipleParametersSync(@PathParam("id") String id,
             @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData spreadWithMultipleParametersRequest,
+            RequestOptions requestOptions, Context context);
+
+        @Post("/parameters/spread/alias/inner-alias-parameter/{id}")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> spreadParameterWithInnerAlias(@PathParam("id") String id,
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData spreadParameterWithInnerAliasRequest,
+            RequestOptions requestOptions, Context context);
+
+        @Post("/parameters/spread/alias/inner-alias-parameter/{id}")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> spreadParameterWithInnerAliasSync(@PathParam("id") String id,
+            @HeaderParam("x-ms-test-header") String xMsTestHeader, @HeaderParam("accept") String accept,
+            @BodyParam("application/json") BinaryData spreadParameterWithInnerAliasRequest,
             RequestOptions requestOptions, Context context);
     }
 
@@ -171,6 +216,62 @@ public final class AliasImpl {
         RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.spreadAsRequestBodySync(accept, spreadAsRequestBodyRequest, requestOptions, Context.NONE);
+    }
+
+    /**
+     * The spreadParameterWithInnerModel operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param spreadParameterWithInnerModelRequest The spreadParameterWithInnerModelRequest parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadParameterWithInnerModelWithResponseAsync(String id, String xMsTestHeader,
+        BinaryData spreadParameterWithInnerModelRequest, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.spreadParameterWithInnerModel(id, xMsTestHeader, accept,
+            spreadParameterWithInnerModelRequest, requestOptions, context));
+    }
+
+    /**
+     * The spreadParameterWithInnerModel operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param spreadParameterWithInnerModelRequest The spreadParameterWithInnerModelRequest parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> spreadParameterWithInnerModelWithResponse(String id, String xMsTestHeader,
+        BinaryData spreadParameterWithInnerModelRequest, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.spreadParameterWithInnerModelSync(id, xMsTestHeader, accept,
+            spreadParameterWithInnerModelRequest, requestOptions, Context.NONE);
     }
 
     /**
@@ -235,12 +336,14 @@ public final class AliasImpl {
      * 
      * <pre>{@code
      * {
-     *     prop1: String (Required)
-     *     prop2: String (Required)
-     *     prop3: String (Required)
-     *     prop4: String (Required)
-     *     prop5: String (Required)
-     *     prop6: String (Required)
+     *     requiredString: String (Required)
+     *     optionalInt: Integer (Optional)
+     *     requiredIntList (Required): [
+     *         int (Required)
+     *     ]
+     *     optionalStringList (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -268,12 +371,14 @@ public final class AliasImpl {
      * 
      * <pre>{@code
      * {
-     *     prop1: String (Required)
-     *     prop2: String (Required)
-     *     prop3: String (Required)
-     *     prop4: String (Required)
-     *     prop5: String (Required)
-     *     prop6: String (Required)
+     *     requiredString: String (Required)
+     *     optionalInt: Integer (Optional)
+     *     requiredIntList (Required): [
+     *         int (Required)
+     *     ]
+     *     optionalStringList (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -293,5 +398,63 @@ public final class AliasImpl {
         final String accept = "application/json";
         return service.spreadWithMultipleParametersSync(id, xMsTestHeader, accept, spreadWithMultipleParametersRequest,
             requestOptions, Context.NONE);
+    }
+
+    /**
+     * spread an alias with contains another alias property as body.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     age: int (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param spreadParameterWithInnerAliasRequest The spreadParameterWithInnerAliasRequest parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadParameterWithInnerAliasWithResponseAsync(String id, String xMsTestHeader,
+        BinaryData spreadParameterWithInnerAliasRequest, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.spreadParameterWithInnerAlias(id, xMsTestHeader, accept,
+            spreadParameterWithInnerAliasRequest, requestOptions, context));
+    }
+
+    /**
+     * spread an alias with contains another alias property as body.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     age: int (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param spreadParameterWithInnerAliasRequest The spreadParameterWithInnerAliasRequest parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> spreadParameterWithInnerAliasWithResponse(String id, String xMsTestHeader,
+        BinaryData spreadParameterWithInnerAliasRequest, RequestOptions requestOptions) {
+        final String accept = "application/json";
+        return service.spreadParameterWithInnerAliasSync(id, xMsTestHeader, accept,
+            spreadParameterWithInnerAliasRequest, requestOptions, Context.NONE);
     }
 }
