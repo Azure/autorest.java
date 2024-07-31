@@ -81,6 +81,12 @@ model EyeProperties {
 @doc("The third level model SawShark in polymorphic multiple levels inheritance.")
 model SawShark extends Shark {
   sharktype: "saw";
+
+  // this is a duplicate property from Fish, with different visibility
+  dna: string;
+
+  // this is a duplicate property from Fish, with same visibility
+  age: int32;
 }
 
 @doc("The third level model GoblinShark in polymorphic multiple levels inheritance.")
@@ -104,13 +110,43 @@ model TopLevelArmResourceProperties {
   description?: string;
 }
 
+@error
+model ErrorResponse {
+  error: Error;
+}
+
+@error
+model ErrorResponseMin {
+  error: ErrorMin;
+}
+
+model Error {
+  code: string;
+  message: string;
+  target: string;
+  details?: Error[];
+  additionalInfo?: AdditionalInfo[];
+  additionalProperty: string;
+}
+
+model AdditionalInfo {
+  type: string;
+  info: {};
+}
+
+model ErrorMin {
+  code: string;
+  message: string;
+  additionalProperty: string;
+}
+
 @route("/model")
 interface Fishes {
   @get
-  getModel(): Fish;
+  getModel(): Fish | ErrorResponse;
 
   @put
-  putModel(@body fish: Fish): Fish;
+  putModel(@body fish: Fish): Fish | ErrorResponseMin;
 }
 
 interface TopLevelArmResources {

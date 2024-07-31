@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -120,4 +125,40 @@ public class ArraySchema extends ValueSchema {
             && Objects.equals(this.elementType, rhs.elementType);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeJsonField("elementType", elementType)
+            .writeDoubleField("maxItems", maxItems)
+            .writeDoubleField("minItems", minItems)
+            .writeBooleanField("uniqueItems", uniqueItems)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes an ArraySchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return An ArraySchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static ArraySchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, ArraySchema::new, (schema, fieldName, reader) -> {
+            if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {
+                return;
+            }
+
+            if ("elementType".equals(fieldName)) {
+                schema.elementType = Schema.fromJson(reader);
+            } else if ("maxItems".equals(fieldName)) {
+                schema.maxItems = reader.getDouble();
+            } else if ("minItems".equals(fieldName)) {
+                schema.minItems = reader.getDouble();
+            } else if ("uniqueItems".equals(fieldName)) {
+                schema.uniqueItems = reader.getBoolean();
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

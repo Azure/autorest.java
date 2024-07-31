@@ -3,6 +3,12 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +16,7 @@ import java.util.Objects;
 /**
  * Represents deprecation information.
  */
-public class Deprecation {
+public class Deprecation implements JsonSerializable<Deprecation> {
     private String message;
     private List<ApiVersion> apiVersions = new ArrayList<>();
 
@@ -81,4 +87,30 @@ public class Deprecation {
         return Objects.equals(message, rhs.message) && Objects.equals(apiVersions, rhs.apiVersions);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("message", message)
+            .writeArrayField("apiVersions", apiVersions, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a Deprecation instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Deprecation instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static Deprecation fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Deprecation::new, (deprecation, fieldName, reader) -> {
+            if ("message".equals(fieldName)) {
+                deprecation.message = reader.getString();
+            } else if ("apiVersions".equals(fieldName)) {
+                deprecation.apiVersions = reader.readArray(ApiVersion::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

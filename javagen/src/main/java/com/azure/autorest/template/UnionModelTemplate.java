@@ -12,7 +12,6 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -42,7 +41,7 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
         model.addImportsTo(imports);
 
         imports.add(Immutable.class.getName());
-        imports.add(JsonValue.class.getName());
+        imports.add("com.fasterxml.jackson.annotation.JsonValue");
 
         javaFile.declareImport(imports);
 

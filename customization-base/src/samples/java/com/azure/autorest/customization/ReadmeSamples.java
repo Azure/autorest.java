@@ -3,7 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.fasterxml.jackson.annotation.JsonClassDescription;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Modifier;
@@ -142,13 +141,13 @@ public class ReadmeSamples {
         public void customize(LibraryCustomization customization, Logger logger) {
             PackageCustomization models = customization.getPackage("com.azure.myservice.models");
             ClassCustomization foo = models.getClass("Foo");
-            foo.addAnnotation("JsonClassDescription(\"Foo class\")");
+            foo.addAnnotation("Deprecated");
         }
         // END: readme-sample-add-class-annotation-customization
 
         static class Result {
             // BEGIN: readme-sample-add-class-annotation-result
-            @JsonClassDescription("Foo class")
+            @Deprecated
             public class Foo {
             }
             // END: readme-sample-add-class-annotation-result
@@ -195,7 +194,7 @@ public class ReadmeSamples {
     static class RemoveClassAnnotation extends Customization {
         static class Initial {
             // BEGIN: readme-sample-remove-class-annotation-initial
-            @JsonClassDescription("Foo class")
+            @Deprecated
             public class Foo {
             }
             // END: readme-sample-remove-class-annotation-initial
@@ -206,7 +205,7 @@ public class ReadmeSamples {
         public void customize(LibraryCustomization customization, Logger logger) {
             PackageCustomization models = customization.getPackage("com.azure.myservice.models");
             ClassCustomization foo = models.getClass("Foo");
-            foo.removeAnnotation("JsonClassDescription");
+            foo.removeAnnotation("Deprecated");
         }
         // END: readme-sample-remove-class-annotation-customization
 

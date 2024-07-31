@@ -17,12 +17,12 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpResponse;
 import com.azure.core.management.profile.AzureProfile;
-import com.azure.core.management.serializer.SerializerFactory;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.SerializerEncoding;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonWriter;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -46,8 +46,6 @@ public class FluentMethodMockTestTemplate
     }
 
     private static final FluentMethodMockTestTemplate INSTANCE = new FluentMethodMockTestTemplate();
-
-    private static final SerializerAdapter SERIALIZER = SerializerFactory.createDefaultManagementSerializerAdapter();
 
     private FluentMethodMockTestTemplate() {
     }
@@ -108,8 +106,10 @@ public class FluentMethodMockTestTemplate
         ExampleNode verificationNode = fluentMethodMockUnitTest.getResponseVerificationNode();
         String verificationObjectName = fluentMethodMockUnitTest.getResponseVerificationVariableName();
         String jsonStr;
-        try {
-            jsonStr = SERIALIZER.serialize(jsonObject, SerializerEncoding.JSON);
+        try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            JsonWriter jsonWriter = JsonProviders.createWriter(outputStream)) {
+            jsonWriter.writeUntyped(jsonObject).flush();
+            jsonStr = outputStream.toString(StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new IllegalStateException("Failed to serialize Object to JSON string", e);
         }

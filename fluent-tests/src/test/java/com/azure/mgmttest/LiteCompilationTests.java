@@ -40,6 +40,7 @@ import com.azure.mgmtlitetest.storage.models.StorageAccountExpand;
 import com.azure.mgmtlitetest.storage.models.StorageAccountListKeysResult;
 import com.azure.mgmtlitetest.storage.models.StorageAccountRegenerateKeyParameters;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
+import com.azure.mgmtlitetest.streamstyleserialization.implementation.CommunityGalleriesClientImpl;
 import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.education.fluent.models.LabDetailsInner;
 import reactor.core.publisher.Mono;
@@ -197,5 +198,9 @@ public class LiteCompilationTests {
         CommonPostActionResponseForStateUpdate actionResponse = mock(CommonPostActionResponseForStateUpdate.class);
         ManagementError error = actionResponse.error();
         error = actionResponse.innerModel().error();
+    }
+
+    public void testPageableLroStreamStyle() {
+        Class<CommunityGalleriesClientImpl> clazz = CommunityGalleriesClientImpl.class;
     }
 }

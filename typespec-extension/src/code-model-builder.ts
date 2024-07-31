@@ -44,6 +44,7 @@ import { KnownMediaType } from "@azure-tools/codegen";
 import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
+  SdkBodyModelPropertyType,
   SdkBuiltInType,
   SdkClient,
   SdkConstantType,
@@ -74,11 +75,14 @@ import {
   listOperationsInOperationGroup,
   shouldGenerateConvenient,
   shouldGenerateProtocol,
+  getHttpOperationExamples,
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
+  Interface,
   Model,
   ModelProperty,
+  Namespace,
   Operation,
   Program,
   Scalar,
@@ -126,7 +130,7 @@ import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
-import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
+import { Client as CodeModelClient, CrossLanguageDefinition } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { Operation as CodeModelOperation, ConvenienceApi, Request } from "./common/operation.js";
@@ -146,7 +150,6 @@ import {
   isKnownContentType,
   isLroNewPollingStrategy,
   isPayloadProperty,
-  loadExamples,
   operationIsJsonMergePatch,
   operationIsMultipart,
   operationIsMultipleContentTypes,
@@ -175,15 +178,19 @@ import {
   stringArrayContainsIgnoreCase,
   trace,
 } from "./utils.js";
+import { pathToFileURL } from "url";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
   private program: Program;
   private typeNameOptions: TypeNameOptions;
   private namespace: string;
-  private sdkContext: SdkContext;
+  private sdkContext!: SdkContext;
   private options: EmitterOptions;
   private codeModel: CodeModel;
+  private emitterContext: EmitContext<EmitterOptions>;
+  private serviceNamespace: Namespace | Interface | Operation;
+
   private loggingEnabled: boolean = false;
 
   readonly schemaCache = new ProcessingCache((type: SdkType, name: string) =>
@@ -191,13 +198,13 @@ export class CodeModelBuilder {
   );
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, undefined means type visited but not completed
 
-  private operationExamples: Map<Operation, any> = new Map<Operation, any>();
   // current apiVersion name to generate code
   private apiVersion: Version | undefined;
 
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
+    this.emitterContext = context;
     if (this.options["dev-options"]?.loglevel) {
       this.loggingEnabled = true;
     }
@@ -206,15 +213,15 @@ export class CodeModelBuilder {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
-    this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
       throw Error("Cannot emit yaml for a namespace that doesn't exist.");
     }
+    this.serviceNamespace = serviceNamespace;
 
-    // java namespace
     this.namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
+    // java namespace
     const javaNamespace = getJavaNamespace(this.namespace);
 
     const namespace1 = this.namespace;
@@ -222,7 +229,7 @@ export class CodeModelBuilder {
       // shorten type names by removing TypeSpec and service namespace
       namespaceFilter(ns) {
         const name = getNamespaceFullName(ns);
-        return name !== "Cadl" && name !== namespace1;
+        return name !== "TypeSpec" && name !== namespace1;
       },
     };
 
@@ -246,17 +253,17 @@ export class CodeModelBuilder {
         },
       },
     });
-
-    // auth
-    // TODO: it is not very likely, but different client could have different auth
-    const auth = getAuthentication(this.program, serviceNamespace);
-    if (auth) {
-      this.processAuth(auth);
-    }
   }
 
   public async build(): Promise<CodeModel> {
-    this.operationExamples = await loadExamples(this.program, this.options, this.sdkContext);
+    this.sdkContext = await createSdkContext(this.emitterContext, "@azure-tools/typespec-java");
+
+    // auth
+    // TODO: it is not very likely, but different client could have different auth
+    const auth = getAuthentication(this.program, this.serviceNamespace);
+    if (auth) {
+      this.processAuth(auth);
+    }
 
     if (this.sdkContext.arm) {
       // ARM
@@ -697,22 +704,20 @@ export class CodeModelBuilder {
     return Boolean(this.options["advanced-versioning"]);
   }
 
-  private getOperationExample(operation: Operation): any | undefined {
-    if (operation.projectionSource?.kind === "Operation") {
-      // always use the projectionSource, if available
-      operation = operation.projectionSource;
-    }
-    let operationExample = this.operationExamples.get(operation);
-    if (!operationExample && operation.sourceOperation) {
-      // if the operation is customized in client.tsp, the operation would be different from that of main.tsp
-      // try the operation.sourceOperation
-      operation = operation.sourceOperation;
-      if (operation.projectionSource?.kind === "Operation") {
-        operation = operation.projectionSource;
+  private getOperationExample(operation: HttpOperation): Record<string, any> | undefined {
+    const httpOperationExamples = getHttpOperationExamples(this.sdkContext, operation);
+    if (httpOperationExamples && httpOperationExamples.length > 0) {
+      const operationExamples: Record<string, any> = {};
+      for (const example of httpOperationExamples) {
+        const operationExample = example.rawExample;
+        operationExample["x-ms-original-file"] = pathToFileURL(example.filePath).toString();
+        operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] =
+          operationExample;
       }
-      operationExample = this.operationExamples.get(operation);
+      return operationExamples;
+    } else {
+      return undefined;
     }
-    return operationExample;
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
@@ -722,19 +727,20 @@ export class CodeModelBuilder {
     const operationName = this.getName(operation);
     const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
-    const operationExample = this.getOperationExample(operation);
+    const operationExamples = this.getOperationExample(op);
 
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
       summary: this.getSummary(operation),
       extensions: {
-        "x-ms-examples": operationExample
-          ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
-          : undefined,
+        "x-ms-examples": operationExamples,
       },
     });
 
-    codeModelOperation.crossLanguageDefinitionId = getCrossLanguageDefinitionId(this.sdkContext, operation);
+    (codeModelOperation as CrossLanguageDefinition).crossLanguageDefinitionId = getCrossLanguageDefinitionId(
+      this.sdkContext,
+      operation,
+    );
     codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
@@ -1720,16 +1726,7 @@ export class CodeModelBuilder {
           return this.processAnySchemaFromSdkType();
 
         case "string":
-        case "password":
-        case "guid":
-        case "ipAddress":
-        case "uuid":
-        case "ipV4Address":
-        case "ipV6Address":
-        case "eTag":
-        case "armId":
-        case "azureLocation":
-          return this.processStringSchemaFromSdkType(type, type.kind);
+          return this.processStringSchemaFromSdkType(type, nameHint);
 
         case "float":
         case "float32":
@@ -1753,7 +1750,6 @@ export class CodeModelBuilder {
           return this.processDateSchemaFromSdkType(type, nameHint);
 
         case "url":
-        case "uri":
           return this.processUrlSchemaFromSdkType(type, nameHint);
       }
     }
@@ -1968,7 +1964,7 @@ export class CodeModelBuilder {
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
     const rawModelType = type.__raw;
     const namespace = getNamespace(rawModelType);
-    const objectSchema = new ObjectScheme(name, type.details ?? "", {
+    const objectSchema = new ObjectSchema(name, type.details ?? "", {
       summary: type.description,
       language: {
         default: {
@@ -1979,7 +1975,7 @@ export class CodeModelBuilder {
         },
       },
     });
-    objectSchema.crossLanguageDefinitionId = type.crossLanguageDefinitionId;
+    (objectSchema as CrossLanguageDefinition).crossLanguageDefinitionId = type.crossLanguageDefinitionId;
     this.codeModel.schemas.add(objectSchema);
 
     // cache this now before we accidentally recurse on this type.
@@ -2029,6 +2025,8 @@ export class CodeModelBuilder {
           kind: "string",
           encode: "string",
           decorators: [],
+          name: "string",
+          crossLanguageDefinitionId: type.crossLanguageDefinitionId,
         },
         description: type.description,
         valueType: type.additionalProperties,
@@ -2095,8 +2093,11 @@ export class CodeModelBuilder {
       extensions["x-ms-mutability"] = mutability;
     }
 
-    if (prop.kind === "property" && prop.isMultipartFileInput) {
-      schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
+    if (prop.kind === "property" && prop.multipartOptions) {
+      // TODO: handle MultipartOptions.isMulti
+      if (prop.multipartOptions.isFilePart) {
+        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
+      }
     }
 
     return new Property(prop.name, prop.details ?? "", schema, {
@@ -2215,25 +2216,41 @@ export class CodeModelBuilder {
   }
 
   private processMultipartFormDataFilePropertySchemaFromSdkType(
-    property: SdkModelPropertyType,
+    property: SdkBodyModelPropertyType,
     namespace: string,
   ): Schema {
-    if (property.type.kind === "bytes") {
+    const processSchemaFunc = (type: SdkType) => this.processSchemaFromSdkType(type, "");
+    if (property.type.kind === "bytes" || property.type.kind === "model") {
       return getFileDetailsSchema(
-        property.name,
+        property,
         namespace,
         this.codeModel.schemas,
         this.binarySchema,
         this.stringSchema,
+        processSchemaFunc,
       );
-    } else if (property.type.kind === "array" && property.type.valueType.kind === "bytes") {
+    } else if (
+      property.type.kind === "array" &&
+      (property.type.valueType.kind === "bytes" || property.type.valueType.kind === "model")
+    ) {
       return new ArraySchema(
         property.name,
-        property.description ?? "",
-        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
+        property.details ?? "",
+        getFileDetailsSchema(
+          property,
+          namespace,
+          this.codeModel.schemas,
+          this.binarySchema,
+          this.stringSchema,
+          processSchemaFunc,
+        ),
+        {
+          summary: property.description,
+        },
       );
+    } else {
+      throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
     }
-    throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
   }
 
   private getDoc(target: Type | undefined): string {

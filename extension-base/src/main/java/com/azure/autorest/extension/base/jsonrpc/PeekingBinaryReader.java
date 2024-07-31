@@ -39,13 +39,11 @@ class PeekingBinaryReader implements Closeable {
     byte[] readBytes(int count) throws IOException {
         byte[] buffer = new byte[count];
         int read = 0;
-        if (count > 0 && lastByte != null)
-        {
+        if (count > 0 && lastByte != null) {
             buffer[read++] = (byte) (int) lastByte;
             lastByte = null;
         }
-        while (read < count)
-        {
+        while (read < count) {
             read += input.read(buffer, read, count - read);
         }
         return buffer;
@@ -55,7 +53,7 @@ class PeekingBinaryReader implements Closeable {
         StringBuilder result = new StringBuilder();
         int c = readByte();
         while (c != '\r' && c != '\n' && c != -1) {
-            result.append((char)c);
+            result.append((char) c);
             c = readByte();
         }
         if (c == '\r' && peekByte() == '\n') {

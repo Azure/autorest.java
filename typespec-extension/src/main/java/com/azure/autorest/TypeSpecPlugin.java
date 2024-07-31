@@ -17,6 +17,8 @@ import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.ReadValueCallback;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
 import com.azure.typespec.util.FileUtil;
@@ -26,7 +28,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.OutputStream;
-import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -288,7 +289,13 @@ public class TypeSpecPlugin extends Javagen {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getValue(Type type, String key) {
+    public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        return (T) SETTINGS_MAP.get(key);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
         return (T) SETTINGS_MAP.get(key);
     }
 

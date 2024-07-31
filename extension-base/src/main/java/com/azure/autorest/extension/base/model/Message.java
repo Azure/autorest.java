@@ -3,43 +3,42 @@
 
 package com.azure.autorest.extension.base.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Represents a message.
  */
-public class Message {
+public class Message implements JsonSerializable<Message> {
 
     /**
      * Represents a message channel.
      */
-    @JsonProperty("Channel")
     public MessageChannel channel;
 
     /**
      * Represents details.
      */
-    @JsonProperty("Details")
     public Object details;
 
     /**
      * Represents text.
      */
-    @JsonProperty("Text")
     public String text;
 
     /**
      * Represents a key.
      */
-    @JsonProperty("Key")
     public List<String> key;
 
     /**
      * Represents a source location.
      */
-    @JsonProperty("Source")
     public List<SourceLocation> source;
 
     /**
@@ -136,5 +135,50 @@ public class Message {
      */
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("Channel", channel == null ? null : channel.toString())
+            .writeUntypedField("Details", details)
+            .writeStringField("Text", text)
+            .writeArrayField("Key", key, JsonWriter::writeString)
+            .writeArrayField("Source", source, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a Message instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Message instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static Message fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Message message = new Message();
+
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("Channel".equals(fieldName)) {
+                    message.channel = MessageChannel.valueOf(reader.getString());
+                } else if ("Details".equals(fieldName)) {
+                    message.details = reader.readUntyped();
+                } else if ("Text".equals(fieldName)) {
+                    message.text = reader.getString();
+                } else if ("Key".equals(fieldName)) {
+                    message.key = reader.readArray(JsonReader::getString);
+                } else if ("Source".equals(fieldName)) {
+                    message.source = reader.readArray(SourceLocation::fromJson);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return message;
+        });
     }
 }

@@ -3,27 +3,57 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.util.TemplateUtil;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 
 public class TestProxyAssetsTemplate {
-
-    private static class Assets {
-        @JsonProperty("AssetsRepo")
+    private static class Assets implements JsonSerializable<Assets> {
         private String assetsRepo = "Azure/azure-sdk-assets";
-
-        @JsonProperty("AssetsRepoPrefixPath")
         private String assetsRepoPrefixPath = "java";
-
-        @JsonProperty("TagPrefix")
         private String tagPrefix;
-
-        @JsonProperty("Tag")
         private String tag = "";
 
         public void setTagPrefix(String tagPrefix) {
             this.tagPrefix = tagPrefix;
+        }
+
+        @Override
+        public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+            return jsonWriter.writeStartObject()
+                .writeStringField("AssetsRepo", assetsRepo)
+                .writeStringField("AssetsRepoPrefixPath", assetsRepoPrefixPath)
+                .writeStringField("TagPrefix", tagPrefix)
+                .writeStringField("Tag", tag)
+                .writeEndObject();
+        }
+
+        /**
+         * Deserialize the JSON data into an Assets instance.
+         *
+         * @param jsonReader JSON reader
+         * @return Assets instance
+         * @throws IOException thrown if the JSON data cannot be deserialized
+         */
+        public static Assets fromJson(JsonReader jsonReader) throws IOException {
+            return JsonUtils.readObject(jsonReader, Assets::new, (assets, fieldName, reader) -> {
+                if ("AssetsRepo".equals(fieldName)) {
+                    assets.assetsRepo = reader.getString();
+                } else if ("AssetsRepoPrefixPath".equals(fieldName)) {
+                    assets.assetsRepoPrefixPath = reader.getString();
+                } else if ("TagPrefix".equals(fieldName)) {
+                    assets.tagPrefix = reader.getString();
+                } else if ("Tag".equals(fieldName)) {
+                    assets.tag = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            });
         }
     }
 

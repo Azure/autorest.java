@@ -33,9 +33,6 @@ import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonSetter;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -417,11 +414,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     protected void addSerializationImports(Set<String> imports, ClientModel model, JavaSettings settings) {
-        imports.add(JsonCreator.class.getName());
+        imports.add("com.fasterxml.jackson.annotation.JsonCreator");
 
         if (settings.isGettersAndSettersAnnotatedForSerialization()) {
-            imports.add(JsonGetter.class.getName());
-            imports.add(JsonSetter.class.getName());
+            imports.add("com.fasterxml.jackson.annotation.JsonGetter");
+            imports.add("com.fasterxml.jackson.annotation.JsonSetter");
         }
 
         imports.add(Pattern.class.getName());

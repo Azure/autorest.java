@@ -181,14 +181,14 @@ with customization
 public void customize(LibraryCustomization customization, Logger logger) {
     PackageCustomization models = customization.getPackage("com.azure.myservice.models");
     ClassCustomization foo = models.getClass("Foo");
-    foo.addAnnotation("JsonClassDescription(\"Foo class\")");
+    foo.addAnnotation("Deprecated");
 }
 ```
 
 will generate
 
 ```java readme-sample-add-class-annotation-result
-@JsonClassDescription("Foo class")
+@Deprecated
 public class Foo {
 }
 ```
@@ -241,7 +241,7 @@ The `Deprecated` class will be automatically imported.
 A class `Foo`
 
 ```java readme-sample-remove-class-annotation-initial
-@JsonClassDescription("Foo class")
+@Deprecated
 public class Foo {
 }
 ```
@@ -253,7 +253,7 @@ with customization
 public void customize(LibraryCustomization customization, Logger logger) {
     PackageCustomization models = customization.getPackage("com.azure.myservice.models");
     ClassCustomization foo = models.getClass("Foo");
-    foo.removeAnnotation("JsonClassDescription");
+    foo.removeAnnotation("Deprecated");
 }
 ```
 

@@ -7,8 +7,6 @@ import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.util.CodeNamer;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -63,7 +61,8 @@ public class XmlSequenceWrapper {
     }
 
     private static Set<String> getXmlSequenceWrapperImports() {
-        return new HashSet<>(Arrays.asList(JsonCreator.class.getName(), JsonProperty.class.getName(),
+        return new HashSet<>(Arrays.asList("com.fasterxml.jackson.annotation.JsonCreator",
+            "com.fasterxml.jackson.annotation.JsonProperty",
             "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty",
             "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement",
             "com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText"));

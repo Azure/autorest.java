@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -59,6 +64,30 @@ public class DurationSchema extends PrimitiveSchema {
     @Override
     public int hashCode() {
         return Objects.hash(format);
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeStringField("format", format == null ? null : format.toString())
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a DurationSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A DurationSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static DurationSchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, DurationSchema::new, (schema, fieldName, reader) -> {
+            if ("format".equals(fieldName)) {
+                schema.format = Format.fromValue(reader.getString());
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 
     /**

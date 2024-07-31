@@ -3,12 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Map;
 
 /**
  * Represents a discriminator for polymorphic types.
  */
-public class Discriminator {
+public class Discriminator implements JsonSerializable<Discriminator> {
     private Property property;
     private Map<String, ComplexSchema> immediate;
     private Map<String, ComplexSchema> all;
@@ -71,5 +77,35 @@ public class Discriminator {
      */
     public void setAll(Map<String, ComplexSchema> all) {
         this.all = all;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeStartObject()
+            .writeJsonField("property", property)
+            .writeMapField("immediate", immediate, JsonWriter::writeJson)
+            .writeMapField("all", all, JsonWriter::writeJson)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a Discriminator instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A Discriminator instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static Discriminator fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, Discriminator::new, (discriminator, fieldName, reader) -> {
+            if ("property".equals(fieldName)) {
+                discriminator.property = Property.fromJson(reader);
+            } else if ("immediate".equals(fieldName)) {
+                discriminator.immediate = reader.readMap(ComplexSchema::fromJson);
+            } else if ("all".equals(fieldName)) {
+                discriminator.all = reader.readMap(ComplexSchema::fromJson);
+            } else {
+                reader.skipChildren();
+            }
+        });
     }
 }

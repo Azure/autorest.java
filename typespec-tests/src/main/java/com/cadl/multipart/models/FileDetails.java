@@ -9,7 +9,7 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
 
 /**
- * The file details for the "file" field.
+ * The file details for the "fileData2" field.
  */
 @Fluent
 public final class FileDetails {

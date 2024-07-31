@@ -29,6 +29,29 @@
             }
           }
         }
+      },
+      "/communityGalleries": {
+        "get": {
+          "tags": [
+            "CommunityGalleries"
+          ],
+          "operationId": "CommunityGalleries_List",
+          "description": "List community galleries.",
+          "parameters": [
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/CommunityGalleryList"
+              }
+            },
+            "202": {
+              "description": "Accepted and the operation will complete asynchronously."
+            }
+          },
+          "x-ms-long-running-operation": true
+        }
       }
     },
     "definitions": {
@@ -93,6 +116,18 @@
           }
         },
         "description": "Describes the properties of a community gallery."
+      },
+      "CommunityGalleryList": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PirCommunityGalleryResource"
+          },
+          "x-ms-identifiers": [],
+          "description": "List of peer routes."
+        },
+        "description": "Map from id to community gallery list."
       }
     },
   "parameters": {

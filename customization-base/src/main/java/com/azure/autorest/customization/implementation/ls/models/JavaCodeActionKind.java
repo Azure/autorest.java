@@ -3,8 +3,6 @@
 
 package com.azure.autorest.customization.implementation.ls.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.eclipse.lsp4j.CodeActionKind;
 
 import java.util.HashMap;
@@ -102,12 +100,10 @@ public enum JavaCodeActionKind {
         this.value = value;
     }
 
-    @JsonCreator
     public static JavaCodeActionKind fromString(String value) {
         return STRING_TO_KIND_MAP.get(value);
     }
 
-    @JsonValue
     @Override
     public String toString() {
         return value;

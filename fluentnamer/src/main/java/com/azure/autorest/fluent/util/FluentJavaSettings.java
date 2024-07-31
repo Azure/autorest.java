@@ -7,7 +7,7 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.ResourceCollectionAssociation;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.azure.json.JsonReader;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -237,9 +237,9 @@ public class FluentJavaSettings {
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
-        Map<String, String> namingOverride = host.getValue(
-            TypeFactory.defaultInstance().constructMapType(Map.class, String.class, String.class),
-            "pipeline.fluentgen.naming.override");
+        Map<String, String> namingOverride = host.getValueWithJsonReader("pipeline.fluentgen.naming.override",
+            jsonReader -> jsonReader.readMap(JsonReader::getString));
+
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
         }
@@ -272,9 +272,8 @@ public class FluentJavaSettings {
 
     private void loadResourceCollectionAssociationSetting(Consumer<List<ResourceCollectionAssociation>> action) {
         String settingName = "resource-collection-associations";
-        List<ResourceCollectionAssociation> settingValue = host.getValue(
-            TypeFactory.defaultInstance().constructCollectionLikeType(List.class, ResourceCollectionAssociation.class),
-            settingName);
+        List<ResourceCollectionAssociation> settingValue = host.getValueWithJsonReader(settingName,
+            jsonReader -> jsonReader.readArray(ResourceCollectionAssociation::fromJson));
         if (settingValue != null) {
             logger.debug("Option, array, {} : {}", settingName, settingValue);
             action.accept(settingValue);

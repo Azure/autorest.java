@@ -3,6 +3,11 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import com.azure.autorest.extension.base.util.JsonUtils;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonWriter;
+
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -99,4 +104,37 @@ public class UriSchema extends PrimitiveSchema {
         return maxLength == rhs.maxLength && minLength == rhs.minLength && Objects.equals(pattern, rhs.pattern);
     }
 
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return super.writeParentProperties(jsonWriter.writeStartObject())
+            .writeDoubleField("maxLength", maxLength)
+            .writeDoubleField("minLength", minLength)
+            .writeStringField("pattern", pattern)
+            .writeEndObject();
+    }
+
+    /**
+     * Deserializes a UriSchema instance from the JSON data.
+     *
+     * @param jsonReader The JSON reader to deserialize from.
+     * @return A UriSchema instance deserialized from the JSON data.
+     * @throws IOException If an error occurs during deserialization.
+     */
+    public static UriSchema fromJson(JsonReader jsonReader) throws IOException {
+        return JsonUtils.readObject(jsonReader, UriSchema::new, (schema, fieldName, reader) -> {
+            if (schema.tryConsumeParentProperties(schema, fieldName, reader)) {
+                return;
+            }
+
+            if ("maxLength".equals(fieldName)) {
+                schema.maxLength = reader.getDouble();
+            } else if ("minLength".equals(fieldName)) {
+                schema.minLength = reader.getDouble();
+            } else if ("pattern".equals(fieldName)) {
+                schema.pattern = reader.getString();
+            } else {
+                reader.skipChildren();
+            }
+        });
+    }
 }

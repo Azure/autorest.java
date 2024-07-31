@@ -17,8 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
-import com.cadl.multipart.models.FileDetails;
+import com.cadl.multipart.models.FileDataFileDetails;
 import com.cadl.multipart.models.FormData;
+import com.cadl.multipart.models.UploadHttpPartRequest;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -68,6 +69,33 @@ public final class MultipartClient {
     }
 
     /**
+     * The uploadHttpPart operation.
+     * <p><strong>Query Parameters</strong></p>
+     * <table border="1">
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>compress</td><td>Boolean</td><td>No</td><td>The compress parameter</td></tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addQueryParam}
+     * 
+     * @param name The name parameter.
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> uploadHttpPartWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadHttpPart'
+        // is 'multipart/form-data'
+        return this.serviceClient.uploadHttpPartWithResponse(name, body, requestOptions);
+    }
+
+    /**
      * The upload operation.
      * 
      * @param name The name parameter.
@@ -88,26 +116,24 @@ public final class MultipartClient {
         if (compress != null) {
             requestOptions.addQueryParam("compress", String.valueOf(compress), false);
         }
-        uploadWithResponse(name,
-            new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
-                .serializeTextField("resolution", String.valueOf(data.getResolution()))
-                .serializeTextField("type", Objects.toString(data.getType()))
-                .serializeJsonField("size", data.getSize())
-                .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
-                    data.getImage().getFilename())
-                .serializeFileFields("file",
-                    data.getFile() == null
-                        ? null
-                        : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
-                    data.getFile() == null
-                        ? null
-                        : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
-                    data.getFile() == null
-                        ? null
-                        : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
-                .end()
-                .getRequestBody(),
-            requestOptions).getValue();
+        uploadWithResponse(name, new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
+            .serializeTextField("resolution", String.valueOf(data.getResolution()))
+            .serializeTextField("type", Objects.toString(data.getType()))
+            .serializeJsonField("size", data.getSize())
+            .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
+                data.getImage().getFilename())
+            .serializeFileFields("fileData",
+                data.getFileData() == null
+                    ? null
+                    : data.getFileData().stream().map(FileDataFileDetails::getContent).collect(Collectors.toList()),
+                data.getFileData() == null
+                    ? null
+                    : data.getFileData().stream().map(FileDataFileDetails::getContentType).collect(Collectors.toList()),
+                data.getFileData() == null
+                    ? null
+                    : data.getFileData().stream().map(FileDataFileDetails::getFilename).collect(Collectors.toList()))
+            .end()
+            .getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -127,23 +153,83 @@ public final class MultipartClient {
     public void upload(String name, FormData data) {
         // Generated convenience method for uploadWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        uploadWithResponse(name,
-            new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
-                .serializeTextField("resolution", String.valueOf(data.getResolution()))
-                .serializeTextField("type", Objects.toString(data.getType()))
-                .serializeJsonField("size", data.getSize())
-                .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
-                    data.getImage().getFilename())
-                .serializeFileFields("file",
-                    data.getFile() == null
-                        ? null
-                        : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
-                    data.getFile() == null
-                        ? null
-                        : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
-                    data.getFile() == null
-                        ? null
-                        : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
+        uploadWithResponse(name, new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
+            .serializeTextField("resolution", String.valueOf(data.getResolution()))
+            .serializeTextField("type", Objects.toString(data.getType()))
+            .serializeJsonField("size", data.getSize())
+            .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
+                data.getImage().getFilename())
+            .serializeFileFields("fileData",
+                data.getFileData() == null
+                    ? null
+                    : data.getFileData().stream().map(FileDataFileDetails::getContent).collect(Collectors.toList()),
+                data.getFileData() == null
+                    ? null
+                    : data.getFileData().stream().map(FileDataFileDetails::getContentType).collect(Collectors.toList()),
+                data.getFileData() == null
+                    ? null
+                    : data.getFileData().stream().map(FileDataFileDetails::getFilename).collect(Collectors.toList()))
+            .end()
+            .getRequestBody(), requestOptions).getValue();
+    }
+
+    /**
+     * The uploadHttpPart operation.
+     * 
+     * @param name The name parameter.
+     * @param body The body parameter.
+     * @param compress The compress parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void uploadHttpPart(String name, UploadHttpPartRequest body, Boolean compress) {
+        // Generated convenience method for uploadHttpPartWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        if (compress != null) {
+            requestOptions.addQueryParam("compress", String.valueOf(compress), false);
+        }
+        uploadHttpPartWithResponse(name,
+            new MultipartFormDataHelper(requestOptions)
+                .serializeFileField("fileData1", body.getFileData1().getContent(), body.getFileData1().getContentType(),
+                    body.getFileData1().getFilename())
+                .serializeFileField("fileData2", body.getFileData2().getContent(), body.getFileData2().getContentType(),
+                    body.getFileData2().getFilename())
+                .serializeJsonField("size", body.getSize())
+                .end()
+                .getRequestBody(),
+            requestOptions).getValue();
+    }
+
+    /**
+     * The uploadHttpPart operation.
+     * 
+     * @param name The name parameter.
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void uploadHttpPart(String name, UploadHttpPartRequest body) {
+        // Generated convenience method for uploadHttpPartWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        uploadHttpPartWithResponse(name,
+            new MultipartFormDataHelper(requestOptions)
+                .serializeFileField("fileData1", body.getFileData1().getContent(), body.getFileData1().getContentType(),
+                    body.getFileData1().getFilename())
+                .serializeFileField("fileData2", body.getFileData2().getContent(), body.getFileData2().getContentType(),
+                    body.getFileData2().getFilename())
+                .serializeJsonField("size", body.getSize())
                 .end()
                 .getRequestBody(),
             requestOptions).getValue();

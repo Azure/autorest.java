@@ -3,8 +3,6 @@
 
 package com.azure.autorest.extension.base.model;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * Represents a message channel.
  */
@@ -60,7 +58,6 @@ public enum MessageChannel {
         this.value = value;
     }
 
-    @JsonValue
     @Override
     public String toString() {
         return this.value;
