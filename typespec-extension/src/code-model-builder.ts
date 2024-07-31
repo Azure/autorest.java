@@ -129,7 +129,7 @@ import { getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
-import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
+import { Client as CodeModelClient, CrossLanguageDefinition } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { Operation as CodeModelOperation, ConvenienceApi, Request } from "./common/operation.js";
@@ -948,7 +948,7 @@ export class CodeModelBuilder {
       },
     });
 
-    codeModelOperation.crossLanguageDefinitionId = sdkMethod.crossLanguageDefintionId;
+    (codeModelOperation as CrossLanguageDefinition).crossLanguageDefinitionId = sdkMethod.crossLanguageDefintionId;
     codeModelOperation.internalApi = sdkMethod.access === "internal";
 
     const convenienceApiName = this.getConvenienceApiNameFromServiceMethod(sdkMethod);
@@ -3011,7 +3011,7 @@ export class CodeModelBuilder {
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
     const rawModelType = type.__raw;
     const namespace = getNamespace(rawModelType);
-    const objectSchema = new ObjectScheme(name, type.details ?? "", {
+    const objectSchema = new ObjectSchema(name, type.details ?? "", {
       summary: type.description,
       language: {
         default: {
@@ -3022,7 +3022,7 @@ export class CodeModelBuilder {
         },
       },
     });
-    objectSchema.crossLanguageDefinitionId = type.crossLanguageDefinitionId;
+    (objectSchema as CrossLanguageDefinition).crossLanguageDefinitionId = type.crossLanguageDefinitionId;
     this.codeModel.schemas.add(objectSchema);
 
     // cache this now before we accidentally recurse on this type.
@@ -3141,12 +3141,9 @@ export class CodeModelBuilder {
     }
 
     if (prop.kind === "property" && prop.multipartOptions) {
+      // TODO: handle MultipartOptions.isMulti
       if (prop.multipartOptions.isFilePart) {
-        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(
-          prop,
-          prop.multipartOptions.isMulti,
-          this.namespace,
-        );
+        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
       }
     }
 
@@ -3275,35 +3272,39 @@ export class CodeModelBuilder {
 
   private processMultipartFormDataFilePropertySchemaFromSdkType(
     property: SdkBodyModelPropertyType,
-    isMulti: boolean,
     namespace: string,
   ): Schema {
-    if (isMulti) {
-      return new ArraySchema(
-        property.name,
-        property.description ?? "",
-        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
-      );
-    } else {
+    const processSchemaFunc = (type: SdkType) => this.processSchemaFromSdkType(type, "");
+    if (property.type.kind === "bytes" || property.type.kind === "model") {
       return getFileDetailsSchema(
-        property.name,
+        property,
         namespace,
         this.codeModel.schemas,
         this.binarySchema,
         this.stringSchema,
+        processSchemaFunc,
       );
-    }
-  }
-
-  private processMultipartFormDataNonFilePropertySchemaFromSdkType(
-    property: SdkBodyModelPropertyType,
-    isMulti: boolean,
-    schema: Schema,
-  ) {
-    if (isMulti) {
-      return new ArraySchema(property.name, property.description ?? "", schema);
+    } else if (
+      property.type.kind === "array" &&
+      (property.type.valueType.kind === "bytes" || property.type.valueType.kind === "model")
+    ) {
+      return new ArraySchema(
+        property.name,
+        property.details ?? "",
+        getFileDetailsSchema(
+          property,
+          namespace,
+          this.codeModel.schemas,
+          this.binarySchema,
+          this.stringSchema,
+          processSchemaFunc,
+        ),
+        {
+          summary: property.description,
+        },
+      );
     } else {
-      return schema;
+      throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
     }
   }
 
