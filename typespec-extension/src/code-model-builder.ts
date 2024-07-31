@@ -287,69 +287,6 @@ export class CodeModelBuilder {
     return this.codeModel;
   }
 
-  // private processHost(server: HttpServer | undefined): Parameter[] {
-  //   const hostParameters: Parameter[] = [];
-  //   if (server && !this.isArmSynthesizedServer(server)) {
-  //     server.parameters.forEach((it) => {
-  //       let parameter;
-
-  //       if (isApiVersion(this.sdkContext, it)) {
-  //         parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
-  //       } else {
-  //         const sdkType = getClientType(this.sdkContext, it.type);
-  //         const schema = this.processSchemaFromSdkType(sdkType, it.name);
-  //         this.trackSchemaUsage(schema, {
-  //           usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
-  //         });
-  //         parameter = new Parameter(this.getName(it), this.getDoc(it), schema, {
-  //           implementation: ImplementationLocation.Client,
-  //           origin: "modelerfour:synthesized/host",
-  //           required: !it.optional,
-  //           protocol: {
-  //             http: new HttpParameter(ParameterLocation.Uri),
-  //           },
-  //           language: {
-  //             default: {
-  //               serializedName: it.name,
-  //             },
-  //           },
-  //           extensions: {
-  //             "x-ms-skip-url-encoding": schema instanceof UriSchema,
-  //           },
-  //           // // make the logic same as TCGC, which takes the server-side default of host as client-side default
-  //           // clientDefaultValue: getDefaultValue(it.defaultValue),
-  //         });
-  //       }
-
-  //       hostParameters.push(this.codeModel.addGlobalParameter(parameter));
-  //     });
-  //     return hostParameters;
-  //   } else {
-  //     // use "endpoint"
-  //     hostParameters.push(
-  //       this.codeModel.addGlobalParameter(
-  //         new Parameter("endpoint", "Server parameter", this.stringSchema, {
-  //           implementation: ImplementationLocation.Client,
-  //           origin: "modelerfour:synthesized/host",
-  //           required: true,
-  //           protocol: {
-  //             http: new HttpParameter(ParameterLocation.Uri),
-  //           },
-  //           language: {
-  //             default: {
-  //               serializedName: "endpoint",
-  //             },
-  //           },
-  //           extensions: {
-  //             "x-ms-skip-url-encoding": true,
-  //           },
-  //         }),
-  //       ),
-  //     );
-  //     return hostParameters;
-  //   }
-  // }
-
   private processHostParametersFromSdkType(sdkPathParameters: SdkPathParameter[]): Parameter[] {
     const hostParameters: Parameter[] = [];
       let parameter;
@@ -358,7 +295,7 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(schema, {
           usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
         });
-        parameter = new Parameter(arg.name, arg.description ?? "", schema, { // TODO: descroption or details?
+        parameter = new Parameter(arg.name, arg.description ?? "", schema, {
           implementation: ImplementationLocation.Client,
           origin: "modelerfour:synthesized/host",
           required: true,
@@ -602,9 +539,17 @@ export class CodeModelBuilder {
       let hostParameters: Parameter[] = [];
       client.initialization.properties.forEach((initializationProperty) => {
         if (initializationProperty.kind === "endpoint") {
-          if (!this.isArm()) {
+          if (this.isArm()) { // this is just a workaround for ARM
+            initializationProperty.type.serverUrl = "{endpoint}";
+            initializationProperty.type.templateArguments = [this.buildSdkPathPathParameterForARM()];
+          }
+          if (initializationProperty.type.serverUrl) {
             baseUri = initializationProperty.type.serverUrl;
           }
+
+          // let templateArguments = initializationProperty.type.templateArguments;
+          // baseUri = initializationProperty.type.serverUrl;
+                  
           hostParameters = this.processHostParametersFromSdkType(initializationProperty.type.templateArguments);
           codeModelClient.addGlobalParameters(hostParameters);
         }
@@ -689,6 +634,31 @@ export class CodeModelBuilder {
         }
       }
     } 
+  }
+
+  private buildSdkPathPathParameterForARM(): SdkPathParameter {
+    return {
+      kind: "path",
+      name: "endpoint",
+      isGeneratedName: true,
+      description: "Service host",
+      onClient: true,
+      urlEncode: false,
+      optional: false,
+      serializedName: "endpoint",
+      correspondingMethodParams: [],
+      type: {
+        kind: "string",
+        encode: "string",
+        decorators: [],
+        name: "string",
+        crossLanguageDefinitionId: "string"
+      },
+      isApiVersionParam: false,
+      decorators: [],
+      apiVersions: [],
+      crossLanguageDefinitionId: "endpoint",
+    };
   }
 
   private listSubClientsUnderClient(client: SdkClientType<SdkHttpOperation>, includeNestedOperationGroups: boolean, isRootClient: boolean): SdkClientType<SdkHttpOperation>[] {
