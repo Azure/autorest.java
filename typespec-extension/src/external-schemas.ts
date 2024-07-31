@@ -206,7 +206,13 @@ export function getFileDetailsSchema(
   stringSchema: StringSchema,
   processSchemaFunc: (type: SdkType) => Schema,
 ): ObjectSchema {
+  let fileSdkType: SdkModelType | undefined;
   if (property.type.kind === "model") {
+    fileSdkType = property.type;
+  } else if (property.type.kind === "array" && property.type.valueType.kind === "model") {
+    fileSdkType = property.type.valueType;
+  }
+  if (fileSdkType) {
     // property.type is File, use name and properties from property.type for the File schema
     /*
     Current logic:
@@ -218,7 +224,7 @@ export function getFileDetailsSchema(
     - Allow required for "filename" and "contentType"
      */
     const filePropertyName = property.name;
-    const fileSchemaName = property.type.name;
+    const fileSchemaName = fileSdkType.name;
     const schemaName = getFileSchemaName(fileSchemaName);
     let fileDetailsSchema = fileDetailsMap.get(schemaName);
     if (!fileDetailsSchema) {
@@ -226,23 +232,21 @@ export function getFileDetailsSchema(
       fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, typeNamespace, schemas);
 
       // description if available
-      if (property.type.description) {
-        fileDetailsSchema.summary = property.type.description;
+      if (fileSdkType.description) {
+        fileDetailsSchema.summary = fileSdkType.description;
       }
-      if (property.type.details) {
-        fileDetailsSchema.language.default.description = property.type.details;
+      if (fileSdkType.details) {
+        fileDetailsSchema.language.default.description = fileSdkType.details;
       }
       // crossLanguageDefinitionId
-      (fileDetailsSchema as CrossLanguageDefinition).crossLanguageDefinitionId =
-        property.type.crossLanguageDefinitionId;
+      (fileDetailsSchema as CrossLanguageDefinition).crossLanguageDefinitionId = fileSdkType.crossLanguageDefinitionId;
 
       let contentTypeProperty;
       let filenameProperty;
 
       // find "filename" and "contentType" property in current model and its base models
-      let type: SdkModelType | undefined = property.type;
-      while (type !== undefined) {
-        for (const property of type.properties) {
+      while (fileSdkType !== undefined) {
+        for (const property of fileSdkType.properties) {
           if (!filenameProperty && property.name === "filename") {
             filenameProperty = property;
           }
@@ -250,7 +254,7 @@ export function getFileDetailsSchema(
             contentTypeProperty = property;
           }
         }
-        type = type.baseModel;
+        fileSdkType = fileSdkType.baseModel;
       }
 
       addContentProperty(fileDetailsSchema, binarySchema);
