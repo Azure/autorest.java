@@ -31,6 +31,7 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
@@ -461,18 +462,31 @@ abstract class ConvenienceMethodTemplateBase {
         }
 
         public static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
+            // rfc https://datatracker.ietf.org/doc/html/rfc7231#section-5.3.2
+
             // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
             // This is mostly for the error response which is in JSON, and is not included in this calculation.
 
             for (String mediaType : mediaTypes) {
                 // The declared mime type can be of the form "application/json; charset=utf-8" or "application/json"
                 // So, we have to check if the mediaType starts with the supported mime type
-                if (!mediaType.equals("application/json;q=0.9")) { // skip the error media type
+                if (!mediaType.equals(MethodUtil.CONTENT_TYPE_APPLICATION_JSON_ERROR_WEIGHT)) { // skip the error media type
+                    int semicolonIndex = mediaType.indexOf(';');
+                    String mediaTypeWithoutParameter = semicolonIndex >= 0 ? mediaType.substring(0, semicolonIndex) : mediaType;
+
                     SupportedMimeType type = SUPPORTED_MIME_TYPES.entrySet().stream()
-                            .filter(supportedMimeType -> mediaType.startsWith(supportedMimeType.getKey()))
+                            .filter(supportedMimeType -> mediaTypeWithoutParameter.equals(supportedMimeType.getKey()))
                             .map(Map.Entry::getValue)
-                            .findAny()
+                            .findFirst()
                             .orElse(null);
+
+                    if (mediaTypeWithoutParameter.startsWith("application/") && mediaTypeWithoutParameter.endsWith("+json")) {
+                        // special handling for "+json", rfc https://datatracker.ietf.org/doc/html/rfc6839#section-3.1
+                        type = SupportedMimeType.JSON;
+
+                        // TODO: we may need to hande "+xml" as well
+                    }
+
                     if (type != null) {
                         return type;
                     }

@@ -50,6 +50,8 @@ public class MethodUtil {
     public static final String REPEATABILITY_REQUEST_ID_EXPRESSION = "CoreUtils.randomUuid().toString()";
     public static final String REPEATABILITY_FIRST_SENT_EXPRESSION = "DateTimeRfc1123.toRfc1123String(OffsetDateTime.now())";
 
+    public static final String CONTENT_TYPE_APPLICATION_JSON_ERROR_WEIGHT = "application/json;q=0.9";
+
     private static final Set<HttpMethod> REPEATABILITY_REQUEST_HTTP_METHODS
         = EnumSet.of(HttpMethod.PUT, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.POST);
 
