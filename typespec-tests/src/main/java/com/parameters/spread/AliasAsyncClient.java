@@ -19,8 +19,10 @@ import com.azure.core.util.FluxUtil;
 import com.parameters.spread.implementation.AliasImpl;
 import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest1;
 import com.parameters.spread.implementation.models.SpreadAsRequestParameterRequest;
+import com.parameters.spread.implementation.models.SpreadParameterWithInnerAliasRequest;
+import com.parameters.spread.implementation.models.SpreadParameterWithInnerModelRequest;
 import com.parameters.spread.implementation.models.SpreadWithMultipleParametersRequest;
-import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
+import java.util.List;
 import reactor.core.publisher.Mono;
 
 /**
@@ -67,6 +69,34 @@ public final class AliasAsyncClient {
     }
 
     /**
+     * The spreadParameterWithInnerModel operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param spreadParameterWithInnerModelRequest The spreadParameterWithInnerModelRequest parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadParameterWithInnerModelWithResponse(String id, String xMsTestHeader,
+        BinaryData spreadParameterWithInnerModelRequest, RequestOptions requestOptions) {
+        return this.serviceClient.spreadParameterWithInnerModelWithResponseAsync(id, xMsTestHeader,
+            spreadParameterWithInnerModelRequest, requestOptions);
+    }
+
+    /**
      * The spreadAsRequestParameter operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
@@ -100,12 +130,14 @@ public final class AliasAsyncClient {
      * 
      * <pre>{@code
      * {
-     *     prop1: String (Required)
-     *     prop2: String (Required)
-     *     prop3: String (Required)
-     *     prop4: String (Required)
-     *     prop5: String (Required)
-     *     prop6: String (Required)
+     *     requiredString: String (Required)
+     *     optionalInt: Integer (Optional)
+     *     requiredIntList (Required): [
+     *         int (Required)
+     *     ]
+     *     optionalStringList (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -128,6 +160,35 @@ public final class AliasAsyncClient {
     }
 
     /**
+     * spread an alias with contains another alias property as body.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     age: int (Required)
+     * }
+     * }</pre>
+     * 
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param spreadParameterWithInnerAliasRequest The spreadParameterWithInnerAliasRequest parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadParameterWithInnerAliasWithResponse(String id, String xMsTestHeader,
+        BinaryData spreadParameterWithInnerAliasRequest, RequestOptions requestOptions) {
+        return this.serviceClient.spreadParameterWithInnerAliasWithResponseAsync(id, xMsTestHeader,
+            spreadParameterWithInnerAliasRequest, requestOptions);
+    }
+
+    /**
      * The spreadAsRequestBody operation.
      * 
      * @param name The name parameter.
@@ -147,6 +208,33 @@ public final class AliasAsyncClient {
         SpreadAsRequestBodyRequest1 spreadAsRequestBodyRequestObj = new SpreadAsRequestBodyRequest1(name);
         BinaryData spreadAsRequestBodyRequest = BinaryData.fromObject(spreadAsRequestBodyRequestObj);
         return spreadAsRequestBodyWithResponse(spreadAsRequestBodyRequest, requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The spreadParameterWithInnerModel operation.
+     * 
+     * @param id The id parameter.
+     * @param name The name parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> spreadParameterWithInnerModel(String id, String name, String xMsTestHeader) {
+        // Generated convenience method for spreadParameterWithInnerModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        SpreadParameterWithInnerModelRequest spreadParameterWithInnerModelRequestObj
+            = new SpreadParameterWithInnerModelRequest(name);
+        BinaryData spreadParameterWithInnerModelRequest
+            = BinaryData.fromObject(spreadParameterWithInnerModelRequestObj);
+        return spreadParameterWithInnerModelWithResponse(id, xMsTestHeader, spreadParameterWithInnerModelRequest,
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -177,7 +265,12 @@ public final class AliasAsyncClient {
     /**
      * The spreadWithMultipleParameters operation.
      * 
-     * @param options Options for spreadWithMultipleParameters API.
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param requiredString required string.
+     * @param requiredIntList required int.
+     * @param optionalInt optional int.
+     * @param optionalStringList optional string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -188,16 +281,71 @@ public final class AliasAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadWithMultipleParameters(SpreadWithMultipleParametersOptions options) {
+    public Mono<Void> spreadWithMultipleParameters(String id, String xMsTestHeader, String requiredString,
+        List<Integer> requiredIntList, Integer optionalInt, List<String> optionalStringList) {
         // Generated convenience method for spreadWithMultipleParametersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        String id = options.getId();
-        String xMsTestHeader = options.getXMsTestHeader();
         SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequestObj
-            = new SpreadWithMultipleParametersRequest(options.getProp1(), options.getProp2(), options.getProp3(),
-                options.getProp4(), options.getProp5(), options.getProp6());
+            = new SpreadWithMultipleParametersRequest(requiredString, requiredIntList).setOptionalInt(optionalInt)
+                .setOptionalStringList(optionalStringList);
         BinaryData spreadWithMultipleParametersRequest = BinaryData.fromObject(spreadWithMultipleParametersRequestObj);
         return spreadWithMultipleParametersWithResponse(id, xMsTestHeader, spreadWithMultipleParametersRequest,
+            requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The spreadWithMultipleParameters operation.
+     * 
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param requiredString required string.
+     * @param requiredIntList required int.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> spreadWithMultipleParameters(String id, String xMsTestHeader, String requiredString,
+        List<Integer> requiredIntList) {
+        // Generated convenience method for spreadWithMultipleParametersWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequestObj
+            = new SpreadWithMultipleParametersRequest(requiredString, requiredIntList);
+        BinaryData spreadWithMultipleParametersRequest = BinaryData.fromObject(spreadWithMultipleParametersRequestObj);
+        return spreadWithMultipleParametersWithResponse(id, xMsTestHeader, spreadWithMultipleParametersRequest,
+            requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * spread an alias with contains another alias property as body.
+     * 
+     * @param id The id parameter.
+     * @param name name of the Thing.
+     * @param age age of the Thing.
+     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> spreadParameterWithInnerAlias(String id, String name, int age, String xMsTestHeader) {
+        // Generated convenience method for spreadParameterWithInnerAliasWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        SpreadParameterWithInnerAliasRequest spreadParameterWithInnerAliasRequestObj
+            = new SpreadParameterWithInnerAliasRequest(name, age);
+        BinaryData spreadParameterWithInnerAliasRequest
+            = BinaryData.fromObject(spreadParameterWithInnerAliasRequestObj);
+        return spreadParameterWithInnerAliasWithResponse(id, xMsTestHeader, spreadParameterWithInnerAliasRequest,
             requestOptions).flatMap(FluxUtil::toMono);
     }
 }

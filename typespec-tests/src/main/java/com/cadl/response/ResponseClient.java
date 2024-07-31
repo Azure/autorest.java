@@ -279,6 +279,58 @@ public final class ResponseClient {
     }
 
     /**
+     * The getJsonUtf8Response operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getJsonUtf8ResponseWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getJsonUtf8ResponseWithResponse(requestOptions);
+    }
+
+    /**
+     * The getPlusJsonResponse operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getPlusJsonResponseWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getPlusJsonResponseWithResponse(requestOptions);
+    }
+
+    /**
      * The getBinary operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -459,6 +511,42 @@ public final class ResponseClient {
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.listIntegers(requestOptions)
             .mapPage(bodyItemValue -> bodyItemValue.toObject(Integer.class));
+    }
+
+    /**
+     * The getJsonUtf8Response operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource getJsonUtf8Response() {
+        // Generated convenience method for getJsonUtf8ResponseWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getJsonUtf8ResponseWithResponse(requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /**
+     * The getPlusJsonResponse operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Resource getPlusJsonResponse() {
+        // Generated convenience method for getPlusJsonResponseWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getPlusJsonResponseWithResponse(requestOptions).getValue().toObject(Resource.class);
     }
 
     @Generated

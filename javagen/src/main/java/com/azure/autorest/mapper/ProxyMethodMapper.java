@@ -124,7 +124,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             .filter(s -> !s.isEmpty())
             .collect(Collectors.toSet());
         if (!responseContentTypes.contains("application/json")) {
-            responseContentTypes.add("application/json;q=0.9");
+            responseContentTypes.add(MethodUtil.CONTENT_TYPE_APPLICATION_JSON_ERROR_WEIGHT);
         }
         builder.responseContentTypes(responseContentTypes);
 

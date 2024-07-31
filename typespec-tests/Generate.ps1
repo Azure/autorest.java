@@ -150,6 +150,8 @@ Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
+# remove xml tests, emitter has not supported xml model
+Remove-Item ./http/payload/xml -Recurse -Force
 
 $job = (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
