@@ -150,16 +150,9 @@ import {
   isKnownContentType,
   isLroNewPollingStrategy,
   isPayloadProperty,
-<<<<<<< HEAD
-  loadExamples,
   sdkHttpOperationIsJsonMergePatch,
   sdkHttpOperationIsMultipart,
   sdkHttpOperationIsMultipleContentTypes,
-=======
-  operationIsJsonMergePatch,
-  operationIsMultipart,
-  operationIsMultipleContentTypes,
->>>>>>> remote/main
 } from "./operation-utils.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import {
@@ -296,26 +289,30 @@ export class CodeModelBuilder {
     const hostParameters: Parameter[] = [];
       let parameter;
       sdkPathParameters.forEach((arg) => {
-        const schema = this.processSchemaFromSdkType(arg.type, arg.name);
-        this.trackSchemaUsage(schema, {
-          usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
-        });
-        parameter = new Parameter(arg.name, arg.description ?? "", schema, {
-          implementation: ImplementationLocation.Client,
-          origin: "modelerfour:synthesized/host",
-          required: true,
-          protocol: {
-            http: new HttpParameter(ParameterLocation.Uri),
-          },
-          language: {
-            default: {
-              serializedName: arg.name,
+        if (arg.isApiVersionParam) {
+          parameter = this.createApiVersionParameter(arg.name, ParameterLocation.Uri);
+        } else {
+          const schema = this.processSchemaFromSdkType(arg.type, arg.name);
+          this.trackSchemaUsage(schema, {
+            usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
+          });
+          parameter = new Parameter(arg.name, arg.description ?? "", schema, {
+            implementation: ImplementationLocation.Client,
+            origin: "modelerfour:synthesized/host",
+            required: true,
+            protocol: {
+              http: new HttpParameter(ParameterLocation.Uri),
             },
-          },
-          extensions: {
-            "x-ms-skip-url-encoding": schema instanceof UriSchema,
-          },
-        });
+            language: {
+              default: {
+                serializedName: arg.name,
+              },
+            },
+            extensions: {
+              "x-ms-skip-url-encoding": schema instanceof UriSchema,
+            },
+          });
+        }
         hostParameters.push(this.codeModel.addGlobalParameter(parameter));
       });
         
