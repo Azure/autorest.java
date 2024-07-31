@@ -10,6 +10,7 @@ import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Put;
@@ -63,7 +64,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         @Get("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.CommonTypes.ManagedIdentity/managedIdentityTrackedResources/{managedIdentityTrackedResourceName}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<Response<ManagedIdentityTrackedResourceInner>> getByResourceGroup(
+        Mono<Response<ManagedIdentityTrackedResourceInner>> getByResourceGroup(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("managedIdentityTrackedResourceName") String managedIdentityTrackedResourceName,
@@ -73,7 +74,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ManagedIdentityTrackedResourceInner>> createWithSystemAssigned(
-            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
+            @HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
+            @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("managedIdentityTrackedResourceName") String managedIdentityTrackedResourceName,
             @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
@@ -83,7 +85,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ManagedIdentityTrackedResourceInner>> updateWithUserAssignedAndSystemAssigned(
-            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
+            @HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
+            @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("managedIdentityTrackedResourceName") String managedIdentityTrackedResourceName,
             @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
@@ -103,6 +106,10 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ManagedIdentityTrackedResourceInner>>
         getByResourceGroupWithResponseAsync(String resourceGroupName, String managedIdentityTrackedResourceName) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -117,9 +124,9 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         }
         final String accept = "application/json";
         return FluxUtil
-            .withContext(
-                context -> service.getByResourceGroup(this.client.getApiVersion(), this.client.getSubscriptionId(),
-                    resourceGroupName, managedIdentityTrackedResourceName, accept, context))
+            .withContext(context -> service.getByResourceGroup(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, accept,
+                context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -137,6 +144,10 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ManagedIdentityTrackedResourceInner>> getByResourceGroupWithResponseAsync(
         String resourceGroupName, String managedIdentityTrackedResourceName, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -151,8 +162,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         }
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.getByResourceGroup(this.client.getApiVersion(), this.client.getSubscriptionId(),
-            resourceGroupName, managedIdentityTrackedResourceName, accept, context);
+        return service.getByResourceGroup(this.client.getEndpoint(), this.client.getApiVersion(),
+            this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, accept, context);
     }
 
     /**
@@ -223,6 +234,10 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
     private Mono<Response<ManagedIdentityTrackedResourceInner>> createWithSystemAssignedWithResponseAsync(
         String resourceGroupName, String managedIdentityTrackedResourceName,
         ManagedIdentityTrackedResourceInner resource) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -243,9 +258,9 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.createWithSystemAssigned(this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, contentType,
-                accept, resource, context))
+            .withContext(context -> service.createWithSystemAssigned(this.client.getEndpoint(),
+                this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
+                managedIdentityTrackedResourceName, contentType, accept, resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -266,6 +281,10 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
     private Mono<Response<ManagedIdentityTrackedResourceInner>> createWithSystemAssignedWithResponseAsync(
         String resourceGroupName, String managedIdentityTrackedResourceName,
         ManagedIdentityTrackedResourceInner resource, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -286,8 +305,9 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.createWithSystemAssigned(this.client.getApiVersion(), this.client.getSubscriptionId(),
-            resourceGroupName, managedIdentityTrackedResourceName, contentType, accept, resource, context);
+        return service.createWithSystemAssigned(this.client.getEndpoint(), this.client.getApiVersion(),
+            this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, contentType, accept,
+            resource, context);
     }
 
     /**
@@ -363,6 +383,10 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
     private Mono<Response<ManagedIdentityTrackedResourceInner>>
         updateWithUserAssignedAndSystemAssignedWithResponseAsync(String resourceGroupName,
             String managedIdentityTrackedResourceName, ManagedIdentityTrackedResourceInner properties) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -383,9 +407,9 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.updateWithUserAssignedAndSystemAssigned(this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, contentType,
-                accept, properties, context))
+            .withContext(context -> service.updateWithUserAssignedAndSystemAssigned(this.client.getEndpoint(),
+                this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
+                managedIdentityTrackedResourceName, contentType, accept, properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -407,6 +431,10 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         updateWithUserAssignedAndSystemAssignedWithResponseAsync(String resourceGroupName,
             String managedIdentityTrackedResourceName, ManagedIdentityTrackedResourceInner properties,
             Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
         if (this.client.getSubscriptionId() == null) {
             return Mono.error(new IllegalArgumentException(
                 "Parameter this.client.getSubscriptionId() is required and cannot be null."));
@@ -427,7 +455,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.updateWithUserAssignedAndSystemAssigned(this.client.getApiVersion(),
+        return service.updateWithUserAssignedAndSystemAssigned(this.client.getEndpoint(), this.client.getApiVersion(),
             this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, contentType, accept,
             properties, context);
     }

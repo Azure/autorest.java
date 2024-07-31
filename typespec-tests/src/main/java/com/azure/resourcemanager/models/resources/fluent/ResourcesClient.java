@@ -12,6 +12,13 @@ import java.time.Duration;
  */
 public interface ResourcesClient {
     /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    String getEndpoint();
+
+    /**
      * Gets Version parameter.
      * 
      * @return the apiVersion value.

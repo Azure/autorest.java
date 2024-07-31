@@ -20,6 +20,22 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ManagedIdentityClientImpl.class })
 public final class ManagedIdentityClientBuilder {
     /*
+     * Service host
+     */
+    private String endpoint;
+
+    /**
+     * Sets Service host.
+     * 
+     * @param endpoint the endpoint value.
+     * @return the ManagedIdentityClientBuilder.
+     */
+    public ManagedIdentityClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The ID of the target subscription. The value must be an UUID.
      */
     private String subscriptionId;
@@ -115,7 +131,7 @@ public final class ManagedIdentityClientBuilder {
             ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ManagedIdentityClientImpl client = new ManagedIdentityClientImpl(localPipeline, localSerializerAdapter,
-            localDefaultPollInterval, localEnvironment, this.subscriptionId);
+            localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
         return client;
     }
 }
