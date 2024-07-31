@@ -75,6 +75,7 @@ import {
   listOperationsInOperationGroup,
   shouldGenerateConvenient,
   shouldGenerateProtocol,
+  getHttpOperationExamples,
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
@@ -149,7 +150,6 @@ import {
   isKnownContentType,
   isLroNewPollingStrategy,
   isPayloadProperty,
-  loadExamples,
   operationIsJsonMergePatch,
   operationIsMultipart,
   operationIsMultipleContentTypes,
@@ -178,6 +178,7 @@ import {
   stringArrayContainsIgnoreCase,
   trace,
 } from "./utils.js";
+import { pathToFileURL } from "url";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -197,7 +198,6 @@ export class CodeModelBuilder {
   );
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, undefined means type visited but not completed
 
-  private operationExamples: Map<Operation, any> = new Map<Operation, any>();
   // current apiVersion name to generate code
   private apiVersion: Version | undefined;
 
@@ -264,8 +264,6 @@ export class CodeModelBuilder {
     if (auth) {
       this.processAuth(auth);
     }
-
-    this.operationExamples = await loadExamples(this.program, this.options, this.sdkContext);
 
     if (this.sdkContext.arm) {
       // ARM
@@ -706,22 +704,20 @@ export class CodeModelBuilder {
     return Boolean(this.options["advanced-versioning"]);
   }
 
-  private getOperationExample(operation: Operation): any | undefined {
-    if (operation.projectionSource?.kind === "Operation") {
-      // always use the projectionSource, if available
-      operation = operation.projectionSource;
-    }
-    let operationExample = this.operationExamples.get(operation);
-    if (!operationExample && operation.sourceOperation) {
-      // if the operation is customized in client.tsp, the operation would be different from that of main.tsp
-      // try the operation.sourceOperation
-      operation = operation.sourceOperation;
-      if (operation.projectionSource?.kind === "Operation") {
-        operation = operation.projectionSource;
+  private getOperationExample(operation: HttpOperation): Record<string, any> | undefined {
+    const httpOperationExamples = getHttpOperationExamples(this.sdkContext, operation);
+    if (httpOperationExamples && httpOperationExamples.length > 0) {
+      const operationExamples: Record<string, any> = {};
+      for (const example of httpOperationExamples) {
+        const operationExample = example.rawExample;
+        operationExample["x-ms-original-file"] = pathToFileURL(example.filePath).toString();
+        operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] =
+          operationExample;
       }
-      operationExample = this.operationExamples.get(operation);
+      return operationExamples;
+    } else {
+      return undefined;
     }
-    return operationExample;
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
@@ -731,15 +727,13 @@ export class CodeModelBuilder {
     const operationName = this.getName(operation);
     const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
-    const operationExample = this.getOperationExample(operation);
+    const operationExamples = this.getOperationExample(op);
 
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
       summary: this.getSummary(operation),
       extensions: {
-        "x-ms-examples": operationExample
-          ? { [operationExample.title ?? operationExample.operationId ?? operation.name]: operationExample }
-          : undefined,
+        "x-ms-examples": operationExamples,
       },
     });
 
