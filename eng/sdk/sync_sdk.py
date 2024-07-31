@@ -112,7 +112,7 @@ def update_sdks():
             # update commit id
             with open(tsp_location_file, "r", encoding="utf-8") as fin:
                 tsp_location_yml = yaml.safe_load(fin)
-            tsp_location_yml['commit'] = '20d2d29d4cb7b427f67845d5b56858f968253e55'
+            tsp_location_yml['commit'] = '7ed015e3dd1b8b1b0e71c9b5e6b6c5ccb8968b3a'
 
             if not tsp_location_yml['directory'].endswith('.Management'):
                 tsp_location_yml['directory'] = tsp_location_yml['directory'] + '.Management'
