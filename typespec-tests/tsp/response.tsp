@@ -203,4 +203,14 @@ interface ResponseOp {
 
   // @route("/paged-datetime")
   // listDateTimes(): DateTimesList;
+
+  @route("/json-utf8-response")
+  getJsonUtf8Response(): Resource & {
+    @header contentType: "application/json;charset=utf-8";
+  };
+
+  @route("/plus-json-response")
+  getPlusJsonResponse(): Resource & {
+    @header contentType: "application/vnd.microsoft.appconfig.kv+json";
+  };
 }

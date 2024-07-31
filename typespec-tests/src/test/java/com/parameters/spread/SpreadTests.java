@@ -4,8 +4,9 @@
 package com.parameters.spread;
 
 import com.parameters.spread.models.BodyParameter;
-import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class SpreadTests {
 
@@ -19,9 +20,7 @@ public class SpreadTests {
 
         aliasClient.spreadAsRequestParameter("1", "bar", "foo");
 
-        // options bag
-        aliasClient.spreadWithMultipleParameters(new SpreadWithMultipleParametersOptions("1", "bar",
-                "foo1", "foo2", "foo3", "foo4", "foo5", "foo6"));
+        aliasClient.spreadWithMultipleParameters("1", "bar", "foo", List.of(1, 2), 1, List.of("foo", "bar"));
     }
 
     @Test

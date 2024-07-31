@@ -58,7 +58,7 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
                         });
                     }
                 })
-                .build();;
+                .build();
     }
 
     @Override
