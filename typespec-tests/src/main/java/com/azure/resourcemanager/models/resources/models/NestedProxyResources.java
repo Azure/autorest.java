@@ -75,7 +75,7 @@ public interface NestedProxyResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<NestedProxyResource> listByTopLevelTrackedResource(String resourceGroupName,
         String topLevelTrackedResourceName);
@@ -89,7 +89,7 @@ public interface NestedProxyResources {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<NestedProxyResource> listByTopLevelTrackedResource(String resourceGroupName,
         String topLevelTrackedResourceName, Context context);

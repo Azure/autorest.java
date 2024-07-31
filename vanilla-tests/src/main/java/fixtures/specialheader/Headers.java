@@ -113,7 +113,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestWithResponseAsync() {
@@ -127,7 +127,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestWithResponseAsync(Context context) {
@@ -145,7 +145,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestAsync() {
@@ -159,7 +159,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestAsync(Context context) {
@@ -173,7 +173,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response}.
+     * @return empty Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> paramRepeatabilityRequestWithResponse(Context context) {
@@ -185,7 +185,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object.
+     * @return empty Response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequest() {
@@ -197,7 +197,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestPutWithResponseAsync() {
@@ -211,7 +211,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestPutWithResponseAsync(Context context) {
@@ -229,7 +229,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestPutAsync() {
@@ -243,7 +243,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestPutAsync(Context context) {
@@ -257,7 +257,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response}.
+     * @return empty Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> paramRepeatabilityRequestPutWithResponse(Context context) {
@@ -269,7 +269,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object.
+     * @return empty Response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestPut() {
@@ -281,7 +281,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestGetWithResponseAsync() {
@@ -295,7 +295,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestGetWithResponseAsync(Context context) {
@@ -312,7 +312,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestGetAsync() {
@@ -326,7 +326,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestGetAsync(Context context) {
@@ -340,7 +340,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response}.
+     * @return empty Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> paramRepeatabilityRequestGetWithResponse(Context context) {
@@ -352,7 +352,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object.
+     * @return empty Response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestGet() {
@@ -364,7 +364,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestLROWithResponseAsync() {
@@ -378,7 +378,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response} on successful completion of {@link Mono}.
+     * @return empty Response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Object>> paramRepeatabilityRequestLROWithResponseAsync(Context context) {
@@ -396,7 +396,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestLROAsync() {
@@ -410,7 +410,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object on successful completion of {@link Mono}.
+     * @return empty Response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Object> paramRepeatabilityRequestLROAsync(Context context) {
@@ -424,7 +424,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object along with {@link Response}.
+     * @return empty Response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Object> paramRepeatabilityRequestLROWithResponse(Context context) {
@@ -436,7 +436,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return any object.
+     * @return empty Response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Object paramRepeatabilityRequestLRO() {
@@ -448,7 +448,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of objects along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableSinglePageAsync() {
@@ -471,7 +471,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of objects along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableSinglePageAsync(Context context) {
@@ -492,7 +492,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of objects as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Object> paramRepeatabilityRequestPageableAsync() {
@@ -507,7 +507,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of objects as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Object> paramRepeatabilityRequestPageableAsync(Context context) {
@@ -520,7 +520,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of objects along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage() {
@@ -534,7 +534,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of objects along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage(Context context) {
@@ -546,7 +546,7 @@ public final class Headers {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of objects as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Object> paramRepeatabilityRequestPageable() {
@@ -560,7 +560,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of objects as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Object> paramRepeatabilityRequestPageable(Context context) {
@@ -574,7 +574,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of objects along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableNextSinglePageAsync(String nextLink) {
@@ -600,7 +600,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of objects along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableNextSinglePageAsync(String nextLink,
@@ -625,7 +625,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of objects along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink) {
@@ -640,7 +640,7 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of objects along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink, Context context) {

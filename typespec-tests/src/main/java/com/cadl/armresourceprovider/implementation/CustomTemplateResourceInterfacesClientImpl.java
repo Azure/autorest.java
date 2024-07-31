@@ -100,8 +100,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'CustomTemplateResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
@@ -147,8 +147,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'CustomTemplateResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
@@ -193,8 +193,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of resource 'CustomTemplateResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdateAsync(
@@ -216,8 +215,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of resource 'CustomTemplateResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdateAsync(
@@ -243,8 +241,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of resource 'CustomTemplateResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdateAsync(
@@ -267,8 +264,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of resource 'CustomTemplateResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdate(
@@ -292,8 +288,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of resource 'CustomTemplateResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdate(
@@ -316,8 +311,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'CustomTemplateResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CustomTemplateResourceInner> createOrUpdateAsync(String resourceGroupName,
@@ -336,8 +330,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'CustomTemplateResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CustomTemplateResourceInner> createOrUpdateAsync(String resourceGroupName,
@@ -361,8 +354,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'CustomTemplateResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CustomTemplateResourceInner> createOrUpdateAsync(String resourceGroupName,
@@ -381,7 +373,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return resource 'CustomTemplateResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CustomTemplateResourceInner createOrUpdate(String resourceGroupName, String customTemplateResourceName,
@@ -404,7 +396,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return resource 'CustomTemplateResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CustomTemplateResourceInner createOrUpdate(String resourceGroupName, String customTemplateResourceName,
@@ -422,8 +414,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateLongRunningWithResponseAsync(String resourceGroupName,
@@ -467,8 +459,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateLongRunningWithResponseAsync(String resourceGroupName,
@@ -510,8 +502,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner>
@@ -534,8 +525,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner>
@@ -558,8 +548,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginUpdateLongRunning(
@@ -578,8 +567,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginUpdateLongRunning(
@@ -598,8 +586,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CustomTemplateResourceInner> updateLongRunningAsync(String resourceGroupName,
@@ -618,8 +605,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CustomTemplateResourceInner> updateLongRunningAsync(String resourceGroupName,
@@ -637,7 +623,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CustomTemplateResourceInner updateLongRunning(String resourceGroupName, String customTemplateResourceName,
@@ -655,7 +641,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CustomTemplateResourceInner updateLongRunning(String resourceGroupName, String customTemplateResourceName,

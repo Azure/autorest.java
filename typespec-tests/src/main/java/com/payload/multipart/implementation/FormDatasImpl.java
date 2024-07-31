@@ -242,7 +242,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> basicWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -260,7 +261,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> basicWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -278,7 +279,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> complexWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -296,7 +298,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> complexWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -314,7 +316,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> jsonPartWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -332,7 +335,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> jsonPartWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -350,7 +353,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> binaryArrayPartsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -369,7 +373,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> binaryArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -387,7 +391,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> jsonArrayPartsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -406,7 +411,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> jsonArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -424,7 +429,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> multiBinaryPartsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -443,7 +449,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> multiBinaryPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -461,7 +467,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkFileNameAndContentTypeWithResponseAsync(BinaryData body,
@@ -481,7 +488,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> checkFileNameAndContentTypeWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -499,7 +506,8 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> anonymousModelWithResponseAsync(BinaryData anonymousModelRequest,
@@ -519,7 +527,7 @@ public final class FormDatasImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> anonymousModelWithResponse(BinaryData anonymousModelRequest, RequestOptions requestOptions) {

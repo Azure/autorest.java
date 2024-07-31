@@ -1213,7 +1213,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return no Content along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
@@ -1238,7 +1238,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return no Content along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
@@ -1263,7 +1263,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no Content on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> registerAsync(String groupName, String schemaName, String contentType,
@@ -1288,7 +1288,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no Content on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> registerAsync(String groupName, String schemaName, String contentType,
@@ -1312,7 +1312,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no Content along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> registerNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
@@ -1337,7 +1337,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no Content along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> registerNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
@@ -1362,7 +1362,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return no Content along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
@@ -1387,7 +1387,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return no Content along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
@@ -1412,7 +1412,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no Content on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> registerAsync(String groupName, String schemaName, String contentType, BinaryData schemaContent,
@@ -1437,7 +1437,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return no Content on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> registerAsync(String groupName, String schemaName, String contentType, BinaryData schemaContent,
@@ -1461,7 +1461,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no Content along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> registerNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
@@ -1486,7 +1486,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return no Content along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> registerNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
@@ -1512,7 +1512,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return no Content along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<SchemasRegisterHeaders, Void> registerWithResponse(String groupName, String schemaName,
@@ -1560,7 +1560,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return no Content along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> registerNoCustomHeadersWithResponse(String groupName, String schemaName, String contentType,
@@ -1577,8 +1577,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Integer>> getVersionsNextSinglePageAsync(String nextLink) {
@@ -1597,8 +1596,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Integer>> getVersionsNextSinglePageAsync(String nextLink, Context context) {
@@ -1615,8 +1613,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Integer> getVersionsNextSinglePage(String nextLink) {
@@ -1635,8 +1632,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Integer> getVersionsNextSinglePage(String nextLink, Context context) {

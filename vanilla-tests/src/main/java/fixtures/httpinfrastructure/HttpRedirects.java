@@ -275,7 +275,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead300Headers, Void>> head300WithResponseAsync() {
@@ -289,7 +290,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead300Headers, Void>> head300WithResponseAsync(Context context) {
@@ -306,7 +308,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head300Async() {
@@ -320,7 +322,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head300Async(Context context) {
@@ -334,7 +336,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsHead300Headers, Void> head300WithResponse(Context context) {
@@ -357,7 +359,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head300NoCustomHeadersWithResponseAsync() {
@@ -371,7 +374,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head300NoCustomHeadersWithResponseAsync(Context context) {
@@ -390,7 +394,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head300NoCustomHeadersWithResponse(Context context) {
@@ -402,7 +406,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet300Headers, List<String>>> get300WithResponseAsync() {
@@ -416,7 +421,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet300Headers, List<String>>> get300WithResponseAsync(Context context) {
@@ -433,7 +439,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<String>> get300Async() {
@@ -447,7 +453,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<List<String>> get300Async(Context context) {
@@ -461,7 +467,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsGet300Headers, List<String>> get300WithResponse(Context context) {
@@ -473,7 +479,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return success, should be returned afyter a successful redirect.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public List<String> get300() {
@@ -485,7 +491,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<String>>> get300NoCustomHeadersWithResponseAsync() {
@@ -499,7 +506,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<List<String>>> get300NoCustomHeadersWithResponseAsync(Context context) {
@@ -518,7 +526,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<List<String>> get300NoCustomHeadersWithResponse(Context context) {
@@ -530,7 +538,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead301Headers, Void>> head301WithResponseAsync() {
@@ -544,7 +553,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead301Headers, Void>> head301WithResponseAsync(Context context) {
@@ -561,7 +571,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head301Async() {
@@ -575,7 +585,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head301Async(Context context) {
@@ -589,7 +599,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsHead301Headers, Void> head301WithResponse(Context context) {
@@ -612,7 +622,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head301NoCustomHeadersWithResponseAsync() {
@@ -626,7 +637,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head301NoCustomHeadersWithResponseAsync(Context context) {
@@ -645,7 +657,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head301NoCustomHeadersWithResponse(Context context) {
@@ -657,7 +669,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet301Headers, Void>> get301WithResponseAsync() {
@@ -671,7 +684,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet301Headers, Void>> get301WithResponseAsync(Context context) {
@@ -688,7 +702,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get301Async() {
@@ -702,7 +716,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get301Async(Context context) {
@@ -716,7 +730,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsGet301Headers, Void> get301WithResponse(Context context) {
@@ -739,7 +753,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get301NoCustomHeadersWithResponseAsync() {
@@ -753,7 +768,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get301NoCustomHeadersWithResponseAsync(Context context) {
@@ -772,7 +788,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get301NoCustomHeadersWithResponse(Context context) {
@@ -785,7 +801,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPut301Headers, Void>> put301WithResponseAsync() {
@@ -800,7 +816,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPut301Headers, Void>> put301WithResponseAsync(Context context) {
@@ -819,7 +835,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return redirect to another endpoint on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put301Async() {
@@ -834,7 +850,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return redirect to another endpoint on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put301Async(Context context) {
@@ -849,7 +865,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return redirect to another endpoint along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsPut301Headers, Void> put301WithResponse(Context context) {
@@ -874,7 +890,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put301NoCustomHeadersWithResponseAsync() {
@@ -889,7 +905,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put301NoCustomHeadersWithResponseAsync(Context context) {
@@ -910,7 +926,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return redirect to another endpoint along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put301NoCustomHeadersWithResponse(Context context) {
@@ -922,7 +938,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead302Headers, Void>> head302WithResponseAsync() {
@@ -936,7 +953,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead302Headers, Void>> head302WithResponseAsync(Context context) {
@@ -953,7 +971,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head302Async() {
@@ -967,7 +985,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head302Async(Context context) {
@@ -981,7 +999,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsHead302Headers, Void> head302WithResponse(Context context) {
@@ -1004,7 +1022,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head302NoCustomHeadersWithResponseAsync() {
@@ -1018,7 +1037,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head302NoCustomHeadersWithResponseAsync(Context context) {
@@ -1037,7 +1057,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head302NoCustomHeadersWithResponse(Context context) {
@@ -1049,7 +1069,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet302Headers, Void>> get302WithResponseAsync() {
@@ -1063,7 +1084,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet302Headers, Void>> get302WithResponseAsync(Context context) {
@@ -1080,7 +1102,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get302Async() {
@@ -1094,7 +1116,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get302Async(Context context) {
@@ -1108,7 +1130,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsGet302Headers, Void> get302WithResponse(Context context) {
@@ -1131,7 +1153,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get302NoCustomHeadersWithResponseAsync() {
@@ -1145,7 +1168,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get302NoCustomHeadersWithResponseAsync(Context context) {
@@ -1164,7 +1188,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get302NoCustomHeadersWithResponse(Context context) {
@@ -1177,7 +1201,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPatch302Headers, Void>> patch302WithResponseAsync() {
@@ -1192,7 +1216,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPatch302Headers, Void>> patch302WithResponseAsync(Context context) {
@@ -1211,7 +1235,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return redirect to another endpoint on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch302Async() {
@@ -1226,7 +1250,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return redirect to another endpoint on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch302Async(Context context) {
@@ -1241,7 +1265,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return redirect to another endpoint along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsPatch302Headers, Void> patch302WithResponse(Context context) {
@@ -1266,7 +1290,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch302NoCustomHeadersWithResponseAsync() {
@@ -1281,7 +1305,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return redirect to another endpoint along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch302NoCustomHeadersWithResponseAsync(Context context) {
@@ -1302,7 +1326,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return redirect to another endpoint along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch302NoCustomHeadersWithResponse(Context context) {
@@ -1315,7 +1339,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPost303Headers, Void>> post303WithResponseAsync() {
@@ -1330,7 +1355,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPost303Headers, Void>> post303WithResponseAsync(Context context) {
@@ -1349,7 +1375,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post303Async() {
@@ -1364,7 +1390,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned afyter a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post303Async(Context context) {
@@ -1379,7 +1405,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned afyter a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsPost303Headers, Void> post303WithResponse(Context context) {
@@ -1404,7 +1430,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post303NoCustomHeadersWithResponseAsync() {
@@ -1419,7 +1446,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post303NoCustomHeadersWithResponseAsync(Context context) {
@@ -1440,7 +1468,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned afyter a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post303NoCustomHeadersWithResponse(Context context) {
@@ -1452,7 +1480,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead307Headers, Void>> head307WithResponseAsync() {
@@ -1466,7 +1495,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsHead307Headers, Void>> head307WithResponseAsync(Context context) {
@@ -1483,7 +1513,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head307Async() {
@@ -1497,7 +1527,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> head307Async(Context context) {
@@ -1511,7 +1541,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsHead307Headers, Void> head307WithResponse(Context context) {
@@ -1534,7 +1564,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head307NoCustomHeadersWithResponseAsync() {
@@ -1548,7 +1579,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> head307NoCustomHeadersWithResponseAsync(Context context) {
@@ -1567,7 +1599,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> head307NoCustomHeadersWithResponse(Context context) {
@@ -1579,7 +1611,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet307Headers, Void>> get307WithResponseAsync() {
@@ -1593,7 +1626,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsGet307Headers, Void>> get307WithResponseAsync(Context context) {
@@ -1610,7 +1644,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get307Async() {
@@ -1624,7 +1658,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> get307Async(Context context) {
@@ -1638,7 +1672,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsGet307Headers, Void> get307WithResponse(Context context) {
@@ -1661,7 +1695,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get307NoCustomHeadersWithResponseAsync() {
@@ -1675,7 +1710,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> get307NoCustomHeadersWithResponseAsync(Context context) {
@@ -1694,7 +1730,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> get307NoCustomHeadersWithResponse(Context context) {
@@ -1706,7 +1742,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsOptions307Headers, Void>> options307WithResponseAsync() {
@@ -1720,7 +1757,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsOptions307Headers, Void>> options307WithResponseAsync(Context context) {
@@ -1737,7 +1775,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> options307Async() {
@@ -1751,7 +1789,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> options307Async(Context context) {
@@ -1765,7 +1803,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsOptions307Headers, Void> options307WithResponse(Context context) {
@@ -1788,7 +1826,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options307NoCustomHeadersWithResponseAsync() {
@@ -1802,7 +1841,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> options307NoCustomHeadersWithResponseAsync(Context context) {
@@ -1821,7 +1861,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> options307NoCustomHeadersWithResponse(Context context) {
@@ -1833,7 +1873,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPut307Headers, Void>> put307WithResponseAsync() {
@@ -1847,7 +1888,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPut307Headers, Void>> put307WithResponseAsync(Context context) {
@@ -1865,7 +1907,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put307Async() {
@@ -1879,7 +1921,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> put307Async(Context context) {
@@ -1893,7 +1935,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsPut307Headers, Void> put307WithResponse(Context context) {
@@ -1916,7 +1958,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put307NoCustomHeadersWithResponseAsync() {
@@ -1930,7 +1973,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> put307NoCustomHeadersWithResponseAsync(Context context) {
@@ -1950,7 +1994,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> put307NoCustomHeadersWithResponse(Context context) {
@@ -1962,7 +2006,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPatch307Headers, Void>> patch307WithResponseAsync() {
@@ -1976,7 +2021,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPatch307Headers, Void>> patch307WithResponseAsync(Context context) {
@@ -1994,7 +2040,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch307Async() {
@@ -2008,7 +2054,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> patch307Async(Context context) {
@@ -2022,7 +2068,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsPatch307Headers, Void> patch307WithResponse(Context context) {
@@ -2045,7 +2091,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch307NoCustomHeadersWithResponseAsync() {
@@ -2059,7 +2106,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patch307NoCustomHeadersWithResponseAsync(Context context) {
@@ -2079,7 +2127,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patch307NoCustomHeadersWithResponse(Context context) {
@@ -2091,7 +2139,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPost307Headers, Void>> post307WithResponseAsync() {
@@ -2105,7 +2154,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsPost307Headers, Void>> post307WithResponseAsync(Context context) {
@@ -2123,7 +2173,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post307Async() {
@@ -2137,7 +2187,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> post307Async(Context context) {
@@ -2151,7 +2201,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsPost307Headers, Void> post307WithResponse(Context context) {
@@ -2174,7 +2224,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post307NoCustomHeadersWithResponseAsync() {
@@ -2188,7 +2239,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post307NoCustomHeadersWithResponseAsync(Context context) {
@@ -2208,7 +2260,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> post307NoCustomHeadersWithResponse(Context context) {
@@ -2220,7 +2272,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsDelete307Headers, Void>> delete307WithResponseAsync() {
@@ -2234,7 +2287,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<HttpRedirectsDelete307Headers, Void>> delete307WithResponseAsync(Context context) {
@@ -2252,7 +2306,7 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete307Async() {
@@ -2266,7 +2320,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return success, should be returned after a successful redirect on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> delete307Async(Context context) {
@@ -2280,7 +2334,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return success, should be returned after a successful redirect along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<HttpRedirectsDelete307Headers, Void> delete307WithResponse(Context context) {
@@ -2303,7 +2357,8 @@ public final class HttpRedirects {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete307NoCustomHeadersWithResponseAsync() {
@@ -2317,7 +2372,8 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return success, should be returned after a successful redirect along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete307NoCustomHeadersWithResponseAsync(Context context) {
@@ -2337,7 +2393,7 @@ public final class HttpRedirects {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return success, should be returned after a successful redirect along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> delete307NoCustomHeadersWithResponse(Context context) {

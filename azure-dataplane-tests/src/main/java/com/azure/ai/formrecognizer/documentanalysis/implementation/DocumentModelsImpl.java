@@ -383,7 +383,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
@@ -406,7 +406,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
@@ -430,7 +430,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return request is queued successfully along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void> analyzeDocumentWithResponse(String modelId,
@@ -453,7 +453,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, String pages, String locale,
@@ -479,7 +479,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, String pages, String locale,
@@ -505,7 +505,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, String pages, String locale,
@@ -532,7 +532,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, String pages, String locale,
@@ -557,7 +557,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, String pages,
@@ -579,7 +579,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, String pages,
@@ -602,7 +602,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return request is queued successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeDocumentNoCustomHeadersWithResponse(String modelId, String pages, String locale,
@@ -624,7 +624,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId, String pages,
@@ -651,7 +651,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId, String pages,
@@ -677,7 +677,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeaders(String modelId, String pages,
@@ -704,7 +704,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeaders(String modelId, String pages,
@@ -732,7 +732,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
@@ -757,7 +757,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
@@ -782,7 +782,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
@@ -812,7 +812,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
@@ -841,7 +841,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, ContentType contentType,
@@ -866,7 +866,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, ContentType contentType,
@@ -891,7 +891,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId,
@@ -921,7 +921,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId,
@@ -950,7 +950,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
@@ -975,7 +975,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
@@ -1001,7 +1001,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return request is queued successfully along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void> analyzeDocumentWithResponse(String modelId,
@@ -1026,7 +1026,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
@@ -1055,7 +1055,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
@@ -1084,7 +1084,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, ContentType contentType,
@@ -1113,7 +1113,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, ContentType contentType,
@@ -1142,7 +1142,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, ContentType contentType,
@@ -1166,7 +1166,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, ContentType contentType,
@@ -1192,7 +1192,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return request is queued successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> analyzeDocumentNoCustomHeadersWithResponse(String modelId, ContentType contentType,
@@ -1217,7 +1217,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId,
@@ -1247,7 +1247,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId,
@@ -1276,7 +1276,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeaders(String modelId,
@@ -1306,7 +1306,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeaders(String modelId,
@@ -1428,7 +1428,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsBuildModelHeaders, Void>>
@@ -1444,7 +1444,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsBuildModelHeaders, Void>>
@@ -1462,7 +1462,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return request is queued successfully along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<DocumentModelsBuildModelHeaders, Void>
@@ -1479,7 +1479,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginBuildModelAsync(BuildDocumentModelRequest buildRequest) {
@@ -1498,7 +1498,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginBuildModelAsync(BuildDocumentModelRequest buildRequest,
@@ -1517,7 +1517,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginBuildModel(BuildDocumentModelRequest buildRequest) {
@@ -1537,7 +1537,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginBuildModel(BuildDocumentModelRequest buildRequest, Context context) {
@@ -1555,7 +1555,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> buildModelNoCustomHeadersWithResponseAsync(BuildDocumentModelRequest buildRequest) {
@@ -1570,7 +1570,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> buildModelNoCustomHeadersWithResponseAsync(BuildDocumentModelRequest buildRequest,
@@ -1588,7 +1588,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return request is queued successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> buildModelNoCustomHeadersWithResponse(BuildDocumentModelRequest buildRequest,
@@ -1605,7 +1605,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -1626,7 +1626,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -1646,7 +1646,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginBuildModelNoCustomHeaders(BuildDocumentModelRequest buildRequest) {
@@ -1666,7 +1666,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginBuildModelNoCustomHeaders(BuildDocumentModelRequest buildRequest,
@@ -1686,7 +1686,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsComposeModelHeaders, Void>>
@@ -1702,7 +1702,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsComposeModelHeaders, Void>>
@@ -1720,7 +1720,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return request is queued successfully along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<DocumentModelsComposeModelHeaders, Void>
@@ -1737,7 +1737,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginComposeModelAsync(ComposeDocumentModelRequest composeRequest) {
@@ -1756,7 +1756,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginComposeModelAsync(ComposeDocumentModelRequest composeRequest,
@@ -1776,7 +1776,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginComposeModel(ComposeDocumentModelRequest composeRequest) {
@@ -1796,7 +1796,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginComposeModel(ComposeDocumentModelRequest composeRequest,
@@ -1816,7 +1816,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
@@ -1832,7 +1832,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> composeModelNoCustomHeadersWithResponseAsync(ComposeDocumentModelRequest composeRequest,
@@ -1850,7 +1850,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return request is queued successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> composeModelNoCustomHeadersWithResponse(ComposeDocumentModelRequest composeRequest,
@@ -1867,7 +1867,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -1888,7 +1888,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -1908,7 +1908,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData>
@@ -1929,7 +1929,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData>
@@ -1950,8 +1950,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return oK along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CopyAuthorization>>
@@ -1968,8 +1967,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return oK along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CopyAuthorization>>
@@ -1987,8 +1985,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId on successful
-     * completion of {@link Mono}.
+     * @return oK on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CopyAuthorization> authorizeModelCopyAsync(AuthorizeCopyRequest authorizeCopyRequest) {
@@ -2005,8 +2002,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId on successful
-     * completion of {@link Mono}.
+     * @return oK on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CopyAuthorization> authorizeModelCopyAsync(AuthorizeCopyRequest authorizeCopyRequest, Context context) {
@@ -2023,8 +2019,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with
-     * {@link Response}.
+     * @return oK along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<CopyAuthorization> authorizeModelCopyWithResponse(AuthorizeCopyRequest authorizeCopyRequest,
@@ -2042,7 +2037,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId.
+     * @return oK.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CopyAuthorization authorizeModelCopy(AuthorizeCopyRequest authorizeCopyRequest) {
@@ -2057,7 +2052,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsCopyModelToHeaders, Void>> copyModelToWithResponseAsync(String modelId,
@@ -2074,7 +2069,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<DocumentModelsCopyModelToHeaders, Void>> copyModelToWithResponseAsync(String modelId,
@@ -2093,7 +2088,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return request is queued successfully along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<DocumentModelsCopyModelToHeaders, Void> copyModelToWithResponse(String modelId,
@@ -2111,7 +2106,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCopyModelToAsync(String modelId, CopyAuthorization copyToRequest) {
@@ -2131,7 +2126,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCopyModelToAsync(String modelId, CopyAuthorization copyToRequest,
@@ -2152,7 +2147,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCopyModelTo(String modelId, CopyAuthorization copyToRequest) {
@@ -2173,7 +2168,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCopyModelTo(String modelId, CopyAuthorization copyToRequest,
@@ -2194,7 +2189,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> copyModelToNoCustomHeadersWithResponseAsync(String modelId,
@@ -2212,7 +2207,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return request is queued successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> copyModelToNoCustomHeadersWithResponseAsync(String modelId,
@@ -2231,7 +2226,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return request is queued successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> copyModelToNoCustomHeadersWithResponse(String modelId, CopyAuthorization copyToRequest,
@@ -2249,7 +2244,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCopyModelToNoCustomHeadersAsync(String modelId,
@@ -2271,7 +2266,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCopyModelToNoCustomHeadersAsync(String modelId,
@@ -2292,7 +2287,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCopyModelToNoCustomHeaders(String modelId,
@@ -2314,7 +2309,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of request is queued successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCopyModelToNoCustomHeaders(String modelId,
@@ -2332,8 +2327,7 @@ public final class DocumentModelsImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> listModelsSinglePageAsync() {
@@ -2352,8 +2346,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> listModelsSinglePageAsync(Context context) {
@@ -2368,7 +2361,7 @@ public final class DocumentModelsImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object as paginated response with {@link PagedFlux}.
+     * @return oK as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<DocumentModelSummary> listModelsAsync() {
@@ -2382,7 +2375,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object as paginated response with {@link PagedFlux}.
+     * @return oK as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<DocumentModelSummary> listModelsAsync(Context context) {
@@ -2395,7 +2388,7 @@ public final class DocumentModelsImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> listModelsSinglePage() {
@@ -2413,7 +2406,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> listModelsSinglePage(Context context) {
@@ -2429,7 +2422,7 @@ public final class DocumentModelsImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object as paginated response with {@link PagedIterable}.
+     * @return oK as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<DocumentModelSummary> listModels() {
@@ -2444,7 +2437,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object as paginated response with {@link PagedIterable}.
+     * @return oK as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<DocumentModelSummary> listModels(Context context) {
@@ -2548,7 +2541,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return deleting document model along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteModelWithResponseAsync(String modelId) {
@@ -2563,7 +2556,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return deleting document model along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteModelWithResponseAsync(String modelId, Context context) {
@@ -2578,7 +2571,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return deleting document model on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteModelAsync(String modelId) {
@@ -2593,7 +2586,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return deleting document model on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteModelAsync(String modelId, Context context) {
@@ -2608,7 +2601,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return deleting document model along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteModelWithResponse(String modelId, Context context) {
@@ -2637,8 +2630,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> listModelsNextSinglePageAsync(String nextLink) {
@@ -2657,8 +2649,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> listModelsNextSinglePageAsync(String nextLink, Context context) {
@@ -2675,7 +2666,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> listModelsNextSinglePage(String nextLink) {
@@ -2694,7 +2685,7 @@ public final class DocumentModelsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<DocumentModelSummary> listModelsNextSinglePage(String nextLink, Context context) {

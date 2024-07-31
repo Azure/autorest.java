@@ -267,8 +267,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getExtensibleModelWithResponseAsync(RequestOptions requestOptions) {
@@ -292,7 +291,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test extensible enum type for discriminator along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getExtensibleModelWithResponse(RequestOptions requestOptions) {
@@ -317,7 +316,8 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putExtensibleModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
@@ -342,7 +342,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putExtensibleModelWithResponse(BinaryData input, RequestOptions requestOptions) {
@@ -467,8 +467,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFixedModelWithResponseAsync(RequestOptions requestOptions) {
@@ -492,7 +491,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test fixed enum type for discriminator along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getFixedModelWithResponse(RequestOptions requestOptions) {
@@ -517,7 +516,8 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFixedModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
@@ -542,7 +542,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putFixedModelWithResponse(BinaryData input, RequestOptions requestOptions) {

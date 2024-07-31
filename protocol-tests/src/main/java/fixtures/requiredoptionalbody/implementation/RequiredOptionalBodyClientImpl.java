@@ -232,7 +232,7 @@ public final class RequiredOptionalBodyClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return deployment metadata along with {@link Response} on successful completion of {@link Mono}.
+     * @return the deployment properties along with {@link Response} on successful completion of {@link Mono}.
      * @see <a href=https://docs.microsoft.com/azure/developer/java/sdk/overview>Rest API Documentation</a>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -289,7 +289,7 @@ public final class RequiredOptionalBodyClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return deployment metadata along with {@link Response}.
+     * @return the deployment properties along with {@link Response}.
      * @see <a href=https://docs.microsoft.com/azure/developer/java/sdk/overview>Rest API Documentation</a>
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -352,7 +352,7 @@ public final class RequiredOptionalBodyClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return deployment metadata along with {@link Response} on successful completion of {@link Mono}.
+     * @return the deployment properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> optionalObjectWithResponseAsync(RequestOptions requestOptions) {
@@ -420,7 +420,7 @@ public final class RequiredOptionalBodyClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return deployment metadata along with {@link Response}.
+     * @return the deployment properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> optionalObjectWithResponse(RequestOptions requestOptions) {

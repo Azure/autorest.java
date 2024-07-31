@@ -53,7 +53,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -79,7 +79,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -105,7 +105,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -131,7 +131,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -166,7 +166,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -193,7 +193,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 as
+     * paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -230,7 +231,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -258,7 +259,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -292,7 +293,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -318,7 +319,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -355,7 +356,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -393,7 +394,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -420,7 +421,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -447,7 +448,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -473,7 +474,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -499,7 +500,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -525,7 +526,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -553,7 +554,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -582,7 +583,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -620,7 +621,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return operation is in progress as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -647,7 +648,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -674,7 +675,7 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -700,7 +701,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' as paginated response with
+     * {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)

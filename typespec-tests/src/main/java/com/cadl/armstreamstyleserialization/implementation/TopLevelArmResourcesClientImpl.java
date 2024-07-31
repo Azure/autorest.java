@@ -84,8 +84,8 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
@@ -127,8 +127,8 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
@@ -169,8 +169,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginUpdateAsync(
@@ -192,8 +191,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginUpdateAsync(
@@ -215,8 +213,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginUpdate(
@@ -234,8 +231,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginUpdate(
@@ -253,8 +249,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelArmResourceInner> updateAsync(String resourceGroupName, String topLevelArmResourceName,
@@ -273,8 +268,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelArmResourceInner> updateAsync(String resourceGroupName, String topLevelArmResourceName,
@@ -292,7 +286,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelArmResourceInner update(String resourceGroupName, String topLevelArmResourceName,
@@ -310,7 +304,7 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelArmResourceInner update(String resourceGroupName, String topLevelArmResourceName,

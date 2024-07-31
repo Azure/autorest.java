@@ -61,7 +61,7 @@ public final class MiscellaneousClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return list Operations response object as paginated response with {@link PagedIterable}.
+     * @return oK as paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -134,7 +134,7 @@ public final class MiscellaneousClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return general information regarding the current resource along with {@link Response}.
+     * @return oK along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

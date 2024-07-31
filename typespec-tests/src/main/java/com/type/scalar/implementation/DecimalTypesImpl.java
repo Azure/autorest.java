@@ -128,8 +128,7 @@ public final class DecimalTypesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a decimal number with any length and precision along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> responseBodyWithResponseAsync(RequestOptions requestOptions) {
@@ -150,7 +149,7 @@ public final class DecimalTypesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a decimal number with any length and precision along with {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> responseBodyWithResponse(RequestOptions requestOptions) {
@@ -172,7 +171,8 @@ public final class DecimalTypesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requestBodyWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -194,7 +194,7 @@ public final class DecimalTypesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requestBodyWithResponse(BinaryData body, RequestOptions requestOptions) {
@@ -211,7 +211,8 @@ public final class DecimalTypesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requestParameterWithResponseAsync(BigDecimal value, RequestOptions requestOptions) {
@@ -228,7 +229,7 @@ public final class DecimalTypesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requestParameterWithResponse(BigDecimal value, RequestOptions requestOptions) {

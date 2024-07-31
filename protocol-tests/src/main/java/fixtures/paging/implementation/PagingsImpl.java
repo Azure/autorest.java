@@ -972,7 +972,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getNoItemNamePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -1001,7 +1001,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNoItemNamePagesAsync(RequestOptions requestOptions) {
@@ -1030,7 +1030,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getNoItemNamePagesSinglePage(RequestOptions requestOptions) {
@@ -1059,7 +1059,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNoItemNamePages(RequestOptions requestOptions) {
@@ -1088,7 +1088,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getEmptyNextLinkNamePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -1118,7 +1118,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getEmptyNextLinkNamePagesAsync(RequestOptions requestOptions) {
@@ -1147,7 +1147,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getEmptyNextLinkNamePagesSinglePage(RequestOptions requestOptions) {
@@ -1176,7 +1176,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getEmptyNextLinkNamePages(RequestOptions requestOptions) {
@@ -1205,7 +1205,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getNullNextLinkNamePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -1235,7 +1235,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getNullNextLinkNamePagesAsync(RequestOptions requestOptions) {
@@ -1260,7 +1260,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getNullNextLinkNamePagesSinglePage(RequestOptions requestOptions) {
@@ -1289,7 +1289,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getNullNextLinkNamePages(RequestOptions requestOptions) {
@@ -1314,7 +1314,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getSinglePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -1343,7 +1344,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesAsync(RequestOptions requestOptions) {
@@ -1372,7 +1373,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getSinglePagesSinglePage(RequestOptions requestOptions) {
@@ -1401,7 +1402,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePages(RequestOptions requestOptions) {
@@ -1439,7 +1440,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getSinglePagesWithBodyParamsSinglePageAsync(BinaryData parameters,
@@ -1479,7 +1481,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesWithBodyParamsAsync(BinaryData parameters,
@@ -1518,7 +1520,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getSinglePagesWithBodyParamsSinglePage(BinaryData parameters,
@@ -1557,7 +1559,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesWithBodyParams(BinaryData parameters,
@@ -1588,7 +1590,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> firstResponseEmptySinglePageAsync(RequestOptions requestOptions) {
@@ -1618,7 +1621,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 as
+     * paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> firstResponseEmptyAsync(RequestOptions requestOptions) {
@@ -1648,7 +1652,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> firstResponseEmptySinglePage(RequestOptions requestOptions) {
@@ -1678,7 +1683,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 as
+     * paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> firstResponseEmpty(RequestOptions requestOptions) {
@@ -1718,7 +1724,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -1758,7 +1765,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesAsync(RequestOptions requestOptions) {
@@ -1798,7 +1805,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesSinglePage(RequestOptions requestOptions) {
@@ -1838,7 +1845,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePages(RequestOptions requestOptions) {
@@ -1869,7 +1876,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getWithQueryParamsSinglePageAsync(int requiredQueryParameter,
@@ -1903,7 +1911,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getWithQueryParamsAsync(int requiredQueryParameter, RequestOptions requestOptions) {
@@ -1934,7 +1942,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getWithQueryParamsSinglePage(int requiredQueryParameter,
@@ -1967,7 +1975,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getWithQueryParams(int requiredQueryParameter, RequestOptions requestOptions) {
@@ -2004,7 +2012,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> duplicateParamsSinglePageAsync(RequestOptions requestOptions) {
@@ -2041,7 +2050,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> duplicateParamsAsync(RequestOptions requestOptions) {
@@ -2078,7 +2087,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> duplicateParamsSinglePage(RequestOptions requestOptions) {
@@ -2115,7 +2124,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> duplicateParams(RequestOptions requestOptions) {
@@ -2144,7 +2153,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> pageWithMaxPageSizeSinglePageAsync(RequestOptions requestOptions) {
@@ -2174,7 +2184,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> pageWithMaxPageSizeAsync(RequestOptions requestOptions) {
@@ -2203,7 +2213,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> pageWithMaxPageSizeSinglePage(RequestOptions requestOptions) {
@@ -2233,7 +2243,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> pageWithMaxPageSize(RequestOptions requestOptions) {
@@ -2262,7 +2272,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> nextOperationWithQueryParamsSinglePageAsync(RequestOptions requestOptions) {
@@ -2293,7 +2304,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> nextOperationWithQueryParamsSinglePage(RequestOptions requestOptions) {
@@ -2334,7 +2345,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getOdataMultiplePagesSinglePageAsync(RequestOptions requestOptions) {
@@ -2375,7 +2387,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getOdataMultiplePagesAsync(RequestOptions requestOptions) {
@@ -2415,7 +2427,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getOdataMultiplePagesSinglePage(RequestOptions requestOptions) {
@@ -2455,7 +2467,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getOdataMultiplePages(RequestOptions requestOptions) {
@@ -2496,7 +2508,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetSinglePageAsync(int offset,
@@ -2539,7 +2552,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesWithOffsetAsync(int offset, RequestOptions requestOptions) {
@@ -2580,7 +2593,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesWithOffsetSinglePage(int offset, RequestOptions requestOptions) {
@@ -2621,7 +2634,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesWithOffset(int offset, RequestOptions requestOptions) {
@@ -2651,7 +2664,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstSinglePageAsync(RequestOptions requestOptions) {
@@ -2682,7 +2696,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetryFirstAsync(RequestOptions requestOptions) {
@@ -2712,7 +2726,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesRetryFirstSinglePage(RequestOptions requestOptions) {
@@ -2742,7 +2756,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetryFirst(RequestOptions requestOptions) {
@@ -2772,7 +2786,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondSinglePageAsync(RequestOptions requestOptions) {
@@ -2803,7 +2818,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesRetrySecondAsync(RequestOptions requestOptions) {
@@ -2833,7 +2848,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesRetrySecondSinglePage(RequestOptions requestOptions) {
@@ -2863,7 +2878,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesRetrySecond(RequestOptions requestOptions) {
@@ -2892,7 +2907,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getSinglePagesFailureSinglePageAsync(RequestOptions requestOptions) {
@@ -2922,7 +2938,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getSinglePagesFailureAsync(RequestOptions requestOptions) {
@@ -2951,7 +2967,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getSinglePagesFailureSinglePage(RequestOptions requestOptions) {
@@ -2980,7 +2996,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getSinglePagesFailure(RequestOptions requestOptions) {
@@ -3009,7 +3025,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesFailureSinglePageAsync(RequestOptions requestOptions) {
@@ -3039,7 +3056,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureAsync(RequestOptions requestOptions) {
@@ -3068,7 +3085,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesFailureSinglePage(RequestOptions requestOptions) {
@@ -3097,7 +3114,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailure(RequestOptions requestOptions) {
@@ -3126,7 +3143,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriSinglePageAsync(RequestOptions requestOptions) {
@@ -3156,7 +3174,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFailureUriAsync(RequestOptions requestOptions) {
@@ -3185,7 +3203,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesFailureUriSinglePage(RequestOptions requestOptions) {
@@ -3214,7 +3232,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFailureUri(RequestOptions requestOptions) {
@@ -3245,7 +3263,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentNextLinkSinglePageAsync(String apiVersion,
@@ -3278,7 +3297,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentNextLinkAsync(String apiVersion, String tenant,
@@ -3311,7 +3330,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesFragmentNextLinkSinglePage(String apiVersion, String tenant,
@@ -3343,7 +3362,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentNextLink(String apiVersion, String tenant,
@@ -3375,7 +3394,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
@@ -3408,7 +3428,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkAsync(String apiVersion, String tenant,
@@ -3442,7 +3462,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesFragmentWithGroupingNextLinkSinglePage(String apiVersion,
@@ -3474,7 +3494,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesFragmentWithGroupingNextLink(String apiVersion, String tenant,
@@ -3516,7 +3536,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return operation is in progress along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesLroSinglePageAsync(RequestOptions requestOptions) {
@@ -3556,7 +3576,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return operation is in progress as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getMultiplePagesLroAsync(RequestOptions requestOptions) {
@@ -3596,7 +3616,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return operation is in progress along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesLroSinglePage(RequestOptions requestOptions) {
@@ -3636,7 +3656,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return operation is in progress as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getMultiplePagesLro(RequestOptions requestOptions) {
@@ -3666,7 +3686,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> appendApiVersionSinglePageAsync(RequestOptions requestOptions) {
@@ -3697,7 +3718,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> appendApiVersionAsync(RequestOptions requestOptions) {
@@ -3727,7 +3748,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> appendApiVersionSinglePage(RequestOptions requestOptions) {
@@ -3757,7 +3778,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> appendApiVersion(RequestOptions requestOptions) {
@@ -3787,7 +3808,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> replaceApiVersionSinglePageAsync(RequestOptions requestOptions) {
@@ -3818,7 +3840,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> replaceApiVersionAsync(RequestOptions requestOptions) {
@@ -3848,7 +3870,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> replaceApiVersionSinglePage(RequestOptions requestOptions) {
@@ -3878,7 +3900,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> replaceApiVersion(RequestOptions requestOptions) {
@@ -3910,7 +3932,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> nextFragmentSinglePageAsync(String apiVersion, String tenant,
@@ -3944,7 +3967,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> nextFragmentSinglePage(String apiVersion, String tenant, String nextLink,
@@ -3977,7 +4000,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> nextFragmentWithGroupingSinglePageAsync(String apiVersion, String tenant,
@@ -4011,7 +4035,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> nextFragmentWithGroupingSinglePage(String apiVersion, String tenant,
@@ -4041,7 +4065,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>>
@@ -4072,7 +4097,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' as paginated response with
+     * {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagingModelWithItemNameWithXmsClientNameAsync(RequestOptions requestOptions) {
@@ -4102,7 +4128,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData>
@@ -4132,7 +4159,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' as paginated response with
+     * {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPagingModelWithItemNameWithXmsClientName(RequestOptions requestOptions) {
@@ -4162,7 +4190,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getNoItemNamePagesNextSinglePageAsync(String nextLink,
@@ -4193,7 +4221,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getNoItemNamePagesNextSinglePage(String nextLink, RequestOptions requestOptions) {
@@ -4223,7 +4251,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getEmptyNextLinkNamePagesNextSinglePageAsync(String nextLink,
@@ -4255,7 +4283,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getEmptyNextLinkNamePagesNextSinglePage(String nextLink,
@@ -4286,7 +4314,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getSinglePagesNextSinglePageAsync(String nextLink,
@@ -4318,7 +4347,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getSinglePagesNextSinglePage(String nextLink, RequestOptions requestOptions) {
@@ -4348,7 +4377,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getSinglePagesWithBodyParamsNextSinglePageAsync(String nextLink,
@@ -4380,7 +4410,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getSinglePagesWithBodyParamsNextSinglePage(String nextLink,
@@ -4411,7 +4441,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> firstResponseEmptyNextSinglePageAsync(String nextLink,
@@ -4442,7 +4473,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> firstResponseEmptyNextSinglePage(String nextLink, RequestOptions requestOptions) {
@@ -4483,7 +4515,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesNextSinglePageAsync(String nextLink,
@@ -4525,7 +4558,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesNextSinglePage(String nextLink, RequestOptions requestOptions) {
@@ -4555,7 +4588,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> duplicateParamsNextSinglePageAsync(String nextLink,
@@ -4586,7 +4620,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> duplicateParamsNextSinglePage(String nextLink, RequestOptions requestOptions) {
@@ -4616,7 +4650,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> pageWithMaxPageSizeNextSinglePageAsync(String nextLink,
@@ -4648,7 +4683,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> pageWithMaxPageSizeNextSinglePage(String nextLink,
@@ -4690,7 +4725,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getOdataMultiplePagesNextSinglePageAsync(String nextLink,
@@ -4733,7 +4769,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getOdataMultiplePagesNextSinglePage(String nextLink,
@@ -4775,7 +4811,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink,
@@ -4818,7 +4855,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesWithOffsetNextSinglePage(String nextLink,
@@ -4849,7 +4886,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink,
@@ -4881,7 +4919,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesRetryFirstNextSinglePage(String nextLink,
@@ -4912,7 +4950,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink,
@@ -4944,7 +4983,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesRetrySecondNextSinglePage(String nextLink,
@@ -4975,7 +5014,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getSinglePagesFailureNextSinglePageAsync(String nextLink,
@@ -5007,7 +5047,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getSinglePagesFailureNextSinglePage(String nextLink,
@@ -5038,7 +5078,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesFailureNextSinglePageAsync(String nextLink,
@@ -5070,7 +5111,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesFailureNextSinglePage(String nextLink,
@@ -5101,7 +5142,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink,
@@ -5133,7 +5175,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesFailureUriNextSinglePage(String nextLink,
@@ -5175,7 +5217,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return operation is in progress along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getMultiplePagesLroNextSinglePageAsync(String nextLink,
@@ -5218,7 +5260,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return operation is in progress along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getMultiplePagesLroNextSinglePage(String nextLink,
@@ -5249,7 +5291,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> appendApiVersionNextSinglePageAsync(String nextLink,
@@ -5280,7 +5323,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> appendApiVersionNextSinglePage(String nextLink, RequestOptions requestOptions) {
@@ -5310,7 +5353,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> replaceApiVersionNextSinglePageAsync(String nextLink,
@@ -5341,7 +5385,7 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> replaceApiVersionNextSinglePage(String nextLink, RequestOptions requestOptions) {
@@ -5371,7 +5415,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>>
@@ -5403,7 +5448,8 @@ public final class PagingsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link PagedResponse}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getPagingModelWithItemNameWithXmsClientNameNextSinglePage(String nextLink,

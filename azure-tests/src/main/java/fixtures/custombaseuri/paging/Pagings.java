@@ -93,7 +93,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlSinglePageAsync(String accountName) {
@@ -119,7 +120,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlSinglePageAsync(String accountName, Context context) {
@@ -143,7 +145,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlAsync(String accountName) {
@@ -159,7 +161,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlAsync(String accountName, Context context) {
@@ -174,7 +176,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlSinglePage(String accountName) {
@@ -189,7 +191,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlSinglePage(String accountName, Context context) {
@@ -203,7 +205,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getPagesPartialUrl(String accountName) {
@@ -218,7 +220,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getPagesPartialUrl(String accountName, Context context) {
@@ -232,7 +234,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlOperationSinglePageAsync(String accountName) {
@@ -259,7 +262,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlOperationSinglePageAsync(String accountName,
@@ -284,7 +288,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlOperationAsync(String accountName) {
@@ -300,7 +304,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagesPartialUrlOperationAsync(String accountName, Context context) {
@@ -315,7 +319,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlOperationSinglePage(String accountName) {
@@ -330,7 +334,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlOperationSinglePage(String accountName, Context context) {
@@ -344,7 +348,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getPagesPartialUrlOperation(String accountName) {
@@ -359,7 +363,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getPagesPartialUrlOperation(String accountName, Context context) {
@@ -374,7 +378,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextSinglePageAsync(String accountName,
@@ -406,7 +411,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlOperationNextSinglePageAsync(String accountName,
@@ -435,7 +441,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlOperationNextSinglePage(String accountName, String nextLink) {
@@ -451,7 +457,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlOperationNextSinglePage(String accountName, String nextLink,
@@ -467,7 +473,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlNextSinglePageAsync(String nextLink, String accountName) {
@@ -497,7 +504,8 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagesPartialUrlNextSinglePageAsync(String nextLink, String accountName,
@@ -526,7 +534,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlNextSinglePage(String nextLink, String accountName) {
@@ -542,7 +550,7 @@ public final class Pagings {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagesPartialUrlNextSinglePage(String nextLink, String accountName,

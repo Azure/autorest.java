@@ -120,8 +120,7 @@ public final class MiscellaneousImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> listOperationsSinglePageAsync() {
@@ -139,8 +138,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> listOperationsSinglePageAsync(Context context) {
@@ -155,7 +153,7 @@ public final class MiscellaneousImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object as paginated response with {@link PagedFlux}.
+     * @return oK as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<OperationSummary> listOperationsAsync() {
@@ -170,7 +168,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object as paginated response with {@link PagedFlux}.
+     * @return oK as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<OperationSummary> listOperationsAsync(Context context) {
@@ -183,7 +181,7 @@ public final class MiscellaneousImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> listOperationsSinglePage() {
@@ -201,7 +199,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> listOperationsSinglePage(Context context) {
@@ -217,7 +215,7 @@ public final class MiscellaneousImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object as paginated response with {@link PagedIterable}.
+     * @return oK as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<OperationSummary> listOperations() {
@@ -232,7 +230,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object as paginated response with {@link PagedIterable}.
+     * @return oK as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<OperationSummary> listOperations(Context context) {
@@ -336,8 +334,7 @@ public final class MiscellaneousImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return oK along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceDetails>> getResourceInfoWithResponseAsync() {
@@ -351,8 +348,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return oK along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceDetails>> getResourceInfoWithResponseAsync(Context context) {
@@ -365,7 +361,7 @@ public final class MiscellaneousImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource on successful completion of {@link Mono}.
+     * @return oK on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResourceDetails> getResourceInfoAsync() {
@@ -379,7 +375,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource on successful completion of {@link Mono}.
+     * @return oK on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResourceDetails> getResourceInfoAsync(Context context) {
@@ -393,7 +389,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource along with {@link Response}.
+     * @return oK along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ResourceDetails> getResourceInfoWithResponse(Context context) {
@@ -406,7 +402,7 @@ public final class MiscellaneousImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource.
+     * @return oK.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResourceDetails getResourceInfo() {
@@ -420,8 +416,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> listOperationsNextSinglePageAsync(String nextLink) {
@@ -440,8 +435,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return oK along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> listOperationsNextSinglePageAsync(String nextLink, Context context) {
@@ -458,7 +452,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> listOperationsNextSinglePage(String nextLink) {
@@ -477,7 +471,7 @@ public final class MiscellaneousImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse}.
+     * @return oK along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<OperationSummary> listOperationsNextSinglePage(String nextLink, Context context) {

@@ -68,7 +68,7 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<TopLevelArmResource> listByResourceGroup(String resourceGroupName);
 
@@ -80,7 +80,7 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<TopLevelArmResource> listByResourceGroup(String resourceGroupName, Context context);
 
@@ -89,7 +89,7 @@ public interface TopLevelArmResourceInterfaces {
      * 
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<TopLevelArmResource> list();
 
@@ -100,7 +100,7 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<TopLevelArmResource> list(Context context);
 
@@ -112,7 +112,7 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return resource operation accepted.
      */
     Result action(String resourceGroupName, String topLevelArmResourceName);
 
@@ -125,7 +125,7 @@ public interface TopLevelArmResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return resource operation accepted.
      */
     Result action(String resourceGroupName, String topLevelArmResourceName, Context context);
 

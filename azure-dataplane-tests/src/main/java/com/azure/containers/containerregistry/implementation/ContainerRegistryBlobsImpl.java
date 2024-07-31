@@ -409,7 +409,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetBlobHeaders, BinaryData>> getBlobWithResponseAsync(String name,
@@ -426,7 +427,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetBlobHeaders, BinaryData>> getBlobWithResponseAsync(String name,
@@ -443,7 +445,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBlobAsync(String name, String digest) {
@@ -459,7 +461,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getBlobAsync(String name, String digest, Context context) {
@@ -474,7 +476,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBlobNoCustomHeadersWithResponseAsync(String name, String digest) {
@@ -490,7 +493,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getBlobNoCustomHeadersWithResponseAsync(String name, String digest,
@@ -508,7 +512,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase}.
+     * @return the blob identified by digest is available along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsGetBlobHeaders, BinaryData> getBlobWithResponse(String name,
@@ -525,7 +529,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the blob identified by digest is available.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getBlob(String name, String digest) {
@@ -541,7 +545,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return the blob identified by digest is available along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getBlobNoCustomHeadersWithResponse(String name, String digest, Context context) {
@@ -557,7 +561,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCheckBlobExistsHeaders, Void>>
@@ -574,7 +579,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCheckBlobExistsHeaders, Void>>
@@ -591,7 +597,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> checkBlobExistsAsync(String name, String digest) {
@@ -607,7 +613,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> checkBlobExistsAsync(String name, String digest, Context context) {
@@ -622,7 +628,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkBlobExistsNoCustomHeadersWithResponseAsync(String name, String digest) {
@@ -638,7 +645,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkBlobExistsNoCustomHeadersWithResponseAsync(String name, String digest,
@@ -656,7 +664,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the blob identified by digest is available along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsCheckBlobExistsHeaders, Void> checkBlobExistsWithResponse(String name,
@@ -688,7 +696,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the blob identified by digest is available along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> checkBlobExistsNoCustomHeadersWithResponse(String name, String digest, Context context) {
@@ -704,7 +712,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsDeleteBlobHeaders, Void>> deleteBlobWithResponseAsync(String name,
@@ -721,7 +730,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsDeleteBlobHeaders, Void>> deleteBlobWithResponseAsync(String name,
@@ -737,7 +747,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteBlobAsync(String name, String digest) {
@@ -753,7 +763,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteBlobAsync(String name, String digest, Context context) {
@@ -768,7 +778,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteBlobNoCustomHeadersWithResponseAsync(String name, String digest) {
@@ -784,7 +795,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteBlobNoCustomHeadersWithResponseAsync(String name, String digest,
@@ -801,7 +813,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the blob identified by digest is available along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsDeleteBlobHeaders, Void> deleteBlobWithResponse(String name,
@@ -832,7 +844,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the blob identified by digest is available along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteBlobNoCustomHeadersWithResponse(String name, String digest, Context context) {
@@ -848,7 +860,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob has been created in the registry and is available at the provided location along with
+     * {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsMountBlobHeaders, Void>> mountBlobWithResponseAsync(String name,
@@ -866,7 +879,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob has been created in the registry and is available at the provided location along with
+     * {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsMountBlobHeaders, Void>> mountBlobWithResponseAsync(String name,
@@ -884,7 +898,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob has been created in the registry and is available at the provided location on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> mountBlobAsync(String name, String from, String mount) {
@@ -901,7 +916,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob has been created in the registry and is available at the provided location on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> mountBlobAsync(String name, String from, String mount, Context context) {
@@ -917,7 +933,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob has been created in the registry and is available at the provided location along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> mountBlobNoCustomHeadersWithResponseAsync(String name, String from, String mount) {
@@ -934,7 +951,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob has been created in the registry and is available at the provided location along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> mountBlobNoCustomHeadersWithResponseAsync(String name, String from, String mount,
@@ -953,7 +971,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the blob has been created in the registry and is available at the provided location along with
+     * {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsMountBlobHeaders, Void> mountBlobWithResponse(String name, String from,
@@ -987,7 +1006,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the blob has been created in the registry and is available at the provided location along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> mountBlobNoCustomHeadersWithResponse(String name, String from, String mount,
@@ -1005,7 +1025,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload is known and in progress along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetUploadStatusHeaders, Void>>
@@ -1023,7 +1044,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload is known and in progress along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetUploadStatusHeaders, Void>>
@@ -1041,7 +1063,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload is known and in progress on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getUploadStatusAsync(String nextLink) {
@@ -1058,7 +1080,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload is known and in progress on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> getUploadStatusAsync(String nextLink, Context context) {
@@ -1074,7 +1096,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload is known and in progress along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getUploadStatusNoCustomHeadersWithResponseAsync(String nextLink) {
@@ -1091,7 +1113,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload is known and in progress along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getUploadStatusNoCustomHeadersWithResponseAsync(String nextLink, Context context) {
@@ -1109,7 +1131,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the upload is known and in progress along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsGetUploadStatusHeaders, Void> getUploadStatusWithResponse(String nextLink,
@@ -1143,7 +1165,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the upload is known and in progress along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getUploadStatusNoCustomHeadersWithResponse(String nextLink, Context context) {
@@ -1161,7 +1183,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>>
@@ -1180,7 +1203,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>>
@@ -1199,7 +1223,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the stream of data has been accepted and the current progress is available in the range header on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> uploadChunkAsync(String nextLink, Flux<ByteBuffer> value, long contentLength) {
@@ -1217,7 +1242,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the stream of data has been accepted and the current progress is available in the range header on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> uploadChunkAsync(String nextLink, Flux<ByteBuffer> value, long contentLength, Context context) {
@@ -1234,7 +1260,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> uploadChunkNoCustomHeadersWithResponseAsync(String nextLink, Flux<ByteBuffer> value,
@@ -1254,7 +1281,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> uploadChunkNoCustomHeadersWithResponseAsync(String nextLink, Flux<ByteBuffer> value,
@@ -1274,7 +1302,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>>
@@ -1293,7 +1322,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void>>
@@ -1312,7 +1342,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the stream of data has been accepted and the current progress is available in the range header on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> uploadChunkAsync(String nextLink, BinaryData value, long contentLength) {
@@ -1330,7 +1361,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the stream of data has been accepted and the current progress is available in the range header on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> uploadChunkAsync(String nextLink, BinaryData value, long contentLength, Context context) {
@@ -1347,7 +1379,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> uploadChunkNoCustomHeadersWithResponseAsync(String nextLink, BinaryData value,
@@ -1367,7 +1400,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> uploadChunkNoCustomHeadersWithResponseAsync(String nextLink, BinaryData value,
@@ -1388,7 +1422,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsUploadChunkHeaders, Void> uploadChunkWithResponse(String nextLink,
@@ -1424,7 +1459,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the stream of data has been accepted and the current progress is available in the range header along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadChunkNoCustomHeadersWithResponse(String nextLink, BinaryData value, long contentLength,
@@ -1446,7 +1482,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>>
@@ -1468,7 +1505,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>> completeUploadWithResponseAsync(
@@ -1489,7 +1527,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been completed and accepted by the registry on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> completeUploadAsync(String digest, String nextLink, Flux<ByteBuffer> value, Long contentLength) {
@@ -1509,7 +1547,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been completed and accepted by the registry on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> completeUploadAsync(String digest, String nextLink, Flux<ByteBuffer> value, Long contentLength,
@@ -1530,7 +1568,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> completeUploadNoCustomHeadersWithResponseAsync(String digest, String nextLink,
@@ -1552,7 +1591,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> completeUploadNoCustomHeadersWithResponseAsync(String digest, String nextLink,
@@ -1574,7 +1614,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>>
@@ -1596,7 +1637,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void>> completeUploadWithResponseAsync(
@@ -1617,7 +1659,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been completed and accepted by the registry on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> completeUploadAsync(String digest, String nextLink, BinaryData value, Long contentLength) {
@@ -1637,7 +1679,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been completed and accepted by the registry on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> completeUploadAsync(String digest, String nextLink, BinaryData value, Long contentLength,
@@ -1658,7 +1700,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> completeUploadNoCustomHeadersWithResponseAsync(String digest, String nextLink,
@@ -1680,7 +1723,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been completed and accepted by the registry along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> completeUploadNoCustomHeadersWithResponseAsync(String digest, String nextLink,
@@ -1703,7 +1747,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the upload has been completed and accepted by the registry along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsCompleteUploadHeaders, Void> completeUploadWithResponse(String digest,
@@ -1744,7 +1788,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the upload has been completed and accepted by the registry along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> completeUploadNoCustomHeadersWithResponse(String digest, String nextLink, BinaryData value,
@@ -1763,7 +1807,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been successfully deleted along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> cancelUploadWithResponseAsync(String nextLink) {
@@ -1780,7 +1825,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been successfully deleted along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> cancelUploadWithResponseAsync(String nextLink, Context context) {
@@ -1797,7 +1843,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been successfully deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> cancelUploadAsync(String nextLink) {
@@ -1814,7 +1860,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been successfully deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> cancelUploadAsync(String nextLink, Context context) {
@@ -1831,7 +1877,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the upload has been successfully deleted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> cancelUploadWithResponse(String nextLink, Context context) {
@@ -1861,7 +1907,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload has been created along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsStartUploadHeaders, Void>>
@@ -1877,7 +1923,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the upload has been created along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsStartUploadHeaders, Void>> startUploadWithResponseAsync(String name,
@@ -1893,7 +1939,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been created on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> startUploadAsync(String name) {
@@ -1908,7 +1954,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the upload has been created on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> startUploadAsync(String name, Context context) {
@@ -1922,7 +1968,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been created along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> startUploadNoCustomHeadersWithResponseAsync(String name) {
@@ -1937,7 +1983,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the upload has been created along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> startUploadNoCustomHeadersWithResponseAsync(String name, Context context) {
@@ -1953,7 +1999,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the upload has been created along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsStartUploadHeaders, Void> startUploadWithResponse(String name,
@@ -1983,7 +2029,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the upload has been created along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> startUploadNoCustomHeadersWithResponse(String name, Context context) {
@@ -2002,7 +2048,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetChunkHeaders, BinaryData>> getChunkWithResponseAsync(String name,
@@ -2022,7 +2069,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsGetChunkHeaders, BinaryData>> getChunkWithResponseAsync(String name,
@@ -2042,7 +2090,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getChunkAsync(String name, String digest, String range) {
@@ -2061,7 +2109,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getChunkAsync(String name, String digest, String range, Context context) {
@@ -2079,7 +2127,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getChunkNoCustomHeadersWithResponseAsync(String name, String digest,
@@ -2099,7 +2148,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getChunkNoCustomHeadersWithResponseAsync(String name, String digest, String range,
@@ -2120,7 +2170,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase}.
+     * @return the blob identified by digest is available along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsGetChunkHeaders, BinaryData> getChunkWithResponse(String name,
@@ -2140,7 +2190,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return the blob identified by digest is available.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getChunk(String name, String digest, String range) {
@@ -2159,7 +2209,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return the blob identified by digest is available along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getChunkNoCustomHeadersWithResponse(String name, String digest, String range,
@@ -2177,7 +2227,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCheckChunkExistsHeaders, Void>>
@@ -2195,7 +2246,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistryBlobsCheckChunkExistsHeaders, Void>>
@@ -2213,7 +2265,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> checkChunkExistsAsync(String name, String digest, String range) {
@@ -2230,7 +2282,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the blob identified by digest is available on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> checkChunkExistsAsync(String name, String digest, String range, Context context) {
@@ -2246,7 +2298,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkChunkExistsNoCustomHeadersWithResponseAsync(String name, String digest,
@@ -2265,7 +2318,8 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the blob identified by digest is available along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkChunkExistsNoCustomHeadersWithResponseAsync(String name, String digest,
@@ -2284,7 +2338,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the blob identified by digest is available along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistryBlobsCheckChunkExistsHeaders, Void> checkChunkExistsWithResponse(String name,
@@ -2318,7 +2372,7 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the blob identified by digest is available along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> checkChunkExistsNoCustomHeadersWithResponse(String name, String digest, String range,

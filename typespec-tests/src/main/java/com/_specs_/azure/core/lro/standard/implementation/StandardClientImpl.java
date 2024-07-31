@@ -224,7 +224,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded and a new resource has been created as a result along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(String name, BinaryData resource,
@@ -263,7 +264,7 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return details about a user along with {@link Response}.
+     * @return the request has succeeded and a new resource has been created as a result along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createOrReplaceWithResponse(String name, BinaryData resource,
@@ -302,7 +303,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of details about a user.
+     * @return the {@link PollerFlux} for polling of the request has succeeded and a new resource has been created as a
+     * result.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateOrReplaceAsync(String name, BinaryData resource,
@@ -348,7 +350,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of details about a user.
+     * @return the {@link SyncPoller} for polling of the request has succeeded and a new resource has been created as a
+     * result.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateOrReplace(String name, BinaryData resource,
@@ -394,7 +397,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of details about a user.
+     * @return the {@link PollerFlux} for polling of the request has succeeded and a new resource has been created as a
+     * result.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<PollOperationDetails, User> beginCreateOrReplaceWithModelAsync(String name, BinaryData resource,
@@ -440,7 +444,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of details about a user.
+     * @return the {@link SyncPoller} for polling of the request has succeeded and a new resource has been created as a
+     * result.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollOperationDetails, User> beginCreateOrReplaceWithModel(String name, BinaryData resource,
@@ -484,8 +489,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> deleteWithResponseAsync(String name, RequestOptions requestOptions) {
@@ -521,7 +526,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> deleteWithResponse(String name, RequestOptions requestOptions) {
@@ -556,7 +562,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsync(String name, RequestOptions requestOptions) {
@@ -598,7 +605,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
@@ -640,7 +648,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<PollOperationDetails, Void> beginDeleteWithModelAsync(String name,
@@ -683,7 +692,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollOperationDetails, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
@@ -730,8 +740,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> exportWithResponseAsync(String name, String format,
@@ -773,7 +783,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> exportWithResponse(String name, String format, RequestOptions requestOptions) {
@@ -814,7 +825,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginExportAsync(String name, String format,
@@ -864,7 +876,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginExport(String name, String format, RequestOptions requestOptions) {
@@ -913,7 +926,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<PollOperationDetails, ExportedUser> beginExportWithModelAsync(String name, String format,
@@ -963,7 +977,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollOperationDetails, ExportedUser> beginExportWithModel(String name, String format,

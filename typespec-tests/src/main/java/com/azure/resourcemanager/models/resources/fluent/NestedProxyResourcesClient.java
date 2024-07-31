@@ -58,7 +58,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of nested child of Top Level Tracked Resource.
+     * @return the {@link SyncPoller} for polling of resource 'NestedProxyResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginCreateOrReplace(
@@ -76,7 +76,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of nested child of Top Level Tracked Resource.
+     * @return the {@link SyncPoller} for polling of resource 'NestedProxyResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginCreateOrReplace(
@@ -93,7 +93,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource.
+     * @return resource 'NestedProxyResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     NestedProxyResourceInner createOrReplace(String resourceGroupName, String topLevelTrackedResourceName,
@@ -110,7 +110,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource.
+     * @return resource 'NestedProxyResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     NestedProxyResourceInner createOrReplace(String resourceGroupName, String topLevelTrackedResourceName,
@@ -126,7 +126,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of nested child of Top Level Tracked Resource.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(String resourceGroupName,
@@ -143,7 +143,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of nested child of Top Level Tracked Resource.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<NestedProxyResourceInner>, NestedProxyResourceInner> beginUpdate(String resourceGroupName,
@@ -160,7 +160,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
@@ -177,7 +177,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return nested child of Top Level Tracked Resource.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     NestedProxyResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
@@ -192,7 +192,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deletion accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String topLevelTrackedResourceName,
@@ -208,7 +208,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deletion accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String topLevelTrackedResourceName,
@@ -250,7 +250,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<NestedProxyResourceInner> listByTopLevelTrackedResource(String resourceGroupName,
@@ -265,7 +265,7 @@ public interface NestedProxyResourcesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a NestedProxyResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<NestedProxyResourceInner> listByTopLevelTrackedResource(String resourceGroupName,

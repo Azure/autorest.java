@@ -379,7 +379,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return response after completion, with ProvisioningState='Succeeded' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putNonRetry400WithResponseAsync(Product product) {
@@ -394,7 +395,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return response after completion, with ProvisioningState='Succeeded' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putNonRetry400WithResponseAsync(Product product, Context context) {
@@ -416,7 +418,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry400Async(Product product) {
@@ -432,7 +434,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry400Async() {
@@ -452,7 +454,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry400Async(Product product, Context context) {
@@ -470,7 +472,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry400(Product product) {
@@ -482,7 +484,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry400() {
@@ -498,7 +500,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry400(Product product, Context context) {
@@ -512,7 +514,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return response after completion, with ProvisioningState='Succeeded' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putNonRetry201Creating400WithResponseAsync(Product product) {
@@ -527,7 +530,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return response after completion, with ProvisioningState='Succeeded' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putNonRetry201Creating400WithResponseAsync(Product product, Context context) {
@@ -549,7 +553,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400Async(Product product) {
@@ -565,7 +569,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400Async() {
@@ -585,7 +589,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400Async(Product product, Context context) {
@@ -604,7 +608,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400(Product product) {
@@ -616,7 +620,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400() {
@@ -632,7 +636,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400(Product product, Context context) {
@@ -646,7 +650,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return response after completion, with ProvisioningState='Succeeded' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putNonRetry201Creating400InvalidJsonWithResponseAsync(Product product) {
@@ -661,7 +666,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return response after completion, with ProvisioningState='Succeeded' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putNonRetry201Creating400InvalidJsonWithResponseAsync(Product product,
@@ -684,7 +690,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400InvalidJsonAsync(Product product) {
@@ -701,7 +707,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400InvalidJsonAsync() {
@@ -722,7 +728,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutNonRetry201Creating400InvalidJsonAsync(Product product,
@@ -742,7 +748,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400InvalidJson(Product product) {
@@ -754,7 +760,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400InvalidJson() {
@@ -770,7 +776,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of response after completion, with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutNonRetry201Creating400InvalidJson(Product product, Context context) {
@@ -785,7 +791,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetry400Headers, Product>>
@@ -802,7 +809,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetry400Headers, Product>>
@@ -826,7 +834,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400Async(Product product) {
@@ -843,7 +851,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400Async() {
@@ -864,7 +872,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400Async(Product product, Context context) {
@@ -884,7 +892,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400(Product product) {
@@ -897,7 +905,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400() {
@@ -914,7 +922,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400(Product product, Context context) {
@@ -929,7 +937,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putAsyncRelativeRetry400NoCustomHeadersWithResponseAsync(Product product) {
@@ -946,7 +955,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putAsyncRelativeRetry400NoCustomHeadersWithResponseAsync(Product product,
@@ -970,7 +980,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400NoCustomHeadersAsync(Product product) {
@@ -988,7 +998,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400NoCustomHeadersAsync() {
@@ -1010,7 +1020,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetry400NoCustomHeadersAsync(Product product,
@@ -1031,7 +1041,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400NoCustomHeaders(Product product) {
@@ -1044,7 +1054,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400NoCustomHeaders() {
@@ -1061,7 +1071,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetry400NoCustomHeaders(Product product, Context context) {
@@ -1073,7 +1083,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteNonRetry400Headers, Void>> deleteNonRetry400WithResponseAsync() {
@@ -1087,7 +1098,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteNonRetry400Headers, Void>>
@@ -1105,7 +1117,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteNonRetry400Async() {
@@ -1123,7 +1135,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteNonRetry400Async(Context context) {
@@ -1139,7 +1151,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteNonRetry400() {
@@ -1153,7 +1165,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteNonRetry400(Context context) {
@@ -1165,7 +1177,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteNonRetry400NoCustomHeadersWithResponseAsync() {
@@ -1179,7 +1192,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteNonRetry400NoCustomHeadersWithResponseAsync(Context context) {
@@ -1196,7 +1210,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteNonRetry400NoCustomHeadersAsync() {
@@ -1214,7 +1228,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteNonRetry400NoCustomHeadersAsync(Context context) {
@@ -1231,7 +1245,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteNonRetry400NoCustomHeaders() {
@@ -1245,7 +1259,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteNonRetry400NoCustomHeaders(Context context) {
@@ -1257,7 +1271,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDelete202NonRetry400Headers, Void>> delete202NonRetry400WithResponseAsync() {
@@ -1271,7 +1286,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDelete202NonRetry400Headers, Void>>
@@ -1289,7 +1305,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202NonRetry400Async() {
@@ -1307,7 +1323,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202NonRetry400Async(Context context) {
@@ -1323,7 +1339,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202NonRetry400() {
@@ -1337,7 +1353,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202NonRetry400(Context context) {
@@ -1349,7 +1365,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202NonRetry400NoCustomHeadersWithResponseAsync() {
@@ -1363,7 +1380,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202NonRetry400NoCustomHeadersWithResponseAsync(Context context) {
@@ -1380,7 +1398,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202NonRetry400NoCustomHeadersAsync() {
@@ -1399,7 +1417,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202NonRetry400NoCustomHeadersAsync(Context context) {
@@ -1416,7 +1434,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202NonRetry400NoCustomHeaders() {
@@ -1430,7 +1448,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202NonRetry400NoCustomHeaders(Context context) {
@@ -1443,7 +1461,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return for completion only will not return along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetry400Headers, Void>>
@@ -1459,7 +1478,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return for completion only will not return along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetry400Headers, Void>>
@@ -1478,7 +1498,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetry400Async() {
@@ -1497,7 +1517,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetry400Async(Context context) {
@@ -1515,7 +1535,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetry400() {
@@ -1530,7 +1550,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetry400(Context context) {
@@ -1543,7 +1563,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return for completion only will not return along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetry400NoCustomHeadersWithResponseAsync() {
@@ -1558,7 +1578,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return for completion only will not return along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetry400NoCustomHeadersWithResponseAsync(Context context) {
@@ -1576,7 +1596,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetry400NoCustomHeadersAsync() {
@@ -1596,7 +1616,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetry400NoCustomHeadersAsync(Context context) {
@@ -1614,7 +1634,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetry400NoCustomHeaders() {
@@ -1629,7 +1649,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetry400NoCustomHeaders(Context context) {
@@ -1643,7 +1663,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostNonRetry400Headers, Void>> postNonRetry400WithResponseAsync(Product product) {
@@ -1658,7 +1679,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostNonRetry400Headers, Void>> postNonRetry400WithResponseAsync(Product product,
@@ -1681,7 +1703,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400Async(Product product) {
@@ -1697,7 +1719,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400Async() {
@@ -1717,7 +1739,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400Async(Product product, Context context) {
@@ -1735,7 +1757,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400(Product product) {
@@ -1747,7 +1769,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400() {
@@ -1763,7 +1785,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400(Product product, Context context) {
@@ -1777,7 +1799,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postNonRetry400NoCustomHeadersWithResponseAsync(Product product) {
@@ -1792,7 +1815,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postNonRetry400NoCustomHeadersWithResponseAsync(Product product, Context context) {
@@ -1814,7 +1838,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400NoCustomHeadersAsync(Product product) {
@@ -1831,7 +1855,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400NoCustomHeadersAsync() {
@@ -1852,7 +1876,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostNonRetry400NoCustomHeadersAsync(Product product,
@@ -1872,7 +1896,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400NoCustomHeaders(Product product) {
@@ -1884,7 +1908,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400NoCustomHeaders() {
@@ -1900,7 +1924,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostNonRetry400NoCustomHeaders(Product product, Context context) {
@@ -1914,7 +1938,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPost202NonRetry400Headers, Void>>
@@ -1930,7 +1955,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPost202NonRetry400Headers, Void>>
@@ -1953,7 +1979,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400Async(Product product) {
@@ -1969,7 +1995,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400Async() {
@@ -1989,7 +2015,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400Async(Product product, Context context) {
@@ -2008,7 +2034,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400(Product product) {
@@ -2020,7 +2046,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400() {
@@ -2036,7 +2062,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400(Product product, Context context) {
@@ -2050,7 +2076,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NonRetry400NoCustomHeadersWithResponseAsync(Product product) {
@@ -2065,7 +2092,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NonRetry400NoCustomHeadersWithResponseAsync(Product product, Context context) {
@@ -2087,7 +2115,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400NoCustomHeadersAsync(Product product) {
@@ -2104,7 +2132,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400NoCustomHeadersAsync() {
@@ -2125,7 +2153,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NonRetry400NoCustomHeadersAsync(Product product,
@@ -2145,7 +2173,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400NoCustomHeaders(Product product) {
@@ -2157,7 +2185,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400NoCustomHeaders() {
@@ -2173,7 +2201,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NonRetry400NoCustomHeaders(Product product, Context context) {
@@ -2188,7 +2216,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetry400Headers, Void>>
@@ -2205,7 +2234,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetry400Headers, Void>>
@@ -2229,7 +2259,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400Async(Product product) {
@@ -2246,7 +2276,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400Async() {
@@ -2267,7 +2297,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400Async(Product product, Context context) {
@@ -2287,7 +2317,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400(Product product) {
@@ -2300,7 +2330,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400() {
@@ -2317,7 +2347,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400(Product product, Context context) {
@@ -2332,7 +2362,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetry400NoCustomHeadersWithResponseAsync(Product product) {
@@ -2349,7 +2380,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetry400NoCustomHeadersWithResponseAsync(Product product,
@@ -2373,7 +2405,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400NoCustomHeadersAsync(Product product) {
@@ -2391,7 +2423,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400NoCustomHeadersAsync() {
@@ -2413,7 +2445,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetry400NoCustomHeadersAsync(Product product,
@@ -2434,7 +2466,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400NoCustomHeaders(Product product) {
@@ -2447,7 +2479,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400NoCustomHeaders() {
@@ -2464,7 +2496,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetry400NoCustomHeaders(Product product,
@@ -2479,7 +2511,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return for completion only will not return along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putError201NoProvisioningStatePayloadWithResponseAsync(Product product) {
@@ -2495,7 +2527,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return for completion only will not return along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putError201NoProvisioningStatePayloadWithResponseAsync(Product product,
@@ -2518,7 +2550,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutError201NoProvisioningStatePayloadAsync(Product product) {
@@ -2535,7 +2567,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutError201NoProvisioningStatePayloadAsync() {
@@ -2556,7 +2588,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutError201NoProvisioningStatePayloadAsync(Product product,
@@ -2576,7 +2608,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutError201NoProvisioningStatePayload(Product product) {
@@ -2588,7 +2620,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutError201NoProvisioningStatePayload() {
@@ -2604,7 +2636,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of for completion only will not return.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutError201NoProvisioningStatePayload(Product product, Context context) {
@@ -2620,7 +2652,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryNoStatusHeaders, Product>>
@@ -2638,7 +2671,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryNoStatusHeaders, Product>>
@@ -2663,7 +2697,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusAsync(Product product) {
@@ -2682,7 +2716,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusAsync() {
@@ -2705,7 +2739,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusAsync(Product product, Context context) {
@@ -2726,7 +2760,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatus(Product product) {
@@ -2740,7 +2774,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatus() {
@@ -2758,7 +2792,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatus(Product product, Context context) {
@@ -2774,7 +2808,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putAsyncRelativeRetryNoStatusNoCustomHeadersWithResponseAsync(Product product) {
@@ -2792,7 +2827,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putAsyncRelativeRetryNoStatusNoCustomHeadersWithResponseAsync(Product product,
@@ -2817,7 +2853,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusNoCustomHeadersAsync(Product product) {
@@ -2836,7 +2872,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusNoCustomHeadersAsync() {
@@ -2859,7 +2895,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusNoCustomHeadersAsync(Product product,
@@ -2881,7 +2917,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusNoCustomHeaders(Product product) {
@@ -2895,7 +2931,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusNoCustomHeaders() {
@@ -2913,7 +2949,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusNoCustomHeaders(Product product,
@@ -2930,7 +2966,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>>
@@ -2948,7 +2985,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryNoStatusPayloadHeaders, Product>>
@@ -2973,7 +3011,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product) {
@@ -2992,7 +3030,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync() {
@@ -3015,7 +3053,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product,
@@ -3037,7 +3075,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayload(Product product) {
@@ -3051,7 +3089,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayload() {
@@ -3069,7 +3107,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayload(Product product, Context context) {
@@ -3085,7 +3123,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>>
@@ -3104,7 +3143,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putAsyncRelativeRetryNoStatusPayloadNoCustomHeadersWithResponseAsync(Product product,
@@ -3130,7 +3170,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadNoCustomHeadersAsync(Product product) {
@@ -3149,7 +3189,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadNoCustomHeadersAsync() {
@@ -3172,7 +3212,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadNoCustomHeadersAsync(Product product,
@@ -3194,7 +3234,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadNoCustomHeaders(Product product) {
@@ -3208,7 +3248,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadNoCustomHeaders() {
@@ -3226,7 +3266,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryNoStatusPayloadNoCustomHeaders(Product product,
@@ -3239,7 +3279,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return final response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204SucceededWithResponseAsync() {
@@ -3253,7 +3293,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return final response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete204SucceededWithResponseAsync(Context context) {
@@ -3270,7 +3310,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of final response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete204SucceededAsync() {
@@ -3288,7 +3328,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of final response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete204SucceededAsync(Context context) {
@@ -3304,7 +3344,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of final response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete204Succeeded() {
@@ -3318,7 +3358,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of final response.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete204Succeeded(Context context) {
@@ -3331,7 +3371,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders, Void>>
@@ -3347,7 +3388,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders, Void>>
@@ -3366,7 +3408,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusAsync() {
@@ -3385,7 +3427,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusAsync(Context context) {
@@ -3403,7 +3445,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatus() {
@@ -3418,7 +3460,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatus(Context context) {
@@ -3431,7 +3473,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryNoStatusNoCustomHeadersWithResponseAsync() {
@@ -3447,7 +3490,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryNoStatusNoCustomHeadersWithResponseAsync(Context context) {
@@ -3465,7 +3509,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusNoCustomHeadersAsync() {
@@ -3485,7 +3529,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusNoCustomHeadersAsync(Context context) {
@@ -3503,7 +3547,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusNoCustomHeaders() {
@@ -3518,7 +3562,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryNoStatusNoCustomHeaders(Context context) {
@@ -3532,7 +3576,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPost202NoLocationHeaders, Void>>
@@ -3548,7 +3593,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPost202NoLocationHeaders, Void>> post202NoLocationWithResponseAsync(Product product,
@@ -3571,7 +3617,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationAsync(Product product) {
@@ -3587,7 +3633,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationAsync() {
@@ -3607,7 +3653,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationAsync(Product product, Context context) {
@@ -3625,7 +3671,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocation(Product product) {
@@ -3637,7 +3683,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocation() {
@@ -3653,7 +3699,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocation(Product product, Context context) {
@@ -3667,7 +3713,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NoLocationNoCustomHeadersWithResponseAsync(Product product) {
@@ -3682,7 +3729,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202NoLocationNoCustomHeadersWithResponseAsync(Product product, Context context) {
@@ -3704,7 +3752,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationNoCustomHeadersAsync(Product product) {
@@ -3721,7 +3769,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationNoCustomHeadersAsync() {
@@ -3742,7 +3790,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202NoLocationNoCustomHeadersAsync(Product product,
@@ -3762,7 +3810,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocationNoCustomHeaders(Product product) {
@@ -3774,7 +3822,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocationNoCustomHeaders() {
@@ -3790,7 +3838,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202NoLocationNoCustomHeaders(Product product, Context context) {
@@ -3806,7 +3854,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetryNoPayloadHeaders, Void>>
@@ -3824,7 +3873,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetryNoPayloadHeaders, Void>>
@@ -3849,7 +3899,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadAsync(Product product) {
@@ -3868,7 +3918,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadAsync() {
@@ -3891,7 +3941,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadAsync(Product product,
@@ -3913,7 +3963,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload(Product product) {
@@ -3927,7 +3977,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload() {
@@ -3945,7 +3995,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayload(Product product, Context context) {
@@ -3961,7 +4011,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryNoPayloadNoCustomHeadersWithResponseAsync(Product product) {
@@ -3979,7 +4030,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryNoPayloadNoCustomHeadersWithResponseAsync(Product product,
@@ -4004,7 +4056,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -4024,7 +4076,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadNoCustomHeadersAsync() {
@@ -4047,7 +4099,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadNoCustomHeadersAsync(Product product,
@@ -4069,7 +4121,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadNoCustomHeaders(Product product) {
@@ -4083,7 +4135,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadNoCustomHeaders() {
@@ -4101,7 +4153,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryNoPayloadNoCustomHeaders(Product product,
@@ -4116,7 +4168,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Succeeded' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put200InvalidJsonWithResponseAsync(Product product) {
@@ -4131,7 +4184,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Succeeded' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> put200InvalidJsonWithResponseAsync(Product product, Context context) {
@@ -4153,7 +4207,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200InvalidJsonAsync(Product product) {
@@ -4169,7 +4223,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200InvalidJsonAsync() {
@@ -4189,7 +4243,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPut200InvalidJsonAsync(Product product, Context context) {
@@ -4207,7 +4261,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200InvalidJson(Product product) {
@@ -4219,7 +4273,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200InvalidJson() {
@@ -4235,7 +4289,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Succeeded'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPut200InvalidJson(Product product, Context context) {
@@ -4250,7 +4304,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>>
@@ -4267,7 +4322,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryInvalidHeaderHeaders, Product>>
@@ -4291,7 +4347,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product) {
@@ -4309,7 +4365,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderAsync() {
@@ -4331,7 +4387,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, Context context) {
@@ -4351,7 +4407,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeader(Product product) {
@@ -4364,7 +4420,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeader() {
@@ -4381,7 +4437,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeader(Product product, Context context) {
@@ -4396,7 +4452,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putAsyncRelativeRetryInvalidHeaderNoCustomHeadersWithResponseAsync(Product product) {
@@ -4413,7 +4470,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>> putAsyncRelativeRetryInvalidHeaderNoCustomHeadersWithResponseAsync(Product product,
@@ -4438,7 +4496,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderNoCustomHeadersAsync(Product product) {
@@ -4456,7 +4514,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderNoCustomHeadersAsync() {
@@ -4478,7 +4536,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderNoCustomHeadersAsync(Product product,
@@ -4499,7 +4557,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderNoCustomHeaders(Product product) {
@@ -4512,7 +4570,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderNoCustomHeaders() {
@@ -4529,7 +4587,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidHeaderNoCustomHeaders(Product product,
@@ -4546,7 +4604,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>>
@@ -4565,7 +4624,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPutAsyncRelativeRetryInvalidJsonPollingHeaders, Product>>
@@ -4590,7 +4650,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
@@ -4609,7 +4669,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -4632,7 +4692,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product,
@@ -4654,7 +4714,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product) {
@@ -4668,7 +4728,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPolling() {
@@ -4686,7 +4746,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPolling(Product product, Context context) {
@@ -4702,7 +4762,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>>
@@ -4721,7 +4782,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Product>>
@@ -4747,7 +4809,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product>
@@ -4767,7 +4829,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingNoCustomHeadersAsync() {
@@ -4790,7 +4852,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<Product, Product>
@@ -4812,7 +4874,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingNoCustomHeaders(Product product) {
@@ -4826,7 +4888,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingNoCustomHeaders() {
@@ -4844,7 +4906,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<Product, Product> beginPutAsyncRelativeRetryInvalidJsonPollingNoCustomHeaders(Product product,
@@ -4858,7 +4920,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDelete202RetryInvalidHeaderHeaders, Void>>
@@ -4874,7 +4937,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link ResponseBase} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDelete202RetryInvalidHeaderHeaders, Void>>
@@ -4893,7 +4957,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202RetryInvalidHeaderAsync() {
@@ -4912,7 +4976,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202RetryInvalidHeaderAsync(Context context) {
@@ -4930,7 +4994,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202RetryInvalidHeader() {
@@ -4945,7 +5009,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202RetryInvalidHeader(Context context) {
@@ -4958,7 +5022,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202RetryInvalidHeaderNoCustomHeadersWithResponseAsync() {
@@ -4973,7 +5038,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with no entity body along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> delete202RetryInvalidHeaderNoCustomHeadersWithResponseAsync(Context context) {
@@ -4991,7 +5057,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202RetryInvalidHeaderNoCustomHeadersAsync() {
@@ -5011,7 +5077,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDelete202RetryInvalidHeaderNoCustomHeadersAsync(Context context) {
@@ -5029,7 +5095,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202RetryInvalidHeaderNoCustomHeaders() {
@@ -5044,7 +5110,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with no entity body.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete202RetryInvalidHeaderNoCustomHeaders(Context context) {
@@ -5057,7 +5123,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>>
@@ -5073,7 +5140,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetryInvalidHeaderHeaders, Void>>
@@ -5092,7 +5160,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync() {
@@ -5112,7 +5180,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeaderAsync(Context context) {
@@ -5130,7 +5198,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeader() {
@@ -5145,7 +5213,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeader(Context context) {
@@ -5158,7 +5226,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidHeaderNoCustomHeadersWithResponseAsync() {
@@ -5174,7 +5243,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidHeaderNoCustomHeadersWithResponseAsync(Context context) {
@@ -5192,7 +5262,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeaderNoCustomHeadersAsync() {
@@ -5212,7 +5282,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void>
@@ -5231,7 +5301,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeaderNoCustomHeaders() {
@@ -5246,7 +5316,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidHeaderNoCustomHeaders(Context context) {
@@ -5259,7 +5329,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>>
@@ -5275,7 +5346,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders, Void>>
@@ -5294,7 +5366,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -5314,7 +5386,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(Context context) {
@@ -5332,7 +5404,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling() {
@@ -5347,7 +5419,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPolling(Context context) {
@@ -5360,7 +5432,8 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteAsyncRelativeRetryInvalidJsonPollingNoCustomHeadersWithResponseAsync() {
@@ -5376,7 +5449,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
@@ -5396,7 +5470,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingNoCustomHeadersAsync() {
@@ -5416,7 +5490,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void>
@@ -5435,7 +5509,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDeleteAsyncRelativeRetryInvalidJsonPollingNoCustomHeaders() {
@@ -5450,7 +5524,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void>
@@ -5466,7 +5540,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPost202RetryInvalidHeaderHeaders, Void>>
@@ -5483,7 +5558,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPost202RetryInvalidHeaderHeaders, Void>>
@@ -5507,7 +5583,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderAsync(Product product) {
@@ -5524,7 +5600,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderAsync() {
@@ -5545,7 +5621,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderAsync(Product product, Context context) {
@@ -5565,7 +5641,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeader(Product product) {
@@ -5578,7 +5654,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeader() {
@@ -5595,7 +5671,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeader(Product product, Context context) {
@@ -5610,7 +5686,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202RetryInvalidHeaderNoCustomHeadersWithResponseAsync(Product product) {
@@ -5627,7 +5704,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response, with ProvisioningState = 'Creating' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> post202RetryInvalidHeaderNoCustomHeadersWithResponseAsync(Product product,
@@ -5651,7 +5729,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderNoCustomHeadersAsync(Product product) {
@@ -5669,7 +5747,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderNoCustomHeadersAsync() {
@@ -5691,7 +5769,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPost202RetryInvalidHeaderNoCustomHeadersAsync(Product product,
@@ -5712,7 +5790,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeaderNoCustomHeaders(Product product) {
@@ -5725,7 +5803,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeaderNoCustomHeaders() {
@@ -5742,7 +5820,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response, with ProvisioningState = 'Creating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPost202RetryInvalidHeaderNoCustomHeaders(Product product,
@@ -5758,7 +5836,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>>
@@ -5775,7 +5854,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetryInvalidHeaderHeaders, Void>>
@@ -5799,7 +5879,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product) {
@@ -5817,7 +5897,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderAsync() {
@@ -5839,7 +5919,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product,
@@ -5860,7 +5940,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader(Product product) {
@@ -5873,7 +5953,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader() {
@@ -5890,7 +5970,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeader(Product product,
@@ -5906,7 +5986,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidHeaderNoCustomHeadersWithResponseAsync(Product product) {
@@ -5923,7 +6004,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postAsyncRelativeRetryInvalidHeaderNoCustomHeadersWithResponseAsync(Product product,
@@ -5948,7 +6030,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -5967,7 +6049,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderNoCustomHeadersAsync() {
@@ -5989,7 +6071,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -6010,7 +6092,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderNoCustomHeaders(Product product) {
@@ -6023,7 +6105,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderNoCustomHeaders() {
@@ -6040,7 +6122,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidHeaderNoCustomHeaders(Product product,
@@ -6057,7 +6139,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>>
@@ -6076,7 +6159,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link ResponseBase} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<LrosaDsPostAsyncRelativeRetryInvalidJsonPollingHeaders, Void>>
@@ -6101,7 +6185,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product) {
@@ -6120,7 +6204,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingAsync() {
@@ -6143,7 +6227,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product,
@@ -6165,7 +6249,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product) {
@@ -6179,7 +6263,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling() {
@@ -6197,7 +6281,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPolling(Product product,
@@ -6214,7 +6298,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
@@ -6233,7 +6318,8 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Updating' along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>>
@@ -6259,7 +6345,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -6279,7 +6365,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingNoCustomHeadersAsync() {
@@ -6302,7 +6388,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData>
@@ -6324,7 +6410,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData>
@@ -6339,7 +6425,7 @@ public final class LrosaDs {
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginPostAsyncRelativeRetryInvalidJsonPollingNoCustomHeaders() {
@@ -6357,7 +6443,7 @@ public final class LrosaDs {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of initial response with ProvisioningState='Updating'.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData>

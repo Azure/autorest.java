@@ -19,8 +19,7 @@ public interface Fishes {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.cadl.armstreamstyleserialization.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     Response<Fish> getModelWithResponse(Context context);
 
@@ -29,7 +28,7 @@ public interface Fishes {
      * 
      * @throws com.cadl.armstreamstyleserialization.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @return the request has succeeded.
      */
     Fish getModel();
 
@@ -42,8 +41,7 @@ public interface Fishes {
      * @throws com.cadl.armstreamstyleserialization.models.ErrorMinException thrown if the request is rejected by
      * server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     Response<Fish> putModelWithResponse(FishInner fish, Context context);
 
@@ -55,7 +53,7 @@ public interface Fishes {
      * @throws com.cadl.armstreamstyleserialization.models.ErrorMinException thrown if the request is rejected by
      * server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @return the request has succeeded.
      */
     Fish putModel(FishInner fish);
 }

@@ -108,7 +108,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters) {
@@ -123,7 +124,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPTrue>> createAPTrueWithResponseAsync(PetAPTrue createParameters, Context context) {
@@ -148,7 +150,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPTrue> createAPTrueAsync(PetAPTrue createParameters) {
@@ -163,7 +165,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPTrue> createAPTrueAsync(PetAPTrue createParameters, Context context) {
@@ -179,7 +181,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<PetAPTrue> createAPTrueWithResponse(PetAPTrue createParameters, Context context) {
@@ -193,7 +195,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a Pet which contains more properties than what is defined.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPTrue createAPTrue(PetAPTrue createParameters) {
@@ -207,7 +209,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a CatAPTrue which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters) {
@@ -222,7 +225,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a CatAPTrue which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CatAPTrue>> createCatAPTrueWithResponseAsync(CatAPTrue createParameters, Context context) {
@@ -247,7 +251,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a CatAPTrue which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CatAPTrue> createCatAPTrueAsync(CatAPTrue createParameters) {
@@ -262,7 +266,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a CatAPTrue which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CatAPTrue> createCatAPTrueAsync(CatAPTrue createParameters, Context context) {
@@ -278,7 +282,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return a CatAPTrue which contains more properties than what is defined along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<CatAPTrue> createCatAPTrueWithResponse(CatAPTrue createParameters, Context context) {
@@ -292,7 +296,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a CatAPTrue which contains more properties than what is defined.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CatAPTrue createCatAPTrue(CatAPTrue createParameters) {
@@ -306,7 +310,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters) {
@@ -321,7 +326,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPObject>> createAPObjectWithResponseAsync(PetAPObject createParameters, Context context) {
@@ -346,7 +352,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPObject> createAPObjectAsync(PetAPObject createParameters) {
@@ -361,7 +367,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPObject> createAPObjectAsync(PetAPObject createParameters, Context context) {
@@ -377,7 +383,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<PetAPObject> createAPObjectWithResponse(PetAPObject createParameters, Context context) {
@@ -391,7 +397,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a Pet which contains more properties than what is defined.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPObject createAPObject(PetAPObject createParameters) {
@@ -405,7 +411,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters) {
@@ -420,7 +427,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPString>> createAPStringWithResponseAsync(PetAPString createParameters, Context context) {
@@ -445,7 +453,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPString> createAPStringAsync(PetAPString createParameters) {
@@ -460,7 +468,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPString> createAPStringAsync(PetAPString createParameters, Context context) {
@@ -476,7 +484,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<PetAPString> createAPStringWithResponse(PetAPString createParameters, Context context) {
@@ -490,7 +498,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a Pet which contains more properties than what is defined.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPString createAPString(PetAPString createParameters) {
@@ -504,7 +512,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPInProperties>> createAPInPropertiesWithResponseAsync(PetAPInProperties createParameters) {
@@ -519,7 +528,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPInProperties>> createAPInPropertiesWithResponseAsync(PetAPInProperties createParameters,
@@ -545,7 +555,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPInProperties> createAPInPropertiesAsync(PetAPInProperties createParameters) {
@@ -560,7 +570,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPInProperties> createAPInPropertiesAsync(PetAPInProperties createParameters, Context context) {
@@ -576,7 +586,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<PetAPInProperties> createAPInPropertiesWithResponse(PetAPInProperties createParameters,
@@ -591,7 +601,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a Pet which contains more properties than what is defined.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInProperties createAPInProperties(PetAPInProperties createParameters) {
@@ -605,7 +615,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPInPropertiesWithAPString>>
@@ -622,7 +633,8 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<PetAPInPropertiesWithAPString>> createAPInPropertiesWithAPStringWithResponseAsync(
@@ -648,7 +660,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPInPropertiesWithAPString>
@@ -665,7 +677,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return a Pet which contains more properties than what is defined on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PetAPInPropertiesWithAPString>
@@ -682,7 +694,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return a Pet which contains more properties than what is defined along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<PetAPInPropertiesWithAPString>
@@ -697,7 +709,7 @@ public final class Pets {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return a Pet which contains more properties than what is defined.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PetAPInPropertiesWithAPString

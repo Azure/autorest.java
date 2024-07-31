@@ -473,7 +473,7 @@ public final class ContainerRegistriesImpl {
      * 
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return successful response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkDockerV2SupportWithResponseAsync() {
@@ -487,7 +487,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return successful response along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> checkDockerV2SupportWithResponseAsync(Context context) {
@@ -500,7 +500,7 @@ public final class ContainerRegistriesImpl {
      * 
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return successful response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> checkDockerV2SupportAsync() {
@@ -514,7 +514,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return successful response on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> checkDockerV2SupportAsync(Context context) {
@@ -528,7 +528,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return successful response along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> checkDockerV2SupportWithResponse(Context context) {
@@ -670,7 +670,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
@@ -691,7 +691,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
@@ -713,7 +713,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the manifest is updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> createManifestAsync(String name, String reference, Flux<ByteBuffer> payload, long contentLength,
@@ -734,7 +734,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the manifest is updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> createManifestAsync(String name, String reference, Flux<ByteBuffer> payload, long contentLength,
@@ -754,7 +754,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> createManifestNoCustomHeadersWithResponseAsync(String name, String reference,
@@ -775,7 +775,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> createManifestNoCustomHeadersWithResponseAsync(String name, String reference,
@@ -796,7 +796,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
@@ -817,7 +817,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
@@ -838,7 +838,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the manifest is updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> createManifestAsync(String name, String reference, BinaryData payload, long contentLength,
@@ -859,7 +859,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the manifest is updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> createManifestAsync(String name, String reference, BinaryData payload, long contentLength,
@@ -879,7 +879,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> createManifestNoCustomHeadersWithResponseAsync(String name, String reference,
@@ -900,7 +900,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest is updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> createManifestNoCustomHeadersWithResponseAsync(String name, String reference,
@@ -922,7 +922,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase}.
+     * @return the manifest is updated along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<ContainerRegistriesCreateManifestHeaders, Void> createManifestWithResponse(String name,
@@ -962,7 +962,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the manifest is updated along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> createManifestNoCustomHeadersWithResponse(String name, String reference, BinaryData payload,
@@ -980,7 +980,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest has been deleted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteManifestWithResponseAsync(String name, String reference) {
@@ -996,7 +996,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest has been deleted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteManifestWithResponseAsync(String name, String reference, Context context) {
@@ -1012,7 +1012,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the manifest has been deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteManifestAsync(String name, String reference) {
@@ -1028,7 +1028,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the manifest has been deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteManifestAsync(String name, String reference, Context context) {
@@ -1044,7 +1044,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the manifest has been deleted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteManifestWithResponse(String name, String reference, Context context) {
@@ -1076,7 +1076,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<String>> getRepositoriesSinglePageAsync(String last, Integer n, Context context) {
@@ -1096,7 +1096,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedFlux}.
+     * @return returns a list of repositories as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<String> getRepositoriesAsync(String last, Integer n, Context context) {
@@ -1114,7 +1114,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<String>> getRepositoriesNoCustomHeadersSinglePageAsync(String last, Integer n,
@@ -1136,7 +1136,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedFlux}.
+     * @return returns a list of repositories as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<String> getRepositoriesNoCustomHeadersAsync(String last, Integer n, Context context) {
@@ -1154,7 +1154,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
+     * @return returns a list of repositories along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<String> getRepositoriesSinglePage(String last, Integer n, Context context) {
@@ -1175,7 +1175,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedIterable}.
+     * @return returns a list of repositories as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<String> getRepositories(String last, Integer n, Context context) {
@@ -1193,7 +1193,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
+     * @return returns a list of repositories along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<String> getRepositoriesNoCustomHeadersSinglePage(String last, Integer n, Context context) {
@@ -1214,7 +1214,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedIterable}.
+     * @return returns a list of repositories as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<String> getRepositoriesNoCustomHeaders(String last, Integer n, Context context) {
@@ -1318,7 +1318,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return deleted repository along with {@link Response} on successful completion of {@link Mono}.
+     * @return the repository is deleted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DeleteRepositoryResult>> deleteRepositoryWithResponseAsync(String name) {
@@ -1333,7 +1333,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return deleted repository along with {@link Response} on successful completion of {@link Mono}.
+     * @return the repository is deleted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DeleteRepositoryResult>> deleteRepositoryWithResponseAsync(String name, Context context) {
@@ -1348,7 +1348,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return deleted repository on successful completion of {@link Mono}.
+     * @return the repository is deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DeleteRepositoryResult> deleteRepositoryAsync(String name) {
@@ -1363,7 +1363,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return deleted repository on successful completion of {@link Mono}.
+     * @return the repository is deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DeleteRepositoryResult> deleteRepositoryAsync(String name, Context context) {
@@ -1378,7 +1378,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return deleted repository along with {@link Response}.
+     * @return the repository is deleted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DeleteRepositoryResult> deleteRepositoryWithResponse(String name, Context context) {
@@ -1393,7 +1393,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return deleted repository.
+     * @return the repository is deleted.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DeleteRepositoryResult deleteRepository(String name) {
@@ -1408,7 +1408,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of this repository along with {@link Response} on successful completion of {@link Mono}.
+     * @return the attributes are updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ContainerRepositoryProperties>> updatePropertiesWithResponseAsync(String name,
@@ -1425,7 +1425,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of this repository along with {@link Response} on successful completion of {@link Mono}.
+     * @return the attributes are updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ContainerRepositoryProperties>> updatePropertiesWithResponseAsync(String name,
@@ -1443,7 +1443,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of this repository on successful completion of {@link Mono}.
+     * @return the attributes are updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ContainerRepositoryProperties> updatePropertiesAsync(String name, RepositoryWriteableProperties value) {
@@ -1459,7 +1459,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of this repository on successful completion of {@link Mono}.
+     * @return the attributes are updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ContainerRepositoryProperties> updatePropertiesAsync(String name, RepositoryWriteableProperties value,
@@ -1476,7 +1476,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of this repository along with {@link Response}.
+     * @return the attributes are updated along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ContainerRepositoryProperties> updatePropertiesWithResponse(String name,
@@ -1494,7 +1494,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return properties of this repository.
+     * @return the attributes are updated.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ContainerRepositoryProperties updateProperties(String name, RepositoryWriteableProperties value) {
@@ -1514,7 +1514,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return tag details of a repository along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<TagAttributesBase>> getTagsSinglePageAsync(String name, String last, Integer n,
@@ -1539,7 +1539,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedFlux}.
+     * @return tag details of a repository as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<TagAttributesBase> getTagsAsync(String name, String last, Integer n, String orderBy, String digest,
@@ -1561,7 +1561,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return tag details of a repository along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<TagAttributesBase>> getTagsNoCustomHeadersSinglePageAsync(String name, String last,
@@ -1587,7 +1587,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedFlux}.
+     * @return tag details of a repository as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<TagAttributesBase> getTagsNoCustomHeadersAsync(String name, String last, Integer n, String orderBy,
@@ -1609,7 +1609,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
+     * @return tag details of a repository along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<TagAttributesBase> getTagsSinglePage(String name, String last, Integer n, String orderBy,
@@ -1634,7 +1634,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedIterable}.
+     * @return tag details of a repository as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TagAttributesBase> getTags(String name, String last, Integer n, String orderBy, String digest,
@@ -1656,7 +1656,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
+     * @return tag details of a repository along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<TagAttributesBase> getTagsNoCustomHeadersSinglePage(String name, String last, Integer n,
@@ -1681,7 +1681,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedIterable}.
+     * @return tag details of a repository as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TagAttributesBase> getTagsNoCustomHeaders(String name, String last, Integer n, String orderBy,
@@ -1800,7 +1800,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag attributes along with {@link Response} on successful completion of {@link Mono}.
+     * @return the attributes are updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactTagPropertiesInternal>> updateTagAttributesWithResponseAsync(String name,
@@ -1818,7 +1818,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag attributes along with {@link Response} on successful completion of {@link Mono}.
+     * @return the attributes are updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactTagPropertiesInternal>> updateTagAttributesWithResponseAsync(String name,
@@ -1837,7 +1837,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag attributes on successful completion of {@link Mono}.
+     * @return the attributes are updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArtifactTagPropertiesInternal> updateTagAttributesAsync(String name, String reference,
@@ -1856,7 +1856,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag attributes on successful completion of {@link Mono}.
+     * @return the attributes are updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArtifactTagPropertiesInternal> updateTagAttributesAsync(String name, String reference,
@@ -1875,7 +1875,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag attributes along with {@link Response}.
+     * @return the attributes are updated along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ArtifactTagPropertiesInternal> updateTagAttributesWithResponse(String name, String reference,
@@ -1894,7 +1894,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return tag attributes.
+     * @return the attributes are updated.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArtifactTagPropertiesInternal updateTagAttributes(String name, String reference,
@@ -1910,7 +1910,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the tag is deleted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteTagWithResponseAsync(String name, String reference) {
@@ -1926,7 +1926,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the tag is deleted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteTagWithResponseAsync(String name, String reference, Context context) {
@@ -1942,7 +1942,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the tag is deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteTagAsync(String name, String reference) {
@@ -1958,7 +1958,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return the tag is deleted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> deleteTagAsync(String name, String reference, Context context) {
@@ -1974,7 +1974,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return the tag is deleted along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteTagWithResponse(String name, String reference, Context context) {
@@ -2009,7 +2009,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of manifests along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<ManifestAttributesBase>> getManifestsSinglePageAsync(String name, String last, Integer n,
@@ -2033,7 +2033,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedFlux}.
+     * @return returns a list of manifests as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<ManifestAttributesBase> getManifestsAsync(String name, String last, Integer n, String orderBy,
@@ -2054,7 +2054,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of manifests along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<ManifestAttributesBase>> getManifestsNoCustomHeadersSinglePageAsync(String name,
@@ -2079,7 +2079,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedFlux}.
+     * @return returns a list of manifests as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<ManifestAttributesBase> getManifestsNoCustomHeadersAsync(String name, String last, Integer n,
@@ -2100,7 +2100,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
+     * @return returns a list of manifests along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<ManifestAttributesBase> getManifestsSinglePage(String name, String last, Integer n,
@@ -2124,7 +2124,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedIterable}.
+     * @return returns a list of manifests as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ManifestAttributesBase> getManifests(String name, String last, Integer n, String orderBy,
@@ -2145,7 +2145,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
+     * @return returns a list of manifests along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<ManifestAttributesBase> getManifestsNoCustomHeadersSinglePage(String name, String last,
@@ -2169,7 +2169,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedIterable}.
+     * @return returns a list of manifests as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ManifestAttributesBase> getManifestsNoCustomHeaders(String name, String last, Integer n,
@@ -2289,7 +2289,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes details along with {@link Response} on successful completion of {@link Mono}.
+     * @return the attributes are updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactManifestPropertiesInternal>> updateManifestPropertiesWithResponseAsync(String name,
@@ -2307,7 +2307,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes details along with {@link Response} on successful completion of {@link Mono}.
+     * @return the attributes are updated along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArtifactManifestPropertiesInternal>> updateManifestPropertiesWithResponseAsync(String name,
@@ -2326,7 +2326,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes details on successful completion of {@link Mono}.
+     * @return the attributes are updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArtifactManifestPropertiesInternal> updateManifestPropertiesAsync(String name, String digest,
@@ -2345,7 +2345,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes details on successful completion of {@link Mono}.
+     * @return the attributes are updated on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ArtifactManifestPropertiesInternal> updateManifestPropertiesAsync(String name, String digest,
@@ -2364,7 +2364,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes details along with {@link Response}.
+     * @return the attributes are updated along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ArtifactManifestPropertiesInternal> updateManifestPropertiesWithResponse(String name, String digest,
@@ -2383,7 +2383,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes details.
+     * @return the attributes are updated.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ArtifactManifestPropertiesInternal updateManifestProperties(String name, String digest,
@@ -2399,7 +2399,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<String>> getRepositoriesNextSinglePageAsync(String nextLink, Context context) {
@@ -2417,7 +2417,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<String>> getRepositoriesNextNoCustomHeadersSinglePageAsync(String nextLink,
@@ -2436,7 +2436,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
+     * @return returns a list of repositories along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<String> getRepositoriesNextSinglePage(String nextLink, Context context) {
@@ -2455,7 +2455,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
+     * @return returns a list of repositories along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<String> getRepositoriesNextNoCustomHeadersSinglePage(String nextLink, Context context) {
@@ -2474,7 +2474,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return tag details of a repository along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<TagAttributesBase>> getTagsNextSinglePageAsync(String nextLink, Context context) {
@@ -2492,7 +2492,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return tag details of a repository along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<TagAttributesBase>> getTagsNextNoCustomHeadersSinglePageAsync(String nextLink,
@@ -2511,7 +2511,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
+     * @return tag details of a repository along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<TagAttributesBase> getTagsNextSinglePage(String nextLink, Context context) {
@@ -2530,7 +2530,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
+     * @return tag details of a repository along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<TagAttributesBase> getTagsNextNoCustomHeadersSinglePage(String nextLink, Context context) {
@@ -2548,7 +2548,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of manifests along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<ManifestAttributesBase>> getManifestsNextSinglePageAsync(String nextLink,
@@ -2567,7 +2567,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a list of manifests along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<ManifestAttributesBase>> getManifestsNextNoCustomHeadersSinglePageAsync(String nextLink,
@@ -2586,7 +2586,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
+     * @return returns a list of manifests along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<ManifestAttributesBase> getManifestsNextSinglePage(String nextLink, Context context) {
@@ -2605,7 +2605,7 @@ public final class ContainerRegistriesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
+     * @return returns a list of manifests along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<ManifestAttributesBase> getManifestsNextNoCustomHeadersSinglePage(String nextLink,

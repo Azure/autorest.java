@@ -278,8 +278,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'TopLevelTrackedResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrReplaceWithResponseAsync(String resourceGroupName,
@@ -323,8 +323,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'TopLevelTrackedResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrReplaceWithResponseAsync(String resourceGroupName,
@@ -365,8 +365,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of resource 'TopLevelTrackedResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner>
@@ -389,8 +388,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of resource 'TopLevelTrackedResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner>
@@ -413,8 +411,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of resource 'TopLevelTrackedResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginCreateOrReplace(
@@ -432,8 +429,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of resource 'TopLevelTrackedResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginCreateOrReplace(
@@ -452,8 +448,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'TopLevelTrackedResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelTrackedResourceInner> createOrReplaceAsync(String resourceGroupName,
@@ -472,8 +467,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'TopLevelTrackedResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelTrackedResourceInner> createOrReplaceAsync(String resourceGroupName,
@@ -491,7 +485,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return resource 'TopLevelTrackedResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelTrackedResourceInner createOrReplace(String resourceGroupName, String topLevelTrackedResourceName,
@@ -509,7 +503,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return resource 'TopLevelTrackedResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelTrackedResourceInner createOrReplace(String resourceGroupName, String topLevelTrackedResourceName,
@@ -526,8 +520,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
@@ -571,8 +565,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> updateWithResponseAsync(String resourceGroupName,
@@ -613,8 +607,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdateAsync(
@@ -636,8 +629,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdateAsync(
@@ -660,8 +652,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdate(
@@ -679,8 +670,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelTrackedResourceInner>, TopLevelTrackedResourceInner> beginUpdate(
@@ -699,8 +689,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelTrackedResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
@@ -719,8 +708,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelTrackedResourceInner> updateAsync(String resourceGroupName, String topLevelTrackedResourceName,
@@ -738,7 +726,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelTrackedResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
@@ -756,7 +744,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelTrackedResourceInner update(String resourceGroupName, String topLevelTrackedResourceName,
@@ -772,7 +760,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return resource deletion accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceGroupName,
@@ -809,7 +797,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return resource deletion accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceGroupName,
@@ -844,7 +832,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource deletion accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceGroupName,
@@ -863,7 +851,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource deletion accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceGroupName,
@@ -883,7 +871,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deletion accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName,
@@ -900,7 +888,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deletion accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String topLevelTrackedResourceName,
@@ -916,7 +904,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return resource deletion accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceGroupName, String topLevelTrackedResourceName) {
@@ -933,7 +921,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return resource deletion accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceGroupName, String topLevelTrackedResourceName, Context context) {
@@ -977,8 +965,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>>
@@ -1012,8 +1000,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>>
@@ -1046,7 +1034,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelTrackedResourceInner> listByResourceGroupAsync(String resourceGroupName) {
@@ -1062,7 +1050,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelTrackedResourceInner> listByResourceGroupAsync(String resourceGroupName,
@@ -1078,8 +1066,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with
-     * {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelTrackedResourceInner> listByResourceGroup(String resourceGroupName) {
@@ -1094,8 +1081,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with
-     * {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelTrackedResourceInner> listByResourceGroup(String resourceGroupName, Context context) {
@@ -1107,8 +1093,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * 
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>> listSinglePageAsync() {
@@ -1136,8 +1122,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>> listSinglePageAsync(Context context) {
@@ -1163,7 +1149,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * 
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelTrackedResourceInner> listAsync() {
@@ -1178,7 +1164,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelTrackedResourceInner> listAsync(Context context) {
@@ -1191,8 +1177,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * 
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with
-     * {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelTrackedResourceInner> list() {
@@ -1206,8 +1191,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation as paginated response with
-     * {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelTrackedResourceInner> list(Context context) {
@@ -1221,8 +1205,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>> listByResourceGroupNextSinglePageAsync(String nextLink) {
@@ -1250,8 +1234,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>> listByResourceGroupNextSinglePageAsync(String nextLink,
@@ -1277,8 +1261,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>> listBySubscriptionNextSinglePageAsync(String nextLink) {
@@ -1306,8 +1290,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelTrackedResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelTrackedResourceInner>> listBySubscriptionNextSinglePageAsync(String nextLink,

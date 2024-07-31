@@ -92,7 +92,8 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded and a new resource has been created as a result along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -146,7 +147,8 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded and a new resource has been created as a result along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -232,7 +234,7 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -264,7 +266,7 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -313,7 +315,7 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -345,7 +347,7 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -364,7 +366,8 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return there is no content to send for this request, but the headers may be useful along with {@link Response}
+     * on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -400,7 +403,7 @@ public final class BasicAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return details about a user along with {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -421,7 +424,8 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details about a user on successful completion of {@link Mono}.
+     * @return the request has succeeded and a new resource has been created as a result on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -450,7 +454,8 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details about a user on successful completion of {@link Mono}.
+     * @return the request has succeeded and a new resource has been created as a result on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -502,7 +507,7 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -565,7 +570,7 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -595,7 +600,7 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -628,7 +633,7 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -663,7 +668,7 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return paged collection of User items as paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -693,7 +698,7 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return the request has succeeded as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -727,7 +732,8 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return there is no content to send for this request, but the headers may be useful on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -750,7 +756,7 @@ public final class BasicAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return details about a user on successful completion of {@link Mono}.
+     * @return the request has succeeded on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

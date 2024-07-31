@@ -77,8 +77,7 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> getModelWithResponseAsync() {
@@ -98,8 +97,7 @@ public final class FishesClientImpl implements FishesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> getModelWithResponseAsync(Context context) {
@@ -117,8 +115,7 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
-     * completion of {@link Mono}.
+     * @return the request has succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<FishInner> getModelAsync() {
@@ -132,8 +129,7 @@ public final class FishesClientImpl implements FishesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<FishInner> getModelWithResponse(Context context) {
@@ -145,7 +141,7 @@ public final class FishesClientImpl implements FishesClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @return the request has succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FishInner getModel() {
@@ -159,8 +155,7 @@ public final class FishesClientImpl implements FishesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> putModelWithResponseAsync(FishInner fish) {
@@ -186,8 +181,7 @@ public final class FishesClientImpl implements FishesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<FishInner>> putModelWithResponseAsync(FishInner fish, Context context) {
@@ -212,8 +206,7 @@ public final class FishesClientImpl implements FishesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
-     * completion of {@link Mono}.
+     * @return the request has succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<FishInner> putModelAsync(FishInner fish) {
@@ -228,8 +221,7 @@ public final class FishesClientImpl implements FishesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<FishInner> putModelWithResponse(FishInner fish, Context context) {
@@ -243,7 +235,7 @@ public final class FishesClientImpl implements FishesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorMinException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
+     * @return the request has succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FishInner putModel(FishInner fish) {

@@ -229,8 +229,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'ManagedIdentityTrackedResource' update operation succeeded along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ManagedIdentityTrackedResourceInner>> createWithSystemAssignedWithResponseAsync(
@@ -275,8 +275,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'ManagedIdentityTrackedResource' update operation succeeded along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ManagedIdentityTrackedResourceInner>> createWithSystemAssignedWithResponseAsync(
@@ -319,8 +319,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'ManagedIdentityTrackedResource' update operation succeeded on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ManagedIdentityTrackedResourceInner> createWithSystemAssignedAsync(String resourceGroupName,
@@ -339,8 +339,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response}.
+     * @return resource 'ManagedIdentityTrackedResource' update operation succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ManagedIdentityTrackedResourceInner> createWithSystemAssignedWithResponse(String resourceGroupName,
@@ -358,7 +357,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return resource 'ManagedIdentityTrackedResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ManagedIdentityTrackedResourceInner createWithSystemAssigned(String resourceGroupName,
@@ -376,8 +375,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ManagedIdentityTrackedResourceInner>>
@@ -422,8 +421,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ManagedIdentityTrackedResourceInner>>
@@ -467,8 +466,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ManagedIdentityTrackedResourceInner> updateWithUserAssignedAndSystemAssignedAsync(
@@ -488,8 +486,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response}.
+     * @return azure operation completed successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ManagedIdentityTrackedResourceInner> updateWithUserAssignedAndSystemAssignedWithResponse(
@@ -508,7 +505,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ManagedIdentityTrackedResourceInner updateWithUserAssignedAndSystemAssigned(String resourceGroupName,

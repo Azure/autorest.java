@@ -176,7 +176,7 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(String id, BinaryData sendRequest,
@@ -206,7 +206,7 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(String id, BinaryData sendRequest, RequestOptions requestOptions) {
@@ -246,7 +246,7 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendLongWithResponseAsync(String id, BinaryData sendLongRequest,
@@ -287,7 +287,7 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendLongWithResponse(String id, BinaryData sendLongRequest, RequestOptions requestOptions) {
@@ -311,7 +311,7 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return the request has succeeded along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponseAsync(RequestOptions requestOptions) {
@@ -334,7 +334,7 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the request has succeeded along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
@@ -371,8 +371,8 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> generateWithResponseAsync(RequestOptions requestOptions) {
@@ -410,7 +410,8 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response}.
+     * @return the request has been accepted for processing, but processing has not yet completed along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> generateWithResponse(RequestOptions requestOptions) {
@@ -448,7 +449,8 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginGenerateAsync(RequestOptions requestOptions) {
@@ -493,7 +495,8 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginGenerate(RequestOptions requestOptions) {
@@ -538,7 +541,8 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of provides status details for long running operations.
+     * @return the {@link PollerFlux} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<PollOperationDetails, Result> beginGenerateWithModelAsync(RequestOptions requestOptions) {
@@ -583,7 +587,8 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
+     * @return the {@link SyncPoller} for polling of the request has been accepted for processing, but processing has
+     * not yet completed.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollOperationDetails, Result> beginGenerateWithModel(RequestOptions requestOptions) {

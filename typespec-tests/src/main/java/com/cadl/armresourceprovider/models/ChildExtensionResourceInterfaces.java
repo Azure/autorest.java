@@ -73,7 +73,7 @@ public interface ChildExtensionResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<ChildExtensionResource> listByTopLevelArmResource(String resourceUri, String topLevelArmResourceName);
 
@@ -86,7 +86,7 @@ public interface ChildExtensionResourceInterfaces {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildExtensionResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     PagedIterable<ChildExtensionResource> listByTopLevelArmResource(String resourceUri, String topLevelArmResourceName,
         Context context);

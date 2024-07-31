@@ -288,8 +288,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'TopLevelArmResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
@@ -332,8 +332,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return resource 'TopLevelArmResource' update operation succeeded along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
@@ -374,8 +374,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of resource 'TopLevelArmResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginCreateOrUpdateAsync(
@@ -397,8 +396,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link PollerFlux} for polling of resource 'TopLevelArmResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginCreateOrUpdateAsync(
@@ -419,8 +417,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of resource 'TopLevelArmResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginCreateOrUpdate(
@@ -438,8 +435,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of concrete tracked resource types can be created by aliasing this
-     * type using a specific property type.
+     * @return the {@link SyncPoller} for polling of resource 'TopLevelArmResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<TopLevelArmResourceInner>, TopLevelArmResourceInner> beginCreateOrUpdate(
@@ -457,8 +453,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'TopLevelArmResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelArmResourceInner> createOrUpdateAsync(String resourceGroupName, String topLevelArmResourceName,
@@ -477,8 +472,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return resource 'TopLevelArmResource' update operation succeeded on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelArmResourceInner> createOrUpdateAsync(String resourceGroupName, String topLevelArmResourceName,
@@ -496,7 +490,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return resource 'TopLevelArmResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelArmResourceInner createOrUpdate(String resourceGroupName, String topLevelArmResourceName,
@@ -514,7 +508,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return resource 'TopLevelArmResource' update operation succeeded.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelArmResourceInner createOrUpdate(String resourceGroupName, String topLevelArmResourceName,
@@ -531,8 +525,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<TopLevelArmResourceInner>> updateWithResponseAsync(String resourceGroupName,
@@ -574,8 +568,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<TopLevelArmResourceInner>> updateWithResponseAsync(String resourceGroupName,
@@ -616,8 +610,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
-     * successful completion of {@link Mono}.
+     * @return azure operation completed successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<TopLevelArmResourceInner> updateAsync(String resourceGroupName, String topLevelArmResourceName,
@@ -636,8 +629,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link Response}.
+     * @return azure operation completed successfully along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<TopLevelArmResourceInner> updateWithResponse(String resourceGroupName,
@@ -654,7 +646,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
+     * @return azure operation completed successfully.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public TopLevelArmResourceInner update(String resourceGroupName, String topLevelArmResourceName,
@@ -670,7 +662,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return resource deleted successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceGroupName,
@@ -707,7 +699,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return resource deleted successfully along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> deleteWithResponseAsync(String resourceGroupName,
@@ -742,7 +734,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceGroupName,
@@ -761,7 +753,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<Void>, Void> beginDeleteAsync(String resourceGroupName,
@@ -781,7 +773,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String topLevelArmResourceName) {
@@ -797,7 +789,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource deleted successfully.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<Void>, Void> beginDelete(String resourceGroupName, String topLevelArmResourceName,
@@ -813,7 +805,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return resource deleted successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceGroupName, String topLevelArmResourceName) {
@@ -830,7 +822,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return resource deleted successfully on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Void> deleteAsync(String resourceGroupName, String topLevelArmResourceName, Context context) {
@@ -874,8 +866,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listByResourceGroupSinglePageAsync(String resourceGroupName) {
@@ -908,8 +900,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listByResourceGroupSinglePageAsync(String resourceGroupName,
@@ -942,7 +934,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelArmResourceInner> listByResourceGroupAsync(String resourceGroupName) {
@@ -958,7 +950,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelArmResourceInner> listByResourceGroupAsync(String resourceGroupName, Context context) {
@@ -973,7 +965,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelArmResourceInner> listByResourceGroup(String resourceGroupName) {
@@ -988,7 +980,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelArmResourceInner> listByResourceGroup(String resourceGroupName, Context context) {
@@ -1000,8 +992,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * 
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listSinglePageAsync() {
@@ -1029,8 +1021,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listSinglePageAsync(Context context) {
@@ -1056,7 +1048,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * 
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelArmResourceInner> listAsync() {
@@ -1071,7 +1063,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedFlux}.
+     * @return azure operation completed successfully as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     private PagedFlux<TopLevelArmResourceInner> listAsync(Context context) {
@@ -1084,7 +1076,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * 
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelArmResourceInner> list() {
@@ -1098,7 +1090,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation as paginated response with {@link PagedIterable}.
+     * @return azure operation completed successfully as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<TopLevelArmResourceInner> list(Context context) {
@@ -1113,7 +1105,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return resource operation accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> actionWithResponseAsync(String resourceGroupName,
@@ -1150,7 +1142,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     * @return resource operation accepted along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> actionWithResponseAsync(String resourceGroupName,
@@ -1185,7 +1177,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource operation accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ResultInner>, ResultInner> beginActionAsync(String resourceGroupName,
@@ -1204,7 +1196,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of resource operation accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<ResultInner>, ResultInner> beginActionAsync(String resourceGroupName,
@@ -1224,7 +1216,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource operation accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ResultInner>, ResultInner> beginAction(String resourceGroupName,
@@ -1241,7 +1233,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link SyncPoller} for polling of resource operation accepted.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<ResultInner>, ResultInner> beginAction(String resourceGroupName,
@@ -1257,7 +1249,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return resource operation accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ResultInner> actionAsync(String resourceGroupName, String topLevelArmResourceName) {
@@ -1274,7 +1266,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return resource operation accepted on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<ResultInner> actionAsync(String resourceGroupName, String topLevelArmResourceName, Context context) {
@@ -1290,7 +1282,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return resource operation accepted.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResultInner action(String resourceGroupName, String topLevelArmResourceName) {
@@ -1306,7 +1298,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return resource operation accepted.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResultInner action(String resourceGroupName, String topLevelArmResourceName, Context context) {
@@ -1320,8 +1312,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listByResourceGroupNextSinglePageAsync(String nextLink) {
@@ -1349,8 +1341,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listByResourceGroupNextSinglePageAsync(String nextLink,
@@ -1376,8 +1368,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listBySubscriptionNextSinglePageAsync(String nextLink) {
@@ -1405,8 +1397,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a TopLevelArmResource list operation along with {@link PagedResponse} on successful
-     * completion of {@link Mono}.
+     * @return azure operation completed successfully along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<TopLevelArmResourceInner>> listBySubscriptionNextSinglePageAsync(String nextLink,

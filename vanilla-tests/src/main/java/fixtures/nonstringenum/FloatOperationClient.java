@@ -38,7 +38,7 @@ public final class FloatOperationClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
+     * @return received correct format along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -53,7 +53,7 @@ public final class FloatOperationClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct format.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -66,7 +66,7 @@ public final class FloatOperationClient {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
+     * @return received correct format.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

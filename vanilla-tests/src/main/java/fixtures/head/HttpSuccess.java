@@ -72,7 +72,8 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head200WithResponseAsync() {
@@ -86,7 +87,8 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head200WithResponseAsync(Context context) {
@@ -102,7 +104,7 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head200Async() {
@@ -116,7 +118,7 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head200Async(Context context) {
@@ -130,7 +132,7 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response}.
+     * @return successfully returns the true boolean value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> head200WithResponse(Context context) {
@@ -142,7 +144,7 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists.
+     * @return successfully returns the true boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head200() {
@@ -154,7 +156,8 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head204WithResponseAsync() {
@@ -168,7 +171,8 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head204WithResponseAsync(Context context) {
@@ -184,7 +188,7 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head204Async() {
@@ -198,7 +202,7 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head204Async(Context context) {
@@ -212,7 +216,7 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response}.
+     * @return successfully returns the true boolean value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> head204WithResponse(Context context) {
@@ -224,7 +228,7 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists.
+     * @return successfully returns the true boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head204() {
@@ -236,7 +240,8 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync() {
@@ -250,7 +255,8 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response} on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> head404WithResponseAsync(Context context) {
@@ -266,7 +272,7 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head404Async() {
@@ -280,7 +286,7 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists on successful completion of {@link Mono}.
+     * @return successfully returns the true boolean value on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Boolean> head404Async(Context context) {
@@ -294,7 +300,7 @@ public final class HttpSuccess {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists along with {@link Response}.
+     * @return successfully returns the true boolean value along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> head404WithResponse(Context context) {
@@ -306,7 +312,7 @@ public final class HttpSuccess {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return whether resource exists.
+     * @return successfully returns the true boolean value.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public boolean head404() {

@@ -1233,7 +1233,8 @@ public final class Paths {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return successfully Received 'begin!*'();:&#064;&amp;=+$,end' url encoded string value along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync() {
@@ -1249,7 +1250,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return successfully Received 'begin!*'();:&#064;&amp;=+$,end' url encoded string value along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlNonEncodedWithResponseAsync(Context context) {
@@ -1269,7 +1271,8 @@ public final class Paths {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return successfully Received 'begin!*'();:&#064;&amp;=+$,end' url encoded string value on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlNonEncodedAsync() {
@@ -1285,7 +1288,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
+     * @return successfully Received 'begin!*'();:&#064;&amp;=+$,end' url encoded string value on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlNonEncodedAsync(Context context) {
@@ -1301,7 +1305,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
+     * @return successfully Received 'begin!*'();:&#064;&amp;=+$,end' url encoded string value along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlNonEncodedWithResponse(Context context) {

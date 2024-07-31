@@ -381,7 +381,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync() {
@@ -402,7 +402,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesSinglePageAsync(Context context) {
@@ -421,7 +421,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getNoItemNamePagesAsync() {
@@ -436,7 +436,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getNoItemNamePagesAsync(Context context) {
@@ -449,7 +449,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNoItemNamePagesSinglePage() {
@@ -463,7 +463,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNoItemNamePagesSinglePage(Context context) {
@@ -475,7 +475,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getNoItemNamePages() {
@@ -489,7 +489,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getNoItemNamePages(Context context) {
@@ -501,7 +501,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesSinglePageAsync() {
@@ -523,7 +523,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesSinglePageAsync(Context context) {
@@ -542,7 +542,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getEmptyNextLinkNamePagesAsync() {
@@ -557,7 +557,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getEmptyNextLinkNamePagesAsync(Context context) {
@@ -570,7 +570,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getEmptyNextLinkNamePagesSinglePage() {
@@ -584,7 +584,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getEmptyNextLinkNamePagesSinglePage(Context context) {
@@ -596,7 +596,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getEmptyNextLinkNamePages() {
@@ -610,7 +610,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getEmptyNextLinkNamePages(Context context) {
@@ -622,7 +622,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync() {
@@ -643,7 +643,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNullNextLinkNamePagesSinglePageAsync(Context context) {
@@ -662,7 +662,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getNullNextLinkNamePagesAsync() {
@@ -676,7 +676,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return a list of products as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getNullNextLinkNamePagesAsync(Context context) {
@@ -688,7 +688,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNullNextLinkNamePagesSinglePage() {
@@ -702,7 +702,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNullNextLinkNamePagesSinglePage(Context context) {
@@ -714,7 +714,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getNullNextLinkNamePages() {
@@ -728,7 +728,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return a list of products as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getNullNextLinkNamePages(Context context) {
@@ -740,7 +740,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync() {
@@ -761,7 +762,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesSinglePageAsync(Context context) {
@@ -780,7 +782,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesAsync() {
@@ -795,7 +797,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesAsync(Context context) {
@@ -808,7 +810,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesSinglePage() {
@@ -822,7 +824,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesSinglePage(Context context) {
@@ -834,7 +836,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePages() {
@@ -848,7 +850,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePages(Context context) {
@@ -862,7 +864,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsSinglePageAsync(String name) {
@@ -888,7 +891,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsSinglePageAsync(String name, Context context) {
@@ -911,7 +915,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesWithBodyParamsAsync(String name) {
@@ -924,7 +928,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesWithBodyParamsAsync() {
@@ -941,7 +945,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesWithBodyParamsAsync(String name, Context context) {
@@ -956,7 +960,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesWithBodyParamsSinglePage(String name) {
@@ -971,7 +975,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesWithBodyParamsSinglePage(String name, Context context) {
@@ -985,7 +989,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePagesWithBodyParams(String name) {
@@ -997,7 +1001,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePagesWithBodyParams() {
@@ -1013,7 +1017,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePagesWithBodyParams(String name, Context context) {
@@ -1026,7 +1030,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> firstResponseEmptySinglePageAsync() {
@@ -1048,7 +1053,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> firstResponseEmptySinglePageAsync(Context context) {
@@ -1068,7 +1074,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 as
+     * paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> firstResponseEmptyAsync() {
@@ -1084,7 +1091,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 as
+     * paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> firstResponseEmptyAsync(Context context) {
@@ -1098,7 +1106,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> firstResponseEmptySinglePage() {
@@ -1113,7 +1122,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> firstResponseEmptySinglePage(Context context) {
@@ -1126,7 +1136,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 as
+     * paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> firstResponseEmpty() {
@@ -1141,7 +1152,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 as
+     * paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> firstResponseEmpty(Context context) {
@@ -1156,7 +1168,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(String clientRequestId,
@@ -1195,7 +1208,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesSinglePageAsync(String clientRequestId,
@@ -1231,7 +1245,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesAsync(String clientRequestId,
@@ -1245,7 +1259,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesAsync() {
@@ -1264,7 +1278,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesAsync(String clientRequestId,
@@ -1283,7 +1297,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesSinglePage(String clientRequestId,
@@ -1300,7 +1314,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesSinglePage(String clientRequestId,
@@ -1316,7 +1330,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePages(String clientRequestId,
@@ -1329,7 +1343,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePages() {
@@ -1347,7 +1361,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePages(String clientRequestId,
@@ -1363,7 +1377,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getWithQueryParamsSinglePageAsync(int requiredQueryParameter) {
@@ -1389,7 +1404,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getWithQueryParamsSinglePageAsync(int requiredQueryParameter, Context context) {
@@ -1412,7 +1428,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getWithQueryParamsAsync(int requiredQueryParameter) {
@@ -1429,7 +1445,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getWithQueryParamsAsync(int requiredQueryParameter, Context context) {
@@ -1445,7 +1461,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getWithQueryParamsSinglePage(int requiredQueryParameter) {
@@ -1461,7 +1477,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getWithQueryParamsSinglePage(int requiredQueryParameter, Context context) {
@@ -1476,7 +1492,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getWithQueryParams(int requiredQueryParameter) {
@@ -1492,7 +1508,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getWithQueryParams(int requiredQueryParameter, Context context) {
@@ -1507,7 +1523,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> duplicateParamsSinglePageAsync(String filter) {
@@ -1530,7 +1547,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> duplicateParamsSinglePageAsync(String filter, Context context) {
@@ -1552,7 +1570,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> duplicateParamsAsync(String filter) {
@@ -1566,7 +1584,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> duplicateParamsAsync() {
@@ -1584,7 +1602,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> duplicateParamsAsync(String filter, Context context) {
@@ -1600,7 +1618,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> duplicateParamsSinglePage(String filter) {
@@ -1616,7 +1634,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> duplicateParamsSinglePage(String filter, Context context) {
@@ -1631,7 +1649,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> duplicateParams(String filter) {
@@ -1644,7 +1662,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> duplicateParams() {
@@ -1661,7 +1679,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> duplicateParams(String filter, Context context) {
@@ -1673,7 +1691,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> pageWithMaxPageSizeSinglePageAsync() {
@@ -1696,7 +1715,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> pageWithMaxPageSizeSinglePageAsync(Context context) {
@@ -1716,7 +1736,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> pageWithMaxPageSizeAsync() {
@@ -1731,7 +1751,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> pageWithMaxPageSizeAsync(Context context) {
@@ -1744,7 +1764,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> pageWithMaxPageSizeSinglePage() {
@@ -1758,7 +1778,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> pageWithMaxPageSizeSinglePage(Context context) {
@@ -1770,7 +1790,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> pageWithMaxPageSize() {
@@ -1784,7 +1804,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> pageWithMaxPageSize(Context context) {
@@ -1796,7 +1816,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextOperationWithQueryParamsSinglePageAsync() {
@@ -1820,7 +1841,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextOperationWithQueryParamsSinglePageAsync(Context context) {
@@ -1840,7 +1862,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> nextOperationWithQueryParamsSinglePage() {
@@ -1854,7 +1876,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> nextOperationWithQueryParamsSinglePage(Context context) {
@@ -1869,7 +1891,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId,
@@ -1908,7 +1931,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesSinglePageAsync(String clientRequestId,
@@ -1945,7 +1969,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getOdataMultiplePagesAsync(String clientRequestId,
@@ -1961,7 +1985,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getOdataMultiplePagesAsync() {
@@ -1982,7 +2006,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getOdataMultiplePagesAsync(String clientRequestId,
@@ -2001,7 +2025,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getOdataMultiplePagesSinglePage(String clientRequestId,
@@ -2018,7 +2042,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getOdataMultiplePagesSinglePage(String clientRequestId,
@@ -2035,7 +2059,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getOdataMultiplePages(String clientRequestId,
@@ -2048,7 +2072,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getOdataMultiplePages() {
@@ -2066,7 +2090,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getOdataMultiplePages(String clientRequestId,
@@ -2083,7 +2107,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(
@@ -2118,7 +2143,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetSinglePageAsync(
@@ -2153,7 +2179,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesWithOffsetAsync(
@@ -2171,7 +2197,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesWithOffsetAsync(
@@ -2192,7 +2218,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesWithOffsetAsync(
@@ -2213,7 +2239,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesWithOffsetSinglePage(
@@ -2231,7 +2257,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesWithOffsetSinglePage(
@@ -2249,7 +2275,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesWithOffset(
@@ -2265,7 +2291,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product>
@@ -2284,7 +2310,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesWithOffset(
@@ -2300,7 +2326,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync() {
@@ -2323,7 +2350,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstSinglePageAsync(Context context) {
@@ -2343,7 +2371,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesRetryFirstAsync() {
@@ -2359,7 +2387,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesRetryFirstAsync(Context context) {
@@ -2373,7 +2401,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetryFirstSinglePage() {
@@ -2388,7 +2416,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetryFirstSinglePage(Context context) {
@@ -2401,7 +2429,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesRetryFirst() {
@@ -2416,7 +2444,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesRetryFirst(Context context) {
@@ -2429,7 +2457,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync() {
@@ -2452,7 +2481,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondSinglePageAsync(Context context) {
@@ -2472,7 +2502,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesRetrySecondAsync() {
@@ -2488,7 +2518,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesRetrySecondAsync(Context context) {
@@ -2502,7 +2532,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetrySecondSinglePage() {
@@ -2517,7 +2547,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetrySecondSinglePage(Context context) {
@@ -2530,7 +2560,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesRetrySecond() {
@@ -2545,7 +2575,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesRetrySecond(Context context) {
@@ -2557,7 +2587,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync() {
@@ -2578,7 +2609,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureSinglePageAsync(Context context) {
@@ -2597,7 +2629,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesFailureAsync() {
@@ -2612,7 +2644,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getSinglePagesFailureAsync(Context context) {
@@ -2625,7 +2657,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesFailureSinglePage() {
@@ -2639,7 +2671,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesFailureSinglePage(Context context) {
@@ -2651,7 +2683,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePagesFailure() {
@@ -2665,7 +2697,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getSinglePagesFailure(Context context) {
@@ -2677,7 +2709,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync() {
@@ -2698,7 +2731,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureSinglePageAsync(Context context) {
@@ -2717,7 +2751,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFailureAsync() {
@@ -2732,7 +2766,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFailureAsync(Context context) {
@@ -2745,7 +2779,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureSinglePage() {
@@ -2759,7 +2793,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureSinglePage(Context context) {
@@ -2771,7 +2805,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesFailure() {
@@ -2785,7 +2819,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesFailure(Context context) {
@@ -2797,7 +2831,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync() {
@@ -2819,7 +2854,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriSinglePageAsync(Context context) {
@@ -2838,7 +2874,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFailureUriAsync() {
@@ -2853,7 +2889,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFailureUriAsync(Context context) {
@@ -2866,7 +2902,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureUriSinglePage() {
@@ -2880,7 +2916,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureUriSinglePage(Context context) {
@@ -2892,7 +2928,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesFailureUri() {
@@ -2906,7 +2942,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesFailureUri(Context context) {
@@ -2921,7 +2957,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(String apiVersion,
@@ -2953,7 +2990,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentNextLinkSinglePageAsync(String apiVersion,
@@ -2982,7 +3020,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFragmentNextLinkAsync(String apiVersion, String tenant) {
@@ -2999,7 +3037,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesFragmentNextLinkAsync(String apiVersion, String tenant, Context context) {
@@ -3015,7 +3053,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFragmentNextLinkSinglePage(String apiVersion, String tenant) {
@@ -3031,7 +3069,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFragmentNextLinkSinglePage(String apiVersion, String tenant,
@@ -3047,7 +3085,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesFragmentNextLink(String apiVersion, String tenant) {
@@ -3063,7 +3101,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesFragmentNextLink(String apiVersion, String tenant, Context context) {
@@ -3077,7 +3115,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>>
@@ -3110,7 +3149,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFragmentWithGroupingNextLinkSinglePageAsync(
@@ -3141,7 +3181,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product>
@@ -3158,7 +3198,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product>
@@ -3175,7 +3215,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product>
@@ -3191,7 +3231,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFragmentWithGroupingNextLinkSinglePage(
@@ -3206,7 +3246,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product>
@@ -3222,7 +3262,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return paging response with a fragment nextLink as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product>
@@ -3238,7 +3278,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return operation is in progress along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId,
@@ -3277,7 +3317,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return operation is in progress along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLROSinglePageAsync(String clientRequestId,
@@ -3313,7 +3353,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return operation is in progress as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesLROAsync(String clientRequestId,
@@ -3329,7 +3369,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return operation is in progress as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesLROAsync() {
@@ -3350,7 +3390,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return operation is in progress as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getMultiplePagesLROAsync(String clientRequestId,
@@ -3369,7 +3409,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return operation is in progress along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesLROSinglePage(String clientRequestId,
@@ -3386,7 +3426,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return operation is in progress along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesLROSinglePage(String clientRequestId,
@@ -3402,7 +3442,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return operation is in progress as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesLRO(String clientRequestId,
@@ -3415,7 +3455,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return operation is in progress as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesLRO() {
@@ -3433,7 +3473,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return operation is in progress as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getMultiplePagesLRO(String clientRequestId,
@@ -3448,7 +3488,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> appendApiVersionSinglePageAsync() {
@@ -3471,7 +3512,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> appendApiVersionSinglePageAsync(Context context) {
@@ -3491,7 +3533,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> appendApiVersionAsync() {
@@ -3507,7 +3549,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> appendApiVersionAsync(Context context) {
@@ -3521,7 +3563,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> appendApiVersionSinglePage() {
@@ -3536,7 +3578,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> appendApiVersionSinglePage(Context context) {
@@ -3549,7 +3591,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> appendApiVersion() {
@@ -3564,7 +3606,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> appendApiVersion(Context context) {
@@ -3577,7 +3619,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> replaceApiVersionSinglePageAsync() {
@@ -3600,7 +3643,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> replaceApiVersionSinglePageAsync(Context context) {
@@ -3620,7 +3664,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> replaceApiVersionAsync() {
@@ -3636,7 +3680,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> replaceApiVersionAsync(Context context) {
@@ -3650,7 +3694,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> replaceApiVersionSinglePage() {
@@ -3665,7 +3709,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> replaceApiVersionSinglePage(Context context) {
@@ -3678,7 +3722,7 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> replaceApiVersion() {
@@ -3693,7 +3737,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return initial response with ProvisioningState='Canceled' as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> replaceApiVersion(Context context) {
@@ -3709,7 +3753,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(String apiVersion, String tenant, String nextLink) {
@@ -3744,7 +3789,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentSinglePageAsync(String apiVersion, String tenant, String nextLink,
@@ -3777,7 +3823,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> nextFragmentSinglePage(String apiVersion, String tenant, String nextLink) {
@@ -3794,7 +3840,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> nextFragmentSinglePage(String apiVersion, String tenant, String nextLink,
@@ -3810,7 +3856,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(String nextLink,
@@ -3847,7 +3894,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> nextFragmentWithGroupingSinglePageAsync(String nextLink,
@@ -3881,7 +3929,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> nextFragmentWithGroupingSinglePage(String nextLink,
@@ -3898,7 +3946,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return paging response with a fragment nextLink along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> nextFragmentWithGroupingSinglePage(String nextLink,
@@ -3911,7 +3959,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync() {
@@ -3934,7 +3983,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameSinglePageAsync(Context context) {
@@ -3953,7 +4003,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' as paginated response with
+     * {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagingModelWithItemNameWithXMSClientNameAsync() {
@@ -3968,7 +4019,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedFlux}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' as paginated response with
+     * {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<Product> getPagingModelWithItemNameWithXMSClientNameAsync(Context context) {
@@ -3981,7 +4033,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameSinglePage() {
@@ -3995,7 +4048,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameSinglePage(Context context) {
@@ -4007,7 +4061,8 @@ public final class PagingsImpl {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' as paginated response with
+     * {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getPagingModelWithItemNameWithXMSClientName() {
@@ -4021,7 +4076,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' as paginated response with
+     * {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<Product> getPagingModelWithItemNameWithXMSClientName(Context context) {
@@ -4035,7 +4091,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink) {
@@ -4061,7 +4117,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getNoItemNamePagesNextSinglePageAsync(String nextLink, Context context) {
@@ -4085,7 +4141,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNoItemNamePagesNextSinglePage(String nextLink) {
@@ -4100,7 +4156,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getNoItemNamePagesNextSinglePage(String nextLink, Context context) {
@@ -4114,7 +4170,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesNextSinglePageAsync(String nextLink) {
@@ -4141,7 +4197,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return a list of products along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getEmptyNextLinkNamePagesNextSinglePageAsync(String nextLink, Context context) {
@@ -4165,7 +4221,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getEmptyNextLinkNamePagesNextSinglePage(String nextLink) {
@@ -4180,7 +4236,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return a list of products along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getEmptyNextLinkNamePagesNextSinglePage(String nextLink, Context context) {
@@ -4194,7 +4250,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesNextSinglePageAsync(String nextLink) {
@@ -4220,7 +4277,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesNextSinglePageAsync(String nextLink, Context context) {
@@ -4244,7 +4302,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesNextSinglePage(String nextLink) {
@@ -4259,7 +4317,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesNextSinglePage(String nextLink, Context context) {
@@ -4274,7 +4332,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsNextSinglePageAsync(String nextLink, String name) {
@@ -4304,7 +4363,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesWithBodyParamsNextSinglePageAsync(String nextLink, String name,
@@ -4332,7 +4392,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesWithBodyParamsNextSinglePage(String nextLink, String name) {
@@ -4348,7 +4408,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesWithBodyParamsNextSinglePage(String nextLink, String name,
@@ -4363,7 +4423,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> firstResponseEmptyNextSinglePageAsync(String nextLink) {
@@ -4389,7 +4450,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> firstResponseEmptyNextSinglePageAsync(String nextLink, Context context) {
@@ -4413,7 +4475,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> firstResponseEmptyNextSinglePage(String nextLink) {
@@ -4428,7 +4491,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return first call returns an empty items list, second (and final) call returns an items list of length 1 along
+     * with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> firstResponseEmptyNextSinglePage(String nextLink, Context context) {
@@ -4444,7 +4508,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesNextSinglePageAsync(String nextLink, String clientRequestId,
@@ -4487,7 +4552,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesNextSinglePageAsync(String nextLink, String clientRequestId,
@@ -4529,7 +4595,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesNextSinglePage(String nextLink, String clientRequestId,
@@ -4547,7 +4613,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesNextSinglePage(String nextLink, String clientRequestId,
@@ -4563,7 +4629,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> duplicateParamsNextSinglePageAsync(String nextLink) {
@@ -4589,7 +4656,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> duplicateParamsNextSinglePageAsync(String nextLink, Context context) {
@@ -4613,7 +4681,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> duplicateParamsNextSinglePage(String nextLink) {
@@ -4628,7 +4696,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> duplicateParamsNextSinglePage(String nextLink, Context context) {
@@ -4642,7 +4710,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> pageWithMaxPageSizeNextSinglePageAsync(String nextLink) {
@@ -4668,7 +4737,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> pageWithMaxPageSizeNextSinglePageAsync(String nextLink, Context context) {
@@ -4692,7 +4762,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> pageWithMaxPageSizeNextSinglePage(String nextLink) {
@@ -4707,7 +4777,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> pageWithMaxPageSizeNextSinglePage(String nextLink, Context context) {
@@ -4723,7 +4793,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesNextSinglePageAsync(String nextLink,
@@ -4766,7 +4837,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getOdataMultiplePagesNextSinglePageAsync(String nextLink,
@@ -4809,7 +4881,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getOdataMultiplePagesNextSinglePage(String nextLink, String clientRequestId,
@@ -4828,7 +4900,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getOdataMultiplePagesNextSinglePage(String nextLink, String clientRequestId,
@@ -4846,7 +4918,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink,
@@ -4884,7 +4957,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesWithOffsetNextSinglePageAsync(String nextLink,
@@ -4922,7 +4996,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesWithOffsetNextSinglePage(String nextLink,
@@ -4941,7 +5015,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesWithOffsetNextSinglePage(String nextLink,
@@ -4958,7 +5032,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink) {
@@ -4985,7 +5060,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetryFirstNextSinglePageAsync(String nextLink,
@@ -5010,7 +5086,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetryFirstNextSinglePage(String nextLink) {
@@ -5025,7 +5101,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetryFirstNextSinglePage(String nextLink, Context context) {
@@ -5039,7 +5115,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink) {
@@ -5066,7 +5143,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesRetrySecondNextSinglePageAsync(String nextLink,
@@ -5091,7 +5169,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetrySecondNextSinglePage(String nextLink) {
@@ -5106,7 +5184,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesRetrySecondNextSinglePage(String nextLink, Context context) {
@@ -5120,7 +5198,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureNextSinglePageAsync(String nextLink) {
@@ -5146,7 +5225,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getSinglePagesFailureNextSinglePageAsync(String nextLink, Context context) {
@@ -5170,7 +5250,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesFailureNextSinglePage(String nextLink) {
@@ -5185,7 +5265,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getSinglePagesFailureNextSinglePage(String nextLink, Context context) {
@@ -5199,7 +5279,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureNextSinglePageAsync(String nextLink) {
@@ -5226,7 +5307,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureNextSinglePageAsync(String nextLink, Context context) {
@@ -5250,7 +5332,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureNextSinglePage(String nextLink) {
@@ -5265,7 +5347,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureNextSinglePage(String nextLink, Context context) {
@@ -5279,7 +5361,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink) {
@@ -5306,7 +5389,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesFailureUriNextSinglePageAsync(String nextLink,
@@ -5331,7 +5415,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureUriNextSinglePage(String nextLink) {
@@ -5346,7 +5430,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesFailureUriNextSinglePage(String nextLink, Context context) {
@@ -5362,7 +5446,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return operation is in progress along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink, String clientRequestId,
@@ -5405,7 +5489,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return operation is in progress along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getMultiplePagesLRONextSinglePageAsync(String nextLink, String clientRequestId,
@@ -5447,7 +5531,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return operation is in progress along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesLRONextSinglePage(String nextLink, String clientRequestId,
@@ -5466,7 +5550,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return operation is in progress along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getMultiplePagesLRONextSinglePage(String nextLink, String clientRequestId,
@@ -5482,7 +5566,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> appendApiVersionNextSinglePageAsync(String nextLink) {
@@ -5508,7 +5593,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> appendApiVersionNextSinglePageAsync(String nextLink, Context context) {
@@ -5532,7 +5618,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> appendApiVersionNextSinglePage(String nextLink) {
@@ -5547,7 +5633,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> appendApiVersionNextSinglePage(String nextLink, Context context) {
@@ -5561,7 +5647,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> replaceApiVersionNextSinglePageAsync(String nextLink) {
@@ -5587,7 +5674,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> replaceApiVersionNextSinglePageAsync(String nextLink, Context context) {
@@ -5611,7 +5699,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> replaceApiVersionNextSinglePage(String nextLink) {
@@ -5626,7 +5714,7 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return initial response with ProvisioningState='Canceled' along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> replaceApiVersionNextSinglePage(String nextLink, Context context) {
@@ -5640,7 +5728,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>>
@@ -5668,7 +5757,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Product>> getPagingModelWithItemNameWithXMSClientNameNextSinglePageAsync(String nextLink,
@@ -5693,7 +5783,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameNextSinglePage(String nextLink) {
@@ -5708,7 +5799,8 @@ public final class PagingsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link PagedResponse}.
+     * @return returns a paging model whose item names are called 'indexes', not 'value' along with
+     * {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Product> getPagingModelWithItemNameWithXMSClientNameNextSinglePage(String nextLink,
