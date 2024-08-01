@@ -42,6 +42,10 @@ export function isKnownContentType(contentTypes: string[]): boolean {
     });
 }
 
+export function sdkHttpOperationIsJsonMergePatch(op: SdkHttpOperation): boolean {
+  return sdkHttpOperationIsContentType(op, "application/merge-patch+json");
+}
+
 export function sdkHttpOperationIsMultipart(op: SdkHttpOperation): boolean {
   return sdkHttpOperationIsContentType(op, "multipart/form-data");
 }
