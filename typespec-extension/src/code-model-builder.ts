@@ -531,8 +531,28 @@ export class CodeModelBuilder {
     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
     for (const client of clients) {
-      const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
+      let clientName = client.name;
+      let javaNamespace = getJavaNamespace(this.namespace);
+      const clientFullName = client.name;
+      const clientNameSegments = clientFullName.split(".");
+      if (clientNameSegments.length > 1) {
+        clientName = clientNameSegments.at(-1)!;
+        javaNamespace = getJavaNamespace(
+          this.namespace + "." + clientNameSegments.slice(0, -1).join(".").toLowerCase(),
+        );
+      }
+
+      const codeModelClient = new CodeModelClient(clientName, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
+
+        language: {
+          default: {
+            namespace: this.namespace,
+          },
+          java: {
+            namespace: javaNamespace,
+          },
+        },
 
         // at present, use global security definition
         security: this.codeModel.security,
