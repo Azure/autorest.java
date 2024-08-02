@@ -262,12 +262,14 @@ public class ClientModelUtil {
     public static String getServiceClientBuilderPackageName(ServiceClient serviceClient) {
         JavaSettings settings = JavaSettings.getInstance();
         String builderPackage = serviceClient.getPackage();
-        if (serviceClient.getBuilderPackageName() != null) {
-            builderPackage = serviceClient.getBuilderPackageName();
-        } else if (settings.isFluent()) {
+        if (settings.isFluent()) {
             builderPackage = settings.getPackage(settings.getImplementationSubpackage());
         } else if (settings.isGenerateSyncAsyncClients() || settings.isDataPlaneClient()) {
-            builderPackage = settings.getPackage();
+            if (serviceClient.getBuilderPackageName() != null) {
+                builderPackage = serviceClient.getBuilderPackageName();
+            } else {
+                builderPackage = settings.getPackage();
+            }
         }
         return builderPackage;
     }

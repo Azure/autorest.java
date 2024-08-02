@@ -2383,8 +2383,8 @@ export class CodeModelBuilder {
     const baseJavaNamespace = this.emitterContext.options.namespace;
     if (!namespace) {
       return undefined;
-    } else if ((baseJavaNamespace && namespace === tspNamespace) || namespace.startsWith(tspNamespace + ".")) {
-      return baseJavaNamespace + namespace.slice(tspNamespace.length);
+    } else if (baseJavaNamespace && (namespace === tspNamespace || namespace.startsWith(tspNamespace + "."))) {
+      return baseJavaNamespace + namespace.slice(tspNamespace.length).toLowerCase();
     } else {
       return "com." + namespace.toLowerCase();
     }

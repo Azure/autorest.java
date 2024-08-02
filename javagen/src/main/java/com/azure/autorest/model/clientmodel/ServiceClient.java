@@ -189,6 +189,9 @@ public class ServiceClient {
 
     /**
      * Gets the package name for builder and wrapper classes.
+     * <p>
+     * It can be {@code null}, if no specific value provided.
+     * In such case, usually the package name from "namespace" option is used.
      *
      * @return the package name for builder and wrapper classes.
      */
