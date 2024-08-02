@@ -170,14 +170,7 @@ import {
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
-import {
-  getJavaNamespace,
-  getNamespace,
-  logWarning,
-  pascalCase,
-  stringArrayContainsIgnoreCase,
-  trace,
-} from "./utils.js";
+import { getNamespace, logWarning, pascalCase, stringArrayContainsIgnoreCase, trace } from "./utils.js";
 import { pathToFileURL } from "url";
 const { isEqual } = pkg;
 
@@ -222,7 +215,7 @@ export class CodeModelBuilder {
 
     this.namespace = getNamespaceFullName(serviceNamespace) || "Azure.Client";
     // java namespace
-    const javaNamespace = getJavaNamespace(this.namespace);
+    const javaNamespace = this.getJavaNamespace(this.namespace);
 
     const namespace1 = this.namespace;
     this.typeNameOptions = {
@@ -532,12 +525,12 @@ export class CodeModelBuilder {
 
     for (const client of clients) {
       let clientName = client.name;
-      let javaNamespace = getJavaNamespace(this.namespace);
+      let javaNamespace = this.getJavaNamespace(this.namespace);
       const clientFullName = client.name;
       const clientNameSegments = clientFullName.split(".");
       if (clientNameSegments.length > 1) {
         clientName = clientNameSegments.at(-1)!;
-        javaNamespace = getJavaNamespace(this.namespace + "." + clientNameSegments.slice(0, -1).join("."));
+        javaNamespace = this.getJavaNamespace(this.namespace + "." + clientNameSegments.slice(0, -1).join("."));
       }
 
       const codeModelClient = new CodeModelClient(clientName, this.getDoc(client.type), {
@@ -925,7 +918,7 @@ export class CodeModelBuilder {
           language: {
             java: {
               name: "OperationLocationPollingStrategy",
-              namespace: getJavaNamespace(this.namespace) + ".implementation",
+              namespace: this.getJavaNamespace(this.namespace) + ".implementation",
             },
           },
         });
@@ -1491,7 +1484,7 @@ export class CodeModelBuilder {
                   namespace: namespace,
                 },
                 java: {
-                  namespace: getJavaNamespace(namespace),
+                  namespace: this.getJavaNamespace(namespace),
                 },
               },
             }),
@@ -1893,7 +1886,7 @@ export class CodeModelBuilder {
           namespace: namespace,
         },
         java: {
-          namespace: getJavaNamespace(namespace),
+          namespace: this.getJavaNamespace(namespace),
         },
       },
     });
@@ -1989,7 +1982,7 @@ export class CodeModelBuilder {
           namespace: namespace,
         },
         java: {
-          namespace: getJavaNamespace(namespace),
+          namespace: this.getJavaNamespace(namespace),
         },
       },
     });
@@ -2114,7 +2107,7 @@ export class CodeModelBuilder {
     if (prop.kind === "property" && prop.multipartOptions) {
       // TODO: handle MultipartOptions.isMulti
       if (prop.multipartOptions.isFilePart) {
-        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
+        schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop);
       }
     }
 
@@ -2155,7 +2148,7 @@ export class CodeModelBuilder {
             namespace: namespace,
           },
           java: {
-            namespace: getJavaNamespace(namespace),
+            namespace: this.getJavaNamespace(namespace),
           },
         },
       });
@@ -2233,14 +2226,14 @@ export class CodeModelBuilder {
     }
   }
 
-  private processMultipartFormDataFilePropertySchemaFromSdkType(
-    property: SdkBodyModelPropertyType,
-    namespace: string,
-  ): Schema {
+  private processMultipartFormDataFilePropertySchemaFromSdkType(property: SdkBodyModelPropertyType): Schema {
     const processSchemaFunc = (type: SdkType) => this.processSchemaFromSdkType(type, "");
     if (property.type.kind === "bytes" || property.type.kind === "model") {
+      const namespace =
+        property.type.kind === "model" ? (getNamespace(property.type.__raw) ?? this.namespace) : this.namespace;
       return getFileDetailsSchema(
         property,
+        getNamespace(property.type.__raw) ?? this.namespace,
         namespace,
         this.codeModel.schemas,
         this.binarySchema,
@@ -2251,12 +2244,17 @@ export class CodeModelBuilder {
       property.type.kind === "array" &&
       (property.type.valueType.kind === "bytes" || property.type.valueType.kind === "model")
     ) {
+      const namespace =
+        property.type.valueType.kind === "model"
+          ? (getNamespace(property.type.valueType.__raw) ?? this.namespace)
+          : this.namespace;
       return new ArraySchema(
         property.name,
         property.details ?? "",
         getFileDetailsSchema(
           property,
           namespace,
+          this.getJavaNamespace(namespace),
           this.codeModel.schemas,
           this.binarySchema,
           this.stringSchema,
@@ -2377,6 +2375,18 @@ export class CodeModelBuilder {
       return this.getName(op);
     } else {
       return undefined;
+    }
+  }
+
+  private getJavaNamespace(namespace: string | undefined): string | undefined {
+    const tspNamespace = this.namespace;
+    const baseJavaNamespace = this.emitterContext.options.namespace;
+    if (!namespace) {
+      return undefined;
+    } else if ((baseJavaNamespace && namespace === tspNamespace) || namespace.startsWith(tspNamespace + ".")) {
+      return baseJavaNamespace + namespace.slice(tspNamespace.length);
+    } else {
+      return "com." + namespace.toLowerCase();
     }
   }
 
