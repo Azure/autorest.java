@@ -24,7 +24,7 @@ public final class Base64urlArrayBytesProperty implements JsonSerializable<Base6
      * The value property.
      */
     @Generated
-    private List<Base64Url> value;
+    private final List<Base64Url> value;
 
     /**
      * Creates an instance of Base64urlArrayBytesProperty class.
