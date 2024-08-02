@@ -537,9 +537,7 @@ export class CodeModelBuilder {
       const clientNameSegments = clientFullName.split(".");
       if (clientNameSegments.length > 1) {
         clientName = clientNameSegments.at(-1)!;
-        javaNamespace = getJavaNamespace(
-          this.namespace + "." + clientNameSegments.slice(0, -1).join(".").toLowerCase(),
-        );
+        javaNamespace = getJavaNamespace(this.namespace + "." + clientNameSegments.slice(0, -1).join("."));
       }
 
       const codeModelClient = new CodeModelClient(clientName, this.getDoc(client.type), {
