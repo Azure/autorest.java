@@ -37,11 +37,6 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      */
     private DateTimeRfc1123 rfc1123NonRequiredChild;
 
-    /*
-     * The rfc1123NonRequired property.
-     */
-    private DateTimeRfc1123 rfc1123NonRequired;
-
     /**
      * Creates an instance of TransformationAsParentRequiredFields class.
      * 
@@ -85,19 +80,6 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
             return null;
         }
         return this.rfc1123NonRequiredChild.getDateTime();
-    }
-
-    /**
-     * Get the rfc1123NonRequired property: The rfc1123NonRequired property.
-     * 
-     * @return the rfc1123NonRequired value.
-     */
-    @Override
-    public OffsetDateTime getRfc1123NonRequired() {
-        if (this.rfc1123NonRequired == null) {
-            return null;
-        }
-        return this.rfc1123NonRequired.getDateTime();
     }
 
     /**
@@ -166,7 +148,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
             OffsetDateTime unixTimeLongRequired = null;
             boolean unixTimeDateTimeRequiredFound = false;
             OffsetDateTime unixTimeDateTimeRequired = null;
-            DateTimeRfc1123 rfc1123NonRequired = null;
+            OffsetDateTime rfc1123NonRequired = null;
             boolean rfc1123RequiredChildFound = false;
             OffsetDateTime rfc1123RequiredChild = null;
             DateTimeRfc1123 rfc1123NonRequiredChild = null;
@@ -200,8 +182,11 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
                         .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                     unixTimeDateTimeRequiredFound = true;
                 } else if ("rfc1123NonRequired".equals(fieldName)) {
-                    rfc1123NonRequired
+                    DateTimeRfc1123 rfc1123NonRequiredHolder
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                    if (rfc1123NonRequiredHolder != null) {
+                        rfc1123NonRequired = rfc1123NonRequiredHolder.getDateTime();
+                    }
                 } else if ("rfc1123RequiredChild".equals(fieldName)) {
                     DateTimeRfc1123 rfc1123RequiredChildHolder
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
@@ -225,7 +210,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
                 TransformationAsParentRequiredFields deserializedTransformationAsParentRequiredFields
                     = new TransformationAsParentRequiredFields(rfc1123Required, nameRequired, urlBase64EncodedRequired,
                         unixTimeLongRequired, unixTimeDateTimeRequired, rfc1123RequiredChild);
-                deserializedTransformationAsParentRequiredFields.rfc1123NonRequired = rfc1123NonRequired;
+                deserializedTransformationAsParentRequiredFields.setRfc1123NonRequired(rfc1123NonRequired);
                 deserializedTransformationAsParentRequiredFields.rfc1123NonRequiredChild = rfc1123NonRequiredChild;
 
                 return deserializedTransformationAsParentRequiredFields;

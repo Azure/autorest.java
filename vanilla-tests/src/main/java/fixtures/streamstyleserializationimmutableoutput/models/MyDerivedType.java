@@ -25,16 +25,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     private String propD1;
 
-    /*
-     * The propB1 property.
-     */
-    private String propB1;
-
-    /*
-     * The propBH1 property.
-     */
-    private String propBH1;
-
     /**
      * Creates an instance of MyDerivedType class.
      */
@@ -58,26 +48,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     public String getPropD1() {
         return this.propD1;
-    }
-
-    /**
-     * Get the propB1 property: The propB1 property.
-     * 
-     * @return the propB1 value.
-     */
-    @Override
-    public String getPropB1() {
-        return this.propB1;
-    }
-
-    /**
-     * Get the propBH1 property: The propBH1 property.
-     * 
-     * @return the propBH1 value.
-     */
-    @Override
-    public String getPropBH1() {
-        return this.propBH1;
     }
 
     /**
@@ -123,7 +93,7 @@ public final class MyDerivedType extends MyBaseType {
                 reader.nextToken();
 
                 if ("propB1".equals(fieldName)) {
-                    deserializedMyDerivedType.propB1 = reader.getString();
+                    deserializedMyDerivedType.setPropB1(reader.getString());
                 } else if ("kind".equals(fieldName)) {
                     deserializedMyDerivedType.kind = MyKind.fromString(reader.getString());
                 } else if ("propD1".equals(fieldName)) {
@@ -134,7 +104,7 @@ public final class MyDerivedType extends MyBaseType {
                         reader.nextToken();
 
                         if ("propBH1".equals(fieldName)) {
-                            deserializedMyDerivedType.propBH1 = reader.getString();
+                            deserializedMyDerivedType.setPropBH1(reader.getString());
                         } else {
                             reader.skipChildren();
                         }
