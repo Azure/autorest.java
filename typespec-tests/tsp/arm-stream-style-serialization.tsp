@@ -144,8 +144,10 @@ model ErrorMin {
 @discriminator("kind")
 model OutputOnlyModel {
   name: string;
+
   @visibility("read")
   id: string;
+
   @flattenProperty
   properties: OutputOnlyModelProperties;
 }
