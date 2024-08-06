@@ -173,7 +173,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
-                boolean overridesParentGetter = overridesParentGetter(model, property, settings);
+                boolean overridesParentGetter = overridesParentGetter(model, property, settings, methodVisibility);
                 if (overridesParentGetter) {
                     classBlock.annotation("Override");
                 }
@@ -337,14 +337,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     /**
      * Whether the property's getter overrides parent getter.
-     * @param model the client model
-     * @param property the property to generate getter method
-     * @param settings {@link JavaSettings} instance
+     *
+     * @param model            the client model
+     * @param property         the property to generate getter method
+     * @param settings         {@link JavaSettings} instance
+     * @param methodVisibility
      * @return whether the property's getter overrides parent getter
      */
-    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings, JavaVisibility methodVisibility) {
         // getter method of discriminator property in subclass is handled differently
-        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
+        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property) && methodVisibility == JavaVisibility.Public;
     }
     /**
      * The model is immutable output if and only if the immutable output model setting is enabled and

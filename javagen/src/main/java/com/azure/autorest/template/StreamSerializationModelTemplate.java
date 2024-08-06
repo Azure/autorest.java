@@ -262,14 +262,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     /**
      * In stream-style-serialization, parent's read-only properties are shadowed in child classes.
-     * @param model the client model
-     * @param property the property to generate getter
-     * @param settings {@link JavaSettings} instance
+     *
+     * @param model            the client model
+     * @param property         the property to generate getter
+     * @param settings         {@link JavaSettings} instance
+     * @param methodVisibility
      * @return whether the property's getter overrides parent getter
      */
     @Override
-    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
-        return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings));
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings, JavaVisibility methodVisibility) {
+        return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings))
+            && methodVisibility == JavaVisibility.Public;
     }
 
     /**
