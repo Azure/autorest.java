@@ -93,7 +93,6 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
      * 
      * @return the innerProperties value.
      */
-    @Override
     private OutputOnlyModelProperties innerProperties() {
         return this.innerProperties;
     }

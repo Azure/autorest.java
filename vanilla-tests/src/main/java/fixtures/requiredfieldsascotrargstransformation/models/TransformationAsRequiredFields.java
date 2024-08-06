@@ -58,11 +58,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      */
     private final OffsetDateTime unixTimeDateTimeRequired;
 
-    /*
-     * flatten output required property
-     */
-    private final FlattenOutputRequiredModel innerProperties;
-
     /**
      * Creates an instance of TransformationAsRequiredFields class.
      * 
@@ -71,11 +66,9 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * @param urlBase64EncodedRequired the urlBase64EncodedRequired value to set.
      * @param unixTimeLongRequired the unixTimeLongRequired value to set.
      * @param unixTimeDateTimeRequired the unixTimeDateTimeRequired value to set.
-     * @param innerProperties the innerProperties value to set.
      */
     protected TransformationAsRequiredFields(OffsetDateTime rfc1123Required, String nameRequired,
-        byte[] urlBase64EncodedRequired, OffsetDateTime unixTimeLongRequired, OffsetDateTime unixTimeDateTimeRequired,
-        FlattenOutputRequiredModel innerProperties) {
+        byte[] urlBase64EncodedRequired, OffsetDateTime unixTimeLongRequired, OffsetDateTime unixTimeDateTimeRequired) {
         if (rfc1123Required == null) {
             this.rfc1123Required = null;
         } else {
@@ -93,7 +86,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
             this.unixTimeLongRequired = unixTimeLongRequired.toEpochSecond();
         }
         this.unixTimeDateTimeRequired = unixTimeDateTimeRequired;
-        this.innerProperties = innerProperties;
     }
 
     /**
@@ -175,33 +167,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
     }
 
     /**
-     * Get the innerProperties property: flatten output required property.
-     * 
-     * @return the innerProperties value.
-     */
-    private FlattenOutputRequiredModel getInnerProperties() {
-        return this.innerProperties;
-    }
-
-    /**
-     * Get the name property: The name property.
-     * 
-     * @return the name value.
-     */
-    public String getName() {
-        return this.getInnerProperties() == null ? null : this.getInnerProperties().getName();
-    }
-
-    /**
-     * Get the titleRequired property: The titleRequired property.
-     * 
-     * @return the titleRequired value.
-     */
-    public String getTitleRequired() {
-        return this.getInnerProperties() == null ? null : this.getInnerProperties().getTitleRequired();
-    }
-
-    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -227,12 +192,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
             throw new IllegalArgumentException(
                 "Missing required property unixTimeDateTimeRequired in model TransformationAsRequiredFields");
         }
-        if (getInnerProperties() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property innerProperties in model TransformationAsRequiredFields");
-        } else {
-            getInnerProperties().validate();
-        }
     }
 
     /**
@@ -249,7 +208,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
             this.unixTimeDateTimeRequired == null
                 ? null
                 : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.unixTimeDateTimeRequired));
-        jsonWriter.writeJsonField("properties", this.innerProperties);
         jsonWriter.writeStringField("rfc1123NonRequired", Objects.toString(this.rfc1123NonRequired, null));
         return jsonWriter.writeEndObject();
     }
@@ -275,8 +233,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
             OffsetDateTime unixTimeLongRequired = null;
             boolean unixTimeDateTimeRequiredFound = false;
             OffsetDateTime unixTimeDateTimeRequired = null;
-            boolean innerPropertiesFound = false;
-            FlattenOutputRequiredModel innerProperties = null;
             DateTimeRfc1123 rfc1123NonRequired = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -307,9 +263,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
                     unixTimeDateTimeRequired = reader
                         .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                     unixTimeDateTimeRequiredFound = true;
-                } else if ("properties".equals(fieldName)) {
-                    innerProperties = FlattenOutputRequiredModel.fromJson(reader);
-                    innerPropertiesFound = true;
                 } else if ("rfc1123NonRequired".equals(fieldName)) {
                     rfc1123NonRequired
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
@@ -321,11 +274,10 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
                 && nameRequiredFound
                 && urlBase64EncodedRequiredFound
                 && unixTimeLongRequiredFound
-                && unixTimeDateTimeRequiredFound
-                && innerPropertiesFound) {
+                && unixTimeDateTimeRequiredFound) {
                 TransformationAsRequiredFields deserializedTransformationAsRequiredFields
                     = new TransformationAsRequiredFields(rfc1123Required, nameRequired, urlBase64EncodedRequired,
-                        unixTimeLongRequired, unixTimeDateTimeRequired, innerProperties);
+                        unixTimeLongRequired, unixTimeDateTimeRequired);
                 deserializedTransformationAsRequiredFields.rfc1123NonRequired = rfc1123NonRequired;
 
                 return deserializedTransformationAsRequiredFields;
@@ -345,9 +297,6 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
             }
             if (!unixTimeDateTimeRequiredFound) {
                 missingProperties.add("unixTimeDateTimeRequired");
-            }
-            if (!innerPropertiesFound) {
-                missingProperties.add("properties");
             }
 
             throw new IllegalStateException(
