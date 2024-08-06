@@ -20,8 +20,6 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
     @JsonProperty(value = "Azure-AsyncOperation")
     private String azureAsyncOperation;
 
-    private static final HttpHeaderName AZURE_ASYNC_OPERATION = HttpHeaderName.fromString("Azure-AsyncOperation");
-
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LROsPatch200SucceededIgnoreHeadersHeaders class.
@@ -29,7 +27,7 @@ public final class LROsPatch200SucceededIgnoreHeadersHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LROsPatch200SucceededIgnoreHeadersHeaders(HttpHeaders rawHeaders) {
-        this.azureAsyncOperation = rawHeaders.getValue(AZURE_ASYNC_OPERATION);
+        this.azureAsyncOperation = rawHeaders.getValue(HttpHeaderName.AZURE_ASYNCOPERATION);
     }
 
     /**

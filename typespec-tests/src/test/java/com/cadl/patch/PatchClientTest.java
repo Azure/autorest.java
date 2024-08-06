@@ -102,11 +102,12 @@ public class PatchClientTest {
         map.put("key", null);
         resource.setMap(map);
         resource.getArray().set(0, null);
-        String json = BinaryData.fromObject(resource).toString(); // {"map":{"key":null},"array":[{"name":"value2"}]}
+        String json = BinaryData.fromObject(resource).toString(); // {"map":{"key":null},"array":[null,{"name":"value2"}]}
         JsonNode node = OBJECT_MAPPER.readTree(json);
         Assertions.assertEquals(JsonNodeType.NULL, node.get("map").get("key").getNodeType());
-        Assertions.assertEquals(1, node.get("array").size());
-        Assertions.assertEquals("value2", node.get("array").get(0).get("name").asText());
+        Assertions.assertEquals(2, node.get("array").size());
+        Assertions.assertTrue(node.get("array").get(0).isNull());
+        Assertions.assertEquals("value2", node.get("array").get(1).get("name").asText());
     }
 
     @Test
