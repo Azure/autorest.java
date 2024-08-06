@@ -57,11 +57,6 @@
         "unixTimeDateTimeRequired": {
           "type": "string",
           "format": "date-time"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "flatten output required property",
-          "$ref": "#/definitions/FlattenOutputRequiredModel"
         }
       },
       "required": [
@@ -69,8 +64,7 @@
         "nameRequired",
         "urlBase64EncodedRequired",
         "unixTimeDateTimeRequired",
-        "unixTimeLongRequired",
-        "properties"
+        "unixTimeLongRequired"
       ]
     },
     "TransformationAsParentRequiredFields": {
@@ -91,19 +85,6 @@
         }
       },
       "required": ["rfc1123RequiredChild"]
-    },
-    "FlattenOutputRequiredModel": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "titleRequired": {
-          "type": "string"
-        }
-      },
-      "description": "flatten output required model",
-      "required": ["titleRequired"]
     }
   }
 }
