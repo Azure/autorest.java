@@ -332,7 +332,20 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs())
                         && (
                         // must be read-only and not appear in constructor
-                        (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs()));
+                        (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
+                                // immutable output model only has package-private setters, making its properties read-only
+                                || isImmutableOutputModel(getDefiningModel(model, property), settings));
+    }
+
+    private static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
+        ClientModel current = model;
+        while(current != null) {
+            if (modelDefinesProperty(current, property)) {
+                return current;
+            }
+            current = ClientModelUtil.getClientModel(current.getParentModelName());
+        }
+        throw new IllegalArgumentException("unable to find defining model for property: " + property);
     }
 
     /**

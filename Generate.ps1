@@ -148,7 +148,7 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/xml-tag-with-attribute-and-value.json --namespace=fixtures.complexstreamstylexmlserialization",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/security-info.json --namespace=fixtures.securityinfo --use-key-credential",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/special-header.json --namespace=fixtures.specialheader",
-    "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable --null-byte-array-maps-to-empty-array",
+    "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable --null-byte-array-maps-to-empty-array --modelerfour.flatten-models=false --client-flattened-annotation-target=NONE ",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-enum.json --namespace=fixtures.discriminatorenum"
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-enum.json --namespace=fixtures.discriminatorsetter --models-subpackage=implementation.models --custom-types-subpackage=models --custom-types=Golden"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
