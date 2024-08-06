@@ -149,7 +149,6 @@ public class Javagen extends NewPlugin {
                 }
             }
 
-
             if (settings.isGenerateClientInterfaces()) {
                 javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(),
                         client.getServiceClient());

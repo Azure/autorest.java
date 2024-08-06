@@ -36,10 +36,6 @@ export function getNamespace(type: Type | undefined): string | undefined {
   }
 }
 
-export function getJavaNamespace(namespace: string | undefined): string | undefined {
-  return namespace ? "com." + namespace.toLowerCase() : undefined;
-}
-
 export function stringArrayContainsIgnoreCase(stringList: string[], str: string): boolean {
   return stringList && str ? stringList.findIndex((s) => s.toLowerCase() === str.toLowerCase()) != -1 : false;
 }
