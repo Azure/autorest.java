@@ -36,7 +36,7 @@ public class OutputOnlyModelInner implements JsonSerializable<OutputOnlyModelInn
     /*
      * The properties property.
      */
-    private OutputOnlyModelProperties innerProperties = new OutputOnlyModelProperties();
+    private OutputOnlyModelProperties innerProperties;
 
     /**
      * Creates an instance of OutputOnlyModelInner class.

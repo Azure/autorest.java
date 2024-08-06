@@ -29,6 +29,11 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
     private String childName;
 
     /*
+     * The name property.
+     */
+    private String name;
+
+    /*
      * The id property.
      */
     private String id;
@@ -36,7 +41,7 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
     /*
      * The properties property.
      */
-    private OutputOnlyModelProperties innerProperties = new OutputOnlyModelProperties();
+    private OutputOnlyModelProperties innerProperties;
 
     /**
      * Creates an instance of OutputOnlyModelChild class.
@@ -64,6 +69,16 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
     }
 
     /**
+     * Get the name property: The name property.
+     * 
+     * @return the name value.
+     */
+    @Override
+    public String name() {
+        return this.name;
+    }
+
+    /**
      * Get the id property: The id property.
      * 
      * @return the id value.
@@ -78,6 +93,7 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
      * 
      * @return the innerProperties value.
      */
+    @Override
     private OutputOnlyModelProperties innerProperties() {
         return this.innerProperties;
     }
@@ -137,7 +153,7 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
                 reader.nextToken();
 
                 if ("name".equals(fieldName)) {
-                    deserializedOutputOnlyModelChild.withName(reader.getString());
+                    deserializedOutputOnlyModelChild.name = reader.getString();
                 } else if ("id".equals(fieldName)) {
                     deserializedOutputOnlyModelChild.id = reader.getString();
                 } else if ("properties".equals(fieldName)) {
