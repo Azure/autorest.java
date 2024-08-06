@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "HttpbinServer",
@@ -54,8 +55,8 @@ namespace Cadl.ContosoServer {
     v1: "v1",
   }
 
-  @Azure.ClientGenerator.Core.client({
-    name: "ContosoClient",
+  @client({
+    name: "Contoso.Sub.ContosoClient",
     service: Cadl.ContosoServer,
   })
   @route("/contoso/{group}")

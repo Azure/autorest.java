@@ -70,6 +70,8 @@ public class ServiceClient {
     private String defaultCredentialScopes;
 
     private boolean builderDisabled;
+    private String builderPackageName;
+
     /**
      * The security configuration information.
      */
@@ -97,7 +99,7 @@ public class ServiceClient {
      */
     protected ServiceClient(String packageName, String className, String interfaceName, Proxy proxy, List<MethodGroupClient> methodGroupClients, List<ServiceClientProperty> properties, List<Constructor> constructors, List<ClientMethod> clientMethods,
                             ClientMethodParameter azureEnvironmentParameter, ClientMethodParameter tokenCredentialParameter, ClientMethodParameter httpPipelineParameter, ClientMethodParameter serializerAdapterParameter, ClientMethodParameter defaultPollIntervalParameter, String defaultCredentialScopes,
-                            boolean builderDisabled, SecurityInfo securityInfo, String baseUrl, PipelinePolicyDetails pipelinePolicyDetails, String crossLanguageDefinitionId) {
+                            boolean builderDisabled, String builderPackageName, SecurityInfo securityInfo, String baseUrl, PipelinePolicyDetails pipelinePolicyDetails, String crossLanguageDefinitionId) {
         this.packageName = packageName;
         this.className = className;
         this.interfaceName = interfaceName;
@@ -114,6 +116,7 @@ public class ServiceClient {
         this.clientBaseName = className.endsWith("Impl") ? className.substring(0, className.length() - 4) : className;
         this.defaultCredentialScopes = defaultCredentialScopes;
         this.builderDisabled = builderDisabled;
+        this.builderPackageName = builderPackageName;
         this.securityInfo = securityInfo;
         this.baseUrl = baseUrl;
         this.pipelinePolicyDetails = pipelinePolicyDetails;
@@ -180,8 +183,20 @@ public class ServiceClient {
         return defaultCredentialScopes;
     }
 
-    public final boolean builderDisabled() {
+    public final boolean isBuilderDisabled() {
         return builderDisabled;
+    }
+
+    /**
+     * Gets the package name for builder and wrapper classes.
+     * <p>
+     * It can be {@code null}, if no specific value provided.
+     * In such case, usually the package name from "namespace" option is used.
+     *
+     * @return the package name for builder and wrapper classes.
+     */
+    public String getBuilderPackageName() {
+        return builderPackageName;
     }
 
     public SecurityInfo getSecurityInfo() {
@@ -303,6 +318,7 @@ public class ServiceClient {
         protected ClientMethodParameter defaultPollIntervalParameter;
         protected String defaultCredentialScopes;
         protected boolean builderDisabled;
+        protected String builderPackageName;
         protected SecurityInfo securityInfo;
         protected String baseUrl;
         protected PipelinePolicyDetails pipelinePolicyDetails;
@@ -459,6 +475,16 @@ public class ServiceClient {
         }
 
         /**
+         * Sets the builderPackageName parameter.
+         * @param builderPackageName the package name for builder and wrapper classes
+         * @return the Builder itself
+         */
+        public Builder builderPackageName(String builderPackageName) {
+            this.builderPackageName = builderPackageName;
+            return this;
+        }
+
+        /**
          * Sets the security configuration information.
          * @param securityInfo the security configuration information
          * @return the Builder itself
@@ -505,6 +531,7 @@ public class ServiceClient {
                     defaultPollIntervalParameter,
                     defaultCredentialScopes,
                     builderDisabled,
+                    builderPackageName,
                     securityInfo,
                     baseUrl,
                     pipelinePolicyDetails,

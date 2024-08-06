@@ -1,5 +1,11 @@
 # Release History
 
+## 0.18.4 (Unreleased)
+
+Compatible with compiler 0.58.
+
+- Supported package in "typespec-client-generator-core" `@client`.
+
 ## 0.18.3 (2024-07-31)
 
 Compatible with compiler 0.58.
