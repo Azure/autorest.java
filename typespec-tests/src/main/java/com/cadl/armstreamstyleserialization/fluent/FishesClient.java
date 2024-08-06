@@ -9,6 +9,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import com.cadl.armstreamstyleserialization.fluent.models.FishInner;
+import com.cadl.armstreamstyleserialization.fluent.models.OutputOnlyModelInner;
 
 /**
  * An instance of this class provides access to all the operations defined in FishesClient.
@@ -64,4 +65,26 @@ public interface FishesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     FishInner putModel(FishInner fish);
+
+    /**
+     * The getOutputOnlyModel operation.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic OutputOnlyModel along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<OutputOnlyModelInner> getOutputOnlyModelWithResponse(Context context);
+
+    /**
+     * The getOutputOnlyModel operation.
+     * 
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic OutputOnlyModel.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    OutputOnlyModelInner getOutputOnlyModel();
 }

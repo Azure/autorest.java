@@ -173,7 +173,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
-                boolean overridesParentGetter = overridesParentGetter(model, property, settings);
+                boolean overridesParentGetter = overridesParentGetter(model, property, settings, methodVisibility);
                 if (overridesParentGetter) {
                     classBlock.annotation("Override");
                 }
@@ -337,14 +337,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     /**
      * Whether the property's getter overrides parent getter.
-     * @param model the client model
-     * @param property the property to generate getter method
-     * @param settings {@link JavaSettings} instance
+     *
+     * @param model            the client model
+     * @param property         the property to generate getter method
+     * @param settings         {@link JavaSettings} instance
+     * @param methodVisibility
      * @return whether the property's getter overrides parent getter
      */
-    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings, JavaVisibility methodVisibility) {
         // getter method of discriminator property in subclass is handled differently
-        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
+        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property) && methodVisibility == JavaVisibility.Public;
     }
     /**
      * The model is immutable output if and only if the immutable output model setting is enabled and
@@ -616,8 +618,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
         } else {
-            if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
-                // if the property of flattened model is required, initialize it
+            if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType
+                    && !isImmutableOutputModel(
+                            getDefiningModel(
+                                ClientModelUtil.getClientModel(((ClassType) property.getClientType()).getName()), property),
+                                settings)
+            ) {
+                // if the property of flattened model is required, and isn't immutable output model(which doesn't have public constructor),
+                // initialize it
                 fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
             } else {
                 // handle x-ms-client-default
@@ -1379,5 +1387,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
         return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
             Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
+    }
+
+    static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
+        ClientModel current = model;
+        while(current != null) {
+            if (modelDefinesProperty(current, property)) {
+                return current;
+            }
+            current = ClientModelUtil.getClientModel(current.getParentModelName());
+        }
+        throw new IllegalArgumentException("unable to find defining model for property: " + property);
     }
 }

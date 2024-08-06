@@ -10,8 +10,10 @@ import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armstreamstyleserialization.fluent.FishesClient;
 import com.cadl.armstreamstyleserialization.fluent.models.FishInner;
+import com.cadl.armstreamstyleserialization.fluent.models.OutputOnlyModelInner;
 import com.cadl.armstreamstyleserialization.models.Fish;
 import com.cadl.armstreamstyleserialization.models.Fishes;
+import com.cadl.armstreamstyleserialization.models.OutputOnlyModel;
 
 public final class FishesImpl implements Fishes {
     private static final ClientLogger LOGGER = new ClientLogger(FishesImpl.class);
@@ -59,6 +61,25 @@ public final class FishesImpl implements Fishes {
         FishInner inner = this.serviceClient().putModel(fish);
         if (inner != null) {
             return new FishImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Response<OutputOnlyModel> getOutputOnlyModelWithResponse(Context context) {
+        Response<OutputOnlyModelInner> inner = this.serviceClient().getOutputOnlyModelWithResponse(context);
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new OutputOnlyModelImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
+    }
+
+    public OutputOnlyModel getOutputOnlyModel() {
+        OutputOnlyModelInner inner = this.serviceClient().getOutputOnlyModel();
+        if (inner != null) {
+            return new OutputOnlyModelImpl(inner, this.manager());
         } else {
             return null;
         }

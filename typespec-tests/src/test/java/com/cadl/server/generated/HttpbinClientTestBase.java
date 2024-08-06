@@ -14,10 +14,10 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
-import com.cadl.server.ContosoClient;
-import com.cadl.server.ContosoClientBuilder;
 import com.cadl.server.HttpbinClient;
 import com.cadl.server.HttpbinClientBuilder;
+import com.cadl.server.contoso.sub.ContosoClient;
+import com.cadl.server.contoso.sub.ContosoClientBuilder;
 
 class HttpbinClientTestBase extends TestProxyTestBase {
     protected HttpbinClient httpbinClient;

@@ -32,8 +32,6 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
     @JsonProperty(value = "Location")
     private String location;
 
-    private static final HttpHeaderName AZURE_ASYNC_OPERATION = HttpHeaderName.fromString("Azure-AsyncOperation");
-
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders class.
@@ -45,7 +43,7 @@ public final class LrosaDsDeleteAsyncRelativeRetryNoStatusHeaders {
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
         }
-        this.azureAsyncOperation = rawHeaders.getValue(AZURE_ASYNC_OPERATION);
+        this.azureAsyncOperation = rawHeaders.getValue(HttpHeaderName.AZURE_ASYNCOPERATION);
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 

@@ -262,14 +262,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     /**
      * In stream-style-serialization, parent's read-only properties are shadowed in child classes.
-     * @param model the client model
-     * @param property the property to generate getter
-     * @param settings {@link JavaSettings} instance
+     *
+     * @param model            the client model
+     * @param property         the property to generate getter
+     * @param settings         {@link JavaSettings} instance
+     * @param methodVisibility
      * @return whether the property's getter overrides parent getter
      */
     @Override
-    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
-        return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings));
+    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings, JavaVisibility methodVisibility) {
+        return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings))
+            && methodVisibility == JavaVisibility.Public;
     }
 
     /**
@@ -333,18 +336,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         && (
                         // must be read-only and not appear in constructor
                         (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
+                                // immutable output model only has package-private setters, making its properties read-only
                                 || isImmutableOutputModel(getDefiningModel(model, property), settings));
-    }
-
-    private static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
-        ClientModel current = model;
-        while(current != null) {
-            if (modelDefinesProperty(current, property)) {
-                return current;
-            }
-            current = ClientModelUtil.getClientModel(current.getParentModelName());
-        }
-        throw new IllegalArgumentException("unable to find defining model for property: " + property);
     }
 
     /**
