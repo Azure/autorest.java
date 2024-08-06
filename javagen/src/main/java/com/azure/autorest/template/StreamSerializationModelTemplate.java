@@ -337,17 +337,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                                 || isImmutableOutputModel(getDefiningModel(model, property), settings));
     }
 
-    private static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
-        ClientModel current = model;
-        while(current != null) {
-            if (modelDefinesProperty(current, property)) {
-                return current;
-            }
-            current = ClientModelUtil.getClientModel(current.getParentModelName());
-        }
-        throw new IllegalArgumentException("unable to find defining model for property: " + property);
-    }
-
     /**
      * write toJson() method.
      * <p>

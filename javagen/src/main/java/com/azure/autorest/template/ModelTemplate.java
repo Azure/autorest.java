@@ -616,8 +616,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
         } else {
-            if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
-                // if the property of flattened model is required, initialize it
+            if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType
+                    && !isImmutableOutputModel(
+                            getDefiningModel(
+                                ClientModelUtil.getClientModel(((ClassType) property.getClientType()).getName()), property),
+                                settings)
+            ) {
+                // if the property of flattened model is required, and isn't immutable output model(which doesn't have public constructor),
+                // initialize it
                 fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
             } else {
                 // handle x-ms-client-default
@@ -1379,5 +1385,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
         return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
             Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
+    }
+
+    static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
+        ClientModel current = model;
+        while(current != null) {
+            if (modelDefinesProperty(current, property)) {
+                return current;
+            }
+            current = ClientModelUtil.getClientModel(current.getParentModelName());
+        }
+        throw new IllegalArgumentException("unable to find defining model for property: " + property);
     }
 }
