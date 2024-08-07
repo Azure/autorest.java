@@ -16,7 +16,7 @@ public final class UploadHttpPartRequest {
      * The fileData1 property.
      */
     @Generated
-    private final Inherit2FileDetails fileData1;
+    private final InheritFileData fileData1;
 
     /*
      * The fileData2 property.
@@ -38,7 +38,7 @@ public final class UploadHttpPartRequest {
      * @param size the size value to set.
      */
     @Generated
-    public UploadHttpPartRequest(Inherit2FileDetails fileData1, FileDetails fileData2, Size size) {
+    public UploadHttpPartRequest(InheritFileData fileData1, FileDetails fileData2, Size size) {
         this.fileData1 = fileData1;
         this.fileData2 = fileData2;
         this.size = size;
@@ -50,7 +50,7 @@ public final class UploadHttpPartRequest {
      * @return the fileData1 value.
      */
     @Generated
-    public Inherit2FileDetails getFileData1() {
+    public InheritFileData getFileData1() {
         return this.fileData1;
     }
 
