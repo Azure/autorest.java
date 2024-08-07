@@ -106,56 +106,32 @@ interface EnumOp {
   @post
   @route("operation/stringenumarray")
   setStringEnumArray(
-    @query({
-      format: "csv",
-    })
     colorArray: ColorModel[],
 
-    @query({
-      format: "csv",
-    })
     colorArrayOpt?: ColorModel[],
   ): string;
 
   @post
   @route("operation/intenumarray")
   setIntEnumArray(
-    @query({
-      format: "csv",
-    })
     priorityArray: Priority[],
 
-    @query({
-      format: "csv",
-    })
     priorityArrayOpt?: Priority[],
   ): string;
 
   @post
   @route("operation/stringarray")
   setStringArray(
-    @query({
-      format: "csv",
-    })
     stringArray: string[],
 
-    @query({
-      format: "csv",
-    })
     stringArrayOpt?: string[],
   ): string;
 
   @post
   @route("operation/intarray")
   setIntArray(
-    @query({
-      format: "csv",
-    })
     intArray: int32[],
 
-    @query({
-      format: "csv",
-    })
     intArrayOpt?: int32[],
   ): string;
 
