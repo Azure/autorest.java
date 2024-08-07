@@ -105,35 +105,19 @@ interface EnumOp {
 
   @post
   @route("operation/stringenumarray")
-  setStringEnumArray(
-    colorArray: ColorModel[],
-
-    colorArrayOpt?: ColorModel[],
-  ): string;
+  setStringEnumArray(colorArray: ColorModel[], colorArrayOpt?: ColorModel[]): string;
 
   @post
   @route("operation/intenumarray")
-  setIntEnumArray(
-    priorityArray: Priority[],
-
-    priorityArrayOpt?: Priority[],
-  ): string;
+  setIntEnumArray(priorityArray: Priority[], priorityArrayOpt?: Priority[]): string;
 
   @post
   @route("operation/stringarray")
-  setStringArray(
-    stringArray: string[],
-
-    stringArrayOpt?: string[],
-  ): string;
+  setStringArray(stringArray: string[], stringArrayOpt?: string[]): string;
 
   @post
   @route("operation/intarray")
-  setIntArray(
-    intArray: int32[],
-
-    intArrayOpt?: int32[],
-  ): string;
+  setIntArray(intArray: int32[], intArrayOpt?: int32[]): string;
 
   @post
   @route("operation/stringenummulti")
