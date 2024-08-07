@@ -1,6 +1,8 @@
 import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 @service({
   title: "Multipart",
@@ -44,6 +46,7 @@ model Inherit1File extends File {
 /**
  * Image file of content-type "image/jpeg"
  */
+@clientName("InheritFileData")
 model Inherit2File extends Inherit1File {
   contentType: "image/jpeg";
 }

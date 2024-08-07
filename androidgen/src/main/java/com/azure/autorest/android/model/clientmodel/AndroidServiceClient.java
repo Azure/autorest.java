@@ -49,6 +49,7 @@ public class AndroidServiceClient extends ServiceClient {
                 defaultPollIntervalParameter,
                 defaultCredentialScopes,
                 builderDisabled,
+                null,
                 securityInfo,
                 baseUrl,
                 null,

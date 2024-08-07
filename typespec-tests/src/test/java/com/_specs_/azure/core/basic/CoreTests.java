@@ -3,15 +3,11 @@
 
 package com._specs_.azure.core.basic;
 
-import com._specs_.azure.core.basic.models.ListItemInputBody;
-import com._specs_.azure.core.basic.models.ListItemInputExtensibleEnum;
 import com._specs_.azure.core.basic.models.User;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.Response;
 import com.azure.core.test.http.AssertingHttpClientBuilder;
-import com.azure.core.util.BinaryData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
@@ -26,11 +22,11 @@ import java.util.stream.Collectors;
 
 public class CoreTests {
 
-    private BasicAsyncClient client = new BasicClientBuilder()
+    private final BasicAsyncClient client = new BasicClientBuilder()
             .httpClient(new AssertingHttpClientBuilder(HttpClient.createDefault()).assertAsync().build())
             .buildAsyncClient();
 
-    private BasicClient syncClient = new BasicClientBuilder()
+    private final BasicClient syncClient = new BasicClientBuilder()
             .httpClient(new AssertingHttpClientBuilder(HttpClient.createDefault()).assertSync().build())
             .buildClient();
 
@@ -101,16 +97,6 @@ public class CoreTests {
     }
 
     @Test
-    public void testListNoModel() {
-        // verification here is that there is no Page or CustomPage class generated in models
-
-        client.listWithPage().blockLast();
-
-        client.listWithCustomPageModel().blockLast();
-    }
-
-
-    @Test
     public void testDelete() {
         Mono<Void> response = client.delete(1);
 
@@ -151,16 +137,5 @@ public class CoreTests {
         User user1 = users.get(1);
         Assertions.assertEquals(2, user1.getId());
         Assertions.assertEquals("John", user1.getName());
-
-        syncClient.listWithPage().forEach(u -> {});
-    }
-
-    @Test
-    public void testMisc() {
-        syncClient.listWithParameters(new ListItemInputBody("Madge"), ListItemInputExtensibleEnum.SECOND).stream().count();
-
-        TwoModelsAsPageItemClient client = new BasicClientBuilder().buildTwoModelsAsPageItemClient();
-        client.listFirstItem().stream().count();
-        client.listSecondItem().stream().count();
     }
 }

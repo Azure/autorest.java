@@ -191,8 +191,7 @@ public final class BuiltinAsyncClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (dateTime != null) {
-            requestOptions.setHeader(HttpHeaderName.fromString("x-ms-date"),
-                String.valueOf(new DateTimeRfc1123(dateTime)));
+            requestOptions.setHeader(HttpHeaderName.X_MS_DATE, String.valueOf(new DateTimeRfc1123(dateTime)));
         }
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);

@@ -21,6 +21,10 @@ public class SpreadTests {
         aliasClient.spreadAsRequestParameter("1", "bar", "foo");
 
         aliasClient.spreadWithMultipleParameters("1", "bar", "foo", List.of(1, 2), 1, List.of("foo", "bar"));
+
+        aliasClient.spreadParameterWithInnerAlias("1", "foo", 1, "bar");
+
+        aliasClient.spreadParameterWithInnerModel("1", "foo", "bar");
     }
 
     @Test

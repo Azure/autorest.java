@@ -32,6 +32,9 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
         builder.interfaceName(baseName)
                 .className(className)
                 .packageName(packageName);
+        if (client.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(client.getLanguage().getJava().getNamespace())) {
+            builder.builderPackageName(client.getLanguage().getJava().getNamespace());
+        }
 
         Proxy proxy = null;
         OperationGroup clientOperationGroup = client.getOperationGroups().stream()

@@ -39,12 +39,7 @@ import java.util.Objects;
 /**
  * A builder for creating a new instance of the BasicClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = {
-        BasicClient.class,
-        TwoModelsAsPageItemClient.class,
-        BasicAsyncClient.class,
-        TwoModelsAsPageItemAsyncClient.class })
+@ServiceClientBuilder(serviceClients = { BasicClient.class, BasicAsyncClient.class })
 public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, ConfigurationTrait<BasicClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
@@ -281,16 +276,6 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
     }
 
     /**
-     * Builds an instance of TwoModelsAsPageItemAsyncClient class.
-     * 
-     * @return an instance of TwoModelsAsPageItemAsyncClient.
-     */
-    @Generated
-    public TwoModelsAsPageItemAsyncClient buildTwoModelsAsPageItemAsyncClient() {
-        return new TwoModelsAsPageItemAsyncClient(buildInnerClient().getTwoModelsAsPageItems());
-    }
-
-    /**
      * Builds an instance of BasicClient class.
      * 
      * @return an instance of BasicClient.
@@ -298,16 +283,6 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
     @Generated
     public BasicClient buildClient() {
         return new BasicClient(buildInnerClient());
-    }
-
-    /**
-     * Builds an instance of TwoModelsAsPageItemClient class.
-     * 
-     * @return an instance of TwoModelsAsPageItemClient.
-     */
-    @Generated
-    public TwoModelsAsPageItemClient buildTwoModelsAsPageItemClient() {
-        return new TwoModelsAsPageItemClient(buildInnerClient().getTwoModelsAsPageItems());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(BasicClientBuilder.class);

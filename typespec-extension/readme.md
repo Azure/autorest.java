@@ -4,7 +4,7 @@ Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [TypeSpec](https://github.com/microsoft/typespec/) 0.54.
+Install [TypeSpec](https://github.com/microsoft/typespec/) 0.58.
 
 # Initialize TypeSpec Project
 
@@ -36,7 +36,7 @@ emit:
 
 # Generate Java
 
-`npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target-folder>`.
+`npx tsp compile client.tsp --emit=@azure-tools/typespec-java` or `npx tsp compile client.tsp --emit=@azure-tools/typespec-java --options='@azure-tools/typespec-java.emitter-output-dir=<target-folder>'`.
 
 If `emitter-output-dir` option is not provided, generated Java code will be under `tsp-output/@azure-tools/typespec-java` folder.
 

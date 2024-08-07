@@ -53,6 +53,7 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -198,6 +199,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         }
 
         // package info
+        // client
         Map<String, PackageInfo> packageInfos = new HashMap<>();
         if (settings.isGenerateClientInterfaces() || !settings.isGenerateClientAsImpl()
             || settings.getImplementationSubpackage() == null || settings.getImplementationSubpackage().isEmpty()
@@ -246,6 +248,16 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 }
             }
         }
+        // client in different packages
+        for (ServiceClient client : serviceClientsMap.keySet()) {
+            if (client.getBuilderPackageName() != null && !packageInfos.containsKey(client.getBuilderPackageName())) {
+                packageInfos.put(client.getBuilderPackageName(), new PackageInfo(
+                        client.getBuilderPackageName(),
+                        String.format("Package containing the classes for %s.\n%s", client.getInterfaceName(),
+                                serviceClientDescription)));
+            }
+        }
+        // model
         final List<String> modelsPackages = getModelsPackages(clientModels, enumTypes, responseModels);
         for (String modelsPackage : modelsPackages) {
             if (!packageInfos.containsKey(modelsPackage)) {
@@ -268,7 +280,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.packageInfos(new ArrayList<>(packageInfos.values()));
 
         // module info
-        builder.moduleInfo(getModuleInfo(modelsPackages));
+        builder.moduleInfo(getModuleInfo(modelsPackages, serviceClientsMap.keySet()));
 
         // async/sync service client (wrapper for the ServiceClient)
         List<AsyncSyncClient> syncClients = new ArrayList<>();
@@ -287,7 +299,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             builder.asyncClients(asyncClients);
 
             // service client builder
-            if (!serviceClient.builderDisabled()) {
+            if (!serviceClient.isBuilderDisabled()) {
                 String builderSuffix = ClientModelUtil.getBuilderSuffix();
                 String builderName = serviceClient.getInterfaceName() + builderSuffix;
                 String builderPackage = ClientModelUtil.getServiceClientBuilderPackageName(serviceClient);
@@ -604,7 +616,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             .build();
     }
 
-    private static ModuleInfo getModuleInfo(List<String> modelsPackages) {
+    private static ModuleInfo getModuleInfo(List<String> modelsPackages, Collection<ServiceClient> clients) {
         // WARNING: Only tested for low level clients
         JavaSettings settings = JavaSettings.getInstance();
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
@@ -612,8 +624,16 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
         requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.CORE.getPackageName(), true));
 
+        // export packages that contain Client, ClientBuilder, ServiceVersion
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));
+        for (ServiceClient client : clients) {
+            String builderPackageName = client.getBuilderPackageName();
+            if (builderPackageName != null
+                    && exportModules.stream().noneMatch(exportModule -> exportModule.getModuleName().equals(builderPackageName))) {
+                exportModules.add(new ModuleInfo.ExportModule(builderPackageName));
+            }
+        }
 
         final String implementationSubpackagePrefix = settings.getPackage(settings.getImplementationSubpackage()) + ".";
         for (String modelsPackage : modelsPackages) {

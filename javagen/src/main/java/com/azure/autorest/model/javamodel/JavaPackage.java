@@ -102,9 +102,7 @@ public class JavaPackage {
     }
 
     public final void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageKeyWord, syncClient.getClassName());
-        Templates.getServiceSyncClientTemplate().write(syncClient, javaFile);
-        addJavaFile(javaFile);
+        addSyncServiceClient(packageKeyWord, syncClient, false);
     }
 
     public final void addSyncServiceClient(String packageKeyWord, AsyncSyncClient syncClient, boolean syncClientWrapAsync) {

@@ -140,6 +140,27 @@ model ErrorMin {
   additionalProperty: string;
 }
 
+@doc("This is base model for polymorphic OutputOnlyModel.")
+@discriminator("kind")
+model OutputOnlyModel {
+  name: string;
+
+  @visibility("read")
+  id: string;
+
+  @flattenProperty
+  properties: OutputOnlyModelProperties;
+}
+
+model OutputOnlyModelProperties {
+  title: string;
+}
+
+model OutputOnlyModelChild extends OutputOnlyModel {
+  kind: "child";
+  childName: string;
+}
+
 @route("/model")
 interface Fishes {
   @get
@@ -147,6 +168,10 @@ interface Fishes {
 
   @put
   putModel(@body fish: Fish): Fish | ErrorResponseMin;
+
+  @get
+  @route("output")
+  getOutputOnlyModel(): OutputOnlyModel;
 }
 
 interface TopLevelArmResources {

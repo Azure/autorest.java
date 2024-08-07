@@ -1,6 +1,6 @@
 import { ArraySchema, BinarySchema, ObjectSchema, Property, Schema, Schemas, StringSchema } from "@autorest/codemodel";
 import { KnownMediaType } from "@azure-tools/codegen";
-import { getJavaNamespace, getNamespace, pascalCase } from "./utils.js";
+import { getNamespace, pascalCase } from "./utils.js";
 import {
   SdkBodyModelPropertyType,
   SdkModelPropertyType,
@@ -115,7 +115,12 @@ export function createPollOperationDetailsSchema(schemas: Schemas, stringSchema:
 
 const fileDetailsMap: Map<string, ObjectSchema> = new Map();
 
-function getFileSchemaName(baseName: string) {
+function getFileSchemaName(baseName: string, sdkModelType?: SdkModelType): string {
+  // If the TypeSpec Model exists and is not TypeSpec.Http.File, directly use its name
+  if (sdkModelType && sdkModelType.crossLanguageDefinitionId !== "TypeSpec.Http.File") {
+    return baseName;
+  }
+
   // make sure suffix "FileDetails"
   if (baseName.toLocaleLowerCase().endsWith("filedetails")) {
     return pascalCase(baseName);
@@ -126,14 +131,20 @@ function getFileSchemaName(baseName: string) {
   }
 }
 
-function createFileDetailsSchema(schemaName: string, propertyName: string, namespace: string, schemas: Schemas) {
+function createFileDetailsSchema(
+  schemaName: string,
+  propertyName: string,
+  namespace: string,
+  javaNamespace: string | undefined,
+  schemas: Schemas,
+) {
   const fileDetailsSchema = new ObjectSchema(schemaName, 'The file details for the "' + propertyName + '" field.', {
     language: {
       default: {
         namespace: namespace,
       },
       java: {
-        namespace: getJavaNamespace(namespace),
+        namespace: javaNamespace,
       },
     },
     serializationFormats: [KnownMediaType.Multipart],
@@ -201,6 +212,7 @@ function addContentTypeProperty(
 export function getFileDetailsSchema(
   property: SdkBodyModelPropertyType,
   namespace: string,
+  javaNamespace: string | undefined,
   schemas: Schemas,
   binarySchema: BinarySchema,
   stringSchema: StringSchema,
@@ -225,11 +237,11 @@ export function getFileDetailsSchema(
      */
     const filePropertyName = property.name;
     const fileSchemaName = fileSdkType.name;
-    const schemaName = getFileSchemaName(fileSchemaName);
+    const schemaName = getFileSchemaName(fileSchemaName, fileSdkType);
     let fileDetailsSchema = fileDetailsMap.get(schemaName);
     if (!fileDetailsSchema) {
       const typeNamespace = getNamespace(property.type.__raw) ?? namespace;
-      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, typeNamespace, schemas);
+      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, typeNamespace, javaNamespace, schemas);
 
       // description if available
       if (fileSdkType.description) {
@@ -268,7 +280,7 @@ export function getFileDetailsSchema(
     const schemaName = getFileSchemaName(filePropertyName);
     let fileDetailsSchema = fileDetailsMap.get(schemaName);
     if (!fileDetailsSchema) {
-      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, namespace, schemas);
+      fileDetailsSchema = createFileDetailsSchema(schemaName, filePropertyName, namespace, javaNamespace, schemas);
 
       addContentProperty(fileDetailsSchema, binarySchema);
       addFilenameProperty(fileDetailsSchema, stringSchema);

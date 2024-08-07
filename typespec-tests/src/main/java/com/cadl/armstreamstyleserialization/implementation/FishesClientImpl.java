@@ -18,10 +18,12 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
+import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.cadl.armstreamstyleserialization.fluent.FishesClient;
 import com.cadl.armstreamstyleserialization.fluent.models.FishInner;
+import com.cadl.armstreamstyleserialization.fluent.models.OutputOnlyModelInner;
 import com.cadl.armstreamstyleserialization.models.ErrorException;
 import com.cadl.armstreamstyleserialization.models.ErrorMinException;
 import reactor.core.publisher.Mono;
@@ -70,6 +72,13 @@ public final class FishesClientImpl implements FishesClient {
         @UnexpectedResponseExceptionType(ErrorMinException.class)
         Mono<Response<FishInner>> putModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
             @BodyParam("application/json") FishInner fish, Context context);
+
+        @Headers({ "Content-Type: application/json" })
+        @Get("/model/output")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<OutputOnlyModelInner>> getOutputOnlyModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, Context context);
     }
 
     /**
@@ -248,5 +257,83 @@ public final class FishesClientImpl implements FishesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public FishInner putModel(FishInner fish) {
         return putModelWithResponse(fish, Context.NONE).getValue();
+    }
+
+    /**
+     * The getOutputOnlyModel operation.
+     * 
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic OutputOnlyModel along with {@link Response} on successful completion
+     * of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<OutputOnlyModelInner>> getOutputOnlyModelWithResponseAsync() {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        return FluxUtil.withContext(context -> service.getOutputOnlyModel(this.client.getEndpoint(), accept, context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * The getOutputOnlyModel operation.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic OutputOnlyModel along with {@link Response} on successful completion
+     * of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<OutputOnlyModelInner>> getOutputOnlyModelWithResponseAsync(Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service.getOutputOnlyModel(this.client.getEndpoint(), accept, context);
+    }
+
+    /**
+     * The getOutputOnlyModel operation.
+     * 
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic OutputOnlyModel on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<OutputOnlyModelInner> getOutputOnlyModelAsync() {
+        return getOutputOnlyModelWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * The getOutputOnlyModel operation.
+     * 
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic OutputOnlyModel along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<OutputOnlyModelInner> getOutputOnlyModelWithResponse(Context context) {
+        return getOutputOnlyModelWithResponseAsync(context).block();
+    }
+
+    /**
+     * The getOutputOnlyModel operation.
+     * 
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return this is base model for polymorphic OutputOnlyModel.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public OutputOnlyModelInner getOutputOnlyModel() {
+        return getOutputOnlyModelWithResponse(Context.NONE).getValue();
     }
 }
