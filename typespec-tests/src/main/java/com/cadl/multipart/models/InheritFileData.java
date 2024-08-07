@@ -14,7 +14,7 @@ import com.azure.core.util.BinaryData;
  * The file details for the "fileData1" field.
  */
 @Immutable
-public final class Inherit2FileDetails {
+public final class InheritFileData {
     /*
      * The content of the file.
      */
@@ -34,13 +34,13 @@ public final class Inherit2FileDetails {
     private final String contentType = "image/jpeg";
 
     /**
-     * Creates an instance of Inherit2FileDetails class.
+     * Creates an instance of InheritFileData class.
      * 
      * @param content the content value to set.
      * @param filename the filename value to set.
      */
     @Generated
-    public Inherit2FileDetails(BinaryData content, String filename) {
+    public InheritFileData(BinaryData content, String filename) {
         this.content = content;
         this.filename = filename;
     }
