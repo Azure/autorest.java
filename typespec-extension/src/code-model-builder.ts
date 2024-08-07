@@ -81,6 +81,7 @@ import {
   shouldGenerateConvenient,
   shouldGenerateProtocol,
   getHttpOperationExamples,
+  SdkHttpOperationExample,
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
@@ -887,14 +888,14 @@ export class CodeModelBuilder {
     return Boolean(this.options["advanced-versioning"]);
   }
 
-  private getOperationExample(operation: HttpOperation): Record<string, any> | undefined {
-    const httpOperationExamples = getHttpOperationExamples(this.sdkContext, operation);
+  private getOperationExample(sdkMethod: SdkServiceMethod<SdkHttpOperation>): Record<string, any> | undefined {
+    const httpOperationExamples = sdkMethod.operation.examples;
     if (httpOperationExamples && httpOperationExamples.length > 0) {
       const operationExamples: Record<string, any> = {};
       for (const example of httpOperationExamples) {
         const operationExample = example.rawExample;
         operationExample["x-ms-original-file"] = pathToFileURL(example.filePath).toString();
-        operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] =
+        operationExamples[operationExample.title ?? operationExample.operationId ?? sdkMethod.name] =
           operationExample;
       }
       return operationExamples;
@@ -912,7 +913,7 @@ export class CodeModelBuilder {
 
     let operationExamples = undefined;
     if (sdkMethod.operation && sdkMethod.operation.__raw) {
-      operationExamples = this.getOperationExample(sdkMethod.operation.__raw);
+      operationExamples = this.getOperationExample(sdkMethod);
     }
 
     const codeModelOperation = new CodeModelOperation(operationName, sdkMethod.details ?? "", {
