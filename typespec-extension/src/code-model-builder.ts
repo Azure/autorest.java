@@ -2085,7 +2085,7 @@ export class CodeModelBuilder {
       nullable = true;
       nonNullType = nonNullType.type;
     }
-    let schema = this.processSchemaFromSdkType(nonNullType, "");
+    let schema;
 
     let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
@@ -2108,6 +2108,8 @@ export class CodeModelBuilder {
       // TODO: handle MultipartOptions.isMulti
       if (prop.multipartOptions.isFilePart) {
         schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop);
+      } else {
+        schema = this.processSchemaFromSdkType(nonNullType, "");
       }
     }
 

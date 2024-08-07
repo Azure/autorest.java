@@ -115,7 +115,13 @@ export function createPollOperationDetailsSchema(schemas: Schemas, stringSchema:
 
 const fileDetailsMap: Map<string, ObjectSchema> = new Map();
 
-function getFileSchemaName(baseName: string) {
+function getFileSchemaName(baseName: string, modelNamespace?: string): string {
+  // "modelNamespace" exists only if "baseName" is from a TypeSpec Model
+  // If the TypeSpec Model exists and is not TypeSpec.Http.File, directly use its name
+  if (modelNamespace && !(modelNamespace === "TypeSpec.Http" && baseName === "File")) {
+    return baseName;
+  }
+
   // make sure suffix "FileDetails"
   if (baseName.toLocaleLowerCase().endsWith("filedetails")) {
     return pascalCase(baseName);
@@ -232,7 +238,7 @@ export function getFileDetailsSchema(
      */
     const filePropertyName = property.name;
     const fileSchemaName = fileSdkType.name;
-    const schemaName = getFileSchemaName(fileSchemaName);
+    const schemaName = getFileSchemaName(fileSchemaName, namespace);
     let fileDetailsSchema = fileDetailsMap.get(schemaName);
     if (!fileDetailsSchema) {
       const typeNamespace = getNamespace(property.type.__raw) ?? namespace;
