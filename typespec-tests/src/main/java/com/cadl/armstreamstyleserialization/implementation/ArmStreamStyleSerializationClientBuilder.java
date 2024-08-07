@@ -20,12 +20,12 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ArmStreamStyleSerializationClientImpl.class })
 public final class ArmStreamStyleSerializationClientBuilder {
     /*
-     * Server parameter
+     * Service host
      */
     private String endpoint;
 
     /**
-     * Sets Server parameter.
+     * Sets Service host.
      * 
      * @param endpoint the endpoint value.
      * @return the ArmStreamStyleSerializationClientBuilder.

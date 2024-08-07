@@ -6,7 +6,6 @@ package com.server.versions.versioned.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Head;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -150,8 +149,8 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withoutApiVersion(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withoutApiVersion(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Head("/server/versions/versioned/without-api-version")
         @ExpectedResponses({ 200 })
@@ -159,8 +158,8 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withoutApiVersionSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> withoutApiVersionSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Head("/server/versions/versioned/with-query-api-version")
         @ExpectedResponses({ 200 })
@@ -169,8 +168,7 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withQueryApiVersion(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Head("/server/versions/versioned/with-query-api-version")
         @ExpectedResponses({ 200 })
@@ -179,8 +177,7 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withQueryApiVersionSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Head("/server/versions/versioned/with-path-api-version/{apiVersion}")
         @ExpectedResponses({ 200 })
@@ -189,8 +186,7 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withPathApiVersion(@HostParam("endpoint") String endpoint,
-            @PathParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @PathParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Head("/server/versions/versioned/with-path-api-version/{apiVersion}")
         @ExpectedResponses({ 200 })
@@ -199,8 +195,7 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withPathApiVersionSync(@HostParam("endpoint") String endpoint,
-            @PathParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @PathParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Head("/server/versions/versioned/with-query-old-api-version")
         @ExpectedResponses({ 200 })
@@ -209,8 +204,7 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withQueryOldApiVersion(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Head("/server/versions/versioned/with-query-old-api-version")
         @ExpectedResponses({ 200 })
@@ -219,8 +213,7 @@ public final class VersionedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withQueryOldApiVersionSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -235,9 +228,7 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withoutApiVersionWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.withoutApiVersion(this.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.withoutApiVersion(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -252,8 +243,7 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withoutApiVersionWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withoutApiVersionSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
+        return service.withoutApiVersionSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 
     /**
@@ -268,9 +258,8 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withQueryApiVersionWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.withQueryApiVersion(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, context));
+            this.getServiceVersion().getVersion(), requestOptions, context));
     }
 
     /**
@@ -285,8 +274,7 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withQueryApiVersionWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withQueryApiVersionSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+        return service.withQueryApiVersionSync(this.getEndpoint(), this.getServiceVersion().getVersion(),
             requestOptions, Context.NONE);
     }
 
@@ -302,9 +290,8 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withPathApiVersionWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.withPathApiVersion(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, context));
+            this.getServiceVersion().getVersion(), requestOptions, context));
     }
 
     /**
@@ -319,9 +306,8 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withPathApiVersionWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withPathApiVersionSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
-            requestOptions, Context.NONE);
+        return service.withPathApiVersionSync(this.getEndpoint(), this.getServiceVersion().getVersion(), requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -336,9 +322,8 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withQueryOldApiVersionWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.withQueryOldApiVersion(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, context));
+            this.getServiceVersion().getVersion(), requestOptions, context));
     }
 
     /**
@@ -353,8 +338,7 @@ public final class VersionedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withQueryOldApiVersionWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withQueryOldApiVersionSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+        return service.withQueryOldApiVersionSync(this.getEndpoint(), this.getServiceVersion().getVersion(),
             requestOptions, Context.NONE);
     }
 }

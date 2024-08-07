@@ -211,8 +211,8 @@ public final class AliasClient {
      * The spreadParameterWithInnerModel operation.
      * 
      * @param id The id parameter.
-     * @param name The name parameter.
      * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -222,7 +222,7 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadParameterWithInnerModel(String id, String name, String xMsTestHeader) {
+    public void spreadParameterWithInnerModel(String id, String xMsTestHeader, String name) {
         // Generated convenience method for spreadParameterWithInnerModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SpreadParameterWithInnerModelRequest spreadParameterWithInnerModelRequestObj
@@ -318,9 +318,9 @@ public final class AliasClient {
      * spread an alias with contains another alias property as body.
      * 
      * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
      * @param name name of the Thing.
      * @param age age of the Thing.
-     * @param xMsTestHeader The xMsTestHeader parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -330,7 +330,7 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadParameterWithInnerAlias(String id, String name, int age, String xMsTestHeader) {
+    public void spreadParameterWithInnerAlias(String id, String xMsTestHeader, String name, int age) {
         // Generated convenience method for spreadParameterWithInnerAliasWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SpreadParameterWithInnerAliasRequest spreadParameterWithInnerAliasRequestObj

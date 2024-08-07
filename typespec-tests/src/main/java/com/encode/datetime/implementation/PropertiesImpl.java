@@ -63,8 +63,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/default")
         @ExpectedResponses({ 200 })
@@ -72,8 +73,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> defaultMethodSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> defaultMethodSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/rfc3339")
         @ExpectedResponses({ 200 })
@@ -81,8 +83,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> rfc3339(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> rfc3339(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/rfc3339")
         @ExpectedResponses({ 200 })
@@ -90,8 +93,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> rfc3339Sync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> rfc3339Sync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/rfc7231")
         @ExpectedResponses({ 200 })
@@ -99,8 +103,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> rfc7231(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> rfc7231(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/rfc7231")
         @ExpectedResponses({ 200 })
@@ -108,8 +113,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> rfc7231Sync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> rfc7231Sync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/unix-timestamp")
         @ExpectedResponses({ 200 })
@@ -117,8 +123,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> unixTimestamp(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> unixTimestamp(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/unix-timestamp")
         @ExpectedResponses({ 200 })
@@ -126,8 +133,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> unixTimestampSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> unixTimestampSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/unix-timestamp-array")
         @ExpectedResponses({ 200 })
@@ -135,8 +143,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> unixTimestampArray(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> unixTimestampArray(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/datetime/property/unix-timestamp-array")
         @ExpectedResponses({ 200 })
@@ -144,8 +153,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> unixTimestampArraySync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> unixTimestampArraySync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -176,8 +186,10 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> defaultMethodWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.defaultMethod(accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.defaultMethod(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -208,8 +220,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> defaultMethodWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.defaultMethodSync(accept, body, requestOptions, Context.NONE);
+        return service.defaultMethodSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -240,8 +253,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> rfc3339WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.rfc3339(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.rfc3339(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -272,8 +286,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> rfc3339WithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.rfc3339Sync(accept, body, requestOptions, Context.NONE);
+        return service.rfc3339Sync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -304,8 +319,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> rfc7231WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.rfc7231(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.rfc7231(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -336,8 +352,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> rfc7231WithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.rfc7231Sync(accept, body, requestOptions, Context.NONE);
+        return service.rfc7231Sync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -368,8 +385,10 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> unixTimestampWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.unixTimestamp(accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.unixTimestamp(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -400,8 +419,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> unixTimestampWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.unixTimestampSync(accept, body, requestOptions, Context.NONE);
+        return service.unixTimestampSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -437,8 +457,10 @@ public final class PropertiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> unixTimestampArrayWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.unixTimestampArray(accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.unixTimestampArray(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -473,7 +495,8 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> unixTimestampArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.unixTimestampArraySync(accept, body, requestOptions, Context.NONE);
+        return service.unixTimestampArraySync(contentType, accept, body, requestOptions, Context.NONE);
     }
 }

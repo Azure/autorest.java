@@ -107,8 +107,7 @@ public final class OAuth2ClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> valid(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> valid(RequestOptions requestOptions, Context context);
 
         @Get("/authentication/oauth2/valid")
         @ExpectedResponses({ 204 })
@@ -116,7 +115,7 @@ public final class OAuth2ClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> validSync(RequestOptions requestOptions, Context context);
 
         @Get("/authentication/oauth2/invalid")
         @ExpectedResponses({ 204 })
@@ -124,7 +123,7 @@ public final class OAuth2ClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> invalid(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<Void>> invalid(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/authentication/oauth2/invalid")
@@ -133,7 +132,7 @@ public final class OAuth2ClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> invalidSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<Void> invalidSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
@@ -149,8 +148,7 @@ public final class OAuth2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.valid(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.valid(requestOptions, context));
     }
 
     /**
@@ -165,8 +163,7 @@ public final class OAuth2ClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.validSync(accept, requestOptions, Context.NONE);
+        return service.validSync(requestOptions, Context.NONE);
     }
 
     /**

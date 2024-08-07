@@ -264,6 +264,7 @@ public final class HttpbinClientBuilder
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(domain, "'domain' cannot be null.");
         Objects.requireNonNull(tld, "'tld' cannot be null.");
+        Objects.requireNonNull(relativePath, "'relativePath' cannot be null.");
     }
 
     @Generated

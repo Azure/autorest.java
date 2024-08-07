@@ -79,9 +79,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -89,10 +88,9 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") TopLevelTrackedResourceInner resource,
-            Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") TopLevelTrackedResourceInner resource, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -100,7 +98,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") TopLevelTrackedResourceInner properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -111,7 +109,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources")
@@ -119,7 +117,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> listByResourceGroup(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("accept") String accept,
+            @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -128,7 +126,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> list(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
@@ -136,7 +134,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> listByResourceGroupNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
@@ -144,7 +142,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> listBySubscriptionNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -305,11 +303,12 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, resource,
-                context))
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, contentType, accept,
+                resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -350,10 +349,12 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, resource, context);
+            this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, contentType, accept,
+            resource, context);
     }
 
     /**
@@ -553,11 +554,12 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, properties,
-                context))
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, contentType, accept,
+                properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -598,10 +600,11 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.update(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
-            resourceGroupName, topLevelTrackedResourceName, accept, properties, context);
+            resourceGroupName, topLevelTrackedResourceName, contentType, accept, properties, context);
     }
 
     /**
@@ -1215,6 +1218,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
+     * List TopLevelTrackedResource resources by resource group
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1243,6 +1248,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
+     * List TopLevelTrackedResource resources by resource group
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1271,6 +1278,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
+     * List TopLevelTrackedResource resources by subscription ID
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1299,6 +1308,8 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
+     * List TopLevelTrackedResource resources by subscription ID
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.

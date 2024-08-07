@@ -20,12 +20,12 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ResourcesClientImpl.class })
 public final class ResourcesClientBuilder {
     /*
-     * Server parameter
+     * Service host
      */
     private String endpoint;
 
     /**
-     * Sets Server parameter.
+     * Sets Service host.
      * 
      * @param endpoint the endpoint value.
      * @return the ResourcesClientBuilder.

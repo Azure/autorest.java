@@ -63,7 +63,7 @@ public final class ClientModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> client(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> client(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/model/client")
@@ -72,16 +72,7 @@ public final class ClientModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> clientSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
-
-        @Post("/client/naming/model/language")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> language(@HeaderParam("accept") String accept,
+        Response<Void> clientSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/model/language")
@@ -90,7 +81,16 @@ public final class ClientModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> languageSync(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> language(@HeaderParam("Content-Type") String contentType,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+
+        @Post("/client/naming/model/language")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> languageSync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
@@ -114,8 +114,8 @@ public final class ClientModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> clientWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.client(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.client(contentType, body, requestOptions, context));
     }
 
     /**
@@ -138,8 +138,8 @@ public final class ClientModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> clientWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.clientSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.clientSync(contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -162,8 +162,8 @@ public final class ClientModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> languageWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.language(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.language(contentType, body, requestOptions, context));
     }
 
     /**
@@ -186,7 +186,7 @@ public final class ClientModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> languageWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.languageSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.languageSync(contentType, body, requestOptions, Context.NONE);
     }
 }

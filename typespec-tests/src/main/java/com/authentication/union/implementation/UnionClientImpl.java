@@ -6,7 +6,6 @@ package com.authentication.union.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -107,8 +106,7 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> validKey(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> validKey(RequestOptions requestOptions, Context context);
 
         @Get("/authentication/union/validkey")
         @ExpectedResponses({ 204 })
@@ -116,8 +114,7 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validKeySync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> validKeySync(RequestOptions requestOptions, Context context);
 
         @Get("/authentication/union/validtoken")
         @ExpectedResponses({ 204 })
@@ -125,8 +122,7 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> validToken(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> validToken(RequestOptions requestOptions, Context context);
 
         @Get("/authentication/union/validtoken")
         @ExpectedResponses({ 204 })
@@ -134,8 +130,7 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validTokenSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<Void> validTokenSync(RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -150,8 +145,7 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validKeyWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.validKey(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.validKey(requestOptions, context));
     }
 
     /**
@@ -166,8 +160,7 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validKeyWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.validKeySync(accept, requestOptions, Context.NONE);
+        return service.validKeySync(requestOptions, Context.NONE);
     }
 
     /**
@@ -182,8 +175,7 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validTokenWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.validToken(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.validToken(requestOptions, context));
     }
 
     /**
@@ -198,7 +190,6 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validTokenWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.validTokenSync(accept, requestOptions, Context.NONE);
+        return service.validTokenSync(requestOptions, Context.NONE);
     }
 }

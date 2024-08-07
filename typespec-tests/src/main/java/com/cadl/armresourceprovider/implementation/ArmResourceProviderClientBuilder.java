@@ -20,12 +20,12 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ArmResourceProviderClientImpl.class })
 public final class ArmResourceProviderClientBuilder {
     /*
-     * Server parameter
+     * Service host
      */
     private String endpoint;
 
     /**
-     * Sets Server parameter.
+     * Sets Service host.
      * 
      * @param endpoint the endpoint value.
      * @return the ArmResourceProviderClientBuilder.

@@ -6,7 +6,6 @@ package com.encode.duration.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -66,8 +65,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> defaultMethod(@QueryParam("input") Duration input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/default")
         @ExpectedResponses({ 204 })
@@ -75,8 +74,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> defaultMethodSync(@QueryParam("input") Duration input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/iso8601")
         @ExpectedResponses({ 204 })
@@ -84,8 +83,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> iso8601(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> iso8601(@QueryParam("input") Duration input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/iso8601")
         @ExpectedResponses({ 204 })
@@ -93,8 +92,7 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> iso8601Sync(@QueryParam("input") Duration input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> iso8601Sync(@QueryParam("input") Duration input, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/query/int32-seconds")
         @ExpectedResponses({ 204 })
@@ -102,8 +100,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> int32Seconds(@QueryParam("input") long input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> int32Seconds(@QueryParam("input") long input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/int32-seconds")
         @ExpectedResponses({ 204 })
@@ -111,8 +109,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> int32SecondsSync(@QueryParam("input") long input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> int32SecondsSync(@QueryParam("input") long input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/float-seconds")
         @ExpectedResponses({ 204 })
@@ -120,8 +118,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatSeconds(@QueryParam("input") double input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> floatSeconds(@QueryParam("input") double input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/float-seconds")
         @ExpectedResponses({ 204 })
@@ -129,8 +127,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatSecondsSync(@QueryParam("input") double input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> floatSecondsSync(@QueryParam("input") double input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/float64-seconds")
         @ExpectedResponses({ 204 })
@@ -138,8 +136,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> float64Seconds(@QueryParam("input") double input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> float64Seconds(@QueryParam("input") double input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/float64-seconds")
         @ExpectedResponses({ 204 })
@@ -147,8 +145,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> float64SecondsSync(@QueryParam("input") double input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> float64SecondsSync(@QueryParam("input") double input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/int32-seconds-array")
         @ExpectedResponses({ 204 })
@@ -156,8 +154,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> int32SecondsArray(@QueryParam("input") String input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> int32SecondsArray(@QueryParam("input") String input, RequestOptions requestOptions,
+            Context context);
 
         @Get("/encode/duration/query/int32-seconds-array")
         @ExpectedResponses({ 204 })
@@ -165,8 +163,8 @@ public final class QueriesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> int32SecondsArraySync(@QueryParam("input") String input, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> int32SecondsArraySync(@QueryParam("input") String input, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -182,8 +180,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> defaultMethodWithResponseAsync(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.defaultMethod(input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.defaultMethod(input, requestOptions, context));
     }
 
     /**
@@ -199,8 +196,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> defaultMethodWithResponse(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.defaultMethodSync(input, accept, requestOptions, Context.NONE);
+        return service.defaultMethodSync(input, requestOptions, Context.NONE);
     }
 
     /**
@@ -216,8 +212,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> iso8601WithResponseAsync(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.iso8601(input, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.iso8601(input, requestOptions, context));
     }
 
     /**
@@ -233,8 +228,7 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> iso8601WithResponse(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.iso8601Sync(input, accept, requestOptions, Context.NONE);
+        return service.iso8601Sync(input, requestOptions, Context.NONE);
     }
 
     /**
@@ -250,9 +244,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> int32SecondsWithResponseAsync(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
         long inputConverted = input.getSeconds();
-        return FluxUtil.withContext(context -> service.int32Seconds(inputConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.int32Seconds(inputConverted, requestOptions, context));
     }
 
     /**
@@ -268,9 +261,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> int32SecondsWithResponse(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
         long inputConverted = input.getSeconds();
-        return service.int32SecondsSync(inputConverted, accept, requestOptions, Context.NONE);
+        return service.int32SecondsSync(inputConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -286,9 +278,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatSecondsWithResponseAsync(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
         double inputConverted = (double) input.toNanos() / 1000_000_000L;
-        return FluxUtil.withContext(context -> service.floatSeconds(inputConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.floatSeconds(inputConverted, requestOptions, context));
     }
 
     /**
@@ -304,9 +295,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatSecondsWithResponse(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
         double inputConverted = (double) input.toNanos() / 1000_000_000L;
-        return service.floatSecondsSync(inputConverted, accept, requestOptions, Context.NONE);
+        return service.floatSecondsSync(inputConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -322,9 +312,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> float64SecondsWithResponseAsync(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
         double inputConverted = (double) input.toNanos() / 1000_000_000L;
-        return FluxUtil.withContext(context -> service.float64Seconds(inputConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.float64Seconds(inputConverted, requestOptions, context));
     }
 
     /**
@@ -340,9 +329,8 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> float64SecondsWithResponse(Duration input, RequestOptions requestOptions) {
-        final String accept = "application/json";
         double inputConverted = (double) input.toNanos() / 1000_000_000L;
-        return service.float64SecondsSync(inputConverted, accept, requestOptions, Context.NONE);
+        return service.float64SecondsSync(inputConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -359,13 +347,11 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> int32SecondsArrayWithResponseAsync(List<Duration> input,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
         String inputConverted = JacksonAdapter.createDefaultSerializerAdapter()
             .serializeIterable(
                 input.stream().map(paramItemValue -> paramItemValue.getSeconds()).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return FluxUtil
-            .withContext(context -> service.int32SecondsArray(inputConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.int32SecondsArray(inputConverted, requestOptions, context));
     }
 
     /**
@@ -381,11 +367,10 @@ public final class QueriesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> int32SecondsArrayWithResponse(List<Duration> input, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String inputConverted = JacksonAdapter.createDefaultSerializerAdapter()
             .serializeIterable(
                 input.stream().map(paramItemValue -> paramItemValue.getSeconds()).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return service.int32SecondsArraySync(inputConverted, accept, requestOptions, Context.NONE);
+        return service.int32SecondsArraySync(inputConverted, requestOptions, Context.NONE);
     }
 }

@@ -80,9 +80,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
             @QueryParam("api-version") String apiVersion, @PathParam("resourceUri") String resourceUri,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
             @PathParam("childExtensionResourceName") String childExtensionResourceName,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Put("/{resourceUri}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childExtensionResources/{childExtensionResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -90,10 +89,9 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
             @QueryParam("api-version") String apiVersion, @PathParam("resourceUri") String resourceUri,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
             @PathParam("childExtensionResourceName") String childExtensionResourceName,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") ChildExtensionResourceInner resource,
-            Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") ChildExtensionResourceInner resource, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Patch("/{resourceUri}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childExtensionResources/{childExtensionResourceName}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -101,7 +99,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
             @QueryParam("api-version") String apiVersion, @PathParam("resourceUri") String resourceUri,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
             @PathParam("childExtensionResourceName") String childExtensionResourceName,
-            @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") ChildExtensionResourceUpdate properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -112,7 +110,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
             @QueryParam("api-version") String apiVersion, @PathParam("resourceUri") String resourceUri,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
             @PathParam("childExtensionResourceName") String childExtensionResourceName,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("/{resourceUri}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childExtensionResources")
@@ -121,7 +119,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
         Mono<Response<ChildExtensionResourceListResult>> listByTopLevelArmResource(
             @HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
             @PathParam("resourceUri") String resourceUri,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -130,7 +128,7 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<ChildExtensionResourceListResult>> listByTopLevelArmResourceNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -295,10 +293,12 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
-                resourceUri, topLevelArmResourceName, childExtensionResourceName, accept, resource, context))
+            .withContext(
+                context -> service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(), resourceUri,
+                    topLevelArmResourceName, childExtensionResourceName, contentType, accept, resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -340,10 +340,11 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(), resourceUri,
-            topLevelArmResourceName, childExtensionResourceName, accept, resource, context);
+            topLevelArmResourceName, childExtensionResourceName, contentType, accept, resource, context);
     }
 
     /**
@@ -551,10 +552,11 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(), resourceUri,
-                topLevelArmResourceName, childExtensionResourceName, accept, properties, context))
+                topLevelArmResourceName, childExtensionResourceName, contentType, accept, properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -596,10 +598,11 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.update(this.client.getEndpoint(), this.client.getApiVersion(), resourceUri,
-            topLevelArmResourceName, childExtensionResourceName, accept, properties, context);
+            topLevelArmResourceName, childExtensionResourceName, contentType, accept, properties, context);
     }
 
     /**
@@ -1018,6 +1021,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
     }
 
     /**
+     * List ChildExtensionResource resources by TopLevelArmResource
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1047,6 +1052,8 @@ public final class ChildExtensionResourceInterfacesClientImpl implements ChildEx
     }
 
     /**
+     * List ChildExtensionResource resources by TopLevelArmResource
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.

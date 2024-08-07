@@ -117,7 +117,7 @@ public final class PageableClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> list(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> list(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/payload/pageable")
@@ -126,7 +126,7 @@ public final class PageableClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> listSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("{nextLink}")
@@ -136,7 +136,7 @@ public final class PageableClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -145,7 +145,7 @@ public final class PageableClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -319,6 +319,8 @@ public final class PageableClientImpl {
     }
 
     /**
+     * List users
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -345,6 +347,8 @@ public final class PageableClientImpl {
     }
 
     /**
+     * List users
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 

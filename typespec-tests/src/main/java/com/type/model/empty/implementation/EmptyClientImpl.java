@@ -111,7 +111,7 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putEmpty(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> putEmpty(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/empty/alone")
@@ -120,7 +120,7 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putEmptySync(@HeaderParam("accept") String accept,
+        Response<Void> putEmptySync(@HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/empty/alone")
@@ -129,7 +129,7 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getEmpty(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> getEmpty(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/model/empty/alone")
@@ -138,7 +138,7 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getEmptySync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getEmptySync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/type/model/empty/round-trip")
@@ -147,8 +147,9 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> postRoundTripEmpty(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> postRoundTripEmpty(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/model/empty/round-trip")
         @ExpectedResponses({ 200 })
@@ -156,8 +157,9 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> postRoundTripEmptySync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> postRoundTripEmptySync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -178,8 +180,8 @@ public final class EmptyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putEmpty(accept, input, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.putEmpty(contentType, input, requestOptions, context));
     }
 
     /**
@@ -200,8 +202,8 @@ public final class EmptyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putEmptySync(accept, input, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putEmptySync(contentType, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -273,8 +275,10 @@ public final class EmptyClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postRoundTripEmptyWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.postRoundTripEmpty(accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.postRoundTripEmpty(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -301,7 +305,8 @@ public final class EmptyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postRoundTripEmptyWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.postRoundTripEmptySync(accept, body, requestOptions, Context.NONE);
+        return service.postRoundTripEmptySync(contentType, accept, body, requestOptions, Context.NONE);
     }
 }

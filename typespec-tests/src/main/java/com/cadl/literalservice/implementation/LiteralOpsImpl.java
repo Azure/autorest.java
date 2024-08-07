@@ -66,8 +66,9 @@ public final class LiteralOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> put(@HostParam("endpoint") String endpoint,
-            @QueryParam("literalParam") String literalParam, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @QueryParam("literalParam") String literalParam, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/literal/put")
         @ExpectedResponses({ 200 })
@@ -76,8 +77,9 @@ public final class LiteralOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> putSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("literalParam") String literalParam, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @QueryParam("literalParam") String literalParam, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -119,9 +121,10 @@ public final class LiteralOpsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String literalParam = "literalParam";
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.put(this.client.getEndpoint(), literalParam, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.put(this.client.getEndpoint(), literalParam, contentType, accept,
+            body, requestOptions, context));
     }
 
     /**
@@ -163,7 +166,9 @@ public final class LiteralOpsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String literalParam = "literalParam";
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putSync(this.client.getEndpoint(), literalParam, accept, body, requestOptions, Context.NONE);
+        return service.putSync(this.client.getEndpoint(), literalParam, contentType, accept, body, requestOptions,
+            Context.NONE);
     }
 }

@@ -7,7 +7,6 @@ package com.cadl.armstreamstyleserialization.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
@@ -64,14 +63,14 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
     @Host("{endpoint}")
     @ServiceInterface(name = "ArmStreamStyleSerial")
     public interface TopLevelArmResourcesService {
-        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmStreamStyleSerialization/topLevelArmResources/{topLevelArmResourceName}")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> update(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") TopLevelArmResourceTagsUpdate properties, Context context);
     }
 
@@ -111,9 +110,12 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, properties, context))
+        return FluxUtil
+            .withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, contentType, accept,
+                properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -154,10 +156,11 @@ public final class TopLevelArmResourcesClientImpl implements TopLevelArmResource
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.update(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
-            resourceGroupName, topLevelArmResourceName, accept, properties, context);
+            resourceGroupName, topLevelArmResourceName, contentType, accept, properties, context);
     }
 
     /**

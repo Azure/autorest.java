@@ -63,8 +63,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> defaultMethod(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/default")
         @ExpectedResponses({ 200 })
@@ -72,8 +73,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> defaultMethodSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> defaultMethodSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64")
         @ExpectedResponses({ 200 })
@@ -81,8 +83,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> base64(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64")
         @ExpectedResponses({ 200 })
@@ -90,8 +93,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64Sync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> base64Sync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64url")
         @ExpectedResponses({ 200 })
@@ -99,8 +103,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64url(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> base64url(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64url")
         @ExpectedResponses({ 200 })
@@ -108,8 +113,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64urlSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> base64urlSync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64url-array")
         @ExpectedResponses({ 200 })
@@ -117,8 +123,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64urlArray(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> base64urlArray(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64url-array")
         @ExpectedResponses({ 200 })
@@ -126,8 +133,9 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64urlArraySync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> base64urlArraySync(@HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -158,8 +166,10 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> defaultMethodWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.defaultMethod(accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.defaultMethod(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -190,8 +200,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> defaultMethodWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.defaultMethodSync(accept, body, requestOptions, Context.NONE);
+        return service.defaultMethodSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -222,8 +233,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> base64WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.base64(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -254,8 +266,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> base64WithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.base64Sync(accept, body, requestOptions, Context.NONE);
+        return service.base64Sync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -286,8 +299,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> base64urlWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.base64url(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64url(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -318,8 +332,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> base64urlWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.base64urlSync(accept, body, requestOptions, Context.NONE);
+        return service.base64urlSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -354,8 +369,10 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> base64urlArrayWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.base64urlArray(accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.base64urlArray(contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -390,7 +407,8 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> base64urlArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.base64urlArraySync(accept, body, requestOptions, Context.NONE);
+        return service.base64urlArraySync(contentType, accept, body, requestOptions, Context.NONE);
     }
 }

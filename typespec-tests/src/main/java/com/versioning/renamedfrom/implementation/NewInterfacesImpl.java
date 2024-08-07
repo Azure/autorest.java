@@ -75,8 +75,9 @@ public final class NewInterfacesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> newOpInNewInterface(@HostParam("endpoint") String endpoint,
-            @HostParam("version") String version, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @HostParam("version") String version, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/interface/test")
         @ExpectedResponses({ 200 })
@@ -85,8 +86,9 @@ public final class NewInterfacesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> newOpInNewInterfaceSync(@HostParam("endpoint") String endpoint,
-            @HostParam("version") String version, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @HostParam("version") String version, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -122,9 +124,10 @@ public final class NewInterfacesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> newOpInNewInterfaceWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.newOpInNewInterface(this.client.getEndpoint(),
-            this.client.getVersion(), accept, body, requestOptions, context));
+            this.client.getVersion(), contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -159,8 +162,9 @@ public final class NewInterfacesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> newOpInNewInterfaceWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.newOpInNewInterfaceSync(this.client.getEndpoint(), this.client.getVersion(), accept, body,
-            requestOptions, Context.NONE);
+        return service.newOpInNewInterfaceSync(this.client.getEndpoint(), this.client.getVersion(), contentType, accept,
+            body, requestOptions, Context.NONE);
     }
 }

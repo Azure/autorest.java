@@ -138,7 +138,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> smokeTest(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/azure/core/traits/user/{id}")
@@ -148,7 +148,7 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> smokeTestSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
@@ -158,8 +158,9 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> repeatableAction(@QueryParam("api-version") String apiVersion,
-            @PathParam("id") int id, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @PathParam("id") int id, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
         @ExpectedResponses({ 200 })
@@ -168,8 +169,8 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> repeatableActionSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -294,6 +295,7 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -310,7 +312,7 @@ public final class TraitsClientImpl {
             }
         });
         return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id,
-            accept, body, requestOptionsLocal, context));
+            contentType, accept, body, requestOptionsLocal, context));
     }
 
     /**
@@ -351,6 +353,7 @@ public final class TraitsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -366,7 +369,7 @@ public final class TraitsClientImpl {
                         DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
-        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, body,
+        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, contentType, accept, body,
             requestOptionsLocal, Context.NONE);
     }
 }

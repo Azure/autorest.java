@@ -43,12 +43,12 @@ public final class MultipartClientImpl {
     private final MultipartClientService service;
 
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -87,7 +87,7 @@ public final class MultipartClientImpl {
     /**
      * Initializes an instance of MultipartClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public MultipartClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -98,7 +98,7 @@ public final class MultipartClientImpl {
      * Initializes an instance of MultipartClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public MultipartClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -109,7 +109,7 @@ public final class MultipartClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public MultipartClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
@@ -133,8 +133,8 @@ public final class MultipartClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> upload(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("multipart/form-data") BinaryData data, RequestOptions requestOptions, Context context);
+            @HeaderParam("content-type") String contentType, @BodyParam("multipart/form-data") BinaryData data,
+            RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
         @Post("/upload/images/{name}")
@@ -144,10 +144,9 @@ public final class MultipartClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadSync(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("multipart/form-data") BinaryData data, RequestOptions requestOptions, Context context);
+            @HeaderParam("content-type") String contentType, @BodyParam("multipart/form-data") BinaryData data,
+            RequestOptions requestOptions, Context context);
 
-        // @Multipart not supported by RestProxy
         @Post("/uploadHttpPart/images/{name}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -155,10 +154,8 @@ public final class MultipartClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> uploadHttpPart(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
+            @HeaderParam("content-type") String contentType, RequestOptions requestOptions, Context context);
 
-        // @Multipart not supported by RestProxy
         @Post("/uploadHttpPart/images/{name}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -166,8 +163,7 @@ public final class MultipartClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> uploadHttpPartSync(@HostParam("endpoint") String endpoint, @PathParam("name") String name,
-            @HeaderParam("content-type") String contentType, @HeaderParam("accept") String accept,
-            @BodyParam("multipart/form-data") BinaryData body, RequestOptions requestOptions, Context context);
+            @HeaderParam("content-type") String contentType, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -192,9 +188,8 @@ public final class MultipartClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> uploadWithResponseAsync(String name, BinaryData data, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
         return FluxUtil.withContext(
-            context -> service.upload(this.getEndpoint(), name, contentType, accept, data, requestOptions, context));
+            context -> service.upload(this.getEndpoint(), name, contentType, data, requestOptions, context));
     }
 
     /**
@@ -219,8 +214,7 @@ public final class MultipartClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadWithResponse(String name, BinaryData data, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.uploadSync(this.getEndpoint(), name, contentType, accept, data, requestOptions, Context.NONE);
+        return service.uploadSync(this.getEndpoint(), name, contentType, data, requestOptions, Context.NONE);
     }
 
     /**
@@ -234,7 +228,6 @@ public final class MultipartClientImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
      * @param name The name parameter.
-     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -243,12 +236,10 @@ public final class MultipartClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadHttpPartWithResponseAsync(String name, BinaryData body,
-        RequestOptions requestOptions) {
+    public Mono<Response<Void>> uploadHttpPartWithResponseAsync(String name, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uploadHttpPart(this.getEndpoint(), name, contentType, accept,
-            body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.uploadHttpPart(this.getEndpoint(), name, contentType, requestOptions, context));
     }
 
     /**
@@ -262,7 +253,6 @@ public final class MultipartClientImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
      * @param name The name parameter.
-     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -271,10 +261,8 @@ public final class MultipartClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadHttpPartWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
+    public Response<Void> uploadHttpPartWithResponse(String name, RequestOptions requestOptions) {
         final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.uploadHttpPartSync(this.getEndpoint(), name, contentType, accept, body, requestOptions,
-            Context.NONE);
+        return service.uploadHttpPartSync(this.getEndpoint(), name, contentType, requestOptions, Context.NONE);
     }
 }

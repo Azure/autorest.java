@@ -6,6 +6,7 @@ import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { getNamespace, pascalCase } from "./utils.js";
 import { modelIs, unionReferredByType } from "./type-utils.js";
+import { SdkHttpOperation } from "@azure-tools/typespec-client-generator-core";
 
 export const SPECIAL_HEADER_NAMES = new Set([
   "repeatability-request-id",
@@ -41,18 +42,18 @@ export function isKnownContentType(contentTypes: string[]): boolean {
     });
 }
 
-export function operationIsJsonMergePatch(op: HttpOperation): boolean {
-  return operationIsContentType(op, "application/merge-patch+json");
+export function sdkHttpOperationIsJsonMergePatch(op: SdkHttpOperation): boolean {
+  return sdkHttpOperationIsContentType(op, "application/merge-patch+json");
 }
 
-export function operationIsMultipart(op: HttpOperation): boolean {
-  return operationIsContentType(op, "multipart/form-data");
+export function sdkHttpOperationIsMultipart(op: SdkHttpOperation): boolean {
+  return sdkHttpOperationIsContentType(op, "multipart/form-data");
 }
 
-function operationIsContentType(op: HttpOperation, contentType: string): boolean {
-  for (const param of op.parameters.parameters) {
-    if (param.type === "header" && param.name.toLowerCase() === CONTENT_TYPE_KEY) {
-      if (param.param.type.kind === "String" && param.param.type.value === contentType) {
+function sdkHttpOperationIsContentType(op: SdkHttpOperation, contentType: string): boolean {
+  for (const param of op.parameters) {
+    if (param.kind === "header" && param.serializedName.toLowerCase() === CONTENT_TYPE_KEY) {
+      if (param.type.kind === "constant" && param.type.value === contentType) {
         return true;
       }
     }
@@ -60,14 +61,14 @@ function operationIsContentType(op: HttpOperation, contentType: string): boolean
   return false;
 }
 
-export function operationIsMultipleContentTypes(op: HttpOperation): boolean {
+export function sdkHttpOperationIsMultipleContentTypes(op: SdkHttpOperation): boolean {
   if (
-    op.parameters.parameters &&
-    op.parameters.parameters.some(
+    op.parameters &&
+    op.parameters.some(
       (parameter) =>
-        parameter?.type === "header" &&
-        parameter?.name?.toLowerCase() === CONTENT_TYPE_KEY &&
-        parameter?.param?.type?.kind === "Union",
+        parameter.kind === "header" &&
+        parameter.serializedName.toLowerCase() === CONTENT_TYPE_KEY &&
+        parameter.type.kind === "enum",
     )
   ) {
     return true;
