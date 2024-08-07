@@ -139,6 +139,29 @@ public final class GoblinShark extends Shark {
     }
 
     /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredString() {
+        return this.innerProperties() == null ? null : this.innerProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the GoblinShark object itself.
+     */
+    public GoblinShark withRequiredString(String requiredString) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new FishProperties();
+        }
+        this.innerProperties().withRequiredString(requiredString);
+        return this;
+    }
+
+    /**
      * Get the length property: The length property.
      * 
      * @return the length value.
@@ -168,6 +191,29 @@ public final class GoblinShark extends Shark {
      */
     public String pattenAnotherPropertiesPatten() {
         return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().patten();
+    }
+
+    /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredStringAnotherPropertiesRequiredString() {
+        return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the GoblinShark object itself.
+     */
+    public GoblinShark withRequiredStringAnotherPropertiesRequiredString(String requiredString) {
+        if (this.innerAnotherProperties() == null) {
+            this.innerAnotherProperties = new AnotherFishProperties();
+        }
+        this.innerAnotherProperties().withRequiredString(requiredString);
+        return this;
     }
 
     /**
