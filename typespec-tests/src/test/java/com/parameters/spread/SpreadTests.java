@@ -22,7 +22,7 @@ public class SpreadTests {
 
         aliasClient.spreadWithMultipleParameters("1", "bar", "foo", List.of(1, 2), 1, List.of("foo", "bar"));
 
-        aliasClient.spreadParameterWithInnerAlias("1", "foo", 1, "bar");
+        aliasClient.spreadParameterWithInnerAlias("1", "foo", "bar", 1);
 
         aliasClient.spreadParameterWithInnerModel("1", "foo", "bar");
     }

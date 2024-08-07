@@ -145,7 +145,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrUpdate(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -156,7 +156,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrUpdateSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -167,8 +167,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion,
-            @PathParam("id") int id, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+            @PathParam("id") int id, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData resource,
+            RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 200, 201 })
@@ -177,8 +178,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 200 })
@@ -187,7 +188,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> get(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 200 })
@@ -196,7 +197,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
         @ExpectedResponses({ 200 })
@@ -205,7 +206,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> list(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
         @ExpectedResponses({ 200 })
@@ -214,7 +215,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 204 })
@@ -223,7 +224,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> delete(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 204 })
@@ -232,7 +233,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/basic/users/{id}:export")
         @ExpectedResponses({ 200 })
@@ -241,7 +242,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/azure/core/basic/users/{id}:export")
@@ -251,7 +252,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("{nextLink}")
@@ -261,7 +262,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -270,7 +271,7 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -434,9 +435,10 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(int id, BinaryData resource,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), id,
-            accept, resource, requestOptions, context));
+            contentType, accept, resource, requestOptions, context));
     }
 
     /**
@@ -489,9 +491,10 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrReplaceWithResponse(int id, BinaryData resource,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), id, accept, resource, requestOptions,
-            Context.NONE);
+        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), id, contentType, accept, resource,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -521,7 +524,9 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a User along with {@link Response} on successful completion of {@link Mono}.
+     * @return a user.
+     * 
+     * Gets a User along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(int id, RequestOptions requestOptions) {
@@ -557,7 +562,9 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a User along with {@link Response}.
+     * @return a user.
+     * 
+     * Gets a User along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(int id, RequestOptions requestOptions) {

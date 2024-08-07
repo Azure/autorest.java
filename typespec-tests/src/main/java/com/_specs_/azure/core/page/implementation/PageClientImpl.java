@@ -155,7 +155,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithPage(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/page/page")
         @ExpectedResponses({ 200 })
@@ -164,7 +164,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithPageSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/page/parameters")
         @ExpectedResponses({ 200 })
@@ -173,7 +173,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithParameters(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/page/parameters")
@@ -183,7 +183,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithParametersSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData bodyInput,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/page/custom-page")
@@ -193,7 +193,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithCustomPageModel(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/page/custom-page")
         @ExpectedResponses({ 200 })
@@ -202,7 +202,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithCustomPageModelSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -211,7 +211,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithPageNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -220,7 +220,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithPageNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -229,7 +229,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithParametersNext(
-            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
@@ -239,7 +239,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithParametersNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -248,7 +248,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithCustomPageModelNext(
-            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
@@ -258,7 +258,7 @@ public final class PageClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithCustomPageModelNextSync(
-            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("accept") String accept,
+            @PathParam(value = "nextLink", encoded = true) String nextLink, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 
@@ -756,6 +756,8 @@ public final class PageClientImpl {
     }
 
     /**
+     * List with Azure.Core.Page&lt;&gt;.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -792,6 +794,8 @@ public final class PageClientImpl {
     }
 
     /**
+     * List with Azure.Core.Page&lt;&gt;.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -827,6 +831,8 @@ public final class PageClientImpl {
     }
 
     /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -864,6 +870,8 @@ public final class PageClientImpl {
     }
 
     /**
+     * List with extensible enum parameter Azure.Core.Page&lt;&gt;.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -899,6 +907,8 @@ public final class PageClientImpl {
     }
 
     /**
+     * List with custom page model.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -936,6 +946,8 @@ public final class PageClientImpl {
     }
 
     /**
+     * List with custom page model.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
