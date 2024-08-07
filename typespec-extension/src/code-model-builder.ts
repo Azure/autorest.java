@@ -2111,6 +2111,8 @@ export class CodeModelBuilder {
       } else {
         schema = this.processSchemaFromSdkType(nonNullType, "");
       }
+    } else {
+      schema = this.processSchemaFromSdkType(nonNullType, "");
     }
 
     return new Property(prop.name, prop.details ?? "", schema, {
