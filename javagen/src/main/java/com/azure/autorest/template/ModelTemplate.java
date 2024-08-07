@@ -1086,7 +1086,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         methodBlock.methodReturn("this");
     }
 
-    private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+    protected void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         if (settings.isClientSideValidations()) {
             boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
 
@@ -1104,7 +1104,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (validateOnParent) {
                     methodBlock.line("super.validate();");
                 }
-                for (ClientModelProperty property : model.getProperties()) {
+                for (ClientModelProperty property : getValidationProperties(model)) {
                     String validation = property.getClientType().validate(getGetterName(model, property) + "()");
                     if (property.isRequired() && !property.isReadOnly() && !property.isConstant() && !(property.getClientType() instanceof PrimitiveType)) {
                         JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", getGetterName(model, property)), ifBlock -> {
@@ -1126,6 +1126,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             });
         }
+    }
+
+    /**
+     * Gets properties to validate in `validate()` method.
+     *
+     * @param model the model to add `validate()` method
+     * @return properties to validate in `validate()` method
+     */
+    protected List<ClientModelProperty> getValidationProperties(ClientModel model) {
+        return model.getProperties();
     }
 
     /**
