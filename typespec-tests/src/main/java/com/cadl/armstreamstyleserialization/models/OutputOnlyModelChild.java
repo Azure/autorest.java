@@ -111,12 +111,21 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
         if (childName() == null) {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Missing required property childName in model OutputOnlyModelChild"));
+        }
+        if (name() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property name in model OutputOnlyModelChild"));
+        }
+        if (innerProperties() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property innerProperties in model OutputOnlyModelChild"));
+        } else {
+            innerProperties().validate();
         }
     }
 

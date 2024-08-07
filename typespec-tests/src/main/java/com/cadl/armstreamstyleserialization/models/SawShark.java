@@ -201,11 +201,22 @@ public final class SawShark extends Shark {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
         if (dna() == null) {
             throw LOGGER.atError().log(new IllegalArgumentException("Missing required property dna in model SawShark"));
+        }
+        if (innerProperties() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property innerProperties in model SawShark"));
+        } else {
+            innerProperties().validate();
+        }
+        if (innerAnotherProperties() == null) {
+            throw LOGGER.atError()
+                .log(
+                    new IllegalArgumentException("Missing required property innerAnotherProperties in model SawShark"));
+        } else {
+            innerAnotherProperties().validate();
         }
     }
 

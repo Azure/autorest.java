@@ -17,7 +17,7 @@ public interface Fishes {
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.cadl.armstreamstyleserialization.models.ErrorException thrown if the request is rejected by server.
+     * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
      * {@link Response}.
@@ -27,7 +27,7 @@ public interface Fishes {
     /**
      * The getModel operation.
      * 
-     * @throws com.cadl.armstreamstyleserialization.models.ErrorException thrown if the request is rejected by server.
+     * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator.
      */
@@ -39,7 +39,7 @@ public interface Fishes {
      * @param fish The fish parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.cadl.armstreamstyleserialization.models.ErrorMinException thrown if the request is rejected by
+     * @throws ErrorMinException thrown if the request is rejected by
      * server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
@@ -52,7 +52,7 @@ public interface Fishes {
      * 
      * @param fish The fish parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws com.cadl.armstreamstyleserialization.models.ErrorMinException thrown if the request is rejected by
+     * @throws ErrorMinException thrown if the request is rejected by
      * server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return this is base model for polymorphic multiple levels inheritance with a discriminator.

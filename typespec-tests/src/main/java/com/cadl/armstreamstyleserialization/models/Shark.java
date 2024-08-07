@@ -5,6 +5,7 @@
 package com.cadl.armstreamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -174,10 +175,22 @@ public class Shark extends FishInner {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
+        if (innerProperties() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property innerProperties in model Shark"));
+        } else {
+            innerProperties().validate();
+        }
+        if (innerAnotherProperties() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property innerAnotherProperties in model Shark"));
+        } else {
+            innerAnotherProperties().validate();
+        }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Shark.class);
 
     /**
      * {@inheritDoc}
