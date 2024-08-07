@@ -87,9 +87,10 @@ public final class Kitten extends Cat {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
+        if (getName() == null) {
+            throw new IllegalArgumentException("Missing required property name in model Kitten");
+        }
     }
 
     /**

@@ -6,6 +6,7 @@ package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -102,10 +103,17 @@ public final class Sawshark extends Shark {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
+        if (getSiblings() != null) {
+            getSiblings().forEach(e -> e.validate());
+        }
+        if (getBirthday() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property birthday in model Sawshark"));
+        }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Sawshark.class);
 
     /**
      * {@inheritDoc}

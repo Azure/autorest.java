@@ -69,9 +69,7 @@ public final class Dog extends Pet {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
     }
 
     /**

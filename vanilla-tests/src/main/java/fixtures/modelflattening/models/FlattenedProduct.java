@@ -179,9 +179,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
     }
 
     /**

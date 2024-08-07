@@ -133,9 +133,10 @@ public final class SmartSalmon extends Salmon {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
+        if (getSiblings() != null) {
+            getSiblings().forEach(e -> e.validate());
+        }
     }
 
     /**

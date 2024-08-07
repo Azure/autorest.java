@@ -60,9 +60,7 @@ public final class ProductUrl extends GenericUrl {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
-    @Override
     public void validate() {
-        super.validate();
     }
 
     /**
