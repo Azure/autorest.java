@@ -26,8 +26,7 @@ class UnionClientTestBase extends TestProxyTestBase {
         UnionClientBuilder unionClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
-            unionClientbuilder.httpClient(interceptorManager.getPlaybackClient())
-                .credential(new MockTokenCredential());
+            unionClientbuilder.httpClient(interceptorManager.getPlaybackClient()).credential(new MockTokenCredential());
         } else if (getTestMode() == TestMode.RECORD) {
             unionClientbuilder.addPolicy(interceptorManager.getRecordPolicy())
                 .credential(new DefaultAzureCredentialBuilder().build());
