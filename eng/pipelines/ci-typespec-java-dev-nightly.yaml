@@ -64,13 +64,6 @@ jobs:
         displayName: 'Install dev TypeSpec Dependencies'
         workingDirectory: ./typespec-extension
 
-      - script: |
-          $file = '.eslintrc.cjs'
-          $regex = '(?<="deprecation/deprecation": ")[^"]*'
-          (Get-Content $file) -replace $regex, 'off' | Set-Content $file
-        displayName: 'Disable warn on deprecation'
-        workingDirectory: ./typespec-extension
-
       - task: PowerShell@2
         retryCountOnTaskFailure: 1
         displayName: 'Generate Code'
