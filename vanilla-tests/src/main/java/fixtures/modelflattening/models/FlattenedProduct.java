@@ -181,7 +181,6 @@ public class FlattenedProduct extends Resource {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**

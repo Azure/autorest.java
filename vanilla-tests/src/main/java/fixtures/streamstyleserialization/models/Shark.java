@@ -125,10 +125,12 @@ public class Shark extends Fish {
      */
     @Override
     public void validate() {
-        super.validate();
         if (getBirthday() == null) {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Missing required property birthday in model Shark"));
+        }
+        if (getSiblings() != null) {
+            getSiblings().forEach(e -> e.validate());
         }
     }
 

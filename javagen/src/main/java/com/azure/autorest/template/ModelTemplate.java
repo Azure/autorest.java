@@ -1088,7 +1088,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         if (settings.isClientSideValidations()) {
-            boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
 
             // javadoc
             classBlock.javadocComment((comment) -> {
@@ -1097,14 +1096,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 comment.methodThrows("IllegalArgumentException", "thrown if the instance is not valid");
             });
 
-            if (validateOnParent) {
+            if (this.parentModelHasValidate(model.getParentModelName())) {
                 classBlock.annotation("Override");
             }
             classBlock.publicMethod("void validate()", methodBlock -> {
-                if (validateOnParent) {
+                if (this.callParentValidate(model.getParentModelName())) {
                     methodBlock.line("super.validate();");
                 }
-                for (ClientModelProperty property : model.getProperties()) {
+                for (ClientModelProperty property : getValidationProperties(model)) {
                     String validation = property.getClientType().validate(getGetterName(model, property) + "()");
                     if (property.isRequired() && !property.isReadOnly() && !property.isConstant() && !(property.getClientType() instanceof PrimitiveType)) {
                         JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", getGetterName(model, property)), ifBlock -> {
@@ -1129,6 +1128,26 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
+     * Extension for validation on parent model.
+     *
+     * @param parentModelName parent model name
+     * @return whether to call validate() on parent model
+     */
+    protected boolean callParentValidate(String parentModelName) {
+        return parentModelHasValidate(parentModelName);
+    }
+
+    /**
+     * Gets properties to validate in `validate()` method.
+     *
+     * @param model the model to add `validate()` method
+     * @return properties to validate in `validate()` method
+     */
+    protected List<ClientModelProperty> getValidationProperties(ClientModel model) {
+        return model.getProperties();
+    }
+
+    /**
      * Gets the property XML wrapper class name.
      *
      * @param property The property that is getting its XML wrapper class name.
@@ -1142,9 +1161,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * Extension for validation on parent model.
      *
      * @param parentModelName the parent model name
-     * @return Whether to call validate on parent model.
+     * @return Whether validate() exists in parent model.
      */
-    protected boolean validateOnParentModel(String parentModelName) {
+    protected boolean parentModelHasValidate(String parentModelName) {
         return parentModelName != null;
     }
 

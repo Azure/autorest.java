@@ -86,7 +86,6 @@ public final class DotSalmon extends DotFish {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**
