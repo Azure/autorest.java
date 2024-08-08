@@ -146,7 +146,9 @@ public class SimpleProduct extends BaseProduct {
      */
     @Override
     public void validate() {
-        super.validate();
+        if (getProductId() == null) {
+            throw new IllegalArgumentException("Missing required property productId in model SimpleProduct");
+        }
     }
 
     /**

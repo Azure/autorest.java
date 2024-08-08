@@ -97,7 +97,6 @@ public class Cat extends Pet {
      */
     @Override
     public void validate() {
-        super.validate();
         if (getHates() != null) {
             getHates().forEach(e -> e.validate());
         }

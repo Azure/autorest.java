@@ -62,7 +62,6 @@ public final class B extends MyException {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**

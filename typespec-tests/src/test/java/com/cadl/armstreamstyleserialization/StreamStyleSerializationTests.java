@@ -8,6 +8,7 @@ import com.azure.json.JsonProviders;
 import com.azure.json.JsonWriter;
 import com.cadl.armstreamstyleserialization.models.Error;
 import com.cadl.armstreamstyleserialization.models.SawShark;
+import com.cadl.armstreamstyleserialization.models.Shark;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -43,5 +44,18 @@ public class StreamStyleSerializationTests {
         Assertions.assertEquals("WepAppError", error.getCode());
         Assertions.assertEquals("Deployment error.", error.getAdditionalProperty());
         Assertions.assertEquals("nested", error.getDetails().iterator().next().getAdditionalProperty());
+    }
+
+    @Test
+    public void testValidate() {
+        Shark shark = new Shark();
+        Assertions.assertThrows(IllegalArgumentException.class, shark::validate);
+
+        shark.withAge(1);
+        shark.withRequiredString("any");
+        Assertions.assertThrows(IllegalArgumentException.class, shark::validate);
+
+        shark.withRequiredStringAnotherPropertiesRequiredString("any");
+        shark.validate();
     }
 }

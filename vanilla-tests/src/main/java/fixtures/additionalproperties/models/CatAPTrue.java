@@ -88,7 +88,6 @@ public final class CatAPTrue extends PetAPTrue {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**

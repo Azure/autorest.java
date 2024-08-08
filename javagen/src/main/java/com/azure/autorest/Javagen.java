@@ -173,10 +173,12 @@ public class Javagen extends NewPlugin {
             }
 
             // Method group
-            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
-                if (settings.isGenerateClientInterfaces()) {
-                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+            if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+                writeMethodGroupClient(javaPackage, client.getServiceClient(), settings);
+            } else {
+                // multi-client from TypeSpec
+                for (ServiceClient serviceClient : client.getServiceClients()) {
+                    writeMethodGroupClient(javaPackage, serviceClient, settings);
                 }
             }
 
@@ -340,6 +342,15 @@ public class Javagen extends NewPlugin {
     }
 
     protected void writeHelperClasses(Client client, CodeModel codeModel, JavaPackage javaPackage, JavaSettings settings) {
+    }
+
+    private static void writeMethodGroupClient(JavaPackage javaPackage, ServiceClient serviceClient, JavaSettings settings) {
+        for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
+            javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
+            if (settings.isGenerateClientInterfaces()) {
+                javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+            }
+        }
     }
 
     private void clear() {

@@ -141,7 +141,9 @@ public final class SmartSalmon extends Salmon {
      */
     @Override
     public void validate() {
-        super.validate();
+        if (getSiblings() != null) {
+            getSiblings().forEach(e -> e.validate());
+        }
     }
 
     /**

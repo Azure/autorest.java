@@ -524,13 +524,15 @@ export class CodeModelBuilder {
     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
     for (const client of clients) {
-      let clientName = client.name;
+      let clientName: string = client.name;
+      let clientSubNamespace: string | undefined = undefined;
       let javaNamespace = this.getJavaNamespace(this.namespace);
       const clientFullName = client.name;
       const clientNameSegments = clientFullName.split(".");
       if (clientNameSegments.length > 1) {
         clientName = clientNameSegments.at(-1)!;
-        javaNamespace = this.getJavaNamespace(this.namespace + "." + clientNameSegments.slice(0, -1).join("."));
+        clientSubNamespace = clientNameSegments.slice(0, -1).join(".");
+        javaNamespace = this.getJavaNamespace(this.namespace + "." + clientSubNamespace);
       }
 
       const codeModelClient = new CodeModelClient(clientName, this.getDoc(client.type), {
@@ -608,14 +610,19 @@ export class CodeModelBuilder {
         const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
         // operation group with no operation is skipped
         if (operations.length > 0) {
-          const groupPath = operationGroup.groupPath.split(".");
+          // groupPath would be in format of "[<SubNamespace>.]<ClientName>.Chat.Completions"
+          let operationGroupPath = operationGroup.groupPath;
+          if (clientSubNamespace && operationGroup.groupPath.startsWith(clientSubNamespace + ".")) {
+            // remove SubNamespace
+            operationGroupPath = operationGroupPath.slice((clientSubNamespace + ".").length);
+          }
+          const groupPath = operationGroupPath.split(".");
           let operationGroupName: string;
           if (groupPath.length > 1) {
-            // groupPath should be in format of "OpenAIClient.Chat.Completions"
+            // remove ClientName
             operationGroupName = groupPath.slice(1).join("");
           } else {
-            // protection
-            operationGroupName = operationGroup.type.name;
+            operationGroupName = groupPath[0];
           }
           codeModelGroup = new OperationGroup(operationGroupName);
           for (const operation of operations) {

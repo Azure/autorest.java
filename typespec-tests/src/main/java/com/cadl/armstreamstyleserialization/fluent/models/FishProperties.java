@@ -70,6 +70,29 @@ public final class FishProperties implements JsonSerializable<FishProperties> {
     }
 
     /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredString() {
+        return this.innerTailProperties() == null ? null : this.innerTailProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the FishProperties object itself.
+     */
+    public FishProperties withRequiredString(String requiredString) {
+        if (this.innerTailProperties() == null) {
+            this.innerTailProperties = new TailProperties();
+        }
+        this.innerTailProperties().withRequiredString(requiredString);
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.

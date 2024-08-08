@@ -71,7 +71,6 @@ public final class Dog extends Pet {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**

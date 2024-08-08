@@ -5,6 +5,7 @@
 package com.cadl.armstreamstyleserialization.fluent.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -199,6 +200,29 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredString() {
+        return this.innerProperties() == null ? null : this.innerProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the SalmonInner object itself.
+     */
+    public SalmonInner withRequiredString(String requiredString) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new FishProperties();
+        }
+        this.innerProperties().withRequiredString(requiredString);
+        return this;
+    }
+
+    /**
      * Get the length property: The length property.
      * 
      * @return the length value.
@@ -231,13 +255,35 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredStringAnotherPropertiesRequiredString() {
+        return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the SalmonInner object itself.
+     */
+    public SalmonInner withRequiredStringAnotherPropertiesRequiredString(String requiredString) {
+        if (this.innerAnotherProperties() == null) {
+            this.innerAnotherProperties = new AnotherFishProperties();
+        }
+        this.innerAnotherProperties().withRequiredString(requiredString);
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     @Override
     public void validate() {
-        super.validate();
         if (friends() != null) {
             friends().forEach(e -> e.validate());
         }
@@ -251,7 +297,22 @@ public final class SalmonInner extends FishInner {
         if (partner() != null) {
             partner().validate();
         }
+        if (innerProperties() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property innerProperties in model SalmonInner"));
+        } else {
+            innerProperties().validate();
+        }
+        if (innerAnotherProperties() == null) {
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property innerAnotherProperties in model SalmonInner"));
+        } else {
+            innerAnotherProperties().validate();
+        }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(SalmonInner.class);
 
     /**
      * {@inheritDoc}

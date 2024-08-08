@@ -41,6 +41,13 @@ public interface Salmon {
     String patten();
 
     /**
+     * Gets the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    String requiredString();
+
+    /**
      * Gets the lengthAnotherPropertiesLength property: The length property.
      * 
      * @return the lengthAnotherPropertiesLength value.
@@ -53,6 +60,13 @@ public interface Salmon {
      * @return the pattenAnotherPropertiesPatten value.
      */
     String pattenAnotherPropertiesPatten();
+
+    /**
+     * Gets the requiredStringAnotherPropertiesRequiredString property: The requiredString property.
+     * 
+     * @return the requiredStringAnotherPropertiesRequiredString value.
+     */
+    String requiredStringAnotherPropertiesRequiredString();
 
     /**
      * Gets the kind property: Discriminator property for Fish.

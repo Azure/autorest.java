@@ -171,6 +171,29 @@ public class FishInner implements JsonSerializable<FishInner> {
     }
 
     /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredString() {
+        return this.innerProperties() == null ? null : this.innerProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the FishInner object itself.
+     */
+    public FishInner withRequiredString(String requiredString) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new FishProperties();
+        }
+        this.innerProperties().withRequiredString(requiredString);
+        return this;
+    }
+
+    /**
      * Get the length property: The length property.
      * 
      * @return the length value.
@@ -200,6 +223,29 @@ public class FishInner implements JsonSerializable<FishInner> {
      */
     public String pattenAnotherPropertiesPatten() {
         return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().patten();
+    }
+
+    /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredStringAnotherPropertiesRequiredString() {
+        return this.innerAnotherProperties() == null ? null : this.innerAnotherProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the FishInner object itself.
+     */
+    public FishInner withRequiredStringAnotherPropertiesRequiredString(String requiredString) {
+        if (this.innerAnotherProperties() == null) {
+            this.innerAnotherProperties = new AnotherFishProperties();
+        }
+        this.innerAnotherProperties().withRequiredString(requiredString);
+        return this;
     }
 
     /**

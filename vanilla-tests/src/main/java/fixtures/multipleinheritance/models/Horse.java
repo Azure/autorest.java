@@ -62,7 +62,9 @@ public final class Horse extends Pet {
      */
     @Override
     public void validate() {
-        super.validate();
+        if (getName() == null) {
+            throw new IllegalArgumentException("Missing required property name in model Horse");
+        }
     }
 
     /**

@@ -44,6 +44,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.azure.autorest.util.ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME;
 import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstructor;
@@ -338,6 +339,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
                                 // immutable output model only has package-private setters, making its properties read-only
                                 || isImmutableOutputModel(getDefiningModel(model, property), settings));
+    }
+
+    @Override
+    protected boolean callParentValidate(String parentModelName) {
+        // in stream-style-serialization, since there are shadowing involved, we validate all properties locally
+        return false;
+    }
+
+    @Override
+    protected List<ClientModelProperty> getValidationProperties(ClientModel model) {
+        // in stream-style-serialization, since there are shadowing involved, we validate all properties locally
+        return Stream.concat(model.getProperties().stream(), ClientModelUtil.getParentProperties(model).stream())
+                .collect(Collectors.toList());
     }
 
     /**

@@ -62,7 +62,6 @@ public final class ProductUrl extends GenericUrl {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**
