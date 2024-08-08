@@ -1086,9 +1086,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         methodBlock.methodReturn("this");
     }
 
-    protected void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+    private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         if (settings.isClientSideValidations()) {
-            boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
 
             // javadoc
             classBlock.javadocComment((comment) -> {
@@ -1097,11 +1096,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 comment.methodThrows("IllegalArgumentException", "thrown if the instance is not valid");
             });
 
-            if (validateOnParent) {
+            if (this.parentModelHasValidate(model.getParentModelName())) {
                 classBlock.annotation("Override");
             }
             classBlock.publicMethod("void validate()", methodBlock -> {
-                if (validateOnParent) {
+                if (this.callParentValidate(model.getParentModelName())) {
                     methodBlock.line("super.validate();");
                 }
                 for (ClientModelProperty property : getValidationProperties(model)) {
@@ -1129,6 +1128,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
+     * Extension for validation on parent model.
+     *
+     * @param parentModelName parent model name
+     * @return whether to call validate() on parent model
+     */
+    protected boolean callParentValidate(String parentModelName) {
+        return parentModelHasValidate(parentModelName);
+    }
+
+    /**
      * Gets properties to validate in `validate()` method.
      *
      * @param model the model to add `validate()` method
@@ -1152,9 +1161,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * Extension for validation on parent model.
      *
      * @param parentModelName the parent model name
-     * @return Whether to call validate on parent model.
+     * @return Whether validate() exists in parent model.
      */
-    protected boolean validateOnParentModel(String parentModelName) {
+    protected boolean parentModelHasValidate(String parentModelName) {
         return parentModelName != null;
     }
 

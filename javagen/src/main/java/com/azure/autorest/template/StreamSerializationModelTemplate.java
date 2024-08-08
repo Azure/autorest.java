@@ -342,7 +342,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     @Override
-    protected boolean validateOnParentModel(String parentModelName) {
+    protected boolean callParentValidate(String parentModelName) {
         // in stream-style-serialization, since there are shadowing involved, we validate all properties locally
         return false;
     }

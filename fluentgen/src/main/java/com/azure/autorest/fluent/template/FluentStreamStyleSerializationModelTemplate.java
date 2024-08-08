@@ -24,6 +24,11 @@ public class FluentStreamStyleSerializationModelTemplate extends StreamSerializa
     }
 
     @Override
+    protected boolean parentModelHasValidate(String parentModelName) {
+        return FLUENT_MODEL_TEMPLATE.parentModelHasValidate(parentModelName);
+    }
+
+    @Override
     protected boolean isManagementErrorSubclass(ClientModel model, JavaSettings settings) {
         if (CoreUtils.isNullOrEmpty(model.getParentModelName())) {
             return false;
