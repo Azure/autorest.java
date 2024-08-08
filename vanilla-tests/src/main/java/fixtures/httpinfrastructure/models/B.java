@@ -60,6 +60,7 @@ public final class B extends MyException {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
     }
 

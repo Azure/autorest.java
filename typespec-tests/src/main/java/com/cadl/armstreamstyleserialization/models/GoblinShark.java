@@ -221,6 +221,7 @@ public final class GoblinShark extends Shark {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (innerProperties() == null) {
             throw LOGGER.atError()

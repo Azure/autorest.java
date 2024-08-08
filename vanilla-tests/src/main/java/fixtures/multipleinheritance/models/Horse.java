@@ -60,6 +60,7 @@ public final class Horse extends Pet {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (getName() == null) {
             throw new IllegalArgumentException("Missing required property name in model Horse");

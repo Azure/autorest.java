@@ -88,6 +88,7 @@ public final class Siamese extends Cat {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (getHates() != null) {
             getHates().forEach(e -> e.validate());

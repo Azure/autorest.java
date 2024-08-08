@@ -144,6 +144,7 @@ public class SimpleProduct extends BaseProduct {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (getProductId() == null) {
             throw new IllegalArgumentException("Missing required property productId in model SimpleProduct");

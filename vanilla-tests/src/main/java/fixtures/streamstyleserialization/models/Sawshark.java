@@ -116,6 +116,7 @@ public final class Sawshark extends Shark {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (getSiblings() != null) {
             getSiblings().forEach(e -> e.validate());

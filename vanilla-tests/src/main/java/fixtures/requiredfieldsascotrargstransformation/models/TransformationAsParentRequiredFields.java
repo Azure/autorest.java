@@ -105,6 +105,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (getRfc1123RequiredChild() == null) {
             throw new IllegalArgumentException(

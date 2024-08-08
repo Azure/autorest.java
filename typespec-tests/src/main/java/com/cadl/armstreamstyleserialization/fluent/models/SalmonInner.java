@@ -282,6 +282,7 @@ public final class SalmonInner extends FishInner {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (friends() != null) {
             friends().forEach(e -> e.validate());

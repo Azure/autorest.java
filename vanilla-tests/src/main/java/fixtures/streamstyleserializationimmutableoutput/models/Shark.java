@@ -123,6 +123,7 @@ public class Shark extends Fish {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (getBirthday() == null) {
             throw LOGGER.atError()

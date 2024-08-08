@@ -111,6 +111,7 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
+    @Override
     public void validate() {
         if (childName() == null) {
             throw LOGGER.atError()
