@@ -143,7 +143,9 @@ public class EnumType implements IType {
      * @return The method name used to convert the enum type to JSON.
      */
     public final String getToMethodName() {
-        return "to" + CodeNamer.toPascalCase(elementType.getClientType().toString());
+        return expandable
+                ? "toString" // TODO(xiaofei) use getValue() once we support ExpandableEnum interface in azure
+                : "to" + CodeNamer.toPascalCase(elementType.getClientType().toString());
     }
 
     @Override
@@ -190,8 +192,10 @@ public class EnumType implements IType {
             ? valueGetter + "." + getToMethodName() + "()"
             : valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
 
-        return elementType.asNullable().jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter,
-            jsonMergePatch);
+        return (expandable
+                    ? ClassType.STRING // TODO(xiaofei) always use elementType once we support ExpandableEnum interface in azure
+                    : elementType.asNullable())
+                .jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter, jsonMergePatch);
     }
 
     @Override

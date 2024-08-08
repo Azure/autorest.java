@@ -266,7 +266,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param model            the client model
      * @param property         the property to generate getter
      * @param settings         {@link JavaSettings} instance
-     * @param methodVisibility
+     * @param methodVisibility {@link JavaVisibility} for the method
      * @return whether the property's getter overrides parent getter
      */
     @Override
