@@ -1131,16 +1131,16 @@ export class CodeModelBuilder {
             }
           }
         } else if (param.type === "header") {
-          switch (param.format) {
-            case "csv":
-              style = SerializationStyle.Simple;
-              break;
+          if (param.format) {
+            switch (param.format) {
+              case "csv":
+                style = SerializationStyle.Simple;
+                break;
 
-            default:
-              if (param.format) {
+              default:
                 this.logWarning(`Unrecognized header parameter format: '${param.format}'.`);
-              }
-              break;
+                break;
+            }
           }
         }
       }
