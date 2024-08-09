@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -57,7 +58,7 @@ public final class DecimalTypesImpl {
      * The interface defining all the services for ScalarClientDecimalTypes to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ScalarClientDecimalT")
     public interface DecimalTypesService {
         @Get("/type/scalar/decimal/response_body")
@@ -66,8 +67,8 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> responseBody(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> responseBody(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/scalar/decimal/response_body")
         @ExpectedResponses({ 200 })
@@ -75,8 +76,8 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> responseBodySync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> responseBodySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/scalar/decimal/resquest_body")
         @ExpectedResponses({ 204 })
@@ -84,8 +85,9 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requestBody(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> requestBody(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/scalar/decimal/resquest_body")
         @ExpectedResponses({ 204 })
@@ -93,8 +95,9 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requestBodySync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> requestBodySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/scalar/decimal/request_parameter")
         @ExpectedResponses({ 204 })
@@ -102,8 +105,8 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requestParameter(@QueryParam("value") BigDecimal value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> requestParameter(@HostParam("endpoint") String endpoint,
+            @QueryParam("value") BigDecimal value, RequestOptions requestOptions, Context context);
 
         @Get("/type/scalar/decimal/request_parameter")
         @ExpectedResponses({ 204 })
@@ -111,8 +114,8 @@ public final class DecimalTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requestParameterSync(@QueryParam("value") BigDecimal value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> requestParameterSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("value") BigDecimal value, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -134,7 +137,8 @@ public final class DecimalTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> responseBodyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.responseBody(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.responseBody(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -155,7 +159,7 @@ public final class DecimalTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> responseBodyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.responseBodySync(accept, requestOptions, Context.NONE);
+        return service.responseBodySync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -177,7 +181,8 @@ public final class DecimalTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requestBodyWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.requestBody(contentType, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.requestBody(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -199,7 +204,7 @@ public final class DecimalTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requestBodyWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.requestBodySync(contentType, body, requestOptions, Context.NONE);
+        return service.requestBodySync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -215,7 +220,8 @@ public final class DecimalTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requestParameterWithResponseAsync(BigDecimal value, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.requestParameter(value, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.requestParameter(this.client.getEndpoint(), value, requestOptions, context));
     }
 
     /**
@@ -231,6 +237,6 @@ public final class DecimalTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requestParameterWithResponse(BigDecimal value, RequestOptions requestOptions) {
-        return service.requestParameterSync(value, requestOptions, Context.NONE);
+        return service.requestParameterSync(this.client.getEndpoint(), value, requestOptions, Context.NONE);
     }
 }

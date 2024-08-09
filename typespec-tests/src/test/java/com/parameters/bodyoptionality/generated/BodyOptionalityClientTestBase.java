@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.parameters.bodyoptionality.BodyOptionalityClient;
 import com.parameters.bodyoptionality.BodyOptionalityClientBuilder;
 import com.parameters.bodyoptionality.OptionalExplicitClient;
@@ -24,9 +25,10 @@ class BodyOptionalityClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        BodyOptionalityClientBuilder bodyOptionalityClientbuilder
-            = new BodyOptionalityClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BodyOptionalityClientBuilder bodyOptionalityClientbuilder = new BodyOptionalityClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             bodyOptionalityClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -34,9 +36,10 @@ class BodyOptionalityClientTestBase extends TestProxyTestBase {
         }
         bodyOptionalityClient = bodyOptionalityClientbuilder.buildClient();
 
-        BodyOptionalityClientBuilder optionalExplicitClientbuilder
-            = new BodyOptionalityClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        BodyOptionalityClientBuilder optionalExplicitClientbuilder = new BodyOptionalityClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             optionalExplicitClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

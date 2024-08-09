@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class BooleanLiteralsImpl {
      * The interface defining all the services for OptionalClientBooleanLiterals to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "OptionalClientBoolea")
     public interface BooleanLiteralsService {
         @Get("/type/property/optional/boolean/literal/all")
@@ -64,8 +65,8 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAll(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getAll(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/boolean/literal/all")
         @ExpectedResponses({ 200 })
@@ -73,8 +74,8 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAllSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getAllSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/boolean/literal/default")
         @ExpectedResponses({ 200 })
@@ -82,8 +83,8 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getDefault(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getDefault(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/boolean/literal/default")
         @ExpectedResponses({ 200 })
@@ -91,8 +92,8 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getDefaultSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getDefaultSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/boolean/literal/all")
         @ExpectedResponses({ 204 })
@@ -100,8 +101,9 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putAll(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putAll(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/boolean/literal/all")
         @ExpectedResponses({ 204 })
@@ -109,8 +111,9 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putAllSync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> putAllSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/boolean/literal/default")
         @ExpectedResponses({ 204 })
@@ -118,8 +121,9 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putDefault(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putDefault(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/boolean/literal/default")
         @ExpectedResponses({ 204 })
@@ -127,8 +131,9 @@ public final class BooleanLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putDefaultSync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> putDefaultSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -152,7 +157,8 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAllWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getAll(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getAll(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -175,7 +181,7 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAllWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getAllSync(accept, requestOptions, Context.NONE);
+        return service.getAllSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -199,7 +205,8 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDefaultWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDefault(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getDefault(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -222,7 +229,7 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getDefaultSync(accept, requestOptions, Context.NONE);
+        return service.getDefaultSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -246,7 +253,8 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putAllWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.putAll(contentType, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.putAll(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -270,7 +278,7 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putAllWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.putAllSync(contentType, body, requestOptions, Context.NONE);
+        return service.putAllSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -294,7 +302,8 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDefaultWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.putDefault(contentType, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.putDefault(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -318,6 +327,6 @@ public final class BooleanLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDefaultWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.putDefaultSync(contentType, body, requestOptions, Context.NONE);
+        return service.putDefaultSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

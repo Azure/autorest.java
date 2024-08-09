@@ -7,6 +7,7 @@ package com.type.scalar;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -55,8 +56,8 @@ import java.util.Objects;
         Decimal128TypeAsyncClient.class,
         DecimalVerifyAsyncClient.class,
         Decimal128VerifyAsyncClient.class })
-public final class ScalarClientBuilder
-    implements HttpTrait<ScalarClientBuilder>, ConfigurationTrait<ScalarClientBuilder> {
+public final class ScalarClientBuilder implements HttpTrait<ScalarClientBuilder>,
+    ConfigurationTrait<ScalarClientBuilder>, EndpointTrait<ScalarClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -188,6 +189,22 @@ public final class ScalarClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public ScalarClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -214,7 +231,8 @@ public final class ScalarClientBuilder
     private ScalarClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ScalarClientImpl client = new ScalarClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        ScalarClientImpl client
+            = new ScalarClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -222,6 +240,7 @@ public final class ScalarClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

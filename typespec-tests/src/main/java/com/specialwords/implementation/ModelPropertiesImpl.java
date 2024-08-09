@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class ModelPropertiesImpl {
      * The interface defining all the services for SpecialWordsClientModelProperties to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "SpecialWordsClientMo")
     public interface ModelPropertiesService {
         @Post("/special-words/model-properties/same-as-model")
@@ -63,8 +64,9 @@ public final class ModelPropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sameAsModel(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> sameAsModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/model-properties/same-as-model")
         @ExpectedResponses({ 204 })
@@ -72,8 +74,9 @@ public final class ModelPropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sameAsModelSync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> sameAsModelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -97,7 +100,8 @@ public final class ModelPropertiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sameAsModelWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.sameAsModel(contentType, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.sameAsModel(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -121,6 +125,6 @@ public final class ModelPropertiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sameAsModelWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.sameAsModelSync(contentType, body, requestOptions, Context.NONE);
+        return service.sameAsModelSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

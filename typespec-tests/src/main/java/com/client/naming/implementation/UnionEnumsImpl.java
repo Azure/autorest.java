@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class UnionEnumsImpl {
      * The interface defining all the services for NamingClientUnionEnums to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "NamingClientUnionEnu")
     public interface UnionEnumsService {
         @Post("/client/naming/union-enum/union-enum-name")
@@ -63,8 +64,9 @@ public final class UnionEnumsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unionEnumName(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> unionEnumName(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/union-enum/union-enum-name")
         @ExpectedResponses({ 204 })
@@ -72,8 +74,9 @@ public final class UnionEnumsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unionEnumNameSync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> unionEnumNameSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/union-enum/union-enum-member-name")
         @ExpectedResponses({ 204 })
@@ -81,8 +84,9 @@ public final class UnionEnumsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unionEnumMemberName(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> unionEnumMemberName(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/client/naming/union-enum/union-enum-member-name")
         @ExpectedResponses({ 204 })
@@ -90,8 +94,9 @@ public final class UnionEnumsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unionEnumMemberNameSync(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> unionEnumMemberNameSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -113,7 +118,8 @@ public final class UnionEnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unionEnumNameWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.unionEnumName(contentType, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.unionEnumName(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -135,7 +141,7 @@ public final class UnionEnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unionEnumNameWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.unionEnumNameSync(contentType, body, requestOptions, Context.NONE);
+        return service.unionEnumNameSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -157,7 +163,8 @@ public final class UnionEnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unionEnumMemberNameWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.unionEnumMemberName(contentType, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.unionEnumMemberName(this.client.getEndpoint(), contentType, body,
+            requestOptions, context));
     }
 
     /**
@@ -179,6 +186,7 @@ public final class UnionEnumsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unionEnumMemberNameWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.unionEnumMemberNameSync(contentType, body, requestOptions, Context.NONE);
+        return service.unionEnumMemberNameSync(this.client.getEndpoint(), contentType, body, requestOptions,
+            Context.NONE);
     }
 }

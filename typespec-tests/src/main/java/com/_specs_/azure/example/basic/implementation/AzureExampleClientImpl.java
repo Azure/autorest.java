@@ -9,6 +9,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -41,6 +42,20 @@ public final class AzureExampleClientImpl {
      * The proxy service used to perform REST calls.
      */
     private final AzureExampleClientService service;
+
+    /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
 
     /**
      * Service version.
@@ -87,21 +102,23 @@ public final class AzureExampleClientImpl {
     /**
      * Initializes an instance of AzureExampleClient client.
      * 
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public AzureExampleClientImpl(BasicServiceVersion serviceVersion) {
+    public AzureExampleClientImpl(String endpoint, BasicServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of AzureExampleClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public AzureExampleClientImpl(HttpPipeline httpPipeline, BasicServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+    public AzureExampleClientImpl(HttpPipeline httpPipeline, String endpoint, BasicServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -109,12 +126,14 @@ public final class AzureExampleClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public AzureExampleClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+    public AzureExampleClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         BasicServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.service
             = RestProxy.create(AzureExampleClientService.class, this.httpPipeline, this.getSerializerAdapter());
@@ -124,7 +143,7 @@ public final class AzureExampleClientImpl {
      * The interface defining all the services for AzureExampleClient to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "AzureExampleClient")
     public interface AzureExampleClientService {
         @Post("/azure/example/basic/basic")
@@ -133,10 +152,11 @@ public final class AzureExampleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> basicAction(@QueryParam("api-version") String apiVersion,
-            @QueryParam("query-param") String queryParam, @HeaderParam("header-param") String headerParam,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> basicAction(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @QueryParam("query-param") String queryParam,
+            @HeaderParam("header-param") String headerParam, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/azure/example/basic/basic")
         @ExpectedResponses({ 200 })
@@ -144,10 +164,11 @@ public final class AzureExampleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> basicActionSync(@QueryParam("api-version") String apiVersion,
-            @QueryParam("query-param") String queryParam, @HeaderParam("header-param") String headerParam,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<BinaryData> basicActionSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @QueryParam("query-param") String queryParam,
+            @HeaderParam("header-param") String headerParam, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -205,8 +226,9 @@ public final class AzureExampleClientImpl {
         BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.basicAction(this.getServiceVersion().getVersion(), queryParam,
-            headerParam, contentType, accept, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.basicAction(this.getEndpoint(), this.getServiceVersion().getVersion(),
+                queryParam, headerParam, contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -264,7 +286,7 @@ public final class AzureExampleClientImpl {
         RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return service.basicActionSync(this.getServiceVersion().getVersion(), queryParam, headerParam, contentType,
-            accept, body, requestOptions, Context.NONE);
+        return service.basicActionSync(this.getEndpoint(), this.getServiceVersion().getVersion(), queryParam,
+            headerParam, contentType, accept, body, requestOptions, Context.NONE);
     }
 }

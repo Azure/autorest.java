@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.type.array.ArrayClientBuilder;
 import com.type.array.BooleanValueClient;
 import com.type.array.DatetimeValueClient;
@@ -60,8 +61,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ArrayClientBuilder int32ValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder int32ValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             int32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -69,8 +72,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         int32ValueClient = int32ValueClientbuilder.buildInt32ValueClient();
 
-        ArrayClientBuilder int64ValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder int64ValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             int64ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -78,8 +83,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         int64ValueClient = int64ValueClientbuilder.buildInt64ValueClient();
 
-        ArrayClientBuilder booleanValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder booleanValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -87,8 +94,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         booleanValueClient = booleanValueClientbuilder.buildBooleanValueClient();
 
-        ArrayClientBuilder stringValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder stringValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -96,8 +105,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         stringValueClient = stringValueClientbuilder.buildStringValueClient();
 
-        ArrayClientBuilder float32ValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder float32ValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             float32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -105,8 +116,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         float32ValueClient = float32ValueClientbuilder.buildFloat32ValueClient();
 
-        ArrayClientBuilder datetimeValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder datetimeValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -114,8 +127,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         datetimeValueClient = datetimeValueClientbuilder.buildDatetimeValueClient();
 
-        ArrayClientBuilder durationValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder durationValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -123,8 +138,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         durationValueClient = durationValueClientbuilder.buildDurationValueClient();
 
-        ArrayClientBuilder unknownValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder unknownValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -132,8 +149,10 @@ class ArrayClientTestBase extends TestProxyTestBase {
         }
         unknownValueClient = unknownValueClientbuilder.buildUnknownValueClient();
 
-        ArrayClientBuilder modelValueClientbuilder = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ArrayClientBuilder modelValueClientbuilder
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -142,7 +161,8 @@ class ArrayClientTestBase extends TestProxyTestBase {
         modelValueClient = modelValueClientbuilder.buildModelValueClient();
 
         ArrayClientBuilder nullableFloatValueClientbuilder
-            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nullableFloatValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -152,7 +172,8 @@ class ArrayClientTestBase extends TestProxyTestBase {
         nullableFloatValueClient = nullableFloatValueClientbuilder.buildNullableFloatValueClient();
 
         ArrayClientBuilder nullableInt32ValueClientbuilder
-            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nullableInt32ValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -162,7 +183,8 @@ class ArrayClientTestBase extends TestProxyTestBase {
         nullableInt32ValueClient = nullableInt32ValueClientbuilder.buildNullableInt32ValueClient();
 
         ArrayClientBuilder nullableBooleanValueClientbuilder
-            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nullableBooleanValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -172,7 +194,8 @@ class ArrayClientTestBase extends TestProxyTestBase {
         nullableBooleanValueClient = nullableBooleanValueClientbuilder.buildNullableBooleanValueClient();
 
         ArrayClientBuilder nullableStringValueClientbuilder
-            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nullableStringValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -182,7 +205,8 @@ class ArrayClientTestBase extends TestProxyTestBase {
         nullableStringValueClient = nullableStringValueClientbuilder.buildNullableStringValueClient();
 
         ArrayClientBuilder nullableModelValueClientbuilder
-            = new ArrayClientBuilder().httpClient(HttpClient.createDefault())
+            = new ArrayClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nullableModelValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());

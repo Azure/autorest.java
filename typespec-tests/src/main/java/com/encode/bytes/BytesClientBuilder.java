@@ -7,6 +7,7 @@ package com.encode.bytes;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -51,7 +52,8 @@ import java.util.Objects;
         HeaderAsyncClient.class,
         RequestBodyAsyncClient.class,
         ResponseBodyAsyncClient.class })
-public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, ConfigurationTrait<BytesClientBuilder> {
+public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, ConfigurationTrait<BytesClientBuilder>,
+    EndpointTrait<BytesClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -183,6 +185,22 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public BytesClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -209,7 +227,8 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
     private BytesClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        BytesClientImpl client = new BytesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        BytesClientImpl client
+            = new BytesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -217,6 +236,7 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

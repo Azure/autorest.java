@@ -8,6 +8,7 @@ import com._specs_.azure.clientgenerator.core.usage.implementation.UsageClientIm
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,7 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the UsageClient type.
  */
 @ServiceClientBuilder(serviceClients = { UsageClient.class, UsageAsyncClient.class })
-public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, ConfigurationTrait<UsageClientBuilder> {
+public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, ConfigurationTrait<UsageClientBuilder>,
+    EndpointTrait<UsageClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -173,6 +175,22 @@ public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, 
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public UsageClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -199,7 +217,8 @@ public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, 
     private UsageClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        UsageClientImpl client = new UsageClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        UsageClientImpl client
+            = new UsageClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -207,6 +226,7 @@ public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, 
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

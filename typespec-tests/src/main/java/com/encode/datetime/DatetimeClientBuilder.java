@@ -7,6 +7,7 @@ package com.encode.datetime;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -49,8 +50,8 @@ import java.util.Objects;
         PropertyAsyncClient.class,
         HeaderAsyncClient.class,
         ResponseHeaderAsyncClient.class })
-public final class DatetimeClientBuilder
-    implements HttpTrait<DatetimeClientBuilder>, ConfigurationTrait<DatetimeClientBuilder> {
+public final class DatetimeClientBuilder implements HttpTrait<DatetimeClientBuilder>,
+    ConfigurationTrait<DatetimeClientBuilder>, EndpointTrait<DatetimeClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -182,6 +183,22 @@ public final class DatetimeClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public DatetimeClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -209,7 +226,7 @@ public final class DatetimeClientBuilder
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         DatetimeClientImpl client
-            = new DatetimeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+            = new DatetimeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -217,6 +234,7 @@ public final class DatetimeClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

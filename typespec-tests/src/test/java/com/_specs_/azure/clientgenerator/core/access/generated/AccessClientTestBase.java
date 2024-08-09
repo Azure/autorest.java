@@ -18,6 +18,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 
 class AccessClientTestBase extends TestProxyTestBase {
     protected PublicOperationClient publicOperationClient;
@@ -31,7 +32,8 @@ class AccessClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         AccessClientBuilder publicOperationClientbuilder
-            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+            = new AccessClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             publicOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -41,7 +43,8 @@ class AccessClientTestBase extends TestProxyTestBase {
         publicOperationClient = publicOperationClientbuilder.buildPublicOperationClient();
 
         AccessClientBuilder internalOperationClientbuilder
-            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+            = new AccessClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             internalOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -51,7 +54,8 @@ class AccessClientTestBase extends TestProxyTestBase {
         internalOperationClient = internalOperationClientbuilder.buildInternalOperationClient();
 
         AccessClientBuilder sharedModelInOperationClientbuilder
-            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+            = new AccessClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             sharedModelInOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -61,7 +65,8 @@ class AccessClientTestBase extends TestProxyTestBase {
         sharedModelInOperationClient = sharedModelInOperationClientbuilder.buildSharedModelInOperationClient();
 
         AccessClientBuilder relativeModelInOperationClientbuilder
-            = new AccessClientBuilder().httpClient(HttpClient.createDefault())
+            = new AccessClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             relativeModelInOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());

@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -39,6 +40,20 @@ public final class ApiKeyClientImpl {
     private final ApiKeyClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -68,19 +83,22 @@ public final class ApiKeyClientImpl {
 
     /**
      * Initializes an instance of ApiKeyClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public ApiKeyClientImpl() {
+    public ApiKeyClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of ApiKeyClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public ApiKeyClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public ApiKeyClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -88,17 +106,19 @@ public final class ApiKeyClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public ApiKeyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public ApiKeyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service = RestProxy.create(ApiKeyClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
      * The interface defining all the services for ApiKeyClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ApiKeyClient")
     public interface ApiKeyClientService {
         @Get("/authentication/api-key/valid")
@@ -107,7 +127,8 @@ public final class ApiKeyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> valid(RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> valid(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/authentication/api-key/valid")
         @ExpectedResponses({ 204 })
@@ -115,15 +136,7 @@ public final class ApiKeyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validSync(RequestOptions requestOptions, Context context);
-
-        @Get("/authentication/api-key/invalid")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> invalid(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
+        Response<Void> validSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
             Context context);
 
         @Get("/authentication/api-key/invalid")
@@ -132,8 +145,17 @@ public final class ApiKeyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> invalidSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> invalid(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
+
+        @Get("/authentication/api-key/invalid")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> invalidSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -148,7 +170,7 @@ public final class ApiKeyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.valid(requestOptions, context));
+        return FluxUtil.withContext(context -> service.valid(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -163,7 +185,7 @@ public final class ApiKeyClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validWithResponse(RequestOptions requestOptions) {
-        return service.validSync(requestOptions, Context.NONE);
+        return service.validSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 
     /**
@@ -179,7 +201,7 @@ public final class ApiKeyClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> invalidWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.invalid(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.invalid(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -195,6 +217,6 @@ public final class ApiKeyClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> invalidWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.invalidSync(accept, requestOptions, Context.NONE);
+        return service.invalidSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

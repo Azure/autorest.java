@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -54,7 +55,7 @@ public final class HeadersImpl {
      * The interface defining all the services for CollectionFormatClientHeaders to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "CollectionFormatClie")
     public interface HeadersService {
         @Get("/parameters/collection-format/header/csv")
@@ -63,7 +64,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> csv(@HeaderParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> csv(@HostParam("endpoint") String endpoint, @HeaderParam("colors") String colors,
+            RequestOptions requestOptions, Context context);
 
         @Get("/parameters/collection-format/header/csv")
         @ExpectedResponses({ 204 })
@@ -71,7 +73,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> csvSync(@HeaderParam("colors") String colors, RequestOptions requestOptions, Context context);
+        Response<Void> csvSync(@HostParam("endpoint") String endpoint, @HeaderParam("colors") String colors,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -90,7 +93,8 @@ public final class HeadersImpl {
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
-        return FluxUtil.withContext(context -> service.csv(colorsConverted, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.csv(this.client.getEndpoint(), colorsConverted, requestOptions, context));
     }
 
     /**
@@ -109,6 +113,6 @@ public final class HeadersImpl {
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
-        return service.csvSync(colorsConverted, requestOptions, Context.NONE);
+        return service.csvSync(this.client.getEndpoint(), colorsConverted, requestOptions, Context.NONE);
     }
 }

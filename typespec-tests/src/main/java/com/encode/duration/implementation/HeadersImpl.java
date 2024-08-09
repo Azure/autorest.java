@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -55,7 +56,7 @@ public final class HeadersImpl {
      * The interface defining all the services for DurationClientHeaders to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "DurationClientHeader")
     public interface HeadersService {
         @Get("/encode/duration/header/default")
@@ -64,8 +65,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(@HeaderParam("duration") Duration duration, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> defaultMethod(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") Duration duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/default")
         @ExpectedResponses({ 204 })
@@ -73,8 +74,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(@HeaderParam("duration") Duration duration, RequestOptions requestOptions,
-            Context context);
+        Response<Void> defaultMethodSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") Duration duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601")
         @ExpectedResponses({ 204 })
@@ -82,8 +83,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> iso8601(@HeaderParam("duration") Duration duration, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> iso8601(@HostParam("endpoint") String endpoint, @HeaderParam("duration") Duration duration,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601")
         @ExpectedResponses({ 204 })
@@ -91,8 +92,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> iso8601Sync(@HeaderParam("duration") Duration duration, RequestOptions requestOptions,
-            Context context);
+        Response<Void> iso8601Sync(@HostParam("endpoint") String endpoint, @HeaderParam("duration") Duration duration,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601-array")
         @ExpectedResponses({ 204 })
@@ -100,8 +101,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> iso8601Array(@HeaderParam("duration") String duration, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> iso8601Array(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") String duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/iso8601-array")
         @ExpectedResponses({ 204 })
@@ -109,8 +110,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> iso8601ArraySync(@HeaderParam("duration") String duration, RequestOptions requestOptions,
-            Context context);
+        Response<Void> iso8601ArraySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") String duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/int32-seconds")
         @ExpectedResponses({ 204 })
@@ -118,8 +119,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> int32Seconds(@HeaderParam("duration") long duration, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> int32Seconds(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") long duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/int32-seconds")
         @ExpectedResponses({ 204 })
@@ -127,8 +128,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> int32SecondsSync(@HeaderParam("duration") long duration, RequestOptions requestOptions,
-            Context context);
+        Response<Void> int32SecondsSync(@HostParam("endpoint") String endpoint, @HeaderParam("duration") long duration,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float-seconds")
         @ExpectedResponses({ 204 })
@@ -136,8 +137,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> floatSeconds(@HeaderParam("duration") double duration, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> floatSeconds(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") double duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float-seconds")
         @ExpectedResponses({ 204 })
@@ -145,8 +146,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> floatSecondsSync(@HeaderParam("duration") double duration, RequestOptions requestOptions,
-            Context context);
+        Response<Void> floatSecondsSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") double duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float64-seconds")
         @ExpectedResponses({ 204 })
@@ -154,8 +155,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> float64Seconds(@HeaderParam("duration") double duration, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> float64Seconds(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") double duration, RequestOptions requestOptions, Context context);
 
         @Get("/encode/duration/header/float64-seconds")
         @ExpectedResponses({ 204 })
@@ -163,8 +164,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> float64SecondsSync(@HeaderParam("duration") double duration, RequestOptions requestOptions,
-            Context context);
+        Response<Void> float64SecondsSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("duration") double duration, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -180,7 +181,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> defaultMethodWithResponseAsync(Duration duration, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.defaultMethod(duration, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.defaultMethod(this.client.getEndpoint(), duration, requestOptions, context));
     }
 
     /**
@@ -196,7 +198,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> defaultMethodWithResponse(Duration duration, RequestOptions requestOptions) {
-        return service.defaultMethodSync(duration, requestOptions, Context.NONE);
+        return service.defaultMethodSync(this.client.getEndpoint(), duration, requestOptions, Context.NONE);
     }
 
     /**
@@ -212,7 +214,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> iso8601WithResponseAsync(Duration duration, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.iso8601(duration, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.iso8601(this.client.getEndpoint(), duration, requestOptions, context));
     }
 
     /**
@@ -228,7 +231,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> iso8601WithResponse(Duration duration, RequestOptions requestOptions) {
-        return service.iso8601Sync(duration, requestOptions, Context.NONE);
+        return service.iso8601Sync(this.client.getEndpoint(), duration, requestOptions, Context.NONE);
     }
 
     /**
@@ -246,7 +249,8 @@ public final class HeadersImpl {
     public Mono<Response<Void>> iso8601ArrayWithResponseAsync(List<Duration> duration, RequestOptions requestOptions) {
         String durationConverted
             = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
-        return FluxUtil.withContext(context -> service.iso8601Array(durationConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.iso8601Array(this.client.getEndpoint(), durationConverted, requestOptions, context));
     }
 
     /**
@@ -264,7 +268,7 @@ public final class HeadersImpl {
     public Response<Void> iso8601ArrayWithResponse(List<Duration> duration, RequestOptions requestOptions) {
         String durationConverted
             = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(duration, CollectionFormat.CSV);
-        return service.iso8601ArraySync(durationConverted, requestOptions, Context.NONE);
+        return service.iso8601ArraySync(this.client.getEndpoint(), durationConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -281,7 +285,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> int32SecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         long durationConverted = duration.getSeconds();
-        return FluxUtil.withContext(context -> service.int32Seconds(durationConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.int32Seconds(this.client.getEndpoint(), durationConverted, requestOptions, context));
     }
 
     /**
@@ -298,7 +303,7 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> int32SecondsWithResponse(Duration duration, RequestOptions requestOptions) {
         long durationConverted = duration.getSeconds();
-        return service.int32SecondsSync(durationConverted, requestOptions, Context.NONE);
+        return service.int32SecondsSync(this.client.getEndpoint(), durationConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -315,7 +320,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatSecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         double durationConverted = (double) duration.toNanos() / 1000_000_000L;
-        return FluxUtil.withContext(context -> service.floatSeconds(durationConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.floatSeconds(this.client.getEndpoint(), durationConverted, requestOptions, context));
     }
 
     /**
@@ -332,7 +338,7 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> floatSecondsWithResponse(Duration duration, RequestOptions requestOptions) {
         double durationConverted = (double) duration.toNanos() / 1000_000_000L;
-        return service.floatSecondsSync(durationConverted, requestOptions, Context.NONE);
+        return service.floatSecondsSync(this.client.getEndpoint(), durationConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -349,7 +355,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> float64SecondsWithResponseAsync(Duration duration, RequestOptions requestOptions) {
         double durationConverted = (double) duration.toNanos() / 1000_000_000L;
-        return FluxUtil.withContext(context -> service.float64Seconds(durationConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.float64Seconds(this.client.getEndpoint(), durationConverted, requestOptions, context));
     }
 
     /**
@@ -366,6 +373,6 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> float64SecondsWithResponse(Duration duration, RequestOptions requestOptions) {
         double durationConverted = (double) duration.toNanos() / 1000_000_000L;
-        return service.float64SecondsSync(durationConverted, requestOptions, Context.NONE);
+        return service.float64SecondsSync(this.client.getEndpoint(), durationConverted, requestOptions, Context.NONE);
     }
 }

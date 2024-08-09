@@ -7,6 +7,7 @@ package com.authentication.union.implementation;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -38,6 +39,20 @@ public final class UnionClientImpl {
     private final UnionClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -67,19 +82,22 @@ public final class UnionClientImpl {
 
     /**
      * Initializes an instance of UnionClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public UnionClientImpl() {
+    public UnionClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of UnionClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public UnionClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public UnionClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -87,17 +105,19 @@ public final class UnionClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public UnionClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public UnionClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service = RestProxy.create(UnionClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
      * The interface defining all the services for UnionClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "UnionClient")
     public interface UnionClientService {
         @Get("/authentication/union/validkey")
@@ -106,7 +126,8 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> validKey(RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> validKey(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/authentication/union/validkey")
         @ExpectedResponses({ 204 })
@@ -114,7 +135,8 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validKeySync(RequestOptions requestOptions, Context context);
+        Response<Void> validKeySync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/authentication/union/validtoken")
         @ExpectedResponses({ 204 })
@@ -122,7 +144,8 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> validToken(RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> validToken(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/authentication/union/validtoken")
         @ExpectedResponses({ 204 })
@@ -130,7 +153,8 @@ public final class UnionClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> validTokenSync(RequestOptions requestOptions, Context context);
+        Response<Void> validTokenSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -145,7 +169,7 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validKeyWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.validKey(requestOptions, context));
+        return FluxUtil.withContext(context -> service.validKey(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -160,7 +184,7 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validKeyWithResponse(RequestOptions requestOptions) {
-        return service.validKeySync(requestOptions, Context.NONE);
+        return service.validKeySync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 
     /**
@@ -175,7 +199,7 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> validTokenWithResponseAsync(RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.validToken(requestOptions, context));
+        return FluxUtil.withContext(context -> service.validToken(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -190,6 +214,6 @@ public final class UnionClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> validTokenWithResponse(RequestOptions requestOptions) {
-        return service.validTokenSync(requestOptions, Context.NONE);
+        return service.validTokenSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 }

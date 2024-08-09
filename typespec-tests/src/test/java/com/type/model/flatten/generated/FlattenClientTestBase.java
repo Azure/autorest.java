@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.type.model.flatten.FlattenClient;
 import com.type.model.flatten.FlattenClientBuilder;
 
@@ -21,8 +22,10 @@ class FlattenClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        FlattenClientBuilder flattenClientbuilder = new FlattenClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        FlattenClientBuilder flattenClientbuilder
+            = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             flattenClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

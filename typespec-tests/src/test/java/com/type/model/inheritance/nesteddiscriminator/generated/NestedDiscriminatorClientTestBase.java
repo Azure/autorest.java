@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.type.model.inheritance.nesteddiscriminator.NestedDiscriminatorClient;
 import com.type.model.inheritance.nesteddiscriminator.NestedDiscriminatorClientBuilder;
 
@@ -21,9 +22,10 @@ class NestedDiscriminatorClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        NestedDiscriminatorClientBuilder nestedDiscriminatorClientbuilder
-            = new NestedDiscriminatorClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        NestedDiscriminatorClientBuilder nestedDiscriminatorClientbuilder = new NestedDiscriminatorClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             nestedDiscriminatorClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

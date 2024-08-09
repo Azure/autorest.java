@@ -46,12 +46,11 @@ public final class FlattenClientImpl {
     private final FlattenClientService service;
 
     /**
-     * Flatten.
      */
     private final String endpoint;
 
     /**
-     * Gets Flatten.
+     * Gets.
      * 
      * @return the endpoint value.
      */
@@ -104,7 +103,7 @@ public final class FlattenClientImpl {
     /**
      * Initializes an instance of FlattenClient client.
      * 
-     * @param endpoint Flatten.
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(String endpoint, FlattenServiceVersion serviceVersion) {
@@ -116,7 +115,7 @@ public final class FlattenClientImpl {
      * Initializes an instance of FlattenClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Flatten.
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(HttpPipeline httpPipeline, String endpoint, FlattenServiceVersion serviceVersion) {
@@ -128,7 +127,7 @@ public final class FlattenClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Flatten.
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,

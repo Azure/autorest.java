@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.type.property.additionalproperties.AdditionalPropertiesClientBuilder;
 import com.type.property.additionalproperties.ExtendsDifferentSpreadFloatClient;
 import com.type.property.additionalproperties.ExtendsDifferentSpreadModelArrayClient;
@@ -114,9 +115,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        AdditionalPropertiesClientBuilder extendsUnknownClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder extendsUnknownClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsUnknownClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -124,9 +126,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         extendsUnknownClient = extendsUnknownClientbuilder.buildExtendsUnknownClient();
 
-        AdditionalPropertiesClientBuilder extendsUnknownDerivedClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder extendsUnknownDerivedClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsUnknownDerivedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -135,7 +138,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsUnknownDerivedClient = extendsUnknownDerivedClientbuilder.buildExtendsUnknownDerivedClient();
 
         AdditionalPropertiesClientBuilder extendsUnknownDiscriminatedClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsUnknownDiscriminatedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -145,9 +150,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsUnknownDiscriminatedClient
             = extendsUnknownDiscriminatedClientbuilder.buildExtendsUnknownDiscriminatedClient();
 
-        AdditionalPropertiesClientBuilder isUnknownClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder isUnknownClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             isUnknownClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -155,9 +161,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isUnknownClient = isUnknownClientbuilder.buildIsUnknownClient();
 
-        AdditionalPropertiesClientBuilder isUnknownDerivedClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder isUnknownDerivedClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             isUnknownDerivedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -165,9 +172,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isUnknownDerivedClient = isUnknownDerivedClientbuilder.buildIsUnknownDerivedClient();
 
-        AdditionalPropertiesClientBuilder isUnknownDiscriminatedClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder isUnknownDiscriminatedClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             isUnknownDiscriminatedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -175,9 +183,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isUnknownDiscriminatedClient = isUnknownDiscriminatedClientbuilder.buildIsUnknownDiscriminatedClient();
 
-        AdditionalPropertiesClientBuilder extendsStringClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder extendsStringClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -185,9 +194,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         extendsStringClient = extendsStringClientbuilder.buildExtendsStringClient();
 
-        AdditionalPropertiesClientBuilder isStringClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder isStringClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             isStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -195,9 +205,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isStringClient = isStringClientbuilder.buildIsStringClient();
 
-        AdditionalPropertiesClientBuilder spreadStringClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadStringClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -205,9 +216,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         spreadStringClient = spreadStringClientbuilder.buildSpreadStringClient();
 
-        AdditionalPropertiesClientBuilder extendsFloatClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder extendsFloatClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -215,9 +227,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         extendsFloatClient = extendsFloatClientbuilder.buildExtendsFloatClient();
 
-        AdditionalPropertiesClientBuilder isFloatClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder isFloatClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             isFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -225,9 +238,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isFloatClient = isFloatClientbuilder.buildIsFloatClient();
 
-        AdditionalPropertiesClientBuilder spreadFloatClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadFloatClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -235,9 +249,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         spreadFloatClient = spreadFloatClientbuilder.buildSpreadFloatClient();
 
-        AdditionalPropertiesClientBuilder extendsModelClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder extendsModelClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -245,9 +260,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         extendsModelClient = extendsModelClientbuilder.buildExtendsModelClient();
 
-        AdditionalPropertiesClientBuilder isModelClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder isModelClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             isModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -255,9 +271,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isModelClient = isModelClientbuilder.buildIsModelClient();
 
-        AdditionalPropertiesClientBuilder spreadModelClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadModelClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -265,9 +282,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         spreadModelClient = spreadModelClientbuilder.buildSpreadModelClient();
 
-        AdditionalPropertiesClientBuilder extendsModelArrayClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder extendsModelArrayClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -275,9 +293,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         extendsModelArrayClient = extendsModelArrayClientbuilder.buildExtendsModelArrayClient();
 
-        AdditionalPropertiesClientBuilder isModelArrayClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder isModelArrayClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             isModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -285,9 +304,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isModelArrayClient = isModelArrayClientbuilder.buildIsModelArrayClient();
 
-        AdditionalPropertiesClientBuilder spreadModelArrayClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadModelArrayClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -295,9 +315,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         spreadModelArrayClient = spreadModelArrayClientbuilder.buildSpreadModelArrayClient();
 
-        AdditionalPropertiesClientBuilder spreadDifferentStringClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadDifferentStringClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadDifferentStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -305,9 +326,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         spreadDifferentStringClient = spreadDifferentStringClientbuilder.buildSpreadDifferentStringClient();
 
-        AdditionalPropertiesClientBuilder spreadDifferentFloatClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadDifferentFloatClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadDifferentFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -315,9 +337,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         spreadDifferentFloatClient = spreadDifferentFloatClientbuilder.buildSpreadDifferentFloatClient();
 
-        AdditionalPropertiesClientBuilder spreadDifferentModelClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadDifferentModelClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadDifferentModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -326,7 +349,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadDifferentModelClient = spreadDifferentModelClientbuilder.buildSpreadDifferentModelClient();
 
         AdditionalPropertiesClientBuilder spreadDifferentModelArrayClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadDifferentModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -336,7 +361,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadDifferentModelArrayClient = spreadDifferentModelArrayClientbuilder.buildSpreadDifferentModelArrayClient();
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadStringClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsDifferentSpreadStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -347,7 +374,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = extendsDifferentSpreadStringClientbuilder.buildExtendsDifferentSpreadStringClient();
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadFloatClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsDifferentSpreadFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -358,7 +387,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = extendsDifferentSpreadFloatClientbuilder.buildExtendsDifferentSpreadFloatClient();
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadModelClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsDifferentSpreadModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -369,7 +400,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = extendsDifferentSpreadModelClientbuilder.buildExtendsDifferentSpreadModelClient();
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadModelArrayClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extendsDifferentSpreadModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -379,9 +412,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsDifferentSpreadModelArrayClient
             = extendsDifferentSpreadModelArrayClientbuilder.buildExtendsDifferentSpreadModelArrayClient();
 
-        AdditionalPropertiesClientBuilder multipleSpreadClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder multipleSpreadClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             multipleSpreadClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -389,9 +423,10 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         multipleSpreadClient = multipleSpreadClientbuilder.buildMultipleSpreadClient();
 
-        AdditionalPropertiesClientBuilder spreadRecordUnionClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        AdditionalPropertiesClientBuilder spreadRecordUnionClientbuilder = new AdditionalPropertiesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadRecordUnionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -400,7 +435,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadRecordUnionClient = spreadRecordUnionClientbuilder.buildSpreadRecordUnionClient();
 
         AdditionalPropertiesClientBuilder spreadRecordDiscriminatedUnionClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadRecordDiscriminatedUnionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -411,7 +448,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = spreadRecordDiscriminatedUnionClientbuilder.buildSpreadRecordDiscriminatedUnionClient();
 
         AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnionClientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadRecordNonDiscriminatedUnionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -422,7 +461,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = spreadRecordNonDiscriminatedUnionClientbuilder.buildSpreadRecordNonDiscriminatedUnionClient();
 
         AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnion2Clientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadRecordNonDiscriminatedUnion2Clientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -433,7 +474,9 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = spreadRecordNonDiscriminatedUnion2Clientbuilder.buildSpreadRecordNonDiscriminatedUnion2Client();
 
         AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnion3Clientbuilder
-            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+            = new AdditionalPropertiesClientBuilder()
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             spreadRecordNonDiscriminatedUnion3Clientbuilder.httpClient(interceptorManager.getPlaybackClient());

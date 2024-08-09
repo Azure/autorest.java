@@ -16,6 +16,20 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class AdditionalPropertiesClientImpl {
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -493,19 +507,22 @@ public final class AdditionalPropertiesClientImpl {
 
     /**
      * Initializes an instance of AdditionalPropertiesClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public AdditionalPropertiesClientImpl() {
+    public AdditionalPropertiesClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of AdditionalPropertiesClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public AdditionalPropertiesClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public AdditionalPropertiesClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -513,10 +530,13 @@ public final class AdditionalPropertiesClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public AdditionalPropertiesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public AdditionalPropertiesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.extendsUnknowns = new ExtendsUnknownsImpl(this);
         this.extendsUnknownDeriveds = new ExtendsUnknownDerivedsImpl(this);
         this.extendsUnknownDiscriminateds = new ExtendsUnknownDiscriminatedsImpl(this);

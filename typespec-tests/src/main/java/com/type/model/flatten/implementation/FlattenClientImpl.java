@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -41,6 +42,20 @@ public final class FlattenClientImpl {
     private final FlattenClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -70,19 +85,22 @@ public final class FlattenClientImpl {
 
     /**
      * Initializes an instance of FlattenClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public FlattenClientImpl() {
+    public FlattenClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of FlattenClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public FlattenClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public FlattenClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -90,17 +108,19 @@ public final class FlattenClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public FlattenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public FlattenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service = RestProxy.create(FlattenClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
      * The interface defining all the services for FlattenClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "FlattenClient")
     public interface FlattenClientService {
         @Put("/type/model/flatten/flattenModel")
@@ -109,9 +129,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putFlattenModel(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> putFlattenModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/flatten/flattenModel")
         @ExpectedResponses({ 200 })
@@ -119,9 +139,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putFlattenModelSync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> putFlattenModelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/flatten/nestedFlattenModel")
         @ExpectedResponses({ 200 })
@@ -129,9 +149,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putNestedFlattenModel(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> putNestedFlattenModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/flatten/nestedFlattenModel")
         @ExpectedResponses({ 200 })
@@ -139,9 +159,9 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putNestedFlattenModelSync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData input,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> putNestedFlattenModelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -184,8 +204,8 @@ public final class FlattenClientImpl {
         RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putFlattenModel(contentType, accept, input, requestOptions, context));
+        return FluxUtil.withContext(context -> service.putFlattenModel(this.getEndpoint(), contentType, accept, input,
+            requestOptions, context));
     }
 
     /**
@@ -226,7 +246,8 @@ public final class FlattenClientImpl {
     public Response<BinaryData> putFlattenModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putFlattenModelSync(contentType, accept, input, requestOptions, Context.NONE);
+        return service.putFlattenModelSync(this.getEndpoint(), contentType, accept, input, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -275,8 +296,8 @@ public final class FlattenClientImpl {
         RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.putNestedFlattenModel(contentType, accept, input, requestOptions, context));
+        return FluxUtil.withContext(context -> service.putNestedFlattenModel(this.getEndpoint(), contentType, accept,
+            input, requestOptions, context));
     }
 
     /**
@@ -323,6 +344,7 @@ public final class FlattenClientImpl {
     public Response<BinaryData> putNestedFlattenModelWithResponse(BinaryData input, RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return service.putNestedFlattenModelSync(contentType, accept, input, requestOptions, Context.NONE);
+        return service.putNestedFlattenModelSync(this.getEndpoint(), contentType, accept, input, requestOptions,
+            Context.NONE);
     }
 }

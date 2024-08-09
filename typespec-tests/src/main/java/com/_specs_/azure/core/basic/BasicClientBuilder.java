@@ -8,6 +8,7 @@ import com._specs_.azure.core.basic.implementation.BasicClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,7 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the BasicClient type.
  */
 @ServiceClientBuilder(serviceClients = { BasicClient.class, BasicAsyncClient.class })
-public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, ConfigurationTrait<BasicClientBuilder> {
+public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, ConfigurationTrait<BasicClientBuilder>,
+    EndpointTrait<BasicClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -173,6 +175,22 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public BasicClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -219,8 +237,8 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         BasicServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : BasicServiceVersion.getLatest();
-        BasicClientImpl client
-            = new BasicClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
+        BasicClientImpl client = new BasicClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+            this.endpoint, localServiceVersion);
         return client;
     }
 
@@ -228,6 +246,7 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

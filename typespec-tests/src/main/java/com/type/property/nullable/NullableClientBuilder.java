@@ -7,6 +7,7 @@ package com.type.property.nullable;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -55,8 +56,8 @@ import java.util.Objects;
         CollectionsByteAsyncClient.class,
         CollectionsModelAsyncClient.class,
         CollectionsStringAsyncClient.class })
-public final class NullableClientBuilder
-    implements HttpTrait<NullableClientBuilder>, ConfigurationTrait<NullableClientBuilder> {
+public final class NullableClientBuilder implements HttpTrait<NullableClientBuilder>,
+    ConfigurationTrait<NullableClientBuilder>, EndpointTrait<NullableClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -188,6 +189,22 @@ public final class NullableClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public NullableClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -215,7 +232,7 @@ public final class NullableClientBuilder
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NullableClientImpl client
-            = new NullableClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+            = new NullableClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -223,6 +240,7 @@ public final class NullableClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

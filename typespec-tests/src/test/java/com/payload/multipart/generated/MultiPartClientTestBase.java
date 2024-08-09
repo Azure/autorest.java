@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.payload.multipart.MultiPartClient;
 import com.payload.multipart.MultiPartClientBuilder;
 
@@ -22,7 +23,8 @@ class MultiPartClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         MultiPartClientBuilder multiPartClientbuilder
-            = new MultiPartClientBuilder().httpClient(HttpClient.createDefault())
+            = new MultiPartClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             multiPartClientbuilder.httpClient(interceptorManager.getPlaybackClient());

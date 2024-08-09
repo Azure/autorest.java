@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class StringBodiesImpl {
      * The interface defining all the services for MediaTypeClientStringBodies to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "MediaTypeClientStrin")
     public interface StringBodiesService {
         @Post("/payload/media-type/string-body/sendAsText")
@@ -64,8 +65,9 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sendAsText(@HeaderParam("content-type") String contentType,
-            @BodyParam("text/plain") BinaryData text, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> sendAsText(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @BodyParam("text/plain") BinaryData text,
+            RequestOptions requestOptions, Context context);
 
         @Post("/payload/media-type/string-body/sendAsText")
         @ExpectedResponses({ 200 })
@@ -73,8 +75,9 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendAsTextSync(@HeaderParam("content-type") String contentType,
-            @BodyParam("text/plain") BinaryData text, RequestOptions requestOptions, Context context);
+        Response<Void> sendAsTextSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @BodyParam("text/plain") BinaryData text,
+            RequestOptions requestOptions, Context context);
 
         @Get("/payload/media-type/string-body/getAsText")
         @ExpectedResponses({ 200 })
@@ -82,8 +85,8 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAsText(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getAsText(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/payload/media-type/string-body/getAsText")
         @ExpectedResponses({ 200 })
@@ -91,8 +94,8 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAsTextSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getAsTextSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/payload/media-type/string-body/sendAsJson")
         @ExpectedResponses({ 200 })
@@ -100,8 +103,9 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sendAsJson(@HeaderParam("content-type") String contentType,
-            @BodyParam("application/json") BinaryData text, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> sendAsJson(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @BodyParam("application/json") BinaryData text,
+            RequestOptions requestOptions, Context context);
 
         @Post("/payload/media-type/string-body/sendAsJson")
         @ExpectedResponses({ 200 })
@@ -109,8 +113,9 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendAsJsonSync(@HeaderParam("content-type") String contentType,
-            @BodyParam("application/json") BinaryData text, RequestOptions requestOptions, Context context);
+        Response<Void> sendAsJsonSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @BodyParam("application/json") BinaryData text,
+            RequestOptions requestOptions, Context context);
 
         @Get("/payload/media-type/string-body/getAsJson")
         @ExpectedResponses({ 200 })
@@ -118,8 +123,8 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAsJson(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getAsJson(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/payload/media-type/string-body/getAsJson")
         @ExpectedResponses({ 200 })
@@ -127,8 +132,8 @@ public final class StringBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAsJsonSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getAsJsonSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -150,7 +155,8 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendAsTextWithResponseAsync(BinaryData text, RequestOptions requestOptions) {
         final String contentType = "text/plain";
-        return FluxUtil.withContext(context -> service.sendAsText(contentType, text, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.sendAsText(this.client.getEndpoint(), contentType, text, requestOptions, context));
     }
 
     /**
@@ -172,7 +178,7 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendAsTextWithResponse(BinaryData text, RequestOptions requestOptions) {
         final String contentType = "text/plain";
-        return service.sendAsTextSync(contentType, text, requestOptions, Context.NONE);
+        return service.sendAsTextSync(this.client.getEndpoint(), contentType, text, requestOptions, Context.NONE);
     }
 
     /**
@@ -193,7 +199,8 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAsTextWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "text/plain";
-        return FluxUtil.withContext(context -> service.getAsText(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getAsText(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -214,7 +221,7 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAsTextWithResponse(RequestOptions requestOptions) {
         final String accept = "text/plain";
-        return service.getAsTextSync(accept, requestOptions, Context.NONE);
+        return service.getAsTextSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -236,7 +243,8 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendAsJsonWithResponseAsync(BinaryData text, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.sendAsJson(contentType, text, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.sendAsJson(this.client.getEndpoint(), contentType, text, requestOptions, context));
     }
 
     /**
@@ -258,7 +266,7 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendAsJsonWithResponse(BinaryData text, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.sendAsJsonSync(contentType, text, requestOptions, Context.NONE);
+        return service.sendAsJsonSync(this.client.getEndpoint(), contentType, text, requestOptions, Context.NONE);
     }
 
     /**
@@ -279,7 +287,8 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAsJsonWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getAsJson(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getAsJson(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -300,6 +309,6 @@ public final class StringBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAsJsonWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getAsJsonSync(accept, requestOptions, Context.NONE);
+        return service.getAsJsonSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

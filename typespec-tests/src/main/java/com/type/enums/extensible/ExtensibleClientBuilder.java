@@ -7,6 +7,7 @@ package com.type.enums.extensible;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the ExtensibleClient type.
  */
 @ServiceClientBuilder(serviceClients = { ExtensibleClient.class, ExtensibleAsyncClient.class })
-public final class ExtensibleClientBuilder
-    implements HttpTrait<ExtensibleClientBuilder>, ConfigurationTrait<ExtensibleClientBuilder> {
+public final class ExtensibleClientBuilder implements HttpTrait<ExtensibleClientBuilder>,
+    ConfigurationTrait<ExtensibleClientBuilder>, EndpointTrait<ExtensibleClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -173,6 +174,22 @@ public final class ExtensibleClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public ExtensibleClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -200,7 +217,7 @@ public final class ExtensibleClientBuilder
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ExtensibleClientImpl client
-            = new ExtensibleClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+            = new ExtensibleClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -208,6 +225,7 @@ public final class ExtensibleClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

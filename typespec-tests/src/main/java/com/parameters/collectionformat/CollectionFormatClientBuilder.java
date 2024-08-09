@@ -7,6 +7,7 @@ package com.parameters.collectionformat;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -41,8 +42,8 @@ import java.util.Objects;
  */
 @ServiceClientBuilder(
     serviceClients = { QueryClient.class, HeaderClient.class, QueryAsyncClient.class, HeaderAsyncClient.class })
-public final class CollectionFormatClientBuilder
-    implements HttpTrait<CollectionFormatClientBuilder>, ConfigurationTrait<CollectionFormatClientBuilder> {
+public final class CollectionFormatClientBuilder implements HttpTrait<CollectionFormatClientBuilder>,
+    ConfigurationTrait<CollectionFormatClientBuilder>, EndpointTrait<CollectionFormatClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -175,6 +176,22 @@ public final class CollectionFormatClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public CollectionFormatClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -201,8 +218,8 @@ public final class CollectionFormatClientBuilder
     private CollectionFormatClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        CollectionFormatClientImpl client
-            = new CollectionFormatClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        CollectionFormatClientImpl client = new CollectionFormatClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -210,6 +227,7 @@ public final class CollectionFormatClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

@@ -12,6 +12,7 @@ import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
@@ -52,6 +53,20 @@ public final class StandardClientImpl {
      * The proxy service used to perform REST calls.
      */
     private final StandardClientService service;
+
+    /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
 
     /**
      * Service version.
@@ -98,21 +113,23 @@ public final class StandardClientImpl {
     /**
      * Initializes an instance of StandardClient client.
      * 
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public StandardClientImpl(StandardServiceVersion serviceVersion) {
+    public StandardClientImpl(String endpoint, StandardServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of StandardClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public StandardClientImpl(HttpPipeline httpPipeline, StandardServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+    public StandardClientImpl(HttpPipeline httpPipeline, String endpoint, StandardServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -120,12 +137,14 @@ public final class StandardClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public StandardClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+    public StandardClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         StandardServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(StandardClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -133,7 +152,7 @@ public final class StandardClientImpl {
     /**
      * The interface defining all the services for StandardClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "StandardClient")
     public interface StandardClientService {
         @Put("/azure/core/lro/standard/users/{name}")
@@ -142,10 +161,10 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion,
-            @PathParam("name") String name, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> createOrReplace(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/lro/standard/users/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -153,10 +172,10 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion,
-            @PathParam("name") String name, @HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> createOrReplaceSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/lro/standard/users/{name}")
         @ExpectedResponses({ 202 })
@@ -164,7 +183,8 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> delete(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+        Mono<Response<BinaryData>> delete(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/lro/standard/users/{name}")
@@ -173,7 +193,8 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+        Response<BinaryData> deleteSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/standard/users/{name}:export")
@@ -182,7 +203,8 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+        Mono<Response<BinaryData>> export(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
             @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
@@ -192,7 +214,8 @@ public final class StandardClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("name") String name,
+        Response<BinaryData> exportSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
             @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
     }
@@ -233,8 +256,8 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), name,
-            contentType, accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createOrReplace(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions, context));
     }
 
     /**
@@ -273,8 +296,8 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), name, contentType, accept, resource,
-            requestOptions, Context.NONE);
+        return service.createOrReplaceSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name, contentType,
+            accept, resource, requestOptions, Context.NONE);
     }
 
     /**
@@ -315,7 +338,7 @@ public final class StandardClientImpl {
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -361,7 +384,7 @@ public final class StandardClientImpl {
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -407,7 +430,7 @@ public final class StandardClientImpl {
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -453,7 +476,7 @@ public final class StandardClientImpl {
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -494,8 +517,8 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> deleteWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.delete(this.getServiceVersion().getVersion(), name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            name, accept, requestOptions, context));
     }
 
     /**
@@ -530,7 +553,8 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> deleteWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.deleteSync(this.getServiceVersion().getVersion(), name, accept, requestOptions, Context.NONE);
+        return service.deleteSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name, accept,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -567,7 +591,7 @@ public final class StandardClientImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteWithResponseAsync(name, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -609,7 +633,7 @@ public final class StandardClientImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteWithResponse(name, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -652,7 +676,7 @@ public final class StandardClientImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteWithResponseAsync(name, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -694,7 +718,7 @@ public final class StandardClientImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteWithResponse(name, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -741,8 +765,8 @@ public final class StandardClientImpl {
     private Mono<Response<BinaryData>> exportWithResponseAsync(String name, String format,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.export(this.getServiceVersion().getVersion(), name, format,
-            accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.export(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            name, format, accept, requestOptions, context));
     }
 
     /**
@@ -782,8 +806,8 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> exportWithResponse(String name, String format, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.exportSync(this.getServiceVersion().getVersion(), name, format, accept, requestOptions,
-            Context.NONE);
+        return service.exportSync(this.getEndpoint(), this.getServiceVersion().getVersion(), name, format, accept,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -827,7 +851,7 @@ public final class StandardClientImpl {
             () -> this.exportWithResponseAsync(name, format, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -876,7 +900,7 @@ public final class StandardClientImpl {
             () -> this.exportWithResponse(name, format, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -926,7 +950,7 @@ public final class StandardClientImpl {
             () -> this.exportWithResponseAsync(name, format, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -976,7 +1000,7 @@ public final class StandardClientImpl {
             () -> this.exportWithResponse(name, format, requestOptions),
             new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)

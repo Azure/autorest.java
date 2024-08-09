@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class InternalOperationsImpl {
      * The interface defining all the services for AccessClientInternalOperations to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "AccessClientInternal")
     public interface InternalOperationsService {
         @Get("/azure/client-generator-core/access/internalOperation/noDecoratorInInternal")
@@ -63,8 +64,9 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> noDecoratorInInternal(@QueryParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> noDecoratorInInternal(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/noDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -72,8 +74,9 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> noDecoratorInInternalSync(@QueryParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> noDecoratorInInternalSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -81,8 +84,9 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> internalDecoratorInInternal(@QueryParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> internalDecoratorInInternal(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -90,8 +94,9 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> internalDecoratorInInternalSync(@QueryParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> internalDecoratorInInternalSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -99,8 +104,9 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> publicDecoratorInInternal(@QueryParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> publicDecoratorInInternal(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal")
         @ExpectedResponses({ 200 })
@@ -108,8 +114,9 @@ public final class InternalOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> publicDecoratorInInternalSync(@QueryParam("name") String name,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> publicDecoratorInInternalSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -135,7 +142,8 @@ public final class InternalOperationsImpl {
     public Mono<Response<BinaryData>> noDecoratorInInternalWithResponseAsync(String name,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.noDecoratorInInternal(name, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.noDecoratorInInternal(this.client.getEndpoint(), name, accept, requestOptions, context));
     }
 
     /**
@@ -159,7 +167,7 @@ public final class InternalOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> noDecoratorInInternalWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.noDecoratorInInternalSync(name, accept, requestOptions, Context.NONE);
+        return service.noDecoratorInInternalSync(this.client.getEndpoint(), name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -185,8 +193,8 @@ public final class InternalOperationsImpl {
     public Mono<Response<BinaryData>> internalDecoratorInInternalWithResponseAsync(String name,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.internalDecoratorInInternal(name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.internalDecoratorInInternal(this.client.getEndpoint(), name,
+            accept, requestOptions, context));
     }
 
     /**
@@ -210,7 +218,8 @@ public final class InternalOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> internalDecoratorInInternalWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.internalDecoratorInInternalSync(name, accept, requestOptions, Context.NONE);
+        return service.internalDecoratorInInternalSync(this.client.getEndpoint(), name, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -236,8 +245,8 @@ public final class InternalOperationsImpl {
     public Mono<Response<BinaryData>> publicDecoratorInInternalWithResponseAsync(String name,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.publicDecoratorInInternal(name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.publicDecoratorInInternal(this.client.getEndpoint(), name,
+            accept, requestOptions, context));
     }
 
     /**
@@ -262,6 +271,7 @@ public final class InternalOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> publicDecoratorInInternalWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.publicDecoratorInInternalSync(name, accept, requestOptions, Context.NONE);
+        return service.publicDecoratorInInternalSync(this.client.getEndpoint(), name, accept, requestOptions,
+            Context.NONE);
     }
 }

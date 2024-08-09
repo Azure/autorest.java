@@ -7,6 +7,7 @@ package com.type.model.inheritance.enumdiscriminator;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the EnumDiscriminatorClient type.
  */
 @ServiceClientBuilder(serviceClients = { EnumDiscriminatorClient.class, EnumDiscriminatorAsyncClient.class })
-public final class EnumDiscriminatorClientBuilder
-    implements HttpTrait<EnumDiscriminatorClientBuilder>, ConfigurationTrait<EnumDiscriminatorClientBuilder> {
+public final class EnumDiscriminatorClientBuilder implements HttpTrait<EnumDiscriminatorClientBuilder>,
+    ConfigurationTrait<EnumDiscriminatorClientBuilder>, EndpointTrait<EnumDiscriminatorClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -174,6 +175,22 @@ public final class EnumDiscriminatorClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public EnumDiscriminatorClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -200,8 +217,8 @@ public final class EnumDiscriminatorClientBuilder
     private EnumDiscriminatorClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        EnumDiscriminatorClientImpl client
-            = new EnumDiscriminatorClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        EnumDiscriminatorClientImpl client = new EnumDiscriminatorClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -209,6 +226,7 @@ public final class EnumDiscriminatorClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

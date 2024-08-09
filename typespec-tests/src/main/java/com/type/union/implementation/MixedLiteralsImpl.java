@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class MixedLiteralsImpl {
      * The interface defining all the services for UnionClientMixedLiterals to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "UnionClientMixedLite")
     public interface MixedLiteralsService {
         @Get("/type/union/mixed-literals")
@@ -64,8 +65,8 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/union/mixed-literals")
         @ExpectedResponses({ 200 })
@@ -73,8 +74,8 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/union/mixed-literals")
         @ExpectedResponses({ 204 })
@@ -82,8 +83,9 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> send(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData sendRequest1, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> send(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData sendRequest1,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/union/mixed-literals")
         @ExpectedResponses({ 204 })
@@ -91,7 +93,7 @@ public final class MixedLiteralsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> sendSync(@HostParam("endpoint") String endpoint, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData sendRequest1, RequestOptions requestOptions, Context context);
     }
 
@@ -120,7 +122,7 @@ public final class MixedLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -148,7 +150,7 @@ public final class MixedLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getSync(accept, requestOptions, Context.NONE);
+        return service.getSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -177,7 +179,8 @@ public final class MixedLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(BinaryData sendRequest1, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.send(contentType, sendRequest1, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.send(this.client.getEndpoint(), contentType, sendRequest1, requestOptions, context));
     }
 
     /**
@@ -206,6 +209,6 @@ public final class MixedLiteralsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(BinaryData sendRequest1, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.sendSync(contentType, sendRequest1, requestOptions, Context.NONE);
+        return service.sendSync(this.client.getEndpoint(), contentType, sendRequest1, requestOptions, Context.NONE);
     }
 }

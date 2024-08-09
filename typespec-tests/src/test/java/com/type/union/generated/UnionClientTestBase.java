@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.type.union.EnumsOnlyClient;
 import com.type.union.FloatsOnlyClient;
 import com.type.union.IntsOnlyClient;
@@ -48,8 +49,10 @@ class UnionClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        UnionClientBuilder stringsOnlyClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder stringsOnlyClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringsOnlyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -58,7 +61,8 @@ class UnionClientTestBase extends TestProxyTestBase {
         stringsOnlyClient = stringsOnlyClientbuilder.buildStringsOnlyClient();
 
         UnionClientBuilder stringExtensibleClientbuilder
-            = new UnionClientBuilder().httpClient(HttpClient.createDefault())
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringExtensibleClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -68,7 +72,8 @@ class UnionClientTestBase extends TestProxyTestBase {
         stringExtensibleClient = stringExtensibleClientbuilder.buildStringExtensibleClient();
 
         UnionClientBuilder stringExtensibleNamedClientbuilder
-            = new UnionClientBuilder().httpClient(HttpClient.createDefault())
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringExtensibleNamedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -77,8 +82,10 @@ class UnionClientTestBase extends TestProxyTestBase {
         }
         stringExtensibleNamedClient = stringExtensibleNamedClientbuilder.buildStringExtensibleNamedClient();
 
-        UnionClientBuilder intsOnlyClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder intsOnlyClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             intsOnlyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -86,8 +93,10 @@ class UnionClientTestBase extends TestProxyTestBase {
         }
         intsOnlyClient = intsOnlyClientbuilder.buildIntsOnlyClient();
 
-        UnionClientBuilder floatsOnlyClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder floatsOnlyClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             floatsOnlyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -95,8 +104,10 @@ class UnionClientTestBase extends TestProxyTestBase {
         }
         floatsOnlyClient = floatsOnlyClientbuilder.buildFloatsOnlyClient();
 
-        UnionClientBuilder modelsOnlyClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder modelsOnlyClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelsOnlyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -104,8 +115,10 @@ class UnionClientTestBase extends TestProxyTestBase {
         }
         modelsOnlyClient = modelsOnlyClientbuilder.buildModelsOnlyClient();
 
-        UnionClientBuilder enumsOnlyClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder enumsOnlyClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             enumsOnlyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -113,8 +126,10 @@ class UnionClientTestBase extends TestProxyTestBase {
         }
         enumsOnlyClient = enumsOnlyClientbuilder.buildEnumsOnlyClient();
 
-        UnionClientBuilder stringAndArrayClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder stringAndArrayClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringAndArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -122,8 +137,10 @@ class UnionClientTestBase extends TestProxyTestBase {
         }
         stringAndArrayClient = stringAndArrayClientbuilder.buildStringAndArrayClient();
 
-        UnionClientBuilder mixedLiteralsClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder mixedLiteralsClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             mixedLiteralsClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -131,8 +148,10 @@ class UnionClientTestBase extends TestProxyTestBase {
         }
         mixedLiteralsClient = mixedLiteralsClientbuilder.buildMixedLiteralsClient();
 
-        UnionClientBuilder mixedTypesClientbuilder = new UnionClientBuilder().httpClient(HttpClient.createDefault())
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder mixedTypesClientbuilder
+            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             mixedTypesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

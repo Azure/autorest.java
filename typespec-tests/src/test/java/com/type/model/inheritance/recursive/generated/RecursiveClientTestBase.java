@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.type.model.inheritance.recursive.RecursiveClient;
 import com.type.model.inheritance.recursive.RecursiveClientBuilder;
 
@@ -22,7 +23,8 @@ class RecursiveClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         RecursiveClientBuilder recursiveClientbuilder
-            = new RecursiveClientBuilder().httpClient(HttpClient.createDefault())
+            = new RecursiveClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             recursiveClientbuilder.httpClient(interceptorManager.getPlaybackClient());

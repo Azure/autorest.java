@@ -10,6 +10,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
@@ -67,7 +68,7 @@ public final class AzureLocationScalarsImpl {
      * The interface defining all the services for ScalarClientAzureLocationScalars to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ScalarClientAzureLoc")
     public interface AzureLocationScalarsService {
         @Get("/azure/core/scalar/azureLocation")
@@ -76,8 +77,8 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/scalar/azureLocation")
         @ExpectedResponses({ 200 })
@@ -85,8 +86,8 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("Accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/scalar/azureLocation")
         @ExpectedResponses({ 204 })
@@ -94,8 +95,9 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> put(@HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> put(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/scalar/azureLocation")
         @ExpectedResponses({ 204 })
@@ -103,7 +105,7 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putSync(@HeaderParam("Content-Type") String contentType,
+        Response<Void> putSync(@HostParam("endpoint") String endpoint, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/scalar/azureLocation")
@@ -112,9 +114,9 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> post(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> post(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/scalar/azureLocation")
         @ExpectedResponses({ 200 })
@@ -122,8 +124,17 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> postSync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<BinaryData> postSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+
+        @Post("/azure/core/scalar/azureLocation/header")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> headerMethod(@HostParam("endpoint") String endpoint, @HeaderParam("region") String region,
             RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/scalar/azureLocation/header")
@@ -132,17 +143,8 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> headerMethod(@HeaderParam("region") String region, RequestOptions requestOptions,
-            Context context);
-
-        @Post("/azure/core/scalar/azureLocation/header")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> headerMethodSync(@HeaderParam("region") String region, RequestOptions requestOptions,
-            Context context);
+        Response<Void> headerMethodSync(@HostParam("endpoint") String endpoint, @HeaderParam("region") String region,
+            RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/scalar/azureLocation/query")
         @ExpectedResponses({ 204 })
@@ -150,7 +152,8 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> query(@QueryParam("region") String region, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> query(@HostParam("endpoint") String endpoint, @QueryParam("region") String region,
+            RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/scalar/azureLocation/query")
         @ExpectedResponses({ 204 })
@@ -158,7 +161,8 @@ public final class AzureLocationScalarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> querySync(@QueryParam("region") String region, RequestOptions requestOptions, Context context);
+        Response<Void> querySync(@HostParam("endpoint") String endpoint, @QueryParam("region") String region,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -179,7 +183,7 @@ public final class AzureLocationScalarsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -200,7 +204,7 @@ public final class AzureLocationScalarsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getSync(accept, requestOptions, Context.NONE);
+        return service.getSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -222,7 +226,8 @@ public final class AzureLocationScalarsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return FluxUtil.withContext(context -> service.put(contentType, body, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.put(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -244,7 +249,7 @@ public final class AzureLocationScalarsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
-        return service.putSync(contentType, body, requestOptions, Context.NONE);
+        return service.putSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -277,7 +282,8 @@ public final class AzureLocationScalarsImpl {
     public Mono<Response<BinaryData>> postWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.post(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.post(this.client.getEndpoint(), contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -310,7 +316,7 @@ public final class AzureLocationScalarsImpl {
     public Response<BinaryData> postWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/json";
         final String accept = "application/json";
-        return service.postSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.postSync(this.client.getEndpoint(), contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -326,7 +332,8 @@ public final class AzureLocationScalarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> headerMethodWithResponseAsync(String region, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.headerMethod(region, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.headerMethod(this.client.getEndpoint(), region, requestOptions, context));
     }
 
     /**
@@ -342,7 +349,7 @@ public final class AzureLocationScalarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> headerMethodWithResponse(String region, RequestOptions requestOptions) {
-        return service.headerMethodSync(region, requestOptions, Context.NONE);
+        return service.headerMethodSync(this.client.getEndpoint(), region, requestOptions, Context.NONE);
     }
 
     /**
@@ -358,7 +365,8 @@ public final class AzureLocationScalarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> queryWithResponseAsync(String region, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.query(region, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.query(this.client.getEndpoint(), region, requestOptions, context));
     }
 
     /**
@@ -374,6 +382,6 @@ public final class AzureLocationScalarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> queryWithResponse(String region, RequestOptions requestOptions) {
-        return service.querySync(region, requestOptions, Context.NONE);
+        return service.querySync(this.client.getEndpoint(), region, requestOptions, Context.NONE);
     }
 }

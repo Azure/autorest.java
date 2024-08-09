@@ -8,6 +8,7 @@ import com._specs_.azure.example.basic.implementation.AzureExampleClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the AzureExampleClient type.
  */
 @ServiceClientBuilder(serviceClients = { AzureExampleClient.class, AzureExampleAsyncClient.class })
-public final class AzureExampleClientBuilder
-    implements HttpTrait<AzureExampleClientBuilder>, ConfigurationTrait<AzureExampleClientBuilder> {
+public final class AzureExampleClientBuilder implements HttpTrait<AzureExampleClientBuilder>,
+    ConfigurationTrait<AzureExampleClientBuilder>, EndpointTrait<AzureExampleClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -174,6 +175,22 @@ public final class AzureExampleClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public AzureExampleClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -221,7 +238,7 @@ public final class AzureExampleClientBuilder
         BasicServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : BasicServiceVersion.getLatest();
         AzureExampleClientImpl client = new AzureExampleClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;
     }
 
@@ -229,6 +246,7 @@ public final class AzureExampleClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

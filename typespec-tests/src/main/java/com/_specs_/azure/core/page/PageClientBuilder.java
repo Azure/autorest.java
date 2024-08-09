@@ -8,6 +8,7 @@ import com._specs_.azure.core.page.implementation.PageClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -45,7 +46,8 @@ import java.util.Objects;
         TwoModelsAsPageItemClient.class,
         PageAsyncClient.class,
         TwoModelsAsPageItemAsyncClient.class })
-public final class PageClientBuilder implements HttpTrait<PageClientBuilder>, ConfigurationTrait<PageClientBuilder> {
+public final class PageClientBuilder
+    implements HttpTrait<PageClientBuilder>, ConfigurationTrait<PageClientBuilder>, EndpointTrait<PageClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -177,6 +179,22 @@ public final class PageClientBuilder implements HttpTrait<PageClientBuilder>, Co
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public PageClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -223,8 +241,8 @@ public final class PageClientBuilder implements HttpTrait<PageClientBuilder>, Co
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         PageServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : PageServiceVersion.getLatest();
-        PageClientImpl client
-            = new PageClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
+        PageClientImpl client = new PageClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+            this.endpoint, localServiceVersion);
         return client;
     }
 
@@ -232,6 +250,7 @@ public final class PageClientBuilder implements HttpTrait<PageClientBuilder>, Co
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

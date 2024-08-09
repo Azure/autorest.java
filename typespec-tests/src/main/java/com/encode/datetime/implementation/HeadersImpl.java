@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -57,7 +58,7 @@ public final class HeadersImpl {
      * The interface defining all the services for DatetimeClientHeaders to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "DatetimeClientHeader")
     public interface HeadersService {
         @Get("/encode/datetime/header/default")
@@ -66,8 +67,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(@HeaderParam("value") DateTimeRfc1123 value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> defaultMethod(@HostParam("endpoint") String endpoint,
+            @HeaderParam("value") DateTimeRfc1123 value, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/default")
         @ExpectedResponses({ 204 })
@@ -75,8 +76,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(@HeaderParam("value") DateTimeRfc1123 value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> defaultMethodSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("value") DateTimeRfc1123 value, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc3339")
         @ExpectedResponses({ 204 })
@@ -84,8 +85,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc3339(@HeaderParam("value") OffsetDateTime value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> rfc3339(@HostParam("endpoint") String endpoint, @HeaderParam("value") OffsetDateTime value,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc3339")
         @ExpectedResponses({ 204 })
@@ -93,8 +94,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc3339Sync(@HeaderParam("value") OffsetDateTime value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> rfc3339Sync(@HostParam("endpoint") String endpoint, @HeaderParam("value") OffsetDateTime value,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc7231")
         @ExpectedResponses({ 204 })
@@ -102,8 +103,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> rfc7231(@HeaderParam("value") DateTimeRfc1123 value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> rfc7231(@HostParam("endpoint") String endpoint,
+            @HeaderParam("value") DateTimeRfc1123 value, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/rfc7231")
         @ExpectedResponses({ 204 })
@@ -111,8 +112,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> rfc7231Sync(@HeaderParam("value") DateTimeRfc1123 value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> rfc7231Sync(@HostParam("endpoint") String endpoint, @HeaderParam("value") DateTimeRfc1123 value,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp")
         @ExpectedResponses({ 204 })
@@ -120,8 +121,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimestamp(@HeaderParam("value") long value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> unixTimestamp(@HostParam("endpoint") String endpoint, @HeaderParam("value") long value,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp")
         @ExpectedResponses({ 204 })
@@ -129,8 +130,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimestampSync(@HeaderParam("value") long value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> unixTimestampSync(@HostParam("endpoint") String endpoint, @HeaderParam("value") long value,
+            RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp-array")
         @ExpectedResponses({ 204 })
@@ -138,8 +139,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> unixTimestampArray(@HeaderParam("value") String value, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<Void>> unixTimestampArray(@HostParam("endpoint") String endpoint,
+            @HeaderParam("value") String value, RequestOptions requestOptions, Context context);
 
         @Get("/encode/datetime/header/unix-timestamp-array")
         @ExpectedResponses({ 204 })
@@ -147,8 +148,8 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> unixTimestampArraySync(@HeaderParam("value") String value, RequestOptions requestOptions,
-            Context context);
+        Response<Void> unixTimestampArraySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("value") String value, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -165,7 +166,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> defaultMethodWithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
         DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
-        return FluxUtil.withContext(context -> service.defaultMethod(valueConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.defaultMethod(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -182,7 +184,7 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> defaultMethodWithResponse(OffsetDateTime value, RequestOptions requestOptions) {
         DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
-        return service.defaultMethodSync(valueConverted, requestOptions, Context.NONE);
+        return service.defaultMethodSync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -198,7 +200,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> rfc3339WithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
-        return FluxUtil.withContext(context -> service.rfc3339(value, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.rfc3339(this.client.getEndpoint(), value, requestOptions, context));
     }
 
     /**
@@ -214,7 +217,7 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> rfc3339WithResponse(OffsetDateTime value, RequestOptions requestOptions) {
-        return service.rfc3339Sync(value, requestOptions, Context.NONE);
+        return service.rfc3339Sync(this.client.getEndpoint(), value, requestOptions, Context.NONE);
     }
 
     /**
@@ -231,7 +234,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> rfc7231WithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
         DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
-        return FluxUtil.withContext(context -> service.rfc7231(valueConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.rfc7231(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -248,7 +252,7 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> rfc7231WithResponse(OffsetDateTime value, RequestOptions requestOptions) {
         DateTimeRfc1123 valueConverted = new DateTimeRfc1123(value);
-        return service.rfc7231Sync(valueConverted, requestOptions, Context.NONE);
+        return service.rfc7231Sync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -265,7 +269,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimestampWithResponseAsync(OffsetDateTime value, RequestOptions requestOptions) {
         long valueConverted = value.toEpochSecond();
-        return FluxUtil.withContext(context -> service.unixTimestamp(valueConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.unixTimestamp(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -282,7 +287,7 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimestampWithResponse(OffsetDateTime value, RequestOptions requestOptions) {
         long valueConverted = value.toEpochSecond();
-        return service.unixTimestampSync(valueConverted, requestOptions, Context.NONE);
+        return service.unixTimestampSync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -303,7 +308,8 @@ public final class HeadersImpl {
             .serializeIterable(
                 value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return FluxUtil.withContext(context -> service.unixTimestampArray(valueConverted, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.unixTimestampArray(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -323,6 +329,6 @@ public final class HeadersImpl {
             .serializeIterable(
                 value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return service.unixTimestampArraySync(valueConverted, requestOptions, Context.NONE);
+        return service.unixTimestampArraySync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 }
