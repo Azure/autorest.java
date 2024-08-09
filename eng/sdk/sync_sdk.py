@@ -112,9 +112,6 @@ def update_sdks():
             tsp_location_yml = yaml.safe_load(fin)
         tsp_location_yml['commit'] = '27a9398801386caaba2df7e1a4d1a8abd19e3789'
 
-        if not tsp_location_yml['directory'].endswith('.Management'):
-            tsp_location_yml['directory'] = tsp_location_yml['directory'] + '.Management'
-
         updated_yaml_str = yaml.dump(tsp_location_yml, width=sys.maxsize, sort_keys=False, Dumper=ListIndentDumper)
         with open(tsp_location_file, "w", encoding="utf-8") as fout:
             fout.write(updated_yaml_str)
