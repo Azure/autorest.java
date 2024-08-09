@@ -1097,33 +1097,35 @@ export class CodeModelBuilder {
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
           const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          switch (queryParamOptions?.format) {
-            case "csv":
-              style = SerializationStyle.Simple;
-              break;
+          // eslint-disable-next-line deprecation/deprecation
+          const queryParamFormat = queryParamOptions?.format;
+          if (queryParamFormat) {
+            switch (queryParamFormat) {
+              case "csv":
+                style = SerializationStyle.Simple;
+                break;
 
-            case "ssv":
-              style = SerializationStyle.SpaceDelimited;
-              break;
+              case "ssv":
+                style = SerializationStyle.SpaceDelimited;
+                break;
 
-            case "tsv":
-              style = SerializationStyle.TabDelimited;
-              break;
+              case "tsv":
+                style = SerializationStyle.TabDelimited;
+                break;
 
-            case "pipes":
-              style = SerializationStyle.PipeDelimited;
-              break;
+              case "pipes":
+                style = SerializationStyle.PipeDelimited;
+                break;
 
-            case "multi":
-              style = SerializationStyle.Form;
-              explode = true;
-              break;
+              case "multi":
+                style = SerializationStyle.Form;
+                explode = true;
+                break;
 
-            default:
-              if (queryParamOptions?.format) {
-                this.logWarning(`Unrecognized query parameter format: '${queryParamOptions?.format}'.`);
-              }
-              break;
+              default:
+                this.logWarning(`Unrecognized query parameter format: '${queryParamFormat}'.`);
+                break;
+            }
           }
         } else if (param.type === "header") {
           const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
