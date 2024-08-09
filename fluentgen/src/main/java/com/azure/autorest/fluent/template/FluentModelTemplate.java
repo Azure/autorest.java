@@ -63,7 +63,7 @@ public class FluentModelTemplate extends ModelTemplate {
     }
 
     @Override
-    protected boolean validateOnParentModel(String parentModelName) {
+    protected boolean parentModelHasValidate(String parentModelName) {
         return parentModelName != null
             && FluentType.nonResourceType(parentModelName)
             && FluentType.nonManagementError(parentModelName);

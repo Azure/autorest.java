@@ -87,7 +87,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**

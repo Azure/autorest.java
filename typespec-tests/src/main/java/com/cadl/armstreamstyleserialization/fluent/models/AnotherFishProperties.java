@@ -70,6 +70,29 @@ public final class AnotherFishProperties implements JsonSerializable<AnotherFish
     }
 
     /**
+     * Get the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    public String requiredString() {
+        return this.innerEyeProperties() == null ? null : this.innerEyeProperties().requiredString();
+    }
+
+    /**
+     * Set the requiredString property: The requiredString property.
+     * 
+     * @param requiredString the requiredString value to set.
+     * @return the AnotherFishProperties object itself.
+     */
+    public AnotherFishProperties withRequiredString(String requiredString) {
+        if (this.innerEyeProperties() == null) {
+            this.innerEyeProperties = new EyeProperties();
+        }
+        this.innerEyeProperties().withRequiredString(requiredString);
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.

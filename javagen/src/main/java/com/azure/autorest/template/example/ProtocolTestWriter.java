@@ -13,14 +13,11 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.Configuration;
-import reactor.core.publisher.Mono;
 
-import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -43,13 +40,11 @@ public class ProtocolTestWriter {
                 && serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2);
 
         this.imports = new HashSet<>(Arrays.asList(
-                AccessToken.class.getName(),
                 HttpClient.class.getName(),
                 HttpLogDetailLevel.class.getName(),
                 HttpLogOptions.class.getName(),
                 Configuration.class.getName(),
-                OffsetDateTime.class.getName(),
-                Mono.class.getName(),
+                "com.azure.core.test.utils.MockTokenCredential",
                 "com.azure.identity.DefaultAzureCredentialBuilder",
                 "com.azure.core.test.TestProxyTestBase",
                 "com.azure.core.test.TestMode",
@@ -106,7 +101,7 @@ public class ProtocolTestWriter {
                 JavaIfBlock codeBlock = methodBlock.ifBlock("getTestMode() == TestMode.PLAYBACK", ifBlock -> {
                     if (isTokenCredential) {
                         ifBlock.line(String.format("%1$s.httpClient(interceptorManager.getPlaybackClient())", builderVarName));
-                        ifBlock.line(".credential(request -> Mono.just(new AccessToken(\"this_is_a_token\", OffsetDateTime.MAX)));");
+                        ifBlock.line(".credential(new MockTokenCredential());");
                     } else {
                         ifBlock.line(String.format("%1$s.httpClient(interceptorManager.getPlaybackClient());", builderVarName));
                     }

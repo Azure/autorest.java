@@ -65,6 +65,8 @@ model TailProperties {
 
   @visibility("read")
   patten: string;
+
+  requiredString: string;
 }
 
 model AnotherFishProperties {
@@ -76,6 +78,8 @@ model EyeProperties {
 
   @visibility("read")
   patten: string;
+
+  requiredString: string;
 }
 
 @doc("The third level model SawShark in polymorphic multiple levels inheritance.")

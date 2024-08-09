@@ -21,6 +21,14 @@ jobs:
       vmImage: "MMSUbuntu20.04"
 
     steps:
+      - task: PowerShell@2
+        displayName: 'Disable Warning on Deprecation'
+        inputs:
+          targetType: inline
+          script: >
+            (Get-Content '.eslintrc.cjs') -replace '(?<="deprecation/deprecation": ")[^"]*', 'off' | Set-Content '.eslintrc.cjs'
+          workingDirectory: ./typespec-extension
+
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
         inputs:
