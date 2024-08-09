@@ -126,12 +126,12 @@ def update_sdks():
 
         logging.info(f'Generate for module {artifact}')
         try:
-            subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
+            subprocess.check_call(['tsp-client', 'update', '--debug'], cwd=module_path)
         except subprocess.CalledProcessError:
             # one retry
             # sometimes customization have intermittent failure
             logging.warning(f'Retry generate for module {artifact}')
-            subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
+            subprocess.check_call(['tsp-client', 'update', '--debug'], cwd=module_path)
 
         if arm_module:
             # revert mock test code
