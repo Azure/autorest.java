@@ -160,7 +160,7 @@ import {
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
-import { getNamespace, logWarning, pascalCase, stringArrayContainsIgnoreCase, trace } from "./utils.js";
+import { getNamespace, logWarning, pascalCase, removeClientSuffix, stringArrayContainsIgnoreCase, trace } from "./utils.js";
 import { pathToFileURL } from "url";
 const { isEqual } = pkg;
 
@@ -255,8 +255,6 @@ export class CodeModelBuilder {
       this.codeModel.arm = true;
       this.options["group-etag-headers"] = false;
     }
-
-    // const clients = this.processClients();
 
     this.processClientsFromSdkType();
 
@@ -642,31 +640,6 @@ export class CodeModelBuilder {
     }
   }
 
-  private buildSdkPathPathParameterForARM(): SdkPathParameter {
-    return {
-      kind: "path",
-      name: "endpoint",
-      isGeneratedName: true,
-      description: "Service host",
-      onClient: true,
-      urlEncode: false,
-      optional: false,
-      serializedName: "endpoint",
-      correspondingMethodParams: [],
-      type: {
-        kind: "string",
-        encode: "string",
-        decorators: [],
-        name: "string",
-        crossLanguageDefinitionId: "string",
-      },
-      isApiVersionParam: false,
-      decorators: [],
-      apiVersions: [],
-      crossLanguageDefinitionId: "endpoint",
-    };
-  }
-
   private listSubClientsUnderClient(
     client: SdkClientType<SdkHttpOperation>,
     includeNestedOperationGroups: boolean,
@@ -678,7 +651,7 @@ export class CodeModelBuilder {
         const subClient = method.response;
         if (!isRootClient) {
           // if it is not root client, append the parent client's name
-          subClient.name = this.removeClientSuffix(client.name) + this.removeClientSuffix(pascalCase(subClient.name));
+          subClient.name = removeClientSuffix(client.name) + removeClientSuffix(pascalCase(subClient.name));
         }
         operationGroups.push(subClient);
         if (includeNestedOperationGroups) {
@@ -712,10 +685,6 @@ export class CodeModelBuilder {
     return methods;
   }
 
-  private removeClientSuffix(clientName: string): string {
-    return clientName.endsWith("Client") ? clientName.slice(0, -6) : clientName;
-  }
-
   /**
    * Filter api-versions for "ServiceVersion".
    * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/965
@@ -735,18 +704,6 @@ export class CodeModelBuilder {
     return versions
       .slice(0, versions.indexOf(pinnedApiVersion) + 1)
       .filter((version) => !excludePreview || pinnedApiVersion.includes("preview") || !version.includes("preview"));
-  }
-
-  /**
-   * `@armProviderNamespace` currently will add a default server if not defined globally:
-   * https://github.com/Azure/typespec-azure/blob/8b8d7c05f168d9305a09691c4fedcb88f4a57652/packages/typespec-azure-resource-manager/src/namespace.ts#L121-L128
-   * TODO: if the synthesized server has the right hostParameter, we can use that instead
-   *
-   * @param server returned by getServers
-   * @returns whether it's synthesized by `@armProviderNamespace`
-   */
-  private isArmSynthesizedServer(server: HttpServer): boolean {
-    return this.isArm() && (!server.parameters || server.parameters.size == 0);
   }
 
   private needToSkipProcessingOperation(operation: Operation | undefined, clientContext: ClientContext): boolean {
