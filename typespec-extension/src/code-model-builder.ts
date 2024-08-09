@@ -67,7 +67,6 @@ import {
   getHttpOperationWithCache,
   getWireName,
   isApiVersion,
-  isInternal,
   isSdkBuiltInKind,
   isSdkIntKind,
   listClients,
@@ -116,10 +115,8 @@ import {
   Visibility,
   getAuthentication,
   getHeaderFieldName,
-  getHeaderFieldOptions,
   getPathParamName,
   getQueryParamName,
-  getQueryParamOptions,
   getServers,
   getStatusCodeDescription,
   isHeader,
@@ -306,6 +303,7 @@ export class CodeModelBuilder {
               },
             },
             extensions: {
+              // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
               "x-ms-skip-url-encoding": schema instanceof UriSchema,
             },
             // // make the logic same as TCGC, which takes the server-side default of host as client-side default
@@ -401,14 +399,12 @@ export class CodeModelBuilder {
     return !this.options["flavor"] || this.options["flavor"].toLocaleLowerCase() === "azure";
   }
 
-  private isInternal(context: SdkContext, operation: Operation): boolean {
+  private isInternal(operation: Operation): boolean {
     const access = getAccess(operation);
     if (access) {
       return access === "internal";
     } else {
-      // TODO: deprecate "internal"
-      // eslint-disable-next-line deprecation/deprecation
-      return isInternal(context, operation);
+      return false;
     }
   }
 
@@ -759,7 +755,7 @@ export class CodeModelBuilder {
       this.sdkContext,
       operation,
     );
-    codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
+    codeModelOperation.internalApi = this.isInternal(operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
@@ -1072,14 +1068,22 @@ export class CodeModelBuilder {
         schema = this.processSchemaFromSdkType(sdkType, param.param.name);
       }
 
-      // skip-url-encoding
       let extensions: { [id: string]: any } | undefined = undefined;
+      // skip-url-encoding
+      if (param.type === "path") {
+        if (param.allowReserved) {
+          extensions = extensions ?? {};
+          extensions["x-ms-skip-url-encoding"] = true;
+        }
+      }
+      // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
       if (
         (param.type === "query" || param.type === "path") &&
         param.param.type.kind === "Scalar" &&
         schema instanceof UriSchema
       ) {
-        extensions = { "x-ms-skip-url-encoding": true };
+        extensions = extensions ?? {};
+        extensions["x-ms-skip-url-encoding"] = true;
       }
 
       if (this.supportsAdvancedVersioning()) {
@@ -1096,47 +1100,47 @@ export class CodeModelBuilder {
       let explode = undefined;
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
-          const queryParamOptions = getQueryParamOptions(this.program, param.param);
-          switch (queryParamOptions?.format) {
-            case "csv":
-              style = SerializationStyle.Simple;
-              break;
+          // eslint-disable-next-line deprecation/deprecation
+          const queryParamFormat = param?.format;
+          if (queryParamFormat) {
+            switch (queryParamFormat) {
+              case "csv":
+                style = SerializationStyle.Simple;
+                break;
 
-            case "ssv":
-              style = SerializationStyle.SpaceDelimited;
-              break;
+              case "ssv":
+                style = SerializationStyle.SpaceDelimited;
+                break;
 
-            case "tsv":
-              style = SerializationStyle.TabDelimited;
-              break;
+              case "tsv":
+                style = SerializationStyle.TabDelimited;
+                break;
 
-            case "pipes":
-              style = SerializationStyle.PipeDelimited;
-              break;
+              case "pipes":
+                style = SerializationStyle.PipeDelimited;
+                break;
 
-            case "multi":
-              style = SerializationStyle.Form;
-              explode = true;
-              break;
+              case "multi":
+                style = SerializationStyle.Form;
+                explode = true;
+                break;
 
-            default:
-              if (queryParamOptions?.format) {
-                this.logWarning(`Unrecognized query parameter format: '${queryParamOptions?.format}'.`);
-              }
-              break;
+              default:
+                this.logWarning(`Unrecognized query parameter format: '${queryParamFormat}'.`);
+                break;
+            }
           }
         } else if (param.type === "header") {
-          const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
-          switch (headerFieldOptions?.format) {
-            case "csv":
-              style = SerializationStyle.Simple;
-              break;
+          if (param.format) {
+            switch (param.format) {
+              case "csv":
+                style = SerializationStyle.Simple;
+                break;
 
-            default:
-              if (headerFieldOptions?.format) {
-                this.logWarning(`Unrecognized header parameter format: '${headerFieldOptions?.format}'.`);
-              }
-              break;
+              default:
+                this.logWarning(`Unrecognized header parameter format: '${param.format}'.`);
+                break;
+            }
           }
         }
       }
