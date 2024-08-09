@@ -67,7 +67,6 @@ import {
   getHttpOperationWithCache,
   getWireName,
   isApiVersion,
-  isInternal,
   isSdkBuiltInKind,
   isSdkIntKind,
   listClients,
@@ -116,11 +115,8 @@ import {
   Visibility,
   getAuthentication,
   getHeaderFieldName,
-  getHeaderFieldOptions,
   getPathParamName,
-  getPathParamOptions,
   getQueryParamName,
-  getQueryParamOptions,
   getServers,
   getStatusCodeDescription,
   isHeader,
@@ -403,14 +399,12 @@ export class CodeModelBuilder {
     return !this.options["flavor"] || this.options["flavor"].toLocaleLowerCase() === "azure";
   }
 
-  private isInternal(context: SdkContext, operation: Operation): boolean {
+  private isInternal(operation: Operation): boolean {
     const access = getAccess(operation);
     if (access) {
       return access === "internal";
     } else {
-      // TODO: deprecate "internal"
-      // eslint-disable-next-line deprecation/deprecation
-      return isInternal(context, operation);
+      return false;
     }
   }
 
@@ -761,7 +755,7 @@ export class CodeModelBuilder {
       this.sdkContext,
       operation,
     );
-    codeModelOperation.internalApi = this.isInternal(this.sdkContext, operation);
+    codeModelOperation.internalApi = this.isInternal(operation);
 
     const convenienceApiName = this.getConvenienceApiName(operation);
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
@@ -1077,8 +1071,7 @@ export class CodeModelBuilder {
       let extensions: { [id: string]: any } | undefined = undefined;
       // skip-url-encoding
       if (param.type === "path") {
-        const pathParamOptions = getPathParamOptions(this.program, param.param);
-        if (pathParamOptions.allowReserved) {
+        if (param.allowReserved) {
           extensions = extensions ?? {};
           extensions["x-ms-skip-url-encoding"] = true;
         }
@@ -1107,9 +1100,8 @@ export class CodeModelBuilder {
       let explode = undefined;
       if (param.param.type.kind === "Model" && isArrayModelType(this.program, param.param.type)) {
         if (param.type === "query") {
-          const queryParamOptions = getQueryParamOptions(this.program, param.param);
           // eslint-disable-next-line deprecation/deprecation
-          const queryParamFormat = queryParamOptions?.format;
+          const queryParamFormat = param?.format;
           if (queryParamFormat) {
             switch (queryParamFormat) {
               case "csv":
@@ -1139,15 +1131,14 @@ export class CodeModelBuilder {
             }
           }
         } else if (param.type === "header") {
-          const headerFieldOptions = getHeaderFieldOptions(this.program, param.param);
-          switch (headerFieldOptions?.format) {
+          switch (param.format) {
             case "csv":
               style = SerializationStyle.Simple;
               break;
 
             default:
-              if (headerFieldOptions?.format) {
-                this.logWarning(`Unrecognized header parameter format: '${headerFieldOptions?.format}'.`);
+              if (param.format) {
+                this.logWarning(`Unrecognized header parameter format: '${param.format}'.`);
               }
               break;
           }
