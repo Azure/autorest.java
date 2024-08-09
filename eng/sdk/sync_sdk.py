@@ -107,14 +107,15 @@ def update_sdks():
         generated_samples_exists = os.path.isdir(generated_samples_path)
         generated_test_exists = os.path.isdir(generated_test_path)
 
-        # update commit id
-        with open(tsp_location_file, "r", encoding="utf-8") as fin:
-            tsp_location_yml = yaml.safe_load(fin)
-        tsp_location_yml['commit'] = '27a9398801386caaba2df7e1a4d1a8abd19e3789'
-
-        updated_yaml_str = yaml.dump(tsp_location_yml, width=sys.maxsize, sort_keys=False, Dumper=ListIndentDumper)
-        with open(tsp_location_file, "w", encoding="utf-8") as fout:
-            fout.write(updated_yaml_str)
+#         # update commit id
+#         if not arm_module:
+#             with open(tsp_location_file, "r", encoding="utf-8") as fin:
+#                 tsp_location_yml = yaml.safe_load(fin)
+#             tsp_location_yml['commit'] = '27a9398801386caaba2df7e1a4d1a8abd19e3789'
+#
+#             updated_yaml_str = yaml.dump(tsp_location_yml, width=sys.maxsize, sort_keys=False, Dumper=ListIndentDumper)
+#             with open(tsp_location_file, "w", encoding="utf-8") as fout:
+#                 fout.write(updated_yaml_str)
 
         if arm_module:
             logging.info('Delete source code of resourcemanager module %s', artifact)
