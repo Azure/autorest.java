@@ -101,15 +101,12 @@ import {
   getSummary,
   getVisibility,
   isArrayModelType,
-  isErrorModel,
   isRecordModelType,
   listServices,
 } from "@typespec/compiler";
 import {
   Authentication,
   HttpOperation,
-  HttpOperationBody,
-  HttpOperationMultipartBody,
   HttpOperationResponse,
   HttpServer,
   HttpStatusCodeRange,
@@ -566,7 +563,7 @@ export class CodeModelBuilder {
           } else {
             throw new Error("unexpected endpoint parameter type");
           }
-          
+
           hostParameters = this.processHostParametersFromSdkType(sdkPathParameters);
           codeModelClient.addGlobalParameters(hostParameters);
         }
@@ -1144,22 +1141,22 @@ export class CodeModelBuilder {
               style = SerializationStyle.Simple;
               break;
 
-              case "ssv":
-                style = SerializationStyle.SpaceDelimited;
-                break;
+            case "ssv":
+              style = SerializationStyle.SpaceDelimited;
+              break;
 
-              case "tsv":
-                style = SerializationStyle.TabDelimited;
-                break;
+            case "tsv":
+              style = SerializationStyle.TabDelimited;
+              break;
 
-              case "pipes":
-                style = SerializationStyle.PipeDelimited;
-                break;
+            case "pipes":
+              style = SerializationStyle.PipeDelimited;
+              break;
 
-              case "multi":
-                style = SerializationStyle.Form;
-                explode = true;
-                break;
+            case "multi":
+              style = SerializationStyle.Form;
+              explode = true;
+              break;
 
             default:
               if (format) {
