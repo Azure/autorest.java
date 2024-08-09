@@ -74,7 +74,6 @@ import {
   getClientType,
   getWireName,
   isApiVersion,
-  isInternal,
   isSdkBuiltInKind,
   isSdkIntKind,
   shouldGenerateConvenient,
