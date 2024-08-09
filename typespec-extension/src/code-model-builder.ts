@@ -547,16 +547,25 @@ export class CodeModelBuilder {
       let hostParameters: Parameter[] = [];
       client.initialization.properties.forEach((initializationProperty) => {
         if (initializationProperty.kind === "endpoint") {
-          if (this.isArm()) {
-            // this is just a workaround for ARM
-            initializationProperty.type.serverUrl = "{endpoint}";
-            initializationProperty.type.templateArguments = [this.buildSdkPathPathParameterForARM()];
-          }
-          if (initializationProperty.type.serverUrl) {
+          let sdkPathParameters: SdkPathParameter[] = [];
+          if (initializationProperty.type.kind === "union") {
+            if (initializationProperty.type.values.length <= 2) {
+              // only get the path parameters from the endpoint whose serverUrl is not {"endpoint"}
+              for (const endpointType of initializationProperty.type.values) {
+                if (endpointType.kind === "endpoint" && endpointType.serverUrl !== "{endpoint}") {
+                  sdkPathParameters = endpointType.templateArguments;
+                  baseUri = endpointType.serverUrl;
+                }
+              }
+            } else {
+              throw new Error("multiple server url defined for one client is not supported yet");
+            }
+          } else {
+            sdkPathParameters = initializationProperty.type.templateArguments;
             baseUri = initializationProperty.type.serverUrl;
           }
-
-          hostParameters = this.processHostParametersFromSdkType(initializationProperty.type.templateArguments);
+          
+          hostParameters = this.processHostParametersFromSdkType(sdkPathParameters);
           codeModelClient.addGlobalParameters(hostParameters);
         }
       });
