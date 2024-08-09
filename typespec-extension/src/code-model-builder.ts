@@ -118,6 +118,7 @@ import {
   getHeaderFieldName,
   getHeaderFieldOptions,
   getPathParamName,
+  getPathParamOptions,
   getQueryParamName,
   getQueryParamOptions,
   getServers,
@@ -306,6 +307,7 @@ export class CodeModelBuilder {
               },
             },
             extensions: {
+              // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
               "x-ms-skip-url-encoding": schema instanceof UriSchema,
             },
             // // make the logic same as TCGC, which takes the server-side default of host as client-side default
@@ -1072,14 +1074,23 @@ export class CodeModelBuilder {
         schema = this.processSchemaFromSdkType(sdkType, param.param.name);
       }
 
-      // skip-url-encoding
       let extensions: { [id: string]: any } | undefined = undefined;
+      // skip-url-encoding
+      if (param.type === "path") {
+        const pathParamOptions = getPathParamOptions(this.program, param.param);
+        if (pathParamOptions.allowReserved) {
+          extensions = extensions ?? {};
+          extensions["x-ms-skip-url-encoding"] = true;
+        }
+      }
+      // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
       if (
         (param.type === "query" || param.type === "path") &&
         param.param.type.kind === "Scalar" &&
         schema instanceof UriSchema
       ) {
-        extensions = { "x-ms-skip-url-encoding": true };
+        extensions = extensions ?? {};
+        extensions["x-ms-skip-url-encoding"] = true;
       }
 
       if (this.supportsAdvancedVersioning()) {
