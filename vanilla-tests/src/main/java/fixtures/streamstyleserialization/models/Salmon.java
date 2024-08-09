@@ -121,7 +121,9 @@ public class Salmon extends Fish {
      */
     @Override
     public void validate() {
-        super.validate();
+        if (getSiblings() != null) {
+            getSiblings().forEach(e -> e.validate());
+        }
     }
 
     /**

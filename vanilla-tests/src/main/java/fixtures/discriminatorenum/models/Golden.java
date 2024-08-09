@@ -52,7 +52,6 @@ public final class Golden extends Dog {
      */
     @Override
     public void validate() {
-        super.validate();
     }
 
     /**

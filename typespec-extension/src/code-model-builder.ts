@@ -498,7 +498,8 @@ export class CodeModelBuilder {
       const clientNameSegments = clientFullName.split(".");
       if (clientNameSegments.length > 1) {
         clientName = clientNameSegments.at(-1)!;
-        javaNamespace = this.getJavaNamespace(this.namespace + "." + clientNameSegments.slice(0, -1).join("."));
+        const clientSubNamespace = clientNameSegments.slice(0, -1).join(".");
+        javaNamespace = this.getJavaNamespace(this.namespace + "." + clientSubNamespace);
       }
 
       const codeModelClient = new CodeModelClient(clientName, client.details ?? "", {
@@ -1132,22 +1133,22 @@ export class CodeModelBuilder {
               style = SerializationStyle.Simple;
               break;
 
-            case "ssv":
-              style = SerializationStyle.SpaceDelimited;
-              break;
+              case "ssv":
+                style = SerializationStyle.SpaceDelimited;
+                break;
 
-            case "tsv":
-              style = SerializationStyle.TabDelimited;
-              break;
+              case "tsv":
+                style = SerializationStyle.TabDelimited;
+                break;
 
-            case "pipes":
-              style = SerializationStyle.PipeDelimited;
-              break;
+              case "pipes":
+                style = SerializationStyle.PipeDelimited;
+                break;
 
-            case "multi":
-              style = SerializationStyle.Form;
-              explode = true;
-              break;
+              case "multi":
+                style = SerializationStyle.Form;
+                explode = true;
+                break;
 
             default:
               if (format) {

@@ -38,12 +38,20 @@ public final class FishImpl implements Fish {
         return this.innerModel().patten();
     }
 
+    public String requiredString() {
+        return this.innerModel().requiredString();
+    }
+
     public double lengthAnotherPropertiesLength() {
         return this.innerModel().lengthAnotherPropertiesLength();
     }
 
     public String pattenAnotherPropertiesPatten() {
         return this.innerModel().pattenAnotherPropertiesPatten();
+    }
+
+    public String requiredStringAnotherPropertiesRequiredString() {
+        return this.innerModel().requiredStringAnotherPropertiesRequiredString();
     }
 
     public FishInner innerModel() {

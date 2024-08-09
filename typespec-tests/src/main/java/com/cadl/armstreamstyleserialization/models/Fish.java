@@ -46,6 +46,13 @@ public interface Fish {
     String patten();
 
     /**
+     * Gets the requiredString property: The requiredString property.
+     * 
+     * @return the requiredString value.
+     */
+    String requiredString();
+
+    /**
      * Gets the lengthAnotherPropertiesLength property: The length property.
      * 
      * @return the lengthAnotherPropertiesLength value.
@@ -58,6 +65,13 @@ public interface Fish {
      * @return the pattenAnotherPropertiesPatten value.
      */
     String pattenAnotherPropertiesPatten();
+
+    /**
+     * Gets the requiredStringAnotherPropertiesRequiredString property: The requiredString property.
+     * 
+     * @return the requiredStringAnotherPropertiesRequiredString value.
+     */
+    String requiredStringAnotherPropertiesRequiredString();
 
     /**
      * Gets the inner com.cadl.armstreamstyleserialization.fluent.models.FishInner object.

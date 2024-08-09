@@ -90,7 +90,9 @@ public final class Siamese extends Cat {
      */
     @Override
     public void validate() {
-        super.validate();
+        if (getHates() != null) {
+            getHates().forEach(e -> e.validate());
+        }
     }
 
     /**
