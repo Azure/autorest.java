@@ -511,7 +511,7 @@ export class CodeModelBuilder {
         // at present, use global security definition
         security: this.codeModel.security,
       });
-      // codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
+      codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
 
       // versioning
       const versions = client.apiVersions;
