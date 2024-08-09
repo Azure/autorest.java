@@ -560,9 +560,11 @@ export class CodeModelBuilder {
             } else {
               throw new Error("multiple server url defined for one client is not supported yet");
             }
-          } else {
+          } else if (initializationProperty.type.kind === "endpoint") {
             sdkPathParameters = initializationProperty.type.templateArguments;
             baseUri = initializationProperty.type.serverUrl;
+          } else {
+            throw new Error("unexpected endpoint parameter type");
           }
           
           hostParameters = this.processHostParametersFromSdkType(sdkPathParameters);
