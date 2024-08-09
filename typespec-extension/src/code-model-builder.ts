@@ -88,7 +88,6 @@ import {
   Namespace,
   Operation,
   Program,
-  Scalar,
   Type,
   TypeNameOptions,
   Union,
@@ -108,7 +107,6 @@ import {
   Authentication,
   HttpOperation,
   HttpOperationResponse,
-  HttpServer,
   HttpStatusCodeRange,
   HttpStatusCodesEntry,
   Visibility,
@@ -362,17 +360,6 @@ export class CodeModelBuilder {
 
   private isBranded(): boolean {
     return !this.options["flavor"] || this.options["flavor"].toLocaleLowerCase() === "azure";
-  }
-
-  private isInternal(context: SdkContext, operation: Operation): boolean {
-    const access = getAccess(operation);
-    if (access) {
-      return access === "internal";
-    } else {
-      // TODO: deprecate "internal"
-      // eslint-disable-next-line deprecation/deprecation
-      return isInternal(context, operation);
-    }
   }
 
   private processModels() {
@@ -1535,7 +1522,6 @@ export class CodeModelBuilder {
       }
     }
 
-    // let responseBody: SdkHttpResponse | undefined = undefined;
     const bodyType: SdkType | undefined = sdkResponse.type;
     let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
 
@@ -2138,14 +2124,6 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(unionSchema);
   }
 
-  private processBinarySchema(type: Scalar): BinarySchema {
-    return this.codeModel.schemas.add(
-      new BinarySchema(this.getDoc(type), {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
-
   private processBinarySchemaFromSdkType(type: SdkBuiltInType): BinarySchema {
     return this.codeModel.schemas.add(
       new BinarySchema(type.description ?? "", {
@@ -2344,15 +2322,6 @@ export class CodeModelBuilder {
       } else {
         return mutability;
       }
-    } else {
-      return undefined;
-    }
-  }
-
-  private getConvenienceApiName(op: Operation): string | undefined {
-    // check @convenienceMethod
-    if (shouldGenerateConvenient(this.sdkContext, op)) {
-      return this.getName(op);
     } else {
       return undefined;
     }
@@ -2617,11 +2586,4 @@ export class CodeModelBuilder {
     return Boolean(this.codeModel.arm);
   }
 
-  // private getLocationFromSdkParameter(param: SdkModelPropertyType): string {
-  //   if (Object.values(ParameterLocation).includes(param.kind)) {
-  //     return param.kind;
-  //   } else {
-  //     return "none";
-  //   }
-  // }
 }
