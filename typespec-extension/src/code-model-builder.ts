@@ -76,7 +76,6 @@ import {
   isApiVersion,
   isSdkBuiltInKind,
   isSdkIntKind,
-  shouldGenerateConvenient,
   shouldGenerateProtocol,
 } from "@azure-tools/typespec-client-generator-core";
 import {
@@ -157,7 +156,14 @@ import {
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
-import { getNamespace, logWarning, pascalCase, removeClientSuffix, stringArrayContainsIgnoreCase, trace } from "./utils.js";
+import {
+  getNamespace,
+  logWarning,
+  pascalCase,
+  removeClientSuffix,
+  stringArrayContainsIgnoreCase,
+  trace,
+} from "./utils.js";
 import { pathToFileURL } from "url";
 const { isEqual } = pkg;
 
@@ -2585,5 +2591,4 @@ export class CodeModelBuilder {
   private isArm(): boolean {
     return Boolean(this.codeModel.arm);
   }
-
 }
