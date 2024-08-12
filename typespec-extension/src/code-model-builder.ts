@@ -127,7 +127,7 @@ import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
-import { Client as CodeModelClient, CrossLanguageDefinition } from "./common/client.js";
+import { Client as CodeModelClient, CrossLanguageDefinition, EncodedSchema } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { Operation as CodeModelOperation, ConvenienceApi, Request } from "./common/operation.js";
@@ -1800,11 +1800,13 @@ export class CodeModelBuilder {
   }
 
   private processIntegerSchemaFromSdkType(type: SdkBuiltInType, name: string, precision: number): NumberSchema {
-    return this.codeModel.schemas.add(
-      new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
-        summary: type.description,
-      }),
-    );
+    const schema = new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
+      summary: type.description,
+    });
+    if (type.encode === "string") {
+      (schema as EncodedSchema).encode = type.encode;
+    }
+    return this.codeModel.schemas.add(schema);
   }
 
   private processNumberSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {

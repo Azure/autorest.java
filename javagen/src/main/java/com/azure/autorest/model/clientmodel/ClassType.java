@@ -206,6 +206,17 @@ public class ClassType implements IType {
         .prototypeAsLong()
         .build();
 
+    public static final ClassType LONG_AS_STRING = new Builder(false)
+        .prototypeAsLong()
+        .defaultValueExpressionConverter(defaultValueExpression -> "Long.parseLong(\"" + defaultValueExpression + "\")")
+        .jsonToken("JsonToken.STRING")
+        .serializationMethodBase("writeString")
+        .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> Long.parseLong(nonNullReader.getString()))")
+        .xmlElementDeserializationMethod("getNullableElement(Long::valueOf)")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Long::valueOf)")
+        .build();
+
     public static final ClassType FLOAT = new Builder(false).knownClass(Float.class)
         .defaultValueExpressionConverter(defaultValueExpression -> Float.parseFloat(defaultValueExpression) + "F")
         .jsonToken("JsonToken.NUMBER")
