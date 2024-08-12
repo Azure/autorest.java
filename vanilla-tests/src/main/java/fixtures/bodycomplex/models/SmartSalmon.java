@@ -54,6 +54,42 @@ public final class SmartSalmon extends Salmon {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setLocation(String location) {
+        super.setLocation(location);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setIswild(Boolean iswild) {
+        super.setIswild(iswild);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -110,42 +146,6 @@ public final class SmartSalmon extends Salmon {
             additionalProperties = new LinkedHashMap<>();
         }
         additionalProperties.put(key, value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setLocation(String location) {
-        super.setLocation(location);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setIswild(Boolean iswild) {
-        super.setIswild(iswild);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
-        return this;
     }
 
     /**

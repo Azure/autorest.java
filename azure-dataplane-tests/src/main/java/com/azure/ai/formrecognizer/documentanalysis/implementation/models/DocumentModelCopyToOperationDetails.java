@@ -36,36 +36,6 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     }
 
     /**
-     * Get the kind property: Type of operation.
-     * 
-     * @return the kind value.
-     */
-    @Override
-    public String getKind() {
-        return this.kind;
-    }
-
-    /**
-     * Get the result property: Operation result upon success.
-     * 
-     * @return the result value.
-     */
-    public DocumentModelDetails getResult() {
-        return this.result;
-    }
-
-    /**
-     * Set the result property: Operation result upon success.
-     * 
-     * @param result the result value to set.
-     * @return the DocumentModelCopyToOperationDetails object itself.
-     */
-    public DocumentModelCopyToOperationDetails setResult(DocumentModelDetails result) {
-        this.result = result;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -143,6 +113,36 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     @Override
     public DocumentModelCopyToOperationDetails setError(Error error) {
         super.setError(error);
+        return this;
+    }
+
+    /**
+     * Get the kind property: Type of operation.
+     * 
+     * @return the kind value.
+     */
+    @Override
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Get the result property: Operation result upon success.
+     * 
+     * @return the result value.
+     */
+    public DocumentModelDetails getResult() {
+        return this.result;
+    }
+
+    /**
+     * Set the result property: Operation result upon success.
+     * 
+     * @param result the result value to set.
+     * @return the DocumentModelCopyToOperationDetails object itself.
+     */
+    public DocumentModelCopyToOperationDetails setResult(DocumentModelDetails result) {
+        this.result = result;
         return this;
     }
 

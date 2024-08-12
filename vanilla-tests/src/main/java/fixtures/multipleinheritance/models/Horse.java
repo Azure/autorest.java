@@ -27,6 +27,15 @@ public final class Horse extends Pet {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Horse setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
+    /**
      * Get the isAShowHorse property: The isAShowHorse property.
      * 
      * @return the isAShowHorse value.
@@ -43,15 +52,6 @@ public final class Horse extends Pet {
      */
     public Horse setIsAShowHorse(Boolean isAShowHorse) {
         this.isAShowHorse = isAShowHorse;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Horse setName(String name) {
-        super.setName(name);
         return this;
     }
 

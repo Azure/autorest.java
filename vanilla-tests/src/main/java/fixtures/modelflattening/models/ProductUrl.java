@@ -27,6 +27,15 @@ public final class ProductUrl extends GenericUrl {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ProductUrl setGenericValue(String genericValue) {
+        super.setGenericValue(genericValue);
+        return this;
+    }
+
+    /**
      * Get the odataValue property: URL value.
      * 
      * @return the odataValue value.
@@ -43,15 +52,6 @@ public final class ProductUrl extends GenericUrl {
      */
     public ProductUrl setOdataValue(String odataValue) {
         this.odataValue = odataValue;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ProductUrl setGenericValue(String genericValue) {
-        super.setGenericValue(genericValue);
         return this;
     }
 

@@ -41,6 +41,24 @@ public class Salmon extends Fish {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Salmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Salmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -87,24 +105,6 @@ public class Salmon extends Fish {
      */
     public Salmon setIswild(Boolean iswild) {
         this.iswild = iswild;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Salmon setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Salmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
         return this;
     }
 
@@ -171,7 +171,7 @@ public class Salmon extends Fish {
 
     static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
+            long foundTracker = 0;
             float length = 0.0f;
             String species = null;
             List<Fish> siblings = null;
@@ -184,7 +184,7 @@ public class Salmon extends Fish {
 
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
-                    lengthFound = true;
+                    foundTracker |= 1;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -199,7 +199,7 @@ public class Salmon extends Fish {
                     reader.skipChildren();
                 }
             }
-            if (lengthFound) {
+            if (foundTracker == 1) {
                 Salmon deserializedSalmon = new Salmon(length);
                 deserializedSalmon.setSpecies(species);
                 deserializedSalmon.setSiblings(siblings);

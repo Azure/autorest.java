@@ -34,6 +34,24 @@ public class Product extends Resource {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Product setTags(Map<String, String> tags) {
+        super.setTags(tags);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Product setLocation(String location) {
+        super.setLocation(location);
+        return this;
+    }
+
+    /**
      * Get the provisioningState property: The provisioningState property.
      * 
      * @return the provisioningState value.
@@ -60,24 +78,6 @@ public class Product extends Resource {
      */
     public ProductPropertiesProvisioningStateValues getProvisioningStateValues() {
         return this.provisioningStateValues;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Product setTags(Map<String, String> tags) {
-        super.setTags(tags);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Product setLocation(String location) {
-        super.setLocation(location);
-        return this;
     }
 
     /**

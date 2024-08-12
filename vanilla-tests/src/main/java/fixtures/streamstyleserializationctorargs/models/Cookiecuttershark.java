@@ -37,16 +37,6 @@ public final class Cookiecuttershark extends Shark {
     }
 
     /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -71,6 +61,16 @@ public final class Cookiecuttershark extends Shark {
     public Cookiecuttershark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
         return this;
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -118,9 +118,8 @@ public final class Cookiecuttershark extends Shark {
      */
     public static Cookiecuttershark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
+            long foundTracker = 0;
             float length = 0.0f;
-            boolean birthdayFound = false;
             OffsetDateTime birthday = null;
             String species = null;
             List<Fish> siblings = null;
@@ -132,11 +131,11 @@ public final class Cookiecuttershark extends Shark {
 
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
-                    lengthFound = true;
+                    foundTracker |= 1;
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader
                         .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
-                    birthdayFound = true;
+                    foundTracker |= 2;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -149,7 +148,7 @@ public final class Cookiecuttershark extends Shark {
                     reader.skipChildren();
                 }
             }
-            if (lengthFound && birthdayFound) {
+            if (foundTracker == 3) {
                 Cookiecuttershark deserializedCookiecuttershark = new Cookiecuttershark(length, birthday);
                 deserializedCookiecuttershark.setSpecies(species);
                 deserializedCookiecuttershark.setSiblings(siblings);
@@ -159,10 +158,10 @@ public final class Cookiecuttershark extends Shark {
                 return deserializedCookiecuttershark;
             }
             List<String> missingProperties = new ArrayList<>();
-            if (!lengthFound) {
+            if ((foundTracker & 1) != 1) {
                 missingProperties.add("length");
             }
-            if (!birthdayFound) {
+            if ((foundTracker & 2) != 2) {
                 missingProperties.add("birthday");
             }
 

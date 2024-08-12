@@ -27,6 +27,15 @@ public final class Golden extends Dog {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Golden setWeight(int weight) {
+        super.setWeight(weight);
+        return this;
+    }
+
+    /**
      * Get the kind property: discriminator property.
      * 
      * @return the kind value.
@@ -34,15 +43,6 @@ public final class Golden extends Dog {
     @Override
     public DogKind getKind() {
         return this.kind;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Golden setWeight(int weight) {
-        super.setWeight(weight);
-        return this;
     }
 
     /**

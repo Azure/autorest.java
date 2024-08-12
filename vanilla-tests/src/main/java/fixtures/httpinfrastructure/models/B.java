@@ -27,6 +27,15 @@ public final class B extends MyException {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public B setStatusCode(String statusCode) {
+        super.setStatusCode(statusCode);
+        return this;
+    }
+
+    /**
      * Get the textStatusCode property: The textStatusCode property.
      * 
      * @return the textStatusCode value.
@@ -43,15 +52,6 @@ public final class B extends MyException {
      */
     public B setTextStatusCode(String textStatusCode) {
         this.textStatusCode = textStatusCode;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public B setStatusCode(String statusCode) {
-        super.setStatusCode(statusCode);
         return this;
     }
 

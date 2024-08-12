@@ -42,6 +42,24 @@ public class SimpleProduct extends BaseProduct {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SimpleProduct setProductId(String productId) {
+        super.setProductId(productId);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SimpleProduct setDescription(String description) {
+        super.setDescription(description);
+        return this;
+    }
+
+    /**
      * Get the maxProductDisplayName property: Display name of product.
      * 
      * @return the maxProductDisplayName value.
@@ -118,24 +136,6 @@ public class SimpleProduct extends BaseProduct {
      */
     public SimpleProduct setOdataValue(String odataValue) {
         this.odataValue = odataValue;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SimpleProduct setProductId(String productId) {
-        super.setProductId(productId);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SimpleProduct setDescription(String description) {
-        super.setDescription(description);
         return this;
     }
 

@@ -851,10 +851,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     //     - Sawshark : sharktype
                     // So, if deserialization enters Fish and the "kind" is "Shark" then it needs to check the
                     // "sharktype" to determine if it's a Sawshark or another subtype of Shark.
-                    boolean sameDiscimrinator = Objects.equals(childType.getPolymorphicDiscriminatorName(),
+                    boolean sameDiscriminator = Objects.equals(childType.getPolymorphicDiscriminatorName(),
                         model.getPolymorphicDiscriminatorName());
 
-                    if (!sameDiscimrinator && !Objects.equals(childType.getParentModelName(), model.getName())) {
+                    if (!sameDiscriminator && !Objects.equals(childType.getParentModelName(), model.getName())) {
                         // Child model and parent model don't share the same discriminator and the child isn't a direct
                         // child of the parent model, so skip this child model. This is done as the child model should
                         // be deserialized by the subtype that defines the different polymorphic discriminator. Using
@@ -863,7 +863,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         continue;
                     }
 
-                    String deserializationMethod = (isSuperTypeWithDiscriminator(childType) && sameDiscimrinator)
+                    String deserializationMethod = (isSuperTypeWithDiscriminator(childType) && sameDiscriminator)
                         ? ".fromJsonKnownDiscriminator(readerToUse.reset())"
                         : ".fromJson(readerToUse.reset())";
 
@@ -966,6 +966,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
 
         // Add the outermost while loop to read the JSON object.
+        AtomicLong foundTracker = new AtomicLong(1);
         addReaderWhileLoop(methodBlock, true, fieldNameVariableName, false, whileBlock -> {
             // Loop over all properties and generate their deserialization handling.
             AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(null);
@@ -974,7 +975,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 handleJsonPropertyDeserialization(propertiesManager.getModel(), property,
                     propertiesManager.getDeserializedModelName(), whileBlock, ifBlockReference,
                     fieldNameVariableName, fromSuper, propertiesManager.hasConstructorArguments(), settings,
-                    polymorphicJsonMergePatchScenario);
+                    polymorphicJsonMergePatchScenario, foundTracker);
 
             Map<String, ClientModelProperty> modelPropertyMap = new HashMap<>();
             for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(propertiesManager.getModel())) {
@@ -1017,7 +1018,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
                 methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
                 propertiesManager.getJsonReaderFieldNameVariableName(), propertiesManager.hasConstructorArguments(),
-                settings, polymorphicJsonMergePatchScenario);
+                settings, polymorphicJsonMergePatchScenario, foundTracker);
 
             // All properties have been checked for, add an else block that will either ignore unknown properties
             // or add them into an additional properties bag.
@@ -1027,7 +1028,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings,
+            foundTracker);
     }
 
     /**
@@ -1116,11 +1118,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (isXml) {
                 // XML only needs to initialize the XML element properties. XML attribute properties are initialized with
                 // their XML value.
+                methodBlock.line("long foundTracker = 0;");
                 propertiesManager.forEachSuperXmlElement(element -> initializeLocalVariable(methodBlock, element, true,
                     settings));
                 propertiesManager.forEachXmlElement(element -> initializeLocalVariable(methodBlock, element, false,
                     settings));
             } else {
+                methodBlock.line("long foundTracker = 0;");
                 propertiesManager.forEachSuperRequiredProperty(property -> {
                     if (property.isConstant()) {
                         // Constants are never deserialized.
@@ -1169,11 +1173,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void initializeLocalVariable(JavaBlock methodBlock, ClientModelProperty property, boolean fromSuper,
         JavaSettings settings) {
-        if (includePropertyInConstructor(property, settings) && !settings.isDisableRequiredJsonAnnotation()) {
-            // Required properties need an additional boolean variable to indicate they've been found.
-            methodBlock.line("boolean " + property.getName() + "Found = false;");
-        }
-
         // Always instantiate the local variable.
         // If the property is part of the constructor or set by a setter method from the super class, initialize the
         // local variable with the client type. Otherwise, initialize as the wire type to prevent multiple conversions
@@ -1239,7 +1238,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void handleJsonPropertyDeserialization(ClientModel model, ClientModelProperty property,
         String modelVariableName, JavaBlock methodBlock, AtomicReference<JavaIfBlock> ifBlockReference,
         String fieldNameVariableName, boolean fromSuper, boolean hasConstructorArguments, JavaSettings settings,
-        boolean polymorphicJsonMergePatchScenario) {
+        boolean polymorphicJsonMergePatchScenario, AtomicLong foundTracker) {
         // Property will be handled later by flattened deserialization.
         if (property.getNeedsFlatten()) {
             return;
@@ -1247,7 +1246,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         JavaIfBlock ifBlock = ifBlockReference.get();
         ifBlock = handleJsonPropertyDeserialization(model, property, modelVariableName, methodBlock, ifBlock,
-            fieldNameVariableName, fromSuper, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario);
+            fieldNameVariableName, fromSuper, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario,
+            foundTracker);
 
         ifBlockReference.set(ifBlock);
     }
@@ -1255,7 +1255,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static JavaIfBlock handleJsonPropertyDeserialization(ClientModel model, ClientModelProperty property,
         String modelVariableName, JavaBlock methodBlock, JavaIfBlock ifBlock, String fieldNameVariableName,
         boolean fromSuper, boolean hasConstructorArguments, JavaSettings settings,
-        boolean polymorphicJsonMergePatchScenario) {
+        boolean polymorphicJsonMergePatchScenario, AtomicLong foundTracker) {
         String jsonPropertyName = property.getSerializedName();
         if (CoreUtils.isNullOrEmpty(jsonPropertyName)) {
             return ifBlock;
@@ -1263,24 +1263,26 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         return ifOrElseIf(methodBlock, ifBlock, "\"" + jsonPropertyName + "\".equals(" + fieldNameVariableName + ")",
             deserializationBlock -> generateJsonDeserializationLogic(deserializationBlock, modelVariableName, model,
-                property, fromSuper, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario));
+                property, fromSuper, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario,
+                foundTracker));
     }
 
     private static void handleFlattenedPropertiesDeserialization(
         JsonFlattenedPropertiesTree flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
         ClientModelProperty additionalProperties, String fieldNameVariableName, boolean hasConstructorArguments,
-        JavaSettings settings, boolean polymorphicJsonMergePatchScenario) {
+        JavaSettings settings, boolean polymorphicJsonMergePatchScenario, AtomicLong foundTracker) {
         // The initial call to handle flattened properties is using the base node which is just a holder.
         for (JsonFlattenedPropertiesTree structure : flattenedProperties.getChildrenNodes().values()) {
             handleFlattenedPropertiesDeserializationHelper(structure, methodBlock, ifBlock, additionalProperties,
-                fieldNameVariableName, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario);
+                fieldNameVariableName, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario,
+                foundTracker);
         }
     }
 
     private static JavaIfBlock handleFlattenedPropertiesDeserializationHelper(
         JsonFlattenedPropertiesTree flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
         ClientModelProperty additionalProperties, String fieldNameVariableName, boolean hasConstructorArguments,
-        JavaSettings settings, boolean polymorphicJsonMergePatchScenario) {
+        JavaSettings settings, boolean polymorphicJsonMergePatchScenario, AtomicLong foundTracker) {
         ClientModelPropertyWithMetadata propertyWithMetadata = flattenedProperties.getProperty();
         if (propertyWithMetadata != null) {
             String modelVariableName = "deserialized" + propertyWithMetadata.getModel().getName();
@@ -1291,7 +1293,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 deserializationBlock -> generateJsonDeserializationLogic(deserializationBlock, modelVariableName,
                     propertyWithMetadata.getModel(), propertyWithMetadata.getProperty(),
                     propertyWithMetadata.isFromSuperClass(), hasConstructorArguments, settings,
-                    polymorphicJsonMergePatchScenario));
+                    polymorphicJsonMergePatchScenario, foundTracker));
         } else {
             // Otherwise this is an intermediate location and a while loop reader needs to be added.
             return ifOrElseIf(methodBlock, ifBlock,
@@ -1301,7 +1303,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     for (JsonFlattenedPropertiesTree structure : flattenedProperties.getChildrenNodes().values()) {
                         innerIfBlock = handleFlattenedPropertiesDeserializationHelper(structure, methodBlock,
                             innerIfBlock, additionalProperties, fieldNameVariableName, hasConstructorArguments,
-                            settings, polymorphicJsonMergePatchScenario);
+                            settings, polymorphicJsonMergePatchScenario, foundTracker);
                     }
 
                     handleUnknownJsonFieldDeserialization(whileBlock, innerIfBlock, additionalProperties,
@@ -1312,7 +1314,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void generateJsonDeserializationLogic(JavaBlock deserializationBlock, String modelVariableName,
         ClientModel model, ClientModelProperty property, boolean fromSuper, boolean hasConstructorArguments, JavaSettings settings,
-        boolean polymorphicJsonMergePatchScenario) {
+        boolean polymorphicJsonMergePatchScenario, AtomicLong foundTracker) {
         IType wireType = property.getWireType();
         IType clientType = property.getClientType();
 
@@ -1397,7 +1399,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // If the property was required, mark it as found.
         if (includePropertyInConstructor(property, settings) && !settings.isDisableRequiredJsonAnnotation()) {
-            deserializationBlock.line(property.getName() + "Found = true;");
+            deserializationBlock.line("foundTracker |= " + foundTracker.getAndUpdate(l -> l * 2) + ";");
         }
     }
 
@@ -1539,7 +1541,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param propertiesManager The property manager for the model.
      */
     private static void handleReadReturn(JavaBlock methodBlock, String modelName,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, JavaSettings settings, AtomicLong foundTracker) {
         StringBuilder constructorArgs = new StringBuilder();
 
         propertiesManager.forEachSuperConstructorProperty(arg -> addConstructorParameter(constructorArgs, arg.getName()));
@@ -1547,12 +1549,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // If there are required properties of any type we must check that all required fields were found.
         if (propertiesManager.hasRequiredProperties()) {
-            StringBuilder ifStatementBuilder = new StringBuilder();
-            propertiesManager.forEachSuperRequiredProperty(property -> addRequiredCheck(ifStatementBuilder, property, settings));
-            propertiesManager.forEachRequiredProperty(property -> addRequiredCheck(ifStatementBuilder, property, settings));
-
-            if (ifStatementBuilder.length() > 0) {
-                methodBlock.ifBlock(ifStatementBuilder.toString(), ifAction ->
+            long foundTrackerValue = foundTracker.get();
+            if (foundTrackerValue > 1) {
+                methodBlock.ifBlock("foundTracker == " + (foundTrackerValue - 1), ifAction ->
                     createObjectAndReturn(methodBlock, modelName, constructorArgs.toString(), propertiesManager, settings));
 
                 if (propertiesManager.getRequiredPropertiesCount() == 1) {
@@ -1562,8 +1561,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     methodBlock.line("throw new IllegalStateException(\"Missing required property: " + stringBuilder + "\");");
                 } else {
                     methodBlock.line("List<String> missingProperties = new ArrayList<>();");
-                    propertiesManager.forEachSuperRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property, settings));
-                    propertiesManager.forEachRequiredProperty(property -> addFoundValidationIfCheck(methodBlock, property, settings));
+                    AtomicLong missingTracker = new AtomicLong(1);
+                    propertiesManager.forEachSuperRequiredProperty(property -> addFoundValidationIfCheck(methodBlock,
+                        property, settings, missingTracker));
+                    propertiesManager.forEachRequiredProperty(property -> addFoundValidationIfCheck(methodBlock,
+                        property, settings, missingTracker));
 
                     methodBlock.line();
                     methodBlock.line("throw new IllegalStateException(\"Missing required property/properties: \" + String.join(\", \", missingProperties));");
@@ -1626,31 +1628,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         constructor.append(parameterName);
     }
 
-    private static void addRequiredCheck(StringBuilder ifCheck, ClientModelProperty property, JavaSettings settings) {
-        // XML attributes and text don't need checks.
-        if (property.isXmlAttribute() || property.isXmlText() || !includePropertyInConstructor(property, settings)) {
-            return;
-        }
-
-        // Constants are ignored during deserialization.
-        if (property.isConstant()) {
-            return;
-        }
-
-        // Required properties aren't being validated for being found.
-        if (settings.isDisableRequiredJsonAnnotation()) {
-            return;
-        }
-
-        if (ifCheck.length() > 0) {
-            ifCheck.append(" && ");
-        }
-
-        ifCheck.append(property.getName()).append("Found");
-    }
-
     private static void addFoundValidationIfCheck(JavaBlock methodBlock, ClientModelProperty property,
-        JavaSettings settings) {
+        JavaSettings settings, AtomicLong missingTracker) {
         // XML attributes and text don't need checks.
         if (property.isXmlAttribute() || property.isXmlText() || !includePropertyInConstructor(property, settings)) {
             return;
@@ -1666,7 +1645,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return;
         }
 
-        methodBlock.ifBlock("!" + property.getName() + "Found",
+        long missing = missingTracker.getAndUpdate(l -> l * 2);
+        methodBlock.ifBlock("(foundTracker & " + missing + ") != " + missing,
             ifAction -> ifAction.line("missingProperties.add(\"" + property.getSerializedName() + "\");"));
     }
 
@@ -2057,6 +2037,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
 
         // Add the deserialization logic.
+        AtomicLong foundTracker = new AtomicLong(1);
         methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
             initializeLocalVariables(methodBlock, propertiesManager, true, settings);
@@ -2115,9 +2096,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 // Loop over all properties and generate their deserialization handling.
                 AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(ifBlock);
                 propertiesManager.forEachSuperXmlElement(element -> handleXmlPropertyDeserialization(element,
-                    whileBlock, ifBlockReference, fieldNameVariableName, propertiesManager, true, settings));
+                    whileBlock, ifBlockReference, fieldNameVariableName, propertiesManager, true, settings,
+                    foundTracker));
                 propertiesManager.forEachXmlElement(element -> handleXmlPropertyDeserialization(element, whileBlock,
-                    ifBlockReference, fieldNameVariableName, propertiesManager, false, settings));
+                    ifBlockReference, fieldNameVariableName, propertiesManager, false, settings, foundTracker));
 
                 ifBlock = ifBlockReference.get();
 
@@ -2130,7 +2112,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         // Add the validation and return logic.
-        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+        handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings, foundTracker);
     }
 
     private static void deserializeXmlAttribute(JavaBlock methodBlock, ClientModelProperty attribute,
@@ -2174,7 +2156,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     private static void handleXmlPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
         AtomicReference<JavaIfBlock> ifBlockReference, String fieldNameVariableName,
-        ClientModelPropertiesManager propertiesManager, boolean fromSuper, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, boolean fromSuper, JavaSettings settings,
+        AtomicLong foundTracker) {
         // Property will be handled later by flattened deserialization.
         // XML should never have flattening.
         if (property.getNeedsFlatten()) {
@@ -2183,14 +2166,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         JavaIfBlock ifBlock = ifBlockReference.get();
         ifBlock = handleXmlPropertyDeserialization(property, methodBlock, ifBlock, fieldNameVariableName,
-            propertiesManager, fromSuper, settings);
+            propertiesManager, fromSuper, settings, foundTracker);
 
         ifBlockReference.set(ifBlock);
     }
 
     private static JavaIfBlock handleXmlPropertyDeserialization(ClientModelProperty property, JavaBlock methodBlock,
         JavaIfBlock ifBlock, String fieldNameVariableName, ClientModelPropertiesManager propertiesManager,
-        boolean fromSuper, JavaSettings settings) {
+        boolean fromSuper, JavaSettings settings, AtomicLong foundTracker) {
         String xmlElementName = (property.getClientType() instanceof IterableType && !property.isXmlWrapper())
             ? property.getXmlListElementName() : property.getXmlName();
         String xmlNamespace = propertiesManager.getXmlNamespaceConstant(property.getXmlNamespace());
@@ -2202,11 +2185,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String condition = getXmlNameConditional(xmlElementName, xmlNamespace, fieldNameVariableName, true);
         return ifOrElseIf(methodBlock, ifBlock, condition,
             deserializationBlock -> generateXmlDeserializationLogic(deserializationBlock, property, propertiesManager,
-                fromSuper, settings));
+                fromSuper, settings, foundTracker));
     }
 
     private static void generateXmlDeserializationLogic(JavaBlock deserializationBlock, ClientModelProperty property,
-        ClientModelPropertiesManager propertiesManager, boolean fromSuper, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, boolean fromSuper, JavaSettings settings,
+        AtomicLong foundTracker) {
         IType wireType = property.getWireType();
 
         // Attempt to determine whether the wire type is simple deserialization.
@@ -2285,7 +2269,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // If the property was required, mark it as found.
         if (includePropertyInConstructor(property, settings) && !settings.isDisableRequiredJsonAnnotation()) {
-            deserializationBlock.line(property.getName() + "Found = true;");
+            deserializationBlock.line("foundTracker |= " + foundTracker.getAndUpdate(l -> l * 2) + ";");
         }
     }
 

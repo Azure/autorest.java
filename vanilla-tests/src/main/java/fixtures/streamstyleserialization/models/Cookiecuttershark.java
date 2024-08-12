@@ -32,16 +32,6 @@ public final class Cookiecuttershark extends Shark {
     }
 
     /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -84,6 +74,16 @@ public final class Cookiecuttershark extends Shark {
     public Cookiecuttershark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
         return this;
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**

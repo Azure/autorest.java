@@ -26,26 +26,6 @@ public final class Siamese extends Cat {
     }
 
     /**
-     * Get the breed property: The breed property.
-     * 
-     * @return the breed value.
-     */
-    public String getBreed() {
-        return this.breed;
-    }
-
-    /**
-     * Set the breed property: The breed property.
-     * 
-     * @param breed the breed value to set.
-     * @return the Siamese object itself.
-     */
-    public Siamese setBreed(String breed) {
-        this.breed = breed;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -78,6 +58,26 @@ public final class Siamese extends Cat {
     @Override
     public Siamese setName(String name) {
         super.setName(name);
+        return this;
+    }
+
+    /**
+     * Get the breed property: The breed property.
+     * 
+     * @return the breed value.
+     */
+    public String getBreed() {
+        return this.breed;
+    }
+
+    /**
+     * Set the breed property: The breed property.
+     * 
+     * @param breed the breed value to set.
+     * @return the Siamese object itself.
+     */
+    public Siamese setBreed(String breed) {
+        this.breed = breed;
         return this;
     }
 

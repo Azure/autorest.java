@@ -25,6 +25,24 @@ public final class Dog extends Pet {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Dog setId(Integer id) {
+        super.setId(id);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Dog setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
+    /**
      * Get the food property: The food property.
      * 
      * @return the food value.
@@ -41,24 +59,6 @@ public final class Dog extends Pet {
      */
     public Dog setFood(String food) {
         this.food = food;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Dog setId(Integer id) {
-        super.setId(id);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Dog setName(String name) {
-        super.setName(name);
         return this;
     }
 

@@ -48,6 +48,24 @@ public class Shark extends Fish {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Shark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Shark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -84,24 +102,6 @@ public class Shark extends Fish {
      */
     public OffsetDateTime getBirthday() {
         return this.birthday;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Shark setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Shark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
-        return this;
     }
 
     /**
@@ -178,11 +178,10 @@ public class Shark extends Fish {
 
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
+            long foundTracker = 0;
             float length = 0.0f;
             String species = null;
             List<Fish> siblings = null;
-            boolean birthdayFound = false;
             OffsetDateTime birthday = null;
             String fishtype = "shark";
             Integer age = null;
@@ -192,7 +191,7 @@ public class Shark extends Fish {
 
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
-                    lengthFound = true;
+                    foundTracker |= 1;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -200,7 +199,7 @@ public class Shark extends Fish {
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader
                         .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
-                    birthdayFound = true;
+                    foundTracker |= 2;
                 } else if ("fishtype".equals(fieldName)) {
                     fishtype = reader.getString();
                 } else if ("age".equals(fieldName)) {
@@ -209,7 +208,7 @@ public class Shark extends Fish {
                     reader.skipChildren();
                 }
             }
-            if (lengthFound && birthdayFound) {
+            if (foundTracker == 3) {
                 Shark deserializedShark = new Shark(length, birthday);
                 deserializedShark.setSpecies(species);
                 deserializedShark.setSiblings(siblings);
@@ -219,10 +218,10 @@ public class Shark extends Fish {
                 return deserializedShark;
             }
             List<String> missingProperties = new ArrayList<>();
-            if (!lengthFound) {
+            if ((foundTracker & 1) != 1) {
                 missingProperties.add("length");
             }
-            if (!birthdayFound) {
+            if ((foundTracker & 2) != 2) {
                 missingProperties.add("birthday");
             }
 

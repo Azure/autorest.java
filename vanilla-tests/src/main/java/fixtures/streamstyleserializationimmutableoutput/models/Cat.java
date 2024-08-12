@@ -33,6 +33,24 @@ public class Cat extends Pet {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Cat setId(Integer id) {
+        super.setId(id);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Cat setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
+    /**
      * Get the color property: The color property.
      * 
      * @return the color value.
@@ -69,24 +87,6 @@ public class Cat extends Pet {
      */
     public Cat setHates(List<Dog> hates) {
         this.hates = hates;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Cat setId(Integer id) {
-        super.setId(id);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Cat setName(String name) {
-        super.setName(name);
         return this;
     }
 

@@ -34,6 +34,24 @@ public final class CatAPTrue extends PetAPTrue {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CatAPTrue setId(int id) {
+        super.setId(id);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CatAPTrue setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
+    /**
      * Get the friendly property: The friendly property.
      * 
      * @return the friendly value.
@@ -61,24 +79,6 @@ public final class CatAPTrue extends PetAPTrue {
     @Override
     public Boolean isStatus() {
         return this.status;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public CatAPTrue setId(int id) {
-        super.setId(id);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public CatAPTrue setName(String name) {
-        super.setName(name);
-        return this;
     }
 
     /**
