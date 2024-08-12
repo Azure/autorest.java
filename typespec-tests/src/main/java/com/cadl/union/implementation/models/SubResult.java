@@ -42,6 +42,16 @@ public final class SubResult extends Result {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public SubResult setResult(Result result) {
+        super.setResult(result);
+        return this;
+    }
+
+    /**
      * Get the text property: The text property.
      * 
      * @return the text value.
@@ -82,16 +92,6 @@ public final class SubResult extends Result {
     @Generated
     public SubResult setArrayData(BinaryData arrayData) {
         this.arrayData = arrayData;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public SubResult setResult(Result result) {
-        super.setResult(result);
         return this;
     }
 

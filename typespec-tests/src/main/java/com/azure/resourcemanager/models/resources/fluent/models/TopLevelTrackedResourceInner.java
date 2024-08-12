@@ -52,6 +52,24 @@ public final class TopLevelTrackedResourceInner extends Resource {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TopLevelTrackedResourceInner withLocation(String location) {
+        super.withLocation(location);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TopLevelTrackedResourceInner withTags(Map<String, String> tags) {
+        super.withTags(tags);
+        return this;
+    }
+
+    /**
      * Get the properties property: The resource-specific properties for this resource.
      * 
      * @return the properties value.
@@ -108,24 +126,6 @@ public final class TopLevelTrackedResourceInner extends Resource {
     @Override
     public String id() {
         return this.id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public TopLevelTrackedResourceInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public TopLevelTrackedResourceInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
-        return this;
     }
 
     /**

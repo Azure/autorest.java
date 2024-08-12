@@ -61,6 +61,15 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SalmonInner withAge(int age) {
+        super.withAge(age);
+        return this;
+    }
+
+    /**
      * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
@@ -156,15 +165,6 @@ public final class SalmonInner extends FishInner {
     @Override
     public String dna() {
         return this.dna;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SalmonInner withAge(int age) {
-        super.withAge(age);
-        return this;
     }
 
     /**

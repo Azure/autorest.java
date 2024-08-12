@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Inner model used in collections model property.
@@ -30,7 +28,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -82,7 +80,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     @Generated
     public InnerModel setProperty(String property) {
         this.property = property;
-        this.updatedProperties.add("property");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -104,7 +102,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("property")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.property == null) {
                 jsonWriter.writeNullField("property");
             } else {

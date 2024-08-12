@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * This is base model for polymorphic multiple levels inheritance with a discriminator.
@@ -54,7 +52,7 @@ public class Fish implements JsonSerializable<Fish> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -156,7 +154,7 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     public Fish setAge(int age) {
         this.age = age;
-        this.updatedProperties.add("age");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -179,7 +177,7 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     public Fish setColor(String color) {
         this.color = color;
-        this.updatedProperties.add("color");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -204,10 +202,10 @@ public class Fish implements JsonSerializable<Fish> {
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", this.kind);
-        if (updatedProperties.contains("age")) {
+        if ((this.updatedProperties & 1) == 1) {
             jsonWriter.writeIntField("age", this.age);
         }
-        if (updatedProperties.contains("color")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.color == null) {
                 jsonWriter.writeNullField("color");
             } else {

@@ -12,10 +12,8 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The Resource model.
@@ -86,7 +84,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -157,7 +155,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setDescription(String description) {
         this.description = description;
-        this.updatedProperties.add("description");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -181,7 +179,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setMap(Map<String, InnerModel> map) {
         this.map = map;
-        this.updatedProperties.add("map");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -204,7 +202,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setLongValue(Long longValue) {
         this.longValue = longValue;
-        this.updatedProperties.add("longValue");
+        this.updatedProperties |= 4;
         return this;
     }
 
@@ -227,7 +225,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setIntValue(Integer intValue) {
         this.intValue = intValue;
-        this.updatedProperties.add("intValue");
+        this.updatedProperties |= 8;
         return this;
     }
 
@@ -250,7 +248,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setEnumValue(ResourceEnumValue enumValue) {
         this.enumValue = enumValue;
-        this.updatedProperties.add("enumValue");
+        this.updatedProperties |= 16;
         return this;
     }
 
@@ -273,7 +271,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setInnerModelProperty(InnerModel innerModelProperty) {
         this.innerModelProperty = innerModelProperty;
-        this.updatedProperties.add("innerModelProperty");
+        this.updatedProperties |= 32;
         return this;
     }
 
@@ -296,7 +294,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setArray(List<InnerModel> array) {
         this.array = array;
-        this.updatedProperties.add("array");
+        this.updatedProperties |= 64;
         return this;
     }
 
@@ -319,7 +317,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setFish(Fish fish) {
         this.fish = fish;
-        this.updatedProperties.add("fish");
+        this.updatedProperties |= 128;
         return this;
     }
 
@@ -348,14 +346,14 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("description")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.description == null) {
                 jsonWriter.writeNullField("description");
             } else {
                 jsonWriter.writeStringField("description", this.description);
             }
         }
-        if (updatedProperties.contains("map")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.map == null) {
                 jsonWriter.writeNullField("map");
             } else {
@@ -370,28 +368,28 @@ public final class Resource implements JsonSerializable<Resource> {
                 });
             }
         }
-        if (updatedProperties.contains("longValue")) {
+        if ((this.updatedProperties & 4) == 4) {
             if (this.longValue == null) {
                 jsonWriter.writeNullField("longValue");
             } else {
                 jsonWriter.writeNumberField("longValue", this.longValue);
             }
         }
-        if (updatedProperties.contains("intValue")) {
+        if ((this.updatedProperties & 8) == 8) {
             if (this.intValue == null) {
                 jsonWriter.writeNullField("intValue");
             } else {
                 jsonWriter.writeNumberField("intValue", this.intValue);
             }
         }
-        if (updatedProperties.contains("enumValue")) {
+        if ((this.updatedProperties & 16) == 16) {
             if (this.enumValue == null) {
                 jsonWriter.writeNullField("enumValue");
             } else {
                 jsonWriter.writeStringField("enumValue", this.enumValue.toString());
             }
         }
-        if (updatedProperties.contains("innerModelProperty")) {
+        if ((this.updatedProperties & 32) == 32) {
             if (this.innerModelProperty == null) {
                 jsonWriter.writeNullField("wireNameForInnerModelProperty");
             } else {
@@ -402,14 +400,14 @@ public final class Resource implements JsonSerializable<Resource> {
                     .prepareModelForJsonMergePatch(this.innerModelProperty, false);
             }
         }
-        if (updatedProperties.contains("array")) {
+        if ((this.updatedProperties & 64) == 64) {
             if (this.array == null) {
                 jsonWriter.writeNullField("array");
             } else {
                 jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
             }
         }
-        if (updatedProperties.contains("fish")) {
+        if ((this.updatedProperties & 128) == 128) {
             if (this.fish == null) {
                 jsonWriter.writeNullField("fish");
             } else {

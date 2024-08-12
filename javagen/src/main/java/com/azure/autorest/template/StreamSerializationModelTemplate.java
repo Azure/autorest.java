@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -242,7 +243,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param model the model to generate class of
      * @param settings JavaSettings
      * @return properties to generate as fields of the class
-     * @see com.azure.autorest.mapper.ModelMapper#passPolymorphicDiscriminatorToChildren
      */
     @Override
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
@@ -412,8 +412,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         boolean isJsonMergePatch) {
         methodBlock.line("jsonWriter.writeStartObject();");
 
+        AtomicLong jsonMergePatchTracker = new AtomicLong(1);
         BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) -> serializeJsonProperty(
-            methodBlock, property, property.getSerializedName(), fromSuper, true, isJsonMergePatch);
+            methodBlock, property, property.getSerializedName(), fromSuper, true, isJsonMergePatch,
+            jsonMergePatchTracker);
 
         propertiesManager.getModel().getParentPolymorphicDiscriminators()
             .forEach(discriminator -> serializeJsonProperty.accept(discriminator, false));
@@ -468,7 +470,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param isJsonMergePatch Whether the serialization is for a JSON Merge Patch model.
      */
     private static void serializeJsonProperty(JavaBlock methodBlock, ClientModelProperty property,
-        String serializedName, boolean fromSuperType, boolean ignoreFlattening, boolean isJsonMergePatch) {
+        String serializedName, boolean fromSuperType, boolean ignoreFlattening, boolean isJsonMergePatch,
+        AtomicLong jsonMergePatchTracker) {
         if ((ignoreFlattening && property.getNeedsFlatten()) || property.isAdditionalProperties()) {
             // Property will be handled later by flattened or additional properties serialization.
             return;
@@ -481,13 +484,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         if (isJsonMergePatch) {
             if (!property.isPolymorphicDiscriminator()) {
-                methodBlock.ifBlock("updatedProperties.contains(\"" + property.getName() + "\")", codeBlock -> {
+                long trackerBitFlag = jsonMergePatchTracker.getAndUpdate(l -> l * 2);
+                methodBlock.ifBlock("(this.updatedProperties & " + trackerBitFlag + ") == " + trackerBitFlag, codeBlock -> {
                     if (property.getClientType().isNullable()) {
                         codeBlock.ifBlock(getPropertyGetterStatement(property, fromSuperType) + " == null",
                                 ifBlock -> ifBlock.line("jsonWriter.writeNullField(\"" + property.getSerializedName() + "\");"))
                             .elseBlock(elseBlock -> serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, true));
                     } else {
-                        serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, true, false);
+                        serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, true, false,
+                            jsonMergePatchTracker);
                     }
                 });
             } else {
@@ -698,8 +703,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         ClientModelPropertyWithMetadata flattenedProperty = flattenedProperties.getProperty();
         if (flattenedProperty != null) {
             // This is a terminal location, only need to add property serialization.
+            AtomicLong jsonMergePatchTracker = new AtomicLong(1);
             serializeJsonProperty(methodBlock, flattenedProperty.getProperty(), flattenedProperties.getNodeName(),
-                flattenedProperty.isFromSuperClass(), false, isJsonMergePatch);
+                flattenedProperty.isFromSuperClass(), false, isJsonMergePatch, jsonMergePatchTracker);
         } else {
             // Otherwise this is an intermediate location.
             // Check for either any of the properties in this subtree being primitives or add an if block checking that

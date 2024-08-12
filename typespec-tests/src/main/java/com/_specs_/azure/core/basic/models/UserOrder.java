@@ -12,8 +12,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * UserOrder for testing list with expand.
@@ -42,7 +40,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -104,7 +102,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     @Generated
     public UserOrder setUserId(int userId) {
         this.userId = userId;
-        this.updatedProperties.add("userId");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -128,7 +126,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     @Generated
     public UserOrder setDetail(String detail) {
         this.detail = detail;
-        this.updatedProperties.add("detail");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -151,10 +149,10 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("userId")) {
+        if ((this.updatedProperties & 1) == 1) {
             jsonWriter.writeIntField("userId", this.userId);
         }
-        if (updatedProperties.contains("detail")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.detail == null) {
                 jsonWriter.writeNullField("detail");
             } else {

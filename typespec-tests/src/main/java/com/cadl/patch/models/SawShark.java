@@ -11,8 +11,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The third level model SawShark in polymorphic multiple levels inheritance.
@@ -35,13 +33,46 @@ public final class SawShark extends Shark {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     /**
      * Creates an instance of SawShark class.
      */
     @Generated
     public SawShark() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public SawShark setWeight(Integer weight) {
+        super.setWeight(weight);
+        this.updatedProperties |= 1;
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public SawShark setAge(int age) {
+        super.setAge(age);
+        this.updatedProperties |= 2;
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public SawShark setColor(String color) {
+        super.setColor(color);
+        this.updatedProperties |= 4;
+        return this;
     }
 
     /**
@@ -71,39 +102,6 @@ public final class SawShark extends Shark {
      */
     @Generated
     @Override
-    public SawShark setWeight(Integer weight) {
-        super.setWeight(weight);
-        this.updatedProperties.add("weight");
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public SawShark setAge(int age) {
-        super.setAge(age);
-        this.updatedProperties.add("age");
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public SawShark setColor(String color) {
-        super.setColor(color);
-        this.updatedProperties.add("color");
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (JsonMergePatchHelper.getFishAccessor().isJsonMergePatch(this)) {
             return toJsonMergePatch(jsonWriter);
@@ -122,17 +120,17 @@ public final class SawShark extends Shark {
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", this.kind);
-        if (updatedProperties.contains("age")) {
+        if ((this.updatedProperties & 1) == 1) {
             jsonWriter.writeIntField("age", getAge());
         }
-        if (updatedProperties.contains("color")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
             } else {
                 jsonWriter.writeStringField("color", getColor());
             }
         }
-        if (updatedProperties.contains("weight")) {
+        if ((this.updatedProperties & 4) == 4) {
             if (getWeight() == null) {
                 jsonWriter.writeNullField("weight");
             } else {

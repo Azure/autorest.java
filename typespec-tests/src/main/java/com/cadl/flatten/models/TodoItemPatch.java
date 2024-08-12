@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.flatten.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The TodoItemPatch model.
@@ -42,7 +40,7 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -93,7 +91,7 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
     @Generated
     public TodoItemPatch setTitle(String title) {
         this.title = title;
-        this.updatedProperties.add("title");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -116,7 +114,7 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
     @Generated
     public TodoItemPatch setDescription(String description) {
         this.description = description;
-        this.updatedProperties.add("description");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -139,7 +137,7 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
     @Generated
     public TodoItemPatch setStatus(TodoItemPatchStatus status) {
         this.status = status;
-        this.updatedProperties.add("status");
+        this.updatedProperties |= 4;
         return this;
     }
 
@@ -163,21 +161,21 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("title")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.title == null) {
                 jsonWriter.writeNullField("title");
             } else {
                 jsonWriter.writeStringField("title", this.title);
             }
         }
-        if (updatedProperties.contains("description")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.description == null) {
                 jsonWriter.writeNullField("description");
             } else {
                 jsonWriter.writeStringField("description", this.description);
             }
         }
-        if (updatedProperties.contains("status")) {
+        if ((this.updatedProperties & 4) == 4) {
             if (this.status == null) {
                 jsonWriter.writeNullField("status");
             } else {

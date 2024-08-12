@@ -12,9 +12,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Details about a user.
@@ -49,7 +47,7 @@ public final class User implements JsonSerializable<User> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -111,7 +109,7 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public User setName(String name) {
         this.name = name;
-        this.updatedProperties.add("name");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -134,7 +132,7 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public User setOrders(List<UserOrder> orders) {
         this.orders = orders;
-        this.updatedProperties.add("orders");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -167,14 +165,14 @@ public final class User implements JsonSerializable<User> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("name")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.name == null) {
                 jsonWriter.writeNullField("name");
             } else {
                 jsonWriter.writeStringField("name", this.name);
             }
         }
-        if (updatedProperties.contains("orders")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.orders == null) {
                 jsonWriter.writeNullField("orders");
             } else {

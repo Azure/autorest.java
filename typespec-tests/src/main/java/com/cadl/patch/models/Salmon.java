@@ -11,10 +11,8 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic
@@ -50,13 +48,35 @@ public final class Salmon extends Fish {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     /**
      * Creates an instance of Salmon class.
      */
     @Generated
     public Salmon() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public Salmon setAge(int age) {
+        super.setAge(age);
+        this.updatedProperties |= 1;
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public Salmon setColor(String color) {
+        super.setColor(color);
+        this.updatedProperties |= 2;
+        return this;
     }
 
     /**
@@ -89,7 +109,7 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon setFriends(List<Fish> friends) {
         this.friends = friends;
-        this.updatedProperties.add("friends");
+        this.updatedProperties |= 4;
         return this;
     }
 
@@ -112,7 +132,7 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon setHate(Map<String, Fish> hate) {
         this.hate = hate;
-        this.updatedProperties.add("hate");
+        this.updatedProperties |= 8;
         return this;
     }
 
@@ -135,29 +155,7 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon setPartner(Fish partner) {
         this.partner = partner;
-        this.updatedProperties.add("partner");
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public Salmon setAge(int age) {
-        super.setAge(age);
-        this.updatedProperties.add("age");
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public Salmon setColor(String color) {
-        super.setColor(color);
-        this.updatedProperties.add("color");
+        this.updatedProperties |= 16;
         return this;
     }
 
@@ -184,10 +182,10 @@ public final class Salmon extends Fish {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("age")) {
+        if ((this.updatedProperties & 1) == 1) {
             jsonWriter.writeIntField("age", getAge());
         }
-        if (updatedProperties.contains("color")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
             } else {
@@ -195,14 +193,14 @@ public final class Salmon extends Fish {
             }
         }
         jsonWriter.writeStringField("kind", this.kind);
-        if (updatedProperties.contains("friends")) {
+        if ((this.updatedProperties & 4) == 4) {
             if (this.friends == null) {
                 jsonWriter.writeNullField("friends");
             } else {
                 jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
             }
         }
-        if (updatedProperties.contains("hate")) {
+        if ((this.updatedProperties & 8) == 8) {
             if (this.hate == null) {
                 jsonWriter.writeNullField("hate");
             } else {
@@ -217,7 +215,7 @@ public final class Salmon extends Fish {
                 });
             }
         }
-        if (updatedProperties.contains("partner")) {
+        if ((this.updatedProperties & 16) == 16) {
             if (this.partner == null) {
                 jsonWriter.writeNullField("partner");
             } else {

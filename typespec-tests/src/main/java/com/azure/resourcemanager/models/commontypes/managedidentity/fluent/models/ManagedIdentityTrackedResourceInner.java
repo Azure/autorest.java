@@ -58,6 +58,24 @@ public final class ManagedIdentityTrackedResourceInner extends Resource {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ManagedIdentityTrackedResourceInner withLocation(String location) {
+        super.withLocation(location);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ManagedIdentityTrackedResourceInner withTags(Map<String, String> tags) {
+        super.withTags(tags);
+        return this;
+    }
+
+    /**
      * Get the properties property: The resource-specific properties for this resource.
      * 
      * @return the properties value.
@@ -134,24 +152,6 @@ public final class ManagedIdentityTrackedResourceInner extends Resource {
     @Override
     public String id() {
         return this.id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ManagedIdentityTrackedResourceInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ManagedIdentityTrackedResourceInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
-        return this;
     }
 
     /**

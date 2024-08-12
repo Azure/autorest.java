@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The Resource model.
@@ -48,7 +46,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -119,7 +117,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setDescription(String description) {
         this.description = description;
-        this.updatedProperties.add("description");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -143,7 +141,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Resource setType(String type) {
         this.type = type;
-        this.updatedProperties.add("type");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -166,14 +164,14 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("description")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.description == null) {
                 jsonWriter.writeNullField("description");
             } else {
                 jsonWriter.writeStringField("description", this.description);
             }
         }
-        if (updatedProperties.contains("type")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.type == null) {
                 jsonWriter.writeNullField("type");
             } else {

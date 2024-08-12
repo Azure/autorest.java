@@ -12,9 +12,7 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Model with collection string properties.
@@ -37,7 +35,7 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -91,7 +89,7 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
     @Generated
     public CollectionsStringProperty setRequiredProperty(String requiredProperty) {
         this.requiredProperty = requiredProperty;
-        this.updatedProperties.add("requiredProperty");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -115,7 +113,7 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
     @Generated
     public CollectionsStringProperty setNullableProperty(List<String> nullableProperty) {
         this.nullableProperty = nullableProperty;
-        this.updatedProperties.add("nullableProperty");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -139,14 +137,14 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("requiredProperty")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.requiredProperty == null) {
                 jsonWriter.writeNullField("requiredProperty");
             } else {
                 jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
             }
         }
-        if (updatedProperties.contains("nullableProperty")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.nullableProperty == null) {
                 jsonWriter.writeNullField("nullableProperty");
             } else {

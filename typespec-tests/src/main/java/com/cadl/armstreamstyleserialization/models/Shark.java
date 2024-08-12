@@ -51,6 +51,15 @@ public class Shark extends FishInner {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Shark withAge(int age) {
+        super.withAge(age);
+        return this;
+    }
+
+    /**
      * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
@@ -95,15 +104,6 @@ public class Shark extends FishInner {
     @Override
     public String dna() {
         return this.dna;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Shark withAge(int age) {
-        super.withAge(age);
-        return this;
     }
 
     /**
