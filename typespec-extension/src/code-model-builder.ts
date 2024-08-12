@@ -568,7 +568,7 @@ export class CodeModelBuilder {
 
       // preprocess operation groups and operations
       // operations without operation group
-      const serviceMethodsWithoutSubClient = this.listServiceMethodsUnderClient(client, false);
+      const serviceMethodsWithoutSubClient = this.listServiceMethodsUnderClient(client);
       let codeModelGroup = new OperationGroup("");
       for (const serviceMethod of serviceMethodsWithoutSubClient) {
         if (!this.needToSkipProcessingOperation(serviceMethod.__raw, clientContext)) {
@@ -582,7 +582,7 @@ export class CodeModelBuilder {
       // operations under operation groups
       const subClients = this.listSubClientsUnderClient(client, true, true);
       for (const subClient of subClients) {
-        const serviceMethods = this.listServiceMethodsUnderClient(subClient, false);
+        const serviceMethods = this.listServiceMethodsUnderClient(subClient);
         // operation group with no operation is skipped
         if (serviceMethods.length > 0) {
           codeModelGroup = new OperationGroup(subClient.name);
@@ -656,20 +656,9 @@ export class CodeModelBuilder {
     return operationGroups;
   }
 
-  private listServiceMethodsUnderClient(
-    client: SdkClientType<SdkHttpOperation>,
-    includeNestedServiceMethods: boolean,
-  ): SdkServiceMethod<SdkHttpOperation>[] {
+  private listServiceMethodsUnderClient(client: SdkClientType<SdkHttpOperation>): SdkServiceMethod<SdkHttpOperation>[] {
     const methods: SdkServiceMethod<SdkHttpOperation>[] = [];
     for (const method of client.methods) {
-      if (includeNestedServiceMethods) {
-        if (method.kind === "clientaccessor") {
-          const client = method.response;
-          for (const method of this.listServiceMethodsUnderClient(client, includeNestedServiceMethods)) {
-            methods.push(method);
-          }
-        }
-      }
       if (method.kind !== "clientaccessor") {
         methods.push(method);
       }
