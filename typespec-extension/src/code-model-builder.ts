@@ -1061,7 +1061,7 @@ export class CodeModelBuilder {
       const schema = this.processSchemaFromSdkType(sdkType, param.name);
 
       let extensions: { [id: string]: any } | undefined = undefined;
-      // skip-url-encoding,pending on TCGC
+      // TODO haoling: skip-url-encoding, pending on TCGC issue https://github.com/Azure/typespec-azure/issues/1318
       // if (param.kind === "path") {
       //   if (param.allowReserved) {
       //     extensions = extensions ?? {};
@@ -1071,7 +1071,7 @@ export class CodeModelBuilder {
       // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
       if (
         (param.kind === "query" || param.kind === "path") &&
-        isSdkBuiltInKind(sdkType.kind) && // TODO: question: Scalar -> builtin kinds, is it fine?
+        isSdkBuiltInKind(sdkType.kind) &&
         schema instanceof UriSchema
       ) {
         extensions = extensions ?? {};
