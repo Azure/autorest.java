@@ -59,8 +59,8 @@ namespace Cadl.ContosoServer {
     name: "Contoso.Sub.ContosoClient",
     service: Cadl.ContosoServer,
   })
-  @route("/contoso/{group}")
+  @route("/contoso/")
   interface ServerOp {
-    get(@path group: url): OkResponse | NoContentResponse;
+    get(@path(#{ allowReserved: true }) group: string): OkResponse | NoContentResponse;
   }
 }

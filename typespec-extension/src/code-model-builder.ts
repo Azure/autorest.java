@@ -1060,14 +1060,22 @@ export class CodeModelBuilder {
       const sdkType = getNonNullSdkType(param.type);
       const schema = this.processSchemaFromSdkType(sdkType, param.name);
 
-      // skip-url-encoding
       let extensions: { [id: string]: any } | undefined = undefined;
+      // skip-url-encoding,pending on TCGC
+      // if (param.kind === "path") {
+      //   if (param.allowReserved) {
+      //     extensions = extensions ?? {};
+      //     extensions["x-ms-skip-url-encoding"] = true;
+      //   }
+      // }
+      // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
       if (
         (param.kind === "query" || param.kind === "path") &&
         isSdkBuiltInKind(sdkType.kind) && // TODO: question: Scalar -> builtin kinds, is it fine?
         schema instanceof UriSchema
       ) {
-        extensions = { "x-ms-skip-url-encoding": true };
+        extensions = extensions ?? {};
+        extensions["x-ms-skip-url-encoding"] = true;
       }
 
       if (this.supportsAdvancedVersioning() && param.__raw) {
