@@ -147,6 +147,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     static IsUnknownAdditionalPropertiesDiscriminated fromJsonKnownDiscriminator(JsonReader jsonReader)
         throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             String kind = null;
             Map<String, Object> additionalProperties = null;

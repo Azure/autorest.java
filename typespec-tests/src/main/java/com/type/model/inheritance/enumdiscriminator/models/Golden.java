@@ -67,6 +67,7 @@ public final class Golden extends Dog {
     @Generated
     public static Golden fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int weight = 0;
             DogKind kind = DogKind.GOLDEN;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

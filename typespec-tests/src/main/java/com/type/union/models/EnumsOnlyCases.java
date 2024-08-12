@@ -85,6 +85,7 @@ public final class EnumsOnlyCases implements JsonSerializable<EnumsOnlyCases> {
     @Generated
     public static EnumsOnlyCases fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             EnumsOnlyCasesLr lr = null;
             EnumsOnlyCasesUd ud = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

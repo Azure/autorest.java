@@ -147,6 +147,7 @@ public final class SpreadWithMultipleParametersRequest
     @Generated
     public static SpreadWithMultipleParametersRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String requiredString = null;
             List<Integer> requiredIntList = null;
             Integer optionalInt = null;

@@ -77,6 +77,7 @@ public final class Extension extends Element {
     @Generated
     public static Extension fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             List<Extension> extension = null;
             int level = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

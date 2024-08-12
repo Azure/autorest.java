@@ -70,6 +70,7 @@ public class SuperClass implements JsonSerializable<SuperClass> {
     @Generated
     public static SuperClass fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OffsetDateTime dateTime = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

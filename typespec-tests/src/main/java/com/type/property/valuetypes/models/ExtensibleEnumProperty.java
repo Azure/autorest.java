@@ -66,6 +66,7 @@ public final class ExtensibleEnumProperty implements JsonSerializable<Extensible
     @Generated
     public static ExtensibleEnumProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             InnerEnum property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

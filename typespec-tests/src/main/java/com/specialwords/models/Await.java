@@ -66,6 +66,7 @@ public final class Await implements JsonSerializable<Await> {
     @Generated
     public static Await fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

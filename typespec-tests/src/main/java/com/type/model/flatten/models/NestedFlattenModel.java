@@ -85,6 +85,7 @@ public final class NestedFlattenModel implements JsonSerializable<NestedFlattenM
     @Generated
     public static NestedFlattenModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             ChildFlattenModel properties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

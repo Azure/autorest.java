@@ -124,6 +124,7 @@ public final class SubResult extends Result {
     @Generated
     public static SubResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             BinaryData data = null;
             Result result = null;

@@ -76,6 +76,7 @@ public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231Da
     @Generated
     public static Rfc7231DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OffsetDateTime value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

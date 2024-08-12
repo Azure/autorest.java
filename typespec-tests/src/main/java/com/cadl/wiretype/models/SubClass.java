@@ -77,6 +77,7 @@ public final class SubClass extends SuperClassMismatch {
     @Generated
     public static SubClass fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OffsetDateTime dateTimeRfc7231 = null;
             OffsetDateTime dateTime = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

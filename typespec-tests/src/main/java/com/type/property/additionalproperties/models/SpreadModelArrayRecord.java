@@ -102,6 +102,7 @@ public final class SpreadModelArrayRecord implements JsonSerializable<SpreadMode
     @Generated
     public static SpreadModelArrayRecord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             List<ModelForRecord> knownProp = null;
             Map<String, List<ModelForRecord>> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

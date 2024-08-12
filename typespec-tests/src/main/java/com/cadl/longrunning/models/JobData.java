@@ -97,6 +97,7 @@ public final class JobData implements JsonSerializable<JobData> {
     @Generated
     public static JobData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             Map<String, Double> nullableFloatDict = null;
             String configuration = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

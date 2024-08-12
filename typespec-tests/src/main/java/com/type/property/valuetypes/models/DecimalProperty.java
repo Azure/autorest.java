@@ -67,6 +67,7 @@ public final class DecimalProperty implements JsonSerializable<DecimalProperty> 
     @Generated
     public static DecimalProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             BigDecimal property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

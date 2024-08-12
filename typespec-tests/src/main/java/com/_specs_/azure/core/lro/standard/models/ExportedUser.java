@@ -85,6 +85,7 @@ public final class ExportedUser implements JsonSerializable<ExportedUser> {
     @Generated
     public static ExportedUser fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             String resourceUri = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

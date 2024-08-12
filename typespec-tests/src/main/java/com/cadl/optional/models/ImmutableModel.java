@@ -82,6 +82,7 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
     @Generated
     public static ImmutableModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String stringReadWriteRequired = null;
             String stringReadOnlyOptional = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

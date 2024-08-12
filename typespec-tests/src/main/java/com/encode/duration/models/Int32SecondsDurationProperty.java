@@ -71,6 +71,7 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
     @Generated
     public static Int32SecondsDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             Duration value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

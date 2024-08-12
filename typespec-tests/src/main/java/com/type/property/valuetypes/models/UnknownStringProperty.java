@@ -66,6 +66,7 @@ public final class UnknownStringProperty implements JsonSerializable<UnknownStri
     @Generated
     public static UnknownStringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             Object property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

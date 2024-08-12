@@ -101,6 +101,7 @@ public final class IsFloatAdditionalProperties implements JsonSerializable<IsFlo
     @Generated
     public static IsFloatAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             double id = 0.0;
             Map<String, Double> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

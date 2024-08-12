@@ -66,6 +66,7 @@ public final class ModelForRecord implements JsonSerializable<ModelForRecord> {
     @Generated
     public static ModelForRecord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String state = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

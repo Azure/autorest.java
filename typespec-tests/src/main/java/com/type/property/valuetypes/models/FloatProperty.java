@@ -66,6 +66,7 @@ public final class FloatProperty implements JsonSerializable<FloatProperty> {
     @Generated
     public static FloatProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             double property = 0.0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

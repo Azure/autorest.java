@@ -66,6 +66,7 @@ public final class UserActionResponse implements JsonSerializable<UserActionResp
     @Generated
     public static UserActionResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String userActionResult = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

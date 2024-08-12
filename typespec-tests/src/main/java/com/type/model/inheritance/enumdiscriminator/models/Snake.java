@@ -109,6 +109,7 @@ public class Snake implements JsonSerializable<Snake> {
     @Generated
     static Snake fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int length = 0;
             SnakeKind kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

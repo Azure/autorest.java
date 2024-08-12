@@ -112,6 +112,7 @@ public class Shark extends Fish {
     @Generated
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int age = 0;
             SharkKind sharktype = SharkKind.fromString("shark");
             while (reader.nextToken() != JsonToken.END_OBJECT) {

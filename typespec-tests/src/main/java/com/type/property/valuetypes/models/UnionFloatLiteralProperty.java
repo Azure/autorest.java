@@ -66,6 +66,7 @@ public final class UnionFloatLiteralProperty implements JsonSerializable<UnionFl
     @Generated
     public static UnionFloatLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             UnionFloatLiteralPropertyProperty property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

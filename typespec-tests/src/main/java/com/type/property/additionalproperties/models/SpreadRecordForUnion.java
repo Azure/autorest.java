@@ -105,6 +105,7 @@ public final class SpreadRecordForUnion implements JsonSerializable<SpreadRecord
     @Generated
     public static SpreadRecordForUnion fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             boolean flag = false;
             Map<String, BinaryData> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

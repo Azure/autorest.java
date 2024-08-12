@@ -66,6 +66,7 @@ public final class ClientNameModel implements JsonSerializable<ClientNameModel> 
     @Generated
     public static ClientNameModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             boolean clientName = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

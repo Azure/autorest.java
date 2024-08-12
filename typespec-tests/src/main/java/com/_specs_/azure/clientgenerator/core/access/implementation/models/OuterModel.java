@@ -68,6 +68,7 @@ public final class OuterModel extends BaseModel {
     @Generated
     public static OuterModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             InnerModel inner = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -106,6 +106,7 @@ public final class SpreadRecordForNonDiscriminatedUnion
     @Generated
     public static SpreadRecordForNonDiscriminatedUnion fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             Map<String, BinaryData> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -146,6 +146,7 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
     @Generated
     public static MixedTypesCases fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             BinaryData model = null;
             BinaryData literal = null;
             BinaryData intProperty = null;

@@ -75,6 +75,7 @@ public final class DifferentSpreadStringDerived extends DifferentSpreadStringRec
     @Generated
     public static DifferentSpreadStringDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             double id = 0.0;
             String derivedProp = null;
             Map<String, String> additionalProperties = null;

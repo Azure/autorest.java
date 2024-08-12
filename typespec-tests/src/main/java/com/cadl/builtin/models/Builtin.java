@@ -384,6 +384,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     @Generated
     public static Builtin fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             boolean booleanProperty = false;
             String string = null;
             byte[] bytes = null;

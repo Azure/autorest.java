@@ -67,6 +67,7 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
     @Generated
     public static CollectionsStringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             List<String> property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

@@ -82,6 +82,7 @@ public final class ResourceA implements JsonSerializable<ResourceA> {
     @Generated
     public static ResourceA fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String id = null;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

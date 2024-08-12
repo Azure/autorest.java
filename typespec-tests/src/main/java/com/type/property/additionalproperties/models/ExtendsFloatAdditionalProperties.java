@@ -101,6 +101,7 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     @Generated
     public static ExtendsFloatAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             double id = 0.0;
             Map<String, Double> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

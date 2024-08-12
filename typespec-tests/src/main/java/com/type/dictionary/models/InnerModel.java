@@ -96,6 +96,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     @Generated
     public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String property = null;
             Map<String, InnerModel> children = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -66,6 +66,7 @@ public final class GetResponse7 implements JsonSerializable<GetResponse7> {
     @Generated
     public static GetResponse7 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             StringExtensibleNamedUnion prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

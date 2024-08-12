@@ -67,6 +67,7 @@ public final class TRex extends Dinosaur {
     @Generated
     public static TRex fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int size = 0;
             String kind = "t-rex";
             while (reader.nextToken() != JsonToken.END_OBJECT) {

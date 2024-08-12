@@ -82,6 +82,7 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             String role = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -66,6 +66,7 @@ public final class Address implements JsonSerializable<Address> {
     @Generated
     public static Address fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String city = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

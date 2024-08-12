@@ -113,6 +113,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     @Generated
     public static SendRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String input = null;
             User user = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

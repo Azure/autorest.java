@@ -101,6 +101,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     @Generated
     public static ExtendsModelAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             ModelForRecord knownProp = null;
             Map<String, ModelForRecord> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

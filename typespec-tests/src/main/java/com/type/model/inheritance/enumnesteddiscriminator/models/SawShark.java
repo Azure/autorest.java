@@ -85,6 +85,7 @@ public final class SawShark extends Shark {
     @Generated
     public static SawShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int age = 0;
             SharkKind sharktype = SharkKind.SAW;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

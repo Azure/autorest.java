@@ -75,6 +75,7 @@ public final class DifferentSpreadFloatDerived extends DifferentSpreadFloatRecor
     @Generated
     public static DifferentSpreadFloatDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             double derivedProp = 0.0;
             Map<String, Double> additionalProperties = null;

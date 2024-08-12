@@ -67,6 +67,7 @@ public final class Goose extends Bird {
     @Generated
     public static Goose fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int wingspan = 0;
             String kind = "goose";
             while (reader.nextToken() != JsonToken.END_OBJECT) {

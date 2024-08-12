@@ -104,6 +104,7 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
     @Generated
     public static ExtendsUnknownAdditionalPropertiesDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             int index = 0;
             Double age = null;
