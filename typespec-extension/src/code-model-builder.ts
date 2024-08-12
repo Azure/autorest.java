@@ -1369,14 +1369,14 @@ export class CodeModelBuilder {
 
         // header/query/path params
         for (const opParameter of parameters) {
-          this.addParameterOrBodyToCodeModelRequest(opParameter, op, request, schema, parameter);
+          this.addParameterOrBodyPropertyToCodeModelRequest(opParameter, op, request, schema, parameter);
         }
         // body param
         if (bodyParameter) {
           if (bodyParameter.type.kind === "model") {
-            for (const bodyParam of bodyParameter.type.properties) {
-              if (bodyParam.kind === "property") {
-                this.addParameterOrBodyToCodeModelRequest(bodyParam, op, request, schema, parameter);
+            for (const bodyProperty of bodyParameter.type.properties) {
+              if (bodyProperty.kind === "property") {
+                this.addParameterOrBodyPropertyToCodeModelRequest(bodyProperty, op, request, schema, parameter);
               }
             }
           }
@@ -1440,7 +1440,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private addParameterOrBodyToCodeModelRequest(
+  private addParameterOrBodyPropertyToCodeModelRequest(
     opParameter: SdkPathParameter | SdkHeaderParameter | SdkQueryParameter | SdkBodyModelPropertyType,
     op: CodeModelOperation,
     request: Request,
@@ -1486,6 +1486,7 @@ export class CodeModelBuilder {
       }
     }
   }
+
   private findResponseBody(bodyType: Type): Type {
     // find a type that possibly without http metadata like @statusCode
     return this.getEffectiveSchemaType(bodyType);
@@ -2327,8 +2328,8 @@ export class CodeModelBuilder {
   }
 
   private getConvenienceApiNameFromServiceMethod(sdkMethod: SdkServiceMethod<SdkHttpOperation>): string | undefined {
-    // check @convenienceMethod
-    if (sdkMethod.__raw && shouldGenerateConvenient(this.sdkContext, sdkMethod.__raw)) {
+    // check @convenienceAPI
+    if (sdkMethod.generateConvenient) {
       return sdkMethod.name;
     } else {
       return undefined;
