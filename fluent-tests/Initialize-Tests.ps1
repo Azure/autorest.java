@@ -144,6 +144,9 @@ $job = @(
     # empty-model
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/empty-model.json --java.namespace=com.azure.mgmtlitetest.emptymodel"
 
+    # pageable model with inheritance
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0ed912fdfaffd5c81eb86b79df0e3b31d978d795/specification/billing/resource-manager/Microsoft.Billing/stable/2024-04-01/billingSavingsPlan.json --java.namespace=com.azure.mgmtlitetest.pageablewithinheritance"
+
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network"
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
