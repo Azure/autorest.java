@@ -55,7 +55,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -565,26 +564,27 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .map(SchemaUtil::getJavaName).collect(Collectors.toList())));
             }
             ClientModel responseBodyModel = Mappers.getModelMapper().map((ObjectSchema) responseBodySchema);
-            Optional<ClientModelProperty> itemPropertyOpt = responseBodyModel.getProperties().stream()
+            Stream.concat(responseBodyModel.getProperties().stream(), ClientModelUtil.getParentProperties(responseBodyModel).stream())
                 .filter(p -> p.getSerializedName().equals(operation.getExtensions().getXmsPageable().getItemName()))
-                .findFirst();
-            if (!itemPropertyOpt.isPresent()) {
-                throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] item name %s not found among properties of client model %s",
-                    operation.getExtensions().getXmsPageable().getItemName(), responseBodyModel.getName()));
-            }
-            IType listType = itemPropertyOpt.get().getWireType();
-            IType elementType = ((ListType) listType).getElementType();
-            if (isProtocolMethod) {
-                returnTypeHolder.asyncRestResponseReturnType = createProtocolPagedRestResponseReturnType();
-                returnTypeHolder.asyncReturnType = createProtocolPagedAsyncReturnType();
-                returnTypeHolder.syncReturnType = createProtocolPagedSyncReturnType();
-                returnTypeHolder.syncReturnWithResponse = createProtocolPagedRestResponseReturnTypeSync();
-            } else {
-                returnTypeHolder.asyncRestResponseReturnType = createPagedRestResponseReturnType(elementType);
-                returnTypeHolder.asyncReturnType = createPagedAsyncReturnType(elementType);
-                returnTypeHolder.syncReturnType = createPagedSyncReturnType(elementType);
-                returnTypeHolder.syncReturnWithResponse = createPagedRestResponseReturnTypeSync(elementType);
-            }
+                .findFirst()
+                .ifPresentOrElse(itemProperty -> {
+                    IType listType = itemProperty.getWireType();
+                    IType elementType = ((ListType) listType).getElementType();
+                    if (isProtocolMethod) {
+                        returnTypeHolder.asyncRestResponseReturnType = createProtocolPagedRestResponseReturnType();
+                        returnTypeHolder.asyncReturnType = createProtocolPagedAsyncReturnType();
+                        returnTypeHolder.syncReturnType = createProtocolPagedSyncReturnType();
+                        returnTypeHolder.syncReturnWithResponse = createProtocolPagedRestResponseReturnTypeSync();
+                    } else {
+                        returnTypeHolder.asyncRestResponseReturnType = createPagedRestResponseReturnType(elementType);
+                        returnTypeHolder.asyncReturnType = createPagedAsyncReturnType(elementType);
+                        returnTypeHolder.syncReturnType = createPagedSyncReturnType(elementType);
+                        returnTypeHolder.syncReturnWithResponse = createPagedRestResponseReturnTypeSync(elementType);
+                    }
+                }, () -> {
+                    throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] item name %s not found among properties of client model %s",
+                        operation.getExtensions().getXmsPageable().getItemName(), responseBodyModel.getName()));
+                });
 
             return returnTypeHolder;
         }
@@ -1521,7 +1521,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
     private static String getPageableItemName(XmsPageable xmsPageable, IType responseBodyType) {
         ClientModel responseBodyModel = ClientModelUtil.getClientModel(responseBodyType.toString());
-        return responseBodyModel.getProperties().stream()
+        return Stream.concat(responseBodyModel.getProperties().stream(), ClientModelUtil.getParentProperties(responseBodyModel).stream())
             .filter(p -> p.getSerializedName().equals(xmsPageable.getItemName()))
             .map(ClientModelProperty::getName).findAny().orElse(null);
     }

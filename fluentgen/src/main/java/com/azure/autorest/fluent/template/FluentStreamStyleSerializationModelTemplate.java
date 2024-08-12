@@ -8,8 +8,11 @@ import com.azure.autorest.fluent.model.arm.ErrorClientModel;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
+import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.template.StreamSerializationModelTemplate;
 import com.azure.core.util.CoreUtils;
+
+import java.util.List;
 
 public class FluentStreamStyleSerializationModelTemplate extends StreamSerializationModelTemplate {
     private static final FluentModelTemplate FLUENT_MODEL_TEMPLATE = FluentModelTemplate.getInstance();
@@ -44,5 +47,10 @@ public class FluentStreamStyleSerializationModelTemplate extends StreamSerializa
             parentModelName = parentModel.getParentModelName();
         }
         return manageErrorParent;
+    }
+
+    @Override
+    protected List<ClientModelPropertyReference> getClientModelPropertyReferences(ClientModel model) {
+        return FLUENT_MODEL_TEMPLATE.getClientModelPropertyReferences(model);
     }
 }

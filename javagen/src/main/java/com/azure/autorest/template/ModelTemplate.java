@@ -436,7 +436,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected List<ClientModelPropertyAccess> getSuperSetters(ClientModel model, JavaSettings settings,
                                                               List<ClientModelPropertyReference> propertyReferences) {
-        Set<String> modelPropertyNames = getFieldProperties(model, settings).stream().map(ClientModelProperty::getName)
+        Set<String> modelPropertyNames = model.getProperties().stream().map(ClientModelProperty::getName)
             .collect(Collectors.toSet());
         return propertyReferences.stream()
             .filter(ClientModelPropertyReference::isFromParentModel)

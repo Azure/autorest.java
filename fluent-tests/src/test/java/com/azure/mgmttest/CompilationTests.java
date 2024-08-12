@@ -31,6 +31,7 @@ import com.azure.mgmttest.resources.fluent.DeploymentsClient;
 import com.azure.mgmttest.resources.fluent.models.DeploymentExtendedInner;
 import com.azure.mgmttest.resources.fluent.models.ResourceGroupInner;
 import com.azure.mgmttest.resources.models.IdentityUserAssignedIdentities;
+import com.azure.mgmttest.resourcewithwritablename.fluent.models.FirewallRuleInner;
 import com.azure.mgmttest.storage.fluent.StorageAccountsClient;
 import com.azure.mgmttest.storage.fluent.models.StorageAccountInner;
 import com.azure.mgmttest.trafficmanager.fluent.models.EndpointInner;
@@ -169,5 +170,9 @@ public class CompilationTests {
 
     public void testSchemaCleanup() {
         UserAssignedIdentity userAssignedIdentity = new UserAssignedIdentity();
+    }
+
+    public void testResourceWithWritableName() {
+        FirewallRuleInner firewallRuleInner = new FirewallRuleInner();
     }
 }

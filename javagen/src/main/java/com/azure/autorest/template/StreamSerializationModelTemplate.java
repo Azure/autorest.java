@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -247,7 +248,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
         List<ClientModelProperty> fieldProperties = super.getFieldProperties(model, settings);
         Set<String> propertySerializedNames = fieldProperties.stream().map(ClientModelProperty::getSerializedName).collect(Collectors.toSet());
-        for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(model)) {
+        for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(model, false)) {
             if (propertySerializedNames.contains(parentProperty.getSerializedName())) {
                 continue;
             }
@@ -969,28 +970,34 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     fieldNameVariableName, fromSuper, propertiesManager.hasConstructorArguments(), settings,
                     polymorphicJsonMergePatchScenario);
 
-            Set<String> modelProperties = propertiesManager.getModel().getProperties()
-                    .stream()
-                    .map(ClientModelProperty::getSerializedName)
-                    .collect(Collectors.toSet());
+            Map<String, ClientModelProperty> modelPropertyMap = new HashMap<>();
+            for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(propertiesManager.getModel())) {
+                modelPropertyMap.put(parentProperty.getName(), parentProperty);
+            }
+            for (ClientModelProperty property : propertiesManager.getModel().getProperties()) {
+                modelPropertyMap.put(property.getName(), property);
+            }
 
-            // Constants are skipped as they aren't deserialized.
+            // Child classes may contain properties that shadow parents' ones.
+            // Thus, we only take the shadowing ones, not the ones shadowed.
+            Map<String, ClientModelProperty> superRequiredToDeserialized = new LinkedHashMap<>();
             propertiesManager.forEachSuperRequiredProperty(property -> {
-                if (property.isConstant()
-                        // Shadowed properties in parent classes are skipped as their duplicate variants will be deserialized
-                        || modelProperties.contains(property.getSerializedName())) {
-                    return;
+                if (!property.isConstant() && modelPropertyMap.get(property.getName()) == property) {
+                    superRequiredToDeserialized.put(property.getName(), property);
                 }
+            });
+            superRequiredToDeserialized.values().forEach(property -> consumer.accept(property, true));
 
-                consumer.accept(property, true);
-            });
+            // Child classes may contain properties that shadow parents' ones.
+            // Thus, we only take the shadowing ones, not the ones shadowed.
+            Map<String, ClientModelProperty> superSettersToDeserialized = new LinkedHashMap<>();
             propertiesManager.forEachSuperSetterProperty(property -> {
-                // Shadowed properties in parent classes are skipped as their duplicate variants will be deserialized
-                if (modelProperties.contains(property.getSerializedName())) {
-                    return;
+                if (!property.isConstant() && modelPropertyMap.get(property.getName()) == property) {
+                    superSettersToDeserialized.put(property.getName(), property);
                 }
-                consumer.accept(property, true);
             });
+            superSettersToDeserialized.values().forEach(property -> consumer.accept(property, true));
+
             propertiesManager.forEachRequiredProperty(property -> {
                 if (property.isConstant()) {
                     return;

@@ -481,6 +481,17 @@ public class ClientModelUtil {
      * @return Returns all properties that are defined by super types of the client model.
      */
     public static List<ClientModelProperty> getParentProperties(ClientModel model) {
+        return getParentProperties(model, true);
+    }
+
+    /**
+     * Gets all parent properties.
+     *
+     * @param model The client model.
+     * @param parentPropertiesFirst whether parent properties are in the front of the return list
+     * @return Returns all properties that are defined by super types of the client model.
+     */
+    public static List<ClientModelProperty> getParentProperties(ClientModel model, boolean parentPropertiesFirst) {
         String lastParentName = model.getName();
         ClientModel parentModel = getClientModel(model.getParentModelName());
         List<ClientModelProperty> parentProperties = new ArrayList<>();
@@ -494,7 +505,9 @@ public class ClientModelUtil {
             lastParentName = parentModel.getName();
             parentModel = getClientModel(parentModel.getParentModelName());
         }
-        Collections.reverse(parentProperties);
+        if (parentPropertiesFirst) {
+            Collections.reverse(parentProperties);
+        }
         return parentProperties;
     }
 

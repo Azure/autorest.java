@@ -111,6 +111,9 @@ $job = @(
     # ErrorDetails shared in exception and output
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothub",
 
+    # resource with writable name
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/2548fe40102c9b5aa27a75a126c8367f55cb9e7d/specification/sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json --java.namespace=com.azure.mgmttest.resourcewithwritablename"
+
     # fluent lite
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-resources-2021-01 --java.namespace=com.azure.mgmtlitetest.resources",
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/da0cfefaa0e6c237e1e3819f1cb2e11d7606878d/specification/storage/resource-manager/readme.md --tag=package-2021-01 --java.namespace=com.azure.mgmtlitetest.storage",
@@ -140,6 +143,9 @@ $job = @(
 
     # empty-model
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/empty-model.json --java.namespace=com.azure.mgmtlitetest.emptymodel"
+
+    # pageable model with inheritance
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0ed912fdfaffd5c81eb86b79df0e3b31d978d795/specification/billing/resource-manager/Microsoft.Billing/stable/2024-04-01/billingSavingsPlan.json --java.namespace=com.azure.mgmtlitetest.pageablewithinheritance"
 
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network"
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
