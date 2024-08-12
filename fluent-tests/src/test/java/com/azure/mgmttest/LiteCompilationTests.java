@@ -22,6 +22,8 @@ import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.LiveEventStatus;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.SyncStorageKeysInput;
+import com.azure.mgmtlitetest.pageablewithinheritance.fluent.SavingsPlansClient;
+import com.azure.mgmtlitetest.pageablewithinheritance.fluent.models.SavingsPlanModelInner;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -202,5 +204,10 @@ public class LiteCompilationTests {
 
     public void testPageableLroStreamStyle() {
         Class<CommunityGalleriesClientImpl> clazz = CommunityGalleriesClientImpl.class;
+    }
+
+    public void testPageableWithInheritance() {
+        SavingsPlansClient savingsPlansClient = mock(SavingsPlansClient.class);
+        PagedIterable<SavingsPlanModelInner> result = savingsPlansClient.listByBillingAccount("myBillingAccount");
     }
 }
