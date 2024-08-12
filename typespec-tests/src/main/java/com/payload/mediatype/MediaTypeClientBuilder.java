@@ -216,8 +216,9 @@ public final class MediaTypeClientBuilder implements HttpTrait<MediaTypeClientBu
     private MediaTypeClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         MediaTypeClientImpl client
-            = new MediaTypeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+            = new MediaTypeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 
@@ -225,7 +226,6 @@ public final class MediaTypeClientBuilder implements HttpTrait<MediaTypeClientBu
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

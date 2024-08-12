@@ -121,6 +121,7 @@ public final class ArmStreamStyleSerializationClientBuilder {
      * @return an instance of ArmStreamStyleSerializationClientImpl.
      */
     public ArmStreamStyleSerializationClientImpl buildClient() {
+        String localEndpoint = (endpoint != null) ? endpoint : "https://management.azure.com";
         AzureEnvironment localEnvironment = (environment != null) ? environment : AzureEnvironment.AZURE;
         HttpPipeline localPipeline = (pipeline != null)
             ? pipeline
@@ -131,7 +132,7 @@ public final class ArmStreamStyleSerializationClientBuilder {
             ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ArmStreamStyleSerializationClientImpl client = new ArmStreamStyleSerializationClientImpl(localPipeline,
-            localSerializerAdapter, localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
+            localSerializerAdapter, localDefaultPollInterval, localEnvironment, localEndpoint, this.subscriptionId);
         return client;
     }
 }

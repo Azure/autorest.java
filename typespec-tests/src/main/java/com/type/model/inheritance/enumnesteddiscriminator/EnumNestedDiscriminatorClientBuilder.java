@@ -218,8 +218,9 @@ public final class EnumNestedDiscriminatorClientBuilder implements HttpTrait<Enu
     private EnumNestedDiscriminatorClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         EnumNestedDiscriminatorClientImpl client = new EnumNestedDiscriminatorClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 
@@ -227,7 +228,6 @@ public final class EnumNestedDiscriminatorClientBuilder implements HttpTrait<Enu
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

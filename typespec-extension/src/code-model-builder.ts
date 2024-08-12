@@ -297,9 +297,11 @@ export class CodeModelBuilder {
               serializedName: arg.name,
             },
           },
+          // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
           extensions: {
             "x-ms-skip-url-encoding": schema instanceof UriSchema,
           },
+          clientDefaultValue: arg.clientDefaultValue,
         });
       }
       hostParameters.push(this.codeModel.addGlobalParameter(parameter));

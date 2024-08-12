@@ -225,8 +225,9 @@ public final class DatetimeClientBuilder implements HttpTrait<DatetimeClientBuil
     private DatetimeClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         DatetimeClientImpl client
-            = new DatetimeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+            = new DatetimeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 
@@ -234,7 +235,6 @@ public final class DatetimeClientBuilder implements HttpTrait<DatetimeClientBuil
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

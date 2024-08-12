@@ -258,8 +258,9 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
     private UnionClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         UnionClientImpl client
-            = new UnionClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+            = new UnionClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 
@@ -267,7 +268,6 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

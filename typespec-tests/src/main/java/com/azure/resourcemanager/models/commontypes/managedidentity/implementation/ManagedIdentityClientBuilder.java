@@ -121,6 +121,7 @@ public final class ManagedIdentityClientBuilder {
      * @return an instance of ManagedIdentityClientImpl.
      */
     public ManagedIdentityClientImpl buildClient() {
+        String localEndpoint = (endpoint != null) ? endpoint : "https://management.azure.com";
         AzureEnvironment localEnvironment = (environment != null) ? environment : AzureEnvironment.AZURE;
         HttpPipeline localPipeline = (pipeline != null)
             ? pipeline
@@ -131,7 +132,7 @@ public final class ManagedIdentityClientBuilder {
             ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ManagedIdentityClientImpl client = new ManagedIdentityClientImpl(localPipeline, localSerializerAdapter,
-            localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
+            localDefaultPollInterval, localEnvironment, localEndpoint, this.subscriptionId);
         return client;
     }
 }

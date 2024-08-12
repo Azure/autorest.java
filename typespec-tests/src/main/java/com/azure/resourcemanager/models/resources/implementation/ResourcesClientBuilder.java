@@ -121,6 +121,7 @@ public final class ResourcesClientBuilder {
      * @return an instance of ResourcesClientImpl.
      */
     public ResourcesClientImpl buildClient() {
+        String localEndpoint = (endpoint != null) ? endpoint : "https://management.azure.com";
         AzureEnvironment localEnvironment = (environment != null) ? environment : AzureEnvironment.AZURE;
         HttpPipeline localPipeline = (pipeline != null)
             ? pipeline
@@ -131,7 +132,7 @@ public final class ResourcesClientBuilder {
             ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ResourcesClientImpl client = new ResourcesClientImpl(localPipeline, localSerializerAdapter,
-            localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
+            localDefaultPollInterval, localEnvironment, localEndpoint, this.subscriptionId);
         return client;
     }
 }

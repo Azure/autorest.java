@@ -249,8 +249,9 @@ public final class OptionalClientBuilder implements HttpTrait<OptionalClientBuil
     private OptionalClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         OptionalClientImpl client
-            = new OptionalClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+            = new OptionalClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 
@@ -258,7 +259,6 @@ public final class OptionalClientBuilder implements HttpTrait<OptionalClientBuil
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

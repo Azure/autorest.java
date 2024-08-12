@@ -231,8 +231,9 @@ public final class ScalarClientBuilder implements HttpTrait<ScalarClientBuilder>
     private ScalarClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         ScalarClientImpl client
-            = new ScalarClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+            = new ScalarClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 
@@ -240,7 +241,6 @@ public final class ScalarClientBuilder implements HttpTrait<ScalarClientBuilder>
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

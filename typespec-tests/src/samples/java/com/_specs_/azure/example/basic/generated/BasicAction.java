@@ -10,7 +10,6 @@ import com._specs_.azure.example.basic.models.ActionRequest;
 import com._specs_.azure.example.basic.models.ActionResponse;
 import com._specs_.azure.example.basic.models.Enum;
 import com._specs_.azure.example.basic.models.Model;
-import com.azure.core.util.Configuration;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +17,7 @@ import java.util.Map;
 public class BasicAction {
     public static void main(String[] args) {
         AzureExampleClient azureExampleClient
-            = new AzureExampleClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
-                .buildClient();
+            = new AzureExampleClientBuilder().endpoint("http://localhost:3000").buildClient();
         // BEGIN:com._specs_.azure.example.basic.generated.basicaction.basicaction
         ActionResponse response = azureExampleClient.basicAction("query", "header",
             new ActionRequest("text")

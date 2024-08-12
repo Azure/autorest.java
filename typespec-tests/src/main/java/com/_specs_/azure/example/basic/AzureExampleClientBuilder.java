@@ -235,10 +235,11 @@ public final class AzureExampleClientBuilder implements HttpTrait<AzureExampleCl
     private AzureExampleClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         BasicServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : BasicServiceVersion.getLatest();
         AzureExampleClientImpl client = new AzureExampleClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint, localServiceVersion);
         return client;
     }
 
@@ -246,7 +247,6 @@ public final class AzureExampleClientBuilder implements HttpTrait<AzureExampleCl
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated
