@@ -242,7 +242,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param model the model to generate class of
      * @param settings JavaSettings
      * @return properties to generate as fields of the class
-     * @see com.azure.autorest.mapper.ModelMapper#passPolymorphicDiscriminatorToChildren
      */
     @Override
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
@@ -368,6 +367,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         boolean isJsonMergePatch, Consumer<JavaClass> addGeneratedAnnotation) {
+        // If the ClientModel is polymorphic, perform the following checks.
+        // 1. Are all the models in the hierarchy in the same package and this isn't JSON merge patch serialization?
+        // If so, check #2 and #3.
+        // 2. Is it a parent model? If so, write a helper method to share serialization of the properties defined by
+        // this model. This will reduce the amount of repetitive code generate for the children toJson methods.
+        // 3. Is it a child model? If so, skip generating toJson logic that write the properties defined by the parent
+        // model(s). Instead call to the helper method to serialize the properties defined by the parent model(s).
+        boolean generateSharedToJson = !isJsonMergePatch && propertiesManager.getModel().isPolymorphic()
+            && propertiesManager.isAllPolymorphicModelsInSamePackage();
+
         classBlock.javadocComment(JavaJavadocComment::inheritDoc);
         addGeneratedAnnotation.accept(classBlock);
         classBlock.annotation("Override");
@@ -381,9 +390,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     : JSON_MERGE_PATCH_HELPER_CLASS_NAME + ".get" + rootParent.getName() + "Accessor().isJsonMergePatch(this)";
 
                 methodBlock.ifBlock(ifStatement, ifBlock -> ifBlock.methodReturn("toJsonMergePatch(jsonWriter)"))
-                    .elseBlock(elseBlock -> serializeJsonProperties(methodBlock, propertiesManager, false));
+                    .elseBlock(elseBlock -> serializeJsonProperties(methodBlock, propertiesManager, false, false));
             } else {
-                serializeJsonProperties(methodBlock, propertiesManager, false);
+                serializeJsonProperties(methodBlock, propertiesManager, false, generateSharedToJson);
             }
         });
     }
@@ -399,7 +408,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         Consumer<JavaClass> addGeneratedAnnotation) {
         addGeneratedAnnotation.accept(classBlock);
         classBlock.privateMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException",
-            methodBlock -> serializeJsonProperties(methodBlock, propertiesManager, true));
+            methodBlock -> serializeJsonProperties(methodBlock, propertiesManager, true, false));
     }
 
     /**
@@ -407,9 +416,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param methodBlock The method block to write the serialization method to.
      * @param propertiesManager The properties manager for the model.
      * @param isJsonMergePatch Whether the serialization is for a JSON merge patch.
+     * @param generateSharedToJson Whether a package-private 'toJsonShared' method will either be generated for this
+     * client model and/or used by this client model.
      */
     private static void serializeJsonProperties(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager,
-        boolean isJsonMergePatch) {
+        boolean isJsonMergePatch, boolean generateSharedToJson) {
         methodBlock.line("jsonWriter.writeStartObject();");
 
         BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) -> serializeJsonProperty(
