@@ -40,9 +40,9 @@ public final class SalmonInner extends FishInner {
     private FishInner partner;
 
     /*
-     * The anotherProperties property.
+     * The dna property.
      */
-    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
+    private String dna;
 
     /*
      * The properties property.
@@ -50,9 +50,9 @@ public final class SalmonInner extends FishInner {
     private FishProperties innerProperties = new FishProperties();
 
     /*
-     * The dna property.
+     * The anotherProperties property.
      */
-    private String dna;
+    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
 
     /**
      * Creates an instance of SalmonInner class.
@@ -131,12 +131,13 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
-     * Get the innerAnotherProperties property: The anotherProperties property.
+     * Get the dna property: The dna property.
      * 
-     * @return the innerAnotherProperties value.
+     * @return the dna value.
      */
-    private AnotherFishProperties innerAnotherProperties() {
-        return this.innerAnotherProperties;
+    @Override
+    public String dna() {
+        return this.dna;
     }
 
     /**
@@ -149,13 +150,12 @@ public final class SalmonInner extends FishInner {
     }
 
     /**
-     * Get the dna property: The dna property.
+     * Get the innerAnotherProperties property: The anotherProperties property.
      * 
-     * @return the dna value.
+     * @return the innerAnotherProperties value.
      */
-    @Override
-    public String dna() {
-        return this.dna;
+    private AnotherFishProperties innerAnotherProperties() {
+        return this.innerAnotherProperties;
     }
 
     /**

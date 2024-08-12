@@ -29,9 +29,9 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
     private String childName;
 
     /*
-     * The properties property.
+     * The name property.
      */
-    private OutputOnlyModelProperties innerProperties;
+    private String name;
 
     /*
      * The id property.
@@ -39,9 +39,9 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
     private String id;
 
     /*
-     * The name property.
+     * The properties property.
      */
-    private String name;
+    private OutputOnlyModelProperties innerProperties;
 
     /**
      * Creates an instance of OutputOnlyModelChild class.
@@ -69,12 +69,13 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
     }
 
     /**
-     * Get the innerProperties property: The properties property.
+     * Get the name property: The name property.
      * 
-     * @return the innerProperties value.
+     * @return the name value.
      */
-    private OutputOnlyModelProperties innerProperties() {
-        return this.innerProperties;
+    @Override
+    public String name() {
+        return this.name;
     }
 
     /**
@@ -88,13 +89,12 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the innerProperties property: The properties property.
      * 
-     * @return the name value.
+     * @return the innerProperties value.
      */
-    @Override
-    public String name() {
-        return this.name;
+    private OutputOnlyModelProperties innerProperties() {
+        return this.innerProperties;
     }
 
     /**

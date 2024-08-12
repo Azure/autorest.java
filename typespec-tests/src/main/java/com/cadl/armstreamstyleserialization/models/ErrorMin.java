@@ -24,19 +24,9 @@ public final class ErrorMin extends ManagementError {
     private String additionalProperty;
 
     /*
-     * Additional info for the error.
+     * The error code parsed from the body of the http error response.
      */
-    private List<AdditionalInfo> additionalInfo;
-
-    /*
-     * Details for the error.
-     */
-    private List<ManagementError> details;
-
-    /*
-     * The target of the error.
-     */
-    private String target;
+    private String code;
 
     /*
      * The error message parsed from the body of the http error response.
@@ -44,9 +34,19 @@ public final class ErrorMin extends ManagementError {
     private String message;
 
     /*
-     * The error code parsed from the body of the http error response.
+     * The target of the error.
      */
-    private String code;
+    private String target;
+
+    /*
+     * Details for the error.
+     */
+    private List<ManagementError> details;
+
+    /*
+     * Additional info for the error.
+     */
+    private List<AdditionalInfo> additionalInfo;
 
     /**
      * Creates an instance of ErrorMin class.
@@ -64,33 +64,13 @@ public final class ErrorMin extends ManagementError {
     }
 
     /**
-     * Get the additionalInfo property: Additional info for the error.
+     * Get the code property: The error code parsed from the body of the http error response.
      * 
-     * @return the additionalInfo value.
+     * @return the code value.
      */
     @Override
-    public List<AdditionalInfo> getAdditionalInfo() {
-        return this.additionalInfo;
-    }
-
-    /**
-     * Get the details property: Details for the error.
-     * 
-     * @return the details value.
-     */
-    @Override
-    public List<ManagementError> getDetails() {
-        return this.details;
-    }
-
-    /**
-     * Get the target property: The target of the error.
-     * 
-     * @return the target value.
-     */
-    @Override
-    public String getTarget() {
-        return this.target;
+    public String getCode() {
+        return this.code;
     }
 
     /**
@@ -104,13 +84,33 @@ public final class ErrorMin extends ManagementError {
     }
 
     /**
-     * Get the code property: The error code parsed from the body of the http error response.
+     * Get the target property: The target of the error.
      * 
-     * @return the code value.
+     * @return the target value.
      */
     @Override
-    public String getCode() {
-        return this.code;
+    public String getTarget() {
+        return this.target;
+    }
+
+    /**
+     * Get the details property: Details for the error.
+     * 
+     * @return the details value.
+     */
+    @Override
+    public List<ManagementError> getDetails() {
+        return this.details;
+    }
+
+    /**
+     * Get the additionalInfo property: Additional info for the error.
+     * 
+     * @return the additionalInfo value.
+     */
+    @Override
+    public List<AdditionalInfo> getAdditionalInfo() {
+        return this.additionalInfo;
     }
 
     /**

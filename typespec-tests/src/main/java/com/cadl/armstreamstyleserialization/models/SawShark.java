@@ -39,14 +39,14 @@ public final class SawShark extends Shark {
     private int age;
 
     /*
-     * The anotherProperties property.
-     */
-    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
-
-    /*
      * The properties property.
      */
     private FishProperties innerProperties = new FishProperties();
+
+    /*
+     * The anotherProperties property.
+     */
+    private AnotherFishProperties innerAnotherProperties = new AnotherFishProperties();
 
     /**
      * Creates an instance of SawShark class.
@@ -115,21 +115,21 @@ public final class SawShark extends Shark {
     }
 
     /**
-     * Get the innerAnotherProperties property: The anotherProperties property.
-     * 
-     * @return the innerAnotherProperties value.
-     */
-    private AnotherFishProperties innerAnotherProperties() {
-        return this.innerAnotherProperties;
-    }
-
-    /**
      * Get the innerProperties property: The properties property.
      * 
      * @return the innerProperties value.
      */
     private FishProperties innerProperties() {
         return this.innerProperties;
+    }
+
+    /**
+     * Get the innerAnotherProperties property: The anotherProperties property.
+     * 
+     * @return the innerAnotherProperties value.
+     */
+    private AnotherFishProperties innerAnotherProperties() {
+        return this.innerAnotherProperties;
     }
 
     /**
