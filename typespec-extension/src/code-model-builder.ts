@@ -70,7 +70,6 @@ import {
   UsageFlags,
   createSdkContext,
   getAllModels,
-  getClientNameOverride,
   getClientType,
   getWireName,
   isApiVersion,
@@ -91,10 +90,8 @@ import {
   Union,
   getDoc,
   getEffectiveModelType,
-  getFriendlyName,
   getNamespaceFullName,
   getOverloadedOperation,
-  getProjectedName,
   getSummary,
   getVisibility,
   isArrayModelType,
@@ -104,7 +101,6 @@ import {
 import {
   Authentication,
   HttpOperation,
-  HttpOperationResponse,
   HttpStatusCodeRange,
   HttpStatusCodesEntry,
   Visibility,
@@ -112,7 +108,6 @@ import {
   getHeaderFieldName,
   getPathParamName,
   getQueryParamName,
-  getStatusCodeDescription,
   isHeader,
   isPathParam,
   isQueryParam,
@@ -1624,14 +1619,6 @@ export class CodeModelBuilder {
     }
   }
 
-  private getResponseDescription(resp: HttpOperationResponse): string {
-    return (
-      resp.description ||
-      (resp.statusCodes === "*" ? "An unexpected error response" : getStatusCodeDescription(resp.statusCodes)) ||
-      ""
-    );
-  }
-
   private processSchemaFromSdkType(type: SdkType, nameHint: string): Schema {
     return this.schemaCache.process(type, nameHint) || fail("Unable to process schema.");
   }
@@ -2231,34 +2218,6 @@ export class CodeModelBuilder {
 
   private getSummary(target: Type | undefined): string | undefined {
     return target ? getSummary(this.program, target) : undefined;
-  }
-
-  private getName(target: ModelProperty | Operation, nameHint: string | undefined = undefined): string {
-    // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
-    const emitterClientName = getClientNameOverride(this.sdkContext, target);
-    if (emitterClientName && typeof emitterClientName === "string") {
-      return emitterClientName;
-    }
-    // TODO: deprecate getProjectedName
-    const languageProjectedName = getProjectedName(this.program, target, "java");
-    if (languageProjectedName) {
-      return languageProjectedName;
-    }
-
-    const clientProjectedName = getProjectedName(this.program, target, "client");
-    if (clientProjectedName) {
-      return clientProjectedName;
-    }
-
-    const friendlyName = getFriendlyName(this.program, target);
-    if (friendlyName) {
-      return friendlyName;
-    }
-
-    if (typeof target.name === "symbol") {
-      return "";
-    }
-    return target.name || "";
   }
 
   private getSerializedName(target: ModelProperty): string {

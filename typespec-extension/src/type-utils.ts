@@ -1,7 +1,6 @@
 import {
   DecoratedType,
   DecoratorApplication,
-  EncodeData,
   EnumMember,
   IntrinsicScalarName,
   Model,
@@ -108,22 +107,6 @@ export function getDefaultValue(value: Value | undefined): any {
     }
   }
   return undefined;
-}
-
-export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {
-  let format: DurationSchema["format"] = "duration-rfc3339";
-  // duration encoded as seconds
-  if (encode.encoding === "seconds") {
-    const scalarName = encode.type.name;
-    if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
-      format = "seconds-integer";
-    } else if (scalarName.startsWith("float")) {
-      format = "seconds-number";
-    } else {
-      throw new Error(`Unrecognized scalar type used by duration encoded as seconds: '${scalarName}'.`);
-    }
-  }
-  return format;
 }
 
 export function getDurationFormatFromSdkType(type: SdkDurationType): DurationSchema["format"] {
