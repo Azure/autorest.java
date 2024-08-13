@@ -269,7 +269,7 @@ export class CodeModelBuilder {
     return this.codeModel;
   }
 
-  private processHostParametersFromSdkType(sdkPathParameters: SdkPathParameter[]): Parameter[] {
+  private processHostParameters(sdkPathParameters: SdkPathParameter[]): Parameter[] {
     const hostParameters: Parameter[] = [];
     let parameter;
     sdkPathParameters.forEach((arg) => {
@@ -551,7 +551,7 @@ export class CodeModelBuilder {
             throw new Error("unexpected endpoint parameter type");
           }
 
-          hostParameters = this.processHostParametersFromSdkType(sdkPathParameters);
+          hostParameters = this.processHostParameters(sdkPathParameters);
           codeModelClient.addGlobalParameters(hostParameters);
         }
       });
