@@ -17,8 +17,7 @@ sdk_root: str
 
 skip_artifacts: List[str] = [
     'azure-ai-anomalydetector',         # deprecated
-    'azure-ai-vision-imageanalysis',    # temporary disabled for modification on Javadoc
-    'azure-analytics-defender-easm'     # https://github.com/Azure/azure-sdk-for-java/issues/39862
+    'azure-ai-vision-imageanalysis'     # temporary disabled for modification on Javadoc
 ]
 
 
@@ -78,7 +77,7 @@ def update_emitter(package_json_path: str, use_dev_package: bool):
             logging.error('Failed to locate the dev package.')
 
     logging.info('Update emitter-package-lock.json')
-    subprocess.check_call(['tsp-client', '--generate-lock-file'], cwd=sdk_root)
+    subprocess.check_call(['tsp-client', 'generate-lock-file'], cwd=sdk_root)
 
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:

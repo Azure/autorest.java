@@ -106,112 +106,81 @@ interface EnumOp {
   @post
   @route("operation/stringenumarray")
   setStringEnumArray(
-    @query({
-      format: "csv",
-    })
+    @query
     colorArray: ColorModel[],
 
-    @query({
-      format: "csv",
-    })
+    @query
     colorArrayOpt?: ColorModel[],
   ): string;
 
   @post
   @route("operation/intenumarray")
   setIntEnumArray(
-    @query({
-      format: "csv",
-    })
+    @query
+    @encode("ssv")
     priorityArray: Priority[],
 
-    @query({
-      format: "csv",
-    })
+    @query
     priorityArrayOpt?: Priority[],
   ): string;
 
   @post
   @route("operation/stringarray")
   setStringArray(
-    @query({
-      format: "csv",
-    })
+    @query
     stringArray: string[],
 
-    @query({
-      format: "csv",
-    })
+    @query
     stringArrayOpt?: string[],
   ): string;
 
   @post
   @route("operation/intarray")
   setIntArray(
-    @query({
-      format: "csv",
-    })
+    @query
     intArray: int32[],
 
-    @query({
-      format: "csv",
-    })
+    @query
     intArrayOpt?: int32[],
   ): string;
 
   @post
   @route("operation/stringenummulti")
   setStringEnumMulti(
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     colorArray: ColorModel[],
 
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     colorArrayOpt?: ColorModel[],
   ): string;
 
   @post
   @route("operation/intenummulti")
   setIntEnumMulti(
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     priorityArray: Priority[],
 
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     priorityArrayOpt?: Priority[],
   ): string;
 
   @post
   @route("operation/stringmulti")
   setStringMulti(
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     stringArray: string[],
 
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     stringArrayOpt?: string[],
   ): string;
 
   @post
   @route("operation/intmulti")
   setIntMulti(
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     intArray: int32[],
 
-    @query({
-      format: "multi",
-    })
+    @query(#{ explode: true })
     intArrayOpt?: int32[],
   ): string;
 
