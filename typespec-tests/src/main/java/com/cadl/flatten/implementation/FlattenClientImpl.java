@@ -284,6 +284,7 @@ public final class FlattenClientImpl {
      * 
      * <pre>{@code
      * {
+     *     endpoint: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
@@ -316,6 +317,7 @@ public final class FlattenClientImpl {
      * 
      * <pre>{@code
      * {
+     *     endpoint: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
