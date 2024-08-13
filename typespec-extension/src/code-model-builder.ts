@@ -259,7 +259,7 @@ export class CodeModelBuilder {
       this.options["group-etag-headers"] = false;
     }
 
-    this.processClientsFromSdkType();
+    this.processClients();
 
     this.processModels();
 
@@ -475,7 +475,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processClientsFromSdkType() {
+  private processClients() {
     // preprocess group-etag-headers
     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
@@ -520,7 +520,7 @@ export class CodeModelBuilder {
         }
 
         codeModelClient.apiVersions = [];
-        for (const version of this.getFilteredApiVersionsFromString(
+        for (const version of this.getFilteredApiVersions(
           this.apiVersion,
           versions,
           this.options["service-version-exclude-preview"],
@@ -574,7 +574,7 @@ export class CodeModelBuilder {
       let codeModelGroup = new OperationGroup("");
       for (const serviceMethod of serviceMethodsWithoutSubClient) {
         if (!this.needToSkipProcessingOperation(serviceMethod.__raw, clientContext)) {
-          codeModelGroup.addOperation(this.processOperationFromSdkType(serviceMethod, clientContext, ""));
+          codeModelGroup.addOperation(this.processOperation(serviceMethod, clientContext, ""));
         }
       }
       if (codeModelGroup.operations?.length > 0) {
@@ -591,7 +591,7 @@ export class CodeModelBuilder {
           for (const serviceMethod of serviceMethods) {
             if (!this.needToSkipProcessingOperation(serviceMethod.__raw, clientContext)) {
               codeModelGroup.addOperation(
-                this.processOperationFromSdkType(serviceMethod, clientContext, subClient.name),
+                this.processOperation(serviceMethod, clientContext, subClient.name),
               );
             }
           }
@@ -676,7 +676,7 @@ export class CodeModelBuilder {
    * @param versions api-versions to filter
    * @returns filtered api-versions
    */
-  private getFilteredApiVersionsFromString(
+  private getFilteredApiVersions(
     pinnedApiVersion: string | undefined,
     versions: string[],
     excludePreview: boolean = false,
@@ -721,7 +721,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processOperationFromSdkType(
+  private processOperation(
     sdkMethod: SdkServiceMethod<SdkHttpOperation>,
     clientContext: ClientContext,
     groupName: string,
@@ -816,12 +816,12 @@ export class CodeModelBuilder {
           continue;
         }
       }
-      this.processParameterFromSdkType(codeModelOperation, param, clientContext);
+      this.processParameter(codeModelOperation, param, clientContext);
     }
 
     // body
     if (httpOperation.bodyParam && httpOperation.__raw && sdkMethod.__raw && httpOperation.bodyParam.type.__raw) {
-      this.processParameterBodyFromSdkType(
+      this.processParameterBody(
         codeModelOperation,
         httpOperation.__raw,
         httpOperation,
@@ -831,38 +831,38 @@ export class CodeModelBuilder {
 
     // group ETag header parameters, if exists
     if (this.options["group-etag-headers"]) {
-      this.processEtagHeaderParametersFromSdkType(codeModelOperation, sdkMethod.operation);
+      this.processEtagHeaderParameters(codeModelOperation, sdkMethod.operation);
     }
 
     // lro metadata
     let lroMetadata = new LongRunningMetadata(false);
     if (sdkMethod.kind === "lro" || sdkMethod.kind === "lropaging") {
-      lroMetadata = this.processLroMetadataFromSdkType(codeModelOperation, sdkMethod);
+      lroMetadata = this.processLroMetadata(codeModelOperation, sdkMethod);
     }
 
     // responses
     for (const [code, response] of sdkMethod.operation.responses) {
-      this.processResponseFromSdkType(codeModelOperation, code, response, lroMetadata.longRunning, false);
+      this.processResponse(codeModelOperation, code, response, lroMetadata.longRunning, false);
     }
 
     // exception
     for (const [code, response] of sdkMethod.operation.exceptions) {
-      this.processResponseFromSdkType(codeModelOperation, code, response, lroMetadata.longRunning, true);
+      this.processResponse(codeModelOperation, code, response, lroMetadata.longRunning, true);
     }
 
     // check for paged
     // this.processRouteForPaged(codeModelOperation, sdkMethod.operation.__raw.responses);
-    this.processRouteForPagedFromSdkType(codeModelOperation, sdkMethod.operation.responses, sdkMethod);
+    this.processRouteForPaged(codeModelOperation, sdkMethod.operation.responses, sdkMethod);
 
     // check for long-running operation
-    this.processRouteForLongRunningFromSdkType(codeModelOperation, sdkMethod.operation.responses, lroMetadata);
+    this.processRouteForLongRunning(codeModelOperation, sdkMethod.operation.responses, lroMetadata);
 
     operationGroup.addOperation(codeModelOperation);
 
     return codeModelOperation;
   }
 
-  private processRouteForPagedFromSdkType(
+  private processRouteForPaged(
     op: CodeModelOperation,
     responses: Map<number | HttpStatusCodeRange, SdkHttpResponse>,
     sdkMethod: SdkMethod<SdkHttpOperation>,
@@ -891,7 +891,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processLroMetadataFromSdkType(
+  private processLroMetadata(
     op: CodeModelOperation,
     sdkMethod: SdkLroServiceMethod<SdkHttpOperation> | SdkLroPagingServiceMethod<SdkHttpOperation>,
   ): LongRunningMetadata {
@@ -984,7 +984,7 @@ export class CodeModelBuilder {
     return new LongRunningMetadata(false);
   }
 
-  private processRouteForLongRunningFromSdkType(
+  private processRouteForLongRunning(
     op: CodeModelOperation,
     responses: Map<number | HttpStatusCodeRange, SdkHttpResponse>,
     lroMetadata: LongRunningMetadata,
@@ -1011,7 +1011,7 @@ export class CodeModelBuilder {
 
   private _armApiVersionParameter?: Parameter;
 
-  private processParameterFromSdkType(
+  private processParameter(
     op: CodeModelOperation,
     param: SdkQueryParameter | SdkPathParameter | SdkHeaderParameter,
     clientContext: ClientContext,
@@ -1157,7 +1157,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processEtagHeaderParametersFromSdkType(op: CodeModelOperation, httpOperation: SdkHttpOperation) {
+  private processEtagHeaderParameters(op: CodeModelOperation, httpOperation: SdkHttpOperation) {
     if (op.convenienceApi && op.parameters && op.signatureParameters) {
       const etagHeadersNames = new Set<string>([
         "if-match",
@@ -1292,7 +1292,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processParameterBodyFromSdkType(
+  private processParameterBody(
     op: CodeModelOperation,
     rawHttpOperation: HttpOperation,
     sdkHttpOperation: SdkHttpOperation,
@@ -1497,7 +1497,7 @@ export class CodeModelBuilder {
     return this.getEffectiveSchemaType(bodyType);
   }
 
-  private processResponseFromSdkType(
+  private processResponse(
     op: CodeModelOperation,
     statusCode: number | HttpStatusCodeRange | "*",
     sdkResponse: SdkHttpResponse,
