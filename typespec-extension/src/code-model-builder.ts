@@ -590,9 +590,7 @@ export class CodeModelBuilder {
           codeModelGroup = new OperationGroup(subClient.name);
           for (const serviceMethod of serviceMethods) {
             if (!this.needToSkipProcessingOperation(serviceMethod.__raw, clientContext)) {
-              codeModelGroup.addOperation(
-                this.processOperation(serviceMethod, clientContext, subClient.name),
-              );
+              codeModelGroup.addOperation(this.processOperation(serviceMethod, clientContext, subClient.name));
             }
           }
           codeModelClient.operationGroups.push(codeModelGroup);
@@ -821,12 +819,7 @@ export class CodeModelBuilder {
 
     // body
     if (httpOperation.bodyParam && httpOperation.__raw && sdkMethod.__raw && httpOperation.bodyParam.type.__raw) {
-      this.processParameterBody(
-        codeModelOperation,
-        httpOperation.__raw,
-        httpOperation,
-        httpOperation.bodyParam,
-      );
+      this.processParameterBody(codeModelOperation, httpOperation.__raw, httpOperation, httpOperation.bodyParam);
     }
 
     // group ETag header parameters, if exists
