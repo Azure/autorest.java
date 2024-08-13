@@ -136,9 +136,9 @@ import {
   isKnownContentType,
   isLroNewPollingStrategy,
   isPayloadProperty,
-  sdkHttpOperationIsJsonMergePatch,
-  sdkHttpOperationIsMultipart,
-  sdkHttpOperationIsMultipleContentTypes,
+  operationIsJsonMergePatch,
+  operationIsMultipart,
+  operationIsMultipleContentTypes,
 } from "./operation-utils.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import {
@@ -749,21 +749,18 @@ export class CodeModelBuilder {
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
       // check if the convenience API need to be disabled for some special cases
-      if (sdkHttpOperationIsMultipart(httpOperation)) {
+      if (operationIsMultipart(httpOperation)) {
         // do not generate protocol method for multipart/form-data, as it be very hard for user to prepare the request body as BinaryData
         generateProtocolApi = false;
         apiComment = `Protocol API requires serialization of parts with content-disposition and data, as operation '${operationName}' is 'multipart/form-data'`;
         this.logWarning(apiComment);
-      } else if (sdkHttpOperationIsMultipleContentTypes(httpOperation)) {
+      } else if (operationIsMultipleContentTypes(httpOperation)) {
         // and multiple content types
         // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${operationName}' is multiple content-type`;
         this.logWarning(apiComment);
-      } else if (
-        sdkHttpOperationIsJsonMergePatch(httpOperation) &&
-        this.options["stream-style-serialization"] === false
-      ) {
+      } else if (operationIsJsonMergePatch(httpOperation) && this.options["stream-style-serialization"] === false) {
         // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${operationName}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;
@@ -1322,10 +1319,10 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
     }
 
-    if (sdkHttpOperationIsJsonMergePatch(sdkHttpOperation)) {
+    if (operationIsJsonMergePatch(sdkHttpOperation)) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
-    if (op.convenienceApi && sdkHttpOperationIsMultipart(sdkHttpOperation)) {
+    if (op.convenienceApi && operationIsMultipart(sdkHttpOperation)) {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
@@ -1344,7 +1341,7 @@ export class CodeModelBuilder {
         parameter.language.default.name = "request";
       }
 
-      if (sdkHttpOperationIsJsonMergePatch(sdkHttpOperation)) {
+      if (operationIsJsonMergePatch(sdkHttpOperation)) {
         // skip model flatten, if "application/merge-patch+json"
         schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
         return;

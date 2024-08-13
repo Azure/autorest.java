@@ -42,15 +42,15 @@ export function isKnownContentType(contentTypes: string[]): boolean {
     });
 }
 
-export function sdkHttpOperationIsJsonMergePatch(op: SdkHttpOperation): boolean {
-  return sdkHttpOperationIsContentType(op, "application/merge-patch+json");
+export function operationIsJsonMergePatch(op: SdkHttpOperation): boolean {
+  return operationIsContentType(op, "application/merge-patch+json");
 }
 
-export function sdkHttpOperationIsMultipart(op: SdkHttpOperation): boolean {
-  return sdkHttpOperationIsContentType(op, "multipart/form-data");
+export function operationIsMultipart(op: SdkHttpOperation): boolean {
+  return operationIsContentType(op, "multipart/form-data");
 }
 
-function sdkHttpOperationIsContentType(op: SdkHttpOperation, contentType: string): boolean {
+function operationIsContentType(op: SdkHttpOperation, contentType: string): boolean {
   for (const param of op.parameters) {
     if (param.kind === "header" && param.serializedName.toLowerCase() === CONTENT_TYPE_KEY) {
       if (param.type.kind === "constant" && param.type.value === contentType) {
@@ -61,7 +61,7 @@ function sdkHttpOperationIsContentType(op: SdkHttpOperation, contentType: string
   return false;
 }
 
-export function sdkHttpOperationIsMultipleContentTypes(op: SdkHttpOperation): boolean {
+export function operationIsMultipleContentTypes(op: SdkHttpOperation): boolean {
   if (
     op.parameters &&
     op.parameters.some(
