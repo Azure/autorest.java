@@ -22,10 +22,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ScalarClientBuilder scalarClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder scalarClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             scalarClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

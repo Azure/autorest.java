@@ -22,10 +22,10 @@ class FixedClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        FixedClientBuilder fixedClientbuilder
-            = new FixedClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        FixedClientBuilder fixedClientbuilder = new FixedClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             fixedClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

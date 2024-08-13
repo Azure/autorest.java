@@ -24,10 +24,10 @@ class UnionClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        UnionClientBuilder unionClientbuilder
-            = new UnionClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        UnionClientBuilder unionClientbuilder = new UnionClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unionClientbuilder.httpClient(interceptorManager.getPlaybackClient()).credential(new MockTokenCredential());
         } else if (getTestMode() == TestMode.RECORD) {

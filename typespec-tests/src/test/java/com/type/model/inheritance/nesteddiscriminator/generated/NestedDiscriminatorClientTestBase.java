@@ -23,7 +23,7 @@ class NestedDiscriminatorClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         NestedDiscriminatorClientBuilder nestedDiscriminatorClientbuilder = new NestedDiscriminatorClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {

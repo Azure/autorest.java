@@ -22,10 +22,10 @@ class ExtensibleClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ExtensibleClientBuilder extensibleClientbuilder
-            = new ExtensibleClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ExtensibleClientBuilder extensibleClientbuilder = new ExtensibleClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             extensibleClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

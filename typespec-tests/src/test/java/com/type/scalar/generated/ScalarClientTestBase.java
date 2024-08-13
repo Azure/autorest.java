@@ -40,10 +40,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        ScalarClientBuilder stringOperationClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder stringOperationClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -51,10 +51,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         stringOperationClient = stringOperationClientbuilder.buildStringOperationClient();
 
-        ScalarClientBuilder booleanOperationClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder booleanOperationClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -62,10 +62,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         booleanOperationClient = booleanOperationClientbuilder.buildBooleanOperationClient();
 
-        ScalarClientBuilder unknownClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder unknownClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unknownClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -73,10 +73,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         unknownClient = unknownClientbuilder.buildUnknownClient();
 
-        ScalarClientBuilder decimalTypeClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder decimalTypeClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             decimalTypeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -84,10 +84,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         decimalTypeClient = decimalTypeClientbuilder.buildDecimalTypeClient();
 
-        ScalarClientBuilder decimal128TypeClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder decimal128TypeClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             decimal128TypeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -95,10 +95,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         decimal128TypeClient = decimal128TypeClientbuilder.buildDecimal128TypeClient();
 
-        ScalarClientBuilder decimalVerifyClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder decimalVerifyClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             decimalVerifyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -106,10 +106,10 @@ class ScalarClientTestBase extends TestProxyTestBase {
         }
         decimalVerifyClient = decimalVerifyClientbuilder.buildDecimalVerifyClient();
 
-        ScalarClientBuilder decimal128VerifyClientbuilder
-            = new ScalarClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        ScalarClientBuilder decimal128VerifyClientbuilder = new ScalarClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             decimal128VerifyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

@@ -67,10 +67,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        OptionalClientBuilder stringOperationClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder stringOperationClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -78,10 +78,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         stringOperationClient = stringOperationClientbuilder.buildStringOperationClient();
 
-        OptionalClientBuilder bytesClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder bytesClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             bytesClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -89,10 +89,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         bytesClient = bytesClientbuilder.buildBytesClient();
 
-        OptionalClientBuilder datetimeOperationClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder datetimeOperationClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             datetimeOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -100,10 +100,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         datetimeOperationClient = datetimeOperationClientbuilder.buildDatetimeOperationClient();
 
-        OptionalClientBuilder durationOperationClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder durationOperationClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             durationOperationClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -111,10 +111,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         durationOperationClient = durationOperationClientbuilder.buildDurationOperationClient();
 
-        OptionalClientBuilder plainDateClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder plainDateClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             plainDateClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -122,10 +122,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         plainDateClient = plainDateClientbuilder.buildPlainDateClient();
 
-        OptionalClientBuilder plainTimeClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder plainTimeClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             plainTimeClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -133,10 +133,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         plainTimeClient = plainTimeClientbuilder.buildPlainTimeClient();
 
-        OptionalClientBuilder collectionsByteClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder collectionsByteClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsByteClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -144,10 +144,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         collectionsByteClient = collectionsByteClientbuilder.buildCollectionsByteClient();
 
-        OptionalClientBuilder collectionsModelClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder collectionsModelClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             collectionsModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -155,10 +155,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         collectionsModelClient = collectionsModelClientbuilder.buildCollectionsModelClient();
 
-        OptionalClientBuilder stringLiteralClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder stringLiteralClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             stringLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -166,10 +166,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         stringLiteralClient = stringLiteralClientbuilder.buildStringLiteralClient();
 
-        OptionalClientBuilder intLiteralClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder intLiteralClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             intLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -177,10 +177,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         intLiteralClient = intLiteralClientbuilder.buildIntLiteralClient();
 
-        OptionalClientBuilder floatLiteralClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder floatLiteralClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             floatLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -188,10 +188,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         floatLiteralClient = floatLiteralClientbuilder.buildFloatLiteralClient();
 
-        OptionalClientBuilder booleanLiteralClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder booleanLiteralClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             booleanLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -199,10 +199,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         booleanLiteralClient = booleanLiteralClientbuilder.buildBooleanLiteralClient();
 
-        OptionalClientBuilder unionStringLiteralClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder unionStringLiteralClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unionStringLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -210,10 +210,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         unionStringLiteralClient = unionStringLiteralClientbuilder.buildUnionStringLiteralClient();
 
-        OptionalClientBuilder unionIntLiteralClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder unionIntLiteralClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unionIntLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -221,10 +221,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         unionIntLiteralClient = unionIntLiteralClientbuilder.buildUnionIntLiteralClient();
 
-        OptionalClientBuilder unionFloatLiteralClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder unionFloatLiteralClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unionFloatLiteralClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {
@@ -232,10 +232,10 @@ class OptionalClientTestBase extends TestProxyTestBase {
         }
         unionFloatLiteralClient = unionFloatLiteralClientbuilder.buildUnionFloatLiteralClient();
 
-        OptionalClientBuilder requiredAndOptionalClientbuilder
-            = new OptionalClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OptionalClientBuilder requiredAndOptionalClientbuilder = new OptionalClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             requiredAndOptionalClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

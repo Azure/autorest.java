@@ -26,7 +26,7 @@ class ContentNegotiationClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         ContentNegotiationClientBuilder sameBodyClientbuilder = new ContentNegotiationClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -37,7 +37,7 @@ class ContentNegotiationClientTestBase extends TestProxyTestBase {
         sameBodyClient = sameBodyClientbuilder.buildSameBodyClient();
 
         ContentNegotiationClientBuilder differentBodyClientbuilder = new ContentNegotiationClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {

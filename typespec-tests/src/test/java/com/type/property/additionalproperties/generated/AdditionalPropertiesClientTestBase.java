@@ -116,7 +116,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         AdditionalPropertiesClientBuilder extendsUnknownClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -127,7 +127,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsUnknownClient = extendsUnknownClientbuilder.buildExtendsUnknownClient();
 
         AdditionalPropertiesClientBuilder extendsUnknownDerivedClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -139,7 +139,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder extendsUnknownDiscriminatedClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -151,7 +151,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = extendsUnknownDiscriminatedClientbuilder.buildExtendsUnknownDiscriminatedClient();
 
         AdditionalPropertiesClientBuilder isUnknownClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -162,7 +162,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         isUnknownClient = isUnknownClientbuilder.buildIsUnknownClient();
 
         AdditionalPropertiesClientBuilder isUnknownDerivedClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -173,7 +173,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         isUnknownDerivedClient = isUnknownDerivedClientbuilder.buildIsUnknownDerivedClient();
 
         AdditionalPropertiesClientBuilder isUnknownDiscriminatedClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -184,7 +184,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         isUnknownDiscriminatedClient = isUnknownDiscriminatedClientbuilder.buildIsUnknownDiscriminatedClient();
 
         AdditionalPropertiesClientBuilder extendsStringClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -195,7 +195,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsStringClient = extendsStringClientbuilder.buildExtendsStringClient();
 
         AdditionalPropertiesClientBuilder isStringClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -206,7 +206,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         isStringClient = isStringClientbuilder.buildIsStringClient();
 
         AdditionalPropertiesClientBuilder spreadStringClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -217,7 +217,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadStringClient = spreadStringClientbuilder.buildSpreadStringClient();
 
         AdditionalPropertiesClientBuilder extendsFloatClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -228,7 +228,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsFloatClient = extendsFloatClientbuilder.buildExtendsFloatClient();
 
         AdditionalPropertiesClientBuilder isFloatClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -239,7 +239,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         isFloatClient = isFloatClientbuilder.buildIsFloatClient();
 
         AdditionalPropertiesClientBuilder spreadFloatClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -250,7 +250,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadFloatClient = spreadFloatClientbuilder.buildSpreadFloatClient();
 
         AdditionalPropertiesClientBuilder extendsModelClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -261,7 +261,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsModelClient = extendsModelClientbuilder.buildExtendsModelClient();
 
         AdditionalPropertiesClientBuilder isModelClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -272,7 +272,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         isModelClient = isModelClientbuilder.buildIsModelClient();
 
         AdditionalPropertiesClientBuilder spreadModelClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -283,7 +283,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadModelClient = spreadModelClientbuilder.buildSpreadModelClient();
 
         AdditionalPropertiesClientBuilder extendsModelArrayClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -294,7 +294,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         extendsModelArrayClient = extendsModelArrayClientbuilder.buildExtendsModelArrayClient();
 
         AdditionalPropertiesClientBuilder isModelArrayClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -305,7 +305,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         isModelArrayClient = isModelArrayClientbuilder.buildIsModelArrayClient();
 
         AdditionalPropertiesClientBuilder spreadModelArrayClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -316,7 +316,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadModelArrayClient = spreadModelArrayClientbuilder.buildSpreadModelArrayClient();
 
         AdditionalPropertiesClientBuilder spreadDifferentStringClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -327,7 +327,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadDifferentStringClient = spreadDifferentStringClientbuilder.buildSpreadDifferentStringClient();
 
         AdditionalPropertiesClientBuilder spreadDifferentFloatClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -338,7 +338,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         spreadDifferentFloatClient = spreadDifferentFloatClientbuilder.buildSpreadDifferentFloatClient();
 
         AdditionalPropertiesClientBuilder spreadDifferentModelClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -350,7 +350,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder spreadDifferentModelArrayClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -362,7 +362,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadStringClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -375,7 +375,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadFloatClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -388,7 +388,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadModelClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -401,7 +401,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder extendsDifferentSpreadModelArrayClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -413,7 +413,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             = extendsDifferentSpreadModelArrayClientbuilder.buildExtendsDifferentSpreadModelArrayClient();
 
         AdditionalPropertiesClientBuilder multipleSpreadClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -424,7 +424,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         multipleSpreadClient = multipleSpreadClientbuilder.buildMultipleSpreadClient();
 
         AdditionalPropertiesClientBuilder spreadRecordUnionClientbuilder = new AdditionalPropertiesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -436,7 +436,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder spreadRecordDiscriminatedUnionClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -449,7 +449,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnionClientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -462,7 +462,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnion2Clientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -475,7 +475,7 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
         AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnion3Clientbuilder
             = new AdditionalPropertiesClientBuilder()
-                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+                .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {

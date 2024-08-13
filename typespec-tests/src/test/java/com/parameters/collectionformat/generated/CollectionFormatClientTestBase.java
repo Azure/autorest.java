@@ -26,7 +26,7 @@ class CollectionFormatClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         CollectionFormatClientBuilder queryClientbuilder = new CollectionFormatClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -37,7 +37,7 @@ class CollectionFormatClientTestBase extends TestProxyTestBase {
         queryClient = queryClientbuilder.buildQueryClient();
 
         CollectionFormatClientBuilder headerClientbuilder = new CollectionFormatClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {

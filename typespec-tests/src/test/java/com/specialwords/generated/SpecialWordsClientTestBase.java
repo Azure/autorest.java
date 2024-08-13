@@ -32,7 +32,7 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         SpecialWordsClientBuilder modelsClientbuilder = new SpecialWordsClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -43,7 +43,7 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
         modelsClient = modelsClientbuilder.buildModelsClient();
 
         SpecialWordsClientBuilder modelPropertiesClientbuilder = new SpecialWordsClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -54,7 +54,7 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
         modelPropertiesClient = modelPropertiesClientbuilder.buildModelPropertiesClient();
 
         SpecialWordsClientBuilder operationsClientbuilder = new SpecialWordsClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
@@ -65,7 +65,7 @@ class SpecialWordsClientTestBase extends TestProxyTestBase {
         operationsClient = operationsClientbuilder.buildOperationsClient();
 
         SpecialWordsClientBuilder parametersClientbuilder = new SpecialWordsClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {

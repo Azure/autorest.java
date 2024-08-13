@@ -24,10 +24,10 @@ class OAuth2ClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        OAuth2ClientBuilder oAuth2Clientbuilder
-            = new OAuth2ClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
-                .httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        OAuth2ClientBuilder oAuth2Clientbuilder = new OAuth2ClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             oAuth2Clientbuilder.httpClient(interceptorManager.getPlaybackClient())
                 .credential(new MockTokenCredential());
