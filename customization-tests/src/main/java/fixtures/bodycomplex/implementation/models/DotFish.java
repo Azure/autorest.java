@@ -67,9 +67,13 @@ public class DotFish implements JsonSerializable<DotFish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStringField("fish.type", this.fishType);
         jsonWriter.writeStringField("species", this.species);
-        return jsonWriter.writeEndObject();
     }
 
     /**

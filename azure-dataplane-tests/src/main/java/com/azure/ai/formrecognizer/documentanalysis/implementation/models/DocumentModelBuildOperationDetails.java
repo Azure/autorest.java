@@ -11,7 +11,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -152,19 +151,7 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("operationId", getOperationId());
-        jsonWriter.writeStringField("status", getStatus() == null ? null : getStatus().toString());
-        jsonWriter.writeStringField("createdDateTime",
-            getCreatedDateTime() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getCreatedDateTime()));
-        jsonWriter.writeStringField("lastUpdatedDateTime",
-            getLastUpdatedDateTime() == null
-                ? null
-                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getLastUpdatedDateTime()));
-        jsonWriter.writeStringField("resourceLocation", getResourceLocation());
-        jsonWriter.writeNumberField("percentCompleted", getPercentCompleted());
-        jsonWriter.writeStringField("apiVersion", getApiVersion());
-        jsonWriter.writeMapField("tags", getTags(), (writer, element) -> writer.writeString(element));
-        jsonWriter.writeJsonField("error", getError());
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();

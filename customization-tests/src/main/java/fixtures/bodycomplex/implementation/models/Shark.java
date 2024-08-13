@@ -123,14 +123,16 @@ public class Shark extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
+        super.toJsonShared(jsonWriter);
         jsonWriter.writeStringField("birthday",
             this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("age", this.age);
-        return jsonWriter.writeEndObject();
     }
 
     /**

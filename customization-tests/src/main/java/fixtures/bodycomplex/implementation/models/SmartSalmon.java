@@ -140,11 +140,7 @@ public final class SmartSalmon extends Salmon {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("location", getLocation());
-        jsonWriter.writeBooleanField("iswild", iswild());
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("college_degree", this.collegeDegree);
         if (additionalProperties != null) {

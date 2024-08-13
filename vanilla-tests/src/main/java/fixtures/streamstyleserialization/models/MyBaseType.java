@@ -100,6 +100,11 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propB1", this.propB1);
         if (propBH1 != null) {
@@ -107,7 +112,6 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
             jsonWriter.writeStringField("propBH1", this.propBH1);
             jsonWriter.writeEndObject();
         }
-        return jsonWriter.writeEndObject();
     }
 
     /**

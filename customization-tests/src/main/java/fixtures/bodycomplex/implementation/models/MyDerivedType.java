@@ -85,7 +85,7 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("propB1", getPropB1());
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {

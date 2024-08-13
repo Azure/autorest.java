@@ -12,7 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,12 +146,7 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday",
-            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeNumberField("age", getAge());
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());

@@ -103,7 +103,7 @@ public final class DotSalmon extends DotFish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("species", getSpecies());
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("fish.type", this.fishType);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.isWild);

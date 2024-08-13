@@ -75,9 +75,13 @@ public class Dog implements JsonSerializable<Dog> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeIntField("weight", this.weight);
         jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
-        return jsonWriter.writeEndObject();
     }
 
     /**

@@ -301,6 +301,10 @@ public final class ClientModelPropertiesManager {
         ClientModel lastParent = model;
         while (parent != null) {
             lastParent = parent;
+            if (!packageName.equals(parent.getPackage())) {
+                return false;
+            }
+
             parent = ClientModelUtil.getClientModel(parent.getParentModelName());
         }
 
