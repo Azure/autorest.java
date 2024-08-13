@@ -145,28 +145,6 @@ public final class FormDatasImpl {
             RequestOptions requestOptions, Context context);
 
         // @Multipart not supported by RestProxy
-        @Post("/multipart/form-data/json-array-parts")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> jsonArrayParts(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
-
-        // @Multipart not supported by RestProxy
-        @Post("/multipart/form-data/json-array-parts")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> jsonArrayPartsSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
-            RequestOptions requestOptions, Context context);
-
-        // @Multipart not supported by RestProxy
         @Post("/multipart/form-data/multi-binary-parts")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -230,6 +208,94 @@ public final class FormDatasImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> anonymousModelSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData anonymousModelRequest,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/check-filename-and-specific-content-type-with-httppart")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> fileWithHttpPartSpecificContentType(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/check-filename-and-specific-content-type-with-httppart")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> fileWithHttpPartSpecificContentTypeSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/check-filename-and-required-content-type-with-httppart")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> fileWithHttpPartRequiredContentType(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/check-filename-and-required-content-type-with-httppart")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> fileWithHttpPartRequiredContentTypeSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/file-with-http-part-optional-content-type")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> fileWithHttpPartOptionalContentType(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/file-with-http-part-optional-content-type")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> fileWithHttpPartOptionalContentTypeSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/complex-parts-with-httppart")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> complexWithHttpPart(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/complex-parts-with-httppart")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> complexWithHttpPartSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -379,43 +445,6 @@ public final class FormDatasImpl {
     }
 
     /**
-     * Test content-type: multipart/form-data for scenario contains multi json parts.
-     * 
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> jsonArrayPartsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.jsonArrayParts(contentType, accept, body, requestOptions, context));
-    }
-
-    /**
-     * Test content-type: multipart/form-data for scenario contains multi json parts.
-     * 
-     * @param body The body parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> jsonArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String contentType = "multipart/form-data";
-        final String accept = "application/json";
-        return service.jsonArrayPartsSync(contentType, accept, body, requestOptions, Context.NONE);
-    }
-
-    /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
      * 
      * @param body The body parameter.
@@ -526,5 +555,159 @@ public final class FormDatasImpl {
         final String contentType = "multipart/form-data";
         final String accept = "application/json";
         return service.anonymousModelSync(contentType, accept, anonymousModelRequest, requestOptions, Context.NONE);
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> fileWithHttpPartSpecificContentTypeWithResponseAsync(BinaryData body,
+        RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.fileWithHttpPartSpecificContentType(contentType, accept, body, requestOptions, context));
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> fileWithHttpPartSpecificContentTypeWithResponse(BinaryData body,
+        RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return service.fileWithHttpPartSpecificContentTypeSync(contentType, accept, body, requestOptions, Context.NONE);
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> fileWithHttpPartRequiredContentTypeWithResponseAsync(BinaryData body,
+        RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.fileWithHttpPartRequiredContentType(contentType, accept, body, requestOptions, context));
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> fileWithHttpPartRequiredContentTypeWithResponse(BinaryData body,
+        RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return service.fileWithHttpPartRequiredContentTypeSync(contentType, accept, body, requestOptions, Context.NONE);
+    }
+
+    /**
+     * Test content-type: multipart/form-data for optional content type.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> fileWithHttpPartOptionalContentTypeWithResponseAsync(BinaryData body,
+        RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.fileWithHttpPartOptionalContentType(contentType, accept, body, requestOptions, context));
+    }
+
+    /**
+     * Test content-type: multipart/form-data for optional content type.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> fileWithHttpPartOptionalContentTypeWithResponse(BinaryData body,
+        RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return service.fileWithHttpPartOptionalContentTypeSync(contentType, accept, body, requestOptions, Context.NONE);
+    }
+
+    /**
+     * Test content-type: multipart/form-data for mixed scenarios.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> complexWithHttpPartWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.complexWithHttpPart(contentType, accept, body, requestOptions, context));
+    }
+
+    /**
+     * Test content-type: multipart/form-data for mixed scenarios.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> complexWithHttpPartWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return service.complexWithHttpPartSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 }

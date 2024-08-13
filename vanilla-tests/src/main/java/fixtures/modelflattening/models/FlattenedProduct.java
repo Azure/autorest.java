@@ -37,9 +37,9 @@ public class FlattenedProduct extends Resource {
     private String provisioningState;
 
     /*
-     * Resource Id
+     * Resource Name
      */
-    private String id;
+    private String name;
 
     /*
      * Resource Type
@@ -47,9 +47,9 @@ public class FlattenedProduct extends Resource {
     private String type;
 
     /*
-     * Resource Name
+     * Resource Id
      */
-    private String name;
+    private String id;
 
     /**
      * Creates an instance of FlattenedProduct class.
@@ -127,13 +127,13 @@ public class FlattenedProduct extends Resource {
     }
 
     /**
-     * Get the id property: Resource Id.
+     * Get the name property: Resource Name.
      * 
-     * @return the id value.
+     * @return the name value.
      */
     @Override
-    public String getId() {
-        return this.id;
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -147,13 +147,13 @@ public class FlattenedProduct extends Resource {
     }
 
     /**
-     * Get the name property: Resource Name.
+     * Get the id property: Resource Id.
      * 
-     * @return the name value.
+     * @return the id value.
      */
     @Override
-    public String getName() {
-        return this.name;
+    public String getId() {
+        return this.id;
     }
 
     /**

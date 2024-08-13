@@ -33,6 +33,7 @@ model ApiVersionParameter {
 
 alias Request = {
   @visibility("read") @key name: string;
+  endpoint: string;
   user?: User;
   input: string;
   constant: "constant";

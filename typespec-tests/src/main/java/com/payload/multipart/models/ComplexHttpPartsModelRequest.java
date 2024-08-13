@@ -9,10 +9,10 @@ import com.azure.core.annotation.Immutable;
 import java.util.List;
 
 /**
- * The ComplexPartsRequest model.
+ * The ComplexHttpPartsModelRequest model.
  */
 @Immutable
-public final class ComplexPartsRequest {
+public final class ComplexHttpPartsModelRequest {
     /*
      * The id property.
      */
@@ -29,28 +29,36 @@ public final class ComplexPartsRequest {
      * The profileImage property.
      */
     @Generated
-    private final ProfileImageFileDetails profileImage;
+    private final FileRequiredMetaData profileImage;
+
+    /*
+     * The previousAddresses property.
+     */
+    @Generated
+    private final List<Address> previousAddresses;
 
     /*
      * The pictures property.
      */
     @Generated
-    private final List<PicturesFileDetails> pictures;
+    private final List<FileRequiredMetaData> pictures;
 
     /**
-     * Creates an instance of ComplexPartsRequest class.
+     * Creates an instance of ComplexHttpPartsModelRequest class.
      * 
      * @param id the id value to set.
      * @param address the address value to set.
      * @param profileImage the profileImage value to set.
+     * @param previousAddresses the previousAddresses value to set.
      * @param pictures the pictures value to set.
      */
     @Generated
-    public ComplexPartsRequest(String id, Address address, ProfileImageFileDetails profileImage,
-        List<PicturesFileDetails> pictures) {
+    public ComplexHttpPartsModelRequest(String id, Address address, FileRequiredMetaData profileImage,
+        List<Address> previousAddresses, List<FileRequiredMetaData> pictures) {
         this.id = id;
         this.address = address;
         this.profileImage = profileImage;
+        this.previousAddresses = previousAddresses;
         this.pictures = pictures;
     }
 
@@ -80,8 +88,18 @@ public final class ComplexPartsRequest {
      * @return the profileImage value.
      */
     @Generated
-    public ProfileImageFileDetails getProfileImage() {
+    public FileRequiredMetaData getProfileImage() {
         return this.profileImage;
+    }
+
+    /**
+     * Get the previousAddresses property: The previousAddresses property.
+     * 
+     * @return the previousAddresses value.
+     */
+    @Generated
+    public List<Address> getPreviousAddresses() {
+        return this.previousAddresses;
     }
 
     /**
@@ -90,7 +108,7 @@ public final class ComplexPartsRequest {
      * @return the pictures value.
      */
     @Generated
-    public List<PicturesFileDetails> getPictures() {
+    public List<FileRequiredMetaData> getPictures() {
         return this.pictures;
     }
 }

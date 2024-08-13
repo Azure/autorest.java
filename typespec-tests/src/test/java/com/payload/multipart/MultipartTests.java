@@ -11,8 +11,14 @@ import com.azure.core.util.BinaryData;
 import com.payload.FileUtils;
 import com.payload.multipart.models.Address;
 import com.payload.multipart.models.BinaryArrayPartsRequest;
+import com.payload.multipart.models.ComplexHttpPartsModelRequest;
 import com.payload.multipart.models.ComplexPartsRequest;
-import com.payload.multipart.models.JsonArrayPartsRequest;
+import com.payload.multipart.models.FileOptionalContentType;
+import com.payload.multipart.models.FileRequiredMetaData;
+import com.payload.multipart.models.FileSpecificContentType;
+import com.payload.multipart.models.FileWithHttpPartOptionalContentTypeRequest;
+import com.payload.multipart.models.FileWithHttpPartRequiredContentTypeRequest;
+import com.payload.multipart.models.FileWithHttpPartSpecificContentTypeRequest;
 import com.payload.multipart.models.JsonPartRequest;
 import com.payload.multipart.models.MultiBinaryPartsRequest;
 import com.payload.multipart.models.MultiPartRequest;
@@ -44,6 +50,9 @@ public class MultipartTests {
     private static final Path FILE = FileUtils.getJpgFile();
 
     private static final Path PNG_FILE = FileUtils.getPngFile();
+
+    private static final String FILENAME = "image";
+    private static final String FILE_CONTENT_TYPE = "application/octet-stream";
 
     private final static class KpmAlgorithm {
         private static int indexOf(byte[] data, int start, int stop, byte[] pattern) {
@@ -168,12 +177,13 @@ public class MultipartTests {
                 new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg")));
     }
 
-    @Test
-    public void testJsonArray() {
-        client.jsonArrayParts(new JsonArrayPartsRequest(
-                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"),
-                Arrays.asList(new Address("Y"), new Address("Z"))));
-    }
+    // JSON array removed from cadl-ranch
+//    @Test
+//    public void testJsonArray() {
+//        client.jsonArrayParts(new JsonArrayPartsRequest(
+//                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"),
+//                Arrays.asList(new Address("Y"), new Address("Z"))));
+//    }
 
     @Test
     public void testMultipleFiles() {
@@ -223,7 +233,6 @@ public class MultipartTests {
                 "123",
                 new Address("X"),
                 new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"),
-                Arrays.asList(new Address("Y"), new Address("Z")),
                 Arrays.asList(
                         new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image1.png"),
                         new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image2.png")
@@ -235,5 +244,34 @@ public class MultipartTests {
     @Test
     public void testAnonymousModel() {
         client.anonymousModel(new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"));
+    }
+
+    @Test
+    public void testFileWithHttpPartSpecificContentType() {
+        client.fileWithHttpPartSpecificContentType(new FileWithHttpPartSpecificContentTypeRequest(
+                new FileSpecificContentType(BinaryData.fromFile(FILE), "hello.jpg")));
+    }
+
+    @Test
+    public void testFileWithHttpPartRequiredContentType() {
+        client.fileWithHttpPartRequiredContentType(new FileWithHttpPartRequiredContentTypeRequest(
+                new FileRequiredMetaData(BinaryData.fromFile(FILE), FILENAME, "application/octet-stream")));
+    }
+
+    @Test
+    public void testFileWithHttpPartOptionalContentType() {
+        client.fileWithHttpPartOptionalContentType(new FileWithHttpPartOptionalContentTypeRequest(
+                new FileOptionalContentType(BinaryData.fromFile(FILE), FILENAME).setContentType(FILE_CONTENT_TYPE)));
+    }
+
+    @Test
+    public void testComplexWithHttpPart() {
+        client.complexWithHttpPart(new ComplexHttpPartsModelRequest(
+                "123",
+                new Address("X"),
+                new FileRequiredMetaData(BinaryData.fromFile(FILE), FILENAME, FILE_CONTENT_TYPE),
+                List.of(new Address("Y"), new Address("Z")),
+                List.of(new FileRequiredMetaData(BinaryData.fromFile(PNG_FILE), FILENAME + "1", FILE_CONTENT_TYPE), new FileRequiredMetaData(BinaryData.fromFile(PNG_FILE), FILENAME + "2", FILE_CONTENT_TYPE))
+        ));
     }
 }
