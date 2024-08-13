@@ -14,7 +14,7 @@ public class FlattenOpSend {
         FlattenClient flattenClient
             = new FlattenClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.flatten.generated.send.flattenopsend
-        flattenClient.send("myRequiredId", null, "myRequiredInput", new User("myOptionalUser"));
+        flattenClient.send("myRequiredId", "host", "myRequiredInput", new User("myOptionalUser"));
         // END:com.cadl.flatten.generated.send.flattenopsend
     }
 }
