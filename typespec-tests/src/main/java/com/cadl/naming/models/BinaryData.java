@@ -72,6 +72,7 @@ public final class BinaryData implements JsonSerializable<BinaryData> {
     @Generated
     public static BinaryData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             Data data = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

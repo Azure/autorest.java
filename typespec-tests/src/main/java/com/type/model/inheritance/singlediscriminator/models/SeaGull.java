@@ -67,6 +67,7 @@ public final class SeaGull extends Bird {
     @Generated
     public static SeaGull fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int wingspan = 0;
             String kind = "seagull";
             while (reader.nextToken() != JsonToken.END_OBJECT) {

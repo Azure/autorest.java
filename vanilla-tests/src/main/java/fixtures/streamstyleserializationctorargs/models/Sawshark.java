@@ -42,6 +42,33 @@ public final class Sawshark extends Shark {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sawshark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sawshark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sawshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -68,33 +95,6 @@ public final class Sawshark extends Shark {
      */
     public Sawshark setPicture(byte[] picture) {
         this.picture = CoreUtils.clone(picture);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Sawshark setAge(Integer age) {
-        super.setAge(age);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Sawshark setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Sawshark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
         return this;
     }
 
@@ -144,9 +144,8 @@ public final class Sawshark extends Shark {
      */
     public static Sawshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
+            long foundTracker = 0;
             float length = 0.0f;
-            boolean birthdayFound = false;
             OffsetDateTime birthday = null;
             String species = null;
             List<Fish> siblings = null;
@@ -159,11 +158,11 @@ public final class Sawshark extends Shark {
 
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
-                    lengthFound = true;
+                    foundTracker |= 1;
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader
                         .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
-                    birthdayFound = true;
+                    foundTracker |= 2;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -178,7 +177,7 @@ public final class Sawshark extends Shark {
                     reader.skipChildren();
                 }
             }
-            if (lengthFound && birthdayFound) {
+            if (foundTracker == 3) {
                 Sawshark deserializedSawshark = new Sawshark(length, birthday);
                 deserializedSawshark.setSpecies(species);
                 deserializedSawshark.setSiblings(siblings);
@@ -189,10 +188,10 @@ public final class Sawshark extends Shark {
                 return deserializedSawshark;
             }
             List<String> missingProperties = new ArrayList<>();
-            if (!lengthFound) {
+            if ((foundTracker & 1) != 1) {
                 missingProperties.add("length");
             }
-            if (!birthdayFound) {
+            if ((foundTracker & 2) != 2) {
                 missingProperties.add("birthday");
             }
 

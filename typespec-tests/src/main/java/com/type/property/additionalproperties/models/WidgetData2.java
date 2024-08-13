@@ -83,6 +83,7 @@ public final class WidgetData2 implements JsonSerializable<WidgetData2> {
     @Generated
     public static WidgetData2 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String start = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

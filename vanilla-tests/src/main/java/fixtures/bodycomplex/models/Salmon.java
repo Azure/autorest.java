@@ -51,6 +51,24 @@ public class Salmon extends Fish {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Salmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Salmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -97,24 +115,6 @@ public class Salmon extends Fish {
      */
     public Salmon setIswild(Boolean iswild) {
         this.iswild = iswild;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Salmon setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Salmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
         return this;
     }
 

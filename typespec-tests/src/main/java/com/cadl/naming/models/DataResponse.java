@@ -160,6 +160,7 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
     @Generated
     public static DataResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             BinaryData data = null;
             TypesModel dataType = null;

@@ -85,6 +85,7 @@ public final class ChildModel implements JsonSerializable<ChildModel> {
     @Generated
     public static ChildModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String description = null;
             int age = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

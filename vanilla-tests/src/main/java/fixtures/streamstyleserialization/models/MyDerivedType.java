@@ -32,6 +32,24 @@ public final class MyDerivedType extends MyBaseType {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MyDerivedType setPropB1(String propB1) {
+        super.setPropB1(propB1);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public MyDerivedType setPropBH1(String propBH1) {
+        super.setPropBH1(propBH1);
+        return this;
+    }
+
+    /**
      * Get the kind property: The kind property.
      * 
      * @return the kind value.
@@ -58,24 +76,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     public MyDerivedType setPropD1(String propD1) {
         this.propD1 = propD1;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MyDerivedType setPropB1(String propB1) {
-        super.setPropB1(propB1);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MyDerivedType setPropBH1(String propBH1) {
-        super.setPropBH1(propBH1);
         return this;
     }
 

@@ -572,6 +572,7 @@ public final class Optional implements JsonSerializable<Optional> {
     @Generated
     public static Optional fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             boolean booleanRequired = false;
             Boolean booleanRequiredNullable = null;
             String stringRequired = null;

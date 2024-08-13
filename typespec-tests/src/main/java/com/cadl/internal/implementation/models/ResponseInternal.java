@@ -66,6 +66,7 @@ public final class ResponseInternal implements JsonSerializable<ResponseInternal
     @Generated
     public static ResponseInternal fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             ResponseInternalInner property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

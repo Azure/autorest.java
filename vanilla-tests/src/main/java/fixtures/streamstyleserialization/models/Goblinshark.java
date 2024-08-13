@@ -42,6 +42,51 @@ public final class Goblinshark extends Shark {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setBirthday(OffsetDateTime birthday) {
+        super.setBirthday(birthday);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setLength(float length) {
+        super.setLength(length);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -88,51 +133,6 @@ public final class Goblinshark extends Shark {
      */
     public Goblinshark setColor(GoblinSharkColor color) {
         this.color = color;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setAge(Integer age) {
-        super.setAge(age);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setBirthday(OffsetDateTime birthday) {
-        super.setBirthday(birthday);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setLength(float length) {
-        super.setLength(length);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
         return this;
     }
 

@@ -66,6 +66,7 @@ public final class StandAloneData implements JsonSerializable<StandAloneData> {
     @Generated
     public static StandAloneData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             StandAloneDataInner property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

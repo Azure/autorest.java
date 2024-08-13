@@ -101,6 +101,7 @@ public final class Dog implements JsonSerializable<Dog> {
     @Generated
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int id = 0;
             String secretName = null;
             String name = null;

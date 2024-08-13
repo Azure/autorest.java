@@ -40,6 +40,51 @@ public final class SmartSalmon extends Salmon {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setLocation(String location) {
+        super.setLocation(location);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setIswild(Boolean iswild) {
+        super.setIswild(iswild);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setLength(float length) {
+        super.setLength(length);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -86,51 +131,6 @@ public final class SmartSalmon extends Salmon {
      */
     public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setLocation(String location) {
-        super.setLocation(location);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setIswild(Boolean iswild) {
-        super.setIswild(iswild);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setLength(float length) {
-        super.setLength(length);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
         return this;
     }
 

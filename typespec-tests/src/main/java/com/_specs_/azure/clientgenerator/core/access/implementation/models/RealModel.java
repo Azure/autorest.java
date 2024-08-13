@@ -67,6 +67,7 @@ public final class RealModel extends AbstractModel {
     @Generated
     public static RealModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             String kind = "real";
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -70,6 +70,7 @@ public final class DefaultDatetimeProperty implements JsonSerializable<DefaultDa
     @Generated
     public static DefaultDatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OffsetDateTime value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

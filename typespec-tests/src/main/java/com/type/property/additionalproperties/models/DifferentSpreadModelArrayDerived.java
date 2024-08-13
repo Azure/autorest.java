@@ -76,6 +76,7 @@ public final class DifferentSpreadModelArrayDerived extends DifferentSpreadModel
     @Generated
     public static DifferentSpreadModelArrayDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String knownProp = null;
             List<ModelForRecord> derivedProp = null;
             Map<String, List<ModelForRecord>> additionalProperties = null;

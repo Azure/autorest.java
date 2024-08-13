@@ -101,6 +101,7 @@ public class DifferentSpreadFloatRecord implements JsonSerializable<DifferentSpr
     @Generated
     public static DifferentSpreadFloatRecord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             Map<String, Double> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

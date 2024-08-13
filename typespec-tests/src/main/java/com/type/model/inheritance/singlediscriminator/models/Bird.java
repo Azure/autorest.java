@@ -115,6 +115,7 @@ public class Bird implements JsonSerializable<Bird> {
     @Generated
     static Bird fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int wingspan = 0;
             String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -116,6 +116,7 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int id = 0;
             String name = null;
             String etag = null;

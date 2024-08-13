@@ -66,6 +66,7 @@ public final class IntProperty implements JsonSerializable<IntProperty> {
     @Generated
     public static IntProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int property = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

@@ -66,6 +66,7 @@ public final class JsonEncodedNameModel implements JsonSerializable<JsonEncodedN
     @Generated
     public static JsonEncodedNameModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             boolean defaultName = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

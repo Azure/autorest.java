@@ -123,6 +123,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
     @Generated
     public static IsUnknownAdditionalPropertiesDiscriminatedDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             int index = 0;
             String kind = "derived";

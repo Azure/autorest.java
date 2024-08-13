@@ -47,6 +47,33 @@ public final class Sawshark extends Shark {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sawshark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sawshark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Sawshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -73,33 +100,6 @@ public final class Sawshark extends Shark {
      */
     public Sawshark setPicture(byte[] picture) {
         this.picture = CoreUtils.clone(picture);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Sawshark setAge(Integer age) {
-        super.setAge(age);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Sawshark setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Sawshark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
         return this;
     }
 

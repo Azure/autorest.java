@@ -11,8 +11,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
@@ -41,7 +39,7 @@ public class Shark extends Fish {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     static {
         JsonMergePatchHelper.setSharkAccessor(new JsonMergePatchHelper.SharkAccessor() {
@@ -57,6 +55,28 @@ public class Shark extends Fish {
      */
     @Generated
     public Shark() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public Shark setAge(int age) {
+        super.setAge(age);
+        this.updatedProperties |= 1;
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public Shark setColor(String color) {
+        super.setColor(color);
+        this.updatedProperties |= 2;
+        return this;
     }
 
     /**
@@ -99,29 +119,7 @@ public class Shark extends Fish {
     @Generated
     public Shark setWeight(Integer weight) {
         this.weight = weight;
-        this.updatedProperties.add("weight");
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public Shark setAge(int age) {
-        super.setAge(age);
-        this.updatedProperties.add("age");
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public Shark setColor(String color) {
-        super.setColor(color);
-        this.updatedProperties.add("color");
+        this.updatedProperties |= 4;
         return this;
     }
 
@@ -148,10 +146,10 @@ public class Shark extends Fish {
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind", this.kind);
-        if (updatedProperties.contains("age")) {
+        if ((this.updatedProperties & 1) == 1) {
             jsonWriter.writeIntField("age", getAge());
         }
-        if (updatedProperties.contains("color")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
             } else {
@@ -159,7 +157,7 @@ public class Shark extends Fish {
             }
         }
         jsonWriter.writeStringField("sharktype", this.sharktype);
-        if (updatedProperties.contains("weight")) {
+        if ((this.updatedProperties & 4) == 4) {
             if (this.weight == null) {
                 jsonWriter.writeNullField("weight");
             } else {

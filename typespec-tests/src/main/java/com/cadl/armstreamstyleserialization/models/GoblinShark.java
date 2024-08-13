@@ -50,6 +50,15 @@ public final class GoblinShark extends Shark {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public GoblinShark withAge(int age) {
+        super.withAge(age);
+        return this;
+    }
+
+    /**
      * Get the kind property: Discriminator property for Fish.
      * 
      * @return the kind value.
@@ -95,15 +104,6 @@ public final class GoblinShark extends Shark {
     @Override
     public String dna() {
         return this.dna;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public GoblinShark withAge(int age) {
-        super.withAge(age);
-        return this;
     }
 
     /**

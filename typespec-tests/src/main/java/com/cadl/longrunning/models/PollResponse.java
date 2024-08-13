@@ -85,6 +85,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
     @Generated
     public static PollResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String operationId = null;
             OperationState status = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

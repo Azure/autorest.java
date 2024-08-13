@@ -66,6 +66,7 @@ public final class GetResponse2 implements JsonSerializable<GetResponse2> {
     @Generated
     public static GetResponse2 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             StringAndArrayCases prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

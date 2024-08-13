@@ -66,6 +66,7 @@ public final class UnionIntLiteralProperty implements JsonSerializable<UnionIntL
     @Generated
     public static UnionIntLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             UnionIntLiteralPropertyProperty property = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

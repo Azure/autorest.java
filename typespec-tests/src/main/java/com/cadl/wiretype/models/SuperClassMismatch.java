@@ -76,6 +76,7 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
     @Generated
     public static SuperClassMismatch fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OffsetDateTime dateTimeRfc7231 = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

@@ -109,6 +109,7 @@ public class Dog implements JsonSerializable<Dog> {
     @Generated
     static Dog fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int weight = 0;
             DogKind kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

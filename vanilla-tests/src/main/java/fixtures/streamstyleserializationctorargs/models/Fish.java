@@ -174,7 +174,7 @@ public class Fish implements JsonSerializable<Fish> {
 
     static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
+            long foundTracker = 0;
             float length = 0.0f;
             String fishtype = null;
             String species = null;
@@ -185,7 +185,7 @@ public class Fish implements JsonSerializable<Fish> {
 
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
-                    lengthFound = true;
+                    foundTracker |= 1;
                 } else if ("fishtype".equals(fieldName)) {
                     fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
@@ -196,7 +196,7 @@ public class Fish implements JsonSerializable<Fish> {
                     reader.skipChildren();
                 }
             }
-            if (lengthFound) {
+            if (foundTracker == 1) {
                 Fish deserializedFish = new Fish(length);
                 deserializedFish.fishtype = fishtype;
                 deserializedFish.species = species;

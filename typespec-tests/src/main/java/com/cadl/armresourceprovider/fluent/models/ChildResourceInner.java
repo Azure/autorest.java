@@ -35,24 +35,6 @@ public final class ChildResourceInner extends Resource {
     }
 
     /**
-     * Get the innerProperties property: The resource-specific properties for this resource.
-     * 
-     * @return the innerProperties value.
-     */
-    private ChildResourceProperties innerProperties() {
-        return this.innerProperties;
-    }
-
-    /**
-     * Get the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
-     * 
-     * @return the systemData value.
-     */
-    public SystemData systemData() {
-        return this.systemData;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -68,6 +50,24 @@ public final class ChildResourceInner extends Resource {
     public ChildResourceInner withTags(Map<String, String> tags) {
         super.withTags(tags);
         return this;
+    }
+
+    /**
+     * Get the innerProperties property: The resource-specific properties for this resource.
+     * 
+     * @return the innerProperties value.
+     */
+    private ChildResourceProperties innerProperties() {
+        return this.innerProperties;
+    }
+
+    /**
+     * Get the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
+     * 
+     * @return the systemData value.
+     */
+    public SystemData systemData() {
+        return this.systemData;
     }
 
     /**

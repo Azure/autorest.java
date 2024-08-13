@@ -36,36 +36,6 @@ public final class Sawshark extends Shark {
     }
 
     /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
-    }
-
-    /**
-     * Get the picture property: The picture property.
-     * 
-     * @return the picture value.
-     */
-    public byte[] getPicture() {
-        return CoreUtils.clone(this.picture);
-    }
-
-    /**
-     * Set the picture property: The picture property.
-     * 
-     * @param picture the picture value to set.
-     * @return the Sawshark object itself.
-     */
-    public Sawshark setPicture(byte[] picture) {
-        this.picture = CoreUtils.clone(picture);
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -107,6 +77,36 @@ public final class Sawshark extends Shark {
     @Override
     public Sawshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
+    }
+
+    /**
+     * Get the picture property: The picture property.
+     * 
+     * @return the picture value.
+     */
+    public byte[] getPicture() {
+        return CoreUtils.clone(this.picture);
+    }
+
+    /**
+     * Set the picture property: The picture property.
+     * 
+     * @param picture the picture value to set.
+     * @return the Sawshark object itself.
+     */
+    public Sawshark setPicture(byte[] picture) {
+        this.picture = CoreUtils.clone(picture);
         return this;
     }
 

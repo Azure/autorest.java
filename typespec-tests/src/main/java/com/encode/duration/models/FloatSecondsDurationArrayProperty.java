@@ -79,6 +79,7 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
     @Generated
     public static FloatSecondsDurationArrayProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             List<Duration> value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

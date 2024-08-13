@@ -117,6 +117,7 @@ public final class WidgetData1 implements JsonSerializable<WidgetData1> {
     @Generated
     public static WidgetData1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OffsetDateTime start = null;
             OffsetDateTime end = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

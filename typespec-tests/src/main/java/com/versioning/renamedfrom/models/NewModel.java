@@ -105,6 +105,7 @@ public final class NewModel implements JsonSerializable<NewModel> {
     @Generated
     public static NewModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String newProp = null;
             NewEnum enumProp = null;
             BinaryData unionProp = null;

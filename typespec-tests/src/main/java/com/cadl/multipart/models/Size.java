@@ -85,6 +85,7 @@ public final class Size implements JsonSerializable<Size> {
     @Generated
     public static Size fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int width = 0;
             int height = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

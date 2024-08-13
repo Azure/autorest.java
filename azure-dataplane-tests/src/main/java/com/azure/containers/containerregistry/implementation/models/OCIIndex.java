@@ -34,6 +34,15 @@ public final class OCIIndex extends Manifest {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public OCIIndex setSchemaVersion(Integer schemaVersion) {
+        super.setSchemaVersion(schemaVersion);
+        return this;
+    }
+
+    /**
      * Get the manifests property: List of OCI image layer information.
      * 
      * @return the manifests value.
@@ -70,15 +79,6 @@ public final class OCIIndex extends Manifest {
      */
     public OCIIndex setAnnotations(OciAnnotations annotations) {
         this.annotations = annotations;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public OCIIndex setSchemaVersion(Integer schemaVersion) {
-        super.setSchemaVersion(schemaVersion);
         return this;
     }
 

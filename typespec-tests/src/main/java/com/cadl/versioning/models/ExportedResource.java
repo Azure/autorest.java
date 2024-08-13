@@ -85,6 +85,7 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
     @Generated
     public static ExportedResource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String id = null;
             String resourceUri = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

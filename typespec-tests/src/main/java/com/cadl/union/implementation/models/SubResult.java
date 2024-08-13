@@ -42,6 +42,16 @@ public final class SubResult extends Result {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public SubResult setResult(Result result) {
+        super.setResult(result);
+        return this;
+    }
+
+    /**
      * Get the text property: The text property.
      * 
      * @return the text value.
@@ -90,16 +100,6 @@ public final class SubResult extends Result {
      */
     @Generated
     @Override
-    public SubResult setResult(Result result) {
-        super.setResult(result);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", getName());
@@ -124,6 +124,7 @@ public final class SubResult extends Result {
     @Generated
     public static SubResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             BinaryData data = null;
             Result result = null;

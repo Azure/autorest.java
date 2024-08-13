@@ -66,6 +66,7 @@ public final class RunObject implements JsonSerializable<RunObject> {
     @Generated
     public static RunObject fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             RunObjectLastError lastError = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

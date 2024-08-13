@@ -101,6 +101,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     @Generated
     public static ExtendsUnknownAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -66,6 +66,7 @@ public final class InternalDecoratorModelInInternal implements JsonSerializable<
     @Generated
     public static InternalDecoratorModelInInternal fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

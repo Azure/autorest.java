@@ -157,6 +157,7 @@ public final class Eagle extends Bird {
     @Generated
     public static Eagle fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int wingspan = 0;
             String kind = "eagle";
             List<Bird> friends = null;

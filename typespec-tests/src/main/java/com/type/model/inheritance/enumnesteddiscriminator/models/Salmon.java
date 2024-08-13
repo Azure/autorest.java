@@ -157,6 +157,7 @@ public final class Salmon extends Fish {
     @Generated
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int age = 0;
             FishKind kind = FishKind.SALMON;
             List<Fish> friends = null;

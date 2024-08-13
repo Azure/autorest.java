@@ -109,6 +109,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
     @Generated
     static AbstractModel fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

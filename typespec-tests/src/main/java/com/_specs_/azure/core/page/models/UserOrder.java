@@ -101,6 +101,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     @Generated
     public static UserOrder fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int id = 0;
             int userId = 0;
             String detail = null;

@@ -34,16 +34,6 @@ public final class Extension extends Element {
     }
 
     /**
-     * Get the level property: The level property.
-     * 
-     * @return the level value.
-     */
-    @Generated
-    public int getLevel() {
-        return this.level;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated
@@ -51,6 +41,16 @@ public final class Extension extends Element {
     public Extension setExtension(List<Extension> extension) {
         super.setExtension(extension);
         return this;
+    }
+
+    /**
+     * Get the level property: The level property.
+     * 
+     * @return the level value.
+     */
+    @Generated
+    public int getLevel() {
+        return this.level;
     }
 
     /**
@@ -77,6 +77,7 @@ public final class Extension extends Element {
     @Generated
     public static Extension fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             List<Extension> extension = null;
             int level = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

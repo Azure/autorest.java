@@ -84,6 +84,7 @@ public final class BytesData extends Data {
     @Generated
     public static BytesData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             byte[] dataAsBytes = null;
             String type = "bytes";
             while (reader.nextToken() != JsonToken.END_OBJECT) {

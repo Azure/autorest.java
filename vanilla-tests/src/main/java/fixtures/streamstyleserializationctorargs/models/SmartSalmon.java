@@ -43,6 +43,42 @@ public final class SmartSalmon extends Salmon {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setLocation(String location) {
+        super.setLocation(location);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setIswild(Boolean iswild) {
+        super.setIswild(iswild);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SmartSalmon setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -93,42 +129,6 @@ public final class SmartSalmon extends Salmon {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setLocation(String location) {
-        super.setLocation(location);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setIswild(Boolean iswild) {
-        super.setIswild(iswild);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SmartSalmon setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
-        return this;
-    }
-
-    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -172,7 +172,7 @@ public final class SmartSalmon extends Salmon {
      */
     public static SmartSalmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
+            long foundTracker = 0;
             float length = 0.0f;
             String species = null;
             List<Fish> siblings = null;
@@ -187,7 +187,7 @@ public final class SmartSalmon extends Salmon {
 
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
-                    lengthFound = true;
+                    foundTracker |= 1;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -208,7 +208,7 @@ public final class SmartSalmon extends Salmon {
                     additionalProperties.put(fieldName, reader.readUntyped());
                 }
             }
-            if (lengthFound) {
+            if (foundTracker == 1) {
                 SmartSalmon deserializedSmartSalmon = new SmartSalmon(length);
                 deserializedSmartSalmon.setSpecies(species);
                 deserializedSmartSalmon.setSiblings(siblings);

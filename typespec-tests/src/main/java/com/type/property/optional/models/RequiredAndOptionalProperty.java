@@ -95,6 +95,7 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
     @Generated
     public static RequiredAndOptionalProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int requiredProperty = 0;
             String optionalProperty = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

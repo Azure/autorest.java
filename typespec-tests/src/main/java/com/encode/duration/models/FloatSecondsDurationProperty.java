@@ -71,6 +71,7 @@ public final class FloatSecondsDurationProperty implements JsonSerializable<Floa
     @Generated
     public static FloatSecondsDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             Duration value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

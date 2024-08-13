@@ -68,6 +68,7 @@ public final class ISO8601DurationProperty implements JsonSerializable<ISO8601Du
     @Generated
     public static ISO8601DurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             Duration value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

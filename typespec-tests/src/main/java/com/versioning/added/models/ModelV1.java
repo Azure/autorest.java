@@ -105,6 +105,7 @@ public final class ModelV1 implements JsonSerializable<ModelV1> {
     @Generated
     public static ModelV1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String prop = null;
             EnumV1 enumProp = null;
             BinaryData unionProp = null;

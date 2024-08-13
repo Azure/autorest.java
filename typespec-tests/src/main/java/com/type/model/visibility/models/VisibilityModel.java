@@ -140,6 +140,7 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
     @Generated
     public static VisibilityModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String readProp = null;
             Integer queryProp = null;
             List<String> createProp = null;

@@ -85,6 +85,7 @@ public final class GoblinShark extends Shark {
     @Generated
     public static GoblinShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int age = 0;
             SharkKind sharktype = SharkKind.GOBLIN;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

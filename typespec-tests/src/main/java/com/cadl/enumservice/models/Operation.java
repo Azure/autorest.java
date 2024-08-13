@@ -238,6 +238,7 @@ public final class Operation implements JsonSerializable<Operation> {
     @Generated
     public static Operation fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OperationName name = null;
             Priority priority = null;
             ColorModel color = null;

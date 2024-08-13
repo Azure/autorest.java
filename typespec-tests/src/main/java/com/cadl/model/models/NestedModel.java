@@ -66,6 +66,7 @@ public final class NestedModel implements JsonSerializable<NestedModel> {
     @Generated
     public static NestedModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             NestedModel1 nested1 = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

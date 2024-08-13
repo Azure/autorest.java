@@ -37,6 +37,15 @@ public class Cat extends Pet {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Cat setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
+    /**
      * Get the likesMilk property: The likesMilk property.
      * 
      * @return the likesMilk value.
@@ -93,15 +102,6 @@ public class Cat extends Pet {
      */
     public Cat setHisses(Boolean hisses) {
         this.hisses = hisses;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Cat setName(String name) {
-        super.setName(name);
         return this;
     }
 

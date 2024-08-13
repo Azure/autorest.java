@@ -67,6 +67,7 @@ public final class SendRequest1 implements JsonSerializable<SendRequest1> {
     @Generated
     public static SendRequest1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             GetResponseProp3 prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

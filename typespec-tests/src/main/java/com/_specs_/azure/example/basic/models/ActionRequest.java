@@ -157,6 +157,7 @@ public final class ActionRequest implements JsonSerializable<ActionRequest> {
     @Generated
     public static ActionRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String stringProperty = null;
             Model modelProperty = null;
             List<String> arrayProperty = null;

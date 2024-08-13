@@ -120,6 +120,7 @@ public final class OperationDetails1 implements JsonSerializable<OperationDetail
     @Generated
     public static OperationDetails1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String operationId = null;
             OperationState status = null;
             ResponseError error = null;

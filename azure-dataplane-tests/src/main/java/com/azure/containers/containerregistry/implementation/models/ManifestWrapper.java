@@ -80,6 +80,15 @@ public final class ManifestWrapper extends Manifest {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ManifestWrapper setSchemaVersion(Integer schemaVersion) {
+        super.setSchemaVersion(schemaVersion);
+        return this;
+    }
+
+    /**
      * Get the mediaType property: Media type for this Manifest.
      * 
      * @return the mediaType value.
@@ -296,15 +305,6 @@ public final class ManifestWrapper extends Manifest {
      */
     public ManifestWrapper setSignatures(List<ImageSignature> signatures) {
         this.signatures = signatures;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ManifestWrapper setSchemaVersion(Integer schemaVersion) {
-        super.setSchemaVersion(schemaVersion);
         return this;
     }
 

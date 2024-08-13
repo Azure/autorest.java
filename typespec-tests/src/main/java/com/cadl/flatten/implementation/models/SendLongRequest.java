@@ -316,6 +316,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     @Generated
     public static SendLongRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String input = null;
             int dataInt = 0;
             String title = null;

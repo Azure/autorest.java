@@ -27,26 +27,6 @@ public final class Kitten extends Cat {
     }
 
     /**
-     * Get the eatsMiceYet property: The eatsMiceYet property.
-     * 
-     * @return the eatsMiceYet value.
-     */
-    public Boolean isEatsMiceYet() {
-        return this.eatsMiceYet;
-    }
-
-    /**
-     * Set the eatsMiceYet property: The eatsMiceYet property.
-     * 
-     * @param eatsMiceYet the eatsMiceYet value to set.
-     * @return the Kitten object itself.
-     */
-    public Kitten setEatsMiceYet(Boolean eatsMiceYet) {
-        this.eatsMiceYet = eatsMiceYet;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -79,6 +59,26 @@ public final class Kitten extends Cat {
     @Override
     public Kitten setName(String name) {
         super.setName(name);
+        return this;
+    }
+
+    /**
+     * Get the eatsMiceYet property: The eatsMiceYet property.
+     * 
+     * @return the eatsMiceYet value.
+     */
+    public Boolean isEatsMiceYet() {
+        return this.eatsMiceYet;
+    }
+
+    /**
+     * Set the eatsMiceYet property: The eatsMiceYet property.
+     * 
+     * @param eatsMiceYet the eatsMiceYet value to set.
+     * @return the Kitten object itself.
+     */
+    public Kitten setEatsMiceYet(Boolean eatsMiceYet) {
+        this.eatsMiceYet = eatsMiceYet;
         return this;
     }
 

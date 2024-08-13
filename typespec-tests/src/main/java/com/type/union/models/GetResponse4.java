@@ -67,6 +67,7 @@ public final class GetResponse4 implements JsonSerializable<GetResponse4> {
     @Generated
     public static GetResponse4 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             BinaryData prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

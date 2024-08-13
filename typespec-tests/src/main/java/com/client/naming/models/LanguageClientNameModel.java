@@ -66,6 +66,7 @@ public final class LanguageClientNameModel implements JsonSerializable<LanguageC
     @Generated
     public static LanguageClientNameModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             boolean javaName = false;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

@@ -185,6 +185,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
     @Generated
     public static TodoItem fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             long id = 0L;
             String title = null;
             SendLongRequestStatus status = null;

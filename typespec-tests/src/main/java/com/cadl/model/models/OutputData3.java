@@ -66,6 +66,7 @@ public final class OutputData3 implements JsonSerializable<OutputData3> {
     @Generated
     public static OutputData3 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String data = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

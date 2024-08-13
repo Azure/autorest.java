@@ -101,6 +101,7 @@ public final class ExtendsStringAdditionalProperties implements JsonSerializable
     @Generated
     public static ExtendsStringAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             Map<String, String> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

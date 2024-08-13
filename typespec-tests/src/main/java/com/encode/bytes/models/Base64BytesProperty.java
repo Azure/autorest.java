@@ -67,6 +67,7 @@ public final class Base64BytesProperty implements JsonSerializable<Base64BytesPr
     @Generated
     public static Base64BytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             byte[] value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

@@ -58,6 +58,24 @@ public class FlattenedProduct extends Resource {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FlattenedProduct setTags(Map<String, String> tags) {
+        super.setTags(tags);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public FlattenedProduct setLocation(String location) {
+        super.setLocation(location);
+        return this;
+    }
+
+    /**
      * Get the pName property: The p.name property.
      * 
      * @return the pName value.
@@ -154,24 +172,6 @@ public class FlattenedProduct extends Resource {
     @Override
     public String getId() {
         return this.id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public FlattenedProduct setTags(Map<String, String> tags) {
-        super.setTags(tags);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public FlattenedProduct setLocation(String location) {
-        super.setLocation(location);
-        return this;
     }
 
     /**

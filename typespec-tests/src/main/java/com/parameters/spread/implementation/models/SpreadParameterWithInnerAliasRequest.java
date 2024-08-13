@@ -86,6 +86,7 @@ public final class SpreadParameterWithInnerAliasRequest
     @Generated
     public static SpreadParameterWithInnerAliasRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             int age = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

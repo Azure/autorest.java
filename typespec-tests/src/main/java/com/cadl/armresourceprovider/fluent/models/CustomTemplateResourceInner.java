@@ -45,6 +45,24 @@ public final class CustomTemplateResourceInner extends Resource {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CustomTemplateResourceInner withLocation(String location) {
+        super.withLocation(location);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CustomTemplateResourceInner withTags(Map<String, String> tags) {
+        super.withTags(tags);
+        return this;
+    }
+
+    /**
      * Get the innerProperties property: The resource-specific properties for this resource.
      * 
      * @return the innerProperties value.
@@ -80,24 +98,6 @@ public final class CustomTemplateResourceInner extends Resource {
      */
     public SystemData systemData() {
         return this.systemData;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public CustomTemplateResourceInner withLocation(String location) {
-        super.withLocation(location);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public CustomTemplateResourceInner withTags(Map<String, String> tags) {
-        super.withTags(tags);
-        return this;
     }
 
     /**

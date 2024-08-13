@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -154,6 +155,29 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 : JavaVisibility.Public;
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
+            AtomicLong jsonMergePatchTracker = new AtomicLong(1);
+            // add setters to override parent setters
+            if (!immutableModel) {
+                List<ClientModelPropertyAccess> settersToOverride = getSuperSetters(model, settings,
+                    propertyReferences);
+                for (ClientModelPropertyAccess parentProperty : settersToOverride) {
+                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    addGeneratedAnnotation(classBlock);
+                    classBlock.annotation("Override");
+                    String methodSignature = model.getName() + " " + parentProperty.getSetterName() + "("
+                        + parentProperty.getClientType() + " " + parentProperty.getName() + ")";
+
+                    classBlock.publicMethod(methodSignature, methodBlock -> {
+                        methodBlock.line(
+                            "super." + parentProperty.getSetterName() + "(" + parentProperty.getName() + ");");
+                        if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
+                            addJsonMergePatchTracking(methodBlock, jsonMergePatchTracker);
+                        }
+                        methodBlock.methodReturn("this");
+                    });
+                }
+            }
+
             for (ClientModelProperty property : getFieldProperties(model, settings)) {
                 final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
 
@@ -189,7 +213,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model, settings)));
+                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model, settings),
+                            jsonMergePatchTracker));
                 } else {
                     // If stream-style serialization is being generated, some additional setters may need to be added to
                     // support read-only properties that aren't included in the constructor.
@@ -214,8 +239,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " "
                                 + property.getName() + ")",
                             methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                                methodBlock, settings,
-                                ClientModelUtil.isJsonMergePatchModel(model, settings)));
+                                methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model, settings),
+                                jsonMergePatchTracker));
                     }
                 }
 
@@ -235,28 +260,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                         String key = model.getNeedsFlatten() ? "KEY_ESCAPER.matcher(key).replaceAll(\".\")" : "key";
                         methodBlock.line(property.getName() + ".put(" + key + ", value);");
-                    });
-                }
-            }
-
-            // add setters to override parent setters
-            if (!immutableModel) {
-                List<ClientModelPropertyAccess> settersToOverride = getSuperSetters(model, settings,
-                    propertyReferences);
-                for (ClientModelPropertyAccess parentProperty : settersToOverride) {
-                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
-                    addGeneratedAnnotation(classBlock);
-                    classBlock.annotation("Override");
-                    String methodSignature = model.getName() + " " + parentProperty.getSetterName() + "("
-                        + parentProperty.getClientType() + " " + parentProperty.getName() + ")";
-
-                    classBlock.publicMethod(methodSignature, methodBlock -> {
-                        methodBlock.line(
-                            "super." + parentProperty.getSetterName() + "(" + parentProperty.getName() + ");");
-                        if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
-                            methodBlock.line("this.updatedProperties.add(\"" + parentProperty.getName() + "\");");
-                        }
-                        methodBlock.methodReturn("this");
                     });
                 }
             }
@@ -410,8 +413,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // add Json merge patch related imports
         if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
             imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
-            imports.add(Set.class.getName());
-            imports.add(HashSet.class.getName());
         }
     }
 
@@ -1051,9 +1052,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param treatAsXml            Whether the setter should treat the property as XML.
      * @param methodBlock           Where the setter method is being added.
      * @param isJsonMergePatchModel Whether the client model is a JSON merge patch model.
+     * @param jsonMergePatchTracker Bitwise long tracker for JSON merge patch properties.
      */
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
-        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings, boolean isJsonMergePatchModel) {
+        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings, boolean isJsonMergePatchModel,
+        AtomicLong jsonMergePatchTracker) {
         String expression = (propertyClientType.equals(ArrayType.BYTE_ARRAY))
             ? TemplateHelper.getByteCloneExpression(property.getName())
             : property.getName();
@@ -1080,10 +1083,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         if (isJsonMergePatchModel) {
-            methodBlock.line("this.updatedProperties.add(\"" + property.getName() + "\");");
+            addJsonMergePatchTracking(methodBlock, jsonMergePatchTracker);
         }
 
         methodBlock.methodReturn("this");
+    }
+
+    private static void addJsonMergePatchTracking(JavaBlock methodBlock, AtomicLong jsonMergePatchTracker) {
+        methodBlock.line("this.updatedProperties |= " + jsonMergePatchTracker.getAndUpdate(l -> l * 2) + ";");
     }
 
     private void addPropertyValidations(JavaClass classBlock, ClientModel model, JavaSettings settings) {
@@ -1339,7 +1346,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         classBlock.javadocComment(comment ->
             comment.description("Stores updated model property, the value is property name, not serialized name"));
         addGeneratedAnnotation(classBlock);
-        classBlock.privateFinalMemberVariable("Set<String> updatedProperties = new HashSet<>()");
+        classBlock.privateMemberVariable("long updatedProperties = 0L");
 
         if (model.isPolymorphic() && CoreUtils.isNullOrEmpty(model.getDerivedModels())) {
             // Only polymorphic parent models generate an accessor.

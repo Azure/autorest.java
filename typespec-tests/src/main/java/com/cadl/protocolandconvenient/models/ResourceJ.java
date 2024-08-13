@@ -98,6 +98,7 @@ public final class ResourceJ implements JsonSerializable<ResourceJ> {
     @Generated
     public static ResourceJ fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String id = null;
             String name = null;
             String type = null;

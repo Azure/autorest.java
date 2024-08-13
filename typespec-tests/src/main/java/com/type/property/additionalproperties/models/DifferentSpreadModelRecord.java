@@ -101,6 +101,7 @@ public class DifferentSpreadModelRecord implements JsonSerializable<DifferentSpr
     @Generated
     public static DifferentSpreadModelRecord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String knownProp = null;
             Map<String, ModelForRecord> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

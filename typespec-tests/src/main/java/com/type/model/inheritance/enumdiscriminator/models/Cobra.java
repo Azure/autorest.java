@@ -67,6 +67,7 @@ public final class Cobra extends Snake {
     @Generated
     public static Cobra fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int length = 0;
             SnakeKind kind = SnakeKind.COBRA;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

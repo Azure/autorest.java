@@ -33,6 +33,15 @@ public final class ManifestList extends Manifest {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ManifestList setSchemaVersion(Integer schemaVersion) {
+        super.setSchemaVersion(schemaVersion);
+        return this;
+    }
+
+    /**
      * Get the mediaType property: Media type for this Manifest.
      * 
      * @return the mediaType value.
@@ -69,15 +78,6 @@ public final class ManifestList extends Manifest {
      */
     public ManifestList setManifests(List<ManifestListAttributes> manifests) {
         this.manifests = manifests;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public ManifestList setSchemaVersion(Integer schemaVersion) {
-        super.setSchemaVersion(schemaVersion);
         return this;
     }
 

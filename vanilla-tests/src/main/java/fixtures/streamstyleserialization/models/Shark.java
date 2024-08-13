@@ -42,6 +42,33 @@ public class Shark extends Fish {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Shark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Shark setLength(float length) {
+        super.setLength(length);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Shark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -88,33 +115,6 @@ public class Shark extends Fish {
      */
     public Shark setBirthday(OffsetDateTime birthday) {
         this.birthday = birthday;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Shark setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Shark setLength(float length) {
-        super.setLength(length);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Shark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
         return this;
     }
 

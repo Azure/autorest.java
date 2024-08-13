@@ -142,6 +142,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public static Resource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String id = null;
             String aggregate = null;
             String condition = null;

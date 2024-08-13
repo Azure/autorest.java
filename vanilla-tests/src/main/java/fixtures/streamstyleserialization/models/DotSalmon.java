@@ -37,6 +37,15 @@ public final class DotSalmon extends DotFish {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DotSalmon setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
      * Get the fishType property: The fish.type property.
      * 
      * @return the fishType value.
@@ -83,15 +92,6 @@ public final class DotSalmon extends DotFish {
      */
     public DotSalmon setIswild(Boolean iswild) {
         this.iswild = iswild;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DotSalmon setSpecies(String species) {
-        super.setSpecies(species);
         return this;
     }
 

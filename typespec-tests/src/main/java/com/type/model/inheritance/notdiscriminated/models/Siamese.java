@@ -70,6 +70,7 @@ public final class Siamese extends Cat {
     @Generated
     public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             int age = 0;
             boolean smart = false;

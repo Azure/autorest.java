@@ -115,6 +115,7 @@ public class Result implements JsonSerializable<Result> {
     @Generated
     public static Result fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             BinaryData data = null;
             Result result = null;

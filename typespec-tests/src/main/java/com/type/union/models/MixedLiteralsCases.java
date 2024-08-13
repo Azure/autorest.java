@@ -125,6 +125,7 @@ public final class MixedLiteralsCases implements JsonSerializable<MixedLiteralsC
     @Generated
     public static MixedLiteralsCases fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             BinaryData stringLiteral = null;
             BinaryData intLiteral = null;
             BinaryData floatLiteral = null;

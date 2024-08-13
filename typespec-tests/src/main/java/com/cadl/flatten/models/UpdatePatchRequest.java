@@ -12,8 +12,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.cadl.flatten.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The UpdatePatchRequest model.
@@ -30,7 +28,7 @@ public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchReq
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -83,7 +81,7 @@ public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchReq
     @Generated
     public UpdatePatchRequest setPatch(TodoItemPatch patch) {
         this.patch = patch;
-        this.updatedProperties.add("patch");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -105,7 +103,7 @@ public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchReq
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("patch")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.patch == null) {
                 jsonWriter.writeNullField("patch");
             } else {

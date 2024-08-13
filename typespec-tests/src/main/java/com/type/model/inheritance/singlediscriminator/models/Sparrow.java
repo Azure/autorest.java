@@ -67,6 +67,7 @@ public final class Sparrow extends Bird {
     @Generated
     public static Sparrow fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int wingspan = 0;
             String kind = "sparrow";
             while (reader.nextToken() != JsonToken.END_OBJECT) {

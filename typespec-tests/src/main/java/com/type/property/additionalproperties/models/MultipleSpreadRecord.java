@@ -105,6 +105,7 @@ public final class MultipleSpreadRecord implements JsonSerializable<MultipleSpre
     @Generated
     public static MultipleSpreadRecord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             boolean flag = false;
             Map<String, BinaryData> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

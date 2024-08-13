@@ -66,6 +66,7 @@ public final class ListItemInputBody implements JsonSerializable<ListItemInputBo
     @Generated
     public static ListItemInputBody fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String inputName = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

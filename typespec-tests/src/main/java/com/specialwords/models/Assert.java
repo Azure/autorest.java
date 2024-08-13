@@ -66,6 +66,7 @@ public final class Assert implements JsonSerializable<Assert> {
     @Generated
     public static Assert fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

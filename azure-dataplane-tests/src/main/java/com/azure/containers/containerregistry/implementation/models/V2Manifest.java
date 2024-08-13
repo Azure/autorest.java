@@ -39,6 +39,15 @@ public final class V2Manifest extends Manifest {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public V2Manifest setSchemaVersion(Integer schemaVersion) {
+        super.setSchemaVersion(schemaVersion);
+        return this;
+    }
+
+    /**
      * Get the mediaType property: Media type for this Manifest.
      * 
      * @return the mediaType value.
@@ -95,15 +104,6 @@ public final class V2Manifest extends Manifest {
      */
     public V2Manifest setLayers(List<OciDescriptor> layers) {
         this.layers = layers;
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public V2Manifest setSchemaVersion(Integer schemaVersion) {
-        super.setSchemaVersion(schemaVersion);
         return this;
     }
 

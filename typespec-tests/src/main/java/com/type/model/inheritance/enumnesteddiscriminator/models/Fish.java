@@ -111,6 +111,7 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int age = 0;
             FishKind kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

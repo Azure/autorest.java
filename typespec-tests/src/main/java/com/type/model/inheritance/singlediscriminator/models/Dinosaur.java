@@ -109,6 +109,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     @Generated
     static Dinosaur fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int size = 0;
             String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -86,6 +86,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
     @Generated
     public static Diagnostic fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String name = null;
             ResponseError error = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

@@ -47,6 +47,33 @@ public final class Goblinshark extends Shark {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setAge(Integer age) {
+        super.setAge(age);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setSpecies(String species) {
+        super.setSpecies(species);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Goblinshark setSiblings(List<Fish> siblings) {
+        super.setSiblings(siblings);
+        return this;
+    }
+
+    /**
      * Get the fishtype property: The fishtype property.
      * 
      * @return the fishtype value.
@@ -97,33 +124,6 @@ public final class Goblinshark extends Shark {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setAge(Integer age) {
-        super.setAge(age);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setSpecies(String species) {
-        super.setSpecies(species);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Goblinshark setSiblings(List<Fish> siblings) {
-        super.setSiblings(siblings);
-        return this;
-    }
-
-    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -170,9 +170,8 @@ public final class Goblinshark extends Shark {
      */
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
+            long foundTracker = 0;
             float length = 0.0f;
-            boolean birthdayFound = false;
             OffsetDateTime birthday = null;
             String species = null;
             List<Fish> siblings = null;
@@ -186,11 +185,11 @@ public final class Goblinshark extends Shark {
 
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
-                    lengthFound = true;
+                    foundTracker |= 1;
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader
                         .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
-                    birthdayFound = true;
+                    foundTracker |= 2;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -207,7 +206,7 @@ public final class Goblinshark extends Shark {
                     reader.skipChildren();
                 }
             }
-            if (lengthFound && birthdayFound) {
+            if (foundTracker == 3) {
                 Goblinshark deserializedGoblinshark = new Goblinshark(length, birthday);
                 deserializedGoblinshark.setSpecies(species);
                 deserializedGoblinshark.setSiblings(siblings);
@@ -219,10 +218,10 @@ public final class Goblinshark extends Shark {
                 return deserializedGoblinshark;
             }
             List<String> missingProperties = new ArrayList<>();
-            if (!lengthFound) {
+            if ((foundTracker & 1) != 1) {
                 missingProperties.add("length");
             }
-            if (!birthdayFound) {
+            if ((foundTracker & 2) != 2) {
                 missingProperties.add("birthday");
             }
 

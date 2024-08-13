@@ -12,10 +12,8 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.payload.jsonmergepatch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Details about a resource for patch operation.
@@ -68,7 +66,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
-    private final Set<String> updatedProperties = new HashSet<>();
+    private long updatedProperties = 0L;
 
     @Generated
     private boolean jsonMergePatch;
@@ -119,7 +117,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     public ResourcePatch setDescription(String description) {
         this.description = description;
-        this.updatedProperties.add("description");
+        this.updatedProperties |= 1;
         return this;
     }
 
@@ -142,7 +140,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     public ResourcePatch setMap(Map<String, InnerModel> map) {
         this.map = map;
-        this.updatedProperties.add("map");
+        this.updatedProperties |= 2;
         return this;
     }
 
@@ -165,7 +163,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     public ResourcePatch setArray(List<InnerModel> array) {
         this.array = array;
-        this.updatedProperties.add("array");
+        this.updatedProperties |= 4;
         return this;
     }
 
@@ -188,7 +186,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     public ResourcePatch setIntValue(Integer intValue) {
         this.intValue = intValue;
-        this.updatedProperties.add("intValue");
+        this.updatedProperties |= 8;
         return this;
     }
 
@@ -211,7 +209,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     public ResourcePatch setFloatValue(Double floatValue) {
         this.floatValue = floatValue;
-        this.updatedProperties.add("floatValue");
+        this.updatedProperties |= 16;
         return this;
     }
 
@@ -234,7 +232,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     public ResourcePatch setInnerModel(InnerModel innerModel) {
         this.innerModel = innerModel;
-        this.updatedProperties.add("innerModel");
+        this.updatedProperties |= 32;
         return this;
     }
 
@@ -257,7 +255,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     public ResourcePatch setIntArray(List<Integer> intArray) {
         this.intArray = intArray;
-        this.updatedProperties.add("intArray");
+        this.updatedProperties |= 64;
         return this;
     }
 
@@ -285,14 +283,14 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("description")) {
+        if ((this.updatedProperties & 1) == 1) {
             if (this.description == null) {
                 jsonWriter.writeNullField("description");
             } else {
                 jsonWriter.writeStringField("description", this.description);
             }
         }
-        if (updatedProperties.contains("map")) {
+        if ((this.updatedProperties & 2) == 2) {
             if (this.map == null) {
                 jsonWriter.writeNullField("map");
             } else {
@@ -307,28 +305,28 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
                 });
             }
         }
-        if (updatedProperties.contains("array")) {
+        if ((this.updatedProperties & 4) == 4) {
             if (this.array == null) {
                 jsonWriter.writeNullField("array");
             } else {
                 jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
             }
         }
-        if (updatedProperties.contains("intValue")) {
+        if ((this.updatedProperties & 8) == 8) {
             if (this.intValue == null) {
                 jsonWriter.writeNullField("intValue");
             } else {
                 jsonWriter.writeNumberField("intValue", this.intValue);
             }
         }
-        if (updatedProperties.contains("floatValue")) {
+        if ((this.updatedProperties & 16) == 16) {
             if (this.floatValue == null) {
                 jsonWriter.writeNullField("floatValue");
             } else {
                 jsonWriter.writeNumberField("floatValue", this.floatValue);
             }
         }
-        if (updatedProperties.contains("innerModel")) {
+        if ((this.updatedProperties & 32) == 32) {
             if (this.innerModel == null) {
                 jsonWriter.writeNullField("innerModel");
             } else {
@@ -337,7 +335,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
                 JsonMergePatchHelper.getInnerModelAccessor().prepareModelForJsonMergePatch(this.innerModel, false);
             }
         }
-        if (updatedProperties.contains("intArray")) {
+        if ((this.updatedProperties & 64) == 64) {
             if (this.intArray == null) {
                 jsonWriter.writeNullField("intArray");
             } else {

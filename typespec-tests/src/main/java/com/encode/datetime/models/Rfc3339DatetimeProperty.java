@@ -70,6 +70,7 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
     @Generated
     public static Rfc3339DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             OffsetDateTime value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

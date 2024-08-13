@@ -66,6 +66,7 @@ public final class RunObjectLastError implements JsonSerializable<RunObjectLastE
     @Generated
     public static RunObjectLastError fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             RunObjectLastErrorCode code = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

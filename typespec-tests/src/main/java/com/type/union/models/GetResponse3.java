@@ -66,6 +66,7 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
     @Generated
     public static GetResponse3 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             EnumsOnlyCases prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

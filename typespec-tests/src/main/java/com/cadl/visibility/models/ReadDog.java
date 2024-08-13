@@ -85,6 +85,7 @@ public final class ReadDog implements JsonSerializable<ReadDog> {
     @Generated
     public static ReadDog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             int id = 0;
             String name = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

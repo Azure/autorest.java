@@ -66,6 +66,7 @@ public final class SpreadCompositeRequestMixRequest implements JsonSerializable<
     @Generated
     public static SpreadCompositeRequestMixRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();

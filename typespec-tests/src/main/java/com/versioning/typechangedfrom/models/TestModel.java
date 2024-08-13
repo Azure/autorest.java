@@ -85,6 +85,7 @@ public final class TestModel implements JsonSerializable<TestModel> {
     @Generated
     public static TestModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             String prop = null;
             String changedProp = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {

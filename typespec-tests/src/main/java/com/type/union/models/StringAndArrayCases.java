@@ -86,6 +86,7 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
     @Generated
     public static StringAndArrayCases fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            long foundTracker = 0;
             BinaryData string = null;
             BinaryData array = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
