@@ -738,7 +738,7 @@ export class CodeModelBuilder {
     (codeModelOperation as CrossLanguageDefinition).crossLanguageDefinitionId = sdkMethod.crossLanguageDefintionId;
     codeModelOperation.internalApi = sdkMethod.access === "internal";
 
-    const convenienceApiName = this.getConvenienceApiNameFromServiceMethod(sdkMethod);
+    const convenienceApiName = this.getConvenienceApiName(sdkMethod);
     let generateConvenienceApi: boolean = Boolean(convenienceApiName);
     let generateProtocolApi: boolean = sdkMethod.__raw
       ? shouldGenerateProtocol(this.sdkContext, sdkMethod.__raw)
@@ -2289,7 +2289,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private getConvenienceApiNameFromServiceMethod(sdkMethod: SdkServiceMethod<SdkHttpOperation>): string | undefined {
+  private getConvenienceApiName(sdkMethod: SdkServiceMethod<SdkHttpOperation>): string | undefined {
     // check @convenienceAPI
     if (sdkMethod.generateConvenient) {
       return sdkMethod.name;
