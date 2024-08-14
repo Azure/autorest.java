@@ -7,7 +7,6 @@ package fixtures.bodycomplex.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
@@ -20,13 +19,6 @@ import java.util.List;
 @JsonTypeName("goblin")
 @Fluent
 public final class Goblinshark extends Shark {
-    /*
-     * The fishtype property.
-     */
-    @JsonTypeId
-    @JsonProperty(value = "fishtype", required = true)
-    private String fishtype = "goblin";
-
     /*
      * The jawsize property.
      */
@@ -49,16 +41,7 @@ public final class Goblinshark extends Shark {
     public Goblinshark(@JsonProperty(value = "length", required = true) float length,
         @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length, birthday);
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "goblin";
     }
 
     /**

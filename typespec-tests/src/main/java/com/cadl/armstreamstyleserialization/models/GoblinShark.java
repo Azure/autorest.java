@@ -19,11 +19,6 @@ import java.io.IOException;
 @Fluent
 public final class GoblinShark extends Shark {
     /*
-     * Discriminator property for Fish.
-     */
-    private String kind = "shark";
-
-    /*
      * The sharktype property.
      */
     private String sharktype = "goblin";

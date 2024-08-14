@@ -20,11 +20,6 @@ import java.io.IOException;
 @Fluent
 public class Shark extends FishInner {
     /*
-     * Discriminator property for Fish.
-     */
-    private String kind = "shark";
-
-    /*
      * The sharktype property.
      */
     private String sharktype = "shark";
@@ -55,7 +50,6 @@ public class Shark extends FishInner {
      * 
      * @return the kind value.
      */
-    @Override
     public String kind() {
         return this.kind;
     }
@@ -92,7 +86,6 @@ public class Shark extends FishInner {
      * 
      * @return the dna value.
      */
-    @Override
     public String dna() {
         return this.dna;
     }

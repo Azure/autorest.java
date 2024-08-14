@@ -20,11 +20,6 @@ import java.util.List;
  */
 @Fluent
 public final class Cookiecuttershark extends Shark {
-    /*
-     * The fishtype property.
-     */
-    private String fishtype = "cookiecuttershark";
-
     /**
      * Creates an instance of Cookiecuttershark class.
      * 
@@ -33,16 +28,7 @@ public final class Cookiecuttershark extends Shark {
      */
     public Cookiecuttershark(float length, OffsetDateTime birthday) {
         super(length, birthday);
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "cookiecuttershark";
     }
 
     /**
@@ -97,7 +83,6 @@ public final class Cookiecuttershark extends Shark {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         return jsonWriter.writeEndObject();
     }
 

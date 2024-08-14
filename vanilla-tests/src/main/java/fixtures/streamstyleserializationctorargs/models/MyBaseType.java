@@ -19,7 +19,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     /*
      * The kind property.
      */
-    private MyKind kind = MyKind.fromString("MyBaseType");
+    MyKind kind;
 
     /*
      * The propB1 property.
@@ -35,6 +35,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * Creates an instance of MyBaseType class.
      */
     public MyBaseType() {
+        this.kind = MyKind.fromString("MyBaseType");
     }
 
     /**

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.LinkedHashMap;
@@ -24,13 +23,6 @@ import java.util.Map;
 @JsonTypeName("smart_salmon")
 @Fluent
 public final class SmartSalmon extends Salmon {
-    /*
-     * The fishtype property.
-     */
-    @JsonTypeId
-    @JsonProperty(value = "fishtype", required = true)
-    private String fishtype = "smart_salmon";
-
     /*
      * The college_degree property.
      */
@@ -51,16 +43,7 @@ public final class SmartSalmon extends Salmon {
     @JsonCreator
     public SmartSalmon(@JsonProperty(value = "length", required = true) float length) {
         super(length);
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "smart_salmon";
     }
 
     /**

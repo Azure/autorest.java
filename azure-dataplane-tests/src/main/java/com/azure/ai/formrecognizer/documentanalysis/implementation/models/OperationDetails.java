@@ -23,7 +23,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
     /*
      * Type of operation.
      */
-    private String kind = "OperationDetails";
+    String kind;
 
     /*
      * Operation ID
@@ -74,6 +74,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * Creates an instance of OperationDetails class.
      */
     public OperationDetails() {
+        this.kind = "OperationDetails";
     }
 
     /**

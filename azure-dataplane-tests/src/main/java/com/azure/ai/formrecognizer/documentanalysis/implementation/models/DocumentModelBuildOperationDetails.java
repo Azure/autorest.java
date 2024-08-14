@@ -19,11 +19,6 @@ import java.util.Map;
 @Fluent
 public final class DocumentModelBuildOperationDetails extends OperationDetails {
     /*
-     * Type of operation.
-     */
-    private String kind = "documentModelBuild";
-
-    /*
      * Operation result upon success.
      */
     private DocumentModelDetails result;
@@ -32,16 +27,7 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
      * Creates an instance of DocumentModelBuildOperationDetails class.
      */
     public DocumentModelBuildOperationDetails() {
-    }
-
-    /**
-     * Get the kind property: Type of operation.
-     * 
-     * @return the kind value.
-     */
-    @Override
-    public String getKind() {
-        return this.kind;
+        this.kind = "documentModelBuild";
     }
 
     /**
@@ -152,7 +138,6 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
-        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }

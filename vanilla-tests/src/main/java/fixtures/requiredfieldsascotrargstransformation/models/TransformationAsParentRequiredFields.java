@@ -92,7 +92,6 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * 
      * @return the rfc1123NonRequired value.
      */
-    @Override
     public OffsetDateTime getRfc1123NonRequired() {
         if (this.rfc1123NonRequired == null) {
             return null;

@@ -19,11 +19,6 @@ import java.util.List;
 @Fluent
 public final class Sawshark extends Shark {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "sawshark";
-
-    /*
      * The picture property.
      */
     private byte[] picture;
@@ -32,16 +27,7 @@ public final class Sawshark extends Shark {
      * Creates an instance of Sawshark class.
      */
     public Sawshark() {
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "sawshark";
     }
 
     /**
@@ -116,7 +102,6 @@ public final class Sawshark extends Shark {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeBinaryField("picture", this.picture);
         return jsonWriter.writeEndObject();
     }

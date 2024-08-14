@@ -16,11 +16,6 @@ import java.io.IOException;
 @Immutable
 public final class MyDerivedType extends MyBaseType {
     /*
-     * The kind property.
-     */
-    private MyKind kind = MyKind.KIND1;
-
-    /*
      * The propD1 property.
      */
     private String propD1;
@@ -39,16 +34,7 @@ public final class MyDerivedType extends MyBaseType {
      * Creates an instance of MyDerivedType class.
      */
     private MyDerivedType() {
-    }
-
-    /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    @Override
-    public MyKind getKind() {
-        return this.kind;
+        this.kind = MyKind.KIND1;
     }
 
     /**
@@ -65,7 +51,6 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the propBH1 value.
      */
-    @Override
     public String getPropBH1() {
         return this.propBH1;
     }
@@ -75,7 +60,6 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the propB1 value.
      */
-    @Override
     public String getPropB1() {
         return this.propB1;
     }
@@ -96,7 +80,6 @@ public final class MyDerivedType extends MyBaseType {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
-        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
             jsonWriter.writeStartObject("helper");

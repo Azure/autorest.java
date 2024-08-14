@@ -59,7 +59,6 @@ public final class Error extends ManagementError {
      * 
      * @return the details value.
      */
-    @Override
     public List<Error> getDetails() {
         return this.details;
     }
@@ -78,7 +77,6 @@ public final class Error extends ManagementError {
      * 
      * @return the additionalInfo value.
      */
-    @Override
     public List<AdditionalInfo> getAdditionalInfo() {
         return this.additionalInfo;
     }
@@ -88,7 +86,6 @@ public final class Error extends ManagementError {
      * 
      * @return the target value.
      */
-    @Override
     public String getTarget() {
         return this.target;
     }
@@ -98,7 +95,6 @@ public final class Error extends ManagementError {
      * 
      * @return the message value.
      */
-    @Override
     public String getMessage() {
         return this.message;
     }
@@ -108,7 +104,6 @@ public final class Error extends ManagementError {
      * 
      * @return the code value.
      */
-    @Override
     public String getCode() {
         return this.code;
     }

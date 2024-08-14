@@ -39,6 +39,8 @@ import static com.azure.autorest.util.ClientModelUtil.getClientModel;
  */
 public final class ClientModelPropertiesManager {
     private final ClientModel model;
+    private final PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler;
+
     private final String deserializedModelName;
     private final boolean hasRequiredProperties;
     private final boolean hasConstructorArguments;
@@ -56,7 +58,6 @@ public final class ClientModelPropertiesManager {
     private final LinkedHashMap<String, ClientModelProperty> readOnlyProperties;
     private final ClientModelProperty additionalProperties;
     private final ClientModelPropertyWithMetadata discriminatorProperty;
-    private final boolean allPolymorphicModelsInSamePackage;
     private final String expectedDiscriminator;
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
     private final String jsonReaderFieldNameVariableName;
@@ -80,13 +81,16 @@ public final class ClientModelPropertiesManager {
      *
      * @param model The {@link ClientModel}.
      */
-    public ClientModelPropertiesManager(ClientModel model, JavaSettings settings) {
+    public ClientModelPropertiesManager(ClientModel model,
+        PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler, JavaSettings settings) {
         // The reader name variable needs to be mutable as it may match a property name in the class.
         Set<String> possibleReaderFieldNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "fieldName", "jsonFieldName", "deserializationFieldName"));
         Set<String> possibleXmlNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "elementName", "xmlElementName", "deserializationElementName"));
         this.model = model;
+        this.polymorphicDiscriminatorHandler = polymorphicDiscriminatorHandler;
+
         this.deserializedModelName = "deserialized" + model.getName();
         this.expectedDiscriminator = model.getSerializedName();
         ClientModelPropertyWithMetadata discriminatorProperty = null;
@@ -236,7 +240,6 @@ public final class ClientModelPropertiesManager {
         this.hasXmlElements = hasXmlElements;
         this.hasXmlTexts = hasXmlTexts;
         this.discriminatorProperty = discriminatorProperty;
-        this.allPolymorphicModelsInSamePackage = allPolymorphicModelsInSamePackage(model);
         this.additionalProperties = additionalProperties;
         this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminatorName(),
             flattenedProperties);
@@ -281,58 +284,21 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
-     * Determines if all models in a polymorphic structure are in the same package.
-     * <p>
-     * For stream-style serialization this information is very useful as it helps us determine whether package-private
-     * helper methods can be created or whether we need to create access helper interfaces.
-     * <p>
-     * If the model isn't polymorphic this will return false.
-     *
-     * @param model The model to check.
-     * @return Whether all models in a polymorphic structure are in the same package.
-     */
-    private static boolean allPolymorphicModelsInSamePackage(ClientModel model) {
-        if (!model.isPolymorphic()) {
-            return false;
-        }
-        
-        String packageName = model.getPackage();
-        ClientModel parent = ClientModelUtil.getClientModel(model.getParentModelName());
-        ClientModel lastParent = model;
-        while (parent != null) {
-            lastParent = parent;
-            if (!packageName.equals(parent.getPackage())) {
-                return false;
-            }
-
-            parent = ClientModelUtil.getClientModel(parent.getParentModelName());
-        }
-
-        return checkChildrenModelsPackage(lastParent, packageName);
-    }
-
-    private static boolean checkChildrenModelsPackage(ClientModel model, String packageName) {
-        List<ClientModel> children = model.getDerivedModels();
-        if (children == null || children.isEmpty()) {
-            return true;
-        }
-
-        for (ClientModel child : children) {
-            if (!packageName.equals(child.getPackage()) || !checkChildrenModelsPackage(child, packageName)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Gets the {@link ClientModel} that the properties are based on.
      *
      * @return The {@link ClientModel} that the properties are based on.
      */
     public ClientModel getModel() {
         return model;
+    }
+
+    /**
+     * Gets the handler for polymorphic discriminators.
+     *
+     * @return The handler for polymorphic discriminators.
+     */
+    public PolymorphicDiscriminatorHandler getPolymorphicDiscriminatorHandler() {
+        return polymorphicDiscriminatorHandler;
     }
 
     /**
@@ -500,19 +466,6 @@ public final class ClientModelPropertiesManager {
      */
     public ClientModelPropertyWithMetadata getDiscriminatorProperty() {
         return discriminatorProperty;
-    }
-
-    /**
-     * If the {@link ClientModel} is polymorphic, this determines if all models in the polymorphic structure are in the
-     * same package.
-     * <p>
-     * This information can be used to determine whether package-private helper methods can be created or whether access
-     * helper interfaces need to be created.
-     *
-     * @return Whether all models in the polymorphic structure are in the same package.
-     */
-    public boolean isAllPolymorphicModelsInSamePackage() {
-        return allPolymorphicModelsInSamePackage;
     }
 
     /**

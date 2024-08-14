@@ -19,11 +19,6 @@ import java.util.List;
 @Fluent
 public final class GoblinShark extends Shark {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "goblin";
-
-    /*
      * The jawsize property.
      */
     private Integer jawsize;
@@ -37,16 +32,7 @@ public final class GoblinShark extends Shark {
      * Creates an instance of Goblinshark class.
      */
     public GoblinShark() {
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "goblin";
     }
 
     /**
@@ -141,7 +127,6 @@ public final class GoblinShark extends Shark {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();

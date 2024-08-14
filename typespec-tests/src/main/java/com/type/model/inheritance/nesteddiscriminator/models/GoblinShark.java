@@ -16,18 +16,6 @@ import java.io.IOException;
  */
 @Immutable
 public final class GoblinShark extends Shark {
-    /*
-     * Discriminator property for Fish.
-     */
-    @Generated
-    private String kind = "shark";
-
-    /*
-     * The sharktype property.
-     */
-    @Generated
-    private String sharktype = "goblin";
-
     /**
      * Creates an instance of GoblinShark class.
      * 
@@ -36,28 +24,8 @@ public final class GoblinShark extends Shark {
     @Generated
     public GoblinShark(int age) {
         super(age);
-    }
-
-    /**
-     * Get the kind property: Discriminator property for Fish.
-     * 
-     * @return the kind value.
-     */
-    @Generated
-    @Override
-    public String getKind() {
-        return this.kind;
-    }
-
-    /**
-     * Get the sharktype property: The sharktype property.
-     * 
-     * @return the sharktype value.
-     */
-    @Generated
-    @Override
-    public String getSharktype() {
-        return this.sharktype;
+        this.kind = "goblin";
+        this.sharktype = "goblin";
     }
 
     /**
@@ -67,9 +35,7 @@ public final class GoblinShark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind);
-        jsonWriter.writeIntField("age", getAge());
-        jsonWriter.writeStringField("sharktype", this.sharktype);
+        toJsonShared(jsonWriter);
         return jsonWriter.writeEndObject();
     }
 

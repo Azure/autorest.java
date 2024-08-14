@@ -24,7 +24,7 @@ public class Dog {
      */
     @JsonTypeId
     @JsonProperty(value = "kind", required = true)
-    private DogKind kind = DogKind.fromString("Dog");
+    DogKind kind;
 
     /*
      * Weight of the dog
@@ -36,6 +36,7 @@ public class Dog {
      * Creates an instance of Dog class.
      */
     public Dog() {
+        this.kind = DogKind.fromString("Dog");
     }
 
     /**

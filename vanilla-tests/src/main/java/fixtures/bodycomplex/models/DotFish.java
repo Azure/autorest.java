@@ -24,7 +24,7 @@ public class DotFish {
      */
     @JsonTypeId
     @JsonProperty(value = "fish.type", required = true)
-    private String fishType = "DotFish";
+    String fishType;
 
     /*
      * The species property.
@@ -36,6 +36,7 @@ public class DotFish {
      * Creates an instance of DotFish class.
      */
     protected DotFish() {
+        this.fishType = "DotFish";
     }
 
     /**

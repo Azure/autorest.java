@@ -21,7 +21,7 @@ public class Snake implements JsonSerializable<Snake> {
      * discriminator property
      */
     @Generated
-    private SnakeKind kind = SnakeKind.fromString("Snake");
+    SnakeKind kind;
 
     /*
      * Length of the snake
@@ -37,6 +37,7 @@ public class Snake implements JsonSerializable<Snake> {
     @Generated
     public Snake(int length) {
         this.length = length;
+        this.kind = SnakeKind.fromString("Snake");
     }
 
     /**
@@ -66,9 +67,13 @@ public class Snake implements JsonSerializable<Snake> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeIntField("length", this.length);
         jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
-        return jsonWriter.writeEndObject();
     }
 
     /**

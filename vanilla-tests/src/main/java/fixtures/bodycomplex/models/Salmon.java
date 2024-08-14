@@ -8,7 +8,6 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
@@ -21,13 +20,6 @@ import java.util.List;
 @JsonSubTypes({ @JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class) })
 @Fluent
 public class Salmon extends Fish {
-    /*
-     * The fishtype property.
-     */
-    @JsonTypeId
-    @JsonProperty(value = "fishtype", required = true)
-    private String fishtype = "salmon";
-
     /*
      * The location property.
      */
@@ -48,16 +40,7 @@ public class Salmon extends Fish {
     @JsonCreator
     public Salmon(@JsonProperty(value = "length", required = true) float length) {
         super(length);
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "salmon";
     }
 
     /**

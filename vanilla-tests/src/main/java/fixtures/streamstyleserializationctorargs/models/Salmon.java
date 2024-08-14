@@ -17,11 +17,6 @@ import java.util.List;
 @Fluent
 public class Salmon extends Fish {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "salmon";
-
-    /*
      * The location property.
      */
     private String location;
@@ -38,16 +33,7 @@ public class Salmon extends Fish {
      */
     public Salmon(float length) {
         super(length);
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "salmon";
     }
 
     /**
@@ -132,7 +118,6 @@ public class Salmon extends Fish {
 
     void toJsonShared(JsonWriter jsonWriter) throws IOException {
         super.toJsonShared(jsonWriter);
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
     }

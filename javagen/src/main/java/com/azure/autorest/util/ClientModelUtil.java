@@ -740,24 +740,95 @@ public class ClientModelUtil {
     }
 
     public static boolean requireOperationLocationPollingStrategy(CodeModel codeModel) {
-        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
-            for (Client client : codeModel.getClients()) {
-                if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
-                    for (OperationGroup og : client.getOperationGroups()) {
-                        if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
-                            for (Operation operation : og.getOperations()) {
-                                if (operation.getLroMetadata() != null && operation.getLroMetadata().getPollingStrategy() != null) {
-                                    if (OPERATION_LOCATION_POLLING_STRATEGY.equals(operation.getLroMetadata().getPollingStrategy().getLanguage().getJava().getName())) {
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
+        if (CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+            return false;
+        }
+
+        for (Client client : codeModel.getClients()) {
+            if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+                continue;
+            }
+
+            for (OperationGroup og : client.getOperationGroups()) {
+                if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
+                    continue;
+                }
+
+                for (Operation operation : og.getOperations()) {
+                    if (operation.getLroMetadata() != null && operation.getLroMetadata().getPollingStrategy() != null
+                        && OPERATION_LOCATION_POLLING_STRATEGY.equals(operation.getLroMetadata().getPollingStrategy().getLanguage().getJava().getName())) {
+                        return true;
                     }
                 }
             }
         }
+
         return false;
+    }
+
+    /**
+     * Checks if the model defines the property.
+     *
+     * @param model The client model.
+     * @param property The client model property.
+     * @return Whether the model defines the property.
+     */
+    public static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
+        // The model doesn't have a parent model, therefore it defines the property.
+        if (CoreUtils.isNullOrEmpty(model.getParentModelName())) {
+            return true;
+        }
+
+        for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(model)) {
+            if (Objects.equals(property.getSerializedName(), parentProperty.getSerializedName())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Gets the {@link ClientModel} that defines the given {@link ClientModelProperty}.
+     * <p>
+     * This may return the passed {@link ClientModel} if the property is defined by the model.
+     *
+     * @param model The client model.
+     * @param property The client model property.
+     * @return The {@link ClientModel} that defines the given {@link ClientModelProperty}.
+     */
+    public static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
+        ClientModel current = model;
+        while(current != null) {
+            if (ClientModelUtil.modelDefinesProperty(current, property)) {
+                return current;
+            }
+            current = ClientModelUtil.getClientModel(current.getParentModelName());
+        }
+        throw new IllegalArgumentException("unable to find defining model for property: " + property);
+    }
+
+    public static boolean readOnlyNotInCtor(ClientModel model, ClientModelProperty property,
+        JavaSettings settings) {
+        return  // not required and in constructor
+            !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs())
+                && (
+                // must be read-only and not appear in constructor
+                (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
+                    // immutable output model only has package-private setters, making its properties read-only
+                    || isImmutableOutputModel(getDefiningModel(model, property), settings));
+    }
+
+    /**
+     * The model is immutable output if and only if the immutable output model setting is enabled and
+     * the usage of the model include output and does not include input.
+     *
+     * @param model the model to check
+     * @param settings JavaSettings instance
+     * @return whether the model is output-only immutable model
+     */
+    public static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
+        return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
     public static boolean isMultipartModel(ClientModel model) {

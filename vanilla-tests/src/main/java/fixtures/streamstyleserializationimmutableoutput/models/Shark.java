@@ -21,11 +21,6 @@ import java.util.List;
 @Fluent
 public class Shark extends Fish {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "shark";
-
-    /*
      * The age property.
      */
     private Integer age;
@@ -39,16 +34,7 @@ public class Shark extends Fish {
      * Creates an instance of Shark class.
      */
     public Shark() {
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "shark";
     }
 
     /**
@@ -150,7 +136,6 @@ public class Shark extends Fish {
         super.toJsonShared(jsonWriter);
         jsonWriter.writeStringField("birthday",
             this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("age", this.age);
     }
 

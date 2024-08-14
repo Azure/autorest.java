@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.implementation.PolymorphicDiscriminatorHandler;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -43,11 +44,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -76,6 +75,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = settings.isStreamStyleSerialization() ? new StreamStyleImports() : new HashSet<>();
+        PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler
+            = new PolymorphicDiscriminatorHandler(model, settings);
 
         addImports(imports, model, settings);
 
@@ -94,11 +95,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(model.getDescription()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
-        final boolean immutableModel = isImmutableOutputModel(model, settings);
+        final boolean immutableModel = ClientModelUtil.isImmutableOutputModel(model, settings);
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
-        handlePolymorphism(model, hasDerivedModels, javaFile);
+        polymorphicDiscriminatorHandler.addAnnotationToField(javaFile);
 
         // Add class level annotations for serialization formats such as XML.
         addClassLevelAnnotations(model, javaFile, settings);
@@ -140,6 +141,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // XML namespace constants
             addXmlNamespaceConstants(model, classBlock);
 
+            // Add polymorphic property
+            polymorphicDiscriminatorHandler.declareField(classBlock, this::addGeneratedAnnotation,
+                discriminator -> addFieldAnnotations(model, discriminator, classBlock, settings));
+
             // properties
             addProperties(model, classBlock, settings);
 
@@ -152,7 +157,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             JavaVisibility modelConstructorVisibility = immutableModel
                 ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
                 : JavaVisibility.Public;
-            addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
+            addModelConstructor(model, modelConstructorVisibility, settings, classBlock, polymorphicDiscriminatorHandler);
 
             for (ClientModelProperty property : getFieldProperties(model, settings)) {
                 final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
@@ -164,23 +169,25 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                generateGetterJavadoc(classBlock, property);
-                addGeneratedAnnotation(classBlock);
-                if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
-                    classBlock.annotation("JsonAnyGetter");
-                }
-                if (!propertyIsReadOnly) {
-                    TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
-                }
+                if (!property.isPolymorphicDiscriminator() || polymorphicDiscriminatorHandler.generateGetter()) {
+                    generateGetterJavadoc(classBlock, property);
+                    addGeneratedAnnotation(classBlock);
+                    if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
+                        classBlock.annotation("JsonAnyGetter");
+                    }
+                    if (!propertyIsReadOnly) {
+                        TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
+                    }
 
-                boolean overridesParentGetter = overridesParentGetter(model, property, settings, methodVisibility);
-                if (overridesParentGetter) {
-                    classBlock.annotation("Override");
-                }
-                classBlock.method(methodVisibility, null,
-                    propertyClientType + " " + getGetterName(model, property) + "()",
-                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
+                    // Only the getter for the polymorphic discriminator can be overridden.
+                    if (polymorphicDiscriminatorHandler.needToOverrideGetter(methodVisibility)) {
+                        classBlock.annotation("Override");
+                    }
+                    classBlock.method(methodVisibility, null,
+                        propertyClientType + " " + getGetterName(model, property) + "()",
+                        methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
+                }
 
                 if (ClientModelUtil.needsPublicSetter(property, settings) && !immutableModel) {
                     generateSetterJavadoc(classBlock, model, property);
@@ -204,7 +211,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     boolean hasDerivedTypes = !CoreUtils.isNullOrEmpty(model.getDerivedModels());
                     boolean notIncludedInConstructor = !ClientModelUtil.includePropertyInConstructor(property,
                         settings);
-                    boolean definedByModel = modelDefinesProperty(model, property);
+                    boolean definedByModel = ClientModelUtil.modelDefinesProperty(model, property);
                     boolean modelIsJsonMergePatch = ClientModelUtil.isJsonMergePatchModel(model, settings);
                     if (hasDerivedTypes && notIncludedInConstructor && definedByModel
                         && streamStyle && !property.isPolymorphicDiscriminator() && !modelIsJsonMergePatch) {
@@ -316,7 +323,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (requireSerialization) {
-                writeStreamStyleSerialization(classBlock, model, settings);
+                writeStreamStyleSerialization(classBlock, model, polymorphicDiscriminatorHandler, settings);
             }
         });
     }
@@ -333,31 +340,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
         // Not a flattening property, return null.
         return null;
-    }
-
-    /**
-     * Whether the property's getter overrides parent getter.
-     *
-     * @param model            the client model
-     * @param property         the property to generate getter method
-     * @param settings         {@link JavaSettings} instance
-     * @param methodVisibility
-     * @return whether the property's getter overrides parent getter
-     */
-    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings, JavaVisibility methodVisibility) {
-        // getter method of discriminator property in subclass is handled differently
-        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property) && methodVisibility == JavaVisibility.Public;
-    }
-    /**
-     * The model is immutable output if and only if the immutable output model setting is enabled and
-     * the usage of the model include output and does not include input.
-     *
-     * @param model the model to check
-     * @param settings JavaSettings instance
-     * @return whether the model is output-only immutable model
-     */
-    static boolean isImmutableOutputModel(ClientModel model, JavaSettings settings) {
-        return (settings.isOutputModelImmutable() && ClientModelUtil.isOutputOnly(model));
     }
 
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {
@@ -453,48 +435,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     /**
-     * Handles setting up Jackson polymorphism annotations.
-     *
-     * @param model The client model.
-     * @param hasDerivedModels Whether this model has children types.
-     * @param javaFile The JavaFile being generated.
-     */
-    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels, JavaFile javaFile) {
-        // Model isn't polymorphic, no work to do here.
-        if (!model.isPolymorphic()) {
-            return;
-        }
-
-        // After removing the concept of passing discriminator to children models and always doing it, there is no need
-        // to set the 'include' property of the JsonTypeInfo annotation. We use 'JsonTypeInfo.As.PROPERTY' as the value,
-        // which is the default value, so it doesn't need to be declared.
-        // And to support unknown subtypes, we always set a default implementation to the class being generated.
-        // And the discriminator is passed to child models, so the discriminator property needs to be set to visible.
-        String jsonTypeInfo = "JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = \""
-            + model.getPolymorphicDiscriminatorName() + "\", defaultImpl = " + model.getName()
-            + ".class, visible = true)";
-
-        javaFile.annotation(jsonTypeInfo);
-        javaFile.annotation("JsonTypeName(\"" + model.getSerializedName() + "\")");
-
-        if (hasDerivedModels) {
-            javaFile.line("@JsonSubTypes({");
-            javaFile.indent(() -> {
-                Function<ClientModel, String> getDerivedTypeAnnotation = derivedType -> "@JsonSubTypes.Type(name = \""
-                    + derivedType.getSerializedName() + "\", value = " + derivedType.getName() + ".class)";
-
-                for (int i = 0; i != model.getDerivedModels().size() - 1; i++) {
-                    ClientModel derivedModel = model.getDerivedModels().get(i);
-                    javaFile.line(getDerivedTypeAnnotation.apply(derivedModel) + ',');
-                }
-                javaFile.line(getDerivedTypeAnnotation.apply(model.getDerivedModels()
-                    .get(model.getDerivedModels().size() - 1)));
-            });
-            javaFile.line("})");
-        }
-    }
-
-    /**
      * Adds class level annotations such as XML root element, JsonFlatten based on the configurations of the model.
      *
      * @param model The client model.
@@ -584,12 +524,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         String defaultValue;
         if (property.isPolymorphicDiscriminator()) {
-            defaultValue = (property.getDefaultValue() == null)
-                ? property.getClientType().defaultValueExpression(model.getSerializedName())
-                : property.getDefaultValue();
-        } else {
-            defaultValue = property.getDefaultValue();
+            return;
         }
+
+        defaultValue = property.getDefaultValue();
 
         String fieldSignature;
         if (model.isUsedInXml()) {
@@ -619,10 +557,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
         } else {
             if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType
-                    && !isImmutableOutputModel(
-                            getDefiningModel(
-                                ClientModelUtil.getClientModel(((ClassType) property.getClientType()).getName()), property),
-                                settings)
+                && !ClientModelUtil.isImmutableOutputModel(ClientModelUtil.getDefiningModel(
+                    ClientModelUtil.getClientModel(((ClassType) property.getClientType()).getName()), property), settings)
             ) {
                 // if the property of flattened model is required, and isn't immutable output model(which doesn't have public constructor),
                 // initialize it
@@ -754,7 +690,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param classBlock The Java class file.
      */
     private void addModelConstructor(ClientModel model, JavaVisibility constructorVisibility, JavaSettings settings,
-        JavaClass classBlock) {
+        JavaClass classBlock, PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler) {
         final boolean requireSerialization = modelRequireSerialization(model);
 
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
@@ -907,6 +843,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     }
                 }
             }
+
+            polymorphicDiscriminatorHandler.initializeInConstructor(constructor);
         });
 
         if (generatePrivateConstructorForJackson) {
@@ -1266,7 +1204,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param model The model.
      * @param settings Autorest generation settings.
      */
-    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model,
+        PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler, JavaSettings settings) {
         // No-op, meant for StreamSerializationModelTemplate.
     }
 
@@ -1401,21 +1340,5 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             staticBlock.line("});");
         });
-    }
-
-    static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
-        return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
-            Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
-    }
-
-    static ClientModel getDefiningModel(ClientModel model, ClientModelProperty property) {
-        ClientModel current = model;
-        while(current != null) {
-            if (modelDefinesProperty(current, property)) {
-                return current;
-            }
-            current = ClientModelUtil.getClientModel(current.getParentModelName());
-        }
-        throw new IllegalArgumentException("unable to find defining model for property: " + property);
     }
 }

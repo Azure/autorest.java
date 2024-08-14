@@ -19,11 +19,6 @@ import java.util.Map;
 @Fluent
 public final class SmartSalmon extends Salmon {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "smart_salmon";
-
-    /*
      * The college_degree property.
      */
     private String collegeDegree;
@@ -40,16 +35,7 @@ public final class SmartSalmon extends Salmon {
      */
     public SmartSalmon(float length) {
         super(length);
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "smart_salmon";
     }
 
     /**
@@ -147,7 +133,6 @@ public final class SmartSalmon extends Salmon {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("college_degree", this.collegeDegree);
         if (additionalProperties != null) {
             for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
