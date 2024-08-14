@@ -1,7 +1,5 @@
-package com.specialheaders.conditionalrequest.generated.conditionalrequest;
+package com.specialheaders.conditionalrequest;
 
-import com.specialheaders.conditionalrequest.ConditionalRequestClient;
-import com.specialheaders.conditionalrequest.ConditionalRequestClientBuilder;
 import org.junit.jupiter.api.Test;
 
 public class ConditionalTests {
