@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the data models for Flatten.
+ * Package containing the data models for FlattenProperty.
  * Illustrates the model flatten cases.
  * <!-- end generated doc -->
  */
-package com.type.model.flatten.models;
+package com.azure.clientgenerator.core.flattenproperty.models;
