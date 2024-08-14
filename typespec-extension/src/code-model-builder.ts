@@ -119,7 +119,10 @@ import {
   getQueryParamName,
   getServers,
   getStatusCodeDescription,
+  isBody,
+  isBodyRoot,
   isHeader,
+  isMultipartBodyProperty,
   isPathParam,
   isQueryParam,
 } from "@typespec/http";
@@ -1440,7 +1443,24 @@ export class CodeModelBuilder {
 
         for (const [_, opParameter] of parameters.properties) {
           const serializedName = this.getSerializedName(opParameter);
-          const existParameter = op.parameters.find((it) => it.language.default.serializedName === serializedName);
+          const paramLocation = this.getParameterLocation(opParameter);
+          let existParameter: Parameter | undefined;
+          if (paramLocation === "BodyProperty") {
+            // property of body, it won't match existing parameter (whose paramLocation be body, path, query, header)
+            existParameter = undefined;
+          } else {
+            existParameter = op.parameters.find((it) => {
+              const sameParamLocation = paramLocation === it.protocol.http?.in;
+              const sameSerializedName = it.language.default.serializedName === serializedName;
+              if (paramLocation === ParameterLocation.Body) {
+                // body, same paramLocation, as there could only be 1 body in operation
+                return sameParamLocation;
+              } else {
+                // path, query, header, require same serializedName and same paramLocation
+                return sameParamLocation && sameSerializedName;
+              }
+            });
+          }
           if (existParameter) {
             // parameter
             if (
@@ -2332,6 +2352,24 @@ export class CodeModelBuilder {
     } else {
       // TODO: currently this is only for JSON
       return getWireName(this.sdkContext, target);
+    }
+  }
+
+  private getParameterLocation(target: ModelProperty): ParameterLocation | "BodyProperty" {
+    if (isHeader(this.program, target)) {
+      return ParameterLocation.Header;
+    } else if (isQueryParam(this.program, target)) {
+      return ParameterLocation.Query;
+    } else if (isPathParam(this.program, target)) {
+      return ParameterLocation.Path;
+    } else if (
+      isBody(this.program, target) ||
+      isBodyRoot(this.program, target) ||
+      isMultipartBodyProperty(this.program, target)
+    ) {
+      return ParameterLocation.Body;
+    } else {
+      return "BodyProperty";
     }
   }
 
