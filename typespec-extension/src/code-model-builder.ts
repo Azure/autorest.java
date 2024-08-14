@@ -542,13 +542,11 @@ export class CodeModelBuilder {
                 }
               }
             } else {
-              throw new Error("multiple server url defined for one client is not supported yet");
+              throw new Error("Multiple server url defined for one client is not supported yet.");
             }
           } else if (initializationProperty.type.kind === "endpoint") {
             sdkPathParameters = initializationProperty.type.templateArguments;
             baseUri = initializationProperty.type.serverUrl;
-          } else {
-            throw new Error("unexpected endpoint parameter type");
           }
 
           hostParameters = this.processHostParameters(sdkPathParameters);
@@ -795,7 +793,11 @@ export class CodeModelBuilder {
     // path/query/header parameters
     for (const param of httpOperation.parameters) {
       // if it's paged operation with request body, skip content-type header added by TCGC, as next link call should not have content type header
-      if ((sdkMethod.kind === "paging" || sdkMethod.kind === "lropaging") && httpOperation.bodyParam && param.kind === "header") {
+      if (
+        (sdkMethod.kind === "paging" || sdkMethod.kind === "lropaging") &&
+        httpOperation.bodyParam &&
+        param.kind === "header"
+      ) {
         if (param.serializedName.toLocaleLowerCase() === "content-type") {
           continue;
         }
