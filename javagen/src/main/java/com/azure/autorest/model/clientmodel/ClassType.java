@@ -202,6 +202,17 @@ public class ClassType implements IType {
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Integer::parseInt)")
         .build();
 
+    public static final ClassType INTEGER_AS_STRING = new Builder(false)
+        .knownClass(Integer.class)
+        .defaultValueExpressionConverter(defaultValueExpression -> "Integer.parseInt(\"" + defaultValueExpression + "\")")
+        .jsonToken("JsonToken.NUMBER")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> Integer.parseInt(nonNullReader.getString()))")
+        .serializationMethodBase("writeString")
+        .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
+        .xmlElementDeserializationMethod("getNullableElement(Integer::valueOf)")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Integer::valueOf)")
+        .build();
+
     public static final ClassType LONG = new Builder(false)
         .prototypeAsLong()
         .build();
@@ -210,9 +221,9 @@ public class ClassType implements IType {
         .prototypeAsLong()
         .defaultValueExpressionConverter(defaultValueExpression -> "Long.parseLong(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> Long.parseLong(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
         .serializationValueGetterModifier(valueGetter -> "Objects.toString(" + valueGetter + ", null)")
-        .jsonDeserializationMethod("getNullable(nonNullReader -> Long.parseLong(nonNullReader.getString()))")
         .xmlElementDeserializationMethod("getNullableElement(Long::valueOf)")
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Long::valueOf)")
         .build();

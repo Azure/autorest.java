@@ -57,6 +57,19 @@ public class PrimitiveType implements IType {
         .prototypeAsLong()
         .build();
 
+    public static final PrimitiveType INT_AS_STRING = new Builder()
+        .name("int")
+        .nullableType(ClassType.INTEGER_AS_STRING)
+        .defaultValueExpressionConverter(defaultValueExpression -> "Integer.parseInt(\"" + defaultValueExpression + "\")")
+        .jsonToken("JsonToken.STRING")
+        .defaultValue("0")
+        .serializationMethodBase("writeString")
+        .wrapSerializationWithObjectsToString(true)
+        .jsonDeserializationMethod("getNullable(nonNullReader -> Integer.parseInt(nonNullReader.getString()))")
+        .xmlElementDeserializationMethod("getNullableElement(Integer::valueOf)")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Integer::valueOf)")
+        .build();
+
     public static final PrimitiveType LONG_AS_STRING = new Builder()
         .prototypeAsLong()
         .nullableType(ClassType.LONG_AS_STRING)

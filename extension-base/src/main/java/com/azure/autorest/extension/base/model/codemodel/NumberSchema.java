@@ -135,10 +135,20 @@ public class NumberSchema extends PrimitiveSchema {
         this.exclusiveMinimum = exclusiveMinimum;
     }
 
+    /**
+     * Gets the encode for the number.
+     *
+     * @return the encode for the number.
+     */
     public String getEncode() {
         return encode;
     }
 
+    /**
+     * Sets the encode for the number. Currently only "string" is supported.
+     *
+     * @param encode the encode for the number.
+     */
     public void setEncode(String encode) {
         this.encode = encode;
     }

@@ -83,7 +83,9 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
             case INTEGER:
                 NumberSchema intSchema = (NumberSchema) primaryType;
                 if ("string".equals(intSchema.getEncode())) {
-                    return PrimitiveType.LONG_AS_STRING;
+                    return (intSchema.getPrecision() == 64)
+                        ? PrimitiveType.LONG_AS_STRING
+                        : PrimitiveType.INT_AS_STRING;
                 } else {
                     return (intSchema.getPrecision() == 64)
                         ? PrimitiveType.LONG
