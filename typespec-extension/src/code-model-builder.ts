@@ -795,7 +795,7 @@ export class CodeModelBuilder {
     // path/query/header parameters
     for (const param of httpOperation.parameters) {
       // if it's paged operation with request body, skip content-type header added by TCGC, as next link call should not have content type header
-      if ((sdkMethod.kind === "paging" || sdkMethod.kind === "lropaging") && httpOperation.bodyParam) {
+      if ((sdkMethod.kind === "paging" || sdkMethod.kind === "lropaging") && httpOperation.bodyParam && param.kind === "header") {
         if (param.serializedName.toLocaleLowerCase() === "content-type") {
           continue;
         }
