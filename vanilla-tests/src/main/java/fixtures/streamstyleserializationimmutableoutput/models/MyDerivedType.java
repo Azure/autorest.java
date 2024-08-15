@@ -51,6 +51,7 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the propBH1 value.
      */
+    @Override
     public String getPropBH1() {
         return this.propBH1;
     }
@@ -60,6 +61,7 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the propB1 value.
      */
+    @Override
     public String getPropB1() {
         return this.propB1;
     }
@@ -81,11 +83,6 @@ public final class MyDerivedType extends MyBaseType {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
         jsonWriter.writeStringField("propD1", this.propD1);
-        if (getPropBH1() != null) {
-            jsonWriter.writeStartObject("helper");
-            jsonWriter.writeStringField("propBH1", getPropBH1());
-            jsonWriter.writeEndObject();
-        }
         return jsonWriter.writeEndObject();
     }
 

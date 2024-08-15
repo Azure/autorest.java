@@ -75,7 +75,6 @@ public final class SalmonInner extends FishInner {
      * 
      * @return the friends value.
      */
-    @Override
     public List<FishInner> friends() {
         return this.friends;
     }
@@ -96,7 +95,6 @@ public final class SalmonInner extends FishInner {
      * 
      * @return the hate value.
      */
-    @Override
     public Map<String, FishInner> hate() {
         return this.hate;
     }
@@ -117,7 +115,6 @@ public final class SalmonInner extends FishInner {
      * 
      * @return the partner value.
      */
-    @Override
     public FishInner partner() {
         return this.partner;
     }

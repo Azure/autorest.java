@@ -19,6 +19,11 @@ import java.io.IOException;
 @Fluent
 public final class SawShark extends Shark {
     /*
+     * Discriminator property for Fish.
+     */
+    private String kind = "shark";
+
+    /*
      * The sharktype property.
      */
     private String sharktype = "saw";
@@ -74,7 +79,6 @@ public final class SawShark extends Shark {
      * 
      * @return the dna value.
      */
-    @Override
     public String dna() {
         return this.dna;
     }
@@ -95,7 +99,6 @@ public final class SawShark extends Shark {
      * 
      * @return the age value.
      */
-    @Override
     public int age() {
         return this.age;
     }

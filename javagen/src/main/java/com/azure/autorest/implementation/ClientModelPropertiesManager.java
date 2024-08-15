@@ -39,7 +39,6 @@ import static com.azure.autorest.util.ClientModelUtil.getClientModel;
  */
 public final class ClientModelPropertiesManager {
     private final ClientModel model;
-    private final PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler;
 
     private final String deserializedModelName;
     private final boolean hasRequiredProperties;
@@ -81,15 +80,13 @@ public final class ClientModelPropertiesManager {
      *
      * @param model The {@link ClientModel}.
      */
-    public ClientModelPropertiesManager(ClientModel model,
-        PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler, JavaSettings settings) {
+    public ClientModelPropertiesManager(ClientModel model, JavaSettings settings) {
         // The reader name variable needs to be mutable as it may match a property name in the class.
         Set<String> possibleReaderFieldNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "fieldName", "jsonFieldName", "deserializationFieldName"));
         Set<String> possibleXmlNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "elementName", "xmlElementName", "deserializationElementName"));
         this.model = model;
-        this.polymorphicDiscriminatorHandler = polymorphicDiscriminatorHandler;
 
         this.deserializedModelName = "deserialized" + model.getName();
         this.expectedDiscriminator = model.getSerializedName();
@@ -290,15 +287,6 @@ public final class ClientModelPropertiesManager {
      */
     public ClientModel getModel() {
         return model;
-    }
-
-    /**
-     * Gets the handler for polymorphic discriminators.
-     *
-     * @return The handler for polymorphic discriminators.
-     */
-    public PolymorphicDiscriminatorHandler getPolymorphicDiscriminatorHandler() {
-        return polymorphicDiscriminatorHandler;
     }
 
     /**

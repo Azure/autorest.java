@@ -24,7 +24,7 @@ public final class SawShark extends Shark {
     @Generated
     public SawShark(int age) {
         super(age);
-        this.kind = "saw";
+        this.kind = "shark";
         this.sharktype = "saw";
     }
 

@@ -85,6 +85,7 @@ public final class TopLevelTrackedResourceInner extends Resource {
      * 
      * @return the type value.
      */
+    @Override
     public String type() {
         return this.type;
     }
@@ -94,6 +95,7 @@ public final class TopLevelTrackedResourceInner extends Resource {
      * 
      * @return the name value.
      */
+    @Override
     public String name() {
         return this.name;
     }
@@ -103,6 +105,7 @@ public final class TopLevelTrackedResourceInner extends Resource {
      * 
      * @return the id value.
      */
+    @Override
     public String id() {
         return this.id;
     }

@@ -30,7 +30,7 @@ public final class SawShark extends Shark {
      */
     @Generated
     public SawShark() {
-        this.kind = "saw";
+        this.kind = "shark";
         this.sharktype = "saw";
     }
 

@@ -24,7 +24,7 @@ public final class GoblinShark extends Shark {
     @Generated
     public GoblinShark(int age) {
         super(age);
-        this.kind = SharkKind.GOBLIN;
+        this.kind = FishKind.SHARK;
         this.sharktype = SharkKind.GOBLIN;
     }
 

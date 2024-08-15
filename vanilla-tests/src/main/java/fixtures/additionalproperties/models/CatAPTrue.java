@@ -58,6 +58,7 @@ public final class CatAPTrue extends PetAPTrue {
      * 
      * @return the status value.
      */
+    @Override
     public Boolean isStatus() {
         return this.status;
     }

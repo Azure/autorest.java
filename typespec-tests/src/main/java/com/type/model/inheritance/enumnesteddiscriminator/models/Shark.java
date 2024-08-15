@@ -30,18 +30,8 @@ public class Shark extends Fish {
     @Generated
     public Shark(int age) {
         super(age);
-        this.kind = SharkKind.fromString("shark");
+        this.kind = FishKind.SHARK;
         this.sharktype = SharkKind.fromString("shark");
-    }
-
-    /**
-     * Get the kind property: discriminator property.
-     * 
-     * @return the kind value.
-     */
-    @Generated
-    public FishKind getKind() {
-        return this.kind;
     }
 
     /**

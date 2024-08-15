@@ -75,8 +75,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         JavaSettings settings = JavaSettings.getInstance();
         Set<String> imports = settings.isStreamStyleSerialization() ? new StreamStyleImports() : new HashSet<>();
-        PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler
-            = new PolymorphicDiscriminatorHandler(model, settings);
 
         addImports(imports, model, settings);
 
@@ -99,7 +97,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
-        polymorphicDiscriminatorHandler.addAnnotationToField(javaFile);
+        PolymorphicDiscriminatorHandler.addAnnotationToField(model, javaFile, settings);
 
         // Add class level annotations for serialization formats such as XML.
         addClassLevelAnnotations(model, javaFile, settings);
@@ -142,8 +140,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addXmlNamespaceConstants(model, classBlock);
 
             // Add polymorphic property
-            polymorphicDiscriminatorHandler.declareField(classBlock, this::addGeneratedAnnotation,
-                discriminator -> addFieldAnnotations(model, discriminator, classBlock, settings));
+            PolymorphicDiscriminatorHandler.declareField(model, classBlock, this::addGeneratedAnnotation,
+                discriminator -> addFieldAnnotations(model, discriminator, classBlock, settings), settings);
 
             // properties
             addProperties(model, classBlock, settings);
@@ -157,7 +155,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             JavaVisibility modelConstructorVisibility = immutableModel
                 ? (hasDerivedModels ? JavaVisibility.Protected : JavaVisibility.Private)
                 : JavaVisibility.Public;
-            addModelConstructor(model, modelConstructorVisibility, settings, classBlock, polymorphicDiscriminatorHandler);
+            addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
             for (ClientModelProperty property : getFieldProperties(model, settings)) {
                 final boolean propertyIsReadOnly = immutableModel || property.isReadOnly();
@@ -169,7 +167,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                if (!property.isPolymorphicDiscriminator() || polymorphicDiscriminatorHandler.generateGetter()) {
+                if (!property.isPolymorphicDiscriminator()
+                    || PolymorphicDiscriminatorHandler.generateGetter(model, property)) {
                     generateGetterJavadoc(classBlock, property);
                     addGeneratedAnnotation(classBlock);
                     if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
@@ -179,8 +178,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                     }
 
-                    // Only the getter for the polymorphic discriminator can be overridden.
-                    if (polymorphicDiscriminatorHandler.needToOverrideGetter(methodVisibility)) {
+                    if (addOverrideAnnotationToGetter(methodVisibility, model, property, settings)) {
                         classBlock.annotation("Override");
                     }
                     classBlock.method(methodVisibility, null,
@@ -323,9 +321,27 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (requireSerialization) {
-                writeStreamStyleSerialization(classBlock, model, polymorphicDiscriminatorHandler, settings);
+                writeStreamStyleSerialization(classBlock, model, settings);
             }
         });
+    }
+
+    private static boolean addOverrideAnnotationToGetter(JavaVisibility visibility, ClientModel model,
+        ClientModelProperty property, JavaSettings settings) {
+        if (visibility != JavaVisibility.Public) {
+            return false;
+        }
+
+        if (property.isPolymorphicDiscriminator() && PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(model)) {
+            return false;
+        }
+
+        if (ClientModelUtil.modelDefinesProperty(model, property)) {
+            return false;
+        }
+
+        return property.isPolymorphicDiscriminator()
+            || (settings.isStreamStyleSerialization() && ClientModelUtil.readOnlyNotInCtor(model, property, settings));
     }
 
     /**
@@ -690,7 +706,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param classBlock The Java class file.
      */
     private void addModelConstructor(ClientModel model, JavaVisibility constructorVisibility, JavaSettings settings,
-        JavaClass classBlock, PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler) {
+        JavaClass classBlock) {
         final boolean requireSerialization = modelRequireSerialization(model);
 
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
@@ -844,7 +860,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            polymorphicDiscriminatorHandler.initializeInConstructor(constructor);
+            PolymorphicDiscriminatorHandler.initializeInConstructor(model, constructor, settings);
         });
 
         if (generatePrivateConstructorForJackson) {
@@ -1204,8 +1220,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param model The model.
      * @param settings Autorest generation settings.
      */
-    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model,
-        PolymorphicDiscriminatorHandler polymorphicDiscriminatorHandler, JavaSettings settings) {
+    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
         // No-op, meant for StreamSerializationModelTemplate.
     }
 

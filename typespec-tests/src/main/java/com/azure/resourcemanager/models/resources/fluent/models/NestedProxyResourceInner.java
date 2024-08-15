@@ -83,6 +83,7 @@ public final class NestedProxyResourceInner extends ProxyResource {
      * 
      * @return the type value.
      */
+    @Override
     public String type() {
         return this.type;
     }
@@ -92,6 +93,7 @@ public final class NestedProxyResourceInner extends ProxyResource {
      * 
      * @return the name value.
      */
+    @Override
     public String name() {
         return this.name;
     }
@@ -101,6 +103,7 @@ public final class NestedProxyResourceInner extends ProxyResource {
      * 
      * @return the id value.
      */
+    @Override
     public String id() {
         return this.id;
     }

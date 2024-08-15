@@ -131,6 +131,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the name value.
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -140,6 +141,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the type value.
      */
+    @Override
     public String getType() {
         return this.type;
     }
@@ -149,6 +151,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the id value.
      */
+    @Override
     public String getId() {
         return this.id;
     }

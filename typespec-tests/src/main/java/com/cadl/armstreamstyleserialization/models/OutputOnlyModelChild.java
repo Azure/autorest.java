@@ -64,7 +64,6 @@ public final class OutputOnlyModelChild extends OutputOnlyModelInner {
      * 
      * @return the childName value.
      */
-    @Override
     public String childName() {
         return this.childName;
     }

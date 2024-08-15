@@ -82,11 +82,6 @@ public final class MyDerivedType extends MyBaseType {
         jsonWriter.writeStartObject();
         toJsonShared(jsonWriter);
         jsonWriter.writeStringField("propD1", this.propD1);
-        if (getPropBH1() != null) {
-            jsonWriter.writeStartObject("helper");
-            jsonWriter.writeStringField("propBH1", getPropBH1());
-            jsonWriter.writeEndObject();
-        }
         return jsonWriter.writeEndObject();
     }
 
