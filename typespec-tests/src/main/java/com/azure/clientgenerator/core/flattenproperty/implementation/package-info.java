@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the classes for Flatten.
+ * Package containing the implementations for FlattenProperty.
  * Illustrates the model flatten cases.
  * <!-- end generated doc -->
  */
-package com.type.model.flatten;
+package com.azure.clientgenerator.core.flattenproperty.implementation;

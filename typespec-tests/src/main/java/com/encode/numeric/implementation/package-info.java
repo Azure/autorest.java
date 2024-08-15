@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the implementations for Flatten.
- * Illustrates the model flatten cases.
+ * Package containing the implementations for Numeric.
+ * Test for encode decorator on integer.
  * <!-- end generated doc -->
  */
-package com.type.model.flatten.implementation;
+package com.encode.numeric.implementation;

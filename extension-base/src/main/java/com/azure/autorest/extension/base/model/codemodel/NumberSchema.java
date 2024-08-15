@@ -19,6 +19,7 @@ public class NumberSchema extends PrimitiveSchema {
     private boolean exclusiveMaximum;
     private double minimum;
     private boolean exclusiveMinimum;
+    private String encode;
 
     /**
      * Creates a new instance of the NumberSchema class.
@@ -134,6 +135,24 @@ public class NumberSchema extends PrimitiveSchema {
         this.exclusiveMinimum = exclusiveMinimum;
     }
 
+    /**
+     * Gets the encode for the number.
+     *
+     * @return the encode for the number.
+     */
+    public String getEncode() {
+        return encode;
+    }
+
+    /**
+     * Sets the encode for the number. Currently only "string" is supported.
+     *
+     * @param encode the encode for the number.
+     */
+    public void setEncode(String encode) {
+        this.encode = encode;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return super.writeParentProperties(jsonWriter.writeStartObject())
@@ -143,6 +162,7 @@ public class NumberSchema extends PrimitiveSchema {
             .writeBooleanField("exclusiveMaximum", exclusiveMaximum)
             .writeDoubleField("minimum", minimum)
             .writeBooleanField("exclusiveMinimum", exclusiveMinimum)
+            .writeStringField("encode", encode)
             .writeEndObject();
     }
 
@@ -171,6 +191,8 @@ public class NumberSchema extends PrimitiveSchema {
                 schema.minimum = reader.getDouble();
             } else if ("exclusiveMinimum".equals(fieldName)) {
                 schema.exclusiveMinimum = reader.getBoolean();
+            } else if ("encode".equals(fieldName)) {
+                schema.encode = reader.getString();
             } else {
                 reader.skipChildren();
             }
