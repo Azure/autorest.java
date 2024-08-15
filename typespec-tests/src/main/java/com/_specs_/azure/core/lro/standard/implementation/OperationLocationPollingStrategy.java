@@ -90,11 +90,11 @@ public final class OperationLocationPollingStrategy<T, U> extends OperationResou
                 = PollingUtils.getRetryAfterFromHeaders(response.getHeaders(), OffsetDateTime::now);
             final Mono<PollResponse<T>> pollResponseMono
                 = PollingUtils.deserializeResponse((BinaryData) response.getValue(), serializer, pollResponseType)
-                .onErrorResume(exception -> {
-                    LOGGER.info("Failed to parse initial response.");
-                    return Mono.empty();
-                })
-                .map(value -> new PollResponse<>(LongRunningOperationStatus.IN_PROGRESS, value, retryAfter));
+                    .onErrorResume(exception -> {
+                        LOGGER.info("Failed to parse initial response.");
+                        return Mono.empty();
+                    })
+                    .map(value -> new PollResponse<>(LongRunningOperationStatus.IN_PROGRESS, value, retryAfter));
             return pollResponseMono.switchIfEmpty(
                 Mono.fromSupplier(() -> new PollResponse<>(LongRunningOperationStatus.IN_PROGRESS, null, retryAfter)));
         } else {

@@ -30,7 +30,7 @@ final class PollingUtils {
 
     public static final TypeReference<Map<String, Object>> POST_POLL_RESULT_TYPE_REFERENCE
         = new TypeReference<Map<String, Object>>() {
-    };
+        };
 
     public static final HttpHeaderName OPERATION_LOCATION_HEADER = HttpHeaderName.fromString("Operation-Location");
 

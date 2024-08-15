@@ -745,12 +745,12 @@ public class ClientModelUtil {
         }
 
         for (Client client : codeModel.getClients()) {
-            if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+            if (CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
                 continue;
             }
 
             for (OperationGroup og : client.getOperationGroups()) {
-                if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
+                if (CoreUtils.isNullOrEmpty(og.getOperations())) {
                     continue;
                 }
 
