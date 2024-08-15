@@ -7,13 +7,11 @@ import com.azure.clientgenerator.core.flattenproperty.models.ChildFlattenModel;
 import com.azure.clientgenerator.core.flattenproperty.models.ChildModel;
 import com.azure.clientgenerator.core.flattenproperty.models.FlattenModel;
 import com.azure.clientgenerator.core.flattenproperty.models.NestedFlattenModel;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class FlattenClientTests {
     private final FlattenPropertyClient flattenClient = new FlattenPropertyClientBuilder().buildClient();
 
-    @Disabled("need a bug fix https://github.com/Azure/cadl-ranch/pull/693")
     @Test
     public void testFlattenModel() {
         // flatten is not enabled for data-plane
