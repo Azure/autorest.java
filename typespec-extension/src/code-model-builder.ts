@@ -172,6 +172,7 @@ import {
 } from "./type-utils.js";
 import { getNamespace, logWarning, pascalCase, stringArrayContainsIgnoreCase, trace } from "./utils.js";
 import { pathToFileURL } from "url";
+import { join } from "path";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -727,7 +728,13 @@ export class CodeModelBuilder {
       const operationExamples: Record<string, any> = {};
       for (const example of httpOperationExamples) {
         const operationExample = example.rawExample;
-        operationExample["x-ms-original-file"] = pathToFileURL(example.filePath).toString();
+
+        // resolve absolute path of the example file
+        const examplesDir = (this.options as any)["examples-dir"] ?? (this.options as any)["examples-directory"];
+        if (examplesDir) {
+          operationExample["x-ms-original-file"] = pathToFileURL(join(examplesDir, example.filePath)).toString();
+        }
+
         operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] =
           operationExample;
       }
