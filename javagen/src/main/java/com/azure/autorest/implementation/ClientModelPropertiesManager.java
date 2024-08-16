@@ -39,6 +39,7 @@ import static com.azure.autorest.util.ClientModelUtil.getClientModel;
  */
 public final class ClientModelPropertiesManager {
     private final ClientModel model;
+
     private final String deserializedModelName;
     private final boolean hasRequiredProperties;
     private final boolean hasConstructorArguments;
@@ -86,6 +87,7 @@ public final class ClientModelPropertiesManager {
         Set<String> possibleXmlNameVariableNames = new LinkedHashSet<>(Arrays.asList(
             "elementName", "xmlElementName", "deserializationElementName"));
         this.model = model;
+
         this.deserializedModelName = "deserialized" + model.getName();
         this.expectedDiscriminator = model.getSerializedName();
         ClientModelPropertyWithMetadata discriminatorProperty = null;

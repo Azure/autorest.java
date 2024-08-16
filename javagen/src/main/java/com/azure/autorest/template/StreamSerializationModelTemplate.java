@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.implementation.ClientModelPropertiesManager;
 import com.azure.autorest.implementation.ClientModelPropertyWithMetadata;
 import com.azure.autorest.implementation.JsonFlattenedPropertiesTree;
+import com.azure.autorest.implementation.PolymorphicDiscriminatorHandler;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -98,11 +99,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(List.class.getName());
         imports.add(Map.class.getName());
         imports.add(Objects.class.getName());
-    }
-
-    @Override
-    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels, JavaFile javaFile) {
-        // no-op as stream-style serialization doesn't need to add anything for polymorphic types.
     }
 
     @Override
@@ -242,7 +238,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param model the model to generate class of
      * @param settings JavaSettings
      * @return properties to generate as fields of the class
-     * @see com.azure.autorest.mapper.ModelMapper#passPolymorphicDiscriminatorToChildren
      */
     @Override
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
@@ -254,27 +249,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
             propertySerializedNames.add(parentProperty.getSerializedName());
             if (!parentProperty.isPolymorphicDiscriminator() // parent discriminators are already passed to children, see @see in method javadoc
-                    && readOnlyNotInCtor(model, parentProperty, settings) // we shadow parent read-only properties in child class
+                    && ClientModelUtil.readOnlyNotInCtor(model, parentProperty, settings) // we shadow parent read-only properties in child class
                     || parentProperty.getClientFlatten()) { // we shadow parent flattened property in child class
                 fieldProperties.add(parentProperty);
             }
         }
         return fieldProperties;
-    }
-
-    /**
-     * In stream-style-serialization, parent's read-only properties are shadowed in child classes.
-     *
-     * @param model            the client model
-     * @param property         the property to generate getter
-     * @param settings         {@link JavaSettings} instance
-     * @param methodVisibility
-     * @return whether the property's getter overrides parent getter
-     */
-    @Override
-    protected boolean overridesParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings, JavaVisibility methodVisibility) {
-        return !modelDefinesProperty(model, property) && (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(model, property, settings))
-            && methodVisibility == JavaVisibility.Public;
     }
 
     /**
@@ -332,16 +312,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 .collect(Collectors.toList());
     }
 
-    private static boolean readOnlyNotInCtor(ClientModel model, ClientModelProperty property, JavaSettings settings) {
-        return  // not required and in constructor
-                !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs())
-                        && (
-                        // must be read-only and not appear in constructor
-                        (property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs())
-                                // immutable output model only has package-private setters, making its properties read-only
-                                || isImmutableOutputModel(getDefiningModel(model, property), settings));
-    }
-
     @Override
     protected boolean callParentValidate(String parentModelName) {
         // in stream-style-serialization, since there are shadowing involved, we validate all properties locally
@@ -368,6 +338,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         boolean isJsonMergePatch, Consumer<JavaClass> addGeneratedAnnotation) {
+        boolean allPolymorphicModelsInSamePackage = PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(propertiesManager.getModel());
+        boolean callToJsonSharedForParentProperties = !isJsonMergePatch
+            && allPolymorphicModelsInSamePackage
+            && !CoreUtils.isNullOrEmpty(propertiesManager.getModel().getParentModelName());
+        boolean callToJsonSharedForThisProperties = !isJsonMergePatch
+            && allPolymorphicModelsInSamePackage
+            && propertiesManager.getModel().isPolymorphicParent();
+
         classBlock.javadocComment(JavaJavadocComment::inheritDoc);
         addGeneratedAnnotation.accept(classBlock);
         classBlock.annotation("Override");
@@ -381,11 +359,35 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     : JSON_MERGE_PATCH_HELPER_CLASS_NAME + ".get" + rootParent.getName() + "Accessor().isJsonMergePatch(this)";
 
                 methodBlock.ifBlock(ifStatement, ifBlock -> ifBlock.methodReturn("toJsonMergePatch(jsonWriter)"))
-                    .elseBlock(elseBlock -> serializeJsonProperties(methodBlock, propertiesManager, false));
+                    .elseBlock(elseBlock -> serializeJsonProperties(methodBlock, propertiesManager, false, false, false));
             } else {
-                serializeJsonProperties(methodBlock, propertiesManager, false);
+                // For polymorphic models, when all models are contained in the same package, a package-private 'toJsonShared'
+                // method will be generated by parent models that handles serialization of properties defined by the parent
+                // model.
+                // So, if we have that case, we skip serializing the properties defined by the parent model(s) and instead call
+                // the 'toJsonShared' method to serialize those properties. And, for properties defined by this model, if the
+                // model is a parent model generate a 'toJsonShared' method to serialize those properties.
+                //
+                // At this time, due to implementation complexity and the low value add, JSON merge patch serialization won't
+                // support 'toJsonMergePatchShared'. JSON merge patch serialization has low usage, and combined with the low
+                // usage of polymorphism as well, there isn't a large expectation for this feature.
+                serializeJsonProperties(methodBlock, propertiesManager, false, callToJsonSharedForParentProperties,
+                    callToJsonSharedForThisProperties);
             }
         });
+
+        // If this model is defining a 'toJsonShared' method, write it.
+        if (callToJsonSharedForThisProperties) {
+            classBlock.packagePrivateMethod("void toJsonShared(JsonWriter jsonWriter) throws IOException", methodBlock -> {
+                if (callToJsonSharedForParentProperties) {
+                    methodBlock.line("super.toJsonShared(jsonWriter);");
+                }
+
+                serializeThisJsonProperties(propertiesManager, (property, fromSuper) -> serializeJsonProperty(
+                    methodBlock, property, property.getSerializedName(), fromSuper, true, false), methodBlock,
+                    callToJsonSharedForParentProperties);
+            });
+        }
     }
 
     /**
@@ -399,7 +401,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         Consumer<JavaClass> addGeneratedAnnotation) {
         addGeneratedAnnotation.accept(classBlock);
         classBlock.privateMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException",
-            methodBlock -> serializeJsonProperties(methodBlock, propertiesManager, true));
+            methodBlock -> serializeJsonProperties(methodBlock, propertiesManager, true, false, false));
     }
 
     /**
@@ -409,28 +411,77 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param isJsonMergePatch Whether the serialization is for a JSON merge patch.
      */
     private static void serializeJsonProperties(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager,
-        boolean isJsonMergePatch) {
+        boolean isJsonMergePatch, boolean callToJsonSharedForParentProperties,
+        boolean callToJsonSharedForThisProperties) {
         methodBlock.line("jsonWriter.writeStartObject();");
+
+        // If we're calling toJsonShared for this model and for parent properties, this is an early out.
+        if (callToJsonSharedForParentProperties && callToJsonSharedForThisProperties) {
+            methodBlock.line("toJsonShared(jsonWriter);");
+            methodBlock.methodReturn("jsonWriter.writeEndObject()");
+            return;
+        }
 
         BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) -> serializeJsonProperty(
             methodBlock, property, property.getSerializedName(), fromSuper, true, isJsonMergePatch);
 
-        propertiesManager.getModel().getParentPolymorphicDiscriminators()
+        if (callToJsonSharedForParentProperties) {
+            methodBlock.line("toJsonShared(jsonWriter);");
+        } else {
+            serializeParentJsonProperties(propertiesManager, serializeJsonProperty);
+        }
+
+        if (callToJsonSharedForThisProperties) {
+            methodBlock.line("toJsonShared(jsonWriter);");
+        } else {
+            serializeThisJsonProperties(propertiesManager, serializeJsonProperty, methodBlock,
+                callToJsonSharedForParentProperties);
+        }
+
+
+        methodBlock.methodReturn("jsonWriter.writeEndObject()");
+    }
+
+    private static void serializeParentJsonProperties(ClientModelPropertiesManager propertiesManager,
+        BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty) {
+        propertiesManager.getModel()
+            .getParentPolymorphicDiscriminators()
             .forEach(discriminator -> serializeJsonProperty.accept(discriminator, false));
         propertiesManager.forEachSuperRequiredProperty(property -> serializeJsonProperty.accept(property, true));
         propertiesManager.forEachSuperSetterProperty(property -> serializeJsonProperty.accept(property, true));
-        propertiesManager.forEachRequiredProperty(property -> serializeJsonProperty.accept(property, false));
-        propertiesManager.forEachSetterProperty(property -> serializeJsonProperty.accept(property, false));
+    }
 
-        handleFlattenedPropertiesSerialization(methodBlock, propertiesManager.getJsonFlattenedPropertiesTree(), isJsonMergePatch);
+    private static void serializeThisJsonProperties(ClientModelPropertiesManager propertiesManager,
+        BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty, JavaBlock methodBlock,
+        boolean callToJsonSharedForParentProperties) {
+        Consumer<ClientModelProperty> wrappedSerializer = property -> {
+            // Skip serializing the polymorphic discriminator if 'toJsonShared' is called to serialize properties
+            // defined by the parent model(s), the polymorphic discriminator isn't defined by this property, and
+            // all polymorphic models are in the same package.
+            // In this scenario, the logic for polymorphism is that the defining model has a package-private, non-final
+            // field for the discriminator which is set by either the deserialization logic or the constructor.
+            if (callToJsonSharedForParentProperties && property.isPolymorphicDiscriminator()
+                && PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(propertiesManager.getModel())
+                && !ClientModelUtil.modelDefinesProperty(propertiesManager.getModel(), property)) {
+                return;
+            }
+
+            serializeJsonProperty.accept(property, false);
+        };
+
+        propertiesManager.forEachRequiredProperty(wrappedSerializer);
+        propertiesManager.forEachSetterProperty(wrappedSerializer);
+
+        handleFlattenedPropertiesSerialization(methodBlock, propertiesManager.getJsonFlattenedPropertiesTree(), false,
+            callToJsonSharedForParentProperties);
 
         if (getAdditionalPropertiesPropertyInModelOrFromSuper(propertiesManager) != null) {
             String additionalPropertiesAccessExpr = propertiesManager.getAdditionalProperties() != null
-                    ? propertiesManager.getAdditionalProperties().getName()
-                    : propertiesManager.getSuperAdditionalPropertiesProperty().getGetterName() + "()";
+                ? propertiesManager.getAdditionalProperties().getName()
+                : propertiesManager.getSuperAdditionalPropertiesProperty().getGetterName() + "()";
             IType wireType = propertiesManager.getAdditionalProperties() != null
-                    ? propertiesManager.getAdditionalProperties().getWireType()
-                    : propertiesManager.getSuperAdditionalPropertiesProperty().getWireType();
+                ? propertiesManager.getAdditionalProperties().getWireType()
+                : propertiesManager.getSuperAdditionalPropertiesProperty().getWireType();
 
             methodBlock.ifBlock(additionalPropertiesAccessExpr + " != null", ifAction -> {
                 IType valueType = ((MapType) wireType).getValueType().asNullable();
@@ -446,8 +497,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 ifAction.line("}");
             });
         }
-
-        methodBlock.methodReturn("jsonWriter.writeEndObject()");
     }
 
     /**
@@ -686,15 +735,18 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param isJsonMergePatch Whether the serialization is for a JSON merge patch model.
      */
     private static void handleFlattenedPropertiesSerialization(JavaBlock methodBlock,
-        JsonFlattenedPropertiesTree flattenedProperties, boolean isJsonMergePatch) {
+        JsonFlattenedPropertiesTree flattenedProperties, boolean isJsonMergePatch,
+        boolean callToJsonSharedForParentProperties) {
         // The initial call to handle flattened properties is using the base node which is just a holder.
         for (JsonFlattenedPropertiesTree flattened : flattenedProperties.getChildrenNodes().values()) {
-            handleFlattenedPropertiesSerializationHelper(methodBlock, flattened, isJsonMergePatch);
+            handleFlattenedPropertiesSerializationHelper(methodBlock, flattened, isJsonMergePatch,
+                callToJsonSharedForParentProperties);
         }
     }
 
     private static void handleFlattenedPropertiesSerializationHelper(JavaBlock methodBlock,
-        JsonFlattenedPropertiesTree flattenedProperties, boolean isJsonMergePatch) {
+        JsonFlattenedPropertiesTree flattenedProperties, boolean isJsonMergePatch,
+        boolean callToJsonSharedForParentProperties) {
         ClientModelPropertyWithMetadata flattenedProperty = flattenedProperties.getProperty();
         if (flattenedProperty != null) {
             // This is a terminal location, only need to add property serialization.
@@ -706,16 +758,27 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // any of the properties are non-null.
             List<ClientModelPropertyWithMetadata> propertiesInFlattenedGroup =
                 getClientModelPropertiesInJsonTree(flattenedProperties);
-            boolean hasPrimitivePropertyInGroup = propertiesInFlattenedGroup.stream()
-                .map(property -> property.getProperty().getWireType())
-                .anyMatch(wireType -> wireType instanceof PrimitiveType);
+            boolean hasPrimitivePropertyInGroup = false;
+            boolean allPropertiesInGroupFromParent = true;
+            for (ClientModelPropertyWithMetadata propertyInFlattenedGroup : propertiesInFlattenedGroup) {
+                hasPrimitivePropertyInGroup |= propertyInFlattenedGroup.getProperty().getWireType() instanceof PrimitiveType;
+                allPropertiesInGroupFromParent &= propertyInFlattenedGroup.isFromSuperClass();
+            }
+
+            if (callToJsonSharedForParentProperties && allPropertiesInGroupFromParent) {
+                // If all properties in the flattened group are from the parent model, then the call to the parent's
+                // 'toJsonShared' method will serialize the properties, skip writing serialization logic for this
+                // method.
+                return;
+            }
 
             if (hasPrimitivePropertyInGroup) {
                 // Simple case where the flattened group has a primitive type where non-null checking doesn't need
                 // to be done.
                 methodBlock.line("jsonWriter.writeStartObject(\"" + flattenedProperties.getNodeName() + "\");");
                 for (JsonFlattenedPropertiesTree flattened : flattenedProperties.getChildrenNodes().values()) {
-                    handleFlattenedPropertiesSerializationHelper(methodBlock, flattened, isJsonMergePatch);
+                    handleFlattenedPropertiesSerializationHelper(methodBlock, flattened, isJsonMergePatch,
+                        callToJsonSharedForParentProperties);
                 }
                 methodBlock.line("jsonWriter.writeEndObject();");
             } else {
@@ -730,7 +793,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.ifBlock(condition, ifAction -> {
                     ifAction.line("jsonWriter.writeStartObject(\"" + flattenedProperties.getNodeName() + "\");");
                     for (JsonFlattenedPropertiesTree flattened : flattenedProperties.getChildrenNodes().values()) {
-                        handleFlattenedPropertiesSerializationHelper(ifAction, flattened, isJsonMergePatch);
+                        handleFlattenedPropertiesSerializationHelper(ifAction, flattened, isJsonMergePatch,
+                            callToJsonSharedForParentProperties);
                     }
                     ifAction.line("jsonWriter.writeEndObject();");
                 });
@@ -1123,7 +1187,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     initializeLocalVariable(methodBlock, property, true, settings);
                 });
                 propertiesManager.forEachSuperSetterProperty(property -> {
-                    if (readOnlyNotInCtor(propertiesManager.getModel(), property, settings)) {
+                    if (ClientModelUtil.readOnlyNotInCtor(propertiesManager.getModel(), property, settings)) {
                         initializeShadowPropertyLocalVariable(methodBlock, property);
                     } else {
                         initializeLocalVariable(methodBlock, property, true, settings);
@@ -1317,7 +1381,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // Need to convert the wire type to the client type for constructors.
             // Need to convert the wire type to the client type for public setters.
             boolean convertToClientType = (clientType != wireType)
-                && (includePropertyInConstructor(property, settings) || (fromSuper && !readOnlyNotInCtor(model, property, settings)));
+                && (includePropertyInConstructor(property, settings) || (fromSuper && !ClientModelUtil.readOnlyNotInCtor(model, property, settings)));
             BiConsumer<String, JavaBlock> simpleDeserializationConsumer = (logic, block) -> {
                 if (!hasConstructorArguments) {
                     handleSettingDeserializedValue(block, modelVariableName, model, property, logic, fromSuper,
@@ -1671,7 +1735,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // super class.
         if (fromSuper
             // If the property is flattened or read-only from parent, it will be shadowed in child class.
-            && (!readOnlyNotInCtor(model, property, JavaSettings.getInstance()) && !property.getClientFlatten())) {
+            && (!ClientModelUtil.readOnlyNotInCtor(model, property, JavaSettings.getInstance()) && !property.getClientFlatten())) {
             if (polymorphicJsonMergePatchScenario) {
                 // Polymorphic JSON merge patch needs special handling as the setter methods are used to track whether
                 // the property is included in patch serialization. To prevent deserialization from requiring parent

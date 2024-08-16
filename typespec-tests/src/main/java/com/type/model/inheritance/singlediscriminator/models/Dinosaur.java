@@ -21,7 +21,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      * Discriminator property for Dinosaur.
      */
     @Generated
-    private String kind = "Dinosaur";
+    String kind;
 
     /*
      * The size property.
@@ -37,6 +37,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     @Generated
     protected Dinosaur(int size) {
         this.size = size;
+        this.kind = "Dinosaur";
     }
 
     /**
@@ -66,9 +67,13 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeIntField("size", this.size);
         jsonWriter.writeStringField("kind", this.kind);
-        return jsonWriter.writeEndObject();
     }
 
     /**

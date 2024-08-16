@@ -16,11 +16,6 @@ import java.io.IOException;
 @Immutable
 public final class DotSalmon extends DotFish {
     /*
-     * The fish.type property.
-     */
-    private String fishType = "DotSalmon";
-
-    /*
      * The location property.
      */
     private String location;
@@ -39,16 +34,7 @@ public final class DotSalmon extends DotFish {
      * Creates an instance of DotSalmon class.
      */
     private DotSalmon() {
-    }
-
-    /**
-     * Get the fishType property: The fish.type property.
-     * 
-     * @return the fishType value.
-     */
-    @Override
-    public String getFishType() {
-        return this.fishType;
+        this.fishType = "DotSalmon";
     }
 
     /**
@@ -94,8 +80,7 @@ public final class DotSalmon extends DotFish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeStringField("fish.type", this.fishType);
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
         return jsonWriter.writeEndObject();

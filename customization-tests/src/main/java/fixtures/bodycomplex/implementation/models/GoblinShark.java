@@ -11,7 +11,6 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -19,11 +18,6 @@ import java.util.List;
  */
 @Fluent
 public final class GoblinShark extends Shark {
-    /*
-     * The fishtype property.
-     */
-    private String fishtype = "goblin";
-
     /*
      * The jawsize property.
      */
@@ -38,16 +32,7 @@ public final class GoblinShark extends Shark {
      * Creates an instance of Goblinshark class.
      */
     public GoblinShark() {
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "goblin";
     }
 
     /**
@@ -141,13 +126,7 @@ public final class GoblinShark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday",
-            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeNumberField("age", getAge());
-        jsonWriter.writeStringField("fishtype", this.fishtype);
+        toJsonShared(jsonWriter);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
