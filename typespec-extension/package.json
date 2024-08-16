@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.19.1",
+  "version": "0.19.2",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -49,7 +49,7 @@
     "@azure-tools/typespec-azure-resource-manager": ">=0.45.0 <1.0.0",
     "@azure-tools/typespec-autorest": ">=0.45.0 <1.0.0",
     "@azure-tools/typespec-azure-rulesets": ">=0.45.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.45.1 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.45.3 <1.0.0",
     "@typespec/compiler": ">=0.59.0 <1.0.0",
     "@typespec/http": ">=0.59.0 <1.0.0",
     "@typespec/openapi": ">=0.59.0 <1.0.0",
@@ -67,7 +67,7 @@
     "@azure-tools/typespec-azure-resource-manager": "0.45.0",
     "@azure-tools/typespec-autorest": "0.45.0",
     "@azure-tools/typespec-azure-rulesets": "0.45.0",
-    "@azure-tools/typespec-client-generator-core": "0.45.2",
+    "@azure-tools/typespec-client-generator-core": "0.45.3",
     "@types/js-yaml": "~4.0.9",
     "@types/lodash": "~4.17.7",
     "@types/mocha": "~10.0.7",
