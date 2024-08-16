@@ -55,6 +55,7 @@ public final class FlattenClient {
      * 
      * <pre>{@code
      * {
+     *     endpoint: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
@@ -235,6 +236,7 @@ public final class FlattenClient {
      * The send operation.
      * 
      * @param id The id parameter.
+     * @param endpoint The endpoint parameter.
      * @param input The input parameter.
      * @param user The user parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -246,10 +248,10 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(String id, String input, User user) {
+    public void send(String id, String endpoint, String input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest sendRequestObj = new SendRequest(input).setUser(user);
+        SendRequest sendRequestObj = new SendRequest(endpoint, input).setUser(user);
         BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
         sendWithResponse(id, sendRequest, requestOptions).getValue();
     }
@@ -258,6 +260,7 @@ public final class FlattenClient {
      * The send operation.
      * 
      * @param id The id parameter.
+     * @param endpoint The endpoint parameter.
      * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -268,10 +271,10 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(String id, String input) {
+    public void send(String id, String endpoint, String input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest sendRequestObj = new SendRequest(input);
+        SendRequest sendRequestObj = new SendRequest(endpoint, input);
         BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
         sendWithResponse(id, sendRequest, requestOptions).getValue();
     }

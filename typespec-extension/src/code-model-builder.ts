@@ -108,7 +108,12 @@ import {
   getHeaderFieldName,
   getPathParamName,
   getQueryParamName,
+  getServers,
+  getStatusCodeDescription,
+  isBody,
+  isBodyRoot,
   isHeader,
+  isMultipartBodyProperty,
   isPathParam,
   isQueryParam,
 } from "@typespec/http";
@@ -116,7 +121,7 @@ import { getSegment } from "@typespec/rest";
 import { getAddedOnVersions } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
-import { Client as CodeModelClient, CrossLanguageDefinition } from "./common/client.js";
+import { Client as CodeModelClient, CrossLanguageDefinition, EncodedSchema } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { Operation as CodeModelOperation, ConvenienceApi, Request } from "./common/operation.js";
@@ -160,6 +165,7 @@ import {
   trace,
 } from "./utils.js";
 import { pathToFileURL } from "url";
+import { join } from "path";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -703,8 +709,16 @@ export class CodeModelBuilder {
       const operationExamples: Record<string, any> = {};
       for (const example of httpOperationExamples) {
         const operationExample = example.rawExample;
-        operationExample["x-ms-original-file"] = pathToFileURL(example.filePath).toString();
-        operationExamples[operationExample.title ?? operationExample.operationId ?? sdkMethod.name] = operationExample;
+
+        // resolve absolute path of the example file
+        if (this.sdkContext.examplesDir) {
+          operationExample["x-ms-original-file"] = pathToFileURL(
+            join(this.sdkContext.examplesDir, example.filePath),
+          ).toString();
+        }
+
+        operationExamples[operationExample.title ?? operationExample.operationId ?? sdkMethod.name] =
+          operationExample;
       }
       return operationExamples;
     } else {
@@ -1446,7 +1460,14 @@ export class CodeModelBuilder {
     originalParameter: Parameter,
   ) {
     const serializedName = opParameter.serializedName;
-    const existParameter = op.parameters?.find((it) => it.language.default.serializedName === serializedName);
+    let existParameter: Parameter | undefined;
+    if (opParameter.kind !== "property") {
+      // property of body, only check parameter location as there could only be 1 body in operation
+    //   existParameter = op.parameters?.find((it) => it.protocol.http?.in === ParameterLocation.Body);
+    // } else {
+      // header/query/path, same location
+      existParameter = op.parameters?.find((it) => it.protocol.http?.in === opParameter.kind && it.language.default.serializedName === serializedName);
+    }
     request.parameters = request.parameters ?? [];
     if (existParameter) {
       // parameter
@@ -1733,11 +1754,13 @@ export class CodeModelBuilder {
   }
 
   private processIntegerSchemaFromSdkType(type: SdkBuiltInType, name: string, precision: number): NumberSchema {
-    return this.codeModel.schemas.add(
-      new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
-        summary: type.description,
-      }),
-    );
+    const schema = new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
+      summary: type.description,
+    });
+    if (type.encode === "string") {
+      (schema as EncodedSchema).encode = type.encode;
+    }
+    return this.codeModel.schemas.add(schema);
   }
 
   private processNumberSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
@@ -2235,6 +2258,24 @@ export class CodeModelBuilder {
     } else {
       // TODO: currently this is only for JSON
       return getWireName(this.sdkContext, target);
+    }
+  }
+
+  private getParameterLocation(target: ModelProperty): ParameterLocation | "BodyProperty" {
+    if (isHeader(this.program, target)) {
+      return ParameterLocation.Header;
+    } else if (isQueryParam(this.program, target)) {
+      return ParameterLocation.Query;
+    } else if (isPathParam(this.program, target)) {
+      return ParameterLocation.Path;
+    } else if (
+      isBody(this.program, target) ||
+      isBodyRoot(this.program, target) ||
+      isMultipartBodyProperty(this.program, target)
+    ) {
+      return ParameterLocation.Body;
+    } else {
+      return "BodyProperty";
     }
   }
 

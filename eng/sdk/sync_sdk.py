@@ -116,7 +116,7 @@ def update_sdks():
             # one retry
             # sometimes customization have intermittent failure
             logging.warning(f'Retry generate for module {artifact}')
-            subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
+            subprocess.check_call(['tsp-client', 'update', '--debug'], cwd=module_path)
 
         if arm_module:
             # revert mock test code

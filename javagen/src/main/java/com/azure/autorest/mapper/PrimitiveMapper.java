@@ -82,15 +82,15 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 }
             case INTEGER:
                 NumberSchema intSchema = (NumberSchema) primaryType;
-                return (intSchema.getPrecision() == 64)
-                    ? PrimitiveType.LONG
-                    : PrimitiveType.INT;
-//            case KnownPrimaryType.Long:
-//                iType = PrimitiveType.Long;
-//                break;
-//            case KnownPrimaryType.Stream:
-//                iType = GenericType.FluxByteBuffer;
-//                break;
+                if ("string".equals(intSchema.getEncode())) {
+                    return (intSchema.getPrecision() == 64)
+                        ? PrimitiveType.LONG_AS_STRING
+                        : PrimitiveType.INT_AS_STRING;
+                } else {
+                    return (intSchema.getPrecision() == 64)
+                        ? PrimitiveType.LONG
+                        : PrimitiveType.INT;
+                }
             case STRING: return ClassType.STRING;
             case ARM_ID: return ClassType.STRING;
             case URI: return isLowLevelClient || urlAsString ? ClassType.STRING : ClassType.URL;

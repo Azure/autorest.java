@@ -14,6 +14,7 @@ import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
+import com.azure.core.annotation.Post;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -35,6 +36,7 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.resourcemanager.models.resources.fluent.TopLevelTrackedResourcesClient;
 import com.azure.resourcemanager.models.resources.fluent.models.TopLevelTrackedResourceInner;
 import com.azure.resourcemanager.models.resources.implementation.models.TopLevelTrackedResourceListResult;
+import com.azure.resourcemanager.models.resources.models.NotificationDetails;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -79,8 +81,9 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("Accept") String accept, Context context);
+            @HeaderParam("accept") String accept, Context context);
 
+        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -88,9 +91,10 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") TopLevelTrackedResourceInner resource, Context context);
+            @HeaderParam("accept") String accept, @BodyParam("application/json") TopLevelTrackedResourceInner resource,
+            Context context);
 
+        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -98,7 +102,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @HeaderParam("accept") String accept,
             @BodyParam("application/json") TopLevelTrackedResourceInner properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -109,7 +113,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("Accept") String accept, Context context);
+            @HeaderParam("accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources")
@@ -117,7 +121,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> listByResourceGroup(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("Accept") String accept,
+            @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -126,7 +130,18 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> list(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
-            @HeaderParam("Accept") String accept, Context context);
+            @HeaderParam("accept") String accept, Context context);
+
+        @Headers({ "Content-Type: application/json" })
+        @Post("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/actionSync")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(ManagementException.class)
+        Mono<Response<Void>> actionSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
+            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
+            @HeaderParam("accept") String accept, @BodyParam("application/json") NotificationDetails body,
+            Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
@@ -134,7 +149,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> listByResourceGroupNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, Context context);
+            @HeaderParam("accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
@@ -142,7 +157,7 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelTrackedResourceListResult>> listBySubscriptionNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, Context context);
+            @HeaderParam("accept") String accept, Context context);
     }
 
     /**
@@ -303,12 +318,11 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             resource.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, contentType, accept,
-                resource, context))
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, resource,
+                context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -349,12 +363,10 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             resource.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, contentType, accept,
-            resource, context);
+            this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, resource, context);
     }
 
     /**
@@ -554,12 +566,11 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             properties.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, contentType, accept,
-                properties, context))
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, properties,
+                context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -600,11 +611,10 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
         } else {
             properties.validate();
         }
-        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.update(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
-            resourceGroupName, topLevelTrackedResourceName, contentType, accept, properties, context);
+            resourceGroupName, topLevelTrackedResourceName, accept, properties, context);
     }
 
     /**
@@ -1218,8 +1228,141 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
-     * List TopLevelTrackedResource resources by resource group
+     * A synchronous resource action that returns no content.
      * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelTrackedResourceName arm resource name for path.
+     * @param body The content of the action request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> actionSyncWithResponseAsync(String resourceGroupName,
+        String topLevelTrackedResourceName, NotificationDetails body) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (topLevelTrackedResourceName == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter topLevelTrackedResourceName is required and cannot be null."));
+        }
+        if (body == null) {
+            return Mono.error(new IllegalArgumentException("Parameter body is required and cannot be null."));
+        } else {
+            body.validate();
+        }
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.actionSync(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, body, context))
+            .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
+    }
+
+    /**
+     * A synchronous resource action that returns no content.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelTrackedResourceName arm resource name for path.
+     * @param body The content of the action request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Response<Void>> actionSyncWithResponseAsync(String resourceGroupName,
+        String topLevelTrackedResourceName, NotificationDetails body, Context context) {
+        if (this.client.getEndpoint() == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
+        }
+        if (this.client.getSubscriptionId() == null) {
+            return Mono.error(new IllegalArgumentException(
+                "Parameter this.client.getSubscriptionId() is required and cannot be null."));
+        }
+        if (resourceGroupName == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter resourceGroupName is required and cannot be null."));
+        }
+        if (topLevelTrackedResourceName == null) {
+            return Mono.error(
+                new IllegalArgumentException("Parameter topLevelTrackedResourceName is required and cannot be null."));
+        }
+        if (body == null) {
+            return Mono.error(new IllegalArgumentException("Parameter body is required and cannot be null."));
+        } else {
+            body.validate();
+        }
+        final String accept = "application/json";
+        context = this.client.mergeContext(context);
+        return service.actionSync(this.client.getEndpoint(), this.client.getApiVersion(),
+            this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, accept, body, context);
+    }
+
+    /**
+     * A synchronous resource action that returns no content.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelTrackedResourceName arm resource name for path.
+     * @param body The content of the action request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<Void> actionSyncAsync(String resourceGroupName, String topLevelTrackedResourceName,
+        NotificationDetails body) {
+        return actionSyncWithResponseAsync(resourceGroupName, topLevelTrackedResourceName, body)
+            .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * A synchronous resource action that returns no content.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelTrackedResourceName arm resource name for path.
+     * @param body The content of the action request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> actionSyncWithResponse(String resourceGroupName, String topLevelTrackedResourceName,
+        NotificationDetails body, Context context) {
+        return actionSyncWithResponseAsync(resourceGroupName, topLevelTrackedResourceName, body, context).block();
+    }
+
+    /**
+     * A synchronous resource action that returns no content.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelTrackedResourceName arm resource name for path.
+     * @param body The content of the action request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void actionSync(String resourceGroupName, String topLevelTrackedResourceName, NotificationDetails body) {
+        actionSyncWithResponse(resourceGroupName, topLevelTrackedResourceName, body, Context.NONE);
+    }
+
+    /**
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1248,8 +1391,6 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
-     * List TopLevelTrackedResource resources by resource group
-     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1278,8 +1419,6 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
-     * List TopLevelTrackedResource resources by subscription ID
-     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1308,8 +1447,6 @@ public final class TopLevelTrackedResourcesClientImpl implements TopLevelTracked
     }
 
     /**
-     * List TopLevelTrackedResource resources by subscription ID
-     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
