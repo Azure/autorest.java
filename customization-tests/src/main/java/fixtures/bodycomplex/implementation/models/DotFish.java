@@ -117,16 +117,23 @@ public class DotFish implements JsonSerializable<DotFish> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fish.type".equals(fieldName)) {
-                    deserializedDotFish.fishType = reader.getString();
-                } else if ("species".equals(fieldName)) {
-                    deserializedDotFish.species = reader.getString();
-                } else {
+                if (!DotFish.fromJsonShared(reader, fieldName, deserializedDotFish)) {
                     reader.skipChildren();
                 }
             }
 
             return deserializedDotFish;
         });
+    }
+
+    static boolean fromJsonShared(JsonReader reader, String fieldName, DotFish deserializedDotFish) throws IOException {
+        if ("fish.type".equals(fieldName)) {
+            deserializedDotFish.fishType = reader.getString();
+            return true;
+        } else if ("species".equals(fieldName)) {
+            deserializedDotFish.species = reader.getString();
+            return true;
+        }
+        return false;
     }
 }

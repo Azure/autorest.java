@@ -57,6 +57,8 @@ public final class ClientModelPropertiesManager {
     private final LinkedHashMap<String, ClientModelProperty> readOnlyProperties;
     private final ClientModelProperty additionalProperties;
     private final ClientModelPropertyWithMetadata discriminatorProperty;
+    private final boolean allPolymorphicModelsInSamePackage;
+    private final boolean polymorphicDiscriminatorDefinedByModel;
     private final String expectedDiscriminator;
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
     private final String jsonReaderFieldNameVariableName;
@@ -237,6 +239,15 @@ public final class ClientModelPropertiesManager {
         this.hasXmlElements = hasXmlElements;
         this.hasXmlTexts = hasXmlTexts;
         this.discriminatorProperty = discriminatorProperty;
+        if (model.isPolymorphic()) {
+            this.allPolymorphicModelsInSamePackage
+                = PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(model);
+            this.polymorphicDiscriminatorDefinedByModel = ClientModelUtil.modelDefinesProperty(model,
+                discriminatorProperty.getProperty());
+        } else {
+            this.allPolymorphicModelsInSamePackage = false;
+            this.polymorphicDiscriminatorDefinedByModel = false;
+        }
         this.additionalProperties = additionalProperties;
         this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminatorName(),
             flattenedProperties);
@@ -454,6 +465,24 @@ public final class ClientModelPropertiesManager {
      */
     public ClientModelPropertyWithMetadata getDiscriminatorProperty() {
         return discriminatorProperty;
+    }
+
+    /**
+     * Whether the polymorphic structure containing the model and all subtypes are in the same package.
+     *
+     * @return Whether the polymorphic structure containing the model and all subtypes are in the same package.
+     */
+    public boolean isAllPolymorphicModelsInSamePackage() {
+        return allPolymorphicModelsInSamePackage;
+    }
+
+    /**
+     * Whether the model defines the polymorphic discriminator property.
+     *
+     * @return Whether the model defines the polymorphic discriminator property.
+     */
+    public boolean isPolymorphicDiscriminatorDefinedByModel() {
+        return polymorphicDiscriminatorDefinedByModel;
     }
 
     /**

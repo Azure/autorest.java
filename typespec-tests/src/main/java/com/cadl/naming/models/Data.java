@@ -99,14 +99,21 @@ public class Data implements JsonSerializable<Data> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("@data.kind".equals(fieldName)) {
-                    deserializedData.type = reader.getString();
-                } else {
+                if (!Data.fromJsonShared(reader, fieldName, deserializedData)) {
                     reader.skipChildren();
                 }
             }
 
             return deserializedData;
         });
+    }
+
+    @Generated
+    static boolean fromJsonShared(JsonReader reader, String fieldName, Data deserializedData) throws IOException {
+        if ("@data.kind".equals(fieldName)) {
+            deserializedData.type = reader.getString();
+            return true;
+        }
+        return false;
     }
 }

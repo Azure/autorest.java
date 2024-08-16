@@ -197,24 +197,26 @@ public class Shark extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("id".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setId(deserializedShark, reader.getString());
-                } else if ("name".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setName(deserializedShark, reader.getString());
-                } else if ("age".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedShark, reader.getInt());
-                } else if ("color".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedShark, reader.getString());
-                } else if ("sharktype".equals(fieldName)) {
-                    deserializedShark.sharktype = reader.getString();
-                } else if ("weight".equals(fieldName)) {
-                    deserializedShark.weight = reader.getNullable(JsonReader::getInt);
-                } else {
+                if (!Shark.fromJsonShared(reader, fieldName, deserializedShark)) {
                     reader.skipChildren();
                 }
             }
 
             return deserializedShark;
         });
+    }
+
+    @Generated
+    static boolean fromJsonShared(JsonReader reader, String fieldName, Shark deserializedShark) throws IOException {
+        if (Fish.fromJsonShared(reader, fieldName, deserializedShark)) {
+            return true;
+        } else if ("sharktype".equals(fieldName)) {
+            deserializedShark.sharktype = reader.getString();
+            return true;
+        } else if ("weight".equals(fieldName)) {
+            deserializedShark.weight = reader.getNullable(JsonReader::getInt);
+            return true;
+        }
+        return false;
     }
 }

@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.implementation.ClientModelPropertiesManager;
 import com.azure.autorest.implementation.ClientModelPropertyWithMetadata;
 import com.azure.autorest.implementation.JsonFlattenedPropertiesTree;
-import com.azure.autorest.implementation.PolymorphicDiscriminatorHandler;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -338,12 +337,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         boolean isJsonMergePatch, Consumer<JavaClass> addGeneratedAnnotation) {
-        boolean allPolymorphicModelsInSamePackage = PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(propertiesManager.getModel());
         boolean callToJsonSharedForParentProperties = !isJsonMergePatch
-            && allPolymorphicModelsInSamePackage
+            && propertiesManager.isAllPolymorphicModelsInSamePackage()
             && !CoreUtils.isNullOrEmpty(propertiesManager.getModel().getParentModelName());
         boolean callToJsonSharedForThisProperties = !isJsonMergePatch
-            && allPolymorphicModelsInSamePackage
+            && propertiesManager.isAllPolymorphicModelsInSamePackage()
             && propertiesManager.getModel().isPolymorphicParent();
 
         classBlock.javadocComment(JavaJavadocComment::inheritDoc);
@@ -461,8 +459,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // In this scenario, the logic for polymorphism is that the defining model has a package-private, non-final
             // field for the discriminator which is set by either the deserialization logic or the constructor.
             if (callToJsonSharedForParentProperties && property.isPolymorphicDiscriminator()
-                && PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(propertiesManager.getModel())
-                && !ClientModelUtil.modelDefinesProperty(propertiesManager.getModel(), property)) {
+                && propertiesManager.isAllPolymorphicModelsInSamePackage()
+                && !propertiesManager.isPolymorphicDiscriminatorDefinedByModel()) {
                 return;
             }
 
@@ -937,11 +935,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         elseBlock -> elseBlock.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())"));
                 }
             });
-        }, addGeneratedAnnotation);
+        }, addGeneratedAnnotation, settings);
 
         readJsonObject(classBlock, propertiesManager, true,
             methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings),
-            addGeneratedAnnotation);
+            addGeneratedAnnotation, settings);
     }
 
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
@@ -982,7 +980,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         JavaSettings settings, Consumer<JavaClass> addGeneratedAnnotation) {
         readJsonObject(classBlock, propertiesManager, false,
             methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings),
-            addGeneratedAnnotation);
+            addGeneratedAnnotation, settings);
     }
 
     private void writeFromJsonDeserialization(JavaBlock methodBlock,
@@ -1002,29 +1000,42 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         methodBlock.line("bufferedReader.nextToken();");
 
         String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
-        addReaderWhileLoop("bufferedReader", methodBlock, true, fieldNameVariableName, false, whileBlock -> {
-            methodBlock
-                .ifBlock("\"error\".equals(" + fieldNameVariableName + ")", ifAction -> {
-                    ifAction.line("return " + READ_MANAGEMENT_ERROR_METHOD_NAME + "(bufferedReader);");
-                }).elseBlock(elseAction -> {
-                    elseAction.line("bufferedReader.skipChildren();");
-                });
-        });
+        addReaderWhileLoop("bufferedReader", methodBlock, true, fieldNameVariableName, false, whileBlock ->
+            methodBlock.ifBlock("\"error\".equals(" + fieldNameVariableName + ")",
+                    ifAction -> ifAction.line("return " + READ_MANAGEMENT_ERROR_METHOD_NAME + "(bufferedReader);"))
+                .elseBlock(elseAction -> elseAction.line("bufferedReader.skipChildren();")));
 
         methodBlock.methodReturn(READ_MANAGEMENT_ERROR_METHOD_NAME + "(bufferedReader.reset())");
     }
 
-    private static void writeFromJsonDeserialization0(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+    private static void writeFromJsonDeserialization0(JavaBlock methodBlock,
+        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
         // Initialize local variables to track what has been deserialized.
         initializeLocalVariables(methodBlock, propertiesManager, false, settings);
 
         boolean polymorphicJsonMergePatchScenario = propertiesManager.getModel().isPolymorphic()
             && ClientModelUtil.isJsonMergePatchModel(propertiesManager.getModel(), settings);
+        boolean useFromJsonShared = canUseFromJsonShared(propertiesManager);
 
         String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
 
         // Add the outermost while loop to read the JSON object.
         addReaderWhileLoop(methodBlock, true, fieldNameVariableName, false, whileBlock -> {
+            if (useFromJsonShared && propertiesManager.getModel().isPolymorphicParent()) {
+                // If we can use 'fromJsonShared' and this model is a super type, then we can use a customized
+                // 'fromJson' / 'fromJsonKnownDiscriminator' method to handle deserialization.
+                // This will generate the following logic:
+                //
+                // if (!fromJsonShared(reader, fieldName, deserializedModel)) {
+                //    handleUnknownProperty
+                // }
+                String ifBlockCondition = "!" + propertiesManager.getModel().getName() + ".fromJsonShared(reader, "
+                    + fieldNameVariableName + ", " + propertiesManager.getDeserializedModelName() + ")";
+                methodBlock.ifBlock(ifBlockCondition,
+                    ifBlock -> generateUnknownFieldLogic(ifBlock, null, propertiesManager));
+                return;
+            }
+
             // Loop over all properties and generate their deserialization handling.
             AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(null);
 
@@ -1032,7 +1043,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 handleJsonPropertyDeserialization(propertiesManager.getModel(), property,
                     propertiesManager.getDeserializedModelName(), whileBlock, ifBlockReference,
                     fieldNameVariableName, fromSuper, propertiesManager.hasConstructorArguments(), settings,
-                    polymorphicJsonMergePatchScenario);
+                    polymorphicJsonMergePatchScenario, false);
 
             Map<String, ClientModelProperty> modelPropertyMap = new HashMap<>();
             for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(propertiesManager.getModel())) {
@@ -1042,50 +1053,94 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 modelPropertyMap.put(property.getName(), property);
             }
 
-            // Child classes may contain properties that shadow parents' ones.
-            // Thus, we only take the shadowing ones, not the ones shadowed.
-            Map<String, ClientModelProperty> superRequiredToDeserialized = new LinkedHashMap<>();
-            propertiesManager.forEachSuperRequiredProperty(property -> {
-                if (!property.isConstant() && modelPropertyMap.get(property.getName()) == property) {
-                    superRequiredToDeserialized.put(property.getName(), property);
-                }
-            });
-            superRequiredToDeserialized.values().forEach(property -> consumer.accept(property, true));
+            if (useFromJsonShared) {
+                // If this model is a subtype, and 'fromJsonShared' can be used, instead of generating the
+                // deserialization of the parent model(s) in 'fromJson' call to the parent class's 'fromJsonShared'.
+                String ifBlockCondition = propertiesManager.getModel().getParentModelName() + ".fromJsonShared(reader, "
+                    + fieldNameVariableName + ", " + propertiesManager.getDeserializedModelName() + ")";
+                ifBlockReference.set(methodBlock.ifBlock(ifBlockCondition, ifBlock -> ifBlock.line("continue;")));
+            } else {
+                // Child classes may contain properties that shadow parents' ones.
+                // Thus, we only take the shadowing ones, not the ones shadowed.
+                Map<String, ClientModelProperty> superRequiredToDeserialized = new LinkedHashMap<>();
+                propertiesManager.forEachSuperRequiredProperty(property -> {
+                    if (!property.isConstant() && modelPropertyMap.get(property.getName()) == property) {
+                        superRequiredToDeserialized.put(property.getName(), property);
+                    }
+                });
+                superRequiredToDeserialized.values().forEach(property -> consumer.accept(property, true));
 
-            // Child classes may contain properties that shadow parents' ones.
-            // Thus, we only take the shadowing ones, not the ones shadowed.
-            Map<String, ClientModelProperty> superSettersToDeserialized = new LinkedHashMap<>();
-            propertiesManager.forEachSuperSetterProperty(property -> {
-                if (!property.isConstant() && modelPropertyMap.get(property.getName()) == property) {
-                    superSettersToDeserialized.put(property.getName(), property);
-                }
-            });
-            superSettersToDeserialized.values().forEach(property -> consumer.accept(property, true));
+                // Child classes may contain properties that shadow parents' ones.
+                // Thus, we only take the shadowing ones, not the ones shadowed.
+                Map<String, ClientModelProperty> superSettersToDeserialized = new LinkedHashMap<>();
+                propertiesManager.forEachSuperSetterProperty(property -> {
+                    if (!property.isConstant() && modelPropertyMap.get(property.getName()) == property) {
+                        superSettersToDeserialized.put(property.getName(), property);
+                    }
+                });
+                superSettersToDeserialized.values().forEach(property -> consumer.accept(property, true));
+            }
 
-            propertiesManager.forEachRequiredProperty(property -> {
-                if (property.isConstant()) {
-                    return;
-                }
-                consumer.accept(property, false);
-            });
-            propertiesManager.forEachSetterProperty(property -> consumer.accept(property, false));
-
-            JavaIfBlock ifBlock = ifBlockReference.get();
-
-            handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
-                methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
-                propertiesManager.getJsonReaderFieldNameVariableName(), propertiesManager.hasConstructorArguments(),
-                settings, polymorphicJsonMergePatchScenario);
+            generateThisFromJson(propertiesManager, ifBlockReference, consumer, methodBlock, settings,
+                polymorphicJsonMergePatchScenario, false, useFromJsonShared);
 
             // All properties have been checked for, add an else block that will either ignore unknown properties
             // or add them into an additional properties bag.
-            ClientModelProperty additionalProperty = getAdditionalPropertiesPropertyInModelOrFromSuper(propertiesManager);
-            handleUnknownJsonFieldDeserialization(whileBlock, ifBlock, additionalProperty,
-                propertiesManager.getJsonReaderFieldNameVariableName());
+            generateUnknownFieldLogic(whileBlock, ifBlockReference.get(), propertiesManager);
         });
 
         // Add the validation and return logic.
         handleReadReturn(methodBlock, propertiesManager.getModel().getName(), propertiesManager, settings);
+    }
+
+    private static void generateThisFromJson(ClientModelPropertiesManager propertiesManager,
+        AtomicReference<JavaIfBlock> ifBlockReference, BiConsumer<ClientModelProperty, Boolean> consumer,
+        JavaBlock methodBlock, JavaSettings settings, boolean polymorphicJsonMergePatchScenario,
+        boolean isFromJsonShared, boolean usingFromJsonShared) {
+        propertiesManager.forEachRequiredProperty(property -> {
+            if (property.isConstant()) {
+                return;
+            }
+
+            if (skipDeserializingParentDefinedDiscriminator(usingFromJsonShared, isFromJsonShared, propertiesManager,
+                property)) {
+                return;
+            }
+
+            consumer.accept(property, false);
+        });
+        propertiesManager.forEachSetterProperty(property -> {
+            if (skipDeserializingParentDefinedDiscriminator(usingFromJsonShared, isFromJsonShared, propertiesManager,
+                property)) {
+                return;
+            }
+
+            consumer.accept(property, false);
+        });
+
+        JavaIfBlock ifBlock = ifBlockReference.get();
+
+        handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
+            methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
+            propertiesManager.getJsonReaderFieldNameVariableName(), propertiesManager.hasConstructorArguments(),
+            settings, polymorphicJsonMergePatchScenario, isFromJsonShared);
+    }
+
+    private static boolean skipDeserializingParentDefinedDiscriminator(boolean usingFromJsonShared,
+        boolean isFromJsonShared, ClientModelPropertiesManager propertiesManager, ClientModelProperty property) {
+        // If this type is using 'fromJsonShared' from the parent model, skip deserializing polymorphic
+        // discriminators if it is defined by a parent model.
+        return (usingFromJsonShared
+            || (isFromJsonShared && !CoreUtils.isNullOrEmpty(propertiesManager.getModel().getParentModelName())))
+            && property.isPolymorphicDiscriminator()
+            && !propertiesManager.isPolymorphicDiscriminatorDefinedByModel();
+    }
+
+    private static void generateUnknownFieldLogic(JavaBlock whileBlock, JavaIfBlock ifBlock,
+        ClientModelPropertiesManager propertiesManager) {
+        ClientModelProperty additionalProperty = getAdditionalPropertiesPropertyInModelOrFromSuper(propertiesManager);
+        handleUnknownJsonFieldDeserialization(whileBlock, ifBlock, additionalProperty,
+            propertiesManager.getJsonReaderFieldNameVariableName());
     }
 
     /**
@@ -1117,7 +1172,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      */
     private static void readJsonObject(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         boolean superTypeReading, Consumer<JavaBlock> deserializationBlock,
-        Consumer<JavaClass> addGeneratedAnnotation) {
+        Consumer<JavaClass> addGeneratedAnnotation, JavaSettings settings) {
         JavaVisibility visibility = superTypeReading ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
         String methodName = superTypeReading ? "fromJsonKnownDiscriminator" : "fromJson";
 
@@ -1131,13 +1186,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 javadocComment.methodReturns("An instance of " + modelName + " if the JsonReader was pointing to an "
                     + "instance of it, or null if it was pointing to JSON null.");
 
-                String throwsStatement = null;
                 if (hasRequiredProperties) {
-                    throwsStatement = "If the deserialized JSON object was missing any required properties.";
-                }
-
-                if (throwsStatement != null) {
-                    javadocComment.methodThrows("IllegalStateException", throwsStatement);
+                    javadocComment.methodThrows("IllegalStateException",
+                        "If the deserialized JSON object was missing any required properties.");
                 }
 
                 javadocComment.methodThrows("IOException", "If an error occurs while reading the " + modelName + ".");
@@ -1145,9 +1196,42 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         addGeneratedAnnotation.accept(classBlock);
-        classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader) throws IOException", methodBlock -> {
-            readJsonObjectMethodBody(methodBlock, deserializationBlock);
-        });
+        classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader) throws IOException",
+            methodBlock -> readJsonObjectMethodBody(methodBlock, deserializationBlock));
+
+        if (superTypeReading
+            && canUseFromJsonShared(propertiesManager)
+            && propertiesManager.getModel().isPolymorphicParent()) {
+            // Add a package-private 'fromJsonShared' method that can handle deserializing properties defined in the parent
+            // class.
+            String fieldName = propertiesManager.getJsonReaderFieldNameVariableName();
+            String modelDeserializedName = propertiesManager.getDeserializedModelName();
+            String methodDefinition = "boolean fromJsonShared(JsonReader reader, String " + fieldName + ", "
+                + modelName + " " + modelDeserializedName + ") throws IOException";
+            addGeneratedAnnotation.accept(classBlock);
+            classBlock.staticMethod(JavaVisibility.PackagePrivate, methodDefinition, methodBlock -> {
+                boolean polymorphicJsonMergePatchScenario = propertiesManager.getModel().isPolymorphic()
+                    && ClientModelUtil.isJsonMergePatchModel(propertiesManager.getModel(), settings);
+
+                AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>();
+                if (!CoreUtils.isNullOrEmpty(propertiesManager.getModel().getParentModelName())) {
+                    String callToSuperFromJsonShared = propertiesManager.getModel().getParentModelName()
+                        + ".fromJsonShared(reader, " + propertiesManager.getJsonReaderFieldNameVariableName() + ", "
+                        + propertiesManager.getDeserializedModelName() + ")";
+                    ifBlockReference.set(methodBlock.ifBlock(callToSuperFromJsonShared,
+                        ifBlock -> ifBlock.methodReturn("true")));
+                }
+
+                BiConsumer<ClientModelProperty, Boolean> consumer
+                    = (property, fromSuper) -> handleJsonPropertyDeserialization(propertiesManager.getModel(), property,
+                    modelDeserializedName, methodBlock, ifBlockReference, fieldName, fromSuper,
+                    propertiesManager.hasConstructorArguments(), settings, polymorphicJsonMergePatchScenario, true);
+                generateThisFromJson(propertiesManager, ifBlockReference, consumer, methodBlock, settings,
+                    polymorphicJsonMergePatchScenario, true, false);
+
+                methodBlock.methodReturn("false");
+            });
+        }
     }
 
     private static void readJsonObjectMethodBody(JavaBlock methodBlock, Consumer<JavaBlock> deserializationBlock) {
@@ -1156,10 +1240,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Support for a default value if null will need to be supported and for objects that get their value
         // from a JSON value instead of JSON object or are an array type.
         methodBlock.line("return jsonReader.readObject(reader -> {");
-
         deserializationBlock.accept(methodBlock);
-
         methodBlock.line("});");
+    }
+
+    private static boolean canUseFromJsonShared(ClientModelPropertiesManager propertiesManager) {
+        // If the model is part of a polymorphic hierarchy and all models in the polymorphic hierarchy are in the same
+        // package we can generate a package-private 'toJsonShared' method that can handle deserializing properties
+        // defined in the parent class(es).
+        // This will prevent duplicating the deserialization logic for parent properties in each subclass.
+        return !propertiesManager.hasConstructorArguments()
+            && propertiesManager.isAllPolymorphicModelsInSamePackage();
     }
 
     /**
@@ -1297,7 +1388,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void handleJsonPropertyDeserialization(ClientModel model, ClientModelProperty property,
         String modelVariableName, JavaBlock methodBlock, AtomicReference<JavaIfBlock> ifBlockReference,
         String fieldNameVariableName, boolean fromSuper, boolean hasConstructorArguments, JavaSettings settings,
-        boolean polymorphicJsonMergePatchScenario) {
+        boolean polymorphicJsonMergePatchScenario, boolean isFromJsonShared) {
         // Property will be handled later by flattened deserialization.
         if (property.getNeedsFlatten()) {
             return;
@@ -1305,7 +1396,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         JavaIfBlock ifBlock = ifBlockReference.get();
         ifBlock = handleJsonPropertyDeserialization(model, property, modelVariableName, methodBlock, ifBlock,
-            fieldNameVariableName, fromSuper, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario);
+            fieldNameVariableName, fromSuper, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario,
+            isFromJsonShared);
 
         ifBlockReference.set(ifBlock);
     }
@@ -1313,32 +1405,38 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static JavaIfBlock handleJsonPropertyDeserialization(ClientModel model, ClientModelProperty property,
         String modelVariableName, JavaBlock methodBlock, JavaIfBlock ifBlock, String fieldNameVariableName,
         boolean fromSuper, boolean hasConstructorArguments, JavaSettings settings,
-        boolean polymorphicJsonMergePatchScenario) {
+        boolean polymorphicJsonMergePatchScenario, boolean isFromJsonShared) {
         String jsonPropertyName = property.getSerializedName();
         if (CoreUtils.isNullOrEmpty(jsonPropertyName)) {
             return ifBlock;
         }
 
         return ifOrElseIf(methodBlock, ifBlock, "\"" + jsonPropertyName + "\".equals(" + fieldNameVariableName + ")",
-            deserializationBlock -> generateJsonDeserializationLogic(deserializationBlock, modelVariableName, model,
-                property, fromSuper, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario));
+            deserializationBlock -> {
+                generateJsonDeserializationLogic(deserializationBlock, modelVariableName, model, property, fromSuper,
+                    hasConstructorArguments, settings, polymorphicJsonMergePatchScenario);
+                if (isFromJsonShared) {
+                    deserializationBlock.methodReturn("true");
+                }
+            });
     }
 
     private static void handleFlattenedPropertiesDeserialization(
         JsonFlattenedPropertiesTree flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
         ClientModelProperty additionalProperties, String fieldNameVariableName, boolean hasConstructorArguments,
-        JavaSettings settings, boolean polymorphicJsonMergePatchScenario) {
+        JavaSettings settings, boolean polymorphicJsonMergePatchScenario, boolean isFromJsonShared) {
         // The initial call to handle flattened properties is using the base node which is just a holder.
         for (JsonFlattenedPropertiesTree structure : flattenedProperties.getChildrenNodes().values()) {
             handleFlattenedPropertiesDeserializationHelper(structure, methodBlock, ifBlock, additionalProperties,
-                fieldNameVariableName, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario);
+                fieldNameVariableName, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario,
+                isFromJsonShared);
         }
     }
 
     private static JavaIfBlock handleFlattenedPropertiesDeserializationHelper(
         JsonFlattenedPropertiesTree flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
         ClientModelProperty additionalProperties, String fieldNameVariableName, boolean hasConstructorArguments,
-        JavaSettings settings, boolean polymorphicJsonMergePatchScenario) {
+        JavaSettings settings, boolean polymorphicJsonMergePatchScenario, boolean isFromJsonShared) {
         ClientModelPropertyWithMetadata propertyWithMetadata = flattenedProperties.getProperty();
         if (propertyWithMetadata != null) {
             String modelVariableName = "deserialized" + propertyWithMetadata.getModel().getName();
@@ -1346,10 +1444,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // This is a terminal location, so only need to handle checking for the property name.
             return ifOrElseIf(methodBlock, ifBlock,
                 "\"" + flattenedProperties.getNodeName() + "\".equals(" + fieldNameVariableName + ")",
-                deserializationBlock -> generateJsonDeserializationLogic(deserializationBlock, modelVariableName,
-                    propertyWithMetadata.getModel(), propertyWithMetadata.getProperty(),
-                    propertyWithMetadata.isFromSuperClass(), hasConstructorArguments, settings,
-                    polymorphicJsonMergePatchScenario));
+                deserializationBlock -> {
+                    generateJsonDeserializationLogic(deserializationBlock, modelVariableName,
+                        propertyWithMetadata.getModel(), propertyWithMetadata.getProperty(),
+                        propertyWithMetadata.isFromSuperClass(), hasConstructorArguments, settings,
+                        polymorphicJsonMergePatchScenario);
+
+                    if (isFromJsonShared) {
+                        deserializationBlock.methodReturn("true");
+                    }
+                });
         } else {
             // Otherwise this is an intermediate location and a while loop reader needs to be added.
             return ifOrElseIf(methodBlock, ifBlock,
@@ -1359,11 +1463,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     for (JsonFlattenedPropertiesTree structure : flattenedProperties.getChildrenNodes().values()) {
                         innerIfBlock = handleFlattenedPropertiesDeserializationHelper(structure, methodBlock,
                             innerIfBlock, additionalProperties, fieldNameVariableName, hasConstructorArguments,
-                            settings, polymorphicJsonMergePatchScenario);
+                            settings, polymorphicJsonMergePatchScenario, isFromJsonShared);
                     }
 
-                    handleUnknownJsonFieldDeserialization(whileBlock, innerIfBlock, additionalProperties,
-                        fieldNameVariableName);
+                    if (!isFromJsonShared) {
+                        handleUnknownJsonFieldDeserialization(whileBlock, innerIfBlock, additionalProperties,
+                            fieldNameVariableName);
+                    }
                 }));
         }
     }

@@ -117,10 +117,8 @@ public final class DotSalmon extends DotFish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("species".equals(fieldName)) {
-                    deserializedDotSalmon.setSpecies(reader.getString());
-                } else if ("fish.type".equals(fieldName)) {
-                    deserializedDotSalmon.fishType = reader.getString();
+                if (DotFish.fromJsonShared(reader, fieldName, deserializedDotSalmon)) {
+                    continue;
                 } else if ("location".equals(fieldName)) {
                     deserializedDotSalmon.location = reader.getString();
                 } else if ("iswild".equals(fieldName)) {
