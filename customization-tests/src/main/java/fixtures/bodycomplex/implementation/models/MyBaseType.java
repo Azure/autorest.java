@@ -171,9 +171,11 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
 
                 if ("propBH1".equals(fieldName)) {
                     deserializedMyBaseType.propBH1 = reader.getString();
-                    return true;
+                } else {
+                    reader.skipChildren();
                 }
             }
+            return true;
         }
         return false;
     }

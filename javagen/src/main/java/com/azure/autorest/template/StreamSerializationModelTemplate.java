@@ -1120,10 +1120,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         JavaIfBlock ifBlock = ifBlockReference.get();
 
-        handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
-            methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
-            propertiesManager.getJsonReaderFieldNameVariableName(), propertiesManager.hasConstructorArguments(),
-            settings, polymorphicJsonMergePatchScenario, isFromJsonShared);
+        // Add flattened properties if we aren't using 'fromJsonShared' or some of the flattened properties are defined
+        // by this model.
+        if (!usingFromJsonShared || !propertiesManager.isAllFlattenedPropertiesFromParent()) {
+            handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(), methodBlock,
+                ifBlock, propertiesManager.getAdditionalProperties(),
+                propertiesManager.getJsonReaderFieldNameVariableName(), propertiesManager.hasConstructorArguments(),
+                settings, polymorphicJsonMergePatchScenario, isFromJsonShared);
+        }
     }
 
     private static boolean skipDeserializingParentDefinedDiscriminator(boolean usingFromJsonShared,
@@ -1429,14 +1433,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         for (JsonFlattenedPropertiesTree structure : flattenedProperties.getChildrenNodes().values()) {
             handleFlattenedPropertiesDeserializationHelper(structure, methodBlock, ifBlock, additionalProperties,
                 fieldNameVariableName, hasConstructorArguments, settings, polymorphicJsonMergePatchScenario,
-                isFromJsonShared);
+                isFromJsonShared, 0);
         }
     }
 
     private static JavaIfBlock handleFlattenedPropertiesDeserializationHelper(
         JsonFlattenedPropertiesTree flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
         ClientModelProperty additionalProperties, String fieldNameVariableName, boolean hasConstructorArguments,
-        JavaSettings settings, boolean polymorphicJsonMergePatchScenario, boolean isFromJsonShared) {
+        JavaSettings settings, boolean polymorphicJsonMergePatchScenario, boolean isFromJsonShared, int depth) {
         ClientModelPropertyWithMetadata propertyWithMetadata = flattenedProperties.getProperty();
         if (propertyWithMetadata != null) {
             String modelVariableName = "deserialized" + propertyWithMetadata.getModel().getName();
@@ -1444,33 +1448,32 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // This is a terminal location, so only need to handle checking for the property name.
             return ifOrElseIf(methodBlock, ifBlock,
                 "\"" + flattenedProperties.getNodeName() + "\".equals(" + fieldNameVariableName + ")",
-                deserializationBlock -> {
-                    generateJsonDeserializationLogic(deserializationBlock, modelVariableName,
-                        propertyWithMetadata.getModel(), propertyWithMetadata.getProperty(),
-                        propertyWithMetadata.isFromSuperClass(), hasConstructorArguments, settings,
-                        polymorphicJsonMergePatchScenario);
-
-                    if (isFromJsonShared) {
-                        deserializationBlock.methodReturn("true");
-                    }
-                });
+                deserializationBlock -> generateJsonDeserializationLogic(deserializationBlock, modelVariableName,
+                    propertyWithMetadata.getModel(), propertyWithMetadata.getProperty(),
+                    propertyWithMetadata.isFromSuperClass(), hasConstructorArguments, settings,
+                    polymorphicJsonMergePatchScenario));
         } else {
             // Otherwise this is an intermediate location and a while loop reader needs to be added.
             return ifOrElseIf(methodBlock, ifBlock,
                 "\"" + flattenedProperties.getNodeName() + "\".equals(" + fieldNameVariableName + ") && reader.currentToken() == JsonToken.START_OBJECT",
-                ifAction -> addReaderWhileLoop(ifAction, false, fieldNameVariableName, false, whileBlock -> {
-                    JavaIfBlock innerIfBlock = null;
-                    for (JsonFlattenedPropertiesTree structure : flattenedProperties.getChildrenNodes().values()) {
-                        innerIfBlock = handleFlattenedPropertiesDeserializationHelper(structure, methodBlock,
-                            innerIfBlock, additionalProperties, fieldNameVariableName, hasConstructorArguments,
-                            settings, polymorphicJsonMergePatchScenario, isFromJsonShared);
-                    }
+                ifAction -> {
+                    addReaderWhileLoop(ifAction, false, fieldNameVariableName, false, whileBlock -> {
+                        JavaIfBlock innerIfBlock = null;
+                        for (JsonFlattenedPropertiesTree structure : flattenedProperties.getChildrenNodes().values()) {
+                            innerIfBlock = handleFlattenedPropertiesDeserializationHelper(structure, methodBlock,
+                                innerIfBlock, additionalProperties, fieldNameVariableName, hasConstructorArguments,
+                                settings, polymorphicJsonMergePatchScenario, isFromJsonShared, depth + 1);
+                        }
 
-                    if (!isFromJsonShared) {
                         handleUnknownJsonFieldDeserialization(whileBlock, innerIfBlock, additionalProperties,
                             fieldNameVariableName);
+                    });
+
+                    if (isFromJsonShared && depth == 0) {
+                        // Flattening will handle skipping and additional properties itself.
+                        ifAction.methodReturn("true");
                     }
-                }));
+                });
         }
     }
 
