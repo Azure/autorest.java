@@ -20,16 +20,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     private String propD1;
 
-    /*
-     * The propBH1 property.
-     */
-    private String propBH1;
-
-    /*
-     * The propB1 property.
-     */
-    private String propB1;
-
     /**
      * Creates an instance of MyDerivedType class.
      */
@@ -44,26 +34,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     public String getPropD1() {
         return this.propD1;
-    }
-
-    /**
-     * Get the propBH1 property: The propBH1 property.
-     * 
-     * @return the propBH1 value.
-     */
-    @Override
-    public String getPropBH1() {
-        return this.propBH1;
-    }
-
-    /**
-     * Get the propB1 property: The propB1 property.
-     * 
-     * @return the propB1 value.
-     */
-    @Override
-    public String getPropB1() {
-        return this.propB1;
     }
 
     /**

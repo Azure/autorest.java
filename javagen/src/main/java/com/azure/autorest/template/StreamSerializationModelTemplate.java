@@ -7,6 +7,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.implementation.ClientModelPropertiesManager;
 import com.azure.autorest.implementation.ClientModelPropertyWithMetadata;
 import com.azure.autorest.implementation.JsonFlattenedPropertiesTree;
+import com.azure.autorest.implementation.PolymorphicDiscriminatorHandler;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -241,15 +242,23 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     @Override
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
         List<ClientModelProperty> fieldProperties = super.getFieldProperties(model, settings);
-        Set<String> propertySerializedNames = fieldProperties.stream().map(ClientModelProperty::getSerializedName).collect(Collectors.toSet());
+
+        // If the model is polymorphic and all the models in the polymorphic hierarchy are in the same package we don't
+        // need to shade parent properties.
+        if (model.isPolymorphic() && PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(model)) {
+            return fieldProperties;
+        }
+
+        Set<String> propertySerializedNames = fieldProperties.stream().map(ClientModelProperty::getSerializedName)
+            .collect(Collectors.toSet());
         for (ClientModelProperty parentProperty : ClientModelUtil.getParentProperties(model, false)) {
             if (propertySerializedNames.contains(parentProperty.getSerializedName())) {
                 continue;
             }
             propertySerializedNames.add(parentProperty.getSerializedName());
             if (!parentProperty.isPolymorphicDiscriminator() // parent discriminators are already passed to children, see @see in method javadoc
-                    && ClientModelUtil.readOnlyNotInCtor(model, parentProperty, settings) // we shadow parent read-only properties in child class
-                    || parentProperty.getClientFlatten()) { // we shadow parent flattened property in child class
+                && ClientModelUtil.readOnlyNotInCtor(model, parentProperty, settings) // we shadow parent read-only properties in child class
+                || parentProperty.getClientFlatten()) { // we shadow parent flattened property in child class
                 fieldProperties.add(parentProperty);
             }
         }
