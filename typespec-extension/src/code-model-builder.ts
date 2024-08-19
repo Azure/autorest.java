@@ -132,6 +132,7 @@ import { EmitterOptions } from "./emitter.js";
 import { createPollOperationDetailsSchema, getFileDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
+  CONTENT_TYPE_KEY,
   ORIGIN_API_VERSION,
   SPECIAL_HEADER_NAMES,
   cloneOperationParameter,
@@ -809,13 +810,13 @@ export class CodeModelBuilder {
         httpOperation.bodyParam &&
         param.kind === "header"
       ) {
-        if (param.serializedName.toLocaleLowerCase() === "content-type") {
+        if (param.serializedName.toLocaleLowerCase() === CONTENT_TYPE_KEY) {
           continue;
         }
       }
       // if the request body is optional, skip content-type header added by TCGC
       if (httpOperation.bodyParam && httpOperation.bodyParam.optional) {
-        if (param.serializedName.toLocaleLowerCase() === "content-type") {
+        if (param.serializedName.toLocaleLowerCase() === CONTENT_TYPE_KEY) {
           continue;
         }
       }
@@ -849,7 +850,6 @@ export class CodeModelBuilder {
     }
 
     // check for paged
-    // this.processRouteForPaged(codeModelOperation, sdkMethod.operation.__raw.responses);
     this.processRouteForPaged(codeModelOperation, sdkMethod.operation.responses, sdkMethod);
 
     // check for long-running operation
@@ -869,12 +869,13 @@ export class CodeModelBuilder {
       for (const [_, response] of responses) {
         const bodyType = response.type;
         if (bodyType && bodyType.kind === "model") {
-          const pagedResult = sdkMethod.__raw_paged_metadata;
-          if (pagedResult) {
+          const itemName = sdkMethod.response.resultPath;
+          const nextLinkName = sdkMethod.nextLinkPath;
+          if (itemName && nextLinkName) {
             op.extensions = op.extensions ?? {};
             op.extensions["x-ms-pageable"] = {
-              itemName: pagedResult.itemsProperty?.name,
-              nextLinkName: pagedResult.nextLinkProperty?.name,
+              itemName: itemName,
+              nextLinkName: nextLinkName,
             };
 
             op.responses?.forEach((r) => {

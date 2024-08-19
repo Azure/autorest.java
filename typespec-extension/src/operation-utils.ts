@@ -18,7 +18,7 @@ export const SPECIAL_HEADER_NAMES = new Set([
 
 export const ORIGIN_API_VERSION = "modelerfour:synthesized/api-version";
 
-const CONTENT_TYPE_KEY = "content-type";
+export const CONTENT_TYPE_KEY = "content-type";
 
 // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
 const SUPPORTED_MIME_TYPES = new Set<string>([
