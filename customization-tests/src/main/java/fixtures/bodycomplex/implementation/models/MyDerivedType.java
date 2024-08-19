@@ -91,23 +91,10 @@ public final class MyDerivedType extends MyBaseType {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("propB1".equals(fieldName)) {
-                    deserializedMyDerivedType.setPropB1(reader.getString());
-                } else if ("kind".equals(fieldName)) {
-                    deserializedMyDerivedType.kind = MyKind.fromString(reader.getString());
+                if (MyBaseType.fromJsonShared(reader, fieldName, deserializedMyDerivedType)) {
+                    continue;
                 } else if ("propD1".equals(fieldName)) {
                     deserializedMyDerivedType.propD1 = reader.getString();
-                } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("propBH1".equals(fieldName)) {
-                            deserializedMyDerivedType.setPropBH1(reader.getString());
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
                 } else {
                     reader.skipChildren();
                 }

@@ -181,21 +181,30 @@ public class Fish implements JsonSerializable<Fish> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("length".equals(fieldName)) {
-                    deserializedFish.length = reader.getFloat();
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedFish.fishtype = reader.getString();
-                } else if ("species".equals(fieldName)) {
-                    deserializedFish.species = reader.getString();
-                } else if ("siblings".equals(fieldName)) {
-                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                    deserializedFish.siblings = siblings;
-                } else {
+                if (!Fish.fromJsonShared(reader, fieldName, deserializedFish)) {
                     reader.skipChildren();
                 }
             }
 
             return deserializedFish;
         });
+    }
+
+    static boolean fromJsonShared(JsonReader reader, String fieldName, Fish deserializedFish) throws IOException {
+        if ("length".equals(fieldName)) {
+            deserializedFish.length = reader.getFloat();
+            return true;
+        } else if ("fishtype".equals(fieldName)) {
+            deserializedFish.fishtype = reader.getString();
+            return true;
+        } else if ("species".equals(fieldName)) {
+            deserializedFish.species = reader.getString();
+            return true;
+        } else if ("siblings".equals(fieldName)) {
+            List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+            deserializedFish.siblings = siblings;
+            return true;
+        }
+        return false;
     }
 }

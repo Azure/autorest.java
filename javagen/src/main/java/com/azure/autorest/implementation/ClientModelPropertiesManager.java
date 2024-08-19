@@ -59,6 +59,7 @@ public final class ClientModelPropertiesManager {
     private final ClientModelPropertyWithMetadata discriminatorProperty;
     private final String expectedDiscriminator;
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
+    private final boolean allFlattenedPropertiesFromParent;
     private final String jsonReaderFieldNameVariableName;
 
     private final String xmlRootElementName;
@@ -109,6 +110,7 @@ public final class ClientModelPropertiesManager {
         xmlTexts = new ArrayList<>();
         superXmlElements = new ArrayList<>();
         xmlElements = new ArrayList<>();
+        boolean allFlattenedPropertiesFromParent = true;
 
         if (model.isPolymorphic()) {
             ClientModel superTypeModel = model;
@@ -207,6 +209,7 @@ public final class ClientModelPropertiesManager {
 
             if (property.getNeedsFlatten()) {
                 flattenedProperties.put(property.getName(), new ClientModelPropertyWithMetadata(model, property, false));
+                allFlattenedPropertiesFromParent = false;
             }
 
             possibleReaderFieldNameVariableNames.remove(property.getName());
@@ -240,6 +243,7 @@ public final class ClientModelPropertiesManager {
         this.additionalProperties = additionalProperties;
         this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminatorName(),
             flattenedProperties);
+        this.allFlattenedPropertiesFromParent = allFlattenedPropertiesFromParent;
         Iterator<String> possibleReaderFieldNameVariableNamesIterator = possibleReaderFieldNameVariableNames.iterator();
         if (possibleReaderFieldNameVariableNamesIterator.hasNext()) {
             this.jsonReaderFieldNameVariableName = possibleReaderFieldNameVariableNamesIterator.next();
@@ -478,6 +482,15 @@ public final class ClientModelPropertiesManager {
      */
     public JsonFlattenedPropertiesTree getJsonFlattenedPropertiesTree() {
         return jsonFlattenedPropertiesTree;
+    }
+
+    /**
+     * Whether all the flattened properties are from parent models.
+     *
+     * @return Whether all the flattened properties are from parent models.
+     */
+    public boolean isAllFlattenedPropertiesFromParent() {
+        return allFlattenedPropertiesFromParent;
     }
 
     /**
