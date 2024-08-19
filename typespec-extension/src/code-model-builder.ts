@@ -1151,6 +1151,7 @@ export class CodeModelBuilder {
         extensions: extensions,
       });
       if (onClient) {
+        op.addParameter(parameter);
         clientContext.addGlobalParameter(parameter);
       } else {
         op.addParameter(parameter);
