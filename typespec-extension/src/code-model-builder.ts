@@ -1461,14 +1461,10 @@ export class CodeModelBuilder {
   ) {
     const serializedName = opParameter.serializedName;
     let existParameter: Parameter | undefined;
-    // if (opParameter.kind !== "property") {
-      // property of body, only check parameter location as there could only be 1 body in operation
-    //   existParameter = op.parameters?.find((it) => it.protocol.http?.in === ParameterLocation.Body);
-    // } else {
+    if (opParameter.kind !== "property") { // not body property
       // header/query/path, same location and same serializedName
-    //   existParameter = op.parameters?.find((it) => it.protocol.http?.in === opParameter.kind && it.language.default.serializedName === serializedName);
-    // }
-    existParameter = op.parameters?.find((it) => it.language.default.serializedName === serializedName);
+      existParameter = op.parameters?.find((it) => it.protocol.http?.in === opParameter.kind && it.language.default.serializedName === serializedName);
+    }
     request.parameters = request.parameters ?? [];
     if (existParameter) {
       // parameter
