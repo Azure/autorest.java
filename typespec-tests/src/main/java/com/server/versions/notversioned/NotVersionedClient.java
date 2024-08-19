@@ -53,7 +53,6 @@ public final class NotVersionedClient {
     /**
      * The withQueryApiVersion operation.
      * 
-     * @param apiVersion The apiVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -63,14 +62,13 @@ public final class NotVersionedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withQueryApiVersionWithResponse(String apiVersion, RequestOptions requestOptions) {
-        return this.serviceClient.withQueryApiVersionWithResponse(apiVersion, requestOptions);
+    public Response<Void> withQueryApiVersionWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.withQueryApiVersionWithResponse(requestOptions);
     }
 
     /**
      * The withPathApiVersion operation.
      * 
-     * @param apiVersion The apiVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -80,8 +78,8 @@ public final class NotVersionedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withPathApiVersionWithResponse(String apiVersion, RequestOptions requestOptions) {
-        return this.serviceClient.withPathApiVersionWithResponse(apiVersion, requestOptions);
+    public Response<Void> withPathApiVersionWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.withPathApiVersionWithResponse(requestOptions);
     }
 
     /**
@@ -104,8 +102,6 @@ public final class NotVersionedClient {
     /**
      * The withQueryApiVersion operation.
      * 
-     * @param apiVersion The apiVersion parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -114,17 +110,15 @@ public final class NotVersionedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void withQueryApiVersion(String apiVersion) {
+    public void withQueryApiVersion() {
         // Generated convenience method for withQueryApiVersionWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        withQueryApiVersionWithResponse(apiVersion, requestOptions).getValue();
+        withQueryApiVersionWithResponse(requestOptions).getValue();
     }
 
     /**
      * The withPathApiVersion operation.
      * 
-     * @param apiVersion The apiVersion parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -133,9 +127,9 @@ public final class NotVersionedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void withPathApiVersion(String apiVersion) {
+    public void withPathApiVersion() {
         // Generated convenience method for withPathApiVersionWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        withPathApiVersionWithResponse(apiVersion, requestOptions).getValue();
+        withPathApiVersionWithResponse(requestOptions).getValue();
     }
 }

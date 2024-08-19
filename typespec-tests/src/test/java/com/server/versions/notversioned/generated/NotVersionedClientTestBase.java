@@ -24,6 +24,7 @@ class NotVersionedClientTestBase extends TestProxyTestBase {
     protected void beforeTest() {
         NotVersionedClientBuilder notVersionedClientbuilder = new NotVersionedClientBuilder()
             .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .apiVersion(Configuration.getGlobalConfiguration().get("APIVERSION", "apiversion"))
             .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
