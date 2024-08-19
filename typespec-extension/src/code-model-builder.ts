@@ -993,19 +993,6 @@ export class CodeModelBuilder {
       op.extensions["x-ms-long-running-operation"] = true;
       return;
     }
-
-    for (const [_, response] of responses) {
-      if (response.headers) {
-        for (const header of response.headers) {
-          if (isPollingLocation(this.program, header.__raw)) {
-            op.extensions = op.extensions ?? {};
-            op.extensions["x-ms-long-running-operation"] = true;
-
-            break;
-          }
-        }
-      }
-    }
   }
 
   private _armApiVersionParameter?: Parameter;
