@@ -20,6 +20,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
+import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaFileContents;
@@ -271,6 +272,7 @@ public class ClientMethodExampleWriter {
      * @return example node
      */
     private ExampleNode parseNodeFromParameter(ClientMethod convenienceMethod, ProxyMethodExample proxyMethodExample, MethodParameter methodParameter) {
+        ExampleNode node;
         if (isGroupingParameter(convenienceMethod, methodParameter)) {
             // grouping, possible with flattening first
 
@@ -304,7 +306,7 @@ public class ClientMethodExampleWriter {
             }
             IType type = methodParameter.getClientMethodParameter().getClientType();
             IType wireType = methodParameter.getClientMethodParameter().getWireType();
-            return ModelExampleUtil.parseNode(type, wireType, exampleValue);
+            node = ModelExampleUtil.parseNode(type, wireType, exampleValue);
         } else if (isFlattenParameter(convenienceMethod, methodParameter)) {
             // flatten, no grouping
             ClientMethodParameter outputParameter = convenienceMethod.getMethodTransformationDetails().iterator().next().getOutParameter();
@@ -323,10 +325,18 @@ public class ClientMethodExampleWriter {
             if (realParameterValue != null && parameterMapping != null) {
                 methodParameterValue = realParameterValue.get(parameterMapping.getOutputParameterProperty().getSerializedName());
             }
-            return ModelExampleUtil.parseNode(type, wireType, methodParameterValue);
+            node = ModelExampleUtil.parseNode(type, wireType, methodParameterValue);
         } else {
-            return ModelExampleUtil.parseNodeFromParameter(proxyMethodExample, methodParameter);
+            node = ModelExampleUtil.parseNodeFromParameter(proxyMethodExample, methodParameter);
         }
+        if (node == null) {
+            if (ClassType.CONTEXT.equals(methodParameter.getClientMethodParameter().getClientType())) {
+                node = new LiteralNode(ClassType.CONTEXT, "").setLiteralsValue("");
+            } else {
+                node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
+            }
+        }
+        return node;
     }
 
     @SuppressWarnings("unchecked")
