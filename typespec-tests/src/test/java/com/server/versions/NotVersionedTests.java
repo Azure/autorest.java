@@ -17,8 +17,8 @@ public class NotVersionedTests {
     public void test() {
         client.withoutApiVersion();
 
-        client.withPathApiVersion("v1.0");
+        client.withPathApiVersion();
 
-        client.withQueryApiVersion("v1.0");
+        client.withQueryApiVersion();
     }
 }
