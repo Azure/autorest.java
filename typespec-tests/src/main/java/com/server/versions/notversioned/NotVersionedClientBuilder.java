@@ -191,24 +191,6 @@ public final class NotVersionedClientBuilder implements HttpTrait<NotVersionedCl
     }
 
     /*
-     * 
-     */
-    @Generated
-    private String apiVersion;
-
-    /**
-     * Sets.
-     * 
-     * @param apiVersion the apiVersion value.
-     * @return the NotVersionedClientBuilder.
-     */
-    @Generated
-    public NotVersionedClientBuilder apiVersion(String apiVersion) {
-        this.apiVersion = apiVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -235,8 +217,8 @@ public final class NotVersionedClientBuilder implements HttpTrait<NotVersionedCl
     private NotVersionedClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        NotVersionedClientImpl client = new NotVersionedClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.apiVersion);
+        NotVersionedClientImpl client
+            = new NotVersionedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
@@ -245,7 +227,6 @@ public final class NotVersionedClientBuilder implements HttpTrait<NotVersionedCl
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
-        Objects.requireNonNull(apiVersion, "'apiVersion' cannot be null.");
     }
 
     @Generated

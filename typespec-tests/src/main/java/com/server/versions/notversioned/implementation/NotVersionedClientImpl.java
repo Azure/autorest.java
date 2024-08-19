@@ -55,19 +55,6 @@ public final class NotVersionedClientImpl {
     }
 
     /**
-     */
-    private final String apiVersion;
-
-    /**
-     * Gets.
-     * 
-     * @return the apiVersion value.
-     */
-    public String getApiVersion() {
-        return this.apiVersion;
-    }
-
-    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -99,11 +86,10 @@ public final class NotVersionedClientImpl {
      * Initializes an instance of NotVersionedClient client.
      * 
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param apiVersion
      */
-    public NotVersionedClientImpl(String endpoint, String apiVersion) {
+    public NotVersionedClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -111,10 +97,9 @@ public final class NotVersionedClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param apiVersion
      */
-    public NotVersionedClientImpl(HttpPipeline httpPipeline, String endpoint, String apiVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, apiVersion);
+    public NotVersionedClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -123,14 +108,11 @@ public final class NotVersionedClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param apiVersion
      */
-    public NotVersionedClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String apiVersion) {
+    public NotVersionedClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-        this.apiVersion = apiVersion;
         this.service
             = RestProxy.create(NotVersionedClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -230,6 +212,7 @@ public final class NotVersionedClientImpl {
     /**
      * The withQueryApiVersion operation.
      * 
+     * @param apiVersion The apiVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -238,14 +221,15 @@ public final class NotVersionedClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> withQueryApiVersionWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> withQueryApiVersionWithResponseAsync(String apiVersion, RequestOptions requestOptions) {
         return FluxUtil.withContext(
-            context -> service.withQueryApiVersion(this.getEndpoint(), this.getApiVersion(), requestOptions, context));
+            context -> service.withQueryApiVersion(this.getEndpoint(), apiVersion, requestOptions, context));
     }
 
     /**
      * The withQueryApiVersion operation.
      * 
+     * @param apiVersion The apiVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -254,13 +238,14 @@ public final class NotVersionedClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withQueryApiVersionWithResponse(RequestOptions requestOptions) {
-        return service.withQueryApiVersionSync(this.getEndpoint(), this.getApiVersion(), requestOptions, Context.NONE);
+    public Response<Void> withQueryApiVersionWithResponse(String apiVersion, RequestOptions requestOptions) {
+        return service.withQueryApiVersionSync(this.getEndpoint(), apiVersion, requestOptions, Context.NONE);
     }
 
     /**
      * The withPathApiVersion operation.
      * 
+     * @param apiVersion The apiVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -269,14 +254,15 @@ public final class NotVersionedClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> withPathApiVersionWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<Void>> withPathApiVersionWithResponseAsync(String apiVersion, RequestOptions requestOptions) {
         return FluxUtil.withContext(
-            context -> service.withPathApiVersion(this.getEndpoint(), this.getApiVersion(), requestOptions, context));
+            context -> service.withPathApiVersion(this.getEndpoint(), apiVersion, requestOptions, context));
     }
 
     /**
      * The withPathApiVersion operation.
      * 
+     * @param apiVersion The apiVersion parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -285,7 +271,7 @@ public final class NotVersionedClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withPathApiVersionWithResponse(RequestOptions requestOptions) {
-        return service.withPathApiVersionSync(this.getEndpoint(), this.getApiVersion(), requestOptions, Context.NONE);
+    public Response<Void> withPathApiVersionWithResponse(String apiVersion, RequestOptions requestOptions) {
+        return service.withPathApiVersionSync(this.getEndpoint(), apiVersion, requestOptions, Context.NONE);
     }
 }

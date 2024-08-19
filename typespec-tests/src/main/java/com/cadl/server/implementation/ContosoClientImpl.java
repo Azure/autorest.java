@@ -148,7 +148,7 @@ public final class ContosoClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
-            @PathParam("group") String group, RequestOptions requestOptions, Context context);
+            @PathParam(value = "group", encoded = true) String group, RequestOptions requestOptions, Context context);
 
         @Get("/contoso/{group}")
         @ExpectedResponses({ 200, 204 })
@@ -157,7 +157,7 @@ public final class ContosoClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> getSync(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
-            @PathParam("group") String group, RequestOptions requestOptions, Context context);
+            @PathParam(value = "group", encoded = true) String group, RequestOptions requestOptions, Context context);
     }
 
     /**
