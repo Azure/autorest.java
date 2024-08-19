@@ -74,6 +74,39 @@ public final class ErrorModelAsyncClient {
     }
 
     /**
+     * The readWithCustomizedError operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     *     error (Required): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> readWithCustomizedErrorWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.readWithCustomizedErrorWithResponseAsync(requestOptions);
+    }
+
+    /**
      * The read operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -89,6 +122,23 @@ public final class ErrorModelAsyncClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(Diagnostic.class));
+    }
+
+    /**
+     * The readWithCustomizedError operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Diagnostic> readWithCustomizedError() {
+        // Generated convenience method for readWithCustomizedErrorWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return readWithCustomizedErrorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Diagnostic.class));
     }
 }
