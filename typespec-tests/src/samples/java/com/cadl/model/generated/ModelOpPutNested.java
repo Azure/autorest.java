@@ -14,7 +14,7 @@ public class ModelOpPutNested {
         ModelClient modelClient
             = new ModelClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.model.generated.modelopputnested.modelopputnested
-        NestedModel response = modelClient.putNested(null);
+        NestedModel response = modelClient.putNested(new NestedModel());
         // END:com.cadl.model.generated.modelopputnested.modelopputnested
     }
 }

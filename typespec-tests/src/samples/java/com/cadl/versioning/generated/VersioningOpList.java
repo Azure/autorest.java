@@ -17,7 +17,7 @@ public class VersioningOpList {
             = new VersioningClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
                 .buildClient();
         // BEGIN:com.cadl.versioning.generated.versioningoplist.versioningoplist
-        PagedIterable<Resource> response = versioningClient.list(Arrays.asList("name=name"), null);
+        PagedIterable<Resource> response = versioningClient.list(Arrays.asList("name=name"), "null");
         // END:com.cadl.versioning.generated.versioningoplist.versioningoplist
     }
 }
