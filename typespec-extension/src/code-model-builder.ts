@@ -108,8 +108,6 @@ import {
   getHeaderFieldName,
   getPathParamName,
   getQueryParamName,
-  getServers,
-  getStatusCodeDescription,
   isBody,
   isBodyRoot,
   isHeader,
@@ -717,8 +715,7 @@ export class CodeModelBuilder {
           ).toString();
         }
 
-        operationExamples[operationExample.title ?? operationExample.operationId ?? sdkMethod.name] =
-          operationExample;
+        operationExamples[operationExample.title ?? operationExample.operationId ?? sdkMethod.name] = operationExample;
       }
       return operationExamples;
     } else {
@@ -1462,9 +1459,12 @@ export class CodeModelBuilder {
   ) {
     const serializedName = opParameter.serializedName;
     let existParameter: Parameter | undefined;
-    if (opParameter.kind !== "property") { // not body property
+    if (opParameter.kind !== "property") {
+      // not body property
       // header/query/path, same location and same serializedName
-      existParameter = op.parameters?.find((it) => it.protocol.http?.in === opParameter.kind && it.language.default.serializedName === serializedName);
+      existParameter = op.parameters?.find(
+        (it) => it.protocol.http?.in === opParameter.kind && it.language.default.serializedName === serializedName,
+      );
     }
     request.parameters = request.parameters ?? [];
     if (existParameter) {
@@ -2461,7 +2461,7 @@ export class CodeModelBuilder {
   }
 
   private isSubscriptionId(param: SdkPathParameter): boolean {
-    return "subscriptionId".toLocaleLowerCase() === param.name.toLocaleLowerCase();
+    return "subscriptionId".toLocaleLowerCase() === param.serializedName.toLocaleLowerCase();
   }
 
   private subscriptionIdParameter(parameter: SdkPathParameter): Parameter {
