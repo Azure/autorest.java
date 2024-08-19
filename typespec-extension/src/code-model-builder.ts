@@ -1127,11 +1127,9 @@ export class CodeModelBuilder {
       }
 
       const nullable = param.type.kind === "nullable";
-      const onClient = param.onClient;
-      const implementationLocation = onClient ? ImplementationLocation.Client : ImplementationLocation.Method;
       const parameter = new Parameter(param.name, param.details ?? "", schema, {
         summary: param.description,
-        implementation: implementationLocation,
+        implementation: ImplementationLocation.Method,
         required: !param.optional,
         nullable: nullable,
         protocol: {
@@ -1147,12 +1145,7 @@ export class CodeModelBuilder {
         },
         extensions: extensions,
       });
-      if (onClient) {
-        op.addParameter(parameter);
-        clientContext.addGlobalParameter(parameter);
-      } else {
-        op.addParameter(parameter);
-      }
+      op.addParameter(parameter);
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
