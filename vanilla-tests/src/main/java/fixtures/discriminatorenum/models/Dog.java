@@ -19,7 +19,7 @@ public class Dog implements JsonSerializable<Dog> {
     /*
      * discriminator property
      */
-    private DogKind kind = DogKind.fromString("Dog");
+    DogKind kind;
 
     /*
      * Weight of the dog
@@ -30,6 +30,7 @@ public class Dog implements JsonSerializable<Dog> {
      * Creates an instance of Dog class.
      */
     public Dog() {
+        this.kind = DogKind.fromString("Dog");
     }
 
     /**
@@ -75,9 +76,13 @@ public class Dog implements JsonSerializable<Dog> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeIntField("weight", this.weight);
         jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
-        return jsonWriter.writeEndObject();
     }
 
     /**

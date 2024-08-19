@@ -24,7 +24,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
      * The discriminator
      */
     @Generated
-    private String kind = "IsUnknownAdditionalPropertiesDiscriminated";
+    String kind;
 
     /*
      * The name property
@@ -46,6 +46,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     @Generated
     public IsUnknownAdditionalPropertiesDiscriminated(String name) {
         this.name = name;
+        this.kind = "IsUnknownAdditionalPropertiesDiscriminated";
     }
 
     /**
@@ -98,6 +99,11 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeStringField("kind", this.kind);
         if (additionalProperties != null) {
@@ -105,7 +111,6 @@ public class IsUnknownAdditionalPropertiesDiscriminated
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
-        return jsonWriter.writeEndObject();
     }
 
     /**

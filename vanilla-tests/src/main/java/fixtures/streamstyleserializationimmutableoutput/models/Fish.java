@@ -20,7 +20,7 @@ public class Fish implements JsonSerializable<Fish> {
     /*
      * The fishtype property.
      */
-    private String fishtype = "Fish";
+    String fishtype;
 
     /*
      * The species property.
@@ -41,6 +41,7 @@ public class Fish implements JsonSerializable<Fish> {
      * Creates an instance of Fish class.
      */
     public Fish() {
+        this.fishtype = "Fish";
     }
 
     /**
@@ -129,11 +130,15 @@ public class Fish implements JsonSerializable<Fish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeFloatField("length", this.length);
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("species", this.species);
         jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject();
     }
 
     /**

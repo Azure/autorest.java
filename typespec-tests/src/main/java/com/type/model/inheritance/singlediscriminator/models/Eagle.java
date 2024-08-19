@@ -20,12 +20,6 @@ import java.util.Map;
 @Fluent
 public final class Eagle extends Bird {
     /*
-     * The kind property.
-     */
-    @Generated
-    private String kind = "eagle";
-
-    /*
      * The friends property.
      */
     @Generated
@@ -51,17 +45,7 @@ public final class Eagle extends Bird {
     @Generated
     public Eagle(int wingspan) {
         super(wingspan);
-    }
-
-    /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    @Generated
-    @Override
-    public String getKind() {
-        return this.kind;
+        this.kind = "eagle";
     }
 
     /**
@@ -137,8 +121,7 @@ public final class Eagle extends Bird {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("wingspan", getWingspan());
-        jsonWriter.writeStringField("kind", this.kind);
+        toJsonShared(jsonWriter);
         jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("partner", this.partner);

@@ -24,7 +24,7 @@ public class Fish implements JsonSerializable<Fish> {
      * Discriminator property for Fish.
      */
     @Generated
-    private String kind = "Fish";
+    String kind;
 
     /*
      * The id property.
@@ -104,6 +104,7 @@ public class Fish implements JsonSerializable<Fish> {
      */
     @Generated
     public Fish() {
+        this.kind = "Fish";
     }
 
     /**

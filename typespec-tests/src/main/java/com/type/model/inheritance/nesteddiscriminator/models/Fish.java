@@ -21,7 +21,7 @@ public class Fish implements JsonSerializable<Fish> {
      * Discriminator property for Fish.
      */
     @Generated
-    private String kind = "Fish";
+    String kind;
 
     /*
      * The age property.
@@ -37,6 +37,7 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     public Fish(int age) {
         this.age = age;
+        this.kind = "Fish";
     }
 
     /**
@@ -66,9 +67,13 @@ public class Fish implements JsonSerializable<Fish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeIntField("age", this.age);
         jsonWriter.writeStringField("kind", this.kind);
-        return jsonWriter.writeEndObject();
     }
 
     /**
