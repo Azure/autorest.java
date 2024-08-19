@@ -1051,12 +1051,12 @@ export class CodeModelBuilder {
 
       let extensions: { [id: string]: any } | undefined = undefined;
       // TODO haoling: skip-url-encoding, pending on TCGC issue https://github.com/Azure/typespec-azure/issues/1318
-      // if (param.kind === "path") {
-      //   if (param.allowReserved) {
-      //     extensions = extensions ?? {};
-      //     extensions["x-ms-skip-url-encoding"] = true;
-      //   }
-      // }
+      if (param.kind === "path") {
+        if (param.allowReserved) {
+          extensions = extensions ?? {};
+          extensions["x-ms-skip-url-encoding"] = true;
+        }
+      }
       // TODO: deprecate this logic of string/url for x-ms-skip-url-encoding
       if (
         (param.kind === "query" || param.kind === "path") &&
