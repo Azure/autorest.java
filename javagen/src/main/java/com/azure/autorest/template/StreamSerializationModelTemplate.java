@@ -7,7 +7,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.implementation.ClientModelPropertiesManager;
 import com.azure.autorest.implementation.ClientModelPropertyWithMetadata;
 import com.azure.autorest.implementation.JsonFlattenedPropertiesTree;
-import com.azure.autorest.implementation.PolymorphicDiscriminatorHandler;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -245,7 +244,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         // If the model is polymorphic and all the models in the polymorphic hierarchy are in the same package we don't
         // need to shade parent properties.
-        if (model.isPolymorphic() && PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(model)) {
+        if (model.isPolymorphic() && model.isAllPolymorphicModelsInSamePackage()) {
             return fieldProperties;
         }
 
@@ -347,10 +346,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         boolean isJsonMergePatch, Consumer<JavaClass> addGeneratedAnnotation) {
         boolean callToJsonSharedForParentProperties = !isJsonMergePatch
-            && propertiesManager.isAllPolymorphicModelsInSamePackage()
+            && propertiesManager.getModel().isAllPolymorphicModelsInSamePackage()
             && !CoreUtils.isNullOrEmpty(propertiesManager.getModel().getParentModelName());
         boolean callToJsonSharedForThisProperties = !isJsonMergePatch
-            && propertiesManager.isAllPolymorphicModelsInSamePackage()
+            && propertiesManager.getModel().isAllPolymorphicModelsInSamePackage()
             && propertiesManager.getModel().isPolymorphicParent();
 
         classBlock.javadocComment(JavaJavadocComment::inheritDoc);
@@ -468,8 +467,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // In this scenario, the logic for polymorphism is that the defining model has a package-private, non-final
             // field for the discriminator which is set by either the deserialization logic or the constructor.
             if (callToJsonSharedForParentProperties && property.isPolymorphicDiscriminator()
-                && propertiesManager.isAllPolymorphicModelsInSamePackage()
-                && !propertiesManager.isPolymorphicDiscriminatorDefinedByModel()) {
+                && propertiesManager.getModel().isAllPolymorphicModelsInSamePackage()
+                && !propertiesManager.getModel().isPolymorphicDiscriminatorDefinedByModel()) {
                 return;
             }
 
@@ -1146,7 +1145,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         return (usingFromJsonShared
             || (isFromJsonShared && !CoreUtils.isNullOrEmpty(propertiesManager.getModel().getParentModelName())))
             && property.isPolymorphicDiscriminator()
-            && !propertiesManager.isPolymorphicDiscriminatorDefinedByModel();
+            && !propertiesManager.getModel().isPolymorphicDiscriminatorDefinedByModel();
     }
 
     private static void generateUnknownFieldLogic(JavaBlock whileBlock, JavaIfBlock ifBlock,
@@ -1263,7 +1262,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // defined in the parent class(es).
         // This will prevent duplicating the deserialization logic for parent properties in each subclass.
         return !propertiesManager.hasConstructorArguments()
-            && propertiesManager.isAllPolymorphicModelsInSamePackage();
+            && propertiesManager.getModel().isAllPolymorphicModelsInSamePackage();
     }
 
     /**

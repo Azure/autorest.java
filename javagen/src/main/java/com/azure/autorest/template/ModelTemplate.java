@@ -332,7 +332,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return false;
         }
 
-        if (property.isPolymorphicDiscriminator() && PolymorphicDiscriminatorHandler.isAllPolymorphicModelsInSamePackage(model)) {
+        if (property.isPolymorphicDiscriminator() && model.isAllPolymorphicModelsInSamePackage()) {
             return false;
         }
 
