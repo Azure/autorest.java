@@ -16,7 +16,6 @@ model Diagnostic {
   error: Error;
 }
 
-
 @error
 model UserError {
   @statusCode
