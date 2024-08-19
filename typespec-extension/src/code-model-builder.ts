@@ -41,7 +41,6 @@ import {
   VirtualParameter,
 } from "@autorest/codemodel";
 import { KnownMediaType } from "@azure-tools/codegen";
-import { isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
   SdkBodyModelPropertyType,
