@@ -11,7 +11,6 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.TypeSpecFluentPlugin;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.postprocessor.Postprocessor;
@@ -21,7 +20,6 @@ import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonProviders;
 import com.azure.json.JsonReader;
 import com.azure.typespec.model.EmitterOptions;
-import com.azure.typespec.util.TspLocationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.DumperOptions;
@@ -47,7 +45,6 @@ import java.util.stream.Stream;
 public class Main {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-    private static final String TSP_LOCATION_FILENAME = "tsp-location.yaml";
 
     private static Yaml yaml = null;
 
@@ -81,20 +78,6 @@ public class Main {
 
                     // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
                     sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
-                }
-            }
-
-            // load tsp-location.yaml
-            try (Stream<Path> filestream = Files.list(outputDirPath)) {
-                Set<String> filenames = filestream.map(p -> p.getFileName().toString())
-                    .map(name -> name.toLowerCase(Locale.ROOT))
-                    .collect(Collectors.toSet());
-                if (filenames.contains(TSP_LOCATION_FILENAME)) {
-                    String directory = TspLocationUtil.getDirectory(getYaml(),
-                        outputDirPath.resolve(TSP_LOCATION_FILENAME));
-                    if (!CoreUtils.isNullOrEmpty(directory)) {
-                        ProxyMethodExample.setTspDirectory(directory);
-                    }
                 }
             }
         }

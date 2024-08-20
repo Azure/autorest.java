@@ -171,8 +171,6 @@ import {
   pushDistinct,
 } from "./type-utils.js";
 import { getNamespace, logWarning, pascalCase, stringArrayContainsIgnoreCase, trace } from "./utils.js";
-import { pathToFileURL } from "url";
-import { join } from "path";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -729,12 +727,9 @@ export class CodeModelBuilder {
       for (const example of httpOperationExamples) {
         const operationExample = example.rawExample;
 
-        // resolve absolute path of the example file
-        if (this.sdkContext.examplesDir) {
-          operationExample["x-ms-original-file"] = pathToFileURL(
-            join(this.sdkContext.examplesDir, example.filePath),
-          ).toString();
-        }
+        // example.filePath is relative path from sdkContext.examplesDir
+        // this is not a URL format (file:// or https://)
+        operationExample["x-ms-original-file"] = example.filePath;
 
         operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] =
           operationExample;
