@@ -1851,8 +1851,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // If the property is defined in a super class use the setter as this will be able to set the value in the
         // super class.
         if (fromSuper
-            // If the property is flattened or read-only from parent, it will be shadowed in child class.
-            && (!ClientModelUtil.readOnlyNotInCtor(model, property, JavaSettings.getInstance()) && !property.getClientFlatten())) {
+            // If the property is flattened or read-only from parent, and not all models in the inheritance hierarchy are
+            // in the same package, it will be shadowed in child class.
+            && (
+            model.isAllPolymorphicModelsInSamePackage()
+                || (!ClientModelUtil.readOnlyNotInCtor(model, property, JavaSettings.getInstance()) &&
+                !property.getClientFlatten()))) {
             if (polymorphicJsonMergePatchScenario) {
                 // Polymorphic JSON merge patch needs special handling as the setter methods are used to track whether
                 // the property is included in patch serialization. To prevent deserialization from requiring parent
