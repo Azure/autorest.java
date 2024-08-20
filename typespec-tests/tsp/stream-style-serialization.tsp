@@ -61,9 +61,7 @@ model AssetResource {
   name?: string;
 }
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
+alias ServiceTraits = NoRepeatableRequests & NoConditionalRequests & NoClientRequestId;
 
 alias Operations = Azure.Core.ResourceOperations<ServiceTraits>;
 @tag("Assets")
