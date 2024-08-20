@@ -20,7 +20,6 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleNode;
-import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaFileContents;
@@ -328,13 +327,6 @@ public class ClientMethodExampleWriter {
             node = ModelExampleUtil.parseNode(type, wireType, methodParameterValue);
         } else {
             node = ModelExampleUtil.parseNodeFromParameter(proxyMethodExample, methodParameter);
-        }
-        if (node == null) {
-            if (ClassType.CONTEXT.equals(methodParameter.getClientMethodParameter().getClientType())) {
-                node = new LiteralNode(ClassType.CONTEXT, "").setLiteralsValue("");
-            } else {
-                node = new LiteralNode(methodParameter.getClientMethodParameter().getClientType(), null);
-            }
         }
         return node;
     }

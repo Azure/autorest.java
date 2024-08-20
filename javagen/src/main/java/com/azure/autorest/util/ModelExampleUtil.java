@@ -179,7 +179,11 @@ public class ModelExampleUtil {
                 node = defaultNode(type, wireType, objectValue);
             }
         } else if (objectValue == null) {
-            node = null;
+            if (ClassType.CONTEXT.equals(type)) {
+                node = new LiteralNode(ClassType.CONTEXT, "").setLiteralsValue("");
+            } else {
+                node = new LiteralNode(type, null);
+            }
         } else {
             node = defaultNode(type, wireType, objectValue);
         }
