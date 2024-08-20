@@ -201,7 +201,7 @@ public class ModelExampleWriter {
                     if (node.getClientType() instanceof PrimitiveType) {
                         return node.getClientType().defaultValueExpression();
                     } else {
-                        literalValue = "null";
+                        return "null";
                     }
                 }
 
