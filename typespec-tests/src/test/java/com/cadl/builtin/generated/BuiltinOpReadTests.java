@@ -6,7 +6,6 @@ package com.cadl.builtin.generated;
 
 import com.cadl.builtin.models.Builtin;
 import com.cadl.builtin.models.Encoded;
-import java.time.OffsetDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -18,7 +17,7 @@ public final class BuiltinOpReadTests extends BuiltinClientTestBase {
     @Disabled
     public void testBuiltinOpReadTests() {
         // method invocation
-        Builtin response = builtinClient.read("null", "null", OffsetDateTime.parse("null"), "myFilter", "null", "null");
+        Builtin response = builtinClient.read(null, null, null, "myFilter", null, null);
 
         // response assertion
         Assertions.assertNotNull(response);

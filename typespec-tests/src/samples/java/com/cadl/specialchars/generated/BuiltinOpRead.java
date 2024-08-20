@@ -15,7 +15,7 @@ public class BuiltinOpRead {
             = new SpecialCharsClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
                 .buildClient();
         // BEGIN:com.cadl.specialchars.generated.builtinopread.builtinopread
-        Resource response = specialCharsClient.read("null");
+        Resource response = specialCharsClient.read(null);
         // END:com.cadl.specialchars.generated.builtinopread.builtinopread
     }
 }

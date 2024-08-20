@@ -8,14 +8,13 @@ import com.azure.core.util.Configuration;
 import com.cadl.builtin.BuiltinClient;
 import com.cadl.builtin.BuiltinClientBuilder;
 import com.cadl.builtin.models.Builtin;
-import java.time.OffsetDateTime;
 
 public class BuiltinOpRead {
     public static void main(String[] args) {
         BuiltinClient builtinClient
             = new BuiltinClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.builtin.generated.builtinopread.builtinopread
-        Builtin response = builtinClient.read("null", "null", OffsetDateTime.parse("null"), "myFilter", "null", "null");
+        Builtin response = builtinClient.read(null, null, null, "myFilter", null, null);
         // END:com.cadl.builtin.generated.builtinopread.builtinopread
     }
 }

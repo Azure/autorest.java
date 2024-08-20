@@ -8,13 +8,15 @@ import com.azure.core.util.Configuration;
 import com.cadl.model.ModelClient;
 import com.cadl.model.ModelClientBuilder;
 import com.cadl.model.models.NestedModel;
+import com.cadl.model.models.NestedModel1;
+import com.cadl.model.models.NestedModel2;
 
 public class ModelOpPutNested {
     public static void main(String[] args) {
         ModelClient modelClient
             = new ModelClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildClient();
         // BEGIN:com.cadl.model.generated.modelopputnested.modelopputnested
-        NestedModel response = modelClient.putNested(new NestedModel());
+        NestedModel response = modelClient.putNested(new NestedModel(new NestedModel1(new NestedModel2("123"))));
         // END:com.cadl.model.generated.modelopputnested.modelopputnested
     }
 }
