@@ -1,5 +1,5 @@
 {
-  "operationId": "TopLevelArmResourceInterface_Action",
+  "operationId": "TopLevelArmResourceInterface_Post",
   "title": "TopLevelArmResourceInterface Action",
   "parameters": {
     "resourceGroupName": "resource-group-name",
