@@ -687,7 +687,10 @@ export class CodeModelBuilder {
   private needToSkipProcessingOperation(operation: Operation | undefined, clientContext: ClientContext): boolean {
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
-    if (operation && getOverloadedOperation(this.program, operation)) {
+    if (operation === undefined) {
+      return true;
+    }
+    if (getOverloadedOperation(this.program, operation)) {
       this.trace(`Operation '${operation.name}' is temporary skipped, as it is an overloaded operation`);
       return true;
     }
@@ -733,10 +736,8 @@ export class CodeModelBuilder {
     const operationId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
     const operationGroup = this.codeModel.getOperationGroup(groupName);
 
-    let operationExamples = undefined;
-    if (sdkMethod.operation && sdkMethod.operation.__raw) {
-      operationExamples = this.getOperationExample(sdkMethod);
-    }
+    let operationExamples = this.getOperationExample(sdkMethod);
+    
 
     const codeModelOperation = new CodeModelOperation(operationName, sdkMethod.details ?? "", {
       operationId: operationId,
@@ -750,10 +751,8 @@ export class CodeModelBuilder {
     codeModelOperation.internalApi = sdkMethod.access === "internal";
 
     const convenienceApiName = this.getConvenienceApiName(sdkMethod);
-    let generateConvenienceApi: boolean = Boolean(convenienceApiName);
-    let generateProtocolApi: boolean = sdkMethod.__raw
-      ? shouldGenerateProtocol(this.sdkContext, sdkMethod.__raw)
-      : true;
+    let generateConvenienceApi: boolean = sdkMethod.generateConvenient;
+    let generateProtocolApi: boolean = sdkMethod.generateProtocol;
 
     let apiComment: string | undefined = undefined;
     if (generateConvenienceApi) {
@@ -814,6 +813,7 @@ export class CodeModelBuilder {
         }
       }
       // if the request body is optional, skip content-type header added by TCGC
+      // TODO: add optional content type to code-model, and support optional content-type from codegen, https://github.com/Azure/autorest.java/issues/2930
       if (httpOperation.bodyParam && httpOperation.bodyParam.optional) {
         if (param.serializedName.toLocaleLowerCase() === CONTENT_TYPE_KEY) {
           continue;
@@ -823,7 +823,7 @@ export class CodeModelBuilder {
     }
 
     // body
-    if (httpOperation.bodyParam && httpOperation.__raw && sdkMethod.__raw && httpOperation.bodyParam.type.__raw) {
+    if (httpOperation.bodyParam && httpOperation.__raw && httpOperation.bodyParam.type.__raw) {
       this.processParameterBody(codeModelOperation, httpOperation.__raw, httpOperation, httpOperation.bodyParam);
     }
 
@@ -1037,7 +1037,6 @@ export class CodeModelBuilder {
       const schema = this.processSchemaFromSdkType(sdkType, param.name);
 
       let extensions: { [id: string]: any } | undefined = undefined;
-      // TODO haoling: skip-url-encoding, pending on TCGC issue https://github.com/Azure/typespec-azure/issues/1318
       if (param.kind === "path") {
         if (param.allowReserved) {
           extensions = extensions ?? {};
@@ -1071,6 +1070,7 @@ export class CodeModelBuilder {
           const format = param.collectionFormat;
           switch (format) {
             case "csv":
+            case "simple":
               style = SerializationStyle.Simple;
               break;
 
@@ -1087,6 +1087,7 @@ export class CodeModelBuilder {
               break;
 
             case "multi":
+            case "form":
               style = SerializationStyle.Form;
               explode = true;
               break;
