@@ -17,13 +17,4 @@ public class ProxyMethodExampleTests {
         String result = ProxyMethodExample.getRelativeOriginalFileNameForSwagger(url);
         Assertions.assertEquals("specification/standbypool/resource-manager/Microsoft.StandbyPool/preview/2023-12-01-preview/examples/StandbyVirtualMachinePools_Update.json", result);
     }
-
-    @Test
-    public void testGetRelativeOriginalFileNameForTsp() throws MalformedURLException {
-        ProxyMethodExample.setTspDirectory("specification/standbypool/StandbyPool.Management");
-        URL url = new URL("file:///C:/github/azure-sdk-for-java/sdk/standbypool/azure-resourcemanager-standbypool/TempTypeSpecFiles/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json");
-        String result = ProxyMethodExample.getRelativeOriginalFileNameForTsp(url);
-        Assertions.assertEquals("specification/standbypool/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json", result);
-        ProxyMethodExample.setTspDirectory(null);
-    }
 }

@@ -23,20 +23,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ProxyMethodExample {
 
     private final Logger logger = new PluginLogger(Javagen.getPluginInstance(), ProxyMethodExample.class);
     private static final String SLASH = "/";
-
-    private static String tspDirectory = null;
-
-    public static void setTspDirectory(String tspDirectory) {
-        ProxyMethodExample.tspDirectory = tspDirectory;
-    }
 
     // https://azure.github.io/autorest/extensions/#x-ms-examples
     // https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/x-ms-examples.md
@@ -232,9 +224,7 @@ public class ProxyMethodExample {
                     }
 
                     case "file": {
-                        String relativeFileName = tspDirectory != null
-                            ? getRelativeOriginalFileNameForTsp(url)
-                            : getRelativeOriginalFileNameForSwagger(url);
+                        String relativeFileName = getRelativeOriginalFileNameForSwagger(url);
                         if (relativeFileName != null) {
                             originalFileName = relativeFileName;
                         }
@@ -247,7 +237,8 @@ public class ProxyMethodExample {
                     }
                 }
             } catch (MalformedURLException | URISyntaxException | IllegalArgumentException e) {
-                logger.error("Failed to parse x-ms-original-file: '{}'", originalFileName);
+                // relative file path from TypeSpec, it is not URL
+                // go with default flow of "relativeOriginalFileName = originalFileName;"
             }
             relativeOriginalFileName = originalFileName;
         }
@@ -272,34 +263,6 @@ public class ProxyMethodExample {
 
     private ProxyMethodExample(String originalFile) {
         this.originalFile = originalFile;
-    }
-
-    static String getRelativeOriginalFileNameForTsp(URL url) {
-        // TypeSpec
-        /*
-         * Example:
-         * directory "specification/standbypool/StandbyPool.Management"
-         * originalFileName "file:///C:/github/azure-sdk-for-java/sdk/standbypool/azure-resourcemanager-standbypool/TempTypeSpecFiles/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
-         *
-         * There is an overlap of "StandbyPool.Management", so that we can combine the 2 to Result:
-         * "specification/standbypool/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
-         */
-        String originalFileName = null;
-        String[] directorySegments = tspDirectory.split(SLASH);
-        String directoryLastSegment = directorySegments[directorySegments.length - 1];
-        int sharedDirectorySegment = -1;
-        String[] segments = url.getPath().split(SLASH);
-        for (int i = segments.length - 1; i >= 0; --i) {
-            if (Objects.equals(directoryLastSegment, segments[i])) {
-                sharedDirectorySegment = i;
-                break;
-            }
-        }
-        if (sharedDirectorySegment >= 0) {
-            originalFileName = Stream.concat(Arrays.stream(directorySegments),
-                Arrays.stream(segments).skip(sharedDirectorySegment + 1)).collect(Collectors.joining(SLASH));
-        }
-        return originalFileName;
     }
 
     static String getRelativeOriginalFileNameForSwagger(URL url) {
