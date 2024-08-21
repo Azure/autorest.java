@@ -178,12 +178,6 @@ public class ModelExampleUtil {
                 // e.g. do not throw exception, use defaultValueExpression
                 node = defaultNode(type, wireType, objectValue);
             }
-        } else if (objectValue == null) {
-            if (ClassType.CONTEXT.equals(type)) {
-                node = new LiteralNode(ClassType.CONTEXT, "").setLiteralsValue("");
-            } else {
-                node = new LiteralNode(type, null);
-            }
         } else {
             node = defaultNode(type, wireType, objectValue);
         }

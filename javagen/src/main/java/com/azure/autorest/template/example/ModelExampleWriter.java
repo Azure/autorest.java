@@ -296,7 +296,7 @@ public class ModelExampleWriter {
                         ctorPosition.put(properties.get(i), i);
                     }
 
-                    List<String> initAtCtors = new ArrayList<>(Collections.nCopies(properties.size(), ""));
+                    List<String> initAtCtors = new ArrayList<>(Collections.nCopies(properties.size(), null));
                     List<String> initAtSetters = new ArrayList<>();
                     for (ExampleNode childNode : node.getChildNodes()) {
                         ModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
@@ -309,7 +309,7 @@ public class ModelExampleWriter {
                     }
                     for (int i = 0; i < properties.size(); ++i) {
                         String ctorParameterValue = initAtCtors.get(i);
-                        if ("".equals(ctorParameterValue)) { // not present, due to missing required property
+                        if (ctorParameterValue == null) { // not present, due to missing required property
                             if (properties.get(i).getClientType() instanceof PrimitiveType) {
                                 initAtCtors.set(i, properties.get(i).getClientType().defaultValueExpression());
                             } else {
