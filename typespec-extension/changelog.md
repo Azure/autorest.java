@@ -1,5 +1,11 @@
 # Release History
 
+## 0.20.0 (2024-08-23)
+
+Compatible with compiler 0.59.
+
+- Adopt TCGC `sdkPackage`.
+
 ## 0.19.2 (2024-08-16)
 
 Compatible with compiler 0.59.
