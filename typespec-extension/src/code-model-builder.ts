@@ -74,7 +74,6 @@ import {
   isApiVersion,
   isSdkBuiltInKind,
   isSdkIntKind,
-  shouldGenerateProtocol,
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
@@ -736,8 +735,7 @@ export class CodeModelBuilder {
     const operationId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
     const operationGroup = this.codeModel.getOperationGroup(groupName);
 
-    let operationExamples = this.getOperationExample(sdkMethod);
-    
+    const operationExamples = this.getOperationExample(sdkMethod);
 
     const codeModelOperation = new CodeModelOperation(operationName, sdkMethod.details ?? "", {
       operationId: operationId,
