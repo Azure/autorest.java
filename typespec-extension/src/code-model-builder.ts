@@ -44,6 +44,7 @@ import { KnownMediaType } from "@azure-tools/codegen";
 import {
   SdkArrayType,
   SdkBodyModelPropertyType,
+  SdkBodyParameter,
   SdkBuiltInType,
   SdkClientType,
   SdkConstantType,
@@ -1275,10 +1276,10 @@ export class CodeModelBuilder {
     op: CodeModelOperation,
     rawHttpOperation: HttpOperation,
     sdkHttpOperation: SdkHttpOperation,
-    sdkBody: SdkModelPropertyType,
+    sdkBody: SdkBodyParameter,
   ) {
     // set contentTypes to mediaTypes
-    op.requests![0].protocol.http!.mediaTypes = rawHttpOperation.parameters.body!.contentTypes;
+    op.requests![0].protocol.http!.mediaTypes = sdkBody.contentTypes;
 
     const unknownRequestBody =
       op.requests![0].protocol.http!.mediaTypes &&
