@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
@@ -187,8 +188,20 @@ public final class Goblinshark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (Shark.fromJsonShared(reader, fieldName, deserializedGoblinshark)) {
-                    continue;
+                if ("length".equals(fieldName)) {
+                    deserializedGoblinshark.setLength(reader.getFloat());
+                } else if ("birthday".equals(fieldName)) {
+                    deserializedGoblinshark.setBirthday(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
+                } else if ("species".equals(fieldName)) {
+                    deserializedGoblinshark.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedGoblinshark.setSiblings(siblings);
+                } else if ("age".equals(fieldName)) {
+                    deserializedGoblinshark.setAge(reader.getNullable(JsonReader::getInt));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedGoblinshark.fishtype = reader.getString();
                 } else if ("jawsize".equals(fieldName)) {
                     deserializedGoblinshark.jawsize = reader.getNullable(JsonReader::getInt);
                 } else if ("color".equals(fieldName)) {

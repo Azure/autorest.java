@@ -184,8 +184,19 @@ public final class SmartSalmon extends Salmon {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (Salmon.fromJsonShared(reader, fieldName, deserializedSmartSalmon)) {
-                    continue;
+                if ("length".equals(fieldName)) {
+                    deserializedSmartSalmon.setLength(reader.getFloat());
+                } else if ("species".equals(fieldName)) {
+                    deserializedSmartSalmon.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedSmartSalmon.setSiblings(siblings);
+                } else if ("location".equals(fieldName)) {
+                    deserializedSmartSalmon.setLocation(reader.getString());
+                } else if ("iswild".equals(fieldName)) {
+                    deserializedSmartSalmon.setIswild(reader.getNullable(JsonReader::getBoolean));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedSmartSalmon.fishtype = reader.getString();
                 } else if ("college_degree".equals(fieldName)) {
                     deserializedSmartSalmon.collegeDegree = reader.getString();
                 } else {

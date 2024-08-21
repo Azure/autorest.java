@@ -333,51 +333,35 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (!OperationDetails.fromJsonShared(reader, fieldName, deserializedOperationDetails)) {
+                if ("operationId".equals(fieldName)) {
+                    deserializedOperationDetails.operationId = reader.getString();
+                } else if ("status".equals(fieldName)) {
+                    deserializedOperationDetails.status = OperationStatus.fromString(reader.getString());
+                } else if ("createdDateTime".equals(fieldName)) {
+                    deserializedOperationDetails.createdDateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
+                } else if ("lastUpdatedDateTime".equals(fieldName)) {
+                    deserializedOperationDetails.lastUpdatedDateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
+                } else if ("resourceLocation".equals(fieldName)) {
+                    deserializedOperationDetails.resourceLocation = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    deserializedOperationDetails.kind = reader.getString();
+                } else if ("percentCompleted".equals(fieldName)) {
+                    deserializedOperationDetails.percentCompleted = reader.getNullable(JsonReader::getInt);
+                } else if ("apiVersion".equals(fieldName)) {
+                    deserializedOperationDetails.apiVersion = reader.getString();
+                } else if ("tags".equals(fieldName)) {
+                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
+                    deserializedOperationDetails.tags = tags;
+                } else if ("error".equals(fieldName)) {
+                    deserializedOperationDetails.error = Error.fromJson(reader);
+                } else {
                     reader.skipChildren();
                 }
             }
 
             return deserializedOperationDetails;
         });
-    }
-
-    static boolean fromJsonShared(JsonReader reader, String fieldName, OperationDetails deserializedOperationDetails)
-        throws IOException {
-        if ("operationId".equals(fieldName)) {
-            deserializedOperationDetails.operationId = reader.getString();
-            return true;
-        } else if ("status".equals(fieldName)) {
-            deserializedOperationDetails.status = OperationStatus.fromString(reader.getString());
-            return true;
-        } else if ("createdDateTime".equals(fieldName)) {
-            deserializedOperationDetails.createdDateTime
-                = reader.getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
-            return true;
-        } else if ("lastUpdatedDateTime".equals(fieldName)) {
-            deserializedOperationDetails.lastUpdatedDateTime
-                = reader.getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
-            return true;
-        } else if ("resourceLocation".equals(fieldName)) {
-            deserializedOperationDetails.resourceLocation = reader.getString();
-            return true;
-        } else if ("kind".equals(fieldName)) {
-            deserializedOperationDetails.kind = reader.getString();
-            return true;
-        } else if ("percentCompleted".equals(fieldName)) {
-            deserializedOperationDetails.percentCompleted = reader.getNullable(JsonReader::getInt);
-            return true;
-        } else if ("apiVersion".equals(fieldName)) {
-            deserializedOperationDetails.apiVersion = reader.getString();
-            return true;
-        } else if ("tags".equals(fieldName)) {
-            Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
-            deserializedOperationDetails.tags = tags;
-            return true;
-        } else if ("error".equals(fieldName)) {
-            deserializedOperationDetails.error = Error.fromJson(reader);
-            return true;
-        }
-        return false;
     }
 }

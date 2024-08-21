@@ -121,23 +121,16 @@ public class Dog implements JsonSerializable<Dog> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (!Dog.fromJsonShared(reader, fieldName, deserializedDog)) {
+                if ("weight".equals(fieldName)) {
+                    deserializedDog.weight = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDog.kind = DogKind.fromString(reader.getString());
+                } else {
                     reader.skipChildren();
                 }
             }
 
             return deserializedDog;
         });
-    }
-
-    static boolean fromJsonShared(JsonReader reader, String fieldName, Dog deserializedDog) throws IOException {
-        if ("weight".equals(fieldName)) {
-            deserializedDog.weight = reader.getInt();
-            return true;
-        } else if ("kind".equals(fieldName)) {
-            deserializedDog.kind = DogKind.fromString(reader.getString());
-            return true;
-        }
-        return false;
     }
 }

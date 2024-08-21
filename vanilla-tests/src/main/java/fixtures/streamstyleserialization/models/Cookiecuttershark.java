@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
@@ -135,8 +136,20 @@ public final class Cookiecuttershark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (Shark.fromJsonShared(reader, fieldName, deserializedCookiecuttershark)) {
-                    continue;
+                if ("length".equals(fieldName)) {
+                    deserializedCookiecuttershark.setLength(reader.getFloat());
+                } else if ("birthday".equals(fieldName)) {
+                    deserializedCookiecuttershark.setBirthday(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
+                } else if ("species".equals(fieldName)) {
+                    deserializedCookiecuttershark.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedCookiecuttershark.setSiblings(siblings);
+                } else if ("age".equals(fieldName)) {
+                    deserializedCookiecuttershark.setAge(reader.getNullable(JsonReader::getInt));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedCookiecuttershark.fishtype = reader.getString();
                 } else {
                     reader.skipChildren();
                 }

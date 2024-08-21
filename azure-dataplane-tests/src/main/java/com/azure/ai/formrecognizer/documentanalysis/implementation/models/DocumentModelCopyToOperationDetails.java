@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -186,9 +187,31 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (OperationDetails.fromJsonShared(reader, fieldName,
-                    deserializedDocumentModelCopyToOperationDetails)) {
-                    continue;
+                if ("operationId".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.setOperationId(reader.getString());
+                } else if ("status".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails
+                        .setStatus(OperationStatus.fromString(reader.getString()));
+                } else if ("createdDateTime".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.setCreatedDateTime(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
+                } else if ("lastUpdatedDateTime".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.setLastUpdatedDateTime(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
+                } else if ("resourceLocation".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.setResourceLocation(reader.getString());
+                } else if ("percentCompleted".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails
+                        .setPercentCompleted(reader.getNullable(JsonReader::getInt));
+                } else if ("apiVersion".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.setApiVersion(reader.getString());
+                } else if ("tags".equals(fieldName)) {
+                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
+                    deserializedDocumentModelCopyToOperationDetails.setTags(tags);
+                } else if ("error".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.setError(Error.fromJson(reader));
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.kind = reader.getString();
                 } else if ("result".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails.result = DocumentModelDetails.fromJson(reader);
                 } else {
