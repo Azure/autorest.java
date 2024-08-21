@@ -23,7 +23,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
     /*
      * Type of operation.
      */
-    String kind;
+    private String kind = "OperationDetails";
 
     /*
      * Operation ID
@@ -74,7 +74,6 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * Creates an instance of OperationDetails class.
      */
     public OperationDetails() {
-        this.kind = "OperationDetails";
     }
 
     /**
@@ -272,11 +271,6 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
-        return jsonWriter.writeEndObject();
-    }
-
-    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStringField("operationId", this.operationId);
         jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
         jsonWriter.writeStringField("createdDateTime",
@@ -291,6 +285,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
         jsonWriter.writeStringField("apiVersion", this.apiVersion);
         jsonWriter.writeMapField("tags", this.tags, (writer, element) -> writer.writeString(element));
         jsonWriter.writeJsonField("error", this.error);
+        return jsonWriter.writeEndObject();
     }
 
     /**

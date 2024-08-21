@@ -4,6 +4,8 @@
 package fixtures.inheritance;
 
 import com.azure.core.util.BinaryData;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -14,10 +16,13 @@ import fixtures.inheritance.passdiscriminator.models.Odatatype;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ValidateDiscriminatorIsPassedTests {
     @Test
@@ -42,7 +47,19 @@ public class ValidateDiscriminatorIsPassedTests {
         String propertyDefaultDiscriminatorValue = new MetricAlertSingleResourceMultipleMetricCriteria().getOdataType()
             .toString();
 
-        assertEquals(discriminatorValue, propertyDefaultDiscriminatorValue);
+        for (Field declaredField : MetricAlertSingleResourceMultipleMetricCriteria.class.getDeclaredFields()) {
+            JsonProperty jsonProperty = declaredField.getAnnotation(JsonProperty.class);
+            if (jsonProperty == null) {
+                continue;
+            }
+
+            if (Objects.equals(jsonTypeInfo.property(), jsonProperty.value()) && declaredField.isAnnotationPresent(
+                JsonTypeId.class) && Objects.equals(discriminatorValue, propertyDefaultDiscriminatorValue)) {
+                return;
+            }
+        }
+
+        fail("Generation didn't match expected pattern when passing discriminator property to child classes.");
     }
 
     private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();

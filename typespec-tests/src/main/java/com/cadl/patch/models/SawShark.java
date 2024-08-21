@@ -19,6 +19,18 @@ import java.util.Set;
  */
 @Fluent
 public final class SawShark extends Shark {
+    /*
+     * Discriminator property for Fish.
+     */
+    @Generated
+    private String kind = "shark";
+
+    /*
+     * The sharktype property.
+     */
+    @Generated
+    private String sharktype = "saw";
+
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -30,8 +42,28 @@ public final class SawShark extends Shark {
      */
     @Generated
     public SawShark() {
-        this.kind = "shark";
-        this.sharktype = "saw";
+    }
+
+    /**
+     * Get the kind property: Discriminator property for Fish.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Get the sharktype property: The sharktype property.
+     * 
+     * @return the sharktype value.
+     */
+    @Generated
+    @Override
+    public String getSharktype() {
+        return this.sharktype;
     }
 
     /**

@@ -22,14 +22,13 @@ public class Data implements JsonSerializable<Data> {
      * The @data.kind property.
      */
     @Generated
-    String type;
+    private String type = "Data";
 
     /**
      * Creates an instance of Data class.
      */
     @Generated
     protected Data() {
-        this.type = "Data";
     }
 
     /**
@@ -49,12 +48,8 @@ public class Data implements JsonSerializable<Data> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
-        return jsonWriter.writeEndObject();
-    }
-
-    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStringField("@data.kind", this.type);
+        return jsonWriter.writeEndObject();
     }
 
     /**

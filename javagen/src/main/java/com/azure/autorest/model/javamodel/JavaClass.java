@@ -28,26 +28,12 @@ public class JavaClass implements JavaType {
     }
 
     public final void privateMemberVariable(String variableType, String variableName) {
-        memberVariable(JavaVisibility.Private, variableType + " " + variableName);
+        privateMemberVariable(variableType + " " + variableName);
     }
 
     public final void privateMemberVariable(String variableDeclaration) {
-        memberVariable(JavaVisibility.Private, variableDeclaration);
-    }
-
-    /**
-     * Adds a variable declaration.
-     * <p>
-     * If the visibility is null or {@link JavaVisibility#PackagePrivate}, the variable will be package-private.
-     *
-     * @param visibility The visibility of the variable.
-     * @param variableDeclaration The variable declaration.
-     */
-    public final void memberVariable(JavaVisibility visibility, String variableDeclaration) {
         addExpectedNewLine();
-        String line = (visibility == null || visibility == JavaVisibility.PackagePrivate)
-            ? variableDeclaration + ";" : visibility + " " + variableDeclaration + ";";
-        contents.line(line);
+        contents.line("private " + variableDeclaration + ";");
         addNewLine = true;
     }
 

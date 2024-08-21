@@ -17,6 +17,11 @@ import java.util.List;
 @Fluent
 public class Salmon extends Fish {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "salmon";
+
+    /*
      * The location property.
      */
     private String location;
@@ -30,7 +35,16 @@ public class Salmon extends Fish {
      * Creates an instance of Salmon class.
      */
     public Salmon() {
-        this.fishtype = "salmon";
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -106,14 +120,13 @@ public class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
-        return jsonWriter.writeEndObject();
-    }
-
-    void toJsonShared(JsonWriter jsonWriter) throws IOException {
-        super.toJsonShared(jsonWriter);
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
+        return jsonWriter.writeEndObject();
     }
 
     /**

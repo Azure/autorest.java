@@ -21,6 +21,11 @@ import java.util.List;
 @Fluent
 public class Shark extends Fish {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "shark";
+
+    /*
      * The age property.
      */
     private Integer age;
@@ -34,7 +39,16 @@ public class Shark extends Fish {
      * Creates an instance of Shark class.
      */
     public Shark() {
-        this.fishtype = "shark";
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -128,15 +142,14 @@ public class Shark extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
-        return jsonWriter.writeEndObject();
-    }
-
-    void toJsonShared(JsonWriter jsonWriter) throws IOException {
-        super.toJsonShared(jsonWriter);
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("birthday",
             this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("age", this.age);
+        return jsonWriter.writeEndObject();
     }
 
     /**

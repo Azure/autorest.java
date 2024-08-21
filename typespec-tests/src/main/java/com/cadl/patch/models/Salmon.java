@@ -23,6 +23,12 @@ import java.util.Set;
 @Fluent
 public final class Salmon extends Fish {
     /*
+     * Discriminator property for Fish.
+     */
+    @Generated
+    private String kind = "salmon";
+
+    /*
      * The friends property.
      */
     @Generated
@@ -51,7 +57,17 @@ public final class Salmon extends Fish {
      */
     @Generated
     public Salmon() {
-        this.kind = "salmon";
+    }
+
+    /**
+     * Get the kind property: Discriminator property for Fish.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
