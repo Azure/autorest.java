@@ -60,7 +60,7 @@ options:
     stream-style-serialization: true
     generate-samples: true
     generate-tests: true
-    examples-directory: "./examples"
+    examples-dir: "{project-root}/examples"
     partial-update: false
     models-subpackage: "models"
     custom-types-subpackage: "implementation.models"
