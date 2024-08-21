@@ -128,19 +128,8 @@ public final class SawShark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("id".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setId(deserializedSawShark, reader.getString());
-                } else if ("name".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setName(deserializedSawShark, reader.getString());
-                } else if ("age".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedSawShark, reader.getInt());
-                } else if ("color".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedSawShark, reader.getString());
-                } else if ("weight".equals(fieldName)) {
-                    JsonMergePatchHelper.getSharkAccessor()
-                        .setWeight(deserializedSawShark, reader.getNullable(JsonReader::getInt));
-                } else if ("sharktype".equals(fieldName)) {
-                    deserializedSawShark.sharktype = reader.getString();
+                if (Shark.fromJsonShared(reader, fieldName, deserializedSawShark)) {
+                    continue;
                 } else {
                     reader.skipChildren();
                 }

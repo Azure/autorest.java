@@ -5,7 +5,6 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -159,31 +158,9 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("operationId".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.setOperationId(reader.getString());
-                } else if ("status".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails
-                        .setStatus(OperationStatus.fromString(reader.getString()));
-                } else if ("createdDateTime".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.setCreatedDateTime(reader
-                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
-                } else if ("lastUpdatedDateTime".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.setLastUpdatedDateTime(reader
-                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
-                } else if ("resourceLocation".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.setResourceLocation(reader.getString());
-                } else if ("percentCompleted".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails
-                        .setPercentCompleted(reader.getNullable(JsonReader::getInt));
-                } else if ("apiVersion".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.setApiVersion(reader.getString());
-                } else if ("tags".equals(fieldName)) {
-                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
-                    deserializedDocumentModelBuildOperationDetails.setTags(tags);
-                } else if ("error".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.setError(Error.fromJson(reader));
-                } else if ("kind".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.kind = reader.getString();
+                if (OperationDetails.fromJsonShared(reader, fieldName,
+                    deserializedDocumentModelBuildOperationDetails)) {
+                    continue;
                 } else if ("result".equals(fieldName)) {
                     deserializedDocumentModelBuildOperationDetails.result = DocumentModelDetails.fromJson(reader);
                 } else {

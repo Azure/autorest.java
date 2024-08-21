@@ -12,7 +12,6 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -76,7 +75,7 @@ public final class PolymorphicDiscriminatorHandler {
     private static void declareFieldInternal(ClientModelProperty discriminator, ClientModel model,
         boolean discriminatorDefinedByModel, JavaClass classBlock, Consumer<JavaClass> addGeneratedAnnotation,
         Consumer<ClientModelProperty> addFieldAnnotations, JavaSettings settings) {
-        boolean allPolymorphicModelsInSamePackage = allPolymorphicModelsInSamePackage(model);
+        boolean allPolymorphicModelsInSamePackage = model.isAllPolymorphicModelsInSamePackage();
         boolean discriminatorUsedInConstructor = ClientModelUtil.includePropertyInConstructor(discriminator, settings);
 
         String propertyName = discriminator.getName();
@@ -124,7 +123,7 @@ public final class PolymorphicDiscriminatorHandler {
 
         // Polymorphic models are contained in different packages, so the discriminator value was set in the field
         // declaration.
-        if (!allPolymorphicModelsInSamePackage(model)) {
+        if (!model.isAllPolymorphicModelsInSamePackage()) {
             return;
         }
 
@@ -156,61 +155,11 @@ public final class PolymorphicDiscriminatorHandler {
     public static boolean generateGetter(ClientModel model, ClientModelProperty discriminator) {
         // If all the polymorphic models aren't in the same package the getter for the discriminator value will be
         // generated for each model as each model defines properties for all discriminators.
-        if (!allPolymorphicModelsInSamePackage(model)) {
+        if (!model.isAllPolymorphicModelsInSamePackage()) {
             return true;
         }
 
         // If all polymorphic models are in the same package, only the declaring model needs to generate the getter.
         return ClientModelUtil.modelDefinesProperty(model, discriminator);
-    }
-
-    /**
-     * Determines if all models in a polymorphic structure are in the same package.
-     * <p>
-     * For stream-style serialization this information is very useful as it helps us determine whether package-private
-     * helper methods can be created or whether we need to create access helper interfaces.
-     * <p>
-     * If the model isn't polymorphic this will return false.
-     *
-     * @param model The model to check.
-     * @return Whether all models in a polymorphic structure are in the same package.
-     */
-    private static boolean allPolymorphicModelsInSamePackage(ClientModel model) {
-        if (!model.isPolymorphic()) {
-            return false;
-        }
-
-        String packageName = model.getPackage();
-        ClientModel parent = ClientModelUtil.getClientModel(model.getParentModelName());
-        ClientModel lastParent = model;
-        while (parent != null) {
-            lastParent = parent;
-            if (!packageName.equals(parent.getPackage())) {
-                return false;
-            }
-
-            parent = ClientModelUtil.getClientModel(parent.getParentModelName());
-        }
-
-        return checkChildrenModelsPackage(lastParent, packageName);
-    }
-
-    public static boolean isAllPolymorphicModelsInSamePackage(ClientModel model) {
-        return allPolymorphicModelsInSamePackage(model);
-    }
-
-    private static boolean checkChildrenModelsPackage(ClientModel model, String packageName) {
-        List<ClientModel> children = model.getDerivedModels();
-        if (children == null || children.isEmpty()) {
-            return true;
-        }
-
-        for (ClientModel child : children) {
-            if (!packageName.equals(child.getPackage()) || !checkChildrenModelsPackage(child, packageName)) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

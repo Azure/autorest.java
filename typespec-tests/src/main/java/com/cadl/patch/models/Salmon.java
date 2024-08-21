@@ -230,16 +230,8 @@ public final class Salmon extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("id".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setId(deserializedSalmon, reader.getString());
-                } else if ("name".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setName(deserializedSalmon, reader.getString());
-                } else if ("age".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedSalmon, reader.getInt());
-                } else if ("color".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedSalmon, reader.getString());
-                } else if ("kind".equals(fieldName)) {
-                    deserializedSalmon.kind = reader.getString();
+                if (Fish.fromJsonShared(reader, fieldName, deserializedSalmon)) {
+                    continue;
                 } else if ("friends".equals(fieldName)) {
                     List<Fish> friends = reader.readArray(reader1 -> Fish.fromJson(reader1));
                     deserializedSalmon.friends = friends;

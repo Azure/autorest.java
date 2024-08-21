@@ -169,25 +169,25 @@ public class Salmon extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("length".equals(fieldName)) {
-                    deserializedSalmon.setLength(reader.getFloat());
-                } else if ("species".equals(fieldName)) {
-                    deserializedSalmon.setSpecies(reader.getString());
-                } else if ("siblings".equals(fieldName)) {
-                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                    deserializedSalmon.setSiblings(siblings);
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedSalmon.fishtype = reader.getString();
-                } else if ("location".equals(fieldName)) {
-                    deserializedSalmon.location = reader.getString();
-                } else if ("iswild".equals(fieldName)) {
-                    deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
-                } else {
+                if (!Salmon.fromJsonShared(reader, fieldName, deserializedSalmon)) {
                     reader.skipChildren();
                 }
             }
 
             return deserializedSalmon;
         });
+    }
+
+    static boolean fromJsonShared(JsonReader reader, String fieldName, Salmon deserializedSalmon) throws IOException {
+        if (Fish.fromJsonShared(reader, fieldName, deserializedSalmon)) {
+            return true;
+        } else if ("location".equals(fieldName)) {
+            deserializedSalmon.location = reader.getString();
+            return true;
+        } else if ("iswild".equals(fieldName)) {
+            deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
+            return true;
+        }
+        return false;
     }
 }
