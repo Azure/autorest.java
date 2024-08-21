@@ -57,6 +57,31 @@ public class PrimitiveType implements IType {
         .prototypeAsLong()
         .build();
 
+    public static final PrimitiveType INT_AS_STRING = new Builder()
+        .name("int")
+        .nullableType(ClassType.INTEGER_AS_STRING)
+        .defaultValueExpressionConverter(defaultValueExpression -> "Integer.parseInt(\"" + defaultValueExpression + "\")")
+        .jsonToken("JsonToken.STRING")
+        .defaultValue("0")
+        .serializationMethodBase("writeString")
+        .wrapSerializationWithObjectsToString(true)
+        .jsonDeserializationMethod("getNullable(nonNullReader -> Integer.parseInt(nonNullReader.getString()))")
+        .xmlElementDeserializationMethod("getNullableElement(Integer::valueOf)")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Integer::valueOf)")
+        .build();
+
+    public static final PrimitiveType LONG_AS_STRING = new Builder()
+        .prototypeAsLong()
+        .nullableType(ClassType.LONG_AS_STRING)
+        .defaultValueExpressionConverter(defaultValueExpression -> "Long.parseLong(\"" + defaultValueExpression + "\")")
+        .jsonToken("JsonToken.STRING")
+        .serializationMethodBase("writeString")
+        .wrapSerializationWithObjectsToString(true)
+        .jsonDeserializationMethod("getNullable(nonNullReader -> Long.parseLong(nonNullReader.getString()))")
+        .xmlElementDeserializationMethod("getNullableElement(Long::valueOf)")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, Long::valueOf)")
+        .build();
+
     public static final PrimitiveType FLOAT = new Builder()
         .name("float")
         .nullableType(ClassType.FLOAT)

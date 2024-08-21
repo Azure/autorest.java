@@ -794,7 +794,15 @@ abstract class ConvenienceMethodTemplateBase {
                 .collect(Collectors.toMap(p -> CodeNamer.getEscapedReservedClientMethodParameterName(p.getName()), Function.identity()));
         return method.getMethodInputParameters().stream()
                 .filter(p -> !p.isConstant() && !p.isFromClient())
-                .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
+                .map(p -> {
+                    ProxyMethodParameter proxyMethodParameter = proxyMethodParameterByClientParameterName.get(p.getName());
+                    if (proxyMethodParameter != null) {
+                        if (p.getRequestParameterLocation() != proxyMethodParameter.getRequestParameterLocation()) {
+                            proxyMethodParameter = null;
+                        }
+                    }
+                    return new MethodParameter(proxyMethodParameter, p);
+                })
                 .collect(Collectors.toList());
     }
 

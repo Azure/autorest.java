@@ -52,7 +52,7 @@ try {
     $file = invoke "npm pack -q"
     Copy-Item $file -Destination $packagesPath
   } finally {
-      Pop-Location
+    Pop-Location
   }
 
   Write-Host "`n`n====================================="

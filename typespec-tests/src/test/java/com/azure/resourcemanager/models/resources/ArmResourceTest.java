@@ -5,6 +5,7 @@ package com.azure.resourcemanager.models.resources;
 
 import com.azure.resourcemanager.models.resources.models.NestedProxyResource;
 import com.azure.resourcemanager.models.resources.models.NestedProxyResourceProperties;
+import com.azure.resourcemanager.models.resources.models.NotificationDetails;
 import com.azure.resourcemanager.models.resources.models.ProvisioningState;
 import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResource;
 import com.azure.resourcemanager.models.resources.models.TopLevelTrackedResourceProperties;
@@ -29,6 +30,7 @@ public class ArmResourceTest {
     private static final String RESOURCE_DESCRIPTION_VALID2 = "valid2";
     private static final ProvisioningState RESOURCE_PROVISIONING_STATE = ProvisioningState.SUCCEEDED;
     private static final String RESOURCE_GROUP_NAME = "test-rg";
+    private static final String NOTIFICATION_DETAILS_MESSAGE = "Resource action at top level.";
     private final ResourcesManager manager = ResourcesManager.authenticate(
             ArmUtils.createTestHttpPipeline(),
             ArmUtils.getAzureProfile());
@@ -49,6 +51,12 @@ public class ArmResourceTest {
         Assertions.assertNotNull(topLevelTrackedResource.properties());
         Assertions.assertEquals(RESOURCE_DESCRIPTION_VALID, topLevelTrackedResource.properties().description());
         Assertions.assertEquals(RESOURCE_PROVISIONING_STATE, topLevelTrackedResource.properties().provisioningState());
+
+        manager.topLevelTrackedResources().actionSync(RESOURCE_GROUP_NAME, TOP_LEVEL_TRACKED_RESOURCE_NAME,
+                new NotificationDetails().withMessage(NOTIFICATION_DETAILS_MESSAGE).withUrgent(true));
+
+        topLevelTrackedResource.actionSync(new NotificationDetails()
+                .withMessage(NOTIFICATION_DETAILS_MESSAGE).withUrgent(true));
 
         // TopLevelTrackedResources.listByResourceGroup
         List<TopLevelTrackedResource> topLevelTrackedResourceList = manager.topLevelTrackedResources()

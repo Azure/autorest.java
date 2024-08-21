@@ -130,7 +130,7 @@ import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
-import { Client as CodeModelClient, CrossLanguageDefinition } from "./common/client.js";
+import { Client as CodeModelClient, CrossLanguageDefinition, EncodedSchema } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { Operation as CodeModelOperation, ConvenienceApi, Request } from "./common/operation.js";
@@ -171,7 +171,6 @@ import {
   pushDistinct,
 } from "./type-utils.js";
 import { getNamespace, logWarning, pascalCase, stringArrayContainsIgnoreCase, trace } from "./utils.js";
-import { pathToFileURL } from "url";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -727,7 +726,11 @@ export class CodeModelBuilder {
       const operationExamples: Record<string, any> = {};
       for (const example of httpOperationExamples) {
         const operationExample = example.rawExample;
-        operationExample["x-ms-original-file"] = pathToFileURL(example.filePath).toString();
+
+        // example.filePath is relative path from sdkContext.examplesDir
+        // this is not a URL format (file:// or https://)
+        operationExample["x-ms-original-file"] = example.filePath;
+
         operationExamples[operationExample.title ?? operationExample.operationId ?? operation.operation.name] =
           operationExample;
       }
@@ -1820,11 +1823,13 @@ export class CodeModelBuilder {
   }
 
   private processIntegerSchemaFromSdkType(type: SdkBuiltInType, name: string, precision: number): NumberSchema {
-    return this.codeModel.schemas.add(
-      new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
-        summary: type.description,
-      }),
-    );
+    const schema = new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
+      summary: type.description,
+    });
+    if (type.encode === "string") {
+      (schema as EncodedSchema).encode = type.encode;
+    }
+    return this.codeModel.schemas.add(schema);
   }
 
   private processNumberSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
