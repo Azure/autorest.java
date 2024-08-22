@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class PropertiesImpl {
      * The interface defining all the services for NumericClientProperties to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "NumericClientPropert")
     public interface PropertiesService {
         @Post("/encode/numeric/property/safeint")
@@ -63,7 +64,8 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> safeintAsString(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> safeintAsString(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/encode/numeric/property/safeint")
@@ -72,7 +74,8 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> safeintAsStringSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> safeintAsStringSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/encode/numeric/property/uint32")
@@ -81,7 +84,8 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> uint32AsStringOptional(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> uint32AsStringOptional(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/encode/numeric/property/uint32")
@@ -90,7 +94,8 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> uint32AsStringOptionalSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> uint32AsStringOptionalSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
@@ -122,8 +127,10 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> safeintAsStringWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.safeintAsString(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.safeintAsString(this.client.getEndpoint(), contentType, accept,
+            body, requestOptions, context));
     }
 
     /**
@@ -154,8 +161,10 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> safeintAsStringWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.safeintAsStringSync(accept, body, requestOptions, Context.NONE);
+        return service.safeintAsStringSync(this.client.getEndpoint(), contentType, accept, body, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -187,8 +196,10 @@ public final class PropertiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> uint32AsStringOptionalWithResponseAsync(BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.uint32AsStringOptional(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.uint32AsStringOptional(this.client.getEndpoint(), contentType,
+            accept, body, requestOptions, context));
     }
 
     /**
@@ -219,7 +230,9 @@ public final class PropertiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> uint32AsStringOptionalWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.uint32AsStringOptionalSync(accept, body, requestOptions, Context.NONE);
+        return service.uint32AsStringOptionalSync(this.client.getEndpoint(), contentType, accept, body, requestOptions,
+            Context.NONE);
     }
 }

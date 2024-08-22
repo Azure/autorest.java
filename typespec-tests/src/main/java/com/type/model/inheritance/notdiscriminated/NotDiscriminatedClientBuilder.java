@@ -7,6 +7,7 @@ package com.type.model.inheritance.notdiscriminated;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the NotDiscriminatedClient type.
  */
 @ServiceClientBuilder(serviceClients = { NotDiscriminatedClient.class, NotDiscriminatedAsyncClient.class })
-public final class NotDiscriminatedClientBuilder
-    implements HttpTrait<NotDiscriminatedClientBuilder>, ConfigurationTrait<NotDiscriminatedClientBuilder> {
+public final class NotDiscriminatedClientBuilder implements HttpTrait<NotDiscriminatedClientBuilder>,
+    ConfigurationTrait<NotDiscriminatedClientBuilder>, EndpointTrait<NotDiscriminatedClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -174,6 +175,22 @@ public final class NotDiscriminatedClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public NotDiscriminatedClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -200,8 +217,9 @@ public final class NotDiscriminatedClientBuilder
     private NotDiscriminatedClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        NotDiscriminatedClientImpl client
-            = new NotDiscriminatedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        NotDiscriminatedClientImpl client = new NotDiscriminatedClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

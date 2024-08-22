@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class RelativeModelInOperationsImpl {
      * The interface defining all the services for AccessClientRelativeModelInOperations to be used by the proxy service
      * to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "AccessClientRelative")
     public interface RelativeModelInOperationsService {
         @Get("/azure/client-generator-core/access/relativeModelInOperation/operation")
@@ -63,8 +64,8 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> operation(@QueryParam("name") String name, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> operation(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/operation")
         @ExpectedResponses({ 200 })
@@ -72,8 +73,8 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> operationSync(@QueryParam("name") String name, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> operationSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/discriminator")
         @ExpectedResponses({ 200 })
@@ -81,8 +82,9 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> discriminator(@QueryParam("kind") String kind, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> discriminator(@HostParam("endpoint") String endpoint,
+            @QueryParam("kind") String kind, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/relativeModelInOperation/discriminator")
         @ExpectedResponses({ 200 })
@@ -90,8 +92,8 @@ public final class RelativeModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> discriminatorSync(@QueryParam("kind") String kind, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> discriminatorSync(@HostParam("endpoint") String endpoint, @QueryParam("kind") String kind,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -129,7 +131,8 @@ public final class RelativeModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> operationWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.operation(name, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.operation(this.client.getEndpoint(), name, accept, requestOptions, context));
     }
 
     /**
@@ -166,7 +169,7 @@ public final class RelativeModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> operationWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.operationSync(name, accept, requestOptions, Context.NONE);
+        return service.operationSync(this.client.getEndpoint(), name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -199,7 +202,8 @@ public final class RelativeModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> discriminatorWithResponseAsync(String kind, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.discriminator(kind, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.discriminator(this.client.getEndpoint(), kind, accept, requestOptions, context));
     }
 
     /**
@@ -231,6 +235,6 @@ public final class RelativeModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> discriminatorWithResponse(String kind, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.discriminatorSync(kind, accept, requestOptions, Context.NONE);
+        return service.discriminatorSync(this.client.getEndpoint(), kind, accept, requestOptions, Context.NONE);
     }
 }

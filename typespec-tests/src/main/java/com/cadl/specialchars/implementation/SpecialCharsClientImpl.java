@@ -16,12 +16,12 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class SpecialCharsClientImpl {
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -74,7 +74,7 @@ public final class SpecialCharsClientImpl {
     /**
      * Initializes an instance of SpecialCharsClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public SpecialCharsClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -85,7 +85,7 @@ public final class SpecialCharsClientImpl {
      * Initializes an instance of SpecialCharsClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public SpecialCharsClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -96,7 +96,7 @@ public final class SpecialCharsClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public SpecialCharsClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;

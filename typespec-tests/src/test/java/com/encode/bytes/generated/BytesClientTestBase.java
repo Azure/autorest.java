@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.encode.bytes.BytesClientBuilder;
 import com.encode.bytes.HeaderClient;
 import com.encode.bytes.PropertyClient;
@@ -33,7 +34,9 @@ class BytesClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        BytesClientBuilder queryClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+        BytesClientBuilder queryClientbuilder = new BytesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             queryClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -42,7 +45,9 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         queryClient = queryClientbuilder.buildQueryClient();
 
-        BytesClientBuilder propertyClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+        BytesClientBuilder propertyClientbuilder = new BytesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             propertyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -51,7 +56,9 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         propertyClient = propertyClientbuilder.buildPropertyClient();
 
-        BytesClientBuilder headerClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+        BytesClientBuilder headerClientbuilder = new BytesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             headerClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -60,7 +67,9 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         headerClient = headerClientbuilder.buildHeaderClient();
 
-        BytesClientBuilder requestBodyClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+        BytesClientBuilder requestBodyClientbuilder = new BytesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             requestBodyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -69,7 +78,9 @@ class BytesClientTestBase extends TestProxyTestBase {
         }
         requestBodyClient = requestBodyClientbuilder.buildRequestBodyClient();
 
-        BytesClientBuilder responseBodyClientbuilder = new BytesClientBuilder().httpClient(HttpClient.createDefault())
+        BytesClientBuilder responseBodyClientbuilder = new BytesClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             responseBodyClientbuilder.httpClient(interceptorManager.getPlaybackClient());

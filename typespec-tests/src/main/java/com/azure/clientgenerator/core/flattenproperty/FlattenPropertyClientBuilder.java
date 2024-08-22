@@ -8,6 +8,7 @@ import com.azure.clientgenerator.core.flattenproperty.implementation.FlattenProp
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the FlattenPropertyClient type.
  */
 @ServiceClientBuilder(serviceClients = { FlattenPropertyClient.class, FlattenPropertyAsyncClient.class })
-public final class FlattenPropertyClientBuilder
-    implements HttpTrait<FlattenPropertyClientBuilder>, ConfigurationTrait<FlattenPropertyClientBuilder> {
+public final class FlattenPropertyClientBuilder implements HttpTrait<FlattenPropertyClientBuilder>,
+    ConfigurationTrait<FlattenPropertyClientBuilder>, EndpointTrait<FlattenPropertyClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -174,6 +175,22 @@ public final class FlattenPropertyClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public FlattenPropertyClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -200,8 +217,9 @@ public final class FlattenPropertyClientBuilder
     private FlattenPropertyClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        FlattenPropertyClientImpl client
-            = new FlattenPropertyClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        FlattenPropertyClientImpl client = new FlattenPropertyClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

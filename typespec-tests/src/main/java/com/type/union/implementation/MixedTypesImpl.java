@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class MixedTypesImpl {
      * The interface defining all the services for UnionClientMixedTypes to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "UnionClientMixedType")
     public interface MixedTypesService {
         @Get("/type/union/mixed-types")
@@ -64,8 +65,8 @@ public final class MixedTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/union/mixed-types")
         @ExpectedResponses({ 200 })
@@ -73,8 +74,8 @@ public final class MixedTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/union/mixed-types")
         @ExpectedResponses({ 204 })
@@ -82,8 +83,9 @@ public final class MixedTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> send(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData sendRequest, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> send(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData sendRequest,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/union/mixed-types")
         @ExpectedResponses({ 204 })
@@ -91,7 +93,7 @@ public final class MixedTypesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("accept") String accept,
+        Response<Void> sendSync(@HostParam("endpoint") String endpoint, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData sendRequest, RequestOptions requestOptions, Context context);
     }
 
@@ -123,7 +125,7 @@ public final class MixedTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -154,7 +156,7 @@ public final class MixedTypesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getSync(accept, requestOptions, Context.NONE);
+        return service.getSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -185,8 +187,9 @@ public final class MixedTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(BinaryData sendRequest, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.send(accept, sendRequest, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.send(this.client.getEndpoint(), contentType, sendRequest, requestOptions, context));
     }
 
     /**
@@ -217,7 +220,7 @@ public final class MixedTypesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(BinaryData sendRequest, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sendSync(accept, sendRequest, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.sendSync(this.client.getEndpoint(), contentType, sendRequest, requestOptions, Context.NONE);
     }
 }

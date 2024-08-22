@@ -8,6 +8,7 @@ import com.authentication.apikey.implementation.ApiKeyClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.client.traits.KeyCredentialTrait;
 import com.azure.core.credential.KeyCredential;
@@ -43,8 +44,9 @@ import java.util.Objects;
  * A builder for creating a new instance of the ApiKeyClient type.
  */
 @ServiceClientBuilder(serviceClients = { ApiKeyClient.class, ApiKeyAsyncClient.class })
-public final class ApiKeyClientBuilder implements HttpTrait<ApiKeyClientBuilder>,
-    ConfigurationTrait<ApiKeyClientBuilder>, KeyCredentialTrait<ApiKeyClientBuilder> {
+public final class ApiKeyClientBuilder
+    implements HttpTrait<ApiKeyClientBuilder>, ConfigurationTrait<ApiKeyClientBuilder>,
+    KeyCredentialTrait<ApiKeyClientBuilder>, EndpointTrait<ApiKeyClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -192,6 +194,22 @@ public final class ApiKeyClientBuilder implements HttpTrait<ApiKeyClientBuilder>
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public ApiKeyClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -218,7 +236,9 @@ public final class ApiKeyClientBuilder implements HttpTrait<ApiKeyClientBuilder>
     private ApiKeyClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ApiKeyClientImpl client = new ApiKeyClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        ApiKeyClientImpl client
+            = new ApiKeyClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

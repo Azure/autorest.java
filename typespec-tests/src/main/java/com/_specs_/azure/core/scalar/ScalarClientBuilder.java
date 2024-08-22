@@ -8,6 +8,7 @@ import com._specs_.azure.core.scalar.implementation.ScalarClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the ScalarClient type.
  */
 @ServiceClientBuilder(serviceClients = { ScalarClient.class, ScalarAsyncClient.class })
-public final class ScalarClientBuilder
-    implements HttpTrait<ScalarClientBuilder>, ConfigurationTrait<ScalarClientBuilder> {
+public final class ScalarClientBuilder implements HttpTrait<ScalarClientBuilder>,
+    ConfigurationTrait<ScalarClientBuilder>, EndpointTrait<ScalarClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -174,6 +175,22 @@ public final class ScalarClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public ScalarClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -218,10 +235,11 @@ public final class ScalarClientBuilder
     private ScalarClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         ScalarServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ScalarServiceVersion.getLatest();
-        ScalarClientImpl client
-            = new ScalarClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
+        ScalarClientImpl client = new ScalarClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+            localEndpoint, localServiceVersion);
         return client;
     }
 

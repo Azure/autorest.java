@@ -68,9 +68,8 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("managedIdentityTrackedResourceName") String managedIdentityTrackedResourceName,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.CommonTypes.ManagedIdentity/managedIdentityTrackedResources/{managedIdentityTrackedResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -79,10 +78,9 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("managedIdentityTrackedResourceName") String managedIdentityTrackedResourceName,
-            @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") ManagedIdentityTrackedResourceInner resource, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.CommonTypes.ManagedIdentity/managedIdentityTrackedResources/{managedIdentityTrackedResourceName}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -91,7 +89,7 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("managedIdentityTrackedResourceName") String managedIdentityTrackedResourceName,
-            @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") ManagedIdentityTrackedResourceInner properties, Context context);
     }
 
@@ -257,11 +255,12 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.createWithSystemAssigned(this.client.getEndpoint(),
                 this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
-                managedIdentityTrackedResourceName, accept, resource, context))
+                managedIdentityTrackedResourceName, contentType, accept, resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -303,11 +302,12 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createWithSystemAssigned(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, accept, resource,
-            context);
+            this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, contentType, accept,
+            resource, context);
     }
 
     /**
@@ -404,11 +404,12 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.updateWithUserAssignedAndSystemAssigned(this.client.getEndpoint(),
                 this.client.getApiVersion(), this.client.getSubscriptionId(), resourceGroupName,
-                managedIdentityTrackedResourceName, accept, properties, context))
+                managedIdentityTrackedResourceName, contentType, accept, properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -451,11 +452,12 @@ public final class ManagedIdentityTrackedResourcesClientImpl implements ManagedI
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.updateWithUserAssignedAndSystemAssigned(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, accept, properties,
-            context);
+            this.client.getSubscriptionId(), resourceGroupName, managedIdentityTrackedResourceName, contentType, accept,
+            properties, context);
     }
 
     /**

@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.payload.jsonmergepatch.JsonMergePatchClient;
 import com.payload.jsonmergepatch.JsonMergePatchClientBuilder;
 
@@ -21,9 +22,10 @@ class JsonMergePatchClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        JsonMergePatchClientBuilder jsonMergePatchClientbuilder
-            = new JsonMergePatchClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        JsonMergePatchClientBuilder jsonMergePatchClientbuilder = new JsonMergePatchClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             jsonMergePatchClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

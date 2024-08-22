@@ -7,7 +7,6 @@ package com.cadl.armresourceprovider.implementation;
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
-import com.azure.core.annotation.Headers;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
@@ -65,7 +64,6 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @Host("{endpoint}")
     @ServiceInterface(name = "ArmResourceProviderC")
     public interface CustomTemplateResourceInterfacesService {
-        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/customTemplateResources/{customTemplateResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -74,10 +72,9 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
             @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("If-Match") String ifMatch,
             @HeaderParam("If-None-Match") String ifNoneMatch,
             @PathParam("customTemplateResourceName") String customTemplateResourceName,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") CustomTemplateResourceInner resource,
-            Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") CustomTemplateResourceInner resource, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/customTemplateResources/{customTemplateResourceName}")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -85,8 +82,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("customTemplateResourceName") String customTemplateResourceName,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") CustomTemplateResourcePatch properties,
-            Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") CustomTemplateResourcePatch properties, Context context);
     }
 
     /**
@@ -127,11 +124,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
                 this.client.getSubscriptionId(), resourceGroupName, ifMatch, ifNoneMatch, customTemplateResourceName,
-                accept, resource, context))
+                contentType, accept, resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -175,11 +173,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
             this.client.getSubscriptionId(), resourceGroupName, ifMatch, ifNoneMatch, customTemplateResourceName,
-            accept, resource, context);
+            contentType, accept, resource, context);
     }
 
     /**
@@ -449,11 +448,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.updateLongRunning(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, accept, properties,
-                context))
+                this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, contentType, accept,
+                properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -494,11 +494,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.updateLongRunning(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, accept, properties,
-            context);
+            this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, contentType, accept,
+            properties, context);
     }
 
     /**

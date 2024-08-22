@@ -16,6 +16,20 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class DurationClientImpl {
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -87,19 +101,22 @@ public final class DurationClientImpl {
 
     /**
      * Initializes an instance of DurationClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public DurationClientImpl() {
+    public DurationClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of DurationClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public DurationClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public DurationClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -107,10 +124,12 @@ public final class DurationClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public DurationClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public DurationClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.queries = new QueriesImpl(this);
         this.properties = new PropertiesImpl(this);
         this.headers = new HeadersImpl(this);

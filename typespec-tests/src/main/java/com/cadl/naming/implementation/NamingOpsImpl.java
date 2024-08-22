@@ -67,8 +67,8 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> post(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/naming")
         @ExpectedResponses({ 200 })
@@ -77,8 +77,8 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> postSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Get("/naming")
         @ExpectedResponses({ 200 })
@@ -87,7 +87,7 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getAnonymous(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/naming")
         @ExpectedResponses({ 200 })
@@ -96,7 +96,7 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getAnonymousSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -156,9 +156,10 @@ public final class NamingOpsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> postWithResponseAsync(String name, BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.post(this.client.getEndpoint(), name, accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.post(this.client.getEndpoint(), name, contentType, accept, body,
+            requestOptions, context));
     }
 
     /**
@@ -217,8 +218,10 @@ public final class NamingOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> postWithResponse(String name, BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.postSync(this.client.getEndpoint(), name, accept, body, requestOptions, Context.NONE);
+        return service.postSync(this.client.getEndpoint(), name, contentType, accept, body, requestOptions,
+            Context.NONE);
     }
 
     /**

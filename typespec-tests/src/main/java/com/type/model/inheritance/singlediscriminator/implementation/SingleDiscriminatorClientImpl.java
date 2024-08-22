@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -42,6 +43,20 @@ public final class SingleDiscriminatorClientImpl {
     private final SingleDiscriminatorClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -71,19 +86,22 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * Initializes an instance of SingleDiscriminatorClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public SingleDiscriminatorClientImpl() {
+    public SingleDiscriminatorClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of SingleDiscriminatorClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public SingleDiscriminatorClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public SingleDiscriminatorClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -91,10 +109,13 @@ public final class SingleDiscriminatorClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public SingleDiscriminatorClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public SingleDiscriminatorClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service
             = RestProxy.create(SingleDiscriminatorClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -103,7 +124,7 @@ public final class SingleDiscriminatorClientImpl {
      * The interface defining all the services for SingleDiscriminatorClient to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "SingleDiscriminatorC")
     public interface SingleDiscriminatorClientService {
         @Get("/type/model/inheritance/single-discriminator/model")
@@ -112,8 +133,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getModel(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/model")
         @ExpectedResponses({ 200 })
@@ -121,8 +142,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getModelSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/model")
         @ExpectedResponses({ 204 })
@@ -130,8 +151,9 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putModel(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/model")
         @ExpectedResponses({ 204 })
@@ -139,16 +161,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putModelSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-
-        @Get("/type/model/inheritance/single-discriminator/recursivemodel")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getRecursiveModel(@HeaderParam("accept") String accept,
+        Response<Void> putModelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData input,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/recursivemodel")
@@ -157,8 +171,17 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getRecursiveModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getRecursiveModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/type/model/inheritance/single-discriminator/recursivemodel")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getRecursiveModelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/recursivemodel")
         @ExpectedResponses({ 204 })
@@ -166,8 +189,9 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putRecursiveModel(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putRecursiveModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData input,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/model/inheritance/single-discriminator/recursivemodel")
         @ExpectedResponses({ 204 })
@@ -175,16 +199,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putRecursiveModelSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-
-        @Get("/type/model/inheritance/single-discriminator/missingdiscriminator")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getMissingDiscriminator(@HeaderParam("accept") String accept,
+        Response<Void> putRecursiveModelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData input,
             RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/missingdiscriminator")
@@ -193,8 +209,17 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getMissingDiscriminatorSync(@HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getMissingDiscriminator(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Get("/type/model/inheritance/single-discriminator/missingdiscriminator")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> getMissingDiscriminatorSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/wrongdiscriminator")
         @ExpectedResponses({ 200 })
@@ -202,8 +227,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getWrongDiscriminator(@HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> getWrongDiscriminator(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/wrongdiscriminator")
         @ExpectedResponses({ 200 })
@@ -211,8 +236,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getWrongDiscriminatorSync(@HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> getWrongDiscriminatorSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/legacy-model")
         @ExpectedResponses({ 200 })
@@ -220,8 +245,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getLegacyModel(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getLegacyModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/model/inheritance/single-discriminator/legacy-model")
         @ExpectedResponses({ 200 })
@@ -229,8 +254,8 @@ public final class SingleDiscriminatorClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getLegacyModelSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getLegacyModelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -255,7 +280,7 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getModel(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.getModel(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -280,7 +305,7 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getModelSync(accept, requestOptions, Context.NONE);
+        return service.getModelSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -304,8 +329,9 @@ public final class SingleDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putModel(accept, input, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil
+            .withContext(context -> service.putModel(this.getEndpoint(), contentType, input, requestOptions, context));
     }
 
     /**
@@ -329,8 +355,8 @@ public final class SingleDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putModelSync(accept, input, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putModelSync(this.getEndpoint(), contentType, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -355,7 +381,8 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRecursiveModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getRecursiveModel(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getRecursiveModel(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -380,7 +407,7 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRecursiveModelWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getRecursiveModelSync(accept, requestOptions, Context.NONE);
+        return service.getRecursiveModelSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -404,8 +431,9 @@ public final class SingleDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putRecursiveModelWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putRecursiveModel(accept, input, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putRecursiveModel(this.getEndpoint(), contentType, input, requestOptions, context));
     }
 
     /**
@@ -429,8 +457,8 @@ public final class SingleDiscriminatorClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putRecursiveModelWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putRecursiveModelSync(accept, input, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putRecursiveModelSync(this.getEndpoint(), contentType, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -455,7 +483,8 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMissingDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getMissingDiscriminator(accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.getMissingDiscriminator(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -480,7 +509,7 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMissingDiscriminatorWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getMissingDiscriminatorSync(accept, requestOptions, Context.NONE);
+        return service.getMissingDiscriminatorSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -505,7 +534,8 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWrongDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getWrongDiscriminator(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getWrongDiscriminator(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -530,7 +560,7 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWrongDiscriminatorWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getWrongDiscriminatorSync(accept, requestOptions, Context.NONE);
+        return service.getWrongDiscriminatorSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -555,7 +585,8 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLegacyModelWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getLegacyModel(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getLegacyModel(this.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -579,6 +610,6 @@ public final class SingleDiscriminatorClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getLegacyModelWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getLegacyModelSync(accept, requestOptions, Context.NONE);
+        return service.getLegacyModelSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

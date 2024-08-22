@@ -7,6 +7,7 @@ package com.encode.duration;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -47,8 +48,8 @@ import java.util.Objects;
         QueryAsyncClient.class,
         PropertyAsyncClient.class,
         HeaderAsyncClient.class })
-public final class DurationClientBuilder
-    implements HttpTrait<DurationClientBuilder>, ConfigurationTrait<DurationClientBuilder> {
+public final class DurationClientBuilder implements HttpTrait<DurationClientBuilder>,
+    ConfigurationTrait<DurationClientBuilder>, EndpointTrait<DurationClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -180,6 +181,22 @@ public final class DurationClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public DurationClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -206,8 +223,9 @@ public final class DurationClientBuilder
     private DurationClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         DurationClientImpl client
-            = new DurationClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+            = new DurationClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

@@ -10,6 +10,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -48,6 +49,20 @@ public final class RpcClientImpl {
      * The proxy service used to perform REST calls.
      */
     private final RpcClientService service;
+
+    /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
 
     /**
      * Service version.
@@ -94,21 +109,23 @@ public final class RpcClientImpl {
     /**
      * Initializes an instance of RpcClient client.
      * 
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public RpcClientImpl(RpcServiceVersion serviceVersion) {
+    public RpcClientImpl(String endpoint, RpcServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of RpcClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public RpcClientImpl(HttpPipeline httpPipeline, RpcServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+    public RpcClientImpl(HttpPipeline httpPipeline, String endpoint, RpcServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -116,12 +133,14 @@ public final class RpcClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public RpcClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+    public RpcClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         RpcServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(RpcClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -129,7 +148,7 @@ public final class RpcClientImpl {
     /**
      * The interface defining all the services for RpcClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "RpcClient")
     public interface RpcClientService {
         @Post("/azure/core/lro/rpc/generations:submit")
@@ -138,8 +157,9 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> longRunningRpc(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Mono<Response<BinaryData>> longRunningRpc(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/lro/rpc/generations:submit")
@@ -148,8 +168,9 @@ public final class RpcClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> longRunningRpcSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<BinaryData> longRunningRpcSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -194,9 +215,10 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.longRunningRpc(this.getServiceVersion().getVersion(), accept,
-            body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.longRunningRpc(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -239,9 +261,10 @@ public final class RpcClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> longRunningRpcWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.longRunningRpcSync(this.getServiceVersion().getVersion(), accept, body, requestOptions,
-            Context.NONE);
+        return service.longRunningRpcSync(this.getEndpoint(), this.getServiceVersion().getVersion(), contentType,
+            accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -288,7 +311,7 @@ public final class RpcClientImpl {
             () -> this.longRunningRpcWithResponseAsync(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -341,7 +364,7 @@ public final class RpcClientImpl {
             () -> this.longRunningRpcWithResponse(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -395,7 +418,7 @@ public final class RpcClientImpl {
             () -> this.longRunningRpcWithResponseAsync(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
@@ -450,7 +473,7 @@ public final class RpcClientImpl {
             () -> this.longRunningRpcWithResponse(body, requestOptions),
             new com._specs_.azure.core.lro.rpc.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
+                    .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)

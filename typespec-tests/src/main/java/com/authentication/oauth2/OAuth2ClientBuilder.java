@@ -8,6 +8,7 @@ import com.authentication.oauth2.implementation.OAuth2ClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.client.traits.TokenCredentialTrait;
 import com.azure.core.credential.TokenCredential;
@@ -43,8 +44,9 @@ import java.util.Objects;
  * A builder for creating a new instance of the OAuth2Client type.
  */
 @ServiceClientBuilder(serviceClients = { OAuth2Client.class, OAuth2AsyncClient.class })
-public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>,
-    ConfigurationTrait<OAuth2ClientBuilder>, TokenCredentialTrait<OAuth2ClientBuilder> {
+public final class OAuth2ClientBuilder
+    implements HttpTrait<OAuth2ClientBuilder>, ConfigurationTrait<OAuth2ClientBuilder>,
+    TokenCredentialTrait<OAuth2ClientBuilder>, EndpointTrait<OAuth2ClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -195,6 +197,22 @@ public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public OAuth2ClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -221,7 +239,9 @@ public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>
     private OAuth2ClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        OAuth2ClientImpl client = new OAuth2ClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        OAuth2ClientImpl client
+            = new OAuth2ClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

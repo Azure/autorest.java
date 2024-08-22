@@ -6,7 +6,6 @@ package com.server.path.multiple.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -149,8 +148,7 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> noOperationParams(@HostParam("endpoint") String endpoint,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Get("/")
         @ExpectedResponses({ 204 })
@@ -159,8 +157,7 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> noOperationParamsSync(@HostParam("endpoint") String endpoint,
-            @HostParam("apiVersion") String apiVersion, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @HostParam("apiVersion") String apiVersion, RequestOptions requestOptions, Context context);
 
         @Get("/{keyword}")
         @ExpectedResponses({ 204 })
@@ -170,7 +167,7 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> withOperationPathParam(@HostParam("endpoint") String endpoint,
             @HostParam("apiVersion") String apiVersion, @PathParam("keyword") String keyword,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Get("/{keyword}")
         @ExpectedResponses({ 204 })
@@ -180,7 +177,7 @@ public final class MultipleClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> withOperationPathParamSync(@HostParam("endpoint") String endpoint,
             @HostParam("apiVersion") String apiVersion, @PathParam("keyword") String keyword,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -195,9 +192,8 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> noOperationParamsWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.noOperationParams(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, requestOptions, context));
+            this.getServiceVersion().getVersion(), requestOptions, context));
     }
 
     /**
@@ -212,9 +208,8 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> noOperationParamsWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.noOperationParamsSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
-            requestOptions, Context.NONE);
+        return service.noOperationParamsSync(this.getEndpoint(), this.getServiceVersion().getVersion(), requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -230,9 +225,8 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withOperationPathParamWithResponseAsync(String keyword, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.withOperationPathParam(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), keyword, accept, requestOptions, context));
+            this.getServiceVersion().getVersion(), keyword, requestOptions, context));
     }
 
     /**
@@ -248,8 +242,7 @@ public final class MultipleClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withOperationPathParamWithResponse(String keyword, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return service.withOperationPathParamSync(this.getEndpoint(), this.getServiceVersion().getVersion(), keyword,
-            accept, requestOptions, Context.NONE);
+            requestOptions, Context.NONE);
     }
 }

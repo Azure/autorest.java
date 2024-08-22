@@ -1,5 +1,13 @@
 # Release History
 
+## 0.20.0 (2024-08-26)
+
+Compatible with compiler 0.59.
+
+- Adopt TCGC `sdkPackage`.
+- Always allow override `endpoint` parameter in `Builder`.
+- Client method parameters' order changes when define the method parameters using spread in TypeSpec. 
+
 ## 0.19.3 (2024-08-21)
 
 Compatible with compiler 0.59.
