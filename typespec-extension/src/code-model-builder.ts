@@ -682,7 +682,7 @@ export class CodeModelBuilder {
       .slice(0, versions.indexOf(pinnedApiVersion) + 1)
       .filter((version) => !excludePreview || !isStable(pinnedApiVersion) || isStable(version));
   }
-  
+
   private needToSkipProcessingOperation(operation: Operation | undefined, clientContext: ClientContext): boolean {
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)

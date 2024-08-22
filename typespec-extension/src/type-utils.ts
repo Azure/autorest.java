@@ -23,7 +23,6 @@ import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
 import { SdkDurationType, SdkType, isSdkFloatKind, isSdkIntKind } from "@azure-tools/typespec-client-generator-core";
-import { Version } from "@typespec/versioning";
 
 /** Acts as a cache for processing inputs.
  *
