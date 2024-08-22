@@ -111,6 +111,7 @@ export const $lib = createTypeSpecLibrary({
 });
 
 export async function $onEmit(context: EmitContext<EmitterOptions>) {
+  console.log("we've entered onEmit!")
   const program = context.program;
   const options = context.options;
   if (!options["flavor"]) {
@@ -122,8 +123,11 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
       options["flavor"] = "Azure";
     }
   }
+
+  console.log("start building CodeModel!")
   const builder = new CodeModelBuilder(program, context);
   const codeModel = await builder.build();
+  console.log("CodeModel built!")
 
   if (!program.compilerOptions.noEmit && !program.hasError()) {
     const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -171,6 +175,8 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
         stdout: string;
         stderr: string;
       };
+
+      console.log("starting java generator!")
       await new Promise<SpawnReturns>((resolve, reject) => {
         const childProcess = spawn("java", javaArgs, { stdio: "inherit" });
 
@@ -221,6 +227,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
 
       // as stdio: "inherit", std is not captured by spawn
       // program.trace("typespec-java", output.stdout ? output.stdout : output.stderr);
+      console.log("exiting java generator!")
     } catch (error: any) {
       if (error && "code" in error && error["code"] === "ENOENT") {
         const msg = "'java' is not on PATH. Please install JDK 11 or above.";
@@ -238,7 +245,9 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     }
 
     if (!options["dev-options"]?.["generate-code-model"]) {
+      console.log("deleting code-model file!")
       await program.host.rm(codeModelFileName);
+      console.log("deleted code-model file!")
     }
   }
 }
