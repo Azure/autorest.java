@@ -151,6 +151,7 @@ import {
   getNonNullSdkType,
   getUnionDescription,
   getUsage,
+  isStable,
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
@@ -535,15 +536,15 @@ export class CodeModelBuilder {
         if (initializationProperty.kind === "endpoint") {
           let sdkPathParameters: SdkPathParameter[] = [];
           if (initializationProperty.type.kind === "union") {
-            if (initializationProperty.type.values.length <= 2) {
-              // only get the path parameters from the endpoint whose serverUrl is not {"endpoint"}
+            if (initializationProperty.type.values.length === 2) {
+              // only get the sdkPathParameters from the endpoint whose serverUrl is not {"endpoint"}
               for (const endpointType of initializationProperty.type.values) {
                 if (endpointType.kind === "endpoint" && endpointType.serverUrl !== "{endpoint}") {
                   sdkPathParameters = endpointType.templateArguments;
                   baseUri = endpointType.serverUrl;
                 }
               }
-            } else {
+            } else if (initializationProperty.type.values.length > 2) {
               throw new Error("Multiple server url defined for one client is not supported yet.");
             }
           } else if (initializationProperty.type.kind === "endpoint") {
@@ -679,9 +680,9 @@ export class CodeModelBuilder {
     }
     return versions
       .slice(0, versions.indexOf(pinnedApiVersion) + 1)
-      .filter((version) => !excludePreview || pinnedApiVersion.includes("preview") || !version.includes("preview"));
+      .filter((version) => !excludePreview || !isStable(pinnedApiVersion) || isStable(version));
   }
-
+  
   private needToSkipProcessingOperation(operation: Operation | undefined, clientContext: ClientContext): boolean {
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
@@ -1084,12 +1085,6 @@ export class CodeModelBuilder {
             case "form":
               style = SerializationStyle.Form;
               explode = true;
-              break;
-
-            default:
-              if (format) {
-                this.logWarning(`Unrecognized query parameter format: '${format}'.`);
-              }
               break;
           }
         } else if (param.kind === "header") {
