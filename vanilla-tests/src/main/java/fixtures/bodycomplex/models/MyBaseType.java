@@ -26,7 +26,7 @@ public class MyBaseType {
      */
     @JsonTypeId
     @JsonProperty(value = "kind", required = true)
-    MyKind kind;
+    private MyKind kind = MyKind.fromString("MyBaseType");
 
     /*
      * The propB1 property.
@@ -44,7 +44,6 @@ public class MyBaseType {
      * Creates an instance of MyBaseType class.
      */
     protected MyBaseType() {
-        this.kind = MyKind.fromString("MyBaseType");
     }
 
     /**

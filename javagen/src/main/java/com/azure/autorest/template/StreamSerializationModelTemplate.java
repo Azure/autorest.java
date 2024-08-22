@@ -279,7 +279,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // package we can generate a package-private 'toJsonShared' method that can handle deserializing properties
         // defined in the parent class(es).
         // This will prevent duplicating the deserialization logic for parent properties in each subclass.
-        return !propertiesManager.hasConstructorArguments()
+        return propertiesManager.getSettings().isShareJsonSerializableCode()
+            && !propertiesManager.hasConstructorArguments()
             && propertiesManager.getModel().isAllPolymorphicModelsInSamePackage();
     }
 
@@ -363,14 +364,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     @Override
-    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
         // Early out as strongly-typed headers do their own thing.
-        if (model.isStronglyTypedHeader()) {
+        if (propertiesManager.getModel().isStronglyTypedHeader()) {
             return;
         }
 
-        new StreamSerializationGenerator(model, settings,
-            this::isManagementErrorSubclass).writeStreamStyleSerialization(classBlock);
+        new StreamSerializationGenerator(propertiesManager, this::isManagementErrorSubclass)
+            .writeStreamStyleSerialization(classBlock);
     }
 
     private static final class StreamSerializationGenerator {
@@ -383,11 +384,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         private final boolean isJsonMergePatchModel;
         private final boolean useFromJsonShared;
 
-        private StreamSerializationGenerator(ClientModel model, JavaSettings settings,
+        private StreamSerializationGenerator(ClientModelPropertiesManager propertiesManager,
             Predicate<ClientModel> isManagementErrorSubclass) {
-            this.propertiesManager = new ClientModelPropertiesManager(model, settings);
-            this.model = model;
-            this.settings = settings;
+            this.propertiesManager = propertiesManager;
+            this.model = propertiesManager.getModel();
+            this.settings = propertiesManager.getSettings();
             this.isManagementErrorSubclass = isManagementErrorSubclass;
 
             this.addGeneratedAnnotation = Templates.getModelTemplate()::addGeneratedAnnotation;
@@ -460,10 +461,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
          * @param isJsonMergePatch Whether the serialization is for a JSON merge patch.
          */
         private void writeToJson(JavaClass classBlock, boolean isJsonMergePatch) {
-            boolean callToJsonSharedForParentProperties = !isJsonMergePatch
+            boolean callToJsonSharedForParentProperties = settings.isShareJsonSerializableCode() && !isJsonMergePatch
                 && model.isAllPolymorphicModelsInSamePackage() && !CoreUtils.isNullOrEmpty(model.getParentModelName());
-            boolean callToJsonSharedForThisProperties = !isJsonMergePatch && model.isAllPolymorphicModelsInSamePackage()
-                && model.isPolymorphicParent();
+            boolean callToJsonSharedForThisProperties = settings.isShareJsonSerializableCode() && !isJsonMergePatch
+                && model.isAllPolymorphicModelsInSamePackage() && model.isPolymorphicParent();
 
             classBlock.javadocComment(JavaJavadocComment::inheritDoc);
             addGeneratedAnnotation.accept(classBlock);

@@ -170,7 +170,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     : JavaVisibility.Public;
 
                 if (!property.isPolymorphicDiscriminator()
-                    || PolymorphicDiscriminatorHandler.generateGetter(model, property)) {
+                    || PolymorphicDiscriminatorHandler.generateGetter(model, property, settings)) {
                     generateGetterJavadoc(classBlock, property);
                     addGeneratedAnnotation(classBlock);
                     if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
@@ -323,7 +323,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             }
 
             if (requireSerialization) {
-                writeStreamStyleSerialization(classBlock, model, settings);
+                writeStreamStyleSerialization(classBlock, propertiesManager);
             }
         });
     }
@@ -334,7 +334,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return false;
         }
 
-        if (property.isPolymorphicDiscriminator() && model.isAllPolymorphicModelsInSamePackage()) {
+        if (!settings.isShareJsonSerializableCode()
+            && property.isPolymorphicDiscriminator()
+            && model.isAllPolymorphicModelsInSamePackage()) {
             return false;
         }
 
@@ -1215,10 +1217,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * the model uses.
      *
      * @param classBlock The class block where serialization methods will be written.
-     * @param model The model.
-     * @param settings Autorest generation settings.
+     * @param propertiesManager The properties manager.
      */
-    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModel model, JavaSettings settings) {
+    protected void writeStreamStyleSerialization(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
         // No-op, meant for StreamSerializationModelTemplate.
     }
 

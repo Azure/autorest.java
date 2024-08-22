@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
@@ -20,6 +21,13 @@ import java.util.List;
 @JsonTypeName("sawshark")
 @Fluent
 public final class Sawshark extends Shark {
+    /*
+     * The fishtype property.
+     */
+    @JsonTypeId
+    @JsonProperty(value = "fishtype", required = true)
+    private String fishtype = "sawshark";
+
     /*
      * The picture property.
      */
@@ -36,7 +44,15 @@ public final class Sawshark extends Shark {
     public Sawshark(@JsonProperty(value = "length", required = true) float length,
         @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length, birthday);
-        this.fishtype = "sawshark";
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**

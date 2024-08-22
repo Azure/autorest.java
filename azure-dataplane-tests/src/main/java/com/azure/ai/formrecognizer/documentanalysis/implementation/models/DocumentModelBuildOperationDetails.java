@@ -5,11 +5,13 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -17,6 +19,11 @@ import java.util.Map;
  */
 @Fluent
 public final class DocumentModelBuildOperationDetails extends OperationDetails {
+    /*
+     * Type of operation.
+     */
+    private String kind = "documentModelBuild";
+
     /*
      * Operation result upon success.
      */
@@ -26,7 +33,15 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
      * Creates an instance of DocumentModelBuildOperationDetails class.
      */
     public DocumentModelBuildOperationDetails() {
-        this.kind = "documentModelBuild";
+    }
+
+    /**
+     * Get the kind property: Type of operation.
+     * 
+     * @return the kind value.
+     */
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -136,7 +151,20 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
+        jsonWriter.writeStringField("operationId", getOperationId());
+        jsonWriter.writeStringField("status", getStatus() == null ? null : getStatus().toString());
+        jsonWriter.writeStringField("createdDateTime",
+            getCreatedDateTime() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getCreatedDateTime()));
+        jsonWriter.writeStringField("lastUpdatedDateTime",
+            getLastUpdatedDateTime() == null
+                ? null
+                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getLastUpdatedDateTime()));
+        jsonWriter.writeStringField("resourceLocation", getResourceLocation());
+        jsonWriter.writeNumberField("percentCompleted", getPercentCompleted());
+        jsonWriter.writeStringField("apiVersion", getApiVersion());
+        jsonWriter.writeMapField("tags", getTags(), (writer, element) -> writer.writeString(element));
+        jsonWriter.writeJsonField("error", getError());
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -158,9 +186,31 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (OperationDetails.fromJsonShared(reader, fieldName,
-                    deserializedDocumentModelBuildOperationDetails)) {
-                    continue;
+                if ("operationId".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.setOperationId(reader.getString());
+                } else if ("status".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails
+                        .setStatus(OperationStatus.fromString(reader.getString()));
+                } else if ("createdDateTime".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.setCreatedDateTime(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
+                } else if ("lastUpdatedDateTime".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.setLastUpdatedDateTime(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
+                } else if ("resourceLocation".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.setResourceLocation(reader.getString());
+                } else if ("percentCompleted".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails
+                        .setPercentCompleted(reader.getNullable(JsonReader::getInt));
+                } else if ("apiVersion".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.setApiVersion(reader.getString());
+                } else if ("tags".equals(fieldName)) {
+                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
+                    deserializedDocumentModelBuildOperationDetails.setTags(tags);
+                } else if ("error".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.setError(Error.fromJson(reader));
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.kind = reader.getString();
                 } else if ("result".equals(fieldName)) {
                     deserializedDocumentModelBuildOperationDetails.result = DocumentModelDetails.fromJson(reader);
                 } else {

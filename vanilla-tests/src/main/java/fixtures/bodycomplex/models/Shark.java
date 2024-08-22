@@ -9,6 +9,7 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
@@ -25,6 +26,13 @@ import java.util.List;
     @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class) })
 @Fluent
 public class Shark extends Fish {
+    /*
+     * The fishtype property.
+     */
+    @JsonTypeId
+    @JsonProperty(value = "fishtype", required = true)
+    private String fishtype = "shark";
+
     /*
      * The age property.
      */
@@ -48,7 +56,15 @@ public class Shark extends Fish {
         @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
         super(length);
         this.birthday = birthday;
-        this.fishtype = "shark";
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**

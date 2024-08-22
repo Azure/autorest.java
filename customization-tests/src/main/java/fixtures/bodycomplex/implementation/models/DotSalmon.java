@@ -18,6 +18,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class DotSalmon extends DotFish {
     /*
+     * The fish.type property.
+     */
+    private String fishType = "DotSalmon";
+
+    /*
      * The location property.
      */
     private String location;
@@ -32,7 +37,15 @@ public final class DotSalmon extends DotFish {
      * Creates an instance of DotSalmon class.
      */
     public DotSalmon() {
-        this.fishType = "DotSalmon";
+    }
+
+    /**
+     * Get the fishType property: The fish.type property.
+     * 
+     * @return the fishType value.
+     */
+    public String getFishType() {
+        return this.fishType;
     }
 
     /**
@@ -89,7 +102,8 @@ public final class DotSalmon extends DotFish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeStringField("fish.type", this.fishType);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.isWild);
         return jsonWriter.writeEndObject();
@@ -110,8 +124,10 @@ public final class DotSalmon extends DotFish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (DotFish.fromJsonShared(reader, fieldName, deserializedDotSalmon)) {
-                    continue;
+                if ("species".equals(fieldName)) {
+                    deserializedDotSalmon.setSpecies(reader.getString());
+                } else if ("fish.type".equals(fieldName)) {
+                    deserializedDotSalmon.fishType = reader.getString();
                 } else if ("location".equals(fieldName)) {
                     deserializedDotSalmon.location = reader.getString();
                 } else if ("iswild".equals(fieldName)) {

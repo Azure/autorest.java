@@ -15,11 +15,24 @@ import java.io.IOException;
  */
 @Fluent
 public final class Golden extends Dog {
+    /*
+     * discriminator property
+     */
+    private DogKind kind = DogKind.GOLDEN;
+
     /**
      * Creates an instance of Golden class.
      */
     public Golden() {
-        this.kind = DogKind.GOLDEN;
+    }
+
+    /**
+     * Get the kind property: discriminator property.
+     * 
+     * @return the kind value.
+     */
+    public DogKind getKind() {
+        return this.kind;
     }
 
     /**
@@ -46,7 +59,8 @@ public final class Golden extends Dog {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
+        jsonWriter.writeIntField("weight", getWeight());
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         return jsonWriter.writeEndObject();
     }
 
@@ -66,8 +80,10 @@ public final class Golden extends Dog {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (Dog.fromJsonShared(reader, fieldName, deserializedGolden)) {
-                    continue;
+                if ("weight".equals(fieldName)) {
+                    deserializedGolden.setWeight(reader.getInt());
+                } else if ("kind".equals(fieldName)) {
+                    deserializedGolden.kind = DogKind.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }
