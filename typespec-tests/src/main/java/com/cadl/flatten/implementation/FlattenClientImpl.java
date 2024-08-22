@@ -292,6 +292,7 @@ public final class FlattenClientImpl {
      *     }
      *     input: String (Required)
      *     constant: String (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      * 
@@ -325,6 +326,7 @@ public final class FlattenClientImpl {
      *     }
      *     input: String (Required)
      *     constant: String (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      * 
@@ -419,6 +421,7 @@ public final class FlattenClientImpl {
      *     dataInt: int (Required)
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
+     *     requiredUser (Required): (recursive schema, see requiredUser above)
      *     data_float: Double (Optional)
      *     title: String (Required)
      *     description: String (Optional)
@@ -465,6 +468,7 @@ public final class FlattenClientImpl {
      *     dataInt: int (Required)
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
+     *     requiredUser (Required): (recursive schema, see requiredUser above)
      *     data_float: Double (Optional)
      *     title: String (Required)
      *     description: String (Optional)

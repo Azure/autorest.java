@@ -196,7 +196,16 @@ public class ModelExampleWriter {
                     helperFeatures.add(ExampleHelperFeature.ThrowsIOException); // MalformedURLException from URL ctor
                 }
 
-                return node.getClientType().defaultValueExpression(((LiteralNode) node).getLiteralsValue());
+                String literalValue = ((LiteralNode) node).getLiteralsValue();
+                if (literalValue == null) {
+                    if (node.getClientType() instanceof PrimitiveType) {
+                        return node.getClientType().defaultValueExpression();
+                    } else {
+                        return "null";
+                    }
+                }
+
+                return node.getClientType().defaultValueExpression(literalValue);
             } else if (node instanceof ObjectNode) {
                 IType simpleType = null;
                 if (node.getObjectValue() instanceof Integer) {
@@ -287,7 +296,7 @@ public class ModelExampleWriter {
                         ctorPosition.put(properties.get(i), i);
                     }
 
-                    List<String> initAtCtors = new ArrayList<>(Collections.nCopies(properties.size(), ""));
+                    List<String> initAtCtors = new ArrayList<>(Collections.nCopies(properties.size(), null));
                     List<String> initAtSetters = new ArrayList<>();
                     for (ExampleNode childNode : node.getChildNodes()) {
                         ModelProperty modelProperty = clientModelNode.getClientModelProperties().get(childNode);
@@ -296,6 +305,16 @@ public class ModelExampleWriter {
                         } else {
                             // .setProperty(...)
                             initAtSetters.add(String.format(".%1$s(%2$s)", modelProperty.getSetterName(), this.accept(childNode)));
+                        }
+                    }
+                    for (int i = 0; i < properties.size(); ++i) {
+                        String ctorParameterValue = initAtCtors.get(i);
+                        if (ctorParameterValue == null) { // not present, due to missing required property
+                            if (properties.get(i).getClientType() instanceof PrimitiveType) {
+                                initAtCtors.set(i, properties.get(i).getClientType().defaultValueExpression());
+                            } else {
+                                initAtCtors.set(i, "null");
+                            }
                         }
                     }
                     // model constructor
