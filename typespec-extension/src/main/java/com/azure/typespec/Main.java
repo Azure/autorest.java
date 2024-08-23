@@ -87,6 +87,8 @@ public class Main {
         } else {
             handleDPG(codeModel, emitterOptions, sdkIntegration, outputDir);
         }
+        // ensure the process exits as expected
+        System.exit(0);
     }
 
     private static void handleFluent(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration) {
@@ -180,7 +182,6 @@ public class Main {
             typeSpecPlugin.writeFile("src/main/resources/META-INF/" + artifactId + "_apiview_properties.json",
                 sb.toString(), null);
         }
-        System.exit(0);
     }
 
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
