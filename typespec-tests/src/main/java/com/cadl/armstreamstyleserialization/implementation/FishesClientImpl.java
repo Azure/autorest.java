@@ -63,14 +63,14 @@ public final class FishesClientImpl implements FishesClient {
         @Get("/model")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<FishInner>> getModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+        Mono<Response<FishInner>> getModel(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Put("/model")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorMinException.class)
-        Mono<Response<FishInner>> putModel(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+        Mono<Response<FishInner>> putModel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") FishInner fish, Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -78,7 +78,7 @@ public final class FishesClientImpl implements FishesClient {
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<OutputOnlyModelInner>> getOutputOnlyModel(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -182,8 +182,10 @@ public final class FishesClientImpl implements FishesClient {
         } else {
             fish.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putModel(this.client.getEndpoint(), accept, fish, context))
+        return FluxUtil
+            .withContext(context -> service.putModel(this.client.getEndpoint(), contentType, accept, fish, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -209,9 +211,10 @@ public final class FishesClientImpl implements FishesClient {
         } else {
             fish.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
-        return service.putModel(this.client.getEndpoint(), accept, fish, context);
+        return service.putModel(this.client.getEndpoint(), contentType, accept, fish, context);
     }
 
     /**

@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -53,7 +54,7 @@ public final class SameBodiesImpl {
      * The interface defining all the services for ContentNegotiationClientSameBodies to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ContentNegotiationCl")
     public interface SameBodiesService {
         @Get("/content-negotiation/same-body")
@@ -62,8 +63,8 @@ public final class SameBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAvatarAsPng(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getAvatarAsPng(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/content-negotiation/same-body")
         @ExpectedResponses({ 200 })
@@ -71,8 +72,8 @@ public final class SameBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAvatarAsPngSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getAvatarAsPngSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/content-negotiation/same-body")
         @ExpectedResponses({ 200 })
@@ -80,8 +81,8 @@ public final class SameBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAvatarAsJpeg(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getAvatarAsJpeg(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/content-negotiation/same-body")
         @ExpectedResponses({ 200 })
@@ -89,8 +90,8 @@ public final class SameBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAvatarAsJpegSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getAvatarAsJpegSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -111,7 +112,8 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAvatarAsPngWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "image/png";
-        return FluxUtil.withContext(context -> service.getAvatarAsPng(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getAvatarAsPng(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -132,7 +134,7 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAvatarAsPngWithResponse(RequestOptions requestOptions) {
         final String accept = "image/png";
-        return service.getAvatarAsPngSync(accept, requestOptions, Context.NONE);
+        return service.getAvatarAsPngSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -153,7 +155,8 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAvatarAsJpegWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "image/jpeg";
-        return FluxUtil.withContext(context -> service.getAvatarAsJpeg(accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.getAvatarAsJpeg(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -174,6 +177,6 @@ public final class SameBodiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAvatarAsJpegWithResponse(RequestOptions requestOptions) {
         final String accept = "image/jpeg";
-        return service.getAvatarAsJpegSync(accept, requestOptions, Context.NONE);
+        return service.getAvatarAsJpegSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

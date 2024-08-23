@@ -7,6 +7,7 @@ package com.type.property.optional;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -73,8 +74,8 @@ import java.util.Objects;
         UnionIntLiteralAsyncClient.class,
         UnionFloatLiteralAsyncClient.class,
         RequiredAndOptionalAsyncClient.class })
-public final class OptionalClientBuilder
-    implements HttpTrait<OptionalClientBuilder>, ConfigurationTrait<OptionalClientBuilder> {
+public final class OptionalClientBuilder implements HttpTrait<OptionalClientBuilder>,
+    ConfigurationTrait<OptionalClientBuilder>, EndpointTrait<OptionalClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -206,6 +207,22 @@ public final class OptionalClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public OptionalClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -232,8 +249,9 @@ public final class OptionalClientBuilder
     private OptionalClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         OptionalClientImpl client
-            = new OptionalClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+            = new OptionalClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

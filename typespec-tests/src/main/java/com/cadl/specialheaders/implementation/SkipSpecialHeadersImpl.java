@@ -76,7 +76,7 @@ public final class SkipSpecialHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteWithSpecialHeaders(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Delete("/skip-special-headers/resources/{name}")
@@ -87,7 +87,7 @@ public final class SkipSpecialHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> deleteWithSpecialHeadersSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 

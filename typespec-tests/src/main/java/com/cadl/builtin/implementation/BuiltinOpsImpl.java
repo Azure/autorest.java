@@ -68,7 +68,7 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint, @QueryParam("query") String queryParam,
             @QueryParam(value = "query-encoded", encoded = true) String queryParamEncoded,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/builtin")
         @ExpectedResponses({ 200 })
@@ -78,7 +78,7 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> readSync(@HostParam("endpoint") String endpoint, @QueryParam("query") String queryParam,
             @QueryParam(value = "query-encoded", encoded = true) String queryParamEncoded,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/builtin")
         @ExpectedResponses({ 200 })
@@ -86,8 +86,9 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> write(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> write(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/builtin")
         @ExpectedResponses({ 200 })
@@ -95,8 +96,9 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> writeSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> writeSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -295,9 +297,9 @@ public final class BuiltinOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> writeWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.write(this.client.getEndpoint(), accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.write(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -350,7 +352,7 @@ public final class BuiltinOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> writeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.writeSync(this.client.getEndpoint(), accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.writeSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

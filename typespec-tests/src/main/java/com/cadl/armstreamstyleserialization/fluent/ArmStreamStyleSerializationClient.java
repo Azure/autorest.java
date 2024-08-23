@@ -12,7 +12,7 @@ import java.time.Duration;
  */
 public interface ArmStreamStyleSerializationClient {
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */

@@ -63,6 +63,7 @@ public final class FlattenAsyncClient {
      *     }
      *     input: String (Required)
      *     constant: String (Required)
+     *     requiredInt: int (Required)
      * }
      * }</pre>
      * 
@@ -127,6 +128,7 @@ public final class FlattenAsyncClient {
      *     dataInt: int (Required)
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
+     *     requiredUser (Required): (recursive schema, see requiredUser above)
      *     data_float: Double (Optional)
      *     title: String (Required)
      *     description: String (Optional)
@@ -243,6 +245,7 @@ public final class FlattenAsyncClient {
      * @param id The id parameter.
      * @param endpoint The endpoint parameter.
      * @param input The input parameter.
+     * @param requiredInt The requiredInt parameter.
      * @param user The user parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -254,10 +257,10 @@ public final class FlattenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(String id, String endpoint, String input, User user) {
+    public Mono<Void> send(String id, String endpoint, String input, int requiredInt, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest sendRequestObj = new SendRequest(endpoint, input).setUser(user);
+        SendRequest sendRequestObj = new SendRequest(endpoint, input, requiredInt).setUser(user);
         BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
         return sendWithResponse(id, sendRequest, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -268,6 +271,7 @@ public final class FlattenAsyncClient {
      * @param id The id parameter.
      * @param endpoint The endpoint parameter.
      * @param input The input parameter.
+     * @param requiredInt The requiredInt parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -278,10 +282,10 @@ public final class FlattenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(String id, String endpoint, String input) {
+    public Mono<Void> send(String id, String endpoint, String input, int requiredInt) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest sendRequestObj = new SendRequest(endpoint, input);
+        SendRequest sendRequestObj = new SendRequest(endpoint, input, requiredInt);
         BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
         return sendWithResponse(id, sendRequest, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -328,14 +332,13 @@ public final class FlattenAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         String name = options.getName();
         String filter = options.getFilter();
-        SendLongRequest sendLongRequestObj
-            = new SendLongRequest(options.getInput(), options.getDataInt(), options.getTitle(), options.getStatus())
-                .setUser(options.getUser())
-                .setDataIntOptional(options.getDataIntOptional())
-                .setDataLong(options.getDataLong())
-                .setDataFloat(options.getDataFloat())
-                .setDescription(options.getDescription())
-                .setDummy(options.getDummy());
+        SendLongRequest sendLongRequestObj = new SendLongRequest(options.getInput(), options.getDataInt(),
+            options.getRequiredUser(), options.getTitle(), options.getStatus()).setUser(options.getUser())
+            .setDataIntOptional(options.getDataIntOptional())
+            .setDataLong(options.getDataLong())
+            .setDataFloat(options.getDataFloat())
+            .setDescription(options.getDescription())
+            .setDummy(options.getDummy());
         BinaryData sendLongRequest = BinaryData.fromObject(sendLongRequestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);

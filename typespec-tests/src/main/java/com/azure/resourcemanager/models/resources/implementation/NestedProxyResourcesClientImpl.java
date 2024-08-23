@@ -79,10 +79,9 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -90,10 +89,10 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") NestedProxyResourceInner resource, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.Models.Resources/topLevelTrackedResources/{topLevelTrackedResourceName}/nestedProxyResources/{nextedProxyResourceName}")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -101,7 +100,8 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") NestedProxyResourceInner properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -112,7 +112,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("accept") String accept,
+            @PathParam("nextedProxyResourceName") String nextedProxyResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -124,7 +124,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
             @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelTrackedResourceName") String topLevelTrackedResourceName,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
@@ -132,7 +132,7 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<NestedProxyResourceListResult>> listByTopLevelTrackedResourceNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -314,11 +314,12 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
                 this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName,
-                nextedProxyResourceName, accept, resource, context))
+                nextedProxyResourceName, contentType, accept, resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -365,11 +366,12 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createOrReplace(this.client.getEndpoint(), this.client.getApiVersion(),
             this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName,
-            accept, resource, context);
+            contentType, accept, resource, context);
     }
 
     /**
@@ -584,11 +586,12 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
                 this.client.getSubscriptionId(), resourceGroupName, topLevelTrackedResourceName,
-                nextedProxyResourceName, accept, properties, context))
+                nextedProxyResourceName, contentType, accept, properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -635,10 +638,12 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.update(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
-            resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, accept, properties, context);
+            resourceGroupName, topLevelTrackedResourceName, nextedProxyResourceName, contentType, accept, properties,
+            context);
     }
 
     /**
@@ -1193,6 +1198,8 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     }
 
     /**
+     * List NestedProxyResource resources by TopLevelTrackedResource
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1221,6 +1228,8 @@ public final class NestedProxyResourcesClientImpl implements NestedProxyResource
     }
 
     /**
+     * List NestedProxyResource resources by TopLevelTrackedResource
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.

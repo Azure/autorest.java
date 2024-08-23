@@ -8,6 +8,7 @@ import com._specs_.azure.core.lro.rpc.implementation.RpcClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,7 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the RpcClient type.
  */
 @ServiceClientBuilder(serviceClients = { RpcClient.class, RpcAsyncClient.class })
-public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, ConfigurationTrait<RpcClientBuilder> {
+public final class RpcClientBuilder
+    implements HttpTrait<RpcClientBuilder>, ConfigurationTrait<RpcClientBuilder>, EndpointTrait<RpcClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -173,6 +175,22 @@ public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, Conf
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public RpcClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -217,10 +235,11 @@ public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, Conf
     private RpcClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         RpcServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : RpcServiceVersion.getLatest();
-        RpcClientImpl client
-            = new RpcClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
+        RpcClientImpl client = new RpcClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+            localEndpoint, localServiceVersion);
         return client;
     }
 

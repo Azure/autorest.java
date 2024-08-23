@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class PublicOperationsImpl {
      * The interface defining all the services for AccessClientPublicOperations to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "AccessClientPublicOp")
     public interface PublicOperationsService {
         @Get("/azure/client-generator-core/access/publicOperation/noDecoratorInPublic")
@@ -63,8 +64,9 @@ public final class PublicOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> noDecoratorInPublic(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> noDecoratorInPublic(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/publicOperation/noDecoratorInPublic")
         @ExpectedResponses({ 200 })
@@ -72,8 +74,9 @@ public final class PublicOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> noDecoratorInPublicSync(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> noDecoratorInPublicSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic")
         @ExpectedResponses({ 200 })
@@ -81,8 +84,9 @@ public final class PublicOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> publicDecoratorInPublic(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> publicDecoratorInPublic(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/client-generator-core/access/publicOperation/publicDecoratorInPublic")
         @ExpectedResponses({ 200 })
@@ -90,8 +94,9 @@ public final class PublicOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> publicDecoratorInPublicSync(@QueryParam("name") String name,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> publicDecoratorInPublicSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("name") String name, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -116,7 +121,8 @@ public final class PublicOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> noDecoratorInPublicWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.noDecoratorInPublic(name, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.noDecoratorInPublic(this.client.getEndpoint(), name, accept, requestOptions, context));
     }
 
     /**
@@ -140,7 +146,7 @@ public final class PublicOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> noDecoratorInPublicWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.noDecoratorInPublicSync(name, accept, requestOptions, Context.NONE);
+        return service.noDecoratorInPublicSync(this.client.getEndpoint(), name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -166,7 +172,8 @@ public final class PublicOperationsImpl {
     public Mono<Response<BinaryData>> publicDecoratorInPublicWithResponseAsync(String name,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.publicDecoratorInPublic(name, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.publicDecoratorInPublic(this.client.getEndpoint(), name, accept,
+            requestOptions, context));
     }
 
     /**
@@ -190,6 +197,7 @@ public final class PublicOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> publicDecoratorInPublicWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.publicDecoratorInPublicSync(name, accept, requestOptions, Context.NONE);
+        return service.publicDecoratorInPublicSync(this.client.getEndpoint(), name, accept, requestOptions,
+            Context.NONE);
     }
 }

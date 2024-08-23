@@ -7,6 +7,7 @@ package com.payload.multipart;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the MultiPartClient type.
  */
 @ServiceClientBuilder(serviceClients = { MultiPartClient.class, MultiPartAsyncClient.class })
-public final class MultiPartClientBuilder
-    implements HttpTrait<MultiPartClientBuilder>, ConfigurationTrait<MultiPartClientBuilder> {
+public final class MultiPartClientBuilder implements HttpTrait<MultiPartClientBuilder>,
+    ConfigurationTrait<MultiPartClientBuilder>, EndpointTrait<MultiPartClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -173,6 +174,22 @@ public final class MultiPartClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public MultiPartClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -199,8 +216,9 @@ public final class MultiPartClientBuilder
     private MultiPartClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         MultiPartClientImpl client
-            = new MultiPartClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+            = new MultiPartClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 
