@@ -87,8 +87,8 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putWithRequestHeaders(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Put("/etag-headers/resources/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -98,8 +98,8 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> putWithRequestHeadersSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Patch("/etag-headers/resources/{name}")
         @ExpectedResponses({ 200, 201 })
@@ -109,7 +109,7 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> patchWithMatchHeaders(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -121,7 +121,7 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> patchWithMatchHeadersSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -132,7 +132,7 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithEtag(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/etag-headers/resources")
@@ -142,7 +142,7 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithEtagSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
@@ -152,7 +152,7 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listWithEtagNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("{nextLink}")
@@ -162,7 +162,7 @@ public final class EtagHeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listWithEtagNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
@@ -216,9 +216,11 @@ public final class EtagHeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putWithRequestHeadersWithResponseAsync(String name, BinaryData resource,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.putWithRequestHeaders(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, context));
+            this.client.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions,
+            context));
     }
 
     /**
@@ -271,9 +273,11 @@ public final class EtagHeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> putWithRequestHeadersWithResponse(String name, BinaryData resource,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         return service.putWithRequestHeadersSync(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, accept, resource, requestOptions, Context.NONE);
+            this.client.getServiceVersion().getVersion(), name, contentType, accept, resource, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -501,6 +505,8 @@ public final class EtagHeadersImpl {
     }
 
     /**
+     * Resource list operation template.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -533,6 +539,8 @@ public final class EtagHeadersImpl {
     }
 
     /**
+     * Resource list operation template.
+     * 
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 

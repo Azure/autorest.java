@@ -70,7 +70,7 @@ public final class OptionalOpsImpl {
             @QueryParam("booleanRequired") boolean booleanRequired,
             @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
             @QueryParam("stringRequired") String stringRequired,
-            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("accept") String accept,
+            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Put("/optional/put")
@@ -84,7 +84,7 @@ public final class OptionalOpsImpl {
             @QueryParam("booleanRequired") boolean booleanRequired,
             @QueryParam("booleanRequiredNullable") Boolean booleanRequiredNullable,
             @QueryParam("stringRequired") String stringRequired,
-            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("accept") String accept,
+            @QueryParam("stringRequiredNullable") String stringRequiredNullable, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 

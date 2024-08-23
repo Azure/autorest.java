@@ -7,6 +7,7 @@ package com.type.union;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -61,7 +62,8 @@ import java.util.Objects;
         StringAndArrayAsyncClient.class,
         MixedLiteralsAsyncClient.class,
         MixedTypesAsyncClient.class })
-public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, ConfigurationTrait<UnionClientBuilder> {
+public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, ConfigurationTrait<UnionClientBuilder>,
+    EndpointTrait<UnionClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -193,6 +195,22 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public UnionClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -219,7 +237,9 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
     private UnionClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        UnionClientImpl client = new UnionClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        UnionClientImpl client
+            = new UnionClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

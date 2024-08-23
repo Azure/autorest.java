@@ -60,12 +60,12 @@ public final class LongRunningClientImpl {
     private final LongRunningClientService service;
 
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -118,7 +118,7 @@ public final class LongRunningClientImpl {
     /**
      * Initializes an instance of LongRunningClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public LongRunningClientImpl(String endpoint, LongRunningServiceVersion serviceVersion) {
@@ -130,7 +130,7 @@ public final class LongRunningClientImpl {
      * Initializes an instance of LongRunningClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public LongRunningClientImpl(HttpPipeline httpPipeline, String endpoint, LongRunningServiceVersion serviceVersion) {
@@ -142,7 +142,7 @@ public final class LongRunningClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public LongRunningClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -167,8 +167,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> longRunning(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> longRunning(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Post("/long-running/post")
         @ExpectedResponses({ 202 })
@@ -176,8 +176,8 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> longRunningSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<Void> longRunningSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/long-running/jobs/{id}")
         @ExpectedResponses({ 200 })
@@ -187,7 +187,7 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getJob(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("id") String id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/long-running/jobs/{id}")
         @ExpectedResponses({ 200 })
@@ -197,7 +197,7 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getJobSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("id") String id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/long-running/jobs")
         @ExpectedResponses({ 202 })
@@ -206,8 +206,9 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> createJob(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/long-running/jobs")
         @ExpectedResponses({ 202 })
@@ -216,8 +217,9 @@ public final class LongRunningClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> createJobSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -232,9 +234,7 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> longRunningWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.longRunning(this.getEndpoint(), accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.longRunning(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -249,8 +249,7 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<Void> longRunningWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.longRunningSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
+        return service.longRunningSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 
     /**
@@ -481,6 +480,7 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -497,7 +497,7 @@ public final class LongRunningClientImpl {
             }
         });
         return FluxUtil.withContext(context -> service.createJob(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), accept, body, requestOptionsLocal, context));
+            this.getServiceVersion().getVersion(), contentType, accept, body, requestOptionsLocal, context));
     }
 
     /**
@@ -556,6 +556,7 @@ public final class LongRunningClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createJobWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -571,8 +572,8 @@ public final class LongRunningClientImpl {
                         DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
-        return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, body,
-            requestOptionsLocal, Context.NONE);
+        return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), contentType, accept,
+            body, requestOptionsLocal, Context.NONE);
     }
 
     /**

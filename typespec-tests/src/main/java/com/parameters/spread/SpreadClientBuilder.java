@@ -7,6 +7,7 @@ package com.parameters.spread;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -41,8 +42,8 @@ import java.util.Objects;
  */
 @ServiceClientBuilder(
     serviceClients = { ModelClient.class, AliasClient.class, ModelAsyncClient.class, AliasAsyncClient.class })
-public final class SpreadClientBuilder
-    implements HttpTrait<SpreadClientBuilder>, ConfigurationTrait<SpreadClientBuilder> {
+public final class SpreadClientBuilder implements HttpTrait<SpreadClientBuilder>,
+    ConfigurationTrait<SpreadClientBuilder>, EndpointTrait<SpreadClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -174,6 +175,22 @@ public final class SpreadClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public SpreadClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -200,7 +217,9 @@ public final class SpreadClientBuilder
     private SpreadClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        SpreadClientImpl client = new SpreadClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        SpreadClientImpl client
+            = new SpreadClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

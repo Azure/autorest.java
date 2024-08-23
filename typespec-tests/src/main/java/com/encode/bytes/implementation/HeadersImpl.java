@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -57,7 +58,7 @@ public final class HeadersImpl {
      * The interface defining all the services for BytesClientHeaders to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "BytesClientHeaders")
     public interface HeadersService {
         @Get("/encode/bytes/header/default")
@@ -66,7 +67,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> defaultMethod(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
+        Mono<Response<Void>> defaultMethod(@HostParam("endpoint") String endpoint, @HeaderParam("value") String value,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/default")
@@ -75,7 +76,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> defaultMethodSync(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
+        Response<Void> defaultMethodSync(@HostParam("endpoint") String endpoint, @HeaderParam("value") String value,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64")
@@ -84,7 +85,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> base64(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
+        Mono<Response<Void>> base64(@HostParam("endpoint") String endpoint, @HeaderParam("value") String value,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64")
@@ -93,7 +94,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> base64Sync(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
+        Response<Void> base64Sync(@HostParam("endpoint") String endpoint, @HeaderParam("value") String value,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url")
@@ -102,7 +103,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> base64url(@HeaderParam("value") Base64Url value, @HeaderParam("accept") String accept,
+        Mono<Response<Void>> base64url(@HostParam("endpoint") String endpoint, @HeaderParam("value") Base64Url value,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url")
@@ -111,7 +112,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> base64urlSync(@HeaderParam("value") Base64Url value, @HeaderParam("accept") String accept,
+        Response<Void> base64urlSync(@HostParam("endpoint") String endpoint, @HeaderParam("value") Base64Url value,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url-array")
@@ -120,7 +121,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> base64urlArray(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
+        Mono<Response<Void>> base64urlArray(@HostParam("endpoint") String endpoint, @HeaderParam("value") String value,
             RequestOptions requestOptions, Context context);
 
         @Get("/encode/bytes/header/base64url-array")
@@ -129,7 +130,7 @@ public final class HeadersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> base64urlArraySync(@HeaderParam("value") String value, @HeaderParam("accept") String accept,
+        Response<Void> base64urlArraySync(@HostParam("endpoint") String endpoint, @HeaderParam("value") String value,
             RequestOptions requestOptions, Context context);
     }
 
@@ -146,9 +147,9 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> defaultMethodWithResponseAsync(byte[] value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String valueConverted = Base64Util.encodeToString(value);
-        return FluxUtil.withContext(context -> service.defaultMethod(valueConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.defaultMethod(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -164,9 +165,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> defaultMethodWithResponse(byte[] value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String valueConverted = Base64Util.encodeToString(value);
-        return service.defaultMethodSync(valueConverted, accept, requestOptions, Context.NONE);
+        return service.defaultMethodSync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -182,9 +182,9 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64WithResponseAsync(byte[] value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String valueConverted = Base64Util.encodeToString(value);
-        return FluxUtil.withContext(context -> service.base64(valueConverted, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.base64(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -200,9 +200,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64WithResponse(byte[] value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String valueConverted = Base64Util.encodeToString(value);
-        return service.base64Sync(valueConverted, accept, requestOptions, Context.NONE);
+        return service.base64Sync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -218,9 +217,9 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64urlWithResponseAsync(byte[] value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         Base64Url valueConverted = Base64Url.encode(value);
-        return FluxUtil.withContext(context -> service.base64url(valueConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.base64url(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -236,9 +235,8 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64urlWithResponse(byte[] value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         Base64Url valueConverted = Base64Url.encode(value);
-        return service.base64urlSync(valueConverted, accept, requestOptions, Context.NONE);
+        return service.base64urlSync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 
     /**
@@ -254,12 +252,12 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64urlArrayWithResponseAsync(List<byte[]> value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
             .serializeIterable(
                 value.stream().map(paramItemValue -> Base64Url.encode(paramItemValue)).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return FluxUtil.withContext(context -> service.base64urlArray(valueConverted, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.base64urlArray(this.client.getEndpoint(), valueConverted, requestOptions, context));
     }
 
     /**
@@ -275,11 +273,10 @@ public final class HeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64urlArrayWithResponse(List<byte[]> value, RequestOptions requestOptions) {
-        final String accept = "application/json";
         String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
             .serializeIterable(
                 value.stream().map(paramItemValue -> Base64Url.encode(paramItemValue)).collect(Collectors.toList()),
                 CollectionFormat.CSV);
-        return service.base64urlArraySync(valueConverted, accept, requestOptions, Context.NONE);
+        return service.base64urlArraySync(this.client.getEndpoint(), valueConverted, requestOptions, Context.NONE);
     }
 }

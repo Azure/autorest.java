@@ -64,7 +64,8 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData readRequest, RequestOptions requestOptions, Context context);
 
         @Post("/specialchars")
@@ -73,7 +74,8 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> readSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+        Response<BinaryData> readSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData readRequest, RequestOptions requestOptions, Context context);
     }
 
@@ -109,9 +111,10 @@ public final class BuiltinOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> readWithResponseAsync(BinaryData readRequest, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.read(this.client.getEndpoint(), accept, readRequest, requestOptions, context));
+        return FluxUtil.withContext(context -> service.read(this.client.getEndpoint(), contentType, accept, readRequest,
+            requestOptions, context));
     }
 
     /**
@@ -146,7 +149,9 @@ public final class BuiltinOpsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> readWithResponse(BinaryData readRequest, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.readSync(this.client.getEndpoint(), accept, readRequest, requestOptions, Context.NONE);
+        return service.readSync(this.client.getEndpoint(), contentType, accept, readRequest, requestOptions,
+            Context.NONE);
     }
 }

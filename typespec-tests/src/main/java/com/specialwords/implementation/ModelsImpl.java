@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -53,7 +54,7 @@ public final class ModelsImpl {
      * The interface defining all the services for SpecialWordsClientModels to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "SpecialWordsClientMo")
     public interface ModelsService {
         @Post("/special-words/models/and")
@@ -62,8 +63,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withAnd(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withAnd(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/and")
         @ExpectedResponses({ 204 })
@@ -71,7 +73,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withAndSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withAndSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/as")
@@ -80,8 +83,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withAs(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withAs(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/as")
         @ExpectedResponses({ 204 })
@@ -89,7 +93,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withAsSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withAsSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/assert")
@@ -98,8 +103,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withAssert(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withAssert(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/assert")
         @ExpectedResponses({ 204 })
@@ -107,8 +113,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withAssertSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withAssertSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/async")
         @ExpectedResponses({ 204 })
@@ -116,8 +123,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withAsync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withAsync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/async")
         @ExpectedResponses({ 204 })
@@ -125,8 +133,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withAsyncSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withAsyncSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/await")
         @ExpectedResponses({ 204 })
@@ -134,8 +143,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withAwait(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withAwait(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/await")
         @ExpectedResponses({ 204 })
@@ -143,8 +153,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withAwaitSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withAwaitSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/break")
         @ExpectedResponses({ 204 })
@@ -152,8 +163,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withBreak(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withBreak(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/break")
         @ExpectedResponses({ 204 })
@@ -161,8 +173,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withBreakSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withBreakSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/class")
         @ExpectedResponses({ 204 })
@@ -170,8 +183,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withClass(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withClass(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/class")
         @ExpectedResponses({ 204 })
@@ -179,8 +193,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withClassSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withClassSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/constructor")
         @ExpectedResponses({ 204 })
@@ -188,8 +203,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withConstructor(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withConstructor(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/constructor")
         @ExpectedResponses({ 204 })
@@ -197,8 +213,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withConstructorSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withConstructorSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/continue")
         @ExpectedResponses({ 204 })
@@ -206,8 +223,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withContinue(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withContinue(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/continue")
         @ExpectedResponses({ 204 })
@@ -215,8 +233,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withContinueSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withContinueSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/def")
         @ExpectedResponses({ 204 })
@@ -224,8 +243,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withDef(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withDef(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/def")
         @ExpectedResponses({ 204 })
@@ -233,7 +253,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withDefSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withDefSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/del")
@@ -242,8 +263,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withDel(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withDel(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/del")
         @ExpectedResponses({ 204 })
@@ -251,7 +273,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withDelSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withDelSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/elif")
@@ -260,8 +283,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withElif(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withElif(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/elif")
         @ExpectedResponses({ 204 })
@@ -269,8 +293,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withElifSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withElifSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/else")
         @ExpectedResponses({ 204 })
@@ -278,8 +303,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withElse(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withElse(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/else")
         @ExpectedResponses({ 204 })
@@ -287,8 +313,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withElseSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withElseSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/except")
         @ExpectedResponses({ 204 })
@@ -296,8 +323,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withExcept(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withExcept(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/except")
         @ExpectedResponses({ 204 })
@@ -305,8 +333,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withExceptSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withExceptSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/exec")
         @ExpectedResponses({ 204 })
@@ -314,8 +343,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withExec(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withExec(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/exec")
         @ExpectedResponses({ 204 })
@@ -323,8 +353,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withExecSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withExecSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/finally")
         @ExpectedResponses({ 204 })
@@ -332,8 +363,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withFinally(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withFinally(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/finally")
         @ExpectedResponses({ 204 })
@@ -341,8 +373,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withFinallySync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withFinallySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/for")
         @ExpectedResponses({ 204 })
@@ -350,8 +383,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withFor(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withFor(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/for")
         @ExpectedResponses({ 204 })
@@ -359,7 +393,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withForSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withForSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/from")
@@ -368,8 +403,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withFrom(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withFrom(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/from")
         @ExpectedResponses({ 204 })
@@ -377,8 +413,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withFromSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withFromSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/global")
         @ExpectedResponses({ 204 })
@@ -386,8 +423,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withGlobal(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withGlobal(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/global")
         @ExpectedResponses({ 204 })
@@ -395,8 +433,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withGlobalSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withGlobalSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/if")
         @ExpectedResponses({ 204 })
@@ -404,8 +443,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withIf(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withIf(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/if")
         @ExpectedResponses({ 204 })
@@ -413,7 +453,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withIfSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withIfSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/import")
@@ -422,8 +463,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withImport(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withImport(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/import")
         @ExpectedResponses({ 204 })
@@ -431,8 +473,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withImportSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withImportSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/in")
         @ExpectedResponses({ 204 })
@@ -440,8 +483,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withIn(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withIn(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/in")
         @ExpectedResponses({ 204 })
@@ -449,7 +493,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withInSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withInSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/is")
@@ -458,8 +503,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withIs(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withIs(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/is")
         @ExpectedResponses({ 204 })
@@ -467,7 +513,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withIsSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withIsSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/lambda")
@@ -476,8 +523,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withLambda(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withLambda(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/lambda")
         @ExpectedResponses({ 204 })
@@ -485,8 +533,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withLambdaSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withLambdaSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/not")
         @ExpectedResponses({ 204 })
@@ -494,8 +543,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withNot(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withNot(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/not")
         @ExpectedResponses({ 204 })
@@ -503,7 +553,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withNotSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withNotSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/or")
@@ -512,8 +563,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withOr(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withOr(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/or")
         @ExpectedResponses({ 204 })
@@ -521,7 +573,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withOrSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withOrSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/pass")
@@ -530,8 +583,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withPass(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withPass(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/pass")
         @ExpectedResponses({ 204 })
@@ -539,8 +593,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withPassSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withPassSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/raise")
         @ExpectedResponses({ 204 })
@@ -548,8 +603,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withRaise(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withRaise(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/raise")
         @ExpectedResponses({ 204 })
@@ -557,8 +613,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withRaiseSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withRaiseSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/return")
         @ExpectedResponses({ 204 })
@@ -566,8 +623,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withReturn(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withReturn(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/return")
         @ExpectedResponses({ 204 })
@@ -575,8 +633,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withReturnSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withReturnSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/try")
         @ExpectedResponses({ 204 })
@@ -584,8 +643,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withTry(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withTry(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/try")
         @ExpectedResponses({ 204 })
@@ -593,7 +653,8 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withTrySync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> withTrySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/while")
@@ -602,8 +663,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withWhile(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withWhile(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/while")
         @ExpectedResponses({ 204 })
@@ -611,8 +673,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withWhileSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withWhileSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/with")
         @ExpectedResponses({ 204 })
@@ -620,8 +683,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withWith(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withWith(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/with")
         @ExpectedResponses({ 204 })
@@ -629,8 +693,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withWithSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withWithSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/yield")
         @ExpectedResponses({ 204 })
@@ -638,8 +703,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> withYield(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> withYield(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/special-words/models/yield")
         @ExpectedResponses({ 204 })
@@ -647,8 +713,9 @@ public final class ModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withYieldSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> withYieldSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -671,8 +738,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withAndWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withAnd(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withAnd(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -695,8 +763,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withAndWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withAndSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withAndSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -719,8 +787,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withAsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withAs(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withAs(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -743,8 +812,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withAsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withAsSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withAsSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -767,8 +836,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withAssertWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withAssert(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withAssert(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -791,8 +861,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withAssertWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withAssertSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withAssertSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -815,8 +885,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withAsyncWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withAsync(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withAsync(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -839,8 +910,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withAsyncWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withAsyncSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withAsyncSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -863,8 +934,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withAwaitWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withAwait(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withAwait(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -887,8 +959,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withAwaitWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withAwaitSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withAwaitSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -911,8 +983,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withBreakWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withBreak(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withBreak(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -935,8 +1008,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withBreakWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withBreakSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withBreakSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -959,8 +1032,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withClassWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withClass(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withClass(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -983,8 +1057,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withClassWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withClassSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withClassSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1007,8 +1081,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withConstructorWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withConstructor(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withConstructor(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1031,8 +1106,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withConstructorWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withConstructorSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withConstructorSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1055,8 +1130,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withContinueWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withContinue(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withContinue(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1079,8 +1155,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withContinueWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withContinueSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withContinueSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1103,8 +1179,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withDefWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withDef(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withDef(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1127,8 +1204,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withDefWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withDefSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withDefSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1151,8 +1228,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withDelWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withDel(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withDel(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1175,8 +1253,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withDelWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withDelSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withDelSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1199,8 +1277,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withElifWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withElif(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withElif(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1223,8 +1302,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withElifWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withElifSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withElifSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1247,8 +1326,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withElseWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withElse(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withElse(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1271,8 +1351,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withElseWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withElseSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withElseSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1295,8 +1375,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withExceptWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withExcept(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withExcept(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1319,8 +1400,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withExceptWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withExceptSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withExceptSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1343,8 +1424,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withExecWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withExec(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withExec(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1367,8 +1449,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withExecWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withExecSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withExecSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1391,8 +1473,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withFinallyWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withFinally(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withFinally(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1415,8 +1498,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withFinallyWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withFinallySync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withFinallySync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1439,8 +1522,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withForWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withFor(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withFor(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1463,8 +1547,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withForWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withForSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withForSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1487,8 +1571,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withFromWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withFrom(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withFrom(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1511,8 +1596,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withFromWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withFromSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withFromSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1535,8 +1620,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withGlobalWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withGlobal(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withGlobal(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1559,8 +1645,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withGlobalWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withGlobalSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withGlobalSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1583,8 +1669,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withIfWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withIf(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withIf(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1607,8 +1694,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withIfWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withIfSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withIfSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1631,8 +1718,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withImportWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withImport(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withImport(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1655,8 +1743,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withImportWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withImportSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withImportSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1679,8 +1767,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withInWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withIn(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withIn(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1703,8 +1792,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withInWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withInSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withInSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1727,8 +1816,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withIsWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withIs(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withIs(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1751,8 +1841,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withIsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withIsSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withIsSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1775,8 +1865,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withLambdaWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withLambda(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withLambda(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1799,8 +1890,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withLambdaWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withLambdaSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withLambdaSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1823,8 +1914,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withNotWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withNot(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withNot(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1847,8 +1939,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withNotWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withNotSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withNotSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1871,8 +1963,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withOrWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withOr(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withOr(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1895,8 +1988,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withOrWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withOrSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withOrSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1919,8 +2012,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withPassWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withPass(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withPass(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1943,8 +2037,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withPassWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withPassSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withPassSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -1967,8 +2061,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withRaiseWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withRaise(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withRaise(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -1991,8 +2086,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withRaiseWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withRaiseSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withRaiseSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -2015,8 +2110,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withReturnWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withReturn(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withReturn(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -2039,8 +2135,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withReturnWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withReturnSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withReturnSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -2063,8 +2159,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withTryWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withTry(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withTry(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -2087,8 +2184,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withTryWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withTrySync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withTrySync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -2111,8 +2208,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withWhileWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withWhile(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withWhile(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -2135,8 +2233,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withWhileWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withWhileSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withWhileSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -2159,8 +2257,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withWithWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withWith(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withWith(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -2183,8 +2282,8 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withWithWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withWithSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withWithSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -2207,8 +2306,9 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> withYieldWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.withYield(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.withYield(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -2231,7 +2331,7 @@ public final class ModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> withYieldWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.withYieldSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.withYieldSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

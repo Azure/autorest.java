@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class BytesImpl {
      * The interface defining all the services for OptionalClientBytes to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "OptionalClientBytes")
     public interface BytesService {
         @Get("/type/property/optional/bytes/all")
@@ -63,8 +64,8 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAll(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getAll(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/bytes/all")
         @ExpectedResponses({ 200 })
@@ -72,8 +73,8 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAllSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getAllSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/bytes/default")
         @ExpectedResponses({ 200 })
@@ -81,8 +82,8 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getDefault(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getDefault(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/bytes/default")
         @ExpectedResponses({ 200 })
@@ -90,8 +91,8 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getDefaultSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getDefaultSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/bytes/all")
         @ExpectedResponses({ 204 })
@@ -99,8 +100,9 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putAll(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putAll(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/bytes/all")
         @ExpectedResponses({ 204 })
@@ -108,7 +110,8 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putAllSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> putAllSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/bytes/default")
@@ -117,8 +120,9 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putDefault(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putDefault(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/bytes/default")
         @ExpectedResponses({ 204 })
@@ -126,8 +130,9 @@ public final class BytesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putDefaultSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> putDefaultSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -151,7 +156,8 @@ public final class BytesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAllWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getAll(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getAll(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -174,7 +180,7 @@ public final class BytesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAllWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getAllSync(accept, requestOptions, Context.NONE);
+        return service.getAllSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -198,7 +204,8 @@ public final class BytesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDefaultWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getDefault(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getDefault(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -221,7 +228,7 @@ public final class BytesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getDefaultWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getDefaultSync(accept, requestOptions, Context.NONE);
+        return service.getDefaultSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -244,8 +251,9 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putAllWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putAll(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putAll(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -268,8 +276,8 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putAllWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putAllSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putAllSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -292,8 +300,9 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDefaultWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putDefault(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putDefault(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -316,7 +325,7 @@ public final class BytesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putDefaultWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putDefaultSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putDefaultSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

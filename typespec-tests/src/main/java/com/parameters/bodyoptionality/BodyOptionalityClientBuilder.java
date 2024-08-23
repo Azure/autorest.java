@@ -7,6 +7,7 @@ package com.parameters.bodyoptionality;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -45,8 +46,8 @@ import java.util.Objects;
         OptionalExplicitClient.class,
         BodyOptionalityAsyncClient.class,
         OptionalExplicitAsyncClient.class })
-public final class BodyOptionalityClientBuilder
-    implements HttpTrait<BodyOptionalityClientBuilder>, ConfigurationTrait<BodyOptionalityClientBuilder> {
+public final class BodyOptionalityClientBuilder implements HttpTrait<BodyOptionalityClientBuilder>,
+    ConfigurationTrait<BodyOptionalityClientBuilder>, EndpointTrait<BodyOptionalityClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -179,6 +180,22 @@ public final class BodyOptionalityClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public BodyOptionalityClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -205,8 +222,9 @@ public final class BodyOptionalityClientBuilder
     private BodyOptionalityClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        BodyOptionalityClientImpl client
-            = new BodyOptionalityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        BodyOptionalityClientImpl client = new BodyOptionalityClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

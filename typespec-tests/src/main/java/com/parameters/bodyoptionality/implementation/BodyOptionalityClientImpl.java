@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -39,6 +40,20 @@ public final class BodyOptionalityClientImpl {
      * The proxy service used to perform REST calls.
      */
     private final BodyOptionalityClientService service;
+
+    /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
 
     /**
      * The HTTP pipeline to send requests through.
@@ -84,19 +99,22 @@ public final class BodyOptionalityClientImpl {
 
     /**
      * Initializes an instance of BodyOptionalityClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public BodyOptionalityClientImpl() {
+    public BodyOptionalityClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of BodyOptionalityClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public BodyOptionalityClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public BodyOptionalityClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -104,10 +122,12 @@ public final class BodyOptionalityClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public BodyOptionalityClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public BodyOptionalityClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.optionalExplicits = new OptionalExplicitsImpl(this);
         this.service
             = RestProxy.create(BodyOptionalityClientService.class, this.httpPipeline, this.getSerializerAdapter());
@@ -117,7 +137,7 @@ public final class BodyOptionalityClientImpl {
      * The interface defining all the services for BodyOptionalityClient to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "BodyOptionalityClien")
     public interface BodyOptionalityClientService {
         @Post("/parameters/body-optionality/required-explicit")
@@ -126,8 +146,9 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requiredExplicit(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> requiredExplicit(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/required-explicit")
         @ExpectedResponses({ 204 })
@@ -135,8 +156,9 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requiredExplicitSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> requiredExplicitSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/parameters/body-optionality/required-implicit")
         @ExpectedResponses({ 204 })
@@ -144,7 +166,8 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> requiredImplicit(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> requiredImplicit(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData requiredImplicitRequest, RequestOptions requestOptions,
             Context context);
 
@@ -154,7 +177,8 @@ public final class BodyOptionalityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> requiredImplicitSync(@HeaderParam("accept") String accept,
+        Response<Void> requiredImplicitSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData requiredImplicitRequest, RequestOptions requestOptions,
             Context context);
     }
@@ -179,8 +203,9 @@ public final class BodyOptionalityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requiredExplicitWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.requiredExplicit(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.requiredExplicit(this.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -203,8 +228,8 @@ public final class BodyOptionalityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requiredExplicitWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.requiredExplicitSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.requiredExplicitSync(this.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -228,9 +253,9 @@ public final class BodyOptionalityClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> requiredImplicitWithResponseAsync(BinaryData requiredImplicitRequest,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.requiredImplicit(accept, requiredImplicitRequest, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(context -> service.requiredImplicit(this.getEndpoint(), contentType,
+            requiredImplicitRequest, requestOptions, context));
     }
 
     /**
@@ -254,7 +279,8 @@ public final class BodyOptionalityClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> requiredImplicitWithResponse(BinaryData requiredImplicitRequest,
         RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.requiredImplicitSync(accept, requiredImplicitRequest, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.requiredImplicitSync(this.getEndpoint(), contentType, requiredImplicitRequest, requestOptions,
+            Context.NONE);
     }
 }

@@ -34,15 +34,15 @@ public class FlattenTests {
             FlattenServiceVersion.V2022_06_01_PREVIEW);
         FlattenAsyncClient client = new FlattenAsyncClient(impl);
 
-        client.send("id1", "host", "input1", new User("user1")).block();
+        client.send("id1", "host", "input1", 11, new User("user1")).block();
 
         Assertions.assertEquals("id1", idCaptor.get());
-        Assertions.assertEquals("{\"endpoint\":\"host\",\"input\":\"input1\",\"constant\":\"constant\",\"user\":{\"user\":\"user1\"}}",
+        Assertions.assertEquals("{\"endpoint\":\"host\",\"input\":\"input1\",\"constant\":\"constant\",\"requiredInt\":11,\"user\":{\"user\":\"user1\"}}",
             payloadCaptor.get().toString());
 
-        client.send("id2", "host", "input2").block();
+        client.send("id2", "host", "input2", 11).block();
 
         Assertions.assertEquals("id2", idCaptor.get());
-        Assertions.assertEquals("{\"endpoint\":\"host\",\"input\":\"input2\",\"constant\":\"constant\"}", payloadCaptor.get().toString());
+        Assertions.assertEquals("{\"endpoint\":\"host\",\"input\":\"input2\",\"constant\":\"constant\",\"requiredInt\":11}", payloadCaptor.get().toString());
     }
 }

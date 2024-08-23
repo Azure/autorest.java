@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class ImplicitBodiesImpl {
      * The interface defining all the services for BasicClientImplicitBodies to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "BasicClientImplicitB")
     public interface ImplicitBodiesService {
         @Put("/parameters/basic/implicit-body/simple")
@@ -63,8 +64,9 @@ public final class ImplicitBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> simple(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData simpleRequest, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> simple(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData simpleRequest,
+            RequestOptions requestOptions, Context context);
 
         @Put("/parameters/basic/implicit-body/simple")
         @ExpectedResponses({ 204 })
@@ -72,8 +74,9 @@ public final class ImplicitBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> simpleSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData simpleRequest, RequestOptions requestOptions, Context context);
+        Response<Void> simpleSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData simpleRequest,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -96,8 +99,9 @@ public final class ImplicitBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> simpleWithResponseAsync(BinaryData simpleRequest, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.simple(accept, simpleRequest, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.simple(this.client.getEndpoint(), contentType, simpleRequest, requestOptions, context));
     }
 
     /**
@@ -120,7 +124,7 @@ public final class ImplicitBodiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> simpleWithResponse(BinaryData simpleRequest, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.simpleSync(accept, simpleRequest, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.simpleSync(this.client.getEndpoint(), contentType, simpleRequest, requestOptions, Context.NONE);
     }
 }

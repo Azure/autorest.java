@@ -16,6 +16,20 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class ValueTypesClientImpl {
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -451,19 +465,22 @@ public final class ValueTypesClientImpl {
 
     /**
      * Initializes an instance of ValueTypesClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public ValueTypesClientImpl() {
+    public ValueTypesClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of ValueTypesClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public ValueTypesClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public ValueTypesClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -471,10 +488,12 @@ public final class ValueTypesClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public ValueTypesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public ValueTypesClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.booleanOperations = new BooleanOperationsImpl(this);
         this.stringOperations = new StringOperationsImpl(this);
         this.bytes = new BytesImpl(this);

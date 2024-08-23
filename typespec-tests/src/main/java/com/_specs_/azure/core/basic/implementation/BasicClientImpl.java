@@ -11,6 +11,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
@@ -54,6 +55,20 @@ public final class BasicClientImpl {
      * The proxy service used to perform REST calls.
      */
     private final BasicClientService service;
+
+    /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
 
     /**
      * Service version.
@@ -100,21 +115,23 @@ public final class BasicClientImpl {
     /**
      * Initializes an instance of BasicClient client.
      * 
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public BasicClientImpl(BasicServiceVersion serviceVersion) {
+    public BasicClientImpl(String endpoint, BasicServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of BasicClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public BasicClientImpl(HttpPipeline httpPipeline, BasicServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+    public BasicClientImpl(HttpPipeline httpPipeline, String endpoint, BasicServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -122,12 +139,14 @@ public final class BasicClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public BasicClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+    public BasicClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         BasicServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(BasicClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -135,7 +154,7 @@ public final class BasicClientImpl {
     /**
      * The interface defining all the services for BasicClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "BasicClient")
     public interface BasicClientService {
         @Patch("/azure/core/basic/users/{id}")
@@ -144,8 +163,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrUpdate(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> createOrUpdate(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -155,8 +175,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrUpdateSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("accept") String accept,
+        Response<BinaryData> createOrUpdateSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/merge-patch+json") BinaryData resource, RequestOptions requestOptions,
             Context context);
 
@@ -166,8 +187,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createOrReplace(@QueryParam("api-version") String apiVersion,
-            @PathParam("id") int id, @HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> createOrReplace(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
 
         @Put("/azure/core/basic/users/{id}")
@@ -176,8 +198,19 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createOrReplaceSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData resource,
+        Response<BinaryData> createOrReplaceSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData resource, RequestOptions requestOptions, Context context);
+
+        @Get("/azure/core/basic/users/{id}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users/{id}")
@@ -186,17 +219,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Get("/azure/core/basic/users/{id}")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
         @ExpectedResponses({ 200 })
@@ -204,8 +229,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> list(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> list(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/basic/users")
         @ExpectedResponses({ 200 })
@@ -213,8 +239,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> listSync(@QueryParam("api-version") String apiVersion,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> listSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 204 })
@@ -222,8 +249,9 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> delete(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> delete(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Delete("/azure/core/basic/users/{id}")
         @ExpectedResponses({ 204 })
@@ -231,17 +259,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> deleteSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Post("/azure/core/basic/users/{id}:export")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> export(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<Void> deleteSync(@HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
+            @PathParam("id") int id, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/azure/core/basic/users/{id}:export")
@@ -250,9 +269,19 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> exportSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> export(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id, @QueryParam("format") String format,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+
+        @Post("/azure/core/basic/users/{id}:export")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> exportSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id, @QueryParam("format") String format,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -261,7 +290,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> listNext(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Get("{nextLink}")
         @ExpectedResponses({ 200 })
@@ -270,7 +300,8 @@ public final class BasicClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> listNextSync(@PathParam(value = "nextLink", encoded = true) String nextLink,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -325,8 +356,8 @@ public final class BasicClientImpl {
         RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrUpdate(this.getServiceVersion().getVersion(), id,
-            contentType, accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createOrUpdate(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), id, contentType, accept, resource, requestOptions, context));
     }
 
     /**
@@ -380,8 +411,8 @@ public final class BasicClientImpl {
     public Response<BinaryData> createOrUpdateWithResponse(int id, BinaryData resource, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return service.createOrUpdateSync(this.getServiceVersion().getVersion(), id, contentType, accept, resource,
-            requestOptions, Context.NONE);
+        return service.createOrUpdateSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, contentType,
+            accept, resource, requestOptions, Context.NONE);
     }
 
     /**
@@ -434,9 +465,10 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrReplaceWithResponseAsync(int id, BinaryData resource,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createOrReplace(this.getServiceVersion().getVersion(), id,
-            accept, resource, requestOptions, context));
+        return FluxUtil.withContext(context -> service.createOrReplace(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), id, contentType, accept, resource, requestOptions, context));
     }
 
     /**
@@ -489,9 +521,10 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrReplaceWithResponse(int id, BinaryData resource,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.createOrReplaceSync(this.getServiceVersion().getVersion(), id, accept, resource, requestOptions,
-            Context.NONE);
+        return service.createOrReplaceSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, contentType,
+            accept, resource, requestOptions, Context.NONE);
     }
 
     /**
@@ -521,13 +554,15 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a User along with {@link Response} on successful completion of {@link Mono}.
+     * @return a user.
+     * 
+     * Gets a User along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(int id, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.get(this.getServiceVersion().getVersion(), id, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            id, accept, requestOptions, context));
     }
 
     /**
@@ -557,12 +592,15 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a User along with {@link Response}.
+     * @return a user.
+     * 
+     * Gets a User along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(int id, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getSync(this.getServiceVersion().getVersion(), id, accept, requestOptions, Context.NONE);
+        return service.getSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -613,8 +651,8 @@ public final class BasicClientImpl {
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil
-            .withContext(
-                context -> service.list(this.getServiceVersion().getVersion(), accept, requestOptions, context))
+            .withContext(context -> service.list(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+                requestOptions, context))
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
@@ -739,8 +777,8 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listSinglePage(RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res
-            = service.listSync(this.getServiceVersion().getVersion(), accept, requestOptions, Context.NONE);
+        Response<BinaryData> res = service.listSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept,
+            requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }
@@ -834,8 +872,8 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteWithResponseAsync(int id, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.delete(this.getServiceVersion().getVersion(), id, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.delete(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            id, accept, requestOptions, context));
     }
 
     /**
@@ -854,7 +892,8 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithResponse(int id, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.deleteSync(this.getServiceVersion().getVersion(), id, accept, requestOptions, Context.NONE);
+        return service.deleteSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, accept, requestOptions,
+            Context.NONE);
     }
 
     /**
@@ -890,8 +929,8 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> exportWithResponseAsync(int id, String format, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.export(this.getServiceVersion().getVersion(), id, format, accept,
-            requestOptions, context));
+        return FluxUtil.withContext(context -> service.export(this.getEndpoint(), this.getServiceVersion().getVersion(),
+            id, format, accept, requestOptions, context));
     }
 
     /**
@@ -927,8 +966,8 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> exportWithResponse(int id, String format, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.exportSync(this.getServiceVersion().getVersion(), id, format, accept, requestOptions,
-            Context.NONE);
+        return service.exportSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, format, accept,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -963,7 +1002,8 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.listNext(nextLink, accept, requestOptions, context))
+        return FluxUtil
+            .withContext(context -> service.listNext(nextLink, this.getEndpoint(), accept, requestOptions, context))
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null));
     }
@@ -1000,7 +1040,8 @@ public final class BasicClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> listNextSinglePage(String nextLink, RequestOptions requestOptions) {
         final String accept = "application/json";
-        Response<BinaryData> res = service.listNextSync(nextLink, accept, requestOptions, Context.NONE);
+        Response<BinaryData> res
+            = service.listNextSync(nextLink, this.getEndpoint(), accept, requestOptions, Context.NONE);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             getValues(res.getValue(), "value"), getNextLink(res.getValue(), "nextLink"), null);
     }

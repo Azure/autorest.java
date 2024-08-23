@@ -16,6 +16,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 
 class PageClientTestBase extends TestProxyTestBase {
     protected PageClient pageClient;
@@ -24,7 +25,9 @@ class PageClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        PageClientBuilder pageClientbuilder = new PageClientBuilder().httpClient(HttpClient.createDefault())
+        PageClientBuilder pageClientbuilder = new PageClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             pageClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -33,9 +36,10 @@ class PageClientTestBase extends TestProxyTestBase {
         }
         pageClient = pageClientbuilder.buildClient();
 
-        PageClientBuilder twoModelsAsPageItemClientbuilder
-            = new PageClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        PageClientBuilder twoModelsAsPageItemClientbuilder = new PageClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             twoModelsAsPageItemClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

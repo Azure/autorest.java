@@ -17,12 +17,12 @@ import com.cadl.versioning.VersioningServiceVersion;
  */
 public final class VersioningClientImpl {
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -89,7 +89,7 @@ public final class VersioningClientImpl {
     /**
      * Initializes an instance of VersioningClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public VersioningClientImpl(String endpoint, VersioningServiceVersion serviceVersion) {
@@ -101,7 +101,7 @@ public final class VersioningClientImpl {
      * Initializes an instance of VersioningClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public VersioningClientImpl(HttpPipeline httpPipeline, String endpoint, VersioningServiceVersion serviceVersion) {
@@ -113,7 +113,7 @@ public final class VersioningClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public VersioningClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,

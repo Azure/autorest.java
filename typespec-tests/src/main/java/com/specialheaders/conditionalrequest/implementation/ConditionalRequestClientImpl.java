@@ -5,8 +5,8 @@
 package com.specialheaders.conditionalrequest.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -39,6 +39,20 @@ public final class ConditionalRequestClientImpl {
     private final ConditionalRequestClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -68,19 +82,22 @@ public final class ConditionalRequestClientImpl {
 
     /**
      * Initializes an instance of ConditionalRequestClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public ConditionalRequestClientImpl() {
+    public ConditionalRequestClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of ConditionalRequestClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public ConditionalRequestClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public ConditionalRequestClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -88,10 +105,13 @@ public final class ConditionalRequestClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public ConditionalRequestClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public ConditionalRequestClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service
             = RestProxy.create(ConditionalRequestClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -100,7 +120,7 @@ public final class ConditionalRequestClientImpl {
      * The interface defining all the services for ConditionalRequestClient to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ConditionalRequestCl")
     public interface ConditionalRequestClientService {
         @Post("/special-headers/conditional-request/if-match")
@@ -109,7 +129,7 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> postIfMatch(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<Void>> postIfMatch(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
             Context context);
 
         @Post("/special-headers/conditional-request/if-match")
@@ -118,7 +138,7 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> postIfMatchSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<Void> postIfMatchSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
             Context context);
 
         @Post("/special-headers/conditional-request/if-none-match")
@@ -127,7 +147,7 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> postIfNoneMatch(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<Void>> postIfNoneMatch(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
             Context context);
 
         @Post("/special-headers/conditional-request/if-none-match")
@@ -136,7 +156,7 @@ public final class ConditionalRequestClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> postIfNoneMatchSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<Void> postIfNoneMatchSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
             Context context);
     }
 
@@ -160,8 +180,7 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postIfMatchWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.postIfMatch(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.postIfMatch(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -184,8 +203,7 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postIfMatchWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.postIfMatchSync(accept, requestOptions, Context.NONE);
+        return service.postIfMatchSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 
     /**
@@ -208,8 +226,7 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> postIfNoneMatchWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.postIfNoneMatch(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.postIfNoneMatch(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -232,7 +249,6 @@ public final class ConditionalRequestClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> postIfNoneMatchWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.postIfNoneMatchSync(accept, requestOptions, Context.NONE);
+        return service.postIfNoneMatchSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 }
