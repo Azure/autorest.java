@@ -90,7 +90,7 @@ public class Main {
 
         printUserThreads();
 
-        System.exit(0);
+//        System.exit(0);
     }
 
     private static void printUserThreads() {
