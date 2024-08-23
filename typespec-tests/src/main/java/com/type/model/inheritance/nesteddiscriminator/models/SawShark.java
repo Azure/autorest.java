@@ -44,6 +44,7 @@ public final class SawShark extends Shark {
      * @return the kind value.
      */
     @Generated
+    @Override
     public String getKind() {
         return this.kind;
     }
@@ -54,6 +55,7 @@ public final class SawShark extends Shark {
      * @return the sharktype value.
      */
     @Generated
+    @Override
     public String getSharktype() {
         return this.sharktype;
     }

@@ -38,6 +38,7 @@ public final class RealModel extends AbstractModel {
      * @return the kind value.
      */
     @Generated
+    @Override
     public String getKind() {
         return this.kind;
     }

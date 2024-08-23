@@ -42,6 +42,7 @@ public class Salmon extends Fish {
      * 
      * @return the fishtype value.
      */
+    @Override
     public String getFishtype() {
         return this.fishtype;
     }

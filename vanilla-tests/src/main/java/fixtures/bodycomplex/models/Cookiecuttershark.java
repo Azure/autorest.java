@@ -44,6 +44,7 @@ public final class Cookiecuttershark extends Shark {
      * 
      * @return the fishtype value.
      */
+    @Override
     public String getFishtype() {
         return this.fishtype;
     }

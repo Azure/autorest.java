@@ -38,6 +38,7 @@ public final class Cobra extends Snake {
      * @return the kind value.
      */
     @Generated
+    @Override
     public SnakeKind getKind() {
         return this.kind;
     }

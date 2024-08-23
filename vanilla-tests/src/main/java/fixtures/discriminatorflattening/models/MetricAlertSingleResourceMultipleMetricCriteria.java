@@ -46,6 +46,7 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
      * 
      * @return the odataType value.
      */
+    @Override
     public Odatatype getOdataType() {
         return this.odataType;
     }

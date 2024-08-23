@@ -38,6 +38,7 @@ public final class SeaGull extends Bird {
      * @return the kind value.
      */
     @Generated
+    @Override
     public String getKind() {
         return this.kind;
     }

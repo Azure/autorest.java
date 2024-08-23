@@ -45,6 +45,7 @@ public final class BytesData extends Data {
      * @return the type value.
      */
     @Generated
+    @Override
     public String getType() {
         return this.type;
     }

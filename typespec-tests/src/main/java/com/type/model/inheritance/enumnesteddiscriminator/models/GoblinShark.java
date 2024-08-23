@@ -44,6 +44,7 @@ public final class GoblinShark extends Shark {
      * @return the kind value.
      */
     @Generated
+    @Override
     public FishKind getKind() {
         return this.kind;
     }
@@ -54,6 +55,7 @@ public final class GoblinShark extends Shark {
      * @return the sharktype value.
      */
     @Generated
+    @Override
     public SharkKind getSharktype() {
         return this.sharktype;
     }

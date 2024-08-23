@@ -59,6 +59,7 @@ public final class Salmon extends Fish {
      * @return the kind value.
      */
     @Generated
+    @Override
     public FishKind getKind() {
         return this.kind;
     }

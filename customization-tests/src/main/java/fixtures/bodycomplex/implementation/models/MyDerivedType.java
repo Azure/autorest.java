@@ -36,6 +36,7 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the kind value.
      */
+    @Override
     public MyKind getKind() {
         return this.kind;
     }

@@ -58,6 +58,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the fishtype value.
      */
+    @Override
     public String getFishtype() {
         return this.fishtype;
     }

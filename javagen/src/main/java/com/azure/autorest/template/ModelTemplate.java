@@ -334,7 +334,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return false;
         }
 
-        if (!settings.isShareJsonSerializableCode()
+        if (settings.isShareJsonSerializableCode()
             && property.isPolymorphicDiscriminator()
             && model.isAllPolymorphicModelsInSamePackage()) {
             return false;

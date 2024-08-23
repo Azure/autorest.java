@@ -35,6 +35,7 @@ public final class Golden extends Dog {
      * 
      * @return the kind value.
      */
+    @Override
     public DogKind kind() {
         return this.kind;
     }

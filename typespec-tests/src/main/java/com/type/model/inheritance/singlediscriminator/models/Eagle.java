@@ -59,6 +59,7 @@ public final class Eagle extends Bird {
      * @return the kind value.
      */
     @Generated
+    @Override
     public String getKind() {
         return this.kind;
     }

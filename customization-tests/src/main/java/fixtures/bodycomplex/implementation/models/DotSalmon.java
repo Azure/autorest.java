@@ -44,6 +44,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the fishType value.
      */
+    @Override
     public String getFishType() {
         return this.fishType;
     }

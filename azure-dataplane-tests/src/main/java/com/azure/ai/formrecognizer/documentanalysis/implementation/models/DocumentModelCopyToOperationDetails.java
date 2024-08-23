@@ -40,6 +40,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * 
      * @return the kind value.
      */
+    @Override
     public String getKind() {
         return this.kind;
     }
