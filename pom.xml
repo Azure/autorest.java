@@ -384,7 +384,6 @@
     <module>./extension-base</module>
     <module>./fluentgen</module>
     <module>./fluentnamer</module>
-    <module>./androidgen</module>
     <module>./partial-update</module>
   </modules>
 

@@ -180,7 +180,8 @@ public class JavaSettings {
                 getBooleanValue(host, "null-byte-array-maps-to-empty-array", false),
                 getBooleanValue(host, "graal-vm-config", false),
                 getStringValue(host, "flavor", "Azure"),
-                getBooleanValue(host, "disable-typed-headers-methods", false)
+                getBooleanValue(host, "disable-typed-headers-methods", false),
+                getBooleanValue(host, "android", false)
             );
         }
         return instance;
@@ -284,6 +285,7 @@ public class JavaSettings {
      * @param flavor The brand name we use to generate SDK.
      * @param disableTypedHeadersMethods Prevents generating REST API methods that include typed headers. If set to
      * true, {@code noCustomHeaders} will be ignored as no REST APIs with typed headers will be generated.
+     * @param android Whether to generate the Android client.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -346,7 +348,8 @@ public class JavaSettings {
         boolean nullByteArrayMapsToEmptyArray,
         boolean generateGraalVmConfig,
         String flavor,
-        boolean disableTypedHeadersMethods) {
+        boolean disableTypedHeadersMethods,
+        boolean android) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -445,6 +448,7 @@ public class JavaSettings {
         this.generateGraalVmConfig = generateGraalVmConfig;
         this.flavor = flavor;
         this.disableTypedHeadersMethods = disableTypedHeadersMethods;
+        this.android = android;
     }
 
     /**
@@ -1641,6 +1645,17 @@ public class JavaSettings {
      */
     public boolean isDisableTypedHeadersMethods() {
         return disableTypedHeadersMethods;
+    }
+
+    private final boolean android;
+
+    /**
+     * Whether to generate code for Android.
+     *
+     * @return Whether to generate code for Android.
+     */
+    public boolean isAndroid() {
+        return android;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\n",
