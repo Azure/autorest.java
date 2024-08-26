@@ -67,7 +67,6 @@ import {
   SdkServiceMethod,
   SdkType,
   SdkUnionType,
-  UsageFlags,
   createSdkContext,
   getAllModels,
   getClientType,
@@ -107,10 +106,7 @@ import {
   getHeaderFieldName,
   getPathParamName,
   getQueryParamName,
-  isBody,
-  isBodyRoot,
   isHeader,
-  isMultipartBodyProperty,
   isPathParam,
   isQueryParam,
 } from "@typespec/http";
@@ -455,6 +451,7 @@ export class CodeModelBuilder {
       schema instanceof ConstantSchema
     ) {
       const schemaUsage: SchemaContext[] | undefined = schema.usage;
+
       // Public override Internal
       if (schemaUsage?.includes(SchemaContext.Public)) {
         const index = schemaUsage.indexOf(SchemaContext.Internal);
@@ -463,12 +460,15 @@ export class CodeModelBuilder {
         }
       }
 
-      // Internal on Anonymous
-      if (schemaUsage?.includes(SchemaContext.Anonymous)) {
+      // Internal on Spread
+      if (schemaUsage?.includes(SchemaContext.Spread)) {
         const index = schemaUsage.indexOf(SchemaContext.Internal);
         if (index < 0) {
           schemaUsage.push(SchemaContext.Internal);
         }
+
+        // SchemaContext.Spread no longer needed
+        schemaUsage.splice(schemaUsage.indexOf(SchemaContext.Spread), 1);
       }
     }
   }
@@ -1302,6 +1302,11 @@ export class CodeModelBuilder {
     });
     op.addParameter(parameter);
 
+    const jsonMergePatch = operationIsJsonMergePatch(sdkHttpOperation);
+
+    const schemaIsPublicBeforeProcess =
+      schema instanceof ObjectSchema && (schema.usage as SchemaContext[] | undefined)?.includes(SchemaContext.Public);
+
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
     if (op.convenienceApi) {
@@ -1309,35 +1314,43 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
     }
 
-    if (operationIsJsonMergePatch(sdkHttpOperation)) {
+    if (jsonMergePatch) {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
     if (op.convenienceApi && operationIsMultipart(sdkHttpOperation)) {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    // Implicit body parameter would have usage flag: UsageFlags.Spread, for this case we need to do body parameter flatten
-    const bodyParameterFlatten = sdkType.kind === "model" && sdkType.usage & UsageFlags.Spread && !this.isArm();
+    // Explicit body parameter @body or @bodyRoot would result to the existance of rawHttpOperation.parameters.body.property
+    // Implicit body parameter would result to rawHttpOperation.parameters.body.property be undefined
+    // see https://typespec.io/docs/libraries/http/cheat-sheet#data-types
+    const bodyParameterFlatten =
+      schema instanceof ObjectSchema &&
+      sdkType.kind === "model" &&
+      !rawHttpOperation.parameters.body?.property &&
+      !this.isArm();
 
     if (schema instanceof ObjectSchema && bodyParameterFlatten) {
       // flatten body parameter
       const parameters = sdkHttpOperation.parameters;
       const bodyParameter = sdkHttpOperation.bodyParam;
-      // name the schema for documentation
-      schema.language.default.name = pascalCase(op.language.default.name) + "Request";
 
       if (!parameter.language.default.name) {
         // name the parameter for documentation
         parameter.language.default.name = "request";
       }
 
-      if (operationIsJsonMergePatch(sdkHttpOperation)) {
+      if (jsonMergePatch) {
         // skip model flatten, if "application/merge-patch+json"
-        schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
+        if (sdkType.isGeneratedName) {
+          schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
+        }
         return;
       }
 
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
+      if (!schemaIsPublicBeforeProcess) {
+        this.trackSchemaUsage(schema, { usage: [SchemaContext.Spread] });
+      }
 
       if (op.convenienceApi && op.parameters) {
         op.convenienceApi.requests = [];
@@ -2229,24 +2242,6 @@ export class CodeModelBuilder {
     }
   }
 
-  private getParameterLocation(target: ModelProperty): ParameterLocation | "BodyProperty" {
-    if (isHeader(this.program, target)) {
-      return ParameterLocation.Header;
-    } else if (isQueryParam(this.program, target)) {
-      return ParameterLocation.Query;
-    } else if (isPathParam(this.program, target)) {
-      return ParameterLocation.Path;
-    } else if (
-      isBody(this.program, target) ||
-      isBodyRoot(this.program, target) ||
-      isMultipartBodyProperty(this.program, target)
-    ) {
-      return ParameterLocation.Body;
-    } else {
-      return "BodyProperty";
-    }
-  }
-
   private isReadOnly(target: SdkModelPropertyType): boolean {
     const segment = target.__raw ? getSegment(this.program, target.__raw) !== undefined : false;
     if (segment) {
@@ -2465,6 +2460,13 @@ export class CodeModelBuilder {
 
     const innerApplySchemaUsage = (schema: Schema, schemaUsage: SchemaUsage) => {
       this.trackSchemaUsage(schema, schemaUsage);
+      if (schema instanceof ObjectSchema) {
+        const schemaUsage: SchemaContext[] | undefined = schema.usage;
+        if (schemaUsage?.includes(SchemaContext.Public) && schemaUsage?.includes(SchemaContext.Spread)) {
+          // Public override Spread as inner
+          schemaUsage.splice(schemaUsage.indexOf(SchemaContext.Spread), 1);
+        }
+      }
       innerPropagateSchemaUsage(schema, schemaUsage);
     };
 
@@ -2517,9 +2519,7 @@ export class CodeModelBuilder {
 
     // Exclude context that not to be propagated
     const schemaUsage = {
-      usage: (schema as SchemaUsage).usage?.filter(
-        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
-      ),
+      usage: (schema as SchemaUsage).usage?.filter((it) => it !== SchemaContext.Paged && it !== SchemaContext.Spread),
       serializationFormats: (schema as SchemaUsage).serializationFormats?.filter(
         (it) => it !== KnownMediaType.Multipart,
       ),

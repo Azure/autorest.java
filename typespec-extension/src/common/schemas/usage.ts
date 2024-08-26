@@ -20,7 +20,7 @@ export enum SchemaContext {
   Paged = "paged",
 
   /** Schema as anonymous model. This usage does not propagate. */
-  Anonymous = "anonymous",
+  Spread = "spread",
 
   /** Schema is used in json-merge-patch operation */
   JsonMergePatch = "json-merge-patch",
