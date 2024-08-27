@@ -17,6 +17,11 @@ import java.util.List;
 @Fluent
 public class Salmon extends Fish {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "salmon";
+
+    /*
      * The location property.
      */
     private String location;
@@ -30,7 +35,16 @@ public class Salmon extends Fish {
      * Creates an instance of Salmon class.
      */
     public Salmon() {
-        this.fishtype = "salmon";
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -106,14 +120,13 @@ public class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
-        return jsonWriter.writeEndObject();
-    }
-
-    void toJsonShared(JsonWriter jsonWriter) throws IOException {
-        super.toJsonShared(jsonWriter);
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -157,25 +170,25 @@ public class Salmon extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (!Salmon.fromJsonShared(reader, fieldName, deserializedSalmon)) {
+                if ("length".equals(fieldName)) {
+                    deserializedSalmon.setLength(reader.getFloat());
+                } else if ("species".equals(fieldName)) {
+                    deserializedSalmon.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedSalmon.setSiblings(siblings);
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedSalmon.fishtype = reader.getString();
+                } else if ("location".equals(fieldName)) {
+                    deserializedSalmon.location = reader.getString();
+                } else if ("iswild".equals(fieldName)) {
+                    deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
+                } else {
                     reader.skipChildren();
                 }
             }
 
             return deserializedSalmon;
         });
-    }
-
-    static boolean fromJsonShared(JsonReader reader, String fieldName, Salmon deserializedSalmon) throws IOException {
-        if (Fish.fromJsonShared(reader, fieldName, deserializedSalmon)) {
-            return true;
-        } else if ("location".equals(fieldName)) {
-            deserializedSalmon.location = reader.getString();
-            return true;
-        } else if ("iswild".equals(fieldName)) {
-            deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
-            return true;
-        }
-        return false;
     }
 }

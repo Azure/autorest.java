@@ -19,7 +19,7 @@ public class DotFish implements JsonSerializable<DotFish> {
     /*
      * The fish.type property.
      */
-    String fishType;
+    private String fishType = "DotFish";
 
     /*
      * The species property.
@@ -30,7 +30,6 @@ public class DotFish implements JsonSerializable<DotFish> {
      * Creates an instance of DotFish class.
      */
     public DotFish() {
-        this.fishType = "DotFish";
     }
 
     /**
@@ -68,13 +67,9 @@ public class DotFish implements JsonSerializable<DotFish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
-        return jsonWriter.writeEndObject();
-    }
-
-    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStringField("fish.type", this.fishType);
         jsonWriter.writeStringField("species", this.species);
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -117,23 +112,16 @@ public class DotFish implements JsonSerializable<DotFish> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (!DotFish.fromJsonShared(reader, fieldName, deserializedDotFish)) {
+                if ("fish.type".equals(fieldName)) {
+                    deserializedDotFish.fishType = reader.getString();
+                } else if ("species".equals(fieldName)) {
+                    deserializedDotFish.species = reader.getString();
+                } else {
                     reader.skipChildren();
                 }
             }
 
             return deserializedDotFish;
         });
-    }
-
-    static boolean fromJsonShared(JsonReader reader, String fieldName, DotFish deserializedDotFish) throws IOException {
-        if ("fish.type".equals(fieldName)) {
-            deserializedDotFish.fishType = reader.getString();
-            return true;
-        } else if ("species".equals(fieldName)) {
-            deserializedDotFish.species = reader.getString();
-            return true;
-        }
-        return false;
     }
 }
