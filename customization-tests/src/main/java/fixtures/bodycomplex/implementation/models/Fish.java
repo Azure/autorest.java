@@ -20,7 +20,7 @@ public class Fish implements JsonSerializable<Fish> {
     /*
      * The fishtype property.
      */
-    String fishtype;
+    private String fishtype = "Fish";
 
     /*
      * The species property.
@@ -41,7 +41,6 @@ public class Fish implements JsonSerializable<Fish> {
      * Creates an instance of Fish class.
      */
     public Fish() {
-        this.fishtype = "Fish";
     }
 
     /**
@@ -119,15 +118,11 @@ public class Fish implements JsonSerializable<Fish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        toJsonShared(jsonWriter);
-        return jsonWriter.writeEndObject();
-    }
-
-    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeFloatField("length", this.length);
         jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("species", this.species);
         jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
+        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -181,30 +176,21 @@ public class Fish implements JsonSerializable<Fish> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (!Fish.fromJsonShared(reader, fieldName, deserializedFish)) {
+                if ("length".equals(fieldName)) {
+                    deserializedFish.length = reader.getFloat();
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedFish.fishtype = reader.getString();
+                } else if ("species".equals(fieldName)) {
+                    deserializedFish.species = reader.getString();
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedFish.siblings = siblings;
+                } else {
                     reader.skipChildren();
                 }
             }
 
             return deserializedFish;
         });
-    }
-
-    static boolean fromJsonShared(JsonReader reader, String fieldName, Fish deserializedFish) throws IOException {
-        if ("length".equals(fieldName)) {
-            deserializedFish.length = reader.getFloat();
-            return true;
-        } else if ("fishtype".equals(fieldName)) {
-            deserializedFish.fishtype = reader.getString();
-            return true;
-        } else if ("species".equals(fieldName)) {
-            deserializedFish.species = reader.getString();
-            return true;
-        } else if ("siblings".equals(fieldName)) {
-            List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-            deserializedFish.siblings = siblings;
-            return true;
-        }
-        return false;
     }
 }
