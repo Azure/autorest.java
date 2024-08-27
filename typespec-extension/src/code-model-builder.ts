@@ -159,7 +159,6 @@ import {
   stringArrayContainsIgnoreCase,
   trace,
 } from "./utils.js";
-import { Context } from "mocha";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -463,7 +462,7 @@ export class CodeModelBuilder {
 
       // Internal on PublicSpread, but Public takes precedence
       if (schemaUsage?.includes(SchemaContext.PublicSpread)) {
-        // SchemaContext.Spread no longer needed
+        // remove PublicSpread as it served its purpose
         schemaUsage.splice(schemaUsage.indexOf(SchemaContext.PublicSpread), 1);
 
         // Public would override PublicSpread, hence do nothing if this schema is Public
