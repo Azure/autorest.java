@@ -4,7 +4,7 @@
 
 AutoRest Java is the Java language generator for AutoRest.
 
-As [npm package](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md), it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/main/package.json) located in project root, and the `package.json` in `preprocessor`, `javagen`, `postprocessor`, `fluentnamer`, `fluentgen`, `androidgen`.
+As [npm package](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md), it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/main/package.json) located in project root, and the `package.json` in `preprocessor`, `javagen`, `postprocessor`, `fluentnamer`, `fluentgen`.
 
 As AutoRest plugin, it is defined by the [YAML section in `readme.md`](https://github.com/Azure/autorest.java/blob/main/javagen/readme.md), located in the same folders of `package.json`.
 
