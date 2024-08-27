@@ -28,7 +28,7 @@ public class Fish {
      */
     @JsonTypeId
     @JsonProperty(value = "fishtype", required = true)
-    String fishtype;
+    private String fishtype = "Fish";
 
     /*
      * The species property.
@@ -56,7 +56,6 @@ public class Fish {
     @JsonCreator
     public Fish(@JsonProperty(value = "length", required = true) float length) {
         this.length = length;
-        this.fishtype = "Fish";
     }
 
     /**

@@ -3,7 +3,6 @@
 
 package com.azure.autorest.fluent.template;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.model.arm.ErrorClientModel;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -32,7 +31,7 @@ public class FluentStreamStyleSerializationModelTemplate extends StreamSerializa
     }
 
     @Override
-    protected boolean isManagementErrorSubclass(ClientModel model, JavaSettings settings) {
+    protected boolean isManagementErrorSubclass(ClientModel model) {
         if (CoreUtils.isNullOrEmpty(model.getParentModelName())) {
             return false;
         }
