@@ -30,7 +30,6 @@
   "files": [
     "*/package.json",
     "/readme.md",
-    "/androidgen/*.md",
     "/fluentgen/*.md",
     "/fluentnamer/*.md",
     "/javagen/*.md",

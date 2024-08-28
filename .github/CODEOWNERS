@@ -8,9 +8,6 @@
 /fluent*                    @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
 /azure-tests                @weidongxu-microsoft @haolingdong-msft @XiaofeiCao
 
-# androidgen
-/androidgen                 @JianpingChen @anuchandy
-
 # protocol
 /protocol*                  @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar
 /partial-update-tests       @weidongxu-microsoft @haolingdong-msft @XiaofeiCao @srnagar

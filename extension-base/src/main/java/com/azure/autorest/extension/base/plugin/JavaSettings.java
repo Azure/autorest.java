@@ -181,7 +181,8 @@ public class JavaSettings {
                 getBooleanValue(host, "graal-vm-config", false),
                 getStringValue(host, "flavor", "Azure"),
                 getBooleanValue(host, "disable-typed-headers-methods", false),
-                getBooleanValue(host, "share-jsonserializable-code", false)
+                getBooleanValue(host, "share-jsonserializable-code", false),
+                getBooleanValue(host, "android", false)
             );
         }
         return instance;
@@ -287,6 +288,7 @@ public class JavaSettings {
      * true, {@code noCustomHeaders} will be ignored as no REST APIs with typed headers will be generated.
      * @param shareJsonSerializableCode Whether models implementing {@code JsonSerializable} can attempt to share code
      * for {@code toJson} and {@code fromJson}.
+     * @param android Whether to generate the Android client.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -350,7 +352,8 @@ public class JavaSettings {
         boolean generateGraalVmConfig,
         String flavor,
         boolean disableTypedHeadersMethods,
-        boolean shareJsonSerializableCode) {
+        boolean shareJsonSerializableCode,
+        boolean android) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -450,6 +453,7 @@ public class JavaSettings {
         this.flavor = flavor;
         this.disableTypedHeadersMethods = disableTypedHeadersMethods;
         this.shareJsonSerializableCode = shareJsonSerializableCode;
+        this.android = android;
     }
 
     /**
@@ -1668,6 +1672,17 @@ public class JavaSettings {
      */
     public boolean isShareJsonSerializableCode() {
         return shareJsonSerializableCode;
+    }
+
+    private final boolean android;
+
+    /**
+     * Whether to generate code for Android.
+     *
+     * @return Whether to generate code for Android.
+     */
+    public boolean isAndroid() {
+        return android;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\n",
