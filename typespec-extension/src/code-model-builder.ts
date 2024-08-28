@@ -462,13 +462,13 @@ export class CodeModelBuilder {
 
       // Internal on PublicSpread, but Public takes precedence
       if (schemaUsage?.includes(SchemaContext.PublicSpread)) {
-        // remove PublicSpread as it served its purpose
+        // remove PublicSpread as it now served its purpose
         schemaUsage.splice(schemaUsage.indexOf(SchemaContext.PublicSpread), 1);
 
         // Public would override PublicSpread, hence do nothing if this schema is Public
         if (!schemaUsage?.includes(SchemaContext.Public)) {
-          const index = schemaUsage.indexOf(SchemaContext.Internal);
-          if (index < 0) {
+          // set the model as Internal, so that it is not exposed to user
+          if (!schemaUsage.includes(SchemaContext.Internal)) {
             schemaUsage.push(SchemaContext.Internal);
           }
         }
