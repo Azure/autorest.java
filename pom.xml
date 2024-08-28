@@ -384,8 +384,8 @@
       </activation>
       <modules>
         <module>./core/packages/http-client-java/generator/http-client-generator-core</module>
-        <module>./core/packages/http-client-java/generator/http-client-generator</module>
         <module>./core/packages/http-client-java/generator/http-client-generator-mgmt</module>
+        <module>./core/packages/http-client-java/generator/http-client-generator</module>
       </modules>
     </profile>
 

@@ -38,6 +38,9 @@ jobs:
       vmImage: "MMSUbuntu20.04"
 
     steps:
+      - checkout: self
+        submodules: true
+
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
         inputs:
@@ -52,7 +55,7 @@ jobs:
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean install'
-          options: '$(DefaultOptions) -P local,tsp -T 1C'
+          options: '$(DefaultOptions) -P tsp -T 1C'
           mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
           javaHomeOption: 'JDKVersion'
           jdkVersionOption: $(JavaVersion)

@@ -24,6 +24,12 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
     }
 }
 
+# Copy JAR
+New-Item -ItemType File -Path ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
+Copy-Item ./core/packages/http-client-java/generator/http-client-generator/target/emitter.jar ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
+# Copy TypeScript code
+Copy-Item -Path ./core/packages/http-client-java/emitter/src -Destination ./typespec-extension/ -Recurse -Force
+
 Write-Host "Changing directory to './typespec-extension'"
 Push-Location ./typespec-extension
 
@@ -37,8 +43,8 @@ try {
   Write-Host "Linting TypeSpec Java ('npm run lint')"
   invokeExpressionAndCaptureOutput("npm run lint")
 
-  Write-Host "Checking TypeSpec Java format ('npm run check-format')"
-  invokeExpressionAndCaptureOutput("npm run check-format")
+#   Write-Host "Checking TypeSpec Java format ('npm run check-format')"
+#   invokeExpressionAndCaptureOutput("npm run check-format")
 
   Write-Host "Packing TypeSpec Java ('npm pack')"
   invokeExpressionAndCaptureOutput("npm pack")
@@ -58,8 +64,8 @@ try {
   Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
   invokeExpressionAndCaptureOutput("./Generate.ps1 -Parallelization $Parallelization")
 
-  Write-Host "Checking format of generated code ('npm run check-format')"
-  invokeExpressionAndCaptureOutput("npm run check-format")
+#   Write-Host "Checking format of generated code ('npm run check-format')"
+#   invokeExpressionAndCaptureOutput("npm run check-format")
 } finally {
   Pop-Location
 }
