@@ -19,7 +19,7 @@ export enum SchemaContext {
   /** Schema is used from the pageable operation. This usage does not propagate. */
   Paged = "paged",
 
-  /** Schema as anonymous model. This usage does not propagate. */
+  /** Schema as spread/flatten model. "Public", if present in usage, will have precedence over "PublicSpread". This usage does not propagate. Instead, it propagate "Public". */
   PublicSpread = "spread",
 
   /** Schema is used in json-merge-patch operation */
