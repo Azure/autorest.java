@@ -8,6 +8,7 @@ import com._specs_.azure.core.model.implementation.ModelClientImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,7 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the ModelClient type.
  */
 @ServiceClientBuilder(serviceClients = { ModelClient.class, ModelAsyncClient.class })
-public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, ConfigurationTrait<ModelClientBuilder> {
+public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, ConfigurationTrait<ModelClientBuilder>,
+    EndpointTrait<ModelClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -173,6 +175,22 @@ public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, 
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public ModelClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * Service version
      */
     @Generated
@@ -217,10 +235,11 @@ public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, 
     private ModelClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         ModelServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ModelServiceVersion.getLatest();
-        ModelClientImpl client
-            = new ModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
+        ModelClientImpl client = new ModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+            localEndpoint, localServiceVersion);
         return client;
     }
 

@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.parameters.spread.AliasClient;
 import com.parameters.spread.ModelClient;
 import com.parameters.spread.SpreadClientBuilder;
@@ -24,7 +25,9 @@ class SpreadClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        SpreadClientBuilder modelClientbuilder = new SpreadClientBuilder().httpClient(HttpClient.createDefault())
+        SpreadClientBuilder modelClientbuilder = new SpreadClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             modelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -33,7 +36,9 @@ class SpreadClientTestBase extends TestProxyTestBase {
         }
         modelClient = modelClientbuilder.buildModelClient();
 
-        SpreadClientBuilder aliasClientbuilder = new SpreadClientBuilder().httpClient(HttpClient.createDefault())
+        SpreadClientBuilder aliasClientbuilder = new SpreadClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             aliasClientbuilder.httpClient(interceptorManager.getPlaybackClient());

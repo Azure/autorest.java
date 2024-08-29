@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.PomMapper;
+import com.azure.autorest.mapper.android.AndroidMapperFactory;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
@@ -36,6 +37,8 @@ import com.azure.autorest.model.projectmodel.TextFile;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.preprocessor.Preprocessor;
+import com.azure.autorest.template.Templates;
+import com.azure.autorest.template.android.AndroidTemplateFactory;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.core.util.CoreUtils;
@@ -73,7 +76,10 @@ public class Javagen extends NewPlugin {
         this.clear();
 
         JavaSettings settings = JavaSettings.getInstance();
+        return settings.isAndroid() ? generateAndroid(settings) : generateJava(settings);
+    }
 
+    private boolean generateJava(JavaSettings settings) {
         try {
             // Step 1: Parse input yaml as CodeModel
             CodeModel codeModel = new Preprocessor(this, connection, pluginName, sessionId)
@@ -100,6 +106,100 @@ public class Javagen extends NewPlugin {
 
             String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                writeFile("src/main/resources/" + artifactId + ".properties",
+                    "name=${project.artifactId}\nversion=${project.version}\n", null);
+            }
+        } catch (Exception ex) {
+            logger.error("Failed to generate code.", ex);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean generateAndroid(JavaSettings settings) {
+        try {
+            // Step 1: Parse input yaml as CodeModel
+            CodeModel codeModel = new Preprocessor(this, connection, pluginName, sessionId)
+                .processCodeModel();
+
+            // Step 2: Map
+            Mappers.setFactory(new AndroidMapperFactory());
+            Client client = Mappers.getClientMapper().map(codeModel);
+
+            // Step 3: Write to templates
+            Templates.setFactory(new AndroidTemplateFactory());
+            JavaPackage javaPackage = new JavaPackage(this);
+            // Service client
+            javaPackage
+                .addServiceClient(client.getServiceClient().getPackage(), client.getServiceClient().getClassName(),
+                    client.getServiceClient());
+
+            if (JavaSettings.getInstance().isGenerateClientInterfaces()) {
+                javaPackage
+                    .addServiceClientInterface(client.getServiceClient().getInterfaceName(), client.getServiceClient());
+            }
+
+            // Async/sync service clients
+            for (AsyncSyncClient asyncClient : client.getAsyncClients()) {
+                javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
+            }
+
+            for (AsyncSyncClient syncClient : client.getSyncClients()) {
+                javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient);
+            }
+
+            // Service client builder
+            for (ClientBuilder clientBuilder : client.getClientBuilders()) {
+                javaPackage.addServiceClientBuilder(clientBuilder);
+            }
+
+            // Method group
+            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
+                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(),
+                    methodGroupClient);
+                if (JavaSettings.getInstance().isGenerateClientInterfaces()) {
+                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                }
+            }
+
+            // Response
+            for (ClientResponse response : client.getResponseModels()) {
+                javaPackage.addClientResponse(response.getPackage(), response.getName(), response);
+            }
+
+            // Client model
+            for (ClientModel model : client.getModels()) {
+                javaPackage.addModel(model.getPackage(), model.getName(), model);
+            }
+
+            // Enum
+            for (EnumType enumType : client.getEnums()) {
+                javaPackage.addEnum(enumType.getPackage(), enumType.getName(), enumType);
+            }
+
+            // Exception
+            for (ClientException exception : client.getExceptions()) {
+                javaPackage.addException(exception.getPackage(), exception.getName(), exception);
+            }
+
+            // XML sequence wrapper
+            for (XmlSequenceWrapper xmlSequenceWrapper : client.getXmlSequenceWrappers()) {
+                javaPackage.addXmlSequenceWrapper(xmlSequenceWrapper.getPackage(),
+                    xmlSequenceWrapper.getWrapperClassName(), xmlSequenceWrapper);
+            }
+
+            // Package-info
+            for (PackageInfo packageInfo : client.getPackageInfos()) {
+                javaPackage.addPackageInfo(packageInfo.getPackage(), "package-info", packageInfo);
+            }
+
+            // TODO: POM, Manager
+            //Step 4: Print to files
+            new Postprocessor(this).postProcess(javaPackage.getJavaFiles().stream()
+                .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())));
+
+            String artifactId = JavaSettings.getInstance().getArtifactId();
+            if (!(artifactId == null || artifactId.isEmpty())) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
                     "name=${project.artifactId}\nversion=${project.version}\n", null);
             }

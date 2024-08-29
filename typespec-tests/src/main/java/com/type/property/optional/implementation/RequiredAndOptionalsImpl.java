@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class RequiredAndOptionalsImpl {
      * The interface defining all the services for OptionalClientRequiredAndOptionals to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "OptionalClientRequir")
     public interface RequiredAndOptionalsService {
         @Get("/type/property/optional/requiredAndOptional/all")
@@ -64,8 +65,8 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAll(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getAll(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/requiredAndOptional/all")
         @ExpectedResponses({ 200 })
@@ -73,8 +74,8 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAllSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getAllSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/requiredAndOptional/requiredOnly")
         @ExpectedResponses({ 200 })
@@ -82,8 +83,8 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getRequiredOnly(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getRequiredOnly(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/optional/requiredAndOptional/requiredOnly")
         @ExpectedResponses({ 200 })
@@ -91,8 +92,8 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getRequiredOnlySync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getRequiredOnlySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/requiredAndOptional/all")
         @ExpectedResponses({ 204 })
@@ -100,8 +101,9 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putAll(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putAll(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/requiredAndOptional/all")
         @ExpectedResponses({ 204 })
@@ -109,7 +111,8 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putAllSync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> putAllSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/requiredAndOptional/requiredOnly")
@@ -118,8 +121,9 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> putRequiredOnly(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> putRequiredOnly(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Put("/type/property/optional/requiredAndOptional/requiredOnly")
         @ExpectedResponses({ 204 })
@@ -127,8 +131,9 @@ public final class RequiredAndOptionalsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> putRequiredOnlySync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Response<Void> putRequiredOnlySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -153,7 +158,8 @@ public final class RequiredAndOptionalsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAllWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getAll(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getAll(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -177,7 +183,7 @@ public final class RequiredAndOptionalsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getAllWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getAllSync(accept, requestOptions, Context.NONE);
+        return service.getAllSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -202,7 +208,8 @@ public final class RequiredAndOptionalsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredOnlyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getRequiredOnly(accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.getRequiredOnly(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -226,7 +233,7 @@ public final class RequiredAndOptionalsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredOnlyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getRequiredOnlySync(accept, requestOptions, Context.NONE);
+        return service.getRequiredOnlySync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -250,8 +257,9 @@ public final class RequiredAndOptionalsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putAllWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putAll(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putAll(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -275,8 +283,8 @@ public final class RequiredAndOptionalsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putAllWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putAllSync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putAllSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -300,8 +308,9 @@ public final class RequiredAndOptionalsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putRequiredOnlyWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putRequiredOnly(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.putRequiredOnly(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -325,7 +334,7 @@ public final class RequiredAndOptionalsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putRequiredOnlyWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.putRequiredOnlySync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.putRequiredOnlySync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

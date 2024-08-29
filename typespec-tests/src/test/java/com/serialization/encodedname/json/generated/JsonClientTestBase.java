@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.serialization.encodedname.json.JsonClient;
 import com.serialization.encodedname.json.JsonClientBuilder;
 
@@ -21,7 +22,9 @@ class JsonClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        JsonClientBuilder jsonClientbuilder = new JsonClientBuilder().httpClient(HttpClient.createDefault())
+        JsonClientBuilder jsonClientbuilder = new JsonClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             jsonClientbuilder.httpClient(interceptorManager.getPlaybackClient());

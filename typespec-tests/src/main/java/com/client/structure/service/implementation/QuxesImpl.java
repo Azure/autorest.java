@@ -5,7 +5,6 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -62,7 +61,7 @@ public final class QuxesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> eight(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/eight")
         @ExpectedResponses({ 204 })
@@ -71,7 +70,7 @@ public final class QuxesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> eightSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -86,9 +85,8 @@ public final class QuxesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> eightWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.eight(this.client.getEndpoint(), this.client.getClient(), accept,
-            requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.eight(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
     }
 
     /**
@@ -103,8 +101,6 @@ public final class QuxesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> eightWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.eightSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
-            Context.NONE);
+        return service.eightSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
     }
 }

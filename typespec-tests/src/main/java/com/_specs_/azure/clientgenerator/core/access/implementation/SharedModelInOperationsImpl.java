@@ -8,6 +8,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -54,7 +55,7 @@ public final class SharedModelInOperationsImpl {
      * The interface defining all the services for AccessClientSharedModelInOperations to be used by the proxy service
      * to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "AccessClientSharedMo")
     public interface SharedModelInOperationsService {
         @Get("/azure/client-generator-core/access/sharedModelInOperation/public")
@@ -63,8 +64,8 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> publicMethod(@QueryParam("name") String name, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> publicMethod(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/sharedModelInOperation/public")
         @ExpectedResponses({ 200 })
@@ -72,8 +73,8 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> publicMethodSync(@QueryParam("name") String name, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> publicMethodSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/sharedModelInOperation/internal")
         @ExpectedResponses({ 200 })
@@ -81,8 +82,8 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> internal(@QueryParam("name") String name, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> internal(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/client-generator-core/access/sharedModelInOperation/internal")
         @ExpectedResponses({ 200 })
@@ -90,8 +91,8 @@ public final class SharedModelInOperationsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> internalSync(@QueryParam("name") String name, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> internalSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -116,7 +117,8 @@ public final class SharedModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> publicMethodWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.publicMethod(name, accept, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.publicMethod(this.client.getEndpoint(), name, accept, requestOptions, context));
     }
 
     /**
@@ -140,7 +142,7 @@ public final class SharedModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> publicMethodWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.publicMethodSync(name, accept, requestOptions, Context.NONE);
+        return service.publicMethodSync(this.client.getEndpoint(), name, accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -165,7 +167,8 @@ public final class SharedModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> internalWithResponseAsync(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.internal(name, accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.internal(this.client.getEndpoint(), name, accept, requestOptions, context));
     }
 
     /**
@@ -189,6 +192,6 @@ public final class SharedModelInOperationsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> internalWithResponse(String name, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.internalSync(name, accept, requestOptions, Context.NONE);
+        return service.internalSync(this.client.getEndpoint(), name, accept, requestOptions, Context.NONE);
     }
 }

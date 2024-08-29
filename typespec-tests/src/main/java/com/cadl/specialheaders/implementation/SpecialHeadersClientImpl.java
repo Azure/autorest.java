@@ -17,12 +17,12 @@ import com.cadl.specialheaders.SpecialHeadersServiceVersion;
  */
 public final class SpecialHeadersClientImpl {
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -131,7 +131,7 @@ public final class SpecialHeadersClientImpl {
     /**
      * Initializes an instance of SpecialHeadersClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public SpecialHeadersClientImpl(String endpoint, SpecialHeadersServiceVersion serviceVersion) {
@@ -143,7 +143,7 @@ public final class SpecialHeadersClientImpl {
      * Initializes an instance of SpecialHeadersClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public SpecialHeadersClientImpl(HttpPipeline httpPipeline, String endpoint,
@@ -156,7 +156,7 @@ public final class SpecialHeadersClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
     public SpecialHeadersClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,

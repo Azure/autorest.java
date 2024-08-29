@@ -10,6 +10,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
@@ -47,6 +48,20 @@ public final class TraitsClientImpl {
      * The proxy service used to perform REST calls.
      */
     private final TraitsClientService service;
+
+    /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
 
     /**
      * Service version.
@@ -93,21 +108,23 @@ public final class TraitsClientImpl {
     /**
      * Initializes an instance of TraitsClient client.
      * 
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public TraitsClientImpl(TraitsServiceVersion serviceVersion) {
+    public TraitsClientImpl(String endpoint, TraitsServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of TraitsClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public TraitsClientImpl(HttpPipeline httpPipeline, TraitsServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+    public TraitsClientImpl(HttpPipeline httpPipeline, String endpoint, TraitsServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -115,12 +132,14 @@ public final class TraitsClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public TraitsClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+    public TraitsClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         TraitsServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(TraitsClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -128,7 +147,7 @@ public final class TraitsClientImpl {
     /**
      * The interface defining all the services for TraitsClient to be used by the proxy service to perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "TraitsClient")
     public interface TraitsClientService {
         @Get("/azure/core/traits/user/{id}")
@@ -137,9 +156,9 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> smokeTest(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> smokeTest(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("foo") String foo,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/azure/core/traits/user/{id}")
         @ExpectedResponses({ 200 })
@@ -147,9 +166,9 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> smokeTestSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("foo") String foo, @HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> smokeTestSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id, @HeaderParam("foo") String foo,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
         @ExpectedResponses({ 200 })
@@ -157,8 +176,9 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> repeatableAction(@QueryParam("api-version") String apiVersion,
-            @PathParam("id") int id, @HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> repeatableAction(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/azure/core/traits/user/{id}:repeatableAction")
@@ -167,9 +187,10 @@ public final class TraitsClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> repeatableActionSync(@QueryParam("api-version") String apiVersion, @PathParam("id") int id,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> repeatableActionSync(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("id") int id,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -210,8 +231,8 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> smokeTestWithResponseAsync(int id, String foo, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.smokeTest(this.getServiceVersion().getVersion(), id, foo, accept,
-            requestOptions, context));
+        return FluxUtil.withContext(context -> service.smokeTest(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), id, foo, accept, requestOptions, context));
     }
 
     /**
@@ -251,8 +272,8 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> smokeTestWithResponse(int id, String foo, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.smokeTestSync(this.getServiceVersion().getVersion(), id, foo, accept, requestOptions,
-            Context.NONE);
+        return service.smokeTestSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, foo, accept,
+            requestOptions, Context.NONE);
     }
 
     /**
@@ -294,6 +315,7 @@ public final class TraitsClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> repeatableActionWithResponseAsync(int id, BinaryData body,
         RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -309,8 +331,8 @@ public final class TraitsClientImpl {
                         DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
-        return FluxUtil.withContext(context -> service.repeatableAction(this.getServiceVersion().getVersion(), id,
-            accept, body, requestOptionsLocal, context));
+        return FluxUtil.withContext(context -> service.repeatableAction(this.getEndpoint(),
+            this.getServiceVersion().getVersion(), id, contentType, accept, body, requestOptionsLocal, context));
     }
 
     /**
@@ -351,6 +373,7 @@ public final class TraitsClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> repeatableActionWithResponse(int id, BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -366,7 +389,7 @@ public final class TraitsClientImpl {
                         DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
-        return service.repeatableActionSync(this.getServiceVersion().getVersion(), id, accept, body,
-            requestOptionsLocal, Context.NONE);
+        return service.repeatableActionSync(this.getEndpoint(), this.getServiceVersion().getVersion(), id, contentType,
+            accept, body, requestOptionsLocal, Context.NONE);
     }
 }

@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.client.naming.ClientModelClient;
 import com.client.naming.NamingClient;
 import com.client.naming.NamingClientBuilder;
@@ -27,7 +28,9 @@ class NamingClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        NamingClientBuilder namingClientbuilder = new NamingClientBuilder().httpClient(HttpClient.createDefault())
+        NamingClientBuilder namingClientbuilder = new NamingClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             namingClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -36,7 +39,9 @@ class NamingClientTestBase extends TestProxyTestBase {
         }
         namingClient = namingClientbuilder.buildClient();
 
-        NamingClientBuilder clientModelClientbuilder = new NamingClientBuilder().httpClient(HttpClient.createDefault())
+        NamingClientBuilder clientModelClientbuilder = new NamingClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             clientModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
@@ -45,7 +50,9 @@ class NamingClientTestBase extends TestProxyTestBase {
         }
         clientModelClient = clientModelClientbuilder.buildClientModelClient();
 
-        NamingClientBuilder unionEnumClientbuilder = new NamingClientBuilder().httpClient(HttpClient.createDefault())
+        NamingClientBuilder unionEnumClientbuilder = new NamingClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             unionEnumClientbuilder.httpClient(interceptorManager.getPlaybackClient());

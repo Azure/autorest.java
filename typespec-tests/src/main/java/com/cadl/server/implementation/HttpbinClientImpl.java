@@ -6,7 +6,6 @@ package com.cadl.server.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -166,8 +165,8 @@ public final class HttpbinClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> status(@HostParam("domain") String domain, @HostParam("tld") String tld,
-            @HostParam("relative-path") String relativePath, @PathParam("code") int code,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HostParam("relative-path") String relativePath, @PathParam("code") int code, RequestOptions requestOptions,
+            Context context);
 
         @Get("/status/{code}")
         @ExpectedResponses({ 200, 204 })
@@ -176,8 +175,8 @@ public final class HttpbinClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> statusSync(@HostParam("domain") String domain, @HostParam("tld") String tld,
-            @HostParam("relative-path") String relativePath, @PathParam("code") int code,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HostParam("relative-path") String relativePath, @PathParam("code") int code, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -193,9 +192,8 @@ public final class HttpbinClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> statusWithResponseAsync(int code, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.status(this.getDomain(), this.getTld(), this.getRelativePath(),
-            code, accept, requestOptions, context));
+            code, requestOptions, context));
     }
 
     /**
@@ -211,8 +209,7 @@ public final class HttpbinClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> statusWithResponse(int code, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.statusSync(this.getDomain(), this.getTld(), this.getRelativePath(), code, accept, requestOptions,
+        return service.statusSync(this.getDomain(), this.getTld(), this.getRelativePath(), code, requestOptions,
             Context.NONE);
     }
 }

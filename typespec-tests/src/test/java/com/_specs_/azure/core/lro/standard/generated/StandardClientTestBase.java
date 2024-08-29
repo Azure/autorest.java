@@ -15,13 +15,16 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 
 class StandardClientTestBase extends TestProxyTestBase {
     protected StandardClient standardClient;
 
     @Override
     protected void beforeTest() {
-        StandardClientBuilder standardClientbuilder = new StandardClientBuilder().httpClient(HttpClient.createDefault())
+        StandardClientBuilder standardClientbuilder = new StandardClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             standardClientbuilder.httpClient(interceptorManager.getPlaybackClient());

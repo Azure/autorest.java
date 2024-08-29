@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.specialheaders.repeatability.RepeatabilityClient;
 import com.specialheaders.repeatability.RepeatabilityClientBuilder;
 
@@ -21,9 +22,10 @@ class RepeatabilityClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        RepeatabilityClientBuilder repeatabilityClientbuilder
-            = new RepeatabilityClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        RepeatabilityClientBuilder repeatabilityClientbuilder = new RepeatabilityClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             repeatabilityClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

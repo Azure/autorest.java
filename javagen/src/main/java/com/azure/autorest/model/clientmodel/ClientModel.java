@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -127,6 +128,26 @@ public class ClientModel {
      * The cross language definition id for the model.
      */
     private final String crossLanguageDefinitionId;
+
+    // Set of non-final properties that are set on access.
+    // This pattern is used as when the ClientModel is initialized the ModelMapper may not have mapped all models
+    // related to the one being initialized. When that happens some properties may not be set correctly. For example,
+    // checks into the polymorphic hierarchy may not be correct. This pattern allows for the properties to be set
+    // correctly when they are accessed.
+
+    /**
+     * Whether all models in the polymorphic hierarchy containing this model are in the same package.
+     * <p>
+     * If this model isn't polymorphic, this will always be false.
+     */
+    private Boolean allPolymorphicModelsInSamePackage;
+
+    /**
+     * Whether the polymorphic discriminator for this model was defined by the model.
+     * <p>
+     * If this model isn't polymorphic, this will always be false.
+     */
+    private Boolean polymorphicDiscriminatorDefinedByModel;
 
     /**
      * Create a new ServiceModel with the provided properties.
@@ -398,6 +419,20 @@ public class ClientModel {
     }
 
     /**
+     * Checks whether the model has the given {@link ImplementationDetails.Usage}.
+     * <p>
+     * If {@link #getImplementationDetails()} or {@link ImplementationDetails#getUsages()} is null this will always
+     * return false.
+     *
+     * @return Whether the model has the given {@link ImplementationDetails.Usage}.
+     */
+    public boolean hasUsage(ImplementationDetails.Usage usage) {
+        return implementationDetails != null
+            && implementationDetails.getUsages() != null
+            && implementationDetails.getUsages().contains(usage);
+    }
+
+    /**
      * List the properties that have access (getter or setter) methods.
      * <p>
      * It does not include properties from superclass (even though they can be accessed via inheritance). It does not
@@ -509,6 +544,79 @@ public class ClientModel {
      */
     public Set<String> getSerializationFormats() {
         return serializationFormats;
+    }
+
+    /**
+     * Whether the polymorphic structure containing the model and all subtypes are in the same package.
+     * <p>
+     * If this model isn't polymorphic, this will always be false.
+     *
+     * @return Whether the polymorphic structure containing the model and all subtypes are in the same package.
+     */
+    public final boolean isAllPolymorphicModelsInSamePackage() {
+        if (!isPolymorphic) {
+            return false;
+        }
+
+        if (allPolymorphicModelsInSamePackage == null) {
+            allPolymorphicModelsInSamePackage = allPolymorphicModelsInSamePackageInternal(this);
+        }
+
+        return allPolymorphicModelsInSamePackage;
+    }
+
+    /**
+     * Whether the model defines the polymorphic discriminator property.
+     * <p>
+     * If this model isn't polymorphic, this will always be false.
+     *
+     * @return Whether the model defines the polymorphic discriminator property.
+     */
+    public final boolean isPolymorphicDiscriminatorDefinedByModel() {
+        if (!isPolymorphic) {
+            return false;
+        }
+
+        if (polymorphicDiscriminatorDefinedByModel == null) {
+            polymorphicDiscriminatorDefinedByModel = ClientModelUtil.modelDefinesProperty(this, polymorphicDiscriminator);
+        }
+
+        return polymorphicDiscriminatorDefinedByModel;
+    }
+
+    private static boolean allPolymorphicModelsInSamePackageInternal(ClientModel model) {
+        if (!model.isPolymorphic()) {
+            return false;
+        }
+
+        String packageName = model.getPackage();
+        ClientModel parent = ClientModelUtil.getClientModel(model.getParentModelName());
+        ClientModel lastParent = model;
+        while (parent != null) {
+            lastParent = parent;
+            if (!packageName.equals(parent.getPackage())) {
+                return false;
+            }
+
+            parent = ClientModelUtil.getClientModel(parent.getParentModelName());
+        }
+
+        return checkChildrenModelsPackage(lastParent, packageName);
+    }
+
+    private static boolean checkChildrenModelsPackage(ClientModel model, String packageName) {
+        List<ClientModel> children = model.getDerivedModels();
+        if (children == null || children.isEmpty()) {
+            return true;
+        }
+
+        for (ClientModel child : children) {
+            if (!packageName.equals(child.getPackage()) || !checkChildrenModelsPackage(child, packageName)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

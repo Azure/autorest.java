@@ -6,7 +6,6 @@ package com.cadl.server.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.PathParam;
@@ -149,8 +148,7 @@ public final class ContosoClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> get(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
-            @PathParam(value = "group", encoded = true) String group, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @PathParam(value = "group", encoded = true) String group, RequestOptions requestOptions, Context context);
 
         @Get("/contoso/{group}")
         @ExpectedResponses({ 200, 204 })
@@ -159,8 +157,7 @@ public final class ContosoClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> getSync(@HostParam("Endpoint") String endpoint, @HostParam("ApiVersion") String apiVersion,
-            @PathParam(value = "group", encoded = true) String group, @HeaderParam("accept") String accept,
-            RequestOptions requestOptions, Context context);
+            @PathParam(value = "group", encoded = true) String group, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -176,9 +173,8 @@ public final class ContosoClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponseAsync(String group, RequestOptions requestOptions) {
-        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.get(this.getEndpoint(), this.getServiceVersion().getVersion(),
-            group, accept, requestOptions, context));
+            group, requestOptions, context));
     }
 
     /**
@@ -194,8 +190,7 @@ public final class ContosoClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(String group, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.getSync(this.getEndpoint(), this.getServiceVersion().getVersion(), group, accept, requestOptions,
+        return service.getSync(this.getEndpoint(), this.getServiceVersion().getVersion(), group, requestOptions,
             Context.NONE);
     }
 }

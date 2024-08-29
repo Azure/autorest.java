@@ -12,7 +12,7 @@ import java.time.Duration;
  */
 public interface ResourcesClient {
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */

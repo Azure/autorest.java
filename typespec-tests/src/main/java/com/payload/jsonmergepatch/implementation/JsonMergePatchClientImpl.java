@@ -8,6 +8,7 @@ import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
@@ -43,6 +44,20 @@ public final class JsonMergePatchClientImpl {
     private final JsonMergePatchClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -72,19 +87,22 @@ public final class JsonMergePatchClientImpl {
 
     /**
      * Initializes an instance of JsonMergePatchClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public JsonMergePatchClientImpl() {
+    public JsonMergePatchClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of JsonMergePatchClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public JsonMergePatchClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public JsonMergePatchClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -92,10 +110,12 @@ public final class JsonMergePatchClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public JsonMergePatchClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public JsonMergePatchClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service
             = RestProxy.create(JsonMergePatchClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -104,7 +124,7 @@ public final class JsonMergePatchClientImpl {
      * The interface defining all the services for JsonMergePatchClient to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "JsonMergePatchClient")
     public interface JsonMergePatchClientService {
         @Put("/json-merge-patch/create/resource")
@@ -113,7 +133,8 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> createResource(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> createResource(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Put("/json-merge-patch/create/resource")
@@ -122,7 +143,8 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> createResourceSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> createResourceSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Patch("/json-merge-patch/update/resource")
@@ -131,9 +153,9 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> updateResource(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> updateResource(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Patch("/json-merge-patch/update/resource")
         @ExpectedResponses({ 200 })
@@ -141,9 +163,9 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> updateResourceSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+        Response<BinaryData> updateResourceSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/merge-patch+json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Patch("/json-merge-patch/update/resource/optional")
         @ExpectedResponses({ 200 })
@@ -151,8 +173,8 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> updateOptionalResource(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<BinaryData>> updateOptionalResource(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Patch("/json-merge-patch/update/resource/optional")
         @ExpectedResponses({ 200 })
@@ -160,8 +182,8 @@ public final class JsonMergePatchClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> updateOptionalResourceSync(@HeaderParam("content-type") String contentType,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<BinaryData> updateOptionalResourceSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -224,8 +246,10 @@ public final class JsonMergePatchClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createResourceWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.createResource(accept, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.createResource(this.getEndpoint(), contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -288,8 +312,9 @@ public final class JsonMergePatchClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createResourceWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.createResourceSync(accept, body, requestOptions, Context.NONE);
+        return service.createResourceSync(this.getEndpoint(), contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -353,8 +378,8 @@ public final class JsonMergePatchClientImpl {
     public Mono<Response<BinaryData>> updateResourceWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.updateResource(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.updateResource(this.getEndpoint(), contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -418,11 +443,19 @@ public final class JsonMergePatchClientImpl {
     public Response<BinaryData> updateResourceWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
-        return service.updateResourceSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.updateResourceSync(this.getEndpoint(), contentType, accept, body, requestOptions, Context.NONE);
     }
 
     /**
      * Test content-type: application/merge-patch+json with optional body.
+     * <p><strong>Header Parameters</strong></p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/merge-patch+json".</td></tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -479,7 +512,6 @@ public final class JsonMergePatchClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> updateOptionalResourceWithResponseAsync(RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -487,12 +519,20 @@ public final class JsonMergePatchClientImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/merge-patch+json");
             }
         });
-        return FluxUtil
-            .withContext(context -> service.updateOptionalResource(contentType, accept, requestOptionsLocal, context));
+        return FluxUtil.withContext(
+            context -> service.updateOptionalResource(this.getEndpoint(), accept, requestOptionsLocal, context));
     }
 
     /**
      * Test content-type: application/merge-patch+json with optional body.
+     * <p><strong>Header Parameters</strong></p>
+     * <table border="1">
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/merge-patch+json".</td></tr>
+     * </table>
+     * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
      * <pre>{@code
@@ -549,7 +589,6 @@ public final class JsonMergePatchClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> updateOptionalResourceWithResponse(RequestOptions requestOptions) {
-        final String contentType = "application/merge-patch+json";
         final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
@@ -557,6 +596,6 @@ public final class JsonMergePatchClientImpl {
                 requestLocal.getHeaders().set(HttpHeaderName.CONTENT_TYPE, "application/merge-patch+json");
             }
         });
-        return service.updateOptionalResourceSync(contentType, accept, requestOptionsLocal, Context.NONE);
+        return service.updateOptionalResourceSync(this.getEndpoint(), accept, requestOptionsLocal, Context.NONE);
     }
 }

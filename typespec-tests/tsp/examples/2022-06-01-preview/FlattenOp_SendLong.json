@@ -8,8 +8,7 @@
       "user": {
         "user": "myOptionalUser"
       },
-      "input": "myRequiredInput",
-      "dataInt": 11,
+      "input": "myInput",
       "dataIntOptional": 12,
       "dataLong": 13,
       "data_float": 14.0,

@@ -5,14 +5,12 @@
 package fixtures.streamstyleserializationimmutableoutput.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -20,11 +18,6 @@ import java.util.List;
  */
 @Fluent
 public final class Goblinshark extends Shark {
-    /*
-     * The fishtype property.
-     */
-    private String fishtype = "goblin";
-
     /*
      * The jawsize property.
      */
@@ -39,16 +32,7 @@ public final class Goblinshark extends Shark {
      * Creates an instance of Goblinshark class.
      */
     public Goblinshark() {
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    @Override
-    public String getFishtype() {
-        return this.fishtype;
+        this.fishtype = "goblin";
     }
 
     /**
@@ -160,13 +144,7 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("birthday",
-            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeNumberField("age", getAge());
-        jsonWriter.writeStringField("fishtype", this.fishtype);
+        toJsonShared(jsonWriter);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
@@ -188,20 +166,8 @@ public final class Goblinshark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("length".equals(fieldName)) {
-                    deserializedGoblinshark.setLength(reader.getFloat());
-                } else if ("birthday".equals(fieldName)) {
-                    deserializedGoblinshark.setBirthday(reader
-                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
-                } else if ("species".equals(fieldName)) {
-                    deserializedGoblinshark.setSpecies(reader.getString());
-                } else if ("siblings".equals(fieldName)) {
-                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                    deserializedGoblinshark.setSiblings(siblings);
-                } else if ("age".equals(fieldName)) {
-                    deserializedGoblinshark.setAge(reader.getNullable(JsonReader::getInt));
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedGoblinshark.fishtype = reader.getString();
+                if (Shark.fromJsonShared(reader, fieldName, deserializedGoblinshark)) {
+                    continue;
                 } else if ("jawsize".equals(fieldName)) {
                     deserializedGoblinshark.jawsize = reader.getNullable(JsonReader::getInt);
                 } else if ("color".equals(fieldName)) {

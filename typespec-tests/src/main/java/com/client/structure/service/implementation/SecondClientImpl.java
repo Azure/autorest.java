@@ -5,7 +5,6 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -162,7 +161,7 @@ public final class SecondClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> five(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/five")
         @ExpectedResponses({ 204 })
@@ -171,7 +170,7 @@ public final class SecondClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fiveSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -186,9 +185,8 @@ public final class SecondClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fiveWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.five(this.getEndpoint(), this.getClient(), accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.five(this.getEndpoint(), this.getClient(), requestOptions, context));
     }
 
     /**
@@ -203,7 +201,6 @@ public final class SecondClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.fiveSync(this.getEndpoint(), this.getClient(), accept, requestOptions, Context.NONE);
+        return service.fiveSync(this.getEndpoint(), this.getClient(), requestOptions, Context.NONE);
     }
 }

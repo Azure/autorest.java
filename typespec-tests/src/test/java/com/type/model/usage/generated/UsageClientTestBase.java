@@ -13,6 +13,7 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 import com.type.model.usage.UsageClient;
 import com.type.model.usage.UsageClientBuilder;
 
@@ -21,7 +22,9 @@ class UsageClientTestBase extends TestProxyTestBase {
 
     @Override
     protected void beforeTest() {
-        UsageClientBuilder usageClientbuilder = new UsageClientBuilder().httpClient(HttpClient.createDefault())
+        UsageClientBuilder usageClientbuilder = new UsageClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             usageClientbuilder.httpClient(interceptorManager.getPlaybackClient());

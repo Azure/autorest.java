@@ -6,8 +6,8 @@ package com.azure.specialheaders.xmsclientrequestid.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -39,6 +39,20 @@ public final class XmsClientRequestIdClientImpl {
     private final XmsClientRequestIdClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -68,19 +82,22 @@ public final class XmsClientRequestIdClientImpl {
 
     /**
      * Initializes an instance of XmsClientRequestIdClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public XmsClientRequestIdClientImpl() {
+    public XmsClientRequestIdClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of XmsClientRequestIdClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public XmsClientRequestIdClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public XmsClientRequestIdClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -88,10 +105,13 @@ public final class XmsClientRequestIdClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public XmsClientRequestIdClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public XmsClientRequestIdClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+        String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service
             = RestProxy.create(XmsClientRequestIdClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -100,7 +120,7 @@ public final class XmsClientRequestIdClientImpl {
      * The interface defining all the services for XmsClientRequestIdClient to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "XmsClientRequestIdCl")
     public interface XmsClientRequestIdClientService {
         @Get("/azure/special-headers/x-ms-client-request-id/")
@@ -109,7 +129,8 @@ public final class XmsClientRequestIdClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> get(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
+            Context context);
 
         @Get("/azure/special-headers/x-ms-client-request-id/")
         @ExpectedResponses({ 204 })
@@ -117,7 +138,7 @@ public final class XmsClientRequestIdClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+        Response<Void> getSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -133,8 +154,7 @@ public final class XmsClientRequestIdClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(this.getEndpoint(), requestOptions, context));
     }
 
     /**
@@ -149,7 +169,6 @@ public final class XmsClientRequestIdClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> getWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.getSync(accept, requestOptions, Context.NONE);
+        return service.getSync(this.getEndpoint(), requestOptions, Context.NONE);
     }
 }

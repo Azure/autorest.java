@@ -81,27 +81,27 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         Mono<Response<TopLevelArmResourceInner>> getByResourceGroup(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Put("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}")
         @ExpectedResponses({ 200, 201 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> createOrUpdate(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") TopLevelArmResourceInner resource, Context context);
 
-        @Headers({ "Content-Type: application/json" })
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelArmResourceInner>> update(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") TopLevelArmResourceUpdate properties, Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -111,7 +111,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         Mono<Response<Flux<ByteBuffer>>> delete(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -120,7 +120,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelArmResourceListResult>> listByResourceGroup(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("accept") String accept,
+            @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -129,7 +129,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelArmResourceListResult>> list(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Post("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/action")
@@ -138,7 +138,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         Mono<Response<Flux<ByteBuffer>>> action(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
-            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("accept") String accept,
+            @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
         @Headers({ "Content-Type: application/json" })
@@ -147,7 +147,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelArmResourceListResult>> listByResourceGroupNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
@@ -155,7 +155,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<TopLevelArmResourceListResult>> listBySubscriptionNext(
             @PathParam(value = "nextLink", encoded = true) String nextLink, @HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, Context context);
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -315,10 +315,12 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, resource, context))
+                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, contentType, accept,
+                resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -359,10 +361,12 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         } else {
             resource.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, resource, context);
+            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, contentType, accept, resource,
+            context);
     }
 
     /**
@@ -558,9 +562,12 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, accept, properties, context))
+        return FluxUtil
+            .withContext(context -> service.update(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, contentType, accept,
+                properties, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -601,10 +608,11 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
         } else {
             properties.validate();
         }
+        final String contentType = "application/json";
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.update(this.client.getEndpoint(), this.client.getApiVersion(), this.client.getSubscriptionId(),
-            resourceGroupName, topLevelArmResourceName, accept, properties, context);
+            resourceGroupName, topLevelArmResourceName, contentType, accept, properties, context);
     }
 
     /**
@@ -1314,6 +1322,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     }
 
     /**
+     * List TopLevelArmResource resources by resource group
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1342,6 +1352,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     }
 
     /**
+     * List TopLevelArmResource resources by resource group
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1370,6 +1382,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     }
 
     /**
+     * List TopLevelArmResource resources by subscription ID
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
@@ -1398,6 +1412,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     }
 
     /**
+     * List TopLevelArmResource resources by subscription ID
+     * 
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.

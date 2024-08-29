@@ -17,6 +17,20 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class ScalarClientImpl {
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * Service version.
      */
     private final ScalarServiceVersion serviceVersion;
@@ -75,21 +89,23 @@ public final class ScalarClientImpl {
     /**
      * Initializes an instance of ScalarClient client.
      * 
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public ScalarClientImpl(ScalarServiceVersion serviceVersion) {
+    public ScalarClientImpl(String endpoint, ScalarServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of ScalarClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public ScalarClientImpl(HttpPipeline httpPipeline, ScalarServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+    public ScalarClientImpl(HttpPipeline httpPipeline, String endpoint, ScalarServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -97,12 +113,14 @@ public final class ScalarClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public ScalarClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+    public ScalarClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         ScalarServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.azureLocationScalars = new AzureLocationScalarsImpl(this);
     }

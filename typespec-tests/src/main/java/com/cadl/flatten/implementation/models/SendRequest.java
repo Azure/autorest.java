@@ -42,16 +42,24 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     @Generated
     private final String constant = "constant";
 
+    /*
+     * The requiredInt property.
+     */
+    @Generated
+    private final int requiredInt;
+
     /**
      * Creates an instance of SendRequest class.
      * 
      * @param endpoint the endpoint value to set.
      * @param input the input value to set.
+     * @param requiredInt the requiredInt value to set.
      */
     @Generated
-    public SendRequest(String endpoint, String input) {
+    public SendRequest(String endpoint, String input, int requiredInt) {
         this.endpoint = endpoint;
         this.input = input;
+        this.requiredInt = requiredInt;
     }
 
     /**
@@ -107,6 +115,16 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     }
 
     /**
+     * Get the requiredInt property: The requiredInt property.
+     * 
+     * @return the requiredInt value.
+     */
+    @Generated
+    public int getRequiredInt() {
+        return this.requiredInt;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -116,6 +134,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
         jsonWriter.writeStringField("endpoint", this.endpoint);
         jsonWriter.writeStringField("input", this.input);
         jsonWriter.writeStringField("constant", this.constant);
+        jsonWriter.writeIntField("requiredInt", this.requiredInt);
         jsonWriter.writeJsonField("user", this.user);
         return jsonWriter.writeEndObject();
     }
@@ -134,6 +153,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
         return jsonReader.readObject(reader -> {
             String endpoint = null;
             String input = null;
+            int requiredInt = 0;
             User user = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -143,13 +163,15 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
                     endpoint = reader.getString();
                 } else if ("input".equals(fieldName)) {
                     input = reader.getString();
+                } else if ("requiredInt".equals(fieldName)) {
+                    requiredInt = reader.getInt();
                 } else if ("user".equals(fieldName)) {
                     user = User.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            SendRequest deserializedSendRequest = new SendRequest(endpoint, input);
+            SendRequest deserializedSendRequest = new SendRequest(endpoint, input, requiredInt);
             deserializedSendRequest.user = user;
 
             return deserializedSendRequest;

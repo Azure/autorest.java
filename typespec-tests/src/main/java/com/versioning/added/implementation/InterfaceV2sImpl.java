@@ -75,8 +75,9 @@ public final class InterfaceV2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> v2InInterface(@HostParam("endpoint") String endpoint,
-            @HostParam("version") String version, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @HostParam("version") String version, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/interface-v2/v2")
         @ExpectedResponses({ 200 })
@@ -85,8 +86,9 @@ public final class InterfaceV2sImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> v2InInterfaceSync(@HostParam("endpoint") String endpoint,
-            @HostParam("version") String version, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+            @HostParam("version") String version, @HeaderParam("Content-Type") String contentType,
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -121,9 +123,10 @@ public final class InterfaceV2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> v2InInterfaceWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.v2InInterface(this.client.getEndpoint(),
-            this.client.getVersion(), accept, body, requestOptions, context));
+            this.client.getVersion(), contentType, accept, body, requestOptions, context));
     }
 
     /**
@@ -158,8 +161,9 @@ public final class InterfaceV2sImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> v2InInterfaceWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.v2InInterfaceSync(this.client.getEndpoint(), this.client.getVersion(), accept, body,
+        return service.v2InInterfaceSync(this.client.getEndpoint(), this.client.getVersion(), contentType, accept, body,
             requestOptions, Context.NONE);
     }
 }

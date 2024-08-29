@@ -15,15 +15,17 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
+import com.azure.core.util.Configuration;
 
 class FlattenPropertyClientTestBase extends TestProxyTestBase {
     protected FlattenPropertyClient flattenPropertyClient;
 
     @Override
     protected void beforeTest() {
-        FlattenPropertyClientBuilder flattenPropertyClientbuilder
-            = new FlattenPropertyClientBuilder().httpClient(HttpClient.createDefault())
-                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        FlattenPropertyClientBuilder flattenPropertyClientbuilder = new FlattenPropertyClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             flattenPropertyClientbuilder.httpClient(interceptorManager.getPlaybackClient());
         } else if (getTestMode() == TestMode.RECORD) {

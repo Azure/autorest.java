@@ -7,6 +7,7 @@ package com.type.model.inheritance.nesteddiscriminator;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -40,8 +41,8 @@ import java.util.Objects;
  * A builder for creating a new instance of the NestedDiscriminatorClient type.
  */
 @ServiceClientBuilder(serviceClients = { NestedDiscriminatorClient.class, NestedDiscriminatorAsyncClient.class })
-public final class NestedDiscriminatorClientBuilder
-    implements HttpTrait<NestedDiscriminatorClientBuilder>, ConfigurationTrait<NestedDiscriminatorClientBuilder> {
+public final class NestedDiscriminatorClientBuilder implements HttpTrait<NestedDiscriminatorClientBuilder>,
+    ConfigurationTrait<NestedDiscriminatorClientBuilder>, EndpointTrait<NestedDiscriminatorClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -174,6 +175,22 @@ public final class NestedDiscriminatorClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public NestedDiscriminatorClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -200,8 +217,9 @@ public final class NestedDiscriminatorClientBuilder
     private NestedDiscriminatorClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        NestedDiscriminatorClientImpl client
-            = new NestedDiscriminatorClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        NestedDiscriminatorClientImpl client = new NestedDiscriminatorClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class DecimalVerifiesImpl {
      * The interface defining all the services for ScalarClientDecimalVerifies to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "ScalarClientDecimalV")
     public interface DecimalVerifiesService {
         @Get("/type/scalar/decimal/prepare_verify")
@@ -64,8 +65,8 @@ public final class DecimalVerifiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> prepareVerify(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> prepareVerify(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/scalar/decimal/prepare_verify")
         @ExpectedResponses({ 200 })
@@ -73,8 +74,8 @@ public final class DecimalVerifiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> prepareVerifySync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> prepareVerifySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/type/scalar/decimal/verify")
         @ExpectedResponses({ 204 })
@@ -82,8 +83,9 @@ public final class DecimalVerifiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> verify(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> verify(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/scalar/decimal/verify")
         @ExpectedResponses({ 204 })
@@ -91,7 +93,8 @@ public final class DecimalVerifiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> verifySync(@HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
+        Response<Void> verifySync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -115,7 +118,8 @@ public final class DecimalVerifiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> prepareVerifyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.prepareVerify(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.prepareVerify(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -138,7 +142,7 @@ public final class DecimalVerifiesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> prepareVerifyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.prepareVerifySync(accept, requestOptions, Context.NONE);
+        return service.prepareVerifySync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -159,8 +163,9 @@ public final class DecimalVerifiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> verifyWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.verify(accept, body, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.verify(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -181,7 +186,7 @@ public final class DecimalVerifiesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> verifyWithResponse(BinaryData body, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.verifySync(accept, body, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.verifySync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

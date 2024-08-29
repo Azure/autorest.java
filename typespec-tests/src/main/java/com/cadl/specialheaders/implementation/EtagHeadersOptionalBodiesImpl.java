@@ -76,7 +76,7 @@ public final class EtagHeadersOptionalBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putWithOptionalBody(@HostParam("endpoint") String endpoint,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Put("/etag-headers-optional-body")
@@ -86,7 +86,7 @@ public final class EtagHeadersOptionalBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> putWithOptionalBodySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("format") String format, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("format") String format, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 

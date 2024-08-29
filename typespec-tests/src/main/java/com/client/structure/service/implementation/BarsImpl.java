@@ -5,7 +5,6 @@
 package com.client.structure.service.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
@@ -62,7 +61,7 @@ public final class BarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> five(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/five")
         @ExpectedResponses({ 204 })
@@ -71,7 +70,7 @@ public final class BarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> fiveSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/six")
         @ExpectedResponses({ 204 })
@@ -80,7 +79,7 @@ public final class BarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> six(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
 
         @Post("/six")
         @ExpectedResponses({ 204 })
@@ -89,7 +88,7 @@ public final class BarsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> sixSync(@HostParam("endpoint") String endpoint, @HostParam("client") String client,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -104,9 +103,8 @@ public final class BarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> fiveWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.five(this.client.getEndpoint(), this.client.getClient(), accept,
-            requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.five(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
     }
 
     /**
@@ -121,9 +119,7 @@ public final class BarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> fiveWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.fiveSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
-            Context.NONE);
+        return service.fiveSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
     }
 
     /**
@@ -138,9 +134,8 @@ public final class BarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sixWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.six(this.client.getEndpoint(), this.client.getClient(), accept,
-            requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.six(this.client.getEndpoint(), this.client.getClient(), requestOptions, context));
     }
 
     /**
@@ -155,8 +150,6 @@ public final class BarsImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sixWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sixSync(this.client.getEndpoint(), this.client.getClient(), accept, requestOptions,
-            Context.NONE);
+        return service.sixSync(this.client.getEndpoint(), this.client.getClient(), requestOptions, Context.NONE);
     }
 }

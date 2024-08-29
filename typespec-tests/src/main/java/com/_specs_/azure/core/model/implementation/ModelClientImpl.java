@@ -17,6 +17,20 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class ModelClientImpl {
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * Service version.
      */
     private final ModelServiceVersion serviceVersion;
@@ -75,21 +89,23 @@ public final class ModelClientImpl {
     /**
      * Initializes an instance of ModelClient client.
      * 
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public ModelClientImpl(ModelServiceVersion serviceVersion) {
+    public ModelClientImpl(String endpoint, ModelServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
      * Initializes an instance of ModelClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public ModelClientImpl(HttpPipeline httpPipeline, ModelServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), serviceVersion);
+    public ModelClientImpl(HttpPipeline httpPipeline, String endpoint, ModelServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -97,12 +113,14 @@ public final class ModelClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      * @param serviceVersion Service version.
      */
-    public ModelClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
+    public ModelClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
         ModelServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.serviceVersion = serviceVersion;
         this.azureCoreEmbeddingVectors = new AzureCoreEmbeddingVectorsImpl(this);
     }

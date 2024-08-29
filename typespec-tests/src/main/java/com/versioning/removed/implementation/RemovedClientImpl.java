@@ -169,8 +169,8 @@ public final class RemovedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> v2(@HostParam("endpoint") String endpoint, @HostParam("version") String version,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/v2")
         @ExpectedResponses({ 200 })
@@ -179,8 +179,8 @@ public final class RemovedClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> v2Sync(@HostParam("endpoint") String endpoint, @HostParam("version") String version,
-            @HeaderParam("accept") String accept, @BodyParam("application/json") BinaryData body,
-            RequestOptions requestOptions, Context context);
+            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
+            @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -215,9 +215,10 @@ public final class RemovedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> v2WithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.v2(this.getEndpoint(), this.getVersion(), accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.v2(this.getEndpoint(), this.getVersion(), contentType, accept,
+            body, requestOptions, context));
     }
 
     /**
@@ -252,7 +253,9 @@ public final class RemovedClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> v2WithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "application/json";
         final String accept = "application/json";
-        return service.v2Sync(this.getEndpoint(), this.getVersion(), accept, body, requestOptions, Context.NONE);
+        return service.v2Sync(this.getEndpoint(), this.getVersion(), contentType, accept, body, requestOptions,
+            Context.NONE);
     }
 }

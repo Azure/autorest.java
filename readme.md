@@ -325,7 +325,7 @@ use: $(this-folder)/fluentgen
 ```
 
 ```  yaml $(java) && $(android)
-use: $(this-folder)/androidgen
+use: $(this-folder)/javagen
 ```
 
 #### Help

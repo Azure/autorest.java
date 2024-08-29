@@ -16,7 +16,6 @@ pr:
     include:
       - '*'
     exclude:
-      - 'androidgen'
       - 'azure-dataplane-tests'
       - 'azure-tests'
       - 'fluent-tests'

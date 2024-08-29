@@ -178,9 +178,9 @@ public class ModelExampleUtil {
                 // e.g. do not throw exception, use defaultValueExpression
                 node = defaultNode(type, wireType, objectValue);
             }
-        } else if (objectValue == null) {
-            node = null;
         } else {
+            // If client type is unrecognized, or the objectValue is null, we return default node (LiteralNode)
+            // In case of null objectValue, instead of directly returning null node, we let downstream to decide how to deal with it
             node = defaultNode(type, wireType, objectValue);
         }
         return node;

@@ -8,6 +8,7 @@ import com._specs_.azure.clientgenerator.core.access.implementation.AccessClient
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -49,8 +50,8 @@ import java.util.Objects;
         InternalOperationAsyncClient.class,
         SharedModelInOperationAsyncClient.class,
         RelativeModelInOperationAsyncClient.class })
-public final class AccessClientBuilder
-    implements HttpTrait<AccessClientBuilder>, ConfigurationTrait<AccessClientBuilder> {
+public final class AccessClientBuilder implements HttpTrait<AccessClientBuilder>,
+    ConfigurationTrait<AccessClientBuilder>, EndpointTrait<AccessClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -183,6 +184,22 @@ public final class AccessClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public AccessClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -209,7 +226,9 @@ public final class AccessClientBuilder
     private AccessClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        AccessClientImpl client = new AccessClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        AccessClientImpl client
+            = new AccessClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

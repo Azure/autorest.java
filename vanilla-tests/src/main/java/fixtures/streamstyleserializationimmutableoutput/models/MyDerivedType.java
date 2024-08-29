@@ -16,39 +16,15 @@ import java.io.IOException;
 @Immutable
 public final class MyDerivedType extends MyBaseType {
     /*
-     * The kind property.
-     */
-    private MyKind kind = MyKind.KIND1;
-
-    /*
      * The propD1 property.
      */
     private String propD1;
-
-    /*
-     * The propBH1 property.
-     */
-    private String propBH1;
-
-    /*
-     * The propB1 property.
-     */
-    private String propB1;
 
     /**
      * Creates an instance of MyDerivedType class.
      */
     private MyDerivedType() {
-    }
-
-    /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    @Override
-    public MyKind getKind() {
-        return this.kind;
+        this.kind = MyKind.KIND1;
     }
 
     /**
@@ -58,26 +34,6 @@ public final class MyDerivedType extends MyBaseType {
      */
     public String getPropD1() {
         return this.propD1;
-    }
-
-    /**
-     * Get the propBH1 property: The propBH1 property.
-     * 
-     * @return the propBH1 value.
-     */
-    @Override
-    public String getPropBH1() {
-        return this.propBH1;
-    }
-
-    /**
-     * Get the propB1 property: The propB1 property.
-     * 
-     * @return the propB1 value.
-     */
-    @Override
-    public String getPropB1() {
-        return this.propB1;
     }
 
     /**
@@ -95,14 +51,8 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("propB1", getPropB1());
-        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("propD1", this.propD1);
-        if (getPropBH1() != null) {
-            jsonWriter.writeStartObject("helper");
-            jsonWriter.writeStringField("propBH1", getPropBH1());
-            jsonWriter.writeEndObject();
-        }
         return jsonWriter.writeEndObject();
     }
 
@@ -121,23 +71,10 @@ public final class MyDerivedType extends MyBaseType {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("propB1".equals(fieldName)) {
-                    deserializedMyDerivedType.propB1 = reader.getString();
-                } else if ("kind".equals(fieldName)) {
-                    deserializedMyDerivedType.kind = MyKind.fromString(reader.getString());
+                if (MyBaseType.fromJsonShared(reader, fieldName, deserializedMyDerivedType)) {
+                    continue;
                 } else if ("propD1".equals(fieldName)) {
                     deserializedMyDerivedType.propD1 = reader.getString();
-                } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("propBH1".equals(fieldName)) {
-                            deserializedMyDerivedType.propBH1 = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
                 } else {
                     reader.skipChildren();
                 }

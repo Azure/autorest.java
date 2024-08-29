@@ -7,6 +7,7 @@ package com.payload.contentnegotiation;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
 import com.azure.core.client.traits.ConfigurationTrait;
+import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaders;
@@ -45,8 +46,8 @@ import java.util.Objects;
         DifferentBodyClient.class,
         SameBodyAsyncClient.class,
         DifferentBodyAsyncClient.class })
-public final class ContentNegotiationClientBuilder
-    implements HttpTrait<ContentNegotiationClientBuilder>, ConfigurationTrait<ContentNegotiationClientBuilder> {
+public final class ContentNegotiationClientBuilder implements HttpTrait<ContentNegotiationClientBuilder>,
+    ConfigurationTrait<ContentNegotiationClientBuilder>, EndpointTrait<ContentNegotiationClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -179,6 +180,22 @@ public final class ContentNegotiationClientBuilder
     }
 
     /*
+     * The service endpoint
+     */
+    @Generated
+    private String endpoint;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public ContentNegotiationClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -205,8 +222,9 @@ public final class ContentNegotiationClientBuilder
     private ContentNegotiationClientImpl buildInnerClient() {
         this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ContentNegotiationClientImpl client
-            = new ContentNegotiationClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+        String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
+        ContentNegotiationClientImpl client = new ContentNegotiationClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
         return client;
     }
 

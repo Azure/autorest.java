@@ -47,12 +47,12 @@ public final class EnumServiceClientImpl {
     private final EnumServiceClientService service;
 
     /**
-     * Server parameter.
+     * Service host.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Service host.
      * 
      * @return the endpoint value.
      */
@@ -91,7 +91,7 @@ public final class EnumServiceClientImpl {
     /**
      * Initializes an instance of EnumServiceClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public EnumServiceClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -102,7 +102,7 @@ public final class EnumServiceClientImpl {
      * Initializes an instance of EnumServiceClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public EnumServiceClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -113,7 +113,7 @@ public final class EnumServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Service host.
      */
     public EnumServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
@@ -136,7 +136,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getColor(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/color")
         @ExpectedResponses({ 200 })
@@ -144,7 +144,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getColorSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
+        Response<BinaryData> getColorSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/enum/colormodel")
@@ -154,7 +154,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getColorModel(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/enum/colormodel")
         @ExpectedResponses({ 200 })
@@ -163,7 +163,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getColorModelSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/colormodel")
         @ExpectedResponses({ 200 })
@@ -172,7 +172,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setColorModel(@HostParam("endpoint") String endpoint,
-            @QueryParam("color") String color, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("color") String color, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/enum/operation/colormodel")
@@ -182,7 +182,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setColorModelSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("color") String color, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("color") String color, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/enum/operation/priority")
@@ -192,7 +192,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setPriority(@HostParam("endpoint") String endpoint,
-            @QueryParam("priority") String priority, @HeaderParam("accept") String accept,
+            @QueryParam("priority") String priority, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/priority")
@@ -202,7 +202,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setPrioritySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("priority") String priority, @HeaderParam("accept") String accept,
+            @QueryParam("priority") String priority, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/enum/operation/state/running")
@@ -212,7 +212,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getRunningOperation(@HostParam("endpoint") String endpoint,
-            @QueryParam("state") String state, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("state") String state, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/enum/operation/state/running")
@@ -222,7 +222,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getRunningOperationSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("state") String state, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("state") String state, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/enum/operation/state")
@@ -232,7 +232,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> getOperation(@HostParam("endpoint") String endpoint,
-            @QueryParam("state") String state, @HeaderParam("accept") String accept, RequestOptions requestOptions,
+            @QueryParam("state") String state, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/enum/operation/state")
@@ -242,7 +242,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getOperationSync(@HostParam("endpoint") String endpoint, @QueryParam("state") String state,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarray")
         @ExpectedResponses({ 200 })
@@ -251,7 +251,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setStringEnumArray(@HostParam("endpoint") String endpoint,
-            @QueryParam("colorArray") String colorArray, @HeaderParam("accept") String accept,
+            @QueryParam("colorArray") String colorArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarray")
@@ -261,7 +261,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setStringEnumArraySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("colorArray") String colorArray, @HeaderParam("accept") String accept,
+            @QueryParam("colorArray") String colorArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenumarray")
@@ -271,7 +271,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setIntEnumArray(@HostParam("endpoint") String endpoint,
-            @QueryParam("priorityArray") String priorityArray, @HeaderParam("accept") String accept,
+            @QueryParam("priorityArray") String priorityArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenumarray")
@@ -281,7 +281,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setIntEnumArraySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("priorityArray") String priorityArray, @HeaderParam("accept") String accept,
+            @QueryParam("priorityArray") String priorityArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringarray")
@@ -291,7 +291,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setStringArray(@HostParam("endpoint") String endpoint,
-            @QueryParam("stringArray") String stringArray, @HeaderParam("accept") String accept,
+            @QueryParam("stringArray") String stringArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringarray")
@@ -301,7 +301,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setStringArraySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("stringArray") String stringArray, @HeaderParam("accept") String accept,
+            @QueryParam("stringArray") String stringArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intarray")
@@ -311,7 +311,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setIntArray(@HostParam("endpoint") String endpoint,
-            @QueryParam("intArray") String intArray, @HeaderParam("accept") String accept,
+            @QueryParam("intArray") String intArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intarray")
@@ -321,7 +321,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setIntArraySync(@HostParam("endpoint") String endpoint,
-            @QueryParam("intArray") String intArray, @HeaderParam("accept") String accept,
+            @QueryParam("intArray") String intArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenummulti")
@@ -332,7 +332,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setStringEnumMulti(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "colorArray", multipleQueryParams = true) List<String> colorArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenummulti")
         @ExpectedResponses({ 200 })
@@ -342,7 +342,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setStringEnumMultiSync(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "colorArray", multipleQueryParams = true) List<String> colorArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenummulti")
         @ExpectedResponses({ 200 })
@@ -352,7 +352,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setIntEnumMulti(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "priorityArray", multipleQueryParams = true) List<String> priorityArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intenummulti")
         @ExpectedResponses({ 200 })
@@ -362,7 +362,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setIntEnumMultiSync(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "priorityArray", multipleQueryParams = true) List<String> priorityArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringmulti")
         @ExpectedResponses({ 200 })
@@ -372,7 +372,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setStringMulti(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "stringArray", multipleQueryParams = true) List<String> stringArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringmulti")
         @ExpectedResponses({ 200 })
@@ -382,7 +382,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setStringMultiSync(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "stringArray", multipleQueryParams = true) List<String> stringArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intmulti")
         @ExpectedResponses({ 200 })
@@ -392,7 +392,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setIntMulti(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "intArray", multipleQueryParams = true) List<String> intArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/intmulti")
         @ExpectedResponses({ 200 })
@@ -402,7 +402,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setIntMultiSync(@HostParam("endpoint") String endpoint,
             @QueryParam(value = "intArray", multipleQueryParams = true) List<String> intArray,
-            @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarrayheader")
         @ExpectedResponses({ 200 })
@@ -411,7 +411,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> setStringEnumArrayHeader(@HostParam("endpoint") String endpoint,
-            @HeaderParam("color-array") String colorArray, @HeaderParam("accept") String accept,
+            @HeaderParam("color-array") String colorArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Post("/enum/operation/stringenumarrayheader")
@@ -421,7 +421,7 @@ public final class EnumServiceClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> setStringEnumArrayHeaderSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("color-array") String colorArray, @HeaderParam("accept") String accept,
+            @HeaderParam("color-array") String colorArray, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
     }
 

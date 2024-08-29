@@ -19,7 +19,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     /*
      * The kind property.
      */
-    private MyKind kind = MyKind.fromString("MyBaseType");
+    MyKind kind;
 
     /*
      * The propB1 property.
@@ -35,6 +35,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * Creates an instance of MyBaseType class.
      */
     protected MyBaseType() {
+        this.kind = MyKind.fromString("MyBaseType");
     }
 
     /**
@@ -100,6 +101,11 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        toJsonShared(jsonWriter);
+        return jsonWriter.writeEndObject();
+    }
+
+    void toJsonShared(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propB1", this.propB1);
         if (propBH1 != null) {
@@ -107,7 +113,6 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
             jsonWriter.writeStringField("propBH1", this.propBH1);
             jsonWriter.writeEndObject();
         }
-        return jsonWriter.writeEndObject();
     }
 
     /**
@@ -150,27 +155,36 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    deserializedMyBaseType.kind = MyKind.fromString(reader.getString());
-                } else if ("propB1".equals(fieldName)) {
-                    deserializedMyBaseType.propB1 = reader.getString();
-                } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("propBH1".equals(fieldName)) {
-                            deserializedMyBaseType.propBH1 = reader.getString();
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                } else {
+                if (!MyBaseType.fromJsonShared(reader, fieldName, deserializedMyBaseType)) {
                     reader.skipChildren();
                 }
             }
 
             return deserializedMyBaseType;
         });
+    }
+
+    static boolean fromJsonShared(JsonReader reader, String fieldName, MyBaseType deserializedMyBaseType)
+        throws IOException {
+        if ("kind".equals(fieldName)) {
+            deserializedMyBaseType.kind = MyKind.fromString(reader.getString());
+            return true;
+        } else if ("propB1".equals(fieldName)) {
+            deserializedMyBaseType.propB1 = reader.getString();
+            return true;
+        } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("propBH1".equals(fieldName)) {
+                    deserializedMyBaseType.propBH1 = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

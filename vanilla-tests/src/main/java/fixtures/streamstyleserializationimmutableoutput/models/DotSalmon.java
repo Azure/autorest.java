@@ -16,11 +16,6 @@ import java.io.IOException;
 @Immutable
 public final class DotSalmon extends DotFish {
     /*
-     * The fish.type property.
-     */
-    private String fishType = "DotSalmon";
-
-    /*
      * The location property.
      */
     private String location;
@@ -30,25 +25,11 @@ public final class DotSalmon extends DotFish {
      */
     private Boolean iswild;
 
-    /*
-     * The species property.
-     */
-    private String species;
-
     /**
      * Creates an instance of DotSalmon class.
      */
     private DotSalmon() {
-    }
-
-    /**
-     * Get the fishType property: The fish.type property.
-     * 
-     * @return the fishType value.
-     */
-    @Override
-    public String getFishType() {
-        return this.fishType;
+        this.fishType = "DotSalmon";
     }
 
     /**
@@ -70,16 +51,6 @@ public final class DotSalmon extends DotFish {
     }
 
     /**
-     * Get the species property: The species property.
-     * 
-     * @return the species value.
-     */
-    @Override
-    public String getSpecies() {
-        return this.species;
-    }
-
-    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -94,8 +65,7 @@ public final class DotSalmon extends DotFish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeStringField("fish.type", this.fishType);
+        toJsonShared(jsonWriter);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
         return jsonWriter.writeEndObject();
@@ -116,10 +86,8 @@ public final class DotSalmon extends DotFish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("species".equals(fieldName)) {
-                    deserializedDotSalmon.species = reader.getString();
-                } else if ("fish.type".equals(fieldName)) {
-                    deserializedDotSalmon.fishType = reader.getString();
+                if (DotFish.fromJsonShared(reader, fieldName, deserializedDotSalmon)) {
+                    continue;
                 } else if ("location".equals(fieldName)) {
                     deserializedDotSalmon.location = reader.getString();
                 } else if ("iswild".equals(fieldName)) {

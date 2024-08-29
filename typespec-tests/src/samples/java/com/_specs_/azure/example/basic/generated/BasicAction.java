@@ -16,7 +16,8 @@ import java.util.Map;
 
 public class BasicAction {
     public static void main(String[] args) {
-        AzureExampleClient azureExampleClient = new AzureExampleClientBuilder().buildClient();
+        AzureExampleClient azureExampleClient
+            = new AzureExampleClientBuilder().endpoint("http://localhost:3000").buildClient();
         // BEGIN:com._specs_.azure.example.basic.generated.basicaction.basicaction
         ActionResponse response = azureExampleClient.basicAction("query", "header",
             new ActionRequest("text")

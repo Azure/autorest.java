@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class FloatsOnliesImpl {
      * The interface defining all the services for UnionClientFloatsOnlies to be used by the proxy service to perform
      * REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "UnionClientFloatsOnl")
     public interface FloatsOnliesService {
         @Get("/type/union/floats-only")
@@ -64,8 +65,8 @@ public final class FloatsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> get(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> get(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/union/floats-only")
         @ExpectedResponses({ 200 })
@@ -73,8 +74,8 @@ public final class FloatsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/union/floats-only")
         @ExpectedResponses({ 204 })
@@ -82,8 +83,9 @@ public final class FloatsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> send(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData sendRequest5, RequestOptions requestOptions, Context context);
+        Mono<Response<Void>> send(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/json") BinaryData sendRequest5,
+            RequestOptions requestOptions, Context context);
 
         @Post("/type/union/floats-only")
         @ExpectedResponses({ 204 })
@@ -91,7 +93,7 @@ public final class FloatsOnliesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendSync(@HeaderParam("accept") String accept,
+        Response<Void> sendSync(@HostParam("endpoint") String endpoint, @HeaderParam("Content-Type") String contentType,
             @BodyParam("application/json") BinaryData sendRequest5, RequestOptions requestOptions, Context context);
     }
 
@@ -115,7 +117,7 @@ public final class FloatsOnliesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.get(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.get(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -138,7 +140,7 @@ public final class FloatsOnliesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getSync(accept, requestOptions, Context.NONE);
+        return service.getSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -161,8 +163,9 @@ public final class FloatsOnliesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> sendWithResponseAsync(BinaryData sendRequest5, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.send(accept, sendRequest5, requestOptions, context));
+        final String contentType = "application/json";
+        return FluxUtil.withContext(
+            context -> service.send(this.client.getEndpoint(), contentType, sendRequest5, requestOptions, context));
     }
 
     /**
@@ -185,7 +188,7 @@ public final class FloatsOnliesImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> sendWithResponse(BinaryData sendRequest5, RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.sendSync(accept, sendRequest5, requestOptions, Context.NONE);
+        final String contentType = "application/json";
+        return service.sendSync(this.client.getEndpoint(), contentType, sendRequest5, requestOptions, Context.NONE);
     }
 }

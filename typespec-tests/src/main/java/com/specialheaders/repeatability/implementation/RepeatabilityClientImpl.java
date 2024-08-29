@@ -5,8 +5,8 @@
 package com.specialheaders.repeatability.implementation;
 
 import com.azure.core.annotation.ExpectedResponses;
-import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -43,6 +43,20 @@ public final class RepeatabilityClientImpl {
     private final RepeatabilityClientService service;
 
     /**
+     * Service host.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Service host.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -72,19 +86,22 @@ public final class RepeatabilityClientImpl {
 
     /**
      * Initializes an instance of RepeatabilityClient client.
+     * 
+     * @param endpoint Service host.
      */
-    public RepeatabilityClientImpl() {
+    public RepeatabilityClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter());
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
      * Initializes an instance of RepeatabilityClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
+     * @param endpoint Service host.
      */
-    public RepeatabilityClientImpl(HttpPipeline httpPipeline) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter());
+    public RepeatabilityClientImpl(HttpPipeline httpPipeline, String endpoint) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
     }
 
     /**
@@ -92,10 +109,12 @@ public final class RepeatabilityClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
+     * @param endpoint Service host.
      */
-    public RepeatabilityClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter) {
+    public RepeatabilityClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
+        this.endpoint = endpoint;
         this.service
             = RestProxy.create(RepeatabilityClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
@@ -104,7 +123,7 @@ public final class RepeatabilityClientImpl {
      * The interface defining all the services for RepeatabilityClient to be used by the proxy service to perform REST
      * calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "RepeatabilityClient")
     public interface RepeatabilityClientService {
         @Post("/special-headers/repeatability/immediateSuccess")
@@ -113,7 +132,7 @@ public final class RepeatabilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> immediateSuccess(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<Void>> immediateSuccess(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
             Context context);
 
         @Post("/special-headers/repeatability/immediateSuccess")
@@ -122,7 +141,7 @@ public final class RepeatabilityClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> immediateSuccessSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<Void> immediateSuccessSync(@HostParam("endpoint") String endpoint, RequestOptions requestOptions,
             Context context);
     }
 
@@ -147,7 +166,6 @@ public final class RepeatabilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> immediateSuccessWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
@@ -162,7 +180,8 @@ public final class RepeatabilityClientImpl {
                         DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
-        return FluxUtil.withContext(context -> service.immediateSuccess(accept, requestOptionsLocal, context));
+        return FluxUtil
+            .withContext(context -> service.immediateSuccess(this.getEndpoint(), requestOptionsLocal, context));
     }
 
     /**
@@ -186,7 +205,6 @@ public final class RepeatabilityClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> immediateSuccessWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
         RequestOptions requestOptionsLocal = requestOptions == null ? new RequestOptions() : requestOptions;
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
@@ -201,6 +219,6 @@ public final class RepeatabilityClientImpl {
                         DateTimeRfc1123.toRfc1123String(OffsetDateTime.now()));
             }
         });
-        return service.immediateSuccessSync(accept, requestOptionsLocal, Context.NONE);
+        return service.immediateSuccessSync(this.getEndpoint(), requestOptionsLocal, Context.NONE);
     }
 }

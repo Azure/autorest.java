@@ -9,6 +9,7 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
+import com.azure.core.annotation.HostParam;
 import com.azure.core.annotation.Patch;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
@@ -55,7 +56,7 @@ public final class CollectionsModelsImpl {
      * The interface defining all the services for NullableClientCollectionsModels to be used by the proxy service to
      * perform REST calls.
      */
-    @Host("http://localhost:3000")
+    @Host("{endpoint}")
     @ServiceInterface(name = "NullableClientCollec")
     public interface CollectionsModelsService {
         @Get("/type/property/nullable/collections/model/non-null")
@@ -64,8 +65,8 @@ public final class CollectionsModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getNonNull(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getNonNull(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/nullable/collections/model/non-null")
         @ExpectedResponses({ 200 })
@@ -73,8 +74,8 @@ public final class CollectionsModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getNonNullSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Response<BinaryData> getNonNullSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/type/property/nullable/collections/model/null")
         @ExpectedResponses({ 200 })
@@ -82,8 +83,8 @@ public final class CollectionsModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getNull(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
+        Mono<Response<BinaryData>> getNull(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Get("/type/property/nullable/collections/model/null")
         @ExpectedResponses({ 200 })
@@ -91,17 +92,7 @@ public final class CollectionsModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getNullSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
-            Context context);
-
-        @Patch("/type/property/nullable/collections/model/non-null")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patchNonNull(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
+        Response<BinaryData> getNullSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Patch("/type/property/nullable/collections/model/non-null")
@@ -110,8 +101,18 @@ public final class CollectionsModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> patchNonNullSync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
+        Mono<Response<Void>> patchNonNull(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/merge-patch+json") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        @Patch("/type/property/nullable/collections/model/non-null")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> patchNonNullSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/merge-patch+json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Patch("/type/property/nullable/collections/model/null")
@@ -120,8 +121,8 @@ public final class CollectionsModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> patchNull(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
+        Mono<Response<Void>> patchNull(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/merge-patch+json") BinaryData body,
             RequestOptions requestOptions, Context context);
 
         @Patch("/type/property/nullable/collections/model/null")
@@ -130,8 +131,8 @@ public final class CollectionsModelsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> patchNullSync(@HeaderParam("Content-Type") String contentType,
-            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData body,
+        Response<Void> patchNullSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("Content-Type") String contentType, @BodyParam("application/merge-patch+json") BinaryData body,
             RequestOptions requestOptions, Context context);
     }
 
@@ -161,7 +162,8 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNonNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNonNull(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getNonNull(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -189,7 +191,7 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNonNullWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getNonNullSync(accept, requestOptions, Context.NONE);
+        return service.getNonNullSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -218,7 +220,8 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getNull(accept, requestOptions, context));
+        return FluxUtil
+            .withContext(context -> service.getNull(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
@@ -246,7 +249,7 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNullWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getNullSync(accept, requestOptions, Context.NONE);
+        return service.getNullSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 
     /**
@@ -275,9 +278,8 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patchNonNullWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.patchNonNull(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.patchNonNull(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -306,8 +308,7 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNonNullWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return service.patchNonNullSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.patchNonNullSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 
     /**
@@ -336,8 +337,8 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patchNullWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.patchNull(contentType, accept, body, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.patchNull(this.client.getEndpoint(), contentType, body, requestOptions, context));
     }
 
     /**
@@ -366,7 +367,6 @@ public final class CollectionsModelsImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String contentType = "application/merge-patch+json";
-        final String accept = "application/json";
-        return service.patchNullSync(contentType, accept, body, requestOptions, Context.NONE);
+        return service.patchNullSync(this.client.getEndpoint(), contentType, body, requestOptions, Context.NONE);
     }
 }

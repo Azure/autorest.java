@@ -20,12 +20,12 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ArmStreamStyleSerializationClientImpl.class })
 public final class ArmStreamStyleSerializationClientBuilder {
     /*
-     * Server parameter
+     * Service host
      */
     private String endpoint;
 
     /**
-     * Sets Server parameter.
+     * Sets Service host.
      * 
      * @param endpoint the endpoint value.
      * @return the ArmStreamStyleSerializationClientBuilder.
@@ -121,6 +121,7 @@ public final class ArmStreamStyleSerializationClientBuilder {
      * @return an instance of ArmStreamStyleSerializationClientImpl.
      */
     public ArmStreamStyleSerializationClientImpl buildClient() {
+        String localEndpoint = (endpoint != null) ? endpoint : "https://management.azure.com";
         AzureEnvironment localEnvironment = (environment != null) ? environment : AzureEnvironment.AZURE;
         HttpPipeline localPipeline = (pipeline != null)
             ? pipeline
@@ -131,7 +132,7 @@ public final class ArmStreamStyleSerializationClientBuilder {
             ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ArmStreamStyleSerializationClientImpl client = new ArmStreamStyleSerializationClientImpl(localPipeline,
-            localSerializerAdapter, localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
+            localSerializerAdapter, localDefaultPollInterval, localEnvironment, localEndpoint, this.subscriptionId);
         return client;
     }
 }
