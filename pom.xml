@@ -383,6 +383,7 @@
         </property>
       </activation>
       <modules>
+        <module>./customization-base</module>
         <module>./core/packages/http-client-java/generator/http-client-generator-core</module>
         <module>./core/packages/http-client-java/generator/http-client-generator-mgmt</module>
         <module>./core/packages/http-client-java/generator/http-client-generator</module>
