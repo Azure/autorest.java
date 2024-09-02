@@ -33,7 +33,7 @@ Copy-Item -Path ./core/packages/http-client-java/emitter/src -Destination ./type
 # Apply diff to core
 Push-Location ./core
 try {
-  git apply ../core.diff
+  invokeExpressionAndCaptureOutput("git apply ../core.diff")
 } finally {
   Pop-Location
 }
