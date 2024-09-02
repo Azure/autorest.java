@@ -1,0 +1,48 @@
+diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
+index 7184d8e2..e7a15641 100644
+--- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
++++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
+@@ -19,6 +19,11 @@
+   </properties>
+ 
+   <dependencies>
++    <dependency>
++      <groupId>com.azure.tools</groupId>
++      <artifactId>azure-autorest-customization</artifactId>
++      <version>1.0.0-beta.8</version>
++    </dependency>
+     <dependency>
+       <groupId>com.azure</groupId>
+       <artifactId>azure-core</artifactId>
+diff --git a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
+index 0ff22ae8..33e7b162 100644
+--- a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
++++ b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
+@@ -3,8 +3,8 @@
+ 
+ package com.microsoft.typespec.http.client.generator.core.postprocessor;
+ 
+-import com.microsoft.typespec.http.client.generator.core.customization.Customization;
+-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
++import com.azure.autorest.customization.Customization;
++import com.azure.autorest.customization.implementation.Utils;
+ import com.microsoft.typespec.http.client.generator.core.extension.plugin.JavaSettings;
+ import com.microsoft.typespec.http.client.generator.core.extension.plugin.NewPlugin;
+ import com.microsoft.typespec.http.client.generator.core.extension.plugin.PluginLogger;
+diff --git a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
+index b009d250..6ef31a2d 100644
+--- a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
++++ b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
+@@ -16,9 +16,9 @@
+ 
+   <dependencies>
+     <dependency>
+-      <groupId>com.microsoft.typespec</groupId>
+-      <artifactId>http-client-generator-core</artifactId>
+-      <version>1.0.0-beta.1</version>
++      <groupId>com.azure.tools</groupId>
++      <artifactId>azure-autorest-customization</artifactId>
++      <version>1.0.0-beta.8</version>
+     </dependency>
+   </dependencies>
+ 
