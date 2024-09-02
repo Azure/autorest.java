@@ -27,6 +27,7 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
 # Apply diff to core
 Push-Location ./core
 try {
+  invokeExpressionAndCaptureOutput("git checkout .")
   invokeExpressionAndCaptureOutput("git apply ../core.diff")
 } finally {
   Pop-Location
