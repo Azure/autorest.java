@@ -24,12 +24,6 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
     }
 }
 
-# Copy JAR
-New-Item -ItemType File -Path ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
-Copy-Item ./core/packages/http-client-java/generator/http-client-generator/target/emitter.jar ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
-# Copy TypeScript code
-Copy-Item -Path ./core/packages/http-client-java/emitter/src -Destination ./typespec-extension/ -Recurse -Force
-
 # Apply diff to core
 Push-Location ./core
 try {
@@ -37,6 +31,15 @@ try {
 } finally {
   Pop-Location
 }
+
+# Build JAR
+invokeExpressionAndCaptureOutput("mvn clean install -P tsp")
+
+# Copy JAR
+New-Item -ItemType File -Path ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
+Copy-Item ./core/packages/http-client-java/generator/http-client-generator/target/emitter.jar ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
+# Copy TypeScript code
+Copy-Item -Path ./core/packages/http-client-java/emitter/src -Destination ./typespec-extension/ -Recurse -Force
 
 Write-Host "Changing directory to './typespec-extension'"
 Push-Location ./typespec-extension
