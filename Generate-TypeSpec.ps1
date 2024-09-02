@@ -22,6 +22,8 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
 
         exit $ExitCode
     }
+
+    Write-Host $output
 }
 
 # Apply diff to core
