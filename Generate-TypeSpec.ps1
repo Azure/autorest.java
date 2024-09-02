@@ -76,7 +76,7 @@ Push-Location ./typespec-tests
 
 try {
   Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
-  invokeExpressionAndCaptureOutput("./Generate.ps1 -Parallelization $Parallelization")
+  Invoke-Expression("./Generate.ps1 -Parallelization $Parallelization")
 
 #   Write-Host "Checking format of generated code ('npm run check-format')"
 #   invokeExpressionAndCaptureOutput("npm run check-format")
