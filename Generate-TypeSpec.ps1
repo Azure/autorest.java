@@ -29,9 +29,9 @@ New-Item -ItemType File -Path ./typespec-extension/generator/http-client-generat
 Copy-Item ./core/packages/http-client-java/generator/http-client-generator/target/emitter.jar ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
 # Copy TypeScript code
 Copy-Item -Path ./core/packages/http-client-java/emitter/src -Destination ./typespec-extension/ -Recurse -Force
-# Apply diff
-Push-Location ./core
 
+# Apply diff to core
+Push-Location ./core
 try {
   git apply ../core.diff
 } finally {
