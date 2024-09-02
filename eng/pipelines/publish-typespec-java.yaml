@@ -22,6 +22,9 @@ extends:
             os: linux
 
           steps:
+          - checkout: self
+            submodules: true
+
           - task: NodeTool@0
             displayName: 'Install Node.js $(NodeVersion)'
             inputs:
@@ -31,51 +34,12 @@ extends:
             parameters:
               JobType: 'Publish TypeSpec'
 
-          - task: Maven@3
-            displayName: 'Build JAR'
+          - task: PowerShell@2
+            retryCountOnTaskFailure: 1
+            displayName: 'Build'
             inputs:
-              mavenPomFile: pom.xml
-              goals: 'clean install'
-              options: '$(DefaultOptions) -P local,tsp -T 1C'
-              mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
-              javaHomeOption: 'JDKVersion'
-              jdkVersionOption: $(JavaVersion)
-              jdkArchitectureOption: 'x64'
-              publishJUnitResults: false
-
-          - task: Npm@1
-            displayName: 'Install Dependencies for TypeSpec Java'
-            inputs:
-              command: install
-              workingDir: ./typespec-extension
-
-          - task: Npm@1
-            displayName: 'Build TypeSpec Java'
-            inputs:
-              command: custom
-              customCommand: run build
-              workingDir: ./typespec-extension
-
-          - task: Npm@1
-            displayName: 'Lint TypeSpec Java'
-            inputs:
-              command: custom
-              customCommand: run lint
-              workingDir: ./typespec-extension
-
-          - task: Npm@1
-            displayName: 'Check-Format TypeSpec Java'
-            inputs:
-              command: custom
-              customCommand: run check-format
-              workingDir: ./typespec-extension
-
-          - task: Npm@1
-            displayName: 'Pack TypeSpec Java'
-            inputs:
-              command: custom
-              customCommand: pack
-              workingDir: ./typespec-extension
+              pwsh: true
+              filePath: Build-TypeSpec.ps1
 
           - task: PowerShell@2
             displayName: 'Get Package Version'
