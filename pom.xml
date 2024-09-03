@@ -406,6 +406,7 @@
 
   <modules>
     <module>./javagen</module>
+    <module>./extension-base</module>
     <module>./customization-base</module>
     <module>./customization-tests</module>
     <module>./fluentgen</module>

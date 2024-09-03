@@ -11,6 +11,9 @@ try {
 
 Write-Host "Build JAR"
 mvn clean install -P tsp --no-transfer-progress
+if ($LASTEXITCODE -ne 0) {
+  exit $LASTEXITCODE
+}
 
 Write-Host "Copy JAR and TypeSpec code to './typespec-extension' directory"
 # Copy JAR
@@ -27,6 +30,9 @@ try {
   npm run lint
   # npm run check-format
   npm pack
+  if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+  }
 }
 finally {
   Pop-Location
