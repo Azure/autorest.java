@@ -3,8 +3,7 @@
 
 package com.microsoft.typespec.http.client.generator.core.extension.plugin;
 
-
-import com.azure.autorest.extension.base.model.codemodel.YamlProperty;
+import com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.YamlProperty;
 
 public class TestYamlPropertyBean {
 

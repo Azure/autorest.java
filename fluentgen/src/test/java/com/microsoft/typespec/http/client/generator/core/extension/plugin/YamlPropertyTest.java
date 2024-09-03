@@ -3,8 +3,8 @@
 
 package com.microsoft.typespec.http.client.generator.core.extension.plugin;
 
-import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
-import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
+import com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.AnnotatedPropertyUtils;
+import com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.CodeModelCustomConstructor;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.yaml.snakeyaml.DumperOptions;

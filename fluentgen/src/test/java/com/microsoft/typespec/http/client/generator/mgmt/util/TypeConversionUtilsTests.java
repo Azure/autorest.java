@@ -3,7 +3,6 @@
 
 package com.microsoft.typespec.http.client.generator.mgmt.util;
 
-import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.microsoft.typespec.http.client.generator.mgmt.TestUtils;
 import com.microsoft.typespec.http.client.generator.core.model.clientmodel.ClassType;
 import com.microsoft.typespec.http.client.generator.core.model.clientmodel.GenericType;
@@ -12,7 +11,6 @@ import com.microsoft.typespec.http.client.generator.core.model.clientmodel.ListT
 import com.microsoft.typespec.http.client.generator.core.model.clientmodel.MapType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Disabled("TODO weidxu")
 public class TypeConversionUtilsTests {
 
     @BeforeAll
@@ -32,7 +29,7 @@ public class TypeConversionUtilsTests {
     @Test
     public void testConversionExpression() {
         IType innerType = new ClassType.Builder()
-                .packageName("com.azure.resourcemanager.models")
+                .packageName("com.azure.resourcemanager.mock.fluent.models")
                 .name("MockResourceInner")
                 .build();
 
