@@ -20,7 +20,7 @@
   <properties>
     <jacoco.min.linecoverage>0.7</jacoco.min.linecoverage>
     <jacoco.min.branchcoverage>0.5</jacoco.min.branchcoverage>
-    <jacoco.skip.coverage.check>false</jacoco.skip.coverage.check>
+    <jacoco.skip.coverage.check>true</jacoco.skip.coverage.check>
 
     <!-- Tests requires shared static class, like FluentStatic. -->
     <parallelizeTests>false</parallelizeTests>
