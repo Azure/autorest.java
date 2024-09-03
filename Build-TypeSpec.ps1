@@ -1,14 +1,16 @@
+$ErrorActionPreference = "Stop"
+
 Write-Host "Apply diff to core"
 Push-Location ./core
 try {
   git checkout .
-  git apply ../core.diff
+  git apply ../core.diff --ignore-whitespace
 } finally {
   Pop-Location
 }
 
 Write-Host "Build JAR"
-mvn clean install -P tsp
+mvn clean install -P tsp --no-transfer-progress
 
 Write-Host "Copy JAR and TypeSpec code to './typespec-extension' directory"
 # Copy JAR
