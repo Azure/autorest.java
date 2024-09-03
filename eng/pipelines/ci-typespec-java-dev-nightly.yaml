@@ -21,6 +21,9 @@ jobs:
       vmImage: "MMSUbuntu20.04"
 
     steps:
+      - checkout: self
+        submodules: true
+
       - task: PowerShell@2
         displayName: 'Disable Warning on Deprecation'
         inputs:
@@ -37,18 +40,6 @@ jobs:
       - template: /eng/pipelines/steps/cache-maven-repository.yml
         parameters:
           JobType: 'TypeSpec Nightly'
-
-      - task: Maven@3
-        displayName: 'Build JAR'
-        inputs:
-          mavenPomFile: pom.xml
-          goals: 'clean install'
-          options: '$(DefaultOptions) -P local,tsp -T 1C'
-          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: $(JavaVersion)
-          jdkArchitectureOption: 'x64'
-          publishJUnitResults: false
 
       - script: |
           npm install -g @typespec/compiler@next
