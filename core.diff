@@ -1,5 +1,5 @@
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index 7184d8e2..e7a15641 100644
+index 33442326..e57b77bb 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 @@ -19,6 +19,11 @@

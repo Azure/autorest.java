@@ -32,6 +32,15 @@ jobs:
       vmImage: "MMSUbuntu20.04"
 
     steps:
+      - checkout: self
+        submodules: true
+
+      - script: |
+          git checkout .
+          git apply ../core.diff
+        displayName: 'Patch core'
+        workingDirectory: ./core
+
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
         inputs:

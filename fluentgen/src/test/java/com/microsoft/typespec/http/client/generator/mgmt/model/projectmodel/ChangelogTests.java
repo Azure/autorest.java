@@ -6,10 +6,8 @@ package com.microsoft.typespec.http.client.generator.mgmt.model.projectmodel;
 import com.microsoft.typespec.http.client.generator.mgmt.TestUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-@Disabled("TODO weidxu")
 public class ChangelogTests {
 
     private static final String CHANGELOG_LINE = "Provides operations for working with resources and resource groups. Package tag package-resources-2020-06. For documentation on how to use this package, please see [Azure Management Libraries for Java](https://aka.ms/azsdk/java/mgmt).";
