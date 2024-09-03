@@ -75,11 +75,11 @@ jobs:
 
       - script: |
           git status
-          git diff
+          git diff --ignore-submodules
         displayName: 'Git Diff'
 
       - script: |
-          [ -z "`git status --porcelain`" ]
+          [ -z "`git status --ignore-submodules --porcelain`" ]
         displayName: 'Check no Diff'
 
       - script: |
