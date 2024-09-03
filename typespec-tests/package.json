@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@azure-tools/cadl-ranch-specs": "0.36.1",
-    "@azure-tools/cadl-ranch-expect": "0.15.1",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.20.1.tgz"
   },
   "devDependencies": {
