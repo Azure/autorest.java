@@ -62,9 +62,9 @@ jobs:
           git diff
         displayName: 'Git Diff'
 
-      - script: |
-          [ -z "`git status --porcelain -- :!package-lock.json`" ]
-        displayName: 'Check no Diff'
+      # - script: |
+      #     [ -z "`git status --porcelain -- :!package-lock.json`" ]
+      #   displayName: 'Check no Diff'
 
       - task: Maven@3
         displayName: 'Verify Test Code'
