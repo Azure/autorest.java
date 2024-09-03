@@ -3,7 +3,8 @@
 
 package com.azure.autorest.fluent;
 
-import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.microsoft.typespec.http.client.generator.core.extension.jsonrpc.Connection;
+import com.microsoft.typespec.http.client.generator.mgmt.FluentGen;
 
 public class Main {
 

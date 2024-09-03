@@ -1,1 +1,1 @@
-com.azure.autorest.BeforeAllTestsExtension
+com.microsoft.typespec.http.client.generator.core.BeforeAllTestsExtension

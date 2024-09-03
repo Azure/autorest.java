@@ -20,28 +20,13 @@
   <dependencies>
     <dependency>
       <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-extension</artifactId>
-      <version>1.0.0-beta.5</version>
+      <artifactId>azure-autorest-customization</artifactId>
+      <version>1.0.0-beta.8</version>
     </dependency>
     <dependency>
-      <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-preprocessor</artifactId>
+      <groupId>com.microsoft.typespec</groupId>
+      <artifactId>http-client-generator-core</artifactId>
       <version>1.0.0-beta.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.azure.tools</groupId>
-      <artifactId>azure-autorest-postprocessor</artifactId>
-      <version>1.0.0-beta.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-json</artifactId>
-      <version>1.2.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-xml</artifactId>
-      <version>1.1.0</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
@@ -89,11 +74,11 @@
       <version>5.9.3</version>
       <scope>test</scope>
     </dependency>
-    <!--    <dependency>-->
-    <!--      <groupId>io.clientcore</groupId>-->
-    <!--      <artifactId>core</artifactId>-->
-    <!--      <version>1.0.0-beta.1</version>-->
-    <!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.clientcore</groupId>-->
+<!--      <artifactId>core</artifactId>-->
+<!--      <version>1.0.0-beta.1</version>-->
+<!--    </dependency>-->
   </dependencies>
 
   <properties>

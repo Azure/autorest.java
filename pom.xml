@@ -406,14 +406,12 @@
 
   <modules>
     <module>./javagen</module>
-    <module>./preprocessor</module>
-    <module>./postprocessor</module>
     <module>./customization-base</module>
     <module>./customization-tests</module>
-    <module>./extension-base</module>
     <module>./fluentgen</module>
-    <module>./fluentnamer</module>
     <module>./partial-update</module>
+    <module>./core/packages/http-client-java/generator/http-client-generator-core</module>
+    <module>./core/packages/http-client-java/generator/http-client-generator-mgmt</module>
   </modules>
 
 </project>
