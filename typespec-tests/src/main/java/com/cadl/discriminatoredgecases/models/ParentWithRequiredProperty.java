@@ -36,7 +36,7 @@ public class ParentWithRequiredProperty implements JsonSerializable<ParentWithRe
      * @param aProperty the aProperty value to set.
      */
     @Generated
-    public ParentWithRequiredProperty(String discriminator, String aProperty) {
+    protected ParentWithRequiredProperty(String discriminator, String aProperty) {
         this.discriminator = discriminator;
         this.aProperty = aProperty;
     }

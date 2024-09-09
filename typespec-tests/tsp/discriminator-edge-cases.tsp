@@ -34,26 +34,21 @@ model GrandChildWithAnotherDiscriminator extends ChildWithAnotherDiscriminator {
   differentDiscriminator: "anotherValue";
 }
 
-@route("/model/super")
-@get
-op getSuperParent(): ParentWithRequiredProperty;
+@client({
+  service: Cadl.DiscriminatorEdgeCases,
+  name: "DiscriminatorEdgeCasesClient",
+})
+@route("/model")
+interface DiscriminatorEdgeCasesOp {
+  @get
+  @route("/childrequireddiscrim")
+  getChildRequiredDiscrim(): {
+    @body body: ChildWithRequiredPropertyAsDiscriminator;
+  };
 
-@route("/model/super")
-@put
-op putSuperParent(@body input: ParentWithRequiredProperty): ParentWithRequiredProperty;
-
-@route("/model/childrequireddiscrim")
-@get
-op getChildRequiredDiscrim(): ChildWithRequiredPropertyAsDiscriminator;
-
-@route("/model/childrequireddiscrim")
-@put
-op putChildRequiredDiscrim(@body input: ChildWithRequiredPropertyAsDiscriminator): ChildWithRequiredPropertyAsDiscriminator;
-
-@route("/model/childnewdiscrim")
-@get
-op getChildNewDiscrim(): ChildWithAnotherDiscriminator;
-
-@route("/model/childnewdiscrim")
-@put
-op putChildNewDiscrim(@body input: ChildWithAnotherDiscriminator): ChildWithAnotherDiscriminator;
+  @get
+  @route("/childnewdiscrim")
+  getChildNewDiscrim(): {
+    @body body: ChildWithAnotherDiscriminator;
+  };
+}

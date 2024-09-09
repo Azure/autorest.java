@@ -30,7 +30,7 @@ public final class GrandChildWithAnotherDiscriminator extends ChildWithAnotherDi
      * @param yetAnotherProperty the yetAnotherProperty value to set.
      */
     @Generated
-    public GrandChildWithAnotherDiscriminator(String discriminator, String aProperty, String yetAnotherProperty) {
+    private GrandChildWithAnotherDiscriminator(String discriminator, String aProperty, String yetAnotherProperty) {
         super(discriminator, aProperty, yetAnotherProperty);
     }
 

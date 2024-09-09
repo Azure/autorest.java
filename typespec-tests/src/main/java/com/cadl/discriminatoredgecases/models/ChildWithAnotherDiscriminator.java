@@ -36,7 +36,7 @@ public class ChildWithAnotherDiscriminator extends ParentWithRequiredProperty {
      * @param yetAnotherProperty the yetAnotherProperty value to set.
      */
     @Generated
-    public ChildWithAnotherDiscriminator(String discriminator, String aProperty, String yetAnotherProperty) {
+    protected ChildWithAnotherDiscriminator(String discriminator, String aProperty, String yetAnotherProperty) {
         super(discriminator, aProperty);
         this.yetAnotherProperty = yetAnotherProperty;
     }

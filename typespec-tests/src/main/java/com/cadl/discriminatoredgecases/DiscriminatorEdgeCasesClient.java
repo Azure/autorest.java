@@ -18,7 +18,6 @@ import com.azure.core.util.BinaryData;
 import com.cadl.discriminatoredgecases.implementation.DiscriminatorEdgeCasesClientImpl;
 import com.cadl.discriminatoredgecases.models.ChildWithAnotherDiscriminator;
 import com.cadl.discriminatoredgecases.models.ChildWithRequiredPropertyAsDiscriminator;
-import com.cadl.discriminatoredgecases.models.ParentWithRequiredProperty;
 
 /**
  * Initializes a new instance of the synchronous DiscriminatorEdgeCasesClient type.
@@ -36,64 +35,6 @@ public final class DiscriminatorEdgeCasesClient {
     @Generated
     DiscriminatorEdgeCasesClient(DiscriminatorEdgeCasesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
-    }
-
-    /**
-     * The getSuperParent operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getSuperParentWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getSuperParentWithResponse(requestOptions);
-    }
-
-    /**
-     * The putSuperParent operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putSuperParentWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.serviceClient.putSuperParentWithResponse(input, requestOptions);
     }
 
     /**
@@ -119,42 +60,6 @@ public final class DiscriminatorEdgeCasesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getChildRequiredDiscrimWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getChildRequiredDiscrimWithResponse(requestOptions);
-    }
-
-    /**
-     * The putChildRequiredDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putChildRequiredDiscrimWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.serviceClient.putChildRequiredDiscrimWithResponse(input, requestOptions);
     }
 
     /**
@@ -184,83 +89,6 @@ public final class DiscriminatorEdgeCasesClient {
     }
 
     /**
-     * The putChildNewDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putChildNewDiscrimWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.serviceClient.putChildNewDiscrimWithResponse(input, requestOptions);
-    }
-
-    /**
-     * The getSuperParent operation.
-     * 
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ParentWithRequiredProperty getSuperParent() {
-        // Generated convenience method for getSuperParentWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getSuperParentWithResponse(requestOptions).getValue().toObject(ParentWithRequiredProperty.class);
-    }
-
-    /**
-     * The putSuperParent operation.
-     * 
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ParentWithRequiredProperty putSuperParent(ParentWithRequiredProperty input) {
-        // Generated convenience method for putSuperParentWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putSuperParentWithResponse(BinaryData.fromObject(input), requestOptions).getValue()
-            .toObject(ParentWithRequiredProperty.class);
-    }
-
-    /**
      * The getChildRequiredDiscrim operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -280,28 +108,6 @@ public final class DiscriminatorEdgeCasesClient {
     }
 
     /**
-     * The putChildRequiredDiscrim operation.
-     * 
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ChildWithRequiredPropertyAsDiscriminator
-        putChildRequiredDiscrim(ChildWithRequiredPropertyAsDiscriminator input) {
-        // Generated convenience method for putChildRequiredDiscrimWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putChildRequiredDiscrimWithResponse(BinaryData.fromObject(input), requestOptions).getValue()
-            .toObject(ChildWithRequiredPropertyAsDiscriminator.class);
-    }
-
-    /**
      * The getChildNewDiscrim operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -317,26 +123,5 @@ public final class DiscriminatorEdgeCasesClient {
         // Generated convenience method for getChildNewDiscrimWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getChildNewDiscrimWithResponse(requestOptions).getValue().toObject(ChildWithAnotherDiscriminator.class);
-    }
-
-    /**
-     * The putChildNewDiscrim operation.
-     * 
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public ChildWithAnotherDiscriminator putChildNewDiscrim(ChildWithAnotherDiscriminator input) {
-        // Generated convenience method for putChildNewDiscrimWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putChildNewDiscrimWithResponse(BinaryData.fromObject(input), requestOptions).getValue()
-            .toObject(ChildWithAnotherDiscriminator.class);
     }
 }

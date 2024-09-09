@@ -4,13 +4,11 @@
 
 package com.cadl.discriminatoredgecases.implementation;
 
-import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
-import com.azure.core.annotation.Put;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
@@ -127,44 +125,6 @@ public final class DiscriminatorEdgeCasesClientImpl {
     @Host("{endpoint}")
     @ServiceInterface(name = "DiscriminatorEdgeCas")
     public interface DiscriminatorEdgeCasesClientService {
-        @Get("/model/super")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getSuperParent(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Get("/model/super")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getSuperParentSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Put("/model/super")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putSuperParent(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-
-        @Put("/model/super")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putSuperParentSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-
         @Get("/model/childrequireddiscrim")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -183,26 +143,6 @@ public final class DiscriminatorEdgeCasesClientImpl {
         Response<BinaryData> getChildRequiredDiscrimSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
 
-        @Put("/model/childrequireddiscrim")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putChildRequiredDiscrim(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-
-        @Put("/model/childrequireddiscrim")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putChildRequiredDiscrimSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-
         @Get("/model/childnewdiscrim")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -220,146 +160,6 @@ public final class DiscriminatorEdgeCasesClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> getChildNewDiscrimSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Put("/model/childnewdiscrim")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putChildNewDiscrim(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-
-        @Put("/model/childnewdiscrim")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
-        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> putChildNewDiscrimSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
-            @BodyParam("application/json") BinaryData input, RequestOptions requestOptions, Context context);
-    }
-
-    /**
-     * The getSuperParent operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getSuperParentWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getSuperParent(this.getEndpoint(), accept, requestOptions, context));
-    }
-
-    /**
-     * The getSuperParent operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getSuperParentWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.getSuperParentSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
-    }
-
-    /**
-     * The putSuperParent operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putSuperParentWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.putSuperParent(this.getEndpoint(), contentType, accept, input, requestOptions, context));
-    }
-
-    /**
-     * The putSuperParent operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putSuperParentWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        final String accept = "application/json";
-        return service.putSuperParentSync(this.getEndpoint(), contentType, accept, input, requestOptions, Context.NONE);
     }
 
     /**
@@ -414,83 +214,6 @@ public final class DiscriminatorEdgeCasesClientImpl {
     }
 
     /**
-     * The putChildRequiredDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putChildRequiredDiscrimWithResponseAsync(BinaryData input,
-        RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putChildRequiredDiscrim(this.getEndpoint(), contentType, accept,
-            input, requestOptions, context));
-    }
-
-    /**
-     * The putChildRequiredDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putChildRequiredDiscrimWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        final String accept = "application/json";
-        return service.putChildRequiredDiscrimSync(this.getEndpoint(), contentType, accept, input, requestOptions,
-            Context.NONE);
-    }
-
-    /**
      * The getChildNewDiscrim operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -541,86 +264,5 @@ public final class DiscriminatorEdgeCasesClientImpl {
     public Response<BinaryData> getChildNewDiscrimWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getChildNewDiscrimSync(this.getEndpoint(), accept, requestOptions, Context.NONE);
-    }
-
-    /**
-     * The putChildNewDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putChildNewDiscrimWithResponseAsync(BinaryData input,
-        RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.putChildNewDiscrim(this.getEndpoint(), contentType, accept,
-            input, requestOptions, context));
-    }
-
-    /**
-     * The putChildNewDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> putChildNewDiscrimWithResponse(BinaryData input, RequestOptions requestOptions) {
-        final String contentType = "application/json";
-        final String accept = "application/json";
-        return service.putChildNewDiscrimSync(this.getEndpoint(), contentType, accept, input, requestOptions,
-            Context.NONE);
     }
 }

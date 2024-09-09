@@ -19,7 +19,6 @@ import com.azure.core.util.FluxUtil;
 import com.cadl.discriminatoredgecases.implementation.DiscriminatorEdgeCasesClientImpl;
 import com.cadl.discriminatoredgecases.models.ChildWithAnotherDiscriminator;
 import com.cadl.discriminatoredgecases.models.ChildWithRequiredPropertyAsDiscriminator;
-import com.cadl.discriminatoredgecases.models.ParentWithRequiredProperty;
 import reactor.core.publisher.Mono;
 
 /**
@@ -38,64 +37,6 @@ public final class DiscriminatorEdgeCasesAsyncClient {
     @Generated
     DiscriminatorEdgeCasesAsyncClient(DiscriminatorEdgeCasesClientImpl serviceClient) {
         this.serviceClient = serviceClient;
-    }
-
-    /**
-     * The getSuperParent operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getSuperParentWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getSuperParentWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The putSuperParent operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putSuperParentWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.serviceClient.putSuperParentWithResponseAsync(input, requestOptions);
     }
 
     /**
@@ -121,43 +62,6 @@ public final class DiscriminatorEdgeCasesAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getChildRequiredDiscrimWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getChildRequiredDiscrimWithResponseAsync(requestOptions);
-    }
-
-    /**
-     * The putChildRequiredDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     anotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putChildRequiredDiscrimWithResponse(BinaryData input,
-        RequestOptions requestOptions) {
-        return this.serviceClient.putChildRequiredDiscrimWithResponseAsync(input, requestOptions);
     }
 
     /**
@@ -187,84 +91,6 @@ public final class DiscriminatorEdgeCasesAsyncClient {
     }
 
     /**
-     * The putChildNewDiscrim operation.
-     * <p><strong>Request Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     discriminator: String (Required)
-     *     aProperty: String (Required)
-     *     differentDiscriminator: String (Required)
-     *     yetAnotherProperty: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param input The input parameter.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putChildNewDiscrimWithResponse(BinaryData input, RequestOptions requestOptions) {
-        return this.serviceClient.putChildNewDiscrimWithResponseAsync(input, requestOptions);
-    }
-
-    /**
-     * The getSuperParent operation.
-     * 
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ParentWithRequiredProperty> getSuperParent() {
-        // Generated convenience method for getSuperParentWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return getSuperParentWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(ParentWithRequiredProperty.class));
-    }
-
-    /**
-     * The putSuperParent operation.
-     * 
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ParentWithRequiredProperty> putSuperParent(ParentWithRequiredProperty input) {
-        // Generated convenience method for putSuperParentWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putSuperParentWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(ParentWithRequiredProperty.class));
-    }
-
-    /**
      * The getChildRequiredDiscrim operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -284,29 +110,6 @@ public final class DiscriminatorEdgeCasesAsyncClient {
     }
 
     /**
-     * The putChildRequiredDiscrim operation.
-     * 
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ChildWithRequiredPropertyAsDiscriminator>
-        putChildRequiredDiscrim(ChildWithRequiredPropertyAsDiscriminator input) {
-        // Generated convenience method for putChildRequiredDiscrimWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putChildRequiredDiscrimWithResponse(BinaryData.fromObject(input), requestOptions)
-            .flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(ChildWithRequiredPropertyAsDiscriminator.class));
-    }
-
-    /**
      * The getChildNewDiscrim operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -322,27 +125,6 @@ public final class DiscriminatorEdgeCasesAsyncClient {
         // Generated convenience method for getChildNewDiscrimWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getChildNewDiscrimWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(ChildWithAnotherDiscriminator.class));
-    }
-
-    /**
-     * The putChildNewDiscrim operation.
-     * 
-     * @param input The input parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ChildWithAnotherDiscriminator> putChildNewDiscrim(ChildWithAnotherDiscriminator input) {
-        // Generated convenience method for putChildNewDiscrimWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return putChildNewDiscrimWithResponse(BinaryData.fromObject(input), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(ChildWithAnotherDiscriminator.class));
     }
 }

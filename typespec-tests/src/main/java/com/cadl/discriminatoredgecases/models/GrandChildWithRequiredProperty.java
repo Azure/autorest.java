@@ -30,7 +30,7 @@ public final class GrandChildWithRequiredProperty extends ChildWithRequiredPrope
      * @param anotherProperty the anotherProperty value to set.
      */
     @Generated
-    public GrandChildWithRequiredProperty(String discriminator, String aProperty, String anotherProperty) {
+    private GrandChildWithRequiredProperty(String discriminator, String aProperty, String anotherProperty) {
         super(discriminator, aProperty, anotherProperty);
     }
 
