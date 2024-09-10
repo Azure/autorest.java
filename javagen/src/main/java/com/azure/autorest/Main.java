@@ -3,7 +3,8 @@
 
 package com.azure.autorest;
 
-import com.azure.autorest.extension.base.jsonrpc.Connection;
+import com.microsoft.typespec.http.client.generator.core.Javagen;
+import com.microsoft.typespec.http.client.generator.core.extension.jsonrpc.Connection;
 
 public class Main {
 

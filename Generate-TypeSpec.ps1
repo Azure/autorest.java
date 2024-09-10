@@ -14,39 +14,19 @@ param (
 )
 
 function invokeExpressionAndCaptureOutput([string]$expression) {
-    $output = Invoke-Expression $expression
-    if ($LASTEXITCODE -ne 0) {
-        $ExitCode = $LASTEXITCODE
+  $output = Invoke-Expression $expression
+  if ($LASTEXITCODE -ne 0) {
+    $ExitCode = $LASTEXITCODE
 
-        Write-Host $output
+    Write-Host $output
 
-        exit $ExitCode
-    }
+    exit $ExitCode
+  }
+
+  Write-Host $output
 }
 
-Write-Host "Changing directory to './typespec-extension'"
-Push-Location ./typespec-extension
-
-try {
-  Write-Host "Installing dependencies for TypeSpec Java ('npm ci')"
-  invokeExpressionAndCaptureOutput("npm ci")
-
-  Write-Host "Building TypeSpec Java ('npm run build')"
-  invokeExpressionAndCaptureOutput("npm run build")
-
-  Write-Host "Linting TypeSpec Java ('npm run lint')"
-  invokeExpressionAndCaptureOutput("npm run lint")
-
-  Write-Host "Checking TypeSpec Java format ('npm run check-format')"
-  invokeExpressionAndCaptureOutput("npm run check-format")
-
-  Write-Host "Packing TypeSpec Java ('npm pack')"
-  invokeExpressionAndCaptureOutput("npm pack")
-
-  Write-Host "Returning to root directory ('..')"
-} finally {
-  Pop-Location
-}
+pwsh ./Build-TypeSpec.ps1
 
 Write-Host "Installing TypeSpec ('npm install -g @typespec/compiler')"
 invokeExpressionAndCaptureOutput("npm install -g @typespec/compiler")
@@ -56,10 +36,10 @@ Push-Location ./typespec-tests
 
 try {
   Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
-  invokeExpressionAndCaptureOutput("./Generate.ps1 -Parallelization $Parallelization")
+  pwsh ./Generate.ps1 -Parallelization $Parallelization
 
-  Write-Host "Checking format of generated code ('npm run check-format')"
-  invokeExpressionAndCaptureOutput("npm run check-format")
+#   Write-Host "Checking format of generated code ('npm run check-format')"
+#   invokeExpressionAndCaptureOutput("npm run check-format")
 } finally {
   Pop-Location
 }

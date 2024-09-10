@@ -1,0 +1,74 @@
+diff --git a/packages/http-client-java/emitter/src/code-model-builder.ts b/packages/http-client-java/emitter/src/code-model-builder.ts
+index 263da6dd..121a62f2 100644
+--- a/packages/http-client-java/emitter/src/code-model-builder.ts
++++ b/packages/http-client-java/emitter/src/code-model-builder.ts
+@@ -240,7 +240,7 @@ export class CodeModelBuilder {
+   }
+ 
+   public async build(): Promise<CodeModel> {
+-    this.sdkContext = await createSdkContext(this.emitterContext, "@typespec/http-client-java", {
++    this.sdkContext = await createSdkContext(this.emitterContext, "@azure-tools/typespec-java", {
+       versioning: { previewStringRegex: /$/ },
+     }); // include all versions and do the filter by ourselves
+ 
+diff --git a/packages/http-client-java/emitter/src/emitter.ts b/packages/http-client-java/emitter/src/emitter.ts
+index b3527bd6..1130efff 100644
+--- a/packages/http-client-java/emitter/src/emitter.ts
++++ b/packages/http-client-java/emitter/src/emitter.ts
+@@ -98,7 +98,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
+ };
+ 
+ export const $lib = createTypeSpecLibrary({
+-  name: "@typespec/http-client-java",
++  name: "@azure-tools/typespec-java",
+   diagnostics: {},
+   emitter: {
+     options: EmitterOptionsSchema,
+diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
+index 33442326..e57b77bb 100644
+--- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
++++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
+@@ -19,6 +19,11 @@
+   </properties>
+ 
+   <dependencies>
++    <dependency>
++      <groupId>com.azure.tools</groupId>
++      <artifactId>azure-autorest-customization</artifactId>
++      <version>1.0.0-beta.8</version>
++    </dependency>
+     <dependency>
+       <groupId>com.azure</groupId>
+       <artifactId>azure-core</artifactId>
+diff --git a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
+index 0ff22ae8..33e7b162 100644
+--- a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
++++ b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
+@@ -3,8 +3,8 @@
+ 
+ package com.microsoft.typespec.http.client.generator.core.postprocessor;
+ 
+-import com.microsoft.typespec.http.client.generator.core.customization.Customization;
+-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
++import com.azure.autorest.customization.Customization;
++import com.azure.autorest.customization.implementation.Utils;
+ import com.microsoft.typespec.http.client.generator.core.extension.plugin.JavaSettings;
+ import com.microsoft.typespec.http.client.generator.core.extension.plugin.NewPlugin;
+ import com.microsoft.typespec.http.client.generator.core.extension.plugin.PluginLogger;
+diff --git a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
+index b009d250..6ef31a2d 100644
+--- a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
++++ b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
+@@ -16,9 +16,9 @@
+ 
+   <dependencies>
+     <dependency>
+-      <groupId>com.microsoft.typespec</groupId>
+-      <artifactId>http-client-generator-core</artifactId>
+-      <version>1.0.0-beta.1</version>
++      <groupId>com.azure.tools</groupId>
++      <artifactId>azure-autorest-customization</artifactId>
++      <version>1.0.0-beta.8</version>
+     </dependency>
+   </dependencies>
+ 

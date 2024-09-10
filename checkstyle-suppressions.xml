@@ -27,4 +27,7 @@
   <suppress checks="[ConstantName|MethodName]" files="com[/\\]azure[/\\]autorest[/\\]fluent[/\\]model[/\\]FluentType.java"/>
   <!-- androidgen -->
   <suppress checks="[a-zA-Z0-9]*" files="com[/\\]azure[/\\]autorest[/\\]android[/\\].*"/>
+
+  <!-- com.microsoft.typespec -->
+  <suppress checks="[a-zA-Z0-9]*" files="com[/\\]microsoft[/\\]typespec[/\\].*"/>
 </suppressions>

@@ -1,4 +1,4 @@
-&id002 !!com.azure.autorest.extension.base.model.codemodel.CodeModel
+&id002 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.CodeModel
 apiVersions: []
 clients: []
 globalParameters:
@@ -29,7 +29,7 @@ globalParameters:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: [default]
-      schema: &id003 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+      schema: &id003 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
         apiVersions:
         - {version: '2.0'}
         flattenedSchema: false
@@ -53,7 +53,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id001 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+          schema: &id001 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
             apiVersions:
             - {version: '2.0'}
             flattenedSchema: false
@@ -72,7 +72,7 @@ globalParameters:
               protocol: {}
               readOnly: true
               required: false
-              schema: &id349 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: &id349 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions:
                 - {version: '2.0'}
                 language:
@@ -91,7 +91,7 @@ globalParameters:
               protocol: {}
               readOnly: true
               required: false
-              schema: &id350 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: &id350 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions:
                 - {version: '2.0'}
                 language:
@@ -110,7 +110,7 @@ globalParameters:
               protocol: {}
               readOnly: true
               required: false
-              schema: &id351 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: &id351 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions:
                 - {version: '2.0'}
                 language:
@@ -131,7 +131,7 @@ globalParameters:
               protocol: {}
               readOnly: true
               required: false
-              schema: &id226 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+              schema: &id226 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                 apiVersions:
                 - {version: '2.0'}
                 elementType: *id001
@@ -156,10 +156,10 @@ globalParameters:
               protocol: {}
               readOnly: true
               required: false
-              schema: &id227 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+              schema: &id227 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                 apiVersions:
                 - {version: '2.0'}
-                elementType: !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                elementType: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                   apiVersions:
                   - {version: '2.0'}
                   flattenedSchema: false
@@ -180,7 +180,7 @@ globalParameters:
                     protocol: {}
                     readOnly: true
                     required: false
-                    schema: &id352 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                    schema: &id352 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                       apiVersions:
                       - {version: '2.0'}
                       language:
@@ -199,7 +199,7 @@ globalParameters:
                     protocol: {}
                     readOnly: true
                     required: false
-                    schema: !!com.azure.autorest.extension.base.model.codemodel.AnySchema
+                    schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.AnySchema
                       apiVersions: []
                       language:
                         default: {description: Any object, name: AnyObject}
@@ -209,7 +209,7 @@ globalParameters:
                   protocol: {}
                   stronglyTypedHeader: false
                   type: OBJECT
-                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'EXCEPTION': null}
+                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'EXCEPTION': null}
                 extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
                   xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
                 language:
@@ -223,13 +223,13 @@ globalParameters:
             protocol: {}
             stronglyTypedHeader: false
             type: OBJECT
-            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'EXCEPTION': null}
+            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'EXCEPTION': null}
           serializedName: error
         protocol: {}
         stronglyTypedHeader: false
         summary: Error response
         type: OBJECT
-        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'EXCEPTION': null}
+        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'EXCEPTION': null}
     extensions:
       xmsAzureResource: false
       xmsClientFlatten: false
@@ -327,7 +327,7 @@ globalParameters:
                   protocol:
                     http: {explode: false, in: PATH}
                   required: true
-                  schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                     apiVersions: []
                     maxLength: 0.0
                     minLength: 0.0
@@ -348,7 +348,7 @@ globalParameters:
                   protocol:
                     http: {explode: false, in: URI}
                   required: true
-                  schema: &id012 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                  schema: &id012 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                     apiVersions: []
                     language:
                       default: {description: simple string, name: String}
@@ -369,7 +369,7 @@ globalParameters:
                   protocol:
                     http: {explode: false, in: HEADER}
                   required: true
-                  schema: &id043 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+                  schema: &id043 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
                     apiVersions: []
                     language:
                       default: {description: 'Accept: application/json', name: Accept}
@@ -391,7 +391,7 @@ globalParameters:
                     knownMediaType: JSON
                     mediaTypes: [application/json]
                     statusCodes: ['200']
-                schema: &id326 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                schema: &id326 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   flattenedSchema: false
@@ -415,10 +415,10 @@ globalParameters:
                     protocol: {}
                     readOnly: false
                     required: false
-                    schema: &id248 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                    schema: &id248 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                       apiVersions:
                       - {version: '2023-02-01'}
-                      elementType: &id016 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                      elementType: &id016 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         flattenedSchema: false
@@ -431,12 +431,12 @@ globalParameters:
                         minProperties: 0.0
                         parents:
                           all:
-                          - &id014 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                          - &id014 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             children:
                               all:
-                              - &id015 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                              - &id015 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                 apiVersions:
                                 - {version: '2023-02-01'}
                                 flattenedSchema: false
@@ -451,14 +451,14 @@ globalParameters:
                                 parents:
                                   all:
                                   - *id014
-                                  - &id017 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                  - &id017 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                     apiVersions:
                                     - {version: '2023-02-01'}
                                     children:
                                       all:
                                       - *id015
                                       - *id016
-                                      - &id074 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                      - &id074 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         flattenedSchema: false
@@ -472,7 +472,7 @@ globalParameters:
                                         minProperties: 0.0
                                         parents:
                                           all:
-                                          - &id018 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          - &id018 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions: []
                                             extensions: {xmsAzureResource: true, xmsClientFlatten: false,
                                               xmsFlattened: false, xmsLongRunningOperation: false,
@@ -492,7 +492,7 @@ globalParameters:
                                               nullable: false
                                               readOnly: true
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions: []
                                                 maxLength: 0.0
                                                 minLength: 0.0
@@ -505,7 +505,7 @@ globalParameters:
                                               nullable: false
                                               readOnly: true
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions: []
                                                 maxLength: 0.0
                                                 minLength: 0.0
@@ -518,7 +518,7 @@ globalParameters:
                                               nullable: false
                                               readOnly: true
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions: []
                                                 maxLength: 0.0
                                                 minLength: 0.0
@@ -538,7 +538,7 @@ globalParameters:
                                               nullable: false
                                               readOnly: false
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions: []
                                                 maxLength: 0.0
                                                 minLength: 0.0
@@ -551,9 +551,9 @@ globalParameters:
                                               nullable: false
                                               readOnly: false
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.DictionarySchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.DictionarySchema
                                                 apiVersions: []
-                                                elementType: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                elementType: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                   apiVersions: []
                                                   maxLength: 0.0
                                                   minLength: 0.0
@@ -574,7 +574,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id118 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          schema: &id118 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             flattenedSchema: false
@@ -604,7 +604,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: true
-                                              schema: &id362 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id362 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -638,7 +638,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id257 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                              schema: &id257 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 choiceType: *id012
@@ -684,7 +684,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id363 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id363 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -706,7 +706,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id364 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id364 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -742,7 +742,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id274 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                                              schema: &id274 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 exclusiveMaximum: false
@@ -767,8 +767,8 @@ globalParameters:
                                             protocol: {}
                                             stronglyTypedHeader: false
                                             type: OBJECT
-                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                           serializedName: sku
                                         - apiVersions: []
                                           extensions: {xmsAzureResource: false, xmsClientFlatten: true,
@@ -784,7 +784,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id295 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          schema: &id295 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             flattenedSchema: true
@@ -810,7 +810,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id024 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                              schema: &id024 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 choiceType: *id012
@@ -862,7 +862,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id365 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id365 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -885,7 +885,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id366 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id366 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -911,7 +911,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id275 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                                              schema: &id275 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 exclusiveMaximum: false
@@ -943,7 +943,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id276 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                                              schema: &id276 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 exclusiveMaximum: false
@@ -975,7 +975,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id367 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id367 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -1004,7 +1004,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id230 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                              schema: &id230 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 elementType: *id015
@@ -1037,7 +1037,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id231 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                              schema: &id231 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 elementType: *id016
@@ -1066,7 +1066,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id300 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id300 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -1093,7 +1093,7 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id254 !!com.azure.autorest.extension.base.model.codemodel.BooleanSchema
+                                                  schema: &id254 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BooleanSchema
                                                     apiVersions: []
                                                     defaultValue: true
                                                     language:
@@ -1107,8 +1107,8 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: tls
                                             - apiVersions: []
                                               isDiscriminator: false
@@ -1120,7 +1120,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id380 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id380 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -1171,10 +1171,10 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id232 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                              schema: &id232 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
-                                                elementType: &id301 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                elementType: &id301 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                   apiVersions:
                                                   - {version: '2023-02-01'}
                                                   flattenedSchema: false
@@ -1280,7 +1280,7 @@ globalParameters:
                                                     protocol: {}
                                                     readOnly: false
                                                     required: true
-                                                    schema: &id260 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                                    schema: &id260 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       choiceType: *id012
@@ -1414,7 +1414,7 @@ globalParameters:
                                                     protocol: {}
                                                     readOnly: false
                                                     required: true
-                                                    schema: &id381 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                    schema: &id381 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       language:
@@ -1442,9 +1442,9 @@ globalParameters:
                                                     protocol: {}
                                                     readOnly: false
                                                     required: false
-                                                    schema: &id270 !!com.azure.autorest.extension.base.model.codemodel.DictionarySchema
+                                                    schema: &id270 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.DictionarySchema
                                                       apiVersions: []
-                                                      elementType: &id033 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                      elementType: &id033 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                         apiVersions:
                                                         - {version: '2023-02-01'}
                                                         language:
@@ -1467,8 +1467,8 @@ globalParameters:
                                                   protocol: {}
                                                   stronglyTypedHeader: false
                                                   type: OBJECT
-                                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                    !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                 extensions: {xmsAzureResource: false,
                                                   xmsClientFlatten: false, xmsFlattened: false,
                                                   xmsLongRunningOperation: false,
@@ -1509,7 +1509,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id302 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id302 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -1561,7 +1561,7 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id382 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                  schema: &id382 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
                                                     defaultValue: 'false'
@@ -1603,10 +1603,10 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id233 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                  schema: &id233 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
-                                                    elementType: &id303 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                    elementType: &id303 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       flattenedSchema: false
@@ -1648,7 +1648,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id383 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id383 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -1689,7 +1689,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id384 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id384 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -1709,8 +1709,8 @@ globalParameters:
                                                       protocol: {}
                                                       stronglyTypedHeader: false
                                                       type: OBJECT
-                                                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                      usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                        !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                     extensions: {xmsAzureResource: false,
                                                       xmsClientFlatten: false, xmsFlattened: false,
                                                       xmsLongRunningOperation: false,
@@ -1728,8 +1728,8 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: liveTraceConfiguration
                                             - apiVersions: []
                                               isDiscriminator: false
@@ -1744,7 +1744,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id304 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id304 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -1776,10 +1776,10 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id234 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                  schema: &id234 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
-                                                    elementType: &id305 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                    elementType: &id305 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       flattenedSchema: false
@@ -1821,7 +1821,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id385 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id385 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -1862,7 +1862,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id386 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id386 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -1882,8 +1882,8 @@ globalParameters:
                                                       protocol: {}
                                                       stronglyTypedHeader: false
                                                       type: OBJECT
-                                                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                      usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                        !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                     extensions: {xmsAzureResource: false,
                                                       xmsClientFlatten: false, xmsFlattened: false,
                                                       xmsLongRunningOperation: false,
@@ -1901,8 +1901,8 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: resourceLogConfiguration
                                             - apiVersions: []
                                               isDiscriminator: false
@@ -1916,7 +1916,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id306 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id306 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -1954,10 +1954,10 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id235 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                  schema: &id235 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
-                                                    elementType: &id387 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                    elementType: &id387 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       language:
@@ -1989,8 +1989,8 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: cors
                                             - apiVersions: []
                                               isDiscriminator: false
@@ -2003,7 +2003,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id307 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id307 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -2073,7 +2073,7 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id277 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                                                  schema: &id277 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
                                                     defaultValue: 30
@@ -2117,8 +2117,8 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: serverless
                                             - apiVersions: []
                                               isDiscriminator: false
@@ -2133,7 +2133,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id308 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id308 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -2169,10 +2169,10 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id236 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                  schema: &id236 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
-                                                    elementType: &id309 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                    elementType: &id309 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       flattenedSchema: false
@@ -2252,7 +2252,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id388 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id388 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -2331,7 +2331,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id389 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id389 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -2416,7 +2416,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id390 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id390 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -2496,7 +2496,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: true
-                                                        schema: &id391 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id391 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -2544,7 +2544,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id310 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                        schema: &id310 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           flattenedSchema: false
@@ -2576,7 +2576,7 @@ globalParameters:
                                                             protocol: {}
                                                             readOnly: false
                                                             required: false
-                                                            schema: &id261 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                                            schema: &id261 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                               apiVersions:
                                                               - {version: '2023-02-01'}
                                                               choiceType: *id012
@@ -2612,7 +2612,7 @@ globalParameters:
                                                             protocol: {}
                                                             readOnly: false
                                                             required: false
-                                                            schema: &id311 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                            schema: &id311 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                               apiVersions:
                                                               - {version: '2023-02-01'}
                                                               flattenedSchema: false
@@ -2660,7 +2660,7 @@ globalParameters:
                                                                 protocol: {}
                                                                 readOnly: false
                                                                 required: false
-                                                                schema: &id392 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                                schema: &id392 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                                   apiVersions:
                                                                   - {version: '2023-02-01'}
                                                                   language:
@@ -2688,20 +2688,20 @@ globalParameters:
                                                               protocol: {}
                                                               stronglyTypedHeader: false
                                                               type: OBJECT
-                                                              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                                !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                                !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                             serializedName: managedIdentity
                                                           protocol: {}
                                                           stronglyTypedHeader: false
                                                           type: OBJECT
-                                                          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                            !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                          usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                            !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                         serializedName: auth
                                                       protocol: {}
                                                       stronglyTypedHeader: false
                                                       type: OBJECT
-                                                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                      usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                        !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                     extensions: {xmsAzureResource: false,
                                                       xmsClientFlatten: false, xmsFlattened: false,
                                                       xmsLongRunningOperation: false,
@@ -2721,8 +2721,8 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: upstream
                                             - apiVersions: []
                                               isDiscriminator: false
@@ -2735,7 +2735,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id312 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id312 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -2759,7 +2759,7 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id262 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                                  schema: &id262 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
                                                     choiceType: *id012
@@ -2792,12 +2792,12 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id019 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                  schema: &id019 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
                                                     children:
                                                       all:
-                                                      - &id020 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                      - &id020 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                         apiVersions:
                                                         - {version: '2023-02-01'}
                                                         flattenedSchema: false
@@ -2830,7 +2830,7 @@ globalParameters:
                                                           protocol: {}
                                                           readOnly: false
                                                           required: true
-                                                          schema: &id393 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                          schema: &id393 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                             apiVersions:
                                                             - {version: '2023-02-01'}
                                                             language:
@@ -2845,8 +2845,8 @@ globalParameters:
                                                         protocol: {}
                                                         stronglyTypedHeader: false
                                                         type: OBJECT
-                                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                       immediate:
                                                       - *id020
                                                     flattenedSchema: false
@@ -2879,10 +2879,10 @@ globalParameters:
                                                       protocol: {}
                                                       readOnly: false
                                                       required: false
-                                                      schema: &id237 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                      schema: &id237 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                         apiVersions:
                                                         - {version: '2023-02-01'}
-                                                        elementType: &id021 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                                        elementType: &id021 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           choiceType: *id012
@@ -2949,7 +2949,7 @@ globalParameters:
                                                       protocol: {}
                                                       readOnly: false
                                                       required: false
-                                                      schema: &id238 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                      schema: &id238 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                         apiVersions:
                                                         - {version: '2023-02-01'}
                                                         elementType: *id021
@@ -2972,8 +2972,8 @@ globalParameters:
                                                     protocol: {}
                                                     stronglyTypedHeader: false
                                                     type: OBJECT
-                                                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                      !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                    usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                      !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                   serializedName: publicNetwork
                                                 - apiVersions: []
                                                   extensions: {xmsAzureResource: false,
@@ -2991,7 +2991,7 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id239 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                                  schema: &id239 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
                                                     elementType: *id020
@@ -3012,8 +3012,8 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: networkACLs
                                             - apiVersions: []
                                               isDiscriminator: false
@@ -3042,7 +3042,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id394 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id394 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 defaultValue: Enabled
@@ -3083,7 +3083,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id255 !!com.azure.autorest.extension.base.model.codemodel.BooleanSchema
+                                              schema: &id255 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BooleanSchema
                                                 apiVersions: []
                                                 defaultValue: false
                                                 language:
@@ -3116,7 +3116,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id256 !!com.azure.autorest.extension.base.model.codemodel.BooleanSchema
+                                              schema: &id256 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BooleanSchema
                                                 apiVersions: []
                                                 defaultValue: false
                                                 language:
@@ -3132,8 +3132,8 @@ globalParameters:
                                             protocol: {}
                                             stronglyTypedHeader: false
                                             type: OBJECT
-                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                           serializedName: properties
                                         - apiVersions: []
                                           extensions:
@@ -3155,7 +3155,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id263 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                          schema: &id263 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             choiceType: *id012
@@ -3189,7 +3189,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id313 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          schema: &id313 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             flattenedSchema: false
@@ -3217,7 +3217,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id264 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                              schema: &id264 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 choiceType: *id012
@@ -3253,9 +3253,9 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id271 !!com.azure.autorest.extension.base.model.codemodel.DictionarySchema
+                                              schema: &id271 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.DictionarySchema
                                                 apiVersions: []
-                                                elementType: &id314 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                elementType: &id314 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                   apiVersions:
                                                   - {version: '2023-02-01'}
                                                   flattenedSchema: false
@@ -3283,7 +3283,7 @@ globalParameters:
                                                     protocol: {}
                                                     readOnly: true
                                                     required: false
-                                                    schema: &id395 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                    schema: &id395 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       language:
@@ -3309,7 +3309,7 @@ globalParameters:
                                                     protocol: {}
                                                     readOnly: true
                                                     required: false
-                                                    schema: &id396 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                    schema: &id396 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       language:
@@ -3325,8 +3325,8 @@ globalParameters:
                                                   protocol: {}
                                                   stronglyTypedHeader: false
                                                   type: OBJECT
-                                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                    !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                 language:
                                                   default: {description: Get or set
                                                       the user assigned identities,
@@ -3353,7 +3353,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id397 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id397 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -3385,7 +3385,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: true
                                               required: false
-                                              schema: &id398 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id398 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -3402,8 +3402,8 @@ globalParameters:
                                             protocol: {}
                                             stronglyTypedHeader: false
                                             type: OBJECT
-                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                           serializedName: identity
                                         - apiVersions: []
                                           isDiscriminator: false
@@ -3418,7 +3418,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: true
                                           required: false
-                                          schema: &id023 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          schema: &id023 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions:
                                             - {version: '2.0'}
                                             flattenedSchema: false
@@ -3444,7 +3444,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id368 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id368 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2.0'}
                                                 language:
@@ -3468,7 +3468,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id022 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                              schema: &id022 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                                 apiVersions:
                                                 - {version: '2.0'}
                                                 choiceType: *id012
@@ -3506,7 +3506,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id268 !!com.azure.autorest.extension.base.model.codemodel.DateTimeSchema
+                                              schema: &id268 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.DateTimeSchema
                                                 apiVersions:
                                                 - {version: '2.0'}
                                                 format: DATE_TIME
@@ -3529,7 +3529,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id369 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id369 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2.0'}
                                                 language:
@@ -3569,7 +3569,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id269 !!com.azure.autorest.extension.base.model.codemodel.DateTimeSchema
+                                              schema: &id269 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.DateTimeSchema
                                                 apiVersions:
                                                 - {version: '2.0'}
                                                 format: DATE_TIME
@@ -3583,15 +3583,15 @@ globalParameters:
                                             protocol: {}
                                             stronglyTypedHeader: false
                                             type: OBJECT
-                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                           serializedName: systemData
                                         protocol: {}
                                         stronglyTypedHeader: false
                                         type: OBJECT
-                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
-                                      - &id026 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
+                                      - &id026 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         flattenedSchema: false
@@ -3606,7 +3606,7 @@ globalParameters:
                                           all:
                                           - *id014
                                           - *id017
-                                          - &id025 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          - &id025 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions: []
                                             extensions: {xmsAzureResource: true, xmsClientFlatten: false,
                                               xmsFlattened: false, xmsLongRunningOperation: false,
@@ -3626,7 +3626,7 @@ globalParameters:
                                               nullable: false
                                               readOnly: true
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions: []
                                                 maxLength: 0.0
                                                 minLength: 0.0
@@ -3639,7 +3639,7 @@ globalParameters:
                                               nullable: false
                                               readOnly: true
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions: []
                                                 maxLength: 0.0
                                                 minLength: 0.0
@@ -3652,7 +3652,7 @@ globalParameters:
                                               nullable: false
                                               readOnly: true
                                               required: false
-                                              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions: []
                                                 maxLength: 0.0
                                                 minLength: 0.0
@@ -3690,7 +3690,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: true
-                                          schema: &id316 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          schema: &id316 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             flattenedSchema: true
@@ -3736,7 +3736,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: true
-                                              schema: &id400 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id400 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 extensions:
@@ -3773,7 +3773,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: true
-                                              schema: &id401 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id401 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 extensions:
@@ -3809,7 +3809,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id402 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id402 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 extensions:
@@ -3830,15 +3830,15 @@ globalParameters:
                                             protocol: {}
                                             stronglyTypedHeader: false
                                             type: OBJECT
-                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                           serializedName: properties
                                         protocol: {}
                                         stronglyTypedHeader: false
                                         type: OBJECT
-                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
-                                      - &id027 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
+                                      - &id027 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         flattenedSchema: false
@@ -3885,7 +3885,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: true
-                                          schema: &id318 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          schema: &id318 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             flattenedSchema: true
@@ -3922,7 +3922,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: true
-                                              schema: &id404 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id404 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -3944,7 +3944,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: true
-                                              schema: &id319 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                              schema: &id319 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 flattenedSchema: false
@@ -3968,7 +3968,7 @@ globalParameters:
                                                   protocol: {}
                                                   readOnly: false
                                                   required: false
-                                                  schema: &id405 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                  schema: &id405 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                     apiVersions:
                                                     - {version: '2023-02-01'}
                                                     language:
@@ -3982,21 +3982,21 @@ globalParameters:
                                                 protocol: {}
                                                 stronglyTypedHeader: false
                                                 type: OBJECT
-                                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                               serializedName: customCertificate
                                             protocol: {}
                                             stronglyTypedHeader: false
                                             type: OBJECT
-                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                           serializedName: properties
                                         protocol: {}
                                         stronglyTypedHeader: false
                                         type: OBJECT
-                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
-                                      - &id028 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
+                                      - &id028 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         flattenedSchema: false
@@ -4029,7 +4029,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id322 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                          schema: &id322 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             flattenedSchema: true
@@ -4053,7 +4053,7 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id412 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                              schema: &id412 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
                                                 language:
@@ -4081,10 +4081,10 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id244 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                              schema: &id244 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
-                                                elementType: &id413 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                elementType: &id413 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                   apiVersions:
                                                   - {version: '2023-02-01'}
                                                   language:
@@ -4121,10 +4121,10 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id245 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                              schema: &id245 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
-                                                elementType: &id414 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                elementType: &id414 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                   apiVersions:
                                                   - {version: '2023-02-01'}
                                                   language:
@@ -4162,10 +4162,10 @@ globalParameters:
                                               protocol: {}
                                               readOnly: false
                                               required: false
-                                              schema: &id246 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                              schema: &id246 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                                 apiVersions:
                                                 - {version: '2023-02-01'}
-                                                elementType: &id323 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                elementType: &id323 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                   apiVersions:
                                                   - {version: '2023-02-01'}
                                                   flattenedSchema: false
@@ -4197,7 +4197,7 @@ globalParameters:
                                                     protocol: {}
                                                     readOnly: false
                                                     required: false
-                                                    schema: &id415 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                    schema: &id415 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       language:
@@ -4228,7 +4228,7 @@ globalParameters:
                                                     protocol: {}
                                                     readOnly: false
                                                     required: false
-                                                    schema: &id324 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                                    schema: &id324 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                                       apiVersions:
                                                       - {version: '2023-02-01'}
                                                       flattenedSchema: false
@@ -4264,7 +4264,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id416 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id416 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -4298,7 +4298,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id417 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id417 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -4332,7 +4332,7 @@ globalParameters:
                                                         protocol: {}
                                                         readOnly: false
                                                         required: false
-                                                        schema: &id418 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                                        schema: &id418 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                                           apiVersions:
                                                           - {version: '2023-02-01'}
                                                           language:
@@ -4350,14 +4350,14 @@ globalParameters:
                                                       protocol: {}
                                                       stronglyTypedHeader: false
                                                       type: OBJECT
-                                                      usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                        !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                      usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                        !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                     serializedName: properties
                                                   protocol: {}
                                                   stronglyTypedHeader: false
                                                   type: OBJECT
-                                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                                    !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                                    !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                                 extensions: {xmsAzureResource: false,
                                                   xmsClientFlatten: false, xmsFlattened: false,
                                                   xmsLongRunningOperation: false,
@@ -4375,14 +4375,14 @@ globalParameters:
                                             protocol: {}
                                             stronglyTypedHeader: false
                                             type: OBJECT
-                                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                           serializedName: properties
                                         protocol: {}
                                         stronglyTypedHeader: false
                                         type: OBJECT
-                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                       immediate: []
                                     extensions: {xmsAzureResource: true, xmsClientFlatten: false,
                                       xmsFlattened: false, xmsLongRunningOperation: false,
@@ -4407,7 +4407,7 @@ globalParameters:
                                       protocol: {}
                                       readOnly: true
                                       required: false
-                                      schema: &id374 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                      schema: &id374 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         language:
@@ -4429,7 +4429,7 @@ globalParameters:
                                       protocol: {}
                                       readOnly: true
                                       required: false
-                                      schema: &id375 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                      schema: &id375 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         language:
@@ -4453,7 +4453,7 @@ globalParameters:
                                       protocol: {}
                                       readOnly: true
                                       required: false
-                                      schema: &id376 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                      schema: &id376 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         language:
@@ -4468,8 +4468,8 @@ globalParameters:
                                     protocol: {}
                                     stronglyTypedHeader: false
                                     type: OBJECT
-                                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                      !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                    usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                      !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                   - *id025
                                   immediate:
                                   - *id014
@@ -4502,7 +4502,7 @@ globalParameters:
                                   protocol: {}
                                   readOnly: false
                                   required: false
-                                  schema: &id296 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                  schema: &id296 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                     apiVersions:
                                     - {version: '2023-02-01'}
                                     flattenedSchema: true
@@ -4537,7 +4537,7 @@ globalParameters:
                                       protocol: {}
                                       readOnly: false
                                       required: false
-                                      schema: &id297 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                      schema: &id297 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         flattenedSchema: false
@@ -4559,7 +4559,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id370 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                          schema: &id370 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             language:
@@ -4573,8 +4573,8 @@ globalParameters:
                                         protocol: {}
                                         stronglyTypedHeader: false
                                         type: OBJECT
-                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                       serializedName: privateEndpoint
                                     - apiVersions: []
                                       extensions: {xmsAzureResource: false, xmsClientFlatten: false,
@@ -4588,10 +4588,10 @@ globalParameters:
                                       protocol: {}
                                       readOnly: true
                                       required: false
-                                      schema: &id229 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                      schema: &id229 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
-                                        elementType: &id371 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                        elementType: &id371 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                           apiVersions:
                                           - {version: '2023-02-01'}
                                           language:
@@ -4622,7 +4622,7 @@ globalParameters:
                                       protocol: {}
                                       readOnly: false
                                       required: false
-                                      schema: &id298 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                      schema: &id298 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         flattenedSchema: false
@@ -4649,7 +4649,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id258 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                                          schema: &id258 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             choiceType: *id012
@@ -4688,7 +4688,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id372 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                          schema: &id372 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             language:
@@ -4715,7 +4715,7 @@ globalParameters:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id373 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                          schema: &id373 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             language:
@@ -4731,20 +4731,20 @@ globalParameters:
                                         protocol: {}
                                         stronglyTypedHeader: false
                                         type: OBJECT
-                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                       serializedName: privateLinkServiceConnectionState
                                     protocol: {}
                                     stronglyTypedHeader: false
                                     type: OBJECT
-                                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                      !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                    usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                      !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                                   serializedName: properties
                                 protocol: {}
                                 stronglyTypedHeader: false
                                 type: OBJECT
-                                usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                                  !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                                usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                                  !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                               - *id016
                               - *id026
                               - *id027
@@ -4773,8 +4773,8 @@ globalParameters:
                             protocol: {}
                             stronglyTypedHeader: false
                             type: OBJECT
-                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                           - *id017
                           - *id025
                           immediate:
@@ -4806,7 +4806,7 @@ globalParameters:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id299 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                          schema: &id299 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             flattenedSchema: true
@@ -4832,7 +4832,7 @@ globalParameters:
                               protocol: {}
                               readOnly: false
                               required: true
-                              schema: &id377 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                              schema: &id377 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                 apiVersions:
                                 - {version: '2023-02-01'}
                                 language:
@@ -4855,7 +4855,7 @@ globalParameters:
                               protocol: {}
                               readOnly: false
                               required: true
-                              schema: &id378 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                              schema: &id378 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                 apiVersions:
                                 - {version: '2023-02-01'}
                                 language:
@@ -4892,7 +4892,7 @@ globalParameters:
                               protocol: {}
                               readOnly: false
                               required: false
-                              schema: &id379 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                              schema: &id379 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                 apiVersions:
                                 - {version: '2023-02-01'}
                                 language:
@@ -4915,7 +4915,7 @@ globalParameters:
                               protocol: {}
                               readOnly: true
                               required: false
-                              schema: &id259 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                              schema: &id259 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                                 apiVersions:
                                 - {version: '2023-02-01'}
                                 choiceType: *id012
@@ -4946,14 +4946,14 @@ globalParameters:
                             protocol: {}
                             stronglyTypedHeader: false
                             type: OBJECT
-                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                              !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                              !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                           serializedName: properties
                         protocol: {}
                         stronglyTypedHeader: false
                         type: OBJECT
-                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null,
-                          !!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null,
+                          !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
                       extensions: {xmsAzureResource: false, xmsClientFlatten: false,
                         xmsFlattened: false, xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
                       language:
@@ -4980,7 +4980,7 @@ globalParameters:
                     protocol: {}
                     readOnly: false
                     required: false
-                    schema: &id420 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                    schema: &id420 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                       apiVersions:
                       - {version: '2023-02-01'}
                       language:
@@ -4996,7 +4996,7 @@ globalParameters:
                   protocol: {}
                   stronglyTypedHeader: false
                   type: OBJECT
-                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
               signatureParameters: []
           xmsSkipUrlEncoding: false
         language: *id030
@@ -5017,7 +5017,7 @@ globalParameters:
           protocol:
             http: {explode: false, in: QUERY}
           required: true
-          schema: &id267 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+          schema: &id267 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
             apiVersions: []
             language:
               default: {description: Api Version (2023-02-01), name: ApiVersion20230201}
@@ -5595,7 +5595,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -5629,7 +5629,7 @@ operationGroups:
                 knownMediaType: JSON
                 mediaTypes: [application/json]
                 statusCodes: ['200']
-            schema: &id282 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            schema: &id282 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -5654,10 +5654,10 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id225 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                schema: &id225 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                   apiVersions:
                   - {version: '2023-02-01'}
-                  elementType: &id283 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                  elementType: &id283 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                     apiVersions:
                     - {version: '2023-02-01'}
                     flattenedSchema: false
@@ -5680,7 +5680,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id330 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                      schema: &id330 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         language:
@@ -5702,7 +5702,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id251 !!com.azure.autorest.extension.base.model.codemodel.BooleanSchema
+                      schema: &id251 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BooleanSchema
                         apiVersions: []
                         language:
                           default: {description: If the operation is a data action.
@@ -5721,7 +5721,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id284 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                      schema: &id284 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         flattenedSchema: false
@@ -5744,7 +5744,7 @@ operationGroups:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id331 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                          schema: &id331 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             language:
@@ -5766,7 +5766,7 @@ operationGroups:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id332 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                          schema: &id332 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             language:
@@ -5788,7 +5788,7 @@ operationGroups:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id333 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                          schema: &id333 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             language:
@@ -5810,7 +5810,7 @@ operationGroups:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id334 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                          schema: &id334 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             language:
@@ -5824,7 +5824,7 @@ operationGroups:
                         protocol: {}
                         stronglyTypedHeader: false
                         type: OBJECT
-                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                       serializedName: display
                     - apiVersions: []
                       isDiscriminator: false
@@ -5839,7 +5839,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id335 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                      schema: &id335 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         language:
@@ -5862,7 +5862,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id285 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                      schema: &id285 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         flattenedSchema: false
@@ -5884,7 +5884,7 @@ operationGroups:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id286 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                          schema: &id286 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             flattenedSchema: false
@@ -5910,10 +5910,10 @@ operationGroups:
                               protocol: {}
                               readOnly: false
                               required: false
-                              schema: &id223 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                              schema: &id223 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                 apiVersions:
                                 - {version: '2023-02-01'}
-                                elementType: &id287 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                elementType: &id287 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                   apiVersions:
                                   - {version: '2023-02-01'}
                                   flattenedSchema: false
@@ -5936,7 +5936,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id336 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id336 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -5958,7 +5958,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id337 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id337 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -5980,7 +5980,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id338 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id338 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -6002,7 +6002,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id339 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id339 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -6026,7 +6026,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id340 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id340 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -6067,7 +6067,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id341 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id341 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -6100,7 +6100,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id342 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id342 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -6127,10 +6127,10 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id222 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                                    schema: &id222 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
-                                      elementType: &id288 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                      elementType: &id288 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                         apiVersions:
                                         - {version: '2023-02-01'}
                                         flattenedSchema: false
@@ -6154,7 +6154,7 @@ operationGroups:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id343 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                          schema: &id343 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             language:
@@ -6176,7 +6176,7 @@ operationGroups:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id344 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                          schema: &id344 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             language:
@@ -6199,7 +6199,7 @@ operationGroups:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id345 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                          schema: &id345 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                             apiVersions:
                                             - {version: '2023-02-01'}
                                             language:
@@ -6225,7 +6225,7 @@ operationGroups:
                                           protocol: {}
                                           readOnly: false
                                           required: false
-                                          schema: &id252 !!com.azure.autorest.extension.base.model.codemodel.BooleanSchema
+                                          schema: &id252 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BooleanSchema
                                             apiVersions: []
                                             language:
                                               default: {description: A Boolean flag
@@ -6238,7 +6238,7 @@ operationGroups:
                                         protocol: {}
                                         stronglyTypedHeader: false
                                         type: OBJECT
-                                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                                       extensions: {xmsAzureResource: false, xmsClientFlatten: false,
                                         xmsFlattened: false, xmsLongRunningOperation: false,
                                         xmsSkipUrlEncoding: false}
@@ -6254,7 +6254,7 @@ operationGroups:
                                   protocol: {}
                                   stronglyTypedHeader: false
                                   type: OBJECT
-                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                                 extensions: {xmsAzureResource: false, xmsClientFlatten: false,
                                   xmsFlattened: false, xmsLongRunningOperation: false,
                                   xmsSkipUrlEncoding: false}
@@ -6281,10 +6281,10 @@ operationGroups:
                               protocol: {}
                               readOnly: false
                               required: false
-                              schema: &id224 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                              schema: &id224 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                                 apiVersions:
                                 - {version: '2023-02-01'}
-                                elementType: &id289 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                                elementType: &id289 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                                   apiVersions:
                                   - {version: '2023-02-01'}
                                   flattenedSchema: false
@@ -6306,7 +6306,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id346 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id346 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -6327,7 +6327,7 @@ operationGroups:
                                     protocol: {}
                                     readOnly: false
                                     required: false
-                                    schema: &id347 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                                    schema: &id347 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                                       apiVersions:
                                       - {version: '2023-02-01'}
                                       language:
@@ -6341,7 +6341,7 @@ operationGroups:
                                   protocol: {}
                                   stronglyTypedHeader: false
                                   type: OBJECT
-                                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                                 extensions: {xmsAzureResource: false, xmsClientFlatten: false,
                                   xmsFlattened: false, xmsLongRunningOperation: false,
                                   xmsSkipUrlEncoding: false}
@@ -6357,17 +6357,17 @@ operationGroups:
                             protocol: {}
                             stronglyTypedHeader: false
                             type: OBJECT
-                            usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                            usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                           serializedName: serviceSpecification
                         protocol: {}
                         stronglyTypedHeader: false
                         type: OBJECT
-                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                       serializedName: properties
                     protocol: {}
                     stronglyTypedHeader: false
                     type: OBJECT
-                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                    usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                   extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
                     xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
                   language:
@@ -6396,7 +6396,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id348 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id348 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -6413,7 +6413,7 @@ operationGroups:
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id060
@@ -6523,7 +6523,7 @@ operationGroups:
         protocol:
           http: {explode: false, in: BODY, style: JSON}
         required: true
-        schema: &id290 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+        schema: &id290 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
           apiVersions:
           - {version: '2023-02-01'}
           flattenedSchema: false
@@ -6545,7 +6545,7 @@ operationGroups:
             protocol: {}
             readOnly: false
             required: true
-            schema: &id353 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            schema: &id353 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
               apiVersions:
               - {version: '2023-02-01'}
               language:
@@ -6567,7 +6567,7 @@ operationGroups:
             protocol: {}
             readOnly: false
             required: true
-            schema: &id354 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            schema: &id354 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
               apiVersions:
               - {version: '2023-02-01'}
               language:
@@ -6581,7 +6581,7 @@ operationGroups:
           protocol: {}
           stronglyTypedHeader: false
           type: OBJECT
-          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+          usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
       - apiVersions: []
         flattened: false
         implementation: METHOD
@@ -6616,7 +6616,7 @@ operationGroups:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: ['200']
-      schema: &id291 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+      schema: &id291 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
         apiVersions:
         - {version: '2023-02-01'}
         flattenedSchema: false
@@ -6639,7 +6639,7 @@ operationGroups:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id253 !!com.azure.autorest.extension.base.model.codemodel.BooleanSchema
+          schema: &id253 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BooleanSchema
             apiVersions: []
             language:
               default: {description: Indicates whether the name is available or not.,
@@ -6658,7 +6658,7 @@ operationGroups:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id355 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id355 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2023-02-01'}
             language:
@@ -6678,7 +6678,7 @@ operationGroups:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id356 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id356 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2023-02-01'}
             language:
@@ -6691,7 +6691,7 @@ operationGroups:
         protocol: {}
         stronglyTypedHeader: false
         type: OBJECT
-        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters:
     - *id065
   - &id072
@@ -6824,7 +6824,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -6858,7 +6858,7 @@ operationGroups:
                 knownMediaType: JSON
                 mediaTypes: [application/json]
                 statusCodes: ['200']
-            schema: &id085 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            schema: &id085 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -6882,7 +6882,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id240 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                schema: &id240 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   elementType: *id074
@@ -6913,7 +6913,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id399 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id399 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -6930,7 +6930,7 @@ operationGroups:
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id075
@@ -7086,7 +7086,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -8175,7 +8175,7 @@ operationGroups:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: ['200']
-      schema: &id111 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+      schema: &id111 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
         apiVersions:
         - {version: '2023-02-01'}
         flattenedSchema: false
@@ -8198,7 +8198,7 @@ operationGroups:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id407 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id407 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2023-02-01'}
             extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
@@ -8221,7 +8221,7 @@ operationGroups:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id408 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id408 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2023-02-01'}
             extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
@@ -8246,7 +8246,7 @@ operationGroups:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id409 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id409 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2023-02-01'}
             extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
@@ -8272,7 +8272,7 @@ operationGroups:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id410 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id410 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2023-02-01'}
             extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
@@ -8288,7 +8288,7 @@ operationGroups:
         protocol: {}
         stronglyTypedHeader: false
         type: OBJECT
-        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters:
     - *id105
     - *id106
@@ -8393,7 +8393,7 @@ operationGroups:
         protocol:
           http: {explode: false, in: BODY, style: JSON}
         required: true
-        schema: &id325 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+        schema: &id325 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
           apiVersions:
           - {version: '2023-02-01'}
           flattenedSchema: false
@@ -8414,7 +8414,7 @@ operationGroups:
             protocol: {}
             readOnly: false
             required: false
-            schema: &id265 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+            schema: &id265 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
               apiVersions:
               - {version: '2023-02-01'}
               choiceType: *id012
@@ -8437,7 +8437,7 @@ operationGroups:
           protocol: {}
           stronglyTypedHeader: false
           type: OBJECT
-          usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'INPUT': null}
+          usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'INPUT': null}
       - apiVersions: []
         flattened: false
         implementation: METHOD
@@ -8720,7 +8720,7 @@ operationGroups:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: ['200']
-      schema: &id327 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+      schema: &id327 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
         apiVersions:
         - {version: '2023-02-01'}
         flattenedSchema: false
@@ -8742,10 +8742,10 @@ operationGroups:
           protocol: {}
           readOnly: true
           required: false
-          schema: &id250 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id250 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2023-02-01'}
-            elementType: &id328 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            elementType: &id328 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -8766,7 +8766,7 @@ operationGroups:
                 protocol: {}
                 readOnly: true
                 required: false
-                schema: &id421 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id421 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -8799,7 +8799,7 @@ operationGroups:
                 protocol: {}
                 readOnly: true
                 required: false
-                schema: &id329 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                schema: &id329 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   flattenedSchema: false
@@ -8821,7 +8821,7 @@ operationGroups:
                     protocol: {}
                     readOnly: true
                     required: false
-                    schema: &id278 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                    schema: &id278 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                       apiVersions:
                       - {version: '2023-02-01'}
                       exclusiveMaximum: false
@@ -8847,7 +8847,7 @@ operationGroups:
                     protocol: {}
                     readOnly: true
                     required: false
-                    schema: &id279 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                    schema: &id279 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                       apiVersions:
                       - {version: '2023-02-01'}
                       exclusiveMaximum: false
@@ -8871,7 +8871,7 @@ operationGroups:
                     protocol: {}
                     readOnly: true
                     required: false
-                    schema: &id280 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                    schema: &id280 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                       apiVersions:
                       - {version: '2023-02-01'}
                       exclusiveMaximum: false
@@ -8896,9 +8896,9 @@ operationGroups:
                     protocol: {}
                     readOnly: true
                     required: false
-                    schema: &id249 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                    schema: &id249 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                       apiVersions: []
-                      elementType: &id281 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                      elementType: &id281 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                         apiVersions: []
                         exclusiveMaximum: false
                         exclusiveMinimum: false
@@ -8930,7 +8930,7 @@ operationGroups:
                     protocol: {}
                     readOnly: true
                     required: false
-                    schema: &id266 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+                    schema: &id266 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
                       apiVersions:
                       - {version: '2023-02-01'}
                       choiceType: *id012
@@ -8955,12 +8955,12 @@ operationGroups:
                   protocol: {}
                   stronglyTypedHeader: false
                   type: OBJECT
-                  usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                  usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                 serializedName: capacity
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
             extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
               xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
             language:
@@ -8987,7 +8987,7 @@ operationGroups:
           protocol: {}
           readOnly: true
           required: false
-          schema: &id422 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id422 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2023-02-01'}
             language:
@@ -9004,7 +9004,7 @@ operationGroups:
         protocol: {}
         stronglyTypedHeader: false
         type: OBJECT
-        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
     signatureParameters:
     - *id116
     - *id117
@@ -9089,7 +9089,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -9123,7 +9123,7 @@ operationGroups:
                 knownMediaType: JSON
                 mediaTypes: [application/json]
                 statusCodes: ['200']
-            schema: &id292 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            schema: &id292 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -9147,10 +9147,10 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id228 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                schema: &id228 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                   apiVersions:
                   - {version: '2023-02-01'}
-                  elementType: &id293 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                  elementType: &id293 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                     apiVersions:
                     - {version: '2023-02-01'}
                     flattenedSchema: false
@@ -9171,7 +9171,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id357 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                      schema: &id357 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         language:
@@ -9192,7 +9192,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id272 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                      schema: &id272 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         exclusiveMaximum: false
@@ -9220,7 +9220,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id273 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+                      schema: &id273 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         exclusiveMaximum: false
@@ -9247,7 +9247,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id294 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+                      schema: &id294 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         flattenedSchema: false
@@ -9269,7 +9269,7 @@ operationGroups:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id358 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                          schema: &id358 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             language:
@@ -9289,7 +9289,7 @@ operationGroups:
                           protocol: {}
                           readOnly: false
                           required: false
-                          schema: &id359 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                          schema: &id359 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                             apiVersions:
                             - {version: '2023-02-01'}
                             language:
@@ -9303,7 +9303,7 @@ operationGroups:
                         protocol: {}
                         stronglyTypedHeader: false
                         type: OBJECT
-                        usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                        usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                       serializedName: name
                     - apiVersions: []
                       isDiscriminator: false
@@ -9318,7 +9318,7 @@ operationGroups:
                       protocol: {}
                       readOnly: false
                       required: false
-                      schema: &id360 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                      schema: &id360 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                         apiVersions:
                         - {version: '2023-02-01'}
                         language:
@@ -9333,7 +9333,7 @@ operationGroups:
                     protocol: {}
                     stronglyTypedHeader: false
                     type: OBJECT
-                    usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+                    usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
                   extensions: {xmsAzureResource: false, xmsClientFlatten: false, xmsFlattened: false,
                     xmsLongRunningOperation: false, xmsSkipUrlEncoding: false}
                   language:
@@ -9361,7 +9361,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id361 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id361 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -9378,7 +9378,7 @@ operationGroups:
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id127
@@ -9495,7 +9495,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -9529,7 +9529,7 @@ operationGroups:
                 knownMediaType: JSON
                 mediaTypes: [application/json]
                 statusCodes: ['200']
-            schema: &id315 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            schema: &id315 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -9553,7 +9553,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id241 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                schema: &id241 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   elementType: *id026
@@ -9585,7 +9585,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id403 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id403 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -9602,7 +9602,7 @@ operationGroups:
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id139
@@ -10176,7 +10176,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -10210,7 +10210,7 @@ operationGroups:
                 knownMediaType: JSON
                 mediaTypes: [application/json]
                 statusCodes: ['200']
-            schema: &id317 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            schema: &id317 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -10234,7 +10234,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id242 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                schema: &id242 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   elementType: *id027
@@ -10266,7 +10266,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id406 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id406 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -10283,7 +10283,7 @@ operationGroups:
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id165
@@ -10862,7 +10862,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -10896,7 +10896,7 @@ operationGroups:
                 knownMediaType: JSON
                 mediaTypes: [application/json]
                 statusCodes: ['200']
-            schema: &id320 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            schema: &id320 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -10920,7 +10920,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id243 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                schema: &id243 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   elementType: *id015
@@ -10950,7 +10950,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id411 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id411 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -10966,7 +10966,7 @@ operationGroups:
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id191
@@ -11570,7 +11570,7 @@ operationGroups:
               protocol:
                 http: {explode: false, in: PATH}
               required: true
-              schema: !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 maxLength: 0.0
                 minLength: 0.0
@@ -11604,7 +11604,7 @@ operationGroups:
                 knownMediaType: JSON
                 mediaTypes: [application/json]
                 statusCodes: ['200']
-            schema: &id321 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+            schema: &id321 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
               apiVersions:
               - {version: '2023-02-01'}
               flattenedSchema: false
@@ -11628,7 +11628,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id247 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+                schema: &id247 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   elementType: *id028
@@ -11659,7 +11659,7 @@ operationGroups:
                 protocol: {}
                 readOnly: false
                 required: false
-                schema: &id419 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id419 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2023-02-01'}
                   language:
@@ -11676,7 +11676,7 @@ operationGroups:
               protocol: {}
               stronglyTypedHeader: false
               type: OBJECT
-              usage: !!set {!!com.azure.autorest.extension.base.model.codemodel.SchemaContext 'OUTPUT': null}
+              usage: !!set {!!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SchemaContext 'OUTPUT': null}
           signatureParameters: []
       xmsSkipUrlEncoding: false
     language: *id217

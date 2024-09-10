@@ -109,8 +109,8 @@ def update_pom(package_versions: List[PackageVersion]):
                 f_out.write(''.join(new_lines))
                 logging.info(f'update POM {pom_file}')
 
-    # javagen/src/main/java/com/azure/autorest/model/projectmodel/Project.java
-    project_file = 'javagen/src/main/java/com/azure/autorest/model/projectmodel/Project.java'
+    # packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/model/projectmodel/Project.java
+    project_file = 'core/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/model/projectmodel/Project.java'
     with open(path.join(root_path, project_file)) as f_in:
         lines = f_in.readlines()
         new_lines = []

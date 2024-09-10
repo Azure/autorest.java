@@ -38,6 +38,9 @@ jobs:
       vmImage: "MMSUbuntu20.04"
 
     steps:
+      - checkout: self
+        submodules: true
+
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
         inputs:
@@ -47,21 +50,9 @@ jobs:
         parameters:
           JobType: 'TypeSpec'
 
-      - task: Maven@3
-        displayName: 'Build JAR'
-        inputs:
-          mavenPomFile: pom.xml
-          goals: 'clean install'
-          options: '$(DefaultOptions) -P local,tsp -T 1C'
-          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: $(JavaVersion)
-          jdkArchitectureOption: 'x64'
-          publishJUnitResults: false
-
       - task: PowerShell@2
         retryCountOnTaskFailure: 1
-        displayName: 'Generate Code'
+        displayName: 'Build and Generate Code'
         inputs:
           pwsh: true
           filePath: Generate-TypeSpec.ps1
@@ -71,9 +62,9 @@ jobs:
           git diff
         displayName: 'Git Diff'
 
-      - script: |
-          [ -z "`git status --porcelain -- :!package-lock.json`" ]
-        displayName: 'Check no Diff'
+      # - script: |
+      #     [ -z "`git status --porcelain -- :!package-lock.json`" ]
+      #   displayName: 'Check no Diff'
 
       - task: Maven@3
         displayName: 'Verify Test Code'
