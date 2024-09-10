@@ -22,6 +22,15 @@ extends:
             timeoutInMinutes: 30
 
             steps:
+              - checkout: self
+                submodules: true
+
+              - script: |
+                  git checkout .
+                  git apply ../core.diff --ignore-whitespace
+                displayName: 'Patch core'
+                workingDirectory: ./core
+
               - task: NodeTool@0
                 displayName: 'Install Node.js $(NodeVersion)'
                 inputs:

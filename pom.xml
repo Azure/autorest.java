@@ -95,7 +95,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
-          <version>3.6.0</version>
+          <version>3.5.2</version>
           <configuration>
             <finalName>${shade.finalName}</finalName>
             <minimizeJar>true</minimizeJar>
@@ -383,11 +383,10 @@
         </property>
       </activation>
       <modules>
-        <module>./javagen</module>
-        <module>./preprocessor</module>
-        <module>./partial-update</module>
-        <module>./extension-base</module>
-        <module>./typespec-extension</module>
+        <module>./customization-base</module>
+        <module>./core/packages/http-client-java/generator/http-client-generator-core</module>
+        <module>./core/packages/http-client-java/generator/http-client-generator-mgmt</module>
+        <module>./core/packages/http-client-java/generator/http-client-generator</module>
       </modules>
     </profile>
 
@@ -407,14 +406,13 @@
 
   <modules>
     <module>./javagen</module>
-    <module>./preprocessor</module>
-    <module>./postprocessor</module>
+    <module>./extension-base</module>
     <module>./customization-base</module>
     <module>./customization-tests</module>
-    <module>./extension-base</module>
     <module>./fluentgen</module>
-    <module>./fluentnamer</module>
     <module>./partial-update</module>
+    <module>./core/packages/http-client-java/generator/http-client-generator-core</module>
+    <module>./core/packages/http-client-java/generator/http-client-generator-mgmt</module>
   </modules>
 
 </project>

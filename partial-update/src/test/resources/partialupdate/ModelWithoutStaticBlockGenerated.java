@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest.util;
+package com.microsoft.typespec.http.client.generator.core.util;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
@@ -9,7 +9,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import java.io.IOException;
 
 @Fluent
 public final class Model {

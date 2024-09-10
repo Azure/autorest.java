@@ -1,4 +1,4 @@
-&id001 !!com.azure.autorest.extension.base.model.codemodel.CodeModel
+&id001 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.CodeModel
 globalParameters:
 - &id004
   apiVersions: []
@@ -23,7 +23,7 @@ globalParameters:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: [default]
-      schema: &id002 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+      schema: &id002 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
         apiVersions:
         - {version: 1.0.0}
         flattenedSchema: false
@@ -42,7 +42,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id039 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+          schema: &id039 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
             apiVersions:
             - {version: 1.0.0}
             exclusiveMaximum: false
@@ -65,7 +65,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id041 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id041 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: 1.0.0}
             language:
@@ -128,14 +128,14 @@ globalParameters:
             protocol:
               http: {explode: false, in: HEADER}
             required: true
-            schema: &id009 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+            schema: &id009 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
               apiVersions: []
               language:
                 default: {description: 'Accept: application/json', name: Accept}
               protocol: {}
               type: CONSTANT
               value: {value: application/json}
-              valueType: &id006 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              valueType: &id006 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions: []
                 language:
                   default: {description: simple string, name: String}
@@ -157,7 +157,7 @@ globalParameters:
               knownMediaType: JSON
               mediaTypes: [application/json]
               statusCodes: ['200']
-          schema: &id008 !!com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema
+          schema: &id008 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SealedChoiceSchema
             apiVersions:
             - {version: 1.0.0}
             choiceType: *id006
@@ -425,7 +425,7 @@ operationGroups:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: ['200']
-      schema: &id017 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+      schema: &id017 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
         apiVersions:
         - {version: 1.0.0}
         language:
@@ -592,7 +592,7 @@ operationGroups:
         protocol:
           http: {explode: false, in: BODY, style: JSON}
         required: true
-        schema: &id036 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+        schema: &id036 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
           apiVersions:
           - {version: 1.0.0}
           language:
@@ -723,7 +723,7 @@ operationGroups:
         protocol:
           http: {explode: false, in: BODY, style: JSON}
         required: true
-        schema: &id037 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+        schema: &id037 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
           apiVersions:
           - {version: 1.0.0}
           language:
@@ -860,7 +860,7 @@ operationGroups:
         protocol:
           http: {explode: false, in: BODY, style: JSON}
         required: true
-        schema: &id038 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+        schema: &id038 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
           apiVersions:
           - {version: 1.0.0}
           language:
@@ -1004,7 +1004,7 @@ operationGroups:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: ['200']
-      schema: &id032 !!com.azure.autorest.extension.base.model.codemodel.ByteArraySchema
+      schema: &id032 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ByteArraySchema
         apiVersions:
         - {version: 1.0.0}
         format: BYTE
@@ -1115,7 +1115,7 @@ operationGroups:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: ['200']
-      schema: &id033 !!com.azure.autorest.extension.base.model.codemodel.ByteArraySchema
+      schema: &id033 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ByteArraySchema
         apiVersions:
         - {version: 1.0.0}
         format: BASE_64_URL
@@ -1161,7 +1161,7 @@ operationGroups:
         protocol:
           http: {explode: false, in: BODY, style: JSON}
         required: true
-        schema: &id034 !!com.azure.autorest.extension.base.model.codemodel.ByteArraySchema
+        schema: &id034 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ByteArraySchema
           apiVersions:
           - {version: 1.0.0}
           format: BASE_64_URL
@@ -1252,7 +1252,7 @@ operationGroups:
           knownMediaType: JSON
           mediaTypes: [application/json]
           statusCodes: ['200']
-      schema: &id035 !!com.azure.autorest.extension.base.model.codemodel.ByteArraySchema
+      schema: &id035 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ByteArraySchema
         apiVersions:
         - {version: 1.0.0}
         format: BASE_64_URL
@@ -1356,7 +1356,7 @@ schemas:
       protocol: {}
       readOnly: false
       required: false
-      schema: &id042 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+      schema: &id042 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
         apiVersions:
         - {version: 1.0.0}
         language:

@@ -45,11 +45,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     @Generated
     private String aggregate;
 
-    /*
-     * customized property
-     */
-    private String testProperty;
-
     /**
      * Creates an instance of PartialUpdateModel class.
      *
@@ -108,32 +103,9 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * javadoc
-     *
-     * @param aggregate javadoc
+     * {@inheritDoc}
      */
-    public void setAggregate(String aggregate) {
-        this.aggregate = aggregate;
-    }
-
-    /**
-     * javadoc
-     *
-     * @return javadoc
-     */
-    public String getTestProperty() {
-        return testProperty;
-    }
-
-    /**
-     * javadoc
-     *
-     * @param testProperty javadoc
-     */
-    public void setTestProperty(String testProperty) {
-        this.testProperty = testProperty;
-    }
-
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -153,6 +125,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the PartialUpdateModel.
      */
+    @Generated
     public static PartialUpdateModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean booleanProperty = false;

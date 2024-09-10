@@ -1,5 +1,0 @@
-# Release History
-
-## {{artifact-version}} ({{date-utc}})
-
-- Azure Resource Manager {{service-name}} client library for Java. {{service-description}}

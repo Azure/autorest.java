@@ -16,9 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.internal.implementation.InternalOpsImpl;
-import com.cadl.internal.implementation.models.ResponseInternal;
 import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
+import com.cadl.internal.models.ResponseInternal;
 
 /**
  * Initializes a new instance of the synchronous InternalClient type.
@@ -70,7 +70,7 @@ public final class InternalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<BinaryData> postInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
         return this.serviceClient.postInternalWithResponse(body, requestOptions);
     }
 
@@ -135,7 +135,7 @@ public final class InternalClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    ResponseInternal postInternal(ApiRequest body) {
+    public ResponseInternal postInternal(ApiRequest body) {
         // Generated convenience method for postInternalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postInternalWithResponse(BinaryData.fromObject(body), requestOptions).getValue()

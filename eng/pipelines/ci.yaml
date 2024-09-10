@@ -32,6 +32,15 @@ jobs:
       vmImage: "MMSUbuntu20.04"
 
     steps:
+      - checkout: self
+        submodules: true
+
+      - script: |
+          git checkout .
+          git apply ../core.diff --ignore-whitespace
+        displayName: 'Patch core'
+        workingDirectory: ./core
+
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
         inputs:
@@ -66,11 +75,11 @@ jobs:
 
       - script: |
           git status
-          git diff
+          git diff --ignore-submodules
         displayName: 'Git Diff'
 
       - script: |
-          [ -z "`git status --porcelain`" ]
+          [ -z "`git status --ignore-submodules --porcelain`" ]
         displayName: 'Check no Diff'
 
       - script: |

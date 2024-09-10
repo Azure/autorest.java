@@ -73,20 +73,6 @@ public final class ErrorOpsImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> readSync(@HostParam("endpoint") String endpoint, @HeaderParam("Accept") String accept,
             RequestOptions requestOptions, Context context);
-
-        @Get("/error/statuscoderange")
-        @ExpectedResponses({ 200, 201, 400, 401, 402, 403, 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> readWithCustomizedError(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
-
-        @Get("/error/statuscoderange")
-        @ExpectedResponses({ 200, 201, 400, 401, 402, 403, 404 })
-        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> readWithCustomizedErrorSync(@HostParam("endpoint") String endpoint,
-            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -158,72 +144,5 @@ public final class ErrorOpsImpl {
     public Response<BinaryData> readWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.readSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
-    }
-
-    /**
-     * The readWithCustomizedError operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     name: String (Required)
-     *     error (Required): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithCustomizedErrorWithResponseAsync(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(
-            context -> service.readWithCustomizedError(this.client.getEndpoint(), accept, requestOptions, context));
-    }
-
-    /**
-     * The readWithCustomizedError operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     name: String (Required)
-     *     error (Required): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithCustomizedErrorWithResponse(RequestOptions requestOptions) {
-        final String accept = "application/json";
-        return service.readWithCustomizedErrorSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

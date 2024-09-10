@@ -1,4 +1,4 @@
-&id003 !!com.azure.autorest.extension.base.model.codemodel.CodeModel
+&id003 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.CodeModel
 globalParameters:
 - &id005
   apiVersions: []
@@ -25,7 +25,7 @@ globalParameters:
           explode: false
           headers:
           - header: x-ms-error-code
-            schema: &id118 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            schema: &id118 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
               apiVersions:
               - {version: '2021-10-01'}
               language:
@@ -37,7 +37,7 @@ globalParameters:
           knownMediaType: JSON
           mediaTypes: [application/json, text/json]
           statusCodes: [default]
-      schema: &id001 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+      schema: &id001 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
         apiVersions:
         - {version: '2021-10-01'}
         flattenedSchema: false
@@ -56,7 +56,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id140 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id140 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2021-10-01'}
             language:
@@ -77,7 +77,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id141 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id141 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2021-10-01'}
             language:
@@ -97,7 +97,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id142 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id142 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2021-10-01'}
             language:
@@ -118,7 +118,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id125 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id125 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2021-10-01'}
             elementType: *id001
@@ -140,7 +140,7 @@ globalParameters:
           protocol: {}
           readOnly: false
           required: false
-          schema: &id002 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+          schema: &id002 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
             apiVersions:
             - {version: '2021-10-01'}
             flattenedSchema: false
@@ -161,7 +161,7 @@ globalParameters:
               protocol: {}
               readOnly: false
               required: false
-              schema: &id143 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: &id143 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions:
                 - {version: '2021-10-01'}
                 language:
@@ -213,7 +213,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id007 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id007 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -250,7 +250,7 @@ globalParameters:
           protocol:
             http: {explode: false, in: PATH}
           required: true
-          schema: &id016 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id016 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2021-10-01'}
             language:
@@ -287,10 +287,10 @@ globalParameters:
           protocol:
             http: {explode: true, in: QUERY, style: FORM}
           required: false
-          schema: &id124 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id124 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2021-10-01'}
-            elementType: &id138 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            elementType: &id138 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
               apiVersions:
               - {version: '2021-10-01'}
               language:
@@ -320,7 +320,7 @@ globalParameters:
           protocol:
             http: {explode: false, in: QUERY}
           required: false
-          schema: &id136 !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+          schema: &id136 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
             apiVersions:
             - {version: '2021-10-01'}
             defaultValue: 60
@@ -347,14 +347,14 @@ globalParameters:
           protocol:
             http: {explode: false, in: QUERY}
           required: true
-          schema: &id135 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+          schema: &id135 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
             apiVersions: []
             language:
               default: {description: Api Version (2021-10-01), name: ApiVersion20211001}
             protocol: {}
             type: CONSTANT
             value: {value: '2021-10-01'}
-            valueType: &id014 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            valueType: &id014 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
               apiVersions: []
               language:
                 default: {description: simple string, name: String}
@@ -385,7 +385,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: HEADER}
             required: true
-            schema: &id021 !!com.azure.autorest.extension.base.model.codemodel.ConstantSchema
+            schema: &id021 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ConstantSchema
               apiVersions: []
               language:
                 default: {description: 'Accept: application/json, text/json', name: Accept}
@@ -410,7 +410,7 @@ globalParameters:
               knownMediaType: JSON
               mediaTypes: [application/json, text/json]
               statusCodes: ['200']
-          schema: &id137 !!com.azure.autorest.extension.base.model.codemodel.ObjectSchema
+          schema: &id137 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ObjectSchema
             apiVersions:
             - {version: '2021-10-01'}
             flattenedSchema: false
@@ -433,7 +433,7 @@ globalParameters:
               protocol: {}
               readOnly: false
               required: false
-              schema: &id139 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+              schema: &id139 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                 apiVersions:
                 - {version: '2021-10-01'}
                 language:
@@ -464,7 +464,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id017 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id017 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -514,10 +514,10 @@ globalParameters:
           protocol:
             http: {explode: true, in: QUERY, style: FORM}
           required: false
-          schema: &id126 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id126 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2021-10-01'}
-            elementType: &id144 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+            elementType: &id144 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
               apiVersions:
               - {version: '2021-10-01'}
               language:
@@ -603,7 +603,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id023 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id023 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -653,7 +653,7 @@ globalParameters:
           protocol:
             http: {explode: true, in: QUERY, style: FORM}
           required: false
-          schema: &id127 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id127 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2021-10-01'}
             elementType: *id023
@@ -687,7 +687,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: HEADER}
             required: true
-            schema: &id043 !!com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema
+            schema: &id043 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.SealedChoiceSchema
               apiVersions: []
               choiceType: *id014
               choices:
@@ -715,7 +715,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: BODY, style: BINARY}
             required: true
-            schema: &id131 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+            schema: &id131 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BinarySchema
               apiVersions:
               - {version: '2021-10-01'}
               language:
@@ -735,7 +735,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: HEADER}
             required: true
-            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+            schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
               apiVersions: []
               exclusiveMaximum: false
               exclusiveMinimum: false
@@ -840,7 +840,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id145 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id145 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -890,7 +890,7 @@ globalParameters:
           protocol:
             http: {explode: false, in: PATH}
           required: true
-          schema: &id035 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id035 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2021-10-01'}
             language:
@@ -957,7 +957,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id036 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id036 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -1076,7 +1076,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id146 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id146 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -1163,7 +1163,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: BODY, style: BINARY}
             required: true
-            schema: &id132 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+            schema: &id132 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BinarySchema
               apiVersions:
               - {version: '2021-10-01'}
               language:
@@ -1183,7 +1183,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: HEADER}
             required: true
-            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+            schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
               apiVersions: []
               exclusiveMaximum: false
               exclusiveMinimum: false
@@ -1287,7 +1287,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id147 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id147 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -1339,7 +1339,7 @@ globalParameters:
           protocol:
             http: {explode: false, in: PATH}
           required: true
-          schema: &id053 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+          schema: &id053 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
             apiVersions:
             - {version: '2021-10-01'}
             language:
@@ -1406,7 +1406,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id054 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id054 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -1471,7 +1471,7 @@ globalParameters:
           protocol:
             http: {explode: true, in: QUERY, style: FORM}
           required: false
-          schema: &id128 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id128 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2021-10-01'}
             elementType: *id054
@@ -1555,7 +1555,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id060 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id060 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -1620,7 +1620,7 @@ globalParameters:
           protocol:
             http: {explode: true, in: QUERY, style: FORM}
           required: false
-          schema: &id129 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id129 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2021-10-01'}
             elementType: *id060
@@ -1668,7 +1668,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: BODY, style: BINARY}
             required: true
-            schema: &id133 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+            schema: &id133 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BinarySchema
               apiVersions:
               - {version: '2021-10-01'}
               language:
@@ -1688,7 +1688,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: HEADER}
             required: true
-            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+            schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
               apiVersions: []
               exclusiveMaximum: false
               exclusiveMinimum: false
@@ -1796,7 +1796,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id148 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id148 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -1915,7 +1915,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id149 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id149 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2034,7 +2034,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id150 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id150 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2143,7 +2143,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id081 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id081 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2206,7 +2206,7 @@ globalParameters:
           protocol:
             http: {explode: true, in: QUERY, style: FORM}
           required: false
-          schema: &id130 !!com.azure.autorest.extension.base.model.codemodel.ArraySchema
+          schema: &id130 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ArraySchema
             apiVersions:
             - {version: '2021-10-01'}
             elementType: *id081
@@ -2290,7 +2290,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id151 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id151 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2377,7 +2377,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: BODY, style: BINARY}
             required: true
-            schema: &id134 !!com.azure.autorest.extension.base.model.codemodel.BinarySchema
+            schema: &id134 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.BinarySchema
               apiVersions:
               - {version: '2021-10-01'}
               language:
@@ -2397,7 +2397,7 @@ globalParameters:
             protocol:
               http: {explode: false, in: HEADER}
             required: true
-            schema: !!com.azure.autorest.extension.base.model.codemodel.NumberSchema
+            schema: !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.NumberSchema
               apiVersions: []
               exclusiveMaximum: false
               exclusiveMinimum: false
@@ -2501,7 +2501,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id152 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id152 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2620,7 +2620,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id153 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id153 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2739,7 +2739,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id154 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id154 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2840,7 +2840,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id106 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id106 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:
@@ -2890,7 +2890,7 @@ globalParameters:
           protocol:
             http: {explode: false, in: PATH}
           required: true
-          schema: &id112 !!com.azure.autorest.extension.base.model.codemodel.ChoiceSchema
+          schema: &id112 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.ChoiceSchema
             apiVersions:
             - {version: '2021-10-01'}
             choiceType: *id014
@@ -2994,7 +2994,7 @@ globalParameters:
               explode: false
               headers:
               - header: x-ms-error-code
-                schema: &id113 !!com.azure.autorest.extension.base.model.codemodel.StringSchema
+                schema: &id113 !!com.microsoft.typespec.http.client.generator.core.extension.model.codemodel.StringSchema
                   apiVersions:
                   - {version: '2021-10-01'}
                   language:

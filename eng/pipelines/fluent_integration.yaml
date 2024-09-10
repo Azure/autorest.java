@@ -29,6 +29,15 @@ jobs:
     - template: /eng/pipelines/variables/globals.yml
 
   steps:
+  - checkout: self
+    submodules: true
+
+  - script: |
+      git checkout .
+      git apply ../core.diff --ignore-whitespace
+    displayName: 'Patch core'
+    workingDirectory: ./core
+
   - task: NodeTool@0
     inputs:
       versionSpec: '$(NodeVersion)'
