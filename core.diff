@@ -1,3 +1,29 @@
+diff --git a/packages/http-client-java/emitter/src/code-model-builder.ts b/packages/http-client-java/emitter/src/code-model-builder.ts
+index 263da6dd..121a62f2 100644
+--- a/packages/http-client-java/emitter/src/code-model-builder.ts
++++ b/packages/http-client-java/emitter/src/code-model-builder.ts
+@@ -240,7 +240,7 @@ export class CodeModelBuilder {
+   }
+ 
+   public async build(): Promise<CodeModel> {
+-    this.sdkContext = await createSdkContext(this.emitterContext, "@typespec/http-client-java", {
++    this.sdkContext = await createSdkContext(this.emitterContext, "@azure-tools/typespec-java", {
+       versioning: { previewStringRegex: /$/ },
+     }); // include all versions and do the filter by ourselves
+ 
+diff --git a/packages/http-client-java/emitter/src/emitter.ts b/packages/http-client-java/emitter/src/emitter.ts
+index b3527bd6..1130efff 100644
+--- a/packages/http-client-java/emitter/src/emitter.ts
++++ b/packages/http-client-java/emitter/src/emitter.ts
+@@ -98,7 +98,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
+ };
+ 
+ export const $lib = createTypeSpecLibrary({
+-  name: "@typespec/http-client-java",
++  name: "@azure-tools/typespec-java",
+   diagnostics: {},
+   emitter: {
+     options: EmitterOptionsSchema,
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 index 33442326..e57b77bb 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
