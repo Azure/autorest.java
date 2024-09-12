@@ -1,10 +1,10 @@
 # Prerequisite
 
-Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node --version`)
+Install [Node.js](https://nodejs.org/en/download/) 20 or above. (Verify by `node --version`)
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [TypeSpec](https://github.com/microsoft/typespec/) 0.59.
+Install [TypeSpec](https://github.com/microsoft/typespec/) 0.60.
 
 # Initialize TypeSpec Project
 
