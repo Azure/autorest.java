@@ -6,7 +6,7 @@ on:
         type: choice
         description: scope of the test code to generate
         required: true
-        default: typespec
+        default: autorest
         options:
           - all
           - autorest
@@ -30,7 +30,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: 'true'
-          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Install node
         uses: actions/setup-node@v4
