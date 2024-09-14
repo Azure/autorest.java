@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@azure-tools/cadl-ranch-specs": "0.37.1",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.20.3.tgz"
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.21.0.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "~0.60.0",
