@@ -6,7 +6,7 @@ on:
         type: choice
         description: scope of the test code to generate
         required: true
-        default: typespec
+        default: autorest
         options:
           - all
           - autorest
@@ -29,8 +29,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          submodules: 'true'
 
-      - name: Setup node 20
+      - name: Install node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -45,6 +46,13 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
+
+      - name: Patch core
+        run: |
+          cd core
+          git checkout .
+          git apply ../core.diff --ignore-whitespace
+          cd ..
 
       - name: Build autorest-java, install modules
         run: |
