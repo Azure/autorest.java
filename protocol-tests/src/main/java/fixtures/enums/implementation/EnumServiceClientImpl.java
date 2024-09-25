@@ -341,9 +341,11 @@ public final class EnumServiceClientImpl {
      * enums required body operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param bodyRequiredEnum body required enum.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -364,9 +366,11 @@ public final class EnumServiceClientImpl {
      * enums required body operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param bodyRequiredEnum body required enum.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -393,9 +397,11 @@ public final class EnumServiceClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
-     * String(test1 / test2)
-     * }</pre>
+     * <pre>
+     * {@code
+     * String(test1/test2)
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -428,9 +434,11 @@ public final class EnumServiceClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
-     * String(test1 / test2)
-     * }</pre>
+     * <pre>
+     * {@code
+     * String(test1/test2)
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

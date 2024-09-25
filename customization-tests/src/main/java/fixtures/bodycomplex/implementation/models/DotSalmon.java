@@ -4,13 +4,12 @@
 
 package fixtures.bodycomplex.implementation.models;
 
-import java.io.IOException;
-
 import com.azure.core.annotation.Fluent;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.IOException;
 
 /**
  * The DotSalmon model.

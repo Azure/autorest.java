@@ -40,9 +40,11 @@ public final class DpgClient {
      * Initially has no query parameters. After evolution, a new optional query parameter is added.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,9 +64,11 @@ public final class DpgClient {
      * Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -93,9 +97,11 @@ public final class DpgClient {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requiredParam I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -115,17 +121,21 @@ public final class DpgClient {
      * POST a JSON.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     url: String (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param parameter I am a body parameter. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -153,9 +163,11 @@ public final class DpgClient {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
