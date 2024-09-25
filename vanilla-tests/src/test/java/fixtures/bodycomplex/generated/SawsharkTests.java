@@ -34,14 +34,12 @@ public final class SawsharkTests {
         Sawshark model
             = new Sawshark(41.75237f, OffsetDateTime.parse("2021-09-01T01:28:54Z")).setSpecies("gibma")
                 .setSiblings(
-                    Arrays.asList(
-                        new Fish(18.452686f).setSpecies("qsrxybzqqed")
-                            .setSiblings(Arrays.asList(
-                                new Fish(67.5812f).setSpecies("iqfouflmmnkz")
-                                    .setSiblings(Arrays.asList(new Fish(56.270576f), new Fish(47.130127f))),
-                                new Fish(88.09739f).setSpecies("ougpbkwt")
-                                    .setSiblings(Arrays.asList(new Fish(35.76977f), new Fish(86.815414f))),
-                                new Fish(94.51547f).setSpecies("ta").setSiblings(Arrays.asList(new Fish(18.805998f))))),
+                    Arrays.asList(new Fish(18.452686f).setSpecies("qsrxybzqqed")
+                        .setSiblings(Arrays.asList(new Fish(67.5812f).setSpecies("iqfouflmmnkz")
+                            .setSiblings(Arrays.asList(new Fish(56.270576f), new Fish(47.130127f))),
+                            new Fish(88.09739f).setSpecies("ougpbkwt")
+                                .setSiblings(Arrays.asList(new Fish(35.76977f), new Fish(86.815414f))),
+                            new Fish(94.51547f).setSpecies("ta").setSiblings(Arrays.asList(new Fish(18.805998f))))),
                         new Fish(2.3766458f).setSpecies("uertumk")
                             .setSiblings(Arrays.asList(
                                 new Fish(84.869194f).setSpecies("whbmd")

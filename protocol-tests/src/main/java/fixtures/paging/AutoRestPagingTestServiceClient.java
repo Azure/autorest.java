@@ -39,14 +39,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that must return result of the default 'value' node.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -65,14 +67,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that gets an empty next link and should stop after page 1.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -91,14 +95,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -117,14 +123,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that finishes on the first call without a nextlink.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -143,22 +151,26 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that finishes on the first call with body params without a nextlink.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     name: String (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param parameters put {'name': 'body'} to pass the test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -180,14 +192,16 @@ public final class AutoRestPagingTestServiceClient {
      * call, will give you an items list of 1.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -217,14 +231,16 @@ public final class AutoRestPagingTestServiceClient {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -244,14 +260,16 @@ public final class AutoRestPagingTestServiceClient {
      * nextOperationWithQueryParams. Returns a ProductResult.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -279,14 +297,16 @@ public final class AutoRestPagingTestServiceClient {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -305,14 +325,16 @@ public final class AutoRestPagingTestServiceClient {
      * Paging with max page size. We don't want to.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -342,14 +364,16 @@ public final class AutoRestPagingTestServiceClient {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -379,14 +403,16 @@ public final class AutoRestPagingTestServiceClient {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param offset Offset of return value.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -407,14 +433,16 @@ public final class AutoRestPagingTestServiceClient {
      * nextLink that has 10 pages.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -434,14 +462,16 @@ public final class AutoRestPagingTestServiceClient {
      * client should retry and finish all 10 pages eventually.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -460,14 +490,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that receives a 400 on the first call.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -486,14 +518,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that receives a 400 on the second call.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -512,14 +546,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that receives an invalid nextLink.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -538,14 +574,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that doesn't return a full URL, just a fragment.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
@@ -567,14 +605,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param apiVersion Sets the api version to use.
      * @param tenant Sets the tenant to use.
@@ -607,14 +647,16 @@ public final class AutoRestPagingTestServiceClient {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -634,14 +676,16 @@ public final class AutoRestPagingTestServiceClient {
      * the next link.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -661,14 +705,16 @@ public final class AutoRestPagingTestServiceClient {
      * returned api version with your client's api version.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -687,14 +733,16 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     properties (Optional): {
      *         id: Integer (Optional)
      *         name: String (Optional)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

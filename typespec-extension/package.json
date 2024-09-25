@@ -64,10 +64,10 @@
   },
   "devDependencies": {
     "@azure-tools/typespec-azure-core": "0.46.0",
-    "@azure-tools/typespec-azure-resource-manager": "0.46.0",
+    "@azure-tools/typespec-azure-resource-manager": "0.46.1",
     "@azure-tools/typespec-autorest": "0.46.0",
     "@azure-tools/typespec-azure-rulesets": "0.46.0",
-    "@azure-tools/typespec-client-generator-core": "0.46.0",
+    "@azure-tools/typespec-client-generator-core": "0.46.2",
     "@types/js-yaml": "~4.0.9",
     "@types/lodash": "~4.17.7",
     "@types/mocha": "~10.0.7",

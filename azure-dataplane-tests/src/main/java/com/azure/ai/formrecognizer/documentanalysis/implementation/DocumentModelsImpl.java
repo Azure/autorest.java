@@ -12,11 +12,11 @@ import com.azure.ai.formrecognizer.documentanalysis.implementation.models.Compos
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.ContentType;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.CopyAuthorization;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.DocumentModelDetails;
+import com.azure.ai.formrecognizer.documentanalysis.implementation.models.DocumentModelSummary;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.DocumentModelsAnalyzeDocumentHeaders;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.DocumentModelsBuildModelHeaders;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.DocumentModelsComposeModelHeaders;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.DocumentModelsCopyModelToHeaders;
-import com.azure.ai.formrecognizer.documentanalysis.implementation.models.DocumentModelSummary;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.ErrorResponseException;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.GetDocumentModelsResponse;
 import com.azure.ai.formrecognizer.documentanalysis.implementation.models.StringIndexType;
