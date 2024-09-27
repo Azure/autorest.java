@@ -37,14 +37,13 @@ public final class FishTests {
                                     .setSiblings(Arrays.asList(new Fish(52.976006f), new Fish(38.78496f),
                                         new Fish(10.636175f))))),
                             new Fish(62.1013f).setSpecies("pjoxzjnch")
-                                .setSiblings(
-                                    Arrays.asList(
-                                        new Fish(2.2013366f).setSpecies("odmailzyd")
-                                            .setSiblings(Arrays.asList(new Fish(81.72188f), new Fish(29.215246f),
-                                                new Fish(46.80177f), new Fish(57.05146f))),
-                                        new Fish(93.690834f).setSpecies("xinpmqnjaq")
-                                            .setSiblings(Arrays.asList(new Fish(58.277805f), new Fish(97.03771f),
-                                                new Fish(1.6464472f))))),
+                                .setSiblings(Arrays.asList(
+                                    new Fish(2.2013366f).setSpecies("odmailzyd")
+                                        .setSiblings(Arrays.asList(new Fish(81.72188f), new Fish(29.215246f),
+                                            new Fish(46.80177f), new Fish(57.05146f))),
+                                    new Fish(93.690834f).setSpecies("xinpmqnjaq")
+                                        .setSiblings(Arrays.asList(new Fish(58.277805f), new Fish(97.03771f),
+                                            new Fish(1.6464472f))))),
                             new Fish(77.05936f).setSpecies("zvcputegjvwmfda")
                                 .setSiblings(Arrays.asList(
                                     new Fish(60.36252f).setSpecies("vpjhulsuuv")

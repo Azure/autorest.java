@@ -3,14 +3,12 @@
   "title": "VersioningOp List",
   "parameters": {
     "filter": "age gt 18",
-    "select": [
-      "name=name"
-    ]
+    "select": ["name=name"]
   },
   "responses": {
     "200": {
       "body": {
-        "value" : [
+        "value": [
           {
             "id": "myId",
             "name": "name",

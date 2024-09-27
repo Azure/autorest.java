@@ -41,11 +41,13 @@ public final class DpgClient {
      * Get models that you will either return to end users as a raw body, or with a model added during grow up.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     received: String(raw/model) (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      * and 'model' if you are going to convert the raw body to a customized body before returning to users.
@@ -68,19 +70,23 @@ public final class DpgClient {
      * instead, and put in 'model' as mode.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     hello: String (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     received: String(raw/model) (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      * and 'model' if you are going to convert the raw body to a customized body before returning to users.
@@ -102,11 +108,13 @@ public final class DpgClient {
      * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     received: String(raw/model) (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      * and 'model' if you are going to convert the raw body to a customized body before returning to users.
@@ -129,12 +137,14 @@ public final class DpgClient {
      * of a model after the SDK has grown up.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     received: String(raw/model) (Required)
      *     provisioningState: String (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
      * and 'model' if you are going to convert the raw body to a customized body before returning to users.

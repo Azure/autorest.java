@@ -39,12 +39,14 @@ public final class ReadonlypropertyClient {
      * Get complex types that have readonly properties.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     id: String (Optional)
      *     size: Integer (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -63,12 +65,14 @@ public final class ReadonlypropertyClient {
      * Put complex types that have readonly properties.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     id: String (Optional)
      *     size: Integer (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

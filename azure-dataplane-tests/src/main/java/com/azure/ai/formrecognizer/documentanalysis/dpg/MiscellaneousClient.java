@@ -40,7 +40,8 @@ public final class MiscellaneousClient {
      * Lists all operations.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
@@ -54,7 +55,8 @@ public final class MiscellaneousClient {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -73,7 +75,8 @@ public final class MiscellaneousClient {
      * Gets operation info.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     kind: String (Required)
      *     operationId: String (Required)
@@ -100,7 +103,8 @@ public final class MiscellaneousClient {
      *         }
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param operationId Unique operation ID.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -120,14 +124,16 @@ public final class MiscellaneousClient {
      * Return information about the current resource.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     customDocumentModels (Required): {
      *         count: int (Required)
      *         limit: int (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

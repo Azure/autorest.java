@@ -2,11 +2,9 @@
   "operationId": "ModelOp_PutNested",
   "title": "ModelOp PutNested",
   "parameters": {
-    "body": {
-      "nested1": {
-        "nested2": {
-          "data": "123"
-        }
+    "nested1": {
+      "nested2": {
+        "data": "123"
       }
     }
   },

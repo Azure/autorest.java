@@ -308,9 +308,11 @@ public final class DocumentModelsImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * BinaryData
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp",
@@ -346,9 +348,11 @@ public final class DocumentModelsImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * BinaryData
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp",
@@ -384,9 +388,11 @@ public final class DocumentModelsImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * BinaryData
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp",
@@ -428,9 +434,11 @@ public final class DocumentModelsImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * BinaryData
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp",
@@ -460,7 +468,8 @@ public final class DocumentModelsImpl {
      * Gets the result of document analysis.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     status: String(notStarted/running/failed/succeeded) (Required)
      *     createdDateTime: OffsetDateTime (Required)
@@ -663,7 +672,8 @@ public final class DocumentModelsImpl {
      *         ]
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
@@ -686,7 +696,8 @@ public final class DocumentModelsImpl {
      * Gets the result of document analysis.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     status: String(notStarted/running/failed/succeeded) (Required)
      *     createdDateTime: OffsetDateTime (Required)
@@ -889,7 +900,8 @@ public final class DocumentModelsImpl {
      *         ]
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param resultId Analyze operation result ID.
@@ -912,7 +924,8 @@ public final class DocumentModelsImpl {
      * Builds a custom document analysis model.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -925,7 +938,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param buildRequest Building request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -946,7 +960,8 @@ public final class DocumentModelsImpl {
      * Builds a custom document analysis model.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -959,7 +974,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param buildRequest Building request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -980,7 +996,8 @@ public final class DocumentModelsImpl {
      * Builds a custom document analysis model.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -993,7 +1010,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param buildRequest Building request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1021,7 +1039,8 @@ public final class DocumentModelsImpl {
      * Builds a custom document analysis model.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1034,7 +1053,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param buildRequest Building request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1061,7 +1081,8 @@ public final class DocumentModelsImpl {
      * Creates a new document model from document types of existing document models.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1074,7 +1095,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param composeRequest Compose request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1096,7 +1118,8 @@ public final class DocumentModelsImpl {
      * Creates a new document model from document types of existing document models.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1109,7 +1132,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param composeRequest Compose request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1130,7 +1154,8 @@ public final class DocumentModelsImpl {
      * Creates a new document model from document types of existing document models.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1143,7 +1168,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param composeRequest Compose request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1171,7 +1197,8 @@ public final class DocumentModelsImpl {
      * Creates a new document model from document types of existing document models.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1184,7 +1211,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param composeRequest Compose request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1213,7 +1241,8 @@ public final class DocumentModelsImpl {
      * description.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1221,11 +1250,13 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     targetResourceId: String (Required)
      *     targetResourceRegion: String (Required)
@@ -1234,7 +1265,8 @@ public final class DocumentModelsImpl {
      *     accessToken: String (Required)
      *     expirationDateTime: OffsetDateTime (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1258,7 +1290,8 @@ public final class DocumentModelsImpl {
      * description.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1266,11 +1299,13 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     targetResourceId: String (Required)
      *     targetResourceRegion: String (Required)
@@ -1279,7 +1314,8 @@ public final class DocumentModelsImpl {
      *     accessToken: String (Required)
      *     expirationDateTime: OffsetDateTime (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1302,7 +1338,8 @@ public final class DocumentModelsImpl {
      * Copies document model to the target resource, region, and modelId.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     targetResourceId: String (Required)
      *     targetResourceRegion: String (Required)
@@ -1311,7 +1348,8 @@ public final class DocumentModelsImpl {
      *     accessToken: String (Required)
      *     expirationDateTime: OffsetDateTime (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
@@ -1334,7 +1372,8 @@ public final class DocumentModelsImpl {
      * Copies document model to the target resource, region, and modelId.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     targetResourceId: String (Required)
      *     targetResourceRegion: String (Required)
@@ -1343,7 +1382,8 @@ public final class DocumentModelsImpl {
      *     accessToken: String (Required)
      *     expirationDateTime: OffsetDateTime (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
@@ -1366,7 +1406,8 @@ public final class DocumentModelsImpl {
      * Copies document model to the target resource, region, and modelId.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     targetResourceId: String (Required)
      *     targetResourceRegion: String (Required)
@@ -1375,7 +1416,8 @@ public final class DocumentModelsImpl {
      *     accessToken: String (Required)
      *     expirationDateTime: OffsetDateTime (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
@@ -1404,7 +1446,8 @@ public final class DocumentModelsImpl {
      * Copies document model to the target resource, region, and modelId.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     targetResourceId: String (Required)
      *     targetResourceRegion: String (Required)
@@ -1413,7 +1456,8 @@ public final class DocumentModelsImpl {
      *     accessToken: String (Required)
      *     expirationDateTime: OffsetDateTime (Required)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param copyToRequest Copy to request parameters.
@@ -1442,7 +1486,8 @@ public final class DocumentModelsImpl {
      * List all document models.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1452,7 +1497,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1476,7 +1522,8 @@ public final class DocumentModelsImpl {
      * List all document models.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1486,7 +1533,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1508,7 +1556,8 @@ public final class DocumentModelsImpl {
      * List all document models.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1518,7 +1567,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1540,7 +1590,8 @@ public final class DocumentModelsImpl {
      * List all document models.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1550,7 +1601,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1572,7 +1624,8 @@ public final class DocumentModelsImpl {
      * Gets detailed document model information.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1602,7 +1655,8 @@ public final class DocumentModelsImpl {
      *         }
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1623,7 +1677,8 @@ public final class DocumentModelsImpl {
      * Gets detailed document model information.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1653,7 +1708,8 @@ public final class DocumentModelsImpl {
      *         }
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param modelId Unique document model name.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1710,7 +1766,8 @@ public final class DocumentModelsImpl {
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1720,7 +1777,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1746,7 +1804,8 @@ public final class DocumentModelsImpl {
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     modelId: String (Required)
      *     description: String (Optional)
@@ -1756,7 +1815,8 @@ public final class DocumentModelsImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

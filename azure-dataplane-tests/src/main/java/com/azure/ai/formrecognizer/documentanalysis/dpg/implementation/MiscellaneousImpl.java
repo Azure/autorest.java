@@ -161,7 +161,8 @@ public final class MiscellaneousImpl {
      * Lists all operations.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
@@ -175,7 +176,8 @@ public final class MiscellaneousImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -199,7 +201,8 @@ public final class MiscellaneousImpl {
      * Lists all operations.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
@@ -213,7 +216,8 @@ public final class MiscellaneousImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -235,7 +239,8 @@ public final class MiscellaneousImpl {
      * Lists all operations.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
@@ -249,7 +254,8 @@ public final class MiscellaneousImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -271,7 +277,8 @@ public final class MiscellaneousImpl {
      * Lists all operations.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
@@ -285,7 +292,8 @@ public final class MiscellaneousImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -307,7 +315,8 @@ public final class MiscellaneousImpl {
      * Gets operation info.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     kind: String (Required)
      *     operationId: String (Required)
@@ -334,7 +343,8 @@ public final class MiscellaneousImpl {
      *         }
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param operationId Unique operation ID.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -355,7 +365,8 @@ public final class MiscellaneousImpl {
      * Gets operation info.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     kind: String (Required)
      *     operationId: String (Required)
@@ -382,7 +393,8 @@ public final class MiscellaneousImpl {
      *         }
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param operationId Unique operation ID.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -403,14 +415,16 @@ public final class MiscellaneousImpl {
      * Return information about the current resource.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     customDocumentModels (Required): {
      *         count: int (Required)
      *         limit: int (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -431,14 +445,16 @@ public final class MiscellaneousImpl {
      * Return information about the current resource.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     customDocumentModels (Required): {
      *         count: int (Required)
      *         limit: int (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -458,7 +474,8 @@ public final class MiscellaneousImpl {
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
@@ -472,7 +489,8 @@ public final class MiscellaneousImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -497,7 +515,8 @@ public final class MiscellaneousImpl {
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
@@ -511,7 +530,8 @@ public final class MiscellaneousImpl {
      *         String: String (Required)
      *     }
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

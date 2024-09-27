@@ -86,6 +86,12 @@ def update_pom(package_versions: List[PackageVersion]):
         if path.isdir(path.join(root_path, folder)) and path.isfile(path.join(root_path, folder, 'pom.xml')):
             pom_files.append(path.join(folder, 'pom.xml'))
 
+    core_relative_path = 'core/packages/http-client-java/generator'
+    core_path = path.join(root_path, core_relative_path)
+    for folder in os.listdir(core_path):
+        if path.isdir(path.join(core_path, folder)) and path.isfile(path.join(core_path, folder, 'pom.xml')):
+            pom_files.append(path.join(core_relative_path, folder, 'pom.xml'))
+
     # POMs
     for pom_file in pom_files:
         with open(path.join(root_path, pom_file), encoding='utf-8') as f_in:

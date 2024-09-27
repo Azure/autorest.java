@@ -39,7 +39,8 @@ public final class PolymorphismClient {
      * Get complex types that are polymorphic.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -48,7 +49,8 @@ public final class PolymorphismClient {
      *         (recursive schema, see above)
      *     ]
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -67,7 +69,8 @@ public final class PolymorphismClient {
      * Put complex types that are polymorphic.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -76,7 +79,8 @@ public final class PolymorphismClient {
      *         (recursive schema, see above)
      *     ]
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
@@ -128,12 +132,14 @@ public final class PolymorphismClient {
      * Get complex types that are polymorphic, JSON key contains a dot.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fish.type: String (Required)
      *     species: String (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -153,7 +159,8 @@ public final class PolymorphismClient {
      * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     sampleSalmon (Optional): {
      *         fish.type: String (Required)
@@ -172,7 +179,8 @@ public final class PolymorphismClient {
      *         (recursive schema, see above)
      *     ]
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -193,7 +201,8 @@ public final class PolymorphismClient {
      * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     sampleSalmon (Optional): {
      *         fish.type: String (Required)
@@ -212,7 +221,8 @@ public final class PolymorphismClient {
      *         (recursive schema, see above)
      *     ]
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -232,7 +242,8 @@ public final class PolymorphismClient {
      * Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -250,7 +261,8 @@ public final class PolymorphismClient {
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -270,7 +282,8 @@ public final class PolymorphismClient {
      * Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -288,7 +301,8 @@ public final class PolymorphismClient {
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -308,7 +322,8 @@ public final class PolymorphismClient {
      * Put complex types that are polymorphic, omitting the discriminator.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -326,11 +341,13 @@ public final class PolymorphismClient {
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -348,7 +365,8 @@ public final class PolymorphismClient {
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param complexBody The complexBody parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -370,7 +388,8 @@ public final class PolymorphismClient {
      * allowed from the client.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -379,7 +398,8 @@ public final class PolymorphismClient {
      *         (recursive schema, see above)
      *     ]
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
      * be sent:
