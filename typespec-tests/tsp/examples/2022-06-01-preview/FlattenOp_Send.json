@@ -2,9 +2,8 @@
   "operationId": "FlattenOp_Send",
   "title": "FlattenOp Send",
   "parameters": {
-    "id":  "myRequiredId",
+    "id": "myRequiredId",
     "sendRequest": {
-      "endpoint": "host",
       "user": {
         "user": "myOptionalUser"
       },
