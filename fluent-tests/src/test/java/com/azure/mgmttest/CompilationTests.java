@@ -26,6 +26,8 @@ import com.azure.mgmttest.network.fluent.NetworkInterfacesClient;
 import com.azure.mgmttest.network.fluent.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.fluent.models.NetworkSecurityGroupInner;
 import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
+import com.azure.mgmttest.nonstringexpandableenum.fluent.models.ScheduledQueryRuleProperties;
+import com.azure.mgmttest.nonstringexpandableenum.models.AlertSeverity;
 import com.azure.mgmttest.postgresqlhsc.fluent.models.ServerConfigurationInner;
 import com.azure.mgmttest.resources.fluent.DeploymentsClient;
 import com.azure.mgmttest.resources.fluent.models.DeploymentExtendedInner;
@@ -37,6 +39,8 @@ import com.azure.mgmttest.storage.fluent.models.StorageAccountInner;
 import com.azure.mgmttest.trafficmanager.fluent.models.EndpointInner;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsGet;
 import com.azure.resourcemanager.resources.fluentcore.collection.InnerSupportsListing;
+
+import java.io.IOException;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -174,5 +178,10 @@ public class CompilationTests {
 
     public void testResourceWithWritableName() {
         FirewallRuleInner firewallRuleInner = new FirewallRuleInner();
+    }
+
+    public void testNonStringExpandableEnum() throws IOException {
+        ScheduledQueryRuleProperties properties = new ScheduledQueryRuleProperties();
+        String jsonString = properties.toJsonString();
     }
 }
