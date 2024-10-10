@@ -26,7 +26,7 @@ $packagesPath = New-Item -ItemType Directory -Force -Path $packagesPath | Select
 
 Push-Location $RepoRoot
 try {
-  invoke "mvn -f pom.xml -P local,tsp -T 1C --no-transfer-progress clean install"
+  invoke "pwsh Build-TypeSpec.ps1"
 
   Push-Location "./typespec-extension"
   try {
