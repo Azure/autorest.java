@@ -4,63 +4,96 @@
 
 package fixtures.nonstringenum.models;
 
-import com.azure.core.util.ExpandableStringEnum;
+import com.azure.core.util.ExpandableEnum;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * List of float enums.
  */
-public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
+public final class FloatEnum implements ExpandableEnum<Float> {
+    private static final Map<Float, FloatEnum> VALUES = new ConcurrentHashMap<>();
+
     /**
      * Static value 200.4 for FloatEnum.
      */
-    public static final FloatEnum TWO_HUNDRED4 = fromFloat(200.4f);
+    public static final FloatEnum TWO_HUNDRED4 = fromValue(200.4f);
 
     /**
      * Static value 403.4 for FloatEnum.
      */
-    public static final FloatEnum FOUR_HUNDRED_THREE4 = fromFloat(403.4f);
+    public static final FloatEnum FOUR_HUNDRED_THREE4 = fromValue(403.4f);
 
     /**
      * Static value 405.3 for FloatEnum.
      */
-    public static final FloatEnum FOUR_HUNDRED_FIVE3 = fromFloat(405.3f);
+    public static final FloatEnum FOUR_HUNDRED_FIVE3 = fromValue(405.3f);
 
     /**
      * Static value 406.2 for FloatEnum.
      */
-    public static final FloatEnum FOUR_HUNDRED_SIX2 = fromFloat(406.2f);
+    public static final FloatEnum FOUR_HUNDRED_SIX2 = fromValue(406.2f);
 
     /**
      * Static value 429.1 for FloatEnum.
      */
-    public static final FloatEnum FOUR_HUNDRED_TWENTY_NINE1 = fromFloat(429.1f);
+    public static final FloatEnum FOUR_HUNDRED_TWENTY_NINE1 = fromValue(429.1f);
 
-    /**
-     * Creates a new instance of FloatEnum value.
-     * 
-     * @deprecated Use the {@link #fromFloat(float)} factory method.
-     */
-    @Deprecated
-    public FloatEnum() {
+    private final Float value;
+
+    private FloatEnum(Float value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a FloatEnum from its string representation.
+     * Creates or finds a FloatEnum.
      * 
-     * @param name a name to look for.
+     * @param value a value to look for.
      * @return the corresponding FloatEnum.
      */
-    public static FloatEnum fromFloat(float name) {
-        return fromString(String.valueOf(name), FloatEnum.class);
+    public static FloatEnum fromValue(Float value) {
+        Objects.requireNonNull(value, "'value' cannot be null.");
+        FloatEnum member = VALUES.get(value);
+        if (member != null) {
+            return member;
+        }
+        return VALUES.computeIfAbsent(value, key -> new FloatEnum(key));
     }
 
     /**
      * Gets known FloatEnum values.
      * 
-     * @return known FloatEnum values.
+     * @return Known FloatEnum values.
      */
     public static Collection<FloatEnum> values() {
-        return values(FloatEnum.class);
+        return new ArrayList<>(VALUES.values());
+    }
+
+    /**
+     * Gets the value of the FloatEnum instance.
+     * 
+     * @return the value of the FloatEnum instance.
+     */
+    @Override
+    public Float getValue() {
+        return this.value;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toString(this.value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return Objects.equals(this.value, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.value);
     }
 }
