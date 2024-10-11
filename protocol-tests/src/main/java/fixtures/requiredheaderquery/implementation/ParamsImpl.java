@@ -164,9 +164,11 @@ public final class ParamsImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
@@ -222,9 +224,11 @@ public final class ParamsImpl {
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
@@ -268,9 +272,11 @@ public final class ParamsImpl {
      * Get Required Header Parameters.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
@@ -305,9 +311,11 @@ public final class ParamsImpl {
      * Get Required Header Parameters.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * Object
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.

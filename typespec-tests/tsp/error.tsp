@@ -16,18 +16,7 @@ model Diagnostic {
   error: Error;
 }
 
-@error
-model UserError {
-  @statusCode
-  @minValue(400)
-  @maxValue(404)
-  status: int32;
-}
-
 @route("/error")
 interface ErrorOp {
   read(): ResourceCreatedOrOkResponse<Diagnostic> | ErrorResponse;
-
-  @route("/statuscoderange")
-  readWithCustomizedError(): ResourceCreatedOrOkResponse<Diagnostic> | UserError;
 }

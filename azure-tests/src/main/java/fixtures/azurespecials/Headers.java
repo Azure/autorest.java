@@ -21,8 +21,8 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdParamGroupingParameters;
-import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeadHeaders;
+import fixtures.azurespecials.models.HeadersCustomNamedRequestIdHeaders;
 import fixtures.azurespecials.models.HeadersCustomNamedRequestIdParamGroupingHeaders;
 import reactor.core.publisher.Mono;
 

@@ -187,9 +187,11 @@ public final class EnumsImpl {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -210,9 +212,11 @@ public final class EnumsImpl {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -232,9 +236,11 @@ public final class EnumsImpl {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -256,9 +262,11 @@ public final class EnumsImpl {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param stringBody string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -278,9 +286,11 @@ public final class EnumsImpl {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -301,9 +311,11 @@ public final class EnumsImpl {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -323,9 +335,11 @@ public final class EnumsImpl {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -347,9 +361,11 @@ public final class EnumsImpl {
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * String(red color/green-color/blue_color)
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -369,12 +385,14 @@ public final class EnumsImpl {
      * Get value 'green-color' from the constant.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -395,12 +413,14 @@ public final class EnumsImpl {
      * Get value 'green-color' from the constant.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -419,12 +439,14 @@ public final class EnumsImpl {
      * Sends value 'green-color' from a constant.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -446,12 +468,14 @@ public final class EnumsImpl {
      * Sends value 'green-color' from a constant.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>{@code
+     * <pre>
+     * {@code
      * {
      *     ColorConstant: String (Required)
      *     field1: String (Optional)
      * }
-     * }</pre>
+     * }
+     * </pre>
      * 
      * @param enumStringBody enum string body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

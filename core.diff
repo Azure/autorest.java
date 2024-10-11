@@ -1,8 +1,8 @@
 diff --git a/packages/http-client-java/emitter/src/code-model-builder.ts b/packages/http-client-java/emitter/src/code-model-builder.ts
-index 263da6dd..121a62f2 100644
+index 5375778e0..917a4a957 100644
 --- a/packages/http-client-java/emitter/src/code-model-builder.ts
 +++ b/packages/http-client-java/emitter/src/code-model-builder.ts
-@@ -240,7 +240,7 @@ export class CodeModelBuilder {
+@@ -241,7 +241,7 @@ export class CodeModelBuilder {
    }
  
    public async build(): Promise<CodeModel> {
@@ -12,7 +12,7 @@ index 263da6dd..121a62f2 100644
      }); // include all versions and do the filter by ourselves
  
 diff --git a/packages/http-client-java/emitter/src/emitter.ts b/packages/http-client-java/emitter/src/emitter.ts
-index b3527bd6..1130efff 100644
+index 317e746d2..848b46275 100644
 --- a/packages/http-client-java/emitter/src/emitter.ts
 +++ b/packages/http-client-java/emitter/src/emitter.ts
 @@ -98,7 +98,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -25,10 +25,10 @@ index b3527bd6..1130efff 100644
    emitter: {
      options: EmitterOptionsSchema,
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index 33442326..e57b77bb 100644
+index afa83e5c4..db70c748e 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-@@ -19,6 +19,11 @@
+@@ -21,6 +21,11 @@
    </properties>
  
    <dependencies>
@@ -41,22 +41,23 @@ index 33442326..e57b77bb 100644
        <groupId>com.azure</groupId>
        <artifactId>azure-core</artifactId>
 diff --git a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
-index 0ff22ae8..33e7b162 100644
+index d44ce8ec4..7953870bc 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
 +++ b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
-@@ -3,8 +3,8 @@
+@@ -3,9 +3,9 @@
  
  package com.microsoft.typespec.http.client.generator.core.postprocessor;
  
--import com.microsoft.typespec.http.client.generator.core.customization.Customization;
--import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
 +import com.azure.autorest.customization.Customization;
 +import com.azure.autorest.customization.implementation.Utils;
+ import com.azure.json.JsonReader;
+-import com.microsoft.typespec.http.client.generator.core.customization.Customization;
+-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
+ import com.microsoft.typespec.http.client.generator.core.extension.base.util.FileUtils;
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.JavaSettings;
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.NewPlugin;
- import com.microsoft.typespec.http.client.generator.core.extension.plugin.PluginLogger;
 diff --git a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
-index b009d250..6ef31a2d 100644
+index c99896650..358938595 100644
 --- a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 @@ -16,9 +16,9 @@

@@ -94,7 +94,7 @@ model ProtocolInternalModel {
 interface InternalOp {
   // test ApiRequest with Access.public
   @access(Access.public, "python")
-  @access(Access.internal, "java")
+  @access(Access.internal, "client")
   @post
   postInternal(@body body: ApiRequest): ResponseInternal;
 
