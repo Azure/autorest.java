@@ -4,63 +4,96 @@
 
 package fixtures.nonstringenum.models;
 
-import com.azure.core.util.ExpandableStringEnum;
+import com.azure.core.util.ExpandableEnum;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * List of integer enums.
  */
-public final class IntEnum extends ExpandableStringEnum<IntEnum> {
+public final class IntEnum implements ExpandableEnum<Integer> {
+    private static final Map<Integer, IntEnum> VALUES = new ConcurrentHashMap<>();
+
     /**
      * Static value 200 for IntEnum.
      */
-    public static final IntEnum TWO_HUNDRED = fromInt(200);
+    public static final IntEnum TWO_HUNDRED = fromValue(200);
 
     /**
      * Static value 403 for IntEnum.
      */
-    public static final IntEnum FOUR_HUNDRED_THREE = fromInt(403);
+    public static final IntEnum FOUR_HUNDRED_THREE = fromValue(403);
 
     /**
      * Static value 405 for IntEnum.
      */
-    public static final IntEnum FOUR_HUNDRED_FIVE = fromInt(405);
+    public static final IntEnum FOUR_HUNDRED_FIVE = fromValue(405);
 
     /**
      * Static value 406 for IntEnum.
      */
-    public static final IntEnum FOUR_HUNDRED_SIX = fromInt(406);
+    public static final IntEnum FOUR_HUNDRED_SIX = fromValue(406);
 
     /**
      * Static value 429 for IntEnum.
      */
-    public static final IntEnum FOUR_HUNDRED_TWENTY_NINE = fromInt(429);
+    public static final IntEnum FOUR_HUNDRED_TWENTY_NINE = fromValue(429);
 
-    /**
-     * Creates a new instance of IntEnum value.
-     * 
-     * @deprecated Use the {@link #fromInt(int)} factory method.
-     */
-    @Deprecated
-    public IntEnum() {
+    private final Integer value;
+
+    private IntEnum(Integer value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a IntEnum from its string representation.
+     * Creates or finds a IntEnum.
      * 
-     * @param name a name to look for.
+     * @param value a value to look for.
      * @return the corresponding IntEnum.
      */
-    public static IntEnum fromInt(int name) {
-        return fromString(String.valueOf(name), IntEnum.class);
+    public static IntEnum fromValue(Integer value) {
+        Objects.requireNonNull(value, "'value' cannot be null.");
+        IntEnum member = VALUES.get(value);
+        if (member != null) {
+            return member;
+        }
+        return VALUES.computeIfAbsent(value, key -> new IntEnum(key));
     }
 
     /**
      * Gets known IntEnum values.
      * 
-     * @return known IntEnum values.
+     * @return Known IntEnum values.
      */
     public static Collection<IntEnum> values() {
-        return values(IntEnum.class);
+        return new ArrayList<>(VALUES.values());
+    }
+
+    /**
+     * Gets the value of the IntEnum instance.
+     * 
+     * @return the value of the IntEnum instance.
+     */
+    @Override
+    public Integer getValue() {
+        return this.value;
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toString(this.value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return Objects.equals(this.value, obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.value);
     }
 }
