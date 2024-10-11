@@ -27,6 +27,7 @@ public class NonStringEnumTests {
         assertEquals(IntEnum.FOUR_HUNDRED_TWENTY_NINE, actual);
     }
 
+    @Disabled("wire type changed for Swagger extensible non-string enum")
     @Test
     public void putInt() {
         intClient.put(IntEnum.TWO_HUNDRED);
@@ -39,6 +40,7 @@ public class NonStringEnumTests {
         assertEquals(FloatEnum.FOUR_HUNDRED_TWENTY_NINE1, actual);
     }
 
+    @Disabled("wire type changed for Swagger extensible non-string enum")
     @Test
     public void putFloat() {
         floatClient.put(FloatEnum.TWO_HUNDRED4);

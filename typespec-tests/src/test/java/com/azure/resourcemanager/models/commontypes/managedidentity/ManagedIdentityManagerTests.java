@@ -45,10 +45,10 @@ public class ManagedIdentityManagerTests {
         Map<String, UserAssignedIdentity> userAssignedIdentityMap = new HashMap<>();
         userAssignedIdentityMap.put(USER_ASSIGNED_IDENTITIES_KEY, new UserAssignedIdentity());
         resource.update()
-            .withIdentity(new ManagedServiceIdentity().withType(ManagedServiceIdentityType.fromString("SystemAssigned,UserAssigned"))
+            .withIdentity(new ManagedServiceIdentity().withType(ManagedServiceIdentityType.SYSTEM_ASSIGNED_USER_ASSIGNED)
                 .withUserAssignedIdentities(userAssignedIdentityMap))
             .apply();
-        Assertions.assertEquals(ManagedServiceIdentityType.fromString("SystemAssigned,UserAssigned"), resource.identity().type());
+        Assertions.assertEquals(ManagedServiceIdentityType.SYSTEM_ASSIGNED_USER_ASSIGNED, resource.identity().type());
         Assertions.assertNotNull(resource.identity().principalId());
         Assertions.assertNotNull(resource.identity().tenantId());
         Assertions.assertNotNull(resource.identity().userAssignedIdentities());
