@@ -1,8 +1,14 @@
 # Release History
 
+## 0.22.0 (Unreleased)
+
+Compatible with compiler 0.61.
+
 ## 0.22.0 (2024-10-11)
 
 Compatible with compiler 0.61.
+
+- Supported non-string extensible enum.
 
 ## 0.21.2 (2024-09-30)
 
