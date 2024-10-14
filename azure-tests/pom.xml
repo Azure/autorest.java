@@ -26,13 +26,13 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-management</artifactId>
-      <version>1.15.3</version>
+      <version>1.15.4</version>
     </dependency>
 
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.15.4</version>
+      <version>1.15.5</version>
       <scope>test</scope>
     </dependency>
 
