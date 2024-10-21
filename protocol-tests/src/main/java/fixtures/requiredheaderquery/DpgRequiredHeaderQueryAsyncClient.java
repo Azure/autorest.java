@@ -57,7 +57,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -93,7 +93,7 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 

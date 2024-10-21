@@ -52,7 +52,7 @@ public final class SpecialHeaderClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -84,7 +84,7 @@ public final class SpecialHeaderClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -107,7 +107,7 @@ public final class SpecialHeaderClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -139,7 +139,7 @@ public final class SpecialHeaderClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -171,7 +171,7 @@ public final class SpecialHeaderClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 

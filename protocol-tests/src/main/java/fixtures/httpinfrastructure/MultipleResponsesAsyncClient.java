@@ -250,7 +250,7 @@ public final class MultipleResponsesAsyncClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -273,7 +273,7 @@ public final class MultipleResponsesAsyncClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -296,7 +296,7 @@ public final class MultipleResponsesAsyncClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -319,7 +319,7 @@ public final class MultipleResponsesAsyncClient {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 

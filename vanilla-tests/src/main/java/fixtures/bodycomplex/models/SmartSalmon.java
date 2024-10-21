@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -41,7 +42,7 @@ public final class SmartSalmon extends Salmon {
      * Dictionary of <any>
      */
     @JsonIgnore
-    private Map<String, Object> additionalProperties;
+    private Map<String, BinaryData> additionalProperties;
 
     /**
      * Creates an instance of SmartSalmon class.
@@ -89,7 +90,7 @@ public final class SmartSalmon extends Salmon {
      * @return the additionalProperties value.
      */
     @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
+    public Map<String, BinaryData> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
@@ -99,13 +100,13 @@ public final class SmartSalmon extends Salmon {
      * @param additionalProperties the additionalProperties value to set.
      * @return the SmartSalmon object itself.
      */
-    public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
+    public SmartSalmon setAdditionalProperties(Map<String, BinaryData> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
 
     @JsonAnySetter
-    void setAdditionalProperties(String key, Object value) {
+    void setAdditionalProperties(String key, BinaryData value) {
         if (additionalProperties == null) {
             additionalProperties = new LinkedHashMap<>();
         }

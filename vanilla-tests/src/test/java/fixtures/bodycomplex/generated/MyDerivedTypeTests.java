@@ -11,11 +11,10 @@ import org.junit.jupiter.api.Assertions;
 public final class MyDerivedTypeTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        MyDerivedType model = BinaryData
-            .fromString(
-                "{\"kind\":\"Kind1\",\"propD1\":\"xo\",\"propB1\":\"jionpimexgstxgc\",\"helper\":{\"propBH1\":\"dg\"}}")
+        MyDerivedType model = BinaryData.fromString(
+            "{\"kind\":\"Kind1\",\"propD1\":\"qidtqajzyu\",\"propB1\":\"kudjkrlkhb\",\"helper\":{\"propBH1\":\"fepgzgq\"}}")
             .toObject(MyDerivedType.class);
-        Assertions.assertEquals("jionpimexgstxgc", model.getPropB1());
-        Assertions.assertEquals("xo", model.getPropD1());
+        Assertions.assertEquals("kudjkrlkhb", model.getPropB1());
+        Assertions.assertEquals("qidtqajzyu", model.getPropD1());
     }
 }

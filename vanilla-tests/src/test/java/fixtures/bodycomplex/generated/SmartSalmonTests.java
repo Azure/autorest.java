@@ -7,6 +7,7 @@ package fixtures.bodycomplex.generated;
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.SmartSalmon;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,45 +17,81 @@ public final class SmartSalmonTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         SmartSalmon model = BinaryData.fromString(
-            "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"lssai\",\"\":{\"eebvmgxsab\":\"datajwnzlljfmp\"},\"location\":\"qduujitcjczdz\",\"iswild\":false,\"species\":\"hkr\",\"length\":38.019188,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"p\",\"length\":43.59222,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vwrwj\",\"length\":48.286907,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":93.839714}]},{\"fishtype\":\"Fish\",\"species\":\"utjeltmrldhugj\",\"length\":66.317825,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":68.56524},{\"fishtype\":\"Fish\",\"length\":94.724525}]},{\"fishtype\":\"Fish\",\"species\":\"hocdgeab\",\"length\":70.60696,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":91.44667},{\"fishtype\":\"Fish\",\"length\":9.046102},{\"fishtype\":\"Fish\",\"length\":89.55463}]}]}]}")
+            "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"lssai\",\"\":{},\"location\":\"wnzlljfmppeeb\",\"iswild\":false,\"species\":\"sabkyqduujitcjcz\",\"length\":99.2908,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"dhkrwpdappdsbdk\",\"length\":37.614758,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"feusnhut\",\"length\":95.083824,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":33.49618},{\"fishtype\":\"Fish\",\"length\":9.114658},{\"fishtype\":\"Fish\",\"length\":82.67335},{\"fishtype\":\"Fish\",\"length\":95.85893}]},{\"fishtype\":\"Fish\",\"species\":\"ugjzzdatqxhocdge\",\"length\":56.39705,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":22.124004},{\"fishtype\":\"Fish\",\"length\":67.32226},{\"fishtype\":\"Fish\",\"length\":91.44667}]},{\"fishtype\":\"Fish\",\"species\":\"icndvkaozwyifty\",\"length\":33.074295,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":30.237473},{\"fishtype\":\"Fish\",\"length\":93.9675}]},{\"fishtype\":\"Fish\",\"species\":\"ftyxolniw\",\"length\":78.04106,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":26.848585},{\"fishtype\":\"Fish\",\"length\":50.280113},{\"fishtype\":\"Fish\",\"length\":48.25244},{\"fishtype\":\"Fish\",\"length\":90.06741}]}]},{\"fishtype\":\"Fish\",\"species\":\"iawxklry\",\"length\":93.34042,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"basyy\",\"length\":74.27816,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":84.3501},{\"fishtype\":\"Fish\",\"length\":33.077652}]},{\"fishtype\":\"Fish\",\"species\":\"cbacphejkotynqg\",\"length\":71.94767,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":30.246729},{\"fishtype\":\"Fish\",\"length\":90.19363}]},{\"fishtype\":\"Fish\",\"species\":\"i\",\"length\":61.310524,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":19.4606},{\"fishtype\":\"Fish\",\"length\":36.83368},{\"fishtype\":\"Fish\",\"length\":70.784225}]}]},{\"fishtype\":\"Fish\",\"species\":\"ibmadgakeqsrxy\",\"length\":33.499878,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"dqytbciqfouflmm\",\"length\":42.5706,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":67.5812},{\"fishtype\":\"Fish\",\"length\":25.49743},{\"fishtype\":\"Fish\",\"length\":40.001904}]},{\"fishtype\":\"Fish\",\"species\":\"glougpbk\",\"length\":18.99814,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":99.13788},{\"fishtype\":\"Fish\",\"length\":27.558018},{\"fishtype\":\"Fish\",\"length\":35.76977},{\"fishtype\":\"Fish\",\"length\":86.815414}]},{\"fishtype\":\"Fish\",\"species\":\"ta\",\"length\":94.51547,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":18.805998}]},{\"fishtype\":\"Fish\",\"species\":\"uertumk\",\"length\":2.3766458,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":9.28132},{\"fishtype\":\"Fish\",\"length\":25.423796},{\"fishtype\":\"Fish\",\"length\":66.73995},{\"fishtype\":\"Fish\",\"length\":22.323168}]}]}]}")
             .toObject(SmartSalmon.class);
-        Assertions.assertEquals("hkr", model.getSpecies());
-        Assertions.assertEquals(38.019188f, model.getLength());
-        Assertions.assertEquals("p", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(43.59222f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("vwrwj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(48.286907f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(93.839714f,
+        Assertions.assertEquals("sabkyqduujitcjcz", model.getSpecies());
+        Assertions.assertEquals(99.2908f, model.getLength());
+        Assertions.assertEquals("dhkrwpdappdsbdk", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(37.614758f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("feusnhut", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(95.083824f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(33.49618f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals("qduujitcjczdz", model.getLocation());
+        Assertions.assertEquals("wnzlljfmppeeb", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
         Assertions.assertEquals("lssai", model.getCollegeDegree());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        SmartSalmon model = new SmartSalmon(38.019188f).setSpecies("hkr")
-            .setSiblings(Arrays.asList(new Fish(43.59222f).setSpecies("p")
-                .setSiblings(Arrays.asList(
-                    new Fish(48.286907f).setSpecies("vwrwj").setSiblings(Arrays.asList(new Fish(93.839714f))),
-                    new Fish(66.317825f).setSpecies("utjeltmrldhugj")
-                        .setSiblings(Arrays.asList(new Fish(68.56524f), new Fish(94.724525f))),
-                    new Fish(70.60696f).setSpecies("hocdgeab")
-                        .setSiblings(Arrays.asList(new Fish(91.44667f), new Fish(9.046102f), new Fish(89.55463f)))))))
-            .setLocation("qduujitcjczdz")
-            .setIswild(false)
-            .setCollegeDegree("lssai")
-            .setAdditionalProperties(mapOf("fishtype", "smart_salmon"));
+        SmartSalmon model
+            = new SmartSalmon(
+                99.2908f)
+                    .setSpecies("sabkyqduujitcjcz")
+                    .setSiblings(
+                        Arrays
+                            .asList(
+                                new Fish(37.614758f).setSpecies("dhkrwpdappdsbdk")
+                                    .setSiblings(Arrays.asList(
+                                        new Fish(95.083824f).setSpecies("feusnhut")
+                                            .setSiblings(Arrays.asList(new Fish(33.49618f), new Fish(9.114658f),
+                                                new Fish(82.67335f), new Fish(95.85893f))),
+                                        new Fish(56.39705f).setSpecies("ugjzzdatqxhocdge")
+                                            .setSiblings(Arrays.asList(new Fish(22.124004f), new Fish(67.32226f),
+                                                new Fish(91.44667f))),
+                                        new Fish(33.074295f).setSpecies("icndvkaozwyifty")
+                                            .setSiblings(Arrays.asList(new Fish(30.237473f), new Fish(93.9675f))),
+                                        new Fish(78.04106f).setSpecies("ftyxolniw")
+                                            .setSiblings(Arrays.asList(new Fish(26.848585f), new Fish(50.280113f),
+                                                new Fish(48.25244f), new Fish(90.06741f))))),
+                                new Fish(93.34042f).setSpecies("iawxklry")
+                                    .setSiblings(Arrays.asList(
+                                        new Fish(74.27816f).setSpecies("basyy")
+                                            .setSiblings(Arrays.asList(new Fish(84.3501f), new Fish(33.077652f))),
+                                        new Fish(71.94767f).setSpecies("cbacphejkotynqg")
+                                            .setSiblings(Arrays.asList(new Fish(30.246729f), new Fish(90.19363f))),
+                                        new Fish(61.310524f).setSpecies("i")
+                                            .setSiblings(Arrays.asList(new Fish(19.4606f), new Fish(36.83368f),
+                                                new Fish(70.784225f))))),
+                                new Fish(33.499878f).setSpecies("ibmadgakeqsrxy")
+                                    .setSiblings(Arrays.asList(
+                                        new Fish(42.5706f).setSpecies("dqytbciqfouflmm")
+                                            .setSiblings(Arrays.asList(new Fish(67.5812f), new Fish(25.49743f),
+                                                new Fish(40.001904f))),
+                                        new Fish(18.99814f)
+                                            .setSpecies("glougpbk")
+                                            .setSiblings(Arrays.asList(new Fish(99.13788f), new Fish(27.558018f),
+                                                new Fish(35.76977f), new Fish(86.815414f))),
+                                        new Fish(94.51547f).setSpecies("ta")
+                                            .setSiblings(Arrays.asList(new Fish(18.805998f))),
+                                        new Fish(2.3766458f).setSpecies("uertumk")
+                                            .setSiblings(Arrays.asList(new Fish(9.28132f), new Fish(25.423796f),
+                                                new Fish(66.73995f), new Fish(22.323168f)))))))
+                    .setLocation("wnzlljfmppeeb")
+                    .setIswild(false)
+                    .setCollegeDegree("lssai")
+                    .setAdditionalProperties(
+                        mapOf("fishtype", BinaryData.fromBytes("smart_salmon".getBytes(StandardCharsets.UTF_8))));
         model = BinaryData.fromObject(model).toObject(SmartSalmon.class);
-        Assertions.assertEquals("hkr", model.getSpecies());
-        Assertions.assertEquals(38.019188f, model.getLength());
-        Assertions.assertEquals("p", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(43.59222f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("vwrwj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(48.286907f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(93.839714f,
+        Assertions.assertEquals("sabkyqduujitcjcz", model.getSpecies());
+        Assertions.assertEquals(99.2908f, model.getLength());
+        Assertions.assertEquals("dhkrwpdappdsbdk", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(37.614758f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("feusnhut", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(95.083824f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(33.49618f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals("qduujitcjczdz", model.getLocation());
+        Assertions.assertEquals("wnzlljfmppeeb", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
         Assertions.assertEquals("lssai", model.getCollegeDegree());
     }

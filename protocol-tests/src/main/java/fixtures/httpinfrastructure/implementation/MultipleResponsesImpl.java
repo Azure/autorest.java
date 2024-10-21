@@ -1102,7 +1102,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -1127,7 +1127,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -1151,7 +1151,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -1176,7 +1176,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -1200,7 +1200,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -1225,7 +1225,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -1249,7 +1249,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
@@ -1274,7 +1274,7 @@ public final class MultipleResponsesImpl {
      * 
      * <pre>
      * {@code
-     * Object
+     * BinaryData
      * }
      * </pre>
      * 
