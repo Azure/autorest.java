@@ -5,7 +5,6 @@
 package fixtures.discriminatorflattening.clientflatten.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -43,7 +42,7 @@ public class MetricAlertCriteria {
      * The rule criteria that defines the conditions of the alert rule.
      */
     @JsonIgnore
-    private Map<String, BinaryData> additionalProperties;
+    private Map<String, Object> additionalProperties;
 
     /**
      * Creates an instance of MetricAlertCriteria class.
@@ -66,7 +65,7 @@ public class MetricAlertCriteria {
      * @return the additionalProperties value.
      */
     @JsonAnyGetter
-    public Map<String, BinaryData> getAdditionalProperties() {
+    public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
@@ -76,13 +75,13 @@ public class MetricAlertCriteria {
      * @param additionalProperties the additionalProperties value to set.
      * @return the MetricAlertCriteria object itself.
      */
-    public MetricAlertCriteria setAdditionalProperties(Map<String, BinaryData> additionalProperties) {
+    public MetricAlertCriteria setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
 
     @JsonAnySetter
-    void setAdditionalProperties(String key, BinaryData value) {
+    void setAdditionalProperties(String key, Object value) {
         if (additionalProperties == null) {
             additionalProperties = new LinkedHashMap<>();
         }

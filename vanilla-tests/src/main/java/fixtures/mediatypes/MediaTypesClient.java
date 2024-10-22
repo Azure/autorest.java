@@ -234,7 +234,7 @@ public final class MediaTypesClient {
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
-            @BodyParam("application/json") BinaryData message, @HeaderParam("Accept") String accept, Context context);
+            @BodyParam("application/json") Object message, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/textAndJson")
         @ExpectedResponses({ 200 })
@@ -1965,7 +1965,7 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(BinaryData message) {
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Object message) {
         return FluxUtil.withContext(context -> bodyThreeTypesWithResponseAsync(message, context));
     }
 
@@ -1982,7 +1982,7 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(BinaryData message, Context context) {
+    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Object message, Context context) {
         if (this.getHost() == null) {
             return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
         }
@@ -2005,7 +2005,7 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> bodyThreeTypesAsync(BinaryData message) {
+    public Mono<String> bodyThreeTypesAsync(Object message) {
         return bodyThreeTypesWithResponseAsync(message).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -2022,7 +2022,7 @@ public final class MediaTypesClient {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> bodyThreeTypesAsync(BinaryData message, Context context) {
+    public Mono<String> bodyThreeTypesAsync(Object message, Context context) {
         return bodyThreeTypesWithResponseAsync(message, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -2039,7 +2039,7 @@ public final class MediaTypesClient {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> bodyThreeTypesWithResponse(BinaryData message, Context context) {
+    public Response<String> bodyThreeTypesWithResponse(Object message, Context context) {
         return bodyThreeTypesWithResponseAsync(message, context).block();
     }
 
@@ -2055,7 +2055,7 @@ public final class MediaTypesClient {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public String bodyThreeTypes(BinaryData message) {
+    public String bodyThreeTypes(Object message) {
         return bodyThreeTypesWithResponse(message, Context.NONE).getValue();
     }
 

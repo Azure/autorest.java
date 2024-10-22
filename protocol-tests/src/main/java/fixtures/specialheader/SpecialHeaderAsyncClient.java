@@ -53,7 +53,7 @@ public final class SpecialHeaderAsyncClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -85,7 +85,7 @@ public final class SpecialHeaderAsyncClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -108,7 +108,7 @@ public final class SpecialHeaderAsyncClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -140,7 +140,7 @@ public final class SpecialHeaderAsyncClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -172,7 +172,7 @@ public final class SpecialHeaderAsyncClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 

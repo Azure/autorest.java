@@ -241,7 +241,7 @@ public final class MultipleResponsesClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -264,7 +264,7 @@ public final class MultipleResponsesClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -287,7 +287,7 @@ public final class MultipleResponsesClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -310,7 +310,7 @@ public final class MultipleResponsesClient {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 

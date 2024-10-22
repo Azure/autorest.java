@@ -5,7 +5,6 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.BinaryData;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -37,7 +36,7 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
     /*
      * Dictionary of <any>
      */
-    private Map<String, BinaryData> additionalProperties;
+    private Map<String, Object> additionalProperties;
 
     /**
      * Creates an instance of PetAPObject class.
@@ -99,7 +98,7 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
      * 
      * @return the additionalProperties value.
      */
-    public Map<String, BinaryData> getAdditionalProperties() {
+    public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
@@ -109,7 +108,7 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPObject object itself.
      */
-    public PetAPObject setAdditionalProperties(Map<String, BinaryData> additionalProperties) {
+    public PetAPObject setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
@@ -131,11 +130,8 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
         jsonWriter.writeIntField("id", this.id);
         jsonWriter.writeStringField("name", this.name);
         if (additionalProperties != null) {
-            for (Map.Entry<String, BinaryData> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(),
-                    additionalProperty.getValue() == null
-                        ? null
-                        : additionalProperty.getValue().toObject(Object.class));
+            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
+                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
         return jsonWriter.writeEndObject();
@@ -153,7 +149,7 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
     public static PetAPObject fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             PetAPObject deserializedPetAPObject = new PetAPObject();
-            Map<String, BinaryData> additionalProperties = null;
+            Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -169,8 +165,7 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
                         additionalProperties = new LinkedHashMap<>();
                     }
 
-                    additionalProperties.put(fieldName,
-                        reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped())));
+                    additionalProperties.put(fieldName, reader.readUntyped());
                 }
             }
             deserializedPetAPObject.additionalProperties = additionalProperties;

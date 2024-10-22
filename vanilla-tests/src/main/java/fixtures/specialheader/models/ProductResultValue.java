@@ -5,7 +5,6 @@
 package fixtures.specialheader.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.BinaryData;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,7 +20,7 @@ public final class ProductResultValue implements JsonSerializable<ProductResultV
     /*
      * The value property.
      */
-    private List<BinaryData> value;
+    private List<Object> value;
 
     /*
      * The nextLink property.
@@ -39,7 +38,7 @@ public final class ProductResultValue implements JsonSerializable<ProductResultV
      * 
      * @return the value value.
      */
-    public List<BinaryData> getValue() {
+    public List<Object> getValue() {
         return this.value;
     }
 
@@ -49,7 +48,7 @@ public final class ProductResultValue implements JsonSerializable<ProductResultV
      * @param value the value value to set.
      * @return the ProductResultValue object itself.
      */
-    public ProductResultValue setValue(List<BinaryData> value) {
+    public ProductResultValue setValue(List<Object> value) {
         this.value = value;
         return this;
     }
@@ -88,8 +87,7 @@ public final class ProductResultValue implements JsonSerializable<ProductResultV
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("value", this.value,
-            (writer, element) -> writer.writeUntyped(element == null ? null : element.toObject(Object.class)));
+        jsonWriter.writeArrayField("value", this.value, (writer, element) -> writer.writeUntyped(element));
         jsonWriter.writeStringField("nextLink", this.nextLink);
         return jsonWriter.writeEndObject();
     }
@@ -110,8 +108,7 @@ public final class ProductResultValue implements JsonSerializable<ProductResultV
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    List<BinaryData> value = reader.readArray(reader1 -> reader1
-                        .getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped())));
+                    List<Object> value = reader.readArray(reader1 -> reader1.readUntyped());
                     deserializedProductResultValue.value = value;
                 } else if ("nextLink".equals(fieldName)) {
                     deserializedProductResultValue.nextLink = reader.getString();

@@ -16,7 +16,6 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
@@ -107,25 +106,25 @@ public final class MultipleResponses {
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError200Valid(@HostParam("$host") String host,
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200Valid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError201Valid(@HostParam("$host") String host,
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201Valid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError404Valid(@HostParam("$host") String host,
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404Valid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         @ExpectedResponses({ 200, 201, 404 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError400Valid(@HostParam("$host") String host,
+        Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400Valid(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Get("/http/payloads/202/none/204/none/default/Error/response/202/none")
@@ -941,7 +940,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync() {
         return FluxUtil
             .withContext(context -> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(context));
     }
@@ -956,8 +955,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>>
-        get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(Context context) {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -974,7 +972,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync()
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -989,7 +987,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(Context context) {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(context)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -1004,7 +1002,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(Context context) {
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponseAsync(context).block();
     }
 
@@ -1016,7 +1014,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError200Valid() {
+    public Object get200ModelA201ModelC404ModelDDefaultError200Valid() {
         return get200ModelA201ModelC404ModelDDefaultError200ValidWithResponse(Context.NONE).getValue();
     }
 
@@ -1028,7 +1026,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync() {
         return FluxUtil
             .withContext(context -> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(context));
     }
@@ -1043,8 +1041,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>>
-        get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(Context context) {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1061,7 +1058,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync()
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -1076,7 +1073,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(Context context) {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(context)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -1091,7 +1088,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(Context context) {
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponseAsync(context).block();
     }
 
@@ -1103,7 +1100,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError201Valid() {
+    public Object get200ModelA201ModelC404ModelDDefaultError201Valid() {
         return get200ModelA201ModelC404ModelDDefaultError201ValidWithResponse(Context.NONE).getValue();
     }
 
@@ -1115,7 +1112,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync() {
         return FluxUtil
             .withContext(context -> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(context));
     }
@@ -1130,8 +1127,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>>
-        get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(Context context) {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1148,7 +1144,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync()
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -1163,7 +1159,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(Context context) {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(context)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -1178,7 +1174,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(Context context) {
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponseAsync(context).block();
     }
 
@@ -1190,7 +1186,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError404Valid() {
+    public Object get200ModelA201ModelC404ModelDDefaultError404Valid() {
         return get200ModelA201ModelC404ModelDDefaultError404ValidWithResponse(Context.NONE).getValue();
     }
 
@@ -1202,7 +1198,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync() {
         return FluxUtil
             .withContext(context -> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(context));
     }
@@ -1217,8 +1213,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>>
-        get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(Context context) {
+    public Mono<Response<Object>> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -1235,7 +1230,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync()
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -1250,7 +1245,7 @@ public final class MultipleResponses {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Context context) {
+    public Mono<Object> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(context)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -1265,7 +1260,7 @@ public final class MultipleResponses {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(Context context) {
+    public Response<Object> get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(Context context) {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponseAsync(context).block();
     }
 
@@ -1277,7 +1272,7 @@ public final class MultipleResponses {
      * @return the response.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData get200ModelA201ModelC404ModelDDefaultError400Valid() {
+    public Object get200ModelA201ModelC404ModelDDefaultError400Valid() {
         return get200ModelA201ModelC404ModelDDefaultError400ValidWithResponse(Context.NONE).getValue();
     }
 

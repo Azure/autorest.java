@@ -5,7 +5,6 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -87,7 +86,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     /*
      * Additional information provided through arbitrary metadata.
      */
-    private Map<String, BinaryData> additionalProperties;
+    private Map<String, Object> additionalProperties;
 
     /**
      * Creates an instance of OciAnnotations class.
@@ -346,7 +345,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
      * 
      * @return the additionalProperties value.
      */
-    public Map<String, BinaryData> getAdditionalProperties() {
+    public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
@@ -356,7 +355,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
      * @param additionalProperties the additionalProperties value to set.
      * @return the OciAnnotations object itself.
      */
-    public OciAnnotations setAdditionalProperties(Map<String, BinaryData> additionalProperties) {
+    public OciAnnotations setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
@@ -381,11 +380,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
         jsonWriter.writeStringField("org.opencontainers.image.title", this.title);
         jsonWriter.writeStringField("org.opencontainers.image.description", this.description);
         if (additionalProperties != null) {
-            for (Map.Entry<String, BinaryData> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(),
-                    additionalProperty.getValue() == null
-                        ? null
-                        : additionalProperty.getValue().toObject(Object.class));
+            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
+                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
         return jsonWriter.writeEndObject();
@@ -402,7 +398,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     public static OciAnnotations fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OciAnnotations deserializedOciAnnotations = new OciAnnotations();
-            Map<String, BinaryData> additionalProperties = null;
+            Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -437,8 +433,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
                         additionalProperties = new LinkedHashMap<>();
                     }
 
-                    additionalProperties.put(fieldName,
-                        reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped())));
+                    additionalProperties.put(fieldName, reader.readUntyped());
                 }
             }
             deserializedOciAnnotations.additionalProperties = additionalProperties;

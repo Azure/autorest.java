@@ -166,7 +166,7 @@ public final class ParamsImpl {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -226,7 +226,7 @@ public final class ParamsImpl {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -274,7 +274,7 @@ public final class ParamsImpl {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 
@@ -313,7 +313,7 @@ public final class ParamsImpl {
      * 
      * <pre>
      * {@code
-     * BinaryData
+     * Object
      * }
      * </pre>
      * 

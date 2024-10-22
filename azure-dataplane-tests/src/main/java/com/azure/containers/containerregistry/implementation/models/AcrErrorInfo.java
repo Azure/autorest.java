@@ -5,7 +5,6 @@
 package com.azure.containers.containerregistry.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.BinaryData;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -30,7 +29,7 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
     /*
      * Error details
      */
-    private BinaryData detail;
+    private Object detail;
 
     /**
      * Creates an instance of AcrErrorInfo class.
@@ -83,7 +82,7 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
      * 
      * @return the detail value.
      */
-    public BinaryData getDetail() {
+    public Object getDetail() {
         return this.detail;
     }
 
@@ -93,7 +92,7 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
      * @param detail the detail value to set.
      * @return the AcrErrorInfo object itself.
      */
-    public AcrErrorInfo setDetail(BinaryData detail) {
+    public AcrErrorInfo setDetail(Object detail) {
         this.detail = detail;
         return this;
     }
@@ -106,9 +105,7 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("code", this.code);
         jsonWriter.writeStringField("message", this.message);
-        if (this.detail != null) {
-            jsonWriter.writeUntypedField("detail", this.detail.toObject(Object.class));
-        }
+        jsonWriter.writeUntypedField("detail", this.detail);
         return jsonWriter.writeEndObject();
     }
 
@@ -132,8 +129,7 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
                 } else if ("message".equals(fieldName)) {
                     deserializedAcrErrorInfo.message = reader.getString();
                 } else if ("detail".equals(fieldName)) {
-                    deserializedAcrErrorInfo.detail
-                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
+                    deserializedAcrErrorInfo.detail = reader.readUntyped();
                 } else {
                     reader.skipChildren();
                 }

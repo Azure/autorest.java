@@ -5,7 +5,6 @@
 package fixtures.streamstyleserializationimmutableoutput.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.BinaryData;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -27,7 +26,7 @@ public final class SmartSalmon extends Salmon {
     /*
      * Dictionary of <any>
      */
-    private Map<String, BinaryData> additionalProperties;
+    private Map<String, Object> additionalProperties;
 
     /**
      * Creates an instance of SmartSalmon class.
@@ -61,7 +60,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the additionalProperties value.
      */
-    public Map<String, BinaryData> getAdditionalProperties() {
+    public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
@@ -71,7 +70,7 @@ public final class SmartSalmon extends Salmon {
      * @param additionalProperties the additionalProperties value to set.
      * @return the SmartSalmon object itself.
      */
-    public SmartSalmon setAdditionalProperties(Map<String, BinaryData> additionalProperties) {
+    public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
@@ -142,11 +141,8 @@ public final class SmartSalmon extends Salmon {
         toJsonShared(jsonWriter);
         jsonWriter.writeStringField("college_degree", this.collegeDegree);
         if (additionalProperties != null) {
-            for (Map.Entry<String, BinaryData> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(),
-                    additionalProperty.getValue() == null
-                        ? null
-                        : additionalProperty.getValue().toObject(Object.class));
+            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
+                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
         return jsonWriter.writeEndObject();
@@ -164,7 +160,7 @@ public final class SmartSalmon extends Salmon {
     public static SmartSalmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             SmartSalmon deserializedSmartSalmon = new SmartSalmon();
-            Map<String, BinaryData> additionalProperties = null;
+            Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -178,8 +174,7 @@ public final class SmartSalmon extends Salmon {
                         additionalProperties = new LinkedHashMap<>();
                     }
 
-                    additionalProperties.put(fieldName,
-                        reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped())));
+                    additionalProperties.put(fieldName, reader.readUntyped());
                 }
             }
             deserializedSmartSalmon.additionalProperties = additionalProperties;

@@ -22,7 +22,6 @@ import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
@@ -66,7 +65,7 @@ public final class Headers {
         @Post("/status/500")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> paramRepeatabilityRequest(@HostParam("$host") String host,
+        Mono<Response<Object>> paramRepeatabilityRequest(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept,
             @HeaderParam("repeatability-request-id") String repeatabilityRequestId,
             @HeaderParam("repeatability-first-sent") String repeatabilityFirstSent, Context context);
@@ -74,7 +73,7 @@ public final class Headers {
         @Put("/status/500")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> paramRepeatabilityRequestPut(@HostParam("$host") String host,
+        Mono<Response<Object>> paramRepeatabilityRequestPut(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept,
             @HeaderParam("repeatability-request-id") String repeatabilityRequestId,
             @HeaderParam("repeatability-first-sent") String repeatabilityFirstSent, Context context);
@@ -82,13 +81,13 @@ public final class Headers {
         @Get("/status/500")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> paramRepeatabilityRequestGet(@HostParam("$host") String host,
+        Mono<Response<Object>> paramRepeatabilityRequestGet(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept, Context context);
 
         @Post("/specialHeader/repeatabilityRequestLRO")
         @ExpectedResponses({ 200, 202 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<BinaryData>> paramRepeatabilityRequestLRO(@HostParam("$host") String host,
+        Mono<Response<Object>> paramRepeatabilityRequestLRO(@HostParam("$host") String host,
             @HeaderParam("Accept") String accept,
             @HeaderParam("repeatability-request-id") String repeatabilityRequestId,
             @HeaderParam("repeatability-first-sent") String repeatabilityFirstSent, Context context);
@@ -117,7 +116,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestWithResponseAsync() {
+    public Mono<Response<Object>> paramRepeatabilityRequestWithResponseAsync() {
         return FluxUtil.withContext(context -> paramRepeatabilityRequestWithResponseAsync(context));
     }
 
@@ -131,7 +130,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestWithResponseAsync(Context context) {
+    public Mono<Response<Object>> paramRepeatabilityRequestWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -149,7 +148,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestAsync() {
+    public Mono<Object> paramRepeatabilityRequestAsync() {
         return paramRepeatabilityRequestWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -163,7 +162,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestAsync(Context context) {
+    public Mono<Object> paramRepeatabilityRequestAsync(Context context) {
         return paramRepeatabilityRequestWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -177,7 +176,7 @@ public final class Headers {
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> paramRepeatabilityRequestWithResponse(Context context) {
+    public Response<Object> paramRepeatabilityRequestWithResponse(Context context) {
         return paramRepeatabilityRequestWithResponseAsync(context).block();
     }
 
@@ -189,7 +188,7 @@ public final class Headers {
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData paramRepeatabilityRequest() {
+    public Object paramRepeatabilityRequest() {
         return paramRepeatabilityRequestWithResponse(Context.NONE).getValue();
     }
 
@@ -201,7 +200,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestPutWithResponseAsync() {
+    public Mono<Response<Object>> paramRepeatabilityRequestPutWithResponseAsync() {
         return FluxUtil.withContext(context -> paramRepeatabilityRequestPutWithResponseAsync(context));
     }
 
@@ -215,7 +214,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestPutWithResponseAsync(Context context) {
+    public Mono<Response<Object>> paramRepeatabilityRequestPutWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -233,7 +232,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestPutAsync() {
+    public Mono<Object> paramRepeatabilityRequestPutAsync() {
         return paramRepeatabilityRequestPutWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -247,7 +246,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestPutAsync(Context context) {
+    public Mono<Object> paramRepeatabilityRequestPutAsync(Context context) {
         return paramRepeatabilityRequestPutWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -261,7 +260,7 @@ public final class Headers {
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> paramRepeatabilityRequestPutWithResponse(Context context) {
+    public Response<Object> paramRepeatabilityRequestPutWithResponse(Context context) {
         return paramRepeatabilityRequestPutWithResponseAsync(context).block();
     }
 
@@ -273,7 +272,7 @@ public final class Headers {
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData paramRepeatabilityRequestPut() {
+    public Object paramRepeatabilityRequestPut() {
         return paramRepeatabilityRequestPutWithResponse(Context.NONE).getValue();
     }
 
@@ -285,7 +284,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestGetWithResponseAsync() {
+    public Mono<Response<Object>> paramRepeatabilityRequestGetWithResponseAsync() {
         return FluxUtil.withContext(context -> paramRepeatabilityRequestGetWithResponseAsync(context));
     }
 
@@ -299,7 +298,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestGetWithResponseAsync(Context context) {
+    public Mono<Response<Object>> paramRepeatabilityRequestGetWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -316,7 +315,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestGetAsync() {
+    public Mono<Object> paramRepeatabilityRequestGetAsync() {
         return paramRepeatabilityRequestGetWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -330,7 +329,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestGetAsync(Context context) {
+    public Mono<Object> paramRepeatabilityRequestGetAsync(Context context) {
         return paramRepeatabilityRequestGetWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -344,7 +343,7 @@ public final class Headers {
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> paramRepeatabilityRequestGetWithResponse(Context context) {
+    public Response<Object> paramRepeatabilityRequestGetWithResponse(Context context) {
         return paramRepeatabilityRequestGetWithResponseAsync(context).block();
     }
 
@@ -356,7 +355,7 @@ public final class Headers {
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData paramRepeatabilityRequestGet() {
+    public Object paramRepeatabilityRequestGet() {
         return paramRepeatabilityRequestGetWithResponse(Context.NONE).getValue();
     }
 
@@ -368,7 +367,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestLROWithResponseAsync() {
+    public Mono<Response<Object>> paramRepeatabilityRequestLROWithResponseAsync() {
         return FluxUtil.withContext(context -> paramRepeatabilityRequestLROWithResponseAsync(context));
     }
 
@@ -382,7 +381,7 @@ public final class Headers {
      * @return any object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> paramRepeatabilityRequestLROWithResponseAsync(Context context) {
+    public Mono<Response<Object>> paramRepeatabilityRequestLROWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -400,7 +399,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestLROAsync() {
+    public Mono<Object> paramRepeatabilityRequestLROAsync() {
         return paramRepeatabilityRequestLROWithResponseAsync().flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -414,7 +413,7 @@ public final class Headers {
      * @return any object on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> paramRepeatabilityRequestLROAsync(Context context) {
+    public Mono<Object> paramRepeatabilityRequestLROAsync(Context context) {
         return paramRepeatabilityRequestLROWithResponseAsync(context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -428,7 +427,7 @@ public final class Headers {
      * @return any object along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> paramRepeatabilityRequestLROWithResponse(Context context) {
+    public Response<Object> paramRepeatabilityRequestLROWithResponse(Context context) {
         return paramRepeatabilityRequestLROWithResponseAsync(context).block();
     }
 
@@ -440,7 +439,7 @@ public final class Headers {
      * @return any object.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData paramRepeatabilityRequestLRO() {
+    public Object paramRepeatabilityRequestLRO() {
         return paramRepeatabilityRequestLROWithResponse(Context.NONE).getValue();
     }
 
@@ -452,7 +451,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync() {
+    public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableSinglePageAsync() {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -475,7 +474,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableSinglePageAsync(Context context) {
+    public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableSinglePageAsync(Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -496,7 +495,7 @@ public final class Headers {
      * @return the paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> paramRepeatabilityRequestPageableAsync() {
+    public PagedFlux<Object> paramRepeatabilityRequestPageableAsync() {
         return new PagedFlux<>(() -> paramRepeatabilityRequestPageableSinglePageAsync(),
             nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink));
     }
@@ -511,7 +510,7 @@ public final class Headers {
      * @return the paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<BinaryData> paramRepeatabilityRequestPageableAsync(Context context) {
+    public PagedFlux<Object> paramRepeatabilityRequestPageableAsync(Context context) {
         return new PagedFlux<>(() -> paramRepeatabilityRequestPageableSinglePageAsync(context),
             nextLink -> paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink, context));
     }
@@ -524,7 +523,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<BinaryData> paramRepeatabilityRequestPageableSinglePage() {
+    public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage() {
         return paramRepeatabilityRequestPageableSinglePageAsync().block();
     }
 
@@ -538,7 +537,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<BinaryData> paramRepeatabilityRequestPageableSinglePage(Context context) {
+    public PagedResponse<Object> paramRepeatabilityRequestPageableSinglePage(Context context) {
         return paramRepeatabilityRequestPageableSinglePageAsync(context).block();
     }
 
@@ -550,7 +549,7 @@ public final class Headers {
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> paramRepeatabilityRequestPageable() {
+    public PagedIterable<Object> paramRepeatabilityRequestPageable() {
         return new PagedIterable<>(paramRepeatabilityRequestPageableAsync());
     }
 
@@ -564,7 +563,7 @@ public final class Headers {
      * @return the paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> paramRepeatabilityRequestPageable(Context context) {
+    public PagedIterable<Object> paramRepeatabilityRequestPageable(Context context) {
         return new PagedIterable<>(paramRepeatabilityRequestPageableAsync(context));
     }
 
@@ -578,7 +577,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableNextSinglePageAsync(String nextLink) {
+    public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableNextSinglePageAsync(String nextLink) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
         }
@@ -604,7 +603,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<BinaryData>> paramRepeatabilityRequestPageableNextSinglePageAsync(String nextLink,
+    public Mono<PagedResponse<Object>> paramRepeatabilityRequestPageableNextSinglePageAsync(String nextLink,
         Context context) {
         if (nextLink == null) {
             return Mono.error(new IllegalArgumentException("Parameter nextLink is required and cannot be null."));
@@ -629,7 +628,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<BinaryData> paramRepeatabilityRequestPageableNextSinglePage(String nextLink) {
+    public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink) {
         return paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink).block();
     }
 
@@ -644,7 +643,7 @@ public final class Headers {
      * @return the response body along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<BinaryData> paramRepeatabilityRequestPageableNextSinglePage(String nextLink, Context context) {
+    public PagedResponse<Object> paramRepeatabilityRequestPageableNextSinglePage(String nextLink, Context context) {
         return paramRepeatabilityRequestPageableNextSinglePageAsync(nextLink, context).block();
     }
 }
