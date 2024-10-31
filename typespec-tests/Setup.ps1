@@ -3,21 +3,22 @@ param (
     [switch] $RebuildJar = $false
 )
 
+Set-Location $PSScriptRoot
+
 if ($RebuildJar) {
-    mvn clean install -f ../pom.xml -P local,tsp -DskipTests "-Djacoco.skip"
+    Set-Location ../
+    ./Build-TypeSpec.ps1
+} else {
+    Set-Location ../typespec-extension/
+    # re-build typespec-java
+    npm ci
+    npm run build
+    npm run lint
+    npm pack
     if ($LASTEXITCODE -ne 0) {
         exit $LASTEXITCODE
     }
 }
-
-# re-build typespec-java
-Set-Location ../typespec-extension/
-# Remove-Item node_modules -Recurse -Force
-# Remove-Item package-lock.json
-npm ci
-npm run build
-npm run lint
-npm pack
 
 # re-install
 Set-Location ../typespec-tests/
