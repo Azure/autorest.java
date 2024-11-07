@@ -48,6 +48,8 @@ modelerfour:
   flatten-models: true
   flatten-payloads: true
   group-parameters: true
+
+use-object-for-unknown: true
 ```
 
 ```yaml $(data-plane)

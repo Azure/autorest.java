@@ -14,6 +14,7 @@ enable-sync-stack: true
 required-fields-as-ctor-args: true
 enable-page-size: true
 use-key-credential: true
+use-object-for-unknown: true
 
 use-default-http-status-code-to-exception-type-mapping: true
 polling: {}
