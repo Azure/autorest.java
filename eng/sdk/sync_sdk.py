@@ -144,7 +144,7 @@ def update_sdks():
     subprocess.check_call(cmd, cwd=sdk_root)
 
     if failed_artifact:
-        logging.error(f'Failed modules f{failed_artifact}')
+        logging.error(f'Failed modules {failed_artifact}')
 
 
 def main():
