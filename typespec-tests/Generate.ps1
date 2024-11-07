@@ -58,6 +58,10 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""
     # exclude preview from service versions
     $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
+  } elseif ($tspFile -match "type[\\/]array" -or $tspFile -match "type[\\/]dictionary") {
+    # TODO https://github.com/Azure/autorest.java/issues/2964
+    # also serve as a test for "use-object-for-unknown" emitter option
+    $tspOptions += " --option ""@azure-tools/typespec-java.use-object-for-unknown=true"""
   } elseif ($tspFile -match "arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""

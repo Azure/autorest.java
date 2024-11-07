@@ -1,5 +1,11 @@
 # Release History
 
+## 0.23.0 (2024-11-07)
+
+Compatible with compiler 0.61.
+
+- Changed to use Java class `BinaryData` for TypeSpec `unknown`.
+
 ## 0.22.1 (2024-10-21)
 
 Compatible with compiler 0.61.

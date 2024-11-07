@@ -55,6 +55,7 @@ public class TestUtils {
             DEFAULT_SETTINGS.put("generate-samples", true);
             DEFAULT_SETTINGS.put("generate-tests", true);
             DEFAULT_SETTINGS.put("client-flattened-annotation-target", "NONE");
+            DEFAULT_SETTINGS.put("use-object-for-unknown", true);
         }
 
         private Javagen javagen;
