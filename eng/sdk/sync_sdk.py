@@ -17,6 +17,7 @@ sdk_root: str
 
 skip_artifacts: List[str] = [
     'azure-ai-anomalydetector',         # deprecated
+    'azure-health-insights-cancerprofiling', # deprecated
     'azure-ai-vision-imageanalysis'     # temporary disabled for modification on Javadoc
 ]
 
@@ -89,6 +90,7 @@ def get_generated_folder_from_artifact(module_path: str, artifact: str, type: st
 
 
 def update_sdks():
+    failed_modules = []
     for tsp_location_file in glob.glob(os.path.join(sdk_root, 'sdk/*/*/tsp-location.yaml')):
         module_path = os.path.dirname(tsp_location_file)
         artifact = os.path.basename(module_path)
@@ -116,7 +118,11 @@ def update_sdks():
             # one retry
             # sometimes customization have intermittent failure
             logging.warning(f'Retry generate for module {artifact}')
-            subprocess.check_call(['tsp-client', 'update', '--debug'], cwd=module_path)
+            try:
+                subprocess.check_call(['tsp-client', 'update', '--debug'], cwd=module_path)
+            except subprocess.CalledProcessError:
+                logging.error(f'Failed to generate for module {artifact}')
+                failed_modules.append(artifact)
 
         if arm_module:
             # revert mock test code
@@ -136,6 +142,9 @@ def update_sdks():
 
     cmd = ['git', 'add', '.']
     subprocess.check_call(cmd, cwd=sdk_root)
+
+    if failed_modules:
+        logging.error(f'Failed modules {failed_modules}')
 
 
 def main():
