@@ -56,7 +56,7 @@ jobs:
       filePath: $(Build.SourcesDirectory)/autorest.java/Build-TypeSpec.ps1
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
-  - script: npm install -g @azure-tools/typespec-client-generator-cli
+  - script: npm install -g @azure-tools/typespec-client-generator-cli@0.13.0
     displayName: 'Install tsp-client'
 
   - task: PowerShell@2
