@@ -30,7 +30,6 @@ org.apache.maven.plugins:maven-antrun-plugin
 org.apache.maven.plugins:maven-checkstyle-plugin
 org.apache.maven.plugins:maven-clean-plugin
 org.apache.maven.plugins:maven-compiler-plugin
-org.apache.maven.plugins:maven-eclipse-plugin
 org.apache.maven.plugins:maven-enforcer-plugin
 org.apache.maven.plugins:maven-failsafe-plugin
 org.apache.maven.plugins:maven-help-plugin
