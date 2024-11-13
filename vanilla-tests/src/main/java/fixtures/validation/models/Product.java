@@ -45,17 +45,17 @@ public final class Product implements JsonSerializable<Product> {
     /*
      * Constant int
      */
-    private int constInt = 0;
+    private final int constInt = 0;
 
     /*
      * Constant string
      */
-    private String constString = "constant";
+    private final String constString = "constant";
 
     /*
      * Constant string as Enum
      */
-    private String constStringAsEnum = "constant_string_as_enum";
+    private final String constStringAsEnum = "constant_string_as_enum";
 
     /**
      * Creates an instance of Product class.
@@ -173,17 +173,6 @@ public final class Product implements JsonSerializable<Product> {
     }
 
     /**
-     * Set the constInt property: Constant int.
-     * 
-     * @param constInt the constInt value to set.
-     * @return the Product object itself.
-     */
-    public Product setConstInt(int constInt) {
-        this.constInt = constInt;
-        return this;
-    }
-
-    /**
      * Get the constString property: Constant string.
      * 
      * @return the constString value.
@@ -193,34 +182,12 @@ public final class Product implements JsonSerializable<Product> {
     }
 
     /**
-     * Set the constString property: Constant string.
-     * 
-     * @param constString the constString value to set.
-     * @return the Product object itself.
-     */
-    public Product setConstString(String constString) {
-        this.constString = constString;
-        return this;
-    }
-
-    /**
      * Get the constStringAsEnum property: Constant string as Enum.
      * 
      * @return the constStringAsEnum value.
      */
     public String getConstStringAsEnum() {
         return this.constStringAsEnum;
-    }
-
-    /**
-     * Set the constStringAsEnum property: Constant string as Enum.
-     * 
-     * @param constStringAsEnum the constStringAsEnum value to set.
-     * @return the Product object itself.
-     */
-    public Product setConstStringAsEnum(String constStringAsEnum) {
-        this.constStringAsEnum = constStringAsEnum;
-        return this;
     }
 
     /**

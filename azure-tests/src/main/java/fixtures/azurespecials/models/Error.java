@@ -24,7 +24,7 @@ public final class Error implements JsonSerializable<Error> {
     /*
      * The constantId property.
      */
-    private int constantId = 1;
+    private final int constantId = 1;
 
     /*
      * The message property.
@@ -64,17 +64,6 @@ public final class Error implements JsonSerializable<Error> {
      */
     public int getConstantId() {
         return this.constantId;
-    }
-
-    /**
-     * Set the constantId property: The constantId property.
-     * 
-     * @param constantId the constantId value to set.
-     * @return the Error object itself.
-     */
-    public Error setConstantId(int constantId) {
-        this.constantId = constantId;
-        return this;
     }
 
     /**

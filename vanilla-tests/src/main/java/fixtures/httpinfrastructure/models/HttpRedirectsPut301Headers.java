@@ -4,19 +4,19 @@
 
 package fixtures.httpinfrastructure.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
  * The HttpRedirectsPut301Headers model.
  */
-@Fluent
+@Immutable
 public final class HttpRedirectsPut301Headers {
     /*
      * The Location property.
      */
-    private String location = "/http/failure/500";
+    private final String location = "/http/failure/500";
 
     // HttpHeaders containing the raw property values.
     /**
@@ -35,17 +35,6 @@ public final class HttpRedirectsPut301Headers {
      */
     public String getLocation() {
         return this.location;
-    }
-
-    /**
-     * Set the location property: The Location property.
-     * 
-     * @param location the location value to set.
-     * @return the HttpRedirectsPut301Headers object itself.
-     */
-    public HttpRedirectsPut301Headers setLocation(String location) {
-        this.location = location;
-        return this;
     }
 
     /**

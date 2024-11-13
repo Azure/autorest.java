@@ -21,7 +21,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
     /*
      * Constant part of a formdata body.
      */
-    private String grantType = "access_token";
+    private final String grantType = "access_token";
 
     /*
      * Indicates the name of your Azure container registry.
@@ -47,20 +47,6 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      */
     public String getGrantType() {
         return this.grantType;
-    }
-
-    /**
-     * Set the grantType property: Constant part of a formdata body.
-     * 
-     * @param grantType the grantType value to set.
-     * @return the
-     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
-     * itself.
-     */
-    public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-        setGrantType(String grantType) {
-        this.grantType = grantType;
-        return this;
     }
 
     /**

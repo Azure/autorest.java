@@ -4,7 +4,7 @@
 
 package fixtures.constants.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,13 +14,13 @@ import java.io.IOException;
 /**
  * The NoModelAsStringNoRequiredOneValueNoDefault model.
  */
-@Fluent
+@Immutable
 public final class NoModelAsStringNoRequiredOneValueNoDefault
     implements JsonSerializable<NoModelAsStringNoRequiredOneValueNoDefault> {
     /*
      * The parameter property.
      */
-    private String parameter = "value1";
+    private final String parameter = "value1";
 
     /**
      * Creates an instance of NoModelAsStringNoRequiredOneValueNoDefault class.
@@ -35,17 +35,6 @@ public final class NoModelAsStringNoRequiredOneValueNoDefault
      */
     public String getParameter() {
         return this.parameter;
-    }
-
-    /**
-     * Set the parameter property: The parameter property.
-     * 
-     * @param parameter the parameter value to set.
-     * @return the NoModelAsStringNoRequiredOneValueNoDefault object itself.
-     */
-    public NoModelAsStringNoRequiredOneValueNoDefault setParameter(String parameter) {
-        this.parameter = parameter;
-        return this;
     }
 
     /**
