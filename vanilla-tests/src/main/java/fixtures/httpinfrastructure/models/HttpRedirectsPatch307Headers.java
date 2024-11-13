@@ -5,7 +5,6 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Immutable;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
@@ -25,7 +24,6 @@ public final class HttpRedirectsPatch307Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HttpRedirectsPatch307Headers(HttpHeaders rawHeaders) {
-        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 
     /**
