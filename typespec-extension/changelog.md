@@ -1,5 +1,11 @@
 # Release History
 
+## 0.25.0 (2024-11-15)
+
+Compatible with compiler 0.62.
+
+- Setter method will not be generated for constant property in model.
+
 ## 0.24.0 (2024-11-08)
 
 Compatible with compiler 0.62.
