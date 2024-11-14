@@ -31,10 +31,10 @@ $generateScript = {
   $tspOptions = "--option ""@azure-tools/typespec-java.emitter-output-dir={project-root}/tsp-output/$(Get-Random)"""
   if ($tspFile -match "type[\\/]enum[\\/]extensible[\\/]") {
     # override namespace for reserved keyword "enum"
-    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=tsptest.enums.extensible"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=type.enums.extensible"""
   } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]") {
     # override namespace for reserved keyword "enum"
-    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=tsptest.enums.fixed"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=type.enums.fixed"""
   } elseif ($tspFile -match "azure[\\/]example[\\/]basic[\\/]") {
     # override examples-directory
     $tspOptions += " --option ""@azure-tools/typespec-java.examples-dir={project-root}/http/azure/example/basic/examples"""
