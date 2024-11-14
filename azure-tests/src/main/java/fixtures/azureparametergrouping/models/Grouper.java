@@ -14,7 +14,7 @@ public final class Grouper {
     /*
      * A grouped parameter that is a constant.
      */
-    private final String groupedConstant = "foo";
+    private String groupedConstant = "foo";
 
     /*
      * Optional parameter part of a parameter grouping.
@@ -34,6 +34,17 @@ public final class Grouper {
      */
     public String getGroupedConstant() {
         return this.groupedConstant;
+    }
+
+    /**
+     * Set the groupedConstant property: A grouped parameter that is a constant.
+     * 
+     * @param groupedConstant the groupedConstant value to set.
+     * @return the Grouper object itself.
+     */
+    public Grouper setGroupedConstant(String groupedConstant) {
+        this.groupedConstant = groupedConstant;
+        return this;
     }
 
     /**

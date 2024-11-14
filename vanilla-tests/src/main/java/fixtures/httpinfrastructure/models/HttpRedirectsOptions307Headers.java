@@ -4,18 +4,19 @@
 
 package fixtures.httpinfrastructure.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
  * The HttpRedirectsOptions307Headers model.
  */
-@Immutable
+@Fluent
 public final class HttpRedirectsOptions307Headers {
     /*
      * The Location property.
      */
-    private final String location = "/http/success/options/200";
+    private String location = "/http/success/options/200";
 
     // HttpHeaders containing the raw property values.
     /**
@@ -24,6 +25,7 @@ public final class HttpRedirectsOptions307Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HttpRedirectsOptions307Headers(HttpHeaders rawHeaders) {
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 
     /**
@@ -33,6 +35,17 @@ public final class HttpRedirectsOptions307Headers {
      */
     public String getLocation() {
         return this.location;
+    }
+
+    /**
+     * Set the location property: The Location property.
+     * 
+     * @param location the location value to set.
+     * @return the HttpRedirectsOptions307Headers object itself.
+     */
+    public HttpRedirectsOptions307Headers setLocation(String location) {
+        this.location = location;
+        return this;
     }
 
     /**

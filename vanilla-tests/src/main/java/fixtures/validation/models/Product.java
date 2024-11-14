@@ -55,7 +55,7 @@ public final class Product implements JsonSerializable<Product> {
     /*
      * Constant string as Enum
      */
-    private final String constStringAsEnum = "constant_string_as_enum";
+    private String constStringAsEnum = "constant_string_as_enum";
 
     /**
      * Creates an instance of Product class.
@@ -188,6 +188,17 @@ public final class Product implements JsonSerializable<Product> {
      */
     public String getConstStringAsEnum() {
         return this.constStringAsEnum;
+    }
+
+    /**
+     * Set the constStringAsEnum property: Constant string as Enum.
+     * 
+     * @param constStringAsEnum the constStringAsEnum value to set.
+     * @return the Product object itself.
+     */
+    public Product setConstStringAsEnum(String constStringAsEnum) {
+        this.constStringAsEnum = constStringAsEnum;
+        return this;
     }
 
     /**

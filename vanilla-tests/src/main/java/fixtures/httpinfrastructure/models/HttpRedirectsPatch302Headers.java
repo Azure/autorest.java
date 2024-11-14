@@ -4,18 +4,19 @@
 
 package fixtures.httpinfrastructure.models;
 
-import com.azure.core.annotation.Immutable;
+import com.azure.core.annotation.Fluent;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
  * The HttpRedirectsPatch302Headers model.
  */
-@Immutable
+@Fluent
 public final class HttpRedirectsPatch302Headers {
     /*
      * The Location property.
      */
-    private final String location = "/http/failure/500";
+    private String location = "/http/failure/500";
 
     // HttpHeaders containing the raw property values.
     /**
@@ -24,6 +25,7 @@ public final class HttpRedirectsPatch302Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public HttpRedirectsPatch302Headers(HttpHeaders rawHeaders) {
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
 
     /**
@@ -33,6 +35,17 @@ public final class HttpRedirectsPatch302Headers {
      */
     public String getLocation() {
         return this.location;
+    }
+
+    /**
+     * Set the location property: The Location property.
+     * 
+     * @param location the location value to set.
+     * @return the HttpRedirectsPatch302Headers object itself.
+     */
+    public HttpRedirectsPatch302Headers setLocation(String location) {
+        this.location = location;
+        return this;
     }
 
     /**
