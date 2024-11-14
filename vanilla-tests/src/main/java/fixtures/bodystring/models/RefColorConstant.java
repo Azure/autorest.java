@@ -19,7 +19,7 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
     /*
      * Referenced Color Constant Description.
      */
-    private String colorConstant = "green-color";
+    private final String colorConstant = "green-color";
 
     /*
      * Sample string.
@@ -39,17 +39,6 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
      */
     public String getColorConstant() {
         return this.colorConstant;
-    }
-
-    /**
-     * Set the colorConstant property: Referenced Color Constant Description.
-     * 
-     * @param colorConstant the colorConstant value to set.
-     * @return the RefColorConstant object itself.
-     */
-    public RefColorConstant setColorConstant(String colorConstant) {
-        this.colorConstant = colorConstant;
-        return this;
     }
 
     /**

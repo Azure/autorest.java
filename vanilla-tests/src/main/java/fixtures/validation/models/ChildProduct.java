@@ -19,7 +19,7 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
     /*
      * Constant string
      */
-    private String constProperty = "constant";
+    private final String constProperty = "constant";
 
     /*
      * Count
@@ -39,17 +39,6 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
      */
     public String getConstProperty() {
         return this.constProperty;
-    }
-
-    /**
-     * Set the constProperty property: Constant string.
-     * 
-     * @param constProperty the constProperty value to set.
-     * @return the ChildProduct object itself.
-     */
-    public ChildProduct setConstProperty(String constProperty) {
-        this.constProperty = constProperty;
-        return this;
     }
 
     /**

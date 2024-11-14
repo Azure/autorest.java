@@ -20,6 +20,8 @@
   <!-- Don't check for JavaDocPackage in samples or tests-->
   <suppress checks="JavadocPackage" files=".*[/\\](samples|test)[/\\].*\.java"/>
 
+  <suppress checks="PackageName" files="_specs_[/\\].*"/>
+
   <!-- code model -->
   <suppress checks="[ParameterName|MemberName]" files="com[/\\]azure[/\\]autorest[/\\]extension[/\\]base[/\\]model[/\\]codemodel[/\\].*.java"/>
   <!-- class type -->

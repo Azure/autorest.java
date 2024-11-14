@@ -4,7 +4,7 @@
 
 package fixtures.validation.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -14,17 +14,17 @@ import java.io.IOException;
 /**
  * The product documentation.
  */
-@Fluent
+@Immutable
 public final class ConstantProduct implements JsonSerializable<ConstantProduct> {
     /*
      * Constant string
      */
-    private String constProperty = "constant";
+    private final String constProperty = "constant";
 
     /*
      * Constant string2
      */
-    private String constProperty2 = "constant2";
+    private final String constProperty2 = "constant2";
 
     /**
      * Creates an instance of ConstantProduct class.
@@ -42,34 +42,12 @@ public final class ConstantProduct implements JsonSerializable<ConstantProduct> 
     }
 
     /**
-     * Set the constProperty property: Constant string.
-     * 
-     * @param constProperty the constProperty value to set.
-     * @return the ConstantProduct object itself.
-     */
-    public ConstantProduct setConstProperty(String constProperty) {
-        this.constProperty = constProperty;
-        return this;
-    }
-
-    /**
      * Get the constProperty2 property: Constant string2.
      * 
      * @return the constProperty2 value.
      */
     public String getConstProperty2() {
         return this.constProperty2;
-    }
-
-    /**
-     * Set the constProperty2 property: Constant string2.
-     * 
-     * @param constProperty2 the constProperty2 value to set.
-     * @return the ConstantProduct object itself.
-     */
-    public ConstantProduct setConstProperty2(String constProperty2) {
-        this.constProperty2 = constProperty2;
-        return this;
     }
 
     /**
