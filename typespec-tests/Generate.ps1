@@ -31,16 +31,16 @@ $generateScript = {
   $tspOptions = "--option ""@azure-tools/typespec-java.emitter-output-dir={project-root}/tsp-output/$(Get-Random)"""
   if ($tspFile -match "type[\\/]enum[\\/]extensible[\\/]") {
     # override namespace for reserved keyword "enum"
-    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.type.enums.extensible"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=tsptest.enums.extensible"""
   } elseif ($tspFile -match "type[\\/]enum[\\/]fixed[\\/]") {
     # override namespace for reserved keyword "enum"
-    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.type.enums.fixed"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=tsptest.enums.fixed"""
   } elseif ($tspFile -match "azure[\\/]example[\\/]basic[\\/]") {
     # override examples-directory
     $tspOptions += " --option ""@azure-tools/typespec-java.examples-dir={project-root}/http/azure/example/basic/examples"""
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old\.tsp") {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
-    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.namespace=resiliency.servicedriven.v1"""
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"""
@@ -120,10 +120,10 @@ $generateScript = {
 
 ./Setup.ps1
 
-New-Item -Path ./existingcode/src/main/java/com/cadl/ -ItemType Directory -Force | Out-Null
+New-Item -Path ./existingcode/src/main/java/tsptest/ -ItemType Directory -Force | Out-Null
 
-if (Test-Path ./src/main/java/com/cadl/partialupdate) {
-  Copy-Item -Path ./src/main/java/com/cadl/partialupdate -Destination ./existingcode/src/main/java/com/cadl/partialupdate -Recurse -Force
+if (Test-Path ./src/main/java/tsptest/partialupdate) {
+  Copy-Item -Path ./src/main/java/tsptest/partialupdate -Destination ./existingcode/src/main/java/tsptest/partialupdate -Recurse -Force
 }
 
 if (Test-Path ./src/main) {
@@ -142,7 +142,7 @@ $job | Receive-Job
 
 # partial update test
 npx tsp compile ./tsp/partialupdate.tsp --option="@azure-tools/typespec-java.emitter-output-dir={project-root}/existingcode"
-Copy-Item -Path ./existingcode/src/main/java/com/cadl/partialupdate -Destination ./src/main/java/com/cadl/partialupdate -Recurse -Force
+Copy-Item -Path ./existingcode/src/main/java/tsptest/partialupdate -Destination ./src/main/java/tsptest/partialupdate -Recurse -Force
 Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
