@@ -17,6 +17,10 @@
   </Match>
 
   <Match>
+    <Bug pattern="SS_SHOULD_BE_STATIC"/>
+  </Match>
+
+  <Match>
     <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,PI_DO_NOT_REUSE_PUBLIC_IDENTIFIERS_CLASS_NAMES"/>
   </Match>
 </FindBugsFilter>
