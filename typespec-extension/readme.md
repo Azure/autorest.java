@@ -1,38 +1,22 @@
 # Prerequisite
 
-Install [Node.js](https://nodejs.org/en/download/) 20 or above. (Verify by `node --version`)
+Install [Node.js](https://nodejs.org/en/download/) 20 or above. (Verify by running `node --version`)
 
-Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
+Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by running `java --version`)
 
-Install [TypeSpec](https://github.com/microsoft/typespec/) 0.62.
+Install [Maven](https://maven.apache.org/install.html). (Verify by running `mvn --version`)
+
+Install [TypeSpec](https://typespec.io/) 0.62.
 
 # Initialize TypeSpec Project
 
-Follow [TypeSpec Getting Started](https://github.com/microsoft/typespec/#using-node--npm) to initialize your TypeSpec project.
+Follow [TypeSpec Getting Started](https://typespec.io/docs/) to initialize your TypeSpec project.
 
 Make sure `npx tsp compile .` runs correctly.
 
 # Add TypeSpec-Java
 
-Make sure the version of [TypeSpec-java release](https://github.com/Azure/autorest.java/releases) depends on same version of "@typespec/compiler" as in your TypeSpec project.
-
-Modify `package.json`, add one line under `dependencies`:
-```diff
-    "dependencies": {
-      "@typespec/compiler": "latest",
-      "@typespec/rest": "latest",
-      "@azure-tools/typespec-azure-core": "latest",
-+      "@azure-tools/typespec-java": "latest"
-    },
-```
-
-Run `npm install` again to install `@azure-tools/typespec-java`.
-
-Modify (or create) `tspconfig.yaml`, specify emit as `@azure-tools/typespec-java`:
-```diff
-emit:
-  - "@azure-tools/typespec-java"
-```
+Run the command `npm install @azure-tools/typespec-java`.
 
 # Generate Java
 
