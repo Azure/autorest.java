@@ -1,5 +1,11 @@
 # Release History
 
+## 1.0.0-beta.9 (2024-11-21)
+
+### Other Changes
+
+- Replaced model types in Eclipse language server with a dependency of LSP4J.
+
 ## 1.0.0-beta.8 (2023-11-03)
 
 ### Other Changes
