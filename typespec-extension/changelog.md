@@ -1,5 +1,12 @@
 # Release History
 
+## 0.26.0 (2024-11-22)
+
+Compatible with compiler 0.62.
+
+- Supported `enable-subclient` emitter option.
+- Supported `@clientNamespace` from "@azure-tools/typespec-client-generator-core". 
+
 ## 0.25.0 (2024-11-14)
 
 Compatible with compiler 0.62.

@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
 package tsptest.armstreamstyleserialization;
 
 import com.azure.core.management.serializer.SerializerFactory;

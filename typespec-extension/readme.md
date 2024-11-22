@@ -38,17 +38,9 @@ options:
     emitter-output-dir: "{project-root}/azure-ai-language-authoring"
     namespace: "com.azure.ai.language.authoring"
     service-name: "Authoring"
-    service-versions:
-      - "2022-05-15-preview"
-    enable-sync-stack: true
-    stream-style-serialization: true
     generate-samples: true
     generate-tests: true
-    examples-dir: "{project-root}/examples"
     partial-update: false
-    models-subpackage: "models"
-    custom-types-subpackage: "implementation.models"
-    custom-types: InternalModel1,InternalModel2
     api-version: "2023-11-01"
 ```
 
