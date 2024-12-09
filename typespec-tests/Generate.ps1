@@ -79,6 +79,8 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
     $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
+  } elseif ($tspFile -match "subclient.tsp") {
+    $tspOptions += " --option ""@typespec/http-client-java.enable-subclient=true"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp

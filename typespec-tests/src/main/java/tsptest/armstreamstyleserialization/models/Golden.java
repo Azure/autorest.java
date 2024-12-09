@@ -73,9 +73,9 @@ public final class Golden extends Dog {
                 reader.nextToken();
 
                 if ("weight".equals(fieldName)) {
-                    deserializedGolden.weight = reader.getInt();
+                    deserializedGolden.withWeight(reader.getInt());
                 } else if ("dna".equals(fieldName)) {
-                    deserializedGolden.dna = reader.getString();
+                    deserializedGolden.withDna(reader.getString());
                 } else if ("kind".equals(fieldName)) {
                     deserializedGolden.kind = DogKind.fromString(reader.getString());
                 } else {
