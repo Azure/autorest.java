@@ -10,15 +10,12 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 
 /**
  * List of float enums.
  */
 public final class FloatEnum implements ExpandableEnum<Float> {
     private static final Map<Float, FloatEnum> VALUES = new ConcurrentHashMap<>();
-
-    private static final Function<Float, FloatEnum> NEW_INSTANCE = FloatEnum::new;
 
     /**
      * Static value 200.4 for FloatEnum.
@@ -59,7 +56,11 @@ public final class FloatEnum implements ExpandableEnum<Float> {
      */
     public static FloatEnum fromValue(Float value) {
         Objects.requireNonNull(value, "'value' cannot be null.");
-        return VALUES.computeIfAbsent(value, NEW_INSTANCE);
+        FloatEnum member = VALUES.get(value);
+        if (member != null) {
+            return member;
+        }
+        return VALUES.computeIfAbsent(value, key -> new FloatEnum(key));
     }
 
     /**
@@ -88,7 +89,7 @@ public final class FloatEnum implements ExpandableEnum<Float> {
 
     @Override
     public boolean equals(Object obj) {
-        return this == obj;
+        return Objects.equals(this.value, obj);
     }
 
     @Override
