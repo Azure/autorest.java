@@ -1,5 +1,12 @@
 # Release History
 
+## 0.26.1 (2024-12-09)
+
+Compatible with compiler 0.62.
+
+- Fixed `equals()` for `ExpandableEnum` implementations.
+- Removed unnecessary parent read-only property shadowing for stream-style-serialization, when all polymorphic models are in the same package.
+
 ## 0.26.0 (2024-11-22)
 
 Compatible with compiler 0.62.
