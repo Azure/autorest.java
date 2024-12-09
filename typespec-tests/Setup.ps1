@@ -5,23 +5,13 @@ param (
 
 Set-Location $PSScriptRoot
 
-if ($RebuildJar) {
-    Set-Location ../
+Push-Location ../
+try {
     ./Build-TypeSpec.ps1
-} else {
-    Set-Location ../typespec-extension/
-    # re-build typespec-java
-    npm ci
-    npm run build
-    npm run lint
-    npm pack
-    if ($LASTEXITCODE -ne 0) {
-        exit $LASTEXITCODE
-    }
+} finally {
+    Pop-Location
 }
 
-# re-install
-Set-Location ../typespec-tests/
 if (Test-Path node_modules) {
     Remove-Item node_modules -Recurse -Force
 }
