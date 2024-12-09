@@ -40,12 +40,7 @@ import tsptest.clientinitialization.implementation.ClientInitializationClientImp
 /**
  * A builder for creating a new instance of the ClientInitializationClient type.
  */
-@ServiceClientBuilder(
-    serviceClients = {
-        ClientInitializationClient.class,
-        ClientInitializationAsyncClient.class,
-        SubClient.class,
-        SubAsyncClient.class })
+@ServiceClientBuilder(serviceClients = { ClientInitializationClient.class, ClientInitializationAsyncClient.class })
 public final class ClientInitializationClientBuilder implements HttpTrait<ClientInitializationClientBuilder>,
     ConfigurationTrait<ClientInitializationClientBuilder>, EndpointTrait<ClientInitializationClientBuilder> {
     @Generated
@@ -196,6 +191,24 @@ public final class ClientInitializationClientBuilder implements HttpTrait<Client
     }
 
     /*
+     * 
+     */
+    @Generated
+    private String name;
+
+    /**
+     * Sets.
+     * 
+     * @param name the name value.
+     * @return the ClientInitializationClientBuilder.
+     */
+    @Generated
+    public ClientInitializationClientBuilder name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -224,7 +237,7 @@ public final class ClientInitializationClientBuilder implements HttpTrait<Client
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localEndpoint = (endpoint != null) ? endpoint : "http://localhost:3000";
         ClientInitializationClientImpl client = new ClientInitializationClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint);
+            JacksonAdapter.createDefaultSerializerAdapter(), localEndpoint, this.name);
         return client;
     }
 
@@ -232,6 +245,7 @@ public final class ClientInitializationClientBuilder implements HttpTrait<Client
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(name, "'name' cannot be null.");
     }
 
     @Generated
@@ -276,7 +290,7 @@ public final class ClientInitializationClientBuilder implements HttpTrait<Client
      */
     @Generated
     public ClientInitializationAsyncClient buildAsyncClient() {
-        return new ClientInitializationAsyncClient(buildInnerClient());
+        return new ClientInitializationAsyncClient(buildInnerClient().getSubClients());
     }
 
     /**
@@ -286,7 +300,7 @@ public final class ClientInitializationClientBuilder implements HttpTrait<Client
      */
     @Generated
     public ClientInitializationClient buildClient() {
-        return new ClientInitializationClient(buildInnerClient());
+        return new ClientInitializationClient(buildInnerClient().getSubClients());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ClientInitializationClientBuilder.class);

@@ -18,127 +18,45 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
 /**
- * Initializes a new instance of the SubClient type.
+ * An instance of this class provides access to all the operations defined in SubClients.
  */
-public final class SubClientImpl {
+public final class SubClientsImpl {
     /**
      * The proxy service used to perform REST calls.
      */
-    private final SubClientService service;
+    private final SubClientsService service;
 
     /**
-     * Service host.
+     * The service client containing this operation class.
      */
-    private final String endpoint;
+    private final ClientInitializationClientImpl client;
 
     /**
-     * Gets Service host.
+     * Initializes an instance of SubClientsImpl.
      * 
-     * @return the endpoint value.
+     * @param client the instance of the service client containing this operation class.
      */
-    public String getEndpoint() {
-        return this.endpoint;
+    SubClientsImpl(ClientInitializationClientImpl client) {
+        this.service
+            = RestProxy.create(SubClientsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
+        this.client = client;
     }
 
     /**
-     */
-    private final String name;
-
-    /**
-     * Gets.
-     * 
-     * @return the name value.
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * The HTTP pipeline to send requests through.
-     */
-    private final HttpPipeline httpPipeline;
-
-    /**
-     * Gets The HTTP pipeline to send requests through.
-     * 
-     * @return the httpPipeline value.
-     */
-    public HttpPipeline getHttpPipeline() {
-        return this.httpPipeline;
-    }
-
-    /**
-     * The serializer to serialize an object into a string.
-     */
-    private final SerializerAdapter serializerAdapter;
-
-    /**
-     * Gets The serializer to serialize an object into a string.
-     * 
-     * @return the serializerAdapter value.
-     */
-    public SerializerAdapter getSerializerAdapter() {
-        return this.serializerAdapter;
-    }
-
-    /**
-     * Initializes an instance of SubClient client.
-     * 
-     * @param endpoint Service host.
-     * @param name
-     */
-    public SubClientImpl(String endpoint, String name) {
-        this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, name);
-    }
-
-    /**
-     * Initializes an instance of SubClient client.
-     * 
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Service host.
-     * @param name
-     */
-    public SubClientImpl(HttpPipeline httpPipeline, String endpoint, String name) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, name);
-    }
-
-    /**
-     * Initializes an instance of SubClient client.
-     * 
-     * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Service host.
-     * @param name
-     */
-    public SubClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint, String name) {
-        this.httpPipeline = httpPipeline;
-        this.serializerAdapter = serializerAdapter;
-        this.endpoint = endpoint;
-        this.name = name;
-        this.service = RestProxy.create(SubClientService.class, this.httpPipeline, this.getSerializerAdapter());
-    }
-
-    /**
-     * The interface defining all the services for SubClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ClientInitializationClientSubClients to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "SubClient")
-    public interface SubClientService {
+    @ServiceInterface(name = "ClientInitialization")
+    public interface SubClientsService {
         @Post("/client/initialization/basic/sub-client/{name}:action")
         @ExpectedResponses({ 204 })
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
@@ -171,8 +89,8 @@ public final class SubClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> actionWithResponseAsync(String type, RequestOptions requestOptions) {
-        return FluxUtil
-            .withContext(context -> service.action(this.getEndpoint(), this.getName(), type, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.action(this.client.getEndpoint(), this.client.getName(), type, requestOptions, context));
     }
 
     /**
@@ -188,6 +106,6 @@ public final class SubClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> actionWithResponse(String type, RequestOptions requestOptions) {
-        return service.actionSync(this.getEndpoint(), this.getName(), type, requestOptions, Context.NONE);
+        return service.actionSync(this.client.getEndpoint(), this.client.getName(), type, requestOptions, Context.NONE);
     }
 }

@@ -23,6 +23,7 @@ class ClientInitializationClientTestBase extends TestProxyTestBase {
     protected void beforeTest() {
         ClientInitializationClientBuilder clientInitializationClientbuilder = new ClientInitializationClientBuilder()
             .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "http://localhost:3000"))
+            .name(Configuration.getGlobalConfiguration().get("NAME", "name"))
             .httpClient(getHttpClientOrUsePlayback(getHttpClients().findFirst().orElse(null)))
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.RECORD) {

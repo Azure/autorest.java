@@ -8,6 +8,7 @@ import _specs_.azure.core.page.implementation.PageClientImpl;
 import _specs_.azure.core.page.models.ListItemInputBody;
 import _specs_.azure.core.page.models.ListItemInputExtensibleEnum;
 import _specs_.azure.core.page.models.User;
+import _specs_.azure.core.page.models.UserListResults;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -18,6 +19,7 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
+import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
 /**
@@ -132,16 +134,21 @@ public final class PageClient {
      * <pre>
      * {@code
      * {
-     *     id: int (Required)
-     *     name: String (Required)
-     *     orders (Optional): [
-     *          (Optional){
+     *     items (Required): [
+     *          (Required){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             name: String (Required)
+     *             orders (Optional): [
+     *                  (Optional){
+     *                     id: int (Required)
+     *                     userId: int (Required)
+     *                     detail: String (Required)
+     *                 }
+     *             ]
+     *             etag: String (Required)
      *         }
      *     ]
-     *     etag: String (Required)
+     *     nextLink: String (Optional)
      * }
      * }
      * </pre>
@@ -151,12 +158,12 @@ public final class PageClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return the response body along with {@link Response}.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> listWithCustomPageModel(RequestOptions requestOptions) {
-        return this.serviceClient.listWithCustomPageModel(requestOptions);
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> listWithCustomPageModelWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.listWithCustomPageModelWithResponse(requestOptions);
     }
 
     /**
@@ -231,14 +238,13 @@ public final class PageClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the paginated response with {@link PagedIterable}.
+     * @return the response.
      */
     @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<User> listWithCustomPageModel() {
-        // Generated convenience method for listWithCustomPageModel
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public UserListResults listWithCustomPageModel() {
+        // Generated convenience method for listWithCustomPageModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.listWithCustomPageModel(requestOptions)
-            .mapPage(bodyItemValue -> bodyItemValue.toObject(User.class));
+        return listWithCustomPageModelWithResponse(requestOptions).getValue().toObject(UserListResults.class);
     }
 }

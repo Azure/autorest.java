@@ -10,7 +10,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import java.util.Objects;
 
 /**
  * Initializes a new instance of the ClientInitializationClient type.
@@ -28,6 +27,19 @@ public final class ClientInitializationClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
+    }
+
+    /**
+     */
+    private final String name;
+
+    /**
+     * Gets.
+     * 
+     * @return the name value.
+     */
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -59,13 +71,28 @@ public final class ClientInitializationClientImpl {
     }
 
     /**
+     * The SubClientsImpl object to access its operations.
+     */
+    private final SubClientsImpl subClients;
+
+    /**
+     * Gets the SubClientsImpl object to access its operations.
+     * 
+     * @return the SubClientsImpl object.
+     */
+    public SubClientsImpl getSubClients() {
+        return this.subClients;
+    }
+
+    /**
      * Initializes an instance of ClientInitializationClient client.
      * 
      * @param endpoint Service host.
+     * @param name
      */
-    public ClientInitializationClientImpl(String endpoint) {
+    public ClientInitializationClientImpl(String endpoint, String name) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, name);
     }
 
     /**
@@ -73,9 +100,10 @@ public final class ClientInitializationClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Service host.
+     * @param name
      */
-    public ClientInitializationClientImpl(HttpPipeline httpPipeline, String endpoint) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+    public ClientInitializationClientImpl(HttpPipeline httpPipeline, String endpoint, String name) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, name);
     }
 
     /**
@@ -84,22 +112,14 @@ public final class ClientInitializationClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Service host.
+     * @param name
      */
     public ClientInitializationClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        String endpoint) {
+        String endpoint, String name) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
-    }
-
-    /**
-     * Gets an instance of SubClientImpl class.
-     * 
-     * @param name
-     * @return an instance of SubClientImplclass.
-     */
-    public SubClientImpl getSubClient(String name) {
-        Objects.requireNonNull(name, "'name' cannot be null.");
-        return new SubClientImpl(httpPipeline, serializerAdapter, endpoint, name);
+        this.name = name;
+        this.subClients = new SubClientsImpl(this);
     }
 }
