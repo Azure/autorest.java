@@ -10,12 +10,15 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 
 /**
  * List of integer enums.
  */
 public final class IntEnum implements ExpandableEnum<Integer> {
     private static final Map<Integer, IntEnum> VALUES = new ConcurrentHashMap<>();
+
+    private static final Function<Integer, IntEnum> NEW_INSTANCE = IntEnum::new;
 
     /**
      * Static value 200 for IntEnum.
@@ -56,11 +59,7 @@ public final class IntEnum implements ExpandableEnum<Integer> {
      */
     public static IntEnum fromValue(Integer value) {
         Objects.requireNonNull(value, "'value' cannot be null.");
-        IntEnum member = VALUES.get(value);
-        if (member != null) {
-            return member;
-        }
-        return VALUES.computeIfAbsent(value, key -> new IntEnum(key));
+        return VALUES.computeIfAbsent(value, NEW_INSTANCE);
     }
 
     /**
@@ -89,7 +88,7 @@ public final class IntEnum implements ExpandableEnum<Integer> {
 
     @Override
     public boolean equals(Object obj) {
-        return Objects.equals(this.value, obj);
+        return this == obj;
     }
 
     @Override
