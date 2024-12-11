@@ -9,25 +9,25 @@
     "testserver-run": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http --coverageFile ./cadl-ranch-coverage-java.json"
   },
   "dependencies": {
-    "@azure-tools/cadl-ranch-specs": "0.39.4",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.26.1.tgz"
+    "@azure-tools/cadl-ranch-specs": "0.39.5",
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.27.0.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": "~0.62.0",
+    "@typespec/prettier-plugin-typespec": "~0.63.0",
     "prettier-plugin-organize-imports": "4.1.0",
-    "prettier": "~3.3.3"
+    "prettier": "~3.4.2"
   },
   "overrides": {
-    "@typespec/compiler": "~0.62.0",
-    "@typespec/http": "~0.62.0",
-    "@typespec/rest": "~0.62.0",
-    "@typespec/versioning": "~0.62.0",
-    "@typespec/openapi": "~0.62.0",
-    "@typespec/xml": "~0.62.0",
-    "@azure-tools/typespec-azure-core": "~0.48.0",
-    "@azure-tools/typespec-client-generator-core": "~0.48.0",
-    "@azure-tools/typespec-azure-resource-manager": "~0.48.0",
-    "@azure-tools/typespec-autorest": "~0.48.0"
+    "@typespec/compiler": "~0.63.0",
+    "@typespec/http": "~0.63.0",
+    "@typespec/rest": "~0.63.0",
+    "@typespec/versioning": "~0.63.0",
+    "@typespec/openapi": "~0.63.0",
+    "@typespec/xml": "~0.63.0",
+    "@azure-tools/typespec-azure-core": "~0.49.0",
+    "@azure-tools/typespec-client-generator-core": "~0.49.0",
+    "@azure-tools/typespec-azure-resource-manager": "~0.49.0",
+    "@azure-tools/typespec-autorest": "~0.49.0"
   },
   "private": true
 }
