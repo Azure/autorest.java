@@ -6,7 +6,7 @@ Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (V
 
 Install [Maven](https://maven.apache.org/install.html). (Verify by running `mvn --version`)
 
-Install [TypeSpec](https://typespec.io/) 0.62.
+Install [TypeSpec](https://typespec.io/) 0.63.
 
 # Initialize TypeSpec Project
 
