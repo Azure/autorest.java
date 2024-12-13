@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the implementations for Pageable.
+ * Package containing the data models for Pageable.
  * Test for pageable payload.
  * <!-- end generated doc -->
  */
-package payload.pageable.implementation;
+package payload.pageable.serverdrivenpagination.models;

@@ -5,7 +5,7 @@
 /**
  * <!-- start generated doc -->
  * Package containing the implementations for Pageable.
- * Test for pageable payload.
+ * Test describing pageable.
  * <!-- end generated doc -->
  */
-package payload.pageable.implementation;
+package azure.payload.pageable.implementation;
