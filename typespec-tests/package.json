@@ -6,10 +6,11 @@
     "format": "npm run -s prettier -- --write",
     "check-format": "npm run prettier -- --check",
     "prettier": "prettier --config ./.prettierrc.yaml **/*.tsp",
-    "testserver-run": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http --coverageFile ./cadl-ranch-coverage-java.json"
+    "spector-serve": "tsp-spector serve ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json"
   },
   "dependencies": {
-    "@azure-tools/cadl-ranch-specs": "0.39.5",
+    "@typespec/http-specs": "0.1.0-alpha.5",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.4",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.27.0.tgz"
   },
   "devDependencies": {
