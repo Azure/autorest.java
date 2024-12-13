@@ -106,7 +106,7 @@ jobs:
 
       - task: AzureCLI@2
         displayName: 'Upload to Spector Coverage Report Dashboard'
-        # condition: eq(variables.isMain, 'true')
+        condition: eq(variables.isMain, 'true')
         inputs:
           azureSubscription: "TypeSpec Storage"
           scriptType: "bash"
