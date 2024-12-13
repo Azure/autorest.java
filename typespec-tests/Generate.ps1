@@ -148,16 +148,17 @@ Copy-Item -Path ./existingcode/src/main/java/tsptest/partialupdate -Destination 
 Remove-Item ./existingcode -Recurse -Force
 
 # run cadl ranch tests sources
-Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
+Copy-Item -Path node_modules/@typespec/http-specs/specs -Destination ./ -Recurse -Force
+Copy-Item -Path node_modules/@azure-tools/azure-http-specs/specs -Destination ./ -Recurse -Force
 # remove xml tests, emitter has not supported xml model
-Remove-Item ./http/payload/xml -Recurse -Force
+Remove-Item ./specs/payload/xml -Recurse -Force
 
-$job = (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
+$job = (Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 1200
 $job | Receive-Job
 
-Remove-Item ./http -Recurse -Force
+Remove-Item ./specs -Recurse -Force
 
 Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 
