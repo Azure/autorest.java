@@ -79,7 +79,7 @@ jobs:
           publishJUnitResults: false
 
       - script: |
-          npx tsp-spector server start ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json
+          npx --no-install tsp-spector server start ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json
         displayName: 'Start Spector Test Server'
         workingDirectory: ./typespec-tests
 
@@ -96,7 +96,7 @@ jobs:
           publishJUnitResults: false
 
       - script: |
-          npx tsp-spector server stop
+          npx --no-install tsp-spector server stop
         displayName: 'Stop Spector Test Server'
         workingDirectory: ./typespec-tests
 
@@ -111,6 +111,6 @@ jobs:
           azureSubscription: "TypeSpec Storage"
           scriptType: "bash"
           scriptLocation: "inlineScript"
-          inlineScript: npx tsp-spector upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/tsp-spector-coverage-java.json --generatorName "@azure-tools/typespec-java" --storageAccountName typespec --containerName coverages --generatorMode azure --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
+          inlineScript: npx --no-install tsp-spector upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/tsp-spector-coverage-java.json --generatorName "@azure-tools/typespec-java" --storageAccountName typespec --containerName coverages --generatorMode azure --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
 
       - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

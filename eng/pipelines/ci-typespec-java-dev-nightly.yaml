@@ -87,7 +87,7 @@ jobs:
 #        displayName: 'Check no Diff'
 
       - script: |
-          npx tsp-spector server start ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json
+          npx --no-install tsp-spector server start ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json
         displayName: 'Start Spector Test Server'
         workingDirectory: ./typespec-tests
 
@@ -104,7 +104,7 @@ jobs:
           publishJUnitResults: false
 
       - script: |
-          npx tsp-spector server stop
+          npx --no-install tsp-spector server stop
         displayName: 'Stop Spector Test Server'
         workingDirectory: ./typespec-tests
 
