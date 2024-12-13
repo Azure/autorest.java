@@ -56,9 +56,12 @@ public final class FloatEnum implements ExpandableEnum<Float> {
      * 
      * @param value a value to look for.
      * @return the corresponding FloatEnum.
+     * @throws IllegalArgumentException if value is null.
      */
     public static FloatEnum fromValue(Float value) {
-        Objects.requireNonNull(value, "'value' cannot be null.");
+        if (value == null) {
+            throw new IllegalArgumentException("'value' cannot be null.");
+        }
         return VALUES.computeIfAbsent(value, NEW_INSTANCE);
     }
 

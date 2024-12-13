@@ -56,9 +56,12 @@ public final class IntEnum implements ExpandableEnum<Integer> {
      * 
      * @param value a value to look for.
      * @return the corresponding IntEnum.
+     * @throws IllegalArgumentException if value is null.
      */
     public static IntEnum fromValue(Integer value) {
-        Objects.requireNonNull(value, "'value' cannot be null.");
+        if (value == null) {
+            throw new IllegalArgumentException("'value' cannot be null.");
+        }
         return VALUES.computeIfAbsent(value, NEW_INSTANCE);
     }
 
