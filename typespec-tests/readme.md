@@ -26,7 +26,7 @@ The existing code is already in sync. Run this if you have changed the code of T
 
 Start tsp-spector Test Server
 
-`npm run tsp-spector-run`
+`npm run spector-serve`
 
 Then, run the tests in `typespec-tests` module as usual Java Tests.
 
