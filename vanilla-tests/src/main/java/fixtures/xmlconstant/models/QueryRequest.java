@@ -117,9 +117,7 @@ public final class QueryRequest implements XmlSerializable<QueryRequest> {
             while (reader.nextElement() != XmlToken.END_ELEMENT) {
                 QName elementName = reader.getElementName();
 
-                if ("QueryType".equals(elementName.getLocalPart())) {
-                    deserializedQueryRequest.queryType = reader.getStringElement();
-                } else if ("Expression".equals(elementName.getLocalPart())) {
+                if ("Expression".equals(elementName.getLocalPart())) {
                     deserializedQueryRequest.expression = reader.getStringElement();
                 } else {
                     reader.skipElement();

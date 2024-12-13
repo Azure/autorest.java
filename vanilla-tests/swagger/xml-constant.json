@@ -34,17 +34,17 @@
           },
           "enum": [
             "SQL"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Expression",
+            "modelAsString": false
+          }
         },
         "Expression": {
           "type": "string",
           "description": "The query expression in SQL. The maximum size of the query expression is 256KiB.",
           "xml": {
             "name": "Expression"
-          },
-          "x-ms-enum": {
-            "name": "Expression",
-            "modelAsString": false
           }
         }
       },
