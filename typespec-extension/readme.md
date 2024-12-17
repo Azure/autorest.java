@@ -59,6 +59,14 @@ It is advised for service to set an appropriate service name. E.g. `service-name
 
 The name will appear in documentations (e.g. "README.md") that describes the service and client. It would also affect the name of the entry class of the SDK.
 
+#### `partial-update`
+
+Default value is `false`.
+
+This emitter option is for data-plane SDK.
+
+In the case that the generated code is not good enough for the SDK, developer can choose to customize generated SDK via [Partial Update](https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-QuickStart#partial-update). Set the value to `true` to enable this feature.
+
 #### `generate-samples`
 
 Default value is `true`. Emitter generates code samples under `generated` package.
