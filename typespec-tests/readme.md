@@ -24,9 +24,9 @@ The existing code is already in sync. Run this if you have changed the code of T
 
 ## Run Test
 
-Start Cadl-Ranch
+Start tsp-spector Test Server
 
-`npm run testserver-run`
+`npm run spector-serve`
 
 Then, run the tests in `typespec-tests` module as usual Java Tests.
 
