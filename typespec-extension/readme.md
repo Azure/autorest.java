@@ -4,7 +4,7 @@ Install [Node.js](https://nodejs.org/en/download/) 20 or above. (Verify by runni
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by running `java --version`)
 
-Install [Maven](https://maven.apache.org/install.html). (Verify by running `mvn --version`)
+Install [Maven](https://maven.apache.org/download.cgi). (Verify by running `mvn --version`)
 
 Install [TypeSpec](https://typespec.io/) 0.63.
 
@@ -36,12 +36,76 @@ emit:
 options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}/azure-ai-language-authoring"
-    namespace: "com.azure.ai.language.authoring"
     service-name: "Authoring"
     generate-samples: true
     generate-tests: true
     partial-update: false
     api-version: "2023-11-01"
+```
+
+### SDK Related Configuration in Emitter options `tspconfig.yaml`
+
+#### `api-version`
+
+By default, the emitter generates code from the latest api-version in TypeSpec.
+
+In cases where a service needs to generate code from a previous api-version, set the value to that specific api-version.
+
+#### `service-name`
+
+This emitter option is for management-plane SDK.
+
+It is advised for the service to set an appropriate service name. E.g. `service-name: Standby Pool`.
+
+The name will appear in documentation (e.g. "README.md") that describes the service and the SDK. It would also affect the name of the entry class of the SDK.
+
+#### `partial-update`
+
+Default value is `false`.
+
+This emitter option is for data-plane SDK.
+
+In the case that the generated code is not good enough for the SDK, the developer can choose to customize the generated SDK via [Partial Update](https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-QuickStart#partial-update). Set the value to `true` to enable this feature.
+
+#### `generate-samples`
+
+Default value is `true`. The emitter generates code samples under the `generated` package.
+
+For data-plane SDK, the generated samples are for reference. The motivation is to show how samples can be written. It is expected that developers write correct and concise samples outside of the `generated` package.
+
+If there is customization of the generated SDK, the generated samples may not compile after customization. One can delete the `generated` package, and set the value to `false` to disable the generated samples.
+
+#### `generate-tests`
+
+Default value is `true`. The emitter generates tests under the `generated` package.
+
+For data-plane SDK, the generated tests are (disabled) live tests. The motivation is to show how test cases can be written in Java with JUnit. It is expected that developers write runnable tests outside of the `generated` package.
+
+For management-plane SDK, the generated tests are mock tests, for JSON serialization and API requests.
+
+If there is customization of the generated SDK, the generated tests may not compile after customization. One can delete the `generated` package, and set the value to `false` to disable the generated tests.
+
+### SDK Related Configuration in Client Customization `client.tsp`
+
+For Java SDK, it is required to provide a Java package name via `@clientNamespace`.
+
+Here is an example:
+
+```ts
+@@clientNamespace(Client, "com.azure.ai.openai", "java");
+@@clientNamespace(Azure.OpenAI, "com.azure.ai.openai", "java");
+```
+
+For management-plane SDK, one can provide a client name via `@clientName`.
+
+Here is an example:
+
+```ts
+@@clientNamespace(Microsoft.StandbyPool,
+  "com.azure.resourcemanager.standbypool",
+  "java"
+);
+@@clientName(Microsoft.StandbyPool, "StandbyPoolManagementClient", "java");
 ```
 
 ## Convenience API
@@ -51,8 +115,8 @@ A few exceptions are API of JSON Merge Patch, and API of long-running operation 
 
 See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).
 
-
 # Customization
+
 All post-code customizations listed in this [documentation](https://github.com/Azure/autorest.java/tree/main/customization-base/README.md) are supported for code generated from TypeSpec.
 
 To configure customization with TypeSpec, Java's emitter options should include a `customization-class`. The `customization-class` option should specify the path to the file containing the customization code relative to `emitter-output-dir`. Note that the path should end with `src/main/java/<YourCustomizationClassName>.java`. The recommended practice is to place the customization class in `<output-dir>/customization/src/main/java/<YourCustomizationClassName>.java` and the `customization-class` option will have the value of `customization-class: customization/src/main/java/<YourCustomizationClassName>.java`. See example `tspconfig.yaml` below:

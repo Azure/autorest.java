@@ -1,21 +1,21 @@
 diff --git a/packages/http-client-java/emitter/src/code-model-builder.ts b/packages/http-client-java/emitter/src/code-model-builder.ts
-index 5375778e0..917a4a957 100644
+index 691af914b..436ae3c8c 100644
 --- a/packages/http-client-java/emitter/src/code-model-builder.ts
 +++ b/packages/http-client-java/emitter/src/code-model-builder.ts
-@@ -241,7 +241,7 @@ export class CodeModelBuilder {
-   }
+@@ -242,7 +242,7 @@ export class CodeModelBuilder {
+       return this.codeModel;
+     }
  
-   public async build(): Promise<CodeModel> {
 -    this.sdkContext = await createSdkContext(this.emitterContext, "@typespec/http-client-java", {
 +    this.sdkContext = await createSdkContext(this.emitterContext, "@azure-tools/typespec-java", {
        versioning: { previewStringRegex: /$/ },
      }); // include all versions and do the filter by ourselves
  
 diff --git a/packages/http-client-java/emitter/src/emitter.ts b/packages/http-client-java/emitter/src/emitter.ts
-index 317e746d2..848b46275 100644
+index ca4246c47..e4ec721eb 100644
 --- a/packages/http-client-java/emitter/src/emitter.ts
 +++ b/packages/http-client-java/emitter/src/emitter.ts
-@@ -98,7 +98,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
+@@ -107,7 +107,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
  };
  
  export const $lib = createTypeSpecLibrary({
@@ -25,7 +25,7 @@ index 317e746d2..848b46275 100644
    emitter: {
      options: EmitterOptionsSchema,
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index afa83e5c4..db70c748e 100644
+index b65210b56..cd015f70f 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 @@ -21,6 +21,11 @@
@@ -57,7 +57,7 @@ index d44ce8ec4..7953870bc 100644
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.JavaSettings;
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.NewPlugin;
 diff --git a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
-index c99896650..358938595 100644
+index c99896650..fef2a4caf 100644
 --- a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 @@ -16,9 +16,9 @@

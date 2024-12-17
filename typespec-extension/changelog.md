@@ -1,5 +1,11 @@
 # Release History
 
+## 0.27.1 (2024-12-17)
+
+Compatible with compiler 0.63.
+
+- Default value for emitter option `flavor` is always `azure`.
+
 ## 0.27.0 (2024-12-11)
 
 Compatible with compiler 0.63.

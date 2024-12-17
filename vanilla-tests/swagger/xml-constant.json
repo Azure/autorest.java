@@ -1,0 +1,56 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-09-15",
+    "title": "XmlConstantClient",
+    "description": "XML constant client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/xml"
+  ],
+  "produces": [
+    "application/xml"
+  ],
+  "paths": {
+  },
+  "definitions": {
+    "QueryRequest": {
+      "description": "Groups the set of query request settings.",
+      "type": "object",
+      "required": [
+        "QueryType",
+        "Expression"
+      ],
+      "properties": {
+        "QueryType": {
+          "type": "string",
+          "description": "Required. The type of the provided query expression.",
+          "xml": {
+            "name": "QueryType"
+          },
+          "enum": [
+            "SQL"
+          ],
+          "x-ms-enum": {
+            "name": "Expression",
+            "modelAsString": false
+          }
+        },
+        "Expression": {
+          "type": "string",
+          "description": "The query expression in SQL. The maximum size of the query expression is 256KiB.",
+          "xml": {
+            "name": "Expression"
+          }
+        }
+      },
+      "xml": {
+        "name": "QueryRequest"
+      }
+    }
+  }
+}
