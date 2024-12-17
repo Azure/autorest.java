@@ -43,43 +43,43 @@ options:
     api-version: "2023-11-01"
 ```
 
-### Emitter options
+### SDK Related Configuration in Emitter options `tspconfig.yaml`
 
 #### `api-version`
 
-By default, emitter generates code upon the latest api-version in TypeSpec.
+By default, emitter generates code from the latest api-version in TypeSpec.
 
-There is cases that service wishes to generate code from a previous api-version. In such case, set this option to that api-version.
+There is cases that service wishes to generate code from a previous api-version. In such case, set the value to that api-version.
 
 #### `service-name`
 
-The emitter option is for management-plane SDK.
+This emitter option is for management-plane SDK.
 
-It is advised for service to set a correct service name. E.g. `service-name: Standby Pool`.
+It is advised for service to set an appropriate service name. E.g. `service-name: Standby Pool`.
 
-The name will appear in documentations (e.g. "README.md") that describes the service and client. It would also affect the entry class of the client.
+The name will appear in documentations (e.g. "README.md") that describes the service and client. It would also affect the name of the entry class of the SDK.
 
 #### `generate-samples`
 
 Default value is `true`. Emitter generates code samples under `generated` package.
 
-For data-plane SDK, the generated samples are for reference. The motivation is to show how samples can be written. It is expected that developers write better samples outside of `generated` package.
+For data-plane SDK, the generated samples are for reference. The motivation is to show how samples can be written. It is expected that developers write correct and concise samples outside of `generated` package.
 
-If there is large customization of the generated SDK, the generated samples may not compile after customization. In such case, one can set the value to `false`.
+If there is customization of the generated SDK, the generated samples may not compile after customization. One can delete the `generated` package, set the value to `false` to disable the generated samples.
 
 #### `generate-tests`
 
 Default value is `true`. Emitter generates tests under `generated` package. The motivation is to show how samples can be written.
 
-For data-plane SDK, the generated tests are live tests, and they are disabled. The motivation is to show how test cases can be written. It is expected that developers write better tests outside of `generated` package.
+For data-plane SDK, the generated tests are (disabled) live tests. The motivation is to show how test cases can be written in Java with JUnit. It is expected that developers write runnable tests outside of `generated` package.
 
 For management-plane SDK, the generated tests are mock tests, for JSON serialization and API requests.
 
-If there is large customization of the generated SDK, the generated tests may not compile after customization. In such case, one can set the value to `false`.
+If there is customization of the generated SDK, the generated tests may not compile after customization. One can delete the `generated` package, set the value to `false` to disable the generated tests.
 
-### `client.tsp`
+### SDK Related Configuration in Client Customization `client.tsp`
 
-For Java SDK, one need to provide Java package name via `@clientNamespace`.
+For Java SDK, it is required to provide Java package name via `@clientNamespace`.
 
 Here is an example:
 
@@ -108,6 +108,7 @@ A few exceptions are API of JSON Merge Patch, and API of long-running operation 
 See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).
 
 # Customization
+
 All post-code customizations listed in this [documentation](https://github.com/Azure/autorest.java/tree/main/customization-base/README.md) are supported for code generated from TypeSpec.
 
 To configure customization with TypeSpec, Java's emitter options should include a `customization-class`. The `customization-class` option should specify the path to the file containing the customization code relative to `emitter-output-dir`. Note that the path should end with `src/main/java/<YourCustomizationClassName>.java`. The recommended practice is to place the customization class in `<output-dir>/customization/src/main/java/<YourCustomizationClassName>.java` and the `customization-class` option will have the value of `customization-class: customization/src/main/java/<YourCustomizationClassName>.java`. See example `tspconfig.yaml` below:
