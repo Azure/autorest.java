@@ -49,7 +49,7 @@ options:
 
 By default, emitter generates code from the latest api-version in TypeSpec.
 
-There is cases that service wishes to generate code from a previous api-version. In such case, set the value to that api-version.
+In cases where a service needs to generate code from a previous api-version, set the value to that specific api-version.
 
 #### `service-name`
 
