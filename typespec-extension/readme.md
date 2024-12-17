@@ -77,7 +77,7 @@ If there is customization of the generated SDK, the generated samples may not co
 
 #### `generate-tests`
 
-Default value is `true`. Emitter generates tests under `generated` package. The motivation is to show how samples can be written.
+Default value is `true`. Emitter generates tests under `generated` package.
 
 For data-plane SDK, the generated tests are (disabled) live tests. The motivation is to show how test cases can be written in Java with JUnit. It is expected that developers write runnable tests outside of `generated` package.
 
