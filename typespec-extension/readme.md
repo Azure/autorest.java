@@ -77,13 +77,35 @@ For management-plane SDK, the generated tests are mock tests, for JSON serializa
 
 If there is large customization of the generated SDK, the generated tests may not compile after customization. In such case, one can set the value to `false`.
 
+### `client.tsp`
+
+For Java SDK, one need to provide Java package name via `@clientNamespace`.
+
+Here is an example:
+
+```ts
+@@clientNamespace(Client, "com.azure.ai.openai", "java");
+@@clientNamespace(Azure.OpenAI, "com.azure.ai.openai", "java");
+```
+
+For management-plane SDK, one can provide a client name via `@clientName`.
+
+Here is an example:
+
+```ts
+@@clientNamespace(Microsoft.StandbyPool,
+  "com.azure.resourcemanager.standbypool",
+  "java"
+);
+@@clientName(Microsoft.StandbyPool, "StandbyPoolManagementClient", "java");
+```
+
 ## Convenience API
 
 By default, TypeSpec-Java generates all protocol APIs and convenience APIs.
 A few exceptions are API of JSON Merge Patch, and API of long-running operation with ambiguous response type.
 
 See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).
-
 
 # Customization
 All post-code customizations listed in this [documentation](https://github.com/Azure/autorest.java/tree/main/customization-base/README.md) are supported for code generated from TypeSpec.
