@@ -36,13 +36,46 @@ emit:
 options:
   "@azure-tools/typespec-java":
     emitter-output-dir: "{project-root}/azure-ai-language-authoring"
-    namespace: "com.azure.ai.language.authoring"
     service-name: "Authoring"
     generate-samples: true
     generate-tests: true
     partial-update: false
     api-version: "2023-11-01"
 ```
+
+### Emitter options
+
+#### `api-version`
+
+By default, emitter generates code upon the latest api-version in TypeSpec.
+
+There is cases that service wishes to generate code from a previous api-version. In such case, set this option to that api-version.
+
+#### `service-name`
+
+The emitter option is for management-plane SDK.
+
+It is advised for service to set a correct service name. E.g. `service-name: Standby Pool`.
+
+The name will appear in documentations (e.g. "README.md") that describes the service and client. It would also affect the entry class of the client.
+
+#### `generate-samples`
+
+Default value is `true`. Emitter generates code samples under `generated` package.
+
+For data-plane SDK, the generated samples are for reference. The motivation is to show how samples can be written. It is expected that developers write better samples outside of `generated` package.
+
+If there is large customization of the generated SDK, the generated samples may not compile after customization. In such case, one can set the value to `false`.
+
+#### `generate-tests`
+
+Default value is `true`. Emitter generates tests under `generated` package. The motivation is to show how samples can be written.
+
+For data-plane SDK, the generated tests are live tests, and they are disabled. The motivation is to show how test cases can be written. It is expected that developers write better tests outside of `generated` package.
+
+For management-plane SDK, the generated tests are mock tests, for JSON serialization and API requests.
+
+If there is large customization of the generated SDK, the generated tests may not compile after customization. In such case, one can set the value to `false`.
 
 ## Convenience API
 
