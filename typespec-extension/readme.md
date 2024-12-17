@@ -47,7 +47,7 @@ options:
 
 #### `api-version`
 
-By default, emitter generates code from the latest api-version in TypeSpec.
+By default, the emitter generates code from the latest api-version in TypeSpec.
 
 In cases where a service needs to generate code from a previous api-version, set the value to that specific api-version.
 
@@ -55,9 +55,9 @@ In cases where a service needs to generate code from a previous api-version, set
 
 This emitter option is for management-plane SDK.
 
-It is advised for service to set an appropriate service name. E.g. `service-name: Standby Pool`.
+It is advised for the service to set an appropriate service name. E.g. `service-name: Standby Pool`.
 
-The name will appear in documentations (e.g. "README.md") that describes the service and client. It would also affect the name of the entry class of the SDK.
+The name will appear in documentation (e.g. "README.md") that describes the service and the SDK. It would also affect the name of the entry class of the SDK.
 
 #### `partial-update`
 
@@ -65,29 +65,29 @@ Default value is `false`.
 
 This emitter option is for data-plane SDK.
 
-In the case that the generated code is not good enough for the SDK, developer can choose to customize generated SDK via [Partial Update](https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-QuickStart#partial-update). Set the value to `true` to enable this feature.
+In the case that the generated code is not good enough for the SDK, the developer can choose to customize the generated SDK via [Partial Update](https://github.com/Azure/azure-sdk-for-java/wiki/TypeSpec-Java-QuickStart#partial-update). Set the value to `true` to enable this feature.
 
 #### `generate-samples`
 
-Default value is `true`. Emitter generates code samples under `generated` package.
+Default value is `true`. The emitter generates code samples under the `generated` package.
 
-For data-plane SDK, the generated samples are for reference. The motivation is to show how samples can be written. It is expected that developers write correct and concise samples outside of `generated` package.
+For data-plane SDK, the generated samples are for reference. The motivation is to show how samples can be written. It is expected that developers write correct and concise samples outside of the `generated` package.
 
-If there is customization of the generated SDK, the generated samples may not compile after customization. One can delete the `generated` package, set the value to `false` to disable the generated samples.
+If there is customization of the generated SDK, the generated samples may not compile after customization. One can delete the `generated` package, and set the value to `false` to disable the generated samples.
 
 #### `generate-tests`
 
-Default value is `true`. Emitter generates tests under `generated` package.
+Default value is `true`. The emitter generates tests under the `generated` package.
 
-For data-plane SDK, the generated tests are (disabled) live tests. The motivation is to show how test cases can be written in Java with JUnit. It is expected that developers write runnable tests outside of `generated` package.
+For data-plane SDK, the generated tests are (disabled) live tests. The motivation is to show how test cases can be written in Java with JUnit. It is expected that developers write runnable tests outside of the `generated` package.
 
 For management-plane SDK, the generated tests are mock tests, for JSON serialization and API requests.
 
-If there is customization of the generated SDK, the generated tests may not compile after customization. One can delete the `generated` package, set the value to `false` to disable the generated tests.
+If there is customization of the generated SDK, the generated tests may not compile after customization. One can delete the `generated` package, and set the value to `false` to disable the generated tests.
 
 ### SDK Related Configuration in Client Customization `client.tsp`
 
-For Java SDK, it is required to provide Java package name via `@clientNamespace`.
+For Java SDK, it is required to provide a Java package name via `@clientNamespace`.
 
 Here is an example:
 
