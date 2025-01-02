@@ -42,6 +42,7 @@ import com.azure.mgmtlitetest.storage.models.StorageAccountExpand;
 import com.azure.mgmtlitetest.storage.models.StorageAccountListKeysResult;
 import com.azure.mgmtlitetest.storage.models.StorageAccountRegenerateKeyParameters;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
+import com.azure.mgmtlitetest.streamanalytics.models.AggregateFunctionProperties;
 import com.azure.mgmtlitetest.streamstyleserialization.implementation.CommunityGalleriesClientImpl;
 import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.education.fluent.models.LabDetailsInner;
@@ -209,5 +210,9 @@ public class LiteCompilationTests {
     public void testPageableWithInheritance() {
         SavingsPlansClient savingsPlansClient = mock(SavingsPlansClient.class);
         PagedIterable<SavingsPlanModelInner> result = savingsPlansClient.listByBillingAccount("myBillingAccount");
+    }
+
+    public void testChildWithParentFlattenedProperties() {
+        AggregateFunctionProperties aggregateFunctionProperties = new AggregateFunctionProperties();
     }
 }
