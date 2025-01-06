@@ -144,6 +144,9 @@ $job = @(
     # stream-style-serialization
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/stream-style-serialization.json --java.namespace=com.azure.mgmtlitetest.streamstyleserialization --stream-style-serialization=true"
 
+    # child model with flattened property from parent
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/692cb8b5eb71505afa267cfbbee322d520eb15ff/specification/streamanalytics/resource-manager/Microsoft.StreamAnalytics/stable/2020-03-01/functions.json --java.namespace=com.azure.mgmtlitetest.streamanalytics --generate-tests=false"
+
     # empty-model
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/empty-model.json --java.namespace=com.azure.mgmtlitetest.emptymodel"
 
