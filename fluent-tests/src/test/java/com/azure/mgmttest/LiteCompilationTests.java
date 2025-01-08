@@ -17,6 +17,7 @@ import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.util.Context;
 import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.containerregistrylite.ContainerRegistryManager;
+import com.azure.mgmtlitetest.emptybytearrayinclients.implementation.DpsCertificatesClientImpl;
 import com.azure.mgmtlitetest.managednetworkfabric.models.CommonPostActionResponseForStateUpdate;
 import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.LiveEventStatus;
@@ -214,5 +215,9 @@ public class LiteCompilationTests {
 
     public void testChildWithParentFlattenedProperties() {
         AggregateFunctionProperties aggregateFunctionProperties = new AggregateFunctionProperties();
+    }
+
+    public void testEmptyByteArrayInClients() {
+        Class<DpsCertificatesClientImpl> clazz = DpsCertificatesClientImpl.class;
     }
 }

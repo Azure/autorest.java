@@ -153,6 +153,9 @@ $job = @(
     # pageable model with inheritance
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0ed912fdfaffd5c81eb86b79df0e3b31d978d795/specification/billing/resource-manager/Microsoft.Billing/stable/2024-04-01/billingSavingsPlan.json --java.namespace=com.azure.mgmtlitetest.pageablewithinheritance"
 
+    # empty byte array in client implementation
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/f840c84013f12b701aac7065ceeb13a59b26051b/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-02-05/iotdps.json --java.namespace=com.azure.mgmtlitetest.emptybytearrayinclients"
+
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network"
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
