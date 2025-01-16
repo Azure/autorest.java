@@ -361,7 +361,17 @@ git remote add upstream https://github.com/microsoft/typespec
 
 Run "Build-TypeSpec.ps1" script to build `@azure-tools/typespec-java` as TypeSpec emitter.
 
+The TypeSpec emitter can be installed via e.g.
+```
+npm install [repo_root]/typespec-extension/azure-tools-typespec-java-[version].tgz
+```
+
 Run "Build-AutoRest.ps1" script to build `@autorest/java` as Autorest extension.
+
+The AutoRest extension can be used via e.g.
+```
+autorest --use="[repo_root]" --java [readme.md]
+```
 
 The script does 3 things:
 
