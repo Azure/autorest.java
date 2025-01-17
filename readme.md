@@ -161,7 +161,7 @@ With the fields specified below:
 |-----|----|--------|-----------|-------|
 |operationId|String|true|The `operationId` of the operation. For global polling configuration, use `default`. Case insensitive.|`Pets_put`|
 |strategy|String|false|The invocation to construct a polling strategy. Use fully qualified class name if outside the implementation subpackage specified in `namespace` & `implementation-subpackage`. Use dynamic literals `{httpPipeline}`, `{context}`, `{serializerAdapter}`, `{endpoint}`, `{serviceVersion}`, `{intermediate-type}`, `{final-type}` if these components are required to construct the polling strategy. Default is `new DefaultPollingStrategy<>(new PollingStrategyOptions({httpPipeline}).setEndpoint({endpoint}).setContext({context}).setServiceVersion({serviceVersion}))`.|`new com.azure.core.util.polling.OperationResourcePollingStrategy<>({httpPipeline}, {context})`|
-|sync-stragety|String|false|Similar to `stragety`. It refers to the synchronous operation resource polling strategy.||
+|sync-strategy|String|false|Similar to `strategy`. It refers to the synchronous operation resource polling strategy.||
 |intermediate-type|String|false|The type of the polling intermediate type. Use fully qualified class name if outside the base package specified in `namespace`. Default is the return type specified on the operation in Swagger, or `BinaryData` if the operation returns `void`.|`PollResult`,`com.azure.core.util.BinaryData`|
 |final-type|String|false|The type of the final result type. Use fully qualified class name if outside the base package specified in `namespace`. Default is the return type specified on the operation in Swagger, or `BinaryData` if the operation returns `void`.|`Pet`,`com.azure.core.util.BinaryData`|
 |poll-interval|integer|false|The default interval in seconds to poll with (can be modified by users in `PollerFlux` and `SyncPoller`. Default is 1.|30|
@@ -295,6 +295,157 @@ This contains the [generator extension for Azure Management Libraries](#addition
 This contains the generated classes from the [test swaggers](https://github.com/Azure/autorest.testserver/tree/main/swagger) in `src/main`. The code here should always be kept up-to-date with the output of the generator in `javagen`.
 
 This also contains test code for these generated code under `src/test`. Running the tests will hit the test server running locally (see https://github.com/Azure/autorest.testserver for instructions) and verify the correctness of the generated code.
+
+# Working with the core submodule
+
+This repository uses a git
+[submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) for the
+[TypeSpec OSS core](https://github.com/microsoft/typespec).
+
+This section covers some basic everyday tasks for working with it. The steps
+below are are really just one possible workflow. There's more than one way
+to accomplish these tasks and if you prefer to do it differently, that's
+fine too!
+
+## Configuring git to recurse submodules automatically for most commands
+
+Run the following command:
+
+```
+git config --global submodule.recurse true
+```
+
+This will effectively pass `--recurse-submodules` for you to git commands
+that accept it. It should eliminate some of the common pain points around
+submodules.
+
+NOTE: git clone is exceptional, see below.
+
+## Cloning recursively
+
+`git clone` does not recurse submodules automatically, even with
+submodule.recurse=true as configured above.
+
+Fork the repo, then clone recursively as follows:
+
+```
+git clone --recurse-submodules https://github.com/(your_username)/autorest.java
+```
+
+## Updating and initializing the submodule
+
+In some situations, even with the above setting, you may still end up with the core/ folder
+being uninitialized and not having a good clone of microsoft/typespec, or with the core/ folder
+initialized, but checked out to the wrong commit for the current branch. To fix this, run the
+following command to update and initialize the submodule:
+
+```
+git submodule update --init
+```
+
+## Point the submodule origin remote to your fork
+
+You can change the remotes of the submodule so that `origin` is your fork of
+microsoft/typespec rather than microsoft/typespec itself, and microsoft/typespec is
+`upstream`:
+
+```
+cd [repo_root]
+cd core
+git remote remove origin
+git remote add origin https://github.com/(your_username)/typespec
+git remote add upstream https://github.com/microsoft/typespec
+```
+
+## Build
+
+Run "Build-TypeSpec.ps1" script to build `@azure-tools/typespec-java` as TypeSpec emitter.
+
+The TypeSpec emitter can be installed via e.g.
+```
+npm install [repo_root]/typespec-extension/azure-tools-typespec-java-[version].tgz
+```
+
+Run "Build-AutoRest.ps1" script to build `@autorest/java` as Autorest extension.
+
+The AutoRest extension can be used via e.g.
+```
+autorest --use="[repo_root]" --java [readme.md]
+```
+
+Before building Maven project and packaging NPM package, the script does 3 things:
+
+1. Apply a patch to code in "core", mainly for switching to `azure-autorest-customization` as customization lib. -- This is the only step that affect AutoRest extension.
+2. Build the JAR for `core/packages/http-client-java/generator/http-client-generator` module (with the patch to code in step 1), and copy it to `typespec-extension/generator/http-client-generator`.
+3. Copy the source from `core/packages/http-client-java/emitter` (with the patch to code in step 1) to `typespec-extension`.
+
+If you do not plan to modify these patched files in your PR, you can use "assume-unchanged" to ignore the changes on these files:
+```
+git update-index --assume-unchanged packages/http-client-java/emitter/src/code-model-builder.ts packages/http-client-java/emitter/src/emitter.ts packages/http-client-java/generator/http-client-generator-core/pom.xml packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
+```
+"no-assume-unchanged" would unset the files marked by "assume-unchanged".
+
+Alternatively, you can commit the patched files, and revert this commit before creating the pull request for review.
+
+## Making a cross-cutting change across both repos
+
+1. Make matching branches:
+
+```
+cd core
+git checkout -b featurebranch
+
+cd ..
+git checkout -b featurebranch
+```
+
+2. Make your changes as needed to both repos.
+
+3. Commit changes to both repos:
+
+```
+cd core
+git commit -a -m "Core part of my change"
+
+cd ..
+git commit -a -m "Azure-specific part of my change"
+```
+
+4. Push
+
+```
+git push origin featurebranch
+```
+
+NOTE: If you configured submodule.recurse=true as shown above, this will
+automatically push the submodule typespec branch along with the autorest.java
+branch. If you prefer not to use that, then `cd core` and push that too.
+
+5. Create 2 PRs from the two branches that were pushed to your
+   microsoft/typespec and Azure/autorest.java forks. Start with the microsoft/typespec
+   PR, then follow up with the Azure/autorest.java PR that depends on it.
+
+6. Get approval for both PRs before merging either of them.
+
+7. Merge the microsoft/typespec PR first.
+
+8. Update the submodule to point to the actual commit you merged to microsoft/typespec main:
+
+```
+cd core
+git fetch --all
+git checkout upstream/main
+
+cd ..
+git commit -a -m "Update submodule"
+git push origin featurebranch
+```
+
+9. Merge the autorest.java PR and you're done.
+
+Note that you only need to do all of the above when your changes span both
+repos. If you are only changing one repo or the other, then just work in
+each individual repo as you would any other.
 
 # Contributing
 
