@@ -17,9 +17,11 @@ import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -148,8 +150,9 @@ public class EclipseLanguageServerFacade {
 
         if (!Files.exists(languageServer) || forceReDownload) {
             Files.createDirectories(languageServer);
-            Path zipPath = languageServerPath.resolve("jdt-language-server.tar.gz");
-            Files.deleteIfExists(zipPath);
+            Path zipPath = languageServerPath.resolve(
+                    // avoid concurrent download conflict
+                    String.format("jdt-language-server-%d.tar.gz", System.currentTimeMillis()));
 
             logger.info("Downloading Eclipse JDT language server from {} to {}", downloadUrl, zipPath);
             try (InputStream in = downloadUrl.openStream()) {
@@ -172,9 +175,7 @@ public class EclipseLanguageServerFacade {
                     Files.createDirectories(languageServerDirectory.resolve(entry.getName()));
                 } else {
                     Path entryPath = languageServerDirectory.resolve(entry.getName());
-                    // In case of corrupted folder, delete before create.
-                    Files.deleteIfExists(entryPath);
-                    Files.copy(tar, entryPath);
+                    Files.copy(tar, entryPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
                 }
             }
 
