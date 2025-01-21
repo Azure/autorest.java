@@ -174,7 +174,7 @@ public class EclipseLanguageServerFacade {
                     Files.createDirectories(languageServerDirectory.resolve(entry.getName()));
                 } else {
                     Path entryPath = languageServerDirectory.resolve(entry.getName());
-                    Files.copy(tar, entryPath, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+                    Files.copy(tar, entryPath, StandardCopyOption.REPLACE_EXISTING);
                 }
             }
 
