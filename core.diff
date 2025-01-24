@@ -1,8 +1,8 @@
 diff --git a/packages/http-client-java/emitter/src/code-model-builder.ts b/packages/http-client-java/emitter/src/code-model-builder.ts
-index 691af914b..436ae3c8c 100644
+index 2bfd89326..7ced1d5b6 100644
 --- a/packages/http-client-java/emitter/src/code-model-builder.ts
 +++ b/packages/http-client-java/emitter/src/code-model-builder.ts
-@@ -242,7 +242,7 @@ export class CodeModelBuilder {
+@@ -230,7 +230,7 @@ export class CodeModelBuilder {
        return this.codeModel;
      }
  
@@ -11,21 +11,21 @@ index 691af914b..436ae3c8c 100644
        versioning: { previewStringRegex: /$/ },
      }); // include all versions and do the filter by ourselves
  
-diff --git a/packages/http-client-java/emitter/src/emitter.ts b/packages/http-client-java/emitter/src/emitter.ts
-index ca4246c47..e4ec721eb 100644
---- a/packages/http-client-java/emitter/src/emitter.ts
-+++ b/packages/http-client-java/emitter/src/emitter.ts
-@@ -107,7 +107,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
+diff --git a/packages/http-client-java/emitter/src/lib.ts b/packages/http-client-java/emitter/src/lib.ts
+index 05cf2d29f..014ef4397 100644
+--- a/packages/http-client-java/emitter/src/lib.ts
++++ b/packages/http-client-java/emitter/src/lib.ts
+@@ -89,7 +89,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
  };
  
  export const $lib = createTypeSpecLibrary({
 -  name: "@typespec/http-client-java",
 +  name: "@azure-tools/typespec-java",
-   diagnostics: {},
-   emitter: {
-     options: EmitterOptionsSchema,
+   diagnostics: {
+     // error
+     "unknown-error": {
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index b65210b56..cd015f70f 100644
+index a883b2f81..c5c412900 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 @@ -21,6 +21,11 @@
