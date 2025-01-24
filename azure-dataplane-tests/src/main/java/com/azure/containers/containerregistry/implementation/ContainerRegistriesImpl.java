@@ -1072,27 +1072,6 @@ public final class ContainerRegistriesImpl {
      * @param last Query parameter for the last item in previous query. Result set will include values lexically after
      * last.
      * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<String>> getRepositoriesSinglePageAsync(String last, Integer n) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getRepositories(this.client.getUrl(), last, n, this.client.getApiVersion(),
-                accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getRepositories(), res.getValue().getLink(), res.getDeserializedHeaders()));
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1113,23 +1092,6 @@ public final class ContainerRegistriesImpl {
      * @param last Query parameter for the last item in previous query. Result set will include values lexically after
      * last.
      * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<String> getRepositoriesAsync(String last, Integer n) {
-        return new PagedFlux<>(() -> getRepositoriesSinglePageAsync(last, n),
-            nextLink -> getRepositoriesNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1140,27 +1102,6 @@ public final class ContainerRegistriesImpl {
     public PagedFlux<String> getRepositoriesAsync(String last, Integer n, Context context) {
         return new PagedFlux<>(() -> getRepositoriesSinglePageAsync(last, n, context),
             nextLink -> getRepositoriesNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<String>> getRepositoriesNoCustomHeadersSinglePageAsync(String last, Integer n) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getRepositoriesNoCustomHeaders(this.client.getUrl(), last, n,
-                this.client.getApiVersion(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getRepositories(), res.getValue().getLink(), null));
     }
 
     /**
@@ -1191,23 +1132,6 @@ public final class ContainerRegistriesImpl {
      * @param last Query parameter for the last item in previous query. Result set will include values lexically after
      * last.
      * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<String> getRepositoriesNoCustomHeadersAsync(String last, Integer n) {
-        return new PagedFlux<>(() -> getRepositoriesNoCustomHeadersSinglePageAsync(last, n),
-            nextLink -> getRepositoriesNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1218,26 +1142,6 @@ public final class ContainerRegistriesImpl {
     public PagedFlux<String> getRepositoriesNoCustomHeadersAsync(String last, Integer n, Context context) {
         return new PagedFlux<>(() -> getRepositoriesNoCustomHeadersSinglePageAsync(last, n, context),
             nextLink -> getRepositoriesNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<String> getRepositoriesSinglePage(String last, Integer n) {
-        final String accept = "application/json";
-        ResponseBase<ContainerRegistriesGetRepositoriesHeaders, Repositories> res = service
-            .getRepositoriesSync(this.client.getUrl(), last, n, this.client.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getRepositories(), res.getValue().getLink(), res.getDeserializedHeaders());
     }
 
     /**
@@ -1267,23 +1171,6 @@ public final class ContainerRegistriesImpl {
      * @param last Query parameter for the last item in previous query. Result set will include values lexically after
      * last.
      * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<String> getRepositories(String last, Integer n) {
-        return new PagedIterable<>(() -> getRepositoriesSinglePage(last, n, Context.NONE),
-            nextLink -> getRepositoriesNextSinglePage(nextLink));
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1294,26 +1181,6 @@ public final class ContainerRegistriesImpl {
     public PagedIterable<String> getRepositories(String last, Integer n, Context context) {
         return new PagedIterable<>(() -> getRepositoriesSinglePage(last, n, context),
             nextLink -> getRepositoriesNextSinglePage(nextLink, context));
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<String> getRepositoriesNoCustomHeadersSinglePage(String last, Integer n) {
-        final String accept = "application/json";
-        Response<Repositories> res = service.getRepositoriesNoCustomHeadersSync(this.client.getUrl(), last, n,
-            this.client.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getRepositories(), res.getValue().getLink(), null);
     }
 
     /**
@@ -1335,23 +1202,6 @@ public final class ContainerRegistriesImpl {
             this.client.getApiVersion(), accept, context);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             res.getValue().getRepositories(), res.getValue().getLink(), null);
-    }
-
-    /**
-     * List repositories.
-     * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<String> getRepositoriesNoCustomHeaders(String last, Integer n) {
-        return new PagedIterable<>(() -> getRepositoriesNoCustomHeadersSinglePage(last, n, Context.NONE),
-            nextLink -> getRepositoriesNextSinglePage(nextLink));
     }
 
     /**
@@ -1660,31 +1510,6 @@ public final class ContainerRegistriesImpl {
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<TagAttributesBase>> getTagsSinglePageAsync(String name, String last, Integer n,
-        String orderBy, String digest) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getTags(this.client.getUrl(), name, last, n, orderBy, digest,
-                this.client.getApiVersion(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getTagAttributeBases(), res.getValue().getLink(), res.getDeserializedHeaders()));
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1710,27 +1535,6 @@ public final class ContainerRegistriesImpl {
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<TagAttributesBase> getTagsAsync(String name, String last, Integer n, String orderBy,
-        String digest) {
-        return new PagedFlux<>(() -> getTagsSinglePageAsync(name, last, n, orderBy, digest),
-            nextLink -> getTagsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1742,31 +1546,6 @@ public final class ContainerRegistriesImpl {
         Context context) {
         return new PagedFlux<>(() -> getTagsSinglePageAsync(name, last, n, orderBy, digest, context),
             nextLink -> getTagsNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<TagAttributesBase>> getTagsNoCustomHeadersSinglePageAsync(String name, String last,
-        Integer n, String orderBy, String digest) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getTagsNoCustomHeaders(this.client.getUrl(), name, last, n, orderBy, digest,
-                this.client.getApiVersion(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getTagAttributeBases(), res.getValue().getLink(), null));
     }
 
     /**
@@ -1804,27 +1583,6 @@ public final class ContainerRegistriesImpl {
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<TagAttributesBase> getTagsNoCustomHeadersAsync(String name, String last, Integer n, String orderBy,
-        String digest) {
-        return new PagedFlux<>(() -> getTagsNoCustomHeadersSinglePageAsync(name, last, n, orderBy, digest),
-            nextLink -> getTagsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1836,30 +1594,6 @@ public final class ContainerRegistriesImpl {
         String digest, Context context) {
         return new PagedFlux<>(() -> getTagsNoCustomHeadersSinglePageAsync(name, last, n, orderBy, digest, context),
             nextLink -> getTagsNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<TagAttributesBase> getTagsSinglePage(String name, String last, Integer n, String orderBy,
-        String digest) {
-        final String accept = "application/json";
-        ResponseBase<ContainerRegistriesGetTagsHeaders, TagList> res = service.getTagsSync(this.client.getUrl(), name,
-            last, n, orderBy, digest, this.client.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getTagAttributeBases(), res.getValue().getLink(), res.getDeserializedHeaders());
     }
 
     /**
@@ -1896,27 +1630,6 @@ public final class ContainerRegistriesImpl {
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<TagAttributesBase> getTags(String name, String last, Integer n, String orderBy,
-        String digest) {
-        return new PagedIterable<>(() -> getTagsSinglePage(name, last, n, orderBy, digest, Context.NONE),
-            nextLink -> getTagsNextSinglePage(nextLink));
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1928,30 +1641,6 @@ public final class ContainerRegistriesImpl {
         Context context) {
         return new PagedIterable<>(() -> getTagsSinglePage(name, last, n, orderBy, digest, context),
             nextLink -> getTagsNextSinglePage(nextLink, context));
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<TagAttributesBase> getTagsNoCustomHeadersSinglePage(String name, String last, Integer n,
-        String orderBy, String digest) {
-        final String accept = "application/json";
-        Response<TagList> res = service.getTagsNoCustomHeadersSync(this.client.getUrl(), name, last, n, orderBy, digest,
-            this.client.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getTagAttributeBases(), res.getValue().getLink(), null);
     }
 
     /**
@@ -1977,27 +1666,6 @@ public final class ContainerRegistriesImpl {
             this.client.getApiVersion(), accept, context);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             res.getValue().getTagAttributeBases(), res.getValue().getLink(), null);
-    }
-
-    /**
-     * List tags of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @param digest filter by digest.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<TagAttributesBase> getTagsNoCustomHeaders(String name, String last, Integer n, String orderBy,
-        String digest) {
-        return new PagedIterable<>(() -> getTagsNoCustomHeadersSinglePage(name, last, n, orderBy, digest, Context.NONE),
-            nextLink -> getTagsNextSinglePage(nextLink));
     }
 
     /**
@@ -2337,30 +2005,6 @@ public final class ContainerRegistriesImpl {
      * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<ManifestAttributesBase>> getManifestsSinglePageAsync(String name, String last, Integer n,
-        String orderBy) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getManifests(this.client.getUrl(), name, last, n, orderBy,
-                this.client.getApiVersion(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getManifests(), res.getValue().getLink(), res.getDeserializedHeaders()));
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -2385,25 +2029,6 @@ public final class ContainerRegistriesImpl {
      * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<ManifestAttributesBase> getManifestsAsync(String name, String last, Integer n, String orderBy) {
-        return new PagedFlux<>(() -> getManifestsSinglePageAsync(name, last, n, orderBy),
-            nextLink -> getManifestsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -2415,30 +2040,6 @@ public final class ContainerRegistriesImpl {
         Context context) {
         return new PagedFlux<>(() -> getManifestsSinglePageAsync(name, last, n, orderBy, context),
             nextLink -> getManifestsNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<ManifestAttributesBase>> getManifestsNoCustomHeadersSinglePageAsync(String name,
-        String last, Integer n, String orderBy) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getManifestsNoCustomHeaders(this.client.getUrl(), name, last, n, orderBy,
-                this.client.getApiVersion(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getManifests(), res.getValue().getLink(), null));
     }
 
     /**
@@ -2474,26 +2075,6 @@ public final class ContainerRegistriesImpl {
      * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedFlux}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<ManifestAttributesBase> getManifestsNoCustomHeadersAsync(String name, String last, Integer n,
-        String orderBy) {
-        return new PagedFlux<>(() -> getManifestsNoCustomHeadersSinglePageAsync(name, last, n, orderBy),
-            nextLink -> getManifestsNextSinglePageAsync(nextLink));
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -2505,29 +2086,6 @@ public final class ContainerRegistriesImpl {
         String orderBy, Context context) {
         return new PagedFlux<>(() -> getManifestsNoCustomHeadersSinglePageAsync(name, last, n, orderBy, context),
             nextLink -> getManifestsNextSinglePageAsync(nextLink, context));
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<ManifestAttributesBase> getManifestsSinglePage(String name, String last, Integer n,
-        String orderBy) {
-        final String accept = "application/json";
-        ResponseBase<ContainerRegistriesGetManifestsHeaders, AcrManifests> res = service.getManifestsSync(
-            this.client.getUrl(), name, last, n, orderBy, this.client.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getManifests(), res.getValue().getLink(), res.getDeserializedHeaders());
     }
 
     /**
@@ -2562,25 +2120,6 @@ public final class ContainerRegistriesImpl {
      * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ManifestAttributesBase> getManifests(String name, String last, Integer n, String orderBy) {
-        return new PagedIterable<>(() -> getManifestsSinglePage(name, last, n, orderBy, Context.NONE),
-            nextLink -> getManifestsNextSinglePage(nextLink));
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -2592,29 +2131,6 @@ public final class ContainerRegistriesImpl {
         Context context) {
         return new PagedIterable<>(() -> getManifestsSinglePage(name, last, n, orderBy, context),
             nextLink -> getManifestsNextSinglePage(nextLink, context));
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<ManifestAttributesBase> getManifestsNoCustomHeadersSinglePage(String name, String last,
-        Integer n, String orderBy) {
-        final String accept = "application/json";
-        Response<AcrManifests> res = service.getManifestsNoCustomHeadersSync(this.client.getUrl(), name, last, n,
-            orderBy, this.client.getApiVersion(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getManifests(), res.getValue().getLink(), null);
     }
 
     /**
@@ -2639,26 +2155,6 @@ public final class ContainerRegistriesImpl {
             orderBy, this.client.getApiVersion(), accept, context);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             res.getValue().getManifests(), res.getValue().getLink(), null);
-    }
-
-    /**
-     * List manifests of a repository.
-     * 
-     * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
-     * last.
-     * @param n query parameter for max number of items.
-     * @param orderBy orderby query parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes as paginated response with {@link PagedIterable}.
-     */
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<ManifestAttributesBase> getManifestsNoCustomHeaders(String name, String last, Integer n,
-        String orderBy) {
-        return new PagedIterable<>(() -> getManifestsNoCustomHeadersSinglePage(name, last, n, orderBy, Context.NONE),
-            nextLink -> getManifestsNextSinglePage(nextLink));
     }
 
     /**
@@ -2899,24 +2395,6 @@ public final class ContainerRegistriesImpl {
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<String>> getRepositoriesNextSinglePageAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getRepositoriesNext(nextLink, this.client.getUrl(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getRepositories(), res.getValue().getLink(), res.getDeserializedHeaders()));
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -2929,25 +2407,6 @@ public final class ContainerRegistriesImpl {
         return service.getRepositoriesNext(nextLink, this.client.getUrl(), accept, context)
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 res.getValue().getRepositories(), res.getValue().getLink(), res.getDeserializedHeaders()));
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<String>> getRepositoriesNextNoCustomHeadersSinglePageAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context -> service.getRepositoriesNextNoCustomHeaders(nextLink, this.client.getUrl(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getRepositories(), res.getValue().getLink(), null));
     }
 
     /**
@@ -2973,24 +2432,6 @@ public final class ContainerRegistriesImpl {
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<String> getRepositoriesNextSinglePage(String nextLink) {
-        final String accept = "application/json";
-        ResponseBase<ContainerRegistriesGetRepositoriesNextHeaders, Repositories> res
-            = service.getRepositoriesNextSync(nextLink, this.client.getUrl(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getRepositories(), res.getValue().getLink(), res.getDeserializedHeaders());
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -3004,24 +2445,6 @@ public final class ContainerRegistriesImpl {
             = service.getRepositoriesNextSync(nextLink, this.client.getUrl(), accept, context);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             res.getValue().getRepositories(), res.getValue().getLink(), res.getDeserializedHeaders());
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of repositories along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<String> getRepositoriesNextNoCustomHeadersSinglePage(String nextLink) {
-        final String accept = "application/json";
-        Response<Repositories> res
-            = service.getRepositoriesNextNoCustomHeadersSync(nextLink, this.client.getUrl(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getRepositories(), res.getValue().getLink(), null);
     }
 
     /**
@@ -3047,23 +2470,6 @@ public final class ContainerRegistriesImpl {
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<TagAttributesBase>> getTagsNextSinglePageAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.getTagsNext(nextLink, this.client.getUrl(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getTagAttributeBases(), res.getValue().getLink(), res.getDeserializedHeaders()));
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -3076,24 +2482,6 @@ public final class ContainerRegistriesImpl {
         return service.getTagsNext(nextLink, this.client.getUrl(), accept, context)
             .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
                 res.getValue().getTagAttributeBases(), res.getValue().getLink(), res.getDeserializedHeaders()));
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<TagAttributesBase>> getTagsNextNoCustomHeadersSinglePageAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getTagsNextNoCustomHeaders(nextLink, this.client.getUrl(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getTagAttributeBases(), res.getValue().getLink(), null));
     }
 
     /**
@@ -3119,24 +2507,6 @@ public final class ContainerRegistriesImpl {
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<TagAttributesBase> getTagsNextSinglePage(String nextLink) {
-        final String accept = "application/json";
-        ResponseBase<ContainerRegistriesGetTagsNextHeaders, TagList> res
-            = service.getTagsNextSync(nextLink, this.client.getUrl(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getTagAttributeBases(), res.getValue().getLink(), res.getDeserializedHeaders());
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -3156,24 +2526,6 @@ public final class ContainerRegistriesImpl {
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list of tag details along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<TagAttributesBase> getTagsNextNoCustomHeadersSinglePage(String nextLink) {
-        final String accept = "application/json";
-        Response<TagList> res
-            = service.getTagsNextNoCustomHeadersSync(nextLink, this.client.getUrl(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getTagAttributeBases(), res.getValue().getLink(), null);
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -3186,24 +2538,6 @@ public final class ContainerRegistriesImpl {
         Response<TagList> res = service.getTagsNextNoCustomHeadersSync(nextLink, this.client.getUrl(), accept, context);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             res.getValue().getTagAttributeBases(), res.getValue().getLink(), null);
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<ManifestAttributesBase>> getManifestsNextSinglePageAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.getManifestsNext(nextLink, this.client.getUrl(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getManifests(), res.getValue().getLink(), res.getDeserializedHeaders()));
     }
 
     /**
@@ -3229,25 +2563,6 @@ public final class ContainerRegistriesImpl {
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<PagedResponse<ManifestAttributesBase>> getManifestsNextNoCustomHeadersSinglePageAsync(String nextLink) {
-        final String accept = "application/json";
-        return FluxUtil
-            .withContext(
-                context -> service.getManifestsNextNoCustomHeaders(nextLink, this.client.getUrl(), accept, context))
-            .map(res -> new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-                res.getValue().getManifests(), res.getValue().getLink(), null));
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -3267,24 +2582,6 @@ public final class ContainerRegistriesImpl {
      * Get the next page of items.
      * 
      * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<ManifestAttributesBase> getManifestsNextSinglePage(String nextLink) {
-        final String accept = "application/json";
-        ResponseBase<ContainerRegistriesGetManifestsNextHeaders, AcrManifests> res
-            = service.getManifestsNextSync(nextLink, this.client.getUrl(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getManifests(), res.getValue().getLink(), res.getDeserializedHeaders());
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -3298,24 +2595,6 @@ public final class ContainerRegistriesImpl {
             = service.getManifestsNextSync(nextLink, this.client.getUrl(), accept, context);
         return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
             res.getValue().getManifests(), res.getValue().getLink(), res.getDeserializedHeaders());
-    }
-
-    /**
-     * Get the next page of items.
-     * 
-     * @param nextLink The URL to get the next list of items.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws AcrErrorsException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return manifest attributes along with {@link PagedResponse}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PagedResponse<ManifestAttributesBase> getManifestsNextNoCustomHeadersSinglePage(String nextLink) {
-        final String accept = "application/json";
-        Response<AcrManifests> res
-            = service.getManifestsNextNoCustomHeadersSync(nextLink, this.client.getUrl(), accept, Context.NONE);
-        return new PagedResponseBase<>(res.getRequest(), res.getStatusCode(), res.getHeaders(),
-            res.getValue().getManifests(), res.getValue().getLink(), null);
     }
 
     /**
