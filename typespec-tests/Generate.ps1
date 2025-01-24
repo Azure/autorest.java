@@ -163,3 +163,5 @@ Remove-Item ./specs -Recurse -Force
 Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 
 Remove-Item ./tsp-output -Recurse -Force
+
+exit $ExitCode
