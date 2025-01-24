@@ -17,14 +17,12 @@
   },
   "license": "MIT",
   "type": "module",
-  "main": "dist/src/emitter.js",
+  "main": "dist/src/index.js",
   "exports": {
-    ".": "./dist/src/emitter.js",
-    "./testing": "./dist/src/testing/index.js"
+    ".": "./dist/src/index.js",
   },
-  "tspMain": "dist/src/emitter.js",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "clean": "rimraf ./dist ./temp",
