@@ -54,7 +54,7 @@
     "@typespec/rest": ">=0.64.0 <1.0.0",
     "@typespec/versioning": ">=0.64.0 <1.0.0",
     "@typespec/xml": ">=0.64.0 <1.0.0",
-    "@azure-tools/typespec-liftr-base": "~0.6.0"
+    "@azure-tools/typespec-liftr-base": ">=0.7.0 <1.0.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.20.0",
