@@ -1,3 +1,5 @@
+# WARNING: the script would "checkout" unstaged code in "./core" submodule. Please stage/commit your code there.
+
 $ErrorActionPreference = "Stop"
 
 Write-Host "Apply diff to core"

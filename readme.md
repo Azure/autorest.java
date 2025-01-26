@@ -373,6 +373,8 @@ The AutoRest extension can be used via e.g.
 autorest --use="[repo_root]" --java [readme.md]
 ```
 
+:warning: the script would "checkout" unstaged code in "./core" submodule. Please stage/commit your code there.
+
 Before building Maven project and packaging NPM package, the script does 3 things:
 
 1. Apply a patch to code in "core", mainly for switching to `azure-autorest-customization` as customization lib. -- This is the only step that affect AutoRest extension.
