@@ -107,4 +107,5 @@ typespec-tests/package-lock.json
 
 # typespec-extension
 /typespec-extension/src
+/typespec-extension/test
 /typespec-extension/generator
