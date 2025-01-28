@@ -9,7 +9,7 @@
     "spector-serve": "tsp-spector serve ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json"
   },
   "dependencies": {
-    "@typespec/http-specs": "0.1.0-alpha.7",
+    "@typespec/http-specs": "0.1.0-alpha.8",
     "@azure-tools/azure-http-specs": "0.1.0-alpha.5",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.27.2.tgz"
   },
@@ -26,7 +26,7 @@
     "@typespec/openapi": "~0.64.0",
     "@typespec/xml": "~0.64.0",
     "@azure-tools/typespec-azure-core": "~0.50.0",
-    "@azure-tools/typespec-client-generator-core": "~0.50.0",
+    "@azure-tools/typespec-client-generator-core": "~0.50.2",
     "@azure-tools/typespec-azure-resource-manager": "~0.50.0",
     "@azure-tools/typespec-autorest": "~0.50.0"
   },

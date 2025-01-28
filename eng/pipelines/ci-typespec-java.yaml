@@ -57,6 +57,10 @@ jobs:
           pwsh: true
           filePath: Generate-TypeSpec.ps1
 
+      - script: npm run test
+        displayName: 'Run TypeScript Unit Tests'
+        workingDirectory: ./typespec-extension
+
       - script: |
           git status
           git diff

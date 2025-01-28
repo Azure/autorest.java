@@ -373,6 +373,8 @@ The AutoRest extension can be used via e.g.
 autorest --use="[repo_root]" --java [readme.md]
 ```
 
+:warning: the script would "checkout" unstaged code in "./core" submodule. Please stage/commit your code there.
+
 Before building Maven project and packaging NPM package, the script does 3 things:
 
 1. Apply a patch to code in "core", mainly for switching to `azure-autorest-customization` as customization lib. -- This is the only step that affect AutoRest extension.
@@ -381,7 +383,7 @@ Before building Maven project and packaging NPM package, the script does 3 thing
 
 If you do not plan to modify these patched files in your PR, you can use "assume-unchanged" to ignore the changes on these files:
 ```
-git update-index --assume-unchanged packages/http-client-java/emitter/src/code-model-builder.ts packages/http-client-java/emitter/src/emitter.ts packages/http-client-java/generator/http-client-generator-core/pom.xml packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
+git update-index --assume-unchanged packages/http-client-java/emitter/src/code-model-builder.ts packages/http-client-java/emitter/src/lib.ts packages/http-client-java/generator/http-client-generator-core/pom.xml packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 ```
 "no-assume-unchanged" would unset the files marked by "assume-unchanged".
 
