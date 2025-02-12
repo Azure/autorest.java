@@ -1,5 +1,11 @@
 # Release History
 
+## 0.27.4 (2025-02-12)
+
+Compatible with compiler 0.65.
+
+- Supported simple form of `@override` from "@azure-tools/typespec-client-generator-core".
+
 ## 0.27.3 (2025-02-08)
 
 Compatible with compiler 0.64.

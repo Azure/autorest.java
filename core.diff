@@ -1,31 +1,17 @@
-diff --git a/packages/http-client-java/emitter/src/code-model-builder.ts b/packages/http-client-java/emitter/src/code-model-builder.ts
-index 2bfd89326..7ced1d5b6 100644
---- a/packages/http-client-java/emitter/src/code-model-builder.ts
-+++ b/packages/http-client-java/emitter/src/code-model-builder.ts
-@@ -230,7 +230,7 @@ export class CodeModelBuilder {
-       return this.codeModel;
-     }
- 
--    this.sdkContext = await createSdkContext(this.emitterContext, "@typespec/http-client-java", {
-+    this.sdkContext = await createSdkContext(this.emitterContext, "@azure-tools/typespec-java", {
-       versioning: { previewStringRegex: /$/ },
-     }); // include all versions and do the filter by ourselves
- 
 diff --git a/packages/http-client-java/emitter/src/lib.ts b/packages/http-client-java/emitter/src/lib.ts
-index 05cf2d29f..014ef4397 100644
+index 2d9134c3d..c9ef91f87 100644
 --- a/packages/http-client-java/emitter/src/lib.ts
 +++ b/packages/http-client-java/emitter/src/lib.ts
-@@ -89,7 +89,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
- };
+@@ -1,6 +1,6 @@
+ import { createTypeSpecLibrary, JSONSchemaType, paramMessage } from "@typespec/compiler";
  
- export const $lib = createTypeSpecLibrary({
--  name: "@typespec/http-client-java",
-+  name: "@azure-tools/typespec-java",
-   diagnostics: {
-     // error
-     "unknown-error": {
+-export const LIB_NAME = "@typespec/http-client-java";
++export const LIB_NAME = "@azure-tools/typespec-java";
+ 
+ export interface DevOptions {
+   "generate-code-model"?: boolean;
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index a883b2f81..c5c412900 100644
+index ce40ac91d..c3ee24c92 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 @@ -21,6 +21,11 @@
