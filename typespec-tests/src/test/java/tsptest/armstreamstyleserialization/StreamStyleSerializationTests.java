@@ -9,6 +9,10 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.json.JsonProviders;
 import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.utils.ArmUtils;
@@ -17,10 +21,6 @@ import tsptest.armstreamstyleserialization.models.Error;
 import tsptest.armstreamstyleserialization.models.Priority;
 import tsptest.armstreamstyleserialization.models.SawShark;
 import tsptest.armstreamstyleserialization.models.Shark;
-
-import java.io.IOException;
-import java.io.StringWriter;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class StreamStyleSerializationTests {
     @Test
@@ -93,13 +93,13 @@ public class StreamStyleSerializationTests {
             Assertions.assertEquals("priority=0", query);
             if (count == 1) {
                 // normal case
-                return Mono.just(new MockHttpResponse(request, 200, 0));
+                return Mono.just(new MockHttpResponse(request, 200, "0".getBytes(StandardCharsets.UTF_8)));
             } else if (count == 2) {
                 // null case
-                return Mono.just(new MockHttpResponse(request, 200, (Object) null));
+                return Mono.just(new MockHttpResponse(request, 200, "null".getBytes(StandardCharsets.UTF_8)));
             } else {
                 // exception case, expected number, but received string
-                return Mono.just(new MockHttpResponse(request, 200, "abc"));
+                return Mono.just(new MockHttpResponse(request, 200, "\"abc\"".getBytes(StandardCharsets.UTF_8)));
             }
         };
         return httpClient;
