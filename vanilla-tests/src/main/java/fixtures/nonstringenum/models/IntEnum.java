@@ -5,6 +5,11 @@
 package fixtures.nonstringenum.models;
 
 import com.azure.core.util.ExpandableEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -15,7 +20,7 @@ import java.util.function.Function;
 /**
  * List of integer enums.
  */
-public final class IntEnum implements ExpandableEnum<Integer> {
+public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<IntEnum> {
     private static final Map<Integer, IntEnum> VALUES = new ConcurrentHashMap<>();
 
     private static final Function<Integer, IntEnum> NEW_INSTANCE = IntEnum::new;
@@ -84,14 +89,38 @@ public final class IntEnum implements ExpandableEnum<Integer> {
         return this.value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String toString() {
-        return Objects.toString(this.value);
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeInt(getValue());
+    }
+
+    /**
+     * Reads an instance of IntEnum from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of IntEnum if the JsonReader was pointing to an instance of it, or null if the JsonReader was
+     * pointing to JSON null.
+     * @throws IOException If an error occurs while reading the IntEnum.
+     * @throws IllegalStateException If unexpected JSON token is found.
+     */
+    public static IntEnum fromJson(JsonReader jsonReader) throws IOException {
+        JsonToken nextToken = jsonReader.nextToken();
+        if (nextToken == JsonToken.NULL) {
+            return null;
+        }
+        if (nextToken != JsonToken.NUMBER) {
+            throw new IllegalStateException(
+                String.format("Unexpected JSON token for %s deserialization: %s", JsonToken.NUMBER, nextToken));
+        }
+        return IntEnum.fromValue(jsonReader.getInt());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return this == obj;
+    public String toString() {
+        return Objects.toString(this.value);
     }
 
     @Override

@@ -5,6 +5,11 @@
 package fixtures.nonstringenum.models;
 
 import com.azure.core.util.ExpandableEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -15,7 +20,7 @@ import java.util.function.Function;
 /**
  * List of float enums.
  */
-public final class FloatEnum implements ExpandableEnum<Float> {
+public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<FloatEnum> {
     private static final Map<Float, FloatEnum> VALUES = new ConcurrentHashMap<>();
 
     private static final Function<Float, FloatEnum> NEW_INSTANCE = FloatEnum::new;
@@ -84,14 +89,38 @@ public final class FloatEnum implements ExpandableEnum<Float> {
         return this.value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String toString() {
-        return Objects.toString(this.value);
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeFloat(getValue());
+    }
+
+    /**
+     * Reads an instance of FloatEnum from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of FloatEnum if the JsonReader was pointing to an instance of it, or null if the JsonReader
+     * was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the FloatEnum.
+     * @throws IllegalStateException If unexpected JSON token is found.
+     */
+    public static FloatEnum fromJson(JsonReader jsonReader) throws IOException {
+        JsonToken nextToken = jsonReader.nextToken();
+        if (nextToken == JsonToken.NULL) {
+            return null;
+        }
+        if (nextToken != JsonToken.NUMBER) {
+            throw new IllegalStateException(
+                String.format("Unexpected JSON token for %s deserialization: %s", JsonToken.NUMBER, nextToken));
+        }
+        return FloatEnum.fromValue(jsonReader.getFloat());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return this == obj;
+    public String toString() {
+        return Objects.toString(this.value);
     }
 
     @Override
