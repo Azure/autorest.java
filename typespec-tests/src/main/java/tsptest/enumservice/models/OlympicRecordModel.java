@@ -6,6 +6,10 @@ package tsptest.enumservice.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableEnum;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -16,7 +20,7 @@ import java.util.function.Function;
 /**
  * Defines values for OlympicRecordModel.
  */
-public final class OlympicRecordModel implements ExpandableEnum<Double> {
+public final class OlympicRecordModel implements ExpandableEnum<Double>, JsonSerializable<OlympicRecordModel> {
     private static final Map<Double, OlympicRecordModel> VALUES = new ConcurrentHashMap<>();
 
     private static final Function<Double, OlympicRecordModel> NEW_INSTANCE = OlympicRecordModel::new;
@@ -73,6 +77,29 @@ public final class OlympicRecordModel implements ExpandableEnum<Double> {
     @Override
     public Double getValue() {
         return this.value;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        return jsonWriter.writeDouble(getValue());
+    }
+
+    /**
+     * Reads an instance of OlympicRecordModel from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of OlympicRecordModel if the JsonReader was pointing to an instance of it.
+     * @throws IOException If an error occurs while reading the OlympicRecordModel.
+     * @throws IllegalArgumentException if the JsonReader was pointing to JSON null.
+     */
+    @Generated
+    public static OlympicRecordModel fromJson(JsonReader jsonReader) throws IOException {
+        jsonReader.nextToken();
+        return OlympicRecordModel.fromValue(jsonReader.getDouble());
     }
 
     @Generated
