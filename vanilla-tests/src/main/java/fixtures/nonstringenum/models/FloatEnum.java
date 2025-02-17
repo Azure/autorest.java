@@ -7,7 +7,6 @@ package fixtures.nonstringenum.models;
 import com.azure.core.util.ExpandableEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -101,26 +100,23 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
      * Reads an instance of FloatEnum from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FloatEnum if the JsonReader was pointing to an instance of it, or null if the JsonReader
-     * was pointing to JSON null.
+     * @return An instance of FloatEnum if the JsonReader was pointing to an instance of it.
      * @throws IOException If an error occurs while reading the FloatEnum.
-     * @throws IllegalStateException If unexpected JSON token is found.
+     * @throws IllegalArgumentException if the JsonReader was pointing to JSON null.
      */
     public static FloatEnum fromJson(JsonReader jsonReader) throws IOException {
-        JsonToken nextToken = jsonReader.nextToken();
-        if (nextToken == JsonToken.NULL) {
-            return null;
-        }
-        if (nextToken != JsonToken.NUMBER) {
-            throw new IllegalStateException(
-                String.format("Unexpected JSON token for %s deserialization: %s", JsonToken.NUMBER, nextToken));
-        }
+        jsonReader.nextToken();
         return FloatEnum.fromValue(jsonReader.getFloat());
     }
 
     @Override
     public String toString() {
         return Objects.toString(this.value);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this == obj;
     }
 
     @Override
