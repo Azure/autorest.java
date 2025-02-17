@@ -7,6 +7,7 @@ package fixtures.nonstringenum.models;
 import com.azure.core.util.ExpandableEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -100,12 +101,20 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
      * Reads an instance of IntEnum from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of IntEnum if the JsonReader was pointing to an instance of it.
+     * @return An instance of IntEnum if the JsonReader was pointing to an instance of it, or null if the JsonReader was
+     * pointing to JSON null.
      * @throws IOException If an error occurs while reading the IntEnum.
-     * @throws IllegalArgumentException if the JsonReader was pointing to JSON null.
+     * @throws IllegalStateException If unexpected JSON token is found.
      */
     public static IntEnum fromJson(JsonReader jsonReader) throws IOException {
-        jsonReader.nextToken();
+        JsonToken nextToken = jsonReader.nextToken();
+        if (nextToken == JsonToken.NULL) {
+            return null;
+        }
+        if (nextToken != JsonToken.NUMBER) {
+            throw new IllegalStateException(
+                String.format("Unexpected JSON token for %s deserialization: %s", JsonToken.NUMBER, nextToken));
+        }
         return IntEnum.fromValue(jsonReader.getInt());
     }
 
