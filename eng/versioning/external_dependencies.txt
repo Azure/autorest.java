@@ -7,6 +7,9 @@ com.azure:azure-identity
 com.azure:azure-json
 com.azure:azure-xml
 
+io.clientcore:core
+io.clientcore:http-okhttp3
+
 com.fasterxml.jackson.core:jackson-core
 com.fasterxml.jackson.core:jackson-databind
 com.fasterxml.jackson.dataformat:jackson-dataformat-xml
