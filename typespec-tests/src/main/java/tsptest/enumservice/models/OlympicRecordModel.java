@@ -8,7 +8,6 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -93,21 +92,13 @@ public final class OlympicRecordModel implements ExpandableEnum<Double>, JsonSer
      * Reads an instance of OlympicRecordModel from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of OlympicRecordModel if the JsonReader was pointing to an instance of it, or null if the
-     * JsonReader was pointing to JSON null.
+     * @return An instance of OlympicRecordModel if the JsonReader was pointing to an instance of it.
      * @throws IOException If an error occurs while reading the OlympicRecordModel.
-     * @throws IllegalStateException If unexpected JSON token is found.
+     * @throws IllegalArgumentException if the JsonReader was pointing to JSON null.
      */
     @Generated
     public static OlympicRecordModel fromJson(JsonReader jsonReader) throws IOException {
-        JsonToken nextToken = jsonReader.nextToken();
-        if (nextToken == JsonToken.NULL) {
-            return null;
-        }
-        if (nextToken != JsonToken.NUMBER) {
-            throw new IllegalStateException(
-                String.format("Unexpected JSON token for %s deserialization: %s", JsonToken.NUMBER, nextToken));
-        }
+        jsonReader.nextToken();
         return OlympicRecordModel.fromValue(jsonReader.getDouble());
     }
 

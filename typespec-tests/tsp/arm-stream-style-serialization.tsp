@@ -217,9 +217,8 @@ union Priority {
 
   @doc("high priority")
   HIGH: 0,
-
   @doc("low priority")
-  LOW: 1,
+  LOW: 1
 }
 
 @route("/model")
