@@ -18,7 +18,7 @@ public class ProvisioningGen extends FluentGen {
     protected void writeFiles(FluentJavaPackage javaPackage) {
         if (JavaSettings.getInstance().isProvisioning()) {
             Specification specification
-                = new Specification(JavaSettings.getInstance().getPackage(), JavaSettings.getInstance().getPackage(),
+                = new Specification("azure-provisioning-keyvault", JavaSettings.getInstance().getPackage(),
                 JavaSettings.getInstance().getAutorestSettings().getOutputFolder(), FluentStatic.getFluentClient().getResourceModels()) {
                 @Override
                 protected void customize() {
