@@ -78,4 +78,5 @@ null-byte-array-maps-to-empty-array: true
 graal-vm-config: true
 stream-style-serialization: true
 use-object-for-unknown: true
+enable-sync-stack: true
 ```
