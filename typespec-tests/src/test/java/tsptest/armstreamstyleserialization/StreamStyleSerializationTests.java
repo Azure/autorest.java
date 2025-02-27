@@ -2,8 +2,6 @@ package tsptest.armstreamstyleserialization;
 
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.HttpRequest;
-import com.azure.core.http.HttpResponse;
 import com.azure.core.management.serializer.SerializerFactory;
 import com.azure.core.test.http.MockHttpResponse;
 import com.azure.core.util.BinaryData;
@@ -13,6 +11,8 @@ import com.azure.json.JsonProviders;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.utils.ArmUtils;
@@ -69,14 +69,39 @@ public class StreamStyleSerializationTests {
 
     @Test
     public void testExpandableEnum() {
-        HttpClient httpClient = request -> {
-            String query = request.getUrl().getQuery();
-            Assertions.assertEquals("priority=0", query);
-            return Mono.just(new MockHttpResponse(request, 200, 0));
-        };
+        HttpClient httpClient = createExpandableEnumHttpClient();
+        // normal case
         ArmStreamStyleSerializationManager manager = ArmStreamStyleSerializationManager
             .authenticate(new HttpPipelineBuilder().httpClient(httpClient).build(), ArmUtils.getAzureProfile());
         Priority priority = manager.priorities().setPriority(Priority.HIGH);
         Assertions.assertEquals(Priority.HIGH, priority);
+
+        // null case
+        priority = manager.priorities().setPriority(Priority.HIGH);
+        Assertions.assertNull(priority);
+
+        // exception case, expected number, but received string
+        // azure-json wraps IllegalArgumentException
+        Assertions.assertThrows(RuntimeException.class, () -> manager.priorities().setPriority(Priority.HIGH));
+    }
+
+    private static HttpClient createExpandableEnumHttpClient() {
+        AtomicInteger callCount = new AtomicInteger();
+        HttpClient httpClient = request -> {
+            int count = callCount.incrementAndGet();
+            String query = request.getUrl().getQuery();
+            Assertions.assertEquals("priority=0", query);
+            if (count == 1) {
+                // normal case
+                return Mono.just(new MockHttpResponse(request, 200, "0".getBytes(StandardCharsets.UTF_8)));
+            } else if (count == 2) {
+                // null case
+                return Mono.just(new MockHttpResponse(request, 200, "null".getBytes(StandardCharsets.UTF_8)));
+            } else {
+                // exception case, expected number, but received string
+                return Mono.just(new MockHttpResponse(request, 200, "\"abc\"".getBytes(StandardCharsets.UTF_8)));
+            }
+        };
+        return httpClient;
     }
 }
