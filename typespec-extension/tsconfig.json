@@ -21,7 +21,7 @@
     "newLine": "LF",
     "outDir": "dist",
     "rootDir": ".",
-    "types": ["node", "mocha"],
+    "types": ["node"],
     "skipLibCheck": true
   },
   "include": [
