@@ -1,5 +1,11 @@
 # Release History
 
+## 0.27.8 (2025-03-07)
+
+Compatible with compiler 0.66.
+
+- Improved diagnostics.
+
 ## 0.27.7 (2025-03-05)
 
 Compatible with compiler 0.66.
