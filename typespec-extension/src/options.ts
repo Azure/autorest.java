@@ -1,6 +1,6 @@
 import { JSONSchemaType } from "@typespec/compiler";
 
-export const LIB_NAME = "@typespec/http-client-java";
+export const LIB_NAME = "@azure-tools/typespec-java";
 
 export interface DevOptions {
   "generate-code-model"?: boolean;
@@ -44,7 +44,7 @@ export interface EmitterOptions {
   "dev-options"?: DevOptions;
 }
 
-const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
+export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
   additionalProperties: true,
   properties: {
