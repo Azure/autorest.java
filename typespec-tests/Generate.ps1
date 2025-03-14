@@ -130,6 +130,8 @@ if (Test-Path ./src/main/java/tsptest/partialupdate) {
 
 if (Test-Path ./src/main) {
   Remove-Item ./src/main -Recurse -Force
+}
+if (Test-Path ./src/samples) {
   Remove-Item ./src/samples -Recurse -Force
 }
 if (Test-Path ./tsp-output) {
