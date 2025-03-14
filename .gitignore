@@ -106,6 +106,7 @@ typespec-tests/package-lock.json
 /typespec-tests/src/main/resources/META-INF/*apiview_properties.json
 
 # typespec-extension
-/typespec-extension/src
+/typespec-extension/src/*
+!/typespec-extension/src/options.ts
 /typespec-extension/test
 /typespec-extension/generator

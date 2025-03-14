@@ -26,7 +26,7 @@ pr:
 jobs:
   - job: Build
 
-    timeoutInMinutes: 30
+    timeoutInMinutes: 60
 
     variables:
       - template: /eng/pipelines/variables/globals.yml
@@ -70,7 +70,7 @@ jobs:
       #     [ -z "`git status --porcelain -- :!package-lock.json`" ]
       #   displayName: 'Check no Diff'
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Verify Test Code'
         inputs:
           mavenPomFile: 'typespec-tests/pom.xml'
@@ -87,7 +87,7 @@ jobs:
         displayName: 'Start Spector Test Server'
         workingDirectory: ./typespec-tests
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Run TypeSpec Tests'
         inputs:
           mavenPomFile: pom.xml

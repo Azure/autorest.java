@@ -12,7 +12,7 @@ pr: none
 jobs:
   - job: Build
 
-    timeoutInMinutes: 30
+    timeoutInMinutes: 60
 
     variables:
       - template: /eng/pipelines/variables/globals.yml
@@ -91,7 +91,7 @@ jobs:
         displayName: 'Start Spector Test Server'
         workingDirectory: ./typespec-tests
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Run TypeSpec Tests'
         inputs:
           mavenPomFile: pom.xml

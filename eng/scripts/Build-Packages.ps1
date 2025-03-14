@@ -26,7 +26,7 @@ $packagesPath = New-Item -ItemType Directory -Force -Path $packagesPath | Select
 
 Push-Location $RepoRoot
 try {
-  invoke "pwsh Build-TypeSpec.ps1"
+  & ./Build-TypeSpec.ps1
 
   Push-Location "./typespec-extension"
   try {

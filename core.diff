@@ -1,17 +1,5 @@
-diff --git a/packages/http-client-java/emitter/src/lib.ts b/packages/http-client-java/emitter/src/lib.ts
-index 2d9134c3d..c9ef91f87 100644
---- a/packages/http-client-java/emitter/src/lib.ts
-+++ b/packages/http-client-java/emitter/src/lib.ts
-@@ -1,6 +1,6 @@
- import { createTypeSpecLibrary, JSONSchemaType, paramMessage } from "@typespec/compiler";
- 
--export const LIB_NAME = "@typespec/http-client-java";
-+export const LIB_NAME = "@azure-tools/typespec-java";
- 
- export interface DevOptions {
-   "generate-code-model"?: boolean;
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index ce40ac91d..c3ee24c92 100644
+index b4139191e..d1b75d5ae 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 @@ -21,6 +21,11 @@
@@ -27,7 +15,7 @@ index ce40ac91d..c3ee24c92 100644
        <groupId>com.azure</groupId>
        <artifactId>azure-core</artifactId>
 diff --git a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
-index d44ce8ec4..7953870bc 100644
+index 4aad12e27..67e5f7ef1 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
 +++ b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
 @@ -3,9 +3,9 @@

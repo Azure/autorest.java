@@ -116,7 +116,7 @@ $generateScript = {
   }
 
   if ($global:ExitCode -ne 0) {
-    exit $global:ExitCode
+    throw "Failed to generate from tsp $tspFile"
   }
 }
 
@@ -130,6 +130,8 @@ if (Test-Path ./src/main/java/tsptest/partialupdate) {
 
 if (Test-Path ./src/main) {
   Remove-Item ./src/main -Recurse -Force
+}
+if (Test-Path ./src/samples) {
   Remove-Item ./src/samples -Recurse -Force
 }
 if (Test-Path ./tsp-output) {
@@ -164,4 +166,6 @@ Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("R
 
 Remove-Item ./tsp-output -Recurse -Force
 
-exit $ExitCode
+if ($ExitCode -ne 0) {
+  throw "Failed to generate from tsp"
+}
