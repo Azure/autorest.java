@@ -48,7 +48,7 @@ jobs:
     parameters:
       JobType: 'Fluent Integration'
 
-  - task: Maven@3
+  - task: Maven@4
     displayName: 'Build and Package'
     inputs:
       mavenPomFile: pom.xml
@@ -67,7 +67,7 @@ jobs:
       filePath: fluent-tests/Initialize-Tests.ps1
       workingDirectory: ./fluent-tests
 
-  - task: Maven@3
+  - task: Maven@4
     displayName: 'Run Tests'
     inputs:
       mavenPomFile: 'pom.xml'
