@@ -12,7 +12,7 @@ pr: none
 jobs:
   - job: Build
 
-    timeoutInMinutes: 30
+    timeoutInMinutes: 60
 
     variables:
       - template: /eng/pipelines/variables/globals.yml
