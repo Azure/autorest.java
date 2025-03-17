@@ -14,9 +14,7 @@ using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 
 @armProviderNamespace
-@service({
-  title: "ArmStreamStyleSerialization",
-})
+@service(#{ title: "ArmStreamStyleSerialization" })
 @versioned(Versions)
 @doc("Arm Resource Provider management API.")
 namespace TspTest.ArmStreamStyleSerialization;
@@ -217,8 +215,9 @@ union Priority {
 
   @doc("high priority")
   HIGH: 0,
+
   @doc("low priority")
-  LOW: 1
+  LOW: 1,
 }
 
 @route("/model")
