@@ -1,7 +1,6 @@
 // @ts-check
 import eslint from "@eslint/js";
 import unicorn from "eslint-plugin-unicorn";
-import vitest from "eslint-plugin-vitest";
 import tsEslint from "typescript-eslint";
 
 /** Config that will apply to all files */
@@ -91,33 +90,10 @@ export function getTypeScriptProjectRules(root) {
   });
 }
 
-/** Config that will apply to all test files only */
-const testFilesConfig = tsEslint.config({
-  /**
-   * Test files specific rules
-   */
-  files: ["**/*.test.ts"],
-  plugins: { vitest },
-  rules: {
-    "vitest/no-focused-tests": "warn",
-    "vitest/no-identical-title": "error",
-    "vitest/no-commented-out-tests": "warn",
-    "vitest/no-import-node-test": "warn",
-    "vitest/require-local-test-context-for-concurrent-snapshots": "warn",
-    "vitest/valid-describe-callback": "warn",
-    "vitest/valid-expect": "warn",
-    "vitest/consistent-test-it": ["warn", { fn: "it" }],
-    "vitest/no-done-callback": ["warn"],
-    "vitest/no-duplicate-hooks": ["warn"],
-    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
-  },
-});
-
 export const TypeSpecCommonEslintConfigs = [
   eslint.configs.recommended,
   ...tsEslint.configs.recommended,
   ...allFilesConfig,
-  ...testFilesConfig,
 ];
 
 export default tsEslint.config(
