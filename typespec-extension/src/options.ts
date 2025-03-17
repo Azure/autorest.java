@@ -67,7 +67,36 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "service-version-exclude-preview": { type: "boolean", nullable: true, default: false },
 
     // dev options
-    "dev-options": { type: "object", additionalProperties: true, nullable: true },
+    "dev-options": {
+      type: "object",
+      description: "Developer options for http-client-java emitter.",
+      properties: {
+        "generate-code-model": {
+          type: "boolean",
+          description: "Generate intermittent 'code-model.yaml' file in output directory.",
+          nullable: true,
+        },
+        "debug": {
+          type: "boolean",
+          description: "Enable Java remote debug on port 5005.",
+          nullable: true,
+        },
+        "loglevel": {
+          type: "string",
+          description: "Log level for Java logging. Default is 'warn'.",
+          nullable: true,
+          enum: ["off", "debug", "info", "warn", "error"],
+        },
+        "java-temp-dir": {
+          type: "string",
+          description: "Temporary working directory for Java code generator.",
+          nullable: true,
+        },
+      },
+      nullable: true,
+      additionalProperties: false,
+      required: [],
+    },
   },
   required: [],
 };
