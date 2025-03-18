@@ -121,7 +121,7 @@ def update_sdks():
             with open(tsp_location_file, "w", encoding="utf-8") as f_out:
                 f_out.writelines(lines_out)
 
-            logging.info("Updated tsp-location file content:\n%s", lines_out.join(""))
+            logging.info("Updated tsp-location file content:\n%s", "".join(lines_out))
 
         generated_samples_path = os.path.join(
             module_path, get_generated_folder_from_artifact(module_path, artifact, "samples")
