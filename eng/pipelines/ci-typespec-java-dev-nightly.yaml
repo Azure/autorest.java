@@ -12,7 +12,7 @@ pr: none
 jobs:
   - job: Build
 
-    timeoutInMinutes: 30
+    timeoutInMinutes: 60
 
     variables:
       - template: /eng/pipelines/variables/globals.yml
@@ -24,14 +24,6 @@ jobs:
     steps:
       - checkout: self
         submodules: true
-
-      - task: PowerShell@2
-        displayName: 'Disable Warning on Deprecation'
-        inputs:
-          targetType: inline
-          script: >
-            (Get-Content '.eslintrc.cjs') -replace '(?<="deprecation/deprecation": ")[^"]*', 'off' | Set-Content '.eslintrc.cjs'
-          workingDirectory: ./typespec-extension
 
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
@@ -91,7 +83,7 @@ jobs:
         displayName: 'Start Spector Test Server'
         workingDirectory: ./typespec-tests
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Run TypeSpec Tests'
         inputs:
           mavenPomFile: pom.xml

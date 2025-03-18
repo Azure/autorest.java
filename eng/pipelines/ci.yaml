@@ -50,7 +50,7 @@ jobs:
         parameters:
           JobType: 'Autorest'
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Build and Package'
         inputs:
           mavenPomFile: pom.xml
@@ -86,7 +86,7 @@ jobs:
           npm run testserver-run &
         displayName: 'Start Testserver'
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Run Vanilla Tests'
         inputs:
           mavenPomFile: pom.xml
@@ -105,7 +105,7 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/vanilla-tests/'
         condition: always()
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Run Azure Tests'
         inputs:
           mavenPomFile: pom.xml
@@ -124,7 +124,7 @@ jobs:
           searchFolder: '$(System.DefaultWorkingDirectory)/azure-tests/'
         condition: always()
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Run Protocol Tests'
         inputs:
           mavenPomFile: pom.xml
@@ -153,7 +153,7 @@ jobs:
           cat coverage/report-dpg.json || true
         displayName: 'Display Coverage Data'
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Verify Javadoc of Protocol Tests'
         inputs:
           mavenPomFile: protocol-tests/pom.xml
@@ -165,7 +165,7 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-      - task: Maven@3
+      - task: Maven@4
         displayName: 'Run Protocol Resilience Tests'
         inputs:
           mavenPomFile: protocol-resilience-test/pom.xml

@@ -116,7 +116,7 @@ $generateScript = {
   }
 
   if ($global:ExitCode -ne 0) {
-    exit $global:ExitCode
+    throw "Failed to generate from tsp $tspFile"
   }
 }
 
@@ -130,6 +130,8 @@ if (Test-Path ./src/main/java/tsptest/partialupdate) {
 
 if (Test-Path ./src/main) {
   Remove-Item ./src/main -Recurse -Force
+}
+if (Test-Path ./src/samples) {
   Remove-Item ./src/samples -Recurse -Force
 }
 if (Test-Path ./tsp-output) {
@@ -152,6 +154,8 @@ Copy-Item -Path node_modules/@typespec/http-specs/specs -Destination ./ -Recurse
 Copy-Item -Path node_modules/@azure-tools/azure-http-specs/specs -Destination ./ -Recurse -Force
 # remove xml tests, emitter has not supported xml model
 Remove-Item ./specs/payload/xml -Recurse -Force
+# TODO, enable after 0.67
+Remove-Item ./specs/streaming -Recurse -Force
 
 $job = (Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
@@ -164,4 +168,6 @@ Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("R
 
 Remove-Item ./tsp-output -Recurse -Force
 
-exit $ExitCode
+if ($ExitCode -ne 0) {
+  throw "Failed to generate from tsp"
+}
