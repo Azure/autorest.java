@@ -36,7 +36,6 @@ export interface EmitterOptions {
 
 export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
-  additionalProperties: true,
   properties: {
     // service
     "namespace": { type: "string", nullable: true },
@@ -98,5 +97,6 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
       required: [],
     },
   },
+  additionalProperties: true,
   required: [],
 };
