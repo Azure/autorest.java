@@ -109,6 +109,20 @@ def update_sdks():
         if artifact in skip_artifacts:
             continue
 
+        commit_id = "8056e0ba6bbe2f00ad0aca066236871ae5e04c23"
+        if commit_id:
+            with open(tsp_location_file, "r", encoding="utf-8") as f_in:
+                lines = f_in.readlines()
+            lines_out = []
+            for line in lines:
+                if line.startswith("commit:"):
+                    line = f"commit: {commit_id}\n"
+                lines_out.append(line)
+            with open(tsp_location_file, "w", encoding="utf-8") as f_out:
+                f_out.writelines(lines_out)
+
+            logging.info("Updated tsp-location file content:\n%s", lines_out.join(""))
+
         generated_samples_path = os.path.join(
             module_path, get_generated_folder_from_artifact(module_path, artifact, "samples")
         )
