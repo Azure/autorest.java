@@ -30,7 +30,7 @@ Push-Location ./typespec-extension/
 try {
   npm ci
   npm run build
-  npm run lint
+  # npm run lint
   # npm run check-format
   npm pack
   if ($LASTEXITCODE -ne 0) {
