@@ -40,7 +40,7 @@ extends:
                 parameters:
                   JobType: 'Publish Autorest'
 
-              - task: Maven@3
+              - task: Maven@4
                 displayName: 'Build JAR'
                 inputs:
                   mavenPomFile: pom.xml
