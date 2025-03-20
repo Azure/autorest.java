@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@typespec/http-specs": "0.1.0-alpha.12",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.7",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.8",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.27.9.tgz"
   },
   "devDependencies": {
