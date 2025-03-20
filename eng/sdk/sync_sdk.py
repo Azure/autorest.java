@@ -142,6 +142,11 @@ def update_sdks():
             logging.info("Delete source code of resourcemanager module %s", artifact)
             shutil.rmtree(os.path.join(module_path, "src", "main"))
 
+            if generated_samples_exists:
+                shutil.rmtree(generated_samples_path)
+            if generated_test_exists:
+                shutil.rmtree(generated_test_path)
+
         logging.info(f"Generate for module {artifact}")
         try:
             subprocess.check_call(["tsp-client", "update"], cwd=module_path)
