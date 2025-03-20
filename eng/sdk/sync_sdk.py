@@ -22,6 +22,7 @@ skip_artifacts: List[str] = [
     "azure-ai-vision-imageanalysis",  # temporary disabled for modification on Javadoc
     "azure-ai-inference",  # commit not on main branch
     "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
+    "azure-compute-batch",  # Large change in same api-verion
     "azure-ai-vision-face",  # SDK in development
     "azure-health-deidentification",  # SDK in development
 ]
