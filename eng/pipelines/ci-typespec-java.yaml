@@ -57,10 +57,6 @@ jobs:
           pwsh: true
           filePath: Generate-TypeSpec.ps1
 
-      - script: npm run test
-        displayName: 'Run TypeScript Unit Tests'
-        workingDirectory: ./typespec-extension
-
       - script: |
           git status
           git diff
@@ -117,5 +113,11 @@ jobs:
           scriptLocation: "inlineScript"
           inlineScript: npx --no-install tsp-spector upload-coverage --coverageFile ./tsp-spector-coverage-java.json --generatorName "@azure-tools/typespec-java" --storageAccountName typespec --containerName coverages --generatorMode azure --generatorVersion $(node -p -e "require('../typespec-extension/package.json').version")
           workingDirectory: ./typespec-tests
+
+      - script: |
+          npm install
+          npm run test
+        displayName: 'Run TypeScript Unit Tests'
+        workingDirectory: ./typespec-extension
 
       - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
