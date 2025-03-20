@@ -114,7 +114,7 @@ def update_sdks():
         if artifact in skip_artifacts:
             continue
 
-        commit_id = "8056e0ba6bbe2f00ad0aca066236871ae5e04c23"
+        commit_id = "6f175c9c006269a1d0f1928fbc768cacc6ac379a"
         if commit_id:
             with open(tsp_location_file, "r", encoding="utf-8") as f_in:
                 lines = f_in.readlines()
