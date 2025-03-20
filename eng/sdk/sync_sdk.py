@@ -144,6 +144,7 @@ def update_sdks():
         logging.info(f"Generate for module {artifact}")
         try:
             subprocess.check_call(["tsp-client", "update"], cwd=module_path)
+            subprocess.check_call(["tsp-client", "update"], cwd=module_path)
         except subprocess.CalledProcessError:
             # one retry
             # sometimes customization have intermittent failure
