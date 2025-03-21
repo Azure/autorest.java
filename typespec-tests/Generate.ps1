@@ -37,7 +37,7 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=type.enums.fixed"""
   } elseif ($tspFile -match "azure[\\/]example[\\/]basic[\\/]") {
     # override examples-directory
-    $tspOptions += " --option ""@azure-tools/typespec-java.examples-dir={project-root}/http/azure/example/basic/examples"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.examples-dir={project-root}/specs/azure/example/basic/examples"""
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old\.tsp") {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=resiliency.servicedriven.v1"""
@@ -51,8 +51,6 @@ $generateScript = {
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/].*[\\/]main\.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
-    # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
-    $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
     # test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""
@@ -67,18 +65,13 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # also don't generate with stream-style-serialization as azure-core-management hasn't migrated to azure-json yet
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
-    # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
-    $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
     # also test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
     # exclude preview from service versions
     $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
-    $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
-    # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
-    $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
   } elseif ($tspFile -match "subclient.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
   }
@@ -93,7 +86,7 @@ $generateScript = {
   $tspCommand = "npx --no-install tsp compile $tspFile $tspOptions $tspTrace"
 
   $timer = [Diagnostics.Stopwatch]::StartNew()
-  $generateOutput = Invoke-Expression $tspCommand
+  Invoke-Expression $tspCommand >$null 2>&1
   $timer.Stop()
 
   $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
@@ -104,7 +97,6 @@ $generateScript = {
   $tspCommand
   ========================
   FAILED (Time elapsed: $($timer.ToString()))
-  $([String]::Join("`n", $generateOutput))
     "
   } else {
     Write-Host "
@@ -154,8 +146,6 @@ Copy-Item -Path node_modules/@typespec/http-specs/specs -Destination ./ -Recurse
 Copy-Item -Path node_modules/@azure-tools/azure-http-specs/specs -Destination ./ -Recurse -Force
 # remove xml tests, emitter has not supported xml model
 Remove-Item ./specs/payload/xml -Recurse -Force
-# TODO, enable after 0.67
-Remove-Item ./specs/streaming -Recurse -Force
 
 $job = (Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 

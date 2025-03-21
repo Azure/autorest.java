@@ -1,5 +1,9 @@
 # Release History
 
+## 0.28.0 (2025-03-21)
+
+Compatible with compiler 0.67.
+
 ## 0.27.9 (2025-03-12)
 
 Compatible with compiler 0.66.

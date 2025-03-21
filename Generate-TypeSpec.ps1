@@ -26,8 +26,6 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
   Write-Host $output
 }
 
-& ./Build-TypeSpec.ps1
-
 Write-Host "Installing TypeSpec ('npm install -g @typespec/compiler')"
 invokeExpressionAndCaptureOutput("npm install -g @typespec/compiler")
 
