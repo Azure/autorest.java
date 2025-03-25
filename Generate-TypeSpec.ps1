@@ -26,8 +26,6 @@ function invokeExpressionAndCaptureOutput([string]$expression) {
   Write-Host $output
 }
 
-pwsh ./Build-TypeSpec.ps1
-
 Write-Host "Installing TypeSpec ('npm install -g @typespec/compiler')"
 invokeExpressionAndCaptureOutput("npm install -g @typespec/compiler")
 
@@ -36,7 +34,7 @@ Push-Location ./typespec-tests
 
 try {
   Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
-  pwsh ./Generate.ps1 -Parallelization $Parallelization
+  & ./Generate.ps1 -Parallelization $Parallelization
 
 #   Write-Host "Checking format of generated code ('npm run check-format')"
 #   invokeExpressionAndCaptureOutput("npm run check-format")
