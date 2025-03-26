@@ -9,10 +9,10 @@
     "spector-serve": "tsp-spector serve ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json"
   },
   "dependencies": {
-    "@typespec/spec-api": "0.1.0-alpha.2",
-    "@typespec/spector": "0.1.0-alpha.9",
-    "@typespec/http-specs": "0.1.0-alpha.15",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.10",
+    "@typespec/spec-api": "0.1.0-alpha.3",
+    "@typespec/spector": "0.1.0-alpha.10",
+    "@typespec/http-specs": "0.1.0-alpha.16",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.12",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.28.0.tgz"
   },
   "devDependencies": {
