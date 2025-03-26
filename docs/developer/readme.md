@@ -51,7 +51,7 @@ Use `--use` option of the AutoRest to load the local AutoRest Java build (instea
 
 The `name` of `@autorest/java` in `package.json` makes sure that it is loaded when `--java` option is provided.
 
-## Pre-release
+## Publish `@autorest/java` to NPM
 
 1. Update `version` in root `package.json`, merge the PR.
 2. Run "autorest.java - publish" in (internal) DevOps.
