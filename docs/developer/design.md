@@ -2,11 +2,9 @@
 
 ## Modules
 
-`extension-base` is the shared module providing `CodeModel` represented in Java language, JSON RPC, and `NewPlugin` plugin entry.
-
-`javagen` is the shared modules on models and operations.
-Also, it alone is the pipeline for data-plane SDK generator.
-It uses Eclipse JDT Language Server to provide customizations, in postprocess stage.
+`javagen` is the shared module on models and operations. It contains the shared classes such as: `CodeModel` represented in Java language, JSON RPC, and `NewPlugin` plugin entry.
+It alone is the pipeline for data-plane SDK generator.
+It uses Eclipse JDT Language Server to provide [Customizations](../../readme.md#customizations), in postprocess stage.
 
 `fluentgen` is activated when `--fluent` option is specified.
 Built with code in `javagen` module, it is the pipeline for management-plane SDK generator.
@@ -105,6 +103,8 @@ Classes of mapper and template is constructed by abstract factory, which enables
 #### Post-process
 
 `Postprocessor` modifies generated Java code, with `PartialUpdateHandler` for [Partial Update](../generate/dataplane-customization.md), and with `Customization` for [Customizations via code](../../readme.md#customizations).
+
+The formatting of generated Java code is also done in this stage, leverage [spotless Maven plugin](https://github.com/diffplug/spotless).
 
 ### `fluentgen` Module
 

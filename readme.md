@@ -280,10 +280,6 @@ and requires latest `azure-core` as a dependency.
 For guidance on using the post-code generation customization framework see its [documentation](https://github.com/Azure/autorest.java/tree/main/customization-base/README.md).
 
 # Project structure
-## extension-base
-This contains the base classes and utilities for creating an AutoRest extension in Java. It handles the JSON RPC communications with AutoRest core, provides JSON and YAML parsers, and provides the POJO models for the code model output from [modelerfour](https://github.com/Azure/autorest.modelerfour/).
-
-Extend from `NewPlugin.java` class if you are writing a new extension in Java.
 
 ## javagen
 This contains the actual generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
