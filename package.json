@@ -31,10 +31,7 @@
     "*/package.json",
     "/readme.md",
     "/fluentgen/*.md",
-    "/fluentnamer/*.md",
     "/javagen/*.md",
-    "/postprocessor/*.md",
-    "/preprocessor/*.md",
     "*/target/*-jar-with-dependencies.jar"
   ],
   "devDependencies": {

@@ -31,7 +31,7 @@ To build from source code, clone this repo and checkout to main branch. Make sur
 mvn package -P local
 ```
 
-This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `preprocess-jar-with-dependencies.jar` under `preprocessor` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module, and a `fluentnamer-jar-with-dependencies.jar` under `fluentnamer` module.
+This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module.
 
 And then run AutoRest
 
