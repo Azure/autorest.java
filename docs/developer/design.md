@@ -11,9 +11,6 @@ Also, they are the pipeline for data-plane SDK generator.
 `fluentnamer`, `fluentgen` is activated when `--fluent` option is specified.
 They are the pipeline for management-plane SDK generator.
 
-`javagen` with Android-style generation is activated when `--android` option is specified.
-Together with `preprocessor`, they are the pipeline for data-plane SDK generator for Android.
-
 ## Configure on Modeler Four
 
 Modeler Four is configured on `readme.md` of `preprocessor` and `fluentnamer`.

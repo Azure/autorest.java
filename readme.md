@@ -469,16 +469,12 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 #### Javagen
 
-``` yaml $(java) && !$(fluent) && !$(android)
+``` yaml $(java) && !$(fluent)
 use: $(this-folder)/javagen
 ```
 
-``` yaml $(java) && $(fluent) && !$(android)
+``` yaml $(java) && $(fluent)
 use: $(this-folder)/fluentgen
-```
-
-```  yaml $(java) && $(android)
-use: $(this-folder)/javagen
 ```
 
 #### Help
