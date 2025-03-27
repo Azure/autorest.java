@@ -5,6 +5,7 @@
 package tsptest.armresourceprovider.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -31,6 +32,7 @@ public final class DogKind extends ExpandableStringEnum<DogKind> {
      * @param name a name to look for.
      * @return the corresponding DogKind.
      */
+    @JsonCreator
     public static DogKind fromString(String name) {
         return fromString(name, DogKind.class);
     }

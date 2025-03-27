@@ -103,33 +103,6 @@ public final class FunctionsClientImpl implements FunctionsClient {
      * The createFunction operation.
      * 
      * @param function The function parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<FunctionInner>> createFunctionWithResponseAsync(FunctionInner function, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (function == null) {
-            return Mono.error(new IllegalArgumentException("Parameter function is required and cannot be null."));
-        } else {
-            function.validate();
-        }
-        final String contentType = "application/json";
-        final String accept = "application/json";
-        context = this.client.mergeContext(context);
-        return service.createFunction(this.client.getEndpoint(), contentType, accept, function, context);
-    }
-
-    /**
-     * The createFunction operation.
-     * 
-     * @param function The function parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

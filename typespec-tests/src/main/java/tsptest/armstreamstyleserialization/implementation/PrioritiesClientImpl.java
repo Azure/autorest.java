@@ -100,30 +100,6 @@ public final class PrioritiesClientImpl implements PrioritiesClient {
      * The setPriority operation.
      * 
      * @param priority The priority parameter.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ManagementException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<Response<Priority>> setPriorityWithResponseAsync(Priority priority, Context context) {
-        if (this.client.getEndpoint() == null) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
-        }
-        if (priority == null) {
-            return Mono.error(new IllegalArgumentException("Parameter priority is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        context = this.client.mergeContext(context);
-        return service.setPriority(this.client.getEndpoint(), priority, accept, context);
-    }
-
-    /**
-     * The setPriority operation.
-     * 
-     * @param priority The priority parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

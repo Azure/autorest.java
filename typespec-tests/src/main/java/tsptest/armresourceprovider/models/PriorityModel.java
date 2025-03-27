@@ -5,11 +5,7 @@
 package tsptest.armresourceprovider.models;
 
 import com.azure.core.util.ExpandableEnum;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -20,7 +16,7 @@ import java.util.function.Function;
 /**
  * Defines values for PriorityModel.
  */
-public final class PriorityModel implements ExpandableEnum<Integer>, JsonSerializable<PriorityModel> {
+public final class PriorityModel implements ExpandableEnum<Integer> {
     private static final Map<Integer, PriorityModel> VALUES = new ConcurrentHashMap<>();
 
     private static final Function<Integer, PriorityModel> NEW_INSTANCE = PriorityModel::new;
@@ -48,6 +44,7 @@ public final class PriorityModel implements ExpandableEnum<Integer>, JsonSeriali
      * @return the corresponding PriorityModel.
      * @throws IllegalArgumentException if value is null.
      */
+    @JsonCreator
     public static PriorityModel fromValue(Integer value) {
         if (value == null) {
             throw new IllegalArgumentException("'value' cannot be null.");
@@ -72,35 +69,6 @@ public final class PriorityModel implements ExpandableEnum<Integer>, JsonSeriali
     @Override
     public Integer getValue() {
         return this.value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        return jsonWriter.writeInt(getValue());
-    }
-
-    /**
-     * Reads an instance of PriorityModel from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of PriorityModel if the JsonReader was pointing to an instance of it, or null if the
-     * JsonReader was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the PriorityModel.
-     * @throws IllegalStateException If unexpected JSON token is found.
-     */
-    public static PriorityModel fromJson(JsonReader jsonReader) throws IOException {
-        JsonToken nextToken = jsonReader.nextToken();
-        if (nextToken == JsonToken.NULL) {
-            return null;
-        }
-        if (nextToken != JsonToken.NUMBER) {
-            throw new IllegalStateException(
-                String.format("Unexpected JSON token for %s deserialization: %s", JsonToken.NUMBER, nextToken));
-        }
-        return PriorityModel.fromValue(jsonReader.getInt());
     }
 
     @Override
