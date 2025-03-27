@@ -80,7 +80,7 @@ ServiceClient client = new ClientBuilder().buildClient();
 
 ChildClient childClient = client.getChildClient(childClientParam);
 
-GrandchildClient grandchildClient2 = childClient.getGrandchildClient(grandclientParam);
+GrandchildClient grandchildClient2 = childClient.getGrandchildClient(grandchildParam);
 
 client.operation1();
 childClient.operation2();
