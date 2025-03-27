@@ -155,8 +155,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -246,12 +246,11 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -353,8 +352,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getInvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInvalid(this.client.getHost(), accept, context);
@@ -441,8 +440,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getEmpty(this.client.getHost(), accept, context);
@@ -531,8 +530,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNull(this.client.getHost(), accept, context);
@@ -621,8 +620,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNotProvidedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNotProvided(this.client.getHost(), accept, context);

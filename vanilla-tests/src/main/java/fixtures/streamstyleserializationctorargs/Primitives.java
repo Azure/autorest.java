@@ -379,8 +379,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInt(this.client.getHost(), accept, context);
@@ -470,12 +470,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putIntWithResponseAsync(IntWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -575,8 +574,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<LongWrapper>> getLongWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getLong(this.client.getHost(), accept, context);
@@ -666,12 +665,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putLongWithResponseAsync(LongWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -771,8 +769,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<FloatWrapper>> getFloatWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getFloat(this.client.getHost(), accept, context);
@@ -862,12 +860,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putFloatWithResponseAsync(FloatWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -969,8 +966,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDouble(this.client.getHost(), accept, context);
@@ -1060,12 +1057,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDoubleWithResponseAsync(DoubleWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1165,8 +1161,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BooleanWrapper>> getBoolWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getBool(this.client.getHost(), accept, context);
@@ -1256,12 +1252,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putBoolWithResponseAsync(BooleanWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1363,8 +1358,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getString(this.client.getHost(), accept, context);
@@ -1454,12 +1449,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putStringWithResponseAsync(StringWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1559,8 +1553,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DateWrapper>> getDateWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDate(this.client.getHost(), accept, context);
@@ -1650,12 +1644,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateWithResponseAsync(DateWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1757,8 +1750,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDateTime(this.client.getHost(), accept, context);
@@ -1848,12 +1841,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDateTimeWithResponseAsync(DatetimeWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -1955,8 +1947,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDateTimeRfc1123(this.client.getHost(), accept, context);
@@ -2047,12 +2039,11 @@ public final class Primitives {
     public Mono<Response<Void>> putDateTimeRfc1123WithResponseAsync(Datetimerfc1123Wrapper complexBody,
         Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -2154,8 +2145,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getDuration(this.client.getHost(), accept, context);
@@ -2245,12 +2236,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putDurationWithResponseAsync(DurationWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -2350,8 +2340,8 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ByteWrapper>> getByteWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getByte(this.client.getHost(), accept, context);
@@ -2441,12 +2431,11 @@ public final class Primitives {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putByteWithResponseAsync(ByteWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            return Mono.error(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
