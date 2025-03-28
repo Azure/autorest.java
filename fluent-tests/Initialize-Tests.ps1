@@ -173,7 +173,10 @@ $job | Receive-Job
 
 # delete module-info as fluent-test is on java8
 if (Test-Path ./src/main/java/module-info.java) {
-    Remove-Item -Path ./src/main/java/module-info.java -Force | Out-Null
+    Remove-Item -Path ./src/main/java/module-info.java -Force -verbose
+    $ExitCode = $ExitCode -bor $LASTEXITCODE
+} else {
+    Write-Host "module-info.java not found"
 }
 
 exit $ExitCode
