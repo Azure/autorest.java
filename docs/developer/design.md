@@ -3,7 +3,7 @@
 ## Modules
 
 `javagen` is the shared module on models and operations. It contains the shared classes such as: `CodeModel` represented in Java language, JSON RPC, and `NewPlugin` plugin entry.
-It alone is the pipeline for data-plane SDK generator.
+It alone is the pipeline for data-plane SDK generator (includes "vanilla" -- the mode that requires a handwritten client).
 It uses Eclipse JDT Language Server to provide [Customizations](../../readme.md#customizations), in postprocess stage.
 
 `fluentgen` is activated when `--fluent` option is specified.

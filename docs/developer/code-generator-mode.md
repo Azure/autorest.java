@@ -2,7 +2,9 @@
 
 ## Vanilla
 
-AutoRest with flag `--java`. This is used primary for lib that involves a handwritten client over generated code. For example, `azure-storage-blob`.
+AutoRest with flag `--java`. This is used primary for lib that involves a handwritten (data-plane) client over generated code. For example, `azure-storage-blob`.
+
+This mode is not recommended to be used for new lib.
 
 ### Client Method
 
