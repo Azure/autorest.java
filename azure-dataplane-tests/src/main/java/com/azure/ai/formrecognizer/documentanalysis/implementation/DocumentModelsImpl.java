@@ -2433,8 +2433,7 @@ public final class DocumentModelsImpl {
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<DocumentModelSummary> listModels() {
-        return new PagedIterable<>(() -> listModelsSinglePage(Context.NONE),
-            nextLink -> listModelsNextSinglePage(nextLink));
+        return new PagedIterable<>(() -> listModelsSinglePage(), nextLink -> listModelsNextSinglePage(nextLink));
     }
 
     /**
