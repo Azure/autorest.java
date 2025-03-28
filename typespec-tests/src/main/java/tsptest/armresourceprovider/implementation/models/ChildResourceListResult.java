@@ -6,11 +6,7 @@ package tsptest.armresourceprovider.implementation.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import tsptest.armresourceprovider.fluent.models.ChildResourceInner;
 
@@ -18,15 +14,17 @@ import tsptest.armresourceprovider.fluent.models.ChildResourceInner;
  * The response of a ChildResource list operation.
  */
 @Immutable
-public final class ChildResourceListResult implements JsonSerializable<ChildResourceListResult> {
+public final class ChildResourceListResult {
     /*
      * The ChildResource items on this page
      */
+    @JsonProperty(value = "value", required = true)
     private List<ChildResourceInner> value;
 
     /*
      * The link to the next page of items
      */
+    @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /**
@@ -68,45 +66,4 @@ public final class ChildResourceListResult implements JsonSerializable<ChildReso
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ChildResourceListResult.class);
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("value", this.value, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("nextLink", this.nextLink);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ChildResourceListResult from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ChildResourceListResult if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ChildResourceListResult.
-     */
-    public static ChildResourceListResult fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ChildResourceListResult deserializedChildResourceListResult = new ChildResourceListResult();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("value".equals(fieldName)) {
-                    List<ChildResourceInner> value = reader.readArray(reader1 -> ChildResourceInner.fromJson(reader1));
-                    deserializedChildResourceListResult.value = value;
-                } else if ("nextLink".equals(fieldName)) {
-                    deserializedChildResourceListResult.nextLink = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedChildResourceListResult;
-        });
-    }
 }
