@@ -181,6 +181,9 @@ if (Test-Path ./src/main/java/module-info.java) {
 
 if (Test-Path ./src/main/java/module-info.java) {
     Write-Host "failed to delete module-info.java"
+} else {
+    Write-Host "delete module-info.java succeeded"
 }
+
 
 exit $ExitCode
