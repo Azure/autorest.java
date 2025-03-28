@@ -10,10 +10,10 @@ At present, almost all the code of the emitter is in [microsoft/typespec reposit
 
 ### Build
 
-Build is done in `typespec-extension` folder.
+NPM package is in `typespec-extension` folder.
 
 The [`Build-TypeSpec.ps1` script](../../../Build-TypeSpec.ps1) builds the emitter.
-It first build the JAR using Maven, then build and pack the NPM package to a `tgz` file.
+It first build the JAR using Maven, copy it into `typespec-extension` folder, then build and pack the NPM package to a `tgz` file.
 
 ### Integrated Test
 
