@@ -17,9 +17,6 @@ sdk_root: str
 
 skip_artifacts: List[str] = [
     "azure-ai-anomalydetector",  # deprecated
-    "azure-health-insights-cancerprofiling",  # deprecated
-    "azure-health-insights-clinicalmatching",  # no TypeSpec source file
-    "azure-ai-vision-imageanalysis",  # temporary disabled for modification on Javadoc
     "azure-ai-inference",  # commit not on main branch
     "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
     "azure-compute-batch",  # Large change in same api-verion
@@ -140,6 +137,10 @@ def update_sdks():
             except subprocess.CalledProcessError:
                 logging.error(f"Failed to generate for module {artifact}")
                 failed_modules.append(artifact)
+
+        if not arm_module:
+            # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
+            subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
 
         if arm_module:
             # revert mock test code
