@@ -36,11 +36,13 @@ This will build a file `javagen-jar-with-dependencies.jar` under `javagen` modul
 And then run AutoRest
 
 ```bash
+
 autorest --java
     --use:where/this/repo/is/cloned/autorest.java
     --input-file:path/to/specs.json
     --output-folder:where/to/generate/java/files
     --namespace:specified.java.package
+
 ```
 
 Java files will be generated under `where/to/generate/java/files/src/main/java/specified/java/package`.
