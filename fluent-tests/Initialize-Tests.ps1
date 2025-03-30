@@ -168,7 +168,7 @@ $job = @(
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
-$job | Wait-Job -Timeout 360
+$job | Wait-Job -Timeout 3600
 $job | Receive-Job
 
 # delete module-info as fluent-test is on java8
