@@ -156,16 +156,25 @@ $job = @(
     # empty byte array in client implementation
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/f840c84013f12b701aac7065ceeb13a59b26051b/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-02-05/iotdps.json --java.namespace=com.azure.mgmtlitetest.emptybytearrayinclients"
 
+    # sync-stack
+    # lite
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/mediaservices/resource-manager/readme.md --tag=package-account-2023-01 --java.namespace=com.azure.mgmtlitetest.mediaservicessync --enable-sync-stack=true"
+    # premium
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothubsync --enable-sync-stack=true"
+    # special cases
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/sync-stack.json --namespace=com.azure.mgmtlitetest.syncstack --enable-sync-stack=true"
+
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network"
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
-$job | Wait-Job -Timeout 360
+$job | Wait-Job -Timeout 3600
 $job | Receive-Job
 
 # delete module-info as fluent-test is on java8
 if (Test-Path ./src/main/java/module-info.java) {
-    Remove-Item -Path ./src/main/java/module-info.java -Force | Out-Null
+    Remove-Item -Path ./src/main/java/module-info.java -Force -verbose
+    $ExitCode = $ExitCode -bor $LASTEXITCODE
 }
 
 exit $ExitCode
