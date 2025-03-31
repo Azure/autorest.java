@@ -1,0 +1,85 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "2020-12-01",
+      "title": "SyncStack"
+    },
+    "schemes": ["https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+      "/normalPageableWithOptionalQuery": {
+        "get": {
+          "tags": [
+            "normalPageables"
+          ],
+          "operationId": "NormalPageables_List",
+          "parameters": [
+            {
+              "$ref": "#/parameters/OptionalFilterParameter"
+            },
+            {
+              "$ref": "#/parameters/RequiredNameParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/NormalPageableWithOptionalQueryResourceList"
+              }
+            }
+          },
+          "x-ms-long-running-operation": false,
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+          }
+        }
+      }
+    },
+    "definitions": {
+      "NormalPageableWithOptionalQueryResource": {
+        "properties": {
+          "name": {
+            "readOnly": true,
+            "type": "string",
+            "description": "Resource name"
+          }
+        }
+      },
+      "NormalPageableWithOptionalQueryResourceList": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NormalPageableWithOptionalQueryResource"
+            },
+            "x-ms-identifiers": [],
+            "description": "List of resources."
+          },
+          "nextLink": {
+            "type": "string"
+          }
+        }
+      }
+    },
+  "parameters": {
+    "RequiredNameParameter": {
+      "name": "name",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "name"
+    },
+    "OptionalFilterParameter": {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "filter"
+    }
+  }
+}

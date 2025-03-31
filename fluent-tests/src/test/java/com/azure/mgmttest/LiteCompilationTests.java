@@ -45,6 +45,7 @@ import com.azure.mgmtlitetest.storage.models.StorageAccountRegenerateKeyParamete
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
 import com.azure.mgmtlitetest.streamanalytics.models.AggregateFunctionProperties;
 import com.azure.mgmtlitetest.streamstyleserialization.implementation.CommunityGalleriesClientImpl;
+import com.azure.mgmtlitetest.syncstack.SyncStackManager;
 import com.azure.mgmttest.azurestack.fluent.models.ExtendedProductInner;
 import com.azure.mgmttest.education.fluent.models.LabDetailsInner;
 import reactor.core.publisher.Mono;
@@ -219,5 +220,11 @@ public class LiteCompilationTests {
 
     public void testEmptyByteArrayInClients() {
         Class<DpsCertificatesClientImpl> clazz = DpsCertificatesClientImpl.class;
+    }
+
+    public void testSyncStack() {
+        SyncStackManager syncStackManager = mock(SyncStackManager.class);
+        syncStackManager.normalPageables().list("name");
+        syncStackManager.normalPageables().list("name", "filter", Context.NONE);
     }
 }
