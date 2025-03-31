@@ -175,15 +175,6 @@ $job | Receive-Job
 if (Test-Path ./src/main/java/module-info.java) {
     Remove-Item -Path ./src/main/java/module-info.java -Force -verbose
     $ExitCode = $ExitCode -bor $LASTEXITCODE
-} else {
-    Write-Host "module-info.java not found"
 }
-
-if (Test-Path ./src/main/java/module-info.java) {
-    Write-Host "failed to delete module-info.java"
-} else {
-    Write-Host "delete module-info.java succeeded"
-}
-
 
 exit $ExitCode
