@@ -19,6 +19,7 @@ There is several build profiles:
 - **`testVanilla` profile**: It enables the integrated vanilla tests, which is the common ground for all modules.
 - **testAzure profile**: It enables the integrated Azure tests, which tests handling of some advanced [AutoRest Extensions for OpenAPI 2.0](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md).
 - **`testFluent` profile**: It enables the integrated Fluent tests, which tests generation of Fluent management SDKs for [ARM](https://docs.microsoft.com/azure/azure-resource-manager/management/overview).
+
 ### Unit Test
 
 Because the input of AutoRest Java is a complicated code model of the OpenAPI, it is relatively difficult to add unit tests.
@@ -55,6 +56,14 @@ The `name` of `@autorest/java` in `package.json` makes sure that it is loaded wh
 1. Update `version` in root `package.json`, merge the PR.
 2. Run "autorest.java - publish" in (internal) DevOps.
 3. Update Release notes in [GitHub Releases](https://github.com/Azure/autorest.java/releases).
+
+## Publish customization libraries to Maven
+
+Modules in following folders are published to Maven
+- **`extension-base` module**: [azure-autorest-extension](https://central.sonatype.com/artifact/com.azure.tools/azure-autorest-extension)
+- **`customization-base` module**: [azure-autorest-customization](https://central.sonatype.com/artifact/com.azure.tools/azure-autorest-customization)
+
+The publish task involves local build and manual operation via Partner release pipeline.
 
 ## Logging
 
@@ -105,9 +114,3 @@ suspend=n,address=*:5005".
 After the remote debugger is configured, run autorest with this additional argument `--java.debugger`. The AutoRest 
 process will block until the JVM debugger is attached, so, after the AutoRest process pauses, start the debugger 
 which will connect to the remote debugger and this will hit the breakpoints set in the "Javagen" plugin.
-
-### Interactive UI to trace AutoRest pipeline
-
-Running autorest with `--interactive` mode on will pop up a browser window to show an interactive UI of the AutoRest 
-pipeline. This generally helps in identifying all the plugins that are executed, their order of execution, their 
-inputs and outputs.
