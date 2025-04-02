@@ -36,8 +36,6 @@ import com.azure.data.schemaregistry.implementation.models.SchemasGetByIdHeaders
 import com.azure.data.schemaregistry.implementation.models.SchemasGetSchemaVersionHeaders;
 import com.azure.data.schemaregistry.implementation.models.SchemasQueryIdByContentHeaders;
 import com.azure.data.schemaregistry.implementation.models.SchemasRegisterHeaders;
-import java.nio.ByteBuffer;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -74,7 +72,7 @@ public final class SchemasImpl {
         @Get("/$schemaGroups/$schemas/{id}")
         @ExpectedResponses({ 200, 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<ResponseBase<SchemasGetByIdHeaders, Flux<ByteBuffer>>> getById(@HostParam("endpoint") String endpoint,
+        Mono<ResponseBase<SchemasGetByIdHeaders, BinaryData>> getById(@HostParam("endpoint") String endpoint,
             @PathParam("id") String id, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
 
@@ -115,7 +113,7 @@ public final class SchemasImpl {
         @Get("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
         @ExpectedResponses({ 200, 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>>> getSchemaVersion(
+        Mono<ResponseBase<SchemasGetSchemaVersionHeaders, BinaryData>> getSchemaVersion(
             @HostParam("endpoint") String endpoint, @PathParam("groupName") String groupName,
             @PathParam("schemaName") String schemaName, @PathParam("schemaVersion") int schemaVersion,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
@@ -143,25 +141,6 @@ public final class SchemasImpl {
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
             @PathParam("schemaVersion") int schemaVersion, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
-
-        @Post("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContent(
-            @HostParam("endpoint") String endpoint, @PathParam("groupName") String groupName,
-            @PathParam("schemaName") String schemaName, @QueryParam("api-version") String apiVersion,
-            @HeaderParam("Content-Type") SchemaFormat contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> schemaContent,
-            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
-
-        @Post("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> queryIdByContentNoCustomHeaders(@HostParam("endpoint") String endpoint,
-            @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") SchemaFormat contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> schemaContent,
-            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/$schemaGroups/{groupName}/schemas/{schemaName}:get-id")
         @ExpectedResponses({ 204 })
@@ -198,24 +177,6 @@ public final class SchemasImpl {
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") SchemaFormat contentType,
             @BodyParam("application/octet-stream") BinaryData schemaContent,
-            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
-
-        @Put("/$schemaGroups/{groupName}/schemas/{schemaName}")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<ResponseBase<SchemasRegisterHeaders, Void>> register(@HostParam("endpoint") String endpoint,
-            @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> schemaContent,
-            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
-
-        @Put("/$schemaGroups/{groupName}/schemas/{schemaName}")
-        @ExpectedResponses({ 204 })
-        @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<Response<Void>> registerNoCustomHeaders(@HostParam("endpoint") String endpoint,
-            @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> schemaContent,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/$schemaGroups/{groupName}/schemas/{schemaName}")
@@ -281,7 +242,7 @@ public final class SchemasImpl {
      * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasGetByIdHeaders, Flux<ByteBuffer>>> getByIdWithResponseAsync(String id) {
+    public Mono<ResponseBase<SchemasGetByIdHeaders, BinaryData>> getByIdWithResponseAsync(String id) {
         return FluxUtil.withContext(context -> getByIdWithResponseAsync(id, context));
     }
 
@@ -300,8 +261,7 @@ public final class SchemasImpl {
      * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasGetByIdHeaders, Flux<ByteBuffer>>> getByIdWithResponseAsync(String id,
-        Context context) {
+    public Mono<ResponseBase<SchemasGetByIdHeaders, BinaryData>> getByIdWithResponseAsync(String id, Context context) {
         final String accept
             = "application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8, text/vnd.ms.protobuf";
         return service.getById(this.client.getEndpoint(), id, this.client.getApiVersion(), accept, context);
@@ -320,7 +280,7 @@ public final class SchemasImpl {
      * @return a registered schema by its unique ID on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Flux<ByteBuffer>> getByIdAsync(String id) {
+    public Mono<BinaryData> getByIdAsync(String id) {
         return getByIdWithResponseAsync(id).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -338,7 +298,7 @@ public final class SchemasImpl {
      * @return a registered schema by its unique ID on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Flux<ByteBuffer>> getByIdAsync(String id, Context context) {
+    public Mono<BinaryData> getByIdAsync(String id, Context context) {
         return getByIdWithResponseAsync(id, context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
 
@@ -626,7 +586,7 @@ public final class SchemasImpl {
      * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>>>
+    public Mono<ResponseBase<SchemasGetSchemaVersionHeaders, BinaryData>>
         getSchemaVersionWithResponseAsync(String groupName, String schemaName, int schemaVersion) {
         return FluxUtil
             .withContext(context -> getSchemaVersionWithResponseAsync(groupName, schemaName, schemaVersion, context));
@@ -649,7 +609,7 @@ public final class SchemasImpl {
      * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>>>
+    public Mono<ResponseBase<SchemasGetSchemaVersionHeaders, BinaryData>>
         getSchemaVersionWithResponseAsync(String groupName, String schemaName, int schemaVersion, Context context) {
         final String accept
             = "application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8, text/vnd.ms.protobuf";
@@ -672,7 +632,7 @@ public final class SchemasImpl {
      * @return one specific version of one schema on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Flux<ByteBuffer>> getSchemaVersionAsync(String groupName, String schemaName, int schemaVersion) {
+    public Mono<BinaryData> getSchemaVersionAsync(String groupName, String schemaName, int schemaVersion) {
         return getSchemaVersionWithResponseAsync(groupName, schemaName, schemaVersion)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
     }
@@ -693,7 +653,7 @@ public final class SchemasImpl {
      * @return one specific version of one schema on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Flux<ByteBuffer>> getSchemaVersionAsync(String groupName, String schemaName, int schemaVersion,
+    public Mono<BinaryData> getSchemaVersionAsync(String groupName, String schemaName, int schemaVersion,
         Context context) {
         return getSchemaVersionWithResponseAsync(groupName, schemaName, schemaVersion, context)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
@@ -809,162 +769,6 @@ public final class SchemasImpl {
             = "application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8, text/vnd.ms.protobuf";
         return service.getSchemaVersionNoCustomHeadersSync(this.client.getEndpoint(), groupName, schemaName,
             schemaVersion, this.client.getApiVersion(), accept, context);
-    }
-
-    /**
-     * Get ID for existing schema.
-     * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
-     * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the registered schema.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
-        String schemaName, SchemaFormat contentType, Flux<ByteBuffer> schemaContent, long contentLength) {
-        return FluxUtil.withContext(context -> queryIdByContentWithResponseAsync(groupName, schemaName, contentType,
-            schemaContent, contentLength, context));
-    }
-
-    /**
-     * Get ID for existing schema.
-     * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
-     * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the registered schema.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
-        String schemaName, SchemaFormat contentType, Flux<ByteBuffer> schemaContent, long contentLength,
-        Context context) {
-        final String accept = "application/json";
-        return service.queryIdByContent(this.client.getEndpoint(), groupName, schemaName, this.client.getApiVersion(),
-            contentType, schemaContent, contentLength, accept, context);
-    }
-
-    /**
-     * Get ID for existing schema.
-     * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
-     * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the registered schema.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> queryIdByContentAsync(String groupName, String schemaName, SchemaFormat contentType,
-        Flux<ByteBuffer> schemaContent, long contentLength) {
-        return queryIdByContentWithResponseAsync(groupName, schemaName, contentType, schemaContent, contentLength)
-            .flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Get ID for existing schema.
-     * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
-     * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the registered schema.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> queryIdByContentAsync(String groupName, String schemaName, SchemaFormat contentType,
-        Flux<ByteBuffer> schemaContent, long contentLength, Context context) {
-        return queryIdByContentWithResponseAsync(groupName, schemaName, contentType, schemaContent, contentLength,
-            context).flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Get ID for existing schema.
-     * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
-     * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the registered schema.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> queryIdByContentNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
-        SchemaFormat contentType, Flux<ByteBuffer> schemaContent, long contentLength) {
-        return FluxUtil.withContext(context -> queryIdByContentNoCustomHeadersWithResponseAsync(groupName, schemaName,
-            contentType, schemaContent, contentLength, context));
-    }
-
-    /**
-     * Get ID for existing schema.
-     * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
-     * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the registered schema.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> queryIdByContentNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
-        SchemaFormat contentType, Flux<ByteBuffer> schemaContent, long contentLength, Context context) {
-        final String accept = "application/json";
-        return service.queryIdByContentNoCustomHeaders(this.client.getEndpoint(), groupName, schemaName,
-            this.client.getApiVersion(), contentType, schemaContent, contentLength, accept, context);
     }
 
     /**
@@ -1195,155 +999,6 @@ public final class SchemasImpl {
         SchemaFormat contentType, BinaryData schemaContent, long contentLength, Context context) {
         final String accept = "application/json";
         return service.queryIdByContentNoCustomHeadersSync(this.client.getEndpoint(), groupName, schemaName,
-            this.client.getApiVersion(), contentType, schemaContent, contentLength, accept, context);
-    }
-
-    /**
-     * Register new schema
-     * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
-     * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the schema being registered.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
-        String schemaName, String contentType, Flux<ByteBuffer> schemaContent, long contentLength) {
-        return FluxUtil.withContext(context -> registerWithResponseAsync(groupName, schemaName, contentType,
-            schemaContent, contentLength, context));
-    }
-
-    /**
-     * Register new schema
-     * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
-     * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the schema being registered.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<ResponseBase<SchemasRegisterHeaders, Void>> registerWithResponseAsync(String groupName,
-        String schemaName, String contentType, Flux<ByteBuffer> schemaContent, long contentLength, Context context) {
-        final String accept = "application/json";
-        return service.register(this.client.getEndpoint(), groupName, schemaName, this.client.getApiVersion(),
-            contentType, schemaContent, contentLength, accept, context);
-    }
-
-    /**
-     * Register new schema
-     * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
-     * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the schema being registered.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> registerAsync(String groupName, String schemaName, String contentType,
-        Flux<ByteBuffer> schemaContent, long contentLength) {
-        return registerWithResponseAsync(groupName, schemaName, contentType, schemaContent, contentLength)
-            .flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Register new schema
-     * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
-     * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the schema being registered.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> registerAsync(String groupName, String schemaName, String contentType,
-        Flux<ByteBuffer> schemaContent, long contentLength, Context context) {
-        return registerWithResponseAsync(groupName, schemaName, contentType, schemaContent, contentLength, context)
-            .flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Register new schema
-     * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
-     * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the schema being registered.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> registerNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
-        String contentType, Flux<ByteBuffer> schemaContent, long contentLength) {
-        return FluxUtil.withContext(context -> registerNoCustomHeadersWithResponseAsync(groupName, schemaName,
-            contentType, schemaContent, contentLength, context));
-    }
-
-    /**
-     * Register new schema
-     * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
-     * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
-     * @param schemaName Name of schema.
-     * @param contentType Content type of the schema.
-     * @param schemaContent String representation (UTF-8) of the schema being registered.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> registerNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
-        String contentType, Flux<ByteBuffer> schemaContent, long contentLength, Context context) {
-        final String accept = "application/json";
-        return service.registerNoCustomHeaders(this.client.getEndpoint(), groupName, schemaName,
             this.client.getApiVersion(), contentType, schemaContent, contentLength, accept, context);
     }
 
