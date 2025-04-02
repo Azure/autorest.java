@@ -1,0 +1,168 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "2020-12-01",
+      "title": "BinariesClient"
+    },
+    "schemes": ["https"],
+    "consumes": ["application/zip"],
+    "produces": ["application/zip"],
+    "paths": {
+      "/binaryRequestAndResponse": {
+        "put": {
+          "tags": [
+            "Binaries"
+          ],
+          "operationId": "Binaries_PutWithBinaryRequestAndResponse",
+          "description": "Replaces the runbook draft content.",
+          "parameters": [
+            {
+              "name": "runbookName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The runbook name."
+            },
+            {
+              "name": "binaryContent",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "format": "file"
+              },
+              "description": "The runbook draft content."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "file"
+              }
+            }
+          }
+        }
+      },
+      "/binaryRequestAndBinaryTextResponse": {
+        "put": {
+          "tags": [
+            "Binaries"
+          ],
+          "operationId": "Binaries_PutWithBinaryJsonRequestAndBinaryTextResponse",
+          "description": "Replaces the runbook draft content.",
+          "produces": [
+            "text/powershell"
+          ],
+          "parameters": [
+            {
+              "name": "runbookName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The runbook name."
+            },
+            {
+              "name": "binaryContent",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "format": "file"
+              },
+              "description": "The runbook draft content."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "file"
+              }
+            }
+          }
+        }
+      },
+      "/binaryTextRequestAndBinaryResponse": {
+        "put": {
+          "tags": [
+            "Binaries"
+          ],
+          "operationId": "Binaries_PutWithBinaryTextRequestAndBinaryResponse",
+          "description": "Replaces the runbook draft content.",
+          "consumes": [
+            "text/powershell"
+          ],
+          "parameters": [
+            {
+              "name": "runbookName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The runbook name."
+            },
+            {
+              "name": "binaryContent",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "format": "file"
+              },
+              "description": "The runbook draft content."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "file"
+              }
+            }
+          }
+        }
+      },
+      "/binaryTextRequestAndResponse": {
+        "put": {
+          "tags": [
+            "Binaries"
+          ],
+          "operationId": "Binaries_PutWithBinaryTextRequestAndResponse",
+          "description": "Replaces the runbook draft content.",
+          "produces": [
+            "text/powershell"
+          ],
+          "consumes": [
+            "text/powershell"
+          ],
+          "parameters": [
+            {
+              "name": "runbookName",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The runbook name."
+            },
+            {
+              "name": "binaryContent",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "format": "file"
+              },
+              "description": "The runbook draft content."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "file"
+              }
+            }
+          }
+        }
+      }
+    }
+}

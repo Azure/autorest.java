@@ -36,13 +36,15 @@
           }
         }
       },
-      "/lroWithBinaryJsonRequestAndResponse": {
+      "/lroWithBinaryRequestAndResponse": {
         "put": {
           "tags": [
             "Binaries"
           ],
-          "operationId": "Binaries_PutLroWithBinaryJsonRequestAndResponse",
+          "operationId": "Binaries_PutLroWithBinaryRequestAndResponse",
           "description": "Replaces the runbook draft content.",
+          "consumes": ["application/zip"],
+          "produces": ["application/zip"],
           "parameters": [
             {
               "name": "runbookName",
@@ -82,13 +84,16 @@
           "x-ms-long-running-operation": true
         }
       },
-      "/lroWithBinaryJsonRequestAndBinaryTextResponse": {
+      "/lroWithBinaryRequestAndBinaryTextResponse": {
         "put": {
           "tags": [
             "Binaries"
           ],
-          "operationId": "Binaries_PutLroWithBinaryJsonRequestAndBinaryTextResponse",
+          "operationId": "Binaries_PutLroWithBinaryRequestAndBinaryTextResponse",
           "description": "Replaces the runbook draft content.",
+          "consumes": [
+            "application/zip"
+          ],
           "produces": [
             "text/powershell"
           ],
@@ -131,15 +136,18 @@
           "x-ms-long-running-operation": true
         }
       },
-      "/lroWithBinaryTextRequestAndBinaryJsonResponse": {
+      "/lroWithBinaryTextRequestAndBinaryResponse": {
         "put": {
           "tags": [
             "Binaries"
           ],
-          "operationId": "Binaries_PutLroWithBinaryTextRequestAndBinaryJsonResponse",
+          "operationId": "Binaries_PutLroWithBinaryTextRequestAndBinaryResponse",
           "description": "Replaces the runbook draft content.",
           "consumes": [
             "text/powershell"
+          ],
+          "produces": [
+            "application/zip"
           ],
           "parameters": [
             {
@@ -232,13 +240,19 @@
           "x-ms-long-running-operation": true
         }
       },
-      "/normalWithBinaryJsonRequestAndResponse": {
+      "/normalWithBinaryRequestAndResponse": {
         "put": {
           "tags": [
             "Binaries"
           ],
-          "operationId": "Binaries_PutWithBinaryJsonRequestAndResponse",
+          "operationId": "Binaries_PutWithBinaryRequestAndResponse",
           "description": "Replaces the runbook draft content.",
+          "consumes": [
+            "application/zip"
+          ],
+          "produces": [
+            "application/zip"
+          ],
           "parameters": [
             {
               "name": "runbookName",
@@ -268,13 +282,16 @@
           }
         }
       },
-      "/normalWithBinaryJsonRequestAndBinaryTextResponse": {
+      "/normalWithBinaryRequestAndBinaryTextResponse": {
         "put": {
           "tags": [
             "Binaries"
           ],
           "operationId": "Binaries_PutWithBinaryJsonRequestAndBinaryTextResponse",
           "description": "Replaces the runbook draft content.",
+          "consumes": [
+            "application/zip"
+          ],
           "produces": [
             "text/powershell"
           ],
@@ -307,15 +324,18 @@
           }
         }
       },
-      "/normalWithBinaryTextRequestAndBinaryJsonResponse": {
+      "/normalWithBinaryTextRequestAndBinaryResponse": {
         "put": {
           "tags": [
             "Binaries"
           ],
-          "operationId": "Binaries_PutWithBinaryTextRequestAndBinaryJsonResponse",
+          "operationId": "Binaries_PutWithBinaryTextRequestAndBinaryResponse",
           "description": "Replaces the runbook draft content.",
           "consumes": [
             "text/powershell"
+          ],
+          "produces": [
+            "application/zip"
           ],
           "parameters": [
             {
