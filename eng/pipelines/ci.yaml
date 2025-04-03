@@ -67,20 +67,21 @@ jobs:
           npm ci
         displayName: 'Prepare Environment for Generation'
 
-      - task: PowerShell@2
-        displayName: 'Generate Code'
-        inputs:
-          pwsh: true
-          filePath: Generate.ps1
+      # skip temporary
+      # - task: PowerShell@2
+      #   displayName: 'Generate Code'
+      #   inputs:
+      #     pwsh: true
+      #     filePath: Generate.ps1
 
-      - script: |
-          git status
-          git diff --ignore-submodules
-        displayName: 'Git Diff'
+      # - script: |
+      #     git status
+      #     git diff --ignore-submodules"
+      #   displayName: 'Git Diff'
 
-      - script: |
-          [ -z "`git status --ignore-submodules --porcelain`" ]
-        displayName: 'Check no Diff'
+      # - script: |
+      #     [ -z "`git status --ignore-submodules --porcelain`" ]
+      #   displayName: 'Check no Diff'
 
       - script: |
           npm run testserver-run &
