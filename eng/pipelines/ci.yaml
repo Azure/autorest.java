@@ -67,7 +67,7 @@ jobs:
           npm ci
         displayName: 'Prepare Environment for Generation'
 
-      # skip temporary
+      # skip temporary for issue https://github.com/Azure/autorest.java/issues/3061
       # - task: PowerShell@2
       #   displayName: 'Generate Code'
       #   inputs:
