@@ -113,7 +113,7 @@ def update_sdks():
         if artifact in skip_artifacts:
             continue
 
-        commit_id = "324bec9812c45197ad9d65174af0f3ee87325ce4"
+        commit_id = "2ddcc49aa62928eff65f3864a88832fb4959166c"
         if commit_id and artifact in ['azure-ai-translation-text', 'azure-ai-translation-document', 'azure-analytics-purview-datamap', 'azure-ai-openai-assistants', 'azure-ai-openai', 'azure-resourcemanager-databasewatcher']:
             with open(tsp_location_file, "r", encoding="utf-8") as f_in:
                 lines = f_in.readlines()
