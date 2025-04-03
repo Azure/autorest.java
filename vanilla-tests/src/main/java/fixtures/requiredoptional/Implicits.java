@@ -747,20 +747,6 @@ public final class Implicits {
     /**
      * Test implicitly optional body parameter.
      * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> putOptionalBinaryBodyAsync() {
-        final BinaryData bodyParameter = null;
-        final Long contentLength = null;
-        return putOptionalBinaryBodyWithResponseAsync(bodyParameter, contentLength).flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Test implicitly optional body parameter.
-     * 
      * @param bodyParameter The bodyParameter parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -803,19 +789,6 @@ public final class Implicits {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void putOptionalBinaryBody(BinaryData bodyParameter, Long contentLength) {
-        putOptionalBinaryBodyWithResponse(bodyParameter, contentLength, Context.NONE);
-    }
-
-    /**
-     * Test implicitly optional body parameter.
-     * 
-     * @throws ErrorException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void putOptionalBinaryBody() {
-        final BinaryData bodyParameter = null;
-        final Long contentLength = null;
         putOptionalBinaryBodyWithResponse(bodyParameter, contentLength, Context.NONE);
     }
 

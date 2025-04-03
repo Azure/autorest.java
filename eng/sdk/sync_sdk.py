@@ -22,6 +22,7 @@ skip_artifacts: List[str] = [
     "azure-compute-batch",  # Large change in same api-verion
     "azure-ai-vision-face",  # SDK in development
     "azure-health-deidentification",  # SDK in development
+    "azure-health-insights-radiologyinsights",  # SDK in development
 ]
 
 
