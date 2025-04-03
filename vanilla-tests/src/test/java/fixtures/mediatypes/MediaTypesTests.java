@@ -1,11 +1,10 @@
 package fixtures.mediatypes;
 
+import com.azure.core.util.BinaryData;
 import fixtures.mediatypes.models.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import reactor.core.publisher.Flux;
 
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 public class MediaTypesTests {
@@ -24,6 +23,6 @@ public class MediaTypesTests {
     @Test
     public void analyzeWithPdf() {
         client.analyzeBody(ContentType.APPLICATION_PDF,
-            Flux.just(ByteBuffer.wrap("PDF".getBytes(StandardCharsets.UTF_8))), 3L);
+                BinaryData.fromBytes("PDF".getBytes(StandardCharsets.UTF_8)), 3L);
     }
 }
