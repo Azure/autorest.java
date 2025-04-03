@@ -454,23 +454,6 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types.
      * 
      * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(ContentType contentType) {
-        final BinaryData input = null;
-        final Long contentLength = null;
-        return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -517,22 +500,6 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(ContentType contentType, BinaryData input, Long contentLength) {
-        return analyzeBodyWithResponse(contentType, input, contentLength, Context.NONE).getValue();
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public String analyzeBody(ContentType contentType) {
-        final BinaryData input = null;
-        final Long contentLength = null;
         return analyzeBodyWithResponse(contentType, input, contentLength, Context.NONE).getValue();
     }
 
@@ -866,23 +833,6 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      * 
      * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType) {
-        final BinaryData input = null;
-        final Long contentLength = null;
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-            .flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -928,21 +878,6 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void analyzeBodyNoAcceptHeader(ContentType contentType, BinaryData input, Long contentLength) {
-        analyzeBodyNoAcceptHeaderWithResponse(contentType, input, contentLength, Context.NONE);
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void analyzeBodyNoAcceptHeader(ContentType contentType) {
-        final BinaryData input = null;
-        final Long contentLength = null;
         analyzeBodyNoAcceptHeaderWithResponse(contentType, input, contentLength, Context.NONE);
     }
 
