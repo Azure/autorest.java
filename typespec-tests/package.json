@@ -11,29 +11,29 @@
   "dependencies": {
     "@typespec/spec-api": "0.1.0-alpha.3",
     "@typespec/spector": "0.1.0-alpha.11-dev.2",
-    "@typespec/http-specs": "0.1.0-alpha.16",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.13-dev.2",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.28.0.tgz"
+    "@typespec/http-specs": "0.1.0-alpha.17",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.13",
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.29.0.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": "~0.67.1",
+    "@typespec/prettier-plugin-typespec": "~0.68.0",
     "prettier-plugin-organize-imports": "4.1.0",
     "prettier": "~3.5.3"
   },
   "overrides": {
-    "@typespec/compiler": "~0.67.1",
-    "@typespec/http": "~0.67.1",
-    "@typespec/rest": "~0.67.1",
-    "@typespec/versioning": "~0.67.1",
-    "@typespec/openapi": "~0.67.1",
-    "@typespec/xml": "~0.67.1",
-    "@typespec/events": "~0.67.1",
-    "@typespec/sse": "~0.67.1",
-    "@typespec/streams": "~0.67.1",
-    "@azure-tools/typespec-azure-core": "0.54.0-dev.5",
-    "@azure-tools/typespec-client-generator-core": "0.54.0-dev.22",
-    "@azure-tools/typespec-azure-resource-manager": "~0.53.0",
-    "@azure-tools/typespec-autorest": "~0.53.0"
+    "@typespec/compiler": "~0.68.0",
+    "@typespec/http": "~0.68.0",
+    "@typespec/rest": "~0.68.0",
+    "@typespec/versioning": "~0.68.0",
+    "@typespec/openapi": "~0.68.0",
+    "@typespec/xml": "~0.68.0",
+    "@typespec/events": "~0.68.0",
+    "@typespec/sse": "~0.68.0",
+    "@typespec/streams": "~0.68.0",
+    "@azure-tools/typespec-azure-core": "~0.54.0",
+    "@azure-tools/typespec-client-generator-core": "~0.54.0",
+    "@azure-tools/typespec-azure-resource-manager": "~0.54.0",
+    "@azure-tools/typespec-autorest": "~0.54.0"
   },
   "private": true
 }
