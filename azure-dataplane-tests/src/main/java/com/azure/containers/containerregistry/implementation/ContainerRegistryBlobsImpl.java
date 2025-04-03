@@ -36,7 +36,6 @@ import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.StreamResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -84,7 +83,7 @@ public final class ContainerRegistryBlobsImpl {
         @Get("/v2/{name}/blobs/{digest}")
         @ExpectedResponses({ 200, 307 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<StreamResponse> getBlobNoCustomHeaders(@HostParam("url") String url, @PathParam("name") String name,
+        Mono<Response<BinaryData>> getBlobNoCustomHeaders(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("digest") String digest, @HeaderParam("Accept") String accept, Context context);
 
         @Get("/v2/{name}/blobs/{digest}")
@@ -320,7 +319,7 @@ public final class ContainerRegistryBlobsImpl {
         @Get("/v2/{name}/blobs/{digest}")
         @ExpectedResponses({ 206 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<StreamResponse> getChunkNoCustomHeaders(@HostParam("url") String url, @PathParam("name") String name,
+        Mono<Response<BinaryData>> getChunkNoCustomHeaders(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("digest") String digest, @HeaderParam("Range") String range,
             @HeaderParam("Accept") String accept, Context context);
 
@@ -440,10 +439,10 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getBlobNoCustomHeadersWithResponseAsync(String name, String digest) {
+    public Mono<Response<BinaryData>> getBlobNoCustomHeadersWithResponseAsync(String name, String digest) {
         return FluxUtil.withContext(context -> getBlobNoCustomHeadersWithResponseAsync(name, digest, context));
     }
 
@@ -456,10 +455,11 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getBlobNoCustomHeadersWithResponseAsync(String name, String digest, Context context) {
+    public Mono<Response<BinaryData>> getBlobNoCustomHeadersWithResponseAsync(String name, String digest,
+        Context context) {
         final String accept = "application/octet-stream";
         return service.getBlobNoCustomHeaders(this.client.getUrl(), name, digest, accept, context);
     }
@@ -1803,10 +1803,11 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getChunkNoCustomHeadersWithResponseAsync(String name, String digest, String range) {
+    public Mono<Response<BinaryData>> getChunkNoCustomHeadersWithResponseAsync(String name, String digest,
+        String range) {
         return FluxUtil.withContext(context -> getChunkNoCustomHeadersWithResponseAsync(name, digest, range, context));
     }
 
@@ -1822,10 +1823,10 @@ public final class ContainerRegistryBlobsImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getChunkNoCustomHeadersWithResponseAsync(String name, String digest, String range,
+    public Mono<Response<BinaryData>> getChunkNoCustomHeadersWithResponseAsync(String name, String digest, String range,
         Context context) {
         final String accept = "application/octet-stream";
         return service.getChunkNoCustomHeaders(this.client.getUrl(), name, digest, range, accept, context);

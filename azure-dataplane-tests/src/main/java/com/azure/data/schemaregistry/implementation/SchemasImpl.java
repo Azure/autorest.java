@@ -25,7 +25,6 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
-import com.azure.core.http.rest.StreamResponse;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
@@ -79,8 +78,9 @@ public final class SchemasImpl {
         @Get("/$schemaGroups/$schemas/{id}")
         @ExpectedResponses({ 200, 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getByIdNoCustomHeaders(@HostParam("endpoint") String endpoint, @PathParam("id") String id,
-            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept, Context context);
+        Mono<Response<BinaryData>> getByIdNoCustomHeaders(@HostParam("endpoint") String endpoint,
+            @PathParam("id") String id, @QueryParam("api-version") String apiVersion,
+            @HeaderParam("Accept") String accept, Context context);
 
         @Get("/$schemaGroups/$schemas/{id}")
         @ExpectedResponses({ 200, 200 })
@@ -121,7 +121,7 @@ public final class SchemasImpl {
         @Get("/$schemaGroups/{groupName}/schemas/{schemaName}/versions/{schemaVersion}")
         @ExpectedResponses({ 200, 200 })
         @UnexpectedResponseExceptionType(ErrorException.class)
-        Mono<StreamResponse> getSchemaVersionNoCustomHeaders(@HostParam("endpoint") String endpoint,
+        Mono<Response<BinaryData>> getSchemaVersionNoCustomHeaders(@HostParam("endpoint") String endpoint,
             @PathParam("groupName") String groupName, @PathParam("schemaName") String schemaName,
             @PathParam("schemaVersion") int schemaVersion, @QueryParam("api-version") String apiVersion,
             @HeaderParam("Accept") String accept, Context context);
@@ -312,10 +312,11 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a registered schema by its unique ID on successful completion of {@link Mono}.
+     * @return a registered schema by its unique ID along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getByIdNoCustomHeadersWithResponseAsync(String id) {
+    public Mono<Response<BinaryData>> getByIdNoCustomHeadersWithResponseAsync(String id) {
         return FluxUtil.withContext(context -> getByIdNoCustomHeadersWithResponseAsync(id, context));
     }
 
@@ -330,10 +331,11 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a registered schema by its unique ID on successful completion of {@link Mono}.
+     * @return a registered schema by its unique ID along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getByIdNoCustomHeadersWithResponseAsync(String id, Context context) {
+    public Mono<Response<BinaryData>> getByIdNoCustomHeadersWithResponseAsync(String id, Context context) {
         final String accept
             = "application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8, text/vnd.ms.protobuf";
         return service.getByIdNoCustomHeaders(this.client.getEndpoint(), id, this.client.getApiVersion(), accept,
@@ -671,11 +673,11 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return one specific version of one schema on successful completion of {@link Mono}.
+     * @return one specific version of one schema along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getSchemaVersionNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
-        int schemaVersion) {
+    public Mono<Response<BinaryData>> getSchemaVersionNoCustomHeadersWithResponseAsync(String groupName,
+        String schemaName, int schemaVersion) {
         return FluxUtil.withContext(
             context -> getSchemaVersionNoCustomHeadersWithResponseAsync(groupName, schemaName, schemaVersion, context));
     }
@@ -693,11 +695,11 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return one specific version of one schema on successful completion of {@link Mono}.
+     * @return one specific version of one schema along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<StreamResponse> getSchemaVersionNoCustomHeadersWithResponseAsync(String groupName, String schemaName,
-        int schemaVersion, Context context) {
+    public Mono<Response<BinaryData>> getSchemaVersionNoCustomHeadersWithResponseAsync(String groupName,
+        String schemaName, int schemaVersion, Context context) {
         final String accept
             = "application/json; serialization=Avro, application/json; serialization=json, text/plain; charset=utf-8, text/vnd.ms.protobuf";
         return service.getSchemaVersionNoCustomHeaders(this.client.getEndpoint(), groupName, schemaName, schemaVersion,
