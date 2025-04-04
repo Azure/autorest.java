@@ -75,7 +75,7 @@ jobs:
 
       - script: |
           git status
-          git diff --ignore-submodules"
+          git diff --ignore-submodules
         displayName: 'Git Diff'
 
       - script: |
