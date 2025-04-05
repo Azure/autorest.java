@@ -31,8 +31,6 @@ import fixtures.mediatypes.models.ContentType1;
 import fixtures.mediatypes.models.ContentType2;
 import fixtures.mediatypes.models.ContentType3;
 import fixtures.mediatypes.models.SourcePath;
-import java.nio.ByteBuffer;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -132,14 +130,6 @@ public final class MediaTypesClient {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
-            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
-
-        @Post("/mediatypes/analyze")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
-            @HeaderParam("Content-Type") ContentType contentType,
             @BodyParam("application/octet-stream") BinaryData input, @HeaderParam("Content-Length") Long contentLength,
             @HeaderParam("Accept") String accept, Context context);
 
@@ -148,14 +138,6 @@ public final class MediaTypesClient {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> analyzeBody(@HostParam("$host") String host,
             @BodyParam("application/json") SourcePath input, @HeaderParam("Accept") String accept, Context context);
-
-        @Post("/mediatypes/analyzeNoAccept")
-        @ExpectedResponses({ 202 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> analyzeBodyNoAcceptHeader(@HostParam("$host") String host,
-            @HeaderParam("Content-Type") ContentType contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> input,
-            @HeaderParam("Content-Length") Long contentLength, Context context);
 
         @Post("/mediatypes/analyzeNoAccept")
         @ExpectedResponses({ 202 })
@@ -183,14 +165,6 @@ public final class MediaTypesClient {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> binaryBodyWithTwoContentTypes(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType1 contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
-            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
-
-        @Post("/mediatypes/binaryBodyTwoContentTypes")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> binaryBodyWithTwoContentTypes(@HostParam("$host") String host,
-            @HeaderParam("Content-Type") ContentType1 contentType,
             @BodyParam("application/octet-stream") BinaryData message,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
@@ -199,22 +173,7 @@ public final class MediaTypesClient {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<String>> binaryBodyWithThreeContentTypes(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType2 contentType,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
-            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
-
-        @Post("/mediatypes/binaryBodyThreeContentTypes")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> binaryBodyWithThreeContentTypes(@HostParam("$host") String host,
-            @HeaderParam("Content-Type") ContentType2 contentType,
             @BodyParam("application/octet-stream") BinaryData message,
-            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
-
-        @Post("/mediatypes/bodyThreeTypes")
-        @ExpectedResponses({ 200 })
-        @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<String>> bodyThreeTypes(@HostParam("$host") String host,
-            @BodyParam("application/octet-stream") Flux<ByteBuffer> message,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/mediatypes/bodyThreeTypes")
@@ -242,152 +201,6 @@ public final class MediaTypesClient {
         Mono<Response<String>> putTextAndJsonBody(@HostParam("$host") String host,
             @HeaderParam("Content-Type") ContentType3 contentType, @BodyParam("text/plain") String message,
             @HeaderParam("Accept") String accept, Context context);
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input,
-        Long contentLength) {
-        return FluxUtil
-            .withContext(context -> analyzeBodyWithResponseAsync(contentType, input, contentLength, context));
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> analyzeBodyWithResponseAsync(ContentType contentType, Flux<ByteBuffer> input,
-        Long contentLength, Context context) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        final String accept = "application/json";
-        return service.analyzeBody(this.getHost(), contentType, input, contentLength, accept, context);
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
-        return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(ContentType contentType) {
-        final Flux<ByteBuffer> input = null;
-        final Long contentLength = null;
-        return analyzeBodyWithResponseAsync(contentType, input, contentLength)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> analyzeBodyAsync(ContentType contentType, Flux<ByteBuffer> input, Long contentLength,
-        Context context) {
-        return analyzeBodyWithResponseAsync(contentType, input, contentLength, context)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> analyzeBodyWithResponse(ContentType contentType, Flux<ByteBuffer> input, Long contentLength,
-        Context context) {
-        return analyzeBodyWithResponseAsync(contentType, input, contentLength, context).block();
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public String analyzeBody(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
-        return analyzeBodyWithResponse(contentType, input, contentLength, Context.NONE).getValue();
-    }
-
-    /**
-     * Analyze body, that could be different media types.
-     * 
-     * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public String analyzeBody(ContentType contentType) {
-        final Flux<ByteBuffer> input = null;
-        final Long contentLength = null;
-        return analyzeBodyWithResponse(contentType, input, contentLength, Context.NONE).getValue();
     }
 
     /**
@@ -454,6 +267,23 @@ public final class MediaTypesClient {
      * Analyze body, that could be different media types.
      * 
      * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<String> analyzeBodyAsync(ContentType contentType) {
+        final BinaryData input = null;
+        final Long contentLength = null;
+        return analyzeBodyWithResponseAsync(contentType, input, contentLength)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     * 
+     * @param contentType Upload file type.
      * @param input Input parameter.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -500,6 +330,22 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String analyzeBody(ContentType contentType, BinaryData input, Long contentLength) {
+        return analyzeBodyWithResponse(contentType, input, contentLength, Context.NONE).getValue();
+    }
+
+    /**
+     * Analyze body, that could be different media types.
+     * 
+     * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public String analyzeBody(ContentType contentType) {
+        final BinaryData input = null;
+        final Long contentLength = null;
         return analyzeBodyWithResponse(contentType, input, contentLength, Context.NONE).getValue();
     }
 
@@ -638,150 +484,6 @@ public final class MediaTypesClient {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType,
-        Flux<ByteBuffer> input, Long contentLength) {
-        return FluxUtil.withContext(
-            context -> analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context));
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType,
-        Flux<ByteBuffer> input, Long contentLength, Context context) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        return service.analyzeBodyNoAcceptHeader(this.getHost(), contentType, input, contentLength, context);
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, Flux<ByteBuffer> input,
-        Long contentLength) {
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-            .flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType) {
-        final Flux<ByteBuffer> input = null;
-        final Long contentLength = null;
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
-            .flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return A {@link Mono} that completes when a successful response is received.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, Flux<ByteBuffer> input,
-        Long contentLength, Context context) {
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context)
-            .flatMap(ignored -> Mono.empty());
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> analyzeBodyNoAcceptHeaderWithResponse(ContentType contentType, Flux<ByteBuffer> input,
-        Long contentLength, Context context) {
-        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength, context).block();
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void analyzeBodyNoAcceptHeader(ContentType contentType, Flux<ByteBuffer> input, Long contentLength) {
-        analyzeBodyNoAcceptHeaderWithResponse(contentType, input, contentLength, Context.NONE);
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public void analyzeBodyNoAcceptHeader(ContentType contentType) {
-        final Flux<ByteBuffer> input = null;
-        final Long contentLength = null;
-        analyzeBodyNoAcceptHeaderWithResponse(contentType, input, contentLength, Context.NONE);
-    }
-
-    /**
-     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
-     * 
-     * @param contentType Upload file type.
-     * @param input Input parameter.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> analyzeBodyNoAcceptHeaderWithResponseAsync(ContentType contentType, BinaryData input,
         Long contentLength) {
         return FluxUtil.withContext(
@@ -825,6 +527,23 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType, BinaryData input, Long contentLength) {
+        return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
+            .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     * 
+     * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> analyzeBodyNoAcceptHeaderAsync(ContentType contentType) {
+        final BinaryData input = null;
+        final Long contentLength = null;
         return analyzeBodyNoAcceptHeaderWithResponseAsync(contentType, input, contentLength)
             .flatMap(ignored -> Mono.empty());
     }
@@ -878,6 +597,21 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public void analyzeBodyNoAcceptHeader(ContentType contentType, BinaryData input, Long contentLength) {
+        analyzeBodyNoAcceptHeaderWithResponse(contentType, input, contentLength, Context.NONE);
+    }
+
+    /**
+     * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
+     * 
+     * @param contentType Upload file type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void analyzeBodyNoAcceptHeader(ContentType contentType) {
+        final BinaryData input = null;
+        final Long contentLength = null;
         analyzeBodyNoAcceptHeaderWithResponse(contentType, input, contentLength, Context.NONE);
     }
 
@@ -1133,131 +867,6 @@ public final class MediaTypesClient {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
-        Flux<ByteBuffer> message, long contentLength) {
-        return FluxUtil.withContext(
-            context -> binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context));
-    }
-
-    /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
-        Flux<ByteBuffer> message, long contentLength, Context context) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return service.binaryBodyWithTwoContentTypes(this.getHost(), contentType, message, contentLength, accept,
-            context);
-    }
-
-    /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Flux<ByteBuffer> message,
-        long contentLength) {
-        return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Flux<ByteBuffer> message,
-        long contentLength, Context context) {
-        return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> binaryBodyWithTwoContentTypesWithResponse(ContentType1 contentType,
-        Flux<ByteBuffer> message, long contentLength, Context context) {
-        return binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context).block();
-    }
-
-    /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public String binaryBodyWithTwoContentTypes(ContentType1 contentType, Flux<ByteBuffer> message,
-        long contentLength) {
-        return binaryBodyWithTwoContentTypesWithResponse(contentType, message, contentLength, Context.NONE).getValue();
-    }
-
-    /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithTwoContentTypesWithResponseAsync(ContentType1 contentType,
         BinaryData message, long contentLength) {
         return FluxUtil.withContext(
             context -> binaryBodyWithTwoContentTypesWithResponseAsync(contentType, message, contentLength, context));
@@ -1366,132 +975,6 @@ public final class MediaTypesClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public String binaryBodyWithTwoContentTypes(ContentType1 contentType, BinaryData message, long contentLength) {
         return binaryBodyWithTwoContentTypesWithResponse(contentType, message, contentLength, Context.NONE).getValue();
-    }
-
-    /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
-        Flux<ByteBuffer> message, long contentLength) {
-        return FluxUtil.withContext(
-            context -> binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context));
-    }
-
-    /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> binaryBodyWithThreeContentTypesWithResponseAsync(ContentType2 contentType,
-        Flux<ByteBuffer> message, long contentLength, Context context) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (contentType == null) {
-            return Mono.error(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return service.binaryBodyWithThreeContentTypes(this.getHost(), contentType, message, contentLength, accept,
-            context);
-    }
-
-    /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Flux<ByteBuffer> message,
-        long contentLength) {
-        return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> binaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Flux<ByteBuffer> message,
-        long contentLength, Context context) {
-        return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> binaryBodyWithThreeContentTypesWithResponse(ContentType2 contentType,
-        Flux<ByteBuffer> message, long contentLength, Context context) {
-        return binaryBodyWithThreeContentTypesWithResponseAsync(contentType, message, contentLength, context).block();
-    }
-
-    /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
-     * 
-     * @param contentType Upload file type.
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public String binaryBodyWithThreeContentTypes(ContentType2 contentType, Flux<ByteBuffer> message,
-        long contentLength) {
-        return binaryBodyWithThreeContentTypesWithResponse(contentType, message, contentLength, Context.NONE)
-            .getValue();
     }
 
     /**
@@ -1617,120 +1100,6 @@ public final class MediaTypesClient {
     public String binaryBodyWithThreeContentTypes(ContentType2 contentType, BinaryData message, long contentLength) {
         return binaryBodyWithThreeContentTypesWithResponse(contentType, message, contentLength, Context.NONE)
             .getValue();
-    }
-
-    /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
-     * 
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Flux<ByteBuffer> message, long contentLength) {
-        return FluxUtil.withContext(context -> bodyThreeTypesWithResponseAsync(message, contentLength, context));
-    }
-
-    /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
-     * 
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<String>> bodyThreeTypesWithResponseAsync(Flux<ByteBuffer> message, long contentLength,
-        Context context) {
-        if (this.getHost() == null) {
-            return Mono.error(new IllegalArgumentException("Parameter this.getHost() is required and cannot be null."));
-        }
-        if (message == null) {
-            return Mono.error(new IllegalArgumentException("Parameter message is required and cannot be null."));
-        }
-        final String accept = "text/plain";
-        return service.bodyThreeTypes(this.getHost(), message, contentLength, accept, context);
-    }
-
-    /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
-     * 
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> bodyThreeTypesAsync(Flux<ByteBuffer> message, long contentLength) {
-        return bodyThreeTypesWithResponseAsync(message, contentLength).flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
-     * 
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body on successful completion of {@link Mono}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<String> bodyThreeTypesAsync(Flux<ByteBuffer> message, long contentLength, Context context) {
-        return bodyThreeTypesWithResponseAsync(message, contentLength, context)
-            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
-    }
-
-    /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
-     * 
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @param context The context to associate with this operation.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response body along with {@link Response}.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<String> bodyThreeTypesWithResponse(Flux<ByteBuffer> message, long contentLength, Context context) {
-        return bodyThreeTypesWithResponseAsync(message, contentLength, context).block();
-    }
-
-    /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
-     * 
-     * @param message The payload body.
-     * @param contentLength The Content-Length header for the request.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public String bodyThreeTypes(Flux<ByteBuffer> message, long contentLength) {
-        return bodyThreeTypesWithResponse(message, contentLength, Context.NONE).getValue();
     }
 
     /**
