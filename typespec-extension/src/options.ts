@@ -1,3 +1,4 @@
+import { BrandedSdkEmitterOptions, UnbrandedSdkEmitterOptions } from "@azure-tools/typespec-client-generator-core";
 import { JSONSchemaType } from "@typespec/compiler";
 
 export const LIB_NAME = "@azure-tools/typespec-java";
@@ -38,10 +39,11 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   type: "object",
   properties: {
     // service
-    "namespace": { type: "string", nullable: true },
+    ...BrandedSdkEmitterOptions.namespace,
     "service-name": { type: "string", nullable: true },
 
     // sample and test
+    ...BrandedSdkEmitterOptions["examples-dir"],
     "generate-samples": { type: "boolean", nullable: true, default: true },
     "generate-tests": { type: "boolean", nullable: true, default: true },
 
@@ -50,6 +52,8 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "use-object-for-unknown": { type: "boolean", nullable: true, default: false },
 
     // customization
+    ...UnbrandedSdkEmitterOptions["generate-protocol-methods"],
+    ...UnbrandedSdkEmitterOptions["generate-convenience-methods"],
     "partial-update": { type: "boolean", nullable: true, default: false },
     "models-subpackage": { type: "string", nullable: true },
     "custom-types": { type: "string", nullable: true },
@@ -61,7 +65,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "enable-subclient": { type: "boolean", nullable: true, default: false },
 
     // versioning
-    "api-version": { type: "string", nullable: true },
+    ...UnbrandedSdkEmitterOptions["api-version"],
     "advanced-versioning": { type: "boolean", nullable: true, default: false },
     "service-version-exclude-preview": { type: "boolean", nullable: true, default: false },
 
