@@ -2,21 +2,16 @@
 
 ## Modules
 
-`extension-base` is the shared module providing `CodeModel` represented in Java language, JSON RPC, and `NewPlugin` plugin entry.
+`javagen` is the shared module on models and operations. It contains the shared classes such as: `CodeModel` represented in Java language, JSON RPC, and `NewPlugin` plugin entry.
+It alone is the pipeline for data-plane SDK generator (includes "vanilla" -- the mode that requires a handwritten client).
+It uses Eclipse JDT Language Server to provide [Customizations](../../readme.md#customizations), in postprocess stage.
 
-`preprocessor`, `javagen`, `postprocessor` is the shared modules on models and operations.
-Also, they are the pipeline for data-plane SDK generator.
-`postprocessor` uses Eclipse JDT Language Server to provide customizations.
-
-`fluentnamer`, `fluentgen` is activated when `--fluent` option is specified.
-They are the pipeline for management-plane SDK generator.
-
-`javagen` with Android-style generation is activated when `--android` option is specified.
-Together with `preprocessor`, they are the pipeline for data-plane SDK generator for Android.
+`fluentgen` is activated when `--fluent` option is specified.
+Built with code in `javagen` module, it is the pipeline for management-plane SDK generator.
 
 ## Configure on Modeler Four
 
-Modeler Four is configured on `readme.md` of `preprocessor` and `fluentnamer`.
+Modeler Four is configured on `readme.md` at repository root, as well as that of `javagen` and `fluentgen`. [The readme.md at repository root](../../readme.md#autorest-plugin-configuration) determined whether the entry point be `javagen` or `fluentgen`.
 
 The most important configure is the version of Modeler Four.
 The important options are:
@@ -27,25 +22,18 @@ The important options are:
 
 Historically, data-plane leaves all of these options as `true`, while management-plane try to turn them to `false`.
 
-Usually `preprocessor` and `fluentnamer` would save the input from pipeline to `code-model.yaml` in module root.
+At preprocess stage, `javagen` or `fluentgen` would save the input from pipeline to `code-model.yaml` in a temporary folder (the environment variable `codegen.java.temp.directory` can be used to specify a path).
 The content of this file is helpful for inspecting Modeler Four output.
 
 One can set `--output-artifact=code-model-v4-no-tags` option to let AutoRest write the code-model file to output folder.
 
-## RPC within AutoRest Java
-
-### Between `preprocessor` and `javagen`
-
-The content of RPC still follows `CodeModel`, after transformation of `preprocessor`.
-However, it could look quite different from output of Modeler Four.
-
-### Between `java` and `postprocessor`
-
-The content would be Java files.
-
 ## Details on Modules
 
-### `extension-base` Module
+### `javagen` Module
+
+This module re-uses code from `com.microsoft.typespec:http-client-generator-core` module.
+
+#### Code Model
 
 `NewPlugin` as entry for plugin, providing RPC for pipeline.
 
@@ -55,21 +43,11 @@ Roughly speaking, `schemas` contain the models, while `operations` grouped into 
 
 `JavaSettings` provides basic configuration for AutoRest Java.
 
-### `preprocessor` Module
+#### Pre-process
 
-`Transformer` renames model/property/method/parameter to be consistent to Java naming. It also supplies the `next` operation for `x-ms-pageable` extension.
+`Preprocessor` with `Transformer` renames model/property/method/parameter to be consistent to Java naming. It also supplies the `next` operation for `x-ms-pageable` extension.
 
 `CodeNamer` as utility for Java naming, including conflict handling e.g. from reserved word in Java.
-
-### `fluentnamer` Module
-
-In addition to what is done in `preprocessor` module, its `Transformer` handles normalization of resource type (e.g. subclass of `Resource`), error type (e.g. subclass of `ManagementException` and `ManagementError`), operation name (e.g. `getByResourceGroup` and `listByResourceGroup`).
-
-It also handles naming conflict between operation groups and models (e.g. `FooClient` from operation group client and `FooClient` from model, maybe another `FooClient` of the service client), naming of anonymous model (e.g. property of anonymous schema, anonymous superclass), rename from options, cleaning up of unused schemas (which is necessary because of the normalization).
-
-`FluentJavaSettings` provides additional configuration on fluentnamer and fluentgen.
-
-### `javagen` Module
 
 #### Client Model
 
@@ -122,10 +100,26 @@ It writes Java code using classes under `model.javamodel` namespace.
 
 Classes of mapper and template is constructed by abstract factory, which enables overriding the behavior in other modules.
 
+#### Post-process
+
+`Postprocessor` modifies generated Java code, with `PartialUpdateHandler` for [Partial Update](../generate/dataplane-customization.md), and with `Customization` for [Customizations via code](../../readme.md#customizations).
+
+The formatting of generated Java code is also done in this stage, leverage [spotless Maven plugin](https://github.com/diffplug/spotless).
+
 ### `fluentgen` Module
 
 Fluent Java SDK for management-plane has a different [API design](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/resourcemanager/docs/DESIGN.md).
 Simply speaking, the Fluent interface wraps the vanilla Client and REST API.
+
+This module re-uses code from `com.microsoft.typespec:http-client-generator-mgmt` module.
+
+#### Pre-process
+
+In addition to what is done in [Pre-process of javagen](#pre-process), its `Transformer` handles normalization of resource type (e.g. subclass of `Resource`), error type (e.g. subclass of `ManagementException` and `ManagementError`), operation name (e.g. `getByResourceGroup` and `listByResourceGroup`).
+
+It also handles naming conflict between operation groups and models (e.g. `FooClient` from operation group client and `FooClient` from model, maybe another `FooClient` of the service client), naming of anonymous model (e.g. property of anonymous schema, anonymous superclass), rename from options, cleaning up of unused schemas (which is necessary because of the normalization).
+
+`FluentJavaSettings` provides additional configuration on fluentnamer and fluentgen.
 
 #### Client Model
 
