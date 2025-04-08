@@ -49,6 +49,8 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -106,6 +108,23 @@ public final class ContainerRegistriesImpl {
         @UnexpectedResponseExceptionType(AcrErrorsException.class)
         Response<BinaryData> getManifestSync(@HostParam("url") String url, @PathParam("name") String name,
             @PathParam("reference") String reference, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/v2/{name}/manifests/{reference}")
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(AcrErrorsException.class)
+        Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifest(@HostParam("url") String url,
+            @PathParam("name") String name, @PathParam("reference") String reference,
+            @HeaderParam("Content-Type") String contentType,
+            @BodyParam("application/vnd.docker.distribution.manifest.v2+json") Flux<ByteBuffer> payload,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/v2/{name}/manifests/{reference}")
+        @ExpectedResponses({ 201 })
+        @UnexpectedResponseExceptionType(AcrErrorsException.class)
+        Mono<Response<Void>> createManifestNoCustomHeaders(@HostParam("url") String url, @PathParam("name") String name,
+            @PathParam("reference") String reference, @HeaderParam("Content-Type") String contentType,
+            @BodyParam("application/vnd.docker.distribution.manifest.v2+json") Flux<ByteBuffer> payload,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/v2/{name}/manifests/{reference}")
         @ExpectedResponses({ 201 })
@@ -638,6 +657,132 @@ public final class ContainerRegistriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public BinaryData getManifest(String name, String reference, String accept) {
         return getManifestWithResponse(name, reference, accept, Context.NONE).getValue();
+    }
+
+    /**
+     * Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.
+     * 
+     * @param name Name of the image (including the namespace).
+     * @param reference A tag or a digest, pointing to a specific image.
+     * @param payload Manifest body, can take v1 or v2 values depending on accept header.
+     * @param contentLength The Content-Length header for the request.
+     * @param contentType The manifest's Content-Type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AcrErrorsException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
+        String name, String reference, Flux<ByteBuffer> payload, long contentLength, String contentType) {
+        return FluxUtil.withContext(
+            context -> createManifestWithResponseAsync(name, reference, payload, contentLength, contentType, context));
+    }
+
+    /**
+     * Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.
+     * 
+     * @param name Name of the image (including the namespace).
+     * @param reference A tag or a digest, pointing to a specific image.
+     * @param payload Manifest body, can take v1 or v2 values depending on accept header.
+     * @param contentLength The Content-Length header for the request.
+     * @param contentType The manifest's Content-Type.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AcrErrorsException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<ContainerRegistriesCreateManifestHeaders, Void>> createManifestWithResponseAsync(
+        String name, String reference, Flux<ByteBuffer> payload, long contentLength, String contentType,
+        Context context) {
+        final String accept = "application/json";
+        return service.createManifest(this.client.getUrl(), name, reference, contentType, payload, contentLength,
+            accept, context);
+    }
+
+    /**
+     * Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.
+     * 
+     * @param name Name of the image (including the namespace).
+     * @param reference A tag or a digest, pointing to a specific image.
+     * @param payload Manifest body, can take v1 or v2 values depending on accept header.
+     * @param contentLength The Content-Length header for the request.
+     * @param contentType The manifest's Content-Type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AcrErrorsException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> createManifestAsync(String name, String reference, Flux<ByteBuffer> payload, long contentLength,
+        String contentType) {
+        return createManifestWithResponseAsync(name, reference, payload, contentLength, contentType)
+            .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.
+     * 
+     * @param name Name of the image (including the namespace).
+     * @param reference A tag or a digest, pointing to a specific image.
+     * @param payload Manifest body, can take v1 or v2 values depending on accept header.
+     * @param contentLength The Content-Length header for the request.
+     * @param contentType The manifest's Content-Type.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AcrErrorsException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> createManifestAsync(String name, String reference, Flux<ByteBuffer> payload, long contentLength,
+        String contentType, Context context) {
+        return createManifestWithResponseAsync(name, reference, payload, contentLength, contentType, context)
+            .flatMap(ignored -> Mono.empty());
+    }
+
+    /**
+     * Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.
+     * 
+     * @param name Name of the image (including the namespace).
+     * @param reference A tag or a digest, pointing to a specific image.
+     * @param payload Manifest body, can take v1 or v2 values depending on accept header.
+     * @param contentLength The Content-Length header for the request.
+     * @param contentType The manifest's Content-Type.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AcrErrorsException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> createManifestNoCustomHeadersWithResponseAsync(String name, String reference,
+        Flux<ByteBuffer> payload, long contentLength, String contentType) {
+        return FluxUtil.withContext(context -> createManifestNoCustomHeadersWithResponseAsync(name, reference, payload,
+            contentLength, contentType, context));
+    }
+
+    /**
+     * Put the manifest identified by `name` and `reference` where `reference` can be a tag or digest.
+     * 
+     * @param name Name of the image (including the namespace).
+     * @param reference A tag or a digest, pointing to a specific image.
+     * @param payload Manifest body, can take v1 or v2 values depending on accept header.
+     * @param contentLength The Content-Length header for the request.
+     * @param contentType The manifest's Content-Type.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws AcrErrorsException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> createManifestNoCustomHeadersWithResponseAsync(String name, String reference,
+        Flux<ByteBuffer> payload, long contentLength, String contentType, Context context) {
+        final String accept = "application/json";
+        return service.createManifestNoCustomHeaders(this.client.getUrl(), name, reference, contentType, payload,
+            contentLength, accept, context);
     }
 
     /**

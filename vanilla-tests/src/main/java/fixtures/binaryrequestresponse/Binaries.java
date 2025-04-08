@@ -21,6 +21,8 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import java.nio.ByteBuffer;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -58,14 +60,35 @@ public final class Binaries {
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> putWithBinaryRequestAndResponse(@HostParam("$host") String host,
+            @PathParam("runbookName") String runbookName, @BodyParam("application/zip") Flux<ByteBuffer> binaryContent,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/binaryRequestAndResponse")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> putWithBinaryRequestAndResponse(@HostParam("$host") String host,
             @PathParam("runbookName") String runbookName, @BodyParam("application/zip") BinaryData binaryContent,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/binaryRequestAndBinaryTextResponse")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putWithBinaryJsonRequestAndBinaryTextResponse(@HostParam("$host") String host,
+        Mono<Response<Flux<ByteBuffer>>> putWithBinaryJsonRequestAndBinaryTextResponse(@HostParam("$host") String host,
+            @PathParam("runbookName") String runbookName, @BodyParam("application/zip") Flux<ByteBuffer> binaryContent,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/binaryRequestAndBinaryTextResponse")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Flux<ByteBuffer>>> putWithBinaryJsonRequestAndBinaryTextResponse(@HostParam("$host") String host,
             @PathParam("runbookName") String runbookName, @BodyParam("application/zip") BinaryData binaryContent,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/binaryTextRequestAndBinaryResponse")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> putWithBinaryTextRequestAndBinaryResponse(@HostParam("$host") String host,
+            @PathParam("runbookName") String runbookName, @BodyParam("text/powershell") Flux<ByteBuffer> binaryContent,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Put("/binaryTextRequestAndBinaryResponse")
@@ -78,9 +101,138 @@ public final class Binaries {
         @Put("/binaryTextRequestAndResponse")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> putWithBinaryTextRequestAndResponse(@HostParam("$host") String host,
+        Mono<Response<Flux<ByteBuffer>>> putWithBinaryTextRequestAndResponse(@HostParam("$host") String host,
+            @PathParam("runbookName") String runbookName, @BodyParam("text/powershell") Flux<ByteBuffer> binaryContent,
+            @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
+
+        @Put("/binaryTextRequestAndResponse")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Flux<ByteBuffer>>> putWithBinaryTextRequestAndResponse(@HostParam("$host") String host,
             @PathParam("runbookName") String runbookName, @BodyParam("text/powershell") BinaryData binaryContent,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putWithBinaryRequestAndResponseWithResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength) {
+        return FluxUtil.withContext(context -> putWithBinaryRequestAndResponseWithResponseAsync(runbookName,
+            binaryContent, contentLength, context));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putWithBinaryRequestAndResponseWithResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (runbookName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
+        }
+        if (binaryContent == null) {
+            return Mono.error(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
+        }
+        final String accept = "application/zip";
+        return service.putWithBinaryRequestAndResponse(this.client.getHost(), runbookName, binaryContent, contentLength,
+            accept, context);
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BinaryData> putWithBinaryRequestAndResponseAsync(String runbookName, Flux<ByteBuffer> binaryContent,
+        long contentLength) {
+        return putWithBinaryRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BinaryData> putWithBinaryRequestAndResponseAsync(String runbookName, Flux<ByteBuffer> binaryContent,
+        long contentLength, Context context) {
+        return putWithBinaryRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength, context)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putWithBinaryRequestAndResponseWithResponse(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        return putWithBinaryRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength, context)
+            .block();
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BinaryData putWithBinaryRequestAndResponse(String runbookName, Flux<ByteBuffer> binaryContent,
+        long contentLength) {
+        return putWithBinaryRequestAndResponseWithResponse(runbookName, binaryContent, contentLength, Context.NONE)
+            .getValue();
     }
 
     /**
@@ -217,8 +369,8 @@ public final class Binaries {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(String runbookName,
-        BinaryData binaryContent, long contentLength) {
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(
+        String runbookName, Flux<ByteBuffer> binaryContent, long contentLength) {
         return FluxUtil
             .withContext(context -> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(runbookName,
                 binaryContent, contentLength, context));
@@ -237,8 +389,8 @@ public final class Binaries {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(String runbookName,
-        BinaryData binaryContent, long contentLength, Context context) {
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(
+        String runbookName, Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
         if (this.client.getHost() == null) {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
@@ -266,7 +418,130 @@ public final class Binaries {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> putWithBinaryJsonRequestAndBinaryTextResponseAsync(String runbookName,
+    public Mono<Flux<ByteBuffer>> putWithBinaryJsonRequestAndBinaryTextResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength) {
+        return putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(runbookName, binaryContent, contentLength)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Flux<ByteBuffer>> putWithBinaryJsonRequestAndBinaryTextResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        return putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(runbookName, binaryContent, contentLength,
+            context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putWithBinaryJsonRequestAndBinaryTextResponseWithResponse(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        return putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(runbookName, binaryContent, contentLength,
+            context).block();
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BinaryData putWithBinaryJsonRequestAndBinaryTextResponse(String runbookName, Flux<ByteBuffer> binaryContent,
+        long contentLength) {
+        return putWithBinaryJsonRequestAndBinaryTextResponseWithResponse(runbookName, binaryContent, contentLength,
+            Context.NONE).getValue();
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(
+        String runbookName, BinaryData binaryContent, long contentLength) {
+        return FluxUtil
+            .withContext(context -> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(runbookName,
+                binaryContent, contentLength, context));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(
+        String runbookName, BinaryData binaryContent, long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (runbookName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
+        }
+        if (binaryContent == null) {
+            return Mono.error(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
+        }
+        final String accept = "text/powershell";
+        return service.putWithBinaryJsonRequestAndBinaryTextResponse(this.client.getHost(), runbookName, binaryContent,
+            contentLength, accept, context);
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Flux<ByteBuffer>> putWithBinaryJsonRequestAndBinaryTextResponseAsync(String runbookName,
         BinaryData binaryContent, long contentLength) {
         return putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(runbookName, binaryContent, contentLength)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
@@ -285,7 +560,7 @@ public final class Binaries {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> putWithBinaryJsonRequestAndBinaryTextResponseAsync(String runbookName,
+    public Mono<Flux<ByteBuffer>> putWithBinaryJsonRequestAndBinaryTextResponseAsync(String runbookName,
         BinaryData binaryContent, long contentLength, Context context) {
         return putWithBinaryJsonRequestAndBinaryTextResponseWithResponseAsync(runbookName, binaryContent, contentLength,
             context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
@@ -325,6 +600,128 @@ public final class Binaries {
     public BinaryData putWithBinaryJsonRequestAndBinaryTextResponse(String runbookName, BinaryData binaryContent,
         long contentLength) {
         return putWithBinaryJsonRequestAndBinaryTextResponseWithResponse(runbookName, binaryContent, contentLength,
+            Context.NONE).getValue();
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putWithBinaryTextRequestAndBinaryResponseWithResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength) {
+        return FluxUtil.withContext(context -> putWithBinaryTextRequestAndBinaryResponseWithResponseAsync(runbookName,
+            binaryContent, contentLength, context));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> putWithBinaryTextRequestAndBinaryResponseWithResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (runbookName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
+        }
+        if (binaryContent == null) {
+            return Mono.error(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
+        }
+        final String accept = "application/zip";
+        return service.putWithBinaryTextRequestAndBinaryResponse(this.client.getHost(), runbookName, binaryContent,
+            contentLength, accept, context);
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BinaryData> putWithBinaryTextRequestAndBinaryResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength) {
+        return putWithBinaryTextRequestAndBinaryResponseWithResponseAsync(runbookName, binaryContent, contentLength)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<BinaryData> putWithBinaryTextRequestAndBinaryResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        return putWithBinaryTextRequestAndBinaryResponseWithResponseAsync(runbookName, binaryContent, contentLength,
+            context).flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putWithBinaryTextRequestAndBinaryResponseWithResponse(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        return putWithBinaryTextRequestAndBinaryResponseWithResponseAsync(runbookName, binaryContent, contentLength,
+            context).block();
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BinaryData putWithBinaryTextRequestAndBinaryResponse(String runbookName, Flux<ByteBuffer> binaryContent,
+        long contentLength) {
+        return putWithBinaryTextRequestAndBinaryResponseWithResponse(runbookName, binaryContent, contentLength,
             Context.NONE).getValue();
     }
 
@@ -462,7 +859,129 @@ public final class Binaries {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithBinaryTextRequestAndResponseWithResponseAsync(String runbookName,
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryTextRequestAndResponseWithResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength) {
+        return FluxUtil.withContext(context -> putWithBinaryTextRequestAndResponseWithResponseAsync(runbookName,
+            binaryContent, contentLength, context));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryTextRequestAndResponseWithResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        if (this.client.getHost() == null) {
+            return Mono
+                .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+        }
+        if (runbookName == null) {
+            return Mono.error(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
+        }
+        if (binaryContent == null) {
+            return Mono.error(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
+        }
+        final String accept = "text/powershell";
+        return service.putWithBinaryTextRequestAndResponse(this.client.getHost(), runbookName, binaryContent,
+            contentLength, accept, context);
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Flux<ByteBuffer>> putWithBinaryTextRequestAndResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength) {
+        return putWithBinaryTextRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Flux<ByteBuffer>> putWithBinaryTextRequestAndResponseAsync(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        return putWithBinaryTextRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength, context)
+            .flatMap(res -> Mono.justOrEmpty(res.getValue()));
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> putWithBinaryTextRequestAndResponseWithResponse(String runbookName,
+        Flux<ByteBuffer> binaryContent, long contentLength, Context context) {
+        return putWithBinaryTextRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength, context)
+            .block();
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public BinaryData putWithBinaryTextRequestAndResponse(String runbookName, Flux<ByteBuffer> binaryContent,
+        long contentLength) {
+        return putWithBinaryTextRequestAndResponseWithResponse(runbookName, binaryContent, contentLength, Context.NONE)
+            .getValue();
+    }
+
+    /**
+     * Replaces the runbook draft content.
+     * 
+     * @param runbookName The runbook name.
+     * @param binaryContent The runbook draft content.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryTextRequestAndResponseWithResponseAsync(String runbookName,
         BinaryData binaryContent, long contentLength) {
         return FluxUtil.withContext(context -> putWithBinaryTextRequestAndResponseWithResponseAsync(runbookName,
             binaryContent, contentLength, context));
@@ -481,7 +1000,7 @@ public final class Binaries {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> putWithBinaryTextRequestAndResponseWithResponseAsync(String runbookName,
+    public Mono<Response<Flux<ByteBuffer>>> putWithBinaryTextRequestAndResponseWithResponseAsync(String runbookName,
         BinaryData binaryContent, long contentLength, Context context) {
         if (this.client.getHost() == null) {
             return Mono
@@ -510,7 +1029,7 @@ public final class Binaries {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> putWithBinaryTextRequestAndResponseAsync(String runbookName, BinaryData binaryContent,
+    public Mono<Flux<ByteBuffer>> putWithBinaryTextRequestAndResponseAsync(String runbookName, BinaryData binaryContent,
         long contentLength) {
         return putWithBinaryTextRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));
@@ -529,7 +1048,7 @@ public final class Binaries {
      * @return the response body on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> putWithBinaryTextRequestAndResponseAsync(String runbookName, BinaryData binaryContent,
+    public Mono<Flux<ByteBuffer>> putWithBinaryTextRequestAndResponseAsync(String runbookName, BinaryData binaryContent,
         long contentLength, Context context) {
         return putWithBinaryTextRequestAndResponseWithResponseAsync(runbookName, binaryContent, contentLength, context)
             .flatMap(res -> Mono.justOrEmpty(res.getValue()));

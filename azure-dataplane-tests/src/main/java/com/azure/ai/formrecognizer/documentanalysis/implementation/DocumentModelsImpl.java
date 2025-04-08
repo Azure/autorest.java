@@ -50,7 +50,9 @@ import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
+import java.nio.ByteBuffer;
 import java.time.Duration;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -126,6 +128,27 @@ public final class DocumentModelsImpl {
             @QueryParam("api-version") String apiVersion,
             @BodyParam("application/json") AnalyzeDocumentRequest analyzeRequest, @HeaderParam("Accept") String accept,
             Context context);
+
+        @Post("/documentModels/{modelId}:analyze")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(ErrorResponseException.class)
+        Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocument(
+            @HostParam("endpoint") String endpoint, @PathParam("modelId") String modelId,
+            @QueryParam("pages") String pages, @QueryParam("locale") String locale,
+            @QueryParam("stringIndexType") StringIndexType stringIndexType,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> analyzeRequest,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
+
+        @Post("/documentModels/{modelId}:analyze")
+        @ExpectedResponses({ 202 })
+        @UnexpectedResponseExceptionType(ErrorResponseException.class)
+        Mono<Response<Void>> analyzeDocumentNoCustomHeaders(@HostParam("endpoint") String endpoint,
+            @PathParam("modelId") String modelId, @QueryParam("pages") String pages,
+            @QueryParam("locale") String locale, @QueryParam("stringIndexType") StringIndexType stringIndexType,
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") ContentType contentType,
+            @BodyParam("application/octet-stream") Flux<ByteBuffer> analyzeRequest,
+            @HeaderParam("Content-Length") Long contentLength, @HeaderParam("Accept") String accept, Context context);
 
         @Post("/documentModels/{modelId}:analyze")
         @ExpectedResponses({ 202 })
@@ -690,6 +713,224 @@ public final class DocumentModelsImpl {
             () -> this.analyzeDocumentNoCustomHeadersWithResponse(modelId, pages, locale, stringIndexType,
                 analyzeRequest, context),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.client.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
+        String modelId, ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        Flux<ByteBuffer> analyzeRequest, Long contentLength) {
+        return FluxUtil.withContext(context -> analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale,
+            stringIndexType, analyzeRequest, contentLength, context));
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link ResponseBase} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ResponseBase<DocumentModelsAnalyzeDocumentHeaders, Void>> analyzeDocumentWithResponseAsync(
+        String modelId, ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        Flux<ByteBuffer> analyzeRequest, Long contentLength, Context context) {
+        final String accept = "application/json";
+        return service.analyzeDocument(this.client.getEndpoint(), modelId, pages, locale, stringIndexType,
+            this.client.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context);
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, Flux<ByteBuffer> analyzeRequest,
+        Long contentLength) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale, stringIndexType,
+                analyzeRequest, contentLength),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.client.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, Flux<ByteBuffer> analyzeRequest,
+        Long contentLength, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentWithResponseAsync(modelId, contentType, pages, locale, stringIndexType,
+                analyzeRequest, contentLength, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.client.getEndpoint()))
+                .setContext(context)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, Flux<ByteBuffer> analyzeRequest,
+        Long contentLength) {
+        return FluxUtil.withContext(context -> analyzeDocumentNoCustomHeadersWithResponseAsync(modelId, contentType,
+            pages, locale, stringIndexType, analyzeRequest, contentLength, context));
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> analyzeDocumentNoCustomHeadersWithResponseAsync(String modelId, ContentType contentType,
+        String pages, String locale, StringIndexType stringIndexType, Flux<ByteBuffer> analyzeRequest,
+        Long contentLength, Context context) {
+        final String accept = "application/json";
+        return service.analyzeDocumentNoCustomHeaders(this.client.getEndpoint(), modelId, pages, locale,
+            stringIndexType, this.client.getApiVersion(), contentType, analyzeRequest, contentLength, accept, context);
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId,
+        ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        Flux<ByteBuffer> analyzeRequest, Long contentLength) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentNoCustomHeadersWithResponseAsync(modelId, contentType, pages, locale,
+                stringIndexType, analyzeRequest, contentLength),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
+                .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.client.getEndpoint()))
+                .setContext(Context.NONE)),
+            TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
+    }
+
+    /**
+     * Analyzes document with document model.
+     * 
+     * @param modelId Unique document model name.
+     * @param contentType Upload file type.
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param stringIndexType Method used to compute string offset and length.
+     * @param analyzeRequest Analyze request parameters.
+     * @param contentLength The Content-Length header for the request.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ErrorResponseException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocumentNoCustomHeadersAsync(String modelId,
+        ContentType contentType, String pages, String locale, StringIndexType stringIndexType,
+        Flux<ByteBuffer> analyzeRequest, Long contentLength, Context context) {
+        return PollerFlux.create(Duration.ofSeconds(1),
+            () -> this.analyzeDocumentNoCustomHeadersWithResponseAsync(modelId, contentType, pages, locale,
+                stringIndexType, analyzeRequest, contentLength, context),
+            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
                 .setEndpoint("{endpoint}/formrecognizer".replace("{endpoint}", this.client.getEndpoint()))
                 .setContext(context)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
