@@ -152,7 +152,10 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/required-fields-as-ctor-args-transformation.json --namespace=fixtures.requiredfieldsascotrargstransformation --required-fields-as-ctor-args=true --output-model-immutable --null-byte-array-maps-to-empty-array",
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-enum.json --namespace=fixtures.discriminatorenum"
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/discriminator-enum.json --namespace=fixtures.discriminatorsetter --models-subpackage=implementation.models --custom-types-subpackage=models --custom-types=Golden"
-    "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/binary-request-response.json --namespace=fixtures.binaryrequestresponse"
+
+    # There's async->sync response type conversion bug for "Content-Type: text/powershell" in vanilla async-stack.
+    # Now that all vanilla libraries are on sync-stack, only test for sync-stack case.
+    # "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/binary-request-response.json --namespace=fixtures.binaryrequestresponse"
     "$VANILLA_ARGUMENTS --input-file=vanilla-tests/swagger/binary-request-response.json --namespace=fixtures.binaryrequestresponsesync --enable-sync-stack=true"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
