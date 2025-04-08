@@ -94,7 +94,7 @@ public final class Binaries {
         @Put("/binaryRequestAndBinaryTextResponse")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Flux<ByteBuffer>> putWithBinaryJsonRequestAndBinaryTextResponseSync(@HostParam("$host") String host,
+        Response<BinaryData> putWithBinaryJsonRequestAndBinaryTextResponseSync(@HostParam("$host") String host,
             @PathParam("runbookName") String runbookName, @BodyParam("application/zip") BinaryData binaryContent,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
 
@@ -136,7 +136,7 @@ public final class Binaries {
         @Put("/binaryTextRequestAndResponse")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Flux<ByteBuffer>> putWithBinaryTextRequestAndResponseSync(@HostParam("$host") String host,
+        Response<BinaryData> putWithBinaryTextRequestAndResponseSync(@HostParam("$host") String host,
             @PathParam("runbookName") String runbookName, @BodyParam("text/powershell") BinaryData binaryContent,
             @HeaderParam("Content-Length") long contentLength, @HeaderParam("Accept") String accept, Context context);
     }
