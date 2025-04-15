@@ -16,10 +16,10 @@ public final class DotFishMarketTests {
             .toObject(DotFishMarket.class);
         Assertions.assertEquals("vdphlxaolthqtr", model.getSampleSalmon().getSpecies());
         Assertions.assertEquals("paojakhmsbzjh", model.getSampleSalmon().getLocation());
-        Assertions.assertEquals(false, model.getSampleSalmon().iswild());
+        Assertions.assertFalse(model.getSampleSalmon().iswild());
         Assertions.assertEquals("oxxjtfelluwf", model.getSalmons().get(0).getSpecies());
         Assertions.assertEquals("pfzfsinzgvfc", model.getSalmons().get(0).getLocation());
-        Assertions.assertEquals(false, model.getSalmons().get(0).iswild());
+        Assertions.assertFalse(model.getSalmons().get(0).iswild());
         Assertions.assertEquals("onpeqfpjkjlxofp", model.getSampleFish().getSpecies());
         Assertions.assertEquals("fxxypininmayhuy", model.getFishes().get(0).getSpecies());
     }

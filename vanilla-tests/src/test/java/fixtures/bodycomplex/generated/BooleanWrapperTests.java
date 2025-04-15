@@ -13,15 +13,15 @@ public final class BooleanWrapperTests {
     public void testDeserialize() throws Exception {
         BooleanWrapper model
             = BinaryData.fromString("{\"field_true\":false,\"field_false\":false}").toObject(BooleanWrapper.class);
-        Assertions.assertEquals(false, model.isFieldTrue());
-        Assertions.assertEquals(false, model.isFieldFalse());
+        Assertions.assertFalse(model.isFieldTrue());
+        Assertions.assertFalse(model.isFieldFalse());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
         BooleanWrapper model = new BooleanWrapper().setFieldTrue(false).setFieldFalse(false);
         model = BinaryData.fromObject(model).toObject(BooleanWrapper.class);
-        Assertions.assertEquals(false, model.isFieldTrue());
-        Assertions.assertEquals(false, model.isFieldFalse());
+        Assertions.assertFalse(model.isFieldTrue());
+        Assertions.assertFalse(model.isFieldFalse());
     }
 }

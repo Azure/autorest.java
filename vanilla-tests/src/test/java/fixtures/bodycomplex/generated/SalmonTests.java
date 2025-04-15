@@ -25,7 +25,7 @@ public final class SalmonTests {
         Assertions.assertEquals(93.34901f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals("xzxtheo", model.getLocation());
-        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertFalse(model.iswild());
     }
 
     @org.junit.jupiter.api.Test
@@ -61,6 +61,6 @@ public final class SalmonTests {
         Assertions.assertEquals(93.34901f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals("xzxtheo", model.getLocation());
-        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertFalse(model.iswild());
     }
 }

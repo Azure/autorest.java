@@ -17,6 +17,6 @@ public final class DotSalmonTests {
             .toObject(DotSalmon.class);
         Assertions.assertEquals("inuvamiheogn", model.getSpecies());
         Assertions.assertEquals("kpode", model.getLocation());
-        Assertions.assertEquals(true, model.iswild());
+        Assertions.assertTrue(model.iswild());
     }
 }
