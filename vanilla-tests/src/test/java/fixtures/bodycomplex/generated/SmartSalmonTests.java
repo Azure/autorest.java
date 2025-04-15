@@ -27,7 +27,7 @@ public final class SmartSalmonTests {
         Assertions.assertEquals(93.839714f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals("qduujitcjczdz", model.getLocation());
-        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertFalse(model.iswild());
         Assertions.assertEquals("lssai", model.getCollegeDegree());
     }
 
@@ -55,7 +55,7 @@ public final class SmartSalmonTests {
         Assertions.assertEquals(93.839714f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
         Assertions.assertEquals("qduujitcjczdz", model.getLocation());
-        Assertions.assertEquals(false, model.iswild());
+        Assertions.assertFalse(model.iswild());
         Assertions.assertEquals("lssai", model.getCollegeDegree());
     }
 
