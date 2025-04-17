@@ -57,8 +57,6 @@ Thumbs.db
 # reduced pom files should not be included
 dependency-reduced-pom.xml
 
-preprocessor/*.yaml
-fluentnamer/*.yaml
 fluentgen/*.yaml
 javagen/*.yaml
 /*.yaml

@@ -31,7 +31,7 @@ To build from source code, clone this repo and checkout to main branch. Make sur
 mvn package -P local
 ```
 
-This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `preprocess-jar-with-dependencies.jar` under `preprocessor` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module, and a `fluentnamer-jar-with-dependencies.jar` under `fluentnamer` module.
+This will build a file `javagen-jar-with-dependencies.jar` under `javagen` module, a `fluentgen-jar-with-dependencies.jar` under `fluentgen` module.
 
 And then run AutoRest
 
@@ -280,10 +280,6 @@ and requires latest `azure-core` as a dependency.
 For guidance on using the post-code generation customization framework see its [documentation](https://github.com/Azure/autorest.java/tree/main/customization-base/README.md).
 
 # Project structure
-## extension-base
-This contains the base classes and utilities for creating an AutoRest extension in Java. It handles the JSON RPC communications with AutoRest core, provides JSON and YAML parsers, and provides the POJO models for the code model output from [modelerfour](https://github.com/Azure/autorest.modelerfour/).
-
-Extend from `NewPlugin.java` class if you are writing a new extension in Java.
 
 ## javagen
 This contains the actual generator extension, including mappers that maps a code model to a Java client model, and templates that writes the Java client models into .java files.
@@ -469,16 +465,12 @@ AutoRest needs the below config to pick this up as a plug-in - see https://githu
 
 #### Javagen
 
-``` yaml $(java) && !$(fluent) && !$(android)
+``` yaml $(java) && !$(fluent)
 use: $(this-folder)/javagen
 ```
 
-``` yaml $(java) && $(fluent) && !$(android)
+``` yaml $(java) && $(fluent)
 use: $(this-folder)/fluentgen
-```
-
-```  yaml $(java) && $(android)
-use: $(this-folder)/javagen
 ```
 
 #### Help

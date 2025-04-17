@@ -4,21 +4,21 @@
 
 AutoRest Java is the Java language generator for AutoRest.
 
-As [npm package](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md), it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/main/package.json) located in project root, and the `package.json` in `preprocessor`, `javagen`, `postprocessor`, `fluentnamer`, `fluentgen`.
+As [NPM package](https://github.com/Azure/autorest/blob/main/docs/developer/writing-an-extension.md), it is defined by the [`package.json`](https://github.com/Azure/autorest.java/blob/main/package.json) located in project root, and the `package.json` in `javagen` and `fluentgen`.
 
 As AutoRest plugin, it is defined by the [YAML section in `readme.md`](https://github.com/Azure/autorest.java/blob/main/javagen/readme.md), located in the same folders of `package.json`.
 
-## Build and Unit Test
+## Build and Test
 
 ### Build
 
 Build is configured via Maven.
 
 There is several build profiles:
-- `local` profile. It is required to be enabled. It uses `maven-shade-plugin` to combine project output to a single jar.
-- `testVanilla` profile. It enables the integrated vanilla tests, which is the common ground for all modules.
-- `testAzure` profile. It enables the integrated Azure tests, which tests handling of some advanced [AutoRest Extensions for OpenAPI 2.0](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md).
-- `testFluent` profile. It enables the integrated Fluent tests, which tests generation of Fluent management SDKs for [ARM](https://docs.microsoft.com/azure/azure-resource-manager/management/overview).
+- **`local` profile**: It is required to be enabled. It uses `maven-shade-plugin` to combine project output to a single jar.
+- **`testVanilla` profile**: It enables the integrated vanilla tests, which is the common ground for all modules.
+- **testAzure profile**: It enables the integrated Azure tests, which tests handling of some advanced [AutoRest Extensions for OpenAPI 2.0](https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md).
+- **`testFluent` profile**: It enables the integrated Fluent tests, which tests generation of Fluent management SDKs for [ARM](https://docs.microsoft.com/azure/azure-resource-manager/management/overview).
 
 ### Unit Test
 
@@ -51,11 +51,19 @@ Use `--use` option of the AutoRest to load the local AutoRest Java build (instea
 
 The `name` of `@autorest/java` in `package.json` makes sure that it is loaded when `--java` option is provided.
 
-## Pre-release
+## Publish `@autorest/java` to NPM
 
-1. Update `version` in root `package.json`.
-2. Run "Pre-release autorest.java" in [GitHub Actions](https://github.com/Azure/autorest.java/actions). Provide the same `release version`.
+1. Update `version` in root `package.json`, merge the PR.
+2. Run "autorest.java - publish" in (internal) DevOps.
 3. Update Release notes in [GitHub Releases](https://github.com/Azure/autorest.java/releases).
+
+## Publish customization libraries to Maven
+
+Modules in following folders are published to Maven
+- **`extension-base` module**: [azure-autorest-extension](https://central.sonatype.com/artifact/com.azure.tools/azure-autorest-extension)
+- **`customization-base` module**: [azure-autorest-customization](https://central.sonatype.com/artifact/com.azure.tools/azure-autorest-customization)
+
+The publish task involves local build and manual operation via Partner release pipeline.
 
 ## Logging
 
@@ -105,14 +113,4 @@ suspend=n,address=*:5005".
 
 After the remote debugger is configured, run autorest with this additional argument `--java.debugger`. The AutoRest 
 process will block until the JVM debugger is attached, so, after the AutoRest process pauses, start the debugger 
-which will connect to the remote debugger and this will hit the breakpoints set in the "Javagen" plugin. If you want 
-to set up a breakpoint in a different plugin like preprocessor or postprocessor, you can change the argument to 
-`--preprocessor.debugger` or `postprocessor.debugger` respectively.
-
-
-### Interactive UI to trace AutoRest pipeline
-
-Running autorest with `--interactive` mode on will pop up a browser window to show an interactive UI of the AutoRest 
-pipeline. This generally helps in identifying all the plugins that are executed, their order of execution, their 
-inputs and outputs.
-
+which will connect to the remote debugger and this will hit the breakpoints set in the "Javagen" plugin.
