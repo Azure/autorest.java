@@ -1,5 +1,11 @@
 # Release History
 
+## 0.29.1 (2025-04-17)
+
+Compatible with compiler 1.0.0-rc.0.
+
+- Supported sync-stack for MPG. Use `enable-sync-stack: true` to enable.
+
 ## 0.29.0 (2025-04-03)
 
 Compatible with compiler 1.0.0-rc.0.
