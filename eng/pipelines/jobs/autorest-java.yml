@@ -1,5 +1,5 @@
 jobs:
-- job: 'Build and Test AutoRest Java'
+- job: Build_AutoRest
 
   timeoutInMinutes: 60
 

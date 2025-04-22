@@ -1,5 +1,5 @@
 jobs:
-- job: 'Build and Test TypeSpec Java'
+- job: Build_TypeSpec
 
   timeoutInMinutes: 60
 

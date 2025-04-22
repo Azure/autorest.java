@@ -1,5 +1,6 @@
 jobs:
-- job: 'Build and Test AutoRest Java for Management'
+- job: Build_AutoRest_Management
+
   timeoutInMinutes: 60
 
   variables:
