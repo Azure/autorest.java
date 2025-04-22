@@ -89,14 +89,14 @@ jobs:
     artifact: CoverageReport
     displayName: 'Publish Spector Coverage Report'
 
-  - task: AzureCLI@2
-    displayName: 'Upload to Spector Coverage Report Dashboard'
-    condition: and(eq(parameters.UploadSpectorReport, true), eq(variables.isMain, true))
-    inputs:
-      azureSubscription: "TypeSpec Storage"
-      scriptType: "bash"
-      scriptLocation: "inlineScript"
-      inlineScript: npx --no-install tsp-spector upload-coverage --coverageFile ./tsp-spector-coverage-java.json --generatorName "@azure-tools/typespec-java" --storageAccountName typespec --containerName coverages --generatorMode azure --generatorVersion $(node -p -e "require('../typespec-extension/package.json').version")
-      workingDirectory: ./typespec-tests
+  - ${{ if and(eq(parameters.UploadSpectorReport, true), eq(variables.isMain, true)) }} :
+    - task: AzureCLI@2
+      displayName: 'Upload to Spector Coverage Report Dashboard'
+      inputs:
+        azureSubscription: "TypeSpec Storage"
+        scriptType: "bash"
+        scriptLocation: "inlineScript"
+        inlineScript: npx --no-install tsp-spector upload-coverage --coverageFile ./tsp-spector-coverage-java.json --generatorName "@azure-tools/typespec-java" --storageAccountName typespec --containerName coverages --generatorMode azure --generatorVersion $(node -p -e "require('../typespec-extension/package.json').version")
+        workingDirectory: ./typespec-tests
 
   - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
