@@ -20,4 +20,4 @@ pr:
       - 'typespec*'
 
 jobs:
-- template: /eng/pipelines/jobs/autorest-java.yml
+- template: /eng/pipelines/jobs/build-autorest.yml

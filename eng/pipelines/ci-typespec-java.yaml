@@ -24,4 +24,4 @@ pr:
       - 'protocol*'
 
 jobs:
-- template: /eng/pipelines/jobs/typespec-java.yml
+- template: /eng/pipelines/jobs/build-typespec.yml

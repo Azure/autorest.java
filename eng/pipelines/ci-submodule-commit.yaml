@@ -2,6 +2,6 @@ trigger: none
 pr: none
 
 jobs:
-- template: /eng/pipelines/jobs/autorest-java.yml
-- template: /eng/pipelines/jobs/autorest-java-mgmt.yml
-- template: /eng/pipelines/jobs/typespec-java.yml
+- template: /eng/pipelines/jobs/build-autorest.yml
+- template: /eng/pipelines/jobs/build-autorest-mgmt.yml
+- template: /eng/pipelines/jobs/build-typespec.yml
