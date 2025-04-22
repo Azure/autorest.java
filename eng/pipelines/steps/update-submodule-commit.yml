@@ -1,0 +1,12 @@
+parameters:
+- name: SubmoduleCommit
+  type: string
+
+steps:
+- script: |
+    cd core
+    git checkout ${{ parameters.SubmoduleCommit }}
+    cd ..
+    git add core
+    git commit -m 'update core to commit ${{ parameters.SubmoduleCommit }}'
+  displayName: 'Update Submodule to Commit ${{ parameters.SubmoduleCommit }}'

@@ -1,4 +1,6 @@
 parameters:
+- name: SubmoduleCommit
+  type: string
 - name: UploadSpectorReport
   type: boolean
   default: false
@@ -22,6 +24,11 @@ jobs:
   steps:
   - checkout: self
     submodules: true
+
+  - ${{ if parameters.SubmoduleCommit }}:
+    template: /eng/pipelines/steps/update-submodule-commit.yml
+    parameters:
+      SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
 
   - task: NodeTool@0
     displayName: 'Install Node.js $(NodeVersion)'
