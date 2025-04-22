@@ -1,5 +1,7 @@
 parameters:
-  UploadSpectorReport: false
+- name: UploadSpectorReport
+  type: boolean
+  default: false
 
 jobs:
 - job: Build_TypeSpec
