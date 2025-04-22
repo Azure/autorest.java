@@ -73,11 +73,11 @@ jobs:
       goals: 'clean install'
       options: '$(DefaultOptions) -P local,testFluent -T 1C'
 
-  - task: PublishCodeCoverageResults@1
+  - task: PublishCodeCoverageResults@2
     inputs:
       codeCoverageTool: 'JaCoCo'
       summaryFileLocation: fluentgen/target/site/test-coverage/jacoco.xml
-      reportDirectory: fluentgen/target/site/test-coverage/
+      pathToSources: fluentgen/src/main/java/
       failIfCoverageEmpty: false
 
   - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
