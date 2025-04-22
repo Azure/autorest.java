@@ -1,0 +1,7 @@
+trigger: none
+pr: none
+
+jobs:
+- template: ci.yaml
+- template: ci-typespec-java.yaml
+- template: fluent_integration.yaml
