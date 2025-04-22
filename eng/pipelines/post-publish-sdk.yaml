@@ -8,10 +8,6 @@ parameters:
   - false
   - true
 
-pool:
-  name: "azsdk-pool-mms-ubuntu-2004-general"
-  vmImage: "MMSUbuntu20.04"
-
 variables:
 - group: Release Secrets for GitHub
 
@@ -35,6 +31,11 @@ jobs:
       value: " DEV"
     ${{ else }}:
       value: ""
+
+  pool:
+    name: $(LINUXPOOL)
+    image: $(LINUXVMIMAGE)
+    os: linux
 
   steps:
   - checkout: self
