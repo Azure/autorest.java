@@ -5,6 +5,7 @@ parameters:
 steps:
 - script: |
     cd core
+    git pull --unshallow
     git checkout ${{ parameters.SubmoduleCommit }}
     cd ..
     git add core
