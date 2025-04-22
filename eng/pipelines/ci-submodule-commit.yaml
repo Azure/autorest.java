@@ -2,6 +2,6 @@ trigger: none
 pr: none
 
 jobs:
-- template: ci.yaml
-- template: ci-typespec-java.yaml
-- template: fluent_integration.yaml
+- template: /eng/pipelines/jobs/autorest-java.yml
+- template: /eng/pipelines/jobs/autorest-java-mgmt.yml
+- template: /eng/pipelines/jobs/typespec-java.yml
