@@ -26,9 +26,9 @@ jobs:
     submodules: true
 
   - ${{ if ne(parameters.SubmoduleCommit, '') }} :
-    template: /eng/pipelines/steps/update-submodule-commit.yml
-    parameters:
-      SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+    - template: /eng/pipelines/steps/update-submodule-commit.yml
+      parameters:
+        SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
 
   - task: NodeTool@0
     displayName: 'Install Node.js $(NodeVersion)'

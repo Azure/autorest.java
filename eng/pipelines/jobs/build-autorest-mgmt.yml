@@ -21,9 +21,9 @@ jobs:
     submodules: true
 
   - ${{ if ne(parameters.SubmoduleCommit, '') }} :
-    template: /eng/pipelines/steps/update-submodule-commit.yml
-    parameters:
-      SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+    - template: /eng/pipelines/steps/update-submodule-commit.yml
+      parameters:
+        SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
 
   - script: |
       git checkout .
