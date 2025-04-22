@@ -20,7 +20,7 @@ jobs:
   - checkout: self
     submodules: true
 
-  - ${{ if parameters.SubmoduleCommit }} :
+  - ${{ if ne(parameters.SubmoduleCommit, '') }} :
     template: /eng/pipelines/steps/update-submodule-commit.yml
     parameters:
       SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
