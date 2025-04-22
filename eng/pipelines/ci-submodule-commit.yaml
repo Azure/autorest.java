@@ -7,15 +7,12 @@ parameters:
   type: string
 
 jobs:
-- extends:
-  template: /eng/pipelines/jobs/build-autorest.yml
+- template: /eng/pipelines/jobs/build-autorest.yml
   parameters:
     SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
-- extends:
-  template: /eng/pipelines/jobs/build-autorest-mgmt.yml
+- template: /eng/pipelines/jobs/build-autorest-mgmt.yml
   parameters:
     SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
-- extends:
-  template: /eng/pipelines/jobs/build-typespec.yml
+- template: /eng/pipelines/jobs/build-typespec.yml
   parameters:
     SubmoduleCommit: ${{ parameters.SubmoduleCommit }}

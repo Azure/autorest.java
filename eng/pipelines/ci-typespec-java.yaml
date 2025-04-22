@@ -24,7 +24,6 @@ pr:
       - 'protocol*'
 
 jobs:
-- extends:
-  template: /eng/pipelines/jobs/build-typespec.yml
+- template: /eng/pipelines/jobs/build-typespec.yml
   parameters:
     UploadSpectorReport: true
