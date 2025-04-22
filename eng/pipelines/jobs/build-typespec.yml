@@ -1,6 +1,7 @@
 parameters:
 - name: SubmoduleCommit
   type: string
+  default: ''
 - name: UploadSpectorReport
   type: boolean
   default: false

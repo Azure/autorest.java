@@ -1,6 +1,7 @@
 parameters:
 - name: SubmoduleCommit
   type: string
+  default: ''
 
 jobs:
 - job: Build_AutoRest_Management
