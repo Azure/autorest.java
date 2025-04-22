@@ -1,8 +1,11 @@
 # Release History
 
-## 0.29.2 (2025-04-21)
+## 0.29.2 (2025-04-22)
 
 Compatible with compiler 1.0.0-rc.0.
+
+- Supported `@clientNamespace` decorator overrides `namespace` emitter option.
+- Supported `@clientInitialization` to add a public Builder for the subclient (require `enable-subclient` option).
 
 ## 0.29.1 (2025-04-17)
 
