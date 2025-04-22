@@ -21,12 +21,15 @@ pr:
 jobs:
 - job: 'Build'
   timeoutInMinutes: 60
-  pool:
-    name: "azsdk-pool-mms-ubuntu-2004-general"
-    vmImage: "MMSUbuntu20.04"
 
   variables:
     - template: /eng/pipelines/variables/globals.yml
+    - template: /eng/pipelines/variables/image.yml
+
+  pool:
+    name: $(LINUXPOOL)
+    image: $(LINUXVMIMAGE)
+    os: linux
 
   steps:
   - checkout: self
