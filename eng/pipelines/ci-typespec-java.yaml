@@ -25,3 +25,5 @@ pr:
 
 jobs:
 - template: /eng/pipelines/jobs/build-typespec.yml
+  parameters:
+    UploadSpectorReport: true
