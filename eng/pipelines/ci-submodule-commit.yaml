@@ -1,7 +1,21 @@
 trigger: none
 pr: none
 
+parameters:
+- name: SubmoduleCommit
+  displayName: 'Commit ID of the Submodule'
+  type: string
+
 jobs:
-- template: /eng/pipelines/jobs/build-autorest.yml
-- template: /eng/pipelines/jobs/build-autorest-mgmt.yml
-- template: /eng/pipelines/jobs/build-typespec.yml
+- extends:
+  template: /eng/pipelines/jobs/build-autorest.yml
+  parameters:
+    SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+- extends:
+  template: /eng/pipelines/jobs/build-autorest-mgmt.yml
+  parameters:
+    SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+- extends:
+  template: /eng/pipelines/jobs/build-typespec.yml
+  parameters:
+    SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
