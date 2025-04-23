@@ -15,7 +15,7 @@ public class ChangelogTests {
     private static class MockProject extends FluentProject {
 
         public MockProject() {
-            super("Resource", null);
+            super("Resource", null,null);
         }
 
         @Override
