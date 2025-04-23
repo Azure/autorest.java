@@ -28,7 +28,7 @@ public class ProjectTests {
         TestUtils.ContentLocks content = TestUtils.initContentLocks(fluentgenAccessor);
         FluentClient fluentClient = content.getFluentClient();
 
-        FluentProject project = new FluentProject(fluentClient);
+        FluentProject project = new FluentProject(fluentClient, null);
         Assertions.assertEquals("com.azure.resourcemanager", project.getGroupId());
         Assertions.assertEquals("azure-resourcemanager-mock", project.getArtifactId());
         Assertions.assertNotNull(project.getChangelog());
