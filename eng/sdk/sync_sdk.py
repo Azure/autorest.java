@@ -17,7 +17,6 @@ sdk_root: str
 
 skip_artifacts: List[str] = [
     "azure-ai-anomalydetector",  # deprecated
-    "azure-ai-inference",  # commit not on main branch
     "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
     "azure-compute-batch",  # Large change in same api-verion
     "azure-ai-vision-face",  # SDK in development
