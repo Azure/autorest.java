@@ -26,6 +26,7 @@ jobs:
 
   variables:
   - template: /eng/pipelines/variables/globals.yml
+  - template: /eng/pipelines/variables/image.yml
   - name: PullRequestTitleSuffix
     ${{ if eq(parameters.DevPackage, 'true') }}:
       value: " DEV"
