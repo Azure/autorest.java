@@ -31,6 +31,8 @@ public final class HeadersResponseDurationHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Duration.parse(value);
+        } else {
+            this.value = null;
         }
     }
 

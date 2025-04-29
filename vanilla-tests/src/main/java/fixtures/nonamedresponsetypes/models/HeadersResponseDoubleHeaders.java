@@ -30,6 +30,8 @@ public final class HeadersResponseDoubleHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Double.parseDouble(value);
+        } else {
+            this.value = null;
         }
     }
 

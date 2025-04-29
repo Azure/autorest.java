@@ -30,6 +30,8 @@ public final class HeadersResponseIntegerHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Integer.parseInt(value);
+        } else {
+            this.value = null;
         }
     }
 

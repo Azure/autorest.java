@@ -30,6 +30,8 @@ public final class HeadersResponseBoolHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Boolean.parseBoolean(value);
+        } else {
+            this.value = null;
         }
     }
 

@@ -34,6 +34,8 @@ public final class ContainerRegistryBlobsCheckChunkExistsHeaders {
         String contentLength = rawHeaders.getValue(HttpHeaderName.CONTENT_LENGTH);
         if (contentLength != null) {
             this.contentLength = Long.parseLong(contentLength);
+        } else {
+            this.contentLength = null;
         }
     }
 

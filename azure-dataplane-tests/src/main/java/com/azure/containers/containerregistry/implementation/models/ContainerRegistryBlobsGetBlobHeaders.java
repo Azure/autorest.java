@@ -40,6 +40,8 @@ public final class ContainerRegistryBlobsGetBlobHeaders {
         String contentLength = rawHeaders.getValue(HttpHeaderName.CONTENT_LENGTH);
         if (contentLength != null) {
             this.contentLength = Long.parseLong(contentLength);
+        } else {
+            this.contentLength = null;
         }
         this.dockerContentDigest = rawHeaders.getValue(DOCKER_CONTENT_DIGEST);
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);

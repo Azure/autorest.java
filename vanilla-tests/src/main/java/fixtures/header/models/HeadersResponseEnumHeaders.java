@@ -30,6 +30,8 @@ public final class HeadersResponseEnumHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = GreyscaleColors.fromString(value);
+        } else {
+            this.value = null;
         }
     }
 

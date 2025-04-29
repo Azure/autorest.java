@@ -31,6 +31,8 @@ public final class HeadersResponseDateHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = LocalDate.parse(value);
+        } else {
+            this.value = null;
         }
     }
 

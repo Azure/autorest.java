@@ -68,6 +68,8 @@ public final class SchemasGetSchemaVersionHeaders {
         String schemaVersion = rawHeaders.getValue(SCHEMA_VERSION);
         if (schemaVersion != null) {
             this.schemaVersion = Integer.parseInt(schemaVersion);
+        } else {
+            this.schemaVersion = null;
         }
         this.schemaId = rawHeaders.getValue(SCHEMA_ID);
         this.schemaGroupName = rawHeaders.getValue(SCHEMA_GROUP_NAME);
@@ -77,6 +79,8 @@ public final class SchemasGetSchemaVersionHeaders {
         String contentType = rawHeaders.getValue(HttpHeaderName.CONTENT_TYPE);
         if (contentType != null) {
             this.contentType = SchemaFormat.fromString(contentType);
+        } else {
+            this.contentType = null;
         }
     }
 

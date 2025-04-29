@@ -36,6 +36,8 @@ public final class LrosaDsDelete202NonRetry400Headers {
         String retryAfter = rawHeaders.getValue(HttpHeaderName.RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
+        } else {
+            this.retryAfter = null;
         }
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
     }
