@@ -30,6 +30,8 @@ public final class HeadersResponseLongHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Long.parseLong(value);
+        } else {
+            this.value = null;
         }
     }
 

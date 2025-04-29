@@ -63,6 +63,8 @@ public final class SchemasRegisterHeaders {
         String schemaVersion = rawHeaders.getValue(SCHEMA_VERSION);
         if (schemaVersion != null) {
             this.schemaVersion = Integer.parseInt(schemaVersion);
+        } else {
+            this.schemaVersion = null;
         }
         this.schemaId = rawHeaders.getValue(SCHEMA_ID);
         this.schemaGroupName = rawHeaders.getValue(SCHEMA_GROUP_NAME);

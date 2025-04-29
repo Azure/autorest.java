@@ -30,6 +30,8 @@ public final class HeadersResponseFloatHeaders {
         String value = rawHeaders.getValue(VALUE);
         if (value != null) {
             this.value = Float.parseFloat(value);
+        } else {
+            this.value = null;
         }
     }
 

@@ -42,6 +42,8 @@ public final class LrosaDsPutAsyncRelativeRetry400Headers {
         String retryAfter = rawHeaders.getValue(HttpHeaderName.RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
+        } else {
+            this.retryAfter = null;
         }
         this.azureAsyncOperation = rawHeaders.getValue(HttpHeaderName.AZURE_ASYNCOPERATION);
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
