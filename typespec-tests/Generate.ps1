@@ -70,7 +70,7 @@ $generateScript = {
     # exclude preview from service versions
     $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
     # enable sync-stack
-    $tspOptions += " --option ""@typespec/http-client-java.enable-sync-stack=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.enable-sync-stack=true"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
