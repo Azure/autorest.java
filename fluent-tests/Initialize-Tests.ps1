@@ -27,45 +27,51 @@ $FLUENTLITE_ARGUMENTS="$COMMON_ARGUMENTS --fluent=lite --generate-samples --gene
 $ExitCode = 0
 
 $generateScript = {
-    $generateOutput = Invoke-Expression "autorest $_"
+    $input = $_
+
+    $generateOutput = Invoke-Expression "autorest $input"
     $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
 
     if ($LASTEXITCODE -ne 0) {
         Write-Host "
 ========================
-autorest $_
+autorest $input
 ========================
 $([String]::Join("`n", $generateOutput))
         "
     } else {
         Write-Host "
 ========================
-autorest $_
+autorest $input
 ========================
 SUCCEEDED
         "
     }
 
     if ($global:ExitCode -ne 0) {
-        exit $global:ExitCode
+        throw "Failed to generate from $input"
     }
 }
 
-function singleThreadGenerate($arguments) {
-    Write-Host "
-========================
-autorest $arguments
-========================
-    "
-    $generateOutput = Invoke-Expression "autorest $arguments"
-    $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
+# function singleThreadGenerate($input) {
+#     Write-Host "
+# ========================
+# autorest $input
+# ========================
+#     "
+#     $generateOutput = Invoke-Expression "autorest $input"
+#     $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
 
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host $([String]::Join("`n", $generateOutput))
-    } else {
-        Write-Host "SUCCEEDED"
-    }
-}
+#     if ($LASTEXITCODE -ne 0) {
+#         Write-Host $([String]::Join("`n", $generateOutput))
+#     } else {
+#         Write-Host "SUCCEEDED"
+#     }
+
+#     if ($global:ExitCode -ne 0) {
+#         throw "Failed to generate from $input"
+#     }
+# }
 
 $job = @(
     # fluent premium
@@ -169,4 +175,6 @@ if (Test-Path ./src/main/java/module-info.java) {
     $ExitCode = $ExitCode -bor $LASTEXITCODE
 }
 
-exit $ExitCode
+if ($ExitCode -ne 0) {
+  throw "Failed to generate from fluent"
+}
