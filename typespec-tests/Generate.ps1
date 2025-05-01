@@ -69,6 +69,8 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
     # exclude preview from service versions
     $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
+    # enable sync-stack
+    $tspOptions += " --option ""@azure-tools/typespec-java.enable-sync-stack=true"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
@@ -125,6 +127,9 @@ if (Test-Path ./src/main) {
 }
 if (Test-Path ./src/samples) {
   Remove-Item ./src/samples -Recurse -Force
+}
+if (Test-Path ./src/test) {
+  Get-ChildItem -Path ./src/test -Recurse -Directory | Where-Object {$_.Name -match "^generated$"} | Remove-Item -Recurse -Force
 }
 if (Test-Path ./tsp-output) {
   Remove-Item ./tsp-output -Recurse -Force
