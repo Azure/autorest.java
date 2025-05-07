@@ -1,5 +1,5 @@
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index 66f8cac11..b86dee591 100644
+index b4139191e..d1b75d5ae 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 @@ -21,6 +21,11 @@
@@ -12,8 +12,8 @@ index 66f8cac11..b86dee591 100644
 +      <version>1.0.0-beta.9</version>
 +    </dependency>
      <dependency>
-       <groupId>io.clientcore</groupId>
-       <artifactId>core</artifactId>
+       <groupId>com.azure</groupId>
+       <artifactId>azure-core</artifactId>
 diff --git a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
 index 4aad12e27..67e5f7ef1 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
