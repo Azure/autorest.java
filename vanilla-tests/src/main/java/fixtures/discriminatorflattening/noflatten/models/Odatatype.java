@@ -4,6 +4,7 @@
 
 package fixtures.discriminatorflattening.noflatten.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -15,18 +16,21 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
     /**
      * Static value Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria for Odatatype.
      */
+    @Generated
     public static final Odatatype MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA
         = fromString("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria");
 
     /**
      * Static value Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria for Odatatype.
      */
+    @Generated
     public static final Odatatype MICROSOFT_AZURE_MONITOR_MULTIPLE_RESOURCE_MULTIPLE_METRIC_CRITERIA
         = fromString("Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria");
 
     /**
      * Static value Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria for Odatatype.
      */
+    @Generated
     public static final Odatatype MICROSOFT_AZURE_MONITOR_WEBTEST_LOCATION_AVAILABILITY_CRITERIA
         = fromString("Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria");
 
@@ -35,6 +39,7 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public Odatatype() {
     }
@@ -45,6 +50,7 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
      * @param name a name to look for.
      * @return the corresponding Odatatype.
      */
+    @Generated
     @JsonCreator
     public static Odatatype fromString(String name) {
         return fromString(name, Odatatype.class);
@@ -55,6 +61,7 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
      * 
      * @return known Odatatype values.
      */
+    @Generated
     public static Collection<Odatatype> values() {
         return values(Odatatype.class);
     }

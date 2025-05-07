@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class ResourceDetails implements JsonSerializable<ResourceDetails> 
     /*
      * Details regarding custom document models.
      */
+    @Generated
     private CustomDocumentModelsDetails customDocumentModels;
 
     /**
      * Creates an instance of ResourceDetails class.
      */
+    @Generated
     public ResourceDetails() {
     }
 
@@ -32,6 +35,7 @@ public final class ResourceDetails implements JsonSerializable<ResourceDetails> 
      * 
      * @return the customDocumentModels value.
      */
+    @Generated
     public CustomDocumentModelsDetails getCustomDocumentModels() {
         return this.customDocumentModels;
     }
@@ -42,6 +46,7 @@ public final class ResourceDetails implements JsonSerializable<ResourceDetails> 
      * @param customDocumentModels the customDocumentModels value to set.
      * @return the ResourceDetails object itself.
      */
+    @Generated
     public ResourceDetails setCustomDocumentModels(CustomDocumentModelsDetails customDocumentModels) {
         this.customDocumentModels = customDocumentModels;
         return this;
@@ -50,6 +55,7 @@ public final class ResourceDetails implements JsonSerializable<ResourceDetails> 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -66,6 +72,7 @@ public final class ResourceDetails implements JsonSerializable<ResourceDetails> 
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ResourceDetails.
      */
+    @Generated
     public static ResourceDetails fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ResourceDetails deserializedResourceDetails = new ResourceDetails();

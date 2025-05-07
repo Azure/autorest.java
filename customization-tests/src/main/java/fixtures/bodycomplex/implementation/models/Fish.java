@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,26 +21,31 @@ public class Fish implements JsonSerializable<Fish> {
     /*
      * The fishtype property.
      */
+    @Generated
     private String fishtype = "Fish";
 
     /*
      * The species property.
      */
+    @Generated
     private String species;
 
     /*
      * The length property.
      */
+    @Generated
     private float length;
 
     /*
      * The siblings property.
      */
+    @Generated
     private List<Fish> siblings;
 
     /**
      * Creates an instance of Fish class.
      */
+    @Generated
     public Fish() {
     }
 
@@ -48,6 +54,7 @@ public class Fish implements JsonSerializable<Fish> {
      * 
      * @return the fishtype value.
      */
+    @Generated
     public String getFishtype() {
         return this.fishtype;
     }
@@ -57,6 +64,7 @@ public class Fish implements JsonSerializable<Fish> {
      * 
      * @return the species value.
      */
+    @Generated
     public String getSpecies() {
         return this.species;
     }
@@ -67,6 +75,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param species the species value to set.
      * @return the Fish object itself.
      */
+    @Generated
     public Fish setSpecies(String species) {
         this.species = species;
         return this;
@@ -77,6 +86,7 @@ public class Fish implements JsonSerializable<Fish> {
      * 
      * @return the length value.
      */
+    @Generated
     public float getLength() {
         return this.length;
     }
@@ -87,6 +97,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param length the length value to set.
      * @return the Fish object itself.
      */
+    @Generated
     public Fish setLength(float length) {
         this.length = length;
         return this;
@@ -97,6 +108,7 @@ public class Fish implements JsonSerializable<Fish> {
      * 
      * @return the siblings value.
      */
+    @Generated
     public List<Fish> getSiblings() {
         return this.siblings;
     }
@@ -107,6 +119,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param siblings the siblings value to set.
      * @return the Fish object itself.
      */
+    @Generated
     public Fish setSiblings(List<Fish> siblings) {
         this.siblings = siblings;
         return this;
@@ -115,6 +128,7 @@ public class Fish implements JsonSerializable<Fish> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -134,6 +148,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
+    @Generated
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -169,6 +184,7 @@ public class Fish implements JsonSerializable<Fish> {
         });
     }
 
+    @Generated
     static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Fish deserializedFish = new Fish();

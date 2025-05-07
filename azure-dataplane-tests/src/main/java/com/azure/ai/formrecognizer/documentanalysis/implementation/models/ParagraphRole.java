@@ -4,6 +4,7 @@
 
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,31 +15,37 @@ public final class ParagraphRole extends ExpandableStringEnum<ParagraphRole> {
     /**
      * Static value pageHeader for ParagraphRole.
      */
+    @Generated
     public static final ParagraphRole PAGE_HEADER = fromString("pageHeader");
 
     /**
      * Static value pageFooter for ParagraphRole.
      */
+    @Generated
     public static final ParagraphRole PAGE_FOOTER = fromString("pageFooter");
 
     /**
      * Static value pageNumber for ParagraphRole.
      */
+    @Generated
     public static final ParagraphRole PAGE_NUMBER = fromString("pageNumber");
 
     /**
      * Static value title for ParagraphRole.
      */
+    @Generated
     public static final ParagraphRole TITLE = fromString("title");
 
     /**
      * Static value sectionHeading for ParagraphRole.
      */
+    @Generated
     public static final ParagraphRole SECTION_HEADING = fromString("sectionHeading");
 
     /**
      * Static value footnote for ParagraphRole.
      */
+    @Generated
     public static final ParagraphRole FOOTNOTE = fromString("footnote");
 
     /**
@@ -46,6 +53,7 @@ public final class ParagraphRole extends ExpandableStringEnum<ParagraphRole> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public ParagraphRole() {
     }
@@ -56,6 +64,7 @@ public final class ParagraphRole extends ExpandableStringEnum<ParagraphRole> {
      * @param name a name to look for.
      * @return the corresponding ParagraphRole.
      */
+    @Generated
     public static ParagraphRole fromString(String name) {
         return fromString(name, ParagraphRole.class);
     }
@@ -65,6 +74,7 @@ public final class ParagraphRole extends ExpandableStringEnum<ParagraphRole> {
      * 
      * @return known ParagraphRole values.
      */
+    @Generated
     public static Collection<ParagraphRole> values() {
         return values(ParagraphRole.class);
     }

@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -16,12 +17,14 @@ public final class ArrayWrapper {
     /*
      * The array property.
      */
+    @Generated
     @JsonProperty(value = "array")
     private List<String> array;
 
     /**
      * Creates an instance of ArrayWrapper class.
      */
+    @Generated
     public ArrayWrapper() {
     }
 
@@ -30,6 +33,7 @@ public final class ArrayWrapper {
      * 
      * @return the array value.
      */
+    @Generated
     public List<String> getArray() {
         return this.array;
     }
@@ -40,6 +44,7 @@ public final class ArrayWrapper {
      * @param array the array value to set.
      * @return the ArrayWrapper object itself.
      */
+    @Generated
     public ArrayWrapper setArray(List<String> array) {
         this.array = array;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class C implements JsonSerializable<C> {
     /*
      * The httpCode property.
      */
+    @Generated
     private String httpCode;
 
     /**
      * Creates an instance of C class.
      */
+    @Generated
     public C() {
     }
 
@@ -32,6 +35,7 @@ public final class C implements JsonSerializable<C> {
      * 
      * @return the httpCode value.
      */
+    @Generated
     public String getHttpCode() {
         return this.httpCode;
     }
@@ -42,6 +46,7 @@ public final class C implements JsonSerializable<C> {
      * @param httpCode the httpCode value to set.
      * @return the C object itself.
      */
+    @Generated
     public C setHttpCode(String httpCode) {
         this.httpCode = httpCode;
         return this;
@@ -58,6 +63,7 @@ public final class C implements JsonSerializable<C> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -73,6 +79,7 @@ public final class C implements JsonSerializable<C> {
      * null.
      * @throws IOException If an error occurs while reading the C.
      */
+    @Generated
     public static C fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             C deserializedC = new C();

@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,12 +18,14 @@ public final class BlobPrefix {
     /*
      * The Name property.
      */
+    @Generated
     @JsonProperty(value = "Name", required = true)
     private String name;
 
     /**
      * Creates an instance of BlobPrefix class.
      */
+    @Generated
     public BlobPrefix() {
     }
 
@@ -31,6 +34,7 @@ public final class BlobPrefix {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -41,6 +45,7 @@ public final class BlobPrefix {
      * @param name the name value to set.
      * @return the BlobPrefix object itself.
      */
+    @Generated
     public BlobPrefix setName(String name) {
         this.name = name;
         return this;

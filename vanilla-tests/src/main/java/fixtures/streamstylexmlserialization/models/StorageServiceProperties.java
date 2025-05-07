@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,37 +23,44 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     /*
      * Azure Analytics Logging settings
      */
+    @Generated
     private Logging logging;
 
     /*
      * A summary of request statistics grouped by API in hourly aggregates for blobs
      */
+    @Generated
     private Metrics hourMetrics;
 
     /*
      * a summary of request statistics grouped by API in minute aggregates for blobs
      */
+    @Generated
     private Metrics minuteMetrics;
 
     /*
      * The set of CORS rules.
      */
+    @Generated
     private List<CorsRule> cors;
 
     /*
      * The default version to use for requests to the Blob service if an incoming request's version is not specified.
      * Possible values include version 2008-10-27 and all more recent versions
      */
+    @Generated
     private String defaultServiceVersion;
 
     /*
      * The Delete Retention Policy for the service
      */
+    @Generated
     private RetentionPolicy deleteRetentionPolicy;
 
     /**
      * Creates an instance of StorageServiceProperties class.
      */
+    @Generated
     public StorageServiceProperties() {
     }
 
@@ -62,6 +69,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * 
      * @return the logging value.
      */
+    @Generated
     public Logging getLogging() {
         return this.logging;
     }
@@ -72,6 +80,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param logging the logging value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setLogging(Logging logging) {
         this.logging = logging;
         return this;
@@ -82,6 +91,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * 
      * @return the hourMetrics value.
      */
+    @Generated
     public Metrics getHourMetrics() {
         return this.hourMetrics;
     }
@@ -92,6 +102,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param hourMetrics the hourMetrics value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setHourMetrics(Metrics hourMetrics) {
         this.hourMetrics = hourMetrics;
         return this;
@@ -102,6 +113,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * 
      * @return the minuteMetrics value.
      */
+    @Generated
     public Metrics getMinuteMetrics() {
         return this.minuteMetrics;
     }
@@ -112,6 +124,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param minuteMetrics the minuteMetrics value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setMinuteMetrics(Metrics minuteMetrics) {
         this.minuteMetrics = minuteMetrics;
         return this;
@@ -122,6 +135,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * 
      * @return the cors value.
      */
+    @Generated
     public List<CorsRule> getCors() {
         if (this.cors == null) {
             this.cors = new ArrayList<>();
@@ -135,6 +149,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param cors the cors value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setCors(List<CorsRule> cors) {
         this.cors = cors;
         return this;
@@ -147,6 +162,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * 
      * @return the defaultServiceVersion value.
      */
+    @Generated
     public String getDefaultServiceVersion() {
         return this.defaultServiceVersion;
     }
@@ -159,6 +175,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param defaultServiceVersion the defaultServiceVersion value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setDefaultServiceVersion(String defaultServiceVersion) {
         this.defaultServiceVersion = defaultServiceVersion;
         return this;
@@ -169,6 +186,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * 
      * @return the deleteRetentionPolicy value.
      */
+    @Generated
     public RetentionPolicy getDeleteRetentionPolicy() {
         return this.deleteRetentionPolicy;
     }
@@ -179,6 +197,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * @param deleteRetentionPolicy the deleteRetentionPolicy value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setDeleteRetentionPolicy(RetentionPolicy deleteRetentionPolicy) {
         this.deleteRetentionPolicy = deleteRetentionPolicy;
         return this;
@@ -207,14 +226,17 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "StorageServiceProperties" : rootElementName;
+        rootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "StorageServiceProperties" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeXml(this.logging, "Logging");
         xmlWriter.writeXml(this.hourMetrics, "HourMetrics");
@@ -239,6 +261,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
      */
+    @Generated
     public static StorageServiceProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -253,10 +276,11 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
      */
+    @Generated
     public static StorageServiceProperties fromXml(XmlReader xmlReader, String rootElementName)
         throws XMLStreamException {
         String finalRootElementName
-            = CoreUtils.isNullOrEmpty(rootElementName) ? "StorageServiceProperties" : rootElementName;
+            = rootElementName == null || rootElementName.isEmpty() ? "StorageServiceProperties" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             StorageServiceProperties deserializedStorageServiceProperties = new StorageServiceProperties();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

@@ -5,6 +5,7 @@
 package fixtures.azurespecials.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HeadersCustomNamedRequestIdHeadHeaders {
     /*
      * The foo-request-id property.
      */
+    @Generated
     private String fooRequestId;
 
     private static final HttpHeaderName FOO_REQUEST_ID = HttpHeaderName.fromString("foo-request-id");
@@ -35,6 +37,7 @@ public final class HeadersCustomNamedRequestIdHeadHeaders {
      * 
      * @return the fooRequestId value.
      */
+    @Generated
     public String getFooRequestId() {
         return this.fooRequestId;
     }
@@ -45,6 +48,7 @@ public final class HeadersCustomNamedRequestIdHeadHeaders {
      * @param fooRequestId the fooRequestId value to set.
      * @return the HeadersCustomNamedRequestIdHeadHeaders object itself.
      */
+    @Generated
     public HeadersCustomNamedRequestIdHeadHeaders setFooRequestId(String fooRequestId) {
         this.fooRequestId = fooRequestId;
         return this;

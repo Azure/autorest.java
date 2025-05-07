@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -21,11 +22,13 @@ public final class SmartSalmon extends Salmon {
     /*
      * The college_degree property.
      */
+    @Generated
     private String collegeDegree;
 
     /*
      * Dictionary of <any>
      */
+    @Generated
     private Map<String, Object> additionalProperties;
 
     /**
@@ -33,6 +36,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @param length the length value to set.
      */
+    @Generated
     public SmartSalmon(float length) {
         super(length);
         this.fishtype = "smart_salmon";
@@ -43,6 +47,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the collegeDegree value.
      */
+    @Generated
     public String getCollegeDegree() {
         return this.collegeDegree;
     }
@@ -53,6 +58,7 @@ public final class SmartSalmon extends Salmon {
      * @param collegeDegree the collegeDegree value to set.
      * @return the SmartSalmon object itself.
      */
+    @Generated
     public SmartSalmon setCollegeDegree(String collegeDegree) {
         this.collegeDegree = collegeDegree;
         return this;
@@ -63,6 +69,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the additionalProperties value.
      */
+    @Generated
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -73,6 +80,7 @@ public final class SmartSalmon extends Salmon {
      * @param additionalProperties the additionalProperties value to set.
      * @return the SmartSalmon object itself.
      */
+    @Generated
     public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
@@ -81,6 +89,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setLocation(String location) {
         super.setLocation(location);
@@ -90,6 +99,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setIswild(Boolean iswild) {
         super.setIswild(iswild);
@@ -99,6 +109,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setSpecies(String species) {
         super.setSpecies(species);
@@ -108,6 +119,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -129,6 +141,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -151,6 +164,7 @@ public final class SmartSalmon extends Salmon {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SmartSalmon.
      */
+    @Generated
     public static SmartSalmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;

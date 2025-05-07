@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,31 +21,37 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
     /*
      * Number of rows in the table.
      */
+    @Generated
     private int rowCount;
 
     /*
      * Number of columns in the table.
      */
+    @Generated
     private int columnCount;
 
     /*
      * Cells contained within the table.
      */
+    @Generated
     private List<DocumentTableCell> cells;
 
     /*
      * Bounding regions covering the table.
      */
+    @Generated
     private List<BoundingRegion> boundingRegions;
 
     /*
      * Location of the table in the reading order concatenated content.
      */
+    @Generated
     private List<DocumentSpan> spans;
 
     /**
      * Creates an instance of DocumentTable class.
      */
+    @Generated
     public DocumentTable() {
     }
 
@@ -53,6 +60,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * 
      * @return the rowCount value.
      */
+    @Generated
     public int getRowCount() {
         return this.rowCount;
     }
@@ -63,6 +71,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * @param rowCount the rowCount value to set.
      * @return the DocumentTable object itself.
      */
+    @Generated
     public DocumentTable setRowCount(int rowCount) {
         this.rowCount = rowCount;
         return this;
@@ -73,6 +82,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * 
      * @return the columnCount value.
      */
+    @Generated
     public int getColumnCount() {
         return this.columnCount;
     }
@@ -83,6 +93,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * @param columnCount the columnCount value to set.
      * @return the DocumentTable object itself.
      */
+    @Generated
     public DocumentTable setColumnCount(int columnCount) {
         this.columnCount = columnCount;
         return this;
@@ -93,6 +104,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * 
      * @return the cells value.
      */
+    @Generated
     public List<DocumentTableCell> getCells() {
         return this.cells;
     }
@@ -103,6 +115,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * @param cells the cells value to set.
      * @return the DocumentTable object itself.
      */
+    @Generated
     public DocumentTable setCells(List<DocumentTableCell> cells) {
         this.cells = cells;
         return this;
@@ -113,6 +126,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * 
      * @return the boundingRegions value.
      */
+    @Generated
     public List<BoundingRegion> getBoundingRegions() {
         return this.boundingRegions;
     }
@@ -123,6 +137,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * @param boundingRegions the boundingRegions value to set.
      * @return the DocumentTable object itself.
      */
+    @Generated
     public DocumentTable setBoundingRegions(List<BoundingRegion> boundingRegions) {
         this.boundingRegions = boundingRegions;
         return this;
@@ -133,6 +148,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * 
      * @return the spans value.
      */
+    @Generated
     public List<DocumentSpan> getSpans() {
         return this.spans;
     }
@@ -143,6 +159,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * @param spans the spans value to set.
      * @return the DocumentTable object itself.
      */
+    @Generated
     public DocumentTable setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
@@ -151,6 +168,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -172,6 +190,7 @@ public final class DocumentTable implements JsonSerializable<DocumentTable> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentTable.
      */
+    @Generated
     public static DocumentTable fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentTable deserializedDocumentTable = new DocumentTable();

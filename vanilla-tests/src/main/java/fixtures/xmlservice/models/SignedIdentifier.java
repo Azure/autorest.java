@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,18 +18,21 @@ public final class SignedIdentifier {
     /*
      * a unique id
      */
+    @Generated
     @JsonProperty(value = "Id", required = true)
     private String id;
 
     /*
      * The access policy
      */
+    @Generated
     @JsonProperty(value = "AccessPolicy", required = true)
     private AccessPolicy accessPolicy;
 
     /**
      * Creates an instance of SignedIdentifier class.
      */
+    @Generated
     public SignedIdentifier() {
     }
 
@@ -37,6 +41,7 @@ public final class SignedIdentifier {
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -47,6 +52,7 @@ public final class SignedIdentifier {
      * @param id the id value to set.
      * @return the SignedIdentifier object itself.
      */
+    @Generated
     public SignedIdentifier setId(String id) {
         this.id = id;
         return this;
@@ -57,6 +63,7 @@ public final class SignedIdentifier {
      * 
      * @return the accessPolicy value.
      */
+    @Generated
     public AccessPolicy getAccessPolicy() {
         return this.accessPolicy;
     }
@@ -67,6 +74,7 @@ public final class SignedIdentifier {
      * @param accessPolicy the accessPolicy value to set.
      * @return the SignedIdentifier object itself.
      */
+    @Generated
     public SignedIdentifier setAccessPolicy(AccessPolicy accessPolicy) {
         this.accessPolicy = accessPolicy;
         return this;

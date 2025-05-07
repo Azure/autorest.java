@@ -5,6 +5,7 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import java.time.Duration;
@@ -17,6 +18,7 @@ public final class HeadersResponseDurationHeaders {
     /*
      * The value property.
      */
+    @Generated
     private Duration value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -41,6 +43,7 @@ public final class HeadersResponseDurationHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public Duration getValue() {
         return this.value;
     }
@@ -51,6 +54,7 @@ public final class HeadersResponseDurationHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseDurationHeaders object itself.
      */
+    @Generated
     public HeadersResponseDurationHeaders setValue(Duration value) {
         this.value = value;
         return this;

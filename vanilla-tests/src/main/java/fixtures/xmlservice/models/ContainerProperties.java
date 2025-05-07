@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -19,42 +20,49 @@ public final class ContainerProperties {
     /*
      * The Last-Modified property.
      */
+    @Generated
     @JsonProperty(value = "Last-Modified", required = true)
     private DateTimeRfc1123 lastModified;
 
     /*
      * The Etag property.
      */
+    @Generated
     @JsonProperty(value = "Etag", required = true)
     private String etag;
 
     /*
      * The LeaseStatus property.
      */
+    @Generated
     @JsonProperty(value = "LeaseStatus")
     private LeaseStatusType leaseStatus;
 
     /*
      * The LeaseState property.
      */
+    @Generated
     @JsonProperty(value = "LeaseState")
     private LeaseStateType leaseState;
 
     /*
      * The LeaseDuration property.
      */
+    @Generated
     @JsonProperty(value = "LeaseDuration")
     private LeaseDurationType leaseDuration;
 
     /*
      * The PublicAccess property.
      */
+    @Generated
     @JsonProperty(value = "PublicAccess")
     private PublicAccessType publicAccess;
 
     /**
      * Creates an instance of ContainerProperties class.
      */
+    @Generated
     public ContainerProperties() {
     }
 
@@ -63,6 +71,7 @@ public final class ContainerProperties {
      * 
      * @return the lastModified value.
      */
+    @Generated
     public OffsetDateTime getLastModified() {
         if (this.lastModified == null) {
             return null;
@@ -76,6 +85,7 @@ public final class ContainerProperties {
      * @param lastModified the lastModified value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLastModified(OffsetDateTime lastModified) {
         if (lastModified == null) {
             this.lastModified = null;
@@ -90,6 +100,7 @@ public final class ContainerProperties {
      * 
      * @return the etag value.
      */
+    @Generated
     public String getEtag() {
         return this.etag;
     }
@@ -100,6 +111,7 @@ public final class ContainerProperties {
      * @param etag the etag value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setEtag(String etag) {
         this.etag = etag;
         return this;
@@ -110,6 +122,7 @@ public final class ContainerProperties {
      * 
      * @return the leaseStatus value.
      */
+    @Generated
     public LeaseStatusType getLeaseStatus() {
         return this.leaseStatus;
     }
@@ -120,6 +133,7 @@ public final class ContainerProperties {
      * @param leaseStatus the leaseStatus value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLeaseStatus(LeaseStatusType leaseStatus) {
         this.leaseStatus = leaseStatus;
         return this;
@@ -130,6 +144,7 @@ public final class ContainerProperties {
      * 
      * @return the leaseState value.
      */
+    @Generated
     public LeaseStateType getLeaseState() {
         return this.leaseState;
     }
@@ -140,6 +155,7 @@ public final class ContainerProperties {
      * @param leaseState the leaseState value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLeaseState(LeaseStateType leaseState) {
         this.leaseState = leaseState;
         return this;
@@ -150,6 +166,7 @@ public final class ContainerProperties {
      * 
      * @return the leaseDuration value.
      */
+    @Generated
     public LeaseDurationType getLeaseDuration() {
         return this.leaseDuration;
     }
@@ -160,6 +177,7 @@ public final class ContainerProperties {
      * @param leaseDuration the leaseDuration value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLeaseDuration(LeaseDurationType leaseDuration) {
         this.leaseDuration = leaseDuration;
         return this;
@@ -170,6 +188,7 @@ public final class ContainerProperties {
      * 
      * @return the publicAccess value.
      */
+    @Generated
     public PublicAccessType getPublicAccess() {
         return this.publicAccess;
     }
@@ -180,6 +199,7 @@ public final class ContainerProperties {
      * @param publicAccess the publicAccess value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setPublicAccess(PublicAccessType publicAccess) {
         this.publicAccess = publicAccess;
         return this;

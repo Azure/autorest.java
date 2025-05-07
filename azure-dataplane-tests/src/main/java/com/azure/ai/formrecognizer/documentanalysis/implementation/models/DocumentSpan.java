@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
     /*
      * Zero-based index of the content represented by the span.
      */
+    @Generated
     private int offset;
 
     /*
      * Number of characters in the content represented by the span.
      */
+    @Generated
     private int length;
 
     /**
      * Creates an instance of DocumentSpan class.
      */
+    @Generated
     public DocumentSpan() {
     }
 
@@ -37,6 +41,7 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
      * 
      * @return the offset value.
      */
+    @Generated
     public int getOffset() {
         return this.offset;
     }
@@ -47,6 +52,7 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
      * @param offset the offset value to set.
      * @return the DocumentSpan object itself.
      */
+    @Generated
     public DocumentSpan setOffset(int offset) {
         this.offset = offset;
         return this;
@@ -57,6 +63,7 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
      * 
      * @return the length value.
      */
+    @Generated
     public int getLength() {
         return this.length;
     }
@@ -67,6 +74,7 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
      * @param length the length value to set.
      * @return the DocumentSpan object itself.
      */
+    @Generated
     public DocumentSpan setLength(int length) {
         this.length = length;
         return this;
@@ -75,6 +83,7 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -92,6 +101,7 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentSpan.
      */
+    @Generated
     public static DocumentSpan fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentSpan deserializedDocumentSpan = new DocumentSpan();

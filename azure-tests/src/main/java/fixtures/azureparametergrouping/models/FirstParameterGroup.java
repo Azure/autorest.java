@@ -5,6 +5,7 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class FirstParameterGroup {
     /*
      * The header-one property.
      */
+    @Generated
     private String headerOne;
 
     /*
      * Query parameter with default
      */
+    @Generated
     private Integer queryOne;
 
     /**
      * Creates an instance of FirstParameterGroup class.
      */
+    @Generated
     public FirstParameterGroup() {
     }
 
@@ -32,6 +36,7 @@ public final class FirstParameterGroup {
      * 
      * @return the headerOne value.
      */
+    @Generated
     public String getHeaderOne() {
         return this.headerOne;
     }
@@ -42,6 +47,7 @@ public final class FirstParameterGroup {
      * @param headerOne the headerOne value to set.
      * @return the FirstParameterGroup object itself.
      */
+    @Generated
     public FirstParameterGroup setHeaderOne(String headerOne) {
         this.headerOne = headerOne;
         return this;
@@ -52,6 +58,7 @@ public final class FirstParameterGroup {
      * 
      * @return the queryOne value.
      */
+    @Generated
     public Integer getQueryOne() {
         return this.queryOne;
     }
@@ -62,6 +69,7 @@ public final class FirstParameterGroup {
      * @param queryOne the queryOne value to set.
      * @return the FirstParameterGroup object itself.
      */
+    @Generated
     public FirstParameterGroup setQueryOne(Integer queryOne) {
         this.queryOne = queryOne;
         return this;

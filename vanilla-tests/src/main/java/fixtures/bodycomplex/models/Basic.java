@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,24 +16,28 @@ public final class Basic {
     /*
      * Basic Id
      */
+    @Generated
     @JsonProperty(value = "id")
     private Integer id;
 
     /*
      * Name property with a very long description that does not fit on a single line and a line break.
      */
+    @Generated
     @JsonProperty(value = "name")
     private String name;
 
     /*
      * The color property.
      */
+    @Generated
     @JsonProperty(value = "color")
     private CMYKColors color;
 
     /**
      * Creates an instance of Basic class.
      */
+    @Generated
     public Basic() {
     }
 
@@ -41,6 +46,7 @@ public final class Basic {
      * 
      * @return the id value.
      */
+    @Generated
     public Integer getId() {
         return this.id;
     }
@@ -51,6 +57,7 @@ public final class Basic {
      * @param id the id value to set.
      * @return the Basic object itself.
      */
+    @Generated
     public Basic setId(Integer id) {
         this.id = id;
         return this;
@@ -62,6 +69,7 @@ public final class Basic {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -73,6 +81,7 @@ public final class Basic {
      * @param name the name value to set.
      * @return the Basic object itself.
      */
+    @Generated
     public Basic setName(String name) {
         this.name = name;
         return this;
@@ -83,6 +92,7 @@ public final class Basic {
      * 
      * @return the color value.
      */
+    @Generated
     public CMYKColors getColor() {
         return this.color;
     }
@@ -93,6 +103,7 @@ public final class Basic {
      * @param color the color value to set.
      * @return the Basic object itself.
      */
+    @Generated
     public Basic setColor(CMYKColors color) {
         this.color = color;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class OperationResult {
     /*
      * The status of the request
      */
+    @Generated
     @JsonProperty(value = "status")
     private OperationResultStatus status;
 
     /*
      * The error property.
      */
+    @Generated
     @JsonProperty(value = "error")
     private OperationResultError error;
 
     /**
      * Creates an instance of OperationResult class.
      */
+    @Generated
     public OperationResult() {
     }
 
@@ -35,6 +39,7 @@ public final class OperationResult {
      * 
      * @return the status value.
      */
+    @Generated
     public OperationResultStatus getStatus() {
         return this.status;
     }
@@ -45,6 +50,7 @@ public final class OperationResult {
      * @param status the status value to set.
      * @return the OperationResult object itself.
      */
+    @Generated
     public OperationResult setStatus(OperationResultStatus status) {
         this.status = status;
         return this;
@@ -55,6 +61,7 @@ public final class OperationResult {
      * 
      * @return the error value.
      */
+    @Generated
     public OperationResultError getError() {
         return this.error;
     }
@@ -65,6 +72,7 @@ public final class OperationResult {
      * @param error the error value to set.
      * @return the OperationResult object itself.
      */
+    @Generated
     public OperationResult setError(OperationResultError error) {
         this.error = error;
         return this;

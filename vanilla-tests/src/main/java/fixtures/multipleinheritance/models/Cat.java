@@ -5,6 +5,7 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,21 +19,25 @@ public class Cat extends Pet {
     /*
      * The likesMilk property.
      */
+    @Generated
     private Boolean likesMilk;
 
     /*
      * The meows property.
      */
+    @Generated
     private Boolean meows;
 
     /*
      * The hisses property.
      */
+    @Generated
     private Boolean hisses;
 
     /**
      * Creates an instance of Cat class.
      */
+    @Generated
     public Cat() {
     }
 
@@ -41,6 +46,7 @@ public class Cat extends Pet {
      * 
      * @return the likesMilk value.
      */
+    @Generated
     public Boolean isLikesMilk() {
         return this.likesMilk;
     }
@@ -51,6 +57,7 @@ public class Cat extends Pet {
      * @param likesMilk the likesMilk value to set.
      * @return the Cat object itself.
      */
+    @Generated
     public Cat setLikesMilk(Boolean likesMilk) {
         this.likesMilk = likesMilk;
         return this;
@@ -61,6 +68,7 @@ public class Cat extends Pet {
      * 
      * @return the meows value.
      */
+    @Generated
     public Boolean isMeows() {
         return this.meows;
     }
@@ -71,6 +79,7 @@ public class Cat extends Pet {
      * @param meows the meows value to set.
      * @return the Cat object itself.
      */
+    @Generated
     public Cat setMeows(Boolean meows) {
         this.meows = meows;
         return this;
@@ -81,6 +90,7 @@ public class Cat extends Pet {
      * 
      * @return the hisses value.
      */
+    @Generated
     public Boolean isHisses() {
         return this.hisses;
     }
@@ -91,6 +101,7 @@ public class Cat extends Pet {
      * @param hisses the hisses value to set.
      * @return the Cat object itself.
      */
+    @Generated
     public Cat setHisses(Boolean hisses) {
         this.hisses = hisses;
         return this;
@@ -99,6 +110,7 @@ public class Cat extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cat setName(String name) {
         super.setName(name);
@@ -120,6 +132,7 @@ public class Cat extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -139,6 +152,7 @@ public class Cat extends Pet {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Cat.
      */
+    @Generated
     public static Cat fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Cat deserializedCat = new Cat();

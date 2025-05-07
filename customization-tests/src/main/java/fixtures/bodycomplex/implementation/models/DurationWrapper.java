@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -21,11 +22,13 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     /*
      * The field property.
      */
+    @Generated
     private Duration field;
 
     /**
      * Creates an instance of DurationWrapper class.
      */
+    @Generated
     public DurationWrapper() {
     }
 
@@ -34,6 +37,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
      * 
      * @return the field value.
      */
+    @Generated
     public Duration getField() {
         return this.field;
     }
@@ -44,6 +48,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
      * @param field the field value to set.
      * @return the DurationWrapper object itself.
      */
+    @Generated
     public DurationWrapper setField(Duration field) {
         this.field = field;
         return this;
@@ -52,6 +57,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +73,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DurationWrapper.
      */
+    @Generated
     public static DurationWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DurationWrapper deserializedDurationWrapper = new DurationWrapper();

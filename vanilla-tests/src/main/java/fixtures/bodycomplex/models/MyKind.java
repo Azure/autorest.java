@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -15,6 +16,7 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
     /**
      * Static value Kind1 for MyKind.
      */
+    @Generated
     public static final MyKind KIND1 = fromString("Kind1");
 
     /**
@@ -22,6 +24,7 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public MyKind() {
     }
@@ -32,6 +35,7 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
      * @param name a name to look for.
      * @return the corresponding MyKind.
      */
+    @Generated
     @JsonCreator
     public static MyKind fromString(String name) {
         return fromString(name, MyKind.class);
@@ -42,6 +46,7 @@ public final class MyKind extends ExpandableStringEnum<MyKind> {
      * 
      * @return known MyKind values.
      */
+    @Generated
     public static Collection<MyKind> values() {
         return values(MyKind.class);
     }

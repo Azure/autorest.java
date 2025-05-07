@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -20,30 +21,35 @@ public final class Slideshow {
     /*
      * The title property.
      */
+    @Generated
     @JacksonXmlProperty(localName = "title", isAttribute = true)
     private String title;
 
     /*
      * The date property.
      */
+    @Generated
     @JacksonXmlProperty(localName = "date", isAttribute = true)
     private String date;
 
     /*
      * The author property.
      */
+    @Generated
     @JacksonXmlProperty(localName = "author", isAttribute = true)
     private String author;
 
     /*
      * The slides property.
      */
+    @Generated
     @JsonProperty("slide")
     private List<Slide> slides = new ArrayList<>();
 
     /**
      * Creates an instance of Slideshow class.
      */
+    @Generated
     public Slideshow() {
     }
 
@@ -52,6 +58,7 @@ public final class Slideshow {
      * 
      * @return the title value.
      */
+    @Generated
     public String getTitle() {
         return this.title;
     }
@@ -62,6 +69,7 @@ public final class Slideshow {
      * @param title the title value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setTitle(String title) {
         this.title = title;
         return this;
@@ -72,6 +80,7 @@ public final class Slideshow {
      * 
      * @return the date value.
      */
+    @Generated
     public String getDate() {
         return this.date;
     }
@@ -82,6 +91,7 @@ public final class Slideshow {
      * @param date the date value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setDate(String date) {
         this.date = date;
         return this;
@@ -92,6 +102,7 @@ public final class Slideshow {
      * 
      * @return the author value.
      */
+    @Generated
     public String getAuthor() {
         return this.author;
     }
@@ -102,6 +113,7 @@ public final class Slideshow {
      * @param author the author value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setAuthor(String author) {
         this.author = author;
         return this;
@@ -112,6 +124,7 @@ public final class Slideshow {
      * 
      * @return the slides value.
      */
+    @Generated
     public List<Slide> getSlides() {
         return this.slides;
     }
@@ -122,6 +135,7 @@ public final class Slideshow {
      * @param slides the slides value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setSlides(List<Slide> slides) {
         this.slides = slides;
         return this;

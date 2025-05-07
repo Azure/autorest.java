@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -23,96 +24,115 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
     /*
      * Data type of the field value.
      */
+    @Generated
     private DocumentFieldType type;
 
     /*
      * String value.
      */
+    @Generated
     private String valueString;
 
     /*
      * Date value in YYYY-MM-DD format (ISO 8601).
      */
+    @Generated
     private LocalDate valueDate;
 
     /*
      * Time value in hh:mm:ss format (ISO 8601).
      */
+    @Generated
     private String valueTime;
 
     /*
      * Phone number value in E.164 format (ex. +19876543210).
      */
+    @Generated
     private String valuePhoneNumber;
 
     /*
      * Floating point value.
      */
+    @Generated
     private Float valueNumber;
 
     /*
      * Integer value.
      */
+    @Generated
     private Long valueInteger;
 
     /*
      * Selection mark value.
      */
+    @Generated
     private SelectionMarkState valueSelectionMark;
 
     /*
      * Presence of signature.
      */
+    @Generated
     private DocumentSignatureType valueSignature;
 
     /*
      * 3-letter country code value (ISO 3166-1 alpha-3).
      */
+    @Generated
     private String valueCountryRegion;
 
     /*
      * Array of field values.
      */
+    @Generated
     private List<DocumentField> valueArray;
 
     /*
      * Dictionary of named field values.
      */
+    @Generated
     private Map<String, DocumentField> valueObject;
 
     /*
      * Currency value.
      */
+    @Generated
     private CurrencyValue valueCurrency;
 
     /*
      * Address value.
      */
+    @Generated
     private AddressValue valueAddress;
 
     /*
      * Field content.
      */
+    @Generated
     private String content;
 
     /*
      * Bounding regions covering the field.
      */
+    @Generated
     private List<BoundingRegion> boundingRegions;
 
     /*
      * Location of the field in the reading order concatenated content.
      */
+    @Generated
     private List<DocumentSpan> spans;
 
     /*
      * Confidence of correctly extracting the field.
      */
+    @Generated
     private Float confidence;
 
     /**
      * Creates an instance of DocumentField class.
      */
+    @Generated
     public DocumentField() {
     }
 
@@ -121,6 +141,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the type value.
      */
+    @Generated
     public DocumentFieldType getType() {
         return this.type;
     }
@@ -131,6 +152,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param type the type value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setType(DocumentFieldType type) {
         this.type = type;
         return this;
@@ -141,6 +163,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueString value.
      */
+    @Generated
     public String getValueString() {
         return this.valueString;
     }
@@ -151,6 +174,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueString the valueString value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueString(String valueString) {
         this.valueString = valueString;
         return this;
@@ -161,6 +185,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueDate value.
      */
+    @Generated
     public LocalDate getValueDate() {
         return this.valueDate;
     }
@@ -171,6 +196,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueDate the valueDate value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueDate(LocalDate valueDate) {
         this.valueDate = valueDate;
         return this;
@@ -181,6 +207,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueTime value.
      */
+    @Generated
     public String getValueTime() {
         return this.valueTime;
     }
@@ -191,6 +218,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueTime the valueTime value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueTime(String valueTime) {
         this.valueTime = valueTime;
         return this;
@@ -201,6 +229,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valuePhoneNumber value.
      */
+    @Generated
     public String getValuePhoneNumber() {
         return this.valuePhoneNumber;
     }
@@ -211,6 +240,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valuePhoneNumber the valuePhoneNumber value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValuePhoneNumber(String valuePhoneNumber) {
         this.valuePhoneNumber = valuePhoneNumber;
         return this;
@@ -221,6 +251,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueNumber value.
      */
+    @Generated
     public Float getValueNumber() {
         return this.valueNumber;
     }
@@ -231,6 +262,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueNumber the valueNumber value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueNumber(Float valueNumber) {
         this.valueNumber = valueNumber;
         return this;
@@ -241,6 +273,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueInteger value.
      */
+    @Generated
     public Long getValueInteger() {
         return this.valueInteger;
     }
@@ -251,6 +284,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueInteger the valueInteger value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueInteger(Long valueInteger) {
         this.valueInteger = valueInteger;
         return this;
@@ -261,6 +295,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueSelectionMark value.
      */
+    @Generated
     public SelectionMarkState getValueSelectionMark() {
         return this.valueSelectionMark;
     }
@@ -271,6 +306,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueSelectionMark the valueSelectionMark value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueSelectionMark(SelectionMarkState valueSelectionMark) {
         this.valueSelectionMark = valueSelectionMark;
         return this;
@@ -281,6 +317,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueSignature value.
      */
+    @Generated
     public DocumentSignatureType getValueSignature() {
         return this.valueSignature;
     }
@@ -291,6 +328,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueSignature the valueSignature value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueSignature(DocumentSignatureType valueSignature) {
         this.valueSignature = valueSignature;
         return this;
@@ -301,6 +339,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueCountryRegion value.
      */
+    @Generated
     public String getValueCountryRegion() {
         return this.valueCountryRegion;
     }
@@ -311,6 +350,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueCountryRegion the valueCountryRegion value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueCountryRegion(String valueCountryRegion) {
         this.valueCountryRegion = valueCountryRegion;
         return this;
@@ -321,6 +361,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueArray value.
      */
+    @Generated
     public List<DocumentField> getValueArray() {
         return this.valueArray;
     }
@@ -331,6 +372,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueArray the valueArray value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueArray(List<DocumentField> valueArray) {
         this.valueArray = valueArray;
         return this;
@@ -341,6 +383,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueObject value.
      */
+    @Generated
     public Map<String, DocumentField> getValueObject() {
         return this.valueObject;
     }
@@ -351,6 +394,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueObject the valueObject value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueObject(Map<String, DocumentField> valueObject) {
         this.valueObject = valueObject;
         return this;
@@ -361,6 +405,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueCurrency value.
      */
+    @Generated
     public CurrencyValue getValueCurrency() {
         return this.valueCurrency;
     }
@@ -371,6 +416,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueCurrency the valueCurrency value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueCurrency(CurrencyValue valueCurrency) {
         this.valueCurrency = valueCurrency;
         return this;
@@ -381,6 +427,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the valueAddress value.
      */
+    @Generated
     public AddressValue getValueAddress() {
         return this.valueAddress;
     }
@@ -391,6 +438,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param valueAddress the valueAddress value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setValueAddress(AddressValue valueAddress) {
         this.valueAddress = valueAddress;
         return this;
@@ -401,6 +449,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the content value.
      */
+    @Generated
     public String getContent() {
         return this.content;
     }
@@ -411,6 +460,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param content the content value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setContent(String content) {
         this.content = content;
         return this;
@@ -421,6 +471,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the boundingRegions value.
      */
+    @Generated
     public List<BoundingRegion> getBoundingRegions() {
         return this.boundingRegions;
     }
@@ -431,6 +482,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param boundingRegions the boundingRegions value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setBoundingRegions(List<BoundingRegion> boundingRegions) {
         this.boundingRegions = boundingRegions;
         return this;
@@ -441,6 +493,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the spans value.
      */
+    @Generated
     public List<DocumentSpan> getSpans() {
         return this.spans;
     }
@@ -451,6 +504,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param spans the spans value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
@@ -461,6 +515,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * 
      * @return the confidence value.
      */
+    @Generated
     public Float getConfidence() {
         return this.confidence;
     }
@@ -471,6 +526,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @param confidence the confidence value to set.
      * @return the DocumentField object itself.
      */
+    @Generated
     public DocumentField setConfidence(Float confidence) {
         this.confidence = confidence;
         return this;
@@ -479,6 +535,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -515,6 +572,7 @@ public final class DocumentField implements JsonSerializable<DocumentField> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentField.
      */
+    @Generated
     public static DocumentField fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentField deserializedDocumentField = new DocumentField();

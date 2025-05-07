@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,18 +16,21 @@ public final class Error {
     /*
      * The status property.
      */
+    @Generated
     @JsonProperty(value = "status")
     private Integer status;
 
     /*
      * The message property.
      */
+    @Generated
     @JsonProperty(value = "message")
     private String message;
 
     /**
      * Creates an instance of Error class.
      */
+    @Generated
     private Error() {
     }
 
@@ -35,6 +39,7 @@ public final class Error {
      * 
      * @return the status value.
      */
+    @Generated
     public Integer getStatus() {
         return this.status;
     }
@@ -44,6 +49,7 @@ public final class Error {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }

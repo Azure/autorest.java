@@ -5,6 +5,7 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,26 +15,31 @@ public final class ParameterGroupingPostRequiredParameters {
     /*
      * The customHeader property.
      */
+    @Generated
     private String customHeader;
 
     /*
      * Query parameter with default
      */
+    @Generated
     private Integer query;
 
     /*
      * Path parameter
      */
+    @Generated
     private String path;
 
     /*
      * The body property.
      */
+    @Generated
     private int body;
 
     /**
      * Creates an instance of ParameterGroupingPostRequiredParameters class.
      */
+    @Generated
     public ParameterGroupingPostRequiredParameters() {
     }
 
@@ -42,6 +48,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * 
      * @return the customHeader value.
      */
+    @Generated
     public String getCustomHeader() {
         return this.customHeader;
     }
@@ -52,6 +59,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * @param customHeader the customHeader value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostRequiredParameters setCustomHeader(String customHeader) {
         this.customHeader = customHeader;
         return this;
@@ -62,6 +70,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * 
      * @return the query value.
      */
+    @Generated
     public Integer getQuery() {
         return this.query;
     }
@@ -72,6 +81,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * @param query the query value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostRequiredParameters setQuery(Integer query) {
         this.query = query;
         return this;
@@ -82,6 +92,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * 
      * @return the path value.
      */
+    @Generated
     public String getPath() {
         return this.path;
     }
@@ -92,6 +103,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * @param path the path value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostRequiredParameters setPath(String path) {
         this.path = path;
         return this;
@@ -102,6 +114,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * 
      * @return the body value.
      */
+    @Generated
     public int getBody() {
         return this.body;
     }
@@ -112,6 +125,7 @@ public final class ParameterGroupingPostRequiredParameters {
      * @param body the body value to set.
      * @return the ParameterGroupingPostRequiredParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostRequiredParameters setBody(int body) {
         this.body = body;
         return this;

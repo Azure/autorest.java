@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -19,22 +20,26 @@ public final class DotSalmon extends DotFish {
     /*
      * The fish.type property.
      */
+    @Generated
     private String fishType = "DotSalmon";
 
     /*
      * The location property.
      */
+    @Generated
     private String location;
 
     /*
      * The iswild property.
      */
+    @Generated
     @JsonProperty(value = "isWild")
     private Boolean isWild;
 
     /**
      * Creates an instance of DotSalmon class.
      */
+    @Generated
     public DotSalmon() {
     }
 
@@ -43,6 +48,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the fishType value.
      */
+    @Generated
     @Override
     public String getFishType() {
         return this.fishType;
@@ -53,6 +59,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -63,6 +70,7 @@ public final class DotSalmon extends DotFish {
      * @param location the location value to set.
      * @return the DotSalmon object itself.
      */
+    @Generated
     public DotSalmon setLocation(String location) {
         this.location = location;
         return this;
@@ -73,6 +81,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the iswild value.
      */
+    @Generated
     public boolean isWild() {
         Boolean returnValue = this.isWild;
         return returnValue;
@@ -83,6 +92,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @param iswild the iswild value to set.
      */
+    @Generated
     public void setWild(Boolean iswild) {
         this.isWild = iswild;
     }
@@ -90,6 +100,7 @@ public final class DotSalmon extends DotFish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DotSalmon setSpecies(String species) {
         super.setSpecies(species);
@@ -99,6 +110,7 @@ public final class DotSalmon extends DotFish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -117,6 +129,7 @@ public final class DotSalmon extends DotFish {
      * to JSON null.
      * @throws IOException If an error occurs while reading the DotSalmon.
      */
+    @Generated
     public static DotSalmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DotSalmon deserializedDotSalmon = new DotSalmon();

@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,12 +18,14 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
     /*
      * The Azure-AsyncOperation property.
      */
+    @Generated
     @JsonProperty(value = "Azure-AsyncOperation")
     private String azureAsyncOperation;
 
     /*
      * The Location property.
      */
+    @Generated
     @JsonProperty(value = "Location")
     private String location;
 
@@ -42,6 +45,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
      * 
      * @return the azureAsyncOperation value.
      */
+    @Generated
     public String getAzureAsyncOperation() {
         return this.azureAsyncOperation;
     }
@@ -52,6 +56,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPutAsyncNoRetrycanceledHeaders object itself.
      */
+    @Generated
     public LROsPutAsyncNoRetrycanceledHeaders setAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
@@ -62,6 +67,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -72,6 +78,7 @@ public final class LROsPutAsyncNoRetrycanceledHeaders {
      * @param location the location value to set.
      * @return the LROsPutAsyncNoRetrycanceledHeaders object itself.
      */
+    @Generated
     public LROsPutAsyncNoRetrycanceledHeaders setLocation(String location) {
         this.location = location;
         return this;

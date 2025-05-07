@@ -5,6 +5,7 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class Error implements JsonSerializable<Error> {
     /*
      * The status property.
      */
+    @Generated
     private Integer status;
 
     /*
      * The message property.
      */
+    @Generated
     private String message;
 
     /**
      * Creates an instance of Error class.
      */
+    @Generated
     public Error() {
     }
 
@@ -37,6 +41,7 @@ public final class Error implements JsonSerializable<Error> {
      * 
      * @return the status value.
      */
+    @Generated
     public Integer getStatus() {
         return this.status;
     }
@@ -47,6 +52,7 @@ public final class Error implements JsonSerializable<Error> {
      * @param status the status value to set.
      * @return the Error object itself.
      */
+    @Generated
     public Error setStatus(Integer status) {
         this.status = status;
         return this;
@@ -57,6 +63,7 @@ public final class Error implements JsonSerializable<Error> {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }
@@ -67,6 +74,7 @@ public final class Error implements JsonSerializable<Error> {
      * @param message the message value to set.
      * @return the Error object itself.
      */
+    @Generated
     public Error setMessage(String message) {
         this.message = message;
         return this;
@@ -83,6 +91,7 @@ public final class Error implements JsonSerializable<Error> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public final class Error implements JsonSerializable<Error> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Error.
      */
+    @Generated
     public static Error fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Error deserializedError = new Error();

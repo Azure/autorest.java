@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class Sku {
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name")
     private String name;
 
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id")
     private String id;
 
     /**
      * Creates an instance of Sku class.
      */
+    @Generated
     public Sku() {
     }
 
@@ -35,6 +39,7 @@ public final class Sku {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -45,6 +50,7 @@ public final class Sku {
      * @param name the name value to set.
      * @return the Sku object itself.
      */
+    @Generated
     public Sku setName(String name) {
         this.name = name;
         return this;
@@ -55,6 +61,7 @@ public final class Sku {
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -65,6 +72,7 @@ public final class Sku {
      * @param id the id value to set.
      * @return the Sku object itself.
      */
+    @Generated
     public Sku setId(String id) {
         this.id = id;
         return this;

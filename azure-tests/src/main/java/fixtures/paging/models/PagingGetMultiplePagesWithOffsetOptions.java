@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,21 +15,25 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
     /*
      * Sets the maximum number of items to return in the response.
      */
+    @Generated
     private Integer maxresults;
 
     /*
      * Offset of return value
      */
+    @Generated
     private int offset;
 
     /*
      * Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      */
+    @Generated
     private Integer timeout;
 
     /**
      * Creates an instance of PagingGetMultiplePagesWithOffsetOptions class.
      */
+    @Generated
     public PagingGetMultiplePagesWithOffsetOptions() {
     }
 
@@ -37,6 +42,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
      * 
      * @return the maxresults value.
      */
+    @Generated
     public Integer getMaxresults() {
         return this.maxresults;
     }
@@ -47,6 +53,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
      * @param maxresults the maxresults value to set.
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
+    @Generated
     public PagingGetMultiplePagesWithOffsetOptions setMaxresults(Integer maxresults) {
         this.maxresults = maxresults;
         return this;
@@ -57,6 +64,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
      * 
      * @return the offset value.
      */
+    @Generated
     public int getOffset() {
         return this.offset;
     }
@@ -67,6 +75,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
      * @param offset the offset value to set.
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
+    @Generated
     public PagingGetMultiplePagesWithOffsetOptions setOffset(int offset) {
         this.offset = offset;
         return this;
@@ -78,6 +87,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
      * 
      * @return the timeout value.
      */
+    @Generated
     public Integer getTimeout() {
         return this.timeout;
     }
@@ -89,6 +99,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions {
      * @param timeout the timeout value to set.
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
      */
+    @Generated
     public PagingGetMultiplePagesWithOffsetOptions setTimeout(Integer timeout) {
         this.timeout = timeout;
         return this;

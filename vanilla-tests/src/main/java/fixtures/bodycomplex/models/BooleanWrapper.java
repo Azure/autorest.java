@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class BooleanWrapper {
     /*
      * The field_true property.
      */
+    @Generated
     @JsonProperty(value = "field_true")
     private Boolean fieldTrue;
 
     /*
      * The field_false property.
      */
+    @Generated
     @JsonProperty(value = "field_false")
     private Boolean fieldFalse;
 
     /**
      * Creates an instance of BooleanWrapper class.
      */
+    @Generated
     public BooleanWrapper() {
     }
 
@@ -35,6 +39,7 @@ public final class BooleanWrapper {
      * 
      * @return the fieldTrue value.
      */
+    @Generated
     public Boolean isFieldTrue() {
         return this.fieldTrue;
     }
@@ -45,6 +50,7 @@ public final class BooleanWrapper {
      * @param fieldTrue the fieldTrue value to set.
      * @return the BooleanWrapper object itself.
      */
+    @Generated
     public BooleanWrapper setFieldTrue(Boolean fieldTrue) {
         this.fieldTrue = fieldTrue;
         return this;
@@ -55,6 +61,7 @@ public final class BooleanWrapper {
      * 
      * @return the fieldFalse value.
      */
+    @Generated
     public Boolean isFieldFalse() {
         return this.fieldFalse;
     }
@@ -65,6 +72,7 @@ public final class BooleanWrapper {
      * @param fieldFalse the fieldFalse value to set.
      * @return the BooleanWrapper object itself.
      */
+    @Generated
     public BooleanWrapper setFieldFalse(Boolean fieldFalse) {
         this.fieldFalse = fieldFalse;
         return this;

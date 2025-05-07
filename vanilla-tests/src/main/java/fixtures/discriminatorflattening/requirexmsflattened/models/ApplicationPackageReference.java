@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.requirexmsflattened.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -16,6 +17,7 @@ public final class ApplicationPackageReference {
      * The ID of the application package to install. This must be inside the same batch account as the pool. This can
      * either be a reference to a specific version or the default version if one exists.
      */
+    @Generated
     @JsonProperty(value = "id", required = true)
     private String id;
 
@@ -23,12 +25,14 @@ public final class ApplicationPackageReference {
      * If this is omitted, and no default version is specified for this application, the request fails with the error
      * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
      */
+    @Generated
     @JsonProperty(value = "version")
     private String version;
 
     /**
      * Creates an instance of ApplicationPackageReference class.
      */
+    @Generated
     public ApplicationPackageReference() {
     }
 
@@ -38,6 +42,7 @@ public final class ApplicationPackageReference {
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -49,6 +54,7 @@ public final class ApplicationPackageReference {
      * @param id the id value to set.
      * @return the ApplicationPackageReference object itself.
      */
+    @Generated
     public ApplicationPackageReference setId(String id) {
         this.id = id;
         return this;
@@ -61,6 +67,7 @@ public final class ApplicationPackageReference {
      * 
      * @return the version value.
      */
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -73,6 +80,7 @@ public final class ApplicationPackageReference {
      * @param version the version value to set.
      * @return the ApplicationPackageReference object itself.
      */
+    @Generated
     public ApplicationPackageReference setVersion(String version) {
         this.version = version;
         return this;

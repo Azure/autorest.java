@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,6 +18,7 @@ public final class RetentionPolicy {
     /*
      * Indicates whether a retention policy is enabled for the storage service
      */
+    @Generated
     @JsonProperty(value = "Enabled", required = true)
     private boolean enabled;
 
@@ -24,12 +26,14 @@ public final class RetentionPolicy {
      * Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than
      * this value will be deleted
      */
+    @Generated
     @JsonProperty(value = "Days")
     private Integer days;
 
     /**
      * Creates an instance of RetentionPolicy class.
      */
+    @Generated
     public RetentionPolicy() {
     }
 
@@ -38,6 +42,7 @@ public final class RetentionPolicy {
      * 
      * @return the enabled value.
      */
+    @Generated
     public boolean isEnabled() {
         return this.enabled;
     }
@@ -48,6 +53,7 @@ public final class RetentionPolicy {
      * @param enabled the enabled value to set.
      * @return the RetentionPolicy object itself.
      */
+    @Generated
     public RetentionPolicy setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -59,6 +65,7 @@ public final class RetentionPolicy {
      * 
      * @return the days value.
      */
+    @Generated
     public Integer getDays() {
         return this.days;
     }
@@ -70,6 +77,7 @@ public final class RetentionPolicy {
      * @param days the days value to set.
      * @return the RetentionPolicy object itself.
      */
+    @Generated
     public RetentionPolicy setDays(Integer days) {
         this.days = days;
         return this;

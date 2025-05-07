@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -23,56 +24,67 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
     /*
      * Type of operation.
      */
+    @Generated
     private String kind = "OperationDetails";
 
     /*
      * Operation ID
      */
+    @Generated
     private String operationId;
 
     /*
      * Operation status.
      */
+    @Generated
     private OperationStatus status;
 
     /*
      * Operation progress (0-100).
      */
+    @Generated
     private Integer percentCompleted;
 
     /*
      * Date and time (UTC) when the operation was created.
      */
+    @Generated
     private OffsetDateTime createdDateTime;
 
     /*
      * Date and time (UTC) when the status was last updated.
      */
+    @Generated
     private OffsetDateTime lastUpdatedDateTime;
 
     /*
      * URL of the resource targeted by this operation.
      */
+    @Generated
     private String resourceLocation;
 
     /*
      * API version used to create this operation.
      */
+    @Generated
     private String apiVersion;
 
     /*
      * List of key-value tag attributes associated with the document model.
      */
+    @Generated
     private Map<String, String> tags;
 
     /*
      * Encountered error.
      */
+    @Generated
     private Error error;
 
     /**
      * Creates an instance of OperationDetails class.
      */
+    @Generated
     public OperationDetails() {
     }
 
@@ -81,6 +93,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the kind value.
      */
+    @Generated
     public String getKind() {
         return this.kind;
     }
@@ -90,6 +103,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the operationId value.
      */
+    @Generated
     public String getOperationId() {
         return this.operationId;
     }
@@ -100,6 +114,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param operationId the operationId value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setOperationId(String operationId) {
         this.operationId = operationId;
         return this;
@@ -110,6 +125,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the status value.
      */
+    @Generated
     public OperationStatus getStatus() {
         return this.status;
     }
@@ -120,6 +136,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param status the status value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setStatus(OperationStatus status) {
         this.status = status;
         return this;
@@ -130,6 +147,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the percentCompleted value.
      */
+    @Generated
     public Integer getPercentCompleted() {
         return this.percentCompleted;
     }
@@ -140,6 +158,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param percentCompleted the percentCompleted value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setPercentCompleted(Integer percentCompleted) {
         this.percentCompleted = percentCompleted;
         return this;
@@ -150,6 +169,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the createdDateTime value.
      */
+    @Generated
     public OffsetDateTime getCreatedDateTime() {
         return this.createdDateTime;
     }
@@ -160,6 +180,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param createdDateTime the createdDateTime value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setCreatedDateTime(OffsetDateTime createdDateTime) {
         this.createdDateTime = createdDateTime;
         return this;
@@ -170,6 +191,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the lastUpdatedDateTime value.
      */
+    @Generated
     public OffsetDateTime getLastUpdatedDateTime() {
         return this.lastUpdatedDateTime;
     }
@@ -180,6 +202,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param lastUpdatedDateTime the lastUpdatedDateTime value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setLastUpdatedDateTime(OffsetDateTime lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
         return this;
@@ -190,6 +213,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the resourceLocation value.
      */
+    @Generated
     public String getResourceLocation() {
         return this.resourceLocation;
     }
@@ -200,6 +224,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param resourceLocation the resourceLocation value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setResourceLocation(String resourceLocation) {
         this.resourceLocation = resourceLocation;
         return this;
@@ -210,6 +235,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the apiVersion value.
      */
+    @Generated
     public String getApiVersion() {
         return this.apiVersion;
     }
@@ -220,6 +246,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param apiVersion the apiVersion value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
         return this;
@@ -230,6 +257,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the tags value.
      */
+    @Generated
     public Map<String, String> getTags() {
         return this.tags;
     }
@@ -240,6 +268,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param tags the tags value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
@@ -250,6 +279,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * 
      * @return the error value.
      */
+    @Generated
     public Error getError() {
         return this.error;
     }
@@ -260,6 +290,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param error the error value to set.
      * @return the OperationDetails object itself.
      */
+    @Generated
     public OperationDetails setError(Error error) {
         this.error = error;
         return this;
@@ -268,6 +299,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -297,6 +329,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the OperationDetails.
      */
+    @Generated
     public static OperationDetails fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -326,6 +359,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
         });
     }
 
+    @Generated
     static OperationDetails fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OperationDetails deserializedOperationDetails = new OperationDetails();

@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,21 +20,25 @@ public final class InnerError implements JsonSerializable<InnerError> {
     /*
      * Error code.
      */
+    @Generated
     private String code;
 
     /*
      * Error message.
      */
+    @Generated
     private String message;
 
     /*
      * Detailed error.
      */
+    @Generated
     private InnerError innererror;
 
     /**
      * Creates an instance of InnerError class.
      */
+    @Generated
     public InnerError() {
     }
 
@@ -42,6 +47,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
      * 
      * @return the code value.
      */
+    @Generated
     public String getCode() {
         return this.code;
     }
@@ -52,6 +58,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
      * @param code the code value to set.
      * @return the InnerError object itself.
      */
+    @Generated
     public InnerError setCode(String code) {
         this.code = code;
         return this;
@@ -62,6 +69,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }
@@ -72,6 +80,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
      * @param message the message value to set.
      * @return the InnerError object itself.
      */
+    @Generated
     public InnerError setMessage(String message) {
         this.message = message;
         return this;
@@ -82,6 +91,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
      * 
      * @return the innererror value.
      */
+    @Generated
     public InnerError getInnererror() {
         return this.innererror;
     }
@@ -92,6 +102,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
      * @param innererror the innererror value to set.
      * @return the InnerError object itself.
      */
+    @Generated
     public InnerError setInnererror(InnerError innererror) {
         this.innererror = innererror;
         return this;
@@ -100,6 +111,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -118,6 +130,7 @@ public final class InnerError implements JsonSerializable<InnerError> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the InnerError.
      */
+    @Generated
     public static InnerError fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             InnerError deserializedInnerError = new InnerError();

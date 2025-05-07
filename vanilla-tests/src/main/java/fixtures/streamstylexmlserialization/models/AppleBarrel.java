@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,16 +23,19 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
     /*
      * The GoodApples property.
      */
+    @Generated
     private List<String> goodApples;
 
     /*
      * The BadApples property.
      */
+    @Generated
     private List<String> badApples;
 
     /**
      * Creates an instance of AppleBarrel class.
      */
+    @Generated
     public AppleBarrel() {
     }
 
@@ -41,6 +44,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * 
      * @return the goodApples value.
      */
+    @Generated
     public List<String> getGoodApples() {
         if (this.goodApples == null) {
             this.goodApples = new ArrayList<>();
@@ -54,6 +58,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * @param goodApples the goodApples value to set.
      * @return the AppleBarrel object itself.
      */
+    @Generated
     public AppleBarrel setGoodApples(List<String> goodApples) {
         this.goodApples = goodApples;
         return this;
@@ -64,6 +69,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * 
      * @return the badApples value.
      */
+    @Generated
     public List<String> getBadApples() {
         if (this.badApples == null) {
             this.badApples = new ArrayList<>();
@@ -77,6 +83,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * @param badApples the badApples value to set.
      * @return the AppleBarrel object itself.
      */
+    @Generated
     public AppleBarrel setBadApples(List<String> badApples) {
         this.badApples = badApples;
         return this;
@@ -90,14 +97,16 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AppleBarrel" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "AppleBarrel" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         if (this.goodApples != null) {
             xmlWriter.writeStartElement("GoodApples");
@@ -124,6 +133,7 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * to XML null.
      * @throws XMLStreamException If an error occurs while reading the AppleBarrel.
      */
+    @Generated
     public static AppleBarrel fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -138,8 +148,10 @@ public final class AppleBarrel implements XmlSerializable<AppleBarrel> {
      * to XML null.
      * @throws XMLStreamException If an error occurs while reading the AppleBarrel.
      */
+    @Generated
     public static AppleBarrel fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AppleBarrel" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "AppleBarrel" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             AppleBarrel deserializedAppleBarrel = new AppleBarrel();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

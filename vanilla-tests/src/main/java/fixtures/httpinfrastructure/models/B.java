@@ -5,6 +5,7 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,11 +19,13 @@ public final class B extends MyException {
     /*
      * The textStatusCode property.
      */
+    @Generated
     private String textStatusCode;
 
     /**
      * Creates an instance of B class.
      */
+    @Generated
     public B() {
     }
 
@@ -31,6 +34,7 @@ public final class B extends MyException {
      * 
      * @return the textStatusCode value.
      */
+    @Generated
     public String getTextStatusCode() {
         return this.textStatusCode;
     }
@@ -41,6 +45,7 @@ public final class B extends MyException {
      * @param textStatusCode the textStatusCode value to set.
      * @return the B object itself.
      */
+    @Generated
     public B setTextStatusCode(String textStatusCode) {
         this.textStatusCode = textStatusCode;
         return this;
@@ -49,6 +54,7 @@ public final class B extends MyException {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public B setStatusCode(String statusCode) {
         super.setStatusCode(statusCode);
@@ -67,6 +73,7 @@ public final class B extends MyException {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -83,6 +90,7 @@ public final class B extends MyException {
      * null.
      * @throws IOException If an error occurs while reading the B.
      */
+    @Generated
     public static B fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             B deserializedB = new B();

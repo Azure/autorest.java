@@ -4,6 +4,7 @@
 
 package fixtures.modelflattening.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -15,56 +16,67 @@ public final class FlattenedProductPropertiesProvisioningStateValues
     /**
      * Static value Succeeded for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues SUCCEEDED = fromString("Succeeded");
 
     /**
      * Static value Failed for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues FAILED = fromString("Failed");
 
     /**
      * Static value canceled for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues CANCELED = fromString("canceled");
 
     /**
      * Static value Accepted for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues ACCEPTED = fromString("Accepted");
 
     /**
      * Static value Creating for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues CREATING = fromString("Creating");
 
     /**
      * Static value Created for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues CREATED = fromString("Created");
 
     /**
      * Static value Updating for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues UPDATING = fromString("Updating");
 
     /**
      * Static value Updated for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues UPDATED = fromString("Updated");
 
     /**
      * Static value Deleting for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues DELETING = fromString("Deleting");
 
     /**
      * Static value Deleted for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues DELETED = fromString("Deleted");
 
     /**
      * Static value OK for FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final FlattenedProductPropertiesProvisioningStateValues OK = fromString("OK");
 
     /**
@@ -72,6 +84,7 @@ public final class FlattenedProductPropertiesProvisioningStateValues
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public FlattenedProductPropertiesProvisioningStateValues() {
     }
@@ -82,6 +95,7 @@ public final class FlattenedProductPropertiesProvisioningStateValues
      * @param name a name to look for.
      * @return the corresponding FlattenedProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static FlattenedProductPropertiesProvisioningStateValues fromString(String name) {
         return fromString(name, FlattenedProductPropertiesProvisioningStateValues.class);
     }
@@ -91,6 +105,7 @@ public final class FlattenedProductPropertiesProvisioningStateValues
      * 
      * @return known FlattenedProductPropertiesProvisioningStateValues values.
      */
+    @Generated
     public static Collection<FlattenedProductPropertiesProvisioningStateValues> values() {
         return values(FlattenedProductPropertiesProvisioningStateValues.class);
     }

@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,11 +19,13 @@ public final class ProductUrl extends GenericUrl {
     /*
      * URL value.
      */
+    @Generated
     private String odataValue;
 
     /**
      * Creates an instance of ProductUrl class.
      */
+    @Generated
     public ProductUrl() {
     }
 
@@ -31,6 +34,7 @@ public final class ProductUrl extends GenericUrl {
      * 
      * @return the odataValue value.
      */
+    @Generated
     public String getOdataValue() {
         return this.odataValue;
     }
@@ -41,6 +45,7 @@ public final class ProductUrl extends GenericUrl {
      * @param odataValue the odataValue value to set.
      * @return the ProductUrl object itself.
      */
+    @Generated
     public ProductUrl setOdataValue(String odataValue) {
         this.odataValue = odataValue;
         return this;
@@ -49,6 +54,7 @@ public final class ProductUrl extends GenericUrl {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public ProductUrl setGenericValue(String genericValue) {
         super.setGenericValue(genericValue);
@@ -67,6 +73,7 @@ public final class ProductUrl extends GenericUrl {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -83,6 +90,7 @@ public final class ProductUrl extends GenericUrl {
      * to JSON null.
      * @throws IOException If an error occurs while reading the ProductUrl.
      */
+    @Generated
     public static ProductUrl fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ProductUrl deserializedProductUrl = new ProductUrl();

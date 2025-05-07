@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -23,21 +24,25 @@ public final class Banana implements XmlSerializable<Banana> {
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /*
      * The flavor property.
      */
+    @Generated
     private String flavor;
 
     /*
      * The time at which you should reconsider eating this banana
      */
+    @Generated
     private OffsetDateTime expiration;
 
     /**
      * Creates an instance of Banana class.
      */
+    @Generated
     public Banana() {
     }
 
@@ -46,6 +51,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -56,6 +62,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * @param name the name value to set.
      * @return the Banana object itself.
      */
+    @Generated
     public Banana setName(String name) {
         this.name = name;
         return this;
@@ -66,6 +73,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * 
      * @return the flavor value.
      */
+    @Generated
     public String getFlavor() {
         return this.flavor;
     }
@@ -76,6 +84,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * @param flavor the flavor value to set.
      * @return the Banana object itself.
      */
+    @Generated
     public Banana setFlavor(String flavor) {
         this.flavor = flavor;
         return this;
@@ -86,6 +95,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * 
      * @return the expiration value.
      */
+    @Generated
     public OffsetDateTime getExpiration() {
         return this.expiration;
     }
@@ -96,6 +106,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * @param expiration the expiration value to set.
      * @return the Banana object itself.
      */
+    @Generated
     public Banana setExpiration(OffsetDateTime expiration) {
         this.expiration = expiration;
         return this;
@@ -109,14 +120,16 @@ public final class Banana implements XmlSerializable<Banana> {
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "banana" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "banana" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("name", this.name);
         xmlWriter.writeStringElement("flavor", this.flavor);
@@ -133,6 +146,7 @@ public final class Banana implements XmlSerializable<Banana> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Banana.
      */
+    @Generated
     public static Banana fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -147,8 +161,9 @@ public final class Banana implements XmlSerializable<Banana> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Banana.
      */
+    @Generated
     public static Banana fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "banana" : rootElementName;
+        String finalRootElementName = rootElementName == null || rootElementName.isEmpty() ? "banana" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Banana deserializedBanana = new Banana();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

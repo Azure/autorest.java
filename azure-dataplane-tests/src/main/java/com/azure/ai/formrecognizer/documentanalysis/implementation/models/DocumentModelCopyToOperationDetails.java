@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
@@ -22,16 +23,19 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /*
      * Type of operation.
      */
+    @Generated
     private String kind = "documentModelCopyTo";
 
     /*
      * Operation result upon success.
      */
+    @Generated
     private DocumentModelDetails result;
 
     /**
      * Creates an instance of DocumentModelCopyToOperationDetails class.
      */
+    @Generated
     public DocumentModelCopyToOperationDetails() {
     }
 
@@ -40,6 +44,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * 
      * @return the kind value.
      */
+    @Generated
     @Override
     public String getKind() {
         return this.kind;
@@ -50,6 +55,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * 
      * @return the result value.
      */
+    @Generated
     public DocumentModelDetails getResult() {
         return this.result;
     }
@@ -60,6 +66,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * @param result the result value to set.
      * @return the DocumentModelCopyToOperationDetails object itself.
      */
+    @Generated
     public DocumentModelCopyToOperationDetails setResult(DocumentModelDetails result) {
         this.result = result;
         return this;
@@ -68,6 +75,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setOperationId(String operationId) {
         super.setOperationId(operationId);
@@ -77,6 +85,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setStatus(OperationStatus status) {
         super.setStatus(status);
@@ -86,6 +95,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setPercentCompleted(Integer percentCompleted) {
         super.setPercentCompleted(percentCompleted);
@@ -95,6 +105,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setCreatedDateTime(OffsetDateTime createdDateTime) {
         super.setCreatedDateTime(createdDateTime);
@@ -104,6 +115,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setLastUpdatedDateTime(OffsetDateTime lastUpdatedDateTime) {
         super.setLastUpdatedDateTime(lastUpdatedDateTime);
@@ -113,6 +125,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setResourceLocation(String resourceLocation) {
         super.setResourceLocation(resourceLocation);
@@ -122,6 +135,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setApiVersion(String apiVersion) {
         super.setApiVersion(apiVersion);
@@ -131,6 +145,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setTags(Map<String, String> tags) {
         super.setTags(tags);
@@ -140,6 +155,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public DocumentModelCopyToOperationDetails setError(Error error) {
         super.setError(error);
@@ -149,6 +165,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -179,6 +196,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentModelCopyToOperationDetails.
      */
+    @Generated
     public static DocumentModelCopyToOperationDetails fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentModelCopyToOperationDetails deserializedDocumentModelCopyToOperationDetails

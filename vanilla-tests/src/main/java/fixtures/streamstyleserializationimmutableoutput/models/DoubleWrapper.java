@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationimmutableoutput.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     /*
      * The field1 property.
      */
+    @Generated
     private Double field1;
 
     /*
      * The field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
      */
+    @Generated
     private Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
 
     /**
      * Creates an instance of DoubleWrapper class.
      */
+    @Generated
     public DoubleWrapper() {
     }
 
@@ -37,6 +41,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * 
      * @return the field1 value.
      */
+    @Generated
     public Double getField1() {
         return this.field1;
     }
@@ -47,6 +52,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * @param field1 the field1 value to set.
      * @return the DoubleWrapper object itself.
      */
+    @Generated
     public DoubleWrapper setField1(Double field1) {
         this.field1 = field1;
         return this;
@@ -58,6 +64,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * 
      * @return the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value.
      */
+    @Generated
     public Double getField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose() {
         return this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
     }
@@ -70,6 +77,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set.
      * @return the DoubleWrapper object itself.
      */
+    @Generated
     public DoubleWrapper setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
         Double field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose) {
         this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose
@@ -88,6 +96,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -106,6 +115,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DoubleWrapper.
      */
+    @Generated
     public static DoubleWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DoubleWrapper deserializedDoubleWrapper = new DoubleWrapper();

@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,16 +21,19 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
      * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San
      * Francisco will have a different product_id than uberX in Los Angeles.
      */
+    @Generated
     private String productId;
 
     /*
      * Description of product.
      */
+    @Generated
     private String description;
 
     /**
      * Creates an instance of BaseProduct class.
      */
+    @Generated
     public BaseProduct() {
     }
 
@@ -39,6 +43,7 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
      * 
      * @return the productId value.
      */
+    @Generated
     public String getProductId() {
         return this.productId;
     }
@@ -50,6 +55,7 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
      * @param productId the productId value to set.
      * @return the BaseProduct object itself.
      */
+    @Generated
     public BaseProduct setProductId(String productId) {
         this.productId = productId;
         return this;
@@ -60,6 +66,7 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
      * 
      * @return the description value.
      */
+    @Generated
     public String getDescription() {
         return this.description;
     }
@@ -70,6 +77,7 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
      * @param description the description value to set.
      * @return the BaseProduct object itself.
      */
+    @Generated
     public BaseProduct setDescription(String description) {
         this.description = description;
         return this;
@@ -89,6 +97,7 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -106,6 +115,7 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the BaseProduct.
      */
+    @Generated
     public static BaseProduct fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BaseProduct deserializedBaseProduct = new BaseProduct();

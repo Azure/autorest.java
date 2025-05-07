@@ -5,6 +5,7 @@
 package fixtures.constants.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,11 +21,13 @@ public final class ModelAsStringRequiredTwoValueNoDefault
     /*
      * The parameter property.
      */
+    @Generated
     private ModelAsStringRequiredTwoValueNoDefaultEnum parameter;
 
     /**
      * Creates an instance of ModelAsStringRequiredTwoValueNoDefault class.
      */
+    @Generated
     public ModelAsStringRequiredTwoValueNoDefault() {
     }
 
@@ -33,6 +36,7 @@ public final class ModelAsStringRequiredTwoValueNoDefault
      * 
      * @return the parameter value.
      */
+    @Generated
     public ModelAsStringRequiredTwoValueNoDefaultEnum getParameter() {
         return this.parameter;
     }
@@ -43,6 +47,7 @@ public final class ModelAsStringRequiredTwoValueNoDefault
      * @param parameter the parameter value to set.
      * @return the ModelAsStringRequiredTwoValueNoDefault object itself.
      */
+    @Generated
     public ModelAsStringRequiredTwoValueNoDefault setParameter(ModelAsStringRequiredTwoValueNoDefaultEnum parameter) {
         this.parameter = parameter;
         return this;
@@ -63,6 +68,7 @@ public final class ModelAsStringRequiredTwoValueNoDefault
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -79,6 +85,7 @@ public final class ModelAsStringRequiredTwoValueNoDefault
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ModelAsStringRequiredTwoValueNoDefault.
      */
+    @Generated
     public static ModelAsStringRequiredTwoValueNoDefault fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ModelAsStringRequiredTwoValueNoDefault deserializedModelAsStringRequiredTwoValueNoDefault

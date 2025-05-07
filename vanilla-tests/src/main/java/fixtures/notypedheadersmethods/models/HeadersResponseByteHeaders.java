@@ -5,6 +5,7 @@
 package fixtures.notypedheadersmethods.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.CoreUtils;
@@ -18,6 +19,7 @@ public final class HeadersResponseByteHeaders {
     /*
      * The value property.
      */
+    @Generated
     private byte[] value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -42,6 +44,7 @@ public final class HeadersResponseByteHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public byte[] getValue() {
         return CoreUtils.clone(this.value);
     }
@@ -52,6 +55,7 @@ public final class HeadersResponseByteHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseByteHeaders object itself.
      */
+    @Generated
     public HeadersResponseByteHeaders setValue(byte[] value) {
         this.value = CoreUtils.clone(value);
         return this;

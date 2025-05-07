@@ -5,6 +5,7 @@
 package fixtures.azurespecials.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,11 +15,13 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
     /*
      * The fooRequestId
      */
+    @Generated
     private String fooClientRequestId;
 
     /**
      * Creates an instance of HeaderCustomNamedRequestIdParamGroupingParameters class.
      */
+    @Generated
     public HeaderCustomNamedRequestIdParamGroupingParameters() {
     }
 
@@ -27,6 +30,7 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
      * 
      * @return the fooClientRequestId value.
      */
+    @Generated
     public String getFooClientRequestId() {
         return this.fooClientRequestId;
     }
@@ -37,6 +41,7 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
      * @param fooClientRequestId the fooClientRequestId value to set.
      * @return the HeaderCustomNamedRequestIdParamGroupingParameters object itself.
      */
+    @Generated
     public HeaderCustomNamedRequestIdParamGroupingParameters setFooClientRequestId(String fooClientRequestId) {
         this.fooClientRequestId = fooClientRequestId;
         return this;

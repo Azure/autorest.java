@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -22,16 +23,19 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
     /*
      * The field property.
      */
+    @Generated
     private DateTimeRfc1123 field;
 
     /*
      * The now property.
      */
+    @Generated
     private DateTimeRfc1123 now;
 
     /**
      * Creates an instance of Datetimerfc1123Wrapper class.
      */
+    @Generated
     public Datetimerfc1123Wrapper() {
     }
 
@@ -40,6 +44,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      * 
      * @return the field value.
      */
+    @Generated
     public OffsetDateTime getField() {
         if (this.field == null) {
             return null;
@@ -53,6 +58,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      * @param field the field value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
+    @Generated
     public Datetimerfc1123Wrapper setField(OffsetDateTime field) {
         if (field == null) {
             this.field = null;
@@ -67,6 +73,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      * 
      * @return the now value.
      */
+    @Generated
     public OffsetDateTime getNow() {
         if (this.now == null) {
             return null;
@@ -80,6 +87,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      * @param now the now value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
+    @Generated
     public Datetimerfc1123Wrapper setNow(OffsetDateTime now) {
         if (now == null) {
             this.now = null;
@@ -92,6 +100,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -108,6 +117,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      * was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Datetimerfc1123Wrapper.
      */
+    @Generated
     public static Datetimerfc1123Wrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Datetimerfc1123Wrapper deserializedDatetimerfc1123Wrapper = new Datetimerfc1123Wrapper();

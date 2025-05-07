@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -16,12 +17,14 @@ public final class DictionaryWrapper {
     /*
      * Dictionary of <string>
      */
+    @Generated
     @JsonProperty(value = "defaultProgram")
     private Map<String, String> defaultProgram;
 
     /**
      * Creates an instance of DictionaryWrapper class.
      */
+    @Generated
     public DictionaryWrapper() {
     }
 
@@ -30,6 +33,7 @@ public final class DictionaryWrapper {
      * 
      * @return the defaultProgram value.
      */
+    @Generated
     public Map<String, String> getDefaultProgram() {
         return this.defaultProgram;
     }
@@ -40,6 +44,7 @@ public final class DictionaryWrapper {
      * @param defaultProgram the defaultProgram value to set.
      * @return the DictionaryWrapper object itself.
      */
+    @Generated
     public DictionaryWrapper setDefaultProgram(Map<String, String> defaultProgram) {
         this.defaultProgram = defaultProgram;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,11 +19,13 @@ public final class Horse extends Pet {
     /*
      * The isAShowHorse property.
      */
+    @Generated
     private Boolean isAShowHorse;
 
     /**
      * Creates an instance of Horse class.
      */
+    @Generated
     public Horse() {
     }
 
@@ -31,6 +34,7 @@ public final class Horse extends Pet {
      * 
      * @return the isAShowHorse value.
      */
+    @Generated
     public Boolean isAShowHorse() {
         return this.isAShowHorse;
     }
@@ -41,6 +45,7 @@ public final class Horse extends Pet {
      * @param isAShowHorse the isAShowHorse value to set.
      * @return the Horse object itself.
      */
+    @Generated
     public Horse setIsAShowHorse(Boolean isAShowHorse) {
         this.isAShowHorse = isAShowHorse;
         return this;
@@ -49,6 +54,7 @@ public final class Horse extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Horse setName(String name) {
         super.setName(name);
@@ -70,6 +76,7 @@ public final class Horse extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -87,6 +94,7 @@ public final class Horse extends Pet {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Horse.
      */
+    @Generated
     public static Horse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Horse deserializedHorse = new Horse();

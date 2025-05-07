@@ -4,6 +4,7 @@
 
 package fixtures.requiredfieldsascotrargstransformation.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
@@ -31,31 +32,37 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
     /*
      * The rfc1123NonRequired property.
      */
+    @Generated
     private DateTimeRfc1123 rfc1123NonRequired;
 
     /*
      * The rfc1123Required property.
      */
+    @Generated
     private final DateTimeRfc1123 rfc1123Required;
 
     /*
      * The nameRequired property.
      */
+    @Generated
     private final String nameRequired;
 
     /*
      * The urlBase64EncodedRequired property.
      */
+    @Generated
     private final Base64Url urlBase64EncodedRequired;
 
     /*
      * The unixTimeLongRequired property.
      */
+    @Generated
     private final long unixTimeLongRequired;
 
     /*
      * The unixTimeDateTimeRequired property.
      */
+    @Generated
     private final OffsetDateTime unixTimeDateTimeRequired;
 
     /**
@@ -67,6 +74,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * @param unixTimeLongRequired the unixTimeLongRequired value to set.
      * @param unixTimeDateTimeRequired the unixTimeDateTimeRequired value to set.
      */
+    @Generated
     protected TransformationAsRequiredFields(OffsetDateTime rfc1123Required, String nameRequired,
         byte[] urlBase64EncodedRequired, OffsetDateTime unixTimeLongRequired, OffsetDateTime unixTimeDateTimeRequired) {
         if (rfc1123Required == null) {
@@ -93,6 +101,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * 
      * @return the rfc1123NonRequired value.
      */
+    @Generated
     public OffsetDateTime getRfc1123NonRequired() {
         if (this.rfc1123NonRequired == null) {
             return null;
@@ -106,6 +115,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * @param rfc1123NonRequired the rfc1123NonRequired value to set.
      * @return the TransformationAsRequiredFields object itself.
      */
+    @Generated
     TransformationAsRequiredFields setRfc1123NonRequired(OffsetDateTime rfc1123NonRequired) {
         if (rfc1123NonRequired == null) {
             this.rfc1123NonRequired = null;
@@ -120,6 +130,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * 
      * @return the rfc1123Required value.
      */
+    @Generated
     public OffsetDateTime getRfc1123Required() {
         if (this.rfc1123Required == null) {
             return null;
@@ -132,6 +143,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * 
      * @return the nameRequired value.
      */
+    @Generated
     public String getNameRequired() {
         return this.nameRequired;
     }
@@ -141,6 +153,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * 
      * @return the urlBase64EncodedRequired value.
      */
+    @Generated
     public byte[] getUrlBase64EncodedRequired() {
         if (this.urlBase64EncodedRequired == null) {
             return EMPTY_BYTE_ARRAY;
@@ -153,6 +166,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * 
      * @return the unixTimeLongRequired value.
      */
+    @Generated
     public OffsetDateTime getUnixTimeLongRequired() {
         return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.unixTimeLongRequired), ZoneOffset.UTC);
     }
@@ -162,6 +176,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * 
      * @return the unixTimeDateTimeRequired value.
      */
+    @Generated
     public OffsetDateTime getUnixTimeDateTimeRequired() {
         return this.unixTimeDateTimeRequired;
     }
@@ -197,6 +212,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -221,6 +237,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the TransformationAsRequiredFields.
      */
+    @Generated
     public static TransformationAsRequiredFields fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean rfc1123RequiredFound = false;

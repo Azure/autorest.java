@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +25,7 @@ public class MyBaseType {
     /*
      * The kind property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "kind", required = true)
     private MyKind kind = MyKind.fromString("MyBaseType");
@@ -31,18 +33,21 @@ public class MyBaseType {
     /*
      * The propB1 property.
      */
+    @Generated
     @JsonProperty(value = "propB1")
     private String propB1;
 
     /*
      * The propBH1 property.
      */
+    @Generated
     @JsonProperty(value = "helper.propBH1")
     private String propBH1;
 
     /**
      * Creates an instance of MyBaseType class.
      */
+    @Generated
     protected MyBaseType() {
     }
 
@@ -51,6 +56,7 @@ public class MyBaseType {
      * 
      * @return the kind value.
      */
+    @Generated
     public MyKind getKind() {
         return this.kind;
     }
@@ -60,6 +66,7 @@ public class MyBaseType {
      * 
      * @return the propB1 value.
      */
+    @Generated
     public String getPropB1() {
         return this.propB1;
     }
@@ -69,6 +76,7 @@ public class MyBaseType {
      * 
      * @return the propBH1 value.
      */
+    @Generated
     public String getPropBH1() {
         return this.propBH1;
     }

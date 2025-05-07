@@ -4,6 +4,7 @@
 
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,6 +15,7 @@ public final class ApiVersion extends ExpandableStringEnum<ApiVersion> {
     /**
      * Static value 2022-08-31 for ApiVersion.
      */
+    @Generated
     public static final ApiVersion TWO_THOUSAND_TWENTY_TWO0831 = fromString("2022-08-31");
 
     /**
@@ -21,6 +23,7 @@ public final class ApiVersion extends ExpandableStringEnum<ApiVersion> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public ApiVersion() {
     }
@@ -31,6 +34,7 @@ public final class ApiVersion extends ExpandableStringEnum<ApiVersion> {
      * @param name a name to look for.
      * @return the corresponding ApiVersion.
      */
+    @Generated
     public static ApiVersion fromString(String name) {
         return fromString(name, ApiVersion.class);
     }
@@ -40,6 +44,7 @@ public final class ApiVersion extends ExpandableStringEnum<ApiVersion> {
      * 
      * @return known ApiVersion values.
      */
+    @Generated
     public static Collection<ApiVersion> values() {
         return values(ApiVersion.class);
     }

@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -21,17 +21,20 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
     /*
      * Indicates whether a retention policy is enabled for the storage service
      */
+    @Generated
     private boolean enabled;
 
     /*
      * Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than
      * this value will be deleted
      */
+    @Generated
     private Integer days;
 
     /**
      * Creates an instance of RetentionPolicy class.
      */
+    @Generated
     public RetentionPolicy() {
     }
 
@@ -40,6 +43,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * 
      * @return the enabled value.
      */
+    @Generated
     public boolean isEnabled() {
         return this.enabled;
     }
@@ -50,6 +54,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * @param enabled the enabled value to set.
      * @return the RetentionPolicy object itself.
      */
+    @Generated
     public RetentionPolicy setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -61,6 +66,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * 
      * @return the days value.
      */
+    @Generated
     public Integer getDays() {
         return this.days;
     }
@@ -72,6 +78,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * @param days the days value to set.
      * @return the RetentionPolicy object itself.
      */
+    @Generated
     public RetentionPolicy setDays(Integer days) {
         this.days = days;
         return this;
@@ -85,14 +92,16 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "RetentionPolicy" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "RetentionPolicy" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeBooleanElement("Enabled", this.enabled);
         xmlWriter.writeNumberElement("Days", this.days);
@@ -107,6 +116,7 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the RetentionPolicy.
      */
+    @Generated
     public static RetentionPolicy fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -121,8 +131,10 @@ public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the RetentionPolicy.
      */
+    @Generated
     public static RetentionPolicy fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "RetentionPolicy" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "RetentionPolicy" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             RetentionPolicy deserializedRetentionPolicy = new RetentionPolicy();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

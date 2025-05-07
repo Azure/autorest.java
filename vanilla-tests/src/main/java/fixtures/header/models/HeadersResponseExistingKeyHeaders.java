@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HeadersResponseExistingKeyHeaders {
     /*
      * The User-Agent property.
      */
+    @Generated
     private String userAgent;
 
     // HttpHeaders containing the raw property values.
@@ -33,6 +35,7 @@ public final class HeadersResponseExistingKeyHeaders {
      * 
      * @return the userAgent value.
      */
+    @Generated
     public String getUserAgent() {
         return this.userAgent;
     }
@@ -43,6 +46,7 @@ public final class HeadersResponseExistingKeyHeaders {
      * @param userAgent the userAgent value to set.
      * @return the HeadersResponseExistingKeyHeaders object itself.
      */
+    @Generated
     public HeadersResponseExistingKeyHeaders setUserAgent(String userAgent) {
         this.userAgent = userAgent;
         return this;

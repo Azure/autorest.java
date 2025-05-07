@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +18,7 @@ public final class XmlsGetHeadersHeaders {
     /*
      * The Custom-Header property.
      */
+    @Generated
     @JsonProperty(value = "Custom-Header")
     private String customHeader;
 
@@ -37,6 +39,7 @@ public final class XmlsGetHeadersHeaders {
      * 
      * @return the customHeader value.
      */
+    @Generated
     public String getCustomHeader() {
         return this.customHeader;
     }
@@ -47,6 +50,7 @@ public final class XmlsGetHeadersHeaders {
      * @param customHeader the customHeader value to set.
      * @return the XmlsGetHeadersHeaders object itself.
      */
+    @Generated
     public XmlsGetHeadersHeaders setCustomHeader(String customHeader) {
         this.customHeader = customHeader;
         return this;

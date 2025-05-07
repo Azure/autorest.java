@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
@@ -26,6 +27,7 @@ public final class Cookiecuttershark extends Shark {
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
+    @Generated
     public Cookiecuttershark(float length, OffsetDateTime birthday) {
         super(length, birthday);
         this.fishtype = "cookiecuttershark";
@@ -34,6 +36,7 @@ public final class Cookiecuttershark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cookiecuttershark setAge(Integer age) {
         super.setAge(age);
@@ -43,6 +46,7 @@ public final class Cookiecuttershark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cookiecuttershark setSpecies(String species) {
         super.setSpecies(species);
@@ -52,6 +56,7 @@ public final class Cookiecuttershark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cookiecuttershark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -79,6 +84,7 @@ public final class Cookiecuttershark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -95,6 +101,7 @@ public final class Cookiecuttershark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Cookiecuttershark.
      */
+    @Generated
     public static Cookiecuttershark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;

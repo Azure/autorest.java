@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class CustomParameterGroup {
     /*
      * Sets the api version to use.
      */
+    @Generated
     private String apiVersion;
 
     /*
      * Sets the tenant to use.
      */
+    @Generated
     private String tenant;
 
     /**
      * Creates an instance of CustomParameterGroup class.
      */
+    @Generated
     public CustomParameterGroup() {
     }
 
@@ -32,6 +36,7 @@ public final class CustomParameterGroup {
      * 
      * @return the apiVersion value.
      */
+    @Generated
     public String getApiVersion() {
         return this.apiVersion;
     }
@@ -42,6 +47,7 @@ public final class CustomParameterGroup {
      * @param apiVersion the apiVersion value to set.
      * @return the CustomParameterGroup object itself.
      */
+    @Generated
     public CustomParameterGroup setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
         return this;
@@ -52,6 +58,7 @@ public final class CustomParameterGroup {
      * 
      * @return the tenant value.
      */
+    @Generated
     public String getTenant() {
         return this.tenant;
     }
@@ -62,6 +69,7 @@ public final class CustomParameterGroup {
      * @param tenant the tenant value to set.
      * @return the CustomParameterGroup object itself.
      */
+    @Generated
     public CustomParameterGroup setTenant(String tenant) {
         this.tenant = tenant;
         return this;

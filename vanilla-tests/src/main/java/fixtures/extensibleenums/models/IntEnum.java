@@ -4,6 +4,7 @@
 
 package fixtures.extensibleenums.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -15,16 +16,19 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
      * This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for
      * readability. Please wrap. This should wrap.
      */
+    @Generated
     public static final IntEnum ONE = fromString("1");
 
     /**
      * two.
      */
+    @Generated
     public static final IntEnum TWO = fromString("2");
 
     /**
      * three.
      */
+    @Generated
     public static final IntEnum THREE = fromString("3");
 
     /**
@@ -32,6 +36,7 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public IntEnum() {
     }
@@ -42,6 +47,7 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
      * @param name a name to look for.
      * @return the corresponding IntEnum.
      */
+    @Generated
     public static IntEnum fromString(String name) {
         return fromString(name, IntEnum.class);
     }
@@ -51,6 +57,7 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
      * 
      * @return known IntEnum values.
      */
+    @Generated
     public static Collection<IntEnum> values() {
         return values(IntEnum.class);
     }

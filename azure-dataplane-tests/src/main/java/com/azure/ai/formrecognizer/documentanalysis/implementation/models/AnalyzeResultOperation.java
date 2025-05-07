@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -22,31 +23,37 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
     /*
      * Operation status.
      */
+    @Generated
     private AnalyzeResultOperationStatus status;
 
     /*
      * Date and time (UTC) when the analyze operation was submitted.
      */
+    @Generated
     private OffsetDateTime createdDateTime;
 
     /*
      * Date and time (UTC) when the status was last updated.
      */
+    @Generated
     private OffsetDateTime lastUpdatedDateTime;
 
     /*
      * Encountered error during document analysis.
      */
+    @Generated
     private Error error;
 
     /*
      * Document analysis result.
      */
+    @Generated
     private AnalyzeResult analyzeResult;
 
     /**
      * Creates an instance of AnalyzeResultOperation class.
      */
+    @Generated
     public AnalyzeResultOperation() {
     }
 
@@ -55,6 +62,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * 
      * @return the status value.
      */
+    @Generated
     public AnalyzeResultOperationStatus getStatus() {
         return this.status;
     }
@@ -65,6 +73,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * @param status the status value to set.
      * @return the AnalyzeResultOperation object itself.
      */
+    @Generated
     public AnalyzeResultOperation setStatus(AnalyzeResultOperationStatus status) {
         this.status = status;
         return this;
@@ -75,6 +84,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * 
      * @return the createdDateTime value.
      */
+    @Generated
     public OffsetDateTime getCreatedDateTime() {
         return this.createdDateTime;
     }
@@ -85,6 +95,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * @param createdDateTime the createdDateTime value to set.
      * @return the AnalyzeResultOperation object itself.
      */
+    @Generated
     public AnalyzeResultOperation setCreatedDateTime(OffsetDateTime createdDateTime) {
         this.createdDateTime = createdDateTime;
         return this;
@@ -95,6 +106,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * 
      * @return the lastUpdatedDateTime value.
      */
+    @Generated
     public OffsetDateTime getLastUpdatedDateTime() {
         return this.lastUpdatedDateTime;
     }
@@ -105,6 +117,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * @param lastUpdatedDateTime the lastUpdatedDateTime value to set.
      * @return the AnalyzeResultOperation object itself.
      */
+    @Generated
     public AnalyzeResultOperation setLastUpdatedDateTime(OffsetDateTime lastUpdatedDateTime) {
         this.lastUpdatedDateTime = lastUpdatedDateTime;
         return this;
@@ -115,6 +128,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * 
      * @return the error value.
      */
+    @Generated
     public Error getError() {
         return this.error;
     }
@@ -125,6 +139,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * @param error the error value to set.
      * @return the AnalyzeResultOperation object itself.
      */
+    @Generated
     public AnalyzeResultOperation setError(Error error) {
         this.error = error;
         return this;
@@ -135,6 +150,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * 
      * @return the analyzeResult value.
      */
+    @Generated
     public AnalyzeResult getAnalyzeResult() {
         return this.analyzeResult;
     }
@@ -145,6 +161,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * @param analyzeResult the analyzeResult value to set.
      * @return the AnalyzeResultOperation object itself.
      */
+    @Generated
     public AnalyzeResultOperation setAnalyzeResult(AnalyzeResult analyzeResult) {
         this.analyzeResult = analyzeResult;
         return this;
@@ -153,6 +170,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -177,6 +195,7 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the AnalyzeResultOperation.
      */
+    @Generated
     public static AnalyzeResultOperation fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             AnalyzeResultOperation deserializedAnalyzeResultOperation = new AnalyzeResultOperation();

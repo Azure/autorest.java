@@ -5,6 +5,7 @@
 package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,6 +35,7 @@ public class MetricAlertCriteria {
     /*
      * specifies the type of the alert criteria.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "odata.type", required = true)
     private Odatatype odataType = Odatatype.fromString("MetricAlertCriteria");
@@ -41,12 +43,14 @@ public class MetricAlertCriteria {
     /*
      * The rule criteria that defines the conditions of the alert rule.
      */
+    @Generated
     @JsonIgnore
     private Map<String, Object> additionalProperties;
 
     /**
      * Creates an instance of MetricAlertCriteria class.
      */
+    @Generated
     public MetricAlertCriteria() {
     }
 
@@ -55,6 +59,7 @@ public class MetricAlertCriteria {
      * 
      * @return the odataType value.
      */
+    @Generated
     public Odatatype getOdataType() {
         return this.odataType;
     }
@@ -64,6 +69,7 @@ public class MetricAlertCriteria {
      * 
      * @return the additionalProperties value.
      */
+    @Generated
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -75,11 +81,13 @@ public class MetricAlertCriteria {
      * @param additionalProperties the additionalProperties value to set.
      * @return the MetricAlertCriteria object itself.
      */
+    @Generated
     public MetricAlertCriteria setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
 
+    @Generated
     @JsonAnySetter
     void setAdditionalProperties(String key, Object value) {
         if (additionalProperties == null) {

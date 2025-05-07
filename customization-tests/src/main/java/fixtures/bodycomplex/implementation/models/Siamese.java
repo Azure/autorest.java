@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -19,11 +20,13 @@ public final class Siamese extends Cat {
     /*
      * The breed property.
      */
+    @Generated
     private String breed;
 
     /**
      * Creates an instance of Siamese class.
      */
+    @Generated
     public Siamese() {
     }
 
@@ -32,6 +35,7 @@ public final class Siamese extends Cat {
      * 
      * @return the breed value.
      */
+    @Generated
     public String getBreed() {
         return this.breed;
     }
@@ -42,6 +46,7 @@ public final class Siamese extends Cat {
      * @param breed the breed value to set.
      * @return the Siamese object itself.
      */
+    @Generated
     public Siamese setBreed(String breed) {
         this.breed = breed;
         return this;
@@ -50,6 +55,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setColor(String color) {
         super.setColor(color);
@@ -59,6 +65,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setHates(List<Dog> hates) {
         super.setHates(hates);
@@ -68,6 +75,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setId(Integer id) {
         super.setId(id);
@@ -77,6 +85,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setName(String name) {
         super.setName(name);
@@ -86,6 +95,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -105,6 +115,7 @@ public final class Siamese extends Cat {
      * JSON null.
      * @throws IOException If an error occurs while reading the Siamese.
      */
+    @Generated
     public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Siamese deserializedSiamese = new Siamese();

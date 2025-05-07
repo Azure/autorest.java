@@ -4,6 +4,7 @@
 
 package fixtures.requiredfieldsascotrargstransformation.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
@@ -30,16 +31,19 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
     /*
      * The rfc1123RequiredChild property.
      */
+    @Generated
     private final DateTimeRfc1123 rfc1123RequiredChild;
 
     /*
      * The rfc1123NonRequiredChild property.
      */
+    @Generated
     private DateTimeRfc1123 rfc1123NonRequiredChild;
 
     /*
      * The rfc1123NonRequired property.
      */
+    @Generated
     private DateTimeRfc1123 rfc1123NonRequired;
 
     /**
@@ -52,6 +56,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * @param unixTimeDateTimeRequired the unixTimeDateTimeRequired value to set.
      * @param rfc1123RequiredChild the rfc1123RequiredChild value to set.
      */
+    @Generated
     private TransformationAsParentRequiredFields(OffsetDateTime rfc1123Required, String nameRequired,
         byte[] urlBase64EncodedRequired, OffsetDateTime unixTimeLongRequired, OffsetDateTime unixTimeDateTimeRequired,
         OffsetDateTime rfc1123RequiredChild) {
@@ -68,6 +73,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * 
      * @return the rfc1123RequiredChild value.
      */
+    @Generated
     public OffsetDateTime getRfc1123RequiredChild() {
         if (this.rfc1123RequiredChild == null) {
             return null;
@@ -80,6 +86,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * 
      * @return the rfc1123NonRequiredChild value.
      */
+    @Generated
     public OffsetDateTime getRfc1123NonRequiredChild() {
         if (this.rfc1123NonRequiredChild == null) {
             return null;
@@ -92,6 +99,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * 
      * @return the rfc1123NonRequired value.
      */
+    @Generated
     @Override
     public OffsetDateTime getRfc1123NonRequired() {
         if (this.rfc1123NonRequired == null) {
@@ -136,6 +144,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -173,6 +182,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the TransformationAsParentRequiredFields.
      */
+    @Generated
     public static TransformationAsParentRequiredFields fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean rfc1123RequiredFound = false;

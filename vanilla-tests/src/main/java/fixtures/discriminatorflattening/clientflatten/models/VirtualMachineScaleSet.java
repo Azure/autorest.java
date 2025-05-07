@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.clientflatten.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,12 +16,14 @@ public final class VirtualMachineScaleSet {
     /*
      * Describes the properties of a Virtual Machine Scale Set.
      */
+    @Generated
     @JsonProperty(value = "properties")
     private VirtualMachineScaleSetProperties innerProperties;
 
     /**
      * Creates an instance of VirtualMachineScaleSet class.
      */
+    @Generated
     public VirtualMachineScaleSet() {
     }
 
@@ -29,6 +32,7 @@ public final class VirtualMachineScaleSet {
      * 
      * @return the innerProperties value.
      */
+    @Generated
     private VirtualMachineScaleSetProperties getInnerProperties() {
         return this.innerProperties;
     }
@@ -38,6 +42,7 @@ public final class VirtualMachineScaleSet {
      * 
      * @return the virtualMachineProfile value.
      */
+    @Generated
     public VirtualMachineScaleSetVMProfile getVirtualMachineProfile() {
         return this.getInnerProperties() == null ? null : this.getInnerProperties().getVirtualMachineProfile();
     }
@@ -48,6 +53,7 @@ public final class VirtualMachineScaleSet {
      * @param virtualMachineProfile the virtualMachineProfile value to set.
      * @return the VirtualMachineScaleSet object itself.
      */
+    @Generated
     public VirtualMachineScaleSet setVirtualMachineProfile(VirtualMachineScaleSetVMProfile virtualMachineProfile) {
         if (this.getInnerProperties() == null) {
             this.innerProperties = new VirtualMachineScaleSetProperties();

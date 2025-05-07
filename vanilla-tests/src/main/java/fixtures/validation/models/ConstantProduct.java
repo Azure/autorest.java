@@ -4,6 +4,7 @@
 
 package fixtures.validation.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -19,16 +20,19 @@ public final class ConstantProduct implements JsonSerializable<ConstantProduct> 
     /*
      * Constant string
      */
+    @Generated
     private final String constProperty = "constant";
 
     /*
      * Constant string2
      */
+    @Generated
     private final String constProperty2 = "constant2";
 
     /**
      * Creates an instance of ConstantProduct class.
      */
+    @Generated
     public ConstantProduct() {
     }
 
@@ -37,6 +41,7 @@ public final class ConstantProduct implements JsonSerializable<ConstantProduct> 
      * 
      * @return the constProperty value.
      */
+    @Generated
     public String getConstProperty() {
         return this.constProperty;
     }
@@ -46,6 +51,7 @@ public final class ConstantProduct implements JsonSerializable<ConstantProduct> 
      * 
      * @return the constProperty2 value.
      */
+    @Generated
     public String getConstProperty2() {
         return this.constProperty2;
     }
@@ -61,6 +67,7 @@ public final class ConstantProduct implements JsonSerializable<ConstantProduct> 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -78,6 +85,7 @@ public final class ConstantProduct implements JsonSerializable<ConstantProduct> 
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ConstantProduct.
      */
+    @Generated
     public static ConstantProduct fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ConstantProduct deserializedConstantProduct = new ConstantProduct();

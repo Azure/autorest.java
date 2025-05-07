@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,12 +16,14 @@ public final class Dog extends Pet {
     /*
      * The food property.
      */
+    @Generated
     @JsonProperty(value = "food")
     private String food;
 
     /**
      * Creates an instance of Dog class.
      */
+    @Generated
     public Dog() {
     }
 
@@ -29,6 +32,7 @@ public final class Dog extends Pet {
      * 
      * @return the food value.
      */
+    @Generated
     public String getFood() {
         return this.food;
     }
@@ -39,6 +43,7 @@ public final class Dog extends Pet {
      * @param food the food value to set.
      * @return the Dog object itself.
      */
+    @Generated
     public Dog setFood(String food) {
         this.food = food;
         return this;
@@ -47,6 +52,7 @@ public final class Dog extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Dog setId(Integer id) {
         super.setId(id);
@@ -56,6 +62,7 @@ public final class Dog extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Dog setName(String name) {
         super.setName(name);

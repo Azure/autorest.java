@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -16,30 +17,35 @@ public final class DotFishMarket {
     /*
      * The sampleSalmon property.
      */
+    @Generated
     @JsonProperty(value = "sampleSalmon")
     private DotSalmon sampleSalmon;
 
     /*
      * The salmons property.
      */
+    @Generated
     @JsonProperty(value = "salmons")
     private List<DotSalmon> salmons;
 
     /*
      * The sampleFish property.
      */
+    @Generated
     @JsonProperty(value = "sampleFish")
     private DotFish sampleFish;
 
     /*
      * The fishes property.
      */
+    @Generated
     @JsonProperty(value = "fishes")
     private List<DotFish> fishes;
 
     /**
      * Creates an instance of DotFishMarket class.
      */
+    @Generated
     private DotFishMarket() {
     }
 
@@ -48,6 +54,7 @@ public final class DotFishMarket {
      * 
      * @return the sampleSalmon value.
      */
+    @Generated
     public DotSalmon getSampleSalmon() {
         return this.sampleSalmon;
     }
@@ -57,6 +64,7 @@ public final class DotFishMarket {
      * 
      * @return the salmons value.
      */
+    @Generated
     public List<DotSalmon> getSalmons() {
         return this.salmons;
     }
@@ -66,6 +74,7 @@ public final class DotFishMarket {
      * 
      * @return the sampleFish value.
      */
+    @Generated
     public DotFish getSampleFish() {
         return this.sampleFish;
     }
@@ -75,6 +84,7 @@ public final class DotFishMarket {
      * 
      * @return the fishes value.
      */
+    @Generated
     public List<DotFish> getFishes() {
         return this.fishes;
     }

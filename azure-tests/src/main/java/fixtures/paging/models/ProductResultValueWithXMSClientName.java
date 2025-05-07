@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,16 +22,19 @@ public final class ProductResultValueWithXMSClientName
     /*
      * The values property.
      */
+    @Generated
     private List<Product> indexes;
 
     /*
      * The nextLink property.
      */
+    @Generated
     private String nextLink;
 
     /**
      * Creates an instance of ProductResultValueWithXMSClientName class.
      */
+    @Generated
     public ProductResultValueWithXMSClientName() {
     }
 
@@ -39,6 +43,7 @@ public final class ProductResultValueWithXMSClientName
      * 
      * @return the indexes value.
      */
+    @Generated
     public List<Product> getIndexes() {
         return this.indexes;
     }
@@ -49,6 +54,7 @@ public final class ProductResultValueWithXMSClientName
      * @param indexes the indexes value to set.
      * @return the ProductResultValueWithXMSClientName object itself.
      */
+    @Generated
     public ProductResultValueWithXMSClientName setIndexes(List<Product> indexes) {
         this.indexes = indexes;
         return this;
@@ -59,6 +65,7 @@ public final class ProductResultValueWithXMSClientName
      * 
      * @return the nextLink value.
      */
+    @Generated
     public String getNextLink() {
         return this.nextLink;
     }
@@ -69,6 +76,7 @@ public final class ProductResultValueWithXMSClientName
      * @param nextLink the nextLink value to set.
      * @return the ProductResultValueWithXMSClientName object itself.
      */
+    @Generated
     public ProductResultValueWithXMSClientName setNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
@@ -88,6 +96,7 @@ public final class ProductResultValueWithXMSClientName
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -104,6 +113,7 @@ public final class ProductResultValueWithXMSClientName
      * or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ProductResultValueWithXMSClientName.
      */
+    @Generated
     public static ProductResultValueWithXMSClientName fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ProductResultValueWithXMSClientName deserializedProductResultValueWithXMSClientName

@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -26,6 +27,7 @@ public class Fish {
     /*
      * The fishtype property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fishtype", required = true)
     private String fishtype = "Fish";
@@ -33,18 +35,21 @@ public class Fish {
     /*
      * The species property.
      */
+    @Generated
     @JsonProperty(value = "species")
     private String species;
 
     /*
      * The length property.
      */
+    @Generated
     @JsonProperty(value = "length", required = true)
     private final float length;
 
     /*
      * The siblings property.
      */
+    @Generated
     @JsonProperty(value = "siblings")
     private List<Fish> siblings;
 
@@ -53,6 +58,7 @@ public class Fish {
      * 
      * @param length the length value to set.
      */
+    @Generated
     @JsonCreator
     public Fish(@JsonProperty(value = "length", required = true) float length) {
         this.length = length;
@@ -63,6 +69,7 @@ public class Fish {
      * 
      * @return the fishtype value.
      */
+    @Generated
     public String getFishtype() {
         return this.fishtype;
     }
@@ -72,6 +79,7 @@ public class Fish {
      * 
      * @return the species value.
      */
+    @Generated
     public String getSpecies() {
         return this.species;
     }
@@ -82,6 +90,7 @@ public class Fish {
      * @param species the species value to set.
      * @return the Fish object itself.
      */
+    @Generated
     public Fish setSpecies(String species) {
         this.species = species;
         return this;
@@ -92,6 +101,7 @@ public class Fish {
      * 
      * @return the length value.
      */
+    @Generated
     public float getLength() {
         return this.length;
     }
@@ -101,6 +111,7 @@ public class Fish {
      * 
      * @return the siblings value.
      */
+    @Generated
     public List<Fish> getSiblings() {
         return this.siblings;
     }
@@ -111,6 +122,7 @@ public class Fish {
      * @param siblings the siblings value to set.
      * @return the Fish object itself.
      */
+    @Generated
     public Fish setSiblings(List<Fish> siblings) {
         this.siblings = siblings;
         return this;

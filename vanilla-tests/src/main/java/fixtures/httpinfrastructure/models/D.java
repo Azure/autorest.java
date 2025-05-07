@@ -5,6 +5,7 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class D implements JsonSerializable<D> {
     /*
      * The httpStatusCode property.
      */
+    @Generated
     private String httpStatusCode;
 
     /**
      * Creates an instance of D class.
      */
+    @Generated
     public D() {
     }
 
@@ -32,6 +35,7 @@ public final class D implements JsonSerializable<D> {
      * 
      * @return the httpStatusCode value.
      */
+    @Generated
     public String getHttpStatusCode() {
         return this.httpStatusCode;
     }
@@ -42,6 +46,7 @@ public final class D implements JsonSerializable<D> {
      * @param httpStatusCode the httpStatusCode value to set.
      * @return the D object itself.
      */
+    @Generated
     public D setHttpStatusCode(String httpStatusCode) {
         this.httpStatusCode = httpStatusCode;
         return this;
@@ -58,6 +63,7 @@ public final class D implements JsonSerializable<D> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -73,6 +79,7 @@ public final class D implements JsonSerializable<D> {
      * null.
      * @throws IOException If an error occurs while reading the D.
      */
+    @Generated
     public static D fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             D deserializedD = new D();

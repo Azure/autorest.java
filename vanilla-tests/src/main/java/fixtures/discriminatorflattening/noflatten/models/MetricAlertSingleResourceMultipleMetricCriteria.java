@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.noflatten.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -25,6 +26,7 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
     /*
      * specifies the type of the alert criteria.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "odata.type", required = true)
     private Odatatype odataType = Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA;
@@ -32,12 +34,14 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
     /*
      * The list of metric criteria for this 'all of' operation.
      */
+    @Generated
     @JsonProperty(value = "allOf")
     private List<String> allOf;
 
     /**
      * Creates an instance of MetricAlertSingleResourceMultipleMetricCriteria class.
      */
+    @Generated
     public MetricAlertSingleResourceMultipleMetricCriteria() {
     }
 
@@ -46,6 +50,7 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
      * 
      * @return the odataType value.
      */
+    @Generated
     @Override
     public Odatatype getOdataType() {
         return this.odataType;
@@ -56,6 +61,7 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
      * 
      * @return the allOf value.
      */
+    @Generated
     public List<String> getAllOf() {
         return this.allOf;
     }
@@ -66,6 +72,7 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
      * @param allOf the allOf value to set.
      * @return the MetricAlertSingleResourceMultipleMetricCriteria object itself.
      */
+    @Generated
     public MetricAlertSingleResourceMultipleMetricCriteria setAllOf(List<String> allOf) {
         this.allOf = allOf;
         return this;

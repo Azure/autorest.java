@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.noflatten.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,12 +16,14 @@ public final class MetricAlertProperties {
     /*
      * defines the specific alert criteria information.
      */
+    @Generated
     @JsonProperty(value = "criteria", required = true)
     private MetricAlertCriteria criteria;
 
     /**
      * Creates an instance of MetricAlertProperties class.
      */
+    @Generated
     public MetricAlertProperties() {
     }
 
@@ -29,6 +32,7 @@ public final class MetricAlertProperties {
      * 
      * @return the criteria value.
      */
+    @Generated
     public MetricAlertCriteria getCriteria() {
         return this.criteria;
     }
@@ -39,6 +43,7 @@ public final class MetricAlertProperties {
      * @param criteria the criteria value to set.
      * @return the MetricAlertProperties object itself.
      */
+    @Generated
     public MetricAlertProperties setCriteria(MetricAlertCriteria criteria) {
         this.criteria = criteria;
         return this;

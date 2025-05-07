@@ -5,6 +5,7 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,11 +21,13 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     /*
      * The value property.
      */
+    @Generated
     private List<String> value;
 
     /**
      * Creates an instance of ArrayWrapper class.
      */
+    @Generated
     public ArrayWrapper() {
     }
 
@@ -33,6 +36,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      * 
      * @return the value value.
      */
+    @Generated
     public List<String> getValue() {
         return this.value;
     }
@@ -43,6 +47,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      * @param value the value value to set.
      * @return the ArrayWrapper object itself.
      */
+    @Generated
     public ArrayWrapper setValue(List<String> value) {
         this.value = value;
         return this;
@@ -62,6 +67,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -78,6 +84,7 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ArrayWrapper.
      */
+    @Generated
     public static ArrayWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ArrayWrapper deserializedArrayWrapper = new ArrayWrapper();

@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
@@ -23,6 +24,7 @@ public final class Cookiecuttershark extends Shark {
     /*
      * The fishtype property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fishtype", required = true)
     private String fishtype = "cookiecuttershark";
@@ -33,6 +35,7 @@ public final class Cookiecuttershark extends Shark {
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
+    @Generated
     @JsonCreator
     public Cookiecuttershark(@JsonProperty(value = "length", required = true) float length,
         @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
@@ -44,6 +47,7 @@ public final class Cookiecuttershark extends Shark {
      * 
      * @return the fishtype value.
      */
+    @Generated
     @Override
     public String getFishtype() {
         return this.fishtype;
@@ -52,6 +56,7 @@ public final class Cookiecuttershark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cookiecuttershark setAge(Integer age) {
         super.setAge(age);
@@ -61,6 +66,7 @@ public final class Cookiecuttershark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cookiecuttershark setSpecies(String species) {
         super.setSpecies(species);
@@ -70,6 +76,7 @@ public final class Cookiecuttershark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cookiecuttershark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

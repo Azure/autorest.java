@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
@@ -16,12 +17,14 @@ public final class DurationWrapper {
     /*
      * The field property.
      */
+    @Generated
     @JsonProperty(value = "field")
     private Duration field;
 
     /**
      * Creates an instance of DurationWrapper class.
      */
+    @Generated
     public DurationWrapper() {
     }
 
@@ -30,6 +33,7 @@ public final class DurationWrapper {
      * 
      * @return the field value.
      */
+    @Generated
     public Duration getField() {
         return this.field;
     }
@@ -40,6 +44,7 @@ public final class DurationWrapper {
      * @param field the field value to set.
      * @return the DurationWrapper object itself.
      */
+    @Generated
     public DurationWrapper setField(Duration field) {
         this.field = field;
         return this;

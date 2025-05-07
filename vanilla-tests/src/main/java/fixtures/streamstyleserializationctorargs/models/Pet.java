@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public class Pet implements JsonSerializable<Pet> {
     /*
      * The id property.
      */
+    @Generated
     private Integer id;
 
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /**
      * Creates an instance of Pet class.
      */
+    @Generated
     public Pet() {
     }
 
@@ -37,6 +41,7 @@ public class Pet implements JsonSerializable<Pet> {
      * 
      * @return the id value.
      */
+    @Generated
     public Integer getId() {
         return this.id;
     }
@@ -47,6 +52,7 @@ public class Pet implements JsonSerializable<Pet> {
      * @param id the id value to set.
      * @return the Pet object itself.
      */
+    @Generated
     public Pet setId(Integer id) {
         this.id = id;
         return this;
@@ -57,6 +63,7 @@ public class Pet implements JsonSerializable<Pet> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -67,6 +74,7 @@ public class Pet implements JsonSerializable<Pet> {
      * @param name the name value to set.
      * @return the Pet object itself.
      */
+    @Generated
     public Pet setName(String name) {
         this.name = name;
         return this;
@@ -83,6 +91,7 @@ public class Pet implements JsonSerializable<Pet> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public class Pet implements JsonSerializable<Pet> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Pet.
      */
+    @Generated
     public static Pet fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Pet deserializedPet = new Pet();

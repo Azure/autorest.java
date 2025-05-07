@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.clientflatten.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     /*
      * The network configuration name.
      */
+    @Generated
     @JsonProperty(value = "name")
     private String name;
 
     /*
      * Describes a virtual machine scale set network profile's IP configuration.
      */
+    @Generated
     @JsonProperty(value = "properties")
     private VirtualMachineScaleSetNetworkConfigurationProperties innerProperties;
 
     /**
      * Creates an instance of VirtualMachineScaleSetNetworkConfiguration class.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfiguration() {
     }
 
@@ -35,6 +39,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -45,6 +50,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @param name the name value to set.
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfiguration setName(String name) {
         this.name = name;
         return this;
@@ -55,6 +61,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * 
      * @return the innerProperties value.
      */
+    @Generated
     private VirtualMachineScaleSetNetworkConfigurationProperties getInnerProperties() {
         return this.innerProperties;
     }
@@ -65,6 +72,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * 
      * @return the primary value.
      */
+    @Generated
     public Boolean isPrimary() {
         return this.getInnerProperties() == null ? null : this.getInnerProperties().isPrimary();
     }
@@ -76,6 +84,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @param primary the primary value to set.
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfiguration setPrimary(Boolean primary) {
         if (this.getInnerProperties() == null) {
             this.innerProperties = new VirtualMachineScaleSetNetworkConfigurationProperties();

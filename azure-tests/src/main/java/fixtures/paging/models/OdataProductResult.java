@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,16 +21,19 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
     /*
      * The values property.
      */
+    @Generated
     private List<Product> values;
 
     /*
      * The odata.nextLink property.
      */
+    @Generated
     private String odataNextLink;
 
     /**
      * Creates an instance of OdataProductResult class.
      */
+    @Generated
     public OdataProductResult() {
     }
 
@@ -38,6 +42,7 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
      * 
      * @return the values value.
      */
+    @Generated
     public List<Product> getValues() {
         return this.values;
     }
@@ -48,6 +53,7 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
      * @param values the values value to set.
      * @return the OdataProductResult object itself.
      */
+    @Generated
     public OdataProductResult setValues(List<Product> values) {
         this.values = values;
         return this;
@@ -58,6 +64,7 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
      * 
      * @return the odataNextLink value.
      */
+    @Generated
     public String getOdataNextLink() {
         return this.odataNextLink;
     }
@@ -68,6 +75,7 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
      * @param odataNextLink the odataNextLink value to set.
      * @return the OdataProductResult object itself.
      */
+    @Generated
     public OdataProductResult setOdataNextLink(String odataNextLink) {
         this.odataNextLink = odataNextLink;
         return this;
@@ -87,6 +95,7 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -103,6 +112,7 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the OdataProductResult.
      */
+    @Generated
     public static OdataProductResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OdataProductResult deserializedOdataProductResult = new OdataProductResult();

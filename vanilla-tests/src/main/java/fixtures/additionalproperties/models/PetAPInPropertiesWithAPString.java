@@ -5,6 +5,7 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,36 +22,43 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
     /*
      * The id property.
      */
+    @Generated
     private int id;
 
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /*
      * The status property.
      */
+    @Generated
     private Boolean status;
 
     /*
      * The @odata.location property.
      */
+    @Generated
     private String odataLocation;
 
     /*
      * Dictionary of <number>
      */
+    @Generated
     private Map<String, Float> additionalPropertiesProperty;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     private Map<String, String> additionalProperties;
 
     /**
      * Creates an instance of PetAPInPropertiesWithAPString class.
      */
+    @Generated
     public PetAPInPropertiesWithAPString() {
     }
 
@@ -59,6 +67,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * 
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -69,6 +78,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * @param id the id value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
+    @Generated
     public PetAPInPropertiesWithAPString setId(int id) {
         this.id = id;
         return this;
@@ -79,6 +89,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -89,6 +100,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * @param name the name value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
+    @Generated
     public PetAPInPropertiesWithAPString setName(String name) {
         this.name = name;
         return this;
@@ -99,6 +111,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * 
      * @return the status value.
      */
+    @Generated
     public Boolean isStatus() {
         return this.status;
     }
@@ -108,6 +121,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * 
      * @return the odataLocation value.
      */
+    @Generated
     public String getOdataLocation() {
         return this.odataLocation;
     }
@@ -118,6 +132,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * @param odataLocation the odataLocation value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
+    @Generated
     public PetAPInPropertiesWithAPString setOdataLocation(String odataLocation) {
         this.odataLocation = odataLocation;
         return this;
@@ -128,6 +143,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * 
      * @return the additionalPropertiesProperty value.
      */
+    @Generated
     public Map<String, Float> getAdditionalPropertiesProperty() {
         return this.additionalPropertiesProperty;
     }
@@ -138,6 +154,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * @param additionalPropertiesProperty the additionalPropertiesProperty value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
+    @Generated
     public PetAPInPropertiesWithAPString
         setAdditionalPropertiesProperty(Map<String, Float> additionalPropertiesProperty) {
         this.additionalPropertiesProperty = additionalPropertiesProperty;
@@ -149,6 +166,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * 
      * @return the additionalProperties value.
      */
+    @Generated
     public Map<String, String> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -159,6 +177,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
      */
+    @Generated
     public PetAPInPropertiesWithAPString setAdditionalProperties(Map<String, String> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
@@ -179,6 +198,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -204,6 +224,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the PetAPInPropertiesWithAPString.
      */
+    @Generated
     public static PetAPInPropertiesWithAPString fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             PetAPInPropertiesWithAPString deserializedPetAPInPropertiesWithAPString

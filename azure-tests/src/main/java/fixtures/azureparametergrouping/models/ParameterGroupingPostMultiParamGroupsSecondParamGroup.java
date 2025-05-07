@@ -5,6 +5,7 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     /*
      * The header-two property.
      */
+    @Generated
     private String headerTwo;
 
     /*
      * Query parameter with default
      */
+    @Generated
     private Integer queryTwo;
 
     /**
      * Creates an instance of ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
      */
+    @Generated
     public ParameterGroupingPostMultiParamGroupsSecondParamGroup() {
     }
 
@@ -32,6 +36,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
      * 
      * @return the headerTwo value.
      */
+    @Generated
     public String getHeaderTwo() {
         return this.headerTwo;
     }
@@ -42,6 +47,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
      * @param headerTwo the headerTwo value to set.
      * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroup object itself.
      */
+    @Generated
     public ParameterGroupingPostMultiParamGroupsSecondParamGroup setHeaderTwo(String headerTwo) {
         this.headerTwo = headerTwo;
         return this;
@@ -52,6 +58,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
      * 
      * @return the queryTwo value.
      */
+    @Generated
     public Integer getQueryTwo() {
         return this.queryTwo;
     }
@@ -62,6 +69,7 @@ public final class ParameterGroupingPostMultiParamGroupsSecondParamGroup {
      * @param queryTwo the queryTwo value to set.
      * @return the ParameterGroupingPostMultiParamGroupsSecondParamGroup object itself.
      */
+    @Generated
     public ParameterGroupingPostMultiParamGroupsSecondParamGroup setQueryTwo(Integer queryTwo) {
         this.queryTwo = queryTwo;
         return this;

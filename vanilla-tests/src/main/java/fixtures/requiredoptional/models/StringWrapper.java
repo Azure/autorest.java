@@ -5,6 +5,7 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     /*
      * The value property.
      */
+    @Generated
     private String value;
 
     /**
      * Creates an instance of StringWrapper class.
      */
+    @Generated
     public StringWrapper() {
     }
 
@@ -32,6 +35,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * 
      * @return the value value.
      */
+    @Generated
     public String getValue() {
         return this.value;
     }
@@ -42,6 +46,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * @param value the value value to set.
      * @return the StringWrapper object itself.
      */
+    @Generated
     public StringWrapper setValue(String value) {
         this.value = value;
         return this;
@@ -61,6 +66,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -77,6 +83,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the StringWrapper.
      */
+    @Generated
     public static StringWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             StringWrapper deserializedStringWrapper = new StringWrapper();

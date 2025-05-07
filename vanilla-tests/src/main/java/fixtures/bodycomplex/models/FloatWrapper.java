@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class FloatWrapper {
     /*
      * The field1 property.
      */
+    @Generated
     @JsonProperty(value = "field1")
     private Float field1;
 
     /*
      * The field2 property.
      */
+    @Generated
     @JsonProperty(value = "field2")
     private Float field2;
 
     /**
      * Creates an instance of FloatWrapper class.
      */
+    @Generated
     public FloatWrapper() {
     }
 
@@ -35,6 +39,7 @@ public final class FloatWrapper {
      * 
      * @return the field1 value.
      */
+    @Generated
     public Float getField1() {
         return this.field1;
     }
@@ -45,6 +50,7 @@ public final class FloatWrapper {
      * @param field1 the field1 value to set.
      * @return the FloatWrapper object itself.
      */
+    @Generated
     public FloatWrapper setField1(Float field1) {
         this.field1 = field1;
         return this;
@@ -55,6 +61,7 @@ public final class FloatWrapper {
      * 
      * @return the field2 value.
      */
+    @Generated
     public Float getField2() {
         return this.field2;
     }
@@ -65,6 +72,7 @@ public final class FloatWrapper {
      * @param field2 the field2 value to set.
      * @return the FloatWrapper object itself.
      */
+    @Generated
     public FloatWrapper setField2(Float field2) {
         this.field2 = field2;
         return this;

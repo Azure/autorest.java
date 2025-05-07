@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -18,18 +19,21 @@ public class Product extends Resource {
     /*
      * The provisioningState property.
      */
+    @Generated
     @JsonProperty(value = "properties.provisioningState")
     private String provisioningState;
 
     /*
      * The provisioningStateValues property.
      */
+    @Generated
     @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private ProductPropertiesProvisioningStateValues provisioningStateValues;
 
     /**
      * Creates an instance of Product class.
      */
+    @Generated
     public Product() {
     }
 
@@ -38,6 +42,7 @@ public class Product extends Resource {
      * 
      * @return the provisioningState value.
      */
+    @Generated
     public String getProvisioningState() {
         return this.provisioningState;
     }
@@ -48,6 +53,7 @@ public class Product extends Resource {
      * @param provisioningState the provisioningState value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
         return this;
@@ -58,6 +64,7 @@ public class Product extends Resource {
      * 
      * @return the provisioningStateValues value.
      */
+    @Generated
     public ProductPropertiesProvisioningStateValues getProvisioningStateValues() {
         return this.provisioningStateValues;
     }
@@ -65,6 +72,7 @@ public class Product extends Resource {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Product setTags(Map<String, String> tags) {
         super.setTags(tags);
@@ -74,6 +82,7 @@ public class Product extends Resource {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Product setLocation(String location) {
         super.setLocation(location);

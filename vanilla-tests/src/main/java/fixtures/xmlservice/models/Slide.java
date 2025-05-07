@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -20,24 +21,28 @@ public final class Slide {
     /*
      * The type property.
      */
+    @Generated
     @JacksonXmlProperty(localName = "type", isAttribute = true)
     private String type;
 
     /*
      * The title property.
      */
+    @Generated
     @JsonProperty(value = "title")
     private String title;
 
     /*
      * The items property.
      */
+    @Generated
     @JsonProperty("item")
     private List<String> items = new ArrayList<>();
 
     /**
      * Creates an instance of Slide class.
      */
+    @Generated
     public Slide() {
     }
 
@@ -46,6 +51,7 @@ public final class Slide {
      * 
      * @return the type value.
      */
+    @Generated
     public String getType() {
         return this.type;
     }
@@ -56,6 +62,7 @@ public final class Slide {
      * @param type the type value to set.
      * @return the Slide object itself.
      */
+    @Generated
     public Slide setType(String type) {
         this.type = type;
         return this;
@@ -66,6 +73,7 @@ public final class Slide {
      * 
      * @return the title value.
      */
+    @Generated
     public String getTitle() {
         return this.title;
     }
@@ -76,6 +84,7 @@ public final class Slide {
      * @param title the title value to set.
      * @return the Slide object itself.
      */
+    @Generated
     public Slide setTitle(String title) {
         this.title = title;
         return this;
@@ -86,6 +95,7 @@ public final class Slide {
      * 
      * @return the items value.
      */
+    @Generated
     public List<String> getItems() {
         return this.items;
     }
@@ -96,6 +106,7 @@ public final class Slide {
      * @param items the items value to set.
      * @return the Slide object itself.
      */
+    @Generated
     public Slide setItems(List<String> items) {
         this.items = items;
         return this;

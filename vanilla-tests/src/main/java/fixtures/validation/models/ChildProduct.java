@@ -5,6 +5,7 @@
 package fixtures.validation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
     /*
      * Constant string
      */
+    @Generated
     private final String constProperty = "constant";
 
     /*
      * Count
      */
+    @Generated
     private Integer count;
 
     /**
      * Creates an instance of ChildProduct class.
      */
+    @Generated
     public ChildProduct() {
     }
 
@@ -37,6 +41,7 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
      * 
      * @return the constProperty value.
      */
+    @Generated
     public String getConstProperty() {
         return this.constProperty;
     }
@@ -46,6 +51,7 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
      * 
      * @return the count value.
      */
+    @Generated
     public Integer getCount() {
         return this.count;
     }
@@ -56,6 +62,7 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
      * @param count the count value to set.
      * @return the ChildProduct object itself.
      */
+    @Generated
     public ChildProduct setCount(Integer count) {
         this.count = count;
         return this;
@@ -72,6 +79,7 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -89,6 +97,7 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ChildProduct.
      */
+    @Generated
     public static ChildProduct fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ChildProduct deserializedChildProduct = new ChildProduct();

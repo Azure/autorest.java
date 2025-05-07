@@ -5,6 +5,7 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,11 +19,13 @@ public final class Kitten extends Cat {
     /*
      * The eatsMiceYet property.
      */
+    @Generated
     private Boolean eatsMiceYet;
 
     /**
      * Creates an instance of Kitten class.
      */
+    @Generated
     public Kitten() {
     }
 
@@ -31,6 +34,7 @@ public final class Kitten extends Cat {
      * 
      * @return the eatsMiceYet value.
      */
+    @Generated
     public Boolean isEatsMiceYet() {
         return this.eatsMiceYet;
     }
@@ -41,6 +45,7 @@ public final class Kitten extends Cat {
      * @param eatsMiceYet the eatsMiceYet value to set.
      * @return the Kitten object itself.
      */
+    @Generated
     public Kitten setEatsMiceYet(Boolean eatsMiceYet) {
         this.eatsMiceYet = eatsMiceYet;
         return this;
@@ -49,6 +54,7 @@ public final class Kitten extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Kitten setLikesMilk(Boolean likesMilk) {
         super.setLikesMilk(likesMilk);
@@ -58,6 +64,7 @@ public final class Kitten extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Kitten setMeows(Boolean meows) {
         super.setMeows(meows);
@@ -67,6 +74,7 @@ public final class Kitten extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Kitten setHisses(Boolean hisses) {
         super.setHisses(hisses);
@@ -76,6 +84,7 @@ public final class Kitten extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Kitten setName(String name) {
         super.setName(name);
@@ -97,6 +106,7 @@ public final class Kitten extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -117,6 +127,7 @@ public final class Kitten extends Cat {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Kitten.
      */
+    @Generated
     public static Kitten fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Kitten deserializedKitten = new Kitten();

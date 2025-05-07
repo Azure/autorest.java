@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,21 +20,25 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     /*
      * The kind property.
      */
+    @Generated
     private MyKind kind = MyKind.fromString("MyBaseType");
 
     /*
      * The propB1 property.
      */
+    @Generated
     private String propB1;
 
     /*
      * The propBH1 property.
      */
+    @Generated
     private String propBH1;
 
     /**
      * Creates an instance of MyBaseType class.
      */
+    @Generated
     public MyBaseType() {
     }
 
@@ -42,6 +47,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * 
      * @return the kind value.
      */
+    @Generated
     public MyKind getKind() {
         return this.kind;
     }
@@ -51,6 +57,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * 
      * @return the propB1 value.
      */
+    @Generated
     public String getPropB1() {
         return this.propB1;
     }
@@ -61,6 +68,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * @param propB1 the propB1 value to set.
      * @return the MyBaseType object itself.
      */
+    @Generated
     public MyBaseType setPropB1(String propB1) {
         this.propB1 = propB1;
         return this;
@@ -71,6 +79,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * 
      * @return the propBH1 value.
      */
+    @Generated
     public String getPropBH1() {
         return this.propBH1;
     }
@@ -81,6 +90,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * @param propBH1 the propBH1 value to set.
      * @return the MyBaseType object itself.
      */
+    @Generated
     public MyBaseType setPropBH1(String propBH1) {
         this.propBH1 = propBH1;
         return this;
@@ -89,6 +99,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -110,6 +121,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * to JSON null.
      * @throws IOException If an error occurs while reading the MyBaseType.
      */
+    @Generated
     public static MyBaseType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -135,6 +147,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
         });
     }
 
+    @Generated
     static MyBaseType fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             MyBaseType deserializedMyBaseType = new MyBaseType();

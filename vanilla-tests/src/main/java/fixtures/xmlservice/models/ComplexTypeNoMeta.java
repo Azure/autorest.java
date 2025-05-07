@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,12 +18,14 @@ public final class ComplexTypeNoMeta {
     /*
      * The id of the res
      */
+    @Generated
     @JsonProperty(value = "ID")
     private String id;
 
     /**
      * Creates an instance of ComplexTypeNoMeta class.
      */
+    @Generated
     public ComplexTypeNoMeta() {
     }
 
@@ -31,6 +34,7 @@ public final class ComplexTypeNoMeta {
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -41,6 +45,7 @@ public final class ComplexTypeNoMeta {
      * @param id the id value to set.
      * @return the ComplexTypeNoMeta object itself.
      */
+    @Generated
     public ComplexTypeNoMeta setId(String id) {
         this.id = id;
         return this;

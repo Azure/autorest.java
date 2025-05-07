@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
@@ -22,11 +23,13 @@ public final class Sawshark extends Shark {
     /*
      * The picture property.
      */
+    @Generated
     private byte[] picture;
 
     /**
      * Creates an instance of Sawshark class.
      */
+    @Generated
     public Sawshark() {
         this.fishtype = "sawshark";
     }
@@ -36,6 +39,7 @@ public final class Sawshark extends Shark {
      * 
      * @return the picture value.
      */
+    @Generated
     public byte[] getPicture() {
         return CoreUtils.clone(this.picture);
     }
@@ -46,6 +50,7 @@ public final class Sawshark extends Shark {
      * @param picture the picture value to set.
      * @return the Sawshark object itself.
      */
+    @Generated
     public Sawshark setPicture(byte[] picture) {
         this.picture = CoreUtils.clone(picture);
         return this;
@@ -54,6 +59,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setAge(Integer age) {
         super.setAge(age);
@@ -63,6 +69,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setBirthday(OffsetDateTime birthday) {
         super.setBirthday(birthday);
@@ -72,6 +79,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setSpecies(String species) {
         super.setSpecies(species);
@@ -81,6 +89,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setLength(float length) {
         super.setLength(length);
@@ -90,6 +99,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -117,6 +127,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -134,6 +145,7 @@ public final class Sawshark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Sawshark.
      */
+    @Generated
     public static Sawshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Sawshark deserializedSawshark = new Sawshark();

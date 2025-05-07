@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,21 +20,25 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     /*
      * The field property.
      */
+    @Generated
     private String field;
 
     /*
      * The empty property.
      */
+    @Generated
     private String empty;
 
     /*
      * The null property.
      */
+    @Generated
     private String nullProperty;
 
     /**
      * Creates an instance of StringWrapper class.
      */
+    @Generated
     public StringWrapper() {
     }
 
@@ -42,6 +47,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * 
      * @return the field value.
      */
+    @Generated
     public String getField() {
         return this.field;
     }
@@ -52,6 +58,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * @param field the field value to set.
      * @return the StringWrapper object itself.
      */
+    @Generated
     public StringWrapper setField(String field) {
         this.field = field;
         return this;
@@ -62,6 +69,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * 
      * @return the empty value.
      */
+    @Generated
     public String getEmpty() {
         return this.empty;
     }
@@ -72,6 +80,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * @param empty the empty value to set.
      * @return the StringWrapper object itself.
      */
+    @Generated
     public StringWrapper setEmpty(String empty) {
         this.empty = empty;
         return this;
@@ -82,6 +91,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * 
      * @return the nullProperty value.
      */
+    @Generated
     public String getNullProperty() {
         return this.nullProperty;
     }
@@ -92,6 +102,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * @param nullProperty the nullProperty value to set.
      * @return the StringWrapper object itself.
      */
+    @Generated
     public StringWrapper setNullProperty(String nullProperty) {
         this.nullProperty = nullProperty;
         return this;
@@ -108,6 +119,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -125,6 +137,7 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the StringWrapper.
      */
+    @Generated
     public static StringWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             StringWrapper deserializedStringWrapper = new StringWrapper();

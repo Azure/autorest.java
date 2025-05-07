@@ -4,6 +4,7 @@
 
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,66 +15,79 @@ public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldT
     /**
      * Static value string for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType STRING = fromString("string");
 
     /**
      * Static value date for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType DATE = fromString("date");
 
     /**
      * Static value time for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType TIME = fromString("time");
 
     /**
      * Static value phoneNumber for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType PHONE_NUMBER = fromString("phoneNumber");
 
     /**
      * Static value number for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType NUMBER = fromString("number");
 
     /**
      * Static value integer for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType INTEGER = fromString("integer");
 
     /**
      * Static value selectionMark for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType SELECTION_MARK = fromString("selectionMark");
 
     /**
      * Static value countryRegion for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType COUNTRY_REGION = fromString("countryRegion");
 
     /**
      * Static value signature for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType SIGNATURE = fromString("signature");
 
     /**
      * Static value array for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType ARRAY = fromString("array");
 
     /**
      * Static value object for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType OBJECT = fromString("object");
 
     /**
      * Static value currency for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType CURRENCY = fromString("currency");
 
     /**
      * Static value address for DocumentFieldType.
      */
+    @Generated
     public static final DocumentFieldType ADDRESS = fromString("address");
 
     /**
@@ -81,6 +95,7 @@ public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldT
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public DocumentFieldType() {
     }
@@ -91,6 +106,7 @@ public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldT
      * @param name a name to look for.
      * @return the corresponding DocumentFieldType.
      */
+    @Generated
     public static DocumentFieldType fromString(String name) {
         return fromString(name, DocumentFieldType.class);
     }
@@ -100,6 +116,7 @@ public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldT
      * 
      * @return known DocumentFieldType values.
      */
+    @Generated
     public static Collection<DocumentFieldType> values() {
         return values(DocumentFieldType.class);
     }

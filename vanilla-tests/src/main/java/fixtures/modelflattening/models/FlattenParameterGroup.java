@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,47 +15,56 @@ public final class FlattenParameterGroup {
     /*
      * Product name with value 'groupproduct'
      */
+    @Generated
     private String name;
 
     /*
      * Simple body product to put
      */
+    @Generated
     private SimpleProduct simpleBodyProduct;
 
     /*
      * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San
      * Francisco will have a different product_id than uberX in Los Angeles.
      */
+    @Generated
     private String productId;
 
     /*
      * Description of product.
      */
+    @Generated
     private String description;
 
     /*
      * Display name of product.
      */
+    @Generated
     private String maxProductDisplayName;
 
     /*
      * Capacity of product. For example, 4 people.
      */
+    @Generated
     private SimpleProductPropertiesMaxProductCapacity capacity;
 
     /*
      * Generic URL value.
      */
+    @Generated
     private String genericValue;
 
     /*
      * URL value.
      */
+    @Generated
     private String odataValue;
 
     /**
      * Creates an instance of FlattenParameterGroup class.
      */
+    @Generated
     public FlattenParameterGroup() {
     }
 
@@ -63,6 +73,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -73,6 +84,7 @@ public final class FlattenParameterGroup {
      * @param name the name value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setName(String name) {
         this.name = name;
         return this;
@@ -83,6 +95,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the simpleBodyProduct value.
      */
+    @Generated
     public SimpleProduct getSimpleBodyProduct() {
         return this.simpleBodyProduct;
     }
@@ -93,6 +106,7 @@ public final class FlattenParameterGroup {
      * @param simpleBodyProduct the simpleBodyProduct value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setSimpleBodyProduct(SimpleProduct simpleBodyProduct) {
         this.simpleBodyProduct = simpleBodyProduct;
         return this;
@@ -104,6 +118,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the productId value.
      */
+    @Generated
     public String getProductId() {
         return this.productId;
     }
@@ -115,6 +130,7 @@ public final class FlattenParameterGroup {
      * @param productId the productId value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setProductId(String productId) {
         this.productId = productId;
         return this;
@@ -125,6 +141,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the description value.
      */
+    @Generated
     public String getDescription() {
         return this.description;
     }
@@ -135,6 +152,7 @@ public final class FlattenParameterGroup {
      * @param description the description value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setDescription(String description) {
         this.description = description;
         return this;
@@ -145,6 +163,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the maxProductDisplayName value.
      */
+    @Generated
     public String getMaxProductDisplayName() {
         return this.maxProductDisplayName;
     }
@@ -155,6 +174,7 @@ public final class FlattenParameterGroup {
      * @param maxProductDisplayName the maxProductDisplayName value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setMaxProductDisplayName(String maxProductDisplayName) {
         this.maxProductDisplayName = maxProductDisplayName;
         return this;
@@ -165,6 +185,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the capacity value.
      */
+    @Generated
     public SimpleProductPropertiesMaxProductCapacity getCapacity() {
         return this.capacity;
     }
@@ -175,6 +196,7 @@ public final class FlattenParameterGroup {
      * @param capacity the capacity value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setCapacity(SimpleProductPropertiesMaxProductCapacity capacity) {
         this.capacity = capacity;
         return this;
@@ -185,6 +207,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the genericValue value.
      */
+    @Generated
     public String getGenericValue() {
         return this.genericValue;
     }
@@ -195,6 +218,7 @@ public final class FlattenParameterGroup {
      * @param genericValue the genericValue value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setGenericValue(String genericValue) {
         this.genericValue = genericValue;
         return this;
@@ -205,6 +229,7 @@ public final class FlattenParameterGroup {
      * 
      * @return the odataValue value.
      */
+    @Generated
     public String getOdataValue() {
         return this.odataValue;
     }
@@ -215,6 +240,7 @@ public final class FlattenParameterGroup {
      * @param odataValue the odataValue value to set.
      * @return the FlattenParameterGroup object itself.
      */
+    @Generated
     public FlattenParameterGroup setOdataValue(String odataValue) {
         this.odataValue = odataValue;
         return this;

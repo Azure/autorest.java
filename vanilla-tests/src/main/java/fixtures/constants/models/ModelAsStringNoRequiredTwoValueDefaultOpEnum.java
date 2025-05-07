@@ -4,6 +4,7 @@
 
 package fixtures.constants.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -15,11 +16,13 @@ public final class ModelAsStringNoRequiredTwoValueDefaultOpEnum
     /**
      * Static value value1 for ModelAsStringNoRequiredTwoValueDefaultOpEnum.
      */
+    @Generated
     public static final ModelAsStringNoRequiredTwoValueDefaultOpEnum VALUE1 = fromString("value1");
 
     /**
      * Static value value2 for ModelAsStringNoRequiredTwoValueDefaultOpEnum.
      */
+    @Generated
     public static final ModelAsStringNoRequiredTwoValueDefaultOpEnum VALUE2 = fromString("value2");
 
     /**
@@ -27,6 +30,7 @@ public final class ModelAsStringNoRequiredTwoValueDefaultOpEnum
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public ModelAsStringNoRequiredTwoValueDefaultOpEnum() {
     }
@@ -37,6 +41,7 @@ public final class ModelAsStringNoRequiredTwoValueDefaultOpEnum
      * @param name a name to look for.
      * @return the corresponding ModelAsStringNoRequiredTwoValueDefaultOpEnum.
      */
+    @Generated
     public static ModelAsStringNoRequiredTwoValueDefaultOpEnum fromString(String name) {
         return fromString(name, ModelAsStringNoRequiredTwoValueDefaultOpEnum.class);
     }
@@ -46,6 +51,7 @@ public final class ModelAsStringNoRequiredTwoValueDefaultOpEnum
      * 
      * @return known ModelAsStringNoRequiredTwoValueDefaultOpEnum values.
      */
+    @Generated
     public static Collection<ModelAsStringNoRequiredTwoValueDefaultOpEnum> values() {
         return values(ModelAsStringNoRequiredTwoValueDefaultOpEnum.class);
     }

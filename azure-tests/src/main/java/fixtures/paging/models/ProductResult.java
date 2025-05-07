@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,16 +21,19 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
     /*
      * The values property.
      */
+    @Generated
     private List<Product> values;
 
     /*
      * The nextLink property.
      */
+    @Generated
     private String nextLink;
 
     /**
      * Creates an instance of ProductResult class.
      */
+    @Generated
     public ProductResult() {
     }
 
@@ -38,6 +42,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
      * 
      * @return the values value.
      */
+    @Generated
     public List<Product> getValues() {
         return this.values;
     }
@@ -48,6 +53,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
      * @param values the values value to set.
      * @return the ProductResult object itself.
      */
+    @Generated
     public ProductResult setValues(List<Product> values) {
         this.values = values;
         return this;
@@ -58,6 +64,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
      * 
      * @return the nextLink value.
      */
+    @Generated
     public String getNextLink() {
         return this.nextLink;
     }
@@ -68,6 +75,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
      * @param nextLink the nextLink value to set.
      * @return the ProductResult object itself.
      */
+    @Generated
     public ProductResult setNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
@@ -87,6 +95,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -103,6 +112,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ProductResult.
      */
+    @Generated
     public static ProductResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ProductResult deserializedProductResult = new ProductResult();

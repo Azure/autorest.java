@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,21 +23,25 @@ public final class Slide implements XmlSerializable<Slide> {
     /*
      * The type property.
      */
+    @Generated
     private String type;
 
     /*
      * The title property.
      */
+    @Generated
     private String title;
 
     /*
      * The items property.
      */
+    @Generated
     private List<String> items = new ArrayList<>();
 
     /**
      * Creates an instance of Slide class.
      */
+    @Generated
     public Slide() {
     }
 
@@ -46,6 +50,7 @@ public final class Slide implements XmlSerializable<Slide> {
      * 
      * @return the type value.
      */
+    @Generated
     public String getType() {
         return this.type;
     }
@@ -56,6 +61,7 @@ public final class Slide implements XmlSerializable<Slide> {
      * @param type the type value to set.
      * @return the Slide object itself.
      */
+    @Generated
     public Slide setType(String type) {
         this.type = type;
         return this;
@@ -66,6 +72,7 @@ public final class Slide implements XmlSerializable<Slide> {
      * 
      * @return the title value.
      */
+    @Generated
     public String getTitle() {
         return this.title;
     }
@@ -76,6 +83,7 @@ public final class Slide implements XmlSerializable<Slide> {
      * @param title the title value to set.
      * @return the Slide object itself.
      */
+    @Generated
     public Slide setTitle(String title) {
         this.title = title;
         return this;
@@ -86,6 +94,7 @@ public final class Slide implements XmlSerializable<Slide> {
      * 
      * @return the items value.
      */
+    @Generated
     public List<String> getItems() {
         return this.items;
     }
@@ -96,6 +105,7 @@ public final class Slide implements XmlSerializable<Slide> {
      * @param items the items value to set.
      * @return the Slide object itself.
      */
+    @Generated
     public Slide setItems(List<String> items) {
         this.items = items;
         return this;
@@ -109,14 +119,16 @@ public final class Slide implements XmlSerializable<Slide> {
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slide" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "slide" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("type", this.type);
         xmlWriter.writeStringElement("title", this.title);
@@ -136,6 +148,7 @@ public final class Slide implements XmlSerializable<Slide> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Slide.
      */
+    @Generated
     public static Slide fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -150,8 +163,9 @@ public final class Slide implements XmlSerializable<Slide> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Slide.
      */
+    @Generated
     public static Slide fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slide" : rootElementName;
+        String finalRootElementName = rootElementName == null || rootElementName.isEmpty() ? "slide" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Slide deserializedSlide = new Slide();
             deserializedSlide.type = reader.getStringAttribute(null, "type");

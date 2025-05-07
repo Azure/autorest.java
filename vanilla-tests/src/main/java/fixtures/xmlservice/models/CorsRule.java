@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -23,18 +24,21 @@ public final class CorsRule {
      * the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all
      * origin domains to make requests via CORS.
      */
+    @Generated
     @JsonProperty(value = "AllowedOrigins", required = true)
     private String allowedOrigins;
 
     /*
      * The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated)
      */
+    @Generated
     @JsonProperty(value = "AllowedMethods", required = true)
     private String allowedMethods;
 
     /*
      * the request headers that the origin domain may specify on the CORS request.
      */
+    @Generated
     @JsonProperty(value = "AllowedHeaders", required = true)
     private String allowedHeaders;
 
@@ -42,18 +46,21 @@ public final class CorsRule {
      * The response headers that may be sent in the response to the CORS request and exposed by the browser to the
      * request issuer
      */
+    @Generated
     @JsonProperty(value = "ExposedHeaders", required = true)
     private String exposedHeaders;
 
     /*
      * The maximum amount time that a browser should cache the preflight OPTIONS request.
      */
+    @Generated
     @JsonProperty(value = "MaxAgeInSeconds", required = true)
     private int maxAgeInSeconds;
 
     /**
      * Creates an instance of CorsRule class.
      */
+    @Generated
     public CorsRule() {
     }
 
@@ -65,6 +72,7 @@ public final class CorsRule {
      * 
      * @return the allowedOrigins value.
      */
+    @Generated
     public String getAllowedOrigins() {
         return this.allowedOrigins;
     }
@@ -78,6 +86,7 @@ public final class CorsRule {
      * @param allowedOrigins the allowedOrigins value to set.
      * @return the CorsRule object itself.
      */
+    @Generated
     public CorsRule setAllowedOrigins(String allowedOrigins) {
         this.allowedOrigins = allowedOrigins;
         return this;
@@ -89,6 +98,7 @@ public final class CorsRule {
      * 
      * @return the allowedMethods value.
      */
+    @Generated
     public String getAllowedMethods() {
         return this.allowedMethods;
     }
@@ -100,6 +110,7 @@ public final class CorsRule {
      * @param allowedMethods the allowedMethods value to set.
      * @return the CorsRule object itself.
      */
+    @Generated
     public CorsRule setAllowedMethods(String allowedMethods) {
         this.allowedMethods = allowedMethods;
         return this;
@@ -110,6 +121,7 @@ public final class CorsRule {
      * 
      * @return the allowedHeaders value.
      */
+    @Generated
     public String getAllowedHeaders() {
         return this.allowedHeaders;
     }
@@ -120,6 +132,7 @@ public final class CorsRule {
      * @param allowedHeaders the allowedHeaders value to set.
      * @return the CorsRule object itself.
      */
+    @Generated
     public CorsRule setAllowedHeaders(String allowedHeaders) {
         this.allowedHeaders = allowedHeaders;
         return this;
@@ -131,6 +144,7 @@ public final class CorsRule {
      * 
      * @return the exposedHeaders value.
      */
+    @Generated
     public String getExposedHeaders() {
         return this.exposedHeaders;
     }
@@ -142,6 +156,7 @@ public final class CorsRule {
      * @param exposedHeaders the exposedHeaders value to set.
      * @return the CorsRule object itself.
      */
+    @Generated
     public CorsRule setExposedHeaders(String exposedHeaders) {
         this.exposedHeaders = exposedHeaders;
         return this;
@@ -153,6 +168,7 @@ public final class CorsRule {
      * 
      * @return the maxAgeInSeconds value.
      */
+    @Generated
     public int getMaxAgeInSeconds() {
         return this.maxAgeInSeconds;
     }
@@ -164,6 +180,7 @@ public final class CorsRule {
      * @param maxAgeInSeconds the maxAgeInSeconds value to set.
      * @return the CorsRule object itself.
      */
+    @Generated
     public CorsRule setMaxAgeInSeconds(int maxAgeInSeconds) {
         this.maxAgeInSeconds = maxAgeInSeconds;
         return this;

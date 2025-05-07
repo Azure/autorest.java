@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,18 +18,21 @@ public final class Error {
     /*
      * The status property.
      */
+    @Generated
     @JsonProperty(value = "status")
     private Integer status;
 
     /*
      * The message property.
      */
+    @Generated
     @JsonProperty(value = "message")
     private String message;
 
     /**
      * Creates an instance of Error class.
      */
+    @Generated
     public Error() {
     }
 
@@ -37,6 +41,7 @@ public final class Error {
      * 
      * @return the status value.
      */
+    @Generated
     public Integer getStatus() {
         return this.status;
     }
@@ -47,6 +52,7 @@ public final class Error {
      * @param status the status value to set.
      * @return the Error object itself.
      */
+    @Generated
     public Error setStatus(Integer status) {
         this.status = status;
         return this;
@@ -57,6 +63,7 @@ public final class Error {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }
@@ -67,6 +74,7 @@ public final class Error {
      * @param message the message value to set.
      * @return the Error object itself.
      */
+    @Generated
     public Error setMessage(String message) {
         this.message = message;
         return this;

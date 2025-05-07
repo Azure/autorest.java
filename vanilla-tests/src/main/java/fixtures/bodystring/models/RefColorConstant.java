@@ -5,6 +5,7 @@
 package fixtures.bodystring.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
     /*
      * Referenced Color Constant Description.
      */
+    @Generated
     private final String colorConstant = "green-color";
 
     /*
      * Sample string.
      */
+    @Generated
     private String field1;
 
     /**
      * Creates an instance of RefColorConstant class.
      */
+    @Generated
     public RefColorConstant() {
     }
 
@@ -37,6 +41,7 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
      * 
      * @return the colorConstant value.
      */
+    @Generated
     public String getColorConstant() {
         return this.colorConstant;
     }
@@ -46,6 +51,7 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
      * 
      * @return the field1 value.
      */
+    @Generated
     public String getField1() {
         return this.field1;
     }
@@ -56,6 +62,7 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
      * @param field1 the field1 value to set.
      * @return the RefColorConstant object itself.
      */
+    @Generated
     public RefColorConstant setField1(String field1) {
         this.field1 = field1;
         return this;
@@ -72,6 +79,7 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -89,6 +97,7 @@ public final class RefColorConstant implements JsonSerializable<RefColorConstant
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the RefColorConstant.
      */
+    @Generated
     public static RefColorConstant fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             RefColorConstant deserializedRefColorConstant = new RefColorConstant();

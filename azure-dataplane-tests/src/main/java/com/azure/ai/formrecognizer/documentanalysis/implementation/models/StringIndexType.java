@@ -4,6 +4,7 @@
 
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,16 +15,19 @@ public final class StringIndexType extends ExpandableStringEnum<StringIndexType>
     /**
      * Static value textElements for StringIndexType.
      */
+    @Generated
     public static final StringIndexType TEXT_ELEMENTS = fromString("textElements");
 
     /**
      * Static value unicodeCodePoint for StringIndexType.
      */
+    @Generated
     public static final StringIndexType UNICODE_CODE_POINT = fromString("unicodeCodePoint");
 
     /**
      * Static value utf16CodeUnit for StringIndexType.
      */
+    @Generated
     public static final StringIndexType UTF16CODE_UNIT = fromString("utf16CodeUnit");
 
     /**
@@ -31,6 +35,7 @@ public final class StringIndexType extends ExpandableStringEnum<StringIndexType>
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public StringIndexType() {
     }
@@ -41,6 +46,7 @@ public final class StringIndexType extends ExpandableStringEnum<StringIndexType>
      * @param name a name to look for.
      * @return the corresponding StringIndexType.
      */
+    @Generated
     public static StringIndexType fromString(String name) {
         return fromString(name, StringIndexType.class);
     }
@@ -50,6 +56,7 @@ public final class StringIndexType extends ExpandableStringEnum<StringIndexType>
      * 
      * @return known StringIndexType values.
      */
+    @Generated
     public static Collection<StringIndexType> values() {
         return values(StringIndexType.class);
     }

@@ -5,6 +5,7 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public class Feline implements JsonSerializable<Feline> {
     /*
      * The meows property.
      */
+    @Generated
     private Boolean meows;
 
     /*
      * The hisses property.
      */
+    @Generated
     private Boolean hisses;
 
     /**
      * Creates an instance of Feline class.
      */
+    @Generated
     public Feline() {
     }
 
@@ -37,6 +41,7 @@ public class Feline implements JsonSerializable<Feline> {
      * 
      * @return the meows value.
      */
+    @Generated
     public Boolean isMeows() {
         return this.meows;
     }
@@ -47,6 +52,7 @@ public class Feline implements JsonSerializable<Feline> {
      * @param meows the meows value to set.
      * @return the Feline object itself.
      */
+    @Generated
     public Feline setMeows(Boolean meows) {
         this.meows = meows;
         return this;
@@ -57,6 +63,7 @@ public class Feline implements JsonSerializable<Feline> {
      * 
      * @return the hisses value.
      */
+    @Generated
     public Boolean isHisses() {
         return this.hisses;
     }
@@ -67,6 +74,7 @@ public class Feline implements JsonSerializable<Feline> {
      * @param hisses the hisses value to set.
      * @return the Feline object itself.
      */
+    @Generated
     public Feline setHisses(Boolean hisses) {
         this.hisses = hisses;
         return this;
@@ -83,6 +91,7 @@ public class Feline implements JsonSerializable<Feline> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public class Feline implements JsonSerializable<Feline> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Feline.
      */
+    @Generated
     public static Feline fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Feline deserializedFeline = new Feline();

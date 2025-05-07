@@ -4,6 +4,7 @@
 
 package fixtures.paging.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,56 +15,67 @@ public final class OperationResultStatus extends ExpandableStringEnum<OperationR
     /**
      * Static value Succeeded for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus SUCCEEDED = fromString("Succeeded");
 
     /**
      * Static value Failed for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus FAILED = fromString("Failed");
 
     /**
      * Static value canceled for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus CANCELED = fromString("canceled");
 
     /**
      * Static value Accepted for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus ACCEPTED = fromString("Accepted");
 
     /**
      * Static value Creating for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus CREATING = fromString("Creating");
 
     /**
      * Static value Created for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus CREATED = fromString("Created");
 
     /**
      * Static value Updating for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus UPDATING = fromString("Updating");
 
     /**
      * Static value Updated for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus UPDATED = fromString("Updated");
 
     /**
      * Static value Deleting for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus DELETING = fromString("Deleting");
 
     /**
      * Static value Deleted for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus DELETED = fromString("Deleted");
 
     /**
      * Static value OK for OperationResultStatus.
      */
+    @Generated
     public static final OperationResultStatus OK = fromString("OK");
 
     /**
@@ -71,6 +83,7 @@ public final class OperationResultStatus extends ExpandableStringEnum<OperationR
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public OperationResultStatus() {
     }
@@ -81,6 +94,7 @@ public final class OperationResultStatus extends ExpandableStringEnum<OperationR
      * @param name a name to look for.
      * @return the corresponding OperationResultStatus.
      */
+    @Generated
     public static OperationResultStatus fromString(String name) {
         return fromString(name, OperationResultStatus.class);
     }
@@ -90,6 +104,7 @@ public final class OperationResultStatus extends ExpandableStringEnum<OperationR
      * 
      * @return known OperationResultStatus values.
      */
+    @Generated
     public static Collection<OperationResultStatus> values() {
         return values(OperationResultStatus.class);
     }

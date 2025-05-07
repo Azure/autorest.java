@@ -5,6 +5,7 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class Product implements JsonSerializable<Product> {
     /*
      * The id property.
      */
+    @Generated
     private int id;
 
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /**
      * Creates an instance of Product class.
      */
+    @Generated
     public Product() {
     }
 
@@ -37,6 +41,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -47,6 +52,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param id the id value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setId(int id) {
         this.id = id;
         return this;
@@ -57,6 +63,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -67,6 +74,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param name the name value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setName(String name) {
         this.name = name;
         return this;
@@ -83,6 +91,7 @@ public final class Product implements JsonSerializable<Product> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -100,6 +109,7 @@ public final class Product implements JsonSerializable<Product> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Product.
      */
+    @Generated
     public static Product fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Product deserializedProduct = new Product();

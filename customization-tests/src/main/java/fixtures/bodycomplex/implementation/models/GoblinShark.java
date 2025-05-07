@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
@@ -22,21 +23,25 @@ public final class GoblinShark extends Shark {
     /*
      * The fishtype property.
      */
+    @Generated
     private String fishtype = "goblin";
 
     /*
      * The jawsize property.
      */
+    @Generated
     private Integer jawsize;
 
     /*
      * Colors possible
      */
+    @Generated
     private GoblinSharkColor color;
 
     /**
      * Creates an instance of Goblinshark class.
      */
+    @Generated
     public GoblinShark() {
     }
 
@@ -45,6 +50,7 @@ public final class GoblinShark extends Shark {
      * 
      * @return the fishtype value.
      */
+    @Generated
     @Override
     public String getFishtype() {
         return this.fishtype;
@@ -55,6 +61,7 @@ public final class GoblinShark extends Shark {
      * 
      * @return the jawsize value.
      */
+    @Generated
     public Integer getJawsize() {
         return this.jawsize;
     }
@@ -65,6 +72,7 @@ public final class GoblinShark extends Shark {
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
+    @Generated
     public GoblinShark setJawsize(Integer jawsize) {
         this.jawsize = jawsize;
         return this;
@@ -75,6 +83,7 @@ public final class GoblinShark extends Shark {
      * 
      * @return the color value.
      */
+    @Generated
     public GoblinSharkColor getColor() {
         return this.color;
     }
@@ -85,6 +94,7 @@ public final class GoblinShark extends Shark {
      * @param color the color value to set.
      * @return the Goblinshark object itself.
      */
+    @Generated
     public GoblinShark setColor(GoblinSharkColor color) {
         this.color = color;
         return this;
@@ -93,6 +103,7 @@ public final class GoblinShark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public GoblinShark setAge(Integer age) {
         super.setAge(age);
@@ -102,6 +113,7 @@ public final class GoblinShark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public GoblinShark setBirthday(OffsetDateTime birthday) {
         super.setBirthday(birthday);
@@ -111,6 +123,7 @@ public final class GoblinShark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public GoblinShark setSpecies(String species) {
         super.setSpecies(species);
@@ -120,6 +133,7 @@ public final class GoblinShark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public GoblinShark setLength(float length) {
         super.setLength(length);
@@ -129,6 +143,7 @@ public final class GoblinShark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public GoblinShark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -138,6 +153,7 @@ public final class GoblinShark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -162,6 +178,7 @@ public final class GoblinShark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Goblinshark.
      */
+    @Generated
     public static GoblinShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             GoblinShark deserializedGoblinshark = new GoblinShark();

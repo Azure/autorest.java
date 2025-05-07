@@ -5,6 +5,7 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,26 +22,31 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
     /*
      * The id property.
      */
+    @Generated
     private int id;
 
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /*
      * The status property.
      */
+    @Generated
     private Boolean status;
 
     /*
      * Dictionary of <any>
      */
+    @Generated
     private Map<String, Object> additionalProperties;
 
     /**
      * Creates an instance of PetAPTrue class.
      */
+    @Generated
     public PetAPTrue() {
     }
 
@@ -49,6 +55,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * 
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -59,6 +66,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * @param id the id value to set.
      * @return the PetAPTrue object itself.
      */
+    @Generated
     public PetAPTrue setId(int id) {
         this.id = id;
         return this;
@@ -69,6 +77,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -79,6 +88,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * @param name the name value to set.
      * @return the PetAPTrue object itself.
      */
+    @Generated
     public PetAPTrue setName(String name) {
         this.name = name;
         return this;
@@ -89,6 +99,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * 
      * @return the status value.
      */
+    @Generated
     public Boolean isStatus() {
         return this.status;
     }
@@ -99,6 +110,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * @param status the status value to set.
      * @return the PetAPTrue object itself.
      */
+    @Generated
     PetAPTrue setStatus(Boolean status) {
         this.status = status;
         return this;
@@ -109,6 +121,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * 
      * @return the additionalProperties value.
      */
+    @Generated
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -119,6 +132,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPTrue object itself.
      */
+    @Generated
     public PetAPTrue setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
@@ -135,6 +149,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -157,6 +172,7 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the PetAPTrue.
      */
+    @Generated
     public static PetAPTrue fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             PetAPTrue deserializedPetAPTrue = new PetAPTrue();

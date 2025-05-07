@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,30 +18,35 @@ public final class Metrics {
     /*
      * The version of Storage Analytics to configure.
      */
+    @Generated
     @JsonProperty(value = "Version")
     private String version;
 
     /*
      * Indicates whether metrics are enabled for the Blob service.
      */
+    @Generated
     @JsonProperty(value = "Enabled", required = true)
     private boolean enabled;
 
     /*
      * Indicates whether metrics should generate summary statistics for called API operations.
      */
+    @Generated
     @JsonProperty(value = "IncludeAPIs")
     private Boolean includeAPIs;
 
     /*
      * the retention policy
      */
+    @Generated
     @JsonProperty(value = "RetentionPolicy")
     private RetentionPolicy retentionPolicy;
 
     /**
      * Creates an instance of Metrics class.
      */
+    @Generated
     public Metrics() {
     }
 
@@ -49,6 +55,7 @@ public final class Metrics {
      * 
      * @return the version value.
      */
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -59,6 +66,7 @@ public final class Metrics {
      * @param version the version value to set.
      * @return the Metrics object itself.
      */
+    @Generated
     public Metrics setVersion(String version) {
         this.version = version;
         return this;
@@ -69,6 +77,7 @@ public final class Metrics {
      * 
      * @return the enabled value.
      */
+    @Generated
     public boolean isEnabled() {
         return this.enabled;
     }
@@ -79,6 +88,7 @@ public final class Metrics {
      * @param enabled the enabled value to set.
      * @return the Metrics object itself.
      */
+    @Generated
     public Metrics setEnabled(boolean enabled) {
         this.enabled = enabled;
         return this;
@@ -90,6 +100,7 @@ public final class Metrics {
      * 
      * @return the includeAPIs value.
      */
+    @Generated
     public Boolean isIncludeAPIs() {
         return this.includeAPIs;
     }
@@ -101,6 +112,7 @@ public final class Metrics {
      * @param includeAPIs the includeAPIs value to set.
      * @return the Metrics object itself.
      */
+    @Generated
     public Metrics setIncludeAPIs(Boolean includeAPIs) {
         this.includeAPIs = includeAPIs;
         return this;
@@ -111,6 +123,7 @@ public final class Metrics {
      * 
      * @return the retentionPolicy value.
      */
+    @Generated
     public RetentionPolicy getRetentionPolicy() {
         return this.retentionPolicy;
     }
@@ -121,6 +134,7 @@ public final class Metrics {
      * @param retentionPolicy the retentionPolicy value to set.
      * @return the Metrics object itself.
      */
+    @Generated
     public Metrics setRetentionPolicy(RetentionPolicy retentionPolicy) {
         this.retentionPolicy = retentionPolicy;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
@@ -19,18 +20,21 @@ public final class Blobs {
     /*
      * The BlobPrefix property.
      */
+    @Generated
     @JsonProperty("BlobPrefix")
     private List<BlobPrefix> blobPrefix = new ArrayList<>();
 
     /*
      * The Blob property.
      */
+    @Generated
     @JsonProperty("Blob")
     private List<Blob> blob = new ArrayList<>();
 
     /**
      * Creates an instance of Blobs class.
      */
+    @Generated
     public Blobs() {
     }
 
@@ -39,6 +43,7 @@ public final class Blobs {
      * 
      * @return the blobPrefix value.
      */
+    @Generated
     public List<BlobPrefix> getBlobPrefix() {
         return this.blobPrefix;
     }
@@ -49,6 +54,7 @@ public final class Blobs {
      * @param blobPrefix the blobPrefix value to set.
      * @return the Blobs object itself.
      */
+    @Generated
     public Blobs setBlobPrefix(List<BlobPrefix> blobPrefix) {
         this.blobPrefix = blobPrefix;
         return this;
@@ -59,6 +65,7 @@ public final class Blobs {
      * 
      * @return the blob value.
      */
+    @Generated
     public List<Blob> getBlob() {
         return this.blob;
     }
@@ -69,6 +76,7 @@ public final class Blobs {
      * @param blob the blob value to set.
      * @return the Blobs object itself.
      */
+    @Generated
     public Blobs setBlob(List<Blob> blob) {
         this.blob = blob;
         return this;

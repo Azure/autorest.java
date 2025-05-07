@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -18,54 +19,63 @@ public final class ListBlobsResponse {
     /*
      * The ServiceEndpoint property.
      */
+    @Generated
     @JacksonXmlProperty(localName = "ServiceEndpoint", isAttribute = true)
     private String serviceEndpoint;
 
     /*
      * The ContainerName property.
      */
+    @Generated
     @JacksonXmlProperty(localName = "ContainerName", isAttribute = true)
     private String containerName;
 
     /*
      * The Prefix property.
      */
+    @Generated
     @JsonProperty(value = "Prefix", required = true)
     private String prefix;
 
     /*
      * The Marker property.
      */
+    @Generated
     @JsonProperty(value = "Marker", required = true)
     private String marker;
 
     /*
      * The MaxResults property.
      */
+    @Generated
     @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
 
     /*
      * The Delimiter property.
      */
+    @Generated
     @JsonProperty(value = "Delimiter", required = true)
     private String delimiter;
 
     /*
      * The Blobs property.
      */
+    @Generated
     @JsonProperty(value = "Blobs", required = true)
     private Blobs blobs;
 
     /*
      * The NextMarker property.
      */
+    @Generated
     @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
 
     /**
      * Creates an instance of ListBlobsResponse class.
      */
+    @Generated
     public ListBlobsResponse() {
     }
 
@@ -74,6 +84,7 @@ public final class ListBlobsResponse {
      * 
      * @return the serviceEndpoint value.
      */
+    @Generated
     public String getServiceEndpoint() {
         return this.serviceEndpoint;
     }
@@ -84,6 +95,7 @@ public final class ListBlobsResponse {
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setServiceEndpoint(String serviceEndpoint) {
         this.serviceEndpoint = serviceEndpoint;
         return this;
@@ -94,6 +106,7 @@ public final class ListBlobsResponse {
      * 
      * @return the containerName value.
      */
+    @Generated
     public String getContainerName() {
         return this.containerName;
     }
@@ -104,6 +117,7 @@ public final class ListBlobsResponse {
      * @param containerName the containerName value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setContainerName(String containerName) {
         this.containerName = containerName;
         return this;
@@ -114,6 +128,7 @@ public final class ListBlobsResponse {
      * 
      * @return the prefix value.
      */
+    @Generated
     public String getPrefix() {
         return this.prefix;
     }
@@ -124,6 +139,7 @@ public final class ListBlobsResponse {
      * @param prefix the prefix value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
@@ -134,6 +150,7 @@ public final class ListBlobsResponse {
      * 
      * @return the marker value.
      */
+    @Generated
     public String getMarker() {
         return this.marker;
     }
@@ -144,6 +161,7 @@ public final class ListBlobsResponse {
      * @param marker the marker value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setMarker(String marker) {
         this.marker = marker;
         return this;
@@ -154,6 +172,7 @@ public final class ListBlobsResponse {
      * 
      * @return the maxResults value.
      */
+    @Generated
     public int getMaxResults() {
         return this.maxResults;
     }
@@ -164,6 +183,7 @@ public final class ListBlobsResponse {
      * @param maxResults the maxResults value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setMaxResults(int maxResults) {
         this.maxResults = maxResults;
         return this;
@@ -174,6 +194,7 @@ public final class ListBlobsResponse {
      * 
      * @return the delimiter value.
      */
+    @Generated
     public String getDelimiter() {
         return this.delimiter;
     }
@@ -184,6 +205,7 @@ public final class ListBlobsResponse {
      * @param delimiter the delimiter value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setDelimiter(String delimiter) {
         this.delimiter = delimiter;
         return this;
@@ -194,6 +216,7 @@ public final class ListBlobsResponse {
      * 
      * @return the blobs value.
      */
+    @Generated
     public Blobs getBlobs() {
         return this.blobs;
     }
@@ -204,6 +227,7 @@ public final class ListBlobsResponse {
      * @param blobs the blobs value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setBlobs(Blobs blobs) {
         this.blobs = blobs;
         return this;
@@ -214,6 +238,7 @@ public final class ListBlobsResponse {
      * 
      * @return the nextMarker value.
      */
+    @Generated
     public String getNextMarker() {
         return this.nextMarker;
     }
@@ -224,6 +249,7 @@ public final class ListBlobsResponse {
      * @param nextMarker the nextMarker value to set.
      * @return the ListBlobsResponse object itself.
      */
+    @Generated
     public ListBlobsResponse setNextMarker(String nextMarker) {
         this.nextMarker = nextMarker;
         return this;

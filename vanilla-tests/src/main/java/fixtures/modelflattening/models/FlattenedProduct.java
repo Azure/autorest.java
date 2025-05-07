@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -19,41 +20,49 @@ public class FlattenedProduct extends Resource {
     /*
      * The p.name property.
      */
+    @Generated
     private String pName;
 
     /*
      * The type property.
      */
+    @Generated
     private String typePropertiesType;
 
     /*
      * The provisioningStateValues property.
      */
+    @Generated
     private FlattenedProductPropertiesProvisioningStateValues provisioningStateValues;
 
     /*
      * The provisioningState property.
      */
+    @Generated
     private String provisioningState;
 
     /*
      * Resource Name
      */
+    @Generated
     private String name;
 
     /*
      * Resource Type
      */
+    @Generated
     private String type;
 
     /*
      * Resource Id
      */
+    @Generated
     private String id;
 
     /**
      * Creates an instance of FlattenedProduct class.
      */
+    @Generated
     public FlattenedProduct() {
     }
 
@@ -62,6 +71,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the pName value.
      */
+    @Generated
     public String getPName() {
         return this.pName;
     }
@@ -72,6 +82,7 @@ public class FlattenedProduct extends Resource {
      * @param pName the pName value to set.
      * @return the FlattenedProduct object itself.
      */
+    @Generated
     public FlattenedProduct setPName(String pName) {
         this.pName = pName;
         return this;
@@ -82,6 +93,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the typePropertiesType value.
      */
+    @Generated
     public String getTypePropertiesType() {
         return this.typePropertiesType;
     }
@@ -92,6 +104,7 @@ public class FlattenedProduct extends Resource {
      * @param typePropertiesType the typePropertiesType value to set.
      * @return the FlattenedProduct object itself.
      */
+    @Generated
     public FlattenedProduct setTypePropertiesType(String typePropertiesType) {
         this.typePropertiesType = typePropertiesType;
         return this;
@@ -102,6 +115,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the provisioningStateValues value.
      */
+    @Generated
     public FlattenedProductPropertiesProvisioningStateValues getProvisioningStateValues() {
         return this.provisioningStateValues;
     }
@@ -111,6 +125,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the provisioningState value.
      */
+    @Generated
     public String getProvisioningState() {
         return this.provisioningState;
     }
@@ -121,6 +136,7 @@ public class FlattenedProduct extends Resource {
      * @param provisioningState the provisioningState value to set.
      * @return the FlattenedProduct object itself.
      */
+    @Generated
     public FlattenedProduct setProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
         return this;
@@ -131,6 +147,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the name value.
      */
+    @Generated
     @Override
     public String getName() {
         return this.name;
@@ -141,6 +158,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the type value.
      */
+    @Generated
     @Override
     public String getType() {
         return this.type;
@@ -151,6 +169,7 @@ public class FlattenedProduct extends Resource {
      * 
      * @return the id value.
      */
+    @Generated
     @Override
     public String getId() {
         return this.id;
@@ -159,6 +178,7 @@ public class FlattenedProduct extends Resource {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public FlattenedProduct setTags(Map<String, String> tags) {
         super.setTags(tags);
@@ -168,6 +188,7 @@ public class FlattenedProduct extends Resource {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public FlattenedProduct setLocation(String location) {
         super.setLocation(location);
@@ -186,6 +207,7 @@ public class FlattenedProduct extends Resource {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -212,6 +234,7 @@ public class FlattenedProduct extends Resource {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the FlattenedProduct.
      */
+    @Generated
     public static FlattenedProduct fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             FlattenedProduct deserializedFlattenedProduct = new FlattenedProduct();

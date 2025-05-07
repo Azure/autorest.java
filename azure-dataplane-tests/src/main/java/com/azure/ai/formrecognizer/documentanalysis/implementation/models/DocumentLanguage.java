@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,21 +21,25 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
     /*
      * Detected language. Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47 language tag (ex. "zh-Hans").
      */
+    @Generated
     private String locale;
 
     /*
      * Location of the text elements in the concatenated content the language applies to.
      */
+    @Generated
     private List<DocumentSpan> spans;
 
     /*
      * Confidence of correctly identifying the language.
      */
+    @Generated
     private float confidence;
 
     /**
      * Creates an instance of DocumentLanguage class.
      */
+    @Generated
     public DocumentLanguage() {
     }
 
@@ -44,6 +49,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * 
      * @return the locale value.
      */
+    @Generated
     public String getLocale() {
         return this.locale;
     }
@@ -55,6 +61,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * @param locale the locale value to set.
      * @return the DocumentLanguage object itself.
      */
+    @Generated
     public DocumentLanguage setLocale(String locale) {
         this.locale = locale;
         return this;
@@ -65,6 +72,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * 
      * @return the spans value.
      */
+    @Generated
     public List<DocumentSpan> getSpans() {
         return this.spans;
     }
@@ -75,6 +83,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * @param spans the spans value to set.
      * @return the DocumentLanguage object itself.
      */
+    @Generated
     public DocumentLanguage setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
@@ -85,6 +94,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * 
      * @return the confidence value.
      */
+    @Generated
     public float getConfidence() {
         return this.confidence;
     }
@@ -95,6 +105,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * @param confidence the confidence value to set.
      * @return the DocumentLanguage object itself.
      */
+    @Generated
     public DocumentLanguage setConfidence(float confidence) {
         this.confidence = confidence;
         return this;
@@ -103,6 +114,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -121,6 +133,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentLanguage.
      */
+    @Generated
     public static DocumentLanguage fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentLanguage deserializedDocumentLanguage = new DocumentLanguage();

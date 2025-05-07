@@ -4,6 +4,7 @@
 
 package fixtures.streamstylexmlserialization.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,11 +15,13 @@ public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
     /**
      * Static value rehydrate-pending-to-hot for ArchiveStatus.
      */
+    @Generated
     public static final ArchiveStatus REHYDRATE_PENDING_TO_HOT = fromString("rehydrate-pending-to-hot");
 
     /**
      * Static value rehydrate-pending-to-cool for ArchiveStatus.
      */
+    @Generated
     public static final ArchiveStatus REHYDRATE_PENDING_TO_COOL = fromString("rehydrate-pending-to-cool");
 
     /**
@@ -26,6 +29,7 @@ public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public ArchiveStatus() {
     }
@@ -36,6 +40,7 @@ public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
      * @param name a name to look for.
      * @return the corresponding ArchiveStatus.
      */
+    @Generated
     public static ArchiveStatus fromString(String name) {
         return fromString(name, ArchiveStatus.class);
     }
@@ -45,6 +50,7 @@ public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
      * 
      * @return known ArchiveStatus values.
      */
+    @Generated
     public static Collection<ArchiveStatus> values() {
         return values(ArchiveStatus.class);
     }
