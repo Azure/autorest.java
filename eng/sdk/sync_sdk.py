@@ -17,6 +17,7 @@ sdk_root: str
 
 skip_artifacts: List[str] = [
     "azure-ai-anomalydetector",  # deprecated
+    "azure-compute-batch",
     # expect failure on below
     # "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
     # "azure-ai-vision-face",  # SDK in development
