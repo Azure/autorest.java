@@ -5,6 +5,7 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -20,16 +21,19 @@ public final class CatAPTrue extends PetAPTrue {
     /*
      * The friendly property.
      */
+    @Generated
     private Boolean friendly;
 
     /*
      * The status property.
      */
+    @Generated
     private Boolean status;
 
     /**
      * Creates an instance of CatAPTrue class.
      */
+    @Generated
     public CatAPTrue() {
     }
 
@@ -38,6 +42,7 @@ public final class CatAPTrue extends PetAPTrue {
      * 
      * @return the friendly value.
      */
+    @Generated
     public Boolean isFriendly() {
         return this.friendly;
     }
@@ -48,6 +53,7 @@ public final class CatAPTrue extends PetAPTrue {
      * @param friendly the friendly value to set.
      * @return the CatAPTrue object itself.
      */
+    @Generated
     public CatAPTrue setFriendly(Boolean friendly) {
         this.friendly = friendly;
         return this;
@@ -58,6 +64,7 @@ public final class CatAPTrue extends PetAPTrue {
      * 
      * @return the status value.
      */
+    @Generated
     @Override
     public Boolean isStatus() {
         return this.status;
@@ -66,6 +73,7 @@ public final class CatAPTrue extends PetAPTrue {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public CatAPTrue setId(int id) {
         super.setId(id);
@@ -75,6 +83,7 @@ public final class CatAPTrue extends PetAPTrue {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public CatAPTrue setName(String name) {
         super.setName(name);
@@ -93,6 +102,7 @@ public final class CatAPTrue extends PetAPTrue {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -116,6 +126,7 @@ public final class CatAPTrue extends PetAPTrue {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CatAPTrue.
      */
+    @Generated
     public static CatAPTrue fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             CatAPTrue deserializedCatAPTrue = new CatAPTrue();

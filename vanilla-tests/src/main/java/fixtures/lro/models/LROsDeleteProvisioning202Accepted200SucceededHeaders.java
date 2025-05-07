@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,12 +18,14 @@ public final class LROsDeleteProvisioning202Accepted200SucceededHeaders {
     /*
      * The Retry-After property.
      */
+    @Generated
     @JsonProperty(value = "Retry-After")
     private Integer retryAfter;
 
     /*
      * The Location property.
      */
+    @Generated
     @JsonProperty(value = "Location")
     private String location;
 
@@ -47,6 +50,7 @@ public final class LROsDeleteProvisioning202Accepted200SucceededHeaders {
      * 
      * @return the retryAfter value.
      */
+    @Generated
     public Integer getRetryAfter() {
         return this.retryAfter;
     }
@@ -57,6 +61,7 @@ public final class LROsDeleteProvisioning202Accepted200SucceededHeaders {
      * @param retryAfter the retryAfter value to set.
      * @return the LROsDeleteProvisioning202Accepted200SucceededHeaders object itself.
      */
+    @Generated
     public LROsDeleteProvisioning202Accepted200SucceededHeaders setRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
@@ -67,6 +72,7 @@ public final class LROsDeleteProvisioning202Accepted200SucceededHeaders {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -77,6 +83,7 @@ public final class LROsDeleteProvisioning202Accepted200SucceededHeaders {
      * @param location the location value to set.
      * @return the LROsDeleteProvisioning202Accepted200SucceededHeaders object itself.
      */
+    @Generated
     public LROsDeleteProvisioning202Accepted200SucceededHeaders setLocation(String location) {
         this.location = location;
         return this;

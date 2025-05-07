@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,21 +21,25 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
     /*
      * Concatenated content of the contained elements in reading order.
      */
+    @Generated
     private String content;
 
     /*
      * Bounding polygon of the line.
      */
+    @Generated
     private List<Float> polygon;
 
     /*
      * Location of the line in the reading order concatenated content.
      */
+    @Generated
     private List<DocumentSpan> spans;
 
     /**
      * Creates an instance of DocumentLine class.
      */
+    @Generated
     public DocumentLine() {
     }
 
@@ -43,6 +48,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
      * 
      * @return the content value.
      */
+    @Generated
     public String getContent() {
         return this.content;
     }
@@ -53,6 +59,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
      * @param content the content value to set.
      * @return the DocumentLine object itself.
      */
+    @Generated
     public DocumentLine setContent(String content) {
         this.content = content;
         return this;
@@ -63,6 +70,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
      * 
      * @return the polygon value.
      */
+    @Generated
     public List<Float> getPolygon() {
         return this.polygon;
     }
@@ -73,6 +81,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
      * @param polygon the polygon value to set.
      * @return the DocumentLine object itself.
      */
+    @Generated
     public DocumentLine setPolygon(List<Float> polygon) {
         this.polygon = polygon;
         return this;
@@ -83,6 +92,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
      * 
      * @return the spans value.
      */
+    @Generated
     public List<DocumentSpan> getSpans() {
         return this.spans;
     }
@@ -93,6 +103,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
      * @param spans the spans value to set.
      * @return the DocumentLine object itself.
      */
+    @Generated
     public DocumentLine setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
@@ -101,6 +112,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -119,6 +131,7 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentLine.
      */
+    @Generated
     public static DocumentLine fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentLine deserializedDocumentLine = new DocumentLine();

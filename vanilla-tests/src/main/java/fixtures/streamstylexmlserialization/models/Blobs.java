@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,16 +23,19 @@ public final class Blobs implements XmlSerializable<Blobs> {
     /*
      * The BlobPrefix property.
      */
+    @Generated
     private List<BlobPrefix> blobPrefix = new ArrayList<>();
 
     /*
      * The Blob property.
      */
+    @Generated
     private List<Blob> blob = new ArrayList<>();
 
     /**
      * Creates an instance of Blobs class.
      */
+    @Generated
     public Blobs() {
     }
 
@@ -41,6 +44,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * 
      * @return the blobPrefix value.
      */
+    @Generated
     public List<BlobPrefix> getBlobPrefix() {
         return this.blobPrefix;
     }
@@ -51,6 +55,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * @param blobPrefix the blobPrefix value to set.
      * @return the Blobs object itself.
      */
+    @Generated
     public Blobs setBlobPrefix(List<BlobPrefix> blobPrefix) {
         this.blobPrefix = blobPrefix;
         return this;
@@ -61,6 +66,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * 
      * @return the blob value.
      */
+    @Generated
     public List<Blob> getBlob() {
         return this.blob;
     }
@@ -71,6 +77,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * @param blob the blob value to set.
      * @return the Blobs object itself.
      */
+    @Generated
     public Blobs setBlob(List<Blob> blob) {
         this.blob = blob;
         return this;
@@ -90,14 +97,16 @@ public final class Blobs implements XmlSerializable<Blobs> {
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blobs" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "Blobs" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         if (this.blobPrefix != null) {
             for (BlobPrefix element : this.blobPrefix) {
@@ -120,6 +129,7 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Blobs.
      */
+    @Generated
     public static Blobs fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -134,8 +144,9 @@ public final class Blobs implements XmlSerializable<Blobs> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Blobs.
      */
+    @Generated
     public static Blobs fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blobs" : rootElementName;
+        String finalRootElementName = rootElementName == null || rootElementName.isEmpty() ? "Blobs" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Blobs deserializedBlobs = new Blobs();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

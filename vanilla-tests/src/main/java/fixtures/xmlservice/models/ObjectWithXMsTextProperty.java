@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
@@ -18,18 +19,21 @@ public final class ObjectWithXMsTextProperty {
     /*
      * Returned value should be 'english'
      */
+    @Generated
     @JacksonXmlProperty(localName = "language", isAttribute = true)
     private String language;
 
     /*
      * Returned value should be 'I am text'
      */
+    @Generated
     @JacksonXmlText
     private String content;
 
     /**
      * Creates an instance of ObjectWithXMsTextProperty class.
      */
+    @Generated
     public ObjectWithXMsTextProperty() {
     }
 
@@ -38,6 +42,7 @@ public final class ObjectWithXMsTextProperty {
      * 
      * @return the language value.
      */
+    @Generated
     public String getLanguage() {
         return this.language;
     }
@@ -48,6 +53,7 @@ public final class ObjectWithXMsTextProperty {
      * @param language the language value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
+    @Generated
     public ObjectWithXMsTextProperty setLanguage(String language) {
         this.language = language;
         return this;
@@ -58,6 +64,7 @@ public final class ObjectWithXMsTextProperty {
      * 
      * @return the content value.
      */
+    @Generated
     public String getContent() {
         return this.content;
     }
@@ -68,6 +75,7 @@ public final class ObjectWithXMsTextProperty {
      * @param content the content value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
+    @Generated
     public ObjectWithXMsTextProperty setContent(String content) {
         this.content = content;
         return this;

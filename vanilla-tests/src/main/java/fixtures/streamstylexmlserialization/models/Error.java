@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -21,16 +21,19 @@ public final class Error implements XmlSerializable<Error> {
     /*
      * The status property.
      */
+    @Generated
     private Integer status;
 
     /*
      * The message property.
      */
+    @Generated
     private String message;
 
     /**
      * Creates an instance of Error class.
      */
+    @Generated
     public Error() {
     }
 
@@ -39,6 +42,7 @@ public final class Error implements XmlSerializable<Error> {
      * 
      * @return the status value.
      */
+    @Generated
     public Integer getStatus() {
         return this.status;
     }
@@ -49,6 +53,7 @@ public final class Error implements XmlSerializable<Error> {
      * @param status the status value to set.
      * @return the Error object itself.
      */
+    @Generated
     public Error setStatus(Integer status) {
         this.status = status;
         return this;
@@ -59,6 +64,7 @@ public final class Error implements XmlSerializable<Error> {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }
@@ -69,6 +75,7 @@ public final class Error implements XmlSerializable<Error> {
      * @param message the message value to set.
      * @return the Error object itself.
      */
+    @Generated
     public Error setMessage(String message) {
         this.message = message;
         return this;
@@ -82,14 +89,16 @@ public final class Error implements XmlSerializable<Error> {
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Error" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "Error" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeNumberElement("status", this.status);
         xmlWriter.writeStringElement("message", this.message);
@@ -104,6 +113,7 @@ public final class Error implements XmlSerializable<Error> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Error.
      */
+    @Generated
     public static Error fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -118,8 +128,9 @@ public final class Error implements XmlSerializable<Error> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Error.
      */
+    @Generated
     public static Error fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Error" : rootElementName;
+        String finalRootElementName = rootElementName == null || rootElementName.isEmpty() ? "Error" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Error deserializedError = new Error();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,18 +18,21 @@ public class SubProduct extends SubResource {
     /*
      * The provisioningState property.
      */
+    @Generated
     @JsonProperty(value = "properties.provisioningState")
     private String provisioningState;
 
     /*
      * The provisioningStateValues property.
      */
+    @Generated
     @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private SubProductPropertiesProvisioningStateValues provisioningStateValues;
 
     /**
      * Creates an instance of SubProduct class.
      */
+    @Generated
     public SubProduct() {
     }
 
@@ -37,6 +41,7 @@ public class SubProduct extends SubResource {
      * 
      * @return the provisioningState value.
      */
+    @Generated
     public String getProvisioningState() {
         return this.provisioningState;
     }
@@ -47,6 +52,7 @@ public class SubProduct extends SubResource {
      * @param provisioningState the provisioningState value to set.
      * @return the SubProduct object itself.
      */
+    @Generated
     public SubProduct setProvisioningState(String provisioningState) {
         this.provisioningState = provisioningState;
         return this;
@@ -57,6 +63,7 @@ public class SubProduct extends SubResource {
      * 
      * @return the provisioningStateValues value.
      */
+    @Generated
     public SubProductPropertiesProvisioningStateValues getProvisioningStateValues() {
         return this.provisioningStateValues;
     }

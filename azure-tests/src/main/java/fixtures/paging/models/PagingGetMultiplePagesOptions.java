@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class PagingGetMultiplePagesOptions {
     /*
      * Sets the maximum number of items to return in the response.
      */
+    @Generated
     private Integer maxresults;
 
     /*
      * Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      */
+    @Generated
     private Integer timeout;
 
     /**
      * Creates an instance of PagingGetMultiplePagesOptions class.
      */
+    @Generated
     public PagingGetMultiplePagesOptions() {
     }
 
@@ -32,6 +36,7 @@ public final class PagingGetMultiplePagesOptions {
      * 
      * @return the maxresults value.
      */
+    @Generated
     public Integer getMaxresults() {
         return this.maxresults;
     }
@@ -42,6 +47,7 @@ public final class PagingGetMultiplePagesOptions {
      * @param maxresults the maxresults value to set.
      * @return the PagingGetMultiplePagesOptions object itself.
      */
+    @Generated
     public PagingGetMultiplePagesOptions setMaxresults(Integer maxresults) {
         this.maxresults = maxresults;
         return this;
@@ -53,6 +59,7 @@ public final class PagingGetMultiplePagesOptions {
      * 
      * @return the timeout value.
      */
+    @Generated
     public Integer getTimeout() {
         return this.timeout;
     }
@@ -64,6 +71,7 @@ public final class PagingGetMultiplePagesOptions {
      * @param timeout the timeout value to set.
      * @return the PagingGetMultiplePagesOptions object itself.
      */
+    @Generated
     public PagingGetMultiplePagesOptions setTimeout(Integer timeout) {
         this.timeout = timeout;
         return this;

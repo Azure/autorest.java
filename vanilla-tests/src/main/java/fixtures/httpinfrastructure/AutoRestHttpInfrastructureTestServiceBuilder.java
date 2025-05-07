@@ -64,22 +64,6 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder
     }
 
     /*
-     * The HTTP pipeline to send requests through.
-     */
-    @Generated
-    private HttpPipeline pipeline;
-
-    /**
-     * {@inheritDoc}.
-     */
-    @Generated
-    @Override
-    public AutoRestHttpInfrastructureTestServiceBuilder pipeline(HttpPipeline pipeline) {
-        this.pipeline = pipeline;
-        return this;
-    }
-
-    /*
      * The HTTP client used to send the request.
      */
     @Generated
@@ -92,6 +76,22 @@ public final class AutoRestHttpInfrastructureTestServiceBuilder
     @Override
     public AutoRestHttpInfrastructureTestServiceBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
+        return this;
+    }
+
+    /*
+     * The HTTP pipeline to send requests through.
+     */
+    @Generated
+    private HttpPipeline pipeline;
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Generated
+    @Override
+    public AutoRestHttpInfrastructureTestServiceBuilder pipeline(HttpPipeline pipeline) {
+        this.pipeline = pipeline;
         return this;
     }
 

@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -23,21 +24,25 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
     /*
      * the date-time the policy is active
      */
+    @Generated
     private OffsetDateTime start;
 
     /*
      * the date-time the policy expires
      */
+    @Generated
     private OffsetDateTime expiry;
 
     /*
      * the permissions for the acl policy
      */
+    @Generated
     private String permission;
 
     /**
      * Creates an instance of AccessPolicy class.
      */
+    @Generated
     public AccessPolicy() {
     }
 
@@ -46,6 +51,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * 
      * @return the start value.
      */
+    @Generated
     public OffsetDateTime getStart() {
         return this.start;
     }
@@ -56,6 +62,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * @param start the start value to set.
      * @return the AccessPolicy object itself.
      */
+    @Generated
     public AccessPolicy setStart(OffsetDateTime start) {
         this.start = start;
         return this;
@@ -66,6 +73,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * 
      * @return the expiry value.
      */
+    @Generated
     public OffsetDateTime getExpiry() {
         return this.expiry;
     }
@@ -76,6 +84,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * @param expiry the expiry value to set.
      * @return the AccessPolicy object itself.
      */
+    @Generated
     public AccessPolicy setExpiry(OffsetDateTime expiry) {
         this.expiry = expiry;
         return this;
@@ -86,6 +95,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * 
      * @return the permission value.
      */
+    @Generated
     public String getPermission() {
         return this.permission;
     }
@@ -96,6 +106,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * @param permission the permission value to set.
      * @return the AccessPolicy object itself.
      */
+    @Generated
     public AccessPolicy setPermission(String permission) {
         this.permission = permission;
         return this;
@@ -118,14 +129,16 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AccessPolicy" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "AccessPolicy" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Start",
             this.start == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.start));
@@ -143,6 +156,7 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the AccessPolicy.
      */
+    @Generated
     public static AccessPolicy fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -157,8 +171,10 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the AccessPolicy.
      */
+    @Generated
     public static AccessPolicy fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "AccessPolicy" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "AccessPolicy" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             AccessPolicy deserializedAccessPolicy = new AccessPolicy();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

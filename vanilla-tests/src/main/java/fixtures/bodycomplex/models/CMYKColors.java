@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -15,21 +16,25 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
     /**
      * Static value cyan for CMYKColors.
      */
+    @Generated
     public static final CMYKColors CYAN = fromString("cyan");
 
     /**
      * Static value Magenta for CMYKColors.
      */
+    @Generated
     public static final CMYKColors MAGENTA = fromString("Magenta");
 
     /**
      * Static value YELLOW for CMYKColors.
      */
+    @Generated
     public static final CMYKColors YELLOW = fromString("YELLOW");
 
     /**
      * Static value blacK for CMYKColors.
      */
+    @Generated
     public static final CMYKColors BLACK = fromString("blacK");
 
     /**
@@ -37,6 +42,7 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public CMYKColors() {
     }
@@ -47,6 +53,7 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
      * @param name a name to look for.
      * @return the corresponding CMYKColors.
      */
+    @Generated
     @JsonCreator
     public static CMYKColors fromString(String name) {
         return fromString(name, CMYKColors.class);
@@ -57,6 +64,7 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
      * 
      * @return known CMYKColors values.
      */
+    @Generated
     public static Collection<CMYKColors> values() {
         return values(CMYKColors.class);
     }

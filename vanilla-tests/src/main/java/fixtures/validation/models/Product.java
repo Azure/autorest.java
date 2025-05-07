@@ -5,6 +5,7 @@
 package fixtures.validation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,46 +21,55 @@ public final class Product implements JsonSerializable<Product> {
     /*
      * Non required array of unique items from 0 to 6 elements.
      */
+    @Generated
     private List<String> displayNames;
 
     /*
      * Non required int betwen 0 and 100 exclusive.
      */
+    @Generated
     private Integer capacity;
 
     /*
      * Image URL representing the product.
      */
+    @Generated
     private String image;
 
     /*
      * The product documentation.
      */
+    @Generated
     private ChildProduct child;
 
     /*
      * The product documentation.
      */
+    @Generated
     private ConstantProduct constChild;
 
     /*
      * Constant int
      */
+    @Generated
     private final int constInt = 0;
 
     /*
      * Constant string
      */
+    @Generated
     private final String constString = "constant";
 
     /*
      * Constant string as Enum
      */
+    @Generated
     private String constStringAsEnum = "constant_string_as_enum";
 
     /**
      * Creates an instance of Product class.
      */
+    @Generated
     public Product() {
     }
 
@@ -68,6 +78,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the displayNames value.
      */
+    @Generated
     public List<String> getDisplayNames() {
         return this.displayNames;
     }
@@ -78,6 +89,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param displayNames the displayNames value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setDisplayNames(List<String> displayNames) {
         this.displayNames = displayNames;
         return this;
@@ -88,6 +100,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the capacity value.
      */
+    @Generated
     public Integer getCapacity() {
         return this.capacity;
     }
@@ -98,6 +111,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param capacity the capacity value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setCapacity(Integer capacity) {
         this.capacity = capacity;
         return this;
@@ -108,6 +122,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the image value.
      */
+    @Generated
     public String getImage() {
         return this.image;
     }
@@ -118,6 +133,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param image the image value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setImage(String image) {
         this.image = image;
         return this;
@@ -128,6 +144,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the child value.
      */
+    @Generated
     public ChildProduct getChild() {
         return this.child;
     }
@@ -138,6 +155,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param child the child value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setChild(ChildProduct child) {
         this.child = child;
         return this;
@@ -148,6 +166,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the constChild value.
      */
+    @Generated
     public ConstantProduct getConstChild() {
         return this.constChild;
     }
@@ -158,6 +177,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param constChild the constChild value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setConstChild(ConstantProduct constChild) {
         this.constChild = constChild;
         return this;
@@ -168,6 +188,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the constInt value.
      */
+    @Generated
     public int getConstInt() {
         return this.constInt;
     }
@@ -177,6 +198,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the constString value.
      */
+    @Generated
     public String getConstString() {
         return this.constString;
     }
@@ -186,6 +208,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the constStringAsEnum value.
      */
+    @Generated
     public String getConstStringAsEnum() {
         return this.constStringAsEnum;
     }
@@ -196,6 +219,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param constStringAsEnum the constStringAsEnum value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setConstStringAsEnum(String constStringAsEnum) {
         this.constStringAsEnum = constStringAsEnum;
         return this;
@@ -222,6 +246,7 @@ public final class Product implements JsonSerializable<Product> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -246,6 +271,7 @@ public final class Product implements JsonSerializable<Product> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Product.
      */
+    @Generated
     public static Product fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Product deserializedProduct = new Product();

@@ -5,6 +5,7 @@
 package fixtures.notypedheadersmethods.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.DateTimeRfc1123;
@@ -18,6 +19,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
     /*
      * The value property.
      */
+    @Generated
     private DateTimeRfc1123 value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -42,6 +44,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
      * 
      * @return the value value.
      */
+    @Generated
     public OffsetDateTime getValue() {
         if (this.value == null) {
             return null;
@@ -55,6 +58,7 @@ public final class HeadersResponseDatetimeRfc1123Headers {
      * @param value the value value to set.
      * @return the HeadersResponseDatetimeRfc1123Headers object itself.
      */
+    @Generated
     public HeadersResponseDatetimeRfc1123Headers setValue(OffsetDateTime value) {
         if (value == null) {
             this.value = null;

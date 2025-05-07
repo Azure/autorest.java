@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,46 +20,55 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
     /*
      * House or building number.
      */
+    @Generated
     private String houseNumber;
 
     /*
      * Post office box number.
      */
+    @Generated
     private String poBox;
 
     /*
      * Street name.
      */
+    @Generated
     private String road;
 
     /*
      * Name of city, town, village, etc.
      */
+    @Generated
     private String city;
 
     /*
      * First-level administrative division.
      */
+    @Generated
     private String state;
 
     /*
      * Postal code used for mail sorting.
      */
+    @Generated
     private String postalCode;
 
     /*
      * Country/region.
      */
+    @Generated
     private String countryRegion;
 
     /*
      * Street-level address, excluding city, state, countryRegion, and postalCode.
      */
+    @Generated
     private String streetAddress;
 
     /**
      * Creates an instance of AddressValue class.
      */
+    @Generated
     public AddressValue() {
     }
 
@@ -67,6 +77,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the houseNumber value.
      */
+    @Generated
     public String getHouseNumber() {
         return this.houseNumber;
     }
@@ -77,6 +88,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param houseNumber the houseNumber value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
         return this;
@@ -87,6 +99,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the poBox value.
      */
+    @Generated
     public String getPoBox() {
         return this.poBox;
     }
@@ -97,6 +110,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param poBox the poBox value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setPoBox(String poBox) {
         this.poBox = poBox;
         return this;
@@ -107,6 +121,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the road value.
      */
+    @Generated
     public String getRoad() {
         return this.road;
     }
@@ -117,6 +132,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param road the road value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setRoad(String road) {
         this.road = road;
         return this;
@@ -127,6 +143,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the city value.
      */
+    @Generated
     public String getCity() {
         return this.city;
     }
@@ -137,6 +154,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param city the city value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setCity(String city) {
         this.city = city;
         return this;
@@ -147,6 +165,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the state value.
      */
+    @Generated
     public String getState() {
         return this.state;
     }
@@ -157,6 +176,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param state the state value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setState(String state) {
         this.state = state;
         return this;
@@ -167,6 +187,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the postalCode value.
      */
+    @Generated
     public String getPostalCode() {
         return this.postalCode;
     }
@@ -177,6 +198,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param postalCode the postalCode value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setPostalCode(String postalCode) {
         this.postalCode = postalCode;
         return this;
@@ -187,6 +209,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the countryRegion value.
      */
+    @Generated
     public String getCountryRegion() {
         return this.countryRegion;
     }
@@ -197,6 +220,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param countryRegion the countryRegion value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setCountryRegion(String countryRegion) {
         this.countryRegion = countryRegion;
         return this;
@@ -207,6 +231,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * 
      * @return the streetAddress value.
      */
+    @Generated
     public String getStreetAddress() {
         return this.streetAddress;
     }
@@ -217,6 +242,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * @param streetAddress the streetAddress value to set.
      * @return the AddressValue object itself.
      */
+    @Generated
     public AddressValue setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
         return this;
@@ -225,6 +251,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -247,6 +274,7 @@ public final class AddressValue implements JsonSerializable<AddressValue> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the AddressValue.
      */
+    @Generated
     public static AddressValue fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             AddressValue deserializedAddressValue = new AddressValue();

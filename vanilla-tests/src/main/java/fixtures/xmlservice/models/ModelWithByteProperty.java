@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -18,12 +19,14 @@ public final class ModelWithByteProperty {
     /*
      * The Bytes property.
      */
+    @Generated
     @JsonProperty(value = "Bytes")
     private byte[] bytes;
 
     /**
      * Creates an instance of ModelWithByteProperty class.
      */
+    @Generated
     public ModelWithByteProperty() {
     }
 
@@ -32,6 +35,7 @@ public final class ModelWithByteProperty {
      * 
      * @return the bytes value.
      */
+    @Generated
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
     }
@@ -42,6 +46,7 @@ public final class ModelWithByteProperty {
      * @param bytes the bytes value to set.
      * @return the ModelWithByteProperty object itself.
      */
+    @Generated
     public ModelWithByteProperty setBytes(byte[] bytes) {
         this.bytes = CoreUtils.clone(bytes);
         return this;

@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class PagingGetOdataMultiplePagesOptions {
     /*
      * Sets the maximum number of items to return in the response.
      */
+    @Generated
     private Integer maxresults;
 
     /*
      * Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      */
+    @Generated
     private Integer timeout;
 
     /**
      * Creates an instance of PagingGetOdataMultiplePagesOptions class.
      */
+    @Generated
     public PagingGetOdataMultiplePagesOptions() {
     }
 
@@ -32,6 +36,7 @@ public final class PagingGetOdataMultiplePagesOptions {
      * 
      * @return the maxresults value.
      */
+    @Generated
     public Integer getMaxresults() {
         return this.maxresults;
     }
@@ -42,6 +47,7 @@ public final class PagingGetOdataMultiplePagesOptions {
      * @param maxresults the maxresults value to set.
      * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
+    @Generated
     public PagingGetOdataMultiplePagesOptions setMaxresults(Integer maxresults) {
         this.maxresults = maxresults;
         return this;
@@ -53,6 +59,7 @@ public final class PagingGetOdataMultiplePagesOptions {
      * 
      * @return the timeout value.
      */
+    @Generated
     public Integer getTimeout() {
         return this.timeout;
     }
@@ -64,6 +71,7 @@ public final class PagingGetOdataMultiplePagesOptions {
      * @param timeout the timeout value to set.
      * @return the PagingGetOdataMultiplePagesOptions object itself.
      */
+    @Generated
     public PagingGetOdataMultiplePagesOptions setTimeout(Integer timeout) {
         this.timeout = timeout;
         return this;

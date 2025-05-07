@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -21,31 +21,37 @@ public final class Logging implements XmlSerializable<Logging> {
     /*
      * The version of Storage Analytics to configure.
      */
+    @Generated
     private String version;
 
     /*
      * Indicates whether all delete requests should be logged.
      */
+    @Generated
     private boolean delete;
 
     /*
      * Indicates whether all read requests should be logged.
      */
+    @Generated
     private boolean read;
 
     /*
      * Indicates whether all write requests should be logged.
      */
+    @Generated
     private boolean write;
 
     /*
      * the retention policy
      */
+    @Generated
     private RetentionPolicy retentionPolicy;
 
     /**
      * Creates an instance of Logging class.
      */
+    @Generated
     public Logging() {
     }
 
@@ -54,6 +60,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * 
      * @return the version value.
      */
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -64,6 +71,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * @param version the version value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setVersion(String version) {
         this.version = version;
         return this;
@@ -74,6 +82,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * 
      * @return the delete value.
      */
+    @Generated
     public boolean isDelete() {
         return this.delete;
     }
@@ -84,6 +93,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * @param delete the delete value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setDelete(boolean delete) {
         this.delete = delete;
         return this;
@@ -94,6 +104,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * 
      * @return the read value.
      */
+    @Generated
     public boolean isRead() {
         return this.read;
     }
@@ -104,6 +115,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * @param read the read value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setRead(boolean read) {
         this.read = read;
         return this;
@@ -114,6 +126,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * 
      * @return the write value.
      */
+    @Generated
     public boolean isWrite() {
         return this.write;
     }
@@ -124,6 +137,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * @param write the write value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setWrite(boolean write) {
         this.write = write;
         return this;
@@ -134,6 +148,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * 
      * @return the retentionPolicy value.
      */
+    @Generated
     public RetentionPolicy getRetentionPolicy() {
         return this.retentionPolicy;
     }
@@ -144,6 +159,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * @param retentionPolicy the retentionPolicy value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setRetentionPolicy(RetentionPolicy retentionPolicy) {
         this.retentionPolicy = retentionPolicy;
         return this;
@@ -165,14 +181,16 @@ public final class Logging implements XmlSerializable<Logging> {
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Logging" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "Logging" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Version", this.version);
         xmlWriter.writeBooleanElement("Delete", this.delete);
@@ -190,6 +208,7 @@ public final class Logging implements XmlSerializable<Logging> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Logging.
      */
+    @Generated
     public static Logging fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -204,8 +223,10 @@ public final class Logging implements XmlSerializable<Logging> {
      * XML null.
      * @throws XMLStreamException If an error occurs while reading the Logging.
      */
+    @Generated
     public static Logging fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Logging" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "Logging" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Logging deserializedLogging = new Logging();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

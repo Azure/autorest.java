@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -19,16 +20,19 @@ public class Salmon extends Fish {
     /*
      * The location property.
      */
+    @Generated
     private String location;
 
     /*
      * The iswild property.
      */
+    @Generated
     private Boolean iswild;
 
     /**
      * Creates an instance of Salmon class.
      */
+    @Generated
     public Salmon() {
         this.fishtype = "salmon";
     }
@@ -38,6 +42,7 @@ public class Salmon extends Fish {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -48,6 +53,7 @@ public class Salmon extends Fish {
      * @param location the location value to set.
      * @return the Salmon object itself.
      */
+    @Generated
     public Salmon setLocation(String location) {
         this.location = location;
         return this;
@@ -58,6 +64,7 @@ public class Salmon extends Fish {
      * 
      * @return the iswild value.
      */
+    @Generated
     public Boolean iswild() {
         return this.iswild;
     }
@@ -68,6 +75,7 @@ public class Salmon extends Fish {
      * @param iswild the iswild value to set.
      * @return the Salmon object itself.
      */
+    @Generated
     public Salmon setIswild(Boolean iswild) {
         this.iswild = iswild;
         return this;
@@ -76,6 +84,7 @@ public class Salmon extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Salmon setSpecies(String species) {
         super.setSpecies(species);
@@ -85,6 +94,7 @@ public class Salmon extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Salmon setLength(float length) {
         super.setLength(length);
@@ -94,6 +104,7 @@ public class Salmon extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Salmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -115,6 +126,7 @@ public class Salmon extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -137,6 +149,7 @@ public class Salmon extends Fish {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Salmon.
      */
+    @Generated
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -162,6 +175,7 @@ public class Salmon extends Fish {
         });
     }
 
+    @Generated
     static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Salmon deserializedSalmon = new Salmon();
@@ -178,6 +192,7 @@ public class Salmon extends Fish {
         });
     }
 
+    @Generated
     static boolean fromJsonShared(JsonReader reader, String fieldName, Salmon deserializedSalmon) throws IOException {
         if (Fish.fromJsonShared(reader, fieldName, deserializedSalmon)) {
             return true;

@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -21,11 +22,13 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
     /*
      * The Bytes property.
      */
+    @Generated
     private byte[] bytes;
 
     /**
      * Creates an instance of ModelWithByteProperty class.
      */
+    @Generated
     public ModelWithByteProperty() {
     }
 
@@ -34,6 +37,7 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
      * 
      * @return the bytes value.
      */
+    @Generated
     public byte[] getBytes() {
         return CoreUtils.clone(this.bytes);
     }
@@ -44,6 +48,7 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
      * @param bytes the bytes value to set.
      * @return the ModelWithByteProperty object itself.
      */
+    @Generated
     public ModelWithByteProperty setBytes(byte[] bytes) {
         this.bytes = CoreUtils.clone(bytes);
         return this;
@@ -57,14 +62,17 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithByteProperty" : rootElementName;
+        rootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "ModelWithByteProperty" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeBinaryElement("Bytes", this.bytes);
         return xmlWriter.writeEndElement();
@@ -78,6 +86,7 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
      * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ModelWithByteProperty.
      */
+    @Generated
     public static ModelWithByteProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -92,9 +101,10 @@ public final class ModelWithByteProperty implements XmlSerializable<ModelWithByt
      * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ModelWithByteProperty.
      */
+    @Generated
     public static ModelWithByteProperty fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName
-            = CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithByteProperty" : rootElementName;
+            = rootElementName == null || rootElementName.isEmpty() ? "ModelWithByteProperty" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             ModelWithByteProperty deserializedModelWithByteProperty = new ModelWithByteProperty();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

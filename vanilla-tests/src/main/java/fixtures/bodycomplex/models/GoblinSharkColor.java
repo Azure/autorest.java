@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -15,26 +16,31 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
     /**
      * Static value pink for GoblinSharkColor.
      */
+    @Generated
     public static final GoblinSharkColor PINK = fromString("pink");
 
     /**
      * Static value gray for GoblinSharkColor.
      */
+    @Generated
     public static final GoblinSharkColor GRAY = fromString("gray");
 
     /**
      * Static value brown for GoblinSharkColor.
      */
+    @Generated
     public static final GoblinSharkColor BROWN = fromString("brown");
 
     /**
      * Uppercase RED.
      */
+    @Generated
     public static final GoblinSharkColor UPPER_RED = fromString("RED");
 
     /**
      * Lowercase RED.
      */
+    @Generated
     public static final GoblinSharkColor LOWER_RED = fromString("red");
 
     /**
@@ -42,6 +48,7 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public GoblinSharkColor() {
     }
@@ -52,6 +59,7 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
      * @param name a name to look for.
      * @return the corresponding GoblinSharkColor.
      */
+    @Generated
     @JsonCreator
     public static GoblinSharkColor fromString(String name) {
         return fromString(name, GoblinSharkColor.class);
@@ -62,6 +70,7 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
      * 
      * @return known GoblinSharkColor values.
      */
+    @Generated
     public static Collection<GoblinSharkColor> values() {
         return values(GoblinSharkColor.class);
     }

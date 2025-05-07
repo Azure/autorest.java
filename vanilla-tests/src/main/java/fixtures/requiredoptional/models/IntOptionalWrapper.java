@@ -5,6 +5,7 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class IntOptionalWrapper implements JsonSerializable<IntOptionalWra
     /*
      * The value property.
      */
+    @Generated
     private Integer value;
 
     /**
      * Creates an instance of IntOptionalWrapper class.
      */
+    @Generated
     public IntOptionalWrapper() {
     }
 
@@ -32,6 +35,7 @@ public final class IntOptionalWrapper implements JsonSerializable<IntOptionalWra
      * 
      * @return the value value.
      */
+    @Generated
     public Integer getValue() {
         return this.value;
     }
@@ -42,6 +46,7 @@ public final class IntOptionalWrapper implements JsonSerializable<IntOptionalWra
      * @param value the value value to set.
      * @return the IntOptionalWrapper object itself.
      */
+    @Generated
     public IntOptionalWrapper setValue(Integer value) {
         this.value = value;
         return this;
@@ -58,6 +63,7 @@ public final class IntOptionalWrapper implements JsonSerializable<IntOptionalWra
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -73,6 +79,7 @@ public final class IntOptionalWrapper implements JsonSerializable<IntOptionalWra
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the IntOptionalWrapper.
      */
+    @Generated
     public static IntOptionalWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             IntOptionalWrapper deserializedIntOptionalWrapper = new IntOptionalWrapper();

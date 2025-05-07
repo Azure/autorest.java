@@ -5,6 +5,7 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,11 +21,13 @@ public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptiona
     /*
      * The value property.
      */
+    @Generated
     private List<String> value;
 
     /**
      * Creates an instance of ArrayOptionalWrapper class.
      */
+    @Generated
     public ArrayOptionalWrapper() {
     }
 
@@ -33,6 +36,7 @@ public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptiona
      * 
      * @return the value value.
      */
+    @Generated
     public List<String> getValue() {
         return this.value;
     }
@@ -43,6 +47,7 @@ public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptiona
      * @param value the value value to set.
      * @return the ArrayOptionalWrapper object itself.
      */
+    @Generated
     public ArrayOptionalWrapper setValue(List<String> value) {
         this.value = value;
         return this;
@@ -59,6 +64,7 @@ public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptiona
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -74,6 +80,7 @@ public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptiona
      * was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ArrayOptionalWrapper.
      */
+    @Generated
     public static ArrayOptionalWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ArrayOptionalWrapper deserializedArrayOptionalWrapper = new ArrayOptionalWrapper();

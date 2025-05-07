@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
     /*
      * The id property.
      */
+    @Generated
     private Integer id;
 
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /**
      * Creates an instance of ProductProperties class.
      */
+    @Generated
     public ProductProperties() {
     }
 
@@ -37,6 +41,7 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
      * 
      * @return the id value.
      */
+    @Generated
     public Integer getId() {
         return this.id;
     }
@@ -47,6 +52,7 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
      * @param id the id value to set.
      * @return the ProductProperties object itself.
      */
+    @Generated
     public ProductProperties setId(Integer id) {
         this.id = id;
         return this;
@@ -57,6 +63,7 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -67,6 +74,7 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
      * @param name the name value to set.
      * @return the ProductProperties object itself.
      */
+    @Generated
     public ProductProperties setName(String name) {
         this.name = name;
         return this;
@@ -83,6 +91,7 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ProductProperties.
      */
+    @Generated
     public static ProductProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ProductProperties deserializedProductProperties = new ProductProperties();

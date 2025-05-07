@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
@@ -17,6 +18,7 @@ public final class LoadBalancer {
     /*
      * Collection of backend address pools used by a load balancer.
      */
+    @Generated
     @JsonFlatten
     @JsonProperty(value = "properties.backendAddressPools")
     private List<BackendAddressPool> backendAddressPools;
@@ -24,6 +26,7 @@ public final class LoadBalancer {
     /**
      * Creates an instance of LoadBalancer class.
      */
+    @Generated
     public LoadBalancer() {
     }
 
@@ -32,6 +35,7 @@ public final class LoadBalancer {
      * 
      * @return the backendAddressPools value.
      */
+    @Generated
     public List<BackendAddressPool> getBackendAddressPools() {
         return this.backendAddressPools;
     }
@@ -42,6 +46,7 @@ public final class LoadBalancer {
      * @param backendAddressPools the backendAddressPools value to set.
      * @return the LoadBalancer object itself.
      */
+    @Generated
     public LoadBalancer setBackendAddressPools(List<BackendAddressPool> backendAddressPools) {
         this.backendAddressPools = backendAddressPools;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HeadersResponseLongHeaders {
     /*
      * The value property.
      */
+    @Generated
     private Long value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -40,6 +42,7 @@ public final class HeadersResponseLongHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public Long getValue() {
         return this.value;
     }
@@ -50,6 +53,7 @@ public final class HeadersResponseLongHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseLongHeaders object itself.
      */
+    @Generated
     public HeadersResponseLongHeaders setValue(Long value) {
         this.value = value;
         return this;

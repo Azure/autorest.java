@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public class DotFish implements JsonSerializable<DotFish> {
     /*
      * The fish.type property.
      */
+    @Generated
     private String fishType = "DotFish";
 
     /*
      * The species property.
      */
+    @Generated
     private String species;
 
     /**
      * Creates an instance of DotFish class.
      */
+    @Generated
     public DotFish() {
     }
 
@@ -37,6 +41,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      * 
      * @return the fishType value.
      */
+    @Generated
     public String getFishType() {
         return this.fishType;
     }
@@ -46,6 +51,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      * 
      * @return the species value.
      */
+    @Generated
     public String getSpecies() {
         return this.species;
     }
@@ -56,6 +62,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      * @param species the species value to set.
      * @return the DotFish object itself.
      */
+    @Generated
     public DotFish setSpecies(String species) {
         this.species = species;
         return this;
@@ -64,6 +71,7 @@ public class DotFish implements JsonSerializable<DotFish> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -80,6 +88,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      * JSON null.
      * @throws IOException If an error occurs while reading the DotFish.
      */
+    @Generated
     public static DotFish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -105,6 +114,7 @@ public class DotFish implements JsonSerializable<DotFish> {
         });
     }
 
+    @Generated
     static DotFish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DotFish deserializedDotFish = new DotFish();

@@ -4,6 +4,7 @@
 
 package fixtures.constants.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -15,6 +16,7 @@ public final class ModelAsStringNoRequiredOneValueDefaultEnum
     /**
      * Static value value1 for ModelAsStringNoRequiredOneValueDefaultEnum.
      */
+    @Generated
     public static final ModelAsStringNoRequiredOneValueDefaultEnum VALUE1 = fromString("value1");
 
     /**
@@ -22,6 +24,7 @@ public final class ModelAsStringNoRequiredOneValueDefaultEnum
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public ModelAsStringNoRequiredOneValueDefaultEnum() {
     }
@@ -32,6 +35,7 @@ public final class ModelAsStringNoRequiredOneValueDefaultEnum
      * @param name a name to look for.
      * @return the corresponding ModelAsStringNoRequiredOneValueDefaultEnum.
      */
+    @Generated
     public static ModelAsStringNoRequiredOneValueDefaultEnum fromString(String name) {
         return fromString(name, ModelAsStringNoRequiredOneValueDefaultEnum.class);
     }
@@ -41,6 +45,7 @@ public final class ModelAsStringNoRequiredOneValueDefaultEnum
      * 
      * @return known ModelAsStringNoRequiredOneValueDefaultEnum values.
      */
+    @Generated
     public static Collection<ModelAsStringNoRequiredOneValueDefaultEnum> values() {
         return values(ModelAsStringNoRequiredOneValueDefaultEnum.class);
     }

@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationimmutableoutput.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,21 +20,25 @@ public final class Basic implements JsonSerializable<Basic> {
     /*
      * Basic Id
      */
+    @Generated
     private Integer id;
 
     /*
      * Name property with a very long description that does not fit on a single line and a line break.
      */
+    @Generated
     private String name;
 
     /*
      * The color property.
      */
+    @Generated
     private CMYKColors color;
 
     /**
      * Creates an instance of Basic class.
      */
+    @Generated
     public Basic() {
     }
 
@@ -42,6 +47,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * 
      * @return the id value.
      */
+    @Generated
     public Integer getId() {
         return this.id;
     }
@@ -52,6 +58,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * @param id the id value to set.
      * @return the Basic object itself.
      */
+    @Generated
     public Basic setId(Integer id) {
         this.id = id;
         return this;
@@ -63,6 +70,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -74,6 +82,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * @param name the name value to set.
      * @return the Basic object itself.
      */
+    @Generated
     public Basic setName(String name) {
         this.name = name;
         return this;
@@ -84,6 +93,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * 
      * @return the color value.
      */
+    @Generated
     public CMYKColors getColor() {
         return this.color;
     }
@@ -94,6 +104,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * @param color the color value to set.
      * @return the Basic object itself.
      */
+    @Generated
     public Basic setColor(CMYKColors color) {
         this.color = color;
         return this;
@@ -110,6 +121,7 @@ public final class Basic implements JsonSerializable<Basic> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -127,6 +139,7 @@ public final class Basic implements JsonSerializable<Basic> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Basic.
      */
+    @Generated
     public static Basic fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Basic deserializedBasic = new Basic();

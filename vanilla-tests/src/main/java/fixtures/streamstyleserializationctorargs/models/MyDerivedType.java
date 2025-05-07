@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,11 +19,13 @@ public final class MyDerivedType extends MyBaseType {
     /*
      * The propD1 property.
      */
+    @Generated
     private String propD1;
 
     /**
      * Creates an instance of MyDerivedType class.
      */
+    @Generated
     public MyDerivedType() {
         this.kind = MyKind.KIND1;
     }
@@ -32,6 +35,7 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the propD1 value.
      */
+    @Generated
     public String getPropD1() {
         return this.propD1;
     }
@@ -42,6 +46,7 @@ public final class MyDerivedType extends MyBaseType {
      * @param propD1 the propD1 value to set.
      * @return the MyDerivedType object itself.
      */
+    @Generated
     public MyDerivedType setPropD1(String propD1) {
         this.propD1 = propD1;
         return this;
@@ -50,6 +55,7 @@ public final class MyDerivedType extends MyBaseType {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public MyDerivedType setPropB1(String propB1) {
         super.setPropB1(propB1);
@@ -59,6 +65,7 @@ public final class MyDerivedType extends MyBaseType {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public MyDerivedType setPropBH1(String propBH1) {
         super.setPropBH1(propBH1);
@@ -77,6 +84,7 @@ public final class MyDerivedType extends MyBaseType {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -93,6 +101,7 @@ public final class MyDerivedType extends MyBaseType {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the MyDerivedType.
      */
+    @Generated
     public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             MyDerivedType deserializedMyDerivedType = new MyDerivedType();

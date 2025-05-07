@@ -4,6 +4,7 @@
 
 package fixtures.bodyformdataurlencoded.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,16 +15,19 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
     /**
      * Static value meat for PetFood.
      */
+    @Generated
     public static final PetFood MEAT = fromString("meat");
 
     /**
      * Static value fish for PetFood.
      */
+    @Generated
     public static final PetFood FISH = fromString("fish");
 
     /**
      * Static value plant for PetFood.
      */
+    @Generated
     public static final PetFood PLANT = fromString("plant");
 
     /**
@@ -31,6 +35,7 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public PetFood() {
     }
@@ -41,6 +46,7 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
      * @param name a name to look for.
      * @return the corresponding PetFood.
      */
+    @Generated
     public static PetFood fromString(String name) {
         return fromString(name, PetFood.class);
     }
@@ -50,6 +56,7 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
      * 
      * @return known PetFood values.
      */
+    @Generated
     public static Collection<PetFood> values() {
         return values(PetFood.class);
     }

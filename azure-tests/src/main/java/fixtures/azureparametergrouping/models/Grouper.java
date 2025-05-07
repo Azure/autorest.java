@@ -5,6 +5,7 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class Grouper {
     /*
      * A grouped parameter that is a constant.
      */
+    @Generated
     private String groupedConstant = "foo";
 
     /*
      * Optional parameter part of a parameter grouping.
      */
+    @Generated
     private String groupedParameter;
 
     /**
      * Creates an instance of Grouper class.
      */
+    @Generated
     public Grouper() {
     }
 
@@ -32,6 +36,7 @@ public final class Grouper {
      * 
      * @return the groupedConstant value.
      */
+    @Generated
     public String getGroupedConstant() {
         return this.groupedConstant;
     }
@@ -42,6 +47,7 @@ public final class Grouper {
      * @param groupedConstant the groupedConstant value to set.
      * @return the Grouper object itself.
      */
+    @Generated
     public Grouper setGroupedConstant(String groupedConstant) {
         this.groupedConstant = groupedConstant;
         return this;
@@ -52,6 +58,7 @@ public final class Grouper {
      * 
      * @return the groupedParameter value.
      */
+    @Generated
     public String getGroupedParameter() {
         return this.groupedParameter;
     }
@@ -62,6 +69,7 @@ public final class Grouper {
      * @param groupedParameter the groupedParameter value to set.
      * @return the Grouper object itself.
      */
+    @Generated
     public Grouper setGroupedParameter(String groupedParameter) {
         this.groupedParameter = groupedParameter;
         return this;

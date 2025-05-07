@@ -4,6 +4,7 @@
 
 package fixtures.streamstyleserializationimmutableoutput.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
@@ -18,11 +19,13 @@ public final class MyDerivedType extends MyBaseType {
     /*
      * The propD1 property.
      */
+    @Generated
     private String propD1;
 
     /**
      * Creates an instance of MyDerivedType class.
      */
+    @Generated
     private MyDerivedType() {
         this.kind = MyKind.KIND1;
     }
@@ -32,6 +35,7 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the propD1 value.
      */
+    @Generated
     public String getPropD1() {
         return this.propD1;
     }
@@ -48,6 +52,7 @@ public final class MyDerivedType extends MyBaseType {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -64,6 +69,7 @@ public final class MyDerivedType extends MyBaseType {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the MyDerivedType.
      */
+    @Generated
     public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             MyDerivedType deserializedMyDerivedType = new MyDerivedType();

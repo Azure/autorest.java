@@ -4,6 +4,7 @@
 
 package fixtures.nonstringenum.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -28,26 +29,31 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
     /**
      * Static value 200.4 for FloatEnum.
      */
+    @Generated
     public static final FloatEnum TWO_HUNDRED4 = fromValue(200.4f);
 
     /**
      * Static value 403.4 for FloatEnum.
      */
+    @Generated
     public static final FloatEnum FOUR_HUNDRED_THREE4 = fromValue(403.4f);
 
     /**
      * Static value 405.3 for FloatEnum.
      */
+    @Generated
     public static final FloatEnum FOUR_HUNDRED_FIVE3 = fromValue(405.3f);
 
     /**
      * Static value 406.2 for FloatEnum.
      */
+    @Generated
     public static final FloatEnum FOUR_HUNDRED_SIX2 = fromValue(406.2f);
 
     /**
      * Static value 429.1 for FloatEnum.
      */
+    @Generated
     public static final FloatEnum FOUR_HUNDRED_TWENTY_NINE1 = fromValue(429.1f);
 
     private final Float value;
@@ -63,6 +69,7 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
      * @return the corresponding FloatEnum.
      * @throws IllegalArgumentException if value is null.
      */
+    @Generated
     public static FloatEnum fromValue(Float value) {
         if (value == null) {
             throw new IllegalArgumentException("'value' cannot be null.");
@@ -75,6 +82,7 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
      * 
      * @return Known FloatEnum values.
      */
+    @Generated
     public static Collection<FloatEnum> values() {
         return new ArrayList<>(VALUES.values());
     }
@@ -84,6 +92,7 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
      * 
      * @return the value of the FloatEnum instance.
      */
+    @Generated
     @Override
     public Float getValue() {
         return this.value;
@@ -92,6 +101,7 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeFloat(getValue());
@@ -106,6 +116,7 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
      * @throws IOException If an error occurs while reading the FloatEnum.
      * @throws IllegalStateException If unexpected JSON token is found.
      */
+    @Generated
     public static FloatEnum fromJson(JsonReader jsonReader) throws IOException {
         JsonToken nextToken = jsonReader.nextToken();
         if (nextToken == JsonToken.NULL) {
@@ -118,16 +129,19 @@ public final class FloatEnum implements ExpandableEnum<Float>, JsonSerializable<
         return FloatEnum.fromValue(jsonReader.getFloat());
     }
 
+    @Generated
     @Override
     public String toString() {
         return Objects.toString(this.value);
     }
 
+    @Generated
     @Override
     public boolean equals(Object obj) {
         return this == obj;
     }
 
+    @Generated
     @Override
     public int hashCode() {
         return Objects.hashCode(this.value);

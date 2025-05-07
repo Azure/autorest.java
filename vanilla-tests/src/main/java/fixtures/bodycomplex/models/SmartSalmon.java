@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -27,6 +28,7 @@ public final class SmartSalmon extends Salmon {
     /*
      * The fishtype property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fishtype", required = true)
     private String fishtype = "smart_salmon";
@@ -34,12 +36,14 @@ public final class SmartSalmon extends Salmon {
     /*
      * The college_degree property.
      */
+    @Generated
     @JsonProperty(value = "college_degree")
     private String collegeDegree;
 
     /*
      * Dictionary of <any>
      */
+    @Generated
     @JsonIgnore
     private Map<String, Object> additionalProperties;
 
@@ -48,6 +52,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @param length the length value to set.
      */
+    @Generated
     @JsonCreator
     public SmartSalmon(@JsonProperty(value = "length", required = true) float length) {
         super(length);
@@ -58,6 +63,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the fishtype value.
      */
+    @Generated
     @Override
     public String getFishtype() {
         return this.fishtype;
@@ -68,6 +74,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the collegeDegree value.
      */
+    @Generated
     public String getCollegeDegree() {
         return this.collegeDegree;
     }
@@ -78,6 +85,7 @@ public final class SmartSalmon extends Salmon {
      * @param collegeDegree the collegeDegree value to set.
      * @return the SmartSalmon object itself.
      */
+    @Generated
     public SmartSalmon setCollegeDegree(String collegeDegree) {
         this.collegeDegree = collegeDegree;
         return this;
@@ -88,6 +96,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the additionalProperties value.
      */
+    @Generated
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -99,11 +108,13 @@ public final class SmartSalmon extends Salmon {
      * @param additionalProperties the additionalProperties value to set.
      * @return the SmartSalmon object itself.
      */
+    @Generated
     public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
     }
 
+    @Generated
     @JsonAnySetter
     void setAdditionalProperties(String key, Object value) {
         if (additionalProperties == null) {
@@ -115,6 +126,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setLocation(String location) {
         super.setLocation(location);
@@ -124,6 +136,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setIswild(Boolean iswild) {
         super.setIswild(iswild);
@@ -133,6 +146,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setSpecies(String species) {
         super.setSpecies(species);
@@ -142,6 +156,7 @@ public final class SmartSalmon extends Salmon {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SmartSalmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

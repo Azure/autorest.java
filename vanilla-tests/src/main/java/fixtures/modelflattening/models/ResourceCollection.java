@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,21 +22,25 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
     /*
      * Flattened product.
      */
+    @Generated
     private FlattenedProduct productresource;
 
     /*
      * The arrayofresources property.
      */
+    @Generated
     private List<FlattenedProduct> arrayofresources;
 
     /*
      * Dictionary of <FlattenedProduct>
      */
+    @Generated
     private Map<String, FlattenedProduct> dictionaryofresources;
 
     /**
      * Creates an instance of ResourceCollection class.
      */
+    @Generated
     public ResourceCollection() {
     }
 
@@ -44,6 +49,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * 
      * @return the productresource value.
      */
+    @Generated
     public FlattenedProduct getProductresource() {
         return this.productresource;
     }
@@ -54,6 +60,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * @param productresource the productresource value to set.
      * @return the ResourceCollection object itself.
      */
+    @Generated
     public ResourceCollection setProductresource(FlattenedProduct productresource) {
         this.productresource = productresource;
         return this;
@@ -64,6 +71,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * 
      * @return the arrayofresources value.
      */
+    @Generated
     public List<FlattenedProduct> getArrayofresources() {
         return this.arrayofresources;
     }
@@ -74,6 +82,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * @param arrayofresources the arrayofresources value to set.
      * @return the ResourceCollection object itself.
      */
+    @Generated
     public ResourceCollection setArrayofresources(List<FlattenedProduct> arrayofresources) {
         this.arrayofresources = arrayofresources;
         return this;
@@ -84,6 +93,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * 
      * @return the dictionaryofresources value.
      */
+    @Generated
     public Map<String, FlattenedProduct> getDictionaryofresources() {
         return this.dictionaryofresources;
     }
@@ -94,6 +104,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * @param dictionaryofresources the dictionaryofresources value to set.
      * @return the ResourceCollection object itself.
      */
+    @Generated
     public ResourceCollection setDictionaryofresources(Map<String, FlattenedProduct> dictionaryofresources) {
         this.dictionaryofresources = dictionaryofresources;
         return this;
@@ -123,6 +134,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -142,6 +154,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ResourceCollection.
      */
+    @Generated
     public static ResourceCollection fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ResourceCollection deserializedResourceCollection = new ResourceCollection();

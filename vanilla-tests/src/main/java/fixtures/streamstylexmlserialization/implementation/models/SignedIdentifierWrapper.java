@@ -4,7 +4,7 @@
 
 package fixtures.streamstylexmlserialization.implementation.models;
 
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -39,14 +39,16 @@ public final class SignedIdentifierWrapper implements XmlSerializable<SignedIden
         return signedIdentifiers;
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifiers" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "SignedIdentifiers" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         if (signedIdentifiers != null) {
             for (SignedIdentifier element : signedIdentifiers) {
@@ -56,13 +58,15 @@ public final class SignedIdentifierWrapper implements XmlSerializable<SignedIden
         return xmlWriter.writeEndElement();
     }
 
+    @Generated
     public static SignedIdentifierWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
 
+    @Generated
     public static SignedIdentifierWrapper fromXml(XmlReader xmlReader, String rootElementName)
         throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifiers" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "SignedIdentifiers" : rootElementName;
         return xmlReader.readObject(rootElementName, reader -> {
             List<SignedIdentifier> items = null;
 

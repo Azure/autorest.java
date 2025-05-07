@@ -5,6 +5,7 @@
 package fixtures.constants.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,11 +21,13 @@ public final class ModelAsStringRequiredOneValueDefault
     /*
      * The parameter property.
      */
+    @Generated
     private ModelAsStringRequiredOneValueDefaultEnum parameter = ModelAsStringRequiredOneValueDefaultEnum.VALUE1;
 
     /**
      * Creates an instance of ModelAsStringRequiredOneValueDefault class.
      */
+    @Generated
     public ModelAsStringRequiredOneValueDefault() {
     }
 
@@ -33,6 +36,7 @@ public final class ModelAsStringRequiredOneValueDefault
      * 
      * @return the parameter value.
      */
+    @Generated
     public ModelAsStringRequiredOneValueDefaultEnum getParameter() {
         return this.parameter;
     }
@@ -43,6 +47,7 @@ public final class ModelAsStringRequiredOneValueDefault
      * @param parameter the parameter value to set.
      * @return the ModelAsStringRequiredOneValueDefault object itself.
      */
+    @Generated
     public ModelAsStringRequiredOneValueDefault setParameter(ModelAsStringRequiredOneValueDefaultEnum parameter) {
         this.parameter = parameter;
         return this;
@@ -63,6 +68,7 @@ public final class ModelAsStringRequiredOneValueDefault
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -79,6 +85,7 @@ public final class ModelAsStringRequiredOneValueDefault
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ModelAsStringRequiredOneValueDefault.
      */
+    @Generated
     public static ModelAsStringRequiredOneValueDefault fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ModelAsStringRequiredOneValueDefault deserializedModelAsStringRequiredOneValueDefault

@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -21,18 +22,21 @@ public final class StorageServiceProperties {
     /*
      * Azure Analytics Logging settings
      */
+    @Generated
     @JsonProperty(value = "Logging")
     private Logging logging;
 
     /*
      * A summary of request statistics grouped by API in hourly aggregates for blobs
      */
+    @Generated
     @JsonProperty(value = "HourMetrics")
     private Metrics hourMetrics;
 
     /*
      * a summary of request statistics grouped by API in minute aggregates for blobs
      */
+    @Generated
     @JsonProperty(value = "MinuteMetrics")
     private Metrics minuteMetrics;
 
@@ -49,6 +53,7 @@ public final class StorageServiceProperties {
     /*
      * The set of CORS rules.
      */
+    @Generated
     @JsonProperty(value = "Cors")
     private CorsWrapper cors;
 
@@ -56,18 +61,21 @@ public final class StorageServiceProperties {
      * The default version to use for requests to the Blob service if an incoming request's version is not specified.
      * Possible values include version 2008-10-27 and all more recent versions
      */
+    @Generated
     @JsonProperty(value = "DefaultServiceVersion")
     private String defaultServiceVersion;
 
     /*
      * The Delete Retention Policy for the service
      */
+    @Generated
     @JsonProperty(value = "DeleteRetentionPolicy")
     private RetentionPolicy deleteRetentionPolicy;
 
     /**
      * Creates an instance of StorageServiceProperties class.
      */
+    @Generated
     public StorageServiceProperties() {
     }
 
@@ -76,6 +84,7 @@ public final class StorageServiceProperties {
      * 
      * @return the logging value.
      */
+    @Generated
     public Logging getLogging() {
         return this.logging;
     }
@@ -86,6 +95,7 @@ public final class StorageServiceProperties {
      * @param logging the logging value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setLogging(Logging logging) {
         this.logging = logging;
         return this;
@@ -96,6 +106,7 @@ public final class StorageServiceProperties {
      * 
      * @return the hourMetrics value.
      */
+    @Generated
     public Metrics getHourMetrics() {
         return this.hourMetrics;
     }
@@ -106,6 +117,7 @@ public final class StorageServiceProperties {
      * @param hourMetrics the hourMetrics value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setHourMetrics(Metrics hourMetrics) {
         this.hourMetrics = hourMetrics;
         return this;
@@ -116,6 +128,7 @@ public final class StorageServiceProperties {
      * 
      * @return the minuteMetrics value.
      */
+    @Generated
     public Metrics getMinuteMetrics() {
         return this.minuteMetrics;
     }
@@ -126,6 +139,7 @@ public final class StorageServiceProperties {
      * @param minuteMetrics the minuteMetrics value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setMinuteMetrics(Metrics minuteMetrics) {
         this.minuteMetrics = minuteMetrics;
         return this;
@@ -136,6 +150,7 @@ public final class StorageServiceProperties {
      * 
      * @return the cors value.
      */
+    @Generated
     public List<CorsRule> getCors() {
         if (this.cors == null) {
             this.cors = new CorsWrapper(new ArrayList<CorsRule>());
@@ -149,6 +164,7 @@ public final class StorageServiceProperties {
      * @param cors the cors value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setCors(List<CorsRule> cors) {
         this.cors = new CorsWrapper(cors);
         return this;
@@ -161,6 +177,7 @@ public final class StorageServiceProperties {
      * 
      * @return the defaultServiceVersion value.
      */
+    @Generated
     public String getDefaultServiceVersion() {
         return this.defaultServiceVersion;
     }
@@ -173,6 +190,7 @@ public final class StorageServiceProperties {
      * @param defaultServiceVersion the defaultServiceVersion value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setDefaultServiceVersion(String defaultServiceVersion) {
         this.defaultServiceVersion = defaultServiceVersion;
         return this;
@@ -183,6 +201,7 @@ public final class StorageServiceProperties {
      * 
      * @return the deleteRetentionPolicy value.
      */
+    @Generated
     public RetentionPolicy getDeleteRetentionPolicy() {
         return this.deleteRetentionPolicy;
     }
@@ -193,6 +212,7 @@ public final class StorageServiceProperties {
      * @param deleteRetentionPolicy the deleteRetentionPolicy value to set.
      * @return the StorageServiceProperties object itself.
      */
+    @Generated
     public StorageServiceProperties setDeleteRetentionPolicy(RetentionPolicy deleteRetentionPolicy) {
         this.deleteRetentionPolicy = deleteRetentionPolicy;
         return this;

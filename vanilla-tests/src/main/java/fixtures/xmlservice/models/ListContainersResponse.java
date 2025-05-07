@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -21,24 +22,28 @@ public final class ListContainersResponse {
     /*
      * The ServiceEndpoint property.
      */
+    @Generated
     @JacksonXmlProperty(localName = "ServiceEndpoint", isAttribute = true)
     private String serviceEndpoint;
 
     /*
      * The Prefix property.
      */
+    @Generated
     @JsonProperty(value = "Prefix", required = true)
     private String prefix;
 
     /*
      * The Marker property.
      */
+    @Generated
     @JsonProperty(value = "Marker")
     private String marker;
 
     /*
      * The MaxResults property.
      */
+    @Generated
     @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
 
@@ -55,18 +60,21 @@ public final class ListContainersResponse {
     /*
      * The Containers property.
      */
+    @Generated
     @JsonProperty(value = "Containers")
     private ContainersWrapper containers;
 
     /*
      * The NextMarker property.
      */
+    @Generated
     @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
 
     /**
      * Creates an instance of ListContainersResponse class.
      */
+    @Generated
     public ListContainersResponse() {
     }
 
@@ -75,6 +83,7 @@ public final class ListContainersResponse {
      * 
      * @return the serviceEndpoint value.
      */
+    @Generated
     public String getServiceEndpoint() {
         return this.serviceEndpoint;
     }
@@ -85,6 +94,7 @@ public final class ListContainersResponse {
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setServiceEndpoint(String serviceEndpoint) {
         this.serviceEndpoint = serviceEndpoint;
         return this;
@@ -95,6 +105,7 @@ public final class ListContainersResponse {
      * 
      * @return the prefix value.
      */
+    @Generated
     public String getPrefix() {
         return this.prefix;
     }
@@ -105,6 +116,7 @@ public final class ListContainersResponse {
      * @param prefix the prefix value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
@@ -115,6 +127,7 @@ public final class ListContainersResponse {
      * 
      * @return the marker value.
      */
+    @Generated
     public String getMarker() {
         return this.marker;
     }
@@ -125,6 +138,7 @@ public final class ListContainersResponse {
      * @param marker the marker value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setMarker(String marker) {
         this.marker = marker;
         return this;
@@ -135,6 +149,7 @@ public final class ListContainersResponse {
      * 
      * @return the maxResults value.
      */
+    @Generated
     public int getMaxResults() {
         return this.maxResults;
     }
@@ -145,6 +160,7 @@ public final class ListContainersResponse {
      * @param maxResults the maxResults value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setMaxResults(int maxResults) {
         this.maxResults = maxResults;
         return this;
@@ -155,6 +171,7 @@ public final class ListContainersResponse {
      * 
      * @return the containers value.
      */
+    @Generated
     public List<Container> getContainers() {
         if (this.containers == null) {
             this.containers = new ContainersWrapper(new ArrayList<Container>());
@@ -168,6 +185,7 @@ public final class ListContainersResponse {
      * @param containers the containers value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setContainers(List<Container> containers) {
         this.containers = new ContainersWrapper(containers);
         return this;
@@ -178,6 +196,7 @@ public final class ListContainersResponse {
      * 
      * @return the nextMarker value.
      */
+    @Generated
     public String getNextMarker() {
         return this.nextMarker;
     }
@@ -188,6 +207,7 @@ public final class ListContainersResponse {
      * @param nextMarker the nextMarker value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setNextMarker(String nextMarker) {
         this.nextMarker = nextMarker;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.Map;
@@ -18,36 +19,42 @@ public final class Blob {
     /*
      * The Name property.
      */
+    @Generated
     @JsonProperty(value = "Name", required = true)
     private String name;
 
     /*
      * The Deleted property.
      */
+    @Generated
     @JsonProperty(value = "Deleted", required = true)
     private boolean deleted;
 
     /*
      * The Snapshot property.
      */
+    @Generated
     @JsonProperty(value = "Snapshot", required = true)
     private String snapshot;
 
     /*
      * Properties of a blob
      */
+    @Generated
     @JsonProperty(value = "Properties", required = true)
     private BlobProperties properties;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
 
     /**
      * Creates an instance of Blob class.
      */
+    @Generated
     public Blob() {
     }
 
@@ -56,6 +63,7 @@ public final class Blob {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -66,6 +74,7 @@ public final class Blob {
      * @param name the name value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setName(String name) {
         this.name = name;
         return this;
@@ -76,6 +85,7 @@ public final class Blob {
      * 
      * @return the deleted value.
      */
+    @Generated
     public boolean isDeleted() {
         return this.deleted;
     }
@@ -86,6 +96,7 @@ public final class Blob {
      * @param deleted the deleted value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setDeleted(boolean deleted) {
         this.deleted = deleted;
         return this;
@@ -96,6 +107,7 @@ public final class Blob {
      * 
      * @return the snapshot value.
      */
+    @Generated
     public String getSnapshot() {
         return this.snapshot;
     }
@@ -106,6 +118,7 @@ public final class Blob {
      * @param snapshot the snapshot value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setSnapshot(String snapshot) {
         this.snapshot = snapshot;
         return this;
@@ -116,6 +129,7 @@ public final class Blob {
      * 
      * @return the properties value.
      */
+    @Generated
     public BlobProperties getProperties() {
         return this.properties;
     }
@@ -126,6 +140,7 @@ public final class Blob {
      * @param properties the properties value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setProperties(BlobProperties properties) {
         this.properties = properties;
         return this;
@@ -136,6 +151,7 @@ public final class Blob {
      * 
      * @return the metadata value.
      */
+    @Generated
     public Map<String, String> getMetadata() {
         return this.metadata;
     }
@@ -146,6 +162,7 @@ public final class Blob {
      * @param metadata the metadata value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
         return this;

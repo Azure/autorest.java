@@ -5,6 +5,7 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class ParameterGroupingPostOptionalParameters {
     /*
      * The customHeader property.
      */
+    @Generated
     private String customHeader;
 
     /*
      * Query parameter with default
      */
+    @Generated
     private Integer query;
 
     /**
      * Creates an instance of ParameterGroupingPostOptionalParameters class.
      */
+    @Generated
     public ParameterGroupingPostOptionalParameters() {
     }
 
@@ -32,6 +36,7 @@ public final class ParameterGroupingPostOptionalParameters {
      * 
      * @return the customHeader value.
      */
+    @Generated
     public String getCustomHeader() {
         return this.customHeader;
     }
@@ -42,6 +47,7 @@ public final class ParameterGroupingPostOptionalParameters {
      * @param customHeader the customHeader value to set.
      * @return the ParameterGroupingPostOptionalParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostOptionalParameters setCustomHeader(String customHeader) {
         this.customHeader = customHeader;
         return this;
@@ -52,6 +58,7 @@ public final class ParameterGroupingPostOptionalParameters {
      * 
      * @return the query value.
      */
+    @Generated
     public Integer getQuery() {
         return this.query;
     }
@@ -62,6 +69,7 @@ public final class ParameterGroupingPostOptionalParameters {
      * @param query the query value to set.
      * @return the ParameterGroupingPostOptionalParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostOptionalParameters setQuery(Integer query) {
         this.query = query;
         return this;

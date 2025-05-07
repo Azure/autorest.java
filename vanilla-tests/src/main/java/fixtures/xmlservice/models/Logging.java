@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,36 +18,42 @@ public final class Logging {
     /*
      * The version of Storage Analytics to configure.
      */
+    @Generated
     @JsonProperty(value = "Version", required = true)
     private String version;
 
     /*
      * Indicates whether all delete requests should be logged.
      */
+    @Generated
     @JsonProperty(value = "Delete", required = true)
     private boolean delete;
 
     /*
      * Indicates whether all read requests should be logged.
      */
+    @Generated
     @JsonProperty(value = "Read", required = true)
     private boolean read;
 
     /*
      * Indicates whether all write requests should be logged.
      */
+    @Generated
     @JsonProperty(value = "Write", required = true)
     private boolean write;
 
     /*
      * the retention policy
      */
+    @Generated
     @JsonProperty(value = "RetentionPolicy", required = true)
     private RetentionPolicy retentionPolicy;
 
     /**
      * Creates an instance of Logging class.
      */
+    @Generated
     public Logging() {
     }
 
@@ -55,6 +62,7 @@ public final class Logging {
      * 
      * @return the version value.
      */
+    @Generated
     public String getVersion() {
         return this.version;
     }
@@ -65,6 +73,7 @@ public final class Logging {
      * @param version the version value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setVersion(String version) {
         this.version = version;
         return this;
@@ -75,6 +84,7 @@ public final class Logging {
      * 
      * @return the delete value.
      */
+    @Generated
     public boolean isDelete() {
         return this.delete;
     }
@@ -85,6 +95,7 @@ public final class Logging {
      * @param delete the delete value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setDelete(boolean delete) {
         this.delete = delete;
         return this;
@@ -95,6 +106,7 @@ public final class Logging {
      * 
      * @return the read value.
      */
+    @Generated
     public boolean isRead() {
         return this.read;
     }
@@ -105,6 +117,7 @@ public final class Logging {
      * @param read the read value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setRead(boolean read) {
         this.read = read;
         return this;
@@ -115,6 +128,7 @@ public final class Logging {
      * 
      * @return the write value.
      */
+    @Generated
     public boolean isWrite() {
         return this.write;
     }
@@ -125,6 +139,7 @@ public final class Logging {
      * @param write the write value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setWrite(boolean write) {
         this.write = write;
         return this;
@@ -135,6 +150,7 @@ public final class Logging {
      * 
      * @return the retentionPolicy value.
      */
+    @Generated
     public RetentionPolicy getRetentionPolicy() {
         return this.retentionPolicy;
     }
@@ -145,6 +161,7 @@ public final class Logging {
      * @param retentionPolicy the retentionPolicy value to set.
      * @return the Logging object itself.
      */
+    @Generated
     public Logging setRetentionPolicy(RetentionPolicy retentionPolicy) {
         this.retentionPolicy = retentionPolicy;
         return this;

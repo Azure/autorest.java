@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,18 +18,21 @@ public final class LROsDeleteAsyncNoRetrySucceededHeaders {
     /*
      * The Retry-After property.
      */
+    @Generated
     @JsonProperty(value = "Retry-After")
     private Integer retryAfter;
 
     /*
      * The Azure-AsyncOperation property.
      */
+    @Generated
     @JsonProperty(value = "Azure-AsyncOperation")
     private String azureAsyncOperation;
 
     /*
      * The Location property.
      */
+    @Generated
     @JsonProperty(value = "Location")
     private String location;
 
@@ -54,6 +58,7 @@ public final class LROsDeleteAsyncNoRetrySucceededHeaders {
      * 
      * @return the retryAfter value.
      */
+    @Generated
     public Integer getRetryAfter() {
         return this.retryAfter;
     }
@@ -64,6 +69,7 @@ public final class LROsDeleteAsyncNoRetrySucceededHeaders {
      * @param retryAfter the retryAfter value to set.
      * @return the LROsDeleteAsyncNoRetrySucceededHeaders object itself.
      */
+    @Generated
     public LROsDeleteAsyncNoRetrySucceededHeaders setRetryAfter(Integer retryAfter) {
         this.retryAfter = retryAfter;
         return this;
@@ -74,6 +80,7 @@ public final class LROsDeleteAsyncNoRetrySucceededHeaders {
      * 
      * @return the azureAsyncOperation value.
      */
+    @Generated
     public String getAzureAsyncOperation() {
         return this.azureAsyncOperation;
     }
@@ -84,6 +91,7 @@ public final class LROsDeleteAsyncNoRetrySucceededHeaders {
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsDeleteAsyncNoRetrySucceededHeaders object itself.
      */
+    @Generated
     public LROsDeleteAsyncNoRetrySucceededHeaders setAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;
@@ -94,6 +102,7 @@ public final class LROsDeleteAsyncNoRetrySucceededHeaders {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -104,6 +113,7 @@ public final class LROsDeleteAsyncNoRetrySucceededHeaders {
      * @param location the location value to set.
      * @return the LROsDeleteAsyncNoRetrySucceededHeaders object itself.
      */
+    @Generated
     public LROsDeleteAsyncNoRetrySucceededHeaders setLocation(String location) {
         this.location = location;
         return this;

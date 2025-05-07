@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationimmutableoutput.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,11 +19,13 @@ public final class Dog extends Pet {
     /*
      * The food property.
      */
+    @Generated
     private String food;
 
     /**
      * Creates an instance of Dog class.
      */
+    @Generated
     public Dog() {
     }
 
@@ -31,6 +34,7 @@ public final class Dog extends Pet {
      * 
      * @return the food value.
      */
+    @Generated
     public String getFood() {
         return this.food;
     }
@@ -41,6 +45,7 @@ public final class Dog extends Pet {
      * @param food the food value to set.
      * @return the Dog object itself.
      */
+    @Generated
     public Dog setFood(String food) {
         this.food = food;
         return this;
@@ -49,6 +54,7 @@ public final class Dog extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Dog setId(Integer id) {
         super.setId(id);
@@ -58,6 +64,7 @@ public final class Dog extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Dog setName(String name) {
         super.setName(name);
@@ -76,6 +83,7 @@ public final class Dog extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -93,6 +101,7 @@ public final class Dog extends Pet {
      * JSON null.
      * @throws IOException If an error occurs while reading the Dog.
      */
+    @Generated
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Dog deserializedDog = new Dog();

@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -21,11 +21,13 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
     /*
      * The id of the res
      */
+    @Generated
     private String id;
 
     /**
      * Creates an instance of ComplexTypeNoMeta class.
      */
+    @Generated
     public ComplexTypeNoMeta() {
     }
 
@@ -34,6 +36,7 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -44,6 +47,7 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
      * @param id the id value to set.
      * @return the ComplexTypeNoMeta object itself.
      */
+    @Generated
     public ComplexTypeNoMeta setId(String id) {
         this.id = id;
         return this;
@@ -57,14 +61,16 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ComplexTypeNoMeta" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "ComplexTypeNoMeta" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("ID", this.id);
         return xmlWriter.writeEndElement();
@@ -78,6 +84,7 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeNoMeta.
      */
+    @Generated
     public static ComplexTypeNoMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -92,8 +99,10 @@ public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMet
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeNoMeta.
      */
+    @Generated
     public static ComplexTypeNoMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ComplexTypeNoMeta" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "ComplexTypeNoMeta" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             ComplexTypeNoMeta deserializedComplexTypeNoMeta = new ComplexTypeNoMeta();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

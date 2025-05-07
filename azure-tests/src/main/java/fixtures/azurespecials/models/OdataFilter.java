@@ -5,6 +5,7 @@
 package fixtures.azurespecials.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
     /*
      * The id property.
      */
+    @Generated
     private Integer id;
 
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /**
      * Creates an instance of OdataFilter class.
      */
+    @Generated
     public OdataFilter() {
     }
 
@@ -37,6 +41,7 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
      * 
      * @return the id value.
      */
+    @Generated
     public Integer getId() {
         return this.id;
     }
@@ -47,6 +52,7 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
      * @param id the id value to set.
      * @return the OdataFilter object itself.
      */
+    @Generated
     public OdataFilter setId(Integer id) {
         this.id = id;
         return this;
@@ -57,6 +63,7 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -67,6 +74,7 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
      * @param name the name value to set.
      * @return the OdataFilter object itself.
      */
+    @Generated
     public OdataFilter setName(String name) {
         this.name = name;
         return this;
@@ -83,6 +91,7 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the OdataFilter.
      */
+    @Generated
     public static OdataFilter fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OdataFilter deserializedOdataFilter = new OdataFilter();

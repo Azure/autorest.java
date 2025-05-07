@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,21 +21,25 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
     /*
      * Is content handwritten?
      */
+    @Generated
     private Boolean isHandwritten;
 
     /*
      * Location of the text elements in the concatenated content the style applies to.
      */
+    @Generated
     private List<DocumentSpan> spans;
 
     /*
      * Confidence of correctly identifying the style.
      */
+    @Generated
     private float confidence;
 
     /**
      * Creates an instance of DocumentStyle class.
      */
+    @Generated
     public DocumentStyle() {
     }
 
@@ -43,6 +48,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
      * 
      * @return the isHandwritten value.
      */
+    @Generated
     public Boolean isHandwritten() {
         return this.isHandwritten;
     }
@@ -53,6 +59,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
      * @param isHandwritten the isHandwritten value to set.
      * @return the DocumentStyle object itself.
      */
+    @Generated
     public DocumentStyle setIsHandwritten(Boolean isHandwritten) {
         this.isHandwritten = isHandwritten;
         return this;
@@ -63,6 +70,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
      * 
      * @return the spans value.
      */
+    @Generated
     public List<DocumentSpan> getSpans() {
         return this.spans;
     }
@@ -73,6 +81,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
      * @param spans the spans value to set.
      * @return the DocumentStyle object itself.
      */
+    @Generated
     public DocumentStyle setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
@@ -83,6 +92,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
      * 
      * @return the confidence value.
      */
+    @Generated
     public float getConfidence() {
         return this.confidence;
     }
@@ -93,6 +103,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
      * @param confidence the confidence value to set.
      * @return the DocumentStyle object itself.
      */
+    @Generated
     public DocumentStyle setConfidence(float confidence) {
         this.confidence = confidence;
         return this;
@@ -101,6 +112,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -119,6 +131,7 @@ public final class DocumentStyle implements JsonSerializable<DocumentStyle> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentStyle.
      */
+    @Generated
     public static DocumentStyle fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentStyle deserializedDocumentStyle = new DocumentStyle();

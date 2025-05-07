@@ -4,6 +4,7 @@
 
 package fixtures.lro.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
@@ -16,56 +17,67 @@ public final class ProductPropertiesProvisioningStateValues
     /**
      * Static value Succeeded for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues SUCCEEDED = fromString("Succeeded");
 
     /**
      * Static value Failed for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues FAILED = fromString("Failed");
 
     /**
      * Static value canceled for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues CANCELED = fromString("canceled");
 
     /**
      * Static value Accepted for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues ACCEPTED = fromString("Accepted");
 
     /**
      * Static value Creating for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues CREATING = fromString("Creating");
 
     /**
      * Static value Created for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues CREATED = fromString("Created");
 
     /**
      * Static value Updating for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues UPDATING = fromString("Updating");
 
     /**
      * Static value Updated for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues UPDATED = fromString("Updated");
 
     /**
      * Static value Deleting for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues DELETING = fromString("Deleting");
 
     /**
      * Static value Deleted for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues DELETED = fromString("Deleted");
 
     /**
      * Static value OK for ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     public static final ProductPropertiesProvisioningStateValues OK = fromString("OK");
 
     /**
@@ -73,6 +85,7 @@ public final class ProductPropertiesProvisioningStateValues
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public ProductPropertiesProvisioningStateValues() {
     }
@@ -83,6 +96,7 @@ public final class ProductPropertiesProvisioningStateValues
      * @param name a name to look for.
      * @return the corresponding ProductPropertiesProvisioningStateValues.
      */
+    @Generated
     @JsonCreator
     public static ProductPropertiesProvisioningStateValues fromString(String name) {
         return fromString(name, ProductPropertiesProvisioningStateValues.class);
@@ -93,6 +107,7 @@ public final class ProductPropertiesProvisioningStateValues
      * 
      * @return known ProductPropertiesProvisioningStateValues values.
      */
+    @Generated
     public static Collection<ProductPropertiesProvisioningStateValues> values() {
         return values(ProductPropertiesProvisioningStateValues.class);
     }

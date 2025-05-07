@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -17,18 +18,21 @@ public final class RootWithRefAndMeta {
     /*
      * XML will use XMLComplexTypeWithMeta
      */
+    @Generated
     @JsonProperty(value = "XMLComplexTypeWithMeta")
     private ComplexTypeWithMeta refToModel;
 
     /*
      * Something else (just to avoid flattening)
      */
+    @Generated
     @JsonProperty(value = "Something")
     private String something;
 
     /**
      * Creates an instance of RootWithRefAndMeta class.
      */
+    @Generated
     public RootWithRefAndMeta() {
     }
 
@@ -37,6 +41,7 @@ public final class RootWithRefAndMeta {
      * 
      * @return the refToModel value.
      */
+    @Generated
     public ComplexTypeWithMeta getRefToModel() {
         return this.refToModel;
     }
@@ -47,6 +52,7 @@ public final class RootWithRefAndMeta {
      * @param refToModel the refToModel value to set.
      * @return the RootWithRefAndMeta object itself.
      */
+    @Generated
     public RootWithRefAndMeta setRefToModel(ComplexTypeWithMeta refToModel) {
         this.refToModel = refToModel;
         return this;
@@ -57,6 +63,7 @@ public final class RootWithRefAndMeta {
      * 
      * @return the something value.
      */
+    @Generated
     public String getSomething() {
         return this.something;
     }
@@ -67,6 +74,7 @@ public final class RootWithRefAndMeta {
      * @param something the something value to set.
      * @return the RootWithRefAndMeta object itself.
      */
+    @Generated
     public RootWithRefAndMeta setSomething(String something) {
         this.something = something;
         return this;

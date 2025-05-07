@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,31 +23,37 @@ public final class Blob implements XmlSerializable<Blob> {
     /*
      * The Name property.
      */
+    @Generated
     private String name;
 
     /*
      * The Deleted property.
      */
+    @Generated
     private boolean deleted;
 
     /*
      * The Snapshot property.
      */
+    @Generated
     private String snapshot;
 
     /*
      * Properties of a blob
      */
+    @Generated
     private BlobProperties properties;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     private Map<String, String> metadata;
 
     /**
      * Creates an instance of Blob class.
      */
+    @Generated
     public Blob() {
     }
 
@@ -56,6 +62,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -66,6 +73,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * @param name the name value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setName(String name) {
         this.name = name;
         return this;
@@ -76,6 +84,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * 
      * @return the deleted value.
      */
+    @Generated
     public boolean isDeleted() {
         return this.deleted;
     }
@@ -86,6 +95,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * @param deleted the deleted value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setDeleted(boolean deleted) {
         this.deleted = deleted;
         return this;
@@ -96,6 +106,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * 
      * @return the snapshot value.
      */
+    @Generated
     public String getSnapshot() {
         return this.snapshot;
     }
@@ -106,6 +117,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * @param snapshot the snapshot value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setSnapshot(String snapshot) {
         this.snapshot = snapshot;
         return this;
@@ -116,6 +128,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * 
      * @return the properties value.
      */
+    @Generated
     public BlobProperties getProperties() {
         return this.properties;
     }
@@ -126,6 +139,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * @param properties the properties value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setProperties(BlobProperties properties) {
         this.properties = properties;
         return this;
@@ -136,6 +150,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * 
      * @return the metadata value.
      */
+    @Generated
     public Map<String, String> getMetadata() {
         return this.metadata;
     }
@@ -146,6 +161,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * @param metadata the metadata value to set.
      * @return the Blob object itself.
      */
+    @Generated
     public Blob setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
         return this;
@@ -170,14 +186,16 @@ public final class Blob implements XmlSerializable<Blob> {
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blob" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "Blob" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Name", this.name);
         xmlWriter.writeBooleanElement("Deleted", this.deleted);
@@ -201,6 +219,7 @@ public final class Blob implements XmlSerializable<Blob> {
      * null.
      * @throws XMLStreamException If an error occurs while reading the Blob.
      */
+    @Generated
     public static Blob fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -215,8 +234,9 @@ public final class Blob implements XmlSerializable<Blob> {
      * null.
      * @throws XMLStreamException If an error occurs while reading the Blob.
      */
+    @Generated
     public static Blob fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Blob" : rootElementName;
+        String finalRootElementName = rootElementName == null || rootElementName.isEmpty() ? "Blob" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Blob deserializedBlob = new Blob();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

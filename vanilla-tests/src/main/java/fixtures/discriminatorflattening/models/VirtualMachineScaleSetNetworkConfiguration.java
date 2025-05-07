@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,12 +17,14 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     /*
      * The network configuration name.
      */
+    @Generated
     @JsonProperty(value = "name")
     private String name;
 
     /*
      * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
      */
+    @Generated
     @JsonFlatten
     @JsonProperty(value = "properties.primary")
     private Boolean primary;
@@ -29,6 +32,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
     /**
      * Creates an instance of VirtualMachineScaleSetNetworkConfiguration class.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfiguration() {
     }
 
@@ -37,6 +41,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -47,6 +52,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @param name the name value to set.
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfiguration setName(String name) {
         this.name = name;
         return this;
@@ -58,6 +64,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * 
      * @return the primary value.
      */
+    @Generated
     public Boolean isPrimary() {
         return this.primary;
     }
@@ -69,6 +76,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration {
      * @param primary the primary value to set.
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfiguration setPrimary(Boolean primary) {
         this.primary = primary;
         return this;

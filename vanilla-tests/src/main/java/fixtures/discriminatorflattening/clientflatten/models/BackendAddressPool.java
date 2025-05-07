@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.clientflatten.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,12 +16,14 @@ public final class BackendAddressPool {
     /*
      * Properties of load balancer backend address pool.
      */
+    @Generated
     @JsonProperty(value = "properties")
     private BackendAddressPoolPropertiesFormat innerProperties;
 
     /**
      * Creates an instance of BackendAddressPool class.
      */
+    @Generated
     public BackendAddressPool() {
     }
 
@@ -29,6 +32,7 @@ public final class BackendAddressPool {
      * 
      * @return the innerProperties value.
      */
+    @Generated
     private BackendAddressPoolPropertiesFormat getInnerProperties() {
         return this.innerProperties;
     }
@@ -38,6 +42,7 @@ public final class BackendAddressPool {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.getInnerProperties() == null ? null : this.getInnerProperties().getLocation();
     }
@@ -48,6 +53,7 @@ public final class BackendAddressPool {
      * @param location the location value to set.
      * @return the BackendAddressPool object itself.
      */
+    @Generated
     public BackendAddressPool setLocation(String location) {
         if (this.getInnerProperties() == null) {
             this.innerProperties = new BackendAddressPoolPropertiesFormat();

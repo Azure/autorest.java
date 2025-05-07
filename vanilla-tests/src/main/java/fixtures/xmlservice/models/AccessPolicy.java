@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
@@ -18,24 +19,28 @@ public final class AccessPolicy {
     /*
      * the date-time the policy is active
      */
+    @Generated
     @JsonProperty(value = "Start", required = true)
     private OffsetDateTime start;
 
     /*
      * the date-time the policy expires
      */
+    @Generated
     @JsonProperty(value = "Expiry", required = true)
     private OffsetDateTime expiry;
 
     /*
      * the permissions for the acl policy
      */
+    @Generated
     @JsonProperty(value = "Permission", required = true)
     private String permission;
 
     /**
      * Creates an instance of AccessPolicy class.
      */
+    @Generated
     public AccessPolicy() {
     }
 
@@ -44,6 +49,7 @@ public final class AccessPolicy {
      * 
      * @return the start value.
      */
+    @Generated
     public OffsetDateTime getStart() {
         return this.start;
     }
@@ -54,6 +60,7 @@ public final class AccessPolicy {
      * @param start the start value to set.
      * @return the AccessPolicy object itself.
      */
+    @Generated
     public AccessPolicy setStart(OffsetDateTime start) {
         this.start = start;
         return this;
@@ -64,6 +71,7 @@ public final class AccessPolicy {
      * 
      * @return the expiry value.
      */
+    @Generated
     public OffsetDateTime getExpiry() {
         return this.expiry;
     }
@@ -74,6 +82,7 @@ public final class AccessPolicy {
      * @param expiry the expiry value to set.
      * @return the AccessPolicy object itself.
      */
+    @Generated
     public AccessPolicy setExpiry(OffsetDateTime expiry) {
         this.expiry = expiry;
         return this;
@@ -84,6 +93,7 @@ public final class AccessPolicy {
      * 
      * @return the permission value.
      */
+    @Generated
     public String getPermission() {
         return this.permission;
     }
@@ -94,6 +104,7 @@ public final class AccessPolicy {
      * @param permission the permission value to set.
      * @return the AccessPolicy object itself.
      */
+    @Generated
     public AccessPolicy setPermission(String permission) {
         this.permission = permission;
         return this;

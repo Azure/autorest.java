@@ -5,6 +5,7 @@
 package fixtures.notypedheadersmethods.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HeadersResponseBoolHeaders {
     /*
      * The value property.
      */
+    @Generated
     private Boolean value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -40,6 +42,7 @@ public final class HeadersResponseBoolHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public Boolean isValue() {
         return this.value;
     }
@@ -50,6 +53,7 @@ public final class HeadersResponseBoolHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseBoolHeaders object itself.
      */
+    @Generated
     public HeadersResponseBoolHeaders setValue(Boolean value) {
         this.value = value;
         return this;

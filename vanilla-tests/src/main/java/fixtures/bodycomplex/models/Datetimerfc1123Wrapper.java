@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
@@ -17,18 +18,21 @@ public final class Datetimerfc1123Wrapper {
     /*
      * The field property.
      */
+    @Generated
     @JsonProperty(value = "field")
     private DateTimeRfc1123 field;
 
     /*
      * The now property.
      */
+    @Generated
     @JsonProperty(value = "now")
     private DateTimeRfc1123 now;
 
     /**
      * Creates an instance of Datetimerfc1123Wrapper class.
      */
+    @Generated
     public Datetimerfc1123Wrapper() {
     }
 
@@ -37,6 +41,7 @@ public final class Datetimerfc1123Wrapper {
      * 
      * @return the field value.
      */
+    @Generated
     public OffsetDateTime getField() {
         if (this.field == null) {
             return null;
@@ -50,6 +55,7 @@ public final class Datetimerfc1123Wrapper {
      * @param field the field value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
+    @Generated
     public Datetimerfc1123Wrapper setField(OffsetDateTime field) {
         if (field == null) {
             this.field = null;
@@ -64,6 +70,7 @@ public final class Datetimerfc1123Wrapper {
      * 
      * @return the now value.
      */
+    @Generated
     public OffsetDateTime getNow() {
         if (this.now == null) {
             return null;
@@ -77,6 +84,7 @@ public final class Datetimerfc1123Wrapper {
      * @param now the now value to set.
      * @return the Datetimerfc1123Wrapper object itself.
      */
+    @Generated
     public Datetimerfc1123Wrapper setNow(OffsetDateTime now) {
         if (now == null) {
             this.now = null;

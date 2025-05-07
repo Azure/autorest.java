@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +18,7 @@ public final class LROsPutAsyncNoHeaderInRetryHeaders {
     /*
      * The Azure-AsyncOperation property.
      */
+    @Generated
     @JsonProperty(value = "Azure-AsyncOperation")
     private String azureAsyncOperation;
 
@@ -35,6 +37,7 @@ public final class LROsPutAsyncNoHeaderInRetryHeaders {
      * 
      * @return the azureAsyncOperation value.
      */
+    @Generated
     public String getAzureAsyncOperation() {
         return this.azureAsyncOperation;
     }
@@ -45,6 +48,7 @@ public final class LROsPutAsyncNoHeaderInRetryHeaders {
      * @param azureAsyncOperation the azureAsyncOperation value to set.
      * @return the LROsPutAsyncNoHeaderInRetryHeaders object itself.
      */
+    @Generated
     public LROsPutAsyncNoHeaderInRetryHeaders setAzureAsyncOperation(String azureAsyncOperation) {
         this.azureAsyncOperation = azureAsyncOperation;
         return this;

@@ -4,6 +4,7 @@
 
 package fixtures.streamstyleserializationimmutableoutput.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -19,16 +20,19 @@ public final class Error implements JsonSerializable<Error> {
     /*
      * The status property.
      */
+    @Generated
     private Integer status;
 
     /*
      * The message property.
      */
+    @Generated
     private String message;
 
     /**
      * Creates an instance of Error class.
      */
+    @Generated
     private Error() {
     }
 
@@ -37,6 +41,7 @@ public final class Error implements JsonSerializable<Error> {
      * 
      * @return the status value.
      */
+    @Generated
     public Integer getStatus() {
         return this.status;
     }
@@ -46,6 +51,7 @@ public final class Error implements JsonSerializable<Error> {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }
@@ -61,6 +67,7 @@ public final class Error implements JsonSerializable<Error> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -77,6 +84,7 @@ public final class Error implements JsonSerializable<Error> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Error.
      */
+    @Generated
     public static Error fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Error deserializedError = new Error();

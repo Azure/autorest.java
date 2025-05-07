@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,26 +23,31 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
     /*
      * The title property.
      */
+    @Generated
     private String title;
 
     /*
      * The date property.
      */
+    @Generated
     private String date;
 
     /*
      * The author property.
      */
+    @Generated
     private String author;
 
     /*
      * The slides property.
      */
+    @Generated
     private List<Slide> slides = new ArrayList<>();
 
     /**
      * Creates an instance of Slideshow class.
      */
+    @Generated
     public Slideshow() {
     }
 
@@ -51,6 +56,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * 
      * @return the title value.
      */
+    @Generated
     public String getTitle() {
         return this.title;
     }
@@ -61,6 +67,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * @param title the title value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setTitle(String title) {
         this.title = title;
         return this;
@@ -71,6 +78,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * 
      * @return the date value.
      */
+    @Generated
     public String getDate() {
         return this.date;
     }
@@ -81,6 +89,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * @param date the date value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setDate(String date) {
         this.date = date;
         return this;
@@ -91,6 +100,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * 
      * @return the author value.
      */
+    @Generated
     public String getAuthor() {
         return this.author;
     }
@@ -101,6 +111,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * @param author the author value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setAuthor(String author) {
         this.author = author;
         return this;
@@ -111,6 +122,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * 
      * @return the slides value.
      */
+    @Generated
     public List<Slide> getSlides() {
         return this.slides;
     }
@@ -121,6 +133,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * @param slides the slides value to set.
      * @return the Slideshow object itself.
      */
+    @Generated
     public Slideshow setSlides(List<Slide> slides) {
         this.slides = slides;
         return this;
@@ -137,14 +150,16 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slideshow" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "slideshow" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("title", this.title);
         xmlWriter.writeStringAttribute("date", this.date);
@@ -165,6 +180,7 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * to XML null.
      * @throws XMLStreamException If an error occurs while reading the Slideshow.
      */
+    @Generated
     public static Slideshow fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -179,8 +195,10 @@ public final class Slideshow implements XmlSerializable<Slideshow> {
      * to XML null.
      * @throws XMLStreamException If an error occurs while reading the Slideshow.
      */
+    @Generated
     public static Slideshow fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "slideshow" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "slideshow" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Slideshow deserializedSlideshow = new Slideshow();
             deserializedSlideshow.title = reader.getStringAttribute(null, "title");

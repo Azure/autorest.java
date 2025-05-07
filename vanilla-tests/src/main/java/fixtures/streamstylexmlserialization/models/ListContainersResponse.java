@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,36 +23,43 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
     /*
      * The ServiceEndpoint property.
      */
+    @Generated
     private String serviceEndpoint;
 
     /*
      * The Prefix property.
      */
+    @Generated
     private String prefix;
 
     /*
      * The Marker property.
      */
+    @Generated
     private String marker;
 
     /*
      * The MaxResults property.
      */
+    @Generated
     private int maxResults;
 
     /*
      * The Containers property.
      */
+    @Generated
     private List<Container> containers;
 
     /*
      * The NextMarker property.
      */
+    @Generated
     private String nextMarker;
 
     /**
      * Creates an instance of ListContainersResponse class.
      */
+    @Generated
     public ListContainersResponse() {
     }
 
@@ -61,6 +68,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * 
      * @return the serviceEndpoint value.
      */
+    @Generated
     public String getServiceEndpoint() {
         return this.serviceEndpoint;
     }
@@ -71,6 +79,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param serviceEndpoint the serviceEndpoint value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setServiceEndpoint(String serviceEndpoint) {
         this.serviceEndpoint = serviceEndpoint;
         return this;
@@ -81,6 +90,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * 
      * @return the prefix value.
      */
+    @Generated
     public String getPrefix() {
         return this.prefix;
     }
@@ -91,6 +101,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param prefix the prefix value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
@@ -101,6 +112,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * 
      * @return the marker value.
      */
+    @Generated
     public String getMarker() {
         return this.marker;
     }
@@ -111,6 +123,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param marker the marker value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setMarker(String marker) {
         this.marker = marker;
         return this;
@@ -121,6 +134,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * 
      * @return the maxResults value.
      */
+    @Generated
     public int getMaxResults() {
         return this.maxResults;
     }
@@ -131,6 +145,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param maxResults the maxResults value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setMaxResults(int maxResults) {
         this.maxResults = maxResults;
         return this;
@@ -141,6 +156,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * 
      * @return the containers value.
      */
+    @Generated
     public List<Container> getContainers() {
         if (this.containers == null) {
             this.containers = new ArrayList<>();
@@ -154,6 +170,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param containers the containers value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setContainers(List<Container> containers) {
         this.containers = containers;
         return this;
@@ -164,6 +181,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * 
      * @return the nextMarker value.
      */
+    @Generated
     public String getNextMarker() {
         return this.nextMarker;
     }
@@ -174,6 +192,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * @param nextMarker the nextMarker value to set.
      * @return the ListContainersResponse object itself.
      */
+    @Generated
     public ListContainersResponse setNextMarker(String nextMarker) {
         this.nextMarker = nextMarker;
         return this;
@@ -200,14 +219,16 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "EnumerationResults" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("ServiceEndpoint", this.serviceEndpoint);
         xmlWriter.writeStringElement("Prefix", this.prefix);
@@ -232,6 +253,7 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ListContainersResponse.
      */
+    @Generated
     public static ListContainersResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -246,9 +268,11 @@ public final class ListContainersResponse implements XmlSerializable<ListContain
      * was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ListContainersResponse.
      */
+    @Generated
     public static ListContainersResponse fromXml(XmlReader xmlReader, String rootElementName)
         throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "EnumerationResults" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             ListContainersResponse deserializedListContainersResponse = new ListContainersResponse();
             deserializedListContainersResponse.serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");

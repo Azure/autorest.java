@@ -5,6 +5,7 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public class MyException implements JsonSerializable<MyException> {
     /*
      * The statusCode property.
      */
+    @Generated
     private String statusCode;
 
     /**
      * Creates an instance of MyException class.
      */
+    @Generated
     public MyException() {
     }
 
@@ -32,6 +35,7 @@ public class MyException implements JsonSerializable<MyException> {
      * 
      * @return the statusCode value.
      */
+    @Generated
     public String getStatusCode() {
         return this.statusCode;
     }
@@ -42,6 +46,7 @@ public class MyException implements JsonSerializable<MyException> {
      * @param statusCode the statusCode value to set.
      * @return the MyException object itself.
      */
+    @Generated
     public MyException setStatusCode(String statusCode) {
         this.statusCode = statusCode;
         return this;
@@ -58,6 +63,7 @@ public class MyException implements JsonSerializable<MyException> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -73,6 +79,7 @@ public class MyException implements JsonSerializable<MyException> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the MyException.
      */
+    @Generated
     public static MyException fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             MyException deserializedMyException = new MyException();

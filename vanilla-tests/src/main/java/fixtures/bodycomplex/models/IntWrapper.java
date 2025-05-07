@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class IntWrapper {
     /*
      * The field1 property.
      */
+    @Generated
     @JsonProperty(value = "field1")
     private Integer field1;
 
     /*
      * The field2 property.
      */
+    @Generated
     @JsonProperty(value = "field2")
     private Integer field2;
 
     /**
      * Creates an instance of IntWrapper class.
      */
+    @Generated
     public IntWrapper() {
     }
 
@@ -35,6 +39,7 @@ public final class IntWrapper {
      * 
      * @return the field1 value.
      */
+    @Generated
     public Integer getField1() {
         return this.field1;
     }
@@ -45,6 +50,7 @@ public final class IntWrapper {
      * @param field1 the field1 value to set.
      * @return the IntWrapper object itself.
      */
+    @Generated
     public IntWrapper setField1(Integer field1) {
         this.field1 = field1;
         return this;
@@ -55,6 +61,7 @@ public final class IntWrapper {
      * 
      * @return the field2 value.
      */
+    @Generated
     public Integer getField2() {
         return this.field2;
     }
@@ -65,6 +72,7 @@ public final class IntWrapper {
      * @param field2 the field2 value to set.
      * @return the IntWrapper object itself.
      */
+    @Generated
     public IntWrapper setField2(Integer field2) {
         this.field2 = field2;
         return this;

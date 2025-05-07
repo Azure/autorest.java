@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
@@ -23,6 +24,7 @@ public final class Goblinshark extends Shark {
     /*
      * The fishtype property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fishtype", required = true)
     private String fishtype = "goblin";
@@ -30,12 +32,14 @@ public final class Goblinshark extends Shark {
     /*
      * The jawsize property.
      */
+    @Generated
     @JsonProperty(value = "jawsize")
     private Integer jawsize;
 
     /*
      * Colors possible
      */
+    @Generated
     @JsonProperty(value = "color")
     private GoblinSharkColor color;
 
@@ -45,6 +49,7 @@ public final class Goblinshark extends Shark {
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
+    @Generated
     @JsonCreator
     public Goblinshark(@JsonProperty(value = "length", required = true) float length,
         @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
@@ -56,6 +61,7 @@ public final class Goblinshark extends Shark {
      * 
      * @return the fishtype value.
      */
+    @Generated
     @Override
     public String getFishtype() {
         return this.fishtype;
@@ -66,6 +72,7 @@ public final class Goblinshark extends Shark {
      * 
      * @return the jawsize value.
      */
+    @Generated
     public Integer getJawsize() {
         return this.jawsize;
     }
@@ -76,6 +83,7 @@ public final class Goblinshark extends Shark {
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
+    @Generated
     public Goblinshark setJawsize(Integer jawsize) {
         this.jawsize = jawsize;
         return this;
@@ -86,6 +94,7 @@ public final class Goblinshark extends Shark {
      * 
      * @return the color value.
      */
+    @Generated
     public GoblinSharkColor getColor() {
         return this.color;
     }
@@ -96,6 +105,7 @@ public final class Goblinshark extends Shark {
      * @param color the color value to set.
      * @return the Goblinshark object itself.
      */
+    @Generated
     public Goblinshark setColor(GoblinSharkColor color) {
         this.color = color;
         return this;
@@ -104,6 +114,7 @@ public final class Goblinshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Goblinshark setAge(Integer age) {
         super.setAge(age);
@@ -113,6 +124,7 @@ public final class Goblinshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Goblinshark setSpecies(String species) {
         super.setSpecies(species);
@@ -122,6 +134,7 @@ public final class Goblinshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Goblinshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

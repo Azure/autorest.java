@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.clientflatten.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,12 +16,14 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
     /*
      * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
      */
+    @Generated
     @JsonProperty(value = "primary")
     private Boolean primary;
 
     /**
      * Creates an instance of VirtualMachineScaleSetNetworkConfigurationProperties class.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfigurationProperties() {
     }
 
@@ -30,6 +33,7 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
      * 
      * @return the primary value.
      */
+    @Generated
     public Boolean isPrimary() {
         return this.primary;
     }
@@ -41,6 +45,7 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties {
      * @param primary the primary value to set.
      * @return the VirtualMachineScaleSetNetworkConfigurationProperties object itself.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkConfigurationProperties setPrimary(Boolean primary) {
         this.primary = primary;
         return this;

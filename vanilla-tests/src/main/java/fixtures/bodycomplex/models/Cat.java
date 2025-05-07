@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -16,18 +17,21 @@ public class Cat extends Pet {
     /*
      * The color property.
      */
+    @Generated
     @JsonProperty(value = "color")
     private String color;
 
     /*
      * The hates property.
      */
+    @Generated
     @JsonProperty(value = "hates")
     private List<Dog> hates;
 
     /**
      * Creates an instance of Cat class.
      */
+    @Generated
     public Cat() {
     }
 
@@ -36,6 +40,7 @@ public class Cat extends Pet {
      * 
      * @return the color value.
      */
+    @Generated
     public String getColor() {
         return this.color;
     }
@@ -46,6 +51,7 @@ public class Cat extends Pet {
      * @param color the color value to set.
      * @return the Cat object itself.
      */
+    @Generated
     public Cat setColor(String color) {
         this.color = color;
         return this;
@@ -56,6 +62,7 @@ public class Cat extends Pet {
      * 
      * @return the hates value.
      */
+    @Generated
     public List<Dog> getHates() {
         return this.hates;
     }
@@ -66,6 +73,7 @@ public class Cat extends Pet {
      * @param hates the hates value to set.
      * @return the Cat object itself.
      */
+    @Generated
     public Cat setHates(List<Dog> hates) {
         this.hates = hates;
         return this;
@@ -74,6 +82,7 @@ public class Cat extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cat setId(Integer id) {
         super.setId(id);
@@ -83,6 +92,7 @@ public class Cat extends Pet {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Cat setName(String name) {
         super.setName(name);

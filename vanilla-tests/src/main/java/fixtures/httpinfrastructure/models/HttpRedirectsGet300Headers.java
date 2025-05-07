@@ -5,6 +5,7 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HttpRedirectsGet300Headers {
     /*
      * The Location property.
      */
+    @Generated
     private String location = "/http/success/get/200";
 
     // HttpHeaders containing the raw property values.
@@ -33,6 +35,7 @@ public final class HttpRedirectsGet300Headers {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -43,6 +46,7 @@ public final class HttpRedirectsGet300Headers {
      * @param location the location value to set.
      * @return the HttpRedirectsGet300Headers object itself.
      */
+    @Generated
     public HttpRedirectsGet300Headers setLocation(String location) {
         this.location = location;
         return this;

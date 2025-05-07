@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class BodyParamModel implements JsonSerializable<BodyParamModel> {
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /**
      * Creates an instance of BodyParamModel class.
      */
+    @Generated
     public BodyParamModel() {
     }
 
@@ -32,6 +35,7 @@ public final class BodyParamModel implements JsonSerializable<BodyParamModel> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -42,6 +46,7 @@ public final class BodyParamModel implements JsonSerializable<BodyParamModel> {
      * @param name the name value to set.
      * @return the BodyParamModel object itself.
      */
+    @Generated
     public BodyParamModel setName(String name) {
         this.name = name;
         return this;
@@ -58,6 +63,7 @@ public final class BodyParamModel implements JsonSerializable<BodyParamModel> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -73,6 +79,7 @@ public final class BodyParamModel implements JsonSerializable<BodyParamModel> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the BodyParamModel.
      */
+    @Generated
     public static BodyParamModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BodyParamModel deserializedBodyParamModel = new BodyParamModel();

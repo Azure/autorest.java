@@ -5,6 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class XmlsGetHeadersHeaders {
     /*
      * The Custom-Header property.
      */
+    @Generated
     private String customHeader;
 
     private static final HttpHeaderName CUSTOM_HEADER = HttpHeaderName.fromString("Custom-Header");
@@ -35,6 +37,7 @@ public final class XmlsGetHeadersHeaders {
      * 
      * @return the customHeader value.
      */
+    @Generated
     public String getCustomHeader() {
         return this.customHeader;
     }
@@ -45,6 +48,7 @@ public final class XmlsGetHeadersHeaders {
      * @param customHeader the customHeader value to set.
      * @return the XmlsGetHeadersHeaders object itself.
      */
+    @Generated
     public XmlsGetHeadersHeaders setCustomHeader(String customHeader) {
         this.customHeader = customHeader;
         return this;

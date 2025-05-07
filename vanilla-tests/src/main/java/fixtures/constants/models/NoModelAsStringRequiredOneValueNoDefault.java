@@ -4,6 +4,7 @@
 
 package fixtures.constants.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -20,11 +21,13 @@ public final class NoModelAsStringRequiredOneValueNoDefault
     /*
      * The parameter property.
      */
+    @Generated
     private final String parameter = "value1";
 
     /**
      * Creates an instance of NoModelAsStringRequiredOneValueNoDefault class.
      */
+    @Generated
     public NoModelAsStringRequiredOneValueNoDefault() {
     }
 
@@ -33,6 +36,7 @@ public final class NoModelAsStringRequiredOneValueNoDefault
      * 
      * @return the parameter value.
      */
+    @Generated
     public String getParameter() {
         return this.parameter;
     }
@@ -48,6 +52,7 @@ public final class NoModelAsStringRequiredOneValueNoDefault
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -64,6 +69,7 @@ public final class NoModelAsStringRequiredOneValueNoDefault
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the NoModelAsStringRequiredOneValueNoDefault.
      */
+    @Generated
     public static NoModelAsStringRequiredOneValueNoDefault fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             NoModelAsStringRequiredOneValueNoDefault deserializedNoModelAsStringRequiredOneValueNoDefault

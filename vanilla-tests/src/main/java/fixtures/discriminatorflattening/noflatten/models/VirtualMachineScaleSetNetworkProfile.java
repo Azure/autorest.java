@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.noflatten.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -16,12 +17,14 @@ public final class VirtualMachineScaleSetNetworkProfile {
     /*
      * The list of network configurations.
      */
+    @Generated
     @JsonProperty(value = "networkInterfaceConfigurations")
     private List<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations;
 
     /**
      * Creates an instance of VirtualMachineScaleSetNetworkProfile class.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkProfile() {
     }
 
@@ -30,6 +33,7 @@ public final class VirtualMachineScaleSetNetworkProfile {
      * 
      * @return the networkInterfaceConfigurations value.
      */
+    @Generated
     public List<VirtualMachineScaleSetNetworkConfiguration> getNetworkInterfaceConfigurations() {
         return this.networkInterfaceConfigurations;
     }
@@ -40,6 +44,7 @@ public final class VirtualMachineScaleSetNetworkProfile {
      * @param networkInterfaceConfigurations the networkInterfaceConfigurations value to set.
      * @return the VirtualMachineScaleSetNetworkProfile object itself.
      */
+    @Generated
     public VirtualMachineScaleSetNetworkProfile setNetworkInterfaceConfigurations(
         List<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations) {
         this.networkInterfaceConfigurations = networkInterfaceConfigurations;

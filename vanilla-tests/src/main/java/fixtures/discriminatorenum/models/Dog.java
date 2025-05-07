@@ -5,6 +5,7 @@
 package fixtures.discriminatorenum.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public class Dog implements JsonSerializable<Dog> {
     /*
      * discriminator property
      */
+    @Generated
     private DogKind kind = DogKind.fromString("Dog");
 
     /*
      * Weight of the dog
      */
+    @Generated
     private int weight;
 
     /**
      * Creates an instance of Dog class.
      */
+    @Generated
     public Dog() {
     }
 
@@ -37,6 +41,7 @@ public class Dog implements JsonSerializable<Dog> {
      * 
      * @return the kind value.
      */
+    @Generated
     public DogKind getKind() {
         return this.kind;
     }
@@ -46,6 +51,7 @@ public class Dog implements JsonSerializable<Dog> {
      * 
      * @return the weight value.
      */
+    @Generated
     public int getWeight() {
         return this.weight;
     }
@@ -56,6 +62,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @param weight the weight value to set.
      * @return the Dog object itself.
      */
+    @Generated
     public Dog setWeight(int weight) {
         this.weight = weight;
         return this;
@@ -72,6 +79,7 @@ public class Dog implements JsonSerializable<Dog> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -89,6 +97,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Dog.
      */
+    @Generated
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -114,6 +123,7 @@ public class Dog implements JsonSerializable<Dog> {
         });
     }
 
+    @Generated
     static Dog fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Dog deserializedDog = new Dog();

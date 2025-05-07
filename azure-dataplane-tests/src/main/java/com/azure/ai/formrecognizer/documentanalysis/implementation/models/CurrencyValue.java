@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
     /*
      * Currency amount.
      */
+    @Generated
     private double amount;
 
     /*
      * Currency symbol label, if any.
      */
+    @Generated
     private String currencySymbol;
 
     /**
      * Creates an instance of CurrencyValue class.
      */
+    @Generated
     public CurrencyValue() {
     }
 
@@ -37,6 +41,7 @@ public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
      * 
      * @return the amount value.
      */
+    @Generated
     public double getAmount() {
         return this.amount;
     }
@@ -47,6 +52,7 @@ public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
      * @param amount the amount value to set.
      * @return the CurrencyValue object itself.
      */
+    @Generated
     public CurrencyValue setAmount(double amount) {
         this.amount = amount;
         return this;
@@ -57,6 +63,7 @@ public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
      * 
      * @return the currencySymbol value.
      */
+    @Generated
     public String getCurrencySymbol() {
         return this.currencySymbol;
     }
@@ -67,6 +74,7 @@ public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
      * @param currencySymbol the currencySymbol value to set.
      * @return the CurrencyValue object itself.
      */
+    @Generated
     public CurrencyValue setCurrencySymbol(String currencySymbol) {
         this.currencySymbol = currencySymbol;
         return this;
@@ -75,6 +83,7 @@ public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -92,6 +101,7 @@ public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CurrencyValue.
      */
+    @Generated
     public static CurrencyValue fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             CurrencyValue deserializedCurrencyValue = new CurrencyValue();

@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,16 +22,19 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     /*
      * The field property.
      */
+    @Generated
     private LocalDate field;
 
     /*
      * The leap property.
      */
+    @Generated
     private LocalDate leap;
 
     /**
      * Creates an instance of DateWrapper class.
      */
+    @Generated
     public DateWrapper() {
     }
 
@@ -39,6 +43,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * 
      * @return the field value.
      */
+    @Generated
     public LocalDate getField() {
         return this.field;
     }
@@ -49,6 +54,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * @param field the field value to set.
      * @return the DateWrapper object itself.
      */
+    @Generated
     public DateWrapper setField(LocalDate field) {
         this.field = field;
         return this;
@@ -59,6 +65,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * 
      * @return the leap value.
      */
+    @Generated
     public LocalDate getLeap() {
         return this.leap;
     }
@@ -69,6 +76,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * @param leap the leap value to set.
      * @return the DateWrapper object itself.
      */
+    @Generated
     public DateWrapper setLeap(LocalDate leap) {
         this.leap = leap;
         return this;
@@ -85,6 +93,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -101,6 +110,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DateWrapper.
      */
+    @Generated
     public static DateWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DateWrapper deserializedDateWrapper = new DateWrapper();

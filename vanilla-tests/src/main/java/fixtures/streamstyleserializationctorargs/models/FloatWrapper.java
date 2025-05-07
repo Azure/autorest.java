@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationctorargs.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
     /*
      * The field1 property.
      */
+    @Generated
     private Float field1;
 
     /*
      * The field2 property.
      */
+    @Generated
     private Float field2;
 
     /**
      * Creates an instance of FloatWrapper class.
      */
+    @Generated
     public FloatWrapper() {
     }
 
@@ -37,6 +41,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
      * 
      * @return the field1 value.
      */
+    @Generated
     public Float getField1() {
         return this.field1;
     }
@@ -47,6 +52,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
      * @param field1 the field1 value to set.
      * @return the FloatWrapper object itself.
      */
+    @Generated
     public FloatWrapper setField1(Float field1) {
         this.field1 = field1;
         return this;
@@ -57,6 +63,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
      * 
      * @return the field2 value.
      */
+    @Generated
     public Float getField2() {
         return this.field2;
     }
@@ -67,6 +74,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
      * @param field2 the field2 value to set.
      * @return the FloatWrapper object itself.
      */
+    @Generated
     public FloatWrapper setField2(Float field2) {
         this.field2 = field2;
         return this;
@@ -83,6 +91,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the FloatWrapper.
      */
+    @Generated
     public static FloatWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             FloatWrapper deserializedFloatWrapper = new FloatWrapper();

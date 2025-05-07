@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +18,7 @@ public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
     /*
      * The Location property.
      */
+    @Generated
     @JsonProperty(value = "Location")
     private String location;
 
@@ -35,6 +37,7 @@ public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -45,6 +48,7 @@ public final class LROsDeleteAsyncNoHeaderInRetryHeaders {
      * @param location the location value to set.
      * @return the LROsDeleteAsyncNoHeaderInRetryHeaders object itself.
      */
+    @Generated
     public LROsDeleteAsyncNoHeaderInRetryHeaders setLocation(String location) {
         this.location = location;
         return this;

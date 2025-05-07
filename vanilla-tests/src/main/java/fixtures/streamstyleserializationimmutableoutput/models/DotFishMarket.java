@@ -4,6 +4,7 @@
 
 package fixtures.streamstyleserializationimmutableoutput.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -20,26 +21,31 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
     /*
      * The sampleSalmon property.
      */
+    @Generated
     private DotSalmon sampleSalmon;
 
     /*
      * The salmons property.
      */
+    @Generated
     private List<DotSalmon> salmons;
 
     /*
      * The sampleFish property.
      */
+    @Generated
     private DotFish sampleFish;
 
     /*
      * The fishes property.
      */
+    @Generated
     private List<DotFish> fishes;
 
     /**
      * Creates an instance of DotFishMarket class.
      */
+    @Generated
     private DotFishMarket() {
     }
 
@@ -48,6 +54,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
      * 
      * @return the sampleSalmon value.
      */
+    @Generated
     public DotSalmon getSampleSalmon() {
         return this.sampleSalmon;
     }
@@ -57,6 +64,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
      * 
      * @return the salmons value.
      */
+    @Generated
     public List<DotSalmon> getSalmons() {
         return this.salmons;
     }
@@ -66,6 +74,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
      * 
      * @return the sampleFish value.
      */
+    @Generated
     public DotFish getSampleFish() {
         return this.sampleFish;
     }
@@ -75,6 +84,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
      * 
      * @return the fishes value.
      */
+    @Generated
     public List<DotFish> getFishes() {
         return this.fishes;
     }
@@ -102,6 +112,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -120,6 +131,7 @@ public final class DotFishMarket implements JsonSerializable<DotFishMarket> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DotFishMarket.
      */
+    @Generated
     public static DotFishMarket fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DotFishMarket deserializedDotFishMarket = new DotFishMarket();

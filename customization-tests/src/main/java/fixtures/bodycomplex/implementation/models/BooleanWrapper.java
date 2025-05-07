@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
     /*
      * The field_true property.
      */
+    @Generated
     private Boolean fieldTrue;
 
     /*
      * The field_false property.
      */
+    @Generated
     private Boolean fieldFalse;
 
     /**
      * Creates an instance of BooleanWrapper class.
      */
+    @Generated
     public BooleanWrapper() {
     }
 
@@ -37,6 +41,7 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
      * 
      * @return the fieldTrue value.
      */
+    @Generated
     public Boolean isFieldTrue() {
         return this.fieldTrue;
     }
@@ -47,6 +52,7 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
      * @param fieldTrue the fieldTrue value to set.
      * @return the BooleanWrapper object itself.
      */
+    @Generated
     public BooleanWrapper setFieldTrue(Boolean fieldTrue) {
         this.fieldTrue = fieldTrue;
         return this;
@@ -57,6 +63,7 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
      * 
      * @return the fieldFalse value.
      */
+    @Generated
     public Boolean isFieldFalse() {
         return this.fieldFalse;
     }
@@ -67,6 +74,7 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
      * @param fieldFalse the fieldFalse value to set.
      * @return the BooleanWrapper object itself.
      */
+    @Generated
     public BooleanWrapper setFieldFalse(Boolean fieldFalse) {
         this.fieldFalse = fieldFalse;
         return this;
@@ -75,6 +83,7 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -91,6 +100,7 @@ public final class BooleanWrapper implements JsonSerializable<BooleanWrapper> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the BooleanWrapper.
      */
+    @Generated
     public static BooleanWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BooleanWrapper deserializedBooleanWrapper = new BooleanWrapper();

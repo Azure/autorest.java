@@ -5,6 +5,7 @@
 package fixtures.streamstyleserializationimmutableoutput.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,11 +21,13 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
     /*
      * Dictionary of <string>
      */
+    @Generated
     private Map<String, String> defaultProgram;
 
     /**
      * Creates an instance of DictionaryWrapper class.
      */
+    @Generated
     public DictionaryWrapper() {
     }
 
@@ -33,6 +36,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
      * 
      * @return the defaultProgram value.
      */
+    @Generated
     public Map<String, String> getDefaultProgram() {
         return this.defaultProgram;
     }
@@ -43,6 +47,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
      * @param defaultProgram the defaultProgram value to set.
      * @return the DictionaryWrapper object itself.
      */
+    @Generated
     public DictionaryWrapper setDefaultProgram(Map<String, String> defaultProgram) {
         this.defaultProgram = defaultProgram;
         return this;
@@ -59,6 +64,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -75,6 +81,7 @@ public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapp
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DictionaryWrapper.
      */
+    @Generated
     public static DictionaryWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DictionaryWrapper deserializedDictionaryWrapper = new DictionaryWrapper();

@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,6 +25,7 @@ public final class Sawshark extends Shark {
     /*
      * The fishtype property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fishtype", required = true)
     private String fishtype = "sawshark";
@@ -31,6 +33,7 @@ public final class Sawshark extends Shark {
     /*
      * The picture property.
      */
+    @Generated
     @JsonProperty(value = "picture")
     private byte[] picture;
 
@@ -40,6 +43,7 @@ public final class Sawshark extends Shark {
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
+    @Generated
     @JsonCreator
     public Sawshark(@JsonProperty(value = "length", required = true) float length,
         @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
@@ -51,6 +55,7 @@ public final class Sawshark extends Shark {
      * 
      * @return the fishtype value.
      */
+    @Generated
     @Override
     public String getFishtype() {
         return this.fishtype;
@@ -61,6 +66,7 @@ public final class Sawshark extends Shark {
      * 
      * @return the picture value.
      */
+    @Generated
     public byte[] getPicture() {
         return CoreUtils.clone(this.picture);
     }
@@ -71,6 +77,7 @@ public final class Sawshark extends Shark {
      * @param picture the picture value to set.
      * @return the Sawshark object itself.
      */
+    @Generated
     public Sawshark setPicture(byte[] picture) {
         this.picture = CoreUtils.clone(picture);
         return this;
@@ -79,6 +86,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setAge(Integer age) {
         super.setAge(age);
@@ -88,6 +96,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setSpecies(String species) {
         super.setSpecies(species);
@@ -97,6 +106,7 @@ public final class Sawshark extends Shark {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Sawshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

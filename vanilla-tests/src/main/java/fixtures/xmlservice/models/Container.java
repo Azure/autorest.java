@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.Map;
@@ -18,24 +19,28 @@ public final class Container {
     /*
      * The Name property.
      */
+    @Generated
     @JsonProperty(value = "Name", required = true)
     private String name;
 
     /*
      * Properties of a container
      */
+    @Generated
     @JsonProperty(value = "Properties", required = true)
     private ContainerProperties properties;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
 
     /**
      * Creates an instance of Container class.
      */
+    @Generated
     public Container() {
     }
 
@@ -44,6 +49,7 @@ public final class Container {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -54,6 +60,7 @@ public final class Container {
      * @param name the name value to set.
      * @return the Container object itself.
      */
+    @Generated
     public Container setName(String name) {
         this.name = name;
         return this;
@@ -64,6 +71,7 @@ public final class Container {
      * 
      * @return the properties value.
      */
+    @Generated
     public ContainerProperties getProperties() {
         return this.properties;
     }
@@ -74,6 +82,7 @@ public final class Container {
      * @param properties the properties value to set.
      * @return the Container object itself.
      */
+    @Generated
     public Container setProperties(ContainerProperties properties) {
         this.properties = properties;
         return this;
@@ -84,6 +93,7 @@ public final class Container {
      * 
      * @return the metadata value.
      */
+    @Generated
     public Map<String, String> getMetadata() {
         return this.metadata;
     }
@@ -94,6 +104,7 @@ public final class Container {
      * @param metadata the metadata value to set.
      * @return the Container object itself.
      */
+    @Generated
     public Container setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.net.URL;
@@ -18,12 +19,14 @@ public final class ModelWithUrlProperty {
     /*
      * The Url property.
      */
+    @Generated
     @JsonProperty(value = "Url")
     private URL url;
 
     /**
      * Creates an instance of ModelWithUrlProperty class.
      */
+    @Generated
     public ModelWithUrlProperty() {
     }
 
@@ -32,6 +35,7 @@ public final class ModelWithUrlProperty {
      * 
      * @return the url value.
      */
+    @Generated
     public URL getUrl() {
         return this.url;
     }
@@ -42,6 +46,7 @@ public final class ModelWithUrlProperty {
      * @param url the url value to set.
      * @return the ModelWithUrlProperty object itself.
      */
+    @Generated
     public ModelWithUrlProperty setUrl(URL url) {
         this.url = url;
         return this;

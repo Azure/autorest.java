@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -21,11 +21,13 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
     /*
      * The id of the res
      */
+    @Generated
     private String id;
 
     /**
      * Creates an instance of ComplexTypeWithMeta class.
      */
+    @Generated
     public ComplexTypeWithMeta() {
     }
 
@@ -34,6 +36,7 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -44,6 +47,7 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
      * @param id the id value to set.
      * @return the ComplexTypeWithMeta object itself.
      */
+    @Generated
     public ComplexTypeWithMeta setId(String id) {
         this.id = id;
         return this;
@@ -57,14 +61,17 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "XMLComplexTypeWithMeta" : rootElementName;
+        rootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "XMLComplexTypeWithMeta" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("ID", this.id);
         return xmlWriter.writeEndElement();
@@ -78,6 +85,7 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeWithMeta.
      */
+    @Generated
     public static ComplexTypeWithMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -92,9 +100,10 @@ public final class ComplexTypeWithMeta implements XmlSerializable<ComplexTypeWit
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ComplexTypeWithMeta.
      */
+    @Generated
     public static ComplexTypeWithMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName
-            = CoreUtils.isNullOrEmpty(rootElementName) ? "XMLComplexTypeWithMeta" : rootElementName;
+            = rootElementName == null || rootElementName.isEmpty() ? "XMLComplexTypeWithMeta" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             ComplexTypeWithMeta deserializedComplexTypeWithMeta = new ComplexTypeWithMeta();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

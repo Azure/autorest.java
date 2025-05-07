@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
@@ -20,6 +21,7 @@ public final class DotSalmon extends DotFish {
     /*
      * The fish.type property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fish.type", required = true)
     private String fishType = "DotSalmon";
@@ -27,18 +29,21 @@ public final class DotSalmon extends DotFish {
     /*
      * The location property.
      */
+    @Generated
     @JsonProperty(value = "location")
     private String location;
 
     /*
      * The iswild property.
      */
+    @Generated
     @JsonProperty(value = "iswild")
     private Boolean iswild;
 
     /**
      * Creates an instance of DotSalmon class.
      */
+    @Generated
     private DotSalmon() {
     }
 
@@ -47,6 +52,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the fishType value.
      */
+    @Generated
     @Override
     public String getFishType() {
         return this.fishType;
@@ -57,6 +63,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -66,6 +73,7 @@ public final class DotSalmon extends DotFish {
      * 
      * @return the iswild value.
      */
+    @Generated
     public Boolean iswild() {
         return this.iswild;
     }

@@ -5,6 +5,7 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HeadersResponseDoubleHeaders {
     /*
      * The value property.
      */
+    @Generated
     private Double value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -40,6 +42,7 @@ public final class HeadersResponseDoubleHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public Double getValue() {
         return this.value;
     }
@@ -50,6 +53,7 @@ public final class HeadersResponseDoubleHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseDoubleHeaders object itself.
      */
+    @Generated
     public HeadersResponseDoubleHeaders setValue(Double value) {
         this.value = value;
         return this;

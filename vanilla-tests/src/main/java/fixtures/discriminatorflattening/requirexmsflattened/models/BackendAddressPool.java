@@ -5,6 +5,7 @@
 package fixtures.discriminatorflattening.requirexmsflattened.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,12 +18,14 @@ public class BackendAddressPool {
     /*
      * The location of the backend address pool.
      */
+    @Generated
     @JsonProperty(value = "properties.location")
     private String location;
 
     /**
      * Creates an instance of BackendAddressPool class.
      */
+    @Generated
     public BackendAddressPool() {
     }
 
@@ -31,6 +34,7 @@ public class BackendAddressPool {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -41,6 +45,7 @@ public class BackendAddressPool {
      * @param location the location value to set.
      * @return the BackendAddressPool object itself.
      */
+    @Generated
     public BackendAddressPool setLocation(String location) {
         this.location = location;
         return this;

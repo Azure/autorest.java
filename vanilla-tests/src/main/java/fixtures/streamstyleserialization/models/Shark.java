@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
@@ -23,16 +24,19 @@ public class Shark extends Fish {
     /*
      * The age property.
      */
+    @Generated
     private Integer age;
 
     /*
      * The birthday property.
      */
+    @Generated
     private OffsetDateTime birthday;
 
     /**
      * Creates an instance of Shark class.
      */
+    @Generated
     public Shark() {
         this.fishtype = "shark";
     }
@@ -42,6 +46,7 @@ public class Shark extends Fish {
      * 
      * @return the age value.
      */
+    @Generated
     public Integer getAge() {
         return this.age;
     }
@@ -52,6 +57,7 @@ public class Shark extends Fish {
      * @param age the age value to set.
      * @return the Shark object itself.
      */
+    @Generated
     public Shark setAge(Integer age) {
         this.age = age;
         return this;
@@ -62,6 +68,7 @@ public class Shark extends Fish {
      * 
      * @return the birthday value.
      */
+    @Generated
     public OffsetDateTime getBirthday() {
         return this.birthday;
     }
@@ -72,6 +79,7 @@ public class Shark extends Fish {
      * @param birthday the birthday value to set.
      * @return the Shark object itself.
      */
+    @Generated
     public Shark setBirthday(OffsetDateTime birthday) {
         this.birthday = birthday;
         return this;
@@ -80,6 +88,7 @@ public class Shark extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Shark setSpecies(String species) {
         super.setSpecies(species);
@@ -89,6 +98,7 @@ public class Shark extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Shark setLength(float length) {
         super.setLength(length);
@@ -98,6 +108,7 @@ public class Shark extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Shark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
@@ -125,6 +136,7 @@ public class Shark extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -148,6 +160,7 @@ public class Shark extends Fish {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Shark.
      */
+    @Generated
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -177,6 +190,7 @@ public class Shark extends Fish {
         });
     }
 
+    @Generated
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Shark deserializedShark = new Shark();
@@ -193,6 +207,7 @@ public class Shark extends Fish {
         });
     }
 
+    @Generated
     static boolean fromJsonShared(JsonReader reader, String fieldName, Shark deserializedShark) throws IOException {
         if (Fish.fromJsonShared(reader, fieldName, deserializedShark)) {
             return true;

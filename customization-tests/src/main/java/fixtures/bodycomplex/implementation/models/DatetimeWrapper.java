@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -22,16 +23,19 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
     /*
      * The field property.
      */
+    @Generated
     private OffsetDateTime field;
 
     /*
      * The now property.
      */
+    @Generated
     private OffsetDateTime now;
 
     /**
      * Creates an instance of DatetimeWrapper class.
      */
+    @Generated
     public DatetimeWrapper() {
     }
 
@@ -40,6 +44,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      * 
      * @return the field value.
      */
+    @Generated
     public OffsetDateTime getField() {
         return this.field;
     }
@@ -50,6 +55,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      * @param field the field value to set.
      * @return the DatetimeWrapper object itself.
      */
+    @Generated
     public DatetimeWrapper setField(OffsetDateTime field) {
         this.field = field;
         return this;
@@ -60,6 +66,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      * 
      * @return the now value.
      */
+    @Generated
     public OffsetDateTime getNow() {
         return this.now;
     }
@@ -70,6 +77,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      * @param now the now value to set.
      * @return the DatetimeWrapper object itself.
      */
+    @Generated
     public DatetimeWrapper setNow(OffsetDateTime now) {
         this.now = now;
         return this;
@@ -78,6 +86,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -96,6 +105,7 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DatetimeWrapper.
      */
+    @Generated
     public static DatetimeWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DatetimeWrapper deserializedDatetimeWrapper = new DatetimeWrapper();

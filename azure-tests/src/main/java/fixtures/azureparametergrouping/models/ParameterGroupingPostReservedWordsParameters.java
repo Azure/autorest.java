@@ -5,6 +5,7 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 
 /**
  * Parameter group.
@@ -14,16 +15,19 @@ public final class ParameterGroupingPostReservedWordsParameters {
     /*
      * 'from' is a reserved word. Pass in 'bob' to pass.
      */
+    @Generated
     private String from;
 
     /*
      * 'accept' is a reserved word. Pass in 'yes' to pass.
      */
+    @Generated
     private String accept;
 
     /**
      * Creates an instance of ParameterGroupingPostReservedWordsParameters class.
      */
+    @Generated
     public ParameterGroupingPostReservedWordsParameters() {
     }
 
@@ -32,6 +36,7 @@ public final class ParameterGroupingPostReservedWordsParameters {
      * 
      * @return the from value.
      */
+    @Generated
     public String getFrom() {
         return this.from;
     }
@@ -42,6 +47,7 @@ public final class ParameterGroupingPostReservedWordsParameters {
      * @param from the from value to set.
      * @return the ParameterGroupingPostReservedWordsParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostReservedWordsParameters setFrom(String from) {
         this.from = from;
         return this;
@@ -52,6 +58,7 @@ public final class ParameterGroupingPostReservedWordsParameters {
      * 
      * @return the accept value.
      */
+    @Generated
     public String getAccept() {
         return this.accept;
     }
@@ -62,6 +69,7 @@ public final class ParameterGroupingPostReservedWordsParameters {
      * @param accept the accept value to set.
      * @return the ParameterGroupingPostReservedWordsParameters object itself.
      */
+    @Generated
     public ParameterGroupingPostReservedWordsParameters setAccept(String accept) {
         this.accept = accept;
         return this;

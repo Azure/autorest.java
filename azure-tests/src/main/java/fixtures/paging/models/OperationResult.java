@@ -5,6 +5,7 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class OperationResult implements JsonSerializable<OperationResult> 
     /*
      * The status of the request
      */
+    @Generated
     private OperationResultStatus status;
 
     /**
      * Creates an instance of OperationResult class.
      */
+    @Generated
     public OperationResult() {
     }
 
@@ -32,6 +35,7 @@ public final class OperationResult implements JsonSerializable<OperationResult> 
      * 
      * @return the status value.
      */
+    @Generated
     public OperationResultStatus getStatus() {
         return this.status;
     }
@@ -42,6 +46,7 @@ public final class OperationResult implements JsonSerializable<OperationResult> 
      * @param status the status value to set.
      * @return the OperationResult object itself.
      */
+    @Generated
     public OperationResult setStatus(OperationResultStatus status) {
         this.status = status;
         return this;
@@ -58,6 +63,7 @@ public final class OperationResult implements JsonSerializable<OperationResult> 
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -73,6 +79,7 @@ public final class OperationResult implements JsonSerializable<OperationResult> 
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the OperationResult.
      */
+    @Generated
     public static OperationResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OperationResult deserializedOperationResult = new OperationResult();

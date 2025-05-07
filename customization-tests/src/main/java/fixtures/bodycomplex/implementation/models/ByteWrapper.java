@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -20,11 +21,13 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
     /*
      * The field property.
      */
+    @Generated
     private byte[] field;
 
     /**
      * Creates an instance of ByteWrapper class.
      */
+    @Generated
     public ByteWrapper() {
     }
 
@@ -33,6 +36,7 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
      * 
      * @return the field value.
      */
+    @Generated
     public byte[] getField() {
         return CoreUtils.clone(this.field);
     }
@@ -43,6 +47,7 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
      * @param field the field value to set.
      * @return the ByteWrapper object itself.
      */
+    @Generated
     public ByteWrapper setField(byte[] field) {
         this.field = CoreUtils.clone(field);
         return this;
@@ -51,6 +56,7 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -66,6 +72,7 @@ public final class ByteWrapper implements JsonSerializable<ByteWrapper> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ByteWrapper.
      */
+    @Generated
     public static ByteWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ByteWrapper deserializedByteWrapper = new ByteWrapper();

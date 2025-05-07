@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,6 +21,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     /*
      * The id property.
      */
+    @Generated
     private String id;
 
     /**
@@ -36,11 +38,13 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     /*
      * The size property.
      */
+    @Generated
     private Integer size;
 
     /**
      * Creates an instance of ReadonlyObj class.
      */
+    @Generated
     public ReadonlyObj() {
     }
 
@@ -49,6 +53,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
      * 
      * @return the id value.
      */
+    @Generated
     public UUID getId() {
         String returnValue = this.id;
         return UUID.fromString(returnValue);
@@ -59,6 +64,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
      * 
      * @return the size value.
      */
+    @Generated
     public Integer getSize() {
         return this.size;
     }
@@ -69,6 +75,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
      * @param size the size value to set.
      * @return the ReadonlyObj object itself.
      */
+    @Generated
     public ReadonlyObj setSize(Integer size) {
         this.size = size;
         return this;
@@ -77,6 +84,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -92,6 +100,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ReadonlyObj.
      */
+    @Generated
     public static ReadonlyObj fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ReadonlyObj deserializedReadonlyObj = new ReadonlyObj();

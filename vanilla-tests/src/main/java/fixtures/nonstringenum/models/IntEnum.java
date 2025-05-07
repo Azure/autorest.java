@@ -4,6 +4,7 @@
 
 package fixtures.nonstringenum.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableEnum;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -28,26 +29,31 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
     /**
      * Static value 200 for IntEnum.
      */
+    @Generated
     public static final IntEnum TWO_HUNDRED = fromValue(200);
 
     /**
      * Static value 403 for IntEnum.
      */
+    @Generated
     public static final IntEnum FOUR_HUNDRED_THREE = fromValue(403);
 
     /**
      * Static value 405 for IntEnum.
      */
+    @Generated
     public static final IntEnum FOUR_HUNDRED_FIVE = fromValue(405);
 
     /**
      * Static value 406 for IntEnum.
      */
+    @Generated
     public static final IntEnum FOUR_HUNDRED_SIX = fromValue(406);
 
     /**
      * Static value 429 for IntEnum.
      */
+    @Generated
     public static final IntEnum FOUR_HUNDRED_TWENTY_NINE = fromValue(429);
 
     private final Integer value;
@@ -63,6 +69,7 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
      * @return the corresponding IntEnum.
      * @throws IllegalArgumentException if value is null.
      */
+    @Generated
     public static IntEnum fromValue(Integer value) {
         if (value == null) {
             throw new IllegalArgumentException("'value' cannot be null.");
@@ -75,6 +82,7 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
      * 
      * @return Known IntEnum values.
      */
+    @Generated
     public static Collection<IntEnum> values() {
         return new ArrayList<>(VALUES.values());
     }
@@ -84,6 +92,7 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
      * 
      * @return the value of the IntEnum instance.
      */
+    @Generated
     @Override
     public Integer getValue() {
         return this.value;
@@ -92,6 +101,7 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         return jsonWriter.writeInt(getValue());
@@ -106,6 +116,7 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
      * @throws IOException If an error occurs while reading the IntEnum.
      * @throws IllegalStateException If unexpected JSON token is found.
      */
+    @Generated
     public static IntEnum fromJson(JsonReader jsonReader) throws IOException {
         JsonToken nextToken = jsonReader.nextToken();
         if (nextToken == JsonToken.NULL) {
@@ -118,16 +129,19 @@ public final class IntEnum implements ExpandableEnum<Integer>, JsonSerializable<
         return IntEnum.fromValue(jsonReader.getInt());
     }
 
+    @Generated
     @Override
     public String toString() {
         return Objects.toString(this.value);
     }
 
+    @Generated
     @Override
     public boolean equals(Object obj) {
         return this == obj;
     }
 
+    @Generated
     @Override
     public int hashCode() {
         return Objects.hashCode(this.value);

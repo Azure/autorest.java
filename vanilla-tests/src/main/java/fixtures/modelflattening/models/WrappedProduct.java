@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class WrappedProduct implements JsonSerializable<WrappedProduct> {
     /*
      * the product value
      */
+    @Generated
     private String value;
 
     /**
      * Creates an instance of WrappedProduct class.
      */
+    @Generated
     public WrappedProduct() {
     }
 
@@ -32,6 +35,7 @@ public final class WrappedProduct implements JsonSerializable<WrappedProduct> {
      * 
      * @return the value value.
      */
+    @Generated
     public String getValue() {
         return this.value;
     }
@@ -42,6 +46,7 @@ public final class WrappedProduct implements JsonSerializable<WrappedProduct> {
      * @param value the value value to set.
      * @return the WrappedProduct object itself.
      */
+    @Generated
     public WrappedProduct setValue(String value) {
         this.value = value;
         return this;
@@ -58,6 +63,7 @@ public final class WrappedProduct implements JsonSerializable<WrappedProduct> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -73,6 +79,7 @@ public final class WrappedProduct implements JsonSerializable<WrappedProduct> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the WrappedProduct.
      */
+    @Generated
     public static WrappedProduct fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             WrappedProduct deserializedWrappedProduct = new WrappedProduct();

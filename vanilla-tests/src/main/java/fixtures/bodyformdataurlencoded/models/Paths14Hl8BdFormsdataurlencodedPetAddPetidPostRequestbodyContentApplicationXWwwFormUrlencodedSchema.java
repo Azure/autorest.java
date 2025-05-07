@@ -5,6 +5,7 @@
 package fixtures.bodyformdataurlencoded.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,32 +22,38 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
     /*
      * Can take a value of dog, or cat, or fish
      */
+    @Generated
     private PetType petType;
 
     /*
      * Can take a value of meat, or fish, or plant
      */
+    @Generated
     private PetFood petFood;
 
     /*
      * How many years is it old?
      */
+    @Generated
     private int petAge;
 
     /*
      * Updated name of the pet
      */
+    @Generated
     private String name;
 
     /*
      * Updated status of the pet
      */
+    @Generated
     private String status;
 
     /**
      * Creates an instance of
      * Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
      */
+    @Generated
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
     }
 
@@ -55,6 +62,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * 
      * @return the petType value.
      */
+    @Generated
     public PetType getPetType() {
         return this.petType;
     }
@@ -66,6 +74,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
      * object itself.
      */
+    @Generated
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setPetType(PetType petType) {
         this.petType = petType;
@@ -77,6 +86,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * 
      * @return the petFood value.
      */
+    @Generated
     public PetFood getPetFood() {
         return this.petFood;
     }
@@ -88,6 +98,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
      * object itself.
      */
+    @Generated
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setPetFood(PetFood petFood) {
         this.petFood = petFood;
@@ -99,6 +110,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * 
      * @return the petAge value.
      */
+    @Generated
     public int getPetAge() {
         return this.petAge;
     }
@@ -110,6 +122,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
      * object itself.
      */
+    @Generated
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setPetAge(int petAge) {
         this.petAge = petAge;
@@ -121,6 +134,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -132,6 +146,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
      * object itself.
      */
+    @Generated
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setName(String name) {
         this.name = name;
@@ -143,6 +158,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * 
      * @return the status value.
      */
+    @Generated
     public String getStatus() {
         return this.status;
     }
@@ -154,6 +170,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * @return the Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
      * object itself.
      */
+    @Generated
     public Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setStatus(String status) {
         this.status = status;
@@ -179,6 +196,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -203,6 +221,7 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      * @throws IOException If an error occurs while reading the
      * Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
      */
+    @Generated
     public static Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {

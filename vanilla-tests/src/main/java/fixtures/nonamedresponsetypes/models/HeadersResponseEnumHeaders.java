@@ -5,6 +5,7 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HeadersResponseEnumHeaders {
     /*
      * The value property.
      */
+    @Generated
     private GreyscaleColors value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -40,6 +42,7 @@ public final class HeadersResponseEnumHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public GreyscaleColors getValue() {
         return this.value;
     }
@@ -50,6 +53,7 @@ public final class HeadersResponseEnumHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseEnumHeaders object itself.
      */
+    @Generated
     public HeadersResponseEnumHeaders setValue(GreyscaleColors value) {
         this.value = value;
         return this;

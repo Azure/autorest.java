@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -21,16 +21,19 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
     /*
      * XML will use RefToModel
      */
+    @Generated
     private ComplexTypeNoMeta refToModel;
 
     /*
      * Something else (just to avoid flattening)
      */
+    @Generated
     private String something;
 
     /**
      * Creates an instance of RootWithRefAndNoMeta class.
      */
+    @Generated
     public RootWithRefAndNoMeta() {
     }
 
@@ -39,6 +42,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      * 
      * @return the refToModel value.
      */
+    @Generated
     public ComplexTypeNoMeta getRefToModel() {
         return this.refToModel;
     }
@@ -49,6 +53,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      * @param refToModel the refToModel value to set.
      * @return the RootWithRefAndNoMeta object itself.
      */
+    @Generated
     public RootWithRefAndNoMeta setRefToModel(ComplexTypeNoMeta refToModel) {
         this.refToModel = refToModel;
         return this;
@@ -59,6 +64,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      * 
      * @return the something value.
      */
+    @Generated
     public String getSomething() {
         return this.something;
     }
@@ -69,6 +75,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      * @param something the something value to set.
      * @return the RootWithRefAndNoMeta object itself.
      */
+    @Generated
     public RootWithRefAndNoMeta setSomething(String something) {
         this.something = something;
         return this;
@@ -85,14 +92,17 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndNoMeta" : rootElementName;
+        rootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "RootWithRefAndNoMeta" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeXml(this.refToModel, "RefToModel");
         xmlWriter.writeStringElement("Something", this.something);
@@ -107,6 +117,7 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the RootWithRefAndNoMeta.
      */
+    @Generated
     public static RootWithRefAndNoMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -121,9 +132,10 @@ public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAn
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the RootWithRefAndNoMeta.
      */
+    @Generated
     public static RootWithRefAndNoMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName
-            = CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndNoMeta" : rootElementName;
+            = rootElementName == null || rootElementName.isEmpty() ? "RootWithRefAndNoMeta" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             RootWithRefAndNoMeta deserializedRootWithRefAndNoMeta = new RootWithRefAndNoMeta();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

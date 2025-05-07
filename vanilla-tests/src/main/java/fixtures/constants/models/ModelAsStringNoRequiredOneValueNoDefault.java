@@ -5,6 +5,7 @@
 package fixtures.constants.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,11 +21,13 @@ public final class ModelAsStringNoRequiredOneValueNoDefault
     /*
      * The parameter property.
      */
+    @Generated
     private ModelAsStringNoRequiredOneValueNoDefaultEnum parameter;
 
     /**
      * Creates an instance of ModelAsStringNoRequiredOneValueNoDefault class.
      */
+    @Generated
     public ModelAsStringNoRequiredOneValueNoDefault() {
     }
 
@@ -33,6 +36,7 @@ public final class ModelAsStringNoRequiredOneValueNoDefault
      * 
      * @return the parameter value.
      */
+    @Generated
     public ModelAsStringNoRequiredOneValueNoDefaultEnum getParameter() {
         return this.parameter;
     }
@@ -43,6 +47,7 @@ public final class ModelAsStringNoRequiredOneValueNoDefault
      * @param parameter the parameter value to set.
      * @return the ModelAsStringNoRequiredOneValueNoDefault object itself.
      */
+    @Generated
     public ModelAsStringNoRequiredOneValueNoDefault
         setParameter(ModelAsStringNoRequiredOneValueNoDefaultEnum parameter) {
         this.parameter = parameter;
@@ -60,6 +65,7 @@ public final class ModelAsStringNoRequiredOneValueNoDefault
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -75,6 +81,7 @@ public final class ModelAsStringNoRequiredOneValueNoDefault
      * it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ModelAsStringNoRequiredOneValueNoDefault.
      */
+    @Generated
     public static ModelAsStringNoRequiredOneValueNoDefault fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ModelAsStringNoRequiredOneValueNoDefault deserializedModelAsStringNoRequiredOneValueNoDefault

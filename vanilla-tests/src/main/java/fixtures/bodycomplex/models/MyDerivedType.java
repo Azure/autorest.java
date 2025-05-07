@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
@@ -20,6 +21,7 @@ public final class MyDerivedType extends MyBaseType {
     /*
      * The kind property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "kind", required = true)
     private MyKind kind = MyKind.KIND1;
@@ -27,12 +29,14 @@ public final class MyDerivedType extends MyBaseType {
     /*
      * The propD1 property.
      */
+    @Generated
     @JsonProperty(value = "propD1")
     private String propD1;
 
     /**
      * Creates an instance of MyDerivedType class.
      */
+    @Generated
     private MyDerivedType() {
     }
 
@@ -41,6 +45,7 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the kind value.
      */
+    @Generated
     @Override
     public MyKind getKind() {
         return this.kind;
@@ -51,6 +56,7 @@ public final class MyDerivedType extends MyBaseType {
      * 
      * @return the propD1 value.
      */
+    @Generated
     public String getPropD1() {
         return this.propD1;
     }

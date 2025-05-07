@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -23,21 +23,25 @@ public final class Container implements XmlSerializable<Container> {
     /*
      * The Name property.
      */
+    @Generated
     private String name;
 
     /*
      * Properties of a container
      */
+    @Generated
     private ContainerProperties properties;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     private Map<String, String> metadata;
 
     /**
      * Creates an instance of Container class.
      */
+    @Generated
     public Container() {
     }
 
@@ -46,6 +50,7 @@ public final class Container implements XmlSerializable<Container> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -56,6 +61,7 @@ public final class Container implements XmlSerializable<Container> {
      * @param name the name value to set.
      * @return the Container object itself.
      */
+    @Generated
     public Container setName(String name) {
         this.name = name;
         return this;
@@ -66,6 +72,7 @@ public final class Container implements XmlSerializable<Container> {
      * 
      * @return the properties value.
      */
+    @Generated
     public ContainerProperties getProperties() {
         return this.properties;
     }
@@ -76,6 +83,7 @@ public final class Container implements XmlSerializable<Container> {
      * @param properties the properties value to set.
      * @return the Container object itself.
      */
+    @Generated
     public Container setProperties(ContainerProperties properties) {
         this.properties = properties;
         return this;
@@ -86,6 +94,7 @@ public final class Container implements XmlSerializable<Container> {
      * 
      * @return the metadata value.
      */
+    @Generated
     public Map<String, String> getMetadata() {
         return this.metadata;
     }
@@ -96,6 +105,7 @@ public final class Container implements XmlSerializable<Container> {
      * @param metadata the metadata value to set.
      * @return the Container object itself.
      */
+    @Generated
     public Container setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
         return this;
@@ -117,14 +127,16 @@ public final class Container implements XmlSerializable<Container> {
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Container" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "Container" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Name", this.name);
         xmlWriter.writeXml(this.properties, "Properties");
@@ -146,6 +158,7 @@ public final class Container implements XmlSerializable<Container> {
      * to XML null.
      * @throws XMLStreamException If an error occurs while reading the Container.
      */
+    @Generated
     public static Container fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -160,8 +173,10 @@ public final class Container implements XmlSerializable<Container> {
      * to XML null.
      * @throws XMLStreamException If an error occurs while reading the Container.
      */
+    @Generated
     public static Container fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Container" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "Container" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             Container deserializedContainer = new Container();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

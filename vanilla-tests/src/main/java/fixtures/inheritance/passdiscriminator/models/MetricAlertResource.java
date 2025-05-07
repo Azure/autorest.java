@@ -5,6 +5,7 @@
 package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,12 +18,14 @@ public class MetricAlertResource {
     /*
      * defines the specific alert criteria information.
      */
+    @Generated
     @JsonProperty(value = "properties.criteria", required = true)
     private MetricAlertCriteria criteria;
 
     /**
      * Creates an instance of MetricAlertResource class.
      */
+    @Generated
     public MetricAlertResource() {
     }
 
@@ -31,6 +34,7 @@ public class MetricAlertResource {
      * 
      * @return the criteria value.
      */
+    @Generated
     public MetricAlertCriteria getCriteria() {
         return this.criteria;
     }
@@ -41,6 +45,7 @@ public class MetricAlertResource {
      * @param criteria the criteria value to set.
      * @return the MetricAlertResource object itself.
      */
+    @Generated
     public MetricAlertResource setCriteria(MetricAlertCriteria criteria) {
         this.criteria = criteria;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
@@ -18,24 +19,28 @@ public final class Banana {
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name")
     private String name;
 
     /*
      * The flavor property.
      */
+    @Generated
     @JsonProperty(value = "flavor")
     private String flavor;
 
     /*
      * The time at which you should reconsider eating this banana
      */
+    @Generated
     @JsonProperty(value = "expiration")
     private OffsetDateTime expiration;
 
     /**
      * Creates an instance of Banana class.
      */
+    @Generated
     public Banana() {
     }
 
@@ -44,6 +49,7 @@ public final class Banana {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -54,6 +60,7 @@ public final class Banana {
      * @param name the name value to set.
      * @return the Banana object itself.
      */
+    @Generated
     public Banana setName(String name) {
         this.name = name;
         return this;
@@ -64,6 +71,7 @@ public final class Banana {
      * 
      * @return the flavor value.
      */
+    @Generated
     public String getFlavor() {
         return this.flavor;
     }
@@ -74,6 +82,7 @@ public final class Banana {
      * @param flavor the flavor value to set.
      * @return the Banana object itself.
      */
+    @Generated
     public Banana setFlavor(String flavor) {
         this.flavor = flavor;
         return this;
@@ -84,6 +93,7 @@ public final class Banana {
      * 
      * @return the expiration value.
      */
+    @Generated
     public OffsetDateTime getExpiration() {
         return this.expiration;
     }
@@ -94,6 +104,7 @@ public final class Banana {
      * @param expiration the expiration value to set.
      * @return the Banana object itself.
      */
+    @Generated
     public Banana setExpiration(OffsetDateTime expiration) {
         this.expiration = expiration;
         return this;

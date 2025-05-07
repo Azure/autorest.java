@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,31 +21,37 @@ public class Resource implements JsonSerializable<Resource> {
     /*
      * Resource Id
      */
+    @Generated
     private String id;
 
     /*
      * Resource Type
      */
+    @Generated
     private String type;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     private Map<String, String> tags;
 
     /*
      * Resource Location
      */
+    @Generated
     private String location;
 
     /*
      * Resource Name
      */
+    @Generated
     private String name;
 
     /**
      * Creates an instance of Resource class.
      */
+    @Generated
     public Resource() {
     }
 
@@ -53,6 +60,7 @@ public class Resource implements JsonSerializable<Resource> {
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -63,6 +71,7 @@ public class Resource implements JsonSerializable<Resource> {
      * @param id the id value to set.
      * @return the Resource object itself.
      */
+    @Generated
     Resource setId(String id) {
         this.id = id;
         return this;
@@ -73,6 +82,7 @@ public class Resource implements JsonSerializable<Resource> {
      * 
      * @return the type value.
      */
+    @Generated
     public String getType() {
         return this.type;
     }
@@ -83,6 +93,7 @@ public class Resource implements JsonSerializable<Resource> {
      * @param type the type value to set.
      * @return the Resource object itself.
      */
+    @Generated
     Resource setType(String type) {
         this.type = type;
         return this;
@@ -93,6 +104,7 @@ public class Resource implements JsonSerializable<Resource> {
      * 
      * @return the tags value.
      */
+    @Generated
     public Map<String, String> getTags() {
         return this.tags;
     }
@@ -103,6 +115,7 @@ public class Resource implements JsonSerializable<Resource> {
      * @param tags the tags value to set.
      * @return the Resource object itself.
      */
+    @Generated
     public Resource setTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
@@ -113,6 +126,7 @@ public class Resource implements JsonSerializable<Resource> {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -123,6 +137,7 @@ public class Resource implements JsonSerializable<Resource> {
      * @param location the location value to set.
      * @return the Resource object itself.
      */
+    @Generated
     public Resource setLocation(String location) {
         this.location = location;
         return this;
@@ -133,6 +148,7 @@ public class Resource implements JsonSerializable<Resource> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -143,6 +159,7 @@ public class Resource implements JsonSerializable<Resource> {
      * @param name the name value to set.
      * @return the Resource object itself.
      */
+    @Generated
     Resource setName(String name) {
         this.name = name;
         return this;
@@ -159,6 +176,7 @@ public class Resource implements JsonSerializable<Resource> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -175,6 +193,7 @@ public class Resource implements JsonSerializable<Resource> {
      * to JSON null.
      * @throws IOException If an error occurs while reading the Resource.
      */
+    @Generated
     public static Resource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Resource deserializedResource = new Resource();

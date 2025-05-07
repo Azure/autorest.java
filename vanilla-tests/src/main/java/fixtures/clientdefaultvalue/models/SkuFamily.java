@@ -4,6 +4,7 @@
 
 package fixtures.clientdefaultvalue.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,6 +15,7 @@ public final class SkuFamily extends ExpandableStringEnum<SkuFamily> {
     /**
      * Static value A for SkuFamily.
      */
+    @Generated
     public static final SkuFamily A = fromString("A");
 
     /**
@@ -21,6 +23,7 @@ public final class SkuFamily extends ExpandableStringEnum<SkuFamily> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public SkuFamily() {
     }
@@ -31,6 +34,7 @@ public final class SkuFamily extends ExpandableStringEnum<SkuFamily> {
      * @param name a name to look for.
      * @return the corresponding SkuFamily.
      */
+    @Generated
     public static SkuFamily fromString(String name) {
         return fromString(name, SkuFamily.class);
     }
@@ -40,6 +44,7 @@ public final class SkuFamily extends ExpandableStringEnum<SkuFamily> {
      * 
      * @return known SkuFamily values.
      */
+    @Generated
     public static Collection<SkuFamily> values() {
         return values(SkuFamily.class);
     }

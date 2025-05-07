@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -18,26 +19,31 @@ public class SimpleProduct extends BaseProduct {
     /*
      * Display name of product.
      */
+    @Generated
     private String maxProductDisplayName;
 
     /*
      * Capacity of product. For example, 4 people.
      */
+    @Generated
     private SimpleProductPropertiesMaxProductCapacity capacity;
 
     /*
      * Generic URL value.
      */
+    @Generated
     private String genericValue;
 
     /*
      * URL value.
      */
+    @Generated
     private String odataValue;
 
     /**
      * Creates an instance of SimpleProduct class.
      */
+    @Generated
     public SimpleProduct() {
     }
 
@@ -46,6 +52,7 @@ public class SimpleProduct extends BaseProduct {
      * 
      * @return the maxProductDisplayName value.
      */
+    @Generated
     public String getMaxProductDisplayName() {
         return this.maxProductDisplayName;
     }
@@ -56,6 +63,7 @@ public class SimpleProduct extends BaseProduct {
      * @param maxProductDisplayName the maxProductDisplayName value to set.
      * @return the SimpleProduct object itself.
      */
+    @Generated
     public SimpleProduct setMaxProductDisplayName(String maxProductDisplayName) {
         this.maxProductDisplayName = maxProductDisplayName;
         return this;
@@ -66,6 +74,7 @@ public class SimpleProduct extends BaseProduct {
      * 
      * @return the capacity value.
      */
+    @Generated
     public SimpleProductPropertiesMaxProductCapacity getCapacity() {
         return this.capacity;
     }
@@ -76,6 +85,7 @@ public class SimpleProduct extends BaseProduct {
      * @param capacity the capacity value to set.
      * @return the SimpleProduct object itself.
      */
+    @Generated
     public SimpleProduct setCapacity(SimpleProductPropertiesMaxProductCapacity capacity) {
         this.capacity = capacity;
         return this;
@@ -86,6 +96,7 @@ public class SimpleProduct extends BaseProduct {
      * 
      * @return the genericValue value.
      */
+    @Generated
     public String getGenericValue() {
         return this.genericValue;
     }
@@ -96,6 +107,7 @@ public class SimpleProduct extends BaseProduct {
      * @param genericValue the genericValue value to set.
      * @return the SimpleProduct object itself.
      */
+    @Generated
     public SimpleProduct setGenericValue(String genericValue) {
         this.genericValue = genericValue;
         return this;
@@ -106,6 +118,7 @@ public class SimpleProduct extends BaseProduct {
      * 
      * @return the odataValue value.
      */
+    @Generated
     public String getOdataValue() {
         return this.odataValue;
     }
@@ -116,6 +129,7 @@ public class SimpleProduct extends BaseProduct {
      * @param odataValue the odataValue value to set.
      * @return the SimpleProduct object itself.
      */
+    @Generated
     public SimpleProduct setOdataValue(String odataValue) {
         this.odataValue = odataValue;
         return this;
@@ -124,6 +138,7 @@ public class SimpleProduct extends BaseProduct {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SimpleProduct setProductId(String productId) {
         super.setProductId(productId);
@@ -133,6 +148,7 @@ public class SimpleProduct extends BaseProduct {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public SimpleProduct setDescription(String description) {
         super.setDescription(description);
@@ -154,6 +170,7 @@ public class SimpleProduct extends BaseProduct {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -184,6 +201,7 @@ public class SimpleProduct extends BaseProduct {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SimpleProduct.
      */
+    @Generated
     public static SimpleProduct fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             SimpleProduct deserializedSimpleProduct = new SimpleProduct();

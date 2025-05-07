@@ -5,6 +5,7 @@
 package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,12 +18,14 @@ public class VirtualMachineScaleSet {
     /*
      * The virtual machine profile.
      */
+    @Generated
     @JsonProperty(value = "properties.virtualMachineProfile")
     private VirtualMachineScaleSetVMProfile virtualMachineProfile;
 
     /**
      * Creates an instance of VirtualMachineScaleSet class.
      */
+    @Generated
     public VirtualMachineScaleSet() {
     }
 
@@ -31,6 +34,7 @@ public class VirtualMachineScaleSet {
      * 
      * @return the virtualMachineProfile value.
      */
+    @Generated
     public VirtualMachineScaleSetVMProfile getVirtualMachineProfile() {
         return this.virtualMachineProfile;
     }
@@ -41,6 +45,7 @@ public class VirtualMachineScaleSet {
      * @param virtualMachineProfile the virtualMachineProfile value to set.
      * @return the VirtualMachineScaleSet object itself.
      */
+    @Generated
     public VirtualMachineScaleSet setVirtualMachineProfile(VirtualMachineScaleSetVMProfile virtualMachineProfile) {
         this.virtualMachineProfile = virtualMachineProfile;
         return this;

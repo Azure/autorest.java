@@ -5,6 +5,7 @@
 package fixtures.bodydictionary.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class Widget implements JsonSerializable<Widget> {
     /*
      * The integer property.
      */
+    @Generated
     private Integer integer;
 
     /*
      * The string property.
      */
+    @Generated
     private String string;
 
     /**
      * Creates an instance of Widget class.
      */
+    @Generated
     public Widget() {
     }
 
@@ -37,6 +41,7 @@ public final class Widget implements JsonSerializable<Widget> {
      * 
      * @return the integer value.
      */
+    @Generated
     public Integer getInteger() {
         return this.integer;
     }
@@ -47,6 +52,7 @@ public final class Widget implements JsonSerializable<Widget> {
      * @param integer the integer value to set.
      * @return the Widget object itself.
      */
+    @Generated
     public Widget setInteger(Integer integer) {
         this.integer = integer;
         return this;
@@ -57,6 +63,7 @@ public final class Widget implements JsonSerializable<Widget> {
      * 
      * @return the string value.
      */
+    @Generated
     public String getString() {
         return this.string;
     }
@@ -67,6 +74,7 @@ public final class Widget implements JsonSerializable<Widget> {
      * @param string the string value to set.
      * @return the Widget object itself.
      */
+    @Generated
     public Widget setString(String string) {
         this.string = string;
         return this;
@@ -83,6 +91,7 @@ public final class Widget implements JsonSerializable<Widget> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public final class Widget implements JsonSerializable<Widget> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Widget.
      */
+    @Generated
     public static Widget fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Widget deserializedWidget = new Widget();

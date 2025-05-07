@@ -4,7 +4,7 @@
 
 package fixtures.streamstylexmlserialization.implementation.models;
 
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -39,14 +39,16 @@ public final class BananaWrapper implements XmlSerializable<BananaWrapper> {
         return bananas;
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "bananas" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "bananas" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         if (bananas != null) {
             for (Banana element : bananas) {
@@ -56,12 +58,14 @@ public final class BananaWrapper implements XmlSerializable<BananaWrapper> {
         return xmlWriter.writeEndElement();
     }
 
+    @Generated
     public static BananaWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
 
+    @Generated
     public static BananaWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "bananas" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "bananas" : rootElementName;
         return xmlReader.readObject(rootElementName, reader -> {
             List<Banana> items = null;
 

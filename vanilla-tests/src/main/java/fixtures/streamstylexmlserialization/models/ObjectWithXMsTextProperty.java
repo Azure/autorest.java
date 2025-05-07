@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlWriter;
@@ -19,16 +19,19 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
     /*
      * Returned value should be 'english'
      */
+    @Generated
     private String language;
 
     /*
      * Returned value should be 'I am text'
      */
+    @Generated
     private String content;
 
     /**
      * Creates an instance of ObjectWithXMsTextProperty class.
      */
+    @Generated
     public ObjectWithXMsTextProperty() {
     }
 
@@ -37,6 +40,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * 
      * @return the language value.
      */
+    @Generated
     public String getLanguage() {
         return this.language;
     }
@@ -47,6 +51,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * @param language the language value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
+    @Generated
     public ObjectWithXMsTextProperty setLanguage(String language) {
         this.language = language;
         return this;
@@ -57,6 +62,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * 
      * @return the content value.
      */
+    @Generated
     public String getContent() {
         return this.content;
     }
@@ -67,6 +73,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * @param content the content value to set.
      * @return the ObjectWithXMsTextProperty object itself.
      */
+    @Generated
     public ObjectWithXMsTextProperty setContent(String content) {
         this.content = content;
         return this;
@@ -80,14 +87,16 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Data" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "Data" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringAttribute("language", this.language);
         xmlWriter.writeString(this.content);
@@ -102,6 +111,7 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
      */
+    @Generated
     public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -116,9 +126,10 @@ public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWi
      * it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ObjectWithXMsTextProperty.
      */
+    @Generated
     public static ObjectWithXMsTextProperty fromXml(XmlReader xmlReader, String rootElementName)
         throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Data" : rootElementName;
+        String finalRootElementName = rootElementName == null || rootElementName.isEmpty() ? "Data" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             ObjectWithXMsTextProperty deserializedObjectWithXMsTextProperty = new ObjectWithXMsTextProperty();
             deserializedObjectWithXMsTextProperty.language = reader.getStringAttribute(null, "language");

@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ public final class HeadersResponseDateHeaders {
     /*
      * The value property.
      */
+    @Generated
     private LocalDate value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -41,6 +43,7 @@ public final class HeadersResponseDateHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public LocalDate getValue() {
         return this.value;
     }
@@ -51,6 +54,7 @@ public final class HeadersResponseDateHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseDateHeaders object itself.
      */
+    @Generated
     public HeadersResponseDateHeaders setValue(LocalDate value) {
         this.value = value;
         return this;

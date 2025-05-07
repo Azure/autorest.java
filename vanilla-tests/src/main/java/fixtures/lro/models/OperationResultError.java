@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class OperationResultError {
     /*
      * The error code for an operation failure
      */
+    @Generated
     @JsonProperty(value = "code")
     private Integer code;
 
     /*
      * The detailed arror message
      */
+    @Generated
     @JsonProperty(value = "message")
     private String message;
 
     /**
      * Creates an instance of OperationResultError class.
      */
+    @Generated
     public OperationResultError() {
     }
 
@@ -35,6 +39,7 @@ public final class OperationResultError {
      * 
      * @return the code value.
      */
+    @Generated
     public Integer getCode() {
         return this.code;
     }
@@ -45,6 +50,7 @@ public final class OperationResultError {
      * @param code the code value to set.
      * @return the OperationResultError object itself.
      */
+    @Generated
     public OperationResultError setCode(Integer code) {
         this.code = code;
         return this;
@@ -55,6 +61,7 @@ public final class OperationResultError {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }
@@ -65,6 +72,7 @@ public final class OperationResultError {
      * @param message the message value to set.
      * @return the OperationResultError object itself.
      */
+    @Generated
     public OperationResultError setMessage(String message) {
         this.message = message;
         return this;

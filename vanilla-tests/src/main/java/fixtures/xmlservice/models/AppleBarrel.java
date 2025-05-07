@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -31,6 +32,7 @@ public final class AppleBarrel {
     /*
      * The GoodApples property.
      */
+    @Generated
     @JsonProperty(value = "GoodApples")
     private GoodApplesWrapper goodApples;
 
@@ -47,12 +49,14 @@ public final class AppleBarrel {
     /*
      * The BadApples property.
      */
+    @Generated
     @JsonProperty(value = "BadApples")
     private BadApplesWrapper badApples;
 
     /**
      * Creates an instance of AppleBarrel class.
      */
+    @Generated
     public AppleBarrel() {
     }
 
@@ -61,6 +65,7 @@ public final class AppleBarrel {
      * 
      * @return the goodApples value.
      */
+    @Generated
     public List<String> getGoodApples() {
         if (this.goodApples == null) {
             this.goodApples = new GoodApplesWrapper(new ArrayList<String>());
@@ -74,6 +79,7 @@ public final class AppleBarrel {
      * @param goodApples the goodApples value to set.
      * @return the AppleBarrel object itself.
      */
+    @Generated
     public AppleBarrel setGoodApples(List<String> goodApples) {
         this.goodApples = new GoodApplesWrapper(goodApples);
         return this;
@@ -84,6 +90,7 @@ public final class AppleBarrel {
      * 
      * @return the badApples value.
      */
+    @Generated
     public List<String> getBadApples() {
         if (this.badApples == null) {
             this.badApples = new BadApplesWrapper(new ArrayList<String>());
@@ -97,6 +104,7 @@ public final class AppleBarrel {
      * @param badApples the badApples value to set.
      * @return the AppleBarrel object itself.
      */
+    @Generated
     public AppleBarrel setBadApples(List<String> badApples) {
         this.badApples = new BadApplesWrapper(badApples);
         return this;

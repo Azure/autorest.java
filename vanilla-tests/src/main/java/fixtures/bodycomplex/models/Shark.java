@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,6 +30,7 @@ public class Shark extends Fish {
     /*
      * The fishtype property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fishtype", required = true)
     private String fishtype = "shark";
@@ -36,12 +38,14 @@ public class Shark extends Fish {
     /*
      * The age property.
      */
+    @Generated
     @JsonProperty(value = "age")
     private Integer age;
 
     /*
      * The birthday property.
      */
+    @Generated
     @JsonProperty(value = "birthday", required = true)
     private final OffsetDateTime birthday;
 
@@ -51,6 +55,7 @@ public class Shark extends Fish {
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
+    @Generated
     @JsonCreator
     public Shark(@JsonProperty(value = "length", required = true) float length,
         @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
@@ -63,6 +68,7 @@ public class Shark extends Fish {
      * 
      * @return the fishtype value.
      */
+    @Generated
     @Override
     public String getFishtype() {
         return this.fishtype;
@@ -73,6 +79,7 @@ public class Shark extends Fish {
      * 
      * @return the age value.
      */
+    @Generated
     public Integer getAge() {
         return this.age;
     }
@@ -83,6 +90,7 @@ public class Shark extends Fish {
      * @param age the age value to set.
      * @return the Shark object itself.
      */
+    @Generated
     public Shark setAge(Integer age) {
         this.age = age;
         return this;
@@ -93,6 +101,7 @@ public class Shark extends Fish {
      * 
      * @return the birthday value.
      */
+    @Generated
     public OffsetDateTime getBirthday() {
         return this.birthday;
     }
@@ -100,6 +109,7 @@ public class Shark extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Shark setSpecies(String species) {
         super.setSpecies(species);
@@ -109,6 +119,7 @@ public class Shark extends Fish {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Shark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);

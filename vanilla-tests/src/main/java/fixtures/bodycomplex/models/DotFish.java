@@ -4,6 +4,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -22,6 +23,7 @@ public class DotFish {
     /*
      * The fish.type property.
      */
+    @Generated
     @JsonTypeId
     @JsonProperty(value = "fish.type", required = true)
     private String fishType = "DotFish";
@@ -29,12 +31,14 @@ public class DotFish {
     /*
      * The species property.
      */
+    @Generated
     @JsonProperty(value = "species")
     private String species;
 
     /**
      * Creates an instance of DotFish class.
      */
+    @Generated
     protected DotFish() {
     }
 
@@ -43,6 +47,7 @@ public class DotFish {
      * 
      * @return the fishType value.
      */
+    @Generated
     public String getFishType() {
         return this.fishType;
     }
@@ -52,6 +57,7 @@ public class DotFish {
      * 
      * @return the species value.
      */
+    @Generated
     public String getSpecies() {
         return this.species;
     }

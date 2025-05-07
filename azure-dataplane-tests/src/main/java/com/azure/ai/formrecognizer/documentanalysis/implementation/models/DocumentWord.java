@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,26 +22,31 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
     /*
      * Text content of the word.
      */
+    @Generated
     private String content;
 
     /*
      * Bounding polygon of the word.
      */
+    @Generated
     private List<Float> polygon;
 
     /*
      * Location of the word in the reading order concatenated content.
      */
+    @Generated
     private DocumentSpan span;
 
     /*
      * Confidence of correctly extracting the word.
      */
+    @Generated
     private float confidence;
 
     /**
      * Creates an instance of DocumentWord class.
      */
+    @Generated
     public DocumentWord() {
     }
 
@@ -49,6 +55,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * 
      * @return the content value.
      */
+    @Generated
     public String getContent() {
         return this.content;
     }
@@ -59,6 +66,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * @param content the content value to set.
      * @return the DocumentWord object itself.
      */
+    @Generated
     public DocumentWord setContent(String content) {
         this.content = content;
         return this;
@@ -69,6 +77,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * 
      * @return the polygon value.
      */
+    @Generated
     public List<Float> getPolygon() {
         return this.polygon;
     }
@@ -79,6 +88,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * @param polygon the polygon value to set.
      * @return the DocumentWord object itself.
      */
+    @Generated
     public DocumentWord setPolygon(List<Float> polygon) {
         this.polygon = polygon;
         return this;
@@ -89,6 +99,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * 
      * @return the span value.
      */
+    @Generated
     public DocumentSpan getSpan() {
         return this.span;
     }
@@ -99,6 +110,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * @param span the span value to set.
      * @return the DocumentWord object itself.
      */
+    @Generated
     public DocumentWord setSpan(DocumentSpan span) {
         this.span = span;
         return this;
@@ -109,6 +121,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * 
      * @return the confidence value.
      */
+    @Generated
     public float getConfidence() {
         return this.confidence;
     }
@@ -119,6 +132,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * @param confidence the confidence value to set.
      * @return the DocumentWord object itself.
      */
+    @Generated
     public DocumentWord setConfidence(float confidence) {
         this.confidence = confidence;
         return this;
@@ -127,6 +141,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -146,6 +161,7 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentWord.
      */
+    @Generated
     public static DocumentWord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DocumentWord deserializedDocumentWord = new DocumentWord();

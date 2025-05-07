@@ -5,6 +5,7 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,12 +16,14 @@ public final class JsonInput {
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id")
     private Integer id;
 
     /**
      * Creates an instance of JsonInput class.
      */
+    @Generated
     public JsonInput() {
     }
 
@@ -29,6 +32,7 @@ public final class JsonInput {
      * 
      * @return the id value.
      */
+    @Generated
     public Integer getId() {
         return this.id;
     }
@@ -39,6 +43,7 @@ public final class JsonInput {
      * @param id the id value to set.
      * @return the JsonInput object itself.
      */
+    @Generated
     public JsonInput setId(Integer id) {
         this.id = id;
         return this;

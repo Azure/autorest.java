@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
@@ -16,18 +17,21 @@ public final class DateWrapper {
     /*
      * The field property.
      */
+    @Generated
     @JsonProperty(value = "field")
     private LocalDate field;
 
     /*
      * The leap property.
      */
+    @Generated
     @JsonProperty(value = "leap")
     private LocalDate leap;
 
     /**
      * Creates an instance of DateWrapper class.
      */
+    @Generated
     public DateWrapper() {
     }
 
@@ -36,6 +40,7 @@ public final class DateWrapper {
      * 
      * @return the field value.
      */
+    @Generated
     public LocalDate getField() {
         return this.field;
     }
@@ -46,6 +51,7 @@ public final class DateWrapper {
      * @param field the field value to set.
      * @return the DateWrapper object itself.
      */
+    @Generated
     public DateWrapper setField(LocalDate field) {
         this.field = field;
         return this;
@@ -56,6 +62,7 @@ public final class DateWrapper {
      * 
      * @return the leap value.
      */
+    @Generated
     public LocalDate getLeap() {
         return this.leap;
     }
@@ -66,6 +73,7 @@ public final class DateWrapper {
      * @param leap the leap value to set.
      * @return the DateWrapper object itself.
      */
+    @Generated
     public DateWrapper setLeap(LocalDate leap) {
         this.leap = leap;
         return this;

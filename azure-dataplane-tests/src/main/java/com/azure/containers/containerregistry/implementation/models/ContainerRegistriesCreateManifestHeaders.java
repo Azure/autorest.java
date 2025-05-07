@@ -5,6 +5,7 @@
 package com.azure.containers.containerregistry.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,16 +17,19 @@ public final class ContainerRegistriesCreateManifestHeaders {
     /*
      * The Content-Length property.
      */
+    @Generated
     private Long contentLength;
 
     /*
      * The Docker-Content-Digest property.
      */
+    @Generated
     private String dockerContentDigest;
 
     /*
      * The Location property.
      */
+    @Generated
     private String location;
 
     private static final HttpHeaderName DOCKER_CONTENT_DIGEST = HttpHeaderName.fromString("Docker-Content-Digest");
@@ -52,6 +56,7 @@ public final class ContainerRegistriesCreateManifestHeaders {
      * 
      * @return the contentLength value.
      */
+    @Generated
     public Long getContentLength() {
         return this.contentLength;
     }
@@ -62,6 +67,7 @@ public final class ContainerRegistriesCreateManifestHeaders {
      * @param contentLength the contentLength value to set.
      * @return the ContainerRegistriesCreateManifestHeaders object itself.
      */
+    @Generated
     public ContainerRegistriesCreateManifestHeaders setContentLength(Long contentLength) {
         this.contentLength = contentLength;
         return this;
@@ -72,6 +78,7 @@ public final class ContainerRegistriesCreateManifestHeaders {
      * 
      * @return the dockerContentDigest value.
      */
+    @Generated
     public String getDockerContentDigest() {
         return this.dockerContentDigest;
     }
@@ -82,6 +89,7 @@ public final class ContainerRegistriesCreateManifestHeaders {
      * @param dockerContentDigest the dockerContentDigest value to set.
      * @return the ContainerRegistriesCreateManifestHeaders object itself.
      */
+    @Generated
     public ContainerRegistriesCreateManifestHeaders setDockerContentDigest(String dockerContentDigest) {
         this.dockerContentDigest = dockerContentDigest;
         return this;
@@ -92,6 +100,7 @@ public final class ContainerRegistriesCreateManifestHeaders {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -102,6 +111,7 @@ public final class ContainerRegistriesCreateManifestHeaders {
      * @param location the location value to set.
      * @return the ContainerRegistriesCreateManifestHeaders object itself.
      */
+    @Generated
     public ContainerRegistriesCreateManifestHeaders setLocation(String location) {
         this.location = location;
         return this;

@@ -5,6 +5,7 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
     /*
      * The value property.
      */
+    @Generated
     private Product value;
 
     /**
      * Creates an instance of ClassOptionalWrapper class.
      */
+    @Generated
     public ClassOptionalWrapper() {
     }
 
@@ -32,6 +35,7 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
      * 
      * @return the value value.
      */
+    @Generated
     public Product getValue() {
         return this.value;
     }
@@ -42,6 +46,7 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
      * @param value the value value to set.
      * @return the ClassOptionalWrapper object itself.
      */
+    @Generated
     public ClassOptionalWrapper setValue(Product value) {
         this.value = value;
         return this;
@@ -61,6 +66,7 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -76,6 +82,7 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
      * was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ClassOptionalWrapper.
      */
+    @Generated
     public static ClassOptionalWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ClassOptionalWrapper deserializedClassOptionalWrapper = new ClassOptionalWrapper();

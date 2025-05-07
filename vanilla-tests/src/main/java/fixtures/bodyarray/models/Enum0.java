@@ -4,6 +4,7 @@
 
 package fixtures.bodyarray.models;
 
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
@@ -14,16 +15,19 @@ public final class Enum0 extends ExpandableStringEnum<Enum0> {
     /**
      * Static value foo1 for Enum0.
      */
+    @Generated
     public static final Enum0 FOO1 = fromString("foo1");
 
     /**
      * Static value foo2 for Enum0.
      */
+    @Generated
     public static final Enum0 FOO2 = fromString("foo2");
 
     /**
      * Static value foo3 for Enum0.
      */
+    @Generated
     public static final Enum0 FOO3 = fromString("foo3");
 
     /**
@@ -31,6 +35,7 @@ public final class Enum0 extends ExpandableStringEnum<Enum0> {
      * 
      * @deprecated Use the {@link #fromString(String)} factory method.
      */
+    @Generated
     @Deprecated
     public Enum0() {
     }
@@ -41,6 +46,7 @@ public final class Enum0 extends ExpandableStringEnum<Enum0> {
      * @param name a name to look for.
      * @return the corresponding Enum0.
      */
+    @Generated
     public static Enum0 fromString(String name) {
         return fromString(name, Enum0.class);
     }
@@ -50,6 +56,7 @@ public final class Enum0 extends ExpandableStringEnum<Enum0> {
      * 
      * @return known Enum0 values.
      */
+    @Generated
     public static Collection<Enum0> values() {
         return values(Enum0.class);
     }

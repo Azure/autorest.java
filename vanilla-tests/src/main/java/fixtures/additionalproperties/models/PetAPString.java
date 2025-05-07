@@ -5,6 +5,7 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,26 +22,31 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
     /*
      * The id property.
      */
+    @Generated
     private int id;
 
     /*
      * The name property.
      */
+    @Generated
     private String name;
 
     /*
      * The status property.
      */
+    @Generated
     private Boolean status;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     private Map<String, String> additionalProperties;
 
     /**
      * Creates an instance of PetAPString class.
      */
+    @Generated
     public PetAPString() {
     }
 
@@ -49,6 +55,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * 
      * @return the id value.
      */
+    @Generated
     public int getId() {
         return this.id;
     }
@@ -59,6 +66,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * @param id the id value to set.
      * @return the PetAPString object itself.
      */
+    @Generated
     public PetAPString setId(int id) {
         this.id = id;
         return this;
@@ -69,6 +77,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -79,6 +88,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * @param name the name value to set.
      * @return the PetAPString object itself.
      */
+    @Generated
     public PetAPString setName(String name) {
         this.name = name;
         return this;
@@ -89,6 +99,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * 
      * @return the status value.
      */
+    @Generated
     public Boolean isStatus() {
         return this.status;
     }
@@ -98,6 +109,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * 
      * @return the additionalProperties value.
      */
+    @Generated
     public Map<String, String> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -108,6 +120,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * @param additionalProperties the additionalProperties value to set.
      * @return the PetAPString object itself.
      */
+    @Generated
     public PetAPString setAdditionalProperties(Map<String, String> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
@@ -124,6 +137,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -146,6 +160,7 @@ public final class PetAPString implements JsonSerializable<PetAPString> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the PetAPString.
      */
+    @Generated
     public static PetAPString fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             PetAPString deserializedPetAPString = new PetAPString();

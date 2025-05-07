@@ -5,6 +5,7 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
     /*
      * The value property.
      */
+    @Generated
     private int value;
 
     /**
      * Creates an instance of IntWrapper class.
      */
+    @Generated
     public IntWrapper() {
     }
 
@@ -32,6 +35,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * 
      * @return the value value.
      */
+    @Generated
     public int getValue() {
         return this.value;
     }
@@ -42,6 +46,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * @param value the value value to set.
      * @return the IntWrapper object itself.
      */
+    @Generated
     public IntWrapper setValue(int value) {
         this.value = value;
         return this;
@@ -58,6 +63,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -74,6 +80,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IntWrapper.
      */
+    @Generated
     public static IntWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             IntWrapper deserializedIntWrapper = new IntWrapper();

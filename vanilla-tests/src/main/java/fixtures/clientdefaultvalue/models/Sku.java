@@ -5,6 +5,7 @@
 package fixtures.clientdefaultvalue.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,32 +20,38 @@ public final class Sku implements JsonSerializable<Sku> {
     /*
      * SKU family name
      */
+    @Generated
     private SkuFamily family = SkuFamily.A;
 
     /*
      * SKU name to specify whether the key vault is a standard vault or a premium vault.
      */
+    @Generated
     private SkuName name = SkuName.STANDARD;
 
     /*
      * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from
      * the key vault.
      */
+    @Generated
     private Boolean enabledForDeployment = true;
 
     /*
      * softDelete data retention days. It accepts >=7 and <=90.
      */
+    @Generated
     private Integer softDeleteRetentionInDays = 90;
 
     /*
      * test string description.
      */
+    @Generated
     private String testString = "test string";
 
     /**
      * Creates an instance of Sku class.
      */
+    @Generated
     public Sku() {
     }
 
@@ -53,6 +60,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * 
      * @return the family value.
      */
+    @Generated
     public SkuFamily getFamily() {
         return this.family;
     }
@@ -63,6 +71,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * @param family the family value to set.
      * @return the Sku object itself.
      */
+    @Generated
     public Sku setFamily(SkuFamily family) {
         this.family = family;
         return this;
@@ -73,6 +82,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * 
      * @return the name value.
      */
+    @Generated
     public SkuName getName() {
         return this.name;
     }
@@ -83,6 +93,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * @param name the name value to set.
      * @return the Sku object itself.
      */
+    @Generated
     public Sku setName(SkuName name) {
         this.name = name;
         return this;
@@ -94,6 +105,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * 
      * @return the enabledForDeployment value.
      */
+    @Generated
     public Boolean isEnabledForDeployment() {
         return this.enabledForDeployment;
     }
@@ -105,6 +117,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * @param enabledForDeployment the enabledForDeployment value to set.
      * @return the Sku object itself.
      */
+    @Generated
     public Sku setEnabledForDeployment(Boolean enabledForDeployment) {
         this.enabledForDeployment = enabledForDeployment;
         return this;
@@ -115,6 +128,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * 
      * @return the softDeleteRetentionInDays value.
      */
+    @Generated
     public Integer getSoftDeleteRetentionInDays() {
         return this.softDeleteRetentionInDays;
     }
@@ -125,6 +139,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * @param softDeleteRetentionInDays the softDeleteRetentionInDays value to set.
      * @return the Sku object itself.
      */
+    @Generated
     public Sku setSoftDeleteRetentionInDays(Integer softDeleteRetentionInDays) {
         this.softDeleteRetentionInDays = softDeleteRetentionInDays;
         return this;
@@ -135,6 +150,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * 
      * @return the testString value.
      */
+    @Generated
     public String getTestString() {
         return this.testString;
     }
@@ -156,6 +172,7 @@ public final class Sku implements JsonSerializable<Sku> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -175,6 +192,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Sku.
      */
+    @Generated
     public static Sku fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Sku deserializedSku = new Sku();

@@ -5,6 +5,7 @@
 package fixtures.extensibleenums.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,21 +20,25 @@ public final class Pet implements JsonSerializable<Pet> {
     /*
      * name
      */
+    @Generated
     private String name;
 
     /*
      * Type of Pet
      */
+    @Generated
     private DaysOfWeekExtensibleEnum daysOfWeek;
 
     /*
      * The IntEnum property.
      */
+    @Generated
     private IntEnum intEnum;
 
     /**
      * Creates an instance of Pet class.
      */
+    @Generated
     public Pet() {
     }
 
@@ -42,6 +47,7 @@ public final class Pet implements JsonSerializable<Pet> {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -52,6 +58,7 @@ public final class Pet implements JsonSerializable<Pet> {
      * @param name the name value to set.
      * @return the Pet object itself.
      */
+    @Generated
     public Pet setName(String name) {
         this.name = name;
         return this;
@@ -62,6 +69,7 @@ public final class Pet implements JsonSerializable<Pet> {
      * 
      * @return the daysOfWeek value.
      */
+    @Generated
     public DaysOfWeekExtensibleEnum getDaysOfWeek() {
         return this.daysOfWeek;
     }
@@ -72,6 +80,7 @@ public final class Pet implements JsonSerializable<Pet> {
      * @param daysOfWeek the daysOfWeek value to set.
      * @return the Pet object itself.
      */
+    @Generated
     public Pet setDaysOfWeek(DaysOfWeekExtensibleEnum daysOfWeek) {
         this.daysOfWeek = daysOfWeek;
         return this;
@@ -82,6 +91,7 @@ public final class Pet implements JsonSerializable<Pet> {
      * 
      * @return the intEnum value.
      */
+    @Generated
     public IntEnum getIntEnum() {
         return this.intEnum;
     }
@@ -92,6 +102,7 @@ public final class Pet implements JsonSerializable<Pet> {
      * @param intEnum the intEnum value to set.
      * @return the Pet object itself.
      */
+    @Generated
     public Pet setIntEnum(IntEnum intEnum) {
         this.intEnum = intEnum;
         return this;
@@ -111,6 +122,7 @@ public final class Pet implements JsonSerializable<Pet> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -129,6 +141,7 @@ public final class Pet implements JsonSerializable<Pet> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Pet.
      */
+    @Generated
     public static Pet fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Pet deserializedPet = new Pet();

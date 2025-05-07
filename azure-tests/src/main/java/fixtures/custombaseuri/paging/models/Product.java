@@ -5,6 +5,7 @@
 package fixtures.custombaseuri.paging.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,11 +20,13 @@ public final class Product implements JsonSerializable<Product> {
     /*
      * The properties property.
      */
+    @Generated
     private ProductProperties properties;
 
     /**
      * Creates an instance of Product class.
      */
+    @Generated
     public Product() {
     }
 
@@ -32,6 +35,7 @@ public final class Product implements JsonSerializable<Product> {
      * 
      * @return the properties value.
      */
+    @Generated
     public ProductProperties getProperties() {
         return this.properties;
     }
@@ -42,6 +46,7 @@ public final class Product implements JsonSerializable<Product> {
      * @param properties the properties value to set.
      * @return the Product object itself.
      */
+    @Generated
     public Product setProperties(ProductProperties properties) {
         this.properties = properties;
         return this;
@@ -61,6 +66,7 @@ public final class Product implements JsonSerializable<Product> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -76,6 +82,7 @@ public final class Product implements JsonSerializable<Product> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Product.
      */
+    @Generated
     public static Product fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Product deserializedProduct = new Product();

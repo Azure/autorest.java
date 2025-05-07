@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class AzureBlobContentSource implements JsonSerializable<AzureBlobC
     /*
      * Azure Blob Storage container URL.
      */
+    @Generated
     private String containerUrl;
 
     /*
      * Blob name prefix.
      */
+    @Generated
     private String prefix;
 
     /**
      * Creates an instance of AzureBlobContentSource class.
      */
+    @Generated
     public AzureBlobContentSource() {
     }
 
@@ -37,6 +41,7 @@ public final class AzureBlobContentSource implements JsonSerializable<AzureBlobC
      * 
      * @return the containerUrl value.
      */
+    @Generated
     public String getContainerUrl() {
         return this.containerUrl;
     }
@@ -47,6 +52,7 @@ public final class AzureBlobContentSource implements JsonSerializable<AzureBlobC
      * @param containerUrl the containerUrl value to set.
      * @return the AzureBlobContentSource object itself.
      */
+    @Generated
     public AzureBlobContentSource setContainerUrl(String containerUrl) {
         this.containerUrl = containerUrl;
         return this;
@@ -57,6 +63,7 @@ public final class AzureBlobContentSource implements JsonSerializable<AzureBlobC
      * 
      * @return the prefix value.
      */
+    @Generated
     public String getPrefix() {
         return this.prefix;
     }
@@ -67,6 +74,7 @@ public final class AzureBlobContentSource implements JsonSerializable<AzureBlobC
      * @param prefix the prefix value to set.
      * @return the AzureBlobContentSource object itself.
      */
+    @Generated
     public AzureBlobContentSource setPrefix(String prefix) {
         this.prefix = prefix;
         return this;
@@ -75,6 +83,7 @@ public final class AzureBlobContentSource implements JsonSerializable<AzureBlobC
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -92,6 +101,7 @@ public final class AzureBlobContentSource implements JsonSerializable<AzureBlobC
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the AzureBlobContentSource.
      */
+    @Generated
     public static AzureBlobContentSource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             AzureBlobContentSource deserializedAzureBlobContentSource = new AzureBlobContentSource();

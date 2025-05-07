@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public final class CloudError {
     /*
      * The code property.
      */
+    @Generated
     @JsonProperty(value = "code")
     private Integer code;
 
     /*
      * The message property.
      */
+    @Generated
     @JsonProperty(value = "message")
     private String message;
 
     /**
      * Creates an instance of CloudError class.
      */
+    @Generated
     public CloudError() {
     }
 
@@ -35,6 +39,7 @@ public final class CloudError {
      * 
      * @return the code value.
      */
+    @Generated
     public Integer getCode() {
         return this.code;
     }
@@ -45,6 +50,7 @@ public final class CloudError {
      * @param code the code value to set.
      * @return the CloudError object itself.
      */
+    @Generated
     public CloudError setCode(Integer code) {
         this.code = code;
         return this;
@@ -55,6 +61,7 @@ public final class CloudError {
      * 
      * @return the message value.
      */
+    @Generated
     public String getMessage() {
         return this.message;
     }
@@ -65,6 +72,7 @@ public final class CloudError {
      * @param message the message value to set.
      * @return the CloudError object itself.
      */
+    @Generated
     public CloudError setMessage(String message) {
         this.message = message;
         return this;

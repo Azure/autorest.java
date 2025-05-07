@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -16,36 +17,42 @@ public class Resource {
     /*
      * Resource Id
      */
+    @Generated
     @JsonProperty(value = "id", access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /*
      * Resource Type
      */
+    @Generated
     @JsonProperty(value = "type", access = JsonProperty.Access.WRITE_ONLY)
     private String type;
 
     /*
      * Dictionary of <string>
      */
+    @Generated
     @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /*
      * Resource Location
      */
+    @Generated
     @JsonProperty(value = "location")
     private String location;
 
     /*
      * Resource Name
      */
+    @Generated
     @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /**
      * Creates an instance of Resource class.
      */
+    @Generated
     public Resource() {
     }
 
@@ -54,6 +61,7 @@ public class Resource {
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -63,6 +71,7 @@ public class Resource {
      * 
      * @return the type value.
      */
+    @Generated
     public String getType() {
         return this.type;
     }
@@ -72,6 +81,7 @@ public class Resource {
      * 
      * @return the tags value.
      */
+    @Generated
     public Map<String, String> getTags() {
         return this.tags;
     }
@@ -82,6 +92,7 @@ public class Resource {
      * @param tags the tags value to set.
      * @return the Resource object itself.
      */
+    @Generated
     public Resource setTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
@@ -92,6 +103,7 @@ public class Resource {
      * 
      * @return the location value.
      */
+    @Generated
     public String getLocation() {
         return this.location;
     }
@@ -102,6 +114,7 @@ public class Resource {
      * @param location the location value to set.
      * @return the Resource object itself.
      */
+    @Generated
     public Resource setLocation(String location) {
         this.location = location;
         return this;
@@ -112,6 +125,7 @@ public class Resource {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }

@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -21,16 +21,19 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
     /*
      * a unique id
      */
+    @Generated
     private String id;
 
     /*
      * The access policy
      */
+    @Generated
     private AccessPolicy accessPolicy;
 
     /**
      * Creates an instance of SignedIdentifier class.
      */
+    @Generated
     public SignedIdentifier() {
     }
 
@@ -39,6 +42,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * 
      * @return the id value.
      */
+    @Generated
     public String getId() {
         return this.id;
     }
@@ -49,6 +53,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * @param id the id value to set.
      * @return the SignedIdentifier object itself.
      */
+    @Generated
     public SignedIdentifier setId(String id) {
         this.id = id;
         return this;
@@ -59,6 +64,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * 
      * @return the accessPolicy value.
      */
+    @Generated
     public AccessPolicy getAccessPolicy() {
         return this.accessPolicy;
     }
@@ -69,6 +75,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * @param accessPolicy the accessPolicy value to set.
      * @return the SignedIdentifier object itself.
      */
+    @Generated
     public SignedIdentifier setAccessPolicy(AccessPolicy accessPolicy) {
         this.accessPolicy = accessPolicy;
         return this;
@@ -90,14 +97,16 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifier" : rootElementName;
+        rootElementName = rootElementName == null || rootElementName.isEmpty() ? "SignedIdentifier" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Id", this.id);
         xmlWriter.writeXml(this.accessPolicy, "AccessPolicy");
@@ -112,6 +121,7 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the SignedIdentifier.
      */
+    @Generated
     public static SignedIdentifier fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -126,8 +136,10 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the SignedIdentifier.
      */
+    @Generated
     public static SignedIdentifier fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "SignedIdentifier" : rootElementName;
+        String finalRootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "SignedIdentifier" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             SignedIdentifier deserializedSignedIdentifier = new SignedIdentifier();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

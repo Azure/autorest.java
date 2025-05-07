@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -19,16 +20,19 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
     /*
      * The field1 property.
      */
+    @Generated
     private Integer field1;
 
     /*
      * The field2 property.
      */
+    @Generated
     private Integer field2;
 
     /**
      * Creates an instance of IntWrapper class.
      */
+    @Generated
     public IntWrapper() {
     }
 
@@ -37,6 +41,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * 
      * @return the field1 value.
      */
+    @Generated
     public Integer getField1() {
         return this.field1;
     }
@@ -47,6 +52,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * @param field1 the field1 value to set.
      * @return the IntWrapper object itself.
      */
+    @Generated
     public IntWrapper setField1(Integer field1) {
         this.field1 = field1;
         return this;
@@ -57,6 +63,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * 
      * @return the field2 value.
      */
+    @Generated
     public Integer getField2() {
         return this.field2;
     }
@@ -67,6 +74,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * @param field2 the field2 value to set.
      * @return the IntWrapper object itself.
      */
+    @Generated
     public IntWrapper setField2(Integer field2) {
         this.field2 = field2;
         return this;
@@ -83,6 +91,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -99,6 +108,7 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
      * to JSON null.
      * @throws IOException If an error occurs while reading the IntWrapper.
      */
+    @Generated
     public static IntWrapper fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             IntWrapper deserializedIntWrapper = new IntWrapper();

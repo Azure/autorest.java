@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
@@ -16,12 +17,14 @@ public final class Siamese extends Cat {
     /*
      * The breed property.
      */
+    @Generated
     @JsonProperty(value = "breed")
     private String breed;
 
     /**
      * Creates an instance of Siamese class.
      */
+    @Generated
     public Siamese() {
     }
 
@@ -30,6 +33,7 @@ public final class Siamese extends Cat {
      * 
      * @return the breed value.
      */
+    @Generated
     public String getBreed() {
         return this.breed;
     }
@@ -40,6 +44,7 @@ public final class Siamese extends Cat {
      * @param breed the breed value to set.
      * @return the Siamese object itself.
      */
+    @Generated
     public Siamese setBreed(String breed) {
         this.breed = breed;
         return this;
@@ -48,6 +53,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setColor(String color) {
         super.setColor(color);
@@ -57,6 +63,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setHates(List<Dog> hates) {
         super.setHates(hates);
@@ -66,6 +73,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setId(Integer id) {
         super.setId(id);
@@ -75,6 +83,7 @@ public final class Siamese extends Cat {
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public Siamese setName(String name) {
         super.setName(name);

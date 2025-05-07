@@ -5,6 +5,7 @@
 package fixtures.complexxmltag.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
@@ -18,18 +19,21 @@ public final class BlobName {
     /*
      * Indicates if the blob name is encoded.
      */
+    @Generated
     @JacksonXmlProperty(localName = "Encoded", isAttribute = true)
     private Boolean encoded;
 
     /*
      * The name of the blob.
      */
+    @Generated
     @JacksonXmlText
     private String content;
 
     /**
      * Creates an instance of BlobName class.
      */
+    @Generated
     public BlobName() {
     }
 
@@ -38,6 +42,7 @@ public final class BlobName {
      * 
      * @return the encoded value.
      */
+    @Generated
     public Boolean isEncoded() {
         return this.encoded;
     }
@@ -48,6 +53,7 @@ public final class BlobName {
      * @param encoded the encoded value to set.
      * @return the BlobName object itself.
      */
+    @Generated
     public BlobName setEncoded(Boolean encoded) {
         this.encoded = encoded;
         return this;
@@ -58,6 +64,7 @@ public final class BlobName {
      * 
      * @return the content value.
      */
+    @Generated
     public String getContent() {
         return this.content;
     }
@@ -68,6 +75,7 @@ public final class BlobName {
      * @param content the content value to set.
      * @return the BlobName object itself.
      */
+    @Generated
     public BlobName setContent(String content) {
         this.content = content;
         return this;

@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -24,11 +24,13 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
     /*
      * The Url property.
      */
+    @Generated
     private URL url;
 
     /**
      * Creates an instance of ModelWithUrlProperty class.
      */
+    @Generated
     public ModelWithUrlProperty() {
     }
 
@@ -37,6 +39,7 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
      * 
      * @return the url value.
      */
+    @Generated
     public URL getUrl() {
         return this.url;
     }
@@ -47,6 +50,7 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
      * @param url the url value to set.
      * @return the ModelWithUrlProperty object itself.
      */
+    @Generated
     public ModelWithUrlProperty setUrl(URL url) {
         this.url = url;
         return this;
@@ -60,14 +64,17 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
     public void validate() {
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithUrlProperty" : rootElementName;
+        rootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "ModelWithUrlProperty" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Url", Objects.toString(this.url, null));
         return xmlWriter.writeEndElement();
@@ -81,6 +88,7 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ModelWithUrlProperty.
      */
+    @Generated
     public static ModelWithUrlProperty fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -95,9 +103,10 @@ public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlP
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ModelWithUrlProperty.
      */
+    @Generated
     public static ModelWithUrlProperty fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName
-            = CoreUtils.isNullOrEmpty(rootElementName) ? "ModelWithUrlProperty" : rootElementName;
+            = rootElementName == null || rootElementName.isEmpty() ? "ModelWithUrlProperty" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             ModelWithUrlProperty deserializedModelWithUrlProperty = new ModelWithUrlProperty();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

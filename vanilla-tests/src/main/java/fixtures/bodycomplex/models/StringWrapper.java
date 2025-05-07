@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,24 +16,28 @@ public final class StringWrapper {
     /*
      * The field property.
      */
+    @Generated
     @JsonProperty(value = "field")
     private String field;
 
     /*
      * The empty property.
      */
+    @Generated
     @JsonProperty(value = "empty")
     private String empty;
 
     /*
      * The null property.
      */
+    @Generated
     @JsonProperty(value = "null")
     private String nullProperty;
 
     /**
      * Creates an instance of StringWrapper class.
      */
+    @Generated
     public StringWrapper() {
     }
 
@@ -41,6 +46,7 @@ public final class StringWrapper {
      * 
      * @return the field value.
      */
+    @Generated
     public String getField() {
         return this.field;
     }
@@ -51,6 +57,7 @@ public final class StringWrapper {
      * @param field the field value to set.
      * @return the StringWrapper object itself.
      */
+    @Generated
     public StringWrapper setField(String field) {
         this.field = field;
         return this;
@@ -61,6 +68,7 @@ public final class StringWrapper {
      * 
      * @return the empty value.
      */
+    @Generated
     public String getEmpty() {
         return this.empty;
     }
@@ -71,6 +79,7 @@ public final class StringWrapper {
      * @param empty the empty value to set.
      * @return the StringWrapper object itself.
      */
+    @Generated
     public StringWrapper setEmpty(String empty) {
         this.empty = empty;
         return this;
@@ -81,6 +90,7 @@ public final class StringWrapper {
      * 
      * @return the nullProperty value.
      */
+    @Generated
     public String getNullProperty() {
         return this.nullProperty;
     }
@@ -91,6 +101,7 @@ public final class StringWrapper {
      * @param nullProperty the nullProperty value to set.
      * @return the StringWrapper object itself.
      */
+    @Generated
     public StringWrapper setNullProperty(String nullProperty) {
         this.nullProperty = nullProperty;
         return this;

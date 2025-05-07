@@ -5,7 +5,7 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
+import com.azure.core.annotation.Generated;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
@@ -24,36 +24,43 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
     /*
      * The Last-Modified property.
      */
+    @Generated
     private DateTimeRfc1123 lastModified;
 
     /*
      * The Etag property.
      */
+    @Generated
     private String etag;
 
     /*
      * The LeaseStatus property.
      */
+    @Generated
     private LeaseStatusType leaseStatus;
 
     /*
      * The LeaseState property.
      */
+    @Generated
     private LeaseStateType leaseState;
 
     /*
      * The LeaseDuration property.
      */
+    @Generated
     private LeaseDurationType leaseDuration;
 
     /*
      * The PublicAccess property.
      */
+    @Generated
     private PublicAccessType publicAccess;
 
     /**
      * Creates an instance of ContainerProperties class.
      */
+    @Generated
     public ContainerProperties() {
     }
 
@@ -62,6 +69,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * 
      * @return the lastModified value.
      */
+    @Generated
     public OffsetDateTime getLastModified() {
         if (this.lastModified == null) {
             return null;
@@ -75,6 +83,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param lastModified the lastModified value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLastModified(OffsetDateTime lastModified) {
         if (lastModified == null) {
             this.lastModified = null;
@@ -89,6 +98,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * 
      * @return the etag value.
      */
+    @Generated
     public String getEtag() {
         return this.etag;
     }
@@ -99,6 +109,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param etag the etag value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setEtag(String etag) {
         this.etag = etag;
         return this;
@@ -109,6 +120,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * 
      * @return the leaseStatus value.
      */
+    @Generated
     public LeaseStatusType getLeaseStatus() {
         return this.leaseStatus;
     }
@@ -119,6 +131,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param leaseStatus the leaseStatus value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLeaseStatus(LeaseStatusType leaseStatus) {
         this.leaseStatus = leaseStatus;
         return this;
@@ -129,6 +142,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * 
      * @return the leaseState value.
      */
+    @Generated
     public LeaseStateType getLeaseState() {
         return this.leaseState;
     }
@@ -139,6 +153,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param leaseState the leaseState value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLeaseState(LeaseStateType leaseState) {
         this.leaseState = leaseState;
         return this;
@@ -149,6 +164,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * 
      * @return the leaseDuration value.
      */
+    @Generated
     public LeaseDurationType getLeaseDuration() {
         return this.leaseDuration;
     }
@@ -159,6 +175,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param leaseDuration the leaseDuration value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setLeaseDuration(LeaseDurationType leaseDuration) {
         this.leaseDuration = leaseDuration;
         return this;
@@ -169,6 +186,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * 
      * @return the publicAccess value.
      */
+    @Generated
     public PublicAccessType getPublicAccess() {
         return this.publicAccess;
     }
@@ -179,6 +197,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param publicAccess the publicAccess value to set.
      * @return the ContainerProperties object itself.
      */
+    @Generated
     public ContainerProperties setPublicAccess(PublicAccessType publicAccess) {
         this.publicAccess = publicAccess;
         return this;
@@ -198,14 +217,17 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
         }
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
         return toXml(xmlWriter, null);
     }
 
+    @Generated
     @Override
     public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
+        rootElementName
+            = rootElementName == null || rootElementName.isEmpty() ? "ContainerProperties" : rootElementName;
         xmlWriter.writeStartElement(rootElementName);
         xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
         xmlWriter.writeStringElement("Etag", this.etag);
@@ -225,6 +247,7 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
      */
+    @Generated
     public static ContainerProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
         return fromXml(xmlReader, null);
     }
@@ -239,9 +262,10 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
      */
+    @Generated
     public static ContainerProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
         String finalRootElementName
-            = CoreUtils.isNullOrEmpty(rootElementName) ? "ContainerProperties" : rootElementName;
+            = rootElementName == null || rootElementName.isEmpty() ? "ContainerProperties" : rootElementName;
         return xmlReader.readObject(finalRootElementName, reader -> {
             ContainerProperties deserializedContainerProperties = new ContainerProperties();
             while (reader.nextElement() != XmlToken.END_ELEMENT) {

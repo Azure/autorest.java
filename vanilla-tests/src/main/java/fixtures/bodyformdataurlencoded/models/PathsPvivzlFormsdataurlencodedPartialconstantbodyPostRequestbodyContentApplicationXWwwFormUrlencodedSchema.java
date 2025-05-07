@@ -5,6 +5,7 @@
 package fixtures.bodyformdataurlencoded.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,22 +22,26 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
     /*
      * Constant part of a formdata body.
      */
+    @Generated
     private final String grantType = "access_token";
 
     /*
      * Indicates the name of your Azure container registry.
      */
+    @Generated
     private String service;
 
     /*
      * AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      */
+    @Generated
     private String aadAccessToken;
 
     /**
      * Creates an instance of
      * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
      */
+    @Generated
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
     }
 
@@ -45,6 +50,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * 
      * @return the grantType value.
      */
+    @Generated
     public String getGrantType() {
         return this.grantType;
     }
@@ -54,6 +60,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * 
      * @return the service value.
      */
+    @Generated
     public String getService() {
         return this.service;
     }
@@ -66,6 +73,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
      * itself.
      */
+    @Generated
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setService(String service) {
         this.service = service;
@@ -78,6 +86,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * 
      * @return the aadAccessToken value.
      */
+    @Generated
     public String getAadAccessToken() {
         return this.aadAccessToken;
     }
@@ -91,6 +100,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
      * itself.
      */
+    @Generated
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setAadAccessToken(String aadAccessToken) {
         this.aadAccessToken = aadAccessToken;
@@ -116,6 +126,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
     /**
      * {@inheritDoc}
      */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -138,6 +149,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * @throws IOException If an error occurs while reading the
      * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
      */
+    @Generated
     public static
         PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         fromJson(JsonReader jsonReader) throws IOException {

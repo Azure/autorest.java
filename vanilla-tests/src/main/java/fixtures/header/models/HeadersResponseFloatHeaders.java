@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
@@ -16,6 +17,7 @@ public final class HeadersResponseFloatHeaders {
     /*
      * The value property.
      */
+    @Generated
     private Float value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -40,6 +42,7 @@ public final class HeadersResponseFloatHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public Float getValue() {
         return this.value;
     }
@@ -50,6 +53,7 @@ public final class HeadersResponseFloatHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseFloatHeaders object itself.
      */
+    @Generated
     public HeadersResponseFloatHeaders setValue(Float value) {
         this.value = value;
         return this;

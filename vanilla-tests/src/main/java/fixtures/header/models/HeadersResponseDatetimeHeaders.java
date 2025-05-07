@@ -5,6 +5,7 @@
 package fixtures.header.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import java.time.OffsetDateTime;
@@ -17,6 +18,7 @@ public final class HeadersResponseDatetimeHeaders {
     /*
      * The value property.
      */
+    @Generated
     private OffsetDateTime value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");
@@ -41,6 +43,7 @@ public final class HeadersResponseDatetimeHeaders {
      * 
      * @return the value value.
      */
+    @Generated
     public OffsetDateTime getValue() {
         return this.value;
     }
@@ -51,6 +54,7 @@ public final class HeadersResponseDatetimeHeaders {
      * @param value the value value to set.
      * @return the HeadersResponseDatetimeHeaders object itself.
      */
+    @Generated
     public HeadersResponseDatetimeHeaders setValue(OffsetDateTime value) {
         this.value = value;
         return this;

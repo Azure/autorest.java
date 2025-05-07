@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Generated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -15,18 +16,21 @@ public class Pet {
     /*
      * The id property.
      */
+    @Generated
     @JsonProperty(value = "id")
     private Integer id;
 
     /*
      * The name property.
      */
+    @Generated
     @JsonProperty(value = "name")
     private String name;
 
     /**
      * Creates an instance of Pet class.
      */
+    @Generated
     public Pet() {
     }
 
@@ -35,6 +39,7 @@ public class Pet {
      * 
      * @return the id value.
      */
+    @Generated
     public Integer getId() {
         return this.id;
     }
@@ -45,6 +50,7 @@ public class Pet {
      * @param id the id value to set.
      * @return the Pet object itself.
      */
+    @Generated
     public Pet setId(Integer id) {
         this.id = id;
         return this;
@@ -55,6 +61,7 @@ public class Pet {
      * 
      * @return the name value.
      */
+    @Generated
     public String getName() {
         return this.name;
     }
@@ -65,6 +72,7 @@ public class Pet {
      * @param name the name value to set.
      * @return the Pet object itself.
      */
+    @Generated
     public Pet setName(String name) {
         this.name = name;
         return this;
