@@ -12,6 +12,7 @@ import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.implementation.serializer.DefaultJsonSerializer;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.Region;
 import com.azure.core.management.ResourceAuthorIdentityType;
@@ -21,9 +22,13 @@ import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.core.management.serializer.SerializerFactory;
 import com.azure.core.util.Context;
+import com.azure.core.util.serializer.JsonSerializerProviders;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.azure.identity.EnvironmentCredentialBuilder;
+import com.azure.json.JsonProviders;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonWriter;
 import com.azure.mgmtlitetest.advisor.AdvisorManager;
 import com.azure.mgmtlitetest.advisor.models.ResourceRecommendationBase;
 import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
@@ -34,6 +39,7 @@ import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
 import com.azure.mgmtlitetest.mediaservices.models.MediaService;
 import com.azure.mgmtlitetest.mediaservices.models.StorageAccountType;
 import com.azure.mgmtlitetest.resources.ResourceManager;
+import com.azure.mgmtlitetest.resources.fluent.models.GenericResourceInner;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
 import com.azure.mgmtlitetest.storage.models.AccessTier;
@@ -73,6 +79,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
@@ -498,5 +505,15 @@ public class RuntimeTests {
         Assertions.assertEquals("myName", galleryInner.name());
         Assertions.assertEquals("myDisclaimer", galleryInner.disclaimer());
         Assertions.assertEquals("abc", pirCommunityGalleryResource.uniqueId());
+    }
+
+    @Test
+    public void testWriteUntypedNull() throws IOException {
+        StringWriter stringWriter = new StringWriter();
+        try (JsonWriter writer = JsonProviders.createWriter(stringWriter)) {
+            GenericResourceInner resourceInner = new GenericResourceInner();
+            resourceInner.toJson(writer);
+        }
+        Assertions.assertFalse(stringWriter.toString().contains("properties"));
     }
 }
