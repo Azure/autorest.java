@@ -9,31 +9,31 @@
     "spector-serve": "tsp-spector serve ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json"
   },
   "dependencies": {
-    "@typespec/spec-api": "0.1.0-alpha.4",
-    "@typespec/spector": "0.1.0-alpha.12",
-    "@typespec/http-specs": "0.1.0-alpha.20",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.15",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.29.3.tgz"
+    "@typespec/spec-api": "0.1.0-alpha.6",
+    "@typespec/spector": "0.1.0-alpha.13",
+    "@typespec/http-specs": "0.1.0-alpha.22",
+     "@azure-tools/azure-http-specs": "0.1.0-alpha.17",
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.30.0.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": "^1.0.0-rc.1",
+    "@typespec/prettier-plugin-typespec": "^1.0.0",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier": "^3.5.3"
   },
   "overrides": {
-    "@typespec/compiler": "^1.0.0-rc.1",
-    "@typespec/http": "^1.0.0-rc.1",
-    "@typespec/rest": "~0.69.0",
-    "@typespec/versioning": "~0.69.0",
-    "@typespec/openapi": "^1.0.0-rc.1",
-    "@typespec/xml": "~0.69.0",
-    "@typespec/events": "~0.69.0",
-    "@typespec/sse": "~0.69.0",
-    "@typespec/streams": "~0.69.0",
-    "@azure-tools/typespec-azure-core": "~0.55.0",
-    "@azure-tools/typespec-client-generator-core": "~0.55.1",
-    "@azure-tools/typespec-azure-resource-manager": "~0.55.0",
-    "@azure-tools/typespec-autorest": "~0.55.0"
+    "@typespec/compiler": "~1.0.0",
+    "@typespec/http": "~1.0.0",
+    "@typespec/rest": "~0.70.0",
+    "@typespec/versioning": "~0.70.0",
+    "@typespec/openapi": "~1.0.0",
+    "@typespec/xml": "~0.70.0",
+    "@typespec/events": "~0.70.0",
+    "@typespec/sse": "~0.70.0",
+    "@typespec/streams": "~0.70.0",
+    "@azure-tools/typespec-azure-core": "~0.56.0",
+    "@azure-tools/typespec-client-generator-core": "~0.56.0",
+    "@azure-tools/typespec-azure-resource-manager": "~0.56.0",
+    "@azure-tools/typespec-autorest": "~0.56.0"
   },
   "private": true
 }
