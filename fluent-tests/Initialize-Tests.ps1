@@ -97,23 +97,23 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cdn/resource-manager/Microsoft.Cdn/stable/2020-09-01/afdx.json --namespace=com.azure.mgmttest.afdx --enable-sync-stack=false",
 
     # nested x-ms-flatten from superclass in ExtendedProduct
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack --stream-style-serialization=false --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack --stream-style-serialization=false",
 
     # conflict property name from 2 x-ms-flatten in LabDetails and LabProperties
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/education/resource-manager/Microsoft.Education/preview/2021-12-01-preview/education.json --namespace=com.azure.mgmttest.education --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/education/resource-manager/Microsoft.Education/preview/2021-12-01-preview/education.json --namespace=com.azure.mgmttest.education",
 
     # do not flatten if polymorphic in DevicePropertiesFormat
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork",
     # flatten the empty model which has non-empty parent model
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor --stream-style-serialization=false --enable-sync-stack=false",
 
     # extract systemData from Resource
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/29f3116d3ce31f2125d1e2cfb92d6511fcb01c41/specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json --java.namespace=com.azure.mgmttest.postgresqlhsc --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/29f3116d3ce31f2125d1e2cfb92d6511fcb01c41/specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json --java.namespace=com.azure.mgmttest.postgresqlhsc",
     # swagger customized Resource and ProxyResource
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager --enable-sync-stack=false",
 
     # ErrorDetails shared in exception and output
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothub --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothub",
 
     # resource with writable name
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/2548fe40102c9b5aa27a75a126c8367f55cb9e7d/specification/sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json --java.namespace=com.azure.mgmttest.resourcewithwritablename --enable-sync-stack=false"
