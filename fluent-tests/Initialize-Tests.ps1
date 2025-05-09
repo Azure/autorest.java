@@ -75,26 +75,26 @@ SUCCEEDED
 
 $job = @(
     # fluent premium
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources",
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.storage.md --namespace=com.azure.mgmttest.storage",
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.network.md --namespace=com.azure.mgmttest.network",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.storage.md --namespace=com.azure.mgmttest.storage --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.network.md --namespace=com.azure.mgmttest.network --enable-sync-stack=false",
 
     # error response that is subclass of ManagementException
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.appservice.md --namespace=com.azure.mgmttest.appservice",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.appservice.md --namespace=com.azure.mgmttest.appservice --enable-sync-stack=false",
 
     # multiple inheritance
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json --namespace=com.azure.mgmttest.cosmos",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json --namespace=com.azure.mgmttest.cosmos --enable-sync-stack=false",
 
     # flatten payload
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute --enable-sync-stack=false",
 
     # error response that not conform to ARM
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization --enable-sync-stack=false",
 
     # client model flatten at autorest.java
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery",
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/Microsoft.Network/stable/2021-02-01/networkWatcher.json --namespace=com.azure.mgmttest.networkwatcher",
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cdn/resource-manager/Microsoft.Cdn/stable/2020-09-01/afdx.json --namespace=com.azure.mgmttest.afdx",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/Microsoft.Network/stable/2021-02-01/networkWatcher.json --namespace=com.azure.mgmttest.networkwatcher --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cdn/resource-manager/Microsoft.Cdn/stable/2020-09-01/afdx.json --namespace=com.azure.mgmttest.afdx --enable-sync-stack=false",
 
     # nested x-ms-flatten from superclass in ExtendedProduct
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack --stream-style-serialization=false",
@@ -105,20 +105,20 @@ $job = @(
     # do not flatten if polymorphic in DevicePropertiesFormat
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork",
     # flatten the empty model which has non-empty parent model
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor --stream-style-serialization=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor --stream-style-serialization=false --enable-sync-stack=false",
 
     # extract systemData from Resource
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/29f3116d3ce31f2125d1e2cfb92d6511fcb01c41/specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json --java.namespace=com.azure.mgmttest.postgresqlhsc",
     # swagger customized Resource and ProxyResource
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager --enable-sync-stack=false",
 
     # ErrorDetails shared in exception and output
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothub",
 
     # resource with writable name
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/2548fe40102c9b5aa27a75a126c8367f55cb9e7d/specification/sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json --java.namespace=com.azure.mgmttest.resourcewithwritablename"
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/2548fe40102c9b5aa27a75a126c8367f55cb9e7d/specification/sql/resource-manager/Microsoft.Sql/stable/2021-11-01/FirewallRules.json --java.namespace=com.azure.mgmttest.resourcewithwritablename --enable-sync-stack=false"
     # non-string expandable enum
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/926540515b9d8059904f023d38c45dda8ba87c9f/specification/monitor/resource-manager/Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json --java.namespace=com.azure.mgmttest.nonstringexpandableenum"
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/926540515b9d8059904f023d38c45dda8ba87c9f/specification/monitor/resource-manager/Microsoft.Insights/stable/2023-12-01/scheduledQueryRule_API.json --java.namespace=com.azure.mgmttest.nonstringexpandableenum --enable-sync-stack=false"
 
     # fluent lite
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-resources-2021-01 --java.namespace=com.azure.mgmtlitetest.resources",
@@ -155,8 +155,6 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/f840c84013f12b701aac7065ceeb13a59b26051b/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2022-02-05/iotdps.json --java.namespace=com.azure.mgmtlitetest.emptybytearrayinclients"
 
     # sync-stack
-    # lite
-    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/mediaservices/resource-manager/readme.md --tag=package-account-2023-01 --java.namespace=com.azure.mgmtlitetest.mediaservicessync --enable-sync-stack=true"
     # premium
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothubsync --enable-sync-stack=true"
     # special cases
