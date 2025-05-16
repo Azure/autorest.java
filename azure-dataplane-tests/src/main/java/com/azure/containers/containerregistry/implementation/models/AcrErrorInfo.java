@@ -117,7 +117,9 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("code", this.code);
         jsonWriter.writeStringField("message", this.message);
-        jsonWriter.writeUntypedField("detail", this.detail);
+        if (this.detail != null) {
+            jsonWriter.writeUntypedField("detail", this.detail);
+        }
         return jsonWriter.writeEndObject();
     }
 
