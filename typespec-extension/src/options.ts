@@ -136,7 +136,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "advanced-versioning": {
       type: "boolean",
       description:
-        "When set to `true`, the emitter will take the history of api-versions in TypeSpec, and try generate SDK without breaking changes compared to SDK generated from prior api-vesions. Default value is `false`. This is an experimental feature.",
+        "When set to `true`, the emitter will take the history of api-versions in TypeSpec, and try generate SDK without breaking changes compared to SDK generated from prior api-versions. Default value is `false`. This is an experimental feature.",
       nullable: true,
       default: false,
     },
