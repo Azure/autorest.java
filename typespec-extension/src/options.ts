@@ -97,7 +97,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     },
     "models-subpackage": {
       type: "string",
-      description: "Specify the package for model classes. Default value is `models`.",
+      description: "Specify the package name for model classes. Default value is `models`.",
       nullable: true,
     },
     "custom-types": {
@@ -107,7 +107,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     },
     "custom-types-subpackage": {
       type: "string",
-      description: "Specify the package for custom model classes.",
+      description: "Specify the package name for custom model classes.",
       nullable: true,
     },
     "customization-class": {
