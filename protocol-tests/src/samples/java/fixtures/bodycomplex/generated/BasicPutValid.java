@@ -13,10 +13,10 @@ import fixtures.bodycomplex.BasicClientBuilder;
 public class BasicPutValid {
     public static void main(String[] args) {
         BasicClient basicClient = new BasicClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.basicputvalid.basicputvalid
+        // BEGIN:fixtures.bodycomplex.generated.basic-put-valid.basic-put-valid
         BinaryData complexBody = BinaryData.fromString("{\"name\":\"abc\",\"color\":\"Magenta\",\"id\":2}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = basicClient.putValidWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.basicputvalid.basicputvalid
+        // END:fixtures.bodycomplex.generated.basic-put-valid.basic-put-valid
     }
 }

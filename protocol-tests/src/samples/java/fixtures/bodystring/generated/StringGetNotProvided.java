@@ -14,9 +14,9 @@ public class StringGetNotProvided {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringgetnotprovided.stringgetnotprovided
+        // BEGIN:fixtures.bodystring.generated.string-get-not-provided.string-get-not-provided
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getNotProvidedWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.stringgetnotprovided.stringgetnotprovided
+        // END:fixtures.bodystring.generated.string-get-not-provided.string-get-not-provided
     }
 }

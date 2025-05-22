@@ -14,10 +14,10 @@ public class QueriesArrayStringMultiEmpty {
         AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient
             = new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder().host("http://localhost:3000")
                 .buildClient();
-        // BEGIN:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty
+        // BEGIN:fixtures.url.multi.generated.queries-array-string-multi-empty.queries-array-string-multi-empty
         RequestOptions requestOptions = new RequestOptions().addQueryParam("arrayQuery", "");
         Response<Void> response
             = autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiEmptyWithResponse(requestOptions);
-        // END:fixtures.url.multi.generated.queriesarraystringmultiempty.queriesarraystringmultiempty
+        // END:fixtures.url.multi.generated.queries-array-string-multi-empty.queries-array-string-multi-empty
     }
 }

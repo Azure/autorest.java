@@ -13,10 +13,10 @@ public class HeaderParamInteger {
     public static void main(String[] args) {
         AutoRestSwaggerBatHeaderServiceClient autoRestSwaggerBatHeaderServiceClient
             = new AutoRestSwaggerBatHeaderServiceClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.header.generated.headerparaminteger.headerparaminteger
+        // BEGIN:fixtures.header.generated.header-param-integer.header-param-integer
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response
             = autoRestSwaggerBatHeaderServiceClient.paramIntegerWithResponse("positive", 1, requestOptions);
-        // END:fixtures.header.generated.headerparaminteger.headerparaminteger
+        // END:fixtures.header.generated.header-param-integer.header-param-integer
     }
 }

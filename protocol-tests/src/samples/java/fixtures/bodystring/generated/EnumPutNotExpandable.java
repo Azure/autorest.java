@@ -13,10 +13,10 @@ import fixtures.bodystring.EnumClientBuilder;
 public class EnumPutNotExpandable {
     public static void main(String[] args) {
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.enumputnotexpandable.enumputnotexpandable
+        // BEGIN:fixtures.bodystring.generated.enum-put-not-expandable.enum-put-not-expandable
         BinaryData stringBody = BinaryData.fromString("\"red color\"");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = enumClient.putNotExpandableWithResponse(stringBody, requestOptions);
-        // END:fixtures.bodystring.generated.enumputnotexpandable.enumputnotexpandable
+        // END:fixtures.bodystring.generated.enum-put-not-expandable.enum-put-not-expandable
     }
 }

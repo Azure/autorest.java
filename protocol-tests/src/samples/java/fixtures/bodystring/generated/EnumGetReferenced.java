@@ -13,9 +13,9 @@ import fixtures.bodystring.EnumClientBuilder;
 public class EnumGetReferenced {
     public static void main(String[] args) {
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
+        // BEGIN:fixtures.bodystring.generated.enum-get-referenced.enum-get-referenced
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = enumClient.getReferencedWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.enumgetreferenced.enumgetreferenced
+        // END:fixtures.bodystring.generated.enum-get-referenced.enum-get-referenced
     }
 }

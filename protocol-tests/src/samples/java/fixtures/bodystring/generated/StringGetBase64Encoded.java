@@ -14,9 +14,9 @@ public class StringGetBase64Encoded {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringgetbase64encoded.stringgetbase64encoded
+        // BEGIN:fixtures.bodystring.generated.string-get-base64encoded.string-get-base64encoded
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getBase64EncodedWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.stringgetbase64encoded.stringgetbase64encoded
+        // END:fixtures.bodystring.generated.string-get-base64encoded.string-get-base64encoded
     }
 }

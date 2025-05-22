@@ -14,9 +14,9 @@ public class StringGetNull {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringgetnull.stringgetnull
+        // BEGIN:fixtures.bodystring.generated.string-get-null.string-get-null
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getNullWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.stringgetnull.stringgetnull
+        // END:fixtures.bodystring.generated.string-get-null.string-get-null
     }
 }

@@ -13,9 +13,9 @@ import fixtures.bodystring.EnumClientBuilder;
 public class EnumGetNotExpandable {
     public static void main(String[] args) {
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
+        // BEGIN:fixtures.bodystring.generated.enum-get-not-expandable.enum-get-not-expandable
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = enumClient.getNotExpandableWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.enumgetnotexpandable.enumgetnotexpandable
+        // END:fixtures.bodystring.generated.enum-get-not-expandable.enum-get-not-expandable
     }
 }

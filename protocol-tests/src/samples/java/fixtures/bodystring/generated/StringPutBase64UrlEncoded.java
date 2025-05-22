@@ -14,10 +14,10 @@ public class StringPutBase64UrlEncoded {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringputbase64urlencoded.stringputbase64urlencoded
+        // BEGIN:fixtures.bodystring.generated.string-put-base64url-encoded.string-put-base64url-encoded
         BinaryData stringBody = BinaryData.fromString("\"YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw\"");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = stringOperationClient.putBase64UrlEncodedWithResponse(stringBody, requestOptions);
-        // END:fixtures.bodystring.generated.stringputbase64urlencoded.stringputbase64urlencoded
+        // END:fixtures.bodystring.generated.string-put-base64url-encoded.string-put-base64url-encoded
     }
 }

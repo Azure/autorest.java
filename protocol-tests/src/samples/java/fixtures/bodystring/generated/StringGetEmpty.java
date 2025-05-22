@@ -14,9 +14,9 @@ public class StringGetEmpty {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringgetempty.stringgetempty
+        // BEGIN:fixtures.bodystring.generated.string-get-empty.string-get-empty
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getEmptyWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.stringgetempty.stringgetempty
+        // END:fixtures.bodystring.generated.string-get-empty.string-get-empty
     }
 }

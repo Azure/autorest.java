@@ -13,9 +13,9 @@ public class ReadonlypropertyPutValid {
     public static void main(String[] args) {
         ReadonlypropertyClient readonlypropertyClient
             = new ReadonlypropertyClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.readonlypropertyputvalid.readonlypropertyputvalid
+        // BEGIN:fixtures.bodycomplex.generated.readonlyproperty-put-valid.readonlyproperty-put-valid
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = readonlypropertyClient.putValidWithResponse(null, requestOptions);
-        // END:fixtures.bodycomplex.generated.readonlypropertyputvalid.readonlypropertyputvalid
+        // END:fixtures.bodycomplex.generated.readonlyproperty-put-valid.readonlyproperty-put-valid
     }
 }

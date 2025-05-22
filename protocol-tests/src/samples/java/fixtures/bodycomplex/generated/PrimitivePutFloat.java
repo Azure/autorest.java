@@ -13,10 +13,10 @@ import fixtures.bodycomplex.PrimitiveClientBuilder;
 public class PrimitivePutFloat {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.primitiveputfloat.primitiveputfloat
+        // BEGIN:fixtures.bodycomplex.generated.primitive-put-float.primitive-put-float
         BinaryData complexBody = BinaryData.fromString("{\"field1\":1.05,\"field2\":-0.003}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putFloatWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.primitiveputfloat.primitiveputfloat
+        // END:fixtures.bodycomplex.generated.primitive-put-float.primitive-put-float
     }
 }

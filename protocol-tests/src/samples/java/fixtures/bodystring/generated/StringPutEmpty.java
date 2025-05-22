@@ -14,9 +14,9 @@ public class StringPutEmpty {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringputempty.stringputempty
+        // BEGIN:fixtures.bodystring.generated.string-put-empty.string-put-empty
         RequestOptions requestOptions = new RequestOptions().setBody(BinaryData.fromString("\"\""));
         Response<Void> response = stringOperationClient.putEmptyWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.stringputempty.stringputempty
+        // END:fixtures.bodystring.generated.string-put-empty.string-put-empty
     }
 }
