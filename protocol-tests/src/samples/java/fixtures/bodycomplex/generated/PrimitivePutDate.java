@@ -13,10 +13,10 @@ import fixtures.bodycomplex.PrimitiveClientBuilder;
 public class PrimitivePutDate {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.primitiveputdate.primitiveputdate
+        // BEGIN:fixtures.bodycomplex.generated.primitive-put-date.primitive-put-date
         BinaryData complexBody = BinaryData.fromString("{\"field\":\"0001-01-01\",\"leap\":\"2016-02-29\"}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putDateWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.primitiveputdate.primitiveputdate
+        // END:fixtures.bodycomplex.generated.primitive-put-date.primitive-put-date
     }
 }

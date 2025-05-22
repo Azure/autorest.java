@@ -14,10 +14,10 @@ public class QueriesArrayStringMultiNull {
         AutoRestUrlMutliCollectionFormatTestServiceClient autoRestUrlMutliCollectionFormatTestServiceClient
             = new AutoRestUrlMutliCollectionFormatTestServiceClientBuilder().host("http://localhost:3000")
                 .buildClient();
-        // BEGIN:fixtures.url.multi.generated.queriesarraystringmultinull.queriesarraystringmultinull
+        // BEGIN:fixtures.url.multi.generated.queries-array-string-multi-null.queries-array-string-multi-null
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response
             = autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiNullWithResponse(requestOptions);
-        // END:fixtures.url.multi.generated.queriesarraystringmultinull.queriesarraystringmultinull
+        // END:fixtures.url.multi.generated.queries-array-string-multi-null.queries-array-string-multi-null
     }
 }

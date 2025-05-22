@@ -13,10 +13,10 @@ import fixtures.bodycomplex.PrimitiveClientBuilder;
 public class PrimitivePutDuration {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.primitiveputduration.primitiveputduration
+        // BEGIN:fixtures.bodycomplex.generated.primitive-put-duration.primitive-put-duration
         BinaryData complexBody = BinaryData.fromString("{\"field\":\"P123DT22H14M12.011S\"}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putDurationWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.primitiveputduration.primitiveputduration
+        // END:fixtures.bodycomplex.generated.primitive-put-duration.primitive-put-duration
     }
 }

@@ -13,10 +13,10 @@ public class HeaderParamExistingKey {
     public static void main(String[] args) {
         AutoRestSwaggerBatHeaderServiceClient autoRestSwaggerBatHeaderServiceClient
             = new AutoRestSwaggerBatHeaderServiceClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.header.generated.headerparamexistingkey.headerparamexistingkey
+        // BEGIN:fixtures.header.generated.header-param-existing-key.header-param-existing-key
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response
             = autoRestSwaggerBatHeaderServiceClient.paramExistingKeyWithResponse("overwrite", requestOptions);
-        // END:fixtures.header.generated.headerparamexistingkey.headerparamexistingkey
+        // END:fixtures.header.generated.header-param-existing-key.header-param-existing-key
     }
 }
