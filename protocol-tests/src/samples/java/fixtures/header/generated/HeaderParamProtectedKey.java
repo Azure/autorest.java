@@ -13,10 +13,10 @@ public class HeaderParamProtectedKey {
     public static void main(String[] args) {
         AutoRestSwaggerBatHeaderServiceClient autoRestSwaggerBatHeaderServiceClient
             = new AutoRestSwaggerBatHeaderServiceClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.header.generated.headerparamprotectedkey.headerparamprotectedkey
+        // BEGIN:fixtures.header.generated.header-param-protected-key.header-param-protected-key
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response
             = autoRestSwaggerBatHeaderServiceClient.paramProtectedKeyWithResponse("text/html", requestOptions);
-        // END:fixtures.header.generated.headerparamprotectedkey.headerparamprotectedkey
+        // END:fixtures.header.generated.header-param-protected-key.header-param-protected-key
     }
 }

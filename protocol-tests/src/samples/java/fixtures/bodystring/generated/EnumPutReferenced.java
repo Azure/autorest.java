@@ -13,10 +13,10 @@ import fixtures.bodystring.EnumClientBuilder;
 public class EnumPutReferenced {
     public static void main(String[] args) {
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.enumputreferenced.enumputreferenced
+        // BEGIN:fixtures.bodystring.generated.enum-put-referenced.enum-put-referenced
         BinaryData enumStringBody = BinaryData.fromString("\"red color\"");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = enumClient.putReferencedWithResponse(enumStringBody, requestOptions);
-        // END:fixtures.bodystring.generated.enumputreferenced.enumputreferenced
+        // END:fixtures.bodystring.generated.enum-put-referenced.enum-put-referenced
     }
 }

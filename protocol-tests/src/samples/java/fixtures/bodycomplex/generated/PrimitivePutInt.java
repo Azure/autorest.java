@@ -13,10 +13,10 @@ import fixtures.bodycomplex.PrimitiveClientBuilder;
 public class PrimitivePutInt {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.primitiveputint.primitiveputint
+        // BEGIN:fixtures.bodycomplex.generated.primitive-put-int.primitive-put-int
         BinaryData complexBody = BinaryData.fromString("{\"field1\":2,\"field2\":-1}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putIntWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.primitiveputint.primitiveputint
+        // END:fixtures.bodycomplex.generated.primitive-put-int.primitive-put-int
     }
 }

@@ -13,10 +13,10 @@ import fixtures.bodycomplex.ArrayClientBuilder;
 public class ArrayPutEmpty {
     public static void main(String[] args) {
         ArrayClient arrayClient = new ArrayClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.arrayputempty.arrayputempty
+        // BEGIN:fixtures.bodycomplex.generated.array-put-empty.array-put-empty
         BinaryData complexBody = BinaryData.fromString("{\"array\":[]}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = arrayClient.putEmptyWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.arrayputempty.arrayputempty
+        // END:fixtures.bodycomplex.generated.array-put-empty.array-put-empty
     }
 }

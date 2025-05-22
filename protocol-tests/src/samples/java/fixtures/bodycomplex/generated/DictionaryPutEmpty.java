@@ -13,10 +13,10 @@ import fixtures.bodycomplex.DictionaryClientBuilder;
 public class DictionaryPutEmpty {
     public static void main(String[] args) {
         DictionaryClient dictionaryClient = new DictionaryClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.dictionaryputempty.dictionaryputempty
+        // BEGIN:fixtures.bodycomplex.generated.dictionary-put-empty.dictionary-put-empty
         BinaryData complexBody = BinaryData.fromString("{\"defaultProgram\":{}}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = dictionaryClient.putEmptyWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.dictionaryputempty.dictionaryputempty
+        // END:fixtures.bodycomplex.generated.dictionary-put-empty.dictionary-put-empty
     }
 }

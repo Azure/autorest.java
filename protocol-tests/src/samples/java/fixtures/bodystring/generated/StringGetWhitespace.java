@@ -14,9 +14,9 @@ public class StringGetWhitespace {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringgetwhitespace.stringgetwhitespace
+        // BEGIN:fixtures.bodystring.generated.string-get-whitespace.string-get-whitespace
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getWhitespaceWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.stringgetwhitespace.stringgetwhitespace
+        // END:fixtures.bodystring.generated.string-get-whitespace.string-get-whitespace
     }
 }

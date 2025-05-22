@@ -14,9 +14,9 @@ public class StringGetMbcs {
     public static void main(String[] args) {
         StringOperationClient stringOperationClient
             = new StringOperationClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.stringgetmbcs.stringgetmbcs
+        // BEGIN:fixtures.bodystring.generated.string-get-mbcs.string-get-mbcs
         RequestOptions requestOptions = new RequestOptions();
         Response<BinaryData> response = stringOperationClient.getMbcsWithResponse(requestOptions);
-        // END:fixtures.bodystring.generated.stringgetmbcs.stringgetmbcs
+        // END:fixtures.bodystring.generated.string-get-mbcs.string-get-mbcs
     }
 }
