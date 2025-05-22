@@ -13,11 +13,11 @@ import fixtures.bodycomplex.DictionaryClientBuilder;
 public class DictionaryPutValid {
     public static void main(String[] args) {
         DictionaryClient dictionaryClient = new DictionaryClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.dictionaryputvalid.dictionaryputvalid
+        // BEGIN:fixtures.bodycomplex.generated.dictionary-put-valid.dictionary-put-valid
         BinaryData complexBody = BinaryData.fromString(
             "{\"defaultProgram\":{\"\":null,\"bmp\":\"mspaint\",\"exe\":\"\",\"txt\":\"notepad\",\"xls\":\"excel\"}}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = dictionaryClient.putValidWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.dictionaryputvalid.dictionaryputvalid
+        // END:fixtures.bodycomplex.generated.dictionary-put-valid.dictionary-put-valid
     }
 }

@@ -13,10 +13,10 @@ import fixtures.bodystring.EnumClientBuilder;
 public class EnumPutReferencedConstant {
     public static void main(String[] args) {
         EnumClient enumClient = new EnumClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodystring.generated.enumputreferencedconstant.enumputreferencedconstant
+        // BEGIN:fixtures.bodystring.generated.enum-put-referenced-constant.enum-put-referenced-constant
         BinaryData enumStringBody = BinaryData.fromString("{\"ColorConstant\":\"green-color\"}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = enumClient.putReferencedConstantWithResponse(enumStringBody, requestOptions);
-        // END:fixtures.bodystring.generated.enumputreferencedconstant.enumputreferencedconstant
+        // END:fixtures.bodystring.generated.enum-put-referenced-constant.enum-put-referenced-constant
     }
 }

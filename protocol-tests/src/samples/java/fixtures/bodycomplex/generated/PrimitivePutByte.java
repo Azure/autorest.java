@@ -13,10 +13,10 @@ import fixtures.bodycomplex.PrimitiveClientBuilder;
 public class PrimitivePutByte {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.primitiveputbyte.primitiveputbyte
+        // BEGIN:fixtures.bodycomplex.generated.primitive-put-byte.primitive-put-byte
         BinaryData complexBody = BinaryData.fromString("{\"field\":\"hex(FF FE FD FC 00 FA F9 F8 F7 F6)\"}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putByteWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.primitiveputbyte.primitiveputbyte
+        // END:fixtures.bodycomplex.generated.primitive-put-byte.primitive-put-byte
     }
 }

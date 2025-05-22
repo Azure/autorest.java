@@ -13,10 +13,10 @@ import fixtures.bodycomplex.PrimitiveClientBuilder;
 public class PrimitivePutBool {
     public static void main(String[] args) {
         PrimitiveClient primitiveClient = new PrimitiveClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.bodycomplex.generated.primitiveputbool.primitiveputbool
+        // BEGIN:fixtures.bodycomplex.generated.primitive-put-bool.primitive-put-bool
         BinaryData complexBody = BinaryData.fromString("{\"field_false\":false,\"field_true\":true}");
         RequestOptions requestOptions = new RequestOptions();
         Response<Void> response = primitiveClient.putBoolWithResponse(complexBody, requestOptions);
-        // END:fixtures.bodycomplex.generated.primitiveputbool.primitiveputbool
+        // END:fixtures.bodycomplex.generated.primitive-put-bool.primitive-put-bool
     }
 }

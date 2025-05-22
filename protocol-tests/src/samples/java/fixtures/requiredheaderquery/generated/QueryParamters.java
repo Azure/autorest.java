@@ -16,7 +16,7 @@ public class QueryParamters {
     public static void main(String[] args) {
         DpgRequiredHeaderQueryClient dpgRequiredHeaderQueryClient
             = new DpgRequiredHeaderQueryClientBuilder().host("http://localhost:3000").buildClient();
-        // BEGIN:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
+        // BEGIN:fixtures.requiredheaderquery.generated.params-get-required-query-param.query-paramters
         RequestOptions requestOptions = new RequestOptions().addQueryParam("parameter_optional_csv_int_array", "6,7,8")
             .addQueryParam("parameter_optional_multi_int_array", "9")
             .addQueryParam("parameter_optional_multi_int_array", "10");
@@ -24,6 +24,6 @@ public class QueryParamters {
             Arrays.asList("one", "two", "three"), Arrays.asList(1, 2, 3), Arrays.asList("four", "five"),
             Arrays.asList(4, 5), Arrays.asList("gamma", "beta"), OffsetDateTime.parse("1985-04-12T23:20:50Z"),
             requestOptions);
-        // END:fixtures.requiredheaderquery.generated.paramsgetrequiredqueryparam.queryparamters
+        // END:fixtures.requiredheaderquery.generated.params-get-required-query-param.query-paramters
     }
 }
