@@ -14,7 +14,6 @@ import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.Region;
-import com.azure.core.management.ResourceAuthorIdentityType;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
@@ -32,9 +31,6 @@ import com.azure.mgmtlitetest.advisor.models.SuppressionContract;
 import com.azure.mgmtlitetest.botservice.models.Site;
 import com.azure.mgmtlitetest.managednetworkfabric.fluent.models.CommonPostActionResponseForDeviceUpdateInner;
 import com.azure.mgmtlitetest.managednetworkfabric.models.ConfigurationState;
-import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
-import com.azure.mgmtlitetest.mediaservices.models.MediaService;
-import com.azure.mgmtlitetest.mediaservices.models.StorageAccountType;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.fluent.models.GenericResourceInner;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
@@ -81,7 +77,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -295,9 +290,6 @@ public class RuntimeTests {
             Assertions.assertTrue(blobService.deleteRetentionPolicy().enabled());
             Assertions.assertEquals(3, blobService.deleteRetentionPolicy().days());
 
-            // test media services for SystemData
-            testMediaServices(storageAccount);
-
             // test advisor as it is an extension, which requires a base resource
             // disabled as generate is async and it takes too long for a new resource
             //testAdvisor(storageAccount);
@@ -306,29 +298,6 @@ public class RuntimeTests {
         } finally {
             resourceManager.resourceGroups().deleteByResourceGroup(rgName);
         }
-    }
-
-    private void testMediaServices(StorageAccount storageAccount) {
-        MediaServicesManager mediaservicesManager = authenticateMediaServicesManager();
-
-        String rgName = "rg1-weidxu-fluentlite";
-        String msName = "ms1weidxulite";
-
-        MediaService mediaService = mediaservicesManager.mediaservices().define(msName)
-                .withRegion(Region.US_EAST)
-                .withExistingResourceGroup(rgName)
-                .withStorageAccounts(Collections.singletonList(
-                        new com.azure.mgmtlitetest.mediaservices.models.StorageAccount()
-                                .withId(storageAccount.id())
-                                .withType(StorageAccountType.PRIMARY)))
-                .create();
-
-        Assertions.assertNotNull(mediaService.systemData());
-        Assertions.assertNotNull(mediaService.systemData().createdBy());
-        Assertions.assertNotNull(mediaService.systemData().createdAt());
-        Assertions.assertEquals(ResourceAuthorIdentityType.APPLICATION, mediaService.systemData().createdByType());
-
-        mediaservicesManager.mediaservices().deleteById(mediaService.id());
     }
 
     private void testAdvisor(StorageAccount storageAccount) {
@@ -404,12 +373,6 @@ public class RuntimeTests {
 
     private AdvisorManager authenticateAdvisorManager() {
         return AdvisorManager.configure()
-                .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
-                .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
-    }
-
-    private MediaServicesManager authenticateMediaServicesManager() {
-        return MediaServicesManager.configure()
                 .withLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }

@@ -102,6 +102,7 @@ typespec-tests/package-lock.json
 
 # ApiView properties files
 /typespec-tests/src/main/resources/META-INF/*apiview_properties.json
+/typespec-tests/src/main/resources/META-INF/*metadata.json
 
 # typespec-extension
 /typespec-extension/src/*
