@@ -66,7 +66,7 @@ $generateScript = {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
-    $tspOptions += " --option ""@typespec/http-client-java.service-name=Arm Resource Provider"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.service-name=Arm Resource Provider"""
     # also test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
     # exclude preview from service versions
@@ -77,11 +77,11 @@ $generateScript = {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
-    $tspOptions += " --option ""@typespec/http-client-java.service-name=Arm Resource Provider"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.service-name=Arm Resource Provider"""
   } elseif ($tspFile -match "subclient.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
     # test for include-api-view-properties
-    $tspOptions += " --option ""@typespec/http-client-java.include-api-view-properties=false"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.include-api-view-properties=false"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
