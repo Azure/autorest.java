@@ -22,8 +22,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.azure.autorest.customization.implementation.Utils.writeLine;
-
 /**
  * The raw editor containing the current files being customized.
  */
@@ -47,7 +45,44 @@ public final class Editor {
         for (Map.Entry<String, String> content : contents.entrySet()) {
             addFile(content.getKey(), content.getValue());
         }
+    }
 
+    /**
+     * Checks if the package exists in the editor.
+     *
+     * @param packageName the package name
+     * @return Whether the package exists
+     */
+    public boolean packageExists(String packageName) {
+        String toFind = "src/main/java/" + packageName.replace('.', '/') + "/";
+        return contents.keySet().stream().anyMatch(fileName -> fileName.startsWith(toFind));
+    }
+
+    /**
+     * Checks if a class exists in the editor.
+     *
+     * @param packageName the package name of the class
+     * @param className the class name
+     * @return Whether the class exists
+     */
+    public boolean classExists(String packageName, String className) {
+        String fileName = "src/main/java/" + packageName.replace('.', '/') + "/" + className + ".java";
+        return contents.containsKey(fileName);
+    }
+
+    /**
+     * Lists all classes in a package.
+     *
+     * @param packageName the package name
+     * @return the list of classes in the package
+     */
+    public List<String> classesInPackage(String packageName) {
+        String packagePath = "src/main/java/" + packageName.replace(".", "/") + "/";
+        return contents.keySet()
+            .stream()
+            .filter(fileName -> fileName.startsWith(packagePath))
+            .map(fileName -> fileName.substring(packagePath.length() + 1, fileName.length() - 5))
+            .collect(Collectors.toList());
     }
 
     /**
@@ -88,10 +123,7 @@ public final class Editor {
 
         try {
             boolean fileCreated = newFile.createNewFile();
-
-            try (BufferedWriter writer = Files.newBufferedWriter(newFile.toPath())) {
-                writer.write(content);
-            }
+            Files.writeString(newFile.toPath(), content);
 
             if (fileCreated || isReplace) {
                 contents.put(name, content);
@@ -192,7 +224,7 @@ public final class Editor {
 
         // Copy lines until the start of the change is reached.
         for (int i = 0; i != start.getLine(); i++) {
-            writeLine(stringBuilder, lineContent.get(i));
+            Utils.writeLine(stringBuilder, lineContent.get(i));
         }
 
         // Copy until the start of the change.
@@ -201,23 +233,23 @@ public final class Editor {
         List<String> replacementLineContent = splitContentIntoLines(newContent);
 
         // Add the change.
-        if (replacementLineContent.size() > 0) {
+        if (!replacementLineContent.isEmpty()) {
             for (int i = 0; i != replacementLineContent.size() - 1; i++) {
                 if (i > 0) {
                     stringBuilder.append(indent);
                 }
 
-                writeLine(stringBuilder, replacementLineContent.get(i));
+                Utils.writeLine(stringBuilder, replacementLineContent.get(i));
             }
 
             stringBuilder.append(indent).append(replacementLineContent.get(replacementLineContent.size() - 1));
         }
 
-        writeLine(stringBuilder, lineContent.get(end.getLine()).substring(end.getCharacter()));
+        Utils.writeLine(stringBuilder, lineContent.get(end.getLine()).substring(end.getCharacter()));
 
         // Copy the rest of the file until its end.
         for (int i = end.getLine() + 1; i != lineContent.size(); i++) {
-            writeLine(stringBuilder, lineContent.get(i));
+            Utils.writeLine(stringBuilder, lineContent.get(i));
         }
 
         contents.put(fileName, stringBuilder.toString());
@@ -333,7 +365,7 @@ public final class Editor {
             }
 
             if (delimiter == null) {
-                writeLine(stringBuilder, lineContent);
+                Utils.writeLine(stringBuilder, lineContent);
             } else {
                 if (stringBuilder.length() == 0) {
                     stringBuilder.append(lineContent);

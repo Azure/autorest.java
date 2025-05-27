@@ -86,7 +86,7 @@ public class AnnotationTests {
             }
         };
 
-        customization.run(Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(Collections.singletonMap(fileName, fileContent), true, LOGGER);
     }
 
     private static String standardizeFileForComparison(String content) {

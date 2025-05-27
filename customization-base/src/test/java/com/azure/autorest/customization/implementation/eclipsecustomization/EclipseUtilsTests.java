@@ -1,21 +1,21 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package com.azure.autorest.customization.implementation;
+package com.azure.autorest.customization.implementation.eclipsecustomization;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.lang.reflect.Modifier;
 
-import static com.azure.autorest.customization.implementation.Utils.validateModifiers;
+import static com.azure.autorest.customization.implementation.eclipsecustomization.EclipseUtils.validateModifiers;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Tests {@link Utils}.
+ * Tests {@link EclipseUtils}.
  */
-public class UtilsTests {
+public class EclipseUtilsTests {
     @ParameterizedTest
     @ValueSource(ints = { Modifier.PUBLIC, Modifier.PROTECTED, Modifier.PRIVATE, Modifier.ABSTRACT, Modifier.STATIC,
         Modifier.FINAL, 0 })
