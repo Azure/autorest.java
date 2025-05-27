@@ -3,12 +3,11 @@
 
 package com.azure.autorest.customization.implementation.eclipsecustomization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.ClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.PackageCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipseClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.ClassCustomization;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.PackageCustomization;
+import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import org.eclipse.lsp4j.SymbolInformation;
 
 import java.util.List;

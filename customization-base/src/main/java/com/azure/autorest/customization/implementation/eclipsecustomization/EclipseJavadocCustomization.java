@@ -3,10 +3,10 @@
 
 package com.azure.autorest.customization.implementation.eclipsecustomization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.JavadocCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.JavadocCustomization;
+import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 

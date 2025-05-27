@@ -3,7 +3,7 @@
 
 package com.azure.autorest.customization.implementation.ls;
 
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.Utils;
 import org.apache.tools.tar.TarEntry;
 import org.apache.tools.tar.TarInputStream;
 import org.slf4j.Logger;

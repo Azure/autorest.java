@@ -3,15 +3,12 @@
 
 package com.azure.autorest.customization.implementation.eclipsecustomization;
 
+import com.azure.autorest.customization.ClassCustomization;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.microsoft.typespec.http.client.generator.core.customization.ClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipseConstantCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipseMethodCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipsePropertyCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageClient;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
 import org.eclipse.lsp4j.Position;

@@ -3,13 +3,11 @@
 
 package com.azure.autorest.customization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.LibraryCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipseLibraryCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.javaparsercustomization.JavaParserLibraryCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageClient;
-import com.microsoft.typespec.http.client.generator.core.extension.base.util.FileUtils;
+import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.eclipsecustomization.EclipseLibraryCustomization;
+import com.azure.autorest.customization.implementation.javaparsercustomization.JavaParserLibraryCustomization;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.extension.base.util.FileUtils;
 import org.slf4j.Logger;
 
 import java.io.IOException;

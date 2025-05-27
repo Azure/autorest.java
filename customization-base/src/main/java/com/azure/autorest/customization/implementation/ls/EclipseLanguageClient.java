@@ -3,11 +3,10 @@
 
 package com.azure.autorest.customization.implementation.ls;
 
+import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
+import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageServerFacade;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.models.JavaCodeActionKind;
-import com.microsoft.typespec.http.client.generator.core.extension.jsonrpc.Connection;
 import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionCapabilities;

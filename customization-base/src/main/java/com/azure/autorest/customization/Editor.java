@@ -3,7 +3,7 @@
 
 package com.azure.autorest.customization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.Utils;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
 

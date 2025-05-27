@@ -2,10 +2,8 @@
 // Licensed under the MIT License.
 package com.azure.autorest.customization.implementation.javaparsercustomization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.LibraryCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.javaparsercustomization.JavaParserClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.javaparsercustomization.JavaParserPackageCustomization;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.LibraryCustomization;
 
 /**
  * Implementation of {@link LibraryCustomization} that uses the JavaParser library for customizations.

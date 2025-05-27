@@ -2,12 +2,10 @@
 // Licensed under the MIT License.
 package com.azure.autorest.customization.implementation.eclipsecustomization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.LibraryCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipseClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipsePackageCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.LibraryCustomization;
+import com.azure.autorest.customization.implementation.Utils;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import org.eclipse.lsp4j.SymbolInformation;
 
 import java.util.Optional;

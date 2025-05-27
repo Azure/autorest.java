@@ -3,10 +3,9 @@
 
 package com.azure.autorest.customization.implementation.javaparsercustomization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.ClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.PackageCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.javaparsercustomization.JavaParserClassCustomization;
+import com.azure.autorest.customization.ClassCustomization;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.PackageCustomization;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -3,7 +3,7 @@
 
 package com.azure.autorest.customization.implementation;
 
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
+import com.azure.autorest.customization.Editor;
 
 import java.io.File;
 import java.util.List;

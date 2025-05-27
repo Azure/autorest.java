@@ -3,10 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.ClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.PackageCustomization;
-
 /**
  * The top level customization for an AutoRest generated client library.
  */

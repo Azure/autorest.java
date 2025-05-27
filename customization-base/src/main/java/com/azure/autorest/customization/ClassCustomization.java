@@ -4,7 +4,6 @@
 package com.azure.autorest.customization;
 
 import com.github.javaparser.ast.CompilationUnit;
-import com.microsoft.typespec.http.client.generator.core.customization.ConstructorCustomization;
 
 import java.lang.reflect.Modifier;
 import java.util.List;

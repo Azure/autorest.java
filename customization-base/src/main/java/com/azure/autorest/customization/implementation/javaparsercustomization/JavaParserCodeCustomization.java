@@ -3,9 +3,9 @@
 
 package com.azure.autorest.customization.implementation.javaparsercustomization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.CodeCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageClient;
+import com.azure.autorest.customization.CodeCustomization;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import org.eclipse.lsp4j.SymbolInformation;
 
 /**

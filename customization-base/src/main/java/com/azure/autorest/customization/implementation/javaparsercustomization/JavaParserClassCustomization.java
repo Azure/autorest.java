@@ -3,15 +3,15 @@
 
 package com.azure.autorest.customization.implementation.javaparsercustomization;
 
+import com.azure.autorest.customization.ClassCustomization;
+import com.azure.autorest.customization.ConstantCustomization;
+import com.azure.autorest.customization.ConstructorCustomization;
+import com.azure.autorest.customization.Editor;
+import com.azure.autorest.customization.JavadocCustomization;
+import com.azure.autorest.customization.MethodCustomization;
+import com.azure.autorest.customization.PropertyCustomization;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import com.microsoft.typespec.http.client.generator.core.customization.ClassCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.ConstantCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.ConstructorCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.Editor;
-import com.microsoft.typespec.http.client.generator.core.customization.JavadocCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.MethodCustomization;
-import com.microsoft.typespec.http.client.generator.core.customization.PropertyCustomization;
 
 import java.util.List;
 import java.util.function.Consumer;

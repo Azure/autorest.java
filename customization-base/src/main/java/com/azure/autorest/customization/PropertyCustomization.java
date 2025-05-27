@@ -3,8 +3,6 @@
 
 package com.azure.autorest.customization;
 
-import com.microsoft.typespec.http.client.generator.core.customization.ConstantCustomization;
-
 import java.lang.reflect.Modifier;
 
 /**
