@@ -3,9 +3,13 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.extension.base.util.FileUtils;
+import com.microsoft.typespec.http.client.generator.core.customization.Editor;
+import com.microsoft.typespec.http.client.generator.core.customization.LibraryCustomization;
+import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
+import com.microsoft.typespec.http.client.generator.core.customization.implementation.eclipsecustomization.EclipseLibraryCustomization;
+import com.microsoft.typespec.http.client.generator.core.customization.implementation.javaparsercustomization.JavaParserLibraryCustomization;
+import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageClient;
+import com.microsoft.typespec.http.client.generator.core.extension.base.util.FileUtils;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -22,10 +26,11 @@ public abstract class Customization {
      * Start the customization process. This is called by the post processor in AutoRest.
      *
      * @param files the map of files generated in the previous steps in AutoRest
+     * @param useEclipseLanguageServer whether to use the Eclipse language server
      * @param logger the logger
      * @return the map of files after customization
      */
-    public final Map<String, String> run(Map<String, String> files, Logger logger) {
+    public final Map<String, String> run(Map<String, String> files, boolean useEclipseLanguageServer, Logger logger) {
         Path tempDirWithPrefix;
 
         // Populate editor
@@ -33,25 +38,35 @@ public abstract class Customization {
         try {
             tempDirWithPrefix = FileUtils.createTempDirectory("temp");
             editor = new Editor(files, tempDirWithPrefix);
-            InputStream pomStream = Customization.class.getResourceAsStream("/pom.xml");
-            byte[] buffer = new byte[pomStream.available()];
-            pomStream.read(buffer);
-            editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
+            if (useEclipseLanguageServer) {
+                try (InputStream pomStream = Customization.class.getResourceAsStream("/pom.xml")) {
+                    editor.addFile("pom.xml", new String(pomStream.readAllBytes(), StandardCharsets.UTF_8));
+                }
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        // Start language client
-        try (EclipseLanguageClient languageClient
-            = new EclipseLanguageClient(null, tempDirWithPrefix.toString(), logger)) {
-            languageClient.initialize();
-            customize(new LibraryCustomization(editor, languageClient), logger);
-            editor.removeFile("pom.xml");
-            return editor.getContents();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            Utils.deleteDirectory(tempDirWithPrefix.toFile());
+        if (useEclipseLanguageServer) {
+            // Start language client
+            try (EclipseLanguageClient languageClient
+                = new EclipseLanguageClient(null, tempDirWithPrefix.toString(), logger)) {
+                languageClient.initialize();
+                customize(new EclipseLibraryCustomization(editor, languageClient), logger);
+                editor.removeFile("pom.xml");
+                return editor.getContents();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            } finally {
+                Utils.deleteDirectory(tempDirWithPrefix.toFile());
+            }
+        } else {
+            try {
+                customize(new JavaParserLibraryCustomization(editor), logger);
+                return editor.getContents();
+            } finally {
+                Utils.deleteDirectory(tempDirWithPrefix.toFile());
+            }
         }
     }
 

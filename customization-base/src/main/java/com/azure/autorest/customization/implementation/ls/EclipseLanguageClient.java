@@ -3,10 +3,11 @@
 
 package com.azure.autorest.customization.implementation.ls;
 
-import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
-import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.EclipseLanguageServerFacade;
+import com.microsoft.typespec.http.client.generator.core.customization.implementation.ls.models.JavaCodeActionKind;
+import com.microsoft.typespec.http.client.generator.core.extension.jsonrpc.Connection;
 import org.eclipse.lsp4j.ClientCapabilities;
 import org.eclipse.lsp4j.CodeAction;
 import org.eclipse.lsp4j.CodeActionCapabilities;
@@ -95,14 +96,15 @@ public class EclipseLanguageClient implements AutoCloseable {
         windowClientCapabilities.setWorkDoneProgress(false);
         windowClientCapabilities.setShowDocument(new ShowDocumentCapabilities(false));
         windowClientCapabilities.setShowMessage(new WindowShowMessageRequestCapabilities());
-        windowClientCapabilities.getShowMessage().setMessageActionItem(new WindowShowMessageRequestActionItemCapabilities(false));
+        windowClientCapabilities.getShowMessage()
+            .setMessageActionItem(new WindowShowMessageRequestActionItemCapabilities(false));
         initializeParams.getCapabilities().setWindow(windowClientCapabilities);
 
         // Configure workspace capabilities to support workspace folders and all symbol kinds.
         WorkspaceClientCapabilities workspaceClientCapabilities = new WorkspaceClientCapabilities();
         workspaceClientCapabilities.setWorkspaceFolders(true);
-        workspaceClientCapabilities.setSymbol(new SymbolCapabilities(
-            new SymbolKindCapabilities(Arrays.asList(SymbolKind.values())), false));
+        workspaceClientCapabilities
+            .setSymbol(new SymbolCapabilities(new SymbolKindCapabilities(Arrays.asList(SymbolKind.values())), false));
 
         // Configure text document capabilities to support code actions and all code action kinds.
         List<String> supportedCodeActions = new ArrayList<>(Arrays.asList(CodeActionKind.QuickFix,
@@ -168,7 +170,8 @@ public class EclipseLanguageClient implements AutoCloseable {
         context.setOnly(Collections.singletonList(codeActionKind));
         CodeActionParams codeActionParams = new CodeActionParams(new TextDocumentIdentifier(fileUri), range, context);
 
-        List<CodeAction> codeActions = sendRequest(connection, "textDocument/codeAction", codeActionParams, LIST_CODE_ACTION);
+        List<CodeAction> codeActions
+            = sendRequest(connection, "textDocument/codeAction", codeActionParams, LIST_CODE_ACTION);
         for (CodeAction codeAction : codeActions) {
             if (codeAction.getEdit() != null) {
                 continue;

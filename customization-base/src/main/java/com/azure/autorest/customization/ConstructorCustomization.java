@@ -3,47 +3,26 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import org.eclipse.lsp4j.SymbolInformation;
-
 import java.lang.reflect.Modifier;
 import java.util.List;
 
 /**
  * The constructor level customization for an AutoRest generated constructor.
  */
-public final class ConstructorCustomization extends CodeCustomization {
-    private final String packageName;
-    private final String className;
-    private final String constructorSignature;
-
-    ConstructorCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
-        String constructorSignature, SymbolInformation symbol) {
-        super(editor, languageClient, symbol);
-        this.packageName = packageName;
-        this.className = className;
-        this.constructorSignature = constructorSignature;
-    }
-
+public interface ConstructorCustomization extends CodeCustomization {
     /**
      * Gets the name of the class containing the constructor.
      *
      * @return The name of the class containing the constructor.
      */
-    public String getClassName() {
-        return className;
-    }
+    String getClassName();
 
     /**
      * Gets the Javadoc customization for this constructor.
      *
      * @return The Javadoc customization for this constructor.
      */
-    public JavadocCustomization getJavadoc() {
-        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
-            symbol.getLocation().getRange().getStart().getLine());
-    }
+    JavadocCustomization getJavadoc();
 
     /**
      * Add an annotation to the constructor.
@@ -51,9 +30,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @param annotation The annotation to add to the constructor. The leading @ can be omitted.
      * @return A new ConstructorCustomization representing the updated constructor.
      */
-    public ConstructorCustomization addAnnotation(String annotation) {
-        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(constructorSignature));
-    }
+    ConstructorCustomization addAnnotation(String annotation);
 
     /**
      * Remove an annotation from the constructor.
@@ -61,15 +38,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @param annotation The annotation to remove from the constructor. The leading @ can be omitted.
      * @return A new ConstructorCustomization representing the updated constructor.
      */
-    public ConstructorCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
-                .getConstructors()
-                .stream()
-                .filter(ctor -> Utils.declarationContainsSymbol(ctor.getRange().get(), symbol.getLocation().getRange()))
-                .findFirst().get()
-                .getAnnotationByName(Utils.cleanAnnotationName(annotation)),
-            () -> refreshCustomization(constructorSignature));
-    }
+    ConstructorCustomization removeAnnotation(String annotation);
 
     /**
      * Replace the modifier for this constructor.
@@ -84,12 +53,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @throws IllegalArgumentException If the {@code modifier} is less than to {@code 0} or any {@link Modifier}
      * included in the bitwise OR isn't a valid constructor {@link Modifier}.
      */
-    public ConstructorCustomization setModifier(int modifiers) {
-        Utils.replaceModifier(symbol, editor, languageClient, "(?:.+ )?" + className + "\\(", className + "(",
-            Modifier.constructorModifiers(), modifiers);
-
-        return refreshCustomization(constructorSignature);
-    }
+    ConstructorCustomization setModifier(int modifiers);
 
     /**
      * Replace the parameters of the constructor.
@@ -97,9 +61,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @param newParameters New constructor parameters.
      * @return A new ConstructorCustomization representing the updated constructor.
      */
-    public ConstructorCustomization replaceParameters(String newParameters) {
-        return replaceParameters(newParameters, null);
-    }
+    ConstructorCustomization replaceParameters(String newParameters);
 
     /**
      * Replaces the parameters of the constructor and adds any additional imports required by the new parameters.
@@ -109,18 +71,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
      * @return A new ConstructorCustomization representing the updated constructor.
      */
-    public ConstructorCustomization replaceParameters(String newParameters, List<String> importsToAdd) {
-        String newSignature = className + "(" + newParameters + ")";
-
-        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className);
-
-        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
-            classCustomization::refreshSymbol);
-
-        return Utils.replaceParameters(newParameters, updatedClassCustomization.getConstructor(constructorSignature),
-            () -> updatedClassCustomization.getConstructor(newSignature));
-    }
+    ConstructorCustomization replaceParameters(String newParameters, List<String> importsToAdd);
 
     /**
      * Replace the body of the constructor.
@@ -128,9 +79,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @param newBody New constructor body.
      * @return A new ConstructorCustomization representing the updated constructor.
      */
-    public ConstructorCustomization replaceBody(String newBody) {
-        return replaceBody(newBody, null);
-    }
+    ConstructorCustomization replaceBody(String newBody);
 
     /**
      * Replaces the body of the constructor and adds any additional imports required by the new body.
@@ -140,20 +89,5 @@ public final class ConstructorCustomization extends CodeCustomization {
      * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
      * @return A new ConstructorCustomization representing the updated constructor.
      */
-    public ConstructorCustomization replaceBody(String newBody, List<String> importsToAdd) {
-        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className);
-
-        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
-            classCustomization::refreshSymbol);
-
-        return Utils.replaceBody(newBody, updatedClassCustomization.getConstructor(constructorSignature),
-            () -> updatedClassCustomization.getConstructor(constructorSignature));
-    }
-
-    private ConstructorCustomization refreshCustomization(String constructorSignature) {
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getConstructor(constructorSignature);
-    }
+    ConstructorCustomization replaceBody(String newBody, List<String> importsToAdd);
 }
