@@ -90,6 +90,13 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationTest.java"""
   }
 
+  # Test customization using only JavaParser for one of the TypeSpec definitions - naming-javaparser.tsp
+  if ($tspFile -match "tsp[\\/]naming-javaparser.tsp$") {
+      # Add the customization-class option for Java emitter
+      $tspOptions += " --option ""@typespec/typespec-java.customization-class=../../customization/src/main/java/JavaParserCustomizationTest.java"""
+      $tspOptions += " --option ""@typespec/typespec-java.use-eclipse-language-server=false"""
+  }
+
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
   $tspCommand = "npx --no-install tsp compile $tspFile $tspOptions $tspTrace"
 

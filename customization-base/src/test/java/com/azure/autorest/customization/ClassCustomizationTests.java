@@ -42,7 +42,7 @@ public class ClassCustomizationTests {
             }
         };
 
-        customization.run(Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(Collections.singletonMap(fileName, fileContent), true, LOGGER);
     }
 
     @Test
@@ -73,8 +73,8 @@ public class ClassCustomizationTests {
                 ClassCustomization classCustomization = libraryCustomization.getPackage("foo")
                         .getClass("Foo");
 
-                classCustomization.addStaticBlock("String a = \"foo\";", Arrays.asList("com.azure.core" +
-                        ".util.BinaryData"));
+                classCustomization.addStaticBlock("String a = \"foo\";",
+                    Arrays.asList("com.azure.core.util.BinaryData"));
 
                 assertEquals(standardizeFileForComparison(expectedFileContent),
                         standardizeFileForComparison(libraryCustomization.getRawEditor()
@@ -82,7 +82,7 @@ public class ClassCustomizationTests {
             }
         };
 
-        customization.run(Collections.singletonMap(fileName, fileContent), LOGGER);
+        customization.run(Collections.singletonMap(fileName, fileContent), true, LOGGER);
     }
 
     private static String standardizeFileForComparison(String content) {

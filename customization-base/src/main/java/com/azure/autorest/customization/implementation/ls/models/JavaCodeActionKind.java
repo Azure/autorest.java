@@ -47,7 +47,8 @@ public enum JavaCodeActionKind {
     /**
      * Extract to method kind
      */
-    REFACTOR_EXTRACT_METHOD(CodeActionKind.RefactorExtract + ".function"), // using `.function` instead of `.method` to match existing keybinding),
+    REFACTOR_EXTRACT_METHOD(CodeActionKind.RefactorExtract + ".function"), // using `.function` instead of `.method` to
+                                                                           // match existing keybinding),
 
     /**
      * Extract to constant kind
