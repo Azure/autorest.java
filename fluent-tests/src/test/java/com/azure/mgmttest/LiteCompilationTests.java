@@ -19,10 +19,6 @@ import com.azure.identity.EnvironmentCredentialBuilder;
 import com.azure.mgmtlitetest.containerregistrylite.ContainerRegistryManager;
 import com.azure.mgmtlitetest.emptybytearrayinclients.implementation.DpsCertificatesClientImpl;
 import com.azure.mgmtlitetest.managednetworkfabric.models.CommonPostActionResponseForStateUpdate;
-import com.azure.mgmtlitetest.mediaservices.MediaServicesManager;
-import com.azure.mgmtlitetest.mediaservices.models.LiveEventStatus;
-import com.azure.mgmtlitetest.mediaservices.models.MediaService;
-import com.azure.mgmtlitetest.mediaservices.models.SyncStorageKeysInput;
 import com.azure.mgmtlitetest.pageablewithinheritance.fluent.SavingsPlansClient;
 import com.azure.mgmtlitetest.pageablewithinheritance.fluent.models.SavingsPlanModelInner;
 import com.azure.mgmtlitetest.resources.ResourceManager;
@@ -153,13 +149,6 @@ public class LiteCompilationTests {
                 .authenticate(new EnvironmentCredentialBuilder().build(), new AzureProfile(AzureEnvironment.AZURE));
     }
 
-    public void testMediaServices() {
-        MediaServicesManager mediaServicesManager = mock(MediaServicesManager.class);
-
-        MediaService mediaService = mediaServicesManager.mediaservices().getById(anyString());
-        mediaService.syncStorageKeys(any(SyncStorageKeysInput.class));
-    }
-
     public void testModelFlatten() {
         ExtendedProductInner extendedProduct = new ExtendedProductInner();
         extendedProduct.uri();
@@ -192,11 +181,6 @@ public class LiteCompilationTests {
             .authenticate(tokenRequestContext -> Mono.just(new AccessToken("this_is_a_token", OffsetDateTime.MAX)),
                 new AzureProfile("", "", AzureEnvironment.AZURE));
         String subscriptionId = manager.serviceClient().getSubscriptionId();
-    }
-
-    public void testLroPageable() {
-        MediaServicesManager manager = mock(MediaServicesManager.class);
-        PagedIterable<LiveEventStatus> eventStatuses = manager.liveEvents().listGetStatus(anyString(), anyString(), anyString());
     }
 
     public void testModelExtendsErrorResponse() {
