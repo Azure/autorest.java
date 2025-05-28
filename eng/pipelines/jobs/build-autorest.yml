@@ -42,6 +42,18 @@ jobs:
       JobType: 'Autorest'
 
   - task: Maven@4
+    displayName: 'Build and Install azure-autorest-customization'
+    inputs:
+      mavenPomFile: pom.xml
+      goals: 'clean install -pl com.azure.tools:azure-autorest-customization -am'
+      options: '-T 1C'  # do not use MAVEN_CACHE_FOLDER
+      mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: $(JavaVersion)
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: false
+
+  - task: Maven@4
     displayName: 'Build and Package'
     inputs:
       mavenPomFile: pom.xml
