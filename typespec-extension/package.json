@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.30.4",
+  "version": "0.31.0",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -48,7 +48,7 @@
   "peerDependencies": {
     "@azure-tools/typespec-autorest": ">=0.56.0 <1.0.0",
     "@azure-tools/typespec-azure-core": ">=0.56.0 <1.0.0",
-    "@azure-tools/typespec-azure-resource-manager": ">=0.56.1 <1.0.0",
+    "@azure-tools/typespec-azure-resource-manager": ">=0.56.2 <1.0.0",
     "@azure-tools/typespec-azure-rulesets": ">=0.56.0 <1.0.0",
     "@azure-tools/typespec-client-generator-core": ">=0.56.2 <1.0.0",
     "@azure-tools/typespec-liftr-base": ">=0.8.0 <1.0.0",
@@ -67,15 +67,15 @@
   "devDependencies": {
     "@azure-tools/typespec-autorest": "0.56.0",
     "@azure-tools/typespec-azure-core": "0.56.0",
-    "@azure-tools/typespec-azure-resource-manager": "0.56.1",
+    "@azure-tools/typespec-azure-resource-manager": "0.56.2",
     "@azure-tools/typespec-azure-rulesets": "0.56.1",
     "@azure-tools/typespec-client-generator-core": "0.56.2",
     "@azure-tools/typespec-liftr-base": "0.8.0",
     "@types/js-yaml": "~4.0.9",
     "@types/lodash": "~4.17.17",
-    "@types/node": "~22.15.21",
+    "@types/node": "~22.15.23",
     "@typescript-eslint/eslint-plugin": "~8.32.1",
-    "@typescript-eslint/parser": "~8.32.1",
+    "@typescript-eslint/parser": "~8.33.0",
     "@typespec/compiler": "1.0.0",
     "@typespec/http": "1.0.1",
     "@typespec/openapi": "1.0.0",
@@ -96,7 +96,7 @@
     "prettier": "~3.5.3",
     "rimraf": "~6.0.1",
     "typescript": "~5.8.3",
-    "typescript-eslint": "^8.32.1",
+    "typescript-eslint": "^8.33.0",
     "vitest": "^3.1.4"
   },
   "overrides": {
