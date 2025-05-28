@@ -7,13 +7,12 @@
     "check-format": "npm run prettier -- --check",
     "prettier": "prettier --config ./.prettierrc.yaml **/*.tsp",
     "spector-serve": "tsp-spector serve ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json"
-  },
-  "dependencies": {
+  },  "dependencies": {
     "@typespec/spec-api": "0.1.0-alpha.6",
     "@typespec/spector": "0.1.0-alpha.14",
     "@typespec/http-specs": "0.1.0-alpha.22",
     "@azure-tools/azure-http-specs": "0.1.0-alpha.17",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.30.4.tgz"
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.31.0.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "^1.0.0",
