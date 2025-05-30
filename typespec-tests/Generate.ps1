@@ -73,6 +73,8 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
     # enable sync-stack
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-sync-stack=true"""
+    # rename model
+    $tspOptions += " --option ""@azure-tools/typespec-java.rename-model=TopLevelArmResourceListResult:ResourceListResult,CustomTemplateResourcePropertiesAnonymousEmptyModel:AnonymousEmptyModel"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
