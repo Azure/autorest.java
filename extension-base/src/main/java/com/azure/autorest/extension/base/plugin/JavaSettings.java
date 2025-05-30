@@ -1690,6 +1690,12 @@ public class JavaSettings {
 
     private final boolean useEclipseLanguageServer;
 
+    /**
+     * If there is Postprocessor code customizations to run, this determines whether to use the Eclipse Language
+     * Server to run the code customizations.
+     *
+     * @return Whether to use the Eclipse Language Server to run the code customizations.
+     */
     public boolean isUseEclipseLanguageServer() {
         return useEclipseLanguageServer;
     }
