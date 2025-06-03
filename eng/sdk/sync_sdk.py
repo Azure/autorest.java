@@ -20,7 +20,6 @@ skip_artifacts: List[str] = [
     # expect failure on below
     # "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
     # "azure-ai-vision-face",  # SDK in development
-    # "azure-health-insights-radiologyinsights",  # SDK in development
 ]
 
 
