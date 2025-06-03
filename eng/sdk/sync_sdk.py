@@ -110,6 +110,11 @@ def update_sdks():
         if artifact in skip_artifacts:
             continue
 
+        if os.path.dirname(module_path).endswith("-v2"):
+            # skip modules on azure-core-v2
+            logging.info(f"Skip azure-core-v2 module on path {module_path}")
+            continue
+
         generated_samples_path = os.path.join(
             module_path, get_generated_folder_from_artifact(module_path, artifact, "samples")
         )
