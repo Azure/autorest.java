@@ -115,6 +115,12 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
       description: "Specify the Java class that to be executed by emitter for [code customization](https://github.com/Azure/autorest.java/blob/main/customization-base/README.md), during post-process.",
       nullable: true,
     },
+    "rename-model": {
+      type: ["string", "object"],
+      description: "Specify models to rename, in case unable to do so through TCGC. E.g. anonymous models or resource list models. Format should be in key-value form, or a comma separated string that follows 'BeforeRename:AfterRename' pattern.",
+      additionalProperties: true,
+      nullable: true,
+    },
 
     // configure
     "skip-special-headers": {
