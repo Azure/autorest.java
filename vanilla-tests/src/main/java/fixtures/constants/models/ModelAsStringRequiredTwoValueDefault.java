@@ -6,6 +6,7 @@ package fixtures.constants.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -60,10 +61,13 @@ public final class ModelAsStringRequiredTwoValueDefault
      */
     public void validate() {
         if (getParameter() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property parameter in model ModelAsStringRequiredTwoValueDefault");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property parameter in model ModelAsStringRequiredTwoValueDefault"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ModelAsStringRequiredTwoValueDefault.class);
 
     /**
      * {@inheritDoc}

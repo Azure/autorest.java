@@ -6,6 +6,7 @@ package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -172,14 +173,18 @@ public final class Logging implements XmlSerializable<Logging> {
      */
     public void validate() {
         if (getVersion() == null) {
-            throw new IllegalArgumentException("Missing required property version in model Logging");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property version in model Logging"));
         }
         if (getRetentionPolicy() == null) {
-            throw new IllegalArgumentException("Missing required property retentionPolicy in model Logging");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property retentionPolicy in model Logging"));
         } else {
             getRetentionPolicy().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Logging.class);
 
     @Generated
     @Override

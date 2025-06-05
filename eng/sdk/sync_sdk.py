@@ -20,7 +20,6 @@ skip_artifacts: List[str] = [
     # expect failure on below
     # "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
     # "azure-ai-vision-face",  # SDK in development
-    # "azure-health-insights-radiologyinsights",  # SDK in development
 ]
 
 
@@ -109,6 +108,11 @@ def update_sdks():
         arm_module = "-resourcemanager-" in artifact
 
         if artifact in skip_artifacts:
+            continue
+
+        if os.path.dirname(module_path).endswith("-v2"):
+            # skip modules on azure-core-v2
+            logging.info(f"Skip azure-core-v2 module on path {module_path}")
             continue
 
         generated_samples_path = os.path.join(

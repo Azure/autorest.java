@@ -9,6 +9,7 @@ import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -116,30 +117,38 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
     @Override
     public void validate() {
         if (getRfc1123RequiredChild() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property rfc1123RequiredChild in model TransformationAsParentRequiredFields");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property rfc1123RequiredChild in model TransformationAsParentRequiredFields"));
         }
         if (getRfc1123Required() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property rfc1123Required in model TransformationAsParentRequiredFields");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property rfc1123Required in model TransformationAsParentRequiredFields"));
         }
         if (getNameRequired() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property nameRequired in model TransformationAsParentRequiredFields");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property nameRequired in model TransformationAsParentRequiredFields"));
         }
         if (getUrlBase64EncodedRequired() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property urlBase64EncodedRequired in model TransformationAsParentRequiredFields");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property urlBase64EncodedRequired in model TransformationAsParentRequiredFields"));
         }
         if (getUnixTimeLongRequired() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property unixTimeLongRequired in model TransformationAsParentRequiredFields");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property unixTimeLongRequired in model TransformationAsParentRequiredFields"));
         }
         if (getUnixTimeDateTimeRequired() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property unixTimeDateTimeRequired in model TransformationAsParentRequiredFields");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property unixTimeDateTimeRequired in model TransformationAsParentRequiredFields"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(TransformationAsParentRequiredFields.class);
 
     /**
      * {@inheritDoc}

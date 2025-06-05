@@ -6,6 +6,7 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -58,7 +59,10 @@ public final class BlobPrefix {
      */
     public void validate() {
         if (getName() == null) {
-            throw new IllegalArgumentException("Missing required property name in model BlobPrefix");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property name in model BlobPrefix"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(BlobPrefix.class);
 }

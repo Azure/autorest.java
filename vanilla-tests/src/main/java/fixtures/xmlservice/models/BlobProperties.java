@@ -7,6 +7,7 @@ package fixtures.xmlservice.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
@@ -864,10 +865,14 @@ public final class BlobProperties {
      */
     public void validate() {
         if (getLastModified() == null) {
-            throw new IllegalArgumentException("Missing required property lastModified in model BlobProperties");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property lastModified in model BlobProperties"));
         }
         if (getEtag() == null) {
-            throw new IllegalArgumentException("Missing required property etag in model BlobProperties");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property etag in model BlobProperties"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(BlobProperties.class);
 }

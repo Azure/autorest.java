@@ -6,6 +6,7 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -262,24 +263,33 @@ public final class ListBlobsResponse {
      */
     public void validate() {
         if (getContainerName() == null) {
-            throw new IllegalArgumentException("Missing required property containerName in model ListBlobsResponse");
+            throw LOGGER.atError()
+                .log(
+                    new IllegalArgumentException("Missing required property containerName in model ListBlobsResponse"));
         }
         if (getPrefix() == null) {
-            throw new IllegalArgumentException("Missing required property prefix in model ListBlobsResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property prefix in model ListBlobsResponse"));
         }
         if (getMarker() == null) {
-            throw new IllegalArgumentException("Missing required property marker in model ListBlobsResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property marker in model ListBlobsResponse"));
         }
         if (getDelimiter() == null) {
-            throw new IllegalArgumentException("Missing required property delimiter in model ListBlobsResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property delimiter in model ListBlobsResponse"));
         }
         if (getBlobs() == null) {
-            throw new IllegalArgumentException("Missing required property blobs in model ListBlobsResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property blobs in model ListBlobsResponse"));
         } else {
             getBlobs().validate();
         }
         if (getNextMarker() == null) {
-            throw new IllegalArgumentException("Missing required property nextMarker in model ListBlobsResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property nextMarker in model ListBlobsResponse"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ListBlobsResponse.class);
 }

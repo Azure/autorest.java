@@ -6,6 +6,7 @@ package fixtures.annotatedgettersandsetters.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -173,10 +174,12 @@ public final class Sku {
      */
     public void validate() {
         if (getFamily() == null) {
-            throw new IllegalArgumentException("Missing required property family in model Sku");
+            throw LOGGER.atError().log(new IllegalArgumentException("Missing required property family in model Sku"));
         }
         if (getName() == null) {
-            throw new IllegalArgumentException("Missing required property name in model Sku");
+            throw LOGGER.atError().log(new IllegalArgumentException("Missing required property name in model Sku"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Sku.class);
 }

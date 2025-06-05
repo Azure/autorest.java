@@ -117,7 +117,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     },
     "rename-model": {
       type: ["string", "object"],
-      description: "Specify models to rename, in case unable to do so through TCGC. E.g. anonymous models or resource list models. Format should be in key-value form, or a comma separated string that follows 'BeforeRename:AfterRename' pattern.",
+      description: "Rename the model classes, in case they cannot be renamed via TCGC. E.g., anonymous models or templated models. Format should be in key-value form, or a comma-separated string that follows 'BeforeRename:AfterRename' pattern. This option is for management-plane SDK.",
       additionalProperties: true,
       nullable: true,
     },

@@ -6,6 +6,7 @@ package fixtures.azurespecials.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 
 /**
  * Parameter group.
@@ -54,8 +55,12 @@ public final class HeaderCustomNamedRequestIdParamGroupingParameters {
      */
     public void validate() {
         if (getFooClientRequestId() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property fooClientRequestId in model HeaderCustomNamedRequestIdParamGroupingParameters");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property fooClientRequestId in model HeaderCustomNamedRequestIdParamGroupingParameters"));
         }
     }
+
+    private static final ClientLogger LOGGER
+        = new ClientLogger(HeaderCustomNamedRequestIdParamGroupingParameters.class);
 }

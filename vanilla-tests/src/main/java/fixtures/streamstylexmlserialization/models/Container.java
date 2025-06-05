@@ -6,6 +6,7 @@ package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -118,14 +119,18 @@ public final class Container implements XmlSerializable<Container> {
      */
     public void validate() {
         if (getName() == null) {
-            throw new IllegalArgumentException("Missing required property name in model Container");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property name in model Container"));
         }
         if (getProperties() == null) {
-            throw new IllegalArgumentException("Missing required property properties in model Container");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property properties in model Container"));
         } else {
             getProperties().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Container.class);
 
     @Generated
     @Override

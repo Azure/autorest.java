@@ -6,6 +6,7 @@ package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -69,9 +70,11 @@ public final class Horse extends Pet {
     @Override
     public void validate() {
         if (getName() == null) {
-            throw new IllegalArgumentException("Missing required property name in model Horse");
+            throw LOGGER.atError().log(new IllegalArgumentException("Missing required property name in model Horse"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Horse.class);
 
     /**
      * {@inheritDoc}

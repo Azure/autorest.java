@@ -6,6 +6,7 @@ package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -60,9 +61,12 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      */
     public void validate() {
         if (getValue() == null) {
-            throw new IllegalArgumentException("Missing required property value in model ArrayWrapper");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property value in model ArrayWrapper"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ArrayWrapper.class);
 
     /**
      * {@inheritDoc}

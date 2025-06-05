@@ -21,6 +21,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.logging.ClientLogger;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -327,13 +328,16 @@ public final class Binaries {
     public Response<BinaryData> putWithBinaryRequestAndResponseWithResponse(String runbookName,
         BinaryData binaryContent, long contentLength, Context context) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (runbookName == null) {
-            throw new IllegalArgumentException("Parameter runbookName is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
         }
         if (binaryContent == null) {
-            throw new IllegalArgumentException("Parameter binaryContent is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
         }
         final String accept = "application/zip";
         return service.putWithBinaryRequestAndResponseSync(this.client.getHost(), runbookName, binaryContent,
@@ -546,13 +550,16 @@ public final class Binaries {
     public Response<BinaryData> putWithBinaryJsonRequestAndBinaryTextResponseWithResponse(String runbookName,
         BinaryData binaryContent, long contentLength, Context context) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (runbookName == null) {
-            throw new IllegalArgumentException("Parameter runbookName is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
         }
         if (binaryContent == null) {
-            throw new IllegalArgumentException("Parameter binaryContent is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
         }
         final String accept = "text/powershell";
         return service.putWithBinaryJsonRequestAndBinaryTextResponseSync(this.client.getHost(), runbookName,
@@ -763,13 +770,16 @@ public final class Binaries {
     public Response<BinaryData> putWithBinaryTextRequestAndBinaryResponseWithResponse(String runbookName,
         BinaryData binaryContent, long contentLength, Context context) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (runbookName == null) {
-            throw new IllegalArgumentException("Parameter runbookName is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
         }
         if (binaryContent == null) {
-            throw new IllegalArgumentException("Parameter binaryContent is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
         }
         final String accept = "application/zip";
         return service.putWithBinaryTextRequestAndBinaryResponseSync(this.client.getHost(), runbookName, binaryContent,
@@ -980,13 +990,16 @@ public final class Binaries {
     public Response<BinaryData> putWithBinaryTextRequestAndResponseWithResponse(String runbookName,
         BinaryData binaryContent, long contentLength, Context context) {
         if (this.client.getHost() == null) {
-            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (runbookName == null) {
-            throw new IllegalArgumentException("Parameter runbookName is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter runbookName is required and cannot be null."));
         }
         if (binaryContent == null) {
-            throw new IllegalArgumentException("Parameter binaryContent is required and cannot be null.");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter binaryContent is required and cannot be null."));
         }
         final String accept = "text/powershell";
         return service.putWithBinaryTextRequestAndResponseSync(this.client.getHost(), runbookName, binaryContent,
@@ -1010,4 +1023,6 @@ public final class Binaries {
         return putWithBinaryTextRequestAndResponseWithResponse(runbookName, binaryContent, contentLength, Context.NONE)
             .getValue();
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Binaries.class);
 }

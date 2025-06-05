@@ -6,6 +6,7 @@ package fixtures.bodyformdataurlencoded.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -184,14 +185,19 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
      */
     public void validate() {
         if (getPetType() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property petType in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property petType in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"));
         }
         if (getPetFood() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property petFood in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property petFood in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(
+        Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.class);
 
     /**
      * {@inheritDoc}
