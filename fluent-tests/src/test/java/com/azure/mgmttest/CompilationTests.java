@@ -29,8 +29,6 @@ import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
 import com.azure.mgmttest.nonstringexpandableenum.fluent.models.ScheduledQueryRuleProperties;
 import com.azure.mgmttest.nonstringexpandableenum.models.AlertSeverity;
 import com.azure.mgmttest.postgresqlhsc.fluent.models.ServerConfigurationInner;
-import com.azure.mgmttest.resources.fluent.DeploymentsClient;
-import com.azure.mgmttest.resources.fluent.models.DeploymentExtendedInner;
 import com.azure.mgmttest.resources.fluent.models.ResourceGroupInner;
 import com.azure.mgmttest.resources.models.IdentityUserAssignedIdentities;
 import com.azure.mgmttest.resourcewithwritablename.fluent.models.FirewallRuleInner;
@@ -77,8 +75,6 @@ public class CompilationTests {
         storageAccounts.list();
 
         // Add InnerSupportsGet to class.
-        InnerSupportsGet<DeploymentExtendedInner> deployments = mock(DeploymentsClient.class);
-        deployments.getByResourceGroup(anyString(), anyString());
 
         InnerSupportsGet<NetworkInterfaceInner> networkInterfaces = mock(NetworkInterfacesClient.class);
         networkInterfaces.getByResourceGroup(anyString(), anyString());
