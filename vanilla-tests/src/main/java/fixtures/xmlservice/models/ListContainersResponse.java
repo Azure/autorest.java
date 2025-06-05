@@ -6,6 +6,7 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -220,17 +221,23 @@ public final class ListContainersResponse {
      */
     public void validate() {
         if (getServiceEndpoint() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property serviceEndpoint in model ListContainersResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property serviceEndpoint in model ListContainersResponse"));
         }
         if (getPrefix() == null) {
-            throw new IllegalArgumentException("Missing required property prefix in model ListContainersResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property prefix in model ListContainersResponse"));
         }
         if (getContainers() != null) {
             getContainers().forEach(e -> e.validate());
         }
         if (getNextMarker() == null) {
-            throw new IllegalArgumentException("Missing required property nextMarker in model ListContainersResponse");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property nextMarker in model ListContainersResponse"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ListContainersResponse.class);
 }

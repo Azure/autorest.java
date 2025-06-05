@@ -7,6 +7,7 @@ package fixtures.streamstylexmlserialization.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -119,15 +120,20 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
      */
     public void validate() {
         if (getStart() == null) {
-            throw new IllegalArgumentException("Missing required property start in model AccessPolicy");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property start in model AccessPolicy"));
         }
         if (getExpiry() == null) {
-            throw new IllegalArgumentException("Missing required property expiry in model AccessPolicy");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property expiry in model AccessPolicy"));
         }
         if (getPermission() == null) {
-            throw new IllegalArgumentException("Missing required property permission in model AccessPolicy");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property permission in model AccessPolicy"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AccessPolicy.class);
 
     @Generated
     @Override

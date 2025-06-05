@@ -6,6 +6,7 @@ package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -88,14 +89,18 @@ public final class SignedIdentifier implements XmlSerializable<SignedIdentifier>
      */
     public void validate() {
         if (getId() == null) {
-            throw new IllegalArgumentException("Missing required property id in model SignedIdentifier");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property id in model SignedIdentifier"));
         }
         if (getAccessPolicy() == null) {
-            throw new IllegalArgumentException("Missing required property accessPolicy in model SignedIdentifier");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property accessPolicy in model SignedIdentifier"));
         } else {
             getAccessPolicy().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(SignedIdentifier.class);
 
     @Generated
     @Override

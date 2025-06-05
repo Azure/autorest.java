@@ -6,6 +6,7 @@ package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -93,7 +94,10 @@ public final class ApplicationPackageReference {
      */
     public void validate() {
         if (getId() == null) {
-            throw new IllegalArgumentException("Missing required property id in model ApplicationPackageReference");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property id in model ApplicationPackageReference"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ApplicationPackageReference.class);
 }

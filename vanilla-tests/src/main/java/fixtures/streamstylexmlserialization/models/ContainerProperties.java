@@ -7,6 +7,7 @@ package fixtures.streamstylexmlserialization.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.DateTimeRfc1123;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -210,12 +211,17 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      */
     public void validate() {
         if (getLastModified() == null) {
-            throw new IllegalArgumentException("Missing required property lastModified in model ContainerProperties");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property lastModified in model ContainerProperties"));
         }
         if (getEtag() == null) {
-            throw new IllegalArgumentException("Missing required property etag in model ContainerProperties");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property etag in model ContainerProperties"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ContainerProperties.class);
 
     @Generated
     @Override

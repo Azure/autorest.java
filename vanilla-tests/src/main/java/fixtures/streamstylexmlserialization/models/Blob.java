@@ -6,6 +6,7 @@ package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -174,17 +175,21 @@ public final class Blob implements XmlSerializable<Blob> {
      */
     public void validate() {
         if (getName() == null) {
-            throw new IllegalArgumentException("Missing required property name in model Blob");
+            throw LOGGER.atError().log(new IllegalArgumentException("Missing required property name in model Blob"));
         }
         if (getSnapshot() == null) {
-            throw new IllegalArgumentException("Missing required property snapshot in model Blob");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property snapshot in model Blob"));
         }
         if (getProperties() == null) {
-            throw new IllegalArgumentException("Missing required property properties in model Blob");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property properties in model Blob"));
         } else {
             getProperties().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Blob.class);
 
     @Generated
     @Override

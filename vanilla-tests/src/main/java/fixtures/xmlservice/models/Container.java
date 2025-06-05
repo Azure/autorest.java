@@ -6,6 +6,7 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.Map;
@@ -117,12 +118,16 @@ public final class Container {
      */
     public void validate() {
         if (getName() == null) {
-            throw new IllegalArgumentException("Missing required property name in model Container");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property name in model Container"));
         }
         if (getProperties() == null) {
-            throw new IllegalArgumentException("Missing required property properties in model Container");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property properties in model Container"));
         } else {
             getProperties().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(Container.class);
 }

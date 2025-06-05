@@ -6,6 +6,7 @@ package fixtures.discriminatorflattening.clientflatten.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -56,9 +57,12 @@ public final class MetricAlertProperties {
      */
     public void validate() {
         if (getCriteria() == null) {
-            throw new IllegalArgumentException("Missing required property criteria in model MetricAlertProperties");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property criteria in model MetricAlertProperties"));
         } else {
             getCriteria().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(MetricAlertProperties.class);
 }

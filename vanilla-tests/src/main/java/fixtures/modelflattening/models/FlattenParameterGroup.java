@@ -6,6 +6,7 @@ package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 
 /**
  * Parameter group.
@@ -253,13 +254,18 @@ public final class FlattenParameterGroup {
      */
     public void validate() {
         if (getName() == null) {
-            throw new IllegalArgumentException("Missing required property name in model FlattenParameterGroup");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property name in model FlattenParameterGroup"));
         }
         if (getSimpleBodyProduct() != null) {
             getSimpleBodyProduct().validate();
         }
         if (getProductId() == null) {
-            throw new IllegalArgumentException("Missing required property productId in model FlattenParameterGroup");
+            throw LOGGER.atError()
+                .log(
+                    new IllegalArgumentException("Missing required property productId in model FlattenParameterGroup"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(FlattenParameterGroup.class);
 }

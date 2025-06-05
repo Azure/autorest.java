@@ -6,6 +6,7 @@ package fixtures.xmlconstant.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
@@ -76,9 +77,12 @@ public final class QueryRequest implements XmlSerializable<QueryRequest> {
      */
     public void validate() {
         if (getExpression() == null) {
-            throw new IllegalArgumentException("Missing required property expression in model QueryRequest");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property expression in model QueryRequest"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(QueryRequest.class);
 
     @Generated
     @Override

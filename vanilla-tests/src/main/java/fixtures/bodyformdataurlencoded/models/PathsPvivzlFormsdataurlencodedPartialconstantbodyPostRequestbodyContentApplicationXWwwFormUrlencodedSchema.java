@@ -6,6 +6,7 @@ package fixtures.bodyformdataurlencoded.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -114,14 +115,19 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      */
     public void validate() {
         if (getService() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property service in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property service in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"));
         }
         if (getAadAccessToken() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property aadAccessToken in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property aadAccessToken in model PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(
+        PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.class);
 
     /**
      * {@inheritDoc}

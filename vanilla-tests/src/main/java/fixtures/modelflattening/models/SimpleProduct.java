@@ -6,6 +6,7 @@ package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -163,9 +164,12 @@ public class SimpleProduct extends BaseProduct {
     @Override
     public void validate() {
         if (getProductId() == null) {
-            throw new IllegalArgumentException("Missing required property productId in model SimpleProduct");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property productId in model SimpleProduct"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(SimpleProduct.class);
 
     /**
      * {@inheritDoc}

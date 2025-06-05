@@ -6,6 +6,7 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
@@ -193,16 +194,22 @@ public final class CorsRule {
      */
     public void validate() {
         if (getAllowedOrigins() == null) {
-            throw new IllegalArgumentException("Missing required property allowedOrigins in model CorsRule");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property allowedOrigins in model CorsRule"));
         }
         if (getAllowedMethods() == null) {
-            throw new IllegalArgumentException("Missing required property allowedMethods in model CorsRule");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property allowedMethods in model CorsRule"));
         }
         if (getAllowedHeaders() == null) {
-            throw new IllegalArgumentException("Missing required property allowedHeaders in model CorsRule");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property allowedHeaders in model CorsRule"));
         }
         if (getExposedHeaders() == null) {
-            throw new IllegalArgumentException("Missing required property exposedHeaders in model CorsRule");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property exposedHeaders in model CorsRule"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(CorsRule.class);
 }

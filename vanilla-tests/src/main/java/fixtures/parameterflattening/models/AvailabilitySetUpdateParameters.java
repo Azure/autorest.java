@@ -6,6 +6,7 @@ package fixtures.parameterflattening.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -60,10 +61,13 @@ public final class AvailabilitySetUpdateParameters implements JsonSerializable<A
      */
     public void validate() {
         if (getTags() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property tags in model AvailabilitySetUpdateParameters");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property tags in model AvailabilitySetUpdateParameters"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AvailabilitySetUpdateParameters.class);
 
     /**
      * {@inheritDoc}

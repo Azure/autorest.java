@@ -6,6 +6,7 @@ package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 
 /**
  * Parameter group.
@@ -138,8 +139,11 @@ public final class ParameterGroupingPostRequiredParameters {
      */
     public void validate() {
         if (getPath() == null) {
-            throw new IllegalArgumentException(
-                "Missing required property path in model ParameterGroupingPostRequiredParameters");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property path in model ParameterGroupingPostRequiredParameters"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(ParameterGroupingPostRequiredParameters.class);
 }

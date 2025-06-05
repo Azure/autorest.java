@@ -6,6 +6,7 @@ package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
@@ -117,13 +118,18 @@ public final class AccessPolicy {
      */
     public void validate() {
         if (getStart() == null) {
-            throw new IllegalArgumentException("Missing required property start in model AccessPolicy");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property start in model AccessPolicy"));
         }
         if (getExpiry() == null) {
-            throw new IllegalArgumentException("Missing required property expiry in model AccessPolicy");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property expiry in model AccessPolicy"));
         }
         if (getPermission() == null) {
-            throw new IllegalArgumentException("Missing required property permission in model AccessPolicy");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property permission in model AccessPolicy"));
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(AccessPolicy.class);
 }

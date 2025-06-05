@@ -7,6 +7,7 @@ package fixtures.inheritance.passdiscriminator.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.JsonFlatten;
+import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -58,9 +59,12 @@ public class MetricAlertResource {
      */
     public void validate() {
         if (getCriteria() == null) {
-            throw new IllegalArgumentException("Missing required property criteria in model MetricAlertResource");
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property criteria in model MetricAlertResource"));
         } else {
             getCriteria().validate();
         }
     }
+
+    private static final ClientLogger LOGGER = new ClientLogger(MetricAlertResource.class);
 }
