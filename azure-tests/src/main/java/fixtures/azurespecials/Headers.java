@@ -55,7 +55,7 @@ public final class Headers {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestAzureSpecial")
+    @ServiceInterface(name = "AutoRestAzureSpecialParametersTestClientHeaders")
     public interface HeadersService {
         @Post("/azurespecials/customNamedRequestId")
         @ExpectedResponses({ 200 })

@@ -56,7 +56,7 @@ public final class Pets {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AdditionalProperties")
+    @ServiceInterface(name = "AdditionalPropertiesClientPets")
     public interface PetsService {
         @Put("/additionalProperties/true")
         @ExpectedResponses({ 200 })

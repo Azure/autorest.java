@@ -67,7 +67,7 @@ public final class BasicsImpl {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServiceBasics")
     public interface BasicsService {
         @Get("/complex/basic/valid")
         @ExpectedResponses({ 200 })

@@ -65,7 +65,7 @@ public final class FlattencomplexesImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServiceFlattencomplexes")
     public interface FlattencomplexesService {
         @Get("/complex/flatten/valid")
         @ExpectedResponses({ 200 })

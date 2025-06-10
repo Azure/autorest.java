@@ -68,7 +68,7 @@ public final class StringOperationsImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatSe")
+    @ServiceInterface(name = "AutoRestSwaggerBatServiceStringOperations")
     public interface StringOperationsService {
         @Get("/string/null")
         @ExpectedResponses({ 200 })

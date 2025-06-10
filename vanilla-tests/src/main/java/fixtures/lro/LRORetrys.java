@@ -68,7 +68,7 @@ public final class LRORetrys {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestLongRunningO")
+    @ServiceInterface(name = "AutoRestLongRunningOperationTestServiceLRORetrys")
     public interface LRORetrysService {
         @Put("/lro/retryerror/put/201/creating/succeeded/200")
         @ExpectedResponses({ 200, 201 })

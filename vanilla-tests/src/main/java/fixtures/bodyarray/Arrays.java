@@ -64,7 +64,7 @@ public final class Arrays {
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATAr")
+    @ServiceInterface(name = "AutoRestSwaggerBATArrayServiceArrays")
     public interface ArraysService {
         @Get("/array/null")
         @ExpectedResponses({ 200 })

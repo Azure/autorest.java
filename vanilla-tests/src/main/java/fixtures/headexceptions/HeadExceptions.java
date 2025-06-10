@@ -49,7 +49,7 @@ public final class HeadExceptions {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHeadExceptio")
+    @ServiceInterface(name = "AutoRestHeadExceptionTestServiceHeadExceptions")
     public interface HeadExceptionsService {
         @Head("/http/success/200")
         @ExpectedResponses({ 200 })

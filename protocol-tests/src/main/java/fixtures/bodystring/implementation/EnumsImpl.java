@@ -66,7 +66,7 @@ public final class EnumsImpl {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatSe")
+    @ServiceInterface(name = "AutoRestSwaggerBatServiceEnums")
     public interface EnumsService {
         @Get("/string/enum/notExpandable")
         @ExpectedResponses({ 200 })

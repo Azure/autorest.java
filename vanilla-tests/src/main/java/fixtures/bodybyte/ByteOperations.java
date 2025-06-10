@@ -52,7 +52,7 @@ public final class ByteOperations {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATBy")
+    @ServiceInterface(name = "AutoRestSwaggerBATByteServiceByteOperations")
     public interface ByteOperationsService {
         @Get("/byte/null")
         @ExpectedResponses({ 200 })

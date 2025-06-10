@@ -67,7 +67,7 @@ public final class Explicits {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestRequiredOpti")
+    @ServiceInterface(name = "AutoRestRequiredOptionalTestServiceExplicits")
     public interface ExplicitsService {
         @Put("/reqopt/explicit/optional/binary-body")
         @ExpectedResponses({ 200 })

@@ -57,7 +57,7 @@ public final class HttpRetries {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastr")
+    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpRetries")
     public interface HttpRetriesService {
         @Head("/http/retry/408")
         @ExpectedResponses({ 200 })

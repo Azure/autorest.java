@@ -65,7 +65,7 @@ public final class HttpFailuresImpl {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastr")
+    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpFailures")
     public interface HttpFailuresService {
         @Get("/http/failure/emptybody/error")
         @ExpectedResponses({ 200 })

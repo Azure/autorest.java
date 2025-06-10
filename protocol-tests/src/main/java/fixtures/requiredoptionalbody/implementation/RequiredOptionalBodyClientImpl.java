@@ -145,7 +145,7 @@ public final class RequiredOptionalBodyClientImpl {
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "RequiredOptionalBody")
+    @ServiceInterface(name = "RequiredOptionalBodyClient")
     public interface RequiredOptionalBodyClientService {
         @Put("/body/required/object")
         @ExpectedResponses({ 200 })

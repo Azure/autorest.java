@@ -53,7 +53,7 @@ public final class DateOperations {
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestDateTestServ")
+    @ServiceInterface(name = "AutoRestDateTestServiceDateOperations")
     public interface DateOperationsService {
         @Get("/date/null")
         @ExpectedResponses({ 200 })

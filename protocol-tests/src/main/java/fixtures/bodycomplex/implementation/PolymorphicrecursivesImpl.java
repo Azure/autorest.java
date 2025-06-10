@@ -67,7 +67,7 @@ public final class PolymorphicrecursivesImpl {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServicePolymorphicrecursives")
     public interface PolymorphicrecursivesService {
         @Get("/complex/polymorphicrecursive/valid")
         @ExpectedResponses({ 200 })

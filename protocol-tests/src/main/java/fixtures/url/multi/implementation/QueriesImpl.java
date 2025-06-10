@@ -63,7 +63,7 @@ public final class QueriesImpl {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestUrlMutliColl")
+    @ServiceInterface(name = "AutoRestUrlMutliCollectionFormatTestServiceQueries")
     public interface QueriesService {
         @Get("/queries/array/multi/string/null")
         @ExpectedResponses({ 200 })

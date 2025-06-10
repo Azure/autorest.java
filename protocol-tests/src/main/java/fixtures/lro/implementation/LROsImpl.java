@@ -75,7 +75,7 @@ public final class LROsImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestLongRunningO")
+    @ServiceInterface(name = "AutoRestLongRunningOperationTestServiceLROs")
     public interface LROsService {
         @Put("/lro/put/200/succeeded")
         @ExpectedResponses({ 200, 204 })

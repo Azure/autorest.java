@@ -53,7 +53,7 @@ public final class FloatOperationsImpl {
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "NonStringEnumsClient")
+    @ServiceInterface(name = "NonStringEnumsClientFloatOperations")
     public interface FloatOperationsService {
         @Put("/nonStringEnums/float/put")
         @ExpectedResponses({ 200 })

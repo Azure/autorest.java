@@ -56,7 +56,7 @@ public final class HttpClientFailures {
      * the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastr")
+    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpClientFailures")
     public interface HttpClientFailuresService {
         @Head("/http/failure/client/400")
         @UnexpectedResponseExceptionType(ErrorException.class)

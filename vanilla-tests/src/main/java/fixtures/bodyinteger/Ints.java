@@ -53,7 +53,7 @@ public final class Ints {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestIntegerTestS")
+    @ServiceInterface(name = "AutoRestIntegerTestServiceInts")
     public interface IntsService {
         @Get("/int/null")
         @ExpectedResponses({ 200 })

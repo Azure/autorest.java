@@ -56,7 +56,7 @@ public final class Pagings {
      * proxy service to perform REST calls.
      */
     @Host("http://{accountName}{host}")
-    @ServiceInterface(name = "AutoRestParameterize")
+    @ServiceInterface(name = "AutoRestParameterizedHostTestPagingClientPagings")
     public interface PagingsService {
         @Get("/paging/customurl/partialnextlink")
         @ExpectedResponses({ 200 })

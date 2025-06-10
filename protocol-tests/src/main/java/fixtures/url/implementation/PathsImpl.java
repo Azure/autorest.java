@@ -70,7 +70,7 @@ public final class PathsImpl {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestUrlTestServi")
+    @ServiceInterface(name = "AutoRestUrlTestServicePaths")
     public interface PathsService {
         @Get("/paths/bool/true/{boolPath}")
         @ExpectedResponses({ 200 })

@@ -141,7 +141,7 @@ public final class ParmaterizedEndpointClientImpl {
      * REST calls.
      */
     @Host("{endpoint}")
-    @ServiceInterface(name = "ParmaterizedEndpoint")
+    @ServiceInterface(name = "ParmaterizedEndpointClient")
     public interface ParmaterizedEndpointClientService {
         @Get("/parameterizedEndpoint/get")
         @ExpectedResponses({ 200 })

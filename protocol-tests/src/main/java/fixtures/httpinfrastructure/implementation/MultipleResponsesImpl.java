@@ -65,7 +65,7 @@ public final class MultipleResponsesImpl {
      * the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastr")
+    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceMultipleResponses")
     public interface MultipleResponsesService {
         @Get("/http/payloads/200/A/204/none/default/Error/response/200/valid")
         @ExpectedResponses({ 200, 204 })

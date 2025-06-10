@@ -63,7 +63,7 @@ public final class PrimitivesImpl {
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServicePrimitives")
     public interface PrimitivesService {
         @Get("/complex/primitive/integer")
         @ExpectedResponses({ 200 })

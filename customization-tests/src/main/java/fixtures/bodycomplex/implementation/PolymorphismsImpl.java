@@ -56,7 +56,7 @@ public final class PolymorphismsImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServicePolymorphisms")
     public interface PolymorphismsService {
         @Get("/complex/polymorphism/valid")
         @ExpectedResponses({ 200 })

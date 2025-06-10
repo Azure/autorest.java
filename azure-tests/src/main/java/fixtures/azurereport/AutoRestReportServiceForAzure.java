@@ -119,7 +119,7 @@ public final class AutoRestReportServiceForAzure {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestReportServic")
+    @ServiceInterface(name = "AutoRestReportServiceForAzure")
     public interface AutoRestReportServiceForAzureService {
         @Get("/report/azure")
         @ExpectedResponses({ 200 })

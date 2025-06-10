@@ -52,7 +52,7 @@ public final class Groups {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "MicrosoftAzureTestUr")
+    @ServiceInterface(name = "MicrosoftAzureTestUrlGroups")
     public interface GroupsService {
         @Get("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         @ExpectedResponses({ 200 })

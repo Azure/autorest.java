@@ -72,7 +72,7 @@ public final class Xmls {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATXM")
+    @ServiceInterface(name = "AutoRestSwaggerBATXMLServiceXmls")
     public interface XmlsService {
         @Get("/xml/complex-type-ref-no-meta")
         @ExpectedResponses({ 200 })

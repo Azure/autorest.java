@@ -57,7 +57,7 @@ public final class HttpSuccess {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastr")
+    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpSuccess")
     public interface HttpSuccessService {
         @Head("/http/success/200")
         @ExpectedResponses({ 200 })

@@ -125,7 +125,7 @@ public final class MultipleInheritanceServiceClient {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "MultipleInheritanceS")
+    @ServiceInterface(name = "MultipleInheritanceServiceClient")
     public interface MultipleInheritanceServiceClientService {
         @Get("/multipleInheritance/horse")
         @ExpectedResponses({ 200 })

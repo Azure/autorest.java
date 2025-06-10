@@ -53,7 +53,7 @@ public final class InheritancesImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServiceInheritances")
     public interface InheritancesService {
         @Get("/complex/inheritance/valid")
         @ExpectedResponses({ 200 })

@@ -72,7 +72,7 @@ public final class HttpRedirectsImpl {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastr")
+    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpRedirects")
     public interface HttpRedirectsService {
         @Head("/http/redirect/300")
         @ExpectedResponses({ 200, 300 })

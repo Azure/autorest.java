@@ -55,7 +55,7 @@ public final class Datetimerfc1123s {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestRFC1123DateT")
+    @ServiceInterface(name = "AutoRestRFC1123DateTimeTestServiceDatetimerfc1123s")
     public interface Datetimerfc1123sService {
         @Get("/datetimerfc1123/null")
         @ExpectedResponses({ 200 })

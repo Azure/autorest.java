@@ -51,7 +51,7 @@ public final class ApiVersionDefaults {
      * by the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestAzureSpecial")
+    @ServiceInterface(name = "AutoRestAzureSpecialParametersTestClientApiVersionDefaults")
     public interface ApiVersionDefaultsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         @ExpectedResponses({ 200 })

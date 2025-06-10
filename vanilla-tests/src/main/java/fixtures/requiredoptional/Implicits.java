@@ -57,7 +57,7 @@ public final class Implicits {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestRequiredOpti")
+    @ServiceInterface(name = "AutoRestRequiredOptionalTestServiceImplicits")
     public interface ImplicitsService {
         @Get("/reqopt/implicit/required/path/{pathParameter}")
         @ExpectedResponses({ 200 })
