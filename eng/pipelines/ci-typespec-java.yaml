@@ -25,7 +25,7 @@ pr:
 
 variables:
 - name: isMain
-  value: $[ eq(variables['Build.SourceBranch'], 'refs/heads/eng_fix-typespec-java-upload-report') ]
+  value: $[ eq(variables['Build.SourceBranch'], 'refs/heads/main') ]
 
 jobs:
 - job: Build_TypeSpec
