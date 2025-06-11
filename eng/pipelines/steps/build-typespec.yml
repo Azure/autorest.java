@@ -1,0 +1,78 @@
+steps:
+- checkout: self
+  submodules: true
+
+- ${{ if ne(parameters.SubmoduleCommit, '') }} :
+  - template: /eng/pipelines/steps/update-submodule-commit.yml
+    parameters:
+      SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+
+- task: NodeTool@0
+  displayName: 'Install Node.js $(NodeVersion)'
+  inputs:
+    versionSpec: '$(NodeVersion)'
+
+- template: /eng/pipelines/steps/cache-maven-repository.yml
+  parameters:
+    JobType: 'TypeSpec'
+
+- task: PowerShell@2
+  retryCountOnTaskFailure: 1
+  displayName: 'Build and Generate Code'
+  inputs:
+    pwsh: true
+    filePath: Generate-TypeSpec.ps1
+
+- script: |
+    git status
+    git diff
+  displayName: 'Git Diff'
+
+# - script: |
+#     npm run test
+#   displayName: 'Run TypeScript Unit Tests'
+#   workingDirectory: ./typespec-extension
+
+# - script: |
+#     [ -z "`git status --porcelain -- :!package-lock.json`" ]
+#   displayName: 'Check no Diff'
+
+- task: Maven@4
+  displayName: 'Verify Test Code'
+  inputs:
+    mavenPomFile: 'typespec-tests/pom.xml'
+    goals: 'verify'
+    options: '$(DefaultOptions) -DskipTests -T 1C'
+    mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: $(JavaVersion)
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+
+- script: |
+    npx --no-install tsp-spector server start ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json
+  displayName: 'Start Spector Test Server'
+  workingDirectory: ./typespec-tests
+
+- task: Maven@4
+  displayName: 'Run TypeSpec Tests'
+  inputs:
+    mavenPomFile: pom.xml
+    goals: 'clean test'
+    options: '$(DefaultOptions) -PtestTsp -pl typespec-tests -DtrimStackTrace=false'
+    mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: $(JavaVersion)
+    jdkArchitectureOption: 'x64'
+    publishJUnitResults: false
+
+- script: |
+    npx --no-install tsp-spector server stop
+  displayName: 'Stop Spector Test Server'
+  workingDirectory: ./typespec-tests
+
+- publish: $(Build.SourcesDirectory)/typespec-tests/tsp-spector-coverage-java.json
+  artifact: CoverageReport
+  displayName: 'Publish Spector Coverage Report'
+
+- template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

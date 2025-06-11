@@ -23,7 +23,33 @@ pr:
       - 'vanilla-tests'
       - 'protocol*'
 
+variables:
+- name: isMain
+  value: $[ eq(variables['Build.SourceBranch'], 'refs/heads/eng_fix-typespec-java-upload-report') ]
+
 jobs:
-- template: /eng/pipelines/jobs/build-typespec.yml
-  parameters:
-    UploadSpectorReport: true
+- job: Build_TypeSpec
+
+  timeoutInMinutes: 60
+
+  variables:
+    - template: /eng/pipelines/variables/globals.yml
+    - template: /eng/pipelines/variables/image.yml
+
+  pool:
+    name: $(LINUXPOOL)
+    image: $(LINUXVMIMAGE)
+    os: linux
+
+  steps:
+  - template: /eng/pipelines/steps/build-typespec.yml
+
+  - task: AzureCLI@2
+    condition: eq(variables.isMain, true)
+    displayName: 'Upload to Spector Coverage Report Dashboard'
+    inputs:
+      azureSubscription: "TypeSpec Storage"
+      scriptType: "bash"
+      scriptLocation: "inlineScript"
+      inlineScript: npx --no-install tsp-spector upload-coverage --coverageFile ./tsp-spector-coverage-java.json --generatorName "@azure-tools/typespec-java" --storageAccountName typespec --containerName coverages --generatorMode azure --generatorVersion $(node -p -e "require('../typespec-extension/package.json').version")
+      workingDirectory: ./typespec-tests
