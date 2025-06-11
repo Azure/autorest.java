@@ -66,7 +66,7 @@ public final class QueriesImpl {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestUrlTestServi")
+    @ServiceInterface(name = "AutoRestUrlTestServiceQueries")
     public interface QueriesService {
         @Get("/queries/bool/true")
         @ExpectedResponses({ 200 })

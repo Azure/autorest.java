@@ -145,7 +145,7 @@ public final class DpgMultiMediaTypesClientImpl {
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "DpgMultiMediaTypesCl")
+    @ServiceInterface(name = "DpgMultiMediaTypesClient")
     public interface DpgMultiMediaTypesClientService {
         @Post("/mediatypes/jsonandbinary/jsonfirst")
         @ExpectedResponses({ 200 })

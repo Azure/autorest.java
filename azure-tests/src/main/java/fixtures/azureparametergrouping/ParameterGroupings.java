@@ -60,7 +60,7 @@ public final class ParameterGroupings {
      * the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestParameterGro")
+    @ServiceInterface(name = "AutoRestParameterGroupingTestServiceParameterGroupings")
     public interface ParameterGroupingsService {
         @Post("/parameterGrouping/postRequired/{path}")
         @ExpectedResponses({ 200 })

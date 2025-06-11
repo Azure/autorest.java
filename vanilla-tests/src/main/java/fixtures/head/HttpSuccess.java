@@ -49,7 +49,7 @@ public final class HttpSuccess {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHeadTestServ")
+    @ServiceInterface(name = "AutoRestHeadTestServiceHttpSuccess")
     public interface HttpSuccessService {
         @Head("/http/success/200")
         @ExpectedResponses({ 200, 404 })

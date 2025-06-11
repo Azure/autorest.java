@@ -64,7 +64,7 @@ public final class FilesImpl {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatFi")
+    @ServiceInterface(name = "AutoRestSwaggerBatFileServiceFiles")
     public interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({ 200 })

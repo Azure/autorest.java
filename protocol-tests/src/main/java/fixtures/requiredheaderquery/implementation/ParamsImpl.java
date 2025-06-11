@@ -73,7 +73,7 @@ public final class ParamsImpl {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "DpgRequiredHeaderQue")
+    @ServiceInterface(name = "DpgRequiredHeaderQueryClientParams")
     public interface ParamsService {
         @Get("/required/query/parameters")
         @ExpectedResponses({ 200 })

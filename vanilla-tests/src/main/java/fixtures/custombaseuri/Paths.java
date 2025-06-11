@@ -49,7 +49,7 @@ public final class Paths {
      * service to perform REST calls.
      */
     @Host("http://{accountName}{host}")
-    @ServiceInterface(name = "AutoRestParameterize")
+    @ServiceInterface(name = "AutoRestParameterizedHostTestClientPaths")
     public interface PathsService {
         @Get("/customuri")
         @ExpectedResponses({ 200 })

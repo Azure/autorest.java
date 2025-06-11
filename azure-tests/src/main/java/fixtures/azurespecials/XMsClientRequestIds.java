@@ -51,7 +51,7 @@ public final class XMsClientRequestIds {
      * used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestAzureSpecial")
+    @ServiceInterface(name = "AutoRestAzureSpecialParametersTestClientXMsClientRequestIds")
     public interface XMsClientRequestIdsService {
         @Get("/azurespecials/overwrite/x-ms-client-request-id/method/")
         @ExpectedResponses({ 200 })

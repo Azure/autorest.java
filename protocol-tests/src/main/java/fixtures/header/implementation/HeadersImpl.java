@@ -66,7 +66,7 @@ public final class HeadersImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBatHe")
+    @ServiceInterface(name = "AutoRestSwaggerBatHeaderServiceHeaders")
     public interface HeadersService {
         @Post("/header/param/existingkey")
         @ExpectedResponses({ 200 })

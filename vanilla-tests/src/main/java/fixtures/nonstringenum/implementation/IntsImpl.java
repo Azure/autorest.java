@@ -52,7 +52,7 @@ public final class IntsImpl {
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "NonStringEnumsClient")
+    @ServiceInterface(name = "NonStringEnumsClientInts")
     public interface IntsService {
         @Put("/nonStringEnums/int/put")
         @ExpectedResponses({ 200 })

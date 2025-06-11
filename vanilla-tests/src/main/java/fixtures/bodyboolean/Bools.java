@@ -51,7 +51,7 @@ public final class Bools {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestBoolTestServ")
+    @ServiceInterface(name = "AutoRestBoolTestServiceBools")
     public interface BoolsService {
         @Get("/bool/true")
         @ExpectedResponses({ 200 })

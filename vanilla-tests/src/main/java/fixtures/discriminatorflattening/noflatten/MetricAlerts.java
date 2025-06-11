@@ -51,7 +51,7 @@ public final class MetricAlerts {
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "MonitorManagementCli")
+    @ServiceInterface(name = "MonitorManagementClientMetricAlerts")
     public interface MetricAlertsService {
         @Get("/providers/Microsoft.Insights/metricAlerts")
         @ExpectedResponses({ 200 })

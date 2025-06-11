@@ -119,7 +119,7 @@ public final class RequiredFieldsAsCtorArgsTransformation {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "RequiredFieldsAsCtor")
+    @ServiceInterface(name = "RequiredFieldsAsCtorArgsTransformation")
     public interface RequiredFieldsAsCtorArgsTransformationService {
         @Get("/argstransformation")
         @ExpectedResponses({ 200 })

@@ -53,7 +53,7 @@ public final class AvailabilitySets {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestParameterFla")
+    @ServiceInterface(name = "AutoRestParameterFlatteningAvailabilitySets")
     public interface AvailabilitySetsService {
         @Patch("/parameterFlattening/{resourceGroupName}/{availabilitySetName}")
         @ExpectedResponses({ 200 })

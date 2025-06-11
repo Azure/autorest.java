@@ -54,7 +54,7 @@ public final class DatetimeOperations {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestDateTimeTest")
+    @ServiceInterface(name = "AutoRestDateTimeTestServiceDatetimeOperations")
     public interface DatetimeOperationsService {
         @Get("/datetime/null")
         @ExpectedResponses({ 200 })

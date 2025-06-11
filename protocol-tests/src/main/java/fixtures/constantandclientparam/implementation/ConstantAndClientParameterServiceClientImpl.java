@@ -206,7 +206,7 @@ public final class ConstantAndClientParameterServiceClientImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "ConstantAndClientPar")
+    @ServiceInterface(name = "ConstantAndClientParameterServiceClient")
     public interface ConstantAndClientParameterServiceClientService {
         @Put("/constant/clientparam/path")
         @ExpectedResponses({ 200 })

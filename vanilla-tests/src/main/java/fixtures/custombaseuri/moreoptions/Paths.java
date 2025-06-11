@@ -51,7 +51,7 @@ public final class Paths {
      * proxy service to perform REST calls.
      */
     @Host("{vault}{secret}{dnsSuffix}")
-    @ServiceInterface(name = "AutoRestParameterize")
+    @ServiceInterface(name = "AutoRestParameterizedCustomHostTestClientPaths")
     public interface PathsService {
         @Get("/customuri/{subscriptionId}/{keyName}")
         @ExpectedResponses({ 200 })

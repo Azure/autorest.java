@@ -52,7 +52,7 @@ public final class SubscriptionInCredentials {
      * be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestAzureSpecial")
+    @ServiceInterface(name = "AutoRestAzureSpecialParametersTestClientSubscriptionInCredentials")
     public interface SubscriptionInCredentialsService {
         @Post("/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}")
         @ExpectedResponses({ 200 })

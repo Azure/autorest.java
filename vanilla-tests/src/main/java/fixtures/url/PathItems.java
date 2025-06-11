@@ -52,7 +52,7 @@ public final class PathItems {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestUrlTestServi")
+    @ServiceInterface(name = "AutoRestUrlTestServicePathItems")
     public interface PathItemsService {
         @Get("/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery")
         @ExpectedResponses({ 200 })

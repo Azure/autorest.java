@@ -51,7 +51,7 @@ public final class ApiVersionLocals {
      * by the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestAzureSpecial")
+    @ServiceInterface(name = "AutoRestAzureSpecialParametersTestClientApiVersionLocals")
     public interface ApiVersionLocalsService {
         @Get("/azurespecials/apiVersion/method/string/none/query/local/2.0")
         @ExpectedResponses({ 200 })

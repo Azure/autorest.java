@@ -68,7 +68,7 @@ public final class PagingsImpl {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestPagingTestSe")
+    @ServiceInterface(name = "AutoRestPagingTestServicePagings")
     public interface PagingsService {
         @Get("/paging/noitemname")
         @ExpectedResponses({ 200 })

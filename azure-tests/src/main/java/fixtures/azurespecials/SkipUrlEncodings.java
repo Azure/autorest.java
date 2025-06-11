@@ -52,7 +52,7 @@ public final class SkipUrlEncodings {
      * by the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestAzureSpecial")
+    @ServiceInterface(name = "AutoRestAzureSpecialParametersTestClientSkipUrlEncodings")
     public interface SkipUrlEncodingsService {
         @Get("/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         @ExpectedResponses({ 200 })

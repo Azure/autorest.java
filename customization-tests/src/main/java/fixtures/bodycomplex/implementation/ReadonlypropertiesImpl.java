@@ -53,7 +53,7 @@ public final class ReadonlypropertiesImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServiceReadonlyproperties")
     public interface ReadonlypropertiesService {
         @Get("/complex/readonlyproperty/valid")
         @ExpectedResponses({ 200 })

@@ -131,7 +131,7 @@ public final class AutoRestResourceFlatteningTestService {
      * to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestResourceFlat")
+    @ServiceInterface(name = "AutoRestResourceFlatteningTestService")
     public interface AutoRestResourceFlatteningTestServiceService {
         @Put("/model-flatten/array")
         @ExpectedResponses({ 200 })

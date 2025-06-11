@@ -61,7 +61,7 @@ public final class DictionariesImpl {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATDi")
+    @ServiceInterface(name = "AutoRestSwaggerBATDictionaryServiceDictionaries")
     public interface DictionariesService {
         @Get("/dictionary/null")
         @ExpectedResponses({ 200 })

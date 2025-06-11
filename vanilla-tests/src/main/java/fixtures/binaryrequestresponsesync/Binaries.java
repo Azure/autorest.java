@@ -55,7 +55,7 @@ public final class Binaries {
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "BinariesClientBinari")
+    @ServiceInterface(name = "BinariesClientBinaries")
     public interface BinariesService {
         @Put("/binaryRequestAndResponse")
         @ExpectedResponses({ 200 })

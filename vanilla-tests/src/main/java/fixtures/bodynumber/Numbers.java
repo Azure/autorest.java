@@ -52,7 +52,7 @@ public final class Numbers {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestNumberTestSe")
+    @ServiceInterface(name = "AutoRestNumberTestServiceNumbers")
     public interface NumbersService {
         @Get("/number/null")
         @ExpectedResponses({ 200 })

@@ -52,7 +52,7 @@ public final class Arrays {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServiceArrays")
     public interface ArraysService {
         @Get("/complex/array/valid")
         @ExpectedResponses({ 200 })

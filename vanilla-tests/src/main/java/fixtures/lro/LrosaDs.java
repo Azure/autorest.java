@@ -81,7 +81,7 @@ public final class LrosaDs {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestLongRunningO")
+    @ServiceInterface(name = "AutoRestLongRunningOperationTestServiceLrosaDs")
     public interface LrosaDsService {
         @Put("/lro/nonretryerror/put/400")
         @ExpectedResponses({ 200, 201 })

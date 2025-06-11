@@ -50,7 +50,7 @@ public final class Files {
      * perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATFi")
+    @ServiceInterface(name = "AutoRestSwaggerBATFileServiceFiles")
     public interface FilesService {
         @Get("/files/stream/nonempty")
         @ExpectedResponses({ 200 })

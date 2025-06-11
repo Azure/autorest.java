@@ -57,7 +57,7 @@ public final class SchemaGroupsOperationsImpl {
      * service to perform REST calls.
      */
     @Host("https://{endpoint}")
-    @ServiceInterface(name = "AzureSchemaRegistryS")
+    @ServiceInterface(name = "AzureSchemaRegistrySchemaGroupsOperations")
     public interface SchemaGroupsService {
         @Get("/$schemaGroups")
         @ExpectedResponses({ 200 })

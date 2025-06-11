@@ -54,7 +54,7 @@ public final class Dictionaries {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestComplexTestS")
+    @ServiceInterface(name = "AutoRestComplexTestServiceDictionaries")
     public interface DictionariesService {
         @Get("/complex/dictionary/typed/valid")
         @ExpectedResponses({ 200 })

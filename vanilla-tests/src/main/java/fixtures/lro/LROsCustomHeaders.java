@@ -64,7 +64,7 @@ public final class LROsCustomHeaders {
      * by the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestLongRunningO")
+    @ServiceInterface(name = "AutoRestLongRunningOperationTestServiceLROsCustomHeaders")
     public interface LROsCustomHeadersService {
         @Put("/lro/customheader/putasync/retry/succeeded")
         @ExpectedResponses({ 200 })

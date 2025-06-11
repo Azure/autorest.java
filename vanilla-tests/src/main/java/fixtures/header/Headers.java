@@ -70,7 +70,7 @@ public final class Headers {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerBATHe")
+    @ServiceInterface(name = "AutoRestSwaggerBATHeaderServiceHeaders")
     public interface HeadersService {
         @Post("/header/param/existingkey")
         @ExpectedResponses({ 200 })

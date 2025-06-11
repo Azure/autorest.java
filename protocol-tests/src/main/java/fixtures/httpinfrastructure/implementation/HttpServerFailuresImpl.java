@@ -68,7 +68,7 @@ public final class HttpServerFailuresImpl {
      * the proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestHttpInfrastr")
+    @ServiceInterface(name = "AutoRestHttpInfrastructureTestServiceHttpServerFailures")
     public interface HttpServerFailuresService {
         @Head("/http/failure/server/501")
         @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })

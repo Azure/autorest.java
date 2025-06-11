@@ -119,7 +119,7 @@ public final class AutoRestReportService {
      * calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestReportServic")
+    @ServiceInterface(name = "AutoRestReportService")
     public interface AutoRestReportServiceService {
         @Get("/report")
         @ExpectedResponses({ 200 })

@@ -161,7 +161,7 @@ public final class AutoRestValidationTest {
      * REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestValidationTe")
+    @ServiceInterface(name = "AutoRestValidationTest")
     public interface AutoRestValidationTestService {
         @Get("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         @ExpectedResponses({ 200 })

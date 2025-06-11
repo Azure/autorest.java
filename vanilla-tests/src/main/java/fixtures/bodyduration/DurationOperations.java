@@ -53,7 +53,7 @@ public final class DurationOperations {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestDurationTest")
+    @ServiceInterface(name = "AutoRestDurationTestServiceDurationOperations")
     public interface DurationOperationsService {
         @Get("/duration/null")
         @ExpectedResponses({ 200 })

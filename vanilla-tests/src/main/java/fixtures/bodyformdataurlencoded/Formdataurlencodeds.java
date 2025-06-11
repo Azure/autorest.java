@@ -53,7 +53,7 @@ public final class Formdataurlencodeds {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "BodyFormsDataURLEnco")
+    @ServiceInterface(name = "BodyFormsDataURLEncodedFormdataurlencodeds")
     public interface FormdataurlencodedsService {
         // @Multipart not supported by RestProxy
         @Post("/formsdataurlencoded/pet/add/{petId}")

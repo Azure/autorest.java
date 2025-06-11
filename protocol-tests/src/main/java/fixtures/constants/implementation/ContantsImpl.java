@@ -65,7 +65,7 @@ public final class ContantsImpl {
      * service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestSwaggerConst")
+    @ServiceInterface(name = "AutoRestSwaggerConstantServiceContants")
     public interface ContantsService {
         @Put("/constants/putNoModelAsStringNoRequiredTwoValueNoDefault")
         @ExpectedResponses({ 201 })

@@ -50,7 +50,7 @@ public final class Odatas {
      * proxy service to perform REST calls.
      */
     @Host("{$host}")
-    @ServiceInterface(name = "AutoRestAzureSpecial")
+    @ServiceInterface(name = "AutoRestAzureSpecialParametersTestClientOdatas")
     public interface OdatasService {
         @Get("/azurespecials/odata/filter")
         @ExpectedResponses({ 200 })
