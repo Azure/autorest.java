@@ -1,5 +1,27 @@
 # Release History
 
+## 1.0.0-beta.11 (2025-06-12)
+
+### Breaking Changes
+
+- Removed Eclipse-based customization framework, only JavaParser-based customization framework is available.
+- Removed `ConstructorCustomization`, `ConstantCustomization`, `JavadocCustomization`, `MethodCustomization`, and
+  `PropertyCustomization` class.
+- Removed all APIs in `ClassCustomization` except `customizeAst`.
+
+## 1.0.0-beta.10 (2025-05-28)
+
+### Features Added
+
+- Added JavaParser-based customization framework that only allows modifications using `ClassCustomization.customizeAst`
+  that doesn't support code refactoring concepts (all customizations must fully know what to change).
+- Added ability to determine whether to use classic Eclipse-based or new JavaParser-based customization framework.
+
+### Breaking Changes
+
+- Turned all `*Customization` classes into interfaces to support separate Eclipse language server and JavaParser-based
+  customization frameworks.
+
 ## 1.0.0-beta.9 (2024-11-21)
 
 ### Other Changes
