@@ -1,10 +1,7 @@
-import com.azure.autorest.customization.ClassCustomization;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
-import com.azure.autorest.customization.PackageCustomization;
+import com.github.javaparser.javadoc.description.JavadocDescription;
 import org.slf4j.Logger;
-
-import java.util.Arrays;
 
 /**
  * This class contains the customization code to customize the AutoRest generated code for App Configuration.
@@ -14,10 +11,13 @@ public class CustomizationTest extends Customization {
     @Override
     public void customize(LibraryCustomization customization, Logger logger) {
         logger.info("Customizing the NamingClient javadoc");
-        PackageCustomization packageCustomization = customization.getPackage("tsptest.naming");
-        ClassCustomization classCustomization = packageCustomization.getClass("NamingClient");
-        classCustomization.getMethod("postWithResponse")
-                .getJavadoc()
-                .setDescription("Protocol method for POST operation.");
+        customization.getClass("tsptest.naming", "NamingClient").customizeAst(ast -> ast.getClassByName("NamingClient")
+            .ifPresent(clazz -> clazz.getMethodsByName("postWithResponse").forEach(method -> method.getJavadoc()
+                .ifPresent(javadoc -> {
+                    javadoc.getDescription().getElements().clear();
+                    javadoc.getDescription().getElements()
+                        .addAll(JavadocDescription.parseText("Protocol method for POST operation.").getElements());
+                    method.setJavadocComment(javadoc);
+                }))));
     }
 }
