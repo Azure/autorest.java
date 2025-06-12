@@ -16,7 +16,7 @@ public final class CMYKColors extends ExpandableStringEnum<CMYKColors> {
      * Static value cyan for CMYKColors.
      */
     @Generated
-    public static final CMYKColors CYAN = fromString("cyan");
+    public static final CMYKColors TEAL = fromString("cyan");
 
     /**
      * Static value Magenta for CMYKColors.

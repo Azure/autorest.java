@@ -38,13 +38,13 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the ID of the object.
      *
      * @return the id value.
      */
     @Generated
-    public String getId() {
-        return this.id;
+    public UUID getId() {
+        return UUID.fromString(this.id);
     }
 
     /**
@@ -105,15 +105,6 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
             }
             return deserializedReadonlyObj;
         });
-    }
-
-    /**
-     * Get the ID of the object.
-     *
-     * @return the id value.
-     */
-    public UUID getId() {
-        return UUID.fromString(this.id);
     }
 
     /**

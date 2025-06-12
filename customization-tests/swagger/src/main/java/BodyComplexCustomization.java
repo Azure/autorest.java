@@ -19,10 +19,12 @@ public class BodyComplexCustomization extends Customization {
     public void customize(LibraryCustomization customization, Logger logger) {
         PackageCustomization implementationModels = customization.getPackage("fixtures.bodycomplex.implementation.models");
 
-        implementationModels.getClass("DotSalmon").customizeAst(ast -> ast.getClassByName("DotSalmon")
-            .ifPresent(clazz -> {
+        implementationModels.getClass("DotSalmon").customizeAst(ast -> {
+            ast.addImport("com.fasterxml.jackson.annotation.JsonProperty");
+            ast.getClassByName("DotSalmon").ifPresent(clazz -> {
                 clazz.getAnnotationByName("JsonProperty").ifPresent(Node::remove);
-                clazz.addAnnotation(StaticJavaParser.parseAnnotation("@JsonProperty(value = \"isWild\")"));
+                clazz.getFieldByName("isWild").ifPresent(field ->
+                    field.addAnnotation(StaticJavaParser.parseAnnotation("@JsonProperty(value = \"isWild\")")));
 
                 clazz.getMethodsByName("setIsWild").forEach(method -> {
                     method.setName("setWild");
@@ -40,25 +42,24 @@ public class BodyComplexCustomization extends Customization {
                     .addMarkerAnnotation("Deprecated")
                     .setType("boolean")
                     .setBody(StaticJavaParser.parseBlock("{ return \"US\".equalsIgnoreCase(getLocation()); }"))
-                    .setJavadocComment(new Javadoc(JavadocDescription.parseText(
-                        "Return if the salmon is a domestic species."))
+                    .setJavadocComment(new Javadoc(
+                        JavadocDescription.parseText("Return if the salmon is a domestic species."))
                         .addBlockTag("return", "true if the salmon is domestic")
                         .addBlockTag("deprecated", "Removing in the next version"));
-            }));
+            });
+        });
 
-        implementationModels.getClass("CMYKColors").customizeAst(ast -> ast.getEnumByName("CMYKColors")
-                .ifPresent(clazz -> clazz.getEntries().stream()
-                    .filter(entry -> "CYAN".equals(entry.getNameAsString()))
-                    .forEach(entry -> entry.setName("TEAL"))));
+        implementationModels.getClass("CMYKColors").customizeAst(ast -> ast.getClassByName("CMYKColors")
+            .flatMap(clazz -> clazz.getFieldByName("CYAN"))
+            .ifPresent(field -> field.getVariable(0).setName("TEAL")));
 
         implementationModels.getClass("ReadonlyObj").customizeAst(ast -> {
             ast.addImport(UUID.class);
             ast.getClassByName("ReadonlyObj").ifPresent(clazz -> {
-                clazz.addMethod("getId", Modifier.Keyword.PUBLIC)
-                    .setType("UUID")
+                clazz.getMethodsByName("getId").forEach(method -> method.setType("UUID")
                     .setBody(StaticJavaParser.parseBlock("{ return UUID.fromString(this.id); }"))
                     .setJavadocComment(new Javadoc(JavadocDescription.parseText("Get the ID of the object."))
-                        .addBlockTag("return", "the id value."));
+                        .addBlockTag("return", "the id value.")));
 
                 clazz.addMethod("setId").setType("ReadonlyObj")
                     .addParameter("String", "id")
@@ -79,14 +80,9 @@ public class BodyComplexCustomization extends Customization {
                     method.getAnnotationByName("ServiceMethod").ifPresent(Node::remove);
                     method.getBody().ifPresent(body -> body.addStatement(new ReturnStmt(new ThisExpr())));
                     method.getJavadoc().ifPresent(javadoc -> {
-                        javadoc.getBlockTags().stream()
-                            .filter(tag -> tag.getType() == JavadocBlockTag.Type.RETURN)
-                            .forEach(tag -> {
-                                tag.getContent().getElements().clear();
-                                tag.getContent().getElements()
-                                    .addAll(JavadocDescription.parseText("The ArrayClient itself").getElements());
-                            });
-                        javadoc.addBlockTag("see", "ArrayAsyncClient#putValid(ArrayWrapper)")
+                        // This method was void before customization, only need to add a return tag, not update it.
+                        javadoc.addBlockTag("return", "The ArrayClient itself")
+                            .addBlockTag("see", "ArrayAsyncClient#putValid(ArrayWrapper)")
                             .addBlockTag("since", "1.0.0-beta.1");
                         method.setJavadocComment(javadoc);
                     });

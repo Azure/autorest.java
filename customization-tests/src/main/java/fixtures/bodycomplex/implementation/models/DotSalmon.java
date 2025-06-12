@@ -8,13 +8,13 @@ import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.IOException;
 
 /**
  * The DotSalmon model.
  */
 @Fluent
-@JsonProperty(value = "isWild")
 public final class DotSalmon extends DotFish {
 
     /*
@@ -33,6 +33,7 @@ public final class DotSalmon extends DotFish {
      * The iswild property.
      */
     @Generated
+    @JsonProperty(value = "isWild")
     private Boolean isWild;
 
     /**

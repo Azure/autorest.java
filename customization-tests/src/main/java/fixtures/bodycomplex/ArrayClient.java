@@ -85,6 +85,7 @@ public final class ArrayClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return The ArrayClient itself
      * @see ArrayAsyncClient#putValid(ArrayWrapper)
      * @since 1.0.0-beta.1
      */
