@@ -1,5 +1,6 @@
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
+import com.github.javaparser.javadoc.JavadocBlockTag;
 import com.github.javaparser.javadoc.description.JavadocDescription;
 import org.slf4j.Logger;
 
@@ -17,6 +18,7 @@ public class CustomizationTest extends Customization {
                     javadoc.getDescription().getElements().clear();
                     javadoc.getDescription().getElements()
                         .addAll(JavadocDescription.parseText("Protocol method for POST operation.").getElements());
+                    javadoc.getBlockTags().removeIf(tag -> tag.getType() == JavadocBlockTag.Type.UNKNOWN);
                     method.setJavadocComment(javadoc);
                 }))));
     }
