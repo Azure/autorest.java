@@ -33,3 +33,23 @@ license-header: MICROSOFT_MIT_SMALL
 models-subpackage: implementation.models
 customization-class: src/main/java/BodyComplexCustomization.java
 ```
+
+### Rename goblinshark to GoblinShark
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.definitions.goblinshark
+    transform: >
+      $["x-ms-client-name"] = "GoblinShark";
+```
+
+### Rename DotSalmon.iswild to isWild
+
+```yaml
+directive:
+  - from: swagger-document
+    where: $.definitions.DotSalmon
+    transform: >
+      $.properties.iswild["x-ms-client-name"] = "isWild";
+```

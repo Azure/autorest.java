@@ -10,7 +10,7 @@ To set up customizations, create a Maven project with dependency:
 <dependency>
   <groupId>com.azure.tools</groupId>
   <artifactId>azure-autorest-customization</artifactId>
-  <version>1.0.0-beta.10</version>
+  <version>1.0.0-beta.11</version>
 </dependency>
 ```
 
@@ -25,10 +25,7 @@ customizations are supported:
 - [Add an annotation to a class](#add-an-annotation-to-a-class)
 - [Add an annotation to a method](#add-an-annotation-to-a-method)
 - [Remove an annotation from a class](#remove-an-annotation-from-a-class)
-- [Refactor: Rename a class](#refactor-rename-a-class)
-- [Refactor: Rename a method](#refactor-rename-a-method)
 - [Refactor: Generate the getter and setter methods for a property](#refactor-generate-the-getter-and-setter-methods-for-a-property)
-- [Refactor: Rename a property and its corresponding getter and setter methods](#refactor-rename-a-property-and-its-corresponding-getter-and-setter-methods)
 - [Refactor: Rename an enum member name](#refactor-rename-an-enum-member-name)
 - [Javadoc: Set the description for a class / method](#javadoc-set-the-description-for-a-class--method)
 - [Javadoc: Set / remove a parameter's javadoc on a method](#javadoc-set--remove-a-parameters-javadoc-on-a-method)
@@ -37,23 +34,8 @@ customizations are supported:
 
 ## Navigate through the packages and classes
 
-There are five primary customization classes currently available, `LibraryCustomization`, `PackageCustomization`, 
-`ClassCustomization`, `MethodCustomization` and `JavadocCustomization`. From a given `LibraryCustomization`, you can 
-navigate through the packages, classes, and methods intuitively with the following methods:
-
-```java readme-sample-implementation-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    /* code to customize on the package level */
-    ClassCustomization foo = models.getClass("Foo");
-    /* code to customize the Foo class */
-    MethodCustomization getBar = foo.getMethod("getBar");
-    /* code to customize the getBar method */
-    JavadocCustomization getBarJavadoc = getBar.getJavadoc();
-    /* code to customize javadoc for getBar() method */
-}
-```
+There are three primary customization classes currently available, `LibraryCustomization`, `PackageCustomization`, 
+and `ClassCustomization`. From a given `LibraryCustomization`, you can navigate through the packages and classes intuitively.
 
 ## Change class modifier
 
@@ -69,9 +51,9 @@ with customization
 ```java readme-sample-change-class-modifier-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    foo.setModifier(0); // 0 is a special modifier that sets package private
+    // Calling setModifiers without passing anything is equivalent to package-private.
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(ClassOrInterfaceDeclaration::setModifiers));
 }
 ```
 
@@ -101,10 +83,9 @@ with customization
 ```java readme-sample-change-method-modifier-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    MethodCustomization getBar = foo.getMethod("getBar");
-    getBar.setModifier(Modifier.PRIVATE); // change to private
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> clazz.getMethodsByName("getBar")
+            .forEach(method -> method.setModifiers(Modifier.Keyword.PRIVATE))));
 }
 ```
 
@@ -143,10 +124,14 @@ with customization
 ```java readme-sample-change-method-return-type-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    MethodCustomization getId = foo.getMethod("getId");
-    getId.setReturnType("UUID", "UUID.fromString(%s)"); // change return type to UUID
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> {
+        ast.addImport(UUID.class);
+        ast.getClassByName("Foo").ifPresent(clazz -> clazz.getMethodsByName("getId").forEach(method -> {
+            // change return type to UUID
+            method.setType("UUID");
+            method.setBody(StaticJavaParser.parseBlock("{ return UUID.fromString(this.id); }"));
+        }));
+    });
 }
 ```
 
@@ -157,8 +142,7 @@ public class Foo {
     private String id;
 
     public UUID getId() {
-        String returnValue = this.id;
-        return UUID.fromString(returnValue);
+        return UUID.fromString(this.id);
     }
 }
 ```
@@ -179,9 +163,8 @@ with customization
 ```java readme-sample-add-class-annotation-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    foo.addAnnotation("Deprecated");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> clazz.addMarkerAnnotation("Deprecated")));
 }
 ```
 
@@ -214,10 +197,9 @@ with customization
 ```java readme-sample-add-method-annotation-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    MethodCustomization getBar = foo.getMethod("getBar");
-    getBar.addAnnotation("Deprecated");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> clazz.getMethodsByName("getBar")
+            .forEach(method -> method.addMarkerAnnotation("Deprecated"))));
 }
 ```
 
@@ -251,9 +233,9 @@ with customization
 ```java readme-sample-remove-class-annotation-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    foo.removeAnnotation("Deprecated");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .flatMap(clazz -> clazz.getAnnotationByName("Deprecated"))
+        .ifPresent(Node::remove));
 }
 ```
 
@@ -263,77 +245,6 @@ will generate
 public class Foo {
 }
 ```
-
-## Refactor: Rename a class
-
-A class `Foo`
-
-```java readme-sample-rename-class-initial
-public class Foo {
-}
-```
-
-with customization
-
-```java readme-sample-rename-class-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    foo.rename("FooInfo");
-}
-```
-
-will generate
-
-```java readme-sample-rename-class-result
-public class FooInfo {
-}
-```
-
-All references of `Foo` will be modified to `FooInfo`. When a valid value is provided, this customization is guaranteed 
-to not break the build.
-
-## Refactor: Rename a method
-
-A method `isSupportsUnicode` in the `Foo` class
-
-```java readme-sample-rename-method-initial
-public class Foo {
-    private boolean supportsUnicode;
-
-    public boolean isSupportsUnicode() {
-        return this.supportsUnicode;
-    }
-}
-```
-
-with customization
-
-```java readme-sample-rename-method-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    MethodCustomization isSupportsUnicode = foo.getMethod("isSupportsUnicode");
-    isSupportsUnicode.rename("isUnicodeSupported");
-}
-```
-
-will generate
-
-```java readme-sample-rename-method-result
-public class Foo {
-    private boolean supportsUnicode;
-
-    public boolean isUnicodeSupported() {
-        return this.supportsUnicode;
-    }
-}
-```
-
-All references of `isSupportsUnicode()` will be modified to `isUnicodeSupported()`. When a valid value is provided, this 
-customization is guaranteed to not break the build.
 
 ## Refactor: Generate the getter and setter methods for a property
 
@@ -350,10 +261,16 @@ with customization
 ```java readme-sample-generate-getter-and-setter-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    PropertyCustomization active = foo.getProperty("active");
-    active.generateGetterAndSetter();
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> {
+            clazz.addMethod("isActive", Modifier.Keyword.PUBLIC)
+                .setType("boolean")
+                .setBody(StaticJavaParser.parseBlock("{ return this.active; }"));
+            clazz.addMethod("setActive", Modifier.Keyword.PUBLIC)
+                .setType("Foo")
+                .addParameter("boolean", "active")
+                .setBody(StaticJavaParser.parseBlock("{ this.active = active; return this; }"));
+        }));
 }
 ```
 
@@ -373,59 +290,6 @@ public class Foo {
     }
 }
 ```
-
-If the class already contains a getter or a setter method, the current method will be kept. This customization is 
-guaranteed to not break the build.
-
-## Refactor: Rename a property and its corresponding getter and setter methods
-
-A property `whitelist` in the `Foo` class
-
-```java readme-sample-rename-property-initial
-public class Foo {
-    private List<String> whiteList;
-
-    public List<String> getWhiteList() {
-        return this.whiteList;
-    }
-
-    public Foo setWhiteList(List<String> whiteList) {
-        this.whiteList = whiteList;
-        return this;
-    }
-}
-```
-
-with customization
-
-```java readme-sample-rename-property-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    PropertyCustomization active = foo.getProperty("active");
-    active.rename("allowList");
-}
-```
-
-will generate
-
-```java readme-sample-rename-property-result
-public class Foo {
-    private List<String> allowList;
-
-    public List<String> getAllowList() {
-        return this.allowList;
-    }
-
-    public Foo setAllowList(List<String> allowList) {
-        this.allowList = allowList;
-        return this;
-    }
-}
-```
-
-This customization is guaranteed to not break the build.
 
 ## Refactor: Rename an enum member name
 
@@ -451,9 +315,10 @@ with customization
 ```java readme-sample-rename-enum-member-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    foo.renameEnumMember("JPG", "JPEG");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getEnumByName("Foo")
+        .ifPresent(clazz -> clazz.getEntries().stream()
+            .filter(entry -> "JPG".equals(entry.getName().getIdentifier()))
+            .forEach(entry -> entry.setName("JPEG"))));
 }
 ```
 
@@ -501,12 +366,12 @@ with customization
 ```java readme-sample-change-javadoc-description-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    JavadocCustomization fooJavadoc = foo.getJavadoc();
-    fooJavadoc.setDescription("A Foo object stored in Azure.");
-    JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-    setActiveJavadoc.setDescription("Set the active value.");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> {
+            clazz.setJavadocComment("A Foo object stored in Azure.");
+            clazz.getMethodsByName("setActive")
+                .forEach(method -> method.setJavadocComment("Set the active value."));
+        }));
 }
 ```
 
@@ -560,10 +425,10 @@ with customization
 ```java readme-sample-change-javadoc-param-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-    setActiveJavadoc.setParam("active", "if the foo object is in active state");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> clazz.getMethodsByName("setActive").forEach(method -> method.getJavadoc()
+            .ifPresent(javadoc -> method.setJavadocComment(javadoc.addBlockTag("param", "active",
+                "if the foo object is in active state"))))));
 }
 ```
 
@@ -618,10 +483,10 @@ with customization
 ```java readme-sample-change-javadoc-return-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-    setActiveJavadoc.setReturn("the current foo object");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> clazz.getMethodsByName("setActive").forEach(method -> method.getJavadoc()
+            .ifPresent(javadoc -> method.setJavadocComment(javadoc.addBlockTag("return",
+                "the current foo object"))))));
 }
 ```
 
@@ -672,10 +537,10 @@ with customization
 ```java readme-sample-change-javadoc-throws-customization
 @Override
 public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-    setActiveJavadoc.addThrows("RuntimeException", "An unsuccessful response is received");
+    customization.getClass("com.azure.myservice.models", "Foo").customizeAst(ast -> ast.getClassByName("Foo")
+        .ifPresent(clazz -> clazz.getMethodsByName("setActive").forEach(method -> method.getJavadoc()
+            .ifPresent(javadoc -> method.setJavadocComment(javadoc.addBlockTag("throws", "RuntimeException",
+                "An unsuccessful response is received"))))));
 }
 ```
 

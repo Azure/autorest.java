@@ -5,6 +5,7 @@ package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
 import com.azure.autorest.extension.base.util.FileUtils;
+import com.github.javaparser.ast.Node;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -74,19 +75,18 @@ public class AnnotationTests {
         Customization customization = new Customization() {
             @Override
             public void customize(LibraryCustomization libraryCustomization, Logger logger) {
-                MethodCustomization methodCustomization = libraryCustomization.getPackage("AnnotationTests")
-                    .getClass("RemoveComplexAnnotation")
-                    .getMethod("methodWithComplexAnnotation");
-
-                methodCustomization.removeAnnotation("@JsonTypeInfo");
+                ClassCustomization classCustomization = libraryCustomization.getClass("AnnotationTests", "RemoveComplexAnnotation")
+                    .customizeAst(ast -> ast.getClassByName("RemoveComplexAnnotation")
+                        .ifPresent(clazz -> clazz.getMethodsByName("methodWithComplexAnnotation")
+                            .forEach(method -> method.getAnnotationByName("JsonTypeInfo").ifPresent(Node::remove))));
 
                 assertEquals(standardizeFileForComparison(expectedFileContent),
                     standardizeFileForComparison(libraryCustomization.getRawEditor()
-                        .getFileContent(methodCustomization.getFileName())));
+                        .getFileContent(classCustomization.getFileName())));
             }
         };
 
-        customization.run(Collections.singletonMap(fileName, fileContent), true, LOGGER);
+        customization.run(Collections.singletonMap(fileName, fileContent), LOGGER);
     }
 
     private static String standardizeFileForComparison(String content) {
