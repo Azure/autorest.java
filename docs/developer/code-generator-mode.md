@@ -109,7 +109,7 @@ This is used for 3rd-party lib that generated from TypeSpec.
 
 The client method takes the form of
 ```java
-Response<ResponseBody> operationWithResponse(String pathParam, String requiredQueryParam, BinaryData body, RequestOptions requestOptions);
+Response<ResponseBody> operationWithResponse(String pathParam, EnumType requiredQueryParam, RequestBody body, RequestContext requestContext);
 
 ResponseBody operation(String pathParam, EnumType requiredQueryParam, RequestBody body);
 

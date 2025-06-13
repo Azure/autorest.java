@@ -55,3 +55,7 @@ Add break point to the `emitter.js` or `code-model-builder.js` under `node_modul
 See [Debugging Java Code](../../../typespec-extension/readme.md#debugging-java-code).
 
 Alternatively, since the communication from TypeScript to Java is via the `code-model.yaml` file (plus the `EmitterOptions`), one can modify the `DEFAULT_OUTPUT_DIR` in `Main.java` under `core/packages/http-client-java/generator/http-client-generator` and debug `Main.main()`.
+
+Notice:
+- Add `--add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED` to VM options.
+- There may be some difference of other option between `tspconfig.yaml` and `EmitterOptions.java`. Remember to temporarily modify `EmitterOptions.java` to reflect the option in `tspconfig.yaml` when running `Main.java` this way. For example, set `flavor` to `azure`.

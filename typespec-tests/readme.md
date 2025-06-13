@@ -53,7 +53,7 @@ At this stage, one can modify or debug the Java code (`./typespec-extension/src/
 
 Notice:
 - Add `--add-exports jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED` to VM options.
-- There maybe some difference of other option between `tspconfig.yaml` and `EmitterOptions.java`. Remember to temporary modify `EmitterOptions.java` to reflect the option in `tspconfig.yaml` when running `Main.java` this way. For example, set `flavor` to `azure`.
+- There may be some difference of other option between `tspconfig.yaml` and `EmitterOptions.java`. Remember to temporarily modify `EmitterOptions.java` to reflect the option in `tspconfig.yaml` when running `Main.java` this way. For example, set `flavor` to `azure`.
 
 ## Troubleshooting
 
