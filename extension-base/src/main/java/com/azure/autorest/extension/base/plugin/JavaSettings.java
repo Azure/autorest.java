@@ -182,8 +182,7 @@ public class JavaSettings {
                 getStringValue(host, "flavor", "Azure"),
                 getBooleanValue(host, "disable-typed-headers-methods", false),
                 getBooleanValue(host, "share-jsonserializable-code", false),
-                getBooleanValue(host, "android", false),
-                getBooleanValue(host, "use-eclipse-language-server", true)
+                getBooleanValue(host, "android", false)
             );
         }
         return instance;
@@ -354,8 +353,7 @@ public class JavaSettings {
         String flavor,
         boolean disableTypedHeadersMethods,
         boolean shareJsonSerializableCode,
-        boolean android,
-        boolean useEclipseLanguageServer) {
+        boolean android) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -456,7 +454,6 @@ public class JavaSettings {
         this.disableTypedHeadersMethods = disableTypedHeadersMethods;
         this.shareJsonSerializableCode = shareJsonSerializableCode;
         this.android = android;
-        this.useEclipseLanguageServer = useEclipseLanguageServer;
     }
 
     /**
@@ -1686,18 +1683,6 @@ public class JavaSettings {
      */
     public boolean isAndroid() {
         return android;
-    }
-
-    private final boolean useEclipseLanguageServer;
-
-    /**
-     * If there is Postprocessor code customizations to run, this determines whether to use the Eclipse Language
-     * Server to run the code customizations.
-     *
-     * @return Whether to use the Eclipse Language Server to run the code customizations.
-     */
-    public boolean isUseEclipseLanguageServer() {
-        return useEclipseLanguageServer;
     }
 
     private static final String DEFAULT_CODE_GENERATION_HEADER = String.join("\n",
