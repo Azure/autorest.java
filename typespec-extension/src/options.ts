@@ -43,7 +43,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "service-name": {
       type: "string",
       description:
-        "Specify the human readable name of the service. The name will be used in `README.md` and entry class. This option is for management-plane SDK.",
+        "Specify the human readable name of the service. The name will be used for classes like `<ServiceName>Manager` or `<ServiceName>ServiceVersion`",
       nullable: true,
     },
 
