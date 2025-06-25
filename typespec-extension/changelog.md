@@ -2,7 +2,7 @@
 
 ## 0.31.5 (2025-06-25)
 
-- Updated package dependencies.
+Compatible with compiler 1.1.0.
 
 ## 0.31.4 (2025-06-17)
 
