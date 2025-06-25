@@ -12,13 +12,13 @@
     "@typespec/spec-api": "0.1.0-alpha.6",
     "@typespec/spector": "0.1.0-alpha.15",
     "@typespec/http-specs": "0.1.0-alpha.23",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.19",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.20",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.31.4.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "^1.1.0",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier": "^3.6.0"
+    "prettier": "^3.6.1"
   },
   "overrides": {
     "@typespec/compiler": "1.1.0",
