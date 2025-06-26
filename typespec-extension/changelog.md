@@ -4,6 +4,8 @@
 
 Compatible with compiler 1.1.0.
 
+- Supported `dev-options.profile` emitter option, to enable Java Flight Recorder (JFR) profiling.
+
 ## 0.31.4 (2025-06-17)
 
 Compatible with compiler 1.1.0.
