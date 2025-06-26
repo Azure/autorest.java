@@ -180,6 +180,11 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
           description: "Temporary working directory for Java code generator.",
           nullable: true,
         },
+        profile: {
+          type: "boolean",
+          description: "Enable performance profiling.",
+          nullable: true,
+        },
       },
       nullable: true,
       additionalProperties: false,

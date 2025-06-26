@@ -19,8 +19,9 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host "Copy JAR and TypeSpec code to './typespec-extension' directory"
 # Copy JAR
-New-Item -ItemType File -Path ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
+New-Item -ItemType Directory -Path ./typespec-extension/generator/http-client-generator/target/classes -Force
 Copy-Item ./core/packages/http-client-java/generator/http-client-generator/target/emitter.jar ./typespec-extension/generator/http-client-generator/target/emitter.jar -Force
+Copy-Item ./core/packages/http-client-java/generator/http-client-generator/target/classes/PerfAutomation.jfc ./typespec-extension/generator/http-client-generator/target/classes/PerfAutomation.jfc -Force
 # Copy TypeScript code
 Copy-Item -Path ./core/packages/http-client-java/emitter/src -Destination ./typespec-extension/ -Exclude "options.ts" -Recurse -Force
 Copy-Item -Path ./core/packages/http-client-java/emitter/test -Destination ./typespec-extension/ -Recurse -Force
