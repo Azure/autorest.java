@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.31.4",
+  "version": "0.31.5",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -94,7 +94,7 @@
     "eslint-plugin-deprecation": "~3.0.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unicorn": "^59.0.1",
-    "prettier": "~3.6.0",
+    "prettier": "~3.6.1",
     "rimraf": "~6.0.1",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.0",
