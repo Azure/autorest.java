@@ -158,9 +158,24 @@ def update_sdks():
     # revert change on pom.xml, readme.md, changelog.md, etc.
     cmd = ["git", "checkout", "**/pom.xml"]
     subprocess.check_call(cmd, cwd=sdk_root)
+    # check if there are changes to sample.md files and add them if so
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--name-only", "**/SAMPLE.md"],
+            cwd=sdk_root,
+            capture_output=True,
+            text=True
+        )
+        if result.stdout.strip():
+            logging.info("Found changes to sample.md files, adding them to git")
+            cmd = ["git", "add", "**/SAMPLE.md"]
+            subprocess.check_call(cmd, cwd=sdk_root)
+    except subprocess.CalledProcessError:
+        # if git diff fails, we'll skip adding sample.md files
+        logging.error("Failed to check for sample.md changes")
+
     cmd = ["git", "checkout", "**/*.md"]
     subprocess.check_call(cmd, cwd=sdk_root)
-
     cmd = ["git", "add", "."]
     subprocess.check_call(cmd, cwd=sdk_root)
 
