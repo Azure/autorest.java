@@ -158,7 +158,9 @@ def update_sdks():
     # revert change on pom.xml, readme.md, changelog.md, etc.
     cmd = ["git", "checkout", "**/pom.xml"]
     subprocess.check_call(cmd, cwd=sdk_root)
-    cmd = ["git", "checkout", "**/*.md"]
+    cmd = ["git", "checkout", "**/README.md"]
+    subprocess.check_call(cmd, cwd=sdk_root)
+    cmd = ["git", "checkout", "**/CHANGELOG.md"]
     subprocess.check_call(cmd, cwd=sdk_root)
 
     cmd = ["git", "add", "."]
