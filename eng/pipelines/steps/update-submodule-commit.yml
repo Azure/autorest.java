@@ -1,14 +1,14 @@
 parameters:
-- name: SubmoduleCommit
+- name: SubmodulePullRequestId
   type: string
 
 steps:
 - script: |
     set -e
     cd core
-    git pull --unshallow
-    git checkout ${{ parameters.SubmoduleCommit }}
+    git fetch origin pull/${{ parameters.SubmodulePullRequestId }}/head:pull_${{ parameters.SubmodulePullRequestId }}_head
+    git checkout pull_${{ parameters.SubmodulePullRequestId }}_head
     cd ..
     git add core
-    git commit -m 'update core to commit ${{ parameters.SubmoduleCommit }}'
-  displayName: 'Update Submodule to Commit ${{ parameters.SubmoduleCommit }}'
+    git commit -m 'update core to head of PR ${{ parameters.SubmodulePullRequestId }}'
+  displayName: 'Update Submodule to Pull Request ID ${{ parameters.SubmodulePullRequestId }}'

@@ -1,5 +1,5 @@
 parameters:
-- name: SubmoduleCommit
+- name: SubmodulePullRequestId
   type: string
   default: ''
 - name: UploadSpectorReport
@@ -23,4 +23,4 @@ jobs:
   steps:
   - template: /eng/pipelines/steps/build-typespec.yml
     parameters:
-      SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+      SubmodulePullRequestId: ${{ parameters.SubmodulePullRequestId }}

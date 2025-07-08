@@ -2,17 +2,17 @@ trigger: none
 pr: none
 
 parameters:
-- name: SubmoduleCommit
-  displayName: 'Commit ID of the Submodule'
+- name: SubmodulePullRequestId
+  displayName: 'Pull Request ID of the Submodule'
   type: string
 
 jobs:
 - template: /eng/pipelines/jobs/build-autorest.yml
   parameters:
-    SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+    SubmodulePullRequestId: ${{ parameters.SubmodulePullRequestId }}
 - template: /eng/pipelines/jobs/build-autorest-mgmt.yml
   parameters:
-    SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+    SubmodulePullRequestId: ${{ parameters.SubmodulePullRequestId }}
 - template: /eng/pipelines/jobs/build-typespec.yml
   parameters:
-    SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+    SubmodulePullRequestId: ${{ parameters.SubmodulePullRequestId }}
