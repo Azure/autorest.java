@@ -1,5 +1,5 @@
 parameters:
-- name: SubmoduleCommit
+- name: SubmodulePullRequestId
   type: string
   default: ''
 
@@ -21,10 +21,10 @@ jobs:
   - checkout: self
     submodules: true
 
-  - ${{ if ne(parameters.SubmoduleCommit, '') }} :
+  - ${{ if ne(parameters.SubmodulePullRequestId, '') }} :
     - template: /eng/pipelines/steps/update-submodule-commit.yml
       parameters:
-        SubmoduleCommit: ${{ parameters.SubmoduleCommit }}
+        SubmodulePullRequestId: ${{ parameters.SubmodulePullRequestId }}
 
   - script: |
       git checkout .
