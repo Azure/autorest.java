@@ -4,6 +4,7 @@ parameters:
 
 steps:
 - script: |
+    set -e
     cd core
     git pull --unshallow
     git checkout ${{ parameters.SubmoduleCommit }}
