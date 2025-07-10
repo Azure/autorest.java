@@ -140,7 +140,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     // "preserve-model": {
     //   type: ["string", "array"],
     //   description:
-    //     "Generate the model cleasses, even it is not used by any API. Format should be in array form. This option is for management-plane SDK.",
+    //     "Generate the model cleasses, even if it is not used by any API. Format should be in array form. This option is for management-plane SDK.",
     //   items: { type: "string" },
     //   nullable: true,
     // },
