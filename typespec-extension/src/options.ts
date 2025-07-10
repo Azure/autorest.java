@@ -116,13 +116,58 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
         "Specify the Java class that to be executed by emitter for [code customization](https://github.com/Azure/autorest.java/blob/main/customization-base/README.md), during post-process.",
       nullable: true,
     },
-    "rename-model": {
-      type: ["string", "object"],
-      description:
-        "Rename the model classes, in case they cannot be renamed via TCGC. E.g., anonymous models or templated models. Format should be in key-value form, or a comma-separated string that follows 'BeforeRename:AfterRename' pattern. This option is for management-plane SDK.",
-      additionalProperties: true,
-      nullable: true,
-    },
+    // "rename-model": {
+    //   type: ["string", "object"],
+    //   description:
+    //     "Rename the model classes, in case they cannot be renamed via TCGC. E.g., anonymous models or templated models. Format should be in key-value form. This option is for management-plane SDK.",
+    //   additionalProperties: true,
+    //   nullable: true,
+    // },
+    // "add-inner": {
+    //   type: ["string", "array"],
+    //   description:
+    //     "Generate the model as Inner classes. Format should be in array form. This option is for management-plane SDK.",
+    //   items: { type: "string" },
+    //   nullable: true,
+    // },
+    // "remove-inner": {
+    //   type: ["string", "array"],
+    //   description:
+    //     "Generate the model not as Inner classes. Format should be in array form. This option is for management-plane SDK.",
+    //   items: { type: "string" },
+    //   nullable: true,
+    // },
+    // "preserve-model": {
+    //   type: ["string", "array"],
+    //   description:
+    //     "Generate the model cleasses, even if it is not used by any API. Format should be in array form. This option is for management-plane SDK.",
+    //   items: { type: "string" },
+    //   nullable: true,
+    // },
+    // "generate-async-methods": {
+    //   type: "boolean",
+    //   description: "Generate async APIs in Clients. This option is for management-plane SDK.",
+    //   nullable: true,
+    // },
+    // "resource-collection-associations": {
+    //   type: "array",
+    //   description:
+    //     "Specify the associations of the resource to the colllection. Format should be in array form. This option is for management-plane SDK.",
+    //   items: {
+    //     type: "object",
+    //     properties: {
+    //       resource: {
+    //         type: "string",
+    //         description: "The name of the resource.",
+    //       },
+    //       collection: {
+    //         type: "string",
+    //         description: "The name of the collection to associate with.",
+    //       },
+    //     },
+    //   },
+    //   nullable: true,
+    // },
 
     // configure
     "skip-special-headers": {
