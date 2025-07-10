@@ -87,6 +87,10 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-sync-stack=true"""
     # rename model
     $tspOptions += " --option ""@azure-tools/typespec-java.rename-model=TopLevelArmResourceListResult:ResourceListResult,CustomTemplateResourcePropertiesAnonymousEmptyModel:AnonymousEmptyModel"""
+    # remove inner
+    $tspOptions += " --option ""@azure-tools/typespec-java.remove-inner=NginxConfigurationResponse"""
+    # generate async methods
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-async-methods=true"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
