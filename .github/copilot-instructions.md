@@ -1,4 +1,4 @@
-# Update Package for Latest Dependencies
+# Update Node.JS Package for Latest Dependencies
 
 Instructions:
 * Always use absolute path when change directory.
