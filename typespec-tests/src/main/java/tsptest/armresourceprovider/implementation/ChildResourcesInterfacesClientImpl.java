@@ -141,7 +141,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             @HeaderParam("Accept") String accept, @BodyParam("application/json") ChildResourceUpdate properties,
             Context context);
 
-        @Headers({ "Accept: application/json;q=0.9", "Content-Type: application/json" })
+        @Headers({ "Content-Type: application/json" })
         @Delete("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/TspTest.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childResources/{childResourceName}")
         @ExpectedResponses({ 200, 202, 204 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -149,9 +149,10 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
-            @PathParam("childResourceName") String childResourceName, Context context);
+            @PathParam("childResourceName") String childResourceName, @HeaderParam("Accept") String accept,
+            Context context);
 
-        @Headers({ "Accept: application/json;q=0.9", "Content-Type: application/json" })
+        @Headers({ "Content-Type: application/json" })
         @Delete("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/TspTest.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childResources/{childResourceName}")
         @ExpectedResponses({ 200, 202, 204 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -159,7 +160,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
-            @PathParam("childResourceName") String childResourceName, Context context);
+            @PathParam("childResourceName") String childResourceName, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/TspTest.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childResources")
@@ -181,7 +183,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName, @HeaderParam("Accept") String accept,
             Context context);
 
-        @Headers({ "Accept: application/json;q=0.9", "Content-Type: application/json" })
+        @Headers({ "Content-Type: application/json" })
         @Post("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/TspTest.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childResources/{childResourceName}/actionWithoutBody")
         @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -189,9 +191,10 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
-            @PathParam("childResourceName") String childResourceName, Context context);
+            @PathParam("childResourceName") String childResourceName, @HeaderParam("Accept") String accept,
+            Context context);
 
-        @Headers({ "Accept: application/json;q=0.9", "Content-Type: application/json" })
+        @Headers({ "Content-Type: application/json" })
         @Post("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/TspTest.ArmResourceProvider/topLevelArmResources/{topLevelArmResourceName}/childResources/{childResourceName}/actionWithoutBody")
         @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ManagementException.class)
@@ -199,7 +202,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("topLevelArmResourceName") String topLevelArmResourceName,
-            @PathParam("childResourceName") String childResourceName, Context context);
+            @PathParam("childResourceName") String childResourceName, @HeaderParam("Accept") String accept,
+            Context context);
 
         @Headers({ "Content-Type: application/json" })
         @Get("{nextLink}")
@@ -783,8 +787,11 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             return Mono
                 .error(new IllegalArgumentException("Parameter childResourceName is required and cannot be null."));
         }
-        return FluxUtil.withContext(context -> service.delete(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, context))
+        final String accept = "application/json";
+        return FluxUtil
+            .withContext(context -> service.delete(this.client.getEndpoint(), this.client.getApiVersion(),
+                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, accept,
+                context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -824,8 +831,9 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Parameter childResourceName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return service.deleteSync(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName,
+            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, accept,
             Context.NONE);
     }
 
@@ -866,8 +874,10 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Parameter childResourceName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return service.deleteSync(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, context);
+            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, accept,
+            context);
     }
 
     /**
@@ -986,8 +996,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion
-     * of {@link Mono}.
+     * @return paged collection of ChildResource items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceSinglePageAsync(String resourceGroupName,
@@ -1026,7 +1036,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation as paginated response with {@link PagedFlux}.
+     * @return paged collection of ChildResource items as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<ChildResourceInner> listByTopLevelArmResourceAsync(String resourceGroupName,
@@ -1044,7 +1054,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse}.
+     * @return paged collection of ChildResource items along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<ChildResourceInner> listByTopLevelArmResourceSinglePage(String resourceGroupName,
@@ -1084,7 +1094,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse}.
+     * @return paged collection of ChildResource items along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<ChildResourceInner> listByTopLevelArmResourceSinglePage(String resourceGroupName,
@@ -1123,7 +1133,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
+     * @return paged collection of ChildResource items as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
@@ -1142,7 +1152,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation as paginated response with {@link PagedIterable}.
+     * @return paged collection of ChildResource items as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
@@ -1186,9 +1196,10 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             return Mono
                 .error(new IllegalArgumentException("Parameter childResourceName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.actionWithoutBody(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName,
+                this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, accept,
                 context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
@@ -1229,8 +1240,9 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Parameter childResourceName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return service.actionWithoutBodySync(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName,
+            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, accept,
             Context.NONE);
     }
 
@@ -1271,8 +1283,10 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Parameter childResourceName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return service.actionWithoutBodySync(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, context);
+            this.client.getSubscriptionId(), resourceGroupName, topLevelArmResourceName, childResourceName, accept,
+            context);
     }
 
     /**
@@ -1391,8 +1405,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion
-     * of {@link Mono}.
+     * @return paged collection of ChildResource items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceNextSinglePageAsync(String nextLink) {
@@ -1419,7 +1433,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse}.
+     * @return paged collection of ChildResource items along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<ChildResourceInner> listByTopLevelArmResourceNextSinglePage(String nextLink) {
@@ -1447,7 +1461,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse}.
+     * @return paged collection of ChildResource items along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<ChildResourceInner> listByTopLevelArmResourceNextSinglePage(String nextLink,

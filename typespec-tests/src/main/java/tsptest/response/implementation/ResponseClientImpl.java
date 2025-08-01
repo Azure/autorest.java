@@ -260,7 +260,8 @@ public final class ResponseClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Boolean>> exists(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Head("/response/exists")
         @ExpectedResponses({ 200, 404 })
@@ -268,7 +269,8 @@ public final class ResponseClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Boolean> existsSync(@HostParam("endpoint") String endpoint,
-            @QueryParam("api-version") String apiVersion, RequestOptions requestOptions, Context context);
+            @QueryParam("api-version") String apiVersion, @HeaderParam("Accept") String accept,
+            RequestOptions requestOptions, Context context);
 
         @Post("/response/lro-invalid-poll-response")
         @ExpectedResponses({ 202 })
@@ -278,7 +280,8 @@ public final class ResponseClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> lroInvalidPollResponse(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData request,
+            RequestOptions requestOptions, Context context);
 
         @Post("/response/lro-invalid-poll-response")
         @ExpectedResponses({ 202 })
@@ -288,7 +291,8 @@ public final class ResponseClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> lroInvalidPollResponseSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData request,
+            RequestOptions requestOptions, Context context);
 
         @Post("/response/lro-invalid-result")
         @ExpectedResponses({ 202 })
@@ -298,7 +302,8 @@ public final class ResponseClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> lroInvalidResult(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData request,
+            RequestOptions requestOptions, Context context);
 
         @Post("/response/lro-invalid-result")
         @ExpectedResponses({ 202 })
@@ -308,7 +313,8 @@ public final class ResponseClientImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> lroInvalidResultSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @HeaderParam("Content-Type") String contentType,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @HeaderParam("Accept") String accept, @BodyParam("application/json") BinaryData request,
+            RequestOptions requestOptions, Context context);
 
         @Get("/response/paged-string")
         @ExpectedResponses({ 200 })
@@ -675,8 +681,9 @@ public final class ResponseClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Boolean>> existsWithResponseAsync(RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.exists(this.getEndpoint(), this.getServiceVersion().getVersion(),
-            requestOptions, context));
+            accept, requestOptions, context));
     }
 
     /**
@@ -697,7 +704,8 @@ public final class ResponseClientImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Boolean> existsWithResponse(RequestOptions requestOptions) {
-        return service.existsSync(this.getEndpoint(), this.getServiceVersion().getVersion(), requestOptions,
+        final String accept = "application/json";
+        return service.existsSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, requestOptions,
             Context.NONE);
     }
 
@@ -728,8 +736,9 @@ public final class ResponseClientImpl {
     private Mono<Response<Void>> lroInvalidPollResponseWithResponseAsync(BinaryData request,
         RequestOptions requestOptions) {
         final String contentType = "application/json";
+        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.lroInvalidPollResponse(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), contentType, request, requestOptions, context));
+            this.getServiceVersion().getVersion(), contentType, accept, request, requestOptions, context));
     }
 
     /**
@@ -758,8 +767,9 @@ public final class ResponseClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<Void> lroInvalidPollResponseWithResponse(BinaryData request, RequestOptions requestOptions) {
         final String contentType = "application/json";
+        final String accept = "application/json";
         return service.lroInvalidPollResponseSync(this.getEndpoint(), this.getServiceVersion().getVersion(),
-            contentType, request, requestOptions, Context.NONE);
+            contentType, accept, request, requestOptions, Context.NONE);
     }
 
     /**
@@ -944,8 +954,9 @@ public final class ResponseClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Void>> lroInvalidResultWithResponseAsync(BinaryData request, RequestOptions requestOptions) {
         final String contentType = "application/json";
+        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.lroInvalidResult(this.getEndpoint(),
-            this.getServiceVersion().getVersion(), contentType, request, requestOptions, context));
+            this.getServiceVersion().getVersion(), contentType, accept, request, requestOptions, context));
     }
 
     /**
@@ -974,8 +985,9 @@ public final class ResponseClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<Void> lroInvalidResultWithResponse(BinaryData request, RequestOptions requestOptions) {
         final String contentType = "application/json";
+        final String accept = "application/json";
         return service.lroInvalidResultSync(this.getEndpoint(), this.getServiceVersion().getVersion(), contentType,
-            request, requestOptions, Context.NONE);
+            accept, request, requestOptions, Context.NONE);
     }
 
     /**

@@ -104,23 +104,23 @@ public final class LroesClientImpl implements LroesClient {
             @HeaderParam("Content-Type") String contentType, @HeaderParam("Accept") String accept,
             @BodyParam("application/json") ExportRequest body, Context context);
 
-        @Headers({ "Accept: application/json;q=0.9", "Content-Type: application/json" })
+        @Headers({ "Content-Type: application/json" })
         @Delete("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.OperationTemplates/orders/{orderName}")
         @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> delete(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName, @PathParam("orderName") String orderName,
-            Context context);
+            @HeaderParam("Accept") String accept, Context context);
 
-        @Headers({ "Accept: application/json;q=0.9", "Content-Type: application/json" })
+        @Headers({ "Content-Type: application/json" })
         @Delete("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Azure.ResourceManager.OperationTemplates/orders/{orderName}")
         @ExpectedResponses({ 202, 204 })
         @UnexpectedResponseExceptionType(ManagementException.class)
         Response<BinaryData> deleteSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName, @PathParam("orderName") String orderName,
-            Context context);
+            @HeaderParam("Accept") String accept, Context context);
     }
 
     /**
@@ -633,9 +633,10 @@ public final class LroesClientImpl implements LroesClient {
         if (orderName == null) {
             return Mono.error(new IllegalArgumentException("Parameter orderName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.delete(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, orderName, context))
+                this.client.getSubscriptionId(), resourceGroupName, orderName, accept, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -669,8 +670,9 @@ public final class LroesClientImpl implements LroesClient {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Parameter orderName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return service.deleteSync(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, orderName, Context.NONE);
+            this.client.getSubscriptionId(), resourceGroupName, orderName, accept, Context.NONE);
     }
 
     /**
@@ -704,8 +706,9 @@ public final class LroesClientImpl implements LroesClient {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException("Parameter orderName is required and cannot be null."));
         }
+        final String accept = "application/json";
         return service.deleteSync(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, orderName, context);
+            this.client.getSubscriptionId(), resourceGroupName, orderName, accept, context);
     }
 
     /**

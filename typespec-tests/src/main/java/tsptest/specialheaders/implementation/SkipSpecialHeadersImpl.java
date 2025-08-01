@@ -76,7 +76,8 @@ public final class SkipSpecialHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> deleteWithSpecialHeaders(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("foo") String foo, RequestOptions requestOptions, Context context);
+            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
 
         @Delete("/skip-special-headers/resources/{name}")
         @ExpectedResponses({ 204 })
@@ -86,7 +87,8 @@ public final class SkipSpecialHeadersImpl {
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> deleteWithSpecialHeadersSync(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("name") String name,
-            @HeaderParam("foo") String foo, RequestOptions requestOptions, Context context);
+            @HeaderParam("foo") String foo, @HeaderParam("Accept") String accept, RequestOptions requestOptions,
+            Context context);
     }
 
     /**
@@ -104,8 +106,9 @@ public final class SkipSpecialHeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> deleteWithSpecialHeadersWithResponseAsync(String name, String foo,
         RequestOptions requestOptions) {
+        final String accept = "application/json";
         return FluxUtil.withContext(context -> service.deleteWithSpecialHeaders(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, foo, requestOptions, context));
+            this.client.getServiceVersion().getVersion(), name, foo, accept, requestOptions, context));
     }
 
     /**
@@ -122,7 +125,8 @@ public final class SkipSpecialHeadersImpl {
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> deleteWithSpecialHeadersWithResponse(String name, String foo, RequestOptions requestOptions) {
+        final String accept = "application/json";
         return service.deleteWithSpecialHeadersSync(this.client.getEndpoint(),
-            this.client.getServiceVersion().getVersion(), name, foo, requestOptions, Context.NONE);
+            this.client.getServiceVersion().getVersion(), name, foo, accept, requestOptions, Context.NONE);
     }
 }
