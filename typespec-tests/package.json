@@ -13,11 +13,11 @@
     "@typespec/spector": "0.1.0-alpha.16",
     "@typespec/http-specs": "0.1.0-alpha.24",
     "@azure-tools/azure-http-specs": "0.1.0-alpha.23",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.31.10.tgz"
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.31.11.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "^1.2.1",
-    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-organize-imports": "^4.2.0",
     "prettier": "^3.6.2"
   },
   "overrides": {
@@ -32,8 +32,8 @@
     "@typespec/streams": "0.72.1",
     "@azure-tools/typespec-azure-core": "0.58.0",
     "@azure-tools/typespec-client-generator-core": "0.58.0",
-    "@azure-tools/typespec-azure-resource-manager": "0.58.0",
-    "@azure-tools/typespec-autorest": "0.58.0"
+    "@azure-tools/typespec-azure-resource-manager": "0.58.1",
+    "@azure-tools/typespec-autorest": "0.58.1"
   },
   "private": true
 }

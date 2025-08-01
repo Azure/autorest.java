@@ -104,6 +104,8 @@ $generateScript = {
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
   if ($tspFile -match "tsp[\\/]naming.tsp$") {
+    # Test for rename-model
+    $tspOptions += " --option ""@azure-tools/typespec-java.rename-model=RunObjectLastError1:RunObjectLastErrorRenamed,RunObjectLastErrorCode:RunObjectLastErrorCodeRenamed"""
     # Add the customization-class option for Java emitter
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationTest.java"""
   }
