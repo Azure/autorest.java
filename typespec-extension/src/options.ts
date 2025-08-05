@@ -8,6 +8,7 @@ export interface DevOptions {
   "debug"?: boolean;
   "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
   "java-temp-dir"?: string; // working directory for java codegen, e.g. transformed code-model file
+  profile?: boolean; // enable performance profiling
 }
 
 // see EmitterOptionsDev in code-model-builder.ts for a full list of options
