@@ -117,13 +117,13 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
         "Specify the Java class that to be executed by emitter for [code customization](https://github.com/Azure/autorest.java/blob/main/customization-base/README.md), during post-process.",
       nullable: true,
     },
-    // "rename-model": {
-    //   type: ["string", "object"],
-    //   description:
-    //     "Rename the model classes, in case they cannot be renamed via TCGC. E.g., anonymous models or templated models. Format should be in key-value form. This option is for management-plane SDK.",
-    //   additionalProperties: true,
-    //   nullable: true,
-    // },
+    "rename-model": {
+      type: ["object"],
+      description:
+        "Rename the model classes, in case they cannot be renamed via TCGC. E.g., anonymous models or templated models. Format should be in key-value form.",
+      additionalProperties: true,
+      nullable: true,
+    },
     // "add-inner": {
     //   type: ["string", "array"],
     //   description:
