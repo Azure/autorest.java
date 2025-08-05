@@ -97,6 +97,7 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--enable-page-size`|Indicates that `maxpagesize` query parameter be supplied via `byPage` API in `PagedFlux` or `PagedIterable`, instead of via client method parameter.|
 |`--use-key-credential`|Indicates that builder uses `KeyCredential` for API key.|
 |`--graal-vm-config`|Generates GraalVM config under `resources/META-INF/native-image`.|
+|`--rename-model`|CSV. Rename classes. Each item is of pattern `from:to`.|
 
 ## Settings for minimal data-plane clients
 
