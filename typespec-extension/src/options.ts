@@ -8,6 +8,7 @@ export interface DevOptions {
   "debug"?: boolean;
   "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
   "java-temp-dir"?: string; // working directory for java codegen, e.g. transformed code-model file
+  profile?: boolean; // enable performance profiling
 }
 
 // see EmitterOptionsDev in code-model-builder.ts for a full list of options
@@ -116,13 +117,13 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
         "Specify the Java class that to be executed by emitter for [code customization](https://github.com/Azure/autorest.java/blob/main/customization-base/README.md), during post-process.",
       nullable: true,
     },
-    // "rename-model": {
-    //   type: ["string", "object"],
-    //   description:
-    //     "Rename the model classes, in case they cannot be renamed via TCGC. E.g., anonymous models or templated models. Format should be in key-value form. This option is for management-plane SDK.",
-    //   additionalProperties: true,
-    //   nullable: true,
-    // },
+    "rename-model": {
+      type: ["string", "object"],
+      description:
+        "Rename the model classes, in case they cannot be renamed via TCGC. E.g., anonymous models or templated models. Format should be in key-value form.",
+      additionalProperties: true,
+      nullable: true,
+    },
     // "add-inner": {
     //   type: ["string", "array"],
     //   description:
@@ -140,13 +141,20 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     // "preserve-model": {
     //   type: ["string", "array"],
     //   description:
-    //     "Generate the model cleasses, even if it is not used by any API. Format should be in array form. This option is for management-plane SDK.",
+    //     "Generate the model classes, even if it is not used by any API. Format should be in array form. This option is for management-plane SDK.",
     //   items: { type: "string" },
     //   nullable: true,
     // },
     // "generate-async-methods": {
     //   type: "boolean",
     //   description: "Generate async APIs in Clients. This option is for management-plane SDK.",
+    //   nullable: true,
+    // },
+    // "property-include-always": {
+    //   type: ["string", "array"],
+    //   description:
+    //     "Specify that properties should always be serialized to JSON, even if its value is `null`. Format should be in array form. Each element be in form `<modelName>.<propertyName>`. This option is for management-plane SDK.",
+    //   items: { type: "string" },
     //   nullable: true,
     // },
     // "resource-collection-associations": {
