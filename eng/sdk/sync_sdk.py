@@ -110,6 +110,21 @@ def update_sdks():
         if artifact in skip_artifacts:
             continue
 
+        # update commit ID for ARM module
+        commit_id = "3c15c2f8c50fb3130b34887d29442da75f07fefb"
+        if commit_id and arm_module:
+            with open(tsp_location_file, "r", encoding="utf-8") as f_in:
+                lines = f_in.readlines()
+            lines_out = []
+            for line in lines:
+                if line.startswith("commit:"):
+                    line = f"commit: {commit_id}\n"
+                lines_out.append(line)
+            with open(tsp_location_file, "w", encoding="utf-8") as f_out:
+                f_out.writelines(lines_out)
+
+            logging.info("Updated tsp-location file content:\n%s", "".join(lines_out))
+
         if os.path.dirname(module_path).endswith("-v2"):
             # skip modules on azure-core-v2
             logging.info(f"Skip azure-core-v2 module on path {module_path}")
