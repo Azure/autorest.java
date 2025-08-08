@@ -1,0 +1,146 @@
+From 3bb4437a6b964156f53b2e8ed22265e14f056a31 Mon Sep 17 00:00:00 2001
+From: Weidong Xu <weidxu@microsoft.com>
+Date: Thu, 7 Aug 2025 11:36:55 +0800
+Subject: [PATCH] revert impl in keyvault
+
+---
+ .../implementation/CertificateClientImpl.java          | 10 ++++++----
+ .../keyvault/keys/implementation/KeyClientImpl.java    | 10 ++++++----
+ .../secrets/implementation/SecretClientImpl.java       | 10 ++++++----
+ 3 files changed, 18 insertions(+), 12 deletions(-)
+
+diff --git a/sdk/keyvault/azure-security-keyvault-certificates/src/main/java/com/azure/security/keyvault/certificates/implementation/CertificateClientImpl.java b/sdk/keyvault/azure-security-keyvault-certificates/src/main/java/com/azure/security/keyvault/certificates/implementation/CertificateClientImpl.java
+index b69446036ab..a6ac254483a 100644
+--- a/sdk/keyvault/azure-security-keyvault-certificates/src/main/java/com/azure/security/keyvault/certificates/implementation/CertificateClientImpl.java
++++ b/sdk/keyvault/azure-security-keyvault-certificates/src/main/java/com/azure/security/keyvault/certificates/implementation/CertificateClientImpl.java
+@@ -693,7 +693,7 @@ public final class CertificateClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Mono<Response<Void>> purgeDeletedCertificate(@HostParam("vaultBaseUrl") String vaultBaseUrl,
+             @QueryParam("api-version") String apiVersion, @PathParam("certificate-name") String certificateName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Delete("/deletedcertificates/{certificate-name}")
+         @ExpectedResponses({ 204 })
+@@ -703,7 +703,7 @@ public final class CertificateClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Response<Void> purgeDeletedCertificateSync(@HostParam("vaultBaseUrl") String vaultBaseUrl,
+             @QueryParam("api-version") String apiVersion, @PathParam("certificate-name") String certificateName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Post("/deletedcertificates/{certificate-name}/recover")
+         @ExpectedResponses({ 200 })
+@@ -5401,8 +5401,9 @@ public final class CertificateClientImpl {
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Mono<Response<Void>> purgeDeletedCertificateWithResponseAsync(String certificateName,
+         RequestOptions requestOptions) {
++        final String accept = "application/json";
+         return FluxUtil.withContext(context -> service.purgeDeletedCertificate(this.getVaultBaseUrl(),
+-            this.getServiceVersion().getVersion(), certificateName, requestOptions, context));
++            this.getServiceVersion().getVersion(), certificateName, accept, requestOptions, context));
+     }
+ 
+     /**
+@@ -5422,8 +5423,9 @@ public final class CertificateClientImpl {
+      */
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Response<Void> purgeDeletedCertificateWithResponse(String certificateName, RequestOptions requestOptions) {
++        final String accept = "application/json";
+         return service.purgeDeletedCertificateSync(this.getVaultBaseUrl(), this.getServiceVersion().getVersion(),
+-            certificateName, requestOptions, Context.NONE);
++            certificateName, accept, requestOptions, Context.NONE);
+     }
+ 
+     /**
+diff --git a/sdk/keyvault/azure-security-keyvault-keys/src/main/java/com/azure/security/keyvault/keys/implementation/KeyClientImpl.java b/sdk/keyvault/azure-security-keyvault-keys/src/main/java/com/azure/security/keyvault/keys/implementation/KeyClientImpl.java
+index e8f3f1f2712..559c4022523 100644
+--- a/sdk/keyvault/azure-security-keyvault-keys/src/main/java/com/azure/security/keyvault/keys/implementation/KeyClientImpl.java
++++ b/sdk/keyvault/azure-security-keyvault-keys/src/main/java/com/azure/security/keyvault/keys/implementation/KeyClientImpl.java
+@@ -583,7 +583,7 @@ public final class KeyClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Mono<Response<Void>> purgeDeletedKey(@HostParam("vaultBaseUrl") String vaultBaseUrl,
+             @QueryParam("api-version") String apiVersion, @PathParam("key-name") String keyName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Delete("/deletedkeys/{key-name}")
+         @ExpectedResponses({ 204 })
+@@ -593,7 +593,7 @@ public final class KeyClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Response<Void> purgeDeletedKeySync(@HostParam("vaultBaseUrl") String vaultBaseUrl,
+             @QueryParam("api-version") String apiVersion, @PathParam("key-name") String keyName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Post("/deletedkeys/{key-name}/recover")
+         @ExpectedResponses({ 200 })
+@@ -3921,8 +3921,9 @@ public final class KeyClientImpl {
+      */
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Mono<Response<Void>> purgeDeletedKeyWithResponseAsync(String keyName, RequestOptions requestOptions) {
++        final String accept = "application/json";
+         return FluxUtil.withContext(context -> service.purgeDeletedKey(this.getVaultBaseUrl(),
+-            this.getServiceVersion().getVersion(), keyName, requestOptions, context));
++            this.getServiceVersion().getVersion(), keyName, accept, requestOptions, context));
+     }
+ 
+     /**
+@@ -3942,8 +3943,9 @@ public final class KeyClientImpl {
+      */
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Response<Void> purgeDeletedKeyWithResponse(String keyName, RequestOptions requestOptions) {
++        final String accept = "application/json";
+         return service.purgeDeletedKeySync(this.getVaultBaseUrl(), this.getServiceVersion().getVersion(), keyName,
+-            requestOptions, Context.NONE);
++            accept, requestOptions, Context.NONE);
+     }
+ 
+     /**
+diff --git a/sdk/keyvault/azure-security-keyvault-secrets/src/main/java/com/azure/security/keyvault/secrets/implementation/SecretClientImpl.java b/sdk/keyvault/azure-security-keyvault-secrets/src/main/java/com/azure/security/keyvault/secrets/implementation/SecretClientImpl.java
+index eaae7c22e04..1563bba24bb 100644
+--- a/sdk/keyvault/azure-security-keyvault-secrets/src/main/java/com/azure/security/keyvault/secrets/implementation/SecretClientImpl.java
++++ b/sdk/keyvault/azure-security-keyvault-secrets/src/main/java/com/azure/security/keyvault/secrets/implementation/SecretClientImpl.java
+@@ -331,7 +331,7 @@ public final class SecretClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Mono<Response<Void>> purgeDeletedSecret(@HostParam("vaultBaseUrl") String vaultBaseUrl,
+             @QueryParam("api-version") String apiVersion, @PathParam("secret-name") String secretName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Delete("/deletedsecrets/{secret-name}")
+         @ExpectedResponses({ 204 })
+@@ -341,7 +341,7 @@ public final class SecretClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Response<Void> purgeDeletedSecretSync(@HostParam("vaultBaseUrl") String vaultBaseUrl,
+             @QueryParam("api-version") String apiVersion, @PathParam("secret-name") String secretName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Post("/deletedsecrets/{secret-name}/recover")
+         @ExpectedResponses({ 200 })
+@@ -1747,8 +1747,9 @@ public final class SecretClientImpl {
+      */
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Mono<Response<Void>> purgeDeletedSecretWithResponseAsync(String secretName, RequestOptions requestOptions) {
++        final String accept = "application/json";
+         return FluxUtil.withContext(context -> service.purgeDeletedSecret(this.getVaultBaseUrl(),
+-            this.getServiceVersion().getVersion(), secretName, requestOptions, context));
++            this.getServiceVersion().getVersion(), secretName, accept, requestOptions, context));
+     }
+ 
+     /**
+@@ -1768,8 +1769,9 @@ public final class SecretClientImpl {
+      */
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Response<Void> purgeDeletedSecretWithResponse(String secretName, RequestOptions requestOptions) {
++        final String accept = "application/json";
+         return service.purgeDeletedSecretSync(this.getVaultBaseUrl(), this.getServiceVersion().getVersion(), secretName,
+-            requestOptions, Context.NONE);
++            accept, requestOptions, Context.NONE);
+     }
+ 
+     /**
+-- 
+2.50.1.windows.1
+
