@@ -28,7 +28,7 @@ jobs:
 
   - script: |
       git checkout .
-      git apply ../core.diff --ignore-whitespace
+      git apply ../core.patch --ignore-whitespace
     displayName: 'Patch core'
     workingDirectory: ./core
 

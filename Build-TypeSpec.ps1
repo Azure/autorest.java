@@ -6,7 +6,7 @@ Write-Host "Apply diff to core"
 Push-Location ./core
 try {
   git checkout .
-  git apply ../core.diff --ignore-whitespace
+  git apply ../core.patch --ignore-whitespace
 } finally {
   Pop-Location
 }
