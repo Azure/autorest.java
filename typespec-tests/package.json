@@ -12,7 +12,7 @@
     "@typespec/spec-api": "0.1.0-alpha.8",
     "@typespec/spector": "0.1.0-alpha.17",
     "@typespec/http-specs": "0.1.0-alpha.25",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.25",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.26",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.32.0.tgz"
   },
   "devDependencies": {
