@@ -1,0 +1,58 @@
+From b120345b0fdbdb49b3f02da90806d991ca217099 Mon Sep 17 00:00:00 2001
+From: Weidong Xu <weidxu@microsoft.com>
+Date: Thu, 7 Aug 2025 14:15:25 +0800
+Subject: [PATCH] revert impl in
+ healthdataaiservices/azure-health-deidentification
+
+---
+ .../implementation/DeidentificationClientImpl.java   | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+diff --git a/sdk/healthdataaiservices/azure-health-deidentification/src/main/java/com/azure/health/deidentification/implementation/DeidentificationClientImpl.java b/sdk/healthdataaiservices/azure-health-deidentification/src/main/java/com/azure/health/deidentification/implementation/DeidentificationClientImpl.java
+index 981b020ca26..a8eefef1a49 100644
+--- a/sdk/healthdataaiservices/azure-health-deidentification/src/main/java/com/azure/health/deidentification/implementation/DeidentificationClientImpl.java
++++ b/sdk/healthdataaiservices/azure-health-deidentification/src/main/java/com/azure/health/deidentification/implementation/DeidentificationClientImpl.java
+@@ -275,7 +275,7 @@ public final class DeidentificationClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Mono<Response<Void>> deleteJob(@HostParam("endpoint") String endpoint,
+             @QueryParam("api-version") String apiVersion, @PathParam("name") String jobName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Delete("/jobs/{name}")
+         @ExpectedResponses({ 204 })
+@@ -285,7 +285,7 @@ public final class DeidentificationClientImpl {
+         @UnexpectedResponseExceptionType(HttpResponseException.class)
+         Response<Void> deleteJobSync(@HostParam("endpoint") String endpoint,
+             @QueryParam("api-version") String apiVersion, @PathParam("name") String jobName,
+-            RequestOptions requestOptions, Context context);
++            @HeaderParam("Accept") String accept, RequestOptions requestOptions, Context context);
+ 
+         @Post("/deid")
+         @ExpectedResponses({ 200 })
+@@ -2041,8 +2041,9 @@ public final class DeidentificationClientImpl {
+      */
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Mono<Response<Void>> deleteJobWithResponseAsync(String jobName, RequestOptions requestOptions) {
++        final String accept = "application/json";
+         return FluxUtil.withContext(context -> service.deleteJob(this.getEndpoint(),
+-            this.getServiceVersion().getVersion(), jobName, requestOptions, context));
++            this.getServiceVersion().getVersion(), jobName, accept, requestOptions, context));
+     }
+ 
+     /**
+@@ -2060,8 +2061,9 @@ public final class DeidentificationClientImpl {
+      */
+     @ServiceMethod(returns = ReturnType.SINGLE)
+     public Response<Void> deleteJobWithResponse(String jobName, RequestOptions requestOptions) {
+-        return service.deleteJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), jobName, requestOptions,
+-            Context.NONE);
++        final String accept = "application/json";
++        return service.deleteJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), jobName, accept,
++            requestOptions, Context.NONE);
+     }
+ 
+     /**
+-- 
+2.50.1.windows.1
+
