@@ -27,7 +27,6 @@ import com.azure.mgmttest.network.fluent.models.NetworkInterfaceInner;
 import com.azure.mgmttest.network.fluent.models.NetworkSecurityGroupInner;
 import com.azure.mgmttest.networkwatcher.fluent.models.PacketCaptureResultInner;
 import com.azure.mgmttest.nonstringexpandableenum.fluent.models.ScheduledQueryRuleProperties;
-import com.azure.mgmttest.nonstringexpandableenum.models.AlertSeverity;
 import com.azure.mgmttest.postgresqlhsc.fluent.models.ServerConfigurationInner;
 import com.azure.mgmttest.resources.fluent.models.ResourceGroupInner;
 import com.azure.mgmttest.resources.models.IdentityUserAssignedIdentities;
