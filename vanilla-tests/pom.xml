@@ -42,7 +42,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-test</artifactId>
-      <version>1.27.0-beta.10</version>
+      <version>1.27.0-beta.11</version>
       <scope>test</scope>
       <exclusions>
         <exclusion>
@@ -72,7 +72,7 @@
     <dependency>
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
-      <version>3.4.41</version>
+      <version>3.7.8</version>
       <scope>test</scope>
     </dependency>
     <dependency>
