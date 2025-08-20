@@ -20,6 +20,7 @@ script_root: str = os.path.dirname(os.path.realpath(__file__))
 skip_artifacts: List[str] = [
     "azure-ai-anomalydetector",  # deprecated
     # expect failure on below
+    "azure-ai-projects",  # wait for service dev update tsp-location.yaml
     # "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
     # "azure-ai-vision-face",  # SDK in development
 ]
