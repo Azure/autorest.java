@@ -1,5 +1,11 @@
 # Release History
 
+## 0.33.0 (2025-08-28)
+
+Compatible with compiler 1.3.0.
+
+- Emitter deletes existing generated Java files in `emitter-output-dir`.
+
 ## 0.32.2 (2025-08-21)
 
 Compatible with compiler 1.3.0.
