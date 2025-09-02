@@ -1,10 +1,10 @@
 # Release History
 
-## 0.33.0 (2025-08-28)
+## 0.33.0 (2025-09-04)
 
 Compatible with compiler 1.3.0.
 
-- Emitter deletes existing generated Java files in `emitter-output-dir`.
+- Supported `clear-output-folder` emitter option, to deletes generated Java files in `emitter-output-dir`.
 
 ## 0.32.2 (2025-08-21)
 
