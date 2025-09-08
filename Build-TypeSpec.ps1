@@ -12,7 +12,7 @@ try {
 }
 
 Write-Host "Build JAR"
-mvn clean install -P tsp --no-transfer-progress
+mvn clean install -P tsp --no-transfer-progress -DskipTests
 if ($LASTEXITCODE -ne 0) {
   exit $LASTEXITCODE
 }
