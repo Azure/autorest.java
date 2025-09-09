@@ -1,5 +1,11 @@
 # Release History
 
+## 0.33.0 (2025-09-09)
+
+Compatible with compiler 1.3.0.
+
+- Supported clean up generated Java files.
+
 ## 0.32.2 (2025-08-21)
 
 Compatible with compiler 1.3.0.

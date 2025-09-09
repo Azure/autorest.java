@@ -36,8 +36,12 @@ public class ProjectTests {
         // ignore for IO
         project.integrateWithSdk();
 
-        Optional<String> coreMgmtVer = FluentProject.checkArtifact("com.azure:azure-core-management;1.1.0;1.2.0-beta.1", "com.azure:azure-core-management");
+        Optional<String> coreMgmtVer = FluentProject.checkArtifact("com.azure:azure-core-management;1.1.0;1.2.0-beta.1", "com.azure:azure-core-management", false);
         Assertions.assertTrue(coreMgmtVer.isPresent());
         Assertions.assertEquals("1.1.0", coreMgmtVer.get());
+
+        coreMgmtVer = FluentProject.checkArtifact("com.azure:azure-core-management;1.1.0;1.2.0-beta.1", "com.azure:azure-core-management", true);
+        Assertions.assertTrue(coreMgmtVer.isPresent());
+        Assertions.assertEquals("1.2.0-beta.1", coreMgmtVer.get());
     }
 }

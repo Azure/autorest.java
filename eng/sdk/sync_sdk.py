@@ -162,7 +162,11 @@ def update_sdks():
 
         if not arm_module:
             # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
-            subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
+            try:
+                subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
+            except subprocess.CalledProcessError:
+                logging.error(f"Failed to update code snippet for module {artifact}")
+                failed_modules.append(artifact)
 
         if arm_module:
             # revert mock test code
