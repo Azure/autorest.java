@@ -113,20 +113,20 @@ def update_sdks():
         if artifact in skip_artifacts:
             continue
 
-        # # update commit ID for ARM module
-        # commit_id = "3c15c2f8c50fb3130b34887d29442da75f07fefb"
-        # if commit_id and arm_module:
-        #     with open(tsp_location_file, "r", encoding="utf-8") as f_in:
-        #         lines = f_in.readlines()
-        #     lines_out = []
-        #     for line in lines:
-        #         if line.startswith("commit:"):
-        #             line = f"commit: {commit_id}\n"
-        #         lines_out.append(line)
-        #     with open(tsp_location_file, "w", encoding="utf-8") as f_out:
-        #         f_out.writelines(lines_out)
+        # update commit ID for ARM module
+        commit_id = "05584a1019e75159b0dc70a6751afaa2c77868e6"
+        if commit_id and artifact in ['azure-resourcemanager-trustedsigning', 'azure-security-keyvault-keys', 'azure-security-keyvault-certificates', 'azure-security-keyvault-secrets', 'azure-security-keyvault-administration', 'azure-resourcemanager-containerservicefleet', 'azure-resourcemanager-hardwaresecuritymodules', 'azure-resourcemanager-iotfirmwaredefense', 'azure-ai-vision-face', 'azure-resourcemanager-workloadssapvirtualinstance', 'azure-resourcemanager-avs', 'azure-resourcemanager-dashboard', 'azure-resourcemanager-servicefabricmanagedclusters', 'azure-resourcemanager-servicenetworking', 'azure-resourcemanager-hybridconnectivity', 'azure-resourcemanager-azurestackhci-vm', 'azure-resourcemanager-storageactions', 'azure-resourcemanager-storagemover', 'azure-resourcemanager-chaos']:
+            with open(tsp_location_file, "r", encoding="utf-8") as f_in:
+                lines = f_in.readlines()
+            lines_out = []
+            for line in lines:
+                if line.startswith("commit:"):
+                    line = f"commit: {commit_id}\n"
+                lines_out.append(line)
+            with open(tsp_location_file, "w", encoding="utf-8") as f_out:
+                f_out.writelines(lines_out)
 
-        #     logging.info("Updated tsp-location file content:\n%s", "".join(lines_out))
+            logging.info("Updated tsp-location file content:\n%s", "".join(lines_out))
 
         if os.path.dirname(module_path).endswith("-v2"):
             # skip modules on azure-core-v2
