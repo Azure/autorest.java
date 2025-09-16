@@ -12,8 +12,8 @@
     "@typespec/spec-api": "0.1.0-alpha.9",
     "@typespec/spector": "0.1.0-alpha.18",
     "@typespec/http-specs": "0.1.0-alpha.26",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.28",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.33.1.tgz"
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.29",
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.33.2.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "^1.4.0",
