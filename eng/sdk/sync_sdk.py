@@ -123,7 +123,8 @@ def commit_is_ancestor(ancestor_sha, descendant_sha):
             "--is-ancestor",
             ancestor_sha,
             descendant_sha,
-        ]
+        ],
+        cwd=specs_repo_dir,
     )
     return returncode == 0
 
