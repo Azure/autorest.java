@@ -142,6 +142,11 @@ def update_sdks():
         if artifact in skip_artifacts:
             continue
 
+        if os.path.dirname(module_path).endswith("-v2"):
+            # skip modules on azure-core-v2
+            logging.info(f"Skip azure-core-v2 module on path {module_path}")
+            continue
+
         # update commit ID
         commit_id = "6267b64842af3d744c5b092a3f3beef49729ad6d"
         if commit_id:
@@ -162,11 +167,6 @@ def update_sdks():
                     modules_commit_updated.append(artifact)
                 else:
                     modules_commit_not_updated.append(artifact)
-
-        if os.path.dirname(module_path).endswith("-v2"):
-            # skip modules on azure-core-v2
-            logging.info(f"Skip azure-core-v2 module on path {module_path}")
-            continue
 
         generated_samples_path = os.path.join(
             module_path, get_generated_folder_from_artifact(module_path, artifact, "samples")
