@@ -147,8 +147,10 @@ def update_sdks():
             logging.info(f"Skip azure-core-v2 module on path {module_path}")
             continue
 
+        if arm_module:
+            continue
         # update commit ID
-        commit_id = "6267b64842af3d744c5b092a3f3beef49729ad6d"
+        commit_id = "9e0b8bd3acb79f2cac47c37eea9e8758d636bd39"
         if commit_id:
             with open(tsp_location_file, "r", encoding="utf-8") as f_in:
                 lines = f_in.readlines()
