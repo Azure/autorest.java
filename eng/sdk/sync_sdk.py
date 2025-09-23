@@ -150,7 +150,7 @@ def update_sdks():
         if arm_module:
             continue
         # update commit ID
-        commit_id = "9e0b8bd3acb79f2cac47c37eea9e8758d636bd39"
+        commit_id = "681c15ad9028f91b3f4978625527fd461b57f4fa"
         if commit_id:
             with open(tsp_location_file, "r", encoding="utf-8") as f_in:
                 lines = f_in.readlines()
