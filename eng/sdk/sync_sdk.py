@@ -22,7 +22,7 @@ skip_artifacts: List[str] = [
     # expect failure on below
     "azure-ai-projects",  # wait for service dev update tsp-location.yaml
     # "azure-developer-devcenter",  # 2 breaks introduced into stable api-version
-    # "azure-ai-vision-face",  # SDK in development
+    "azure-ai-vision-face",  # SDK in development
 ]
 
 
