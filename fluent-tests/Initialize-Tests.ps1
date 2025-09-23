@@ -89,7 +89,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute --enable-sync-stack=false",
 
     # error response that not conform to ARM
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/graphrbac/data-plane/GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization --enable-sync-stack=false",
 
     # client model flatten at autorest.java
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery --enable-sync-stack=false",
@@ -100,7 +100,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack --stream-style-serialization=false",
 
     # conflict property name from 2 x-ms-flatten in LabDetails and LabProperties
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/education/resource-manager/Microsoft.Education/preview/2021-12-01-preview/education.json --namespace=com.azure.mgmttest.education",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/education/resource-manager/Microsoft.Education/Education/preview/2021-12-01-preview/education.json --namespace=com.azure.mgmttest.education",
 
     # do not flatten if polymorphic in DevicePropertiesFormat
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork",

@@ -1,5 +1,11 @@
 # Release History
 
+## 0.34.0 (2025-09-22)
+
+Compatible with compiler 1.4.0.
+
+- Supported `client-side-validations` emitter option, default is `false`.
+
 ## 0.33.3 (2025-09-17)
 
 Compatible with compiler 1.4.0.
