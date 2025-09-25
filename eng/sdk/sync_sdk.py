@@ -192,7 +192,11 @@ def update_sdks():
                     if not directory_exists(current_directory):
                         # find the new directory containing tspconfig.yaml
                         logging.warning(f"Directory {current_directory} does not exist in specs repo.")
-                        new_directory = find_tspconfig(current_directory)
+                        if current_directory == "specification/loadtestservice/Playwright.Management":
+                            # this directory was removed
+                            new_directory = "specification/loadtestservice/resource-manager/Microsoft.LoadTestService/playwright"
+                        else:
+                            new_directory = find_tspconfig(current_directory)
                         if new_directory:
                             lines = lines_out
                             lines_out = []
