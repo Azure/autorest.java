@@ -113,7 +113,7 @@ def find_tspconfig(directory: str) -> str | None:
     specs_repo_dir = os.path.join(workspace_dir, "azure-rest-api-specs")
     segments = directory.split("/")
     glob_dir = segments[0] + "/" + segments[1] + "/resource-manager/**/tspconfig.yaml"
-    for tspconfig_file in glob.glob(os.path.join(specs_repo_dir, glob_dir)):
+    for tspconfig_file in glob.glob(os.path.join(specs_repo_dir, glob_dir), recursive=True):
         return os.path.relpath(os.path.dirname(tspconfig_file), specs_repo_dir)
     return None
 
@@ -196,10 +196,10 @@ def update_sdks():
                         if new_directory:
                             lines = lines_out
                             lines_out = []
-                        for line in lines:
-                            if line.startswith("directory:"):
-                                line = f"directory: {new_directory}\n"
-                            lines_out.append(line)
+                            for line in lines:
+                                if line.startswith("directory:"):
+                                    line = f"directory: {new_directory}\n"
+                                lines_out.append(line)
 
                     with open(tsp_location_file, "w", encoding="utf-8") as f_out:
                         f_out.writelines(lines_out)
