@@ -102,6 +102,22 @@ def get_generated_folder_from_artifact(module_path: str, artifact: str, type: st
     return path
 
 
+def directory_exists(directory: str) -> bool:
+    workspace_dir = os.path.dirname(sdk_root)
+    specs_repo_dir = os.path.join(workspace_dir, "azure-rest-api-specs")
+    return os.path.isdir(os.path.join(specs_repo_dir, directory))
+
+
+def find_tspconfig(directory: str) -> str | None:
+    workspace_dir = os.path.dirname(sdk_root)
+    specs_repo_dir = os.path.join(workspace_dir, "azure-rest-api-specs")
+    segments = directory.split("/")
+    glob_dir = segments[0] + "/" + segments[1] + "/resource-manager/**/tspconfig.yaml"
+    for tspconfig_file in glob.glob(os.path.join(specs_repo_dir, glob_dir)):
+        return os.path.relpath(os.path.dirname(tspconfig_file), specs_repo_dir)
+    return None
+
+
 def commit_is_ancestor(ancestor_sha, descendant_sha):
     workspace_dir = os.path.dirname(sdk_root)
     specs_repo_dir = os.path.join(workspace_dir, "azure-rest-api-specs")
@@ -116,6 +132,15 @@ def commit_is_ancestor(ancestor_sha, descendant_sha):
             ],
             cwd=workspace_dir,
         )
+        subprocess.check_call(
+            [
+                "git",
+                "checkout",
+                "681c15ad9028f91b3f4978625527fd461b57f4fa",
+            ],
+            cwd=specs_repo_dir,
+        )
+
     returncode = subprocess.call(
         [
             "git",
@@ -159,9 +184,23 @@ def update_sdks():
                 if line.startswith("commit:"):
                     current_commit = line.split("commit:")[-1].strip()
                     line = f"commit: {commit_id}\n"
+                if line.startswith("directory:"):
+                    current_directory = line.split("directory:")[-1].strip()
                 lines_out.append(line)
             if current_commit:
                 if commit_is_ancestor(current_commit, commit_id):
+                    if not directory_exists(current_directory):
+                        # find the new directory containing tspconfig.yaml
+                        logging.warning(f"Directory {current_directory} does not exist in specs repo.")
+                        new_directory = find_tspconfig(current_directory)
+                        if new_directory:
+                            lines = lines_out
+                            lines_out = []
+                        for line in lines:
+                            if line.startswith("directory:"):
+                                line = f"directory: {new_directory}\n"
+                            lines_out.append(line)
+
                     with open(tsp_location_file, "w", encoding="utf-8") as f_out:
                         f_out.writelines(lines_out)
 
@@ -179,41 +218,41 @@ def update_sdks():
         generated_samples_exists = os.path.isdir(generated_samples_path)
         generated_test_exists = os.path.isdir(generated_test_path)
 
-        if arm_module:
-            logging.info("Delete generated source code of resourcemanager module %s", artifact)
-            shutil.rmtree(os.path.join(module_path, "src", "main", "resources"), ignore_errors=True)
-            delete_generated_source_code(os.path.join(module_path, "src", "main", "java"))
-
-        logging.info(f"Generate for module {artifact}")
-        try:
-            subprocess.check_call(["tsp-client", "update"], cwd=module_path)
-        except subprocess.CalledProcessError:
-            # one retry
-            # sometimes customization have intermittent failure
-            logging.warning(f"Retry generate for module {artifact}")
-            try:
-                subprocess.check_call(["tsp-client", "update", "--debug"], cwd=module_path)
-            except subprocess.CalledProcessError:
-                logging.error(f"Failed to generate for module {artifact}")
-                failed_modules.append(artifact)
-
-        if not arm_module:
-            # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
-            try:
-                subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
-            except subprocess.CalledProcessError:
-                logging.error(f"Failed to update code snippet for module {artifact}")
-                failed_modules.append(artifact)
-
         # if arm_module:
-        #     # revert mock test code
-        #     cmd = ["git", "checkout", "src/test"]
-        #     subprocess.check_call(cmd, cwd=module_path)
+        #     logging.info("Delete generated source code of resourcemanager module %s", artifact)
+        #     shutil.rmtree(os.path.join(module_path, "src", "main", "resources"), ignore_errors=True)
+        #     delete_generated_source_code(os.path.join(module_path, "src", "main", "java"))
 
-        if not generated_samples_exists:
-            shutil.rmtree(generated_samples_path, ignore_errors=True)
-        if not generated_test_exists:
-            shutil.rmtree(generated_test_path, ignore_errors=True)
+        # logging.info(f"Generate for module {artifact}")
+        # try:
+        #     subprocess.check_call(["tsp-client", "update"], cwd=module_path)
+        # except subprocess.CalledProcessError:
+        #     # one retry
+        #     # sometimes customization have intermittent failure
+        #     logging.warning(f"Retry generate for module {artifact}")
+        #     try:
+        #         subprocess.check_call(["tsp-client", "update", "--debug"], cwd=module_path)
+        #     except subprocess.CalledProcessError:
+        #         logging.error(f"Failed to generate for module {artifact}")
+        #         failed_modules.append(artifact)
+
+        # if not arm_module:
+        #     # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
+        #     try:
+        #         subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
+        #     except subprocess.CalledProcessError:
+        #         logging.error(f"Failed to update code snippet for module {artifact}")
+        #         failed_modules.append(artifact)
+
+        # # if arm_module:
+        # #     # revert mock test code
+        # #     cmd = ["git", "checkout", "src/test"]
+        # #     subprocess.check_call(cmd, cwd=module_path)
+
+        # if not generated_samples_exists:
+        #     shutil.rmtree(generated_samples_path, ignore_errors=True)
+        # if not generated_test_exists:
+        #     shutil.rmtree(generated_test_path, ignore_errors=True)
 
     # revert change on pom.xml, readme.md, changelog.md, etc.
     cmd = ["git", "checkout", "**/pom.xml"]
