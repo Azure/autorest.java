@@ -205,10 +205,10 @@ def update_sdks():
                 logging.error(f"Failed to update code snippet for module {artifact}")
                 failed_modules.append(artifact)
 
-        if arm_module:
-            # revert mock test code
-            cmd = ["git", "checkout", "src/test"]
-            subprocess.check_call(cmd, cwd=module_path)
+        # if arm_module:
+        #     # revert mock test code
+        #     cmd = ["git", "checkout", "src/test"]
+        #     subprocess.check_call(cmd, cwd=module_path)
 
         if not generated_samples_exists:
             shutil.rmtree(generated_samples_path, ignore_errors=True)
