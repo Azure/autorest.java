@@ -222,41 +222,41 @@ def update_sdks():
         generated_samples_exists = os.path.isdir(generated_samples_path)
         generated_test_exists = os.path.isdir(generated_test_path)
 
+        if arm_module:
+            logging.info("Delete generated source code of resourcemanager module %s", artifact)
+            shutil.rmtree(os.path.join(module_path, "src", "main", "resources"), ignore_errors=True)
+            delete_generated_source_code(os.path.join(module_path, "src", "main", "java"))
+
+        logging.info(f"Generate for module {artifact}")
+        try:
+            subprocess.check_call(["tsp-client", "update"], cwd=module_path)
+        except subprocess.CalledProcessError:
+            # one retry
+            # sometimes customization have intermittent failure
+            logging.warning(f"Retry generate for module {artifact}")
+            try:
+                subprocess.check_call(["tsp-client", "update", "--debug"], cwd=module_path)
+            except subprocess.CalledProcessError:
+                logging.error(f"Failed to generate for module {artifact}")
+                failed_modules.append(artifact)
+
+        if not arm_module:
+            # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
+            try:
+                subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
+            except subprocess.CalledProcessError:
+                logging.error(f"Failed to update code snippet for module {artifact}")
+                failed_modules.append(artifact)
+
         # if arm_module:
-        #     logging.info("Delete generated source code of resourcemanager module %s", artifact)
-        #     shutil.rmtree(os.path.join(module_path, "src", "main", "resources"), ignore_errors=True)
-        #     delete_generated_source_code(os.path.join(module_path, "src", "main", "java"))
+        #     # revert mock test code
+        #     cmd = ["git", "checkout", "src/test"]
+        #     subprocess.check_call(cmd, cwd=module_path)
 
-        # logging.info(f"Generate for module {artifact}")
-        # try:
-        #     subprocess.check_call(["tsp-client", "update"], cwd=module_path)
-        # except subprocess.CalledProcessError:
-        #     # one retry
-        #     # sometimes customization have intermittent failure
-        #     logging.warning(f"Retry generate for module {artifact}")
-        #     try:
-        #         subprocess.check_call(["tsp-client", "update", "--debug"], cwd=module_path)
-        #     except subprocess.CalledProcessError:
-        #         logging.error(f"Failed to generate for module {artifact}")
-        #         failed_modules.append(artifact)
-
-        # if not arm_module:
-        #     # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
-        #     try:
-        #         subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
-        #     except subprocess.CalledProcessError:
-        #         logging.error(f"Failed to update code snippet for module {artifact}")
-        #         failed_modules.append(artifact)
-
-        # # if arm_module:
-        # #     # revert mock test code
-        # #     cmd = ["git", "checkout", "src/test"]
-        # #     subprocess.check_call(cmd, cwd=module_path)
-
-        # if not generated_samples_exists:
-        #     shutil.rmtree(generated_samples_path, ignore_errors=True)
-        # if not generated_test_exists:
-        #     shutil.rmtree(generated_test_path, ignore_errors=True)
+        if not generated_samples_exists:
+            shutil.rmtree(generated_samples_path, ignore_errors=True)
+        if not generated_test_exists:
+            shutil.rmtree(generated_test_path, ignore_errors=True)
 
     # revert change on pom.xml, readme.md, changelog.md, etc.
     cmd = ["git", "checkout", "**/pom.xml"]
