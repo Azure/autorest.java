@@ -136,7 +136,7 @@ def commit_is_ancestor(ancestor_sha, descendant_sha):
             [
                 "git",
                 "checkout",
-                "681c15ad9028f91b3f4978625527fd461b57f4fa",
+                "6267b64842af3d744c5b092a3f3beef49729ad6d",
             ],
             cwd=specs_repo_dir,
         )
@@ -175,7 +175,7 @@ def update_sdks():
         if not arm_module:
             continue
         # update commit ID
-        commit_id = "681c15ad9028f91b3f4978625527fd461b57f4fa"
+        commit_id = "6267b64842af3d744c5b092a3f3beef49729ad6d"
         if commit_id:
             with open(tsp_location_file, "r", encoding="utf-8") as f_in:
                 lines = f_in.readlines()
