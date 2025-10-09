@@ -172,7 +172,7 @@ def update_sdks():
             logging.info(f"Skip azure-core-v2 module on path {module_path}")
             continue
 
-        if not arm_module:
+        if arm_module:
             continue
         # update commit ID
         commit_id = "6267b64842af3d744c5b092a3f3beef49729ad6d"
