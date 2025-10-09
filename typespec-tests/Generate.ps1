@@ -65,8 +65,6 @@ $generateScript = {
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
     # test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""
-    # exclude preview from service versions
-    $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
   } elseif ($tspFile -match "tsp[\\/]error.tsp") {
     # test for default-http-exception-type
     $tspOptions += " --option ""@azure-tools/typespec-java.use-default-http-status-code-to-exception-type-mapping=false"""
@@ -81,8 +79,6 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.service-name=Arm Resource Provider"""
     # also test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
-    # exclude preview from service versions
-    $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
     # enable sync-stack
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-sync-stack=true"""
     # rename model
