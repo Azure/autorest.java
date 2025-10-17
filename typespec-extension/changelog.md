@@ -4,7 +4,7 @@
 
 Compatible with compiler 1.5.0.
 
-- Supports `customization-class` for mgmt libraries.
+- Supported `customization-class` for mgmt libraries.
 
 ## 0.35.0 (2025-10-09)
 
