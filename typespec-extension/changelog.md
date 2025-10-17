@@ -1,5 +1,11 @@
 # Release History
 
+## 0.36.0 (2025-10-17)
+
+Compatible with compiler 1.5.0.
+
+- Supports `customization-class` for mgmt libraries.
+
 ## 0.35.0 (2025-10-09)
 
 Compatible with compiler 1.5.0.
