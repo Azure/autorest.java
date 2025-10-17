@@ -89,7 +89,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute --enable-sync-stack=false",
 
     # error response that not conform to ARM
-    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/graphrbac/data-plane/GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization --enable-sync-stack=false",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/e3dcc10ab749ed6731255aebec7d3214eda10da0/specification/graphrbac/data-plane/GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization --enable-sync-stack=false",
 
     # client model flatten at autorest.java
     "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery --enable-sync-stack=false",
