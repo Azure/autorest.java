@@ -96,6 +96,11 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.property-include-always=FunctionConfiguration.input"""
     # enable client side validations
     $tspOptions += " --option ""@azure-tools/typespec-java.client-side-validations=true"""
+  } elseif ($tspFile -match "arm-customization.tsp") {
+    # for mgmt, do not generate tests due to random mock values
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+    # add customization code
+    $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/KeyVaultCustomization.java"""
   } elseif ($tspFile -match "subclient.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
     # test for include-api-view-properties
