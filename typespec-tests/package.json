@@ -12,7 +12,7 @@
     "@typespec/spec-api": "0.1.0-alpha.9",
     "@typespec/spector": "0.1.0-alpha.19",
     "@typespec/http-specs": "0.1.0-alpha.27",
-    "@azure-tools/azure-http-specs": "0.1.0-alpha.30",
+    "@azure-tools/azure-http-specs": "0.1.0-alpha.31",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.35.0.tgz"
   },
   "devDependencies": {
@@ -31,9 +31,10 @@
     "@typespec/sse": "0.75.0",
     "@typespec/streams": "0.75.0",
     "@azure-tools/typespec-azure-core": "0.61.0",
-    "@azure-tools/typespec-client-generator-core": "0.61.0",
+    "@azure-tools/typespec-client-generator-core": "0.61.1",
     "@azure-tools/typespec-azure-resource-manager": "0.61.0",
-    "@azure-tools/typespec-autorest": "0.61.0"
+    "@azure-tools/typespec-autorest": "0.61.0",
+    "@azure-tools/typespec-liftr-base": "0.11.0"
   },
   "private": true
 }
