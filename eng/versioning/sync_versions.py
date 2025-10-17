@@ -88,6 +88,7 @@ def update_pom(package_versions: List[PackageVersion]):
         "customization-base/src/main/resources/pom.xml",
         "core/packages/http-client-java/generator/http-client-generator-core/src/main/resources/pom.xml",
         "pom.xml",
+        "core/packages/http-client-java/generator/pom.xml",
     ]
     for folder in os.listdir(root_path):
         if path.isdir(path.join(root_path, folder)) and path.isfile(path.join(root_path, folder, "pom.xml")):
