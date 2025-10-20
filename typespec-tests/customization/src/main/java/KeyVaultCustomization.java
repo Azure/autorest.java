@@ -14,7 +14,6 @@ public class KeyVaultCustomization extends Customization {
         PackageCustomization modelsPackage = customization.getPackage("tsptest.armcustomization.fluent.models");
 
         customizeBaseResource(modelsPackage.getClass("VaultInner"));
-        customizeBaseResource(modelsPackage.getClass("ManagedHsmInner"));
     }
 
     private void customizeBaseResource(ClassCustomization customization) {
