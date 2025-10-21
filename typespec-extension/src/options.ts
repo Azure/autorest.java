@@ -204,7 +204,7 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "service-version-exclude-preview": {
       type: "boolean",
       description:
-        "When set to `true`, the emitter will not include `##-preview` api-versions in ServiceVersion class. Default value is `false`. The option should be set to `true`, if the intended release is SDK of stable version.",
+        "When set to `true`, the emitter will not include `##-preview` api-versions in ServiceVersion class, if the release targets a stable api-version. Default value is `true`. The option should be set to `true`, if the intended release is SDK of stable version.",
       nullable: true,
       default: false,
     },
