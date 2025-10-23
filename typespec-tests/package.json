@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java-tests",
-  "version": "0.36.1",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "format": "npm run -s prettier -- --write",
