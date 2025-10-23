@@ -2,7 +2,12 @@
 
 ## 0.37.0 (2025-10-23)
 
-Updated Node.js dependencies to latest versions. Bumped minor version.
+Compatible with compiler 1.5.0.
+
+- Supported `float32-as-double` emitter option, default is `true`.
+- Supported `uuid-as-string` emitter option, default is `true`.
+
+Both options are for backward compatibility.
 
 ## 0.36.0 (2025-10-20)
 
