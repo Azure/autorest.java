@@ -85,6 +85,20 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
       nullable: true,
       default: false,
     },
+    "float32-as-double": {
+      type: "boolean",
+      description:
+        "When set to `true`, the emitter generates Java `double` for TypeSpec `float32`; otherwise, the emitter generates `float`. Default value is `true`. This option is for backward-compatibility.",
+      nullable: true,
+      default: true,
+    },
+    "uuid-as-string": {
+      type: "boolean",
+      description:
+        "When set to `true`, the emitter generates Java `String` for TypeSpec `Azure.Core.uuid`; otherwise, the emitter generates `UUID`. Default value is `true`. This option is for backward-compatibility.",
+      nullable: true,
+      default: true,
+    },
 
     // customization
     ...UnbrandedSdkEmitterOptions["generate-protocol-methods"],
