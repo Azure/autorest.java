@@ -72,7 +72,7 @@ $generateScript = {
     # TODO https://github.com/Azure/autorest.java/issues/2964
     # also serve as a test for "use-object-for-unknown" emitter option
     $tspOptions += " --option ""@azure-tools/typespec-java.use-object-for-unknown=true"""
-  } elseif ($tspFile -match "arm.tsp") {
+  } elseif ($tspFile -match "tsp[\\/]arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
@@ -87,7 +87,10 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.remove-inner=NginxConfigurationResponse"""
     # generate async methods
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-async-methods=true"""
-  } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
+    # backward compatible options
+    $tspOptions += " --option ""@azure-tools/typespec-java.float32-as-double=false"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.uuid-as-string=false"""
+  } elseif ($tspFile -match "tsp[\\/]arm-stream-style-serialization.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
@@ -96,12 +99,12 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.property-include-always=FunctionConfiguration.input"""
     # enable client side validations
     $tspOptions += " --option ""@azure-tools/typespec-java.client-side-validations=true"""
-  } elseif ($tspFile -match "arm-customization.tsp") {
+  } elseif ($tspFile -match "tsp[\\/]arm-customization.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # add customization code
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/KeyVaultCustomization.java"""
-  } elseif ($tspFile -match "subclient.tsp") {
+  } elseif ($tspFile -match "tsp[\\/]subclient.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
     # test for include-api-view-properties
     $tspOptions += " --option ""@azure-tools/typespec-java.include-api-view-properties=false"""

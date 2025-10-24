@@ -1,5 +1,14 @@
 # Release History
 
+## 0.36.1 (2025-10-23)
+
+Compatible with compiler 1.5.0.
+
+- Supported `float32-as-double` emitter option, default is `true`.
+- Supported `uuid-as-string` emitter option, default is `true`.
+
+Both options are for backward compatibility.
+
 ## 0.36.0 (2025-10-20)
 
 Compatible with compiler 1.5.0.
