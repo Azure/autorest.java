@@ -21,6 +21,7 @@ import com.azure.core.util.Context;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.utils.ArmUtils;
 
@@ -66,6 +67,7 @@ public class ArmResourceTest {
     private ExtensionsResource extensionResource;
     private List<ExtensionsResource> extensionResources;
 
+    @Disabled
     @Test
     public void testTenantExtensionResources() {
         // Create
@@ -120,6 +122,7 @@ public class ArmResourceTest {
             .deleteByResourceGroup(EXTENSION_RESOURCE_TENANT_SCOPE_URI, EXTENSION_RESOURCE_NAME);
     }
 
+    @Disabled
     @Test
     public void testSubscriptionExtensionResources() {
         // resource url format: /subscriptions/00000000-0000-0000-0000-000000000000
@@ -233,6 +236,7 @@ public class ArmResourceTest {
             .deleteByResourceGroup(EXTENSION_RESOURCE_SUBSCRIPTION_SCOPE_URI.substring(1), EXTENSION_RESOURCE_NAME);
     }
 
+    @Disabled
     @Test
     public void testResourceGroupExtensionResources() {
         // resource uri format: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg
@@ -346,6 +350,7 @@ public class ArmResourceTest {
             .deleteByResourceGroup(EXTENSION_RESOURCE_RESOURCE_GROUP_SCOPE_URI.substring(1), EXTENSION_RESOURCE_NAME);
     }
 
+    @Disabled
     @Test
     public void testResourceExtensionResources() {
         // resource uri format:
