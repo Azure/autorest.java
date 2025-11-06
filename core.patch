@@ -1,5 +1,5 @@
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index b4139191e..d1b75d5ae 100644
+index 0b727d93e..6bfc0d567 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
 @@ -21,6 +21,11 @@
@@ -15,23 +15,22 @@ index b4139191e..d1b75d5ae 100644
        <groupId>com.azure</groupId>
        <artifactId>azure-core</artifactId>
 diff --git a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
-index 4aad12e27..67e5f7ef1 100644
+index e9b1e0a49..18955e7d7 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
 +++ b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
-@@ -3,9 +3,9 @@
+@@ -3,8 +3,8 @@
  
  package com.microsoft.typespec.http.client.generator.core.postprocessor;
  
-+import com.azure.autorest.customization.Customization;
-+import com.azure.autorest.customization.implementation.Utils;
- import com.azure.json.JsonReader;
 -import com.microsoft.typespec.http.client.generator.core.customization.Customization;
 -import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
++import com.azure.autorest.customization.Customization;
++import com.azure.autorest.customization.implementation.Utils;
  import com.microsoft.typespec.http.client.generator.core.extension.base.util.FileUtils;
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.JavaSettings;
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.NewPlugin;
 diff --git a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
-index c99896650..fef2a4caf 100644
+index 0fe7a353c..0ca282f35 100644
 --- a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 @@ -16,9 +16,9 @@
