@@ -1,7 +1,19 @@
-# Update Node.JS Package for Latest Dependencies
+# Development
+
+See [Developer Guide for TypeSpec Emitter](docs/developer/typespec/readme.md) for basics.
+
+Guideline:
+
+- Most of the development work should happen in "core/packages/http-client-java" folder.
+- Before start the development in "core" folder, always checkout latest code from main branch, and create a dev branch upon it.
+- When check-in code in "core" folder, do not check-in the files in "core.patch".
+
+# Update and Release
+
+## Update Node.JS Package for Latest Dependencies
 
 Instructions:
-* Always use absolute path when change directory.
+- Always use absolute path when change directory.
 
 Steps:
 
@@ -15,7 +27,7 @@ Steps:
 8. Run `pwsh SyncTests.ps1` in "typespec-tests" folder.
 9. Commit the changes in "typespec-tests" folder, include new files.
 
-# Prepare for Minor/Patch Release
+## Prepare for Minor/Patch Release
 
 Steps:
 
