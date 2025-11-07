@@ -22,8 +22,10 @@ customizations are supported:
 - [Change class modifier](#change-class-modifier)
 - [Change method modifier](#change-method-modifier)
 - [Change method return type](#change-method-return-type)
+- [Change class super type](#change-class-super-type)
 - [Add an annotation to a class](#add-an-annotation-to-a-class)
 - [Add an annotation to a method](#add-an-annotation-to-a-method)
+- [Add a field default value](#add-a-field-default-value)
 - [Remove an annotation from a class](#remove-an-annotation-from-a-class)
 - [Refactor: Generate the getter and setter methods for a property](#refactor-generate-the-getter-and-setter-methods-for-a-property)
 - [Refactor: Rename an enum member name](#refactor-rename-an-enum-member-name)
@@ -149,6 +151,36 @@ public class Foo {
 
 The `UUID` class will be automatically imported.
 
+## Change class super type
+
+A class `Foo` extends `Bar`
+```java readme-sample-change-class-base-type-initial
+public class Bar {
+}
+public class Foo extends Bar {
+}
+```
+
+with customization
+```java readme-sample-change-class-base-type-customization
+@Override
+public void customize(LibraryCustomization customization, Logger logger) {
+    customization.getClass("com.azure.myservice.models", "Foo")
+        .customizeAst(ast -> ast.getClassByName("foo").ifPresent(clazz -> {
+            String newTypeFullName = "com.azure.myservice.models.Bar1";
+            ast.addImport(newTypeFullName);
+            clazz.getExtendedTypes().clear();
+            clazz.addExtendedType(new ClassOrInterfaceType(null, "Bar1"));
+        }));
+}
+```
+
+will generate
+```java readme-sample-change-class-base-type-result
+public class Foo extends Bar1 {
+}
+```
+
 ## Add an annotation to a class
 
 A class `Foo`
@@ -217,6 +249,40 @@ public class Foo {
 ```
 
 The `Deprecated` class will be automatically imported.
+
+## Add a field default value
+
+A class `Foo`
+
+```java readme-sample-add-a-field-default-value-initial
+public class Foo {
+    private String bar;
+}
+```
+
+with customization
+
+```java readme-sample-add-a-field-default-value-customization
+@Override
+public void customize(LibraryCustomization customization, Logger logger) {
+    customization.getClass("com.azure.myservice.models", "Foo")
+        .customizeAst(ast -> ast.getClassByName("Foo")
+            .flatMap(clazz -> clazz.getFieldByName("bar"))
+            .ifPresent(barField ->
+                barField.getVariables().forEach(var -> {
+                    if (var.getNameAsString().equals("bar")) {
+                        var.setInitializer("\"bar\"");
+                    }
+                })));
+}
+```
+
+will generate
+```java readme-sample-add-a-field-default-value-result
+public class Foo {
+    private String bar = "bar";
+}
+```
 
 ## Remove an annotation from a class
 
