@@ -1,12 +1,43 @@
 # Development
 
-See [Developer Guide for TypeSpec Emitter](docs/developer/typespec/readme.md) for basics.
+The emitter is the [TypeSpec](https://typespec.io/) library for emitting Java client from the TypeSpec REST protocol binding.
+
+See [Emitter](https://typespec.io/docs/extending-typespec/emitters-basics/) for the basics on the TypeSpec emitter library.
+
+See [Developer Guide for TypeSpec Emitter](docs/developer/typespec/readme.md) for basics on this repostority.
 
 Guideline:
 
 - Most of the development work should happen in "core/packages/http-client-java" folder.
 - Before start the development in "core" folder, always checkout latest code from main branch, and create a dev branch upon it.
 - When check-in code in "core" folder, do not check-in the files in "core.patch".
+- When prepare the PR, create 2 PRs, one for the code changes in submodule ("typespec" repository, if there is change), one for the code changes in this repository (which would include the update on "core" submodule).
+
+## TypeScript Part for the Emitter
+
+TypeScript code for the Emitter is in "core/packages/http-client-java/emitter" folder. Follow the package.json for the build and unit test.
+
+The code there, in runtime, produces a "code-model.yaml" file, and passes it to Java Part to generate Java client.
+
+## Java Part for the Emitter
+
+Java code for the Emitter is in "core/packages/http-client-java/generator/http-client-generator" (which depends on "http-client-generator-core" and "http-client-generator-mgmt" module). Follow the pom.xml for the build and unit test.
+
+The code there, in runtime, consumes the "code-model.yaml" file produced by the TypeSpec Part, and generate the Java client.
+
+## End-to-end test with TypeSpec
+
+The end-to-end takes a TypeSpec file, and produce a Java client.
+We'd like to see whether the TypeSpec file (with a certain feature) can produce expected Java code.
+
+The test happens in "core/packages/http-client-java/generator/http-client-generator-test" folder.
+
+If there is code change in "core", before running any end-to-end test, first run the "Setup.ps1" script there, to update the test environment.
+
+When calling "tsp compile", always set `--config .`.
+
+The Java client would be generated in its "tsp-output" folder.
+When running a new test, delete this folder if exists.
 
 # Update and Release
 
