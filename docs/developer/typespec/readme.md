@@ -8,6 +8,8 @@ As [NPM package](https://www.npmjs.com/package/@azure-tools/typespec-java), it i
 
 At present, almost all the code of the emitter is in [microsoft/typespec repository](https://github.com/microsoft/typespec/tree/main/packages/http-client-java).
 
+This repository is checked out at `core` folder as submodule.
+
 ### Build
 
 NPM package is in `typespec-extension` folder.
