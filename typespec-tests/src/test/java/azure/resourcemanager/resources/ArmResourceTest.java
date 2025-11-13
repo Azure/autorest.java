@@ -16,14 +16,21 @@ import azure.resourcemanager.resources.models.SingletonTrackedResource;
 import azure.resourcemanager.resources.models.SingletonTrackedResourceProperties;
 import azure.resourcemanager.resources.models.TopLevelTrackedResource;
 import azure.resourcemanager.resources.models.TopLevelTrackedResourceProperties;
+import com.azure.core.http.HttpPipelineCallContext;
+import com.azure.core.http.HttpPipelineNextPolicy;
+import com.azure.core.http.HttpPipelineNextSyncPolicy;
+import com.azure.core.http.HttpPipelinePosition;
+import com.azure.core.http.HttpRequest;
+import com.azure.core.http.HttpResponse;
+import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.management.Region;
 import com.azure.core.util.Context;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.utils.ArmUtils;
+import reactor.core.publisher.Mono;
 
 public class ArmResourceTest {
     private static final String TOP_LEVEL_TRACKED_RESOURCE_ID
@@ -58,8 +65,8 @@ public class ArmResourceTest {
     private static final String EXTENSION_RESOURCE_TYPE = "Azure.ResourceManager.Resources/extensionsResources";
     private static final String EXTENSION_RESOURCE_BASE_ID
         = "/providers/Azure.ResourceManager.Resources/extensionsResources/extension";
-    private final ResourcesManager manager
-        = ResourcesManager.authenticate(ArmUtils.createTestHttpPipeline(), ArmUtils.getAzureProfile());
+    private final ResourcesManager manager = ResourcesManager
+        .authenticate(ArmUtils.createTestHttpPipeline(List.of(NORMALIZE_URL_POLICY)), ArmUtils.getAzureProfile());
     private final static ExtensionsResourceProperties CREATE_PROPERTIES
         = new ExtensionsResourceProperties().withDescription(RESOURCE_DESCRIPTION_VALID);
     private final static ExtensionsResourceProperties UPDATE_PROPERTIES
@@ -67,7 +74,31 @@ public class ArmResourceTest {
     private ExtensionsResource extensionResource;
     private List<ExtensionsResource> extensionResources;
 
-    @Disabled
+    private static final HttpPipelinePolicy NORMALIZE_URL_POLICY = new HttpPipelinePolicy() {
+        @Override
+        public Mono<HttpResponse> process(HttpPipelineCallContext context, HttpPipelineNextPolicy next) {
+            normalizeUrl(context.getHttpRequest());
+            return next.process();
+        }
+
+        @Override
+        public HttpResponse processSync(HttpPipelineCallContext context, HttpPipelineNextSyncPolicy next) {
+            normalizeUrl(context.getHttpRequest());
+            return next.processSync();
+        }
+
+        @Override
+        public HttpPipelinePosition getPipelinePosition() {
+            return HttpPipelinePosition.PER_CALL;
+        }
+
+        private void normalizeUrl(HttpRequest httpRequest) {
+            String url = httpRequest.getUrl().toString();
+            url = url.replace("//", "/").replace(":/", "://");
+            httpRequest.setUrl(url);
+        }
+    };
+
     @Test
     public void testTenantExtensionResources() {
         // Create
@@ -122,7 +153,6 @@ public class ArmResourceTest {
             .deleteByResourceGroup(EXTENSION_RESOURCE_TENANT_SCOPE_URI, EXTENSION_RESOURCE_NAME);
     }
 
-    @Disabled
     @Test
     public void testSubscriptionExtensionResources() {
         // resource url format: /subscriptions/00000000-0000-0000-0000-000000000000
@@ -236,7 +266,6 @@ public class ArmResourceTest {
             .deleteByResourceGroup(EXTENSION_RESOURCE_SUBSCRIPTION_SCOPE_URI.substring(1), EXTENSION_RESOURCE_NAME);
     }
 
-    @Disabled
     @Test
     public void testResourceGroupExtensionResources() {
         // resource uri format: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg
@@ -350,7 +379,6 @@ public class ArmResourceTest {
             .deleteByResourceGroup(EXTENSION_RESOURCE_RESOURCE_GROUP_SCOPE_URI.substring(1), EXTENSION_RESOURCE_NAME);
     }
 
-    @Disabled
     @Test
     public void testResourceExtensionResources() {
         // resource uri format:

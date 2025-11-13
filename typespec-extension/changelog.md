@@ -1,5 +1,12 @@
 # Release History
 
+## 0.36.3 (2025-11-13)
+
+Compatible with compiler 1.6.0.
+
+- Updated package dependencies to latest versions.
+- Patch release: align peerDependencies and test overrides with latest TypeSpec 1.6.0 / libraries 0.76.0 and Azure tools 0.62.0.
+
 ## 0.36.2 (2025-10-31)
 
 Compatible with compiler 1.5.0.
