@@ -3,7 +3,7 @@
 
 package com.microsoft.typespec.http.client.generator.mgmt.util;
 
-import com.azure.core.http.HttpHeaderName;
+import io.clientcore.core.http.models.HttpHeaderName;
 import com.azure.core.http.policy.ExponentialBackoff;
 import com.azure.core.http.policy.ExponentialBackoffOptions;
 import com.azure.core.http.policy.FixedDelay;
