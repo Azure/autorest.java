@@ -73,8 +73,6 @@ $generateScript = {
     # also serve as a test for "use-object-for-unknown" emitter option
     $tspOptions += " --option ""@azure-tools/typespec-java.use-object-for-unknown=true"""
   } elseif ($tspFile -match "tsp[\\/]arm.tsp") {
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
     $tspOptions += " --option ""@azure-tools/typespec-java.service-name=Arm Resource Provider"""
     # also test generating from specific api-version
@@ -91,8 +89,6 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.float32-as-double=false"""
     $tspOptions += " --option ""@azure-tools/typespec-java.uuid-as-string=false"""
   } elseif ($tspFile -match "tsp[\\/]arm-stream-style-serialization.tsp") {
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
     $tspOptions += " --option ""@azure-tools/typespec-java.service-name=Arm Resource Provider"""
     # test property-include-always
@@ -100,8 +96,6 @@ $generateScript = {
     # enable client side validations
     $tspOptions += " --option ""@azure-tools/typespec-java.client-side-validations=true"""
   } elseif ($tspFile -match "tsp[\\/]arm-customization.tsp") {
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # add customization code
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/KeyVaultCustomization.java"""
   } elseif ($tspFile -match "tsp[\\/]subclient.tsp") {
