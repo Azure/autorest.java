@@ -17,7 +17,7 @@ import com.microsoft.typespec.http.client.generator.mgmt.model.clientmodel.fluen
 import com.microsoft.typespec.http.client.generator.mgmt.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.microsoft.typespec.http.client.generator.mgmt.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.microsoft.typespec.http.client.generator.core.model.clientmodel.Client;
-import com.azure.core.http.HttpMethod;
+import io.clientcore.core.http.models.HttpMethod;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

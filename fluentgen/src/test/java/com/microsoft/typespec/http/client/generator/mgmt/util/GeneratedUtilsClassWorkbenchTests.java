@@ -49,7 +49,7 @@ public class GeneratedUtilsClassWorkbenchTests {
             while (idItrReverted.hasNext() && pathIndex > 0) {
                 String idSegment = idItrReverted.next();
                 String pathSegment = pathSegments.get(--pathIndex);
-                if (!CoreUtils.isNullOrEmpty(idSegment) && !CoreUtils.isNullOrEmpty(pathSegment)) {
+                if (idSegment != null && !idSegment.isBlank() && pathSegment != null && !pathSegment.isBlank()) {
                     if (pathSegment.equalsIgnoreCase(parameterNameParentheses)) {
                         if (pathIndex == 0 || (pathIndex == 1 && pathSegments.get(0).isEmpty())) {
                             List<String> segments = new ArrayList<>();

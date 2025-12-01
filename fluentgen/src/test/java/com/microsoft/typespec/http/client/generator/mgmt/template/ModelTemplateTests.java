@@ -13,7 +13,6 @@ import com.microsoft.typespec.http.client.generator.core.model.clientmodel.Clien
 import com.microsoft.typespec.http.client.generator.mgmt.FluentGenAccessor;
 import com.microsoft.typespec.http.client.generator.mgmt.TestUtils;
 import com.microsoft.typespec.http.client.generator.core.mapper.ClientMapper;
-import com.azure.core.util.CoreUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -43,7 +42,7 @@ public class ModelTemplateTests {
         ClientModel model = client.getModels().stream().filter(clientModel -> clientModel.getName().equals("Site")).findAny().get();
         ModelTemplateAccessor templateAccessor = new ModelTemplateAccessor();
         List<ClientModelPropertyReference> propertyReferences = templateAccessor.getClientModelPropertyReferences0(model);
-        if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
+        if (model.getPropertyReferences() != null && !model.getPropertyReferences().isEmpty()) {
             propertyReferences.addAll(model.getPropertyReferences());
         }
         // real test here
