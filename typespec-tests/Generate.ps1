@@ -71,8 +71,6 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.service-version-exclude-preview=true"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
     $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
   }
