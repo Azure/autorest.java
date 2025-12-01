@@ -9,19 +9,16 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@service({
-  title: "Patch",
-})
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace Cadl.Patch;
+@service(#{ title: "Patch" })
+namespace TspTest.Patch;
 
 @resource("resources")
 model Resource {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   description?: string;
@@ -46,11 +43,11 @@ model InnerModel {
 @discriminator("kind")
 @resource("resources")
 model Fish {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   age: int32;
@@ -100,4 +97,11 @@ interface Patch {
     @header("content-type") contentType: "application/merge-patch+json",
     @body fish: Fish,
   ): Fish;
+
+  @patch
+  @route("/fish/salmon")
+  createOrUpdateSalmon(
+    @header("content-type") contentType: "application/merge-patch+json",
+    @body fish: Salmon,
+  ): Salmon;
 }

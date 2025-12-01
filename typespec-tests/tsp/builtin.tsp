@@ -1,13 +1,12 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
-@service({
-  title: "Builtin",
-})
-namespace Cadl.Builtin;
+@service(#{ title: "Builtin" })
+namespace TspTest.Builtin;
 
 model Builtin {
   boolean: boolean;
@@ -27,6 +26,7 @@ model Builtin {
   url: url;
   nullableFloatDict: Record<float64 | null>;
   encoded: Encoded;
+  uuid: Azure.Core.uuid;
 }
 
 @encode(DurationKnownEncoding.seconds, float32)
@@ -52,6 +52,15 @@ model Encoded {
 
   @encode(BytesKnownEncoding.base64url)
   base64url?: bytes;
+
+  @encode("unknown-duration")
+  unknownDurationFormat?: duration;
+
+  @encode("unknown-datetime")
+  unknownDateTimeFormat?: utcDateTime;
+
+  @encode("unknown-bytes")
+  unknownBytes?: bytes;
 }
 
 model Request {

@@ -10,21 +10,17 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 
 @armProviderNamespace
-@service({
-  title: "ArmStreamStyleSerialization",
-})
+@service(#{ title: "ArmStreamStyleSerialization" })
 @versioned(Versions)
 @doc("Arm Resource Provider management API.")
-namespace Cadl.ArmStreamStyleSerialization;
+namespace TspTest.ArmStreamStyleSerialization;
 
 @doc("Azure API versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Preview API version 2023-12-01-preview.")
   v2023_12_01_preview: "2023-12-01-preview",
 }
@@ -34,7 +30,7 @@ enum Versions {
 model Fish {
   age: int32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   dna: string;
 
   properties: FishProperties;
@@ -63,7 +59,7 @@ model FishProperties {
 model TailProperties {
   length: float32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   patten: string;
 
   requiredString: string;
@@ -76,7 +72,7 @@ model AnotherFishProperties {
 model EyeProperties {
   length: float32;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   patten: string;
 
   requiredString: string;
@@ -112,6 +108,7 @@ model TopLevelArmResource is TrackedResource<TopLevelArmResourceProperties> {
 @doc("Top Level Arm Resource Properties.")
 model TopLevelArmResourceProperties {
   description?: string;
+  builtin: Builtin;
 }
 
 @error
@@ -149,7 +146,7 @@ model ErrorMin {
 model OutputOnlyModel {
   name: string;
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @flattenProperty
@@ -158,11 +155,68 @@ model OutputOnlyModel {
 
 model OutputOnlyModelProperties {
   title: string;
+  dog: Golden;
+}
+
+@doc("extensible enum type for discriminator")
+union DogKind {
+  string,
+
+  @doc("Species golden")
+  Golden: "golden",
+}
+
+@doc("Test extensible enum type for discriminator")
+@discriminator("kind")
+model Dog {
+  @doc("discriminator property")
+  kind: DogKind;
+
+  @doc("Weight of the dog")
+  weight: int32;
+
+  @doc("dna of the dog")
+  @visibility(Lifecycle.Read)
+  dna: string;
+}
+
+@doc("Golden dog model")
+model Golden extends Dog {
+  @doc("discriminator property")
+  kind: DogKind.Golden;
 }
 
 model OutputOnlyModelChild extends OutputOnlyModel {
   kind: "child";
   childName: string;
+}
+
+model FunctionConfiguration {
+  input?: string;
+  output?: string;
+}
+
+@discriminator("kind")
+model FunctionProperties {
+  properties: FunctionConfiguration;
+}
+
+model AggregateFunctionProperties extends FunctionProperties {
+  kind: "aggregate";
+}
+
+model Function {
+  properties: FunctionProperties;
+}
+
+union Priority {
+  int32,
+
+  @doc("high priority")
+  HIGH: 0,
+
+  @doc("low priority")
+  LOW: 1,
 }
 
 @route("/model")
@@ -182,7 +236,115 @@ interface TopLevelArmResources {
   update is ArmCustomPatchAsync<TopLevelArmResource>;
 }
 
+@route("/function")
+interface Functions {
+  @put
+  createFunction(
+    @header `x-ms-authorization-auxiliary`?: string,
+    @body function: Function,
+  ): Function & {
+    @header("ETag")
+    @clientName("etag")
+    eTag: string;
+  };
+}
+
+@route("/priority")
+interface Priorities {
+  @post
+  setPriority(@query priority: Priority): {
+    @body body: Priority;
+  };
+}
+
+@route("/items")
+interface Items {
+  // op of LRO + pageable
+  @get
+  @list
+  list(): ListResult & ArmLroLocationHeader;
+}
+
+model ListResult {
+  @pageItems
+  items: Result[];
+
+  @nextLink
+  nextLink?: string;
+}
+
+model Result {
+  name: string;
+
+  @visibility(Lifecycle.Read)
+  data: ResultData;
+}
+
+model ResultData {
+  prop1: string;
+
+  @visibility(Lifecycle.Read)
+  prop2: string;
+}
+
+model Builtin {
+  boolean: boolean;
+  string: string;
+  bytes: bytes;
+  int: int32;
+  safeint: safeint;
+  decimal: decimal;
+  long: int64;
+  float: float32;
+  double: float64;
+  duration: duration;
+  date: plainDate;
+  dateTime: utcDateTime;
+  stringList: string[];
+  bytesDict: Record<bytes>;
+  url: url;
+  nullableFloatDict: Record<float64 | null>;
+  encoded: Encoded;
+  uuid: Azure.Core.uuid;
+}
+
+@encode(DurationKnownEncoding.seconds, float32)
+scalar myDuration extends duration;
+
+model Encoded {
+  @encode(DurationKnownEncoding.seconds, int32)
+  timeInSeconds?: duration;
+
+  timeInSecondsFraction?: myDuration;
+
+  @encode(DateTimeKnownEncoding.rfc3339)
+  dateTime?: utcDateTime;
+
+  @encode(DateTimeKnownEncoding.rfc7231)
+  dateTimeRfc7231?: utcDateTime;
+
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  unixTimestamp?: utcDateTime;
+
+  @encode(BytesKnownEncoding.base64)
+  base64?: bytes;
+
+  @encode(BytesKnownEncoding.base64url)
+  base64url?: bytes;
+
+  @encode("unknown-duration")
+  unknownDurationFormat?: duration;
+
+  @encode("unknown-datetime")
+  unknownDateTimeFormat?: utcDateTime;
+
+  @encode("unknown-bytes")
+  unknownBytes?: bytes;
+}
+
 @@flattenProperty(Fish.properties);
 @@flattenProperty(FishProperties.tailProperties);
 @@flattenProperty(Fish.anotherProperties);
 @@flattenProperty(AnotherFishProperties.eyeProperties);
+@@flattenProperty(FunctionProperties.properties);
+@@flattenProperty(Result.data);

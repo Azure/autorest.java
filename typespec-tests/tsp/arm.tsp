@@ -10,36 +10,26 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 
 @armProviderNamespace
-@service({
-  title: "ArmResource",
-})
+@service(#{ title: "ArmResource" })
 @versioned(Versions)
 @doc("Arm Resource Provider management API.")
-namespace Cadl.ArmResourceProvider;
+namespace TspTest.ArmResourceProvider;
 
 @doc("Azure API versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Preview API version 2022-06-01-preview.")
   v2022_06_01_preview: "2022-06-01-preview",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Preview API version 2022-09-01-preview.")
   v2022_09_01_preview: "2022-09-01-preview",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Public API version.")
   v2023_11_01: "2023-11-01",
 
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Preview API version 2023-12-01-preview.")
   v2023_12_01_preview: "2023-12-01-preview",
 }
@@ -50,7 +40,7 @@ enum Versions {
 model ChildResource is TrackedResource<ChildResourceProperties> {
   @key("childResourceName")
   @doc("ChildResources")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("childResources")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -59,7 +49,7 @@ model ChildResource is TrackedResource<ChildResourceProperties> {
 
 @doc("Child Resource Properties.")
 model ChildResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of Top Level Arm Resource")
   provisioningState?: ProvisioningState;
 }
@@ -78,17 +68,20 @@ model TopLevelArmResource is TrackedResource<TopLevelArmResourceProperties> {
 @doc("Top Level Arm Resource Properties.")
 model TopLevelArmResourceProperties {
   @doc("Configuration Endpoints.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   configurationEndpoints?: string[];
 
   userName: string; // this should be renamed to username
   userNames: string; // this isn't a whole word match, shouldn't be renamed to usernames
   accuserName: string; // this isn't a whole word match, shouldn't be renamed to accusername
 
-  @visibility("create", "read")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   startTimeStamp: utcDateTime; // this should be renamed to startTimestamp
 
-  @visibility("read")
+  @visibility(Lifecycle.Read)
+  size?: float32;
+
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }
@@ -135,7 +128,7 @@ model Golden extends Dog {
 
 @doc("Top Level Arm Resource Properties.")
 model CustomTemplateResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
@@ -209,7 +202,7 @@ alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.Resource
 model ChildExtensionResource is ExtensionResource<ChildExtensionResourceProperties> {
   @key("childExtensionResourceName")
   @doc("ChildExtensionResources")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @path
   @segment("childExtensionResources")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
@@ -218,23 +211,74 @@ model ChildExtensionResource is ExtensionResource<ChildExtensionResourceProperti
 
 /** Child ExtensionResource properties. */
 model ChildExtensionResourceProperties {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   @doc("Provisioning State of the Resource")
   provisioningState?: ProvisioningState;
 }
+
+/** Resource for testing conflict name with operation group. */
+model ManagedMaintenanceWindowStatusContent
+  is TrackedResource<ManagedMaintenanceWindowStatusContentProperties> {
+  ...ResourceNameParameter<ManagedMaintenanceWindowStatusContent>;
+}
+
+model ManagedMaintenanceWindowStatusContentProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation.")
+  provisioningState: string;
+}
+
+model ModelInterfaceDifferentName is TrackedResource<ModelInterfaceDifferentNameProperties> {
+  ...ResourceNameParameter<ModelInterfaceDifferentName>;
+}
+
+model ModelInterfaceDifferentNameProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation.")
+  provisioningState: string;
+}
+
+model NginxConfigurationResponse
+  is Azure.ResourceManager.ProxyResource<NginxConfigurationResponseProperties> {
+  ...ResourceNameParameter<
+    Resource = NginxConfigurationResponse,
+    KeyName = "configurationName",
+    SegmentName = "configurations",
+    NamePattern = ""
+  >;
+}
+
+model NginxConfigurationResponseProperties {
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  rootFile?: string;
+}
+
+model NginxConfigurationRequest {
+  rootFile?: string;
+}
+
+model ChildResourceListResult is Azure.Core.Page<ChildResource>;
 
 //----------------------- Paths -----------------------
 @armResourceOperations
 interface ChildResourcesInterface
   extends ResourceInstanceOperations<ChildResource, ChildResourceProperties> {
-  listByTopLevelArmResource is ArmResourceListByParent<ChildResource>;
+  listByTopLevelArmResource is ArmResourceListByParent<
+    ChildResource,
+    Response = ArmResponse<ChildResourceListResult & {
+      @header("ETag") eTag: string;
+      @header("content-type") contentType: "application/json";
+      @header("x-ms-constant-header") xMsConstantHeader: "constantValue";
+    }>
+  >;
   actionWithoutBody is ArmResourceActionAsync<ChildResource, void, void>;
 }
 
 @armResourceOperations
 interface TopLevelArmResourceInterface
   extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {
-  @operationId("TopLevelArmResourceInterface_Post")
   action is ArmResourceActionAsync<
     TopLevelArmResource,
     void,
@@ -259,7 +303,6 @@ interface CustomTemplateResourceInterface
   #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated update operation"
   @sharedRoute
   @added(Versions.v2023_11_01)
-  @operationId("CustomTemplateResourceInterfaces_Update")
   updateLongRunning is ArmCustomPatchAsync<CustomTemplateResource, CustomTemplateResourcePatch>;
 }
 
@@ -285,5 +328,49 @@ op ArmResourceUpdateSync<
   resource: TResource,
 ): ResponseWithHeader<TResource> | ErrorResponse;
 
+@armResourceOperations
+interface ManagedMaintenanceWindowStatus {
+  get is ArmResourceRead<ManagedMaintenanceWindowStatusContent>;
+  // test renaming delete -> deleteByResourceGroup in fluent method
+  delete is ArmResourceDeleteAsync<
+    ManagedMaintenanceWindowStatusContent,
+    Parameters = IfMatchParameters<ManagedMaintenanceWindowStatusContent> &
+      IfNoneMatchParameters<ManagedMaintenanceWindowStatusContent>
+  >;
+}
+
+@armResourceOperations
+interface ModelInterfaceSameName {
+  get is ArmResourceRead<ModelInterfaceDifferentName>;
+  // test renaming deleteWithResponse -> deleteByResourceGroupWithResponse in fluent method
+  delete is ArmResourceDeleteSync<
+    ModelInterfaceDifferentName,
+    Parameters = IfMatchParameters<ModelInterfaceDifferentName> &
+      IfNoneMatchParameters<ModelInterfaceDifferentName>
+  >;
+}
+
+// Resource model is immutable output only.
+@armResourceOperations
+interface ImmutableResourceModel {
+  @put
+  createOrUpdate is Azure.ResourceManager.Legacy.UpdateOperation<
+    ResourceInstanceParameters<
+      NginxConfigurationResponse,
+      Azure.ResourceManager.Foundations.DefaultBaseParameters<NginxConfigurationResponse>
+    >,
+    NginxConfigurationRequest,
+    NginxConfigurationResponse | ArmResourceCreatedResponse<
+      NginxConfigurationResponse,
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = NginxConfigurationResponse>
+    >,
+    ErrorResponse,
+    OptionalRequestBody = true
+  >;
+}
+
+@@clientName(TspTest.ArmResourceProvider, "ArmClient");
+@@clientName(ManagedMaintenanceWindowStatusContent, "ManagedMaintenanceWindowStatus");
+@@clientName(ModelInterfaceDifferentName, "ModelInterfaceSameName");
 @@flattenProperty(TrackedResource.properties);
 @@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties);

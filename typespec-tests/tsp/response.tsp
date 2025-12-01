@@ -9,14 +9,11 @@ using Azure.Core;
 using Azure.Core.Traits;
 using Azure.ClientGenerator.Core;
 
-@service({
-  title: "Response",
-})
+@service(#{ title: "Response" })
 @versioned(ApiVersions)
-namespace Cadl.Response;
+namespace TspTest.Response;
 
 enum ApiVersions {
-  @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)
   v2022_06_01_preview: "2022-06-01-preview",
 }
 
@@ -24,8 +21,8 @@ enum ApiVersions {
 op RpcOperationWithAdditionalResponse<
   TParams,
   TResponse extends TypeSpec.Reflection.Model,
-  TAdditionalResponse extends object,
-  Traits extends object = {},
+  TAdditionalResponse extends {},
+  Traits extends {} = {},
   TErrorResponse = Azure.Core.Foundations.ErrorResponse
 > is Foundations.Operation<
   TParams & Azure.Core.Traits.Private.TraitProperties<Traits, TraitLocation.Parameters>,
@@ -40,11 +37,11 @@ op RpcOperationWithAdditionalResponse<
 
 @resource("resources")
 model Resource {
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: string;
 
   @key
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   name: string;
 
   description?: string;
@@ -57,7 +54,7 @@ model ResourceArray is Resource[];
 model OperationDetails1 {
   @doc("Operation ID")
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   operationId: uuid;
 
   status: Azure.Core.Foundations.OperationState;
@@ -71,41 +68,38 @@ model OperationDetails1 {
 model OperationDetails2 {
   @doc("Operation ID")
   @key
-  @visibility("read", "create")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   id: uuid;
 
   status: Azure.Core.Foundations.OperationState;
   error?: Azure.Core.Foundations.Error;
 
   @lroResult
+  @clientName("longRunningResult", "java")
+  @encodedName("application/json", "lro_result")
   lroResult?: Resource;
 }
 
-@pagedResult
 model StringsList {
-  @items
+  @pageItems
+  @clientName("items", "java")
+  @encodedName("application/json", "items_value")
   value: string[];
 
   @nextLink
-  nextLink?: string;
+  @clientName("nextLink", "java")
+  @encodedName("application/json", "next_link")
+  next?: string;
 }
 
-@pagedResult
 model Int32sList {
-  @items
+  @pageItems
   value: int32[];
-
-  @nextLink
-  nextLink?: string;
 }
 
-@pagedResult
 model DateTimesList {
-  @items
+  @pageItems
   value: utcDateTime[];
-
-  @nextLink
-  nextLink?: string;
 }
 
 op CustomLongRunningOperation<
@@ -122,12 +116,12 @@ op CustomLongRunningOperation<
 
 @Azure.ClientGenerator.Core.client({
   name: "ResponseClient",
-  service: Cadl.Response,
+  service: TspTest.Response,
 })
 @doc("Response")
 @route("/response")
 interface ResponseOp {
-  // binary
+  // file as BinaryData
   @route("/get-binary")
   @get
   getBinary(): OkResponse & {
@@ -159,6 +153,7 @@ interface ResponseOp {
     operationLocation: ResourceLocation<Resource>;
   };
 
+  // expect boolean response, true for 200, false for 404
   @route("/exists")
   @head
   exists is RpcOperationWithAdditionalResponse<
@@ -178,6 +173,7 @@ interface ResponseOp {
   >;
 
   // OperationDetails does not have "id" property
+  // expect final result be OperationDetails1, as the response does not follow the standard
   @route("/lro-invalid-poll-response")
   lroInvalidPollResponse is CustomLongRunningOperation<
     {
@@ -187,6 +183,7 @@ interface ResponseOp {
   >;
 
   // OperationDetails does not have "result" property
+  // expect final result be OperationDetails2, as the response does not follow the standard
   @route("/lro-invalid-result")
   lroInvalidResult is CustomLongRunningOperation<
     {
@@ -196,12 +193,15 @@ interface ResponseOp {
   >;
 
   @route("/paged-string")
+  @list
   listStrings(): StringsList;
 
   @route("/paged-int32")
+  @list
   listIntegers(): Int32sList;
 
   // @route("/paged-datetime")
+  // @list
   // listDateTimes(): DateTimesList;
 
   @route("/json-utf8-response")
@@ -209,8 +209,55 @@ interface ResponseOp {
     @header contentType: "application/json;charset=utf-8";
   };
 
+  // expect same method signature as "application/json"
   @route("/plus-json-response")
   getPlusJsonResponse(): Resource & {
     @header contentType: "application/vnd.microsoft.appconfig.kv+json";
+  };
+
+  // expect BinaryData as response
+  @route("/union-response")
+  getUnionResponse(): OperationDetails1 | OperationDetails2;
+
+  @route("/text-boolean-response")
+  @get
+  getTextBoolean(): OkResponse & {
+    @body body: boolean;
+  };
+
+  @route("/text-byte-response")
+  @get
+  getTextByte(): OkResponse & {
+    @body body: int8;
+  };
+
+  @route("/text-int32-response")
+  @get
+  getTextInt32(): OkResponse & {
+    @body body: int32;
+  };
+
+  @route("/text-int64-response")
+  @get
+  getTextInt64(): OkResponse & {
+    @body body: int64;
+  };
+
+  @route("/text-float32-response")
+  @get
+  getTextFloat32(): OkResponse & {
+    @body body: float32;
+  };
+
+  @route("/text-float64-response")
+  @get
+  getTextFloat64(): OkResponse & {
+    @body body: float64;
+  };
+
+  @route("/text-char-response")
+  @get
+  getTextChar(): OkResponse & {
+    @body body: int16;
   };
 }
