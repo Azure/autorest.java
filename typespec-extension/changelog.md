@@ -4,7 +4,8 @@
 
 Compatible with compiler 1.6.0.
 
-- Minor release: updated prettier to 3.7.3 and synced upstream core. No functional changes.
+- In-memory code formatting.
+- Fix on LRO final result on management SDK from TypeSpec.
 
 ## 0.36.3 (2025-11-13)
 
