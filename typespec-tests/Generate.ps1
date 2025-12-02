@@ -98,6 +98,9 @@ $generateScript = {
   } elseif ($tspFile -match "tsp[\\/]arm-customization.tsp") {
     # add customization code
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/KeyVaultCustomization.java"""
+  } elseif ($tspFile -match "tsp[\\/]arm-versioned.tsp") {
+    # enable advanced versioning for resiliency test
+    $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
   } elseif ($tspFile -match "tsp[\\/]subclient.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
     # test for include-api-view-properties

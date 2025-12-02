@@ -1,5 +1,12 @@
 # Release History
 
+## 0.37.0 (2025-12-02)
+
+Compatible with compiler 1.6.0.
+
+- In-memory code formatting.
+- Fix on LRO final result on management SDK from TypeSpec.
+
 ## 0.36.3 (2025-11-13)
 
 Compatible with compiler 1.6.0.
