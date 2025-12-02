@@ -1,5 +1,11 @@
 # Release History
 
+## 0.37.0 (2025-12-02)
+
+Compatible with compiler 1.6.0.
+
+- Minor release: updated prettier to 3.7.3 and synced upstream core. No functional changes.
+
 ## 0.36.3 (2025-11-13)
 
 Compatible with compiler 1.6.0.
