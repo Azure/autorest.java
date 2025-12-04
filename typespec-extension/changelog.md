@@ -1,5 +1,11 @@
 # Release History
 
+## 0.37.2 (2025-12-04)
+
+Compatible with compiler 1.6.0.
+
+- Patch release: update package metadata for publication.
+
 ## 0.37.1 (2025-12-02)
 
 Compatible with compiler 1.6.0.
