@@ -1,9 +1,9 @@
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index 59ba660d8..313ee875b 100644
+index 2015b7761..d5103d017 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-@@ -21,6 +21,11 @@
-   </properties>
+@@ -51,6 +51,11 @@
+   </build>
  
    <dependencies>
 +    <dependency>
