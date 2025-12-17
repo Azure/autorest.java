@@ -1,5 +1,12 @@
 # Release History
 
+## 0.37.4 (2025-12-17)
+
+Compatible with compiler 1.7.1.
+
+- Updated TypeSpec dependencies (compiler 1.7.1) and refreshed dev dependencies.
+- Added support for CSV-encoded array properties in the HTTP client emitter.
+
 ## 0.37.3 (2025-12-12)
 
 Compatible with compiler 1.7.0.
