@@ -85,6 +85,13 @@ export const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
       nullable: true,
       default: false,
     },
+    "client-side-validations": {
+      type: "boolean",
+      description:
+        "When set to `true`, the model classes would be generated with a `validate()` API for validating required properties, during REST API invocation. Default value is `false`. This option is for backward-compatibility.",
+      nullable: true,
+      default: false,
+    },
     "float32-as-double": {
       type: "boolean",
       description:
