@@ -159,7 +159,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/sync-stack.json --namespace=com.azure.mgmtlitetest.syncstack --enable-sync-stack=true"
 
     # multiple PUTs under the same collection
-    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/980d7b8ba06697dd77b287a38aab617ad095f353/specification/providerhub/resource-manager/Microsoft.ProviderHub/stable/2024-09-01/providerhub.json --namespace=com.azure.mgmtlitetest.providerhub"
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/980d7b8ba06697dd77b287a38aab617ad095f353/specification/providerhub/resource-manager/Microsoft.ProviderHub/stable/2024-09-01/providerhub.json --namespace=com.azure.mgmtlitetest.providerhub"
 
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/113b466bf76cd86da547beee5300d2ef5210cfb3/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network"
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/113b466bf76cd86da547beee5300d2ef5210cfb3/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
