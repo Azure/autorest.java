@@ -214,7 +214,7 @@ public class LiteCompilationTests {
     }
 
     public void testProviderHubSkuDefine() {
-        ProviderHubManager providerHubManager = mock(SyncStackManager.class);
+        ProviderHubManager providerHubManager = mock(ProviderHubManager.class);
         providerHubManager.skus().define("mySku")
             .withExistingResourcetypeRegistration("My.Rp", "myResource")
             .create();
