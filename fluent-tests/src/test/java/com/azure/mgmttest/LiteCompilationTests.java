@@ -21,6 +21,7 @@ import com.azure.mgmtlitetest.emptybytearrayinclients.implementation.DpsCertific
 import com.azure.mgmtlitetest.managednetworkfabric.models.CommonPostActionResponseForStateUpdate;
 import com.azure.mgmtlitetest.pageablewithinheritance.fluent.SavingsPlansClient;
 import com.azure.mgmtlitetest.pageablewithinheritance.fluent.models.SavingsPlanModelInner;
+import com.azure.mgmtlitetest.providerhub.ProviderHubManager;
 import com.azure.mgmtlitetest.resources.ResourceManager;
 import com.azure.mgmtlitetest.resources.models.ResourceGroup;
 import com.azure.mgmtlitetest.storage.StorageManager;
@@ -210,5 +211,12 @@ public class LiteCompilationTests {
         SyncStackManager syncStackManager = mock(SyncStackManager.class);
         syncStackManager.normalPageables().list("name");
         syncStackManager.normalPageables().list("name", "filter", Context.NONE);
+    }
+
+    public void testProviderHubSkuDefine() {
+        ProviderHubManager providerHubManager = mock(ProviderHubManager.class);
+        providerHubManager.skus().define("mySku")
+            .withExistingResourcetypeRegistration("My.Rp", "myResource")
+            .create();
     }
 }
