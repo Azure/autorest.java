@@ -1,5 +1,11 @@
 # Release History
 
+## 0.38.0 (2026-01-08)
+
+Compatible with compiler 1.7.1.
+
+- Supported merging of multiple services into a single root client.
+
 ## 0.37.4 (2025-12-18)
 
 Compatible with compiler 1.7.1.
