@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.38.2",
+  "version": "0.38.3",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -51,7 +51,7 @@
     "@azure-tools/typespec-azure-core": ">=0.64.0 <1.0.0",
     "@azure-tools/typespec-azure-resource-manager": ">=0.64.0 <1.0.0",
     "@azure-tools/typespec-azure-rulesets": ">=0.64.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.64.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.64.1 <1.0.0",
     "@azure-tools/typespec-liftr-base": ">=0.11.0 <1.0.0",
     "@typespec/compiler": "^1.8.0",
     "@typespec/http": "^1.8.0",
@@ -70,7 +70,7 @@
     "@azure-tools/typespec-azure-core": "0.64.0",
     "@azure-tools/typespec-azure-resource-manager": "0.64.0",
     "@azure-tools/typespec-azure-rulesets": "0.64.0",
-    "@azure-tools/typespec-client-generator-core": "0.64.0",
+    "@azure-tools/typespec-client-generator-core": "0.64.1",
     "@azure-tools/typespec-liftr-base": "0.11.0",
     "@microsoft/api-extractor": "^7.55.2",
     "@types/js-yaml": "~4.0.9",
@@ -95,7 +95,7 @@
     "eslint-plugin-deprecation": "~3.0.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unicorn": "^62.0.0",
-    "prettier": "~3.7.4",
+    "prettier": "~3.8.0",
     "rimraf": "~6.1.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.53.0",
