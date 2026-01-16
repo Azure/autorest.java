@@ -22,7 +22,7 @@ resources:
 jobs:
 - job: Generate_SDK
 
-  timeoutInMinutes: 60
+  timeoutInMinutes: 120
 
   variables:
   - template: /eng/pipelines/variables/globals.yml
