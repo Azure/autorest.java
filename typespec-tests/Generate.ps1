@@ -214,12 +214,6 @@ try {
 
   Remove-Item ./tsp-output -Recurse -Force
 
-    $clientStructureMetadataPath = Join-Path ./src/main/resources/META-INF "client-structure-service_metadata.json"
-    if (Test-Path $clientStructureMetadataPath) {
-      # avoid nondeterminism when multiple client.tsp files contribute metadata
-      Remove-Item $clientStructureMetadataPath -Force
-    }
-
   if ($ExitCode -ne 0) {
     throw "Failed to generate from tsp"
   }
