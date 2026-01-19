@@ -1,5 +1,12 @@
 # Release History
 
+## 0.38.4 (2026-01-19)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to the latest versions.
+- Synced generator test harness to include multi-service client metadata updates.
+
 ## 0.38.3 (2026-01-15)
 
 Compatible with compiler 1.8.0.
