@@ -198,18 +198,10 @@ try {
   Remove-Item ./specs/payload/xml -Recurse -Force
 
   $specFiles = Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse
-  $multiServiceSpecs = @(
-    "azure/resource-manager/multi-service/client.tsp",
-    "azure/resource-manager/multi-service-older-versions/client.tsp",
-    "azure/resource-manager/multi-service-shared-models/client.tsp"
-  )
-  foreach ($multiServiceSpec in $multiServiceSpecs) {
-    $multiServicePath = Join-Path ./specs $multiServiceSpec
-    if (Test-Path $multiServicePath) {
-      # ensure multi-service client specs are processed even though they do not match the default filter
-      $specFiles += Get-Item $multiServicePath
-    }
-  }
+  # ensure multi-service client specs are processed even though they do not match the default filter
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service/client.tsp")
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-older-versions/client.tsp")
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-shared-models/client.tsp")
 
   $job = $specFiles | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
