@@ -62,6 +62,10 @@ $generateScript = {
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/].*[\\/]main\.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+  } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-older-versions[\\/]") {
+    $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=older-versions"""
+  } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-shared-models[\\/]") {
+    $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=shared-models"""
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
     # test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""
@@ -194,11 +198,10 @@ try {
   Remove-Item ./specs/payload/xml -Recurse -Force
 
   $specFiles = Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse
-  $multiServiceSpec = Join-Path ./specs "azure/resource-manager/multi-service/client.tsp"
-  if (Test-Path $multiServiceSpec) {
-    # ensure multi-service client specs are processed even though they do not match the default filter
-    $specFiles += Get-Item $multiServiceSpec
-  }
+  # ensure multi-service client specs are processed even though they do not match the default filter
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service/client.tsp")
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-older-versions/client.tsp")
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-shared-models/client.tsp")
 
   $job = $specFiles | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
@@ -210,6 +213,12 @@ try {
   Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 
   Remove-Item ./tsp-output -Recurse -Force
+
+    $clientStructureMetadataPath = Join-Path ./src/main/resources/META-INF "client-structure-service_metadata.json"
+    if (Test-Path $clientStructureMetadataPath) {
+      # avoid nondeterminism when multiple client.tsp files contribute metadata
+      Remove-Item $clientStructureMetadataPath -Force
+    }
 
   if ($ExitCode -ne 0) {
     throw "Failed to generate from tsp"
