@@ -4,6 +4,12 @@ The `azure-autorest-customization` package provides APIs for customizing Autores
 programmatically to support special cases not supported by Autorest code generation directly using Eclipse language
 server to ensure valid Java code.
 
+## Before You Customize
+
+Before customizing generated code, consider whether your change should be made in TypeSpec (`client.tsp`) instead. TypeSpec customizations are cleaner and survive regeneration. See the [TypeSpec Client Customizations Reference](https://github.com/Azure/azure-sdk-for-java/blob/main/eng/common/knowledge/customizing-client-tsp.md) for available decorators like `@@clientName`, `@@access`, etc.
+
+Use Java code customizations only when TypeSpec cannot express the behavior you need.
+
 To set up customizations, create a Maven project with dependency:
 
 ```xml
