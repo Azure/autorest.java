@@ -1,9 +1,9 @@
 diff --git a/packages/http-client-java/generator/http-client-generator-core/pom.xml b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-index b4139191e..d1b75d5ae 100644
+index 2015b7761..d5103d017 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator-core/pom.xml
-@@ -21,6 +21,11 @@
-   </properties>
+@@ -51,6 +51,11 @@
+   </build>
  
    <dependencies>
 +    <dependency>
@@ -12,26 +12,25 @@ index b4139191e..d1b75d5ae 100644
 +      <version>1.0.0-beta.11</version>
 +    </dependency>
      <dependency>
-       <groupId>com.azure</groupId>
-       <artifactId>azure-core</artifactId>
+       <groupId>io.clientcore</groupId>
+       <artifactId>core</artifactId>
 diff --git a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
-index 4aad12e27..67e5f7ef1 100644
+index e9b1e0a49..18955e7d7 100644
 --- a/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
 +++ b/packages/http-client-java/generator/http-client-generator-core/src/main/java/com/microsoft/typespec/http/client/generator/core/postprocessor/Postprocessor.java
-@@ -3,9 +3,9 @@
+@@ -3,8 +3,8 @@
  
  package com.microsoft.typespec.http.client.generator.core.postprocessor;
  
-+import com.azure.autorest.customization.Customization;
-+import com.azure.autorest.customization.implementation.Utils;
- import com.azure.json.JsonReader;
 -import com.microsoft.typespec.http.client.generator.core.customization.Customization;
 -import com.microsoft.typespec.http.client.generator.core.customization.implementation.Utils;
++import com.azure.autorest.customization.Customization;
++import com.azure.autorest.customization.implementation.Utils;
  import com.microsoft.typespec.http.client.generator.core.extension.base.util.FileUtils;
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.JavaSettings;
  import com.microsoft.typespec.http.client.generator.core.extension.plugin.NewPlugin;
 diff --git a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
-index c99896650..fef2a4caf 100644
+index 58fc6b54d..09804e3f0 100644
 --- a/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 +++ b/packages/http-client-java/generator/http-client-generator/src/main/resources/readme/pom.xml
 @@ -16,9 +16,9 @@
@@ -46,4 +45,4 @@ index c99896650..fef2a4caf 100644
 +      <version>1.0.0-beta.11</version>
      </dependency>
    </dependencies>
- 
+ </project>

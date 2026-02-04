@@ -1,5 +1,92 @@
 # Release History
 
+## 0.38.7 (2026-02-01)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to the latest versions.
+
+## 0.38.6 (2026-01-27)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to the latest versions.
+
+## 0.38.5 (2026-01-23)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to the latest versions.
+
+## 0.38.4 (2026-01-19)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to the latest versions.
+
+## 0.38.3 (2026-01-15)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to latest versions.
+
+## 0.38.2 (2026-01-14)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to latest versions.
+
+## 0.38.1 (2026-01-12)
+
+Compatible with compiler 1.7.1.
+
+- Updated package dependencies to latest versions.
+
+## 0.38.0 (2026-01-08)
+
+Compatible with compiler 1.7.1.
+
+- Supported merging of multiple services into a single root client.
+
+## 0.37.4 (2025-12-18)
+
+Compatible with compiler 1.7.1.
+
+- Updated TypeSpec dependencies (compiler 1.7.1) and refreshed dev dependencies.
+- Supported ArrayEncoding on array properties in the HTTP client emitter.
+
+## 0.37.3 (2025-12-12)
+
+Compatible with compiler 1.7.0.
+
+Updated package dependencies to latest versions.
+
+## 0.37.2 (2025-12-04)
+
+Compatible with compiler 1.6.0.
+
+- Patch release: update package metadata for publication.
+
+## 0.37.1 (2025-12-02)
+
+Compatible with compiler 1.6.0.
+
+- Bug fix.
+
+## 0.37.0 (2025-12-02)
+
+Compatible with compiler 1.6.0.
+
+- In-memory code formatting.
+- Fix on LRO final result on management SDK from TypeSpec.
+
+## 0.36.3 (2025-11-13)
+
+Compatible with compiler 1.6.0.
+
+- Updated package dependencies to latest versions.
+- Patch release: align peerDependencies and test overrides with latest TypeSpec 1.6.0 / libraries 0.76.0 and Azure tools 0.62.0.
+
 ## 0.36.2 (2025-10-31)
 
 Compatible with compiler 1.5.0.

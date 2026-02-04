@@ -19,8 +19,8 @@ import com.microsoft.typespec.http.client.generator.core.model.clientmodel.Clien
 import com.microsoft.typespec.http.client.generator.core.model.javamodel.JavaClass;
 import com.microsoft.typespec.http.client.generator.core.model.javamodel.JavaFile;
 import com.microsoft.typespec.http.client.generator.core.template.prototype.MethodTemplate;
-import com.azure.json.JsonReader;
-import com.azure.json.ReadValueCallback;
+import io.clientcore.core.serialization.json.JsonReader;
+import io.clientcore.core.utils.IOExceptionCheckedFunction;
 import org.junit.jupiter.api.Assertions;
 
 import java.io.IOException;
@@ -73,13 +73,13 @@ public class TestUtils {
 
         @SuppressWarnings("unchecked")
         @Override
-        public <T> T getValue(String key, ReadValueCallback<String, T> converter) {
+        public <T> T getValue(String key, IOExceptionCheckedFunction<String, T> converter) {
             return (T) DEFAULT_SETTINGS.get(key);
         }
 
         @SuppressWarnings("unchecked")
         @Override
-        public <T> T getValueWithJsonReader(String key, ReadValueCallback<JsonReader, T> converter) {
+        public <T> T getValueWithJsonReader(String key, IOExceptionCheckedFunction<JsonReader, T> converter) {
             return (T) DEFAULT_SETTINGS.get(key);
         }
 

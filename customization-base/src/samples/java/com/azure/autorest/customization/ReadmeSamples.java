@@ -7,6 +7,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.slf4j.Logger;
 
 import java.util.UUID;
@@ -116,6 +117,39 @@ public class ReadmeSamples {
         }
     }
 
+    static class ChangeClassBaseType extends Customization {
+        static class Initial {
+            // BEGIN: readme-sample-change-class-base-type-initial
+            public class Bar {
+            }
+            public class Foo extends Bar {
+            }
+            // END: readme-sample-change-class-base-type-initial
+        }
+
+        // BEGIN: readme-sample-change-class-base-type-customization
+        @Override
+        public void customize(LibraryCustomization customization, Logger logger) {
+            customization.getClass("com.azure.myservice.models", "Foo")
+                .customizeAst(ast -> ast.getClassByName("foo").ifPresent(clazz -> {
+                    String newTypeFullName = "com.azure.myservice.models.Bar1";
+                    ast.addImport(newTypeFullName);
+                    clazz.getExtendedTypes().clear();
+                    clazz.addExtendedType(new ClassOrInterfaceType(null, "Bar1"));
+                }));
+        }
+        // END: readme-sample-change-class-base-type-customization
+
+        static class Result {
+            public class Bar1 {
+            }
+            // BEGIN: readme-sample-change-class-base-type-result
+            public class Foo extends Bar1 {
+            }
+            // END: readme-sample-change-class-base-type-result
+        }
+    }
+
     static class AddClassAnnotation extends Customization {
         static class Initial {
             // BEGIN: readme-sample-add-class-annotation-initial
@@ -174,6 +208,39 @@ public class ReadmeSamples {
                 }
             }
             // END: readme-sample-add-method-annotation-result
+        }
+    }
+
+    static class AddFieldDefaultValue extends Customization {
+        static class Initial {
+            // BEGIN: readme-sample-add-a-field-default-value-initial
+            public class Foo {
+                private String bar;
+            }
+            // END: readme-sample-add-a-field-default-value-initial
+        }
+
+        // BEGIN: readme-sample-add-a-field-default-value-customization
+        @Override
+        public void customize(LibraryCustomization customization, Logger logger) {
+            customization.getClass("com.azure.myservice.models", "Foo")
+                .customizeAst(ast -> ast.getClassByName("Foo")
+                    .flatMap(clazz -> clazz.getFieldByName("bar"))
+                    .ifPresent(barField ->
+                        barField.getVariables().forEach(var -> {
+                            if (var.getNameAsString().equals("bar")) {
+                                var.setInitializer("\"bar\"");
+                            }
+                        })));
+        }
+        // END: readme-sample-add-a-field-default-value-customization
+
+        static class Result {
+            // BEGIN: readme-sample-add-a-field-default-value-result
+            public class Foo {
+                private String bar = "bar";
+            }
+            // END: readme-sample-add-a-field-default-value-result
         }
     }
 

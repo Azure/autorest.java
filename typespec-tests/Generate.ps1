@@ -62,6 +62,10 @@ $generateScript = {
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/].*[\\/]main\.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+  } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-older-versions[\\/]") {
+    $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=older-versions"""
+  } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-shared-models[\\/]") {
+    $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=shared-models"""
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
     # test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""
@@ -73,8 +77,6 @@ $generateScript = {
     # also serve as a test for "use-object-for-unknown" emitter option
     $tspOptions += " --option ""@azure-tools/typespec-java.use-object-for-unknown=true"""
   } elseif ($tspFile -match "tsp[\\/]arm.tsp") {
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
     $tspOptions += " --option ""@azure-tools/typespec-java.service-name=Arm Resource Provider"""
     # also test generating from specific api-version
@@ -91,8 +93,6 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.float32-as-double=false"""
     $tspOptions += " --option ""@azure-tools/typespec-java.uuid-as-string=false"""
   } elseif ($tspFile -match "tsp[\\/]arm-stream-style-serialization.tsp") {
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # test service-name
     $tspOptions += " --option ""@azure-tools/typespec-java.service-name=Arm Resource Provider"""
     # test property-include-always
@@ -100,10 +100,11 @@ $generateScript = {
     # enable client side validations
     $tspOptions += " --option ""@azure-tools/typespec-java.client-side-validations=true"""
   } elseif ($tspFile -match "tsp[\\/]arm-customization.tsp") {
-    # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # add customization code
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/KeyVaultCustomization.java"""
+  } elseif ($tspFile -match "tsp[\\/]arm-versioned.tsp") {
+    # enable advanced versioning for resiliency test
+    $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
   } elseif ($tspFile -match "tsp[\\/]subclient.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
     # test for include-api-view-properties
@@ -156,55 +157,66 @@ $generateScript = {
   }
 }
 
-./Setup.ps1
+Push-Location $PSScriptRoot
+try {
+  ./Setup.ps1
 
-New-Item -Path ./existingcode/src/main/java/tsptest/ -ItemType Directory -Force | Out-Null
+  New-Item -Path ./existingcode/src/main/java/tsptest/ -ItemType Directory -Force | Out-Null
 
-if (Test-Path ./src/main/java/tsptest/partialupdate) {
-  Copy-Item -Path ./src/main/java/tsptest/partialupdate -Destination ./existingcode/src/main/java/tsptest/partialupdate -Recurse -Force
-}
+  if (Test-Path ./src/main/java/tsptest/partialupdate) {
+    Copy-Item -Path ./src/main/java/tsptest/partialupdate -Destination ./existingcode/src/main/java/tsptest/partialupdate -Recurse -Force
+  }
 
-if (Test-Path ./src/main) {
-  Remove-Item ./src/main -Recurse -Force
-}
-if (Test-Path ./src/samples) {
-  Remove-Item ./src/samples -Recurse -Force
-}
-if (Test-Path ./src/test) {
-  Get-ChildItem -Path ./src/test -Recurse -Directory | Where-Object {$_.Name -match "^generated$"} | Remove-Item -Recurse -Force
-}
-if (Test-Path ./tsp-output) {
+  if (Test-Path ./src/main) {
+    Remove-Item ./src/main -Recurse -Force
+  }
+  if (Test-Path ./src/samples) {
+    Remove-Item ./src/samples -Recurse -Force
+  }
+  if (Test-Path ./src/test) {
+    Get-ChildItem -Path ./src/test -Recurse -Directory | Where-Object {$_.Name -match "^generated$"} | Remove-Item -Recurse -Force
+  }
+  if (Test-Path ./tsp-output) {
+    Remove-Item ./tsp-output -Recurse -Force
+  }
+
+  # generate for other local test sources except partial update
+  $job = Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*" | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
+
+  $job | Wait-Job -Timeout 600
+  $job | Receive-Job
+
+  # partial update test
+  npx --no-install tsp compile ./tsp/partialupdate.tsp --option="@azure-tools/typespec-java.emitter-output-dir={project-root}/existingcode"
+  Copy-Item -Path ./existingcode/src/main/java/tsptest/partialupdate -Destination ./src/main/java/tsptest/partialupdate -Recurse -Force
+  Remove-Item ./existingcode -Recurse -Force
+
+  # generate for http-specs/azure-http-specs test sources
+  Copy-Item -Path node_modules/@typespec/http-specs/specs -Destination ./ -Recurse -Force
+  Copy-Item -Path node_modules/@azure-tools/azure-http-specs/specs -Destination ./ -Recurse -Force
+  # remove xml tests, emitter has not supported xml model
+  Remove-Item ./specs/payload/xml -Recurse -Force
+
+  $specFiles = Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse
+  # ensure multi-service client specs are processed even though they do not match the default filter
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service/client.tsp")
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-older-versions/client.tsp")
+  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-shared-models/client.tsp")
+
+  $job = $specFiles | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
+
+  $job | Wait-Job -Timeout 1200
+  $job | Receive-Job
+
+  Remove-Item ./specs -Recurse -Force
+
+  Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
+
   Remove-Item ./tsp-output -Recurse -Force
-}
 
-# generate for other local test sources except partial update
-$job = Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*" | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
-
-$job | Wait-Job -Timeout 600
-$job | Receive-Job
-
-# partial update test
-npx --no-install tsp compile ./tsp/partialupdate.tsp --option="@azure-tools/typespec-java.emitter-output-dir={project-root}/existingcode"
-Copy-Item -Path ./existingcode/src/main/java/tsptest/partialupdate -Destination ./src/main/java/tsptest/partialupdate -Recurse -Force
-Remove-Item ./existingcode -Recurse -Force
-
-# generate for http-specs/azure-http-specs test sources
-Copy-Item -Path node_modules/@typespec/http-specs/specs -Destination ./ -Recurse -Force
-Copy-Item -Path node_modules/@azure-tools/azure-http-specs/specs -Destination ./ -Recurse -Force
-# remove xml tests, emitter has not supported xml model
-Remove-Item ./specs/payload/xml -Recurse -Force
-
-$job = (Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
-
-$job | Wait-Job -Timeout 1200
-$job | Receive-Job
-
-Remove-Item ./specs -Recurse -Force
-
-Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
-
-Remove-Item ./tsp-output -Recurse -Force
-
-if ($ExitCode -ne 0) {
-  throw "Failed to generate from tsp"
+  if ($ExitCode -ne 0) {
+    throw "Failed to generate from tsp"
+  }
+} finally {
+  Pop-Location
 }
