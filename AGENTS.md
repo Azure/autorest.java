@@ -9,9 +9,9 @@ See [Developer Guide for TypeSpec Emitter](docs/developer/typespec/readme.md) fo
 Guideline:
 
 - Most of the development work should happen in "core/packages/http-client-java" folder.
-- Before start the development in "core" folder, always checkout latest code from main branch, and create a dev branch upon it.
-- When check-in code in "core" folder, do not check-in the files in "core.patch".
-- When prepare the PR, create 2 PRs, one for the code changes in submodule ("typespec" repository, if there is change), one for the code changes in this repository (which would include the update on "core" submodule).
+- Before starting the development in "core" folder, always checkout latest code from main branch, and create a dev branch upon it.
+- When checking in code in "core" folder, do not check-in the files in "core.patch".
+- When preparing the PR, create 2 PRs, one for the code changes in submodule ("typespec" repository, if there is change), one for the code changes in this repository (which would include the update on "core" submodule).
 
 ## TypeScript Part for the Emitter
 
@@ -27,7 +27,7 @@ The code there, in runtime, consumes the "code-model.yaml" file produced by the 
 
 ## End-to-end test with TypeSpec
 
-The end-to-end takes a TypeSpec file, and produce a Java client.
+The end-to-end takes a TypeSpec file, and produces a Java client.
 We'd like to see whether the TypeSpec file (with a certain feature) can produce expected Java code.
 
 The test happens in "core/packages/http-client-java/generator/http-client-generator-test" folder.
@@ -66,7 +66,7 @@ Steps:
 2. Save the file, and run `npm install` in "typespec-extension" folder, so that "package-lock.json" would be updated.
 3. Add a new item in release history in "typespec-extension/changelog.md". The version would be the minor/patch version. The date would be today.
 
-The [publish to NPM pipeline](https://dev.azure.com/azure-sdk/internal/_build?definitionId=5618) need to be triggered, after the PR is merged.
+The [publish to NPM pipeline](https://dev.azure.com/azure-sdk/internal/_build?definitionId=5618) needs to be triggered, after the PR is merged.
 
-After release, the [sync SDK pipeline](https://dev.azure.com/azure-sdk/internal/_build?definitionId=6270) need to be triggered, to sync the released typespec-java into the SDK repository.
+After release, the [sync SDK pipeline](https://dev.azure.com/azure-sdk/internal/_build?definitionId=6270) needs to be triggered, to sync the released typespec-java into the SDK repository.
 This pipeline also regenerates all SDK based on TypeSpec.
