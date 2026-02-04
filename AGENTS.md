@@ -25,20 +25,6 @@ Java code for the Emitter is in "core/packages/http-client-java/generator/http-c
 
 The code there, in runtime, consumes the "code-model.yaml" file produced by the TypeSpec Part, and generate the Java client.
 
-## End-to-end test with TypeSpec
-
-The end-to-end takes a TypeSpec file, and produces a Java client.
-We'd like to see whether the TypeSpec file (with a certain feature) can produce expected Java code.
-
-The test happens in "core/packages/http-client-java/generator/http-client-generator-test" folder.
-
-If there is code change in "core", before running any end-to-end test, first run the "Setup.ps1" script there, to update the test environment.
-
-When calling "tsp compile", always set `--config .`.
-
-The Java client would be generated in its "tsp-output" folder.
-When running a new test, delete this folder if exists.
-
 # Update and Release
 
 ## Update Node.js Package for Latest Dependencies
