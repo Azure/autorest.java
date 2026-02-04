@@ -4,7 +4,7 @@ The emitter is the [TypeSpec](https://typespec.io/) library for emitting Java cl
 
 See [Emitter](https://typespec.io/docs/extending-typespec/emitters-basics/) for the basics on the TypeSpec emitter library.
 
-See [Developer Guide for TypeSpec Emitter](docs/developer/typespec/readme.md) for basics on this repostority.
+See [Developer Guide for TypeSpec Emitter](docs/developer/typespec/readme.md) for basics on this repository.
 
 Guideline:
 
@@ -41,7 +41,7 @@ When running a new test, delete this folder if exists.
 
 # Update and Release
 
-## Update Node.JS Package for Latest Dependencies
+## Update Node.js Package for Latest Dependencies
 
 Instructions:
 - Always use absolute path when change directory.
