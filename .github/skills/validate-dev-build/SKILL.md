@@ -7,10 +7,11 @@ argument-hint: [test-case]
 ## Update Node.js dependencies to dev
 
 Read "typespec-extension/package.json", if it does not depends on a dev version of `@typespec/compiler` (e.g. `X-dev.Y`), run following command on repository root:
-
 ```
 npx -y @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
 ```
+
+Under "typespec-extension" folder, run `npm install --force` to install the dev dependencies.
 
 ## Prepare end-to-end test environment
 
