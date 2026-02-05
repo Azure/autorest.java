@@ -15,7 +15,7 @@ npm install -g autorest
 ```
 
 # Usage
-To use the latest released preview(https://github.com/Azure/autorest.java/releases), run
+To use the latest released preview (https://github.com/Azure/autorest.java/releases), run
 ```bash
 autorest --java
     --use:@autorest/java@4.x.x
@@ -45,7 +45,7 @@ autorest --java
 
 Java files will be generated under `where/to/generate/java/files/src/main/java/specified/java/package`.
 
-To debug, add `--java.debugger` to the argument list. The JVM will suspend at the beginning of the execution. Then attach a remote debugger in your IDE to `localhost:5005`. **Make sure you detach the debugger before killing the AutoRest process. Otherwise it will fail to shutdown the JVM and leave it orphaned. (which can be killed in the Task Manager)**
+To debug, add `--java.debugger` to the argument list. The JVM will suspend at the beginning of the execution. Then attach a remote debugger in your IDE to `localhost:5005`. **Make sure you detach the debugger before killing the AutoRest process. Otherwise it will fail to shut down the JVM and leave it orphaned. (which can be killed in the Task Manager)**
 
 # Recommended Settings
 
