@@ -1,5 +1,11 @@
 # Release History
 
+## 0.39.0 (2026-02-06)
+
+Compatible with compiler 1.8.0.
+
+- Supported TypeSpec.Http.File as operation request body and response body.
+
 ## 0.38.7 (2026-02-01)
 
 Compatible with compiler 1.8.0.
