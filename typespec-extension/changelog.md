@@ -4,7 +4,7 @@
 
 Compatible with compiler 1.8.0.
 
-- Updated package dependencies to the latest versions.
+- Supported TypeSpec.Http.File as operation request body and response body.
 
 ## 0.38.7 (2026-02-01)
 
