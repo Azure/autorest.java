@@ -1,5 +1,12 @@
 # Release History
 
+## 0.39.1 (2026-02-09)
+
+Compatible with compiler 1.8.0.
+
+- Updated package dependencies to the latest versions.
+- Fixed serialization for dictionary of unknown types.
+
 ## 0.39.0 (2026-02-06)
 
 Compatible with compiler 1.8.0.

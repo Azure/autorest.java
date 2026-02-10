@@ -16,7 +16,7 @@ public final class SmartSalmonTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         SmartSalmon model = BinaryData.fromString(
-            "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"lssai\",\"eebvmgxsab\":\"datajwnzlljfmp\",\"location\":\"qduujitcjczdz\",\"iswild\":false,\"species\":\"hkr\",\"length\":38.019188,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"p\",\"length\":43.59222,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vwrwj\",\"length\":48.286907,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":93.839714}]},{\"fishtype\":\"Fish\",\"species\":\"utjeltmrldhugj\",\"length\":66.317825,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":68.56524},{\"fishtype\":\"Fish\",\"length\":94.724525}]},{\"fishtype\":\"Fish\",\"species\":\"hocdgeab\",\"length\":70.60696,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":91.44667},{\"fishtype\":\"Fish\",\"length\":9.046102},{\"fishtype\":\"Fish\",\"length\":89.55463}]}]}]}")
+            "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"lssai\",\"eebvmgxsab\":\"\\\"datajwnzlljfmp\\\"\",\"location\":\"qduujitcjczdz\",\"iswild\":false,\"species\":\"hkr\",\"length\":38.019188,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"p\",\"length\":43.59222,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vwrwj\",\"length\":48.286907,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":93.839714}]},{\"fishtype\":\"Fish\",\"species\":\"utjeltmrldhugj\",\"length\":66.317825,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":68.56524},{\"fishtype\":\"Fish\",\"length\":94.724525}]},{\"fishtype\":\"Fish\",\"species\":\"hocdgeab\",\"length\":70.60696,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":91.44667},{\"fishtype\":\"Fish\",\"length\":9.046102},{\"fishtype\":\"Fish\",\"length\":89.55463}]}]}]}")
             .toObject(SmartSalmon.class);
         Assertions.assertEquals("hkr", model.getSpecies());
         Assertions.assertEquals(38.019188f, model.getLength());
@@ -44,7 +44,7 @@ public final class SmartSalmonTests {
             .setLocation("qduujitcjczdz")
             .setIswild(false)
             .setCollegeDegree("lssai")
-            .setAdditionalProperties(mapOf("fishtype", "smart_salmon", "eebvmgxsab", "datajwnzlljfmp"));
+            .setAdditionalProperties(mapOf("fishtype", "smart_salmon", "eebvmgxsab", "\"datajwnzlljfmp\""));
         model = BinaryData.fromObject(model).toObject(SmartSalmon.class);
         Assertions.assertEquals("hkr", model.getSpecies());
         Assertions.assertEquals(38.019188f, model.getLength());
