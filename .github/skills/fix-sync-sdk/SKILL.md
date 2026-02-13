@@ -11,6 +11,10 @@ The request would come as a form of:
 - "Fix sdk lib <project-name>“
 - "Fix sdk lib <project-name>, update TypeSpec project to <requested-change-to-typespec-project>“
 
+## Checklist
+
+- When update "client.tsp", always use "java" scope, and add new lines to the end of the file.
+
 ## Required repositories
 
 - [Azure/azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java), cloned at "../azure-sdk-for-java"
