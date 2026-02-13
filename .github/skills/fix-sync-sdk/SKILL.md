@@ -52,8 +52,12 @@ This is the relative path of the TypeSpec project in specs repo.
 Update the "tsp-location.yaml" file, update the `commit` property to "<specs-main-commit>".
 
 Run `tsp-client update` command under "<project-path>" folder to regenerate the project.
+- DO NOT use other force of the command, nor any other arguments
+- Output the result to user.
 
-If the generate succeeded, commit the "tsp-location.yaml" and all Java files in "<project-path>" folder (discard changes to  .md file and pom.xml file). And we have fixed this project.
+If the generate succeeded, commit the "tsp-location.yaml", all ".java" and ".json" files in "<project-path>/src/main" folder (discard changes to other files).
+We have fixed this project.
+Summary the changes to specs repo and sdk repo.
 
 If the generate fails, continue to next step.
 
@@ -77,9 +81,9 @@ If it still fails, summary the details and ask user for help.
 
 #### Update the TypeSpec project in specs repo
 
-All the fixes should be done under "<tsp-path>" folder.
+All the changes should be done under "<tsp-path>" folder.
 
-See [common errors and their fixes](./common-error.md) to fix common errors.
+Modify the TypeSpec project as per "<requested-change-to-typespec-project>".
 
 When finished, check if the specs repo is on "main" branch. If yes, create a new branch, and create a pull request to "main" branch of specs repo.
 
@@ -89,4 +93,4 @@ Make sure the pull request is created.
 
 Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
 
-If it still fails, summary the details and ask user for help.
+Summary the changes to specs repo and sdk repo.
