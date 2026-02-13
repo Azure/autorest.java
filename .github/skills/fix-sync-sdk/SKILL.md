@@ -1,6 +1,6 @@
 ---
 name: fix-sync-sdk
-description: '**WORKFLOW SKILL** - Update TypeSpec project, re-generate SDK, to fix error on SDK project. USE FOR: "fix sdk lib".
+description: '**WORKFLOW SKILL** - Update TypeSpec project, re-generate SDK, to fix error on SDK project. USE FOR: "fix sdk lib <project-name>".'
 ---
 
 # Skill Instructions
@@ -9,6 +9,7 @@ description: '**WORKFLOW SKILL** - Update TypeSpec project, re-generate SDK, to 
 
 The request would come as a form of:
 - "Fix sdk lib <project-name>“
+- "Fix sdk lib <project-name>, update TypeSpec project to <requested-change-to-typespec-project>“
 
 ## Required repositories
 
@@ -44,7 +45,9 @@ This is the relative path of the TypeSpec project in specs repo.
 
 "<tsp-path>" refers to the full path of this TypeSpec project folder in specs repo.
 
-### Regenerate the project in sdk repo
+### When there is no "<requested-change-to-typespec-project>"
+
+#### Regenerate the project in sdk repo
 
 Update the "tsp-location.yaml" file, update the `commit` property to "<specs-main-commit>".
 
@@ -54,7 +57,25 @@ If the generate succeeded, commit the "tsp-location.yaml" and all Java files in 
 
 If the generate fails, continue to next step.
 
-### Fix the TypeSpec project in specs repo
+#### Fix the TypeSpec project in specs repo
+
+All the fixes should be done under "<tsp-path>" folder.
+
+See [common errors and their fixes](./common-error.md) to fix common errors.
+
+When finished, check if the specs repo is on "main" branch. If yes, create a new branch, and create a pull request to "main" branch of specs repo.
+
+Commit the changes in "<tsp-path>" folder, push to origin.
+
+Make sure the pull request is created. Use the HEAD commit hash of the pull request branch as "<specs-fix-commit>".
+
+Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
+
+If it still fails, summary the details and ask user for help.
+
+### When there is "<requested-change-to-typespec-project>"
+
+#### Update the TypeSpec project in specs repo
 
 All the fixes should be done under "<tsp-path>" folder.
 
@@ -66,6 +87,6 @@ Commit the changes in "<tsp-path>" folder, push to origin. Note the commit hash 
 
 Make sure the pull request is created.
 
-Repeat step "Regenerate the project in sdk repo", but use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
+Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
 
-If it still fails, repeat this step until the generate succeeds.
+If it still fails, summary the details and ask user for help.

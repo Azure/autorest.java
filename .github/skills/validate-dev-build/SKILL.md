@@ -1,6 +1,6 @@
 ---
 name: validate-dev-build
-description: '**WORKFLOW SKILL** - Build the emitter with dev dependencies, and validate end-to-end tests. USE FOR: "validate dev build".
+description: '**WORKFLOW SKILL** - Build the emitter with dev dependencies, and validate end-to-end tests. USE FOR: "validate dev build".'
 ---
 
 # Skill Instructions
