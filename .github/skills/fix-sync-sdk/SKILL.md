@@ -67,7 +67,7 @@ All the fixes should be done under "<tsp-path>" folder.
 
 See [common errors and their fixes](./common-error.md) to fix common errors.
 
-When finished, check if the specs repo is on "main" branch. If yes, create a new branch, and create a pull request to "main" branch of specs repo.
+When finished, check if the specs repo is on "main" branch. If yes, create a new branch, and create a draft pull request to "main" branch of specs repo.
 
 Commit the changes in "<tsp-path>" folder, push to origin.
 
@@ -75,7 +75,7 @@ Make sure the pull request is created. Use the HEAD commit hash of the pull requ
 
 Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
 
-If it still fails, summary the details and ask user for help.
+If it still fails, summary the details (include the link to draft pull request) and ask user for help.
 
 ### When there is "<requested-change-to-typespec-project>"
 
@@ -93,4 +93,4 @@ Make sure the pull request is created.
 
 Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
 
-Summary the changes to specs repo and sdk repo.
+Summary the changes to specs repo and sdk repo (include the link to draft pull request).
