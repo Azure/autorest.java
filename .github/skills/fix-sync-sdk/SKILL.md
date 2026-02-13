@@ -13,9 +13,9 @@ The request would come as a form of:
 
 ## Required repositories
 
-- Azure/azure-sdk-for-java, cloned at "../azure-sdk-for-java"
+- [Azure/azure-sdk-for-java](https://github.com/Azure/azure-sdk-for-java), cloned at "../azure-sdk-for-java"
   Call this folder "sdk repo" for short.
-- Azure/azure-rest-api-specs, cloned at "../azure-rest-api-specs"
+- [Azure/azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs), cloned at "../azure-rest-api-specs"
   Call this folder "specs repo" for short.
 
 You have full access to these folders of local clone.
