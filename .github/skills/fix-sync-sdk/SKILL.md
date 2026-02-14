@@ -79,7 +79,7 @@ Make sure the pull request is created. Use the HEAD commit hash of the pull requ
 
 Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
 
-If it still fails, summary the details (include the link to draft pull request) and ask user for help.
+If it still fails, summarize the details (include the link to draft pull request) and ask user for help.
 
 ### When there is "<requested-change-to-typespec-project>"
 
