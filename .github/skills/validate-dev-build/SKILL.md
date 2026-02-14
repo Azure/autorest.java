@@ -5,6 +5,11 @@ description: '**WORKFLOW SKILL** - Build the emitter with dev dependencies, and 
 
 # Skill Instructions
 
+## Request
+
+The request would come in the form of:
+- "Validate dev build for <test-case>"
+
 ## Steps
 
 ### Update Node.js dependencies to dev
@@ -24,7 +29,7 @@ Under "typespec-tests" folder, run `Setup.ps1`.
 
 Under "typespec-tests" folder.
 
-`[test-case]` usually in the form of an URL, e.g. "https://github.com/Azure/typespec-azure/tree/main/packages/azure-http-specs/specs/azure/client-generator-core/override"
+"<test-case>" usually in the form of an URL, e.g. "https://github.com/Azure/typespec-azure/tree/main/packages/azure-http-specs/specs/azure/client-generator-core/override"
 
 Map this URL to the location of the test case in "node_modules".
 E.g. above would map to "node_modules/@azure-tools/azure-http-specs/specs/azure/client-generator-core/override/client.tsp"
