@@ -97,7 +97,7 @@ Make sure the pull request is created.
 
 Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to update `commit` property in "tsp-location.yaml" file.
 
-Summary the changes to specs repo and sdk repo (include the link to draft pull request).
+Summarize the changes to specs repo and sdk repo (include the link to draft pull request).
 
 ### Finally update the `commit` property in "tsp-location.yaml" file
 
