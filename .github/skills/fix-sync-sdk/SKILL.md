@@ -89,7 +89,7 @@ All the changes should be done under "<tsp-path>" folder.
 
 Modify the TypeSpec project as per "<requested-change-to-typespec-project>".
 
-When finished, check if the specs repo is on "main" branch. If yes, create a new branch, and create a pull request to "main" branch of specs repo.
+When finished, check if the specs repo is on "main" branch. If yes, create a new branch, and create a draft pull request to "main" branch of specs repo.
 
 Commit the changes in "<tsp-path>" folder, push to origin. Note the commit hash on the current branch, call it "<specs-fix-commit>".
 
