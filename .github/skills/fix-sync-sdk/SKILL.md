@@ -56,7 +56,7 @@ This is the relative path of the TypeSpec project in specs repo.
 Update the "tsp-location.yaml" file, update the `commit` property to "<specs-main-commit>".
 
 Run `tsp-client update` command under "<project-path>" folder to regenerate the project.
-- DO NOT use other force of the command, nor any other arguments
+- DO NOT use other form of the command, nor any other arguments
 - Output the result to user.
 
 If the generate succeeded, commit the "tsp-location.yaml", all ".java" and ".json" files in "<project-path>/src/main" folder (discard changes to other files).
