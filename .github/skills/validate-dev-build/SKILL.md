@@ -1,27 +1,35 @@
 ---
 name: validate-dev-build
-description: Build the emitter with dev dependencies, and validate end-to-end tests
-argument-hint: [test-case]
+description: '**WORKFLOW SKILL** - Build the emitter with dev dependencies, and validate end-to-end tests. USE FOR: "validate dev build".'
 ---
 
-## Update Node.js dependencies to dev
+# Skill Instructions
 
-Read "typespec-extension/package.json", if it does not depends on a dev version of `@typespec/compiler` (e.g. `X-dev.Y`), run following command on repository root:
+## Request
+
+The request would come in the form of:
+- "Validate dev build for <test-case>"
+
+## Steps
+
+### Update Node.js dependencies to dev
+
+Read "typespec-extension/package.json", if it does not depend on a dev version of `@typespec/compiler` (e.g. `X-dev.Y`), run following command on repository root:
 ```
 npx -y @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
 ```
 
 Under "typespec-extension" folder, run `npm install --force` to install the dev dependencies.
 
-## Prepare end-to-end test environment
+### Prepare end-to-end test environment
 
 Under "typespec-tests" folder, run `Setup.ps1`.
 
-## Generate end-to-end test code
+### Generate end-to-end test code
 
 Under "typespec-tests" folder.
 
-`[test-case]` usually in the form of an URL, e.g. "https://github.com/Azure/typespec-azure/tree/main/packages/azure-http-specs/specs/azure/client-generator-core/override"
+"<test-case>" usually in the form of an URL, e.g. "https://github.com/Azure/typespec-azure/tree/main/packages/azure-http-specs/specs/azure/client-generator-core/override"
 
 Map this URL to the location of the test case in "node_modules".
 E.g. above would map to "node_modules/@azure-tools/azure-http-specs/specs/azure/client-generator-core/override/client.tsp"
