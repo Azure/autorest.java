@@ -8,8 +8,8 @@ description: '**WORKFLOW SKILL** - Update TypeSpec project, re-generate SDK, to 
 ## Request
 
 The request would come as a form of:
-- "Fix sdk lib <project-name>“
-- "Fix sdk lib <project-name>, update TypeSpec project to <requested-change-to-typespec-project>“
+- "Fix sdk lib <project-name>"
+- "Fix sdk lib <project-name>, update TypeSpec project to <requested-change-to-typespec-project>"
 
 ## Checklist
 
