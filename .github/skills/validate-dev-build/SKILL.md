@@ -9,7 +9,7 @@ description: '**WORKFLOW SKILL** - Build the emitter with dev dependencies, and 
 
 ### Update Node.js dependencies to dev
 
-Read "typespec-extension/package.json", if it does not depends on a dev version of `@typespec/compiler` (e.g. `X-dev.Y`), run following command on repository root:
+Read "typespec-extension/package.json", if it does not depend on a dev version of `@typespec/compiler` (e.g. `X-dev.Y`), run following command on repository root:
 ```
 npx -y @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
 ```

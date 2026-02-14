@@ -1,5 +1,5 @@
-# Common error, and their fixes:
+# Common errors and their fixes
 
 ## `duplicate-client-name`
 
-1. Find the model of duplicate client name, add `@@clientName(<ref-to-model>, "<unique-name>", "java");` in "client.tsp", to rename it to a unique name. 
+1. Locate the model(s) that produce the duplicate client name error and add `@@clientName(<ref-to-model>, "<unique-name>", "java");` to one of them in "client.tsp" to give it a unique name.

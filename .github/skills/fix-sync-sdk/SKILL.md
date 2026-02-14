@@ -1,19 +1,19 @@
 ---
 name: fix-sync-sdk
-description: '**WORKFLOW SKILL** - Update TypeSpec project, re-generate SDK, to fix error on SDK project. USE FOR: "fix sdk lib <project-name>".'
+description: '**WORKFLOW SKILL** - Update TypeSpec project, regenerate SDK, to fix error on SDK project. USE FOR: "fix sdk lib <project-name>".'
 ---
 
 # Skill Instructions
 
 ## Request
 
-The request would come as a form of:
+The request would come in the form of:
 - "Fix sdk lib <project-name>"
 - "Fix sdk lib <project-name>, update TypeSpec project to <requested-change-to-typespec-project>"
 
 ## Checklist
 
-- When update "client.tsp", always use "java" scope, and add new lines to the end of the file.
+- When updating "client.tsp", always use "java" scope, and add new lines to the end of the file.
 
 ## Required repositories
 
@@ -22,7 +22,7 @@ The request would come as a form of:
 - [Azure/azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs), cloned at "../azure-rest-api-specs"
   Call this folder "specs repo" for short.
 
-You have full access to these folders of local clone.
+You have full access to these locally cloned repositories/folders.
 
 ## Steps
 
@@ -59,9 +59,9 @@ Run `tsp-client update` command under "<project-path>" folder to regenerate the 
 - DO NOT use other form of the command, nor any other arguments
 - Output the result to user.
 
-If the generate succeeded, commit the "tsp-location.yaml", all ".java" and ".json" files in "<project-path>/src/main" folder (discard changes to other files).
+If generation succeeded, commit the "tsp-location.yaml", all ".java" and ".json" files in "<project-path>/src/main" folder (discard changes to other files).
 We have fixed this project.
-Summary the changes to specs repo and sdk repo.
+Summarize the changes to specs repo and sdk repo.
 
 If the generate fails, continue to next step.
 
@@ -99,7 +99,7 @@ Repeat step "Regenerate the project in sdk repo", use "<specs-fix-commit>" to up
 
 Summary the changes to specs repo and sdk repo (include the link to draft pull request).
 
-### Final update the `commit` property in "tsp-location.yaml" file
+### Finally update the `commit` property in "tsp-location.yaml" file
 
 The created pull request would need human review and merge. User will notify you when all pull requests are merged.
 
