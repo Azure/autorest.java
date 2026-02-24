@@ -93,7 +93,7 @@ public class TestUtils {
         }
     }
 
-    // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.locks --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json
+    // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.locks --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/resources/resource-manager/Microsoft.Authorization/locks/stable/2016-09-01/locks.json
     // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.storage fluent-tests/swagger/readme.storage.md
     // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.policy https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-policy-2020-09
     // autorest --use=. --java --fluent=lite --namespace=com.azure.resourcemanager.signalr --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/signalr/resource-manager/Microsoft.SignalRService/stable/2023-02-01/signalr.json
