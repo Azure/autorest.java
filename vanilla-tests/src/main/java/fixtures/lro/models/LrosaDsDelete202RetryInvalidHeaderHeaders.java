@@ -16,18 +16,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
     /*
-     * The Retry-After property.
-     */
-    @Generated
-    @JsonProperty(value = "Retry-After")
-    private Integer retryAfter;
-
-    /*
      * The Location property.
      */
     @Generated
     @JsonProperty(value = "Location")
     private String location;
+
+    /*
+     * The Retry-After property.
+     */
+    @Generated
+    @JsonProperty(value = "Retry-After")
+    private Integer retryAfter;
 
     // HttpHeaders containing the raw property values.
     /**
@@ -36,35 +36,13 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LrosaDsDelete202RetryInvalidHeaderHeaders(HttpHeaders rawHeaders) {
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
         String retryAfter = rawHeaders.getValue(HttpHeaderName.RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
         } else {
             this.retryAfter = null;
         }
-        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
-    }
-
-    /**
-     * Get the retryAfter property: The Retry-After property.
-     * 
-     * @return the retryAfter value.
-     */
-    @Generated
-    public Integer getRetryAfter() {
-        return this.retryAfter;
-    }
-
-    /**
-     * Set the retryAfter property: The Retry-After property.
-     * 
-     * @param retryAfter the retryAfter value to set.
-     * @return the LrosaDsDelete202RetryInvalidHeaderHeaders object itself.
-     */
-    @Generated
-    public LrosaDsDelete202RetryInvalidHeaderHeaders setRetryAfter(Integer retryAfter) {
-        this.retryAfter = retryAfter;
-        return this;
     }
 
     /**
@@ -86,6 +64,28 @@ public final class LrosaDsDelete202RetryInvalidHeaderHeaders {
     @Generated
     public LrosaDsDelete202RetryInvalidHeaderHeaders setLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the retryAfter property: The Retry-After property.
+     * 
+     * @return the retryAfter value.
+     */
+    @Generated
+    public Integer getRetryAfter() {
+        return this.retryAfter;
+    }
+
+    /**
+     * Set the retryAfter property: The Retry-After property.
+     * 
+     * @param retryAfter the retryAfter value to set.
+     * @return the LrosaDsDelete202RetryInvalidHeaderHeaders object itself.
+     */
+    @Generated
+    public LrosaDsDelete202RetryInvalidHeaderHeaders setRetryAfter(Integer retryAfter) {
+        this.retryAfter = retryAfter;
         return this;
     }
 

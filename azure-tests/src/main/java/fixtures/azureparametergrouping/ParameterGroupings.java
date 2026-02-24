@@ -526,11 +526,11 @@ public final class ParameterGroupings {
             return Mono
                 .error(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
-        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
-            parameterGroupingPostMultiParamGroupsSecondParamGroup.validate();
-        }
         if (firstParameterGroup != null) {
             firstParameterGroup.validate();
+        }
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            parameterGroupingPostMultiParamGroupsSecondParamGroup.validate();
         }
         final String accept = "application/json";
         String headerOneInternal = null;

@@ -15,12 +15,6 @@ import com.azure.core.http.HttpHeaders;
 @Fluent
 public final class ContainerRegistriesCreateManifestHeaders {
     /*
-     * The Content-Length property.
-     */
-    @Generated
-    private Long contentLength;
-
-    /*
      * The Docker-Content-Digest property.
      */
     @Generated
@@ -32,6 +26,12 @@ public final class ContainerRegistriesCreateManifestHeaders {
     @Generated
     private String location;
 
+    /*
+     * The Content-Length property.
+     */
+    @Generated
+    private Long contentLength;
+
     private static final HttpHeaderName DOCKER_CONTENT_DIGEST = HttpHeaderName.fromString("Docker-Content-Digest");
 
     // HttpHeaders containing the raw property values.
@@ -41,36 +41,14 @@ public final class ContainerRegistriesCreateManifestHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public ContainerRegistriesCreateManifestHeaders(HttpHeaders rawHeaders) {
+        this.dockerContentDigest = rawHeaders.getValue(DOCKER_CONTENT_DIGEST);
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
         String contentLength = rawHeaders.getValue(HttpHeaderName.CONTENT_LENGTH);
         if (contentLength != null) {
             this.contentLength = Long.parseLong(contentLength);
         } else {
             this.contentLength = null;
         }
-        this.dockerContentDigest = rawHeaders.getValue(DOCKER_CONTENT_DIGEST);
-        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
-    }
-
-    /**
-     * Get the contentLength property: The Content-Length property.
-     * 
-     * @return the contentLength value.
-     */
-    @Generated
-    public Long getContentLength() {
-        return this.contentLength;
-    }
-
-    /**
-     * Set the contentLength property: The Content-Length property.
-     * 
-     * @param contentLength the contentLength value to set.
-     * @return the ContainerRegistriesCreateManifestHeaders object itself.
-     */
-    @Generated
-    public ContainerRegistriesCreateManifestHeaders setContentLength(Long contentLength) {
-        this.contentLength = contentLength;
-        return this;
     }
 
     /**
@@ -114,6 +92,28 @@ public final class ContainerRegistriesCreateManifestHeaders {
     @Generated
     public ContainerRegistriesCreateManifestHeaders setLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the contentLength property: The Content-Length property.
+     * 
+     * @return the contentLength value.
+     */
+    @Generated
+    public Long getContentLength() {
+        return this.contentLength;
+    }
+
+    /**
+     * Set the contentLength property: The Content-Length property.
+     * 
+     * @param contentLength the contentLength value to set.
+     * @return the ContainerRegistriesCreateManifestHeaders object itself.
+     */
+    @Generated
+    public ContainerRegistriesCreateManifestHeaders setContentLength(Long contentLength) {
+        this.contentLength = contentLength;
         return this;
     }
 }

@@ -15,10 +15,10 @@ import com.azure.core.http.HttpHeaders;
 @Fluent
 public final class ContainerRegistryBlobsStartUploadHeaders {
     /*
-     * The Docker-Upload-UUID property.
+     * The Location property.
      */
     @Generated
-    private String dockerUploadUUID;
+    private String location;
 
     /*
      * The Range property.
@@ -27,10 +27,10 @@ public final class ContainerRegistryBlobsStartUploadHeaders {
     private String range;
 
     /*
-     * The Location property.
+     * The Docker-Upload-UUID property.
      */
     @Generated
-    private String location;
+    private String dockerUploadUUID;
 
     private static final HttpHeaderName DOCKER_UPLOAD_UUID = HttpHeaderName.fromString("Docker-Upload-UUID");
 
@@ -41,30 +41,30 @@ public final class ContainerRegistryBlobsStartUploadHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public ContainerRegistryBlobsStartUploadHeaders(HttpHeaders rawHeaders) {
-        this.dockerUploadUUID = rawHeaders.getValue(DOCKER_UPLOAD_UUID);
-        this.range = rawHeaders.getValue(HttpHeaderName.RANGE);
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
+        this.range = rawHeaders.getValue(HttpHeaderName.RANGE);
+        this.dockerUploadUUID = rawHeaders.getValue(DOCKER_UPLOAD_UUID);
     }
 
     /**
-     * Get the dockerUploadUUID property: The Docker-Upload-UUID property.
+     * Get the location property: The Location property.
      * 
-     * @return the dockerUploadUUID value.
+     * @return the location value.
      */
     @Generated
-    public String getDockerUploadUUID() {
-        return this.dockerUploadUUID;
+    public String getLocation() {
+        return this.location;
     }
 
     /**
-     * Set the dockerUploadUUID property: The Docker-Upload-UUID property.
+     * Set the location property: The Location property.
      * 
-     * @param dockerUploadUUID the dockerUploadUUID value to set.
+     * @param location the location value to set.
      * @return the ContainerRegistryBlobsStartUploadHeaders object itself.
      */
     @Generated
-    public ContainerRegistryBlobsStartUploadHeaders setDockerUploadUUID(String dockerUploadUUID) {
-        this.dockerUploadUUID = dockerUploadUUID;
+    public ContainerRegistryBlobsStartUploadHeaders setLocation(String location) {
+        this.location = location;
         return this;
     }
 
@@ -91,24 +91,24 @@ public final class ContainerRegistryBlobsStartUploadHeaders {
     }
 
     /**
-     * Get the location property: The Location property.
+     * Get the dockerUploadUUID property: The Docker-Upload-UUID property.
      * 
-     * @return the location value.
+     * @return the dockerUploadUUID value.
      */
     @Generated
-    public String getLocation() {
-        return this.location;
+    public String getDockerUploadUUID() {
+        return this.dockerUploadUUID;
     }
 
     /**
-     * Set the location property: The Location property.
+     * Set the dockerUploadUUID property: The Docker-Upload-UUID property.
      * 
-     * @param location the location value to set.
+     * @param dockerUploadUUID the dockerUploadUUID value to set.
      * @return the ContainerRegistryBlobsStartUploadHeaders object itself.
      */
     @Generated
-    public ContainerRegistryBlobsStartUploadHeaders setLocation(String location) {
-        this.location = location;
+    public ContainerRegistryBlobsStartUploadHeaders setDockerUploadUUID(String dockerUploadUUID) {
+        this.dockerUploadUUID = dockerUploadUUID;
         return this;
     }
 }
