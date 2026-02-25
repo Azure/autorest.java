@@ -15,16 +15,16 @@ import com.azure.core.http.HttpHeaders;
 @Fluent
 public final class ContainerRegistryBlobsCompleteUploadHeaders {
     /*
-     * The Range property.
-     */
-    @Generated
-    private String range;
-
-    /*
      * The Location property.
      */
     @Generated
     private String location;
+
+    /*
+     * The Range property.
+     */
+    @Generated
+    private String range;
 
     /*
      * The Docker-Content-Digest property.
@@ -41,31 +41,9 @@ public final class ContainerRegistryBlobsCompleteUploadHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public ContainerRegistryBlobsCompleteUploadHeaders(HttpHeaders rawHeaders) {
-        this.range = rawHeaders.getValue(HttpHeaderName.RANGE);
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
+        this.range = rawHeaders.getValue(HttpHeaderName.RANGE);
         this.dockerContentDigest = rawHeaders.getValue(DOCKER_CONTENT_DIGEST);
-    }
-
-    /**
-     * Get the range property: The Range property.
-     * 
-     * @return the range value.
-     */
-    @Generated
-    public String getRange() {
-        return this.range;
-    }
-
-    /**
-     * Set the range property: The Range property.
-     * 
-     * @param range the range value to set.
-     * @return the ContainerRegistryBlobsCompleteUploadHeaders object itself.
-     */
-    @Generated
-    public ContainerRegistryBlobsCompleteUploadHeaders setRange(String range) {
-        this.range = range;
-        return this;
     }
 
     /**
@@ -87,6 +65,28 @@ public final class ContainerRegistryBlobsCompleteUploadHeaders {
     @Generated
     public ContainerRegistryBlobsCompleteUploadHeaders setLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the range property: The Range property.
+     * 
+     * @return the range value.
+     */
+    @Generated
+    public String getRange() {
+        return this.range;
+    }
+
+    /**
+     * Set the range property: The Range property.
+     * 
+     * @param range the range value to set.
+     * @return the ContainerRegistryBlobsCompleteUploadHeaders object itself.
+     */
+    @Generated
+    public ContainerRegistryBlobsCompleteUploadHeaders setRange(String range) {
+        this.range = range;
         return this;
     }
 

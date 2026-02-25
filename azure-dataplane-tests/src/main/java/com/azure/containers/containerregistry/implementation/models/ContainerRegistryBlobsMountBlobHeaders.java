@@ -15,16 +15,16 @@ import com.azure.core.http.HttpHeaders;
 @Fluent
 public final class ContainerRegistryBlobsMountBlobHeaders {
     /*
-     * The Docker-Upload-UUID property.
-     */
-    @Generated
-    private String dockerUploadUUID;
-
-    /*
      * The Location property.
      */
     @Generated
     private String location;
+
+    /*
+     * The Docker-Upload-UUID property.
+     */
+    @Generated
+    private String dockerUploadUUID;
 
     /*
      * The Docker-Content-Digest property.
@@ -43,31 +43,9 @@ public final class ContainerRegistryBlobsMountBlobHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public ContainerRegistryBlobsMountBlobHeaders(HttpHeaders rawHeaders) {
-        this.dockerUploadUUID = rawHeaders.getValue(DOCKER_UPLOAD_UUID);
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
+        this.dockerUploadUUID = rawHeaders.getValue(DOCKER_UPLOAD_UUID);
         this.dockerContentDigest = rawHeaders.getValue(DOCKER_CONTENT_DIGEST);
-    }
-
-    /**
-     * Get the dockerUploadUUID property: The Docker-Upload-UUID property.
-     * 
-     * @return the dockerUploadUUID value.
-     */
-    @Generated
-    public String getDockerUploadUUID() {
-        return this.dockerUploadUUID;
-    }
-
-    /**
-     * Set the dockerUploadUUID property: The Docker-Upload-UUID property.
-     * 
-     * @param dockerUploadUUID the dockerUploadUUID value to set.
-     * @return the ContainerRegistryBlobsMountBlobHeaders object itself.
-     */
-    @Generated
-    public ContainerRegistryBlobsMountBlobHeaders setDockerUploadUUID(String dockerUploadUUID) {
-        this.dockerUploadUUID = dockerUploadUUID;
-        return this;
     }
 
     /**
@@ -89,6 +67,28 @@ public final class ContainerRegistryBlobsMountBlobHeaders {
     @Generated
     public ContainerRegistryBlobsMountBlobHeaders setLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the dockerUploadUUID property: The Docker-Upload-UUID property.
+     * 
+     * @return the dockerUploadUUID value.
+     */
+    @Generated
+    public String getDockerUploadUUID() {
+        return this.dockerUploadUUID;
+    }
+
+    /**
+     * Set the dockerUploadUUID property: The Docker-Upload-UUID property.
+     * 
+     * @param dockerUploadUUID the dockerUploadUUID value to set.
+     * @return the ContainerRegistryBlobsMountBlobHeaders object itself.
+     */
+    @Generated
+    public ContainerRegistryBlobsMountBlobHeaders setDockerUploadUUID(String dockerUploadUUID) {
+        this.dockerUploadUUID = dockerUploadUUID;
         return this;
     }
 

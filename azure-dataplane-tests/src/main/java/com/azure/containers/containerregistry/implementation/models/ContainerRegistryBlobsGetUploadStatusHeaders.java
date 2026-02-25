@@ -15,16 +15,16 @@ import com.azure.core.http.HttpHeaders;
 @Fluent
 public final class ContainerRegistryBlobsGetUploadStatusHeaders {
     /*
-     * The Docker-Upload-UUID property.
-     */
-    @Generated
-    private String dockerUploadUUID;
-
-    /*
      * The Range property.
      */
     @Generated
     private String range;
+
+    /*
+     * The Docker-Upload-UUID property.
+     */
+    @Generated
+    private String dockerUploadUUID;
 
     private static final HttpHeaderName DOCKER_UPLOAD_UUID = HttpHeaderName.fromString("Docker-Upload-UUID");
 
@@ -35,30 +35,8 @@ public final class ContainerRegistryBlobsGetUploadStatusHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public ContainerRegistryBlobsGetUploadStatusHeaders(HttpHeaders rawHeaders) {
-        this.dockerUploadUUID = rawHeaders.getValue(DOCKER_UPLOAD_UUID);
         this.range = rawHeaders.getValue(HttpHeaderName.RANGE);
-    }
-
-    /**
-     * Get the dockerUploadUUID property: The Docker-Upload-UUID property.
-     * 
-     * @return the dockerUploadUUID value.
-     */
-    @Generated
-    public String getDockerUploadUUID() {
-        return this.dockerUploadUUID;
-    }
-
-    /**
-     * Set the dockerUploadUUID property: The Docker-Upload-UUID property.
-     * 
-     * @param dockerUploadUUID the dockerUploadUUID value to set.
-     * @return the ContainerRegistryBlobsGetUploadStatusHeaders object itself.
-     */
-    @Generated
-    public ContainerRegistryBlobsGetUploadStatusHeaders setDockerUploadUUID(String dockerUploadUUID) {
-        this.dockerUploadUUID = dockerUploadUUID;
-        return this;
+        this.dockerUploadUUID = rawHeaders.getValue(DOCKER_UPLOAD_UUID);
     }
 
     /**
@@ -80,6 +58,28 @@ public final class ContainerRegistryBlobsGetUploadStatusHeaders {
     @Generated
     public ContainerRegistryBlobsGetUploadStatusHeaders setRange(String range) {
         this.range = range;
+        return this;
+    }
+
+    /**
+     * Get the dockerUploadUUID property: The Docker-Upload-UUID property.
+     * 
+     * @return the dockerUploadUUID value.
+     */
+    @Generated
+    public String getDockerUploadUUID() {
+        return this.dockerUploadUUID;
+    }
+
+    /**
+     * Set the dockerUploadUUID property: The Docker-Upload-UUID property.
+     * 
+     * @param dockerUploadUUID the dockerUploadUUID value to set.
+     * @return the ContainerRegistryBlobsGetUploadStatusHeaders object itself.
+     */
+    @Generated
+    public ContainerRegistryBlobsGetUploadStatusHeaders setDockerUploadUUID(String dockerUploadUUID) {
+        this.dockerUploadUUID = dockerUploadUUID;
         return this;
     }
 }

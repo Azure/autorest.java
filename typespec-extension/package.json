@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.39.2",
+  "version": "0.39.3",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -47,13 +47,13 @@
     "generator/http-client-generator/target/classes/PerfAutomation.jfc"
   ],
   "peerDependencies": {
-    "@azure-tools/openai-typespec": "^1.10.0",
+    "@azure-tools/openai-typespec": "^1.11.0",
     "@azure-tools/typespec-autorest": ">=0.65.0 <1.0.0",
     "@azure-tools/typespec-azure-core": ">=0.65.0 <1.0.0",
     "@azure-tools/typespec-azure-resource-manager": ">=0.65.0 <1.0.0",
     "@azure-tools/typespec-azure-rulesets": ">=0.65.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.65.1 <1.0.0",
-    "@azure-tools/typespec-liftr-base": ">=0.11.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.65.3 <1.0.0",
+    "@azure-tools/typespec-liftr-base": ">=0.12.0 <1.0.0",
     "@typespec/compiler": "^1.9.0",
     "@typespec/http": "^1.9.0",
     "@typespec/openapi": "^1.9.0",
@@ -67,19 +67,19 @@
     "lodash": "~4.17.23"
   },
   "devDependencies": {
-    "@azure-tools/openai-typespec": "^1.10.0",
+    "@azure-tools/openai-typespec": "^1.11.0",
     "@azure-tools/typespec-autorest": "0.65.0",
     "@azure-tools/typespec-azure-core": "0.65.0",
     "@azure-tools/typespec-azure-resource-manager": "0.65.0",
     "@azure-tools/typespec-azure-rulesets": "0.65.0",
-    "@azure-tools/typespec-client-generator-core": "0.65.1",
-    "@azure-tools/typespec-liftr-base": "0.11.0",
-    "@microsoft/api-extractor": "^7.56.3",
+    "@azure-tools/typespec-client-generator-core": "0.65.3",
+    "@azure-tools/typespec-liftr-base": "0.12.0",
+    "@microsoft/api-extractor": "^7.57.4",
     "@types/js-yaml": "~4.0.9",
-    "@types/lodash": "~4.17.23",
-    "@types/node": "~25.2.3",
-    "@typescript-eslint/eslint-plugin": "~8.55.0",
-    "@typescript-eslint/parser": "~8.55.0",
+    "@types/lodash": "~4.17.24",
+    "@types/node": "~25.3.0",
+    "@typescript-eslint/eslint-plugin": "~8.56.1",
+    "@typescript-eslint/parser": "~8.56.1",
     "@typespec/compiler": "1.9.0",
     "@typespec/events": "0.79.0",
     "@typespec/http": "1.9.0",
@@ -93,19 +93,19 @@
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "^4.0.18",
     "c8": "~10.1.3",
-    "eslint": "~9.39.2",
+    "eslint": "~9.39.3",
     "eslint-plugin-deprecation": "~3.0.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-unicorn": "^63.0.0",
     "prettier": "~3.8.1",
-    "rimraf": "~6.1.2",
+    "rimraf": "~6.1.3",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.55.0",
+    "typescript-eslint": "^8.56.1",
     "vitest": "^4.0.18"
   },
   "overrides": {
-    "eslint": "~9.39.2",
-    "@typescript-eslint/eslint-plugin": "~8.55.0",
-    "@typescript-eslint/parser": "~8.55.0"
+    "eslint": "~9.39.3",
+    "@typescript-eslint/eslint-plugin": "~8.56.1",
+    "@typescript-eslint/parser": "~8.56.1"
   }
 }

@@ -15,16 +15,28 @@ import com.azure.core.http.HttpHeaders;
 @Fluent
 public final class SchemasGetByIdHeaders {
     /*
-     * The Schema-Version property.
+     * The Location property.
      */
     @Generated
-    private Integer schemaVersion;
+    private String location;
+
+    /*
+     * The Content-Type property.
+     */
+    @Generated
+    private SchemaFormat contentType;
 
     /*
      * The Schema-Id property.
      */
     @Generated
     private String schemaId;
+
+    /*
+     * The Schema-Id-Location property.
+     */
+    @Generated
+    private String schemaIdLocation;
 
     /*
      * The Schema-Group-Name property.
@@ -39,32 +51,20 @@ public final class SchemasGetByIdHeaders {
     private String schemaName;
 
     /*
-     * The Schema-Id-Location property.
+     * The Schema-Version property.
      */
     @Generated
-    private String schemaIdLocation;
-
-    /*
-     * The Location property.
-     */
-    @Generated
-    private String location;
-
-    /*
-     * The Content-Type property.
-     */
-    @Generated
-    private SchemaFormat contentType;
-
-    private static final HttpHeaderName SCHEMA_VERSION = HttpHeaderName.fromString("Schema-Version");
+    private Integer schemaVersion;
 
     private static final HttpHeaderName SCHEMA_ID = HttpHeaderName.fromString("Schema-Id");
+
+    private static final HttpHeaderName SCHEMA_ID_LOCATION = HttpHeaderName.fromString("Schema-Id-Location");
 
     private static final HttpHeaderName SCHEMA_GROUP_NAME = HttpHeaderName.fromString("Schema-Group-Name");
 
     private static final HttpHeaderName SCHEMA_NAME = HttpHeaderName.fromString("Schema-Name");
 
-    private static final HttpHeaderName SCHEMA_ID_LOCATION = HttpHeaderName.fromString("Schema-Id-Location");
+    private static final HttpHeaderName SCHEMA_VERSION = HttpHeaderName.fromString("Schema-Version");
 
     // HttpHeaders containing the raw property values.
     /**
@@ -73,16 +73,6 @@ public final class SchemasGetByIdHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public SchemasGetByIdHeaders(HttpHeaders rawHeaders) {
-        String schemaVersion = rawHeaders.getValue(SCHEMA_VERSION);
-        if (schemaVersion != null) {
-            this.schemaVersion = Integer.parseInt(schemaVersion);
-        } else {
-            this.schemaVersion = null;
-        }
-        this.schemaId = rawHeaders.getValue(SCHEMA_ID);
-        this.schemaGroupName = rawHeaders.getValue(SCHEMA_GROUP_NAME);
-        this.schemaName = rawHeaders.getValue(SCHEMA_NAME);
-        this.schemaIdLocation = rawHeaders.getValue(SCHEMA_ID_LOCATION);
         this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
         String contentType = rawHeaders.getValue(HttpHeaderName.CONTENT_TYPE);
         if (contentType != null) {
@@ -90,27 +80,59 @@ public final class SchemasGetByIdHeaders {
         } else {
             this.contentType = null;
         }
+        this.schemaId = rawHeaders.getValue(SCHEMA_ID);
+        this.schemaIdLocation = rawHeaders.getValue(SCHEMA_ID_LOCATION);
+        this.schemaGroupName = rawHeaders.getValue(SCHEMA_GROUP_NAME);
+        this.schemaName = rawHeaders.getValue(SCHEMA_NAME);
+        String schemaVersion = rawHeaders.getValue(SCHEMA_VERSION);
+        if (schemaVersion != null) {
+            this.schemaVersion = Integer.parseInt(schemaVersion);
+        } else {
+            this.schemaVersion = null;
+        }
     }
 
     /**
-     * Get the schemaVersion property: The Schema-Version property.
+     * Get the location property: The Location property.
      * 
-     * @return the schemaVersion value.
+     * @return the location value.
      */
     @Generated
-    public Integer getSchemaVersion() {
-        return this.schemaVersion;
+    public String getLocation() {
+        return this.location;
     }
 
     /**
-     * Set the schemaVersion property: The Schema-Version property.
+     * Set the location property: The Location property.
      * 
-     * @param schemaVersion the schemaVersion value to set.
+     * @param location the location value to set.
      * @return the SchemasGetByIdHeaders object itself.
      */
     @Generated
-    public SchemasGetByIdHeaders setSchemaVersion(Integer schemaVersion) {
-        this.schemaVersion = schemaVersion;
+    public SchemasGetByIdHeaders setLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the contentType property: The Content-Type property.
+     * 
+     * @return the contentType value.
+     */
+    @Generated
+    public SchemaFormat getContentType() {
+        return this.contentType;
+    }
+
+    /**
+     * Set the contentType property: The Content-Type property.
+     * 
+     * @param contentType the contentType value to set.
+     * @return the SchemasGetByIdHeaders object itself.
+     */
+    @Generated
+    public SchemasGetByIdHeaders setContentType(SchemaFormat contentType) {
+        this.contentType = contentType;
         return this;
     }
 
@@ -133,6 +155,28 @@ public final class SchemasGetByIdHeaders {
     @Generated
     public SchemasGetByIdHeaders setSchemaId(String schemaId) {
         this.schemaId = schemaId;
+        return this;
+    }
+
+    /**
+     * Get the schemaIdLocation property: The Schema-Id-Location property.
+     * 
+     * @return the schemaIdLocation value.
+     */
+    @Generated
+    public String getSchemaIdLocation() {
+        return this.schemaIdLocation;
+    }
+
+    /**
+     * Set the schemaIdLocation property: The Schema-Id-Location property.
+     * 
+     * @param schemaIdLocation the schemaIdLocation value to set.
+     * @return the SchemasGetByIdHeaders object itself.
+     */
+    @Generated
+    public SchemasGetByIdHeaders setSchemaIdLocation(String schemaIdLocation) {
+        this.schemaIdLocation = schemaIdLocation;
         return this;
     }
 
@@ -181,68 +225,24 @@ public final class SchemasGetByIdHeaders {
     }
 
     /**
-     * Get the schemaIdLocation property: The Schema-Id-Location property.
+     * Get the schemaVersion property: The Schema-Version property.
      * 
-     * @return the schemaIdLocation value.
+     * @return the schemaVersion value.
      */
     @Generated
-    public String getSchemaIdLocation() {
-        return this.schemaIdLocation;
+    public Integer getSchemaVersion() {
+        return this.schemaVersion;
     }
 
     /**
-     * Set the schemaIdLocation property: The Schema-Id-Location property.
+     * Set the schemaVersion property: The Schema-Version property.
      * 
-     * @param schemaIdLocation the schemaIdLocation value to set.
+     * @param schemaVersion the schemaVersion value to set.
      * @return the SchemasGetByIdHeaders object itself.
      */
     @Generated
-    public SchemasGetByIdHeaders setSchemaIdLocation(String schemaIdLocation) {
-        this.schemaIdLocation = schemaIdLocation;
-        return this;
-    }
-
-    /**
-     * Get the location property: The Location property.
-     * 
-     * @return the location value.
-     */
-    @Generated
-    public String getLocation() {
-        return this.location;
-    }
-
-    /**
-     * Set the location property: The Location property.
-     * 
-     * @param location the location value to set.
-     * @return the SchemasGetByIdHeaders object itself.
-     */
-    @Generated
-    public SchemasGetByIdHeaders setLocation(String location) {
-        this.location = location;
-        return this;
-    }
-
-    /**
-     * Get the contentType property: The Content-Type property.
-     * 
-     * @return the contentType value.
-     */
-    @Generated
-    public SchemaFormat getContentType() {
-        return this.contentType;
-    }
-
-    /**
-     * Set the contentType property: The Content-Type property.
-     * 
-     * @param contentType the contentType value to set.
-     * @return the SchemasGetByIdHeaders object itself.
-     */
-    @Generated
-    public SchemasGetByIdHeaders setContentType(SchemaFormat contentType) {
-        this.contentType = contentType;
+    public SchemasGetByIdHeaders setSchemaVersion(Integer schemaVersion) {
+        this.schemaVersion = schemaVersion;
         return this;
     }
 }

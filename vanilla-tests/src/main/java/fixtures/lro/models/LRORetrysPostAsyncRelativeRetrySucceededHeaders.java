@@ -16,13 +16,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class LRORetrysPostAsyncRelativeRetrySucceededHeaders {
     /*
-     * The Retry-After property.
-     */
-    @Generated
-    @JsonProperty(value = "Retry-After")
-    private Integer retryAfter;
-
-    /*
      * The Azure-AsyncOperation property.
      */
     @Generated
@@ -36,6 +29,13 @@ public final class LRORetrysPostAsyncRelativeRetrySucceededHeaders {
     @JsonProperty(value = "Location")
     private String location;
 
+    /*
+     * The Retry-After property.
+     */
+    @Generated
+    @JsonProperty(value = "Retry-After")
+    private Integer retryAfter;
+
     // HttpHeaders containing the raw property values.
     /**
      * Creates an instance of LRORetrysPostAsyncRelativeRetrySucceededHeaders class.
@@ -43,36 +43,14 @@ public final class LRORetrysPostAsyncRelativeRetrySucceededHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LRORetrysPostAsyncRelativeRetrySucceededHeaders(HttpHeaders rawHeaders) {
+        this.azureAsyncOperation = rawHeaders.getValue(HttpHeaderName.AZURE_ASYNCOPERATION);
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
         String retryAfter = rawHeaders.getValue(HttpHeaderName.RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
         } else {
             this.retryAfter = null;
         }
-        this.azureAsyncOperation = rawHeaders.getValue(HttpHeaderName.AZURE_ASYNCOPERATION);
-        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
-    }
-
-    /**
-     * Get the retryAfter property: The Retry-After property.
-     * 
-     * @return the retryAfter value.
-     */
-    @Generated
-    public Integer getRetryAfter() {
-        return this.retryAfter;
-    }
-
-    /**
-     * Set the retryAfter property: The Retry-After property.
-     * 
-     * @param retryAfter the retryAfter value to set.
-     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeaders object itself.
-     */
-    @Generated
-    public LRORetrysPostAsyncRelativeRetrySucceededHeaders setRetryAfter(Integer retryAfter) {
-        this.retryAfter = retryAfter;
-        return this;
     }
 
     /**
@@ -116,6 +94,28 @@ public final class LRORetrysPostAsyncRelativeRetrySucceededHeaders {
     @Generated
     public LRORetrysPostAsyncRelativeRetrySucceededHeaders setLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the retryAfter property: The Retry-After property.
+     * 
+     * @return the retryAfter value.
+     */
+    @Generated
+    public Integer getRetryAfter() {
+        return this.retryAfter;
+    }
+
+    /**
+     * Set the retryAfter property: The Retry-After property.
+     * 
+     * @param retryAfter the retryAfter value to set.
+     * @return the LRORetrysPostAsyncRelativeRetrySucceededHeaders object itself.
+     */
+    @Generated
+    public LRORetrysPostAsyncRelativeRetrySucceededHeaders setRetryAfter(Integer retryAfter) {
+        this.retryAfter = retryAfter;
         return this;
     }
 

@@ -16,18 +16,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class LRORetrysDelete202Retry200Headers {
     /*
-     * The Retry-After property.
-     */
-    @Generated
-    @JsonProperty(value = "Retry-After")
-    private Integer retryAfter;
-
-    /*
      * The Location property.
      */
     @Generated
     @JsonProperty(value = "Location")
     private String location;
+
+    /*
+     * The Retry-After property.
+     */
+    @Generated
+    @JsonProperty(value = "Retry-After")
+    private Integer retryAfter;
 
     // HttpHeaders containing the raw property values.
     /**
@@ -36,35 +36,13 @@ public final class LRORetrysDelete202Retry200Headers {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public LRORetrysDelete202Retry200Headers(HttpHeaders rawHeaders) {
+        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
         String retryAfter = rawHeaders.getValue(HttpHeaderName.RETRY_AFTER);
         if (retryAfter != null) {
             this.retryAfter = Integer.parseInt(retryAfter);
         } else {
             this.retryAfter = null;
         }
-        this.location = rawHeaders.getValue(HttpHeaderName.LOCATION);
-    }
-
-    /**
-     * Get the retryAfter property: The Retry-After property.
-     * 
-     * @return the retryAfter value.
-     */
-    @Generated
-    public Integer getRetryAfter() {
-        return this.retryAfter;
-    }
-
-    /**
-     * Set the retryAfter property: The Retry-After property.
-     * 
-     * @param retryAfter the retryAfter value to set.
-     * @return the LRORetrysDelete202Retry200Headers object itself.
-     */
-    @Generated
-    public LRORetrysDelete202Retry200Headers setRetryAfter(Integer retryAfter) {
-        this.retryAfter = retryAfter;
-        return this;
     }
 
     /**
@@ -86,6 +64,28 @@ public final class LRORetrysDelete202Retry200Headers {
     @Generated
     public LRORetrysDelete202Retry200Headers setLocation(String location) {
         this.location = location;
+        return this;
+    }
+
+    /**
+     * Get the retryAfter property: The Retry-After property.
+     * 
+     * @return the retryAfter value.
+     */
+    @Generated
+    public Integer getRetryAfter() {
+        return this.retryAfter;
+    }
+
+    /**
+     * Set the retryAfter property: The Retry-After property.
+     * 
+     * @param retryAfter the retryAfter value to set.
+     * @return the LRORetrysDelete202Retry200Headers object itself.
+     */
+    @Generated
+    public LRORetrysDelete202Retry200Headers setRetryAfter(Integer retryAfter) {
+        this.retryAfter = retryAfter;
         return this;
     }
 

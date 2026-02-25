@@ -15,16 +15,16 @@ import com.azure.core.http.HttpHeaders;
 @Fluent
 public final class ContainerRegistryBlobsGetChunkHeaders {
     /*
-     * The Content-Range property.
-     */
-    @Generated
-    private String contentRange;
-
-    /*
      * The Content-Length property.
      */
     @Generated
     private Long contentLength;
+
+    /*
+     * The Content-Range property.
+     */
+    @Generated
+    private String contentRange;
 
     // HttpHeaders containing the raw property values.
     /**
@@ -33,35 +33,13 @@ public final class ContainerRegistryBlobsGetChunkHeaders {
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
     public ContainerRegistryBlobsGetChunkHeaders(HttpHeaders rawHeaders) {
-        this.contentRange = rawHeaders.getValue(HttpHeaderName.CONTENT_RANGE);
         String contentLength = rawHeaders.getValue(HttpHeaderName.CONTENT_LENGTH);
         if (contentLength != null) {
             this.contentLength = Long.parseLong(contentLength);
         } else {
             this.contentLength = null;
         }
-    }
-
-    /**
-     * Get the contentRange property: The Content-Range property.
-     * 
-     * @return the contentRange value.
-     */
-    @Generated
-    public String getContentRange() {
-        return this.contentRange;
-    }
-
-    /**
-     * Set the contentRange property: The Content-Range property.
-     * 
-     * @param contentRange the contentRange value to set.
-     * @return the ContainerRegistryBlobsGetChunkHeaders object itself.
-     */
-    @Generated
-    public ContainerRegistryBlobsGetChunkHeaders setContentRange(String contentRange) {
-        this.contentRange = contentRange;
-        return this;
+        this.contentRange = rawHeaders.getValue(HttpHeaderName.CONTENT_RANGE);
     }
 
     /**
@@ -83,6 +61,28 @@ public final class ContainerRegistryBlobsGetChunkHeaders {
     @Generated
     public ContainerRegistryBlobsGetChunkHeaders setContentLength(Long contentLength) {
         this.contentLength = contentLength;
+        return this;
+    }
+
+    /**
+     * Get the contentRange property: The Content-Range property.
+     * 
+     * @return the contentRange value.
+     */
+    @Generated
+    public String getContentRange() {
+        return this.contentRange;
+    }
+
+    /**
+     * Set the contentRange property: The Content-Range property.
+     * 
+     * @param contentRange the contentRange value to set.
+     * @return the ContainerRegistryBlobsGetChunkHeaders object itself.
+     */
+    @Generated
+    public ContainerRegistryBlobsGetChunkHeaders setContentRange(String contentRange) {
+        this.contentRange = contentRange;
         return this;
     }
 }
