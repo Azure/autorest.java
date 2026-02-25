@@ -1,10 +1,17 @@
 # Release History
 
+## 0.40.1 (2026-02-26)
+
+Compatible with compiler 1.9.0.
+
+- Patch release: refreshed dependencies and pinned @azure-tools/openai-typespec to 1.9.0.
+
 ## 0.40.0 (2026-02-25)
 
 Compatible with compiler 1.9.0.
 
 - Updated package dependencies to the latest versions.
+- Changed `apiVersions` to JSON object (dictionary) in "metadata.json".
 
 ## 0.39.3 (2026-02-24)
 
