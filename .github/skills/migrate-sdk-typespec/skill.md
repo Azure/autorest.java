@@ -112,5 +112,6 @@ For compile error of "cannot find symbol" and "cannot be converted to", there ca
 For compile error of "type argument is not within bounds of type-variable InnerT", we would need to customize the class.
 1. Add option "customization-class: customization/src/main/java/<Service>Customization.java" to "tspconfig.yaml".
 2. Create the "customization" module, write the "<Service>Customization.java" class in "sdk-path". Use [this](https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/keyvault/azure-resourcemanager-keyvault/customization) as reference.
+3. Commit the changes to "customization" module. Whenever you make changes to the "customization" module, you need to commit it before you run another `python eng/automation/generate.py` command.
 
 If you work on it for a while, but does not make progress, pause and summarize the errors.
