@@ -39,11 +39,12 @@ Steps:
 3. Run `ncu -u` on "package.json" in both "package.json" from "typespec-extension" and "typespec-tests" folder.
 4. Update package versions in `peerDependencies` (keep the semver range) in "package.json" from "typespec-extension" folder, according to the corresponding package versions in `devDependencies`.
 5. Update the "package.json" from "typespec-extension" folder, set version of "@azure-tools/openai-typespec" to the same semantic version used in https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/package.json
-6. Update package versions in `override` (keep the semver range) in "package.json" from "typespec-tests" folder, according to the corresponding package versions in "package.json" from "typespec-extension" folder.
-7. Save the files, and run `npm install` in "typespec-extension" folder, so that "package-lock.json" would be updated.
-8. Commit the changes in "typespec-extension" and "typespec-tests" folders.
-9. Run `pwsh SyncTests.ps1` in "typespec-tests" folder.
-10. Commit the changes in "typespec-tests" folder, include new files.
+6. Run `npm audit fix` on "package.json" from "typespec-extension" folder.
+7. Update package versions in `override` (keep the semver range) in "package.json" from "typespec-tests" folder, according to the corresponding package versions in "package.json" from "typespec-extension" folder.
+8. Save the files, and run `npm install` in "typespec-extension" folder, so that "package-lock.json" would be updated.
+9. Commit the changes in "typespec-extension" and "typespec-tests" folders.
+10. Run `pwsh SyncTests.ps1` in "typespec-tests" folder.
+11. Commit the changes in "typespec-tests" folder, include new files.
 
 ## Prepare for Minor/Patch Release
 
