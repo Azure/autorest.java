@@ -92,26 +92,46 @@ API: api
 Use PascalCase for model names. E.g. `ResponseMetaData` to `ResponseMetadata`.
 Use camelCase for property and method names. E.g. `acrUserManagedIdentityID` to `acrUserManagedIdentityId`.
 
-### Iterate to fix inconsistencies and errors
+### Iterate to fix compile errors
 
 #### Generate the Java code
 
 Run
-```
+```sh
 python eng/automation/generate.py -s <sdk-service> -c <tsp-path>/tspconfig.yaml
 ```
 in SDK repo root folder.
 
+This script will generate the Java code, and build the Java lib. It may encounter compile error that you need to fix in next step.
+
 #### Fix compile error
 
-For compile error of "cannot find symbol" and "cannot be converted to", there can be a few reasons.
-
-- The casing difference between .tsp model/property/method and Java code. Use `@@clientName` to mitigate it.
-- The model is read-only in .tsp, but the Java code calls the setter method. Please double check whether the Java class indeed contains the corresponding getter method (e.g. `ipRules` for `withIpRules`). This can be mitigated by `@@usage(<model>, Azure.ClientGenerator.Core.Usage.input, "java");`.
-
-For compile error of "type argument is not within bounds of type-variable InnerT", we would need to customize the class.
-1. Add option "customization-class: customization/src/main/java/<Service>Customization.java" to "tspconfig.yaml".
-2. Create the "customization" module, write the "<Service>Customization.java" class in "sdk-path". Use [this](https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/keyvault/azure-resourcemanager-keyvault/customization) as reference.
-3. Commit the changes to "customization" module. Whenever you make changes to the "customization" module, you need to commit it before you run another `python eng/automation/generate.py` command.
+See [Solve Compile Error](./solve-compile-error.md) for common compile errors and mitigation.
 
 If you work on it for a while, but does not make progress, pause and summarize the errors.
+
+### Modify "module-info.java"
+
+Add this line to "module-info.java" file.
+```java
+opens com.azure.resourcemanager.<sdk-service>.implementation.models to com.azure.core;
+```
+
+### Iterate to fix breaking changes
+
+#### Build the Java lib
+
+Run
+```sh
+mvn install -pl com.azure.resourcemanager:<sdk-package> -am -DskipTests
+```
+in SDK repo root folder.
+
+It may encounter error from revapi check. This means there are breaking changes compared with the previous version, and you need to either suppress, or fix in next step.
+
+#### Suppress or fix revapi error
+
+See [Solve Revapi Error](./solve-revapi-error.md) for mitigation.
+
+When you finished this step, pause and output report on remaining errors.
+Use the `git diff` with "main" branch, to provide the details on what you think be the cause of the error.
