@@ -49,7 +49,7 @@ jobs:
     inputs:
       versionSpec: '$(NodeVersion)'
 
-  - task: PowerShell@2
+  - task: PowerShell@5
     retryCountOnTaskFailure: 1
     condition: and(succeeded(), eq('${{ parameters.DevPackage }}', 'true'))
     displayName: 'Build'
@@ -62,7 +62,7 @@ jobs:
       npm install -g @azure-tools/typespec-client-generator-cli
     displayName: 'Install tsp-client'
 
-  - task: PowerShell@2
+  - task: PowerShell@5
     displayName: 'Get Package Version'
     inputs:
       targetType: 'inline'

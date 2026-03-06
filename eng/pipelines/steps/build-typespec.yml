@@ -16,7 +16,7 @@ steps:
   parameters:
     JobType: 'TypeSpec'
 
-- task: PowerShell@2
+- task: PowerShell@5
   retryCountOnTaskFailure: 1
   displayName: 'Build and Generate Code'
   inputs:

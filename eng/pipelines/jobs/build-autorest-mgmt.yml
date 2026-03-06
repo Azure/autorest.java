@@ -54,7 +54,7 @@ jobs:
       jdkArchitectureOption: 'x64'
       publishJUnitResults: false
 
-  - task: PowerShell@2
+  - task: PowerShell@5
     displayName: 'Generate Code'
     inputs:
       pwsh: true

@@ -50,7 +50,7 @@ jobs:
         displayName: 'Install dev TypeSpec Dependencies'
         workingDirectory: ./typespec-extension
 
-      - task: PowerShell@2
+      - task: PowerShell@5
         retryCountOnTaskFailure: 1
         displayName: 'Generate Code'
         inputs:

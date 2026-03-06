@@ -63,7 +63,7 @@ extends:
                   command: custom
                   customCommand: pack
 
-              - task: PowerShell@2
+              - task: PowerShell@5
                 displayName: 'Get Package Version'
                 inputs:
                   targetType: 'inline'
@@ -71,7 +71,7 @@ extends:
                     $PACKAGE_VERSION = node -p -e "require('./package.json').version"
                     Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-              - task: PowerShell@2
+              - task: PowerShell@5
                 displayName: 'Create GitHub Releases'
                 inputs:
                   filePath: eng/scripts/Create-Release.ps1

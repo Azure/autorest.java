@@ -34,14 +34,14 @@ extends:
             parameters:
               JobType: 'Publish TypeSpec'
 
-          - task: PowerShell@2
+          - task: PowerShell@5
             retryCountOnTaskFailure: 1
             displayName: 'Build'
             inputs:
               pwsh: true
               filePath: Build-TypeSpec.ps1
 
-          - task: PowerShell@2
+          - task: PowerShell@5
             displayName: 'Get Package Version'
             inputs:
               targetType: 'inline'
@@ -49,7 +49,7 @@ extends:
                 $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
                 Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-          - task: PowerShell@2
+          - task: PowerShell@5
             displayName: 'Create GitHub Releases'
             inputs:
               filePath: eng/scripts/Create-Release.ps1

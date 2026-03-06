@@ -1,6 +1,6 @@
 steps:
 
-  - task: PowerShell@2
+  - task: PowerShell@5
     displayName: Clean up maven local cache
     inputs:
       pwsh: true

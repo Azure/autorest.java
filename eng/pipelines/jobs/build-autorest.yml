@@ -58,7 +58,7 @@ jobs:
       npm ci
     displayName: 'Prepare Environment for Generation'
 
-  - task: PowerShell@2
+  - task: PowerShell@5
     displayName: 'Generate Code'
     inputs:
       pwsh: true
