@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.40.0",
+  "version": "0.41.0",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -78,7 +78,7 @@
     "@microsoft/api-extractor": "^7.57.6",
     "@types/js-yaml": "~4.0.9",
     "@types/lodash": "~4.17.24",
-    "@types/node": "~25.3.2",
+    "@types/node": "~25.3.5",
     "@typescript-eslint/eslint-plugin": "~8.56.1",
     "@typescript-eslint/parser": "~8.56.1",
     "@typespec/compiler": "1.9.0",

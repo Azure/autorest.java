@@ -172,7 +172,9 @@ def update_sdks():
             cmd = ["git", "checkout", "src/test"]
             subprocess.check_call(cmd, cwd=module_path)
 
-        if not generated_samples_exists:
+        # For ARM module, we want to keep the generated samples code.
+        # For data-plane, if the generated samples/test code is not there before generation, we will delete the generated code after generation, to avoid unnecessary code check-in.
+        if not generated_samples_exists and not arm_module:
             shutil.rmtree(generated_samples_path, ignore_errors=True)
         if not generated_test_exists:
             shutil.rmtree(generated_test_path, ignore_errors=True)
