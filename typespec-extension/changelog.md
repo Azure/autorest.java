@@ -1,5 +1,12 @@
 # Release History
 
+## 0.42.0 (2026-03-09)
+
+Compatible with compiler 1.9.0.
+
+- Updated package dependencies to the latest versions.
+- Improve the logic to convert plural words to singular, used for generating management libs.
+
 ## 0.41.0 (2026-03-06)
 
 Compatible with compiler 1.9.0.
