@@ -53,6 +53,7 @@ Only modify the YAML under "options"/"@azure-tools/typespec-java" property.
 - Make sure these options are set
   ```yaml
     premium: true
+    generate-tests: false
     client-side-validations: true
     enable-sync-stack: false
   ```
