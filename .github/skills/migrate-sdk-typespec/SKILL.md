@@ -33,7 +33,7 @@ You have full access to these locally cloned repositories/folders.
 
 ### Before you start
 
-<!-- Make sure both sdk repo and specs repo are on a "migrate-<tsp-project>" branch. If not, checkout latest "main", and make a new branch from it. -->
+Make sure both sdk repo and specs repo are on a "migrate-<tsp-project>" branch. If not, checkout latest "main", and make a new branch from it.
 
 Run `npm ci` in "eng/common/tsp-client" folder in sdk repo to make sure the tsp-client is installed.
 
