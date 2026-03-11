@@ -14,6 +14,7 @@ The "<tsp-project>" would be a relative path to a folder in specs repo. A typica
 
 ## Checklist
 
+- DO NOT use force push. Always create a new commit for each change, to make sure the history is clear.
 - Files in "autorest.java" repo and folder are not relevant to this skill. Do not read or modify any files in "autorest.java" repo and folder, except this skill folder.
 - For TypeSpec project, only update "client.tsp" file and "tspconfig.yaml" file.
 - When updating "client.tsp", always use "java" scope, and add new lines to the end of the file.
