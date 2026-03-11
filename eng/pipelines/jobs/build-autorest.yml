@@ -54,7 +54,7 @@ jobs:
       publishJUnitResults: false
 
   - script: |
-      npm install -g autorest
+      npm install -g autorest@$(AutorestVersion)
       npm ci
     displayName: 'Prepare Environment for Generation'
 

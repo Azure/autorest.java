@@ -36,7 +36,7 @@ jobs:
     inputs:
       versionSpec: '$(NodeVersion)'
 
-  - script: npm install autorest -g
+  - script: npm install autorest@$(AutorestVersion) -g
 
   - template: /eng/pipelines/steps/cache-maven-repository.yml
     parameters:

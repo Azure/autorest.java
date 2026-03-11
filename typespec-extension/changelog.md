@@ -1,5 +1,21 @@
 # Release History
 
+## 0.42.0 (2026-03-09)
+
+Compatible with compiler 1.9.0.
+
+- Updated package dependencies to the latest versions.
+- Improve the logic to convert plural words to singular, used for generating management libs.
+
+## 0.41.0 (2026-03-06)
+
+Compatible with compiler 1.9.0.
+
+- Supported DurationKnownEncoding.milliseconds.
+- Supported apiVersions in metadata.json for multiple services.
+- Premium examples now have separate entry points other than `AzureResourceManager`.
+- Updated package dependencies to the latest versions.
+
 ## 0.40.0 (2026-02-25)
 
 Compatible with compiler 1.9.0.

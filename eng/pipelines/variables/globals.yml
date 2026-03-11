@@ -1,6 +1,7 @@
 variables:
   JavaVersion: '1.11'
   NodeVersion: '20.x'
+  AutorestVersion: '3.7.2'
 
   # Sets the Maven log level to either the LogLevel passed in the manual pipeline run or the default 'warn'
   MavenLogLevel: $[coalesce(variables['LogLevel'], 'warn')]
