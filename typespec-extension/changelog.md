@@ -1,6 +1,6 @@
 # Release History
 
-## 0.43.0 (2026-03-11)
+## 0.43.0 (2026-03-12)
 
 Compatible with compiler 1.10.0.
 
