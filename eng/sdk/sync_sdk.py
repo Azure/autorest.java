@@ -94,7 +94,17 @@ def update_emitter(package_json_path: str, use_dev_package: bool):
 
 
 def generate_lock_file():
-    subprocess.check_call(["tsp-client", "generate-lock-file"], cwd=sdk_root)
+    # subprocess.check_call(["tsp-client", "generate-lock-file"], cwd=sdk_root)
+    tmp_dir = os.path.join(sdk_root, "tmp_lock")
+    os.makedirs(tmp_dir, exist_ok=True)
+    try:
+        shutil.copy(os.path.join(sdk_root, "eng", "emitter-package.json"), os.path.join(tmp_dir, "package.json"))
+        subprocess.check_call(["npm", "install", "--force"], cwd=tmp_dir)
+        shutil.copy(
+            os.path.join(tmp_dir, "package-lock.json"), os.path.join(sdk_root, "eng", "emitter-package-lock.json")
+        )
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:
@@ -166,7 +176,9 @@ def update_sdks():
         if not arm_module:
             # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
             try:
-                subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
+                subprocess.check_call(
+                    ["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path
+                )
             except subprocess.CalledProcessError:
                 logging.error(f"Failed to update code snippet for module {artifact}")
                 failed_modules.append(artifact)
