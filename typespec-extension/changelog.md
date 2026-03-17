@@ -1,5 +1,12 @@
 # Release History
 
+## 0.43.1 (2026-03-16)
+
+Compatible with compiler 1.10.0.
+
+- Fixed list result property in parent class.
+- Updated package dependencies to the latest versions.
+
 ## 0.43.0 (2026-03-12)
 
 Compatible with compiler 1.10.0.
