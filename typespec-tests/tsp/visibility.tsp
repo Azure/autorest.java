@@ -37,7 +37,7 @@ model WriteDog {
   ...Dog;
 }
 
-@client
+@operationGroup
 interface VisibilityRead {
   @get
   @route("/read")
@@ -46,7 +46,7 @@ interface VisibilityRead {
   };
 }
 
-@client
+@operationGroup
 interface VisibilityWrite {
   @put
   @route("/write")
@@ -55,7 +55,7 @@ interface VisibilityWrite {
   };
 }
 
-@client
+@operationGroup
 @route("/visibility")
 interface VisibilityOp extends VisibilityRead, VisibilityWrite {
   @post
