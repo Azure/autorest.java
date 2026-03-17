@@ -85,12 +85,16 @@ def update_emitter(package_json_path: str, use_dev_package: bool):
             logging.error("Failed to locate the dev package.")
 
         logging.info("Update emitter-package-lock.json")
-        subprocess.check_call(["tsp-client", "generate-lock-file"], cwd=sdk_root)
+        generate_lock_file()
     else:
         logging.info("Update emitter-package.json and emitter-package-lock.json")
         subprocess.check_call(
             ["tsp-client", "generate-config-files", "--package-json", package_json_path], cwd=sdk_root
         )
+
+
+def generate_lock_file():
+    subprocess.check_call(["tsp-client", "generate-lock-file"], cwd=sdk_root)
 
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:
