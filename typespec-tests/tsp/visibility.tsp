@@ -5,7 +5,10 @@ using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
 
 @service(#{ title: "Visibility" })
-@client
+@client({
+  service: TspTest.Visibility,
+  name: "VisibilityClient",
+})
 namespace TspTest.Visibility;
 
 model Dog {
