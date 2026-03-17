@@ -55,6 +55,7 @@ interface VisibilityWrite {
   };
 }
 
+@client
 @route("/visibility")
 interface VisibilityOp extends VisibilityRead, VisibilityWrite {
   @post
