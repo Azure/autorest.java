@@ -3,7 +3,8 @@ schedules:
   displayName: Nightly dev build
   branches:
     include:
-    - main
+#    - main
+    - dev
   always: true
 
 trigger: none
@@ -26,10 +27,6 @@ jobs:
     steps:
       - checkout: self
         submodules: true
-
-      - script: |
-          git checkout dev
-        displayName: 'Switch to dev Branch'
 
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
