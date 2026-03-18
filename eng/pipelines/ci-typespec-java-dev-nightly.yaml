@@ -27,6 +27,10 @@ jobs:
       - checkout: self
         submodules: true
 
+      - script: |
+          git checkout dev
+        displayName: 'Switch to dev Branch'
+
       - task: NodeTool@0
         displayName: 'Install Node.js $(NodeVersion)'
         inputs:
