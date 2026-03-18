@@ -84,6 +84,7 @@ def update_emitter(package_json_path: str, use_dev_package: bool):
         else:
             logging.error("Failed to locate the dev package.")
 
+        # only enable it on dev branch
         update_latest_dev()
 
         logging.info("Update emitter-package-lock.json")
@@ -104,16 +105,6 @@ def update_latest_dev():
 
 def generate_lock_file():
     subprocess.check_call(["tsp-client", "generate-lock-file"], cwd=sdk_root)
-    # tmp_dir = os.path.join(sdk_root, "tmp_lock")
-    # os.makedirs(tmp_dir, exist_ok=True)
-    # try:
-    #     shutil.copy(os.path.join(sdk_root, "eng", "emitter-package.json"), os.path.join(tmp_dir, "package.json"))
-    #     subprocess.check_call(["npm", "install", "--force"], cwd=tmp_dir)
-    #     shutil.copy(
-    #         os.path.join(tmp_dir, "package-lock.json"), os.path.join(sdk_root, "eng", "emitter-package-lock.json")
-    #     )
-    # finally:
-    #     shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:
