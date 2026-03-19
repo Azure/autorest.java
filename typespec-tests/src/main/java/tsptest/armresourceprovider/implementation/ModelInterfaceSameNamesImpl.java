@@ -30,8 +30,12 @@ public final class ModelInterfaceSameNamesImpl implements ModelInterfaceSameName
         String modelInterfaceDifferentNameName, Context context) {
         Response<ModelInterfaceSameNameInner> inner = this.serviceClient()
             .getByResourceGroupWithResponse(resourceGroupName, modelInterfaceDifferentNameName, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new ModelInterfaceSameNameImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new ModelInterfaceSameNameImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public ModelInterfaceSameName getByResourceGroup(String resourceGroupName, String modelInterfaceDifferentNameName) {

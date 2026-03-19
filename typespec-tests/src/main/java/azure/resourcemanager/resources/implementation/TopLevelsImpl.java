@@ -31,8 +31,12 @@ public final class TopLevelsImpl implements TopLevels {
         String topLevelTrackedResourceName, Context context) {
         Response<TopLevelTrackedResourceInner> inner = this.serviceClient()
             .getByResourceGroupWithResponse(resourceGroupName, topLevelTrackedResourceName, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new TopLevelTrackedResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new TopLevelTrackedResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public TopLevelTrackedResource getByResourceGroup(String resourceGroupName, String topLevelTrackedResourceName) {

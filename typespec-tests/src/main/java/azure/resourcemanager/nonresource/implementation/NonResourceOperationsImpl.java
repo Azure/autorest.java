@@ -28,8 +28,12 @@ public final class NonResourceOperationsImpl implements NonResourceOperations {
 
     public Response<NonResource> getWithResponse(String location, String parameter, Context context) {
         Response<NonResourceInner> inner = this.serviceClient().getWithResponse(location, parameter, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new NonResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new NonResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public NonResource get(String location, String parameter) {

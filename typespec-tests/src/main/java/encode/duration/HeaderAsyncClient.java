@@ -187,7 +187,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> int32MillisecondsWithResponse(Duration duration, RequestOptions requestOptions) {
+    public Mono<Response<Void>> int32MillisecondsWithResponse(int duration, RequestOptions requestOptions) {
         return this.serviceClient.int32MillisecondsWithResponseAsync(duration, requestOptions);
     }
 
@@ -204,8 +204,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> int32MillisecondsLargerUnitWithResponse(Duration duration,
-        RequestOptions requestOptions) {
+    public Mono<Response<Void>> int32MillisecondsLargerUnitWithResponse(int duration, RequestOptions requestOptions) {
         return this.serviceClient.int32MillisecondsLargerUnitWithResponseAsync(duration, requestOptions);
     }
 
@@ -222,7 +221,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> floatMillisecondsWithResponse(Duration duration, RequestOptions requestOptions) {
+    public Mono<Response<Void>> floatMillisecondsWithResponse(double duration, RequestOptions requestOptions) {
         return this.serviceClient.floatMillisecondsWithResponseAsync(duration, requestOptions);
     }
 
@@ -239,7 +238,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> floatMillisecondsLargerUnitWithResponse(Duration duration,
+    public Mono<Response<Void>> floatMillisecondsLargerUnitWithResponse(double duration,
         RequestOptions requestOptions) {
         return this.serviceClient.floatMillisecondsLargerUnitWithResponseAsync(duration, requestOptions);
     }
@@ -257,7 +256,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> float64MillisecondsWithResponse(Duration duration, RequestOptions requestOptions) {
+    public Mono<Response<Void>> float64MillisecondsWithResponse(double duration, RequestOptions requestOptions) {
         return this.serviceClient.float64MillisecondsWithResponseAsync(duration, requestOptions);
     }
 
@@ -274,7 +273,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> int32MillisecondsArrayWithResponse(List<Duration> duration,
+    public Mono<Response<Void>> int32MillisecondsArrayWithResponse(List<Integer> duration,
         RequestOptions requestOptions) {
         return this.serviceClient.int32MillisecondsArrayWithResponseAsync(duration, requestOptions);
     }
@@ -453,7 +452,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> int32Milliseconds(Duration duration) {
+    public Mono<Void> int32Milliseconds(int duration) {
         // Generated convenience method for int32MillisecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return int32MillisecondsWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);
@@ -473,7 +472,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> int32MillisecondsLargerUnit(Duration duration) {
+    public Mono<Void> int32MillisecondsLargerUnit(int duration) {
         // Generated convenience method for int32MillisecondsLargerUnitWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return int32MillisecondsLargerUnitWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);
@@ -493,7 +492,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> floatMilliseconds(Duration duration) {
+    public Mono<Void> floatMilliseconds(double duration) {
         // Generated convenience method for floatMillisecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return floatMillisecondsWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);
@@ -513,7 +512,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> floatMillisecondsLargerUnit(Duration duration) {
+    public Mono<Void> floatMillisecondsLargerUnit(double duration) {
         // Generated convenience method for floatMillisecondsLargerUnitWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return floatMillisecondsLargerUnitWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);
@@ -533,7 +532,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> float64Milliseconds(Duration duration) {
+    public Mono<Void> float64Milliseconds(double duration) {
         // Generated convenience method for float64MillisecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return float64MillisecondsWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);
@@ -553,7 +552,7 @@ public final class HeaderAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> int32MillisecondsArray(List<Duration> duration) {
+    public Mono<Void> int32MillisecondsArray(List<Integer> duration) {
         // Generated convenience method for int32MillisecondsArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return int32MillisecondsArrayWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);

@@ -30,8 +30,12 @@ public final class LocationResourcesImpl implements LocationResources {
     public Response<LocationResource> getWithResponse(String location, String locationResourceName, Context context) {
         Response<LocationResourceInner> inner
             = this.serviceClient().getWithResponse(location, locationResourceName, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new LocationResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new LocationResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public LocationResource get(String location, String locationResourceName) {

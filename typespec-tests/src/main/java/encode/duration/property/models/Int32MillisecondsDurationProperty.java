@@ -11,7 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.time.Duration;
 
 /**
  * The Int32MillisecondsDurationProperty model.
@@ -22,7 +21,7 @@ public final class Int32MillisecondsDurationProperty implements JsonSerializable
      * The value property.
      */
     @Generated
-    private final long value;
+    private final int value;
 
     /**
      * Creates an instance of Int32MillisecondsDurationProperty class.
@@ -30,12 +29,8 @@ public final class Int32MillisecondsDurationProperty implements JsonSerializable
      * @param value the value value to set.
      */
     @Generated
-    public Int32MillisecondsDurationProperty(Duration value) {
-        if (value == null) {
-            this.value = 0L;
-        } else {
-            this.value = value.toMillis();
-        }
+    public Int32MillisecondsDurationProperty(int value) {
+        this.value = value;
     }
 
     /**
@@ -44,8 +39,8 @@ public final class Int32MillisecondsDurationProperty implements JsonSerializable
      * @return the value value.
      */
     @Generated
-    public Duration getValue() {
-        return Duration.ofMillis(this.value);
+    public int getValue() {
+        return this.value;
     }
 
     /**
@@ -55,7 +50,7 @@ public final class Int32MillisecondsDurationProperty implements JsonSerializable
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeLongField("value", this.value);
+        jsonWriter.writeIntField("value", this.value);
         return jsonWriter.writeEndObject();
     }
 
@@ -71,13 +66,13 @@ public final class Int32MillisecondsDurationProperty implements JsonSerializable
     @Generated
     public static Int32MillisecondsDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Duration value = null;
+            int value = 0;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = Duration.ofMillis(reader.getLong());
+                    value = reader.getInt();
                 } else {
                     reader.skipChildren();
                 }

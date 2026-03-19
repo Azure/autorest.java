@@ -31,8 +31,12 @@ public final class SingletonsImpl implements Singletons {
         Context context) {
         Response<SingletonTrackedResourceInner> inner
             = this.serviceClient().getByResourceGroupWithResponse(resourceGroupName, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new SingletonTrackedResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new SingletonTrackedResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public SingletonTrackedResource getByResourceGroup(String resourceGroupName) {
@@ -67,8 +71,12 @@ public final class SingletonsImpl implements Singletons {
         SingletonTrackedResourceInner properties, Context context) {
         Response<SingletonTrackedResourceInner> inner
             = this.serviceClient().updateWithResponse(resourceGroupName, properties, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new SingletonTrackedResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new SingletonTrackedResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public SingletonTrackedResource update(String resourceGroupName, SingletonTrackedResourceInner properties) {

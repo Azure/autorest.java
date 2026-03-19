@@ -29,8 +29,12 @@ public final class SkusImpl implements Skus {
         String nestedResourceTypeFirst, String sku, Context context) {
         Response<SkuResourceInner> inner = this.serviceClient()
             .getNestedWithResponse(providerNamespace, resourceType, nestedResourceTypeFirst, sku, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new SkuResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new SkuResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public SkuResource getNested(String providerNamespace, String resourceType, String nestedResourceTypeFirst,
@@ -48,8 +52,12 @@ public final class SkusImpl implements Skus {
         String nestedResourceTypeFirst, String sku, SkuResourceInner resource, Context context) {
         Response<SkuResourceInner> inner = this.serviceClient()
             .createNestedWithResponse(providerNamespace, resourceType, nestedResourceTypeFirst, sku, resource, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new SkuResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new SkuResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public SkuResource createNested(String providerNamespace, String resourceType, String nestedResourceTypeFirst,
@@ -78,8 +86,12 @@ public final class SkusImpl implements Skus {
         Context context) {
         Response<SkuResourceInner> inner
             = this.serviceClient().getRootWithResponse(providerNamespace, resourceType, sku, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new SkuResourceImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new SkuResourceImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public SkuResource getRoot(String providerNamespace, String resourceType, String sku) {

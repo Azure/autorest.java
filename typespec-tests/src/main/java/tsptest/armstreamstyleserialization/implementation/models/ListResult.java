@@ -18,7 +18,7 @@ import tsptest.armstreamstyleserialization.models.Result;
  * The ListResult model.
  */
 @Immutable
-public class ListResult implements JsonSerializable<ListResult> {
+public final class ListResult implements JsonSerializable<ListResult> {
     /*
      * The items property.
      */
@@ -32,7 +32,7 @@ public class ListResult implements JsonSerializable<ListResult> {
     /**
      * Creates an instance of ListResult class.
      */
-    protected ListResult() {
+    private ListResult() {
     }
 
     /**
@@ -45,34 +45,12 @@ public class ListResult implements JsonSerializable<ListResult> {
     }
 
     /**
-     * Set the items property: The items property.
-     * 
-     * @param items the items value to set.
-     * @return the ListResult object itself.
-     */
-    ListResult withItems(List<Result> items) {
-        this.items = items;
-        return this;
-    }
-
-    /**
      * Get the nextLink property: The nextLink property.
      * 
      * @return the nextLink value.
      */
     public String nextLink() {
         return this.nextLink;
-    }
-
-    /**
-     * Set the nextLink property: The nextLink property.
-     * 
-     * @param nextLink the nextLink value to set.
-     * @return the ListResult object itself.
-     */
-    ListResult withNextLink(String nextLink) {
-        this.nextLink = nextLink;
-        return this;
     }
 
     /**

@@ -11,7 +11,6 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 
 /**
@@ -32,14 +31,8 @@ public final class FloatMillisecondsDurationArrayProperty
      * @param value the value value to set.
      */
     @Generated
-    public FloatMillisecondsDurationArrayProperty(List<Duration> value) {
-        if (value == null) {
-            this.value = null;
-        } else {
-            this.value = value.stream()
-                .map(el -> (double) el.toNanos() / 1000_000L)
-                .collect(java.util.stream.Collectors.toList());
-        }
+    public FloatMillisecondsDurationArrayProperty(List<Double> value) {
+        this.value = value;
     }
 
     /**
@@ -48,13 +41,8 @@ public final class FloatMillisecondsDurationArrayProperty
      * @return the value value.
      */
     @Generated
-    public List<Duration> getValue() {
-        if (this.value == null) {
-            return null;
-        }
-        return this.value.stream()
-            .map(el -> Duration.ofNanos((long) (el * 1000_000L)))
-            .collect(java.util.stream.Collectors.toList());
+    public List<Double> getValue() {
+        return this.value;
     }
 
     /**
@@ -80,13 +68,13 @@ public final class FloatMillisecondsDurationArrayProperty
     @Generated
     public static FloatMillisecondsDurationArrayProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            List<Duration> value = null;
+            List<Double> value = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = reader.readArray(reader1 -> Duration.ofNanos((long) (reader1.getDouble() * 1000_000L)));
+                    value = reader.readArray(reader1 -> reader1.getDouble());
                 } else {
                     reader.skipChildren();
                 }

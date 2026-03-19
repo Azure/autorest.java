@@ -236,7 +236,7 @@ public final class PropertyClient {
      * <pre>
      * {@code
      * {
-     *     value: long (Required)
+     *     value: int (Required)
      * }
      * }
      * </pre>
@@ -246,7 +246,7 @@ public final class PropertyClient {
      * <pre>
      * {@code
      * {
-     *     value: long (Required)
+     *     value: int (Required)
      * }
      * }
      * </pre>
@@ -496,7 +496,7 @@ public final class PropertyClient {
      * <pre>
      * {@code
      * {
-     *     value: long (Required)
+     *     value: int (Required)
      * }
      * }
      * </pre>
@@ -506,7 +506,7 @@ public final class PropertyClient {
      * <pre>
      * {@code
      * {
-     *     value: long (Required)
+     *     value: int (Required)
      * }
      * }
      * </pre>

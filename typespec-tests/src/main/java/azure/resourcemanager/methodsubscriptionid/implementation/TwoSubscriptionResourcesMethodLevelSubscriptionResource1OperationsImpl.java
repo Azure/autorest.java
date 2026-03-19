@@ -33,8 +33,12 @@ public final class TwoSubscriptionResourcesMethodLevelSubscriptionResource1Opera
         Context context) {
         Response<SubscriptionResource1Inner> inner
             = this.serviceClient().getWithResponse(subscriptionId, subscriptionResource1Name, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new SubscriptionResource1Impl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new SubscriptionResource1Impl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public SubscriptionResource1 get(String subscriptionId, String subscriptionResource1Name) {

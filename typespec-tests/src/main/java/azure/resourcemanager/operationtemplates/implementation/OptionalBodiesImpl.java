@@ -36,8 +36,12 @@ public final class OptionalBodiesImpl implements OptionalBodies {
         Context context) {
         Response<WidgetInner> inner
             = this.serviceClient().getByResourceGroupWithResponse(resourceGroupName, widgetName, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new WidgetImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new WidgetImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public Widget getByResourceGroup(String resourceGroupName, String widgetName) {
@@ -53,8 +57,12 @@ public final class OptionalBodiesImpl implements OptionalBodies {
         Context context) {
         Response<WidgetInner> inner
             = this.serviceClient().patchWithResponse(resourceGroupName, widgetName, properties, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new WidgetImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new WidgetImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public Widget patch(String resourceGroupName, String widgetName) {
@@ -70,8 +78,12 @@ public final class OptionalBodiesImpl implements OptionalBodies {
         Context context) {
         Response<ActionResultInner> inner
             = this.serviceClient().postWithResponse(resourceGroupName, widgetName, body, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new ActionResultImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new ActionResultImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public ActionResult post(String resourceGroupName, String widgetName) {
@@ -85,8 +97,12 @@ public final class OptionalBodiesImpl implements OptionalBodies {
 
     public Response<ChangeAllowanceResult> providerPostWithResponse(ChangeAllowanceRequest body, Context context) {
         Response<ChangeAllowanceResultInner> inner = this.serviceClient().providerPostWithResponse(body, context);
-        return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
-            new ChangeAllowanceResultImpl(inner.getValue(), this.manager()));
+        if (inner != null) {
+            return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
+                new ChangeAllowanceResultImpl(inner.getValue(), this.manager()));
+        } else {
+            return null;
+        }
     }
 
     public ChangeAllowanceResult providerPost() {
