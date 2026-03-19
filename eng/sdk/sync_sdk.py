@@ -84,13 +84,27 @@ def update_emitter(package_json_path: str, use_dev_package: bool):
         else:
             logging.error("Failed to locate the dev package.")
 
+        # only enable it on dev branch
+        # update_latest_dev()
+
         logging.info("Update emitter-package-lock.json")
-        subprocess.check_call(["tsp-client", "generate-lock-file"], cwd=sdk_root)
+        generate_lock_file()
     else:
         logging.info("Update emitter-package.json and emitter-package-lock.json")
         subprocess.check_call(
             ["tsp-client", "generate-config-files", "--package-json", package_json_path], cwd=sdk_root
         )
+
+
+def update_latest_dev():
+    subprocess.check_call(
+        ["npx", "-y", "@azure-tools/typespec-bump-deps", "eng/emitter-package.json", "--add-npm-overrides"],
+        cwd=sdk_root,
+    )
+
+
+def generate_lock_file():
+    subprocess.check_call(["tsp-client", "generate-lock-file"], cwd=sdk_root)
 
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:
@@ -162,7 +176,9 @@ def update_sdks():
         if not arm_module:
             # run mvn package, as this is what's done in "TypeSpec-Compare-CurrentToCodegeneration.ps1" script
             try:
-                subprocess.check_call(["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path)
+                subprocess.check_call(
+                    ["mvn", "--no-transfer-progress", "codesnippet:update-codesnippet"], cwd=module_path
+                )
             except subprocess.CalledProcessError:
                 logging.error(f"Failed to update code snippet for module {artifact}")
                 failed_modules.append(artifact)
