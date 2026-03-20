@@ -3,7 +3,8 @@ schedules:
   displayName: Nightly dev build
   branches:
     include:
-    - main
+    # - main
+    - dev
   always: true
 
 trigger: none
