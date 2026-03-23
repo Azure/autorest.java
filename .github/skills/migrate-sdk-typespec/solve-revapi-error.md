@@ -57,6 +57,8 @@ DO NOT suppress revapi, if it does not fall in these categories.
 }
 ```
 
+Avoid wildcard `.*` if possible.
+
 ### "java.missing.oldSuperType" and "java.missing.newSuperType"
 
 Use a narrower regex on class, if possible. E.g. `.*Resource`.
@@ -65,10 +67,12 @@ Use a narrower regex on class, if possible. E.g. `.*Resource`.
 {
   "regex": true,
   "code": "java\\.missing\\.(oldSuperType|newSuperType)",
-  "old" : "class com\\.azure\\.resourcemanager\\.<sdk-service>\\.models\\..*",
+  "old" : "class com\\.azure\\.resourcemanager\\.<sdk-service>\\.models\\..*Resource",
   "justification": "TypeSpec fix for base resource class."
 }
 ```
+
+Avoid wildcard `.*` if possible.
 
 ## Error that are candidates for fix
 
