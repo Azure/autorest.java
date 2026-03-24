@@ -170,12 +170,6 @@ This step should be invoked by user, not by agent.
 
 Make sure the filename on GitHub is consistent with the filename on filesystem (typical reason is that Windows filename is case-insensitive, but git is case-sensitive). If not, use `git mv` command to rename the file on git to make them consistent.
 
-#### Revert change to "eng/versioning/version_client.txt" file and "sdk/resourcemanager" folder
-
-Checkout the content from "main" branch. We are not releasing the lib, hence no need to update the versions.
-
-Use `git checkout main --no-overlay -- sdk/resourcemanager/azure-resourcemanager` to revert "sdk/resourcemanager" folder.
-
 #### Create pull request on specs repo
 
 Create a draft pull request in specs repo.
