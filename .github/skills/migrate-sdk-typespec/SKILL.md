@@ -101,7 +101,7 @@ Use camelCase for property and method names. E.g. `acrUserManagedIdentityID` to 
 
 Run
 ```sh
-python eng/automation/generate.py -s <sdk-service> -c <tsp-path>/tspconfig.yaml
+python eng/automation/generate.py -s <sdk-service> -c <tsp-path>/tspconfig.yaml -v <sdk-version>
 ```
 in SDK repo root folder.
 
