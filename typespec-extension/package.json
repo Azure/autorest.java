@@ -68,7 +68,7 @@
     "lodash": "~4.17.23"
   },
   "devDependencies": {
-    "@azure-tools/openai-typespec": "1.13.0",
+    "@azure-tools/openai-typespec": "1.11.0",
     "@azure-tools/typespec-autorest": "0.66.0",
     "@azure-tools/typespec-azure-core": "0.66.0",
     "@azure-tools/typespec-azure-resource-manager": "0.66.0",
