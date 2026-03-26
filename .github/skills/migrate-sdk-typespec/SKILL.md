@@ -145,6 +145,12 @@ It is known that there will be some hard to mitigate breaks, e.g. enum changed t
 When you finished this step, pause and output report on remaining errors.
 Use the `git diff` with "main" branch, to provide the details on what you think be the cause of the error.
 
+### Compare client APIs
+
+Write down all the *Client in fluent package, and their public APIs.
+
+Compare it with the *Client and APIs in main branch. List the differences.
+
 ### Update "CHANGELOG.md"
 
 This step should be invoked by user, not by agent.
