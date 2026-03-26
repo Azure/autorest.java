@@ -38,8 +38,8 @@ Steps:
 2. Go back to project root. Commit the change in "core" folder.
 3. Run `ncu -u` on "package.json" in both "package.json" from "typespec-extension" and "typespec-tests" folder.
 4. Update package versions in `peerDependencies` (keep the semver range) in "package.json" from "typespec-extension" folder, according to the corresponding package versions in `devDependencies`.
-5. Update version of "" in "package.json" from "typespec-extension" folder, set it to "~5.9.2".
-5. Update version of "@azure-tools/openai-typespec" in "package.json" from "typespec-extension" folder, set it to the same semantic version used in https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/package.json
+5. Update version of "typescript" lib in "package.json" from "typespec-extension" folder, set it to "~5.9.2".
+5. Update version of "@azure-tools/openai-typespec" lib in "package.json" from "typespec-extension" folder, set it to the same semantic version used in https://raw.githubusercontent.com/Azure/azure-rest-api-specs/refs/heads/main/package.json
 6. Update package versions in `override` (keep the semver range) in "package.json" from "typespec-tests" folder, according to the corresponding package versions in "package.json" from "typespec-extension" folder.
 7. Save the files, and run `npm install` in "typespec-extension" folder, so that "package-lock.json" would be updated.
 8. Run `npm audit fix` in "typespec-extension" folder.
