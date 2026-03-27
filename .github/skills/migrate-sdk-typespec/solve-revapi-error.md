@@ -100,6 +100,16 @@ A `git diff` with "main" branch can also help you see what's changed in a class.
 
 Whenever you've fixed in "client.tsp" or "tspconfig.yaml", run "Generate the Java code" step to update Java code (so that "Build the Java lib" would now build on the updated Java code).
 
+### Error relates to Java Enum/ExpandableStringEnum value change (it can come with name change too)
+
+Confirm with user, before handle this change. If user asks you to fix, follow example here
+https://github.com/Azure/azure-rest-api-specs/blob/8299357c0d704b9f7706ab262d2339c5ff7dbacd/specification/containerservice/resource-manager/Microsoft.ContainerService/aks/client.tsp#L1302-L1326
+
+Flow is
+1. Create a new TypeSpec enum/union to match the prior Java Enum/ExpandableStringEnum value.
+2. Use `@alternateType` to override type, for the property that have different type in generated Java code.
+3. Resolve possible naming conflict, by rename the other enum/union in TypeSpec.
+
 ## Error that should be reported
 
 ### "java.class.nowFinal" and "java.class.noLongerInheritsFromClass"
