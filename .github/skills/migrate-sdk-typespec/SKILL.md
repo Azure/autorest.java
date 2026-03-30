@@ -180,6 +180,8 @@ Make sure the filename on GitHub is consistent with the filename on filesystem (
 
 Create a draft pull request in specs repo.
 
+Add label "PublishToCustomers", "ARMSignedOff", "BreakingChange-Go-Sdk-Approved", "BreakingChange-JavaScript-Sdk-Approved", "BreakingChange-Python-Sdk-Approved" to the draft PR.
+
 #### Update "tsp-location.yaml" file, create pull request on sdk repo
 
 When the pull request on specs repo is ready, get the SHA of the last commit.
