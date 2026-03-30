@@ -61,9 +61,13 @@ Read the `<Service>Manager.java` to understand which resources already have conv
 
 See [supplement-properties.md](./reference/supplement-properties.md) for detailed steps (includes adding/updating tests).
 
+**IMPORTANT: Tests are MANDATORY** — never consider property supplementation complete without generating or updating tests for the new properties.
+
 ## Scenario 2: Add new convenience layer for new resource(s)
 
 See [add-convenience-layer.md](./reference/add-convenience-layer.md) for detailed steps.
+
+**IMPORTANT: Tests are MANDATORY** — never consider a new convenience layer complete without generating tests.
 
 ## Scenario 3: Generate tests for convenience layer
 
@@ -74,6 +78,10 @@ See [generate-tests.md](./reference/generate-tests.md) for detailed steps.
 ## Rules
 
 - **DO NOT** generate convenience layers for deprecated classes (models, clients, or any type annotated with `@Deprecated`). If an inner model or inner client is deprecated, skip it entirely — do not create interfaces, implementations, or collection wrappers for it. When supplementing properties, skip any property whose type is a deprecated class.
+- **DO NOT** supplement infrastructure/plumbing properties. Skip these entirely — they are handled by separate mechanisms (base interfaces, dedicated APIs), not as convenience property getters:
+  - `provisioningState` — provisioning state of the resource
+  - `privateEndpointConnections` — private endpoint connections list
+  - `privateLinkResources` / `privateLinks` — private link resources
 
 ## Checklist
 
@@ -86,7 +94,7 @@ See [generate-tests.md](./reference/generate-tests.md) for detailed steps.
 - [ ] Add proper Javadoc for all public methods.
 - [ ] Add necessary imports.
 - [ ] Verify the code compiles by running `mvn compile -f <project-path>/pom.xml -pl .` (or a broader build if dependencies are involved).
-- [ ] Generate tests for the convenience layer (see Scenario 3).
+- [ ] **[MANDATORY]** Generate or update tests for the convenience layer (see Scenario 3). This is NOT optional — the task is incomplete without tests.
 - [ ] Run tests in record mode and verify they pass.
 
 ## Notes
@@ -94,3 +102,9 @@ See [generate-tests.md](./reference/generate-tests.md) for detailed steps.
 - The code templates above are for groupable (top-level ARM) resources. For child resources or proxy resources, adapt the base classes accordingly (e.g., use `IndependentChildImpl`, `ExternalChildResourceImpl`, or simpler wrappers).
 - If the resource is read-only (no create/update), omit the `Creatable`, `Updatable`, `Appliable`, Definition, and Update interfaces.
 - When in doubt about a pattern, always refer to an existing similar resource in the same project or in the `azure-resourcemanager-compute` project as the reference implementation.
+
+## Project-specific notes
+
+Some projects have additional constraints. Check for a `<project-name>-notes.md` file in the `reference/` folder before starting work.
+
+- [keyvault-notes.md](./reference/keyvault-notes.md) — skip ManagedHsm/Mhsm resources (not testable)

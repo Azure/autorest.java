@@ -4,6 +4,11 @@ Use this when a convenience layer already exists for `<resource-name>`, but some
 
 > **Rule:** Do NOT supplement properties whose type is a deprecated class (annotated with `@Deprecated`). Skip those entirely.
 
+> **Rule:** Do NOT supplement infrastructure/plumbing properties. Skip the following property types entirely — they are handled by separate mechanisms (base interfaces, dedicated APIs), not as convenience getters:
+> - `provisioningState` — provisioning state of the resource
+> - `privateEndpointConnections` — private endpoint connections list
+> - `privateLinkResources` / `privateLinks` — private link resources
+
 ## Identify missing properties
 
 1. Read the inner model class at `<src-base>/fluent/models/<ResourceName>Inner.java`.
