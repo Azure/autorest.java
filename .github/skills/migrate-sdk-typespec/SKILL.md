@@ -8,9 +8,9 @@ description: '**WORKFLOW SKILL** - Update SDK project and TypeSpec project, rege
 ## Request
 
 The request would come in the form of:
-- "Migrate sdk lib for <tsp-project>"
+- "Migrate sdk lib for `<tsp-project>`"
 
-The "<tsp-project>" would be a relative path to a folder in specs repo. A typical form of it can be "specification/web/resource-manager/Microsoft.Web/AppService".
+The `<tsp-project>` would be a relative path to a folder in specs repo. A typical form of it can be "specification/web/resource-manager/Microsoft.Web/AppService".
 
 ## Checklist
 
@@ -34,7 +34,7 @@ You have full access to these locally cloned repositories/folders.
 
 ### Before you start
 
-Make sure both sdk repo and specs repo are on a "migrate-<tsp-project>" branch. If not, checkout latest "main", and make a new branch from it.
+Make sure both sdk repo and specs repo are on a `migrate-<tsp-project>` branch. If not, checkout latest "main", and make a new branch from it.
 
 Run `npm ci` in "eng/common/tsp-client" folder in sdk repo to make sure the tsp-client is installed.
 
@@ -42,9 +42,9 @@ Run `npm ci` in specs repo to make sure all dependencies are installed.
 
 ### Find the TypeSpec project in specs repo
 
-Find a "tspconfig.yaml" file under "<tsp-project>" folder in specs repo. This file indicates the folder is a TypeSpec project.
+Find a "tspconfig.yaml" file under `<tsp-project>` folder in specs repo. This file indicates the folder is a TypeSpec project.
 
-"<tsp-path>" refers to the full path of this TypeSpec project folder in specs repo.
+`<tsp-path>` refers to the full path of this TypeSpec project folder in specs repo.
 
 ### Correct "tspconfig.yaml"
 
@@ -66,13 +66,13 @@ Only modify the YAML under "options"/"@azure-tools/typespec-java" property.
 
 Now you have the correct "tspconfig.yaml" file, you can find the corresponding SDK project in sdk repo.
 
-Read "emitter-output-dir" property and "service-dir" property (use "options"/"@azure-tools/typespec-java"/"service-dir" if available, otherwise use "parameters"/"service-dir"), combine them for "<sdk-project>". The typical form of it can be "sdk/appservice/azure-resourcemanager-appservice".
+Read "emitter-output-dir" property and "service-dir" property (use "options"/"@azure-tools/typespec-java"/"service-dir" if available, otherwise use "parameters"/"service-dir"), combine them for `<sdk-project>`. The typical form of it can be "sdk/appservice/azure-resourcemanager-appservice".
 
-"<sdk-path>" refers to the full path of the "<sdk-project>" folder.
+`<sdk-path>` refers to the full path of the `<sdk-project>` folder.
 
-"<sdk-service>" refers to the middle segment of the "emitter-output-dir" property in "tspconfig.yaml" file. The typical form of it can be "appservice".
+`<sdk-service>` refers to the middle segment of the "emitter-output-dir" property in "tspconfig.yaml" file. The typical form of it can be "appservice".
 
-"<sdk-package>" refers to the last segment of the "emitter-output-dir" property in "tspconfig.yaml" file. The typical form of it can be "azure.resourcemanager.appservice".
+`<sdk-package>` refers to the last segment of the "emitter-output-dir" property in "tspconfig.yaml" file. The typical form of it can be "azure.resourcemanager.appservice".
 
 ### Initial mitigation
 

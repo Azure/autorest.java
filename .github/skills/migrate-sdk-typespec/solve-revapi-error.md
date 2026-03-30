@@ -114,4 +114,4 @@ Flow is
 
 ### "java.class.nowFinal" and "java.class.noLongerInheritsFromClass"
 
-This should be reported.
+You should pause the procedure, and reported this case to user for further decision.
