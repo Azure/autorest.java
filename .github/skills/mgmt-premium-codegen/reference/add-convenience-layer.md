@@ -231,3 +231,13 @@ Edit `<src-base>/<Service>Manager.java`:
    ```
 
 3. Add the necessary imports.
+
+## Generate tests
+
+After wiring up the convenience layer, generate tests to verify the implementation. See [generate-tests.md](./generate-tests.md) for detailed instructions.
+
+At minimum, create tests that cover:
+1. Creating the resource via the convenience layer
+2. Getting/listing the resource
+3. Updating the resource (if the resource supports updates)
+4. Deleting the resource (if the resource supports deletion)

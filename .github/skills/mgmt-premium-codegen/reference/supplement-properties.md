@@ -78,3 +78,47 @@ If the user requests that the property be settable during create (Definition) or
 ## Add necessary imports
 
 Ensure all new imports are added to both the interface and implementation files.
+
+## Add or update tests for the new properties
+
+After supplementing properties, verify them with tests. There are two approaches depending on whether tests already exist for the resource:
+
+### If tests already exist for this resource
+
+Find the existing test class (e.g. `<ResourceName>Tests.java`) in `<project-path>/src/test/java/com/azure/resourcemanager/<service>/`. Add assertions for the new properties in the existing CRUD test:
+
+```java
+// After creating or getting the resource, assert the new properties
+Assertions.assertNotNull(resource.<propertyName>());
+// For properties with known expected values:
+Assertions.assertEquals(expectedValue, resource.<propertyName>());
+```
+
+If the property is settable (Definition/Update stage was added), also test setting it:
+
+```java
+// In the create flow, chain the new setter
+<ResourceName> resource = <service>Manager.<resourceName>s()
+    .define(resourceName)
+    .withRegion(Region.US_EAST)
+    .withNewResourceGroup(rgName)
+    .with<PropertyName>(testValue)
+    .create();
+
+Assertions.assertEquals(testValue, resource.<propertyName>());
+
+// In the update flow, if UpdateStages was added
+resource.update()
+    .with<PropertyName>(updatedValue)
+    .apply();
+
+Assertions.assertEquals(updatedValue, resource.<propertyName>());
+```
+
+### If no tests exist yet
+
+Create a new test class following the instructions in [generate-tests.md](./generate-tests.md). Include assertions for the supplemented properties in the test methods.
+
+### Run the tests
+
+Run the tests in record mode to verify the new properties work correctly. See [generate-tests.md](./generate-tests.md) for prerequisites and commands.

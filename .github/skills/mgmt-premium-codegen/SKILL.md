@@ -59,11 +59,15 @@ Read the `<Service>Manager.java` to understand which resources already have conv
 
 ## Scenario 1: Supplement existing resource's missing properties
 
-See [supplement-properties.md](./reference/supplement-properties.md) for detailed steps.
+See [supplement-properties.md](./reference/supplement-properties.md) for detailed steps (includes adding/updating tests).
 
 ## Scenario 2: Add new convenience layer for new resource(s)
 
 See [add-convenience-layer.md](./reference/add-convenience-layer.md) for detailed steps.
+
+## Scenario 3: Generate tests for convenience layer
+
+See [generate-tests.md](./reference/generate-tests.md) for detailed steps.
 
 ---
 
@@ -78,6 +82,8 @@ See [add-convenience-layer.md](./reference/add-convenience-layer.md) for detaile
 - [ ] Add proper Javadoc for all public methods.
 - [ ] Add necessary imports.
 - [ ] Verify the code compiles by running `mvn compile -f <project-path>/pom.xml -pl .` (or a broader build if dependencies are involved).
+- [ ] Generate tests for the convenience layer (see Scenario 3).
+- [ ] Run tests in record mode and verify they pass.
 
 ## Notes
 
