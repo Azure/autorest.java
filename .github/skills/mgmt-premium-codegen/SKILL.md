@@ -71,6 +71,10 @@ See [generate-tests.md](./reference/generate-tests.md) for detailed steps.
 
 ---
 
+## Rules
+
+- **DO NOT** generate convenience layers for deprecated classes (models, clients, or any type annotated with `@Deprecated`). If an inner model or inner client is deprecated, skip it entirely — do not create interfaces, implementations, or collection wrappers for it. When supplementing properties, skip any property whose type is a deprecated class.
+
 ## Checklist
 
 - [ ] Follow the code style and conventions of the existing convenience layer code in the same project.

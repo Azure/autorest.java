@@ -2,6 +2,8 @@
 
 Use this when a convenience layer already exists for `<resource-name>`, but some properties from the inner model are not exposed.
 
+> **Rule:** Do NOT supplement properties whose type is a deprecated class (annotated with `@Deprecated`). Skip those entirely.
+
 ## Identify missing properties
 
 1. Read the inner model class at `<src-base>/fluent/models/<ResourceName>Inner.java`.

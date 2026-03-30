@@ -2,6 +2,8 @@
 
 Use this when `<resource-name>` exists in the generated (inner) layer but has no convenience layer yet.
 
+> **Rule:** Do NOT generate convenience layers for deprecated inner models or clients (annotated with `@Deprecated`). If the inner model or client is deprecated, skip the resource entirely.
+
 ## Examine the inner model
 
 1. Read `<src-base>/fluent/models/<ResourceName>Inner.java` to understand all properties.
