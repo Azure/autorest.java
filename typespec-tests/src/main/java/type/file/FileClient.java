@@ -194,6 +194,7 @@ public final class FileClient {
      * }
      * </pre>
      * 
+     * @param contentType Body parameter's content type. Known values are *&#47;*.
      * @param file The file parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -204,8 +205,9 @@ public final class FileClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> uploadFileDefaultContentTypeWithResponse(BinaryData file, RequestOptions requestOptions) {
-        return this.serviceClient.uploadFileDefaultContentTypeWithResponse(file, requestOptions);
+    public Response<Void> uploadFileDefaultContentTypeWithResponse(String contentType, BinaryData file,
+        RequestOptions requestOptions) {
+        return this.serviceClient.uploadFileDefaultContentTypeWithResponse(contentType, file, requestOptions);
     }
 
     /**
@@ -218,6 +220,7 @@ public final class FileClient {
      * }
      * </pre>
      * 
+     * @param accept The accept parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -227,8 +230,9 @@ public final class FileClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> downloadFileDefaultContentTypeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.downloadFileDefaultContentTypeWithResponse(requestOptions);
+    public Response<BinaryData> downloadFileDefaultContentTypeWithResponse(String accept,
+        RequestOptions requestOptions) {
+        return this.serviceClient.downloadFileDefaultContentTypeWithResponse(accept, requestOptions);
     }
 
     /**
@@ -328,6 +332,7 @@ public final class FileClient {
     /**
      * The uploadFileDefaultContentType operation.
      * 
+     * @param contentType Body parameter's content type. Known values are *&#47;*.
      * @param file The file parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -338,15 +343,17 @@ public final class FileClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadFileDefaultContentType(BinaryData file) {
+    public void uploadFileDefaultContentType(String contentType, BinaryData file) {
         // Generated convenience method for uploadFileDefaultContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        uploadFileDefaultContentTypeWithResponse(file, requestOptions).getValue();
+        uploadFileDefaultContentTypeWithResponse(contentType, file, requestOptions).getValue();
     }
 
     /**
      * The downloadFileDefaultContentType operation.
      * 
+     * @param accept The accept parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -356,9 +363,9 @@ public final class FileClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public BinaryData downloadFileDefaultContentType() {
+    public BinaryData downloadFileDefaultContentType(String accept) {
         // Generated convenience method for downloadFileDefaultContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return downloadFileDefaultContentTypeWithResponse(requestOptions).getValue();
+        return downloadFileDefaultContentTypeWithResponse(accept, requestOptions).getValue();
     }
 }

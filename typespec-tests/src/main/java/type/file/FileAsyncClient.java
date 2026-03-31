@@ -197,6 +197,7 @@ public final class FileAsyncClient {
      * }
      * </pre>
      * 
+     * @param contentType Body parameter's content type. Known values are *&#47;*.
      * @param file The file parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -207,9 +208,9 @@ public final class FileAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> uploadFileDefaultContentTypeWithResponse(BinaryData file,
+    public Mono<Response<Void>> uploadFileDefaultContentTypeWithResponse(String contentType, BinaryData file,
         RequestOptions requestOptions) {
-        return this.serviceClient.uploadFileDefaultContentTypeWithResponseAsync(file, requestOptions);
+        return this.serviceClient.uploadFileDefaultContentTypeWithResponseAsync(contentType, file, requestOptions);
     }
 
     /**
@@ -222,6 +223,7 @@ public final class FileAsyncClient {
      * }
      * </pre>
      * 
+     * @param accept The accept parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -231,8 +233,9 @@ public final class FileAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> downloadFileDefaultContentTypeWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.downloadFileDefaultContentTypeWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> downloadFileDefaultContentTypeWithResponse(String accept,
+        RequestOptions requestOptions) {
+        return this.serviceClient.downloadFileDefaultContentTypeWithResponseAsync(accept, requestOptions);
     }
 
     /**
@@ -335,6 +338,7 @@ public final class FileAsyncClient {
     /**
      * The uploadFileDefaultContentType operation.
      * 
+     * @param contentType Body parameter's content type. Known values are *&#47;*.
      * @param file The file parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -346,15 +350,17 @@ public final class FileAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> uploadFileDefaultContentType(BinaryData file) {
+    public Mono<Void> uploadFileDefaultContentType(String contentType, BinaryData file) {
         // Generated convenience method for uploadFileDefaultContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return uploadFileDefaultContentTypeWithResponse(file, requestOptions).flatMap(FluxUtil::toMono);
+        return uploadFileDefaultContentTypeWithResponse(contentType, file, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
      * The downloadFileDefaultContentType operation.
      * 
+     * @param accept The accept parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -364,9 +370,9 @@ public final class FileAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<BinaryData> downloadFileDefaultContentType() {
+    public Mono<BinaryData> downloadFileDefaultContentType(String accept) {
         // Generated convenience method for downloadFileDefaultContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return downloadFileDefaultContentTypeWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+        return downloadFileDefaultContentTypeWithResponse(accept, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
