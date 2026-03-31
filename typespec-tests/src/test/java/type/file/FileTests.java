@@ -54,15 +54,14 @@ public class FileTests {
         Assertions.assertNotNull(response);
     }
 
-    @Disabled("Need to investigate whether 'File' without content-type should give contentType as string")
     @Test
     public void testUploadFileDefaultContentType() {
-        client.uploadFileDefaultContentTypeWithResponse(BinaryData.fromFile(PNG_FILE), new RequestOptions().addHeader(HttpHeaderName.CONTENT_TYPE, "image/png"));
+        client.uploadFileDefaultContentTypeWithResponse("image/png", BinaryData.fromFile(PNG_FILE), new RequestOptions().addHeader(HttpHeaderName.CONTENT_TYPE, "image/png"));
     }
 
     @Test
     public void testDownloadFileDefaultContentType() {
-        BinaryData response = client.downloadFileDefaultContentType();
+        BinaryData response = client.downloadFileDefaultContentType("image/png");
         Assertions.assertNotNull(response);
     }
 }
