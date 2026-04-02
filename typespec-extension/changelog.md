@@ -5,6 +5,7 @@
 Compatible with compiler 1.10.0.
 
 - Updated package dependencies to the latest versions.
+- Fixed bug on name/namespace/prefix for XML item, in XML array with isXmlWrapper=true.
 
 ## 0.43.2 (2026-03-26)
 
