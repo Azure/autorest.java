@@ -109,6 +109,9 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
     # test for include-api-view-properties
     $tspOptions += " --option ""@azure-tools/typespec-java.include-api-view-properties=false"""
+  } elseif ($tspFile -match "service[\\/]multiple-services") {
+    # remove after https://github.com/microsoft/typespec/issues/10277 is fixed
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
