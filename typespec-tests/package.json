@@ -9,14 +9,14 @@
     "spector-serve": "tsp-spector serve ./node_modules/@typespec/http-specs/specs ./node_modules/@azure-tools/azure-http-specs/specs --coverageFile ./tsp-spector-coverage-java.json"
   },
   "dependencies": {
-    "@typespec/spec-api": "0.1.0-alpha.13",
-    "@typespec/spector": "0.1.0-alpha.24",
+    "@typespec/spec-api": "0.1.0-alpha.14",
+    "@typespec/spector": "0.1.0-alpha.25",
     "@typespec/http-specs": "0.1.0-alpha.36",
     "@azure-tools/azure-http-specs": "0.1.0-alpha.39",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.44.0.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": "^1.10.0",
+    "@typespec/prettier-plugin-typespec": "^1.11.0",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier": "^3.8.1"
   },
