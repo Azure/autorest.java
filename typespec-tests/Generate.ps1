@@ -62,8 +62,6 @@ $generateScript = {
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/].*[\\/]main\.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
-  } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-older-versions[\\/]") {
-    $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=older-versions"""
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-shared-models[\\/]") {
     $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=shared-models"""
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
@@ -200,7 +198,6 @@ try {
   $specFiles = Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse
   # ensure multi-service client specs are processed even though they do not match the default filter
   $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service/client.tsp")
-  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-older-versions/client.tsp")
   $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-shared-models/client.tsp")
 
   $job = $specFiles | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
@@ -213,13 +210,6 @@ try {
   Copy-Item -Path ./tsp-output/*/src -Destination ./ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 
   Remove-Item ./tsp-output -Recurse -Force
-
-  if (Test-Path ./src/main/resources/META-INF/client-structure-service_metadata.json) {
-    # client structure is generated from multiple client.tsp files and the last one to execute overwrites
-    # the api view properties file. Because the tests run in parallel, the order is not guaranteed. This
-    # causes git diff check to fail as the checked in file is not the same as the generated one.
-    Remove-Item ./src/main/resources/META-INF/client-structure-service_metadata.json -Force
-  }
 
   if ($ExitCode -ne 0) {
     throw "Failed to generate from tsp"
