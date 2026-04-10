@@ -154,7 +154,7 @@ Compare it with the *Client and APIs in main branch. List the differences.
 
 ### Update "CHANGELOG.md"
 
-This step should be invoked by user, not by agent.
+Wait for user to request this step. Do not execute it on your own — the user will tell you when and what to put in the changelog.
 
 Remove all generated content in the section of latest lib version of "CHANGELOG.md" file. Also, update the date to "Unreleased".
 
@@ -171,7 +171,7 @@ etc.
 
 ### Create pull request and finalize the sdk lib
 
-This step should be invoked by user, not by agent.
+Wait for user to request this step. When user asks to finalize, create PRs, or open PRs, execute ALL of the following sub-steps.
 
 #### Verify filename is consistent on GitHub and on filesystem
 
@@ -179,17 +179,23 @@ Make sure the filename on GitHub is consistent with the filename on filesystem (
 
 #### Create pull request on specs repo
 
-Create a draft pull request in specs repo.
-
-Add label "PublishToCustomers", "ARMSignedOff", "BreakingChange-Go-Sdk-Approved", "BreakingChange-JavaScript-Sdk-Approved", "BreakingChange-Python-Sdk-Approved" to the draft PR.
+1. Create a **draft** pull request in specs repo.
+2. **Immediately** add these labels to the draft PR (do NOT skip this):
+   - `PublishToCustomers`
+   - `ARMSignedOff`
+   - `BreakingChange-Go-Sdk-Approved`
+   - `BreakingChange-JavaScript-Sdk-Approved`
+   - `BreakingChange-Python-Sdk-Approved`
 
 #### Update "tsp-location.yaml" file, create pull request on sdk repo
 
-When the pull request on specs repo is ready, get the SHA of the last commit.
+1. Get the SHA of the last commit on the specs repo branch.
+2. Update the "commit" property of the "tsp-location.yaml" file in sdk repo, to make it point to this SHA.
+3. Commit the change, and create a **draft** pull request in sdk repo.
 
-Update the "commit" property of the "tsp-location.yaml" file in sdk repo, to make it point to this SHA.
+#### Open PRs in browser
 
-Commit the change, and create a draft pull request in sdk repo.
+Open both PRs in the browser so the user can review them.
 
 #### Update "tsp-location.yaml" file the last time
 
