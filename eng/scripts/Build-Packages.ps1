@@ -67,7 +67,7 @@ finally {
 }
 
 if ($PublishInternal) {
-  $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry"
+  $feedUrl = "https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js/npm/registry"
 
   $overrides = @{
       "@azure-tools/typespec-java" = "$feedUrl/@azure-tools/typespec-java/-/typespec-java-$emitterVersion.tgz"

@@ -20,7 +20,7 @@ Write-Host "Parallelization: $Parallelization"
 $generateScript = {
   $tspFile = $_
 
-  if (($tspFile -match "payload[\\/]pageable[\\/]main\.tsp") -and (-not ($tspFile -match "azure[\\/]payload[\\/]pageable[\\/]main\.tsp"))) {
+  if ((($tspFile -match "payload[\\/]pageable[\\/]main\.tsp") -and (-not ($tspFile -match "azure[\\/]payload[\\/]pageable[\\/]main\.tsp"))) -or ($tspFile -match "service[\\/]multiple-services[\\/]main\.tsp")) {
     Write-Host "
     SKIPPED
     $tspFile
@@ -62,8 +62,6 @@ $generateScript = {
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/].*[\\/]main\.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
-  } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-older-versions[\\/]") {
-    $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=older-versions"""
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/]multi-service-shared-models[\\/]") {
     $tspOptions += " --option ""@azure-tools/typespec-java.metadata-suffix=shared-models"""
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
@@ -200,7 +198,6 @@ try {
   $specFiles = Get-ChildItem ./specs -Include "main.tsp","old.tsp" -File -Recurse
   # ensure multi-service client specs are processed even though they do not match the default filter
   $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service/client.tsp")
-  $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-older-versions/client.tsp")
   $specFiles += Get-Item (Join-Path ./specs "azure/resource-manager/multi-service-shared-models/client.tsp")
 
   $job = $specFiles | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
