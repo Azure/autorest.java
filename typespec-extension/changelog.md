@@ -5,7 +5,6 @@
 Compatible with compiler 1.11.0.
 
 - Supported `@clientRequired` client option.
-- Fixed singular on caches.
 
 ## 0.44.1 (2026-04-10)
 
