@@ -180,7 +180,7 @@ Make sure the filename on GitHub is consistent with the filename on filesystem (
 #### Create pull request on specs repo
 
 1. Create a **draft** pull request in specs repo.
-2. **Immediately** add these labels to the draft PR (do NOT skip this):
+2. Add these labels to the draft PR:
    - `PublishToCustomers`
    - `ARMSignedOff`
    - `BreakingChange-Go-Sdk-Approved`
