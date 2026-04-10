@@ -1,5 +1,12 @@
 # Release History
 
+## 0.44.2 (2026-04-10)
+
+Compatible with compiler 1.11.0.
+
+- Updated package dependencies to the latest versions.
+- Fixed singular on caches.
+
 ## 0.44.1 (2026-04-10)
 
 Compatible with compiler 1.11.0.
