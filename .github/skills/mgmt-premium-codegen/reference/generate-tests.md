@@ -191,15 +191,9 @@ public class <ResourceName>Tests extends <Service>ManagementTest {
 
 ### Testing supplemented properties
 
-When properties have been supplemented on an existing resource (Scenario 1), update existing tests or add new ones to cover the new properties:
+When properties have been supplemented on an existing resource (Scenario 1), update existing tests or add new ones to cover the new properties. **Prioritize settable properties — they produce meaningful tests.**
 
-1. **If the resource already has a test class**: Add assertions for the new properties to the existing test methods. After a create or get operation, assert the new property values:
-   ```java
-   // Read-only property — assert it's accessible and non-null (or has expected value)
-   Assertions.assertNotNull(resource.<propertyName>());
-   ```
-
-2. **If the property is settable (Definition/Update stage was added)**: Add the setter in the create/update flow and assert the value:
+1. **Settable properties (PREFERRED — always test these)**: Add the setter in the create/update flow and assert the persisted value. This is the gold standard for property tests:
    ```java
    // In create
    <ResourceName> resource = <service>Manager.<resourceName>s()
@@ -217,7 +211,16 @@ When properties have been supplemented on an existing resource (Scenario 1), upd
    Assertions.assertEquals(updatedValue, resource.<propertyName>());
    ```
 
-3. **If no test class exists yet for the resource**: Create one following the test class template above, and include assertions for the supplemented properties.
+2. **Read-only properties (use sparingly)**: Only assert if the value is predictable and meaningful. **Do NOT add blank `Assertions.assertNotNull()` checks** — they provide no real test coverage and may fail when the server returns null for newly created resources:
+   ```java
+   // GOOD: known value for a read-only property
+   Assertions.assertEquals("Microsoft.Service/resourceType", resource.type());
+
+   // BAD: blank assertion — AVOID
+   Assertions.assertNotNull(resource.someServerPopulatedField());
+   ```
+
+3. **If no test class exists yet for the resource**: Create one following the test class template above, and include assertions for the supplemented properties. Focus on settable properties.
 
 ## Ensure test dependencies exist
 

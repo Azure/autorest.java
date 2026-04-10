@@ -45,6 +45,16 @@ Search for folder of `<project-name>` under "/sdk" in sdk repo. It should be in 
 
 `<src-base>` refers to `<project-path>/src/main/java/com/azure/resourcemanager/<service>`.
 
+### Check project-specific notes FIRST
+
+Before exploring the project, check for a project-specific notes file in the `reference/` folder (e.g. `keyvault-notes.md`). These files contain:
+- Architecture details (e.g. which inner models are used by the convenience layer)
+- Rules and constraints (e.g. resources to skip)
+- Existing convenience layer inventory
+- Property supplementation status (which properties are already exposed, which are skipped)
+
+If a notes file exists with a detailed gap analysis, **use it** instead of re-exploring the project from scratch. Only re-explore if the notes appear outdated (e.g. new inner models exist that aren't listed).
+
 ### Understand the existing code
 
 Examine the project structure under `<src-base>`:
@@ -82,6 +92,11 @@ See [generate-tests.md](./reference/generate-tests.md) for detailed steps.
   - `provisioningState` — provisioning state of the resource
   - `privateEndpointConnections` — private endpoint connections list
   - `privateLinkResources` / `privateLinks` — private link resources
+- **PREFER settable properties** when supplementing. A "settable" property is one that has a corresponding `withXxx()` setter method in the inner model (meaning it can be set during create or update). Settable properties are far more valuable because:
+  - They can be tested with meaningful assertions (set a value, then assert it was persisted)
+  - Read-only properties with no setter often return null or server-default values in newly created resources, leading to blank/useless `assertNotNull` checks
+  - There is little value in exposing a property if we don't know what/how to set it
+  - When presenting missing properties to the user, **list settable properties first** and clearly label which are settable vs read-only
 
 ## Checklist
 
@@ -105,6 +120,16 @@ See [generate-tests.md](./reference/generate-tests.md) for detailed steps.
 
 ## Project-specific notes
 
-Some projects have additional constraints. Check for a `<project-name>-notes.md` file in the `reference/` folder before starting work.
+Some projects have additional constraints and structural findings. **Always** check for a project-specific notes file in the `reference/` folder before starting work — it may contain architecture details, gap analysis, and supplementation status that saves significant exploration time.
 
-- [keyvault-notes.md](./reference/keyvault-notes.md) — skip ManagedHsm/Mhsm resources (not testable)
+- [keyvault-notes.md](./reference/keyvault-notes.md) — skip ManagedHsm/Mhsm resources (not testable); Key/Secret use data-plane SDK not ARM; full property supplementation status
+
+### Updating project-specific notes
+
+After completing work on a project, **update the project-specific notes file** to reflect:
+- Any new convenience layers added
+- Any properties supplemented (mark them as ✅ in the status table)
+- Any new architectural findings discovered during analysis
+- Any new inner models that appeared (e.g. from SDK regeneration)
+
+This ensures future invocations of this skill don't need to re-explore the entire project from scratch.
