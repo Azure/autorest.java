@@ -1,5 +1,36 @@
 # Release History
 
+## 0.44.2 (2026-04-10)
+
+Compatible with compiler 1.11.0.
+
+- Supported `@clientRequired` client option.
+
+## 0.44.1 (2026-04-10)
+
+Compatible with compiler 1.11.0.
+
+- Updated package dependencies to the latest versions.
+
+## 0.44.0 (2026-04-08)
+
+Compatible with compiler 1.11.0.
+
+- Updated package dependencies to the latest versions.
+
+## 0.43.3 (2026-04-02)
+
+Compatible with compiler 1.10.0.
+
+- Updated package dependencies to the latest versions.
+- Fixed bug on name/namespace/prefix for XML item, in XML array with isXmlWrapper=true.
+
+## 0.43.2 (2026-03-26)
+
+Compatible with compiler 1.10.0.
+
+- Updated package dependencies to the latest versions.
+
 ## 0.43.1 (2026-03-16)
 
 Compatible with compiler 1.10.0.

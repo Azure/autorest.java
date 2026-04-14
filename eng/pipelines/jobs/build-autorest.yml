@@ -11,6 +11,8 @@ jobs:
   variables:
     - template: /eng/pipelines/variables/globals.yml
     - template: /eng/pipelines/variables/image.yml
+    - name: NodeVersion
+      value: '20.x'
 
   pool:
     name: $(LINUXPOOL)
