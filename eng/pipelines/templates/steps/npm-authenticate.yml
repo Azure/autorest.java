@@ -4,4 +4,4 @@ steps:
   - task: npmAuthenticate@0
     displayName: 'npm Authenticate'
     inputs:
-      workingFile: .npmrc
+      workingFile: $(Build.SourcesDirectory)/.npmrc
