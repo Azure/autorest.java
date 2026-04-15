@@ -67,11 +67,21 @@ extends:
             env:
               GH_TOKEN: $(azuresdk-github-pat)
 
-          - script: |
-              npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
-              ls *.tgz | npm publish -0 --access public
-              npm config delete //registry.npmjs.org/:_authToken
+          - task: EsrpRelease@11
             displayName: 'Publish TypeSpec Java to NPM'
-            workingDirectory: ./typespec-extension
+            inputs:
+              ConnectedServiceName: Azure SDK PME Managed Identity
+              ClientId: 5f81938c-2544-4f1f-9251-dd9de5b8a81b
+              DomainTenantId: 975f013f-7f24-47e8-a7d3-abc4752bf346
+              UseManagedIdentity: true
+              KeyVaultName: kv-azuresdk-codesign
+              SignCertName: azure-sdk-esrp-release-certificate
+              Intent: PackageDistribution
+              ContentType: npm
+              FolderLocation: $(System.DefaultWorkingDirectory)/typespec-extension
+              Owners: ${{ coalesce(variables['Build.RequestedForEmail'], 'azuresdk@microsoft.com') }}
+              Approvers: ${{ coalesce(variables['Build.RequestedForEmail'], 'azuresdk@microsoft.com') }}
+              ServiceEndpointUrl: https://api.esrp.microsoft.com
+              MainPublisher: ESRPRELPACMANTEST
 
           - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
