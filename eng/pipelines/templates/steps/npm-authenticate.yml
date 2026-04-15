@@ -1,7 +1,11 @@
 steps:
   # Authenticate with Azure Artifacts npm feed
-  # .npmrc in repo root sets the registry URL; npmAuthenticate adds the credentials
   - task: npmAuthenticate@0
-    displayName: 'npm Authenticate'
+    displayName: 'npm Authenticate on extension'
     inputs:
-      workingFile: $(Build.SourcesDirectory)/.npmrc
+      workingFile: $(Build.SourcesDirectory)/typespec-extension/.npmrc
+
+  - task: npmAuthenticate@0
+    displayName: 'npm Authenticate on tests'
+    inputs:
+      workingFile: $(Build.SourcesDirectory)/typespec-tests/.npmrc
