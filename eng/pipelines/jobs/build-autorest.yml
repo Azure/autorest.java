@@ -43,6 +43,8 @@ jobs:
     parameters:
       JobType: 'Autorest'
 
+  - template: /eng/pipelines/templates/steps/maven-authenticate.yml
+
   - task: Maven@4
     displayName: 'Build and Package'
     inputs:
