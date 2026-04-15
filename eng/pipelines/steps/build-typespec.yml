@@ -18,6 +18,8 @@ steps:
 
 - template: /eng/pipelines/templates/steps/maven-authenticate.yml
 
+- template: /eng/pipelines/templates/steps/npm-authenticate.yml
+
 - task: PowerShell@2
   retryCountOnTaskFailure: 1
   displayName: 'Build and Generate Code'

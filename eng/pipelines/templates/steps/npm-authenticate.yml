@@ -1,0 +1,7 @@
+steps:
+  # Authenticate with Azure Artifacts npm feed
+  # .npmrc in repo root sets the registry URL; npmAuthenticate adds the credentials
+  - task: npmAuthenticate@0
+    displayName: 'npm Authenticate'
+    inputs:
+      workingFile: .npmrc
