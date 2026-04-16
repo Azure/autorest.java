@@ -44,6 +44,10 @@ jobs:
     parameters:
       JobType: 'Fluent Integration'
 
+  - template: /eng/pipelines/templates/steps/maven-authenticate.yml
+
+  - template: /eng/pipelines/templates/steps/npm-authenticate.yml
+
   - task: Maven@4
     displayName: 'Build and Package'
     inputs:

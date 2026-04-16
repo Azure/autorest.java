@@ -49,6 +49,14 @@ jobs:
     inputs:
       versionSpec: '$(NodeVersion)'
 
+  - template: /eng/pipelines/templates/steps/maven-authenticate.yml
+    parameters:
+      SourceDirectory: $(Build.SourcesDirectory)/autorest.java
+
+  - template: /eng/pipelines/templates/steps/npm-authenticate.yml
+    parameters:
+      SourceDirectory: $(Build.SourcesDirectory)/autorest.java
+
   - task: PowerShell@2
     retryCountOnTaskFailure: 1
     condition: and(succeeded(), eq('${{ parameters.DevPackage }}', 'true'))
