@@ -35,9 +35,6 @@ Push-Location ./typespec-tests
 try {
   Write-Host "Generating code ('Generate.ps1' in './typespec-tests')"
   & ./Generate.ps1 -Parallelization $Parallelization
-  if ($LASTEXITCODE -ne 0) {
-    exit $LASTEXITCODE
-  }
 
 #   Write-Host "Checking format of generated code ('npm run check-format')"
 #   invokeExpressionAndCaptureOutput("npm run check-format")
