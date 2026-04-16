@@ -65,10 +65,10 @@ jobs:
       - script: |
           echo "Dependencies of typespec-java"
           cd typespec-extension
-          npm ls --all
+          npm ls --all || true
           echo "Dependencies of typespec-java-tests"
           cd ../typespec-tests
-          npm ls --all
+          npm ls --all || true
         displayName: 'Print Package Dependencies'
         condition: succeededOrFailed()
 
