@@ -15,6 +15,8 @@ extends:
           variables:
           - template: /eng/pipelines/variables/globals.yml
           - template: /eng/pipelines/variables/image.yml
+          - name: buildArtifactsPath
+            value: $(Pipeline.Workspace)/build_artifacts
 
           pool:
             name: $(LINUXPOOL)
@@ -63,11 +65,43 @@ extends:
             env:
               GH_TOKEN: $(azuresdk-github-pat)
 
-          - script: |
-              npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
-              ls *.tgz | npm publish -0 --access public
-              npm config delete //registry.npmjs.org/:_authToken
+          - pwsh: |
+              New-Item -ItemType Directory -Path "$(buildArtifactsPath)/packages" -Force
+              Copy-Item -Path "./typespec-extension/*.tgz" -Destination "$(buildArtifactsPath)/packages"
+            displayName: 'Copy packages to artifacts staging directory'
+
+          # Always publish to internal feed
+          - template: /eng/pipelines/templates/steps/create-authenticated-npmrc.yml
+            parameters:
+              npmrcPath: $(buildArtifactsPath)/packages/.npmrc
+              registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js/npm/registry/
+
+          # publish to devops feed
+          - pwsh: |
+              $packageFiles = Get-ChildItem -Path . -Filter '*.tgz'
+              foreach ($file in $packageFiles.Name) {
+                Write-Host "npm publish $file --verbose --access public"
+                npm publish $file --verbose --access public
+              }
+            displayName: Publish to DevOps feed
+            workingDirectory: $(buildArtifactsPath)/packages
+
+          # publish to npmjs.org
+          - task: EsrpRelease@11
             displayName: 'Publish TypeSpec Java to NPM'
-            workingDirectory: ./typespec-extension
+            inputs:
+              ConnectedServiceName: Azure SDK PME Managed Identity
+              ClientId: 5f81938c-2544-4f1f-9251-dd9de5b8a81b
+              DomainTenantId: 975f013f-7f24-47e8-a7d3-abc4752bf346
+              UseManagedIdentity: true
+              KeyVaultName: kv-azuresdk-codesign
+              SignCertName: azure-sdk-esrp-release-certificate
+              Intent: PackageDistribution
+              ContentType: npm
+              FolderLocation: $(buildArtifactsPath)/packages
+              Owners: ${{ coalesce(variables['Build.RequestedForEmail'], 'azuresdk@microsoft.com') }}
+              Approvers: ${{ coalesce(variables['Build.RequestedForEmail'], 'azuresdk@microsoft.com') }}
+              ServiceEndpointUrl: https://api.esrp.microsoft.com
+              MainPublisher: ESRPRELPACMANTEST
 
           - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
