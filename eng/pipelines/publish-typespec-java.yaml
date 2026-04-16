@@ -53,19 +53,19 @@ extends:
                 $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
                 Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-          # - task: PowerShell@2
-          #   displayName: 'Create GitHub Releases'
-          #   inputs:
-          #     filePath: eng/scripts/Create-Release.ps1
-          #     arguments: >
-          #       -releaseSha '$(Build.SourceVersion)'
-          #       -tagName '@azure-tools/typespec-java_$(PackageVersion)'
-          #       -title '@azure-tools/typespec-java_$(PackageVersion)'
-          #       -releaseNotes '- Bug fix'
-          #     pwsh: true
-          #   timeoutInMinutes: 5
-          #   env:
-          #     GH_TOKEN: $(azuresdk-github-pat)
+          - task: PowerShell@2
+            displayName: 'Create GitHub Releases'
+            inputs:
+              filePath: eng/scripts/Create-Release.ps1
+              arguments: >
+                -releaseSha '$(Build.SourceVersion)'
+                -tagName '@azure-tools/typespec-java_$(PackageVersion)'
+                -title '@azure-tools/typespec-java_$(PackageVersion)'
+                -releaseNotes '- Bug fix'
+              pwsh: true
+            timeoutInMinutes: 5
+            env:
+              GH_TOKEN: $(azuresdk-github-pat)
 
           - task: EsrpRelease@11
             displayName: 'Publish TypeSpec Java to NPM'
