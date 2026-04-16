@@ -8,9 +8,6 @@ Set-Location $PSScriptRoot
 Push-Location ../
 try {
   ./Build-TypeSpec.ps1
-  if ($LASTEXITCODE -ne 0) {
-    exit $LASTEXITCODE
-  }
 } finally {
   Pop-Location
 }
