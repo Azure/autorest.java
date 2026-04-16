@@ -1,11 +1,29 @@
+parameters:
+  SourceDirectory: $(Build.SourcesDirectory)
+
 steps:
+  - pwsh: |
+      $npmrcPath = "$($env:USERPROFILE ?? $env:HOME)/.npmrc"
+      Write-Host "##vso[task.setvariable variable=npmrcPath]$npmrcPath"
+    displayName: 'Setup env npmrcPath for path to global .npmrc'
+
+  # Copy .npmrc to global
+  - pwsh: |
+      Copy-Item -Path "${{ parameters.SourceDirectory }}/typespec-extension/.npmrc" -Destination "$(npmrcPath)"
+    displayName: 'Setup mirror global .npmrc'
+
   # Authenticate with Azure Artifacts npm feed
+  - task: npmAuthenticate@0
+    displayName: 'npm Authenticate on global'
+    inputs:
+      workingFile: $(npmrcPath)
+
   - task: npmAuthenticate@0
     displayName: 'npm Authenticate on extension'
     inputs:
-      workingFile: $(Build.SourcesDirectory)/typespec-extension/.npmrc
+      workingFile: ${{ parameters.SourceDirectory }}/typespec-extension/.npmrc
 
   - task: npmAuthenticate@0
     displayName: 'npm Authenticate on tests'
     inputs:
-      workingFile: $(Build.SourcesDirectory)/typespec-tests/.npmrc
+      workingFile: ${{ parameters.SourceDirectory }}/typespec-tests/.npmrc
