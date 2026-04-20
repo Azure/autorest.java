@@ -1,23 +1,23 @@
 param (
-    # re-build autorest.java
-    [switch] $RebuildJar = $false
+  # re-build autorest.java
+  [switch] $RebuildJar = $false
 )
 
 Set-Location $PSScriptRoot
 
 Push-Location ../
 try {
-    ./Build-TypeSpec.ps1
+  ./Build-TypeSpec.ps1
 } finally {
-    Pop-Location
+  Pop-Location
 }
 
 if (Test-Path node_modules) {
-    Remove-Item node_modules -Recurse -Force
+  Remove-Item node_modules -Recurse -Force
 }
 
 if (Test-Path package-lock.json) {
-    Remove-Item package-lock.json
+  Remove-Item package-lock.json
 }
 
 # typespec-tests references typespec-java via a local file path.
@@ -27,5 +27,5 @@ npm install
 
 # delete output
 if (Test-Path tsp-output) {
-    Remove-Item tsp-output -Recurse -Force
+  Remove-Item tsp-output -Recurse -Force
 }

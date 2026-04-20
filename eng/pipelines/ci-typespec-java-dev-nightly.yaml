@@ -37,6 +37,10 @@ jobs:
         parameters:
           JobType: 'TypeSpec Nightly'
 
+      - template: /eng/pipelines/templates/steps/maven-authenticate.yml
+
+      - template: /eng/pipelines/templates/steps/npm-authenticate.yml
+
       - script: |
           npm install -g @typespec/compiler@next
           npx @azure-tools/typespec-bump-deps typespec-extension/package.json typespec-tests/package.json --add-npm-overrides
