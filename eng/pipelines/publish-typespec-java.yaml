@@ -70,7 +70,7 @@ extends:
               Copy-Item -Path "./typespec-extension/*.tgz" -Destination "$(buildArtifactsPath)/packages"
             displayName: 'Copy packages to artifacts staging directory'
 
-          # Always publish to internal feed
+          # create npmrc file with auth
           - template: /eng/pipelines/templates/steps/create-authenticated-npmrc.yml
             parameters:
               npmrcPath: $(buildArtifactsPath)/packages/.npmrc
