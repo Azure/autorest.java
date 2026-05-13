@@ -15,13 +15,6 @@ pr:
   paths:
     include:
       - '*'
-    exclude:
-      - 'azure-dataplane-tests'
-      - 'azure-tests'
-      - 'fluent-tests'
-      - 'partial-update-tests'
-      - 'vanilla-tests'
-      - 'protocol*'
 
 variables:
 - name: isMain
