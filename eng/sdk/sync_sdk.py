@@ -201,6 +201,10 @@ def update_sdks():
     cmd = ["git", "checkout", "**/*.md"]
     subprocess.check_call(cmd, cwd=sdk_root)
 
+    # temporary, revert change on metadata.json
+    cmd = ["git", "checkout", "**/*_metadata.json"]
+    subprocess.check_call(cmd, cwd=sdk_root)
+
     cmd = ["git", "add", "."]
     subprocess.check_call(cmd, cwd=sdk_root)
 
