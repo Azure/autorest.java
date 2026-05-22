@@ -55,40 +55,10 @@ extends:
                 $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
                 Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-          - task: PowerShell@2
-            displayName: 'Create GitHub Releases'
-            inputs:
-              filePath: eng/scripts/Create-Release.ps1
-              arguments: >
-                -releaseSha '$(Build.SourceVersion)'
-                -tagName '@azure-tools/typespec-java_$(PackageVersion)'
-                -title '@azure-tools/typespec-java_$(PackageVersion)'
-                -releaseNotes '- Bug fix'
-              pwsh: true
-            timeoutInMinutes: 5
-            env:
-              GH_TOKEN: $(azuresdk-github-pat)
-
           - pwsh: |
               New-Item -ItemType Directory -Path "$(buildArtifactsPath)/packages" -Force
               Copy-Item -Path "./typespec-extension/*.tgz" -Destination "$(buildArtifactsPath)/packages"
             displayName: 'Copy packages to artifacts staging directory'
-
-          # create npmrc file with auth
-          - template: /eng/pipelines/templates/steps/create-authenticated-npmrc.yml
-            parameters:
-              npmrcPath: $(buildArtifactsPath)/packages/.npmrc
-              registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js/npm/registry/
-
-          # publish to devops feed
-          - pwsh: |
-              $packageFiles = Get-ChildItem -Path . -Filter '*.tgz'
-              foreach ($file in $packageFiles.Name) {
-                Write-Host "npm publish $file --verbose --access public"
-                npm publish $file --verbose --access public
-              }
-            displayName: Publish to DevOps feed
-            workingDirectory: $(buildArtifactsPath)/packages
 
           # publish to npmjs.org
           - task: EsrpRelease@11
@@ -107,5 +77,35 @@ extends:
               Approvers: ${{ coalesce(variables['Build.RequestedForEmail'], 'azuresdk@microsoft.com') }}
               ServiceEndpointUrl: https://api.esrp.microsoft.com
               MainPublisher: ESRPRELPACMANTEST
+
+          - task: PowerShell@2
+            displayName: 'Create GitHub Releases'
+            inputs:
+              filePath: eng/scripts/Create-Release.ps1
+              arguments: >
+                -releaseSha '$(Build.SourceVersion)'
+                -tagName '@azure-tools/typespec-java_$(PackageVersion)'
+                -title '@azure-tools/typespec-java_$(PackageVersion)'
+                -releaseNotes '- Bug fix'
+              pwsh: true
+            timeoutInMinutes: 5
+            env:
+              GH_TOKEN: $(azuresdk-github-pat)
+
+          # create npmrc file with auth
+          - template: /eng/pipelines/templates/steps/create-authenticated-npmrc.yml
+            parameters:
+              npmrcPath: $(buildArtifactsPath)/packages/.npmrc
+              registryUrl: https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js/npm/registry/
+
+          # publish to devops feed
+          - pwsh: |
+              $packageFiles = Get-ChildItem -Path . -Filter '*.tgz'
+              foreach ($file in $packageFiles.Name) {
+                Write-Host "npm publish $file --verbose --access public"
+                npm publish $file --verbose --access public
+              }
+            displayName: Publish to DevOps feed
+            workingDirectory: $(buildArtifactsPath)/packages
 
           - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
