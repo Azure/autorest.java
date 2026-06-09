@@ -54,11 +54,9 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=resiliency.servicedriven.v1"""
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
-    $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"""
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]main\.tsp") {
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
-    $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"""
   } elseif ($tspFile -match "azure[\\/]resource-manager[\\/].*[\\/]main\.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
@@ -103,6 +101,8 @@ $generateScript = {
   } elseif ($tspFile -match "tsp[\\/]arm-versioned.tsp") {
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-async-methods=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.enable-sync-stack=false"""
   } elseif ($tspFile -match "tsp[\\/]subclient.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.enable-subclient=true"""
     # test for include-api-view-properties
