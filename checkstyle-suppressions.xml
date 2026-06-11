@@ -30,4 +30,7 @@
 
   <!-- com.microsoft.typespec -->
   <suppress checks="[a-zA-Z0-9]*" files="com[/\\]microsoft[/\\]typespec[/\\].*"/>
+
+  <!-- typespec-tests exactname -->
+  <suppress checks="[a-zA-Z0-9]*" files="typespec-tests[/\\]src[/\\]main[/\\]java[/\\]azure[/\\]clientgenerator[/\\]core[/\\]exactname[/\\].*"/>
 </suppressions>
