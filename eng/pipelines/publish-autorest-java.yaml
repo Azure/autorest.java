@@ -75,6 +75,8 @@ extends:
                     $PACKAGE_VERSION = node -p -e "require('./package.json').version"
                     Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
+              - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
               - task: PowerShell@2
                 displayName: 'Create GitHub Releases'
                 inputs:
@@ -87,7 +89,7 @@ extends:
                   pwsh: true
                 timeoutInMinutes: 5
                 env:
-                  GH_TOKEN: $(azuresdk-github-pat)
+                  GH_TOKEN: $(GH_TOKEN)
 
               - script: |
                   npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
