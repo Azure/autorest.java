@@ -1,5 +1,13 @@
 # Release History
 
+## 0.45.4 (2026-06-18)
+
+Compatible with compiler 1.13.0.
+
+- Updated package dependencies to the latest versions.
+- Fix duplicate method in generated samples, when advanced-versioning=true.
+- Fix null LRO error response body handling in generated management clients.
+
 ## 0.45.3 (2026-06-11)
 
 Compatible with compiler 1.13.0.
