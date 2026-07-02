@@ -1,5 +1,11 @@
 # Release History
 
+## 0.45.5 (2026-07-02)
+
+Compatible with compiler 1.13.0.
+
+- Updated package dependencies to the latest versions.
+
 ## 0.45.4 (2026-06-18)
 
 Compatible with compiler 1.13.0.
