@@ -68,7 +68,7 @@
     "lodash": "~4.18.1"
   },
   "devDependencies": {
-    "@azure-tools/openai-typespec": "1.21.0",
+    "@azure-tools/openai-typespec": "1.20.0",
     "@azure-tools/typespec-autorest": "0.69.1",
     "@azure-tools/typespec-azure-core": "0.69.0",
     "@azure-tools/typespec-azure-resource-manager": "0.69.2",
@@ -108,7 +108,7 @@
   },
   "overrides": {
     "eslint": "~10.4.1",
-    "typescript": "$typescript",
-    "js-yaml": "$js-yaml"
+    "js-yaml": "$js-yaml",
+    "typescript": "$typescript"
   }
 }
